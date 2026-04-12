@@ -99,24 +99,24 @@ export default function ProductMockup() {
           borderBottom: '1px solid rgba(255,255,255,0.06)',
         }}
       >
-        <div className="flex items-center" style={{ gap: 10 }}>
-          <span style={{ fontSize: 14, fontWeight: 700, color: '#fff', letterSpacing: '-0.02em' }}>MambaHR</span>
+        <div className="flex items-center" style={{ gap: 8 }}>
+          <span style={{ fontSize: 13, fontWeight: 700, color: '#fff', letterSpacing: '-0.02em' }}>MambaHR</span>
           <span style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: 'var(--green)', animation: 'pulse-dot 2s ease-in-out infinite' }} />
-          <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', fontFamily: mono }}>
-            Agent active · 31 tasks handled today
+          <span className="hidden sm:inline" style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', fontFamily: mono }}>
+            Agent active
           </span>
         </div>
-        <div className="flex items-center" style={{ gap: 8 }}>
-          <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', fontFamily: mono }}>Apr 12, 2026</span>
-          <div style={{ width: 24, height: 24, borderRadius: 6, backgroundColor: 'rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>
+        <div className="flex items-center" style={{ gap: 6 }}>
+          <span className="hidden sm:inline" style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', fontFamily: mono }}>Apr 12, 2026</span>
+          <div style={{ width: 22, height: 22, borderRadius: 6, backgroundColor: 'rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>
             BK
           </div>
         </div>
       </div>
 
-      <div className="flex" style={{ minHeight: 380 }}>
+      <div className="flex" style={{ minHeight: 300 }}>
         {/* Sidebar */}
-        <div style={{ width: 200, borderRight: '1px solid rgba(255,255,255,0.06)', padding: '16px 8px', flexShrink: 0 }}>
+        <div className="hidden md:block" style={{ width: 200, borderRight: '1px solid rgba(255,255,255,0.06)', padding: '16px 8px', flexShrink: 0 }}>
           {sidebarItems.map((item) => (
             <div
               key={item.label}
@@ -174,7 +174,7 @@ export default function ProductMockup() {
         </div>
 
         {/* Main feed */}
-        <div style={{ flex: 1, padding: '20px 24px', overflow: 'hidden' }}>
+        <div style={{ flex: 1, padding: '16px 12px', overflow: 'hidden' }}>
           <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: 16, fontFamily: mono }}>
             Activity feed
           </div>
@@ -183,7 +183,7 @@ export default function ProductMockup() {
             <div
               key={item.title}
               style={{
-                padding: '14px 16px',
+                padding: '10px 12px',
                 borderRadius: 10,
                 backgroundColor: i === expanded ? 'rgba(176,141,87,0.06)' : 'rgba(255,255,255,0.02)',
                 border: `1px solid ${item.type === 'approval' && i !== expanded ? 'rgba(176,141,87,0.15)' : 'rgba(255,255,255,0.04)'}`,
@@ -192,21 +192,20 @@ export default function ProductMockup() {
                 transition: 'background-color 0.3s',
               }}
             >
-              <div className="flex items-center justify-between" style={{ marginBottom: i === expanded ? 10 : 0 }}>
-                <div className="flex items-center" style={{ gap: 10 }}>
-                  {/* Status dot */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between" style={{ gap: 6, marginBottom: i === expanded ? 10 : 0 }}>
+                <div className="flex items-center" style={{ gap: 8, minWidth: 0 }}>
                   <span style={{
-                    width: 7,
-                    height: 7,
+                    width: 6,
+                    height: 6,
                     borderRadius: '50%',
                     backgroundColor: item.type === 'approval' ? 'var(--gold)' : 'var(--green)',
                     flexShrink: 0,
                   }} />
-                  <span style={{ fontSize: 13, fontWeight: 500, color: '#fff' }}>
+                  <span style={{ fontSize: 12, fontWeight: 500, color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {item.title}
                   </span>
                 </div>
-                <div className="flex items-center" style={{ gap: 10, flexShrink: 0 }}>
+                <div className="flex items-center" style={{ gap: 8, flexShrink: 0, paddingLeft: 14 }}>
                   <span style={{
                     fontSize: 10,
                     fontWeight: 600,
@@ -218,7 +217,7 @@ export default function ProductMockup() {
                   }}>
                     {item.status}
                   </span>
-                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', fontFamily: mono }}>{item.time}</span>
+                  <span className="hidden sm:inline" style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)', fontFamily: mono }}>{item.time}</span>
                 </div>
               </div>
 

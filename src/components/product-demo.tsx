@@ -15,7 +15,7 @@ export default function ProductDemo() {
           How it works
         </p>
         <h2
-          data-animate
+
           style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 12 }}
         >
           4.2 seconds. Zero humans.
@@ -36,7 +36,7 @@ export default function ProductDemo() {
           {steps.map((step, i) => (
             <div
               key={step.time}
-              data-animate
+    
               className="flex"
               style={{
                 gap: 16,

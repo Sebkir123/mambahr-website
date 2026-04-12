@@ -10,7 +10,7 @@ export default function Hero() {
   return (
     <section
       className={`bg-grid relative ${animate ? 'hero-animate' : ''}`}
-      style={{ paddingTop: 100, paddingBottom: 0, backgroundColor: 'var(--bg)' }}
+      style={{ paddingTop: 100, paddingBottom: 0, backgroundColor: 'var(--bg)', overflow: 'hidden' }}
     >
       {/* Radial gold glow behind headline */}
       <div

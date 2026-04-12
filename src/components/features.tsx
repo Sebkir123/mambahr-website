@@ -24,6 +24,28 @@ export default function Capabilities() {
     },
     {
       num: '03',
+      title: 'Offboarding & Transitions',
+      hook: 'Exits handled with the same precision as entries.',
+      details: [
+        'Access revoked across all systems — SSO, email, Slack, cloud — within minutes',
+        'Equipment return tracked, final pay calculated, benefits termination scheduled',
+        'Knowledge transfer docs generated and handoff meetings auto-scheduled',
+      ],
+      result: 'No more "wait, does the ex-employee still have access to our Stripe?" moments.',
+    },
+    {
+      num: '04',
+      title: 'Change Management',
+      hook: 'RIFs, reorgs, and role changes. The hardest work in HR.',
+      details: [
+        'Manages the operational complexity of workforce restructuring end-to-end',
+        'Generates notification letters, severance calculations, and benefits continuation',
+        'Tracks every action for audit and ensures nothing falls through the cracks',
+      ],
+      result: 'Your team focuses on the human side. The agent handles the operational side.',
+    },
+    {
+      num: '05',
       title: 'Risk & Policy',
       hook: 'Problems flagged before they become lawsuits.',
       details: [
@@ -32,17 +54,6 @@ export default function Capabilities() {
         'Keeps an auditable trail of every decision the agent makes',
       ],
       result: 'The stuff that keeps HR leaders up at night — handled quietly, in the background.',
-    },
-    {
-      num: '04',
-      title: 'People Intelligence',
-      hook: 'Insights surfaced before you think to ask.',
-      details: [
-        'Attrition risk scores based on engagement, tenure, and comp data',
-        'Compensation gap analysis across teams, levels, and demographics',
-        'Headcount trends and hiring pipeline health — updated in real time',
-      ],
-      result: 'Your HRIS has the data. MambaHR actually reads it.',
     },
   ]
 
@@ -53,7 +64,7 @@ export default function Capabilities() {
           What the agent does
         </p>
         <h2
-          data-animate
+
           style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.02em', color: 'var(--text-dark)', marginBottom: 16 }}
         >
           From the first offer letter to the hardest quarter.
@@ -66,7 +77,7 @@ export default function Capabilities() {
           {features.map((f, i) => (
             <div
               key={f.num}
-              data-animate
+    
               className="card-hover"
               style={{
                 backgroundColor: 'var(--bg-light-surface)',
@@ -96,7 +107,7 @@ export default function Capabilities() {
                 </div>
 
                 {/* Right — details + result */}
-                <div style={{ padding: '32px 32px 32px 24px', borderLeft: '1px solid var(--border-light)' }}>
+                <div className="md:border-l" style={{ padding: '32px 32px 32px 24px', borderColor: 'var(--border-light)' }}>
                   <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 16px 0' }}>
                     {f.details.map((d) => (
                       <li key={d} className="flex" style={{ gap: 10, marginBottom: 8, alignItems: 'baseline' }}>

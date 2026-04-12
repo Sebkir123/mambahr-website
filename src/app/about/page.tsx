@@ -1,21 +1,23 @@
-'use client'
-
+import Image from 'next/image'
 import Nav from '@/components/nav'
 import Footer from '@/components/footer'
 import AnimateOnScroll from '@/components/animate-on-scroll'
+import ParticleField from '@/components/particle-field'
 
 const team = [
   {
-    name: 'Founder Name',
+    name: 'Brian Bell',
     role: 'CEO & Co-Founder',
     bio: 'Previously [company]. Background in [domain]. Building MambaHR because HR deserves better tooling.',
-    linkedin: '#',
+    linkedin: 'https://linkedin.com/in/brianbell',
+    avatar: '/brian_bell.jpeg',
   },
   {
-    name: 'Founder Name',
+    name: 'Sebastian Kirsch',
     role: 'CTO & Co-Founder',
     bio: 'Previously [company]. Background in [domain]. Leading the AI lab and agent architecture.',
-    linkedin: '#',
+    linkedin: 'https://linkedin.com/in/sebastiankirsch',
+    avatar: '/sebastian_kirsch.jpg',
   },
 ]
 
@@ -53,21 +55,7 @@ export default function AboutPage() {
           className="bg-grid relative"
           style={{ paddingTop: 140, paddingBottom: 100, backgroundColor: 'var(--bg)', overflow: 'hidden' }}
         >
-          {/* Radial gold glow */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '30%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: 600,
-              height: 400,
-              borderRadius: '50%',
-              background: 'radial-gradient(ellipse, rgba(176,141,87,0.08) 0%, transparent 70%)',
-              pointerEvents: 'none',
-              zIndex: 0,
-            }}
-          />
+          <ParticleField />
           <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 24px', position: 'relative', textAlign: 'center', zIndex: 1 }}>
             <p
               style={{
@@ -204,7 +192,7 @@ export default function AboutPage() {
               Mission
             </p>
             <h2
-              data-animate
+    
               style={{
                 fontSize: 'clamp(28px, 3.5vw, 44px)',
                 fontWeight: 800,
@@ -241,7 +229,7 @@ export default function AboutPage() {
                 {timeline.map((m, i) => (
                   <div
                     key={m.date}
-                    data-animate
+          
                     style={{
                       display: 'flex',
                       alignItems: 'center',
@@ -326,7 +314,7 @@ export default function AboutPage() {
               Values
             </p>
             <h2
-              data-animate
+    
               style={{
                 fontSize: 'clamp(28px, 3.5vw, 44px)',
                 fontWeight: 800,
@@ -342,7 +330,7 @@ export default function AboutPage() {
               {values.map((v, i) => (
                 <div
                   key={v.title}
-                  data-animate
+        
                   className="card-hover"
                   style={{
                     padding: 28,
@@ -424,7 +412,7 @@ export default function AboutPage() {
               Team
             </p>
             <h2
-              data-animate
+    
               style={{
                 fontSize: 'clamp(28px, 3.5vw, 44px)',
                 fontWeight: 800,
@@ -433,14 +421,14 @@ export default function AboutPage() {
                 marginBottom: 48,
               }}
             >
-              The people behind the agent.
+              The people behind MambaHR.
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 20 }}>
               {team.map((person) => (
                 <div
                   key={person.role}
-                  data-animate
+        
                   style={{
                     padding: 32,
                     borderRadius: 16,
@@ -464,28 +452,19 @@ export default function AboutPage() {
                       background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.25), transparent)',
                     }}
                   />
-                  {/* Avatar placeholder */}
-                  <div
+                  {/* Avatar */}
+                  <Image
+                    src={person.avatar}
+                    alt={person.name}
+                    width={56}
+                    height={56}
                     style={{
-                      width: 56,
-                      height: 56,
                       borderRadius: 14,
-                      backgroundColor: 'var(--bg-elevated)',
+                      objectFit: 'cover',
                       border: '1px solid var(--border-mid)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: 20,
-                      fontWeight: 700,
-                      color: 'var(--text-faint)',
                       marginBottom: 20,
                     }}
-                  >
-                    {person.name
-                      .split(' ')
-                      .map((n) => n[0])
-                      .join('')}
-                  </div>
+                  />
                   <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>
                     {person.name}
                   </h3>
@@ -521,7 +500,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2" style={{ maxWidth: 900, margin: '0 auto', gap: 20 }}>
             {/* Backed by */}
             <div
-              data-animate
+    
               className="card-hover"
               style={{
                 padding: 32,
@@ -584,7 +563,7 @@ export default function AboutPage() {
 
             {/* Hiring */}
             <div
-              data-animate
+    
               className="card-hover"
               style={{
                 padding: 32,
@@ -671,7 +650,7 @@ export default function AboutPage() {
           />
           <div style={{ maxWidth: 500, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
             <h2
-              data-animate
+    
               style={{
                 fontSize: 'clamp(28px, 3.5vw, 44px)',
                 fontWeight: 800,

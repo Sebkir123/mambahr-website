@@ -3,7 +3,7 @@ export default function ProductPreview() {
     <section style={{ padding: '64px 24px 0', backgroundColor: 'var(--bg-surface)' }}>
       <div style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center' }}>
         <p
-          data-animate
+
           style={{
             fontSize: 15,
             color: 'var(--text-muted)',
@@ -15,7 +15,7 @@ export default function ProductPreview() {
 
         {/* Compact dashboard preview */}
         <div
-          data-animate
+
           style={{
             backgroundColor: '#14110D',
             borderRadius: 12,

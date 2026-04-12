@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 const navLinks = [
-  { label: 'Product', href: '/#product' },
-  { label: 'Research', href: '/research' },
+  { label: 'Product', href: '/' },
+  { label: 'Lab', href: '/research' },
   { label: 'About Us', href: '/about' },
 ]
 
@@ -24,9 +24,9 @@ export default function Nav() {
       aria-label="Main navigation"
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        backgroundColor: scrolled || menuOpen ? 'rgba(9,9,11,0.92)' : 'transparent',
-        backdropFilter: scrolled || menuOpen ? 'blur(12px)' : 'none',
-        WebkitBackdropFilter: scrolled || menuOpen ? 'blur(12px)' : 'none',
+        backgroundColor: scrolled || menuOpen ? 'rgba(9,9,11,0.95)' : 'rgba(9,9,11,0.8)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         borderBottom: scrolled ? '1px solid var(--border-mid)' : '1px solid transparent',
       }}
     >

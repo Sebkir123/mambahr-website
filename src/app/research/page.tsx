@@ -58,79 +58,27 @@ const patents = [
 
 const publications = [
   {
-    title: 'HR-Bench: A Benchmark for Evaluating AI Systems on HR Decision-Making',
-    authors: 'MambaHR Research',
-    date: '2026',
-    type: 'Benchmark',
-    desc: '500+ HR decision scenarios across federal and state regulations, validated by domain experts.',
-    link: '#',
+    title: 'HR-Bench: Evaluating AI on HR Decision-Making',
+    status: 'In preparation',
+    venue: 'arXiv + EMNLP workshop',
+    timeline: 'Q2 2026',
+    desc: '500 scenarios across federal and state HR regulations.',
   },
   {
-    title: 'Deterministic Statutory Logic for Safety-Critical HR Automation',
-    authors: 'MambaHR Research',
-    date: '2026',
-    type: 'Technical Report',
-    desc: 'How we encode 95K lines of HR policy into a verifiable decision engine — and why probabilistic approaches fail in HR.',
-    link: '#',
+    title: 'Deterministic Verification Layers for Agentic AI in HR',
+    status: 'In preparation',
+    venue: 'ICLR workshop',
+    timeline: 'Q3 2026',
+    desc: null,
   },
   {
-    title: 'Why Generic AI Fails at HR: Lessons from Building HR-Bench',
-    authors: 'MambaHR Research',
-    date: '2026',
-    type: 'Blog Post',
-    desc: 'The surprising failure modes we discovered when testing general-purpose language models on HR decisions.',
-    link: '#',
+    title: 'Calibrated Uncertainty Quantification for HR AI',
+    status: 'In preparation',
+    venue: 'FAccT',
+    timeline: 'Q4 2026',
+    desc: null,
   },
 ]
-
-function BenchmarkBars() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold: 0.3 }
-    )
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
-
-  const bars = [
-    { label: 'MambaHR', value: 94.2, color: 'var(--gold)' },
-    { label: 'GPT-4', value: 31, color: 'var(--text-faint)' },
-    { label: 'Claude 3.5', value: 27, color: 'var(--text-faint)' },
-    { label: 'Gemini Pro', value: 24, color: 'var(--text-faint)' },
-  ]
-
-  return (
-    <div ref={ref} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-      {bars.map((bar, i) => (
-        <div key={bar.label}>
-          <div className="flex items-center justify-between" style={{ marginBottom: 8 }}>
-            <span style={{ fontSize: 13, fontWeight: 600, color: bar.color === 'var(--gold)' ? 'var(--text)' : 'var(--text-faint)' }}>
-              {bar.label}
-            </span>
-            <span style={{ fontSize: 13, fontWeight: 700, color: bar.color, fontFamily: 'var(--font-mono), monospace' }}>
-              {bar.value}%
-            </span>
-          </div>
-          <div style={{ height: 8, borderRadius: 4, backgroundColor: 'var(--bg-elevated)', overflow: 'hidden' }}>
-            <div
-              style={{
-                height: '100%',
-                borderRadius: 4,
-                backgroundColor: bar.color,
-                width: visible ? `${bar.value}%` : '0%',
-                transition: `width 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.15}s`,
-              }}
-            />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
 
 function NetworkGraphic() {
   // 5-layer network: HRIS data (3) → Encode (4) → Agent Core (5) → Verify (4) → Action (3)
@@ -242,7 +190,6 @@ function NetworkGraphic() {
         )}
 
         {/* Layer labels */}
-        {/* Layer labels */}
         <text x={50} y="192" fill="var(--text-faint)" fontSize="8" textAnchor="middle" fontFamily="var(--font-mono)" opacity="0.5">
           HRIS data
         </text>
@@ -263,64 +210,56 @@ function NetworkGraphic() {
   )
 }
 
-function TerminalLive() {
-  const [step, setStep] = useState(0)
-  const lines = [
-    { ts: '09:32:11', tag: 'system', tagColor: 'var(--gold)', text: 'HR engine initialized. 95,247 rules loaded.' },
-    { ts: '09:32:11', tag: 'bench', tagColor: '#D97706', text: 'Running HR-Bench suite... 500 scenarios queued.' },
-    { ts: '09:32:14', tag: 'eval', tagColor: 'var(--gold)', text: 'Category: Leave eligibility [48/48 passed]' },
-    { ts: '09:32:16', tag: 'eval', tagColor: 'var(--gold)', text: 'Category: Multi-state conflicts [31/34 passed]' },
-    { ts: '09:32:18', tag: 'eval', tagColor: 'var(--gold)', text: 'Category: Accommodation requests [42/42 passed]' },
-    { ts: '09:32:22', tag: 'result', tagColor: 'var(--green)', text: 'HR-Bench complete. Score: 94.2% (471/500)' },
-    { ts: '09:32:22', tag: 'delta', tagColor: 'var(--green)', text: 'vs GPT-4: +63.2pp | vs Claude: +67.2pp' },
-  ]
+function HRBenchSignup() {
+  const [email, setEmail] = useState('')
+  const [submitted, setSubmitted] = useState(false)
 
-  useEffect(() => {
-    if (step < lines.length) {
-      const timer = setTimeout(() => setStep(s => s + 1), 600)
-      return () => clearTimeout(timer)
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (email.trim()) {
+      console.log('HR-Bench notify email:', email)
+      setSubmitted(true)
+      setEmail('')
     }
-    const reset = setTimeout(() => setStep(0), 4000)
-    return () => clearTimeout(reset)
-  }, [step, lines.length])
+  }
 
   return (
-    <div
-      style={{
-        backgroundColor: '#0A0908',
-        borderRadius: 12,
-        overflow: 'hidden',
-        border: '1px solid rgba(255,255,255,0.06)',
-      }}
-    >
-      <div className="flex items-center" style={{ padding: '10px 16px', borderBottom: '1px solid rgba(255,255,255,0.06)', gap: 8 }}>
-        <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#FF5F57' }} />
-        <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#FEBC2E' }} />
-        <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#28C840' }} />
-        <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', marginLeft: 8, fontFamily: 'var(--font-mono), monospace' }}>
-          hr-bench --run-suite
-        </span>
-      </div>
-      <div style={{ padding: '16px 20px', fontFamily: 'var(--font-mono), monospace', fontSize: 12, lineHeight: 2, minHeight: 220 }}>
-        {lines.slice(0, step).map((line, i) => (
-          <div
-            key={i}
-            style={{
-              animation: 'hero-fade-up 0.3s ease forwards',
-            }}
-          >
-            <span style={{ color: 'rgba(255,255,255,0.25)' }}>[{line.ts}]</span>{' '}
-            <span style={{ color: line.tagColor }}>{line.tag}</span>{' '}
-            <span style={{ color: line.tag === 'result' || line.tag === 'delta' ? 'var(--green)' : 'rgba(255,255,255,0.5)' }}>
-              {line.text}
-            </span>
-          </div>
-        ))}
-        {step < lines.length && (
-          <span style={{ display: 'inline-block', width: 7, height: 14, backgroundColor: 'var(--gold)', animation: 'blink 1s step-end infinite', verticalAlign: 'middle' }} />
-        )}
-      </div>
-    </div>
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row" style={{ gap: 12, maxWidth: 480 }}>
+      <input
+        type="email"
+        required
+        placeholder="you@company.com"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={{
+          flex: 1,
+          padding: '12px 16px',
+          borderRadius: 8,
+          backgroundColor: 'rgba(255,255,255,0.05)',
+          border: '1px solid rgba(176,141,87,0.2)',
+          color: 'var(--text)',
+          fontSize: 14,
+          outline: 'none',
+          fontFamily: 'inherit',
+        }}
+      />
+      <button
+        type="submit"
+        style={{
+          padding: '12px 24px',
+          borderRadius: 8,
+          backgroundColor: 'var(--gold)',
+          color: '#fff',
+          fontSize: 14,
+          fontWeight: 600,
+          border: 'none',
+          cursor: 'pointer',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {submitted ? 'Subscribed' : 'Notify me when HR-Bench ships'}
+      </button>
+    </form>
   )
 }
 
@@ -397,63 +336,6 @@ export default function ResearchPage() {
           </div>
         </section>
 
-        {/* HR-Bench */}
-        <section style={{ padding: '80px 24px', backgroundColor: 'var(--bg-surface)' }}>
-          <div style={{ maxWidth: 800, margin: '0 auto' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32 }}>
-              <span style={{ padding: '4px 10px', borderRadius: 999, backgroundColor: 'rgba(176,141,87,0.15)', fontSize: 11, fontWeight: 600, color: 'var(--gold)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-                Featured
-              </span>
-              <span style={{ fontSize: 13, color: 'var(--text-faint)' }}>Benchmark &middot; 2026</span>
-            </div>
-
-            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 40px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>
-              HR-Bench
-            </h2>
-            <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 48, maxWidth: 520 }}>
-              The first open benchmark for evaluating AI systems on US employment
-              decision-making. 500+ scenarios across policies and regulations,
-              validated by domain experts.
-            </p>
-
-            {/* Animated bar chart */}
-            <div
-              style={{
-                backgroundColor: 'rgba(17,17,19,0.5)',
-                backdropFilter: 'blur(20px)',
-                borderRadius: 12,
-                border: '1px solid rgba(176,141,87,0.1)',
-                padding: '32px',
-                marginBottom: 24,
-                boxShadow: '0 24px 80px rgba(0,0,0,0.3)',
-                position: 'relative',
-                overflow: 'hidden',
-              }}
-            >
-              <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.25), transparent)' }} />
-              <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-faint)', marginBottom: 24 }}>
-                Accuracy on complex HR decision scenarios
-              </p>
-              <BenchmarkBars />
-            </div>
-
-            {/* Live terminal */}
-            <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 12, backgroundColor: 'rgba(17,17,19,0.5)', backdropFilter: 'blur(20px)', border: '1px solid rgba(176,141,87,0.1)', boxShadow: '0 24px 80px rgba(0,0,0,0.3)' }}>
-              <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.25), transparent)', zIndex: 1 }} />
-              <TerminalLive />
-            </div>
-
-            <div className="flex flex-wrap" style={{ gap: 16, marginTop: 32 }}>
-              <a href="#" style={{ fontSize: 14, fontWeight: 600, color: 'var(--gold)', textDecoration: 'none' }}>
-                Read methodology &rarr;
-              </a>
-              <a href="#" style={{ fontSize: 14, fontWeight: 600, color: 'var(--gold)', textDecoration: 'none' }}>
-                Download dataset &rarr;
-              </a>
-            </div>
-          </div>
-        </section>
-
         {/* Research Areas */}
         <section style={{ padding: '80px 24px', backgroundColor: 'var(--bg-light)' }}>
           <div style={{ maxWidth: 800, margin: '0 auto' }}>
@@ -465,7 +347,6 @@ export default function ResearchPage() {
               {areas.map((area) => (
                 <div
                   key={area.num}
-                  data-animate
                   className="card-hover"
                   style={{
                     padding: 32,
@@ -532,44 +413,88 @@ export default function ResearchPage() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {publications.map((pub) => (
-                <a
+                <div
                   key={pub.title}
-                  href={pub.link}
-                  className="card-hover"
                   style={{
-                    display: 'block',
                     padding: 28,
                     borderRadius: 12,
                     backgroundColor: 'rgba(17,17,19,0.5)',
-                    backdropFilter: 'blur(12px)',
+                    backdropFilter: 'blur(20px)',
                     border: '1px solid rgba(176,141,87,0.1)',
-                    textDecoration: 'none',
                     position: 'relative',
                     overflow: 'hidden',
                   }}
                 >
+                  {/* Gold shimmer */}
                   <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.25), transparent)' }} />
-                  <div className="flex items-center" style={{ gap: 12, marginBottom: 12 }}>
-                    <span style={{ padding: '3px 8px', borderRadius: 4, backgroundColor: 'var(--bg-elevated)', fontSize: 11, fontWeight: 500, color: 'var(--text-faint)' }}>
-                      {pub.type}
+                  <div className="flex items-center flex-wrap" style={{ gap: 10, marginBottom: 12 }}>
+                    <span style={{
+                      padding: '3px 10px',
+                      borderRadius: 4,
+                      backgroundColor: 'rgba(176,141,87,0.15)',
+                      fontSize: 11,
+                      fontWeight: 600,
+                      color: 'var(--gold-light)',
+                      letterSpacing: '0.02em',
+                    }}>
+                      {pub.status}
                     </span>
-                    <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>{pub.date}</span>
-                    <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>&middot; {pub.authors}</span>
+                    <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>
+                      Target: {pub.venue}
+                    </span>
+                    <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>
+                      &middot; {pub.timeline}
+                    </span>
                   </div>
-                  <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
+                  <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--text)', marginBottom: pub.desc ? 8 : 0 }}>
                     {pub.title}
                   </h3>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                    {pub.desc}
-                  </p>
-                </a>
+                  {pub.desc && (
+                    <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                      {pub.desc}
+                    </p>
+                  )}
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Patents */}
+        {/* HR-Bench */}
         <section style={{ padding: '80px 24px', backgroundColor: 'var(--bg-surface)' }}>
+          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <div
+              style={{
+                backgroundColor: 'rgba(17,17,19,0.5)',
+                backdropFilter: 'blur(20px)',
+                borderRadius: 16,
+                border: '1px solid rgba(176,141,87,0.1)',
+                padding: '48px 32px',
+                boxShadow: '0 24px 80px rgba(0,0,0,0.3)',
+                position: 'relative',
+                overflow: 'hidden',
+              }}
+            >
+              {/* Gold shimmer */}
+              <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.25), transparent)' }} />
+
+              <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 40px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 12 }}>
+                HR-Bench
+              </h2>
+              <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16, maxWidth: 520 }}>
+                The first open benchmark for AI on HR decision-making.
+              </p>
+              <p style={{ fontSize: 13, color: 'var(--text-faint)', marginBottom: 32, fontFamily: 'var(--font-mono), monospace', letterSpacing: '0.02em' }}>
+                500 scenarios &middot; Federal + state regulations &middot; Open dataset
+              </p>
+
+              <HRBenchSignup />
+            </div>
+          </div>
+        </section>
+
+        {/* Patents */}
+        <section style={{ padding: '80px 24px', backgroundColor: 'var(--bg)' }}>
           <div style={{ maxWidth: 800, margin: '0 auto' }}>
             <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>
               7 Patents Pending
@@ -583,13 +508,11 @@ export default function ResearchPage() {
               {patents.map((patent, i) => (
                 <div
                   key={patent}
-                  data-animate
                   className="flex items-baseline"
                   style={{
                     gap: 16,
                     padding: '16px 0',
                     borderBottom: i < patents.length - 1 ? '1px solid var(--border)' : 'none',
-                    transitionDelay: `${i * 60}ms`,
                   }}
                 >
                   <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', fontFamily: 'var(--font-mono), monospace', minWidth: 28 }}>
@@ -605,7 +528,7 @@ export default function ResearchPage() {
         </section>
 
         {/* Join the lab */}
-        <section className="bg-grid relative" style={{ padding: '96px 24px', backgroundColor: 'var(--bg)', textAlign: 'center' }}>
+        <section className="bg-grid relative" style={{ padding: '96px 24px', backgroundColor: 'var(--bg-surface)', textAlign: 'center' }}>
           <div
             style={{
               position: 'absolute',

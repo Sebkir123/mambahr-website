@@ -1,7 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://mambaHR.com',
-  generateRobotsTxt: true,
+  siteUrl: 'https://mambahr.com',
+  generateRobotsTxt: false,
   changefreq: 'weekly',
-  priority: 1.0,
+  priority: 0.7,
 }

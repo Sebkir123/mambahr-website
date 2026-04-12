@@ -4,7 +4,7 @@ import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '900'],
+  weight: ['400', '600', '700', '900'],
   variable: '--font-inter',
   display: 'swap',
 })
@@ -47,21 +47,36 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
 }
 
-// Static JSON-LD — hardcoded constant, not user input
-const jsonLdString = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'MambaHR',
-  applicationCategory: 'BusinessApplication',
-  description: 'Autonomous AI agent for HR and people operations',
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-    description: 'Private beta — request access',
+// Static JSON-LD — hardcoded constants, not user input
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    url: 'https://mambahr.com',
+    applicationCategory: 'BusinessApplication',
+    description: 'Autonomous AI agent for HR and people operations',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      description: 'Private beta — request access',
+    },
+    operatingSystem: 'Web',
   },
-  operatingSystem: 'Web',
-})
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'MambaHR',
+    url: 'https://mambahr.com',
+    description: 'Domain AI lab building the autonomous HR agent.',
+    foundingDate: '2026',
+  },
+]
+const jsonLdString = JSON.stringify(jsonLd)
+  .replace(/</g, '\\u003c')
+  .replace(/>/g, '\\u003e')
+  .replace(/&/g, '\\u0026')
 
 export default function RootLayout({
   children,

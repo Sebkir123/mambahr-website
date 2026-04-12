@@ -14,7 +14,7 @@ export default function DesignPartnerOffer() {
             Design Partner Program
           </p>
           <h2
-            data-animate
+  
             style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.02em', color: 'var(--text-dark)', marginBottom: 12 }}
           >
             What you get.
@@ -28,7 +28,7 @@ export default function DesignPartnerOffer() {
           {perks.map((perk, i) => (
             <div
               key={perk.title}
-              data-animate
+    
               className="card-hover"
               style={{
                 padding: 28,
@@ -54,7 +54,7 @@ export default function DesignPartnerOffer() {
         </div>
 
         {/* How it works flow */}
-        <div data-animate style={{ marginTop: 48, textAlign: 'center' }}>
+        <div style={{ marginTop: 48, textAlign: 'center' }}>
           <div className="flex flex-col md:flex-row items-center justify-center" style={{ gap: 0 }}>
             {[
               'Submit your email',

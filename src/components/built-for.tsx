@@ -34,7 +34,7 @@ export default function BuiltFor() {
             Built with people leaders
           </p>
           <h2
-            data-animate
+  
             style={{
               fontSize: 'clamp(28px, 3.5vw, 44px)',
               fontWeight: 800,
@@ -56,7 +56,7 @@ export default function BuiltFor() {
 
         {/* Industry tags */}
         <div
-          data-animate
+
           className="flex flex-wrap justify-center"
           style={{ gap: 12, marginBottom: 56 }}
         >
@@ -87,7 +87,7 @@ export default function BuiltFor() {
           {features.map((item, i) => (
             <div
               key={item.num}
-              data-animate
+    
               className="card-hover"
               style={{
                 padding: 28,
@@ -119,7 +119,7 @@ export default function BuiltFor() {
 
         {/* Bottom stat + CTA */}
         <div
-          data-animate
+
           style={{
             textAlign: 'center',
             padding: '40px 0 0',

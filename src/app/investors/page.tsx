@@ -1,13 +1,26 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import Nav from '@/components/nav'
 import Footer from '@/components/footer'
 import AnimateOnScroll from '@/components/animate-on-scroll'
+import { submitInvestorContact } from '@/lib/actions'
 
 /* ── Full-section particle background ── */
 function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isVisible = useRef(true)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(([e]) => { isVisible.current = e.isIntersecting }, { threshold: 0 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -40,6 +53,7 @@ function ParticleField() {
 
     let animId: number, t = 0
     function draw() {
+      if (!isVisible.current) { animId = requestAnimationFrame(draw); return }
       t++; ctx!.clearRect(0, 0, w, h)
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
@@ -59,35 +73,9 @@ function ParticleField() {
     return () => cancelAnimationFrame(animId)
   }, [])
 
-  return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0 }} />
-}
-
-/* ── Animated benchmark bars ── */
-function BenchmarkBars() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [vis, setVis] = useState(false)
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.3 })
-    if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
-  }, [])
-
   return (
-    <div ref={ref} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-      {[
-        { label: 'MambaHR', value: 94.2, gold: true },
-        { label: 'GPT-4o', value: 31, gold: false },
-        { label: 'Claude 3.5', value: 27, gold: false },
-        { label: 'Gemini Pro', value: 24, gold: false },
-      ].map((bar, i) => (
-        <div key={bar.label} className="flex items-center" style={{ gap: 12 }}>
-          <span style={{ fontSize: 11, fontWeight: 500, color: bar.gold ? 'var(--text-dark)' : 'var(--text-dark-faint)', minWidth: 76, fontFamily: 'var(--font-mono), monospace' }}>{bar.label}</span>
-          <div style={{ flex: 1, height: 6, borderRadius: 3, backgroundColor: 'var(--border-light)', overflow: 'hidden' }}>
-            <div style={{ height: '100%', borderRadius: 3, backgroundColor: bar.gold ? 'var(--gold)' : 'var(--text-dark-faint)', width: vis ? `${bar.value}%` : '0%', transition: `width 1.4s cubic-bezier(0.22,1,0.36,1) ${i * 0.15}s` }} />
-          </div>
-          <span style={{ fontSize: 11, fontWeight: 700, color: bar.gold ? 'var(--gold)' : 'var(--text-dark-faint)', minWidth: 40, textAlign: 'right', fontFamily: 'var(--font-mono), monospace' }}>{bar.value}%</span>
-        </div>
-      ))}
+    <div ref={containerRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
+      <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
     </div>
   )
 }
@@ -152,7 +140,7 @@ export default function InvestorsPage() {
                 {[
                   { value: '$18B', label: 'Market by 2028', gold: true },
                   { value: '4.2M', label: 'HR professionals', gold: false },
-                  { value: '94.2%', label: 'HR-Bench score', gold: true },
+                  { value: 'Q2 2026', label: 'HR-Bench launch', gold: true },
                   { value: '7', label: 'Patents pending', gold: false },
                 ].map((stat, i) => (
                   <div key={stat.value} style={{ textAlign: 'center', padding: '0 16px', position: 'relative' }}>
@@ -170,7 +158,7 @@ export default function InvestorsPage() {
         <section style={{ padding: '96px 24px', backgroundColor: 'var(--bg-surface)' }}>
           <div style={{ maxWidth: 900, margin: '0 auto' }}>
             <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 16, letterSpacing: '0.06em', textTransform: 'uppercase' }}>The Opportunity</p>
-            <h2 data-animate style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 48, maxWidth: 500 }}>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 48, maxWidth: 500 }}>
               Why now?
             </h2>
 
@@ -196,7 +184,7 @@ export default function InvestorsPage() {
                 ].map((stat, i) => (
                   <div
                     key={stat.value}
-                    data-animate
+          
                     style={{
                       display: 'flex',
                       alignItems: 'baseline',
@@ -220,7 +208,7 @@ export default function InvestorsPage() {
           <div style={{ maxWidth: 900, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 56 }}>
               <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 16, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Defensibility</p>
-              <h2 data-animate style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-dark)', marginBottom: 12 }}>
+              <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-dark)', marginBottom: 12 }}>
                 Why MambaHR wins.
               </h2>
               <p style={{ fontSize: 16, color: 'var(--text-dark-muted)', maxWidth: 440, margin: '0 auto' }}>
@@ -231,7 +219,7 @@ export default function InvestorsPage() {
             {/* Moat cards */}
             <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 16, marginBottom: 32 }}>
               {moats.map((m, i) => (
-                <div key={m.num} data-animate className="card-hover" style={{ padding: 28, borderRadius: 14, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', transitionDelay: `${i * 80}ms`, position: 'relative', overflow: 'hidden' }}>
+                <div key={m.num} className="card-hover" style={{ padding: 28, borderRadius: 14, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', transitionDelay: `${i * 80}ms`, position: 'relative', overflow: 'hidden' }}>
                   {/* Left gold accent */}
                   <div style={{ position: 'absolute', left: 0, top: '20%', bottom: '20%', width: 2, borderRadius: 1, backgroundColor: 'var(--gold)', opacity: 0.4 }} />
                   <div style={{ paddingLeft: 12 }}>
@@ -246,8 +234,23 @@ export default function InvestorsPage() {
             {/* Benchmark + Flywheel */}
             <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 16 }}>
               <div className="card-hover" style={{ padding: 28, borderRadius: 14, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)' }}>
-                <p style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-dark-faint)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 20 }}>HR-Bench Accuracy</p>
-                <BenchmarkBars />
+                <p style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-dark-faint)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 20 }}>7 Patents Pending</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                  {[
+                    'Decision confidence quantification',
+                    'Workforce delta intelligence',
+                    'HR decision archaeology',
+                    'Multi-jurisdictional policy resolution',
+                    'Autonomous onboarding orchestration',
+                    'Real-time policy update propagation',
+                    'Agent confidence calibration',
+                  ].map((patent, i) => (
+                    <div key={patent} className="flex items-baseline" style={{ gap: 10, padding: '8px 0', borderBottom: i < 6 ? '1px solid var(--border-light)' : 'none' }}>
+                      <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--gold)', fontFamily: 'var(--font-mono), monospace', minWidth: 20 }}>{String(i + 1).padStart(2, '0')}</span>
+                      <span style={{ fontSize: 12, color: 'var(--text-dark-muted)' }}>{patent}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="card-hover" style={{ padding: 28, borderRadius: 14, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <p style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-dark-faint)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 20, alignSelf: 'stretch' }}>Data Flywheel</p>
@@ -262,7 +265,7 @@ export default function InvestorsPage() {
           <ParticleField />
           <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 1 }}>
             <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 16, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Traction</p>
-            <h2 data-animate style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 48 }}>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 48 }}>
               Early signals.
             </h2>
 
@@ -271,11 +274,11 @@ export default function InvestorsPage() {
               {[
                 { value: '3,200+', label: 'Employees managed', sub: 'across beta partners' },
                 { value: '10', label: 'Design partners', sub: 'in private beta' },
-                { value: '94.2%', label: 'HR-Bench score', sub: 'vs 31% for GPT-4' },
+                { value: 'Q2 2026', label: 'HR-Bench', sub: 'First open benchmark for HR AI' },
               ].map((t, i) => (
                 <div
                   key={t.value}
-                  data-animate
+        
                   style={{
                     padding: '36px 24px',
                     borderRadius: 16,
@@ -320,20 +323,18 @@ export default function InvestorsPage() {
         <section style={{ padding: '96px 24px', backgroundColor: 'var(--bg-light)' }}>
           <div style={{ maxWidth: 900, margin: '0 auto' }}>
             <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 16, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Team</p>
-            <h2 data-animate style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-dark)', marginBottom: 48 }}>
-              The people behind the agent.
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-dark)', marginBottom: 48 }}>
+              The people behind MambaHR.
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 20 }}>
               {[
-                { name: 'Founder Name', role: 'CEO & Co-Founder', bio: 'Previously [company]. Background in [domain]. Building MambaHR because HR deserves better infrastructure.', linkedin: '#' },
-                { name: 'Founder Name', role: 'CTO & Co-Founder', bio: 'Previously [company]. Background in [domain]. Leading the AI lab and agent architecture.', linkedin: '#' },
+                { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: 'Previously [company]. Background in [domain]. Building MambaHR because HR deserves better infrastructure.', linkedin: 'https://linkedin.com/in/brianbell', avatar: '/brian_bell.jpeg' },
+                { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Previously [company]. Background in [domain]. Leading the AI lab and agent architecture.', linkedin: 'https://linkedin.com/in/sebastiankirsch', avatar: '/sebastian_kirsch.jpg' },
               ].map((person) => (
                 <div key={person.role} className="card-hover" style={{ padding: 32, borderRadius: 14, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(90deg, var(--gold), rgba(176,141,87,0.2), transparent)' }} />
-                  <div style={{ width: 56, height: 56, borderRadius: 14, backgroundColor: 'var(--bg-light)', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 700, color: 'var(--text-dark-faint)', marginBottom: 20 }}>
-                    {person.name.split(' ').map((n) => n[0]).join('')}
-                  </div>
+                  <Image src={person.avatar} alt={person.name} width={56} height={56} style={{ borderRadius: 14, objectFit: 'cover', border: '1px solid var(--border-light)', marginBottom: 20 }} />
                   <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text-dark)', marginBottom: 4 }}>{person.name}</h3>
                   <p style={{ fontSize: 13, color: 'var(--gold)', marginBottom: 14, fontWeight: 500 }}>{person.role}</p>
                   <p style={{ fontSize: 14, color: 'var(--text-dark-muted)', lineHeight: 1.6, marginBottom: 16 }}>{person.bio}</p>
@@ -360,7 +361,7 @@ export default function InvestorsPage() {
               <div style={{ backgroundColor: 'rgba(17,17,19,0.5)', backdropFilter: 'blur(20px)', borderRadius: 16, border: '1px solid rgba(176,141,87,0.1)', padding: 32, boxShadow: '0 24px 80px rgba(0,0,0,0.3)', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.25), transparent)' }} />
                 <form
-                  onSubmit={(e) => { e.preventDefault(); const d = new FormData(e.currentTarget); console.log('Investor:', { name: d.get('name'), email: d.get('email'), firm: d.get('firm'), message: d.get('message') }); setSent(true) }}
+                  onSubmit={async (e) => { e.preventDefault(); const d = new FormData(e.currentTarget); const result = await submitInvestorContact(d); if (result.success) setSent(true) }}
                   style={{ textAlign: 'left' }}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 12, marginBottom: 12 }}>
