@@ -476,58 +476,52 @@ export default function Capabilities() {
         </div>
       ))}
 
-      {/* Closing — "Judgment stays with your team" */}
-      <div style={{ padding: '120px 24px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-        {/* Floating "Ready for review" pills */}
-        {[
-          { top: '15%', left: '8%' }, { top: '25%', right: '12%' },
-          { top: '55%', left: '5%' }, { top: '65%', right: '8%' },
-          { top: '35%', left: '15%' }, { top: '45%', right: '18%' },
-          { bottom: '20%', left: '12%' }, { bottom: '25%', right: '15%' },
-        ].map((pos, i) => (
-          <div
-            key={i}
-            className="hidden md:flex items-center"
-            style={{
-              position: 'absolute',
-              ...pos,
-              gap: 6,
-              padding: '5px 12px',
-              borderRadius: 999,
-              backgroundColor: '#fff',
-              border: '1px solid #e7e5e4',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-              fontSize: 10,
-              color: '#a8a29e',
-              animation: `float ${5 + i * 0.4}s ease-in-out ${i * 0.3}s infinite`,
-            }}
-          >
-            <span style={{ width: 5, height: 5, borderRadius: '50%', backgroundColor: '#60a5fa' }} />
-            Ready for review
-          </div>
-        ))}
+      {/* Closing — Your morning with MambaHR */}
+      <div style={{ padding: '120px 24px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 600, margin: '0 auto' }}>
+          <h3 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, letterSpacing: '-0.03em', color: '#1a1611', lineHeight: 1.1, marginBottom: 16 }}>
+            Your morning with MambaHR.
+          </h3>
+          <p style={{ fontSize: 16, color: '#78716c', marginBottom: 48, lineHeight: 1.6 }}>
+            You open your laptop. The agent already handled 31 tasks overnight. You approve 2 items. You&apos;re done with HR admin for the day.
+          </p>
 
-        {/* Center card */}
-        <div style={{ position: 'relative', zIndex: 1, display: 'inline-block', marginBottom: 32 }}>
-          <div style={{ padding: '20px 32px', borderRadius: 14, backgroundColor: '#fff', border: '1px solid #e7e5e4', boxShadow: '0 8px 32px rgba(0,0,0,0.08)', textAlign: 'left' }}>
-            <div className="flex items-center" style={{ gap: 8, marginBottom: 8 }}>
-              <div style={{ width: 24, height: 24, borderRadius: 6, backgroundColor: '#1a1611', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: '#fff' }}>M</div>
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#1a1611' }}>MambaHR</span>
+          {/* Morning summary card */}
+          <div style={{ padding: 28, borderRadius: 16, backgroundColor: '#fff', border: '1px solid #e7e5e4', boxShadow: '0 8px 40px rgba(0,0,0,0.08)', textAlign: 'left', maxWidth: 400, margin: '0 auto' }}>
+            <div className="flex items-center justify-between" style={{ marginBottom: 20 }}>
+              <div className="flex items-center" style={{ gap: 8 }}>
+                <div style={{ width: 28, height: 28, borderRadius: 8, backgroundColor: '#1a1611', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: '#fff' }}>M</div>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#1a1611' }}>Good morning.</div>
+                  <div style={{ fontSize: 11, color: '#a8a29e' }}>Here&apos;s your daily digest.</div>
+                </div>
+              </div>
+              <span style={{ fontSize: 10, color: '#a8a29e' }}>8:01 AM</span>
             </div>
-            <div style={{ fontSize: 12, color: '#78716c', marginBottom: 12 }}>12 tasks completed · 2 need review</div>
-            <div style={{ padding: '10px 32px', borderRadius: 8, backgroundColor: '#1a1611', color: '#fff', fontSize: 13, fontWeight: 600, textAlign: 'center', cursor: 'pointer' }}>
-              Accept Changes
+
+            {/* Stats row */}
+            <div className="grid grid-cols-3" style={{ gap: 12, marginBottom: 20 }}>
+              {[
+                { n: '31', label: 'Handled', color: '#22c55e' },
+                { n: '2', label: 'Need you', color: 'var(--gold)' },
+                { n: '0', label: 'Escalated', color: '#22c55e' },
+              ].map(s => (
+                <div key={s.label} style={{ textAlign: 'center', padding: '12px 0', borderRadius: 10, backgroundColor: '#fafaf7' }}>
+                  <div style={{ fontSize: 24, fontWeight: 800, color: s.color, letterSpacing: '-0.02em', lineHeight: 1 }}>{s.n}</div>
+                  <div style={{ fontSize: 10, color: '#a8a29e', marginTop: 4 }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Time saved */}
+            <div style={{ padding: '12px 16px', borderRadius: 10, backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0' }}>
+              <div className="flex items-center justify-between">
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#16a34a' }}>Time saved today</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#16a34a' }}>2h 14m</span>
+              </div>
             </div>
           </div>
         </div>
-
-        <h3 style={{ fontSize: 'clamp(32px, 4vw, 56px)', fontWeight: 800, letterSpacing: '-0.03em', color: '#1a1611', lineHeight: 1.1, marginBottom: 16, position: 'relative', zIndex: 1 }}>
-          <em style={{ fontStyle: 'italic', fontWeight: 800 }}>Judgment</em><br />
-          <em style={{ fontStyle: 'italic', fontWeight: 800 }}>stays with</em> <em style={{ fontStyle: 'italic', fontWeight: 800, color: 'var(--gold)' }}>you.</em>
-        </h3>
-        <p style={{ fontSize: 16, color: '#78716c', maxWidth: 400, margin: '0 auto', lineHeight: 1.6, position: 'relative', zIndex: 1 }}>
-          Agents do the execution while you review, strategize, and make the decisions that matter.
-        </p>
       </div>
     </section>
   )
