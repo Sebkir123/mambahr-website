@@ -257,40 +257,45 @@ export default function Capabilities() {
     <section style={{ backgroundColor: 'var(--bg-light)' }}>
       {/* Section header */}
       <div style={{ padding: '96px 24px 0', maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-        <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 16, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+        <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 24, letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-mono), monospace' }}>
           What the agent does
         </p>
-        <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text-dark)', marginBottom: 16 }}>
-          Delegate the admin.<br />
-          <span style={{ color: 'var(--text-dark-faint)' }}>Own the people decisions.</span>
+        <h2 style={{ fontSize: 'clamp(36px, 5vw, 64px)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em', color: 'var(--text-dark)', marginBottom: 20 }}>
+          Delegate the admin.
         </h2>
-        <p style={{ fontSize: 16, color: 'var(--text-dark-muted)', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 }}>
-          MambaHR agents execute HR operations end to end, so you can focus on what only humans can do.
+        <p style={{ fontSize: 'clamp(18px, 2.5vw, 24px)', color: 'var(--text-dark-muted)', maxWidth: 520, margin: '0 auto', lineHeight: 1.5, fontWeight: 500 }}>
+          MambaHR agents handle HR operations end to end — so you can focus on what only humans can do.
         </p>
       </div>
 
       {/* Workflow pipeline */}
-      <div style={{ padding: '48px 24px 0', maxWidth: 700, margin: '0 auto' }}>
-        <div className="flex flex-wrap justify-center" style={{ gap: 8 }}>
+      <div style={{ padding: '56px 24px 0', maxWidth: 760, margin: '0 auto' }}>
+        <div className="flex flex-wrap justify-center items-center" style={{ gap: 0 }}>
           {['Intake', 'Verify', 'Act', 'Notify', 'Review'].map((step, i) => (
             <div key={step} className="flex items-center">
-              <span style={{
-                padding: '8px 20px',
-                borderRadius: 999,
-                border: '1px solid var(--border-light)',
+              <div style={{
+                padding: '10px 24px',
                 fontSize: 13,
-                fontWeight: 500,
-                color: 'var(--text-dark-muted)',
-                backgroundColor: 'var(--bg-light-surface)',
+                fontWeight: 600,
+                color: i === 2 ? 'var(--gold)' : 'var(--text-dark-muted)',
+                letterSpacing: '0.02em',
+                position: 'relative',
               }}>
                 {step}
-              </span>
+                {i === 2 && (
+                  <div style={{ position: 'absolute', bottom: 0, left: '20%', right: '20%', height: 2, backgroundColor: 'var(--gold)', borderRadius: 1 }} />
+                )}
+              </div>
               {i < 4 && (
-                <span className="hidden md:inline" style={{ margin: '0 4px', color: 'var(--text-dark-faint)', fontSize: 14 }}>→</span>
+                <svg className="hidden md:block" width="20" height="12" viewBox="0 0 20 12" fill="none" style={{ margin: '0 2px', opacity: 0.25 }}>
+                  <path d="M0 6h16M12 1l5 5-5 5" stroke="var(--text-dark-faint)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               )}
             </div>
           ))}
         </div>
+        {/* Subtle line under pipeline */}
+        <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, var(--border-light), transparent)', marginTop: 8 }} />
       </div>
 
       {/* Feature sections */}
