@@ -268,101 +268,119 @@ export default function Capabilities() {
         </p>
       </div>
 
-      {/* Workflow pipeline — Harvey style with mini mockups */}
-      <div className="hidden md:block" style={{ padding: '64px 24px 0', maxWidth: 960, margin: '0 auto' }}>
+      {/* Workflow pipeline — Harvey style */}
+      <div className="hidden md:block" style={{ padding: '80px 24px 0', maxWidth: 1060, margin: '0 auto', position: 'relative' }}>
+
+        {/* SVG flowing connector lines behind everything */}
+        <svg style={{ position: 'absolute', top: 80, left: 0, width: '100%', height: 320, pointerEvents: 'none', zIndex: 0 }} viewBox="0 0 1060 320" fill="none" preserveAspectRatio="none">
+          {/* Flowing curves between columns */}
+          <path d="M160 60 C210 60, 230 60, 280 60" stroke="var(--border-light)" strokeWidth="1.5" strokeDasharray="4 4" />
+          <path d="M380 60 C430 60, 450 60, 500 60" stroke="var(--border-light)" strokeWidth="1.5" strokeDasharray="4 4" />
+          <path d="M600 60 C650 60, 670 60, 720 60" stroke="var(--border-light)" strokeWidth="1.5" strokeDasharray="4 4" />
+          <path d="M820 60 C870 60, 890 60, 940 60" stroke="var(--border-light)" strokeWidth="1.5" strokeDasharray="4 4" />
+          {/* Downward curves from labels to cards */}
+          <path d="M106 75 C106 100, 106 110, 106 120" stroke="var(--border-light)" strokeWidth="1" opacity="0.5" />
+          <path d="M318 75 C318 100, 318 110, 318 120" stroke="var(--border-light)" strokeWidth="1" opacity="0.5" />
+          <path d="M530 75 C530 100, 530 110, 530 120" stroke="var(--gold)" strokeWidth="1.5" opacity="0.4" />
+          <path d="M742 75 C742 100, 742 110, 742 120" stroke="var(--border-light)" strokeWidth="1" opacity="0.5" />
+          <path d="M954 75 C954 100, 954 110, 954 120" stroke="var(--border-light)" strokeWidth="1" opacity="0.5" />
+        </svg>
+
         {/* Labels row */}
-        <div className="grid grid-cols-5" style={{ gap: 16, marginBottom: 24 }}>
-          {[
-            { label: 'Intake', desc: 'Request received' },
-            { label: 'Verify', desc: 'Policy checked' },
-            { label: 'Act', desc: 'Work executed' },
-            { label: 'Notify', desc: 'People informed' },
-            { label: 'Review', desc: 'You decide' },
-          ].map((step, i) => (
-            <div key={step.label} style={{ textAlign: 'center' }}>
+        <div className="grid grid-cols-5" style={{ gap: 20, marginBottom: 40, position: 'relative', zIndex: 1 }}>
+          {['Intake', 'Verify', 'Act', 'Notify', 'Review'].map((label, i) => (
+            <div key={label} style={{ textAlign: 'center' }}>
               <div style={{
                 display: 'inline-block',
-                padding: '8px 20px',
+                padding: '10px 28px',
                 borderRadius: 999,
-                border: i === 2 ? '1.5px solid var(--gold)' : '1px solid var(--border-light)',
-                fontSize: 13,
+                border: i === 2 ? '2px solid var(--gold)' : '1.5px solid var(--border-light)',
+                fontSize: 14,
                 fontWeight: 600,
-                color: i === 2 ? 'var(--gold)' : 'var(--text-dark-muted)',
-                backgroundColor: i === 2 ? 'rgba(176,141,87,0.06)' : 'var(--bg-light-surface)',
+                color: i === 2 ? 'var(--gold)' : 'var(--text-dark)',
+                backgroundColor: 'var(--bg-light-surface)',
+                boxShadow: i === 2 ? '0 4px 16px rgba(176,141,87,0.12)' : '0 2px 8px rgba(0,0,0,0.03)',
               }}>
-                {step.label}
+                {label}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Connecting lines */}
-        <div style={{ position: 'relative', height: 2, margin: '0 10%' }}>
-          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, backgroundColor: 'var(--border-light)' }} />
-          {/* Dots on the line */}
-          {[0, 25, 50, 75, 100].map((pct) => (
-            <div key={pct} style={{ position: 'absolute', left: `${pct}%`, top: -3, width: 7, height: 7, borderRadius: '50%', backgroundColor: pct === 50 ? 'var(--gold)' : 'var(--border-light)', transform: 'translateX(-50%)' }} />
-          ))}
-        </div>
-
-        {/* Mini mockup cards row */}
-        <div className="grid grid-cols-5" style={{ gap: 16, marginTop: 24 }}>
-          {/* Intake */}
-          <div style={{ padding: 12, borderRadius: 10, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', marginBottom: 8, fontWeight: 600 }}>New request</div>
-            <div style={{ fontSize: 11, color: 'var(--text-dark)', marginBottom: 4 }}>Sarah Chen</div>
-            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)' }}>PTO · 5 days</div>
-            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', marginTop: 2 }}>Dec 23–27</div>
-          </div>
-
-          {/* Verify */}
-          <div style={{ padding: 12, borderRadius: 10, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', marginBottom: 8, fontWeight: 600 }}>Policy check</div>
-            <div className="flex items-center" style={{ gap: 4, marginBottom: 4 }}>
-              <span style={{ color: '#16a34a', fontSize: 10 }}>✓</span>
-              <span style={{ fontSize: 10, color: 'var(--text-dark)' }}>14 days remaining</span>
+        {/* Mini mockup cards — floating with depth */}
+        <div className="grid grid-cols-5" style={{ gap: 20, position: 'relative', zIndex: 1 }}>
+          {/* Intake — request card with avatar */}
+          <div style={{ padding: 16, borderRadius: 14, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)', transition: 'transform 0.3s, box-shadow 0.3s' }} className="card-hover">
+            <div className="flex items-center" style={{ gap: 8, marginBottom: 12 }}>
+              <div style={{ width: 28, height: 28, borderRadius: '50%', backgroundColor: '#f0eee8', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: 'var(--text-dark-faint)' }}>SC</div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-dark)' }}>Sarah Chen</div>
+                <div style={{ fontSize: 10, color: 'var(--text-dark-faint)' }}>PTO request</div>
+              </div>
             </div>
-            <div className="flex items-center" style={{ gap: 4, marginBottom: 4 }}>
-              <span style={{ color: '#16a34a', fontSize: 10 }}>✓</span>
-              <span style={{ fontSize: 10, color: 'var(--text-dark)' }}>No blackout</span>
-            </div>
-            <div className="flex items-center" style={{ gap: 4 }}>
-              <span style={{ color: '#16a34a', fontSize: 10 }}>✓</span>
-              <span style={{ fontSize: 10, color: 'var(--text-dark)' }}>Auto-approve OK</span>
+            <div style={{ padding: '8px 10px', borderRadius: 8, backgroundColor: 'rgba(176,141,87,0.04)', fontSize: 10, color: 'var(--text-dark-muted)' }}>
+              5 days · Dec 23–27
             </div>
           </div>
 
-          {/* Act */}
-          <div style={{ padding: 12, borderRadius: 10, backgroundColor: 'var(--bg-light-surface)', border: '1.5px solid rgba(176,141,87,0.3)', boxShadow: '0 2px 12px rgba(176,141,87,0.08)' }}>
-            <div style={{ fontSize: 10, color: 'var(--gold)', marginBottom: 8, fontWeight: 600 }}>Executing</div>
+          {/* Verify — checklist with green checks */}
+          <div style={{ padding: 16, borderRadius: 14, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }} className="card-hover">
+            {[
+              { text: '14 days remaining', done: true },
+              { text: 'No blackout dates', done: true },
+              { text: 'Auto-approve eligible', done: true },
+            ].map((check) => (
+              <div key={check.text} className="flex items-center" style={{ gap: 8, padding: '6px 0' }}>
+                <div style={{ width: 16, height: 16, borderRadius: '50%', backgroundColor: '#dcfce7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3l2 2 4-4" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </div>
+                <span style={{ fontSize: 11, color: 'var(--text-dark)' }}>{check.text}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Act — HRIS logos + status */}
+          <div style={{ padding: 16, borderRadius: 14, backgroundColor: 'var(--bg-light-surface)', border: '2px solid rgba(176,141,87,0.25)', boxShadow: '0 8px 32px rgba(176,141,87,0.1)' }} className="card-hover">
+            <div className="flex items-center" style={{ gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
+              {['G', 'B', 'R'].map((letter, i) => (
+                <div key={letter} style={{ width: 28, height: 28, borderRadius: 8, backgroundColor: i === 0 ? '#e8f5e9' : i === 1 ? '#fff3e0' : '#e3f2fd', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: i === 0 ? '#2e7d32' : i === 1 ? '#e65100' : '#1565c0', border: '1px solid rgba(0,0,0,0.06)' }}>
+                  {letter}
+                </div>
+              ))}
+            </div>
             <StatusBadge label="In progress" color="gold" />
-            <div style={{ marginTop: 8, fontSize: 10, color: 'var(--text-dark-muted)' }}>Updating Gusto payroll...</div>
-            <div style={{ fontSize: 10, color: 'var(--text-dark-muted)', marginTop: 2 }}>Updating calendar...</div>
-          </div>
-
-          {/* Notify */}
-          <div style={{ padding: 12, borderRadius: 10, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', marginBottom: 8, fontWeight: 600 }}>Notifications</div>
-            <div style={{ fontSize: 10, color: 'var(--text-dark)', marginBottom: 4 }}>→ Sarah Chen</div>
-            <div style={{ fontSize: 10, color: 'var(--text-dark)', marginBottom: 4 }}>→ Manager: Alex Kim</div>
-            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', fontStyle: 'italic' }}>Calendar updated</div>
-          </div>
-
-          {/* Review */}
-          <div style={{ padding: 12, borderRadius: 10, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', marginBottom: 8, fontWeight: 600 }}>Your queue</div>
-            <div style={{ padding: '6px 0', borderBottom: '1px solid var(--border-light)', fontSize: 10, color: 'var(--text-dark)' }}>
-              Mark Liu — $1,240
+            <div style={{ marginTop: 8, fontSize: 10, color: 'var(--text-dark-muted)', fontStyle: 'italic' }}>
+              Syncing payroll...
             </div>
-            <div className="flex" style={{ gap: 6, marginTop: 8 }}>
-              <span style={{ padding: '3px 10px', borderRadius: 4, backgroundColor: 'var(--text-dark)', color: '#fff', fontSize: 9, fontWeight: 600 }}>Approve</span>
-              <span style={{ padding: '3px 10px', borderRadius: 4, border: '1px solid var(--border-light)', fontSize: 9, color: 'var(--text-dark-faint)' }}>Reject</span>
+          </div>
+
+          {/* Notify — message bubbles */}
+          <div style={{ padding: 16, borderRadius: 14, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }} className="card-hover">
+            {[
+              { to: 'Sarah Chen', type: 'Approved' },
+              { to: 'Alex Kim', type: 'FYI' },
+            ].map((msg) => (
+              <div key={msg.to} style={{ padding: '8px 10px', borderRadius: 8, backgroundColor: 'rgba(0,0,0,0.02)', marginBottom: 6, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: 11, color: 'var(--text-dark)' }}>{msg.to}</span>
+                <span style={{ fontSize: 9, fontWeight: 600, padding: '2px 6px', borderRadius: 4, backgroundColor: msg.type === 'Approved' ? '#dcfce7' : '#f0eee8', color: msg.type === 'Approved' ? '#16a34a' : 'var(--text-dark-faint)' }}>{msg.type}</span>
+              </div>
+            ))}
+            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', fontStyle: 'italic', marginTop: 4 }}>Calendar updated</div>
+          </div>
+
+          {/* Review — accept/reject */}
+          <div style={{ padding: 16, borderRadius: 14, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }} className="card-hover">
+            <div style={{ fontSize: 11, color: 'var(--text-dark-faint)', marginBottom: 8 }}>MambaHR made a decision</div>
+            <div style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-dark)', marginBottom: 12 }}>Auto-approved PTO</div>
+            <div className="flex" style={{ gap: 6 }}>
+              <span style={{ flex: 1, padding: '7px 0', borderRadius: 8, backgroundColor: 'var(--text-dark)', color: '#fff', fontSize: 11, fontWeight: 600, textAlign: 'center', cursor: 'pointer' }}>Accept</span>
+              <span style={{ flex: 1, padding: '7px 0', borderRadius: 8, border: '1px solid var(--border-light)', fontSize: 11, fontWeight: 500, color: 'var(--text-dark-faint)', textAlign: 'center', cursor: 'pointer' }}>Reject</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Mobile pipeline — simplified */}
+      {/* Mobile pipeline — simplified pills */}
       <div className="md:hidden" style={{ padding: '48px 24px 0', maxWidth: 400, margin: '0 auto' }}>
         <div className="flex flex-wrap justify-center" style={{ gap: 8 }}>
           {['Intake', 'Verify', 'Act', 'Notify', 'Review'].map((step, i) => (
