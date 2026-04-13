@@ -268,34 +268,116 @@ export default function Capabilities() {
         </p>
       </div>
 
-      {/* Workflow pipeline */}
-      <div style={{ padding: '56px 24px 0', maxWidth: 760, margin: '0 auto' }}>
-        <div className="flex flex-wrap justify-center items-center" style={{ gap: 0 }}>
-          {['Intake', 'Verify', 'Act', 'Notify', 'Review'].map((step, i) => (
-            <div key={step} className="flex items-center">
+      {/* Workflow pipeline — Harvey style with mini mockups */}
+      <div className="hidden md:block" style={{ padding: '64px 24px 0', maxWidth: 960, margin: '0 auto' }}>
+        {/* Labels row */}
+        <div className="grid grid-cols-5" style={{ gap: 16, marginBottom: 24 }}>
+          {[
+            { label: 'Intake', desc: 'Request received' },
+            { label: 'Verify', desc: 'Policy checked' },
+            { label: 'Act', desc: 'Work executed' },
+            { label: 'Notify', desc: 'People informed' },
+            { label: 'Review', desc: 'You decide' },
+          ].map((step, i) => (
+            <div key={step.label} style={{ textAlign: 'center' }}>
               <div style={{
-                padding: '10px 24px',
+                display: 'inline-block',
+                padding: '8px 20px',
+                borderRadius: 999,
+                border: i === 2 ? '1.5px solid var(--gold)' : '1px solid var(--border-light)',
                 fontSize: 13,
                 fontWeight: 600,
                 color: i === 2 ? 'var(--gold)' : 'var(--text-dark-muted)',
-                letterSpacing: '0.02em',
-                position: 'relative',
+                backgroundColor: i === 2 ? 'rgba(176,141,87,0.06)' : 'var(--bg-light-surface)',
               }}>
-                {step}
-                {i === 2 && (
-                  <div style={{ position: 'absolute', bottom: 0, left: '20%', right: '20%', height: 2, backgroundColor: 'var(--gold)', borderRadius: 1 }} />
-                )}
+                {step.label}
               </div>
-              {i < 4 && (
-                <svg className="hidden md:block" width="20" height="12" viewBox="0 0 20 12" fill="none" style={{ margin: '0 2px', opacity: 0.25 }}>
-                  <path d="M0 6h16M12 1l5 5-5 5" stroke="var(--text-dark-faint)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              )}
             </div>
           ))}
         </div>
-        {/* Subtle line under pipeline */}
-        <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, var(--border-light), transparent)', marginTop: 8 }} />
+
+        {/* Connecting lines */}
+        <div style={{ position: 'relative', height: 2, margin: '0 10%' }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, backgroundColor: 'var(--border-light)' }} />
+          {/* Dots on the line */}
+          {[0, 25, 50, 75, 100].map((pct) => (
+            <div key={pct} style={{ position: 'absolute', left: `${pct}%`, top: -3, width: 7, height: 7, borderRadius: '50%', backgroundColor: pct === 50 ? 'var(--gold)' : 'var(--border-light)', transform: 'translateX(-50%)' }} />
+          ))}
+        </div>
+
+        {/* Mini mockup cards row */}
+        <div className="grid grid-cols-5" style={{ gap: 16, marginTop: 24 }}>
+          {/* Intake */}
+          <div style={{ padding: 12, borderRadius: 10, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', marginBottom: 8, fontWeight: 600 }}>New request</div>
+            <div style={{ fontSize: 11, color: 'var(--text-dark)', marginBottom: 4 }}>Sarah Chen</div>
+            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)' }}>PTO · 5 days</div>
+            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', marginTop: 2 }}>Dec 23–27</div>
+          </div>
+
+          {/* Verify */}
+          <div style={{ padding: 12, borderRadius: 10, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', marginBottom: 8, fontWeight: 600 }}>Policy check</div>
+            <div className="flex items-center" style={{ gap: 4, marginBottom: 4 }}>
+              <span style={{ color: '#16a34a', fontSize: 10 }}>✓</span>
+              <span style={{ fontSize: 10, color: 'var(--text-dark)' }}>14 days remaining</span>
+            </div>
+            <div className="flex items-center" style={{ gap: 4, marginBottom: 4 }}>
+              <span style={{ color: '#16a34a', fontSize: 10 }}>✓</span>
+              <span style={{ fontSize: 10, color: 'var(--text-dark)' }}>No blackout</span>
+            </div>
+            <div className="flex items-center" style={{ gap: 4 }}>
+              <span style={{ color: '#16a34a', fontSize: 10 }}>✓</span>
+              <span style={{ fontSize: 10, color: 'var(--text-dark)' }}>Auto-approve OK</span>
+            </div>
+          </div>
+
+          {/* Act */}
+          <div style={{ padding: 12, borderRadius: 10, backgroundColor: 'var(--bg-light-surface)', border: '1.5px solid rgba(176,141,87,0.3)', boxShadow: '0 2px 12px rgba(176,141,87,0.08)' }}>
+            <div style={{ fontSize: 10, color: 'var(--gold)', marginBottom: 8, fontWeight: 600 }}>Executing</div>
+            <StatusBadge label="In progress" color="gold" />
+            <div style={{ marginTop: 8, fontSize: 10, color: 'var(--text-dark-muted)' }}>Updating Gusto payroll...</div>
+            <div style={{ fontSize: 10, color: 'var(--text-dark-muted)', marginTop: 2 }}>Updating calendar...</div>
+          </div>
+
+          {/* Notify */}
+          <div style={{ padding: 12, borderRadius: 10, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', marginBottom: 8, fontWeight: 600 }}>Notifications</div>
+            <div style={{ fontSize: 10, color: 'var(--text-dark)', marginBottom: 4 }}>→ Sarah Chen</div>
+            <div style={{ fontSize: 10, color: 'var(--text-dark)', marginBottom: 4 }}>→ Manager: Alex Kim</div>
+            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', fontStyle: 'italic' }}>Calendar updated</div>
+          </div>
+
+          {/* Review */}
+          <div style={{ padding: 12, borderRadius: 10, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+            <div style={{ fontSize: 10, color: 'var(--text-dark-faint)', marginBottom: 8, fontWeight: 600 }}>Your queue</div>
+            <div style={{ padding: '6px 0', borderBottom: '1px solid var(--border-light)', fontSize: 10, color: 'var(--text-dark)' }}>
+              Mark Liu — $1,240
+            </div>
+            <div className="flex" style={{ gap: 6, marginTop: 8 }}>
+              <span style={{ padding: '3px 10px', borderRadius: 4, backgroundColor: 'var(--text-dark)', color: '#fff', fontSize: 9, fontWeight: 600 }}>Approve</span>
+              <span style={{ padding: '3px 10px', borderRadius: 4, border: '1px solid var(--border-light)', fontSize: 9, color: 'var(--text-dark-faint)' }}>Reject</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile pipeline — simplified */}
+      <div className="md:hidden" style={{ padding: '48px 24px 0', maxWidth: 400, margin: '0 auto' }}>
+        <div className="flex flex-wrap justify-center" style={{ gap: 8 }}>
+          {['Intake', 'Verify', 'Act', 'Notify', 'Review'].map((step, i) => (
+            <span key={step} style={{
+              padding: '6px 14px',
+              borderRadius: 999,
+              border: i === 2 ? '1.5px solid var(--gold)' : '1px solid var(--border-light)',
+              fontSize: 12,
+              fontWeight: 600,
+              color: i === 2 ? 'var(--gold)' : 'var(--text-dark-muted)',
+            }}>
+              {step}
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* Feature sections */}
