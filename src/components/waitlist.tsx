@@ -6,6 +6,7 @@ import TurnstileWidget from '@/components/turnstile-widget'
 
 export default function RequestAccess() {
   const [success, setSuccess] = useState(false)
+  const [returning, setReturning] = useState(false)
   const [pending, setPending] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
@@ -15,8 +16,12 @@ export default function RequestAccess() {
     setError(null)
     if (turnstileToken) formData.set('cf-turnstile-response', turnstileToken)
     const result = await submitWaitlist(formData)
-    if (result.success) setSuccess(true)
-    else setError(result.error || 'Something went wrong.')
+    if (result.success) {
+      setSuccess(true)
+      setReturning(!!result.returning)
+    } else {
+      setError(result.error || 'Something went wrong.')
+    }
     setPending(false)
   }
 
@@ -123,11 +128,14 @@ export default function RequestAccess() {
         ) : (
           <div style={{ padding: '32px 0' }}>
             <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
-              You&apos;re on the list.
+              {returning ? 'Good to see you again.' : 'You\'re on the list.'}
             </div>
             <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-              We&apos;ll review your application and get back to you within 48 hours.<br />
-              Keep an eye on your inbox.
+              {returning ? (
+                <>You&apos;re already on our list — we have your application on file.<br />We&apos;ll be in touch soon.</>
+              ) : (
+                <>We&apos;ll review your application and get back to you within 48 hours.<br />Keep an eye on your inbox.</>
+              )}
             </p>
           </div>
         )}

@@ -49,10 +49,12 @@ export async function submitWaitlist(formData: FormData) {
     .from('waitlist')
     .insert({ email, company })
 
+  // Duplicate email — treat as success (returning visitor)
+  if (error?.code === '23505') {
+    return { success: true, returning: true }
+  }
+
   if (error) {
-    if (error.code === '23505') {
-      return { success: false, error: 'This email is already on the waitlist.' }
-    }
     return { success: false, error: 'Something went wrong. Please try again.' }
   }
 
@@ -64,7 +66,7 @@ export async function submitWaitlist(formData: FormData) {
     sendWaitlistWelcome({ email, company }),
   ])
 
-  return { success: true }
+  return { success: true, returning: false }
 }
 
 const investorSchema = z.object({
