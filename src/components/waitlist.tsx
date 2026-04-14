@@ -29,7 +29,7 @@ export default function RequestAccess() {
           Get in.
         </h2>
         <p style={{ fontSize: 15, color: 'var(--text-muted)', marginBottom: 40, lineHeight: 1.6 }}>
-          We&apos;re onboarding 10 design partners. The agent connects to your HRIS and runs autonomously from day one.
+          We&apos;re selectively onboarding design partners. The agent connects to your HRIS and runs autonomously from day one — see if MambaHR is right for your team.
         </p>
 
         {!success ? (
@@ -122,11 +122,12 @@ export default function RequestAccess() {
           </form>
         ) : (
           <div style={{ padding: '32px 0' }}>
-            <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>
-              You&apos;re in.
+            <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
+              You&apos;re on the list.
             </div>
-            <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>
-              We&apos;ll reach out within 48 hours to get you started.
+            <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+              We&apos;ll review your application and get back to you within 48 hours.<br />
+              Keep an eye on your inbox.
             </p>
           </div>
         )}

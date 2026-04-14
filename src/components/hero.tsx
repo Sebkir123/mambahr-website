@@ -63,7 +63,7 @@ export default function Hero() {
               animation: 'pulse-dot 2s ease-in-out infinite',
             }}
           />
-          Private Beta — accepting 10 design partners
+          Private Beta — accepting design partners
         </div>
 
         {/* H1 */}
