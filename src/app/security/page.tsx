@@ -5,157 +5,50 @@ import Nav from '@/components/nav'
 import Footer from '@/components/footer'
 import ParticleField from '@/components/particle-field'
 
-const principles = [
-  {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <path d="M16 3l11 4v8c0 6.5-4.5 12-11 14C9.5 27 5 21.5 5 15V7l11-4z" stroke="var(--gold)" strokeWidth="1.5" />
-        <path d="M12 16l3 3 5-6" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: 'PII Protection',
-    desc: 'Employee personally identifiable information is encrypted at rest and in transit. We treat every piece of HR data as sensitive by default — names, SSNs, salaries, health info.',
-  },
-  {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <rect x="4" y="14" width="24" height="14" rx="3" stroke="var(--gold)" strokeWidth="1.5" />
-        <path d="M10 14V10a6 6 0 1112 0v4" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="16" cy="21" r="2" fill="var(--gold)" />
-      </svg>
-    ),
-    title: 'Encryption Everywhere',
-    desc: 'AES-256 encryption at rest. TLS 1.3 in transit. Your data is encrypted before it touches our systems and stays encrypted in storage. No exceptions.',
-  },
-  {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="11" stroke="var(--gold)" strokeWidth="1.5" />
-        <path d="M16 10v6l4 4" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: 'Zero Data Retention on AI',
-    desc: 'Your HR data is never used to train AI models. Inputs are processed and discarded. We contractually guarantee zero data retention on all AI inference.',
-  },
-  {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <path d="M6 8h20M6 16h20M6 24h20" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="12" cy="8" r="2" fill="var(--gold)" />
-        <circle cx="20" cy="16" r="2" fill="var(--gold)" />
-        <circle cx="14" cy="24" r="2" fill="var(--gold)" />
-      </svg>
-    ),
-    title: 'Full Audit Trail',
-    desc: 'Every decision the agent makes is logged with a timestamp, the data it used, and the policy it applied. You can audit any action at any time.',
-  },
-  {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <rect x="3" y="6" width="26" height="20" rx="3" stroke="var(--gold)" strokeWidth="1.5" />
-        <path d="M3 12h26" stroke="var(--gold)" strokeWidth="1.5" />
-        <circle cx="8" cy="9" r="1" fill="var(--gold)" />
-        <circle cx="12" cy="9" r="1" fill="var(--gold)" />
-      </svg>
-    ),
-    title: 'Access Controls',
-    desc: 'Role-based access control with SSO integration. Admin, HR Manager, and Read-Only roles with granular permissions. Every access event is logged.',
-  },
-  {
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <path d="M8 16a8 8 0 1116 0 8 8 0 01-16 0z" stroke="var(--gold)" strokeWidth="1.5" />
-        <path d="M16 12v4l3 3" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M4 4l4 4M28 4l-4 4" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-    title: 'Incident Response',
-    desc: 'Documented incident response plan with defined SLAs. We notify affected customers within 72 hours of any confirmed breach, per our security addendum.',
-  },
-]
-
 const faqItems = [
   {
     q: 'Does MambaHR train AI models on my data?',
-    a: 'No. Your HR data is never used to train, fine-tune, or improve any AI model. Inputs are processed for your specific request and immediately discarded from AI systems. This is a contractual guarantee in our security addendum.',
+    a: 'No. Your HR data is never used to train, fine-tune, or improve any AI model. Inputs are processed for your specific request and immediately discarded. This is a contractual guarantee.',
   },
   {
     q: 'Where is my data stored?',
-    a: 'All data is stored in SOC 2 certified data centers in the United States. We use Supabase (backed by AWS) for our primary database with automatic daily backups and point-in-time recovery.',
+    a: 'All data is stored in SOC 2 certified data centers in the United States. We use automatic daily backups with point-in-time recovery.',
   },
   {
     q: 'How do you handle PII like SSNs and salary data?',
-    a: 'All PII is encrypted at rest using AES-256 and in transit using TLS 1.3. Within our application, PII fields are additionally encrypted at the column level. Access to raw PII requires explicit role-based permissions and is logged.',
+    a: 'All PII is encrypted at rest (AES-256) and in transit (TLS 1.3). PII fields have additional column-level encryption. Access requires explicit permissions and is logged.',
   },
   {
-    q: 'What happens if an employee leaves and we need to delete their data?',
-    a: 'We support full data deletion requests per your retention policies. When you request deletion, the data is purged from all primary systems within 30 days and from backups within 90 days.',
-  },
-  {
-    q: 'Do you have SOC 2 certification?',
-    a: 'We are currently pursuing SOC 2 Type I certification, targeted for completion in Q3 2026. In the meantime, we follow SOC 2 Trust Service Criteria as our baseline for all security controls and can share our current security posture documentation on request.',
+    q: 'Can we delete employee data?',
+    a: 'Yes. We support full data deletion requests per your retention policies. Data is purged from primary systems within 30 days and backups within 90 days.',
   },
   {
     q: 'How do you connect to our HRIS?',
-    a: 'We integrate via OAuth 2.0 with read/write scopes that you explicitly approve. We never store your HRIS credentials. You can revoke MambaHR\'s access at any time from your HRIS admin panel.',
+    a: 'Via OAuth 2.0 with scopes you explicitly approve. We never store your HRIS credentials. You can revoke access at any time from your HRIS admin panel.',
   },
   {
-    q: 'Can I get a copy of your security documentation?',
-    a: 'Yes. We provide a security addendum, data processing agreement (DPA), and infrastructure documentation to all design partners during onboarding. Contact security@mambahr.com for access.',
+    q: 'Can we get your security documentation?',
+    a: 'Yes. We provide a security addendum, data processing agreement (DPA), and infrastructure documentation to all design partners during onboarding.',
   },
 ]
 
 function FAQAccordion() {
   const [open, setOpen] = useState<number | null>(null)
-
   return (
     <div>
       {faqItems.map((item, i) => (
-        <div
-          key={item.q}
-          style={{
-            borderBottom: i < faqItems.length - 1 ? '1px solid var(--border-light)' : 'none',
-          }}
-        >
+        <div key={item.q} style={{ borderBottom: i < faqItems.length - 1 ? '1px solid #e7e5e4' : 'none' }}>
           <button
             onClick={() => setOpen(open === i ? null : i)}
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '20px 0',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              textAlign: 'left',
-            }}
+            style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '24px 0', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
           >
-            <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-dark)', paddingRight: 24 }}>{item.q}</span>
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              style={{
-                flexShrink: 0,
-                transform: open === i ? 'rotate(180deg)' : 'rotate(0deg)',
-                transition: 'transform 0.3s cubic-bezier(0.22,1,0.36,1)',
-              }}
-            >
-              <path d="M5 8l5 5 5-5" stroke="var(--text-dark-faint)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <span style={{ fontSize: 16, fontWeight: 600, color: '#1a1611', paddingRight: 24 }}>{item.q}</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, transform: open === i ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s cubic-bezier(0.22,1,0.36,1)' }}>
+              <path d="M5 8l5 5 5-5" stroke="#a8a29e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
-          <div
-            style={{
-              maxHeight: open === i ? 300 : 0,
-              overflow: 'hidden',
-              transition: 'max-height 0.4s cubic-bezier(0.22,1,0.36,1)',
-            }}
-          >
-            <p style={{ fontSize: 14, color: 'var(--text-dark-muted)', lineHeight: 1.7, paddingBottom: 20 }}>
-              {item.a}
-            </p>
+          <div style={{ maxHeight: open === i ? 300 : 0, overflow: 'hidden', transition: 'max-height 0.4s cubic-bezier(0.22,1,0.36,1)' }}>
+            <p style={{ fontSize: 15, color: '#57534e', lineHeight: 1.7, paddingBottom: 24 }}>{item.a}</p>
           </div>
         </div>
       ))}
@@ -168,139 +61,222 @@ export default function SecurityPage() {
     <>
       <Nav />
       <main>
-        {/* ═══ HERO ═══ */}
-        <section className="relative" style={{ paddingTop: 140, paddingBottom: 96, backgroundColor: 'var(--bg)', overflow: 'hidden' }}>
+        {/* ═══ HERO — emotional, not technical ═══ */}
+        <section className="relative" style={{ paddingTop: 140, paddingBottom: 100, backgroundColor: 'var(--bg)', overflow: 'hidden' }}>
           <ParticleField />
           <div style={{ maxWidth: 800, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1, textAlign: 'center' }}>
-            <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 24, letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-mono), monospace' }}>
-              Security
-            </p>
-            <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em', color: 'var(--text)', marginBottom: 20, maxWidth: 600, margin: '0 auto 20px' }}>
-              Built for the most <span style={{ color: 'var(--gold)' }}>sensitive data.</span>
+            {/* Large shield icon */}
+            <div style={{ marginBottom: 32, display: 'inline-block' }}>
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <path d="M32 4l24 9v16c0 14-10 26-24 30C18 55 8 43 8 29V13l24-9z" stroke="var(--gold)" strokeWidth="2" fill="rgba(176,141,87,0.06)" />
+                <path d="M22 32l7 7 13-14" stroke="var(--gold)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+
+            <h1 style={{ fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em', color: 'var(--text)', marginBottom: 20, maxWidth: 550, margin: '0 auto 20px' }}>
+              Your employees&apos; data is safe with us.
             </h1>
-            <p style={{ fontSize: 17, lineHeight: 1.6, color: 'var(--text-muted)', maxWidth: 520, margin: '0 auto 36px' }}>
-              HR data includes SSNs, salaries, health information, and performance reviews. We treat every byte as if it were our own.
+            <p style={{ fontSize: 18, lineHeight: 1.6, color: 'var(--text-muted)', maxWidth: 500, margin: '0 auto' }}>
+              SSNs, salaries, health records, performance reviews — we handle it all with the care it deserves.
             </p>
-            <a href="mailto:security@mambahr.com" style={{ display: 'inline-block', padding: '14px 32px', borderRadius: 999, backgroundColor: 'var(--gold)', color: '#fff', fontSize: 15, fontWeight: 600, textDecoration: 'none' }}>
-              Request security documentation
-            </a>
           </div>
         </section>
 
-        {/* ═══ SECURITY PRINCIPLES — 6 cards ═══ */}
-        <section style={{ padding: '96px 24px', backgroundColor: 'var(--bg-light)' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 16, letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-mono), monospace' }}>
-              How we protect your data
-            </p>
-            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-dark)', marginBottom: 56 }}>
-              Enterprise-grade from day one.
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: 16 }}>
-              {principles.map((p) => (
-                <div
-                  key={p.title}
-                  className="card-hover"
-                  style={{
-                    padding: 28,
-                    borderRadius: 14,
-                    backgroundColor: '#fff',
-                    border: '1px solid var(--border-light)',
-                  }}
-                >
-                  <div style={{ marginBottom: 16 }}>{p.icon}</div>
-                  <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-dark)', marginBottom: 8 }}>{p.title}</h3>
-                  <p style={{ fontSize: 14, color: 'var(--text-dark-muted)', lineHeight: 1.6 }}>{p.desc}</p>
-                </div>
-              ))}
+        {/* ═══ THE BIG PROMISE — "We never train on your data" ═══ */}
+        <section style={{ padding: '80px 24px', backgroundColor: '#fafaf7' }}>
+          <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
+            <div style={{
+              padding: '48px 40px',
+              borderRadius: 20,
+              backgroundColor: '#fff',
+              border: '1px solid #e7e5e4',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.04)',
+              maxWidth: 600,
+              margin: '0 auto',
+            }}>
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 48,
+                height: 48,
+                borderRadius: '50%',
+                backgroundColor: '#f0fdf4',
+                border: '2px solid #bbf7d0',
+                marginBottom: 20,
+              }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12l5 5L20 7" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#1a1611', marginBottom: 12 }}>
+                We never train on your data.
+              </h2>
+              <p style={{ fontSize: 16, color: '#57534e', lineHeight: 1.6 }}>
+                Your HR data is processed for your requests and immediately discarded from all AI systems. No training. No fine-tuning. No retention. Contractually guaranteed.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* ═══ FAQ ACCORDION ═══ */}
-        <section style={{ padding: '96px 24px', backgroundColor: 'var(--bg-light)' }}>
-          <div style={{ maxWidth: 700, margin: '0 auto' }}>
-            <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 16, letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-mono), monospace' }}>
-              FAQ
-            </p>
-            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-dark)', marginBottom: 48 }}>
-              Common questions.
-            </h2>
-
-            <FAQAccordion />
-          </div>
-        </section>
-
-        {/* ═══ DATA HANDLING VISUAL ═══ */}
-        <section style={{ padding: '96px 24px', backgroundColor: 'var(--bg-surface)' }}>
-          <div style={{ maxWidth: 800, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 56 }}>
-              <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 12 }}>
+        {/* ═══ HOW YOUR DATA FLOWS — visual story ═══ */}
+        <section style={{ padding: '96px 24px', backgroundColor: '#fafaf7', borderTop: '1px solid #e7e5e4' }}>
+          <div style={{ maxWidth: 900, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+              <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#1a1611', marginBottom: 12 }}>
                 How your data flows.
               </h2>
-              <p style={{ fontSize: 15, color: 'var(--text-muted)', maxWidth: 480, margin: '0 auto' }}>
-                Your data never leaves your control. Here&apos;s exactly what happens at each step.
+              <p style={{ fontSize: 16, color: '#78716c', maxWidth: 440, margin: '0 auto' }}>
+                Every step is encrypted, logged, and under your control.
               </p>
             </div>
 
-            {/* Data flow diagram */}
-            <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: 16 }}>
+            {/* 3-step flow with visual cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: 0, position: 'relative' }}>
+              {/* Connecting arrows — desktop only */}
+              <svg className="hidden md:block" style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: 2, transform: 'translateY(-50%)', zIndex: 0 }} viewBox="0 0 900 2" preserveAspectRatio="none">
+                <line x1="200" y1="1" x2="380" y2="1" stroke="#e7e5e4" strokeWidth="1.5" strokeDasharray="6 4" />
+                <line x1="520" y1="1" x2="700" y2="1" stroke="#e7e5e4" strokeWidth="1.5" strokeDasharray="6 4" />
+              </svg>
+
               {[
                 {
                   step: '01',
                   title: 'Your HRIS',
-                  desc: 'Data stays in your HRIS (Gusto, BambooHR, Rippling). MambaHR connects via OAuth with scopes you approve.',
-                  detail: 'You control access. Revoke anytime.',
+                  icon: (
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                      <rect x="4" y="8" width="32" height="24" rx="4" stroke="var(--gold)" strokeWidth="1.5" />
+                      <path d="M4 16h32" stroke="var(--gold)" strokeWidth="1.5" />
+                      <circle cx="10" cy="12" r="1.5" fill="var(--gold)" />
+                      <circle cx="15" cy="12" r="1.5" fill="var(--gold)" />
+                      <rect x="10" y="22" width="20" height="4" rx="1" fill="rgba(176,141,87,0.15)" />
+                    </svg>
+                  ),
+                  lines: [
+                    'Data stays in your HRIS',
+                    'OAuth 2.0 — scopes you approve',
+                    'Revoke access anytime',
+                  ],
                 },
                 {
                   step: '02',
                   title: 'MambaHR Agent',
-                  desc: 'The agent processes requests using your data. PII is encrypted in transit (TLS 1.3) and at rest (AES-256).',
-                  detail: 'Zero data retention on AI models.',
+                  icon: (
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                      <path d="M20 4l14 5v10c0 8-6 15-14 17C12 34 6 27 6 19V9l14-5z" stroke="var(--gold)" strokeWidth="1.5" fill="rgba(176,141,87,0.06)" />
+                      <rect x="14" y="16" width="12" height="8" rx="2" stroke="var(--gold)" strokeWidth="1.2" />
+                      <path d="M17 16v-2a3 3 0 016 0v2" stroke="var(--gold)" strokeWidth="1.2" />
+                    </svg>
+                  ),
+                  lines: [
+                    'Encrypted in transit (TLS 1.3)',
+                    'Encrypted at rest (AES-256)',
+                    'Zero retention on AI models',
+                  ],
                 },
                 {
                   step: '03',
                   title: 'Audit Log',
-                  desc: 'Every action is logged — what was accessed, what decision was made, what policy was applied, and when.',
-                  detail: 'Full trail. Exportable. Immutable.',
+                  icon: (
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                      <rect x="8" y="4" width="24" height="32" rx="3" stroke="var(--gold)" strokeWidth="1.5" />
+                      <path d="M14 14h12M14 20h8M14 26h10" stroke="var(--gold)" strokeWidth="1.2" strokeLinecap="round" />
+                      <circle cx="14" cy="9" r="1.5" fill="var(--gold)" />
+                    </svg>
+                  ),
+                  lines: [
+                    'Every action timestamped',
+                    'Full decision trail',
+                    'Exportable and immutable',
+                  ],
                 },
-              ].map((item) => (
-                <div
-                  key={item.step}
-                  style={{
-                    padding: 24,
-                    borderRadius: 14,
-                    backgroundColor: 'rgba(17,17,19,0.4)',
-                    backdropFilter: 'blur(12px)',
-                    border: '1px solid var(--border-mid)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}
-                >
-                  <div style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.2), transparent)' }} />
-                  <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--gold)', fontFamily: 'var(--font-mono), monospace' }}>{item.step}</span>
-                  <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--text)', margin: '12px 0 8px' }}>{item.title}</h3>
-                  <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 12 }}>{item.desc}</p>
-                  <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--gold)', fontFamily: 'var(--font-mono), monospace' }}>{item.detail}</p>
+              ].map((item, i) => (
+                <div key={item.step} style={{ position: 'relative', zIndex: 1, padding: '0 16px' }}>
+                  <div className="card-hover" style={{
+                    padding: 32,
+                    borderRadius: 16,
+                    backgroundColor: '#fff',
+                    border: i === 1 ? '2px solid rgba(176,141,87,0.2)' : '1px solid #e7e5e4',
+                    boxShadow: i === 1 ? '0 8px 32px rgba(176,141,87,0.08)' : '0 4px 16px rgba(0,0,0,0.04)',
+                    textAlign: 'center',
+                  }}>
+                    <div style={{ marginBottom: 16 }}>{item.icon}</div>
+                    <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--gold)', fontFamily: 'var(--font-mono), monospace', letterSpacing: '0.06em' }}>{item.step}</span>
+                    <h3 style={{ fontSize: 18, fontWeight: 700, color: '#1a1611', margin: '8px 0 16px' }}>{item.title}</h3>
+                    <div style={{ textAlign: 'left' }}>
+                      {item.lines.map((line) => (
+                        <div key={line} className="flex items-center" style={{ gap: 8, marginBottom: 8 }}>
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
+                            <circle cx="7" cy="7" r="6" fill="#f0fdf4" stroke="#bbf7d0" strokeWidth="1" />
+                            <path d="M4 7l2 2 4-4" stroke="#16a34a" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          <span style={{ fontSize: 13, color: '#57534e' }}>{line}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ═══ CTA ═══ */}
+        {/* ═══ WHAT WE PROTECT — big visual list ═══ */}
+        <section style={{ padding: '96px 24px', backgroundColor: 'var(--bg-surface)' }}>
+          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 48 }}>
+              <div>
+                <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 16, letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-mono), monospace' }}>
+                  What we protect
+                </p>
+                <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 40px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>
+                  Every type of HR data. Every layer of protection.
+                </h2>
+                <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7 }}>
+                  HR data isn&apos;t just names and emails. It&apos;s the most sensitive information in your company. We built our security for this reality.
+                </p>
+              </div>
+              <div>
+                {[
+                  { label: 'Social Security Numbers', detail: 'Column-level encryption + access logging' },
+                  { label: 'Salary & Compensation', detail: 'Role-gated access, encrypted at rest' },
+                  { label: 'Health & Benefits Info', detail: 'HIPAA-informed handling practices' },
+                  { label: 'Performance Reviews', detail: 'Manager-only access controls' },
+                  { label: 'Termination Records', detail: 'Immutable audit trail on all actions' },
+                  { label: 'Immigration Documents', detail: 'Encrypted storage, retention policies enforced' },
+                ].map((item, i) => (
+                  <div key={item.label} style={{ padding: '16px 0', borderBottom: i < 5 ? '1px solid var(--border)' : 'none' }}>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>{item.label}</div>
+                    <div style={{ fontSize: 12, color: 'var(--text-faint)' }}>{item.detail}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ FAQ ═══ */}
+        <section style={{ padding: '96px 24px', backgroundColor: '#fafaf7' }}>
+          <div style={{ maxWidth: 700, margin: '0 auto' }}>
+            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: '#1a1611', marginBottom: 48 }}>
+              Common questions.
+            </h2>
+            <FAQAccordion />
+          </div>
+        </section>
+
+        {/* ═══ CONTACT — simple, not "request documentation" ═══ */}
         <section className="relative" style={{ padding: '96px 24px', backgroundColor: 'var(--bg)', overflow: 'hidden' }}>
           <ParticleField />
           <div style={{ maxWidth: 500, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
             <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>
-              Questions about security?
+              Need more detail?
             </h2>
             <p style={{ fontSize: 15, color: 'var(--text-muted)', marginBottom: 32, lineHeight: 1.6 }}>
-              We&apos;re happy to share our full security documentation, DPA, and infrastructure details.
+              We&apos;ll walk you through our security posture, share our DPA, and answer any questions your team has.
             </p>
             <a href="mailto:security@mambahr.com" className="cta-glow" style={{ display: 'inline-block', padding: '14px 32px', borderRadius: 999, backgroundColor: 'var(--gold)', color: '#fff', fontSize: 15, fontWeight: 600, textDecoration: 'none' }}>
-              Contact security@mambahr.com
+              Talk to us
             </a>
           </div>
         </section>
