@@ -3,6 +3,7 @@
 import { z } from 'zod'
 import { supabase } from './supabase'
 import { verifyTurnstile } from './turnstile'
+import { sendWaitlistWelcome, sendInvestorAck, sendHRBenchAck } from './email'
 
 async function notifySlack(webhookEnvKey: string, text: string) {
   const url = process.env[webhookEnvKey]
@@ -55,10 +56,13 @@ export async function submitWaitlist(formData: FormData) {
     return { success: false, error: 'Something went wrong. Please try again.' }
   }
 
-  await notifySlack(
-    'SLACK_WEBHOOK_WAITLIST',
-    `New waitlist signup:\n• *Email:* ${email}\n• *Company:* ${company}`,
-  )
+  await Promise.all([
+    notifySlack(
+      'SLACK_WEBHOOK_WAITLIST',
+      `New waitlist signup:\n• *Email:* ${email}\n• *Company:* ${company}`,
+    ),
+    sendWaitlistWelcome({ email, company }),
+  ])
 
   return { success: true }
 }
@@ -104,10 +108,13 @@ export async function submitInvestorContact(formData: FormData) {
     return { success: false, error: 'Something went wrong. Please try again.' }
   }
 
-  await notifySlack(
-    'SLACK_WEBHOOK_INVESTORS',
-    `New investor inquiry:\n• *Name:* ${name}\n• *Email:* ${email}\n• *Firm:* ${firm || 'Not provided'}\n• *Message:* ${message || 'None'}`,
-  )
+  await Promise.all([
+    notifySlack(
+      'SLACK_WEBHOOK_INVESTORS',
+      `New investor inquiry:\n• *Name:* ${name}\n• *Email:* ${email}\n• *Firm:* ${firm || 'Not provided'}\n• *Message:* ${message || 'None'}`,
+    ),
+    sendInvestorAck({ email, name }),
+  ])
 
   return { success: true }
 }
@@ -140,10 +147,13 @@ export async function submitHRBenchNotify(formData: FormData) {
     console.log('HR-Bench notify:', email)
   }
 
-  await notifySlack(
-    'SLACK_WEBHOOK_WAITLIST',
-    `New HR-Bench notification signup:\n• *Email:* ${email}`,
-  )
+  await Promise.all([
+    notifySlack(
+      'SLACK_WEBHOOK_WAITLIST',
+      `New HR-Bench notification signup:\n• *Email:* ${email}`,
+    ),
+    sendHRBenchAck({ email }),
+  ])
 
   return { success: true }
 }
