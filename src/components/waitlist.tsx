@@ -126,23 +126,96 @@ export default function RequestAccess() {
             )}
           </form>
         ) : (
-          <div style={{ padding: '32px 0' }}>
-            <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
-              {returning ? 'Good to see you again.' : 'You\'re on the list.'}
+          <div
+            style={{
+              padding: '40px 32px',
+              borderRadius: 16,
+              backgroundColor: 'rgba(17,17,19,0.5)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(176,141,87,0.15)',
+              boxShadow: '0 24px 80px rgba(0,0,0,0.3), inset 0 1px 0 rgba(176,141,87,0.08)',
+              position: 'relative',
+              overflow: 'hidden',
+              animation: 'hero-fade-up 0.6s cubic-bezier(0.22,1,0.36,1) both',
+            }}
+          >
+            {/* Gold top shimmer */}
+            <div style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.4), transparent)' }} />
+
+            {/* Animated checkmark badge */}
+            <div style={{
+              width: 64,
+              height: 64,
+              borderRadius: '50%',
+              backgroundColor: 'rgba(34,197,94,0.1)',
+              border: '2px solid rgba(34,197,94,0.4)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 24px',
+              animation: 'hero-scale-in 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both',
+              position: 'relative',
+            }}>
+              {/* Pulsing outer ring */}
+              <div style={{
+                position: 'absolute',
+                inset: -8,
+                borderRadius: '50%',
+                border: '1px solid rgba(34,197,94,0.2)',
+                animation: 'pulse-dot 2.5s ease-in-out infinite',
+              }} />
+              <svg width="28" height="22" viewBox="0 0 28 22" fill="none">
+                <path d="M2 11l8 8L26 3" stroke="#22c55e" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </div>
-            <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+
+            <h3 style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.02em', animation: 'hero-fade-up 0.5s cubic-bezier(0.22,1,0.36,1) 0.4s both' }}>
+              {returning ? 'Good to see you again.' : "You're on the list."}
+            </h3>
+
+            <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 24, animation: 'hero-fade-up 0.5s cubic-bezier(0.22,1,0.36,1) 0.5s both' }}>
               {returning ? (
-                <>You&apos;re already on our list — we have your application on file.<br />We&apos;ll be in touch soon.</>
+                <>You&apos;re already on our list — we have your application on file. We&apos;ll be in touch soon.</>
               ) : (
-                <>We&apos;ll review your application and get back to you within 48 hours.<br />Keep an eye on your inbox.</>
+                <>We&apos;ll review your application and get back to you within 48 hours.</>
               )}
             </p>
+
+            {/* Next steps timeline */}
+            <div style={{
+              padding: 20,
+              borderRadius: 12,
+              backgroundColor: 'rgba(255,255,255,0.02)',
+              border: '1px solid var(--border)',
+              textAlign: 'left',
+              animation: 'hero-fade-up 0.5s cubic-bezier(0.22,1,0.36,1) 0.6s both',
+            }}>
+              <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 14, fontFamily: 'var(--font-mono), monospace' }}>
+                What happens next
+              </div>
+              {[
+                { num: '01', label: 'Check your inbox', detail: 'Confirmation email from team@mambahr.com' },
+                { num: '02', label: 'We review your fit', detail: 'Within 48 hours, no sales pitch' },
+                { num: '03', label: 'We schedule a call', detail: 'If MambaHR is right for your team' },
+              ].map((step, i) => (
+                <div key={step.num} className="flex" style={{ gap: 12, padding: '8px 0', borderBottom: i < 2 ? '1px solid var(--border)' : 'none', alignItems: 'baseline' }}>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--gold)', fontFamily: 'var(--font-mono), monospace', minWidth: 22 }}>{step.num}</span>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)' }}>{step.label}</div>
+                    <div style={{ fontSize: 11, color: 'var(--text-faint)', marginTop: 2 }}>{step.detail}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        <p style={{ marginTop: 24, fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>
-          We respond within 48 hours. No sales pitch — just a conversation about whether MambaHR is a fit.
-        </p>
+        {!success && (
+          <p style={{ marginTop: 24, fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>
+            We respond within 48 hours. No sales pitch — just a conversation about whether MambaHR is a fit.
+          </p>
+        )}
 
         <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center' }}>
           <a href="/investors" style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none', borderBottom: '1px solid var(--border-mid)' }}>
