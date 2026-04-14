@@ -105,18 +105,6 @@ const faqItems = [
   },
 ]
 
-const roadmap = [
-  { status: 'done', label: 'Encryption at rest and in transit (AES-256, TLS 1.3)' },
-  { status: 'done', label: 'Role-based access control with SSO' },
-  { status: 'done', label: 'Full audit trail on all agent decisions' },
-  { status: 'done', label: 'Zero data retention policy on AI inference' },
-  { status: 'done', label: 'Data Processing Agreement (DPA) available' },
-  { status: 'progress', label: 'SOC 2 Type I certification (Q3 2026)' },
-  { status: 'planned', label: 'SOC 2 Type II certification (Q1 2027)' },
-  { status: 'planned', label: 'Penetration testing by third-party firm' },
-  { status: 'planned', label: 'Bug bounty program' },
-]
-
 function FAQAccordion() {
   const [open, setOpen] = useState<number | null>(null)
 
@@ -224,76 +212,6 @@ export default function SecurityPage() {
                   <div style={{ marginBottom: 16 }}>{p.icon}</div>
                   <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-dark)', marginBottom: 8 }}>{p.title}</h3>
                   <p style={{ fontSize: 14, color: 'var(--text-dark-muted)', lineHeight: 1.6 }}>{p.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ═══ SECURITY ROADMAP ═══ */}
-        <section style={{ padding: '96px 24px', backgroundColor: 'var(--bg-surface)' }}>
-          <div style={{ maxWidth: 700, margin: '0 auto' }}>
-            <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 16, letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-mono), monospace' }}>
-              Security roadmap
-            </p>
-            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>
-              Where we are. Where we&apos;re going.
-            </h2>
-            <p style={{ fontSize: 15, color: 'var(--text-muted)', marginBottom: 48, maxWidth: 500 }}>
-              We don&apos;t claim certifications we don&apos;t have. Here&apos;s our honest security posture.
-            </p>
-
-            <div style={{
-              padding: 32,
-              borderRadius: 16,
-              backgroundColor: 'rgba(17,17,19,0.5)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(176,141,87,0.1)',
-              boxShadow: '0 24px 80px rgba(0,0,0,0.3)',
-              position: 'relative',
-              overflow: 'hidden',
-            }}>
-              <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.25), transparent)' }} />
-
-              {roadmap.map((item, i) => (
-                <div
-                  key={item.label}
-                  className="flex items-center"
-                  style={{
-                    gap: 14,
-                    padding: '14px 0',
-                    borderBottom: i < roadmap.length - 1 ? '1px solid var(--border)' : 'none',
-                  }}
-                >
-                  {/* Status indicator */}
-                  <div style={{
-                    width: 20,
-                    height: 20,
-                    borderRadius: '50%',
-                    flexShrink: 0,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: item.status === 'done' ? 'rgba(34,197,94,0.15)' : item.status === 'progress' ? 'rgba(176,141,87,0.15)' : 'rgba(255,255,255,0.05)',
-                    border: item.status === 'done' ? '1.5px solid #22c55e' : item.status === 'progress' ? '1.5px solid var(--gold)' : '1.5px solid var(--text-faint)',
-                  }}>
-                    {item.status === 'done' && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
-                    {item.status === 'progress' && <div style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: 'var(--gold)', animation: 'pulse-dot 2s ease-in-out infinite' }} />}
-                  </div>
-
-                  <span style={{
-                    fontSize: 14,
-                    color: item.status === 'done' ? 'var(--text)' : item.status === 'progress' ? 'var(--gold)' : 'var(--text-faint)',
-                    fontWeight: item.status === 'progress' ? 600 : 400,
-                  }}>
-                    {item.label}
-                  </span>
-
-                  {item.status === 'progress' && (
-                    <span style={{ fontSize: 10, fontWeight: 600, padding: '2px 8px', borderRadius: 999, backgroundColor: 'rgba(176,141,87,0.15)', color: 'var(--gold)', marginLeft: 'auto', flexShrink: 0 }}>
-                      In progress
-                    </span>
-                  )}
                 </div>
               ))}
             </div>
