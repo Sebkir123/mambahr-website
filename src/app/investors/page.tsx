@@ -106,7 +106,7 @@ function Flywheel() {
 
 const moats = [
   { num: '01', title: '95K lines of HR domain logic', desc: 'Deterministic HR decision engine. Every answer verified and auditable.' },
-  { num: '02', title: 'HR-Bench', desc: 'First benchmark for AI on HR decisions. 94.2% vs 31% GPT-4. Published.' },
+  { num: '02', title: 'HR-Bench', desc: 'First open benchmark for AI on HR decisions. 500 scenarios. Launching Q2 2026.' },
   { num: '03', title: '7 patents pending', desc: 'Novel IP in decision automation, workforce intelligence, confidence calibration.' },
   { num: '04', title: 'Domain data flywheel', desc: 'Every decision processed makes models better. Generic AI can\'t replicate this.' },
 ]
