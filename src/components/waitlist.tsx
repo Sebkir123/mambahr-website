@@ -2,15 +2,21 @@
 
 import { useState } from 'react'
 import { submitWaitlist } from '@/lib/actions'
+import TurnstileWidget from '@/components/turnstile-widget'
 
 export default function RequestAccess() {
   const [success, setSuccess] = useState(false)
   const [pending, setPending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
   async function handleSubmit(formData: FormData) {
     setPending(true)
+    setError(null)
+    if (turnstileToken) formData.set('cf-turnstile-response', turnstileToken)
     const result = await submitWaitlist(formData)
     if (result.success) setSuccess(true)
+    else setError(result.error || 'Something went wrong.')
     setPending(false)
   }
 
@@ -64,7 +70,7 @@ export default function RequestAccess() {
                 }}
               />
             </div>
-            <div style={{ marginBottom: 20 }}>
+            <div style={{ marginBottom: 16 }}>
               <select
                 name="size"
                 style={{
@@ -85,6 +91,9 @@ export default function RequestAccess() {
                 <option value="500+">500+</option>
               </select>
             </div>
+
+            <TurnstileWidget onSuccess={setTurnstileToken} theme="dark" />
+
             <button
               type="submit"
               disabled={pending}
@@ -104,6 +113,12 @@ export default function RequestAccess() {
             >
               {pending ? 'Submitting...' : 'Request Access'}
             </button>
+
+            {error && (
+              <p style={{ marginTop: 12, fontSize: 13, color: '#ef4444', textAlign: 'center' }}>
+                {error}
+              </p>
+            )}
           </form>
         ) : (
           <div style={{ padding: '32px 0' }}>

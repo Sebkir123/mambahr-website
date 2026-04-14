@@ -6,6 +6,7 @@ import Nav from '@/components/nav'
 import Footer from '@/components/footer'
 import AnimateOnScroll from '@/components/animate-on-scroll'
 import { submitInvestorContact } from '@/lib/actions'
+import TurnstileWidget from '@/components/turnstile-widget'
 
 /* ── Full-section particle background ── */
 function ParticleField() {
@@ -113,6 +114,8 @@ const moats = [
 
 export default function InvestorsPage() {
   const [sent, setSent] = useState(false)
+  const [investorError, setInvestorError] = useState<string | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
   return (
     <>
@@ -361,7 +364,15 @@ export default function InvestorsPage() {
               <div style={{ backgroundColor: 'rgba(17,17,19,0.5)', backdropFilter: 'blur(20px)', borderRadius: 16, border: '1px solid rgba(176,141,87,0.1)', padding: 32, boxShadow: '0 24px 80px rgba(0,0,0,0.3)', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.25), transparent)' }} />
                 <form
-                  onSubmit={async (e) => { e.preventDefault(); const d = new FormData(e.currentTarget); const result = await submitInvestorContact(d); if (result.success) setSent(true) }}
+                  onSubmit={async (e) => {
+                    e.preventDefault()
+                    setInvestorError(null)
+                    const d = new FormData(e.currentTarget)
+                    if (turnstileToken) d.set('cf-turnstile-response', turnstileToken)
+                    const result = await submitInvestorContact(d)
+                    if (result.success) setSent(true)
+                    else setInvestorError(result.error || 'Something went wrong.')
+                  }}
                   style={{ textAlign: 'left' }}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 12, marginBottom: 12 }}>
@@ -371,12 +382,16 @@ export default function InvestorsPage() {
                   <div style={{ marginBottom: 12 }}>
                     <input name="email" type="email" placeholder="Email" required style={{ width: '100%', padding: '14px 16px', borderRadius: 10, border: '1px solid var(--border-mid)', backgroundColor: 'rgba(9,9,11,0.6)', fontSize: 15, color: 'var(--text)', outline: 'none' }} />
                   </div>
-                  <div style={{ marginBottom: 20 }}>
+                  <div style={{ marginBottom: 16 }}>
                     <textarea name="message" placeholder="Anything you'd like us to know (optional)" rows={3} style={{ width: '100%', padding: '14px 16px', borderRadius: 10, border: '1px solid var(--border-mid)', backgroundColor: 'rgba(9,9,11,0.6)', fontSize: 15, color: 'var(--text)', outline: 'none', resize: 'vertical', fontFamily: 'inherit' }} />
                   </div>
+                  <TurnstileWidget onSuccess={setTurnstileToken} theme="dark" />
                   <button type="submit" className="cta-glow" style={{ width: '100%', padding: '14px', borderRadius: 10, backgroundColor: 'var(--gold)', color: '#fff', fontSize: 15, fontWeight: 600, border: 'none', cursor: 'pointer' }}>
                     Get in Touch
                   </button>
+                  {investorError && (
+                    <p style={{ marginTop: 12, fontSize: 13, color: '#ef4444', textAlign: 'center' }}>{investorError}</p>
+                  )}
                 </form>
               </div>
             ) : (

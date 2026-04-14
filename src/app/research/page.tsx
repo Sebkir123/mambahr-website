@@ -4,6 +4,8 @@ import { useEffect, useState, useRef } from 'react'
 import Nav from '@/components/nav'
 import Footer from '@/components/footer'
 import AnimateOnScroll from '@/components/animate-on-scroll'
+import TurnstileWidget from '@/components/turnstile-widget'
+import { submitHRBenchNotify } from '@/lib/actions'
 
 const areas = [
   {
@@ -213,53 +215,67 @@ function NetworkGraphic() {
 function HRBenchSignup() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [pending, setPending] = useState(false)
+  const [token, setToken] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (email.trim()) {
-      console.log('HR-Bench notify email:', email)
+    if (!email.trim() || pending) return
+    setPending(true)
+    const fd = new FormData()
+    fd.set('email', email)
+    if (token) fd.set('cf-turnstile-response', token)
+    const result = await submitHRBenchNotify(fd)
+    if (result.success) {
       setSubmitted(true)
       setEmail('')
     }
+    setPending(false)
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row" style={{ gap: 12, maxWidth: 480 }}>
-      <input
-        type="email"
-        required
-        placeholder="you@company.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        style={{
-          flex: 1,
-          padding: '12px 16px',
-          borderRadius: 8,
-          backgroundColor: 'rgba(255,255,255,0.05)',
-          border: '1px solid rgba(176,141,87,0.2)',
-          color: 'var(--text)',
-          fontSize: 14,
-          outline: 'none',
-          fontFamily: 'inherit',
-        }}
-      />
-      <button
-        type="submit"
-        style={{
-          padding: '12px 24px',
-          borderRadius: 8,
-          backgroundColor: 'var(--gold)',
-          color: '#fff',
-          fontSize: 14,
-          fontWeight: 600,
-          border: 'none',
-          cursor: 'pointer',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {submitted ? 'Subscribed' : 'Notify me when HR-Bench ships'}
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row" style={{ gap: 12, maxWidth: 480, marginBottom: 12 }}>
+        <input
+          type="email"
+          required
+          placeholder="you@company.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={submitted}
+          style={{
+            flex: 1,
+            padding: '12px 16px',
+            borderRadius: 8,
+            backgroundColor: 'rgba(255,255,255,0.05)',
+            border: '1px solid rgba(176,141,87,0.2)',
+            color: 'var(--text)',
+            fontSize: 14,
+            outline: 'none',
+            fontFamily: 'inherit',
+          }}
+        />
+        <button
+          type="submit"
+          disabled={pending || submitted}
+          style={{
+            padding: '12px 24px',
+            borderRadius: 8,
+            backgroundColor: 'var(--gold)',
+            color: '#fff',
+            fontSize: 14,
+            fontWeight: 600,
+            border: 'none',
+            cursor: pending ? 'wait' : 'pointer',
+            opacity: pending ? 0.7 : 1,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {submitted ? '✓ Subscribed' : pending ? 'Submitting...' : 'Notify me when HR-Bench ships'}
+        </button>
+      </form>
+      {!submitted && <TurnstileWidget onSuccess={setToken} theme="dark" />}
+    </div>
   )
 }
 

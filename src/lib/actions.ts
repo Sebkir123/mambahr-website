@@ -2,6 +2,7 @@
 
 import { z } from 'zod'
 import { supabase } from './supabase'
+import { verifyTurnstile } from './turnstile'
 
 async function notifySlack(webhookEnvKey: string, text: string) {
   const url = process.env[webhookEnvKey]
@@ -24,6 +25,13 @@ const waitlistSchema = z.object({
 })
 
 export async function submitWaitlist(formData: FormData) {
+  // Verify Turnstile token first
+  const token = formData.get('cf-turnstile-response') as string | null
+  const verified = await verifyTurnstile(token)
+  if (!verified) {
+    return { success: false, error: 'Bot verification failed. Please try again.' }
+  }
+
   const parsed = waitlistSchema.safeParse({
     email: formData.get('email'),
     company: formData.get('company'),
@@ -63,6 +71,12 @@ const investorSchema = z.object({
 })
 
 export async function submitInvestorContact(formData: FormData) {
+  const token = formData.get('cf-turnstile-response') as string | null
+  const verified = await verifyTurnstile(token)
+  if (!verified) {
+    return { success: false, error: 'Bot verification failed. Please try again.' }
+  }
+
   const parsed = investorSchema.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
@@ -93,6 +107,42 @@ export async function submitInvestorContact(formData: FormData) {
   await notifySlack(
     'SLACK_WEBHOOK_INVESTORS',
     `New investor inquiry:\n• *Name:* ${name}\n• *Email:* ${email}\n• *Firm:* ${firm || 'Not provided'}\n• *Message:* ${message || 'None'}`,
+  )
+
+  return { success: true }
+}
+
+const hrbenchSchema = z.object({
+  email: z.string().email().max(320),
+})
+
+export async function submitHRBenchNotify(formData: FormData) {
+  const token = formData.get('cf-turnstile-response') as string | null
+  const verified = await verifyTurnstile(token)
+  if (!verified) {
+    return { success: false, error: 'Bot verification failed.' }
+  }
+
+  const parsed = hrbenchSchema.safeParse({ email: formData.get('email') })
+  if (!parsed.success) return { success: false, error: 'Invalid email.' }
+
+  const { email } = parsed.data
+
+  const { error } = await supabase
+    .from('hrbench_notify')
+    .insert({ email })
+
+  if (error) {
+    if (error.code === '23505') {
+      return { success: true } // Already subscribed — treat as success silently
+    }
+    // Fall back to console.log if table doesn't exist
+    console.log('HR-Bench notify:', email)
+  }
+
+  await notifySlack(
+    'SLACK_WEBHOOK_WAITLIST',
+    `New HR-Bench notification signup:\n• *Email:* ${email}`,
   )
 
   return { success: true }
