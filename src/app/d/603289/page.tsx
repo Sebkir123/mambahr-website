@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 
-const TOTAL = 11
+const TOTAL = 12
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
 /* ── Animation helpers ── */
@@ -538,14 +538,82 @@ export default function PitchDeck() {
           </div>
         </section>
 
-        {/* ═══ 8 — MARKET ═══ */}
+        {/* ═══ 8 — BUSINESS MODEL ═══ */}
         <section ref={setRef(8)} data-slide="8" style={{ ...slideBase, backgroundColor: 'var(--bg)' }}>
           <div style={glowLine(v(8))} />
-          <div style={{ position: 'relative', zIndex: 1, maxWidth: 800, width: '100%' }}>
+          <div style={{ position: 'relative', zIndex: 1, maxWidth: 900, width: '100%' }}>
             <p style={{ ...reveal(v(8), 0), fontSize: 11, fontWeight: 500, color: 'var(--gold)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 24, fontFamily: 'var(--font-mono), monospace' }}>
+              Business Model
+            </p>
+            <h2 style={{ ...reveal(v(8), 100), fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 900, letterSpacing: '-0.03em', color: 'var(--text)', lineHeight: 1.1, marginBottom: 16 }}>
+              Platform fee <span style={{ color: 'var(--gold)' }}>+</span> usage.
+            </h2>
+            <p style={{ ...reveal(v(8), 200), fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: 560, marginBottom: 48 }}>
+              Predictable ARR floor. Expansion revenue tied to value delivered. Customers only pay more when the agent does more.
+            </p>
+
+            {/* Pricing Tiers */}
+            <div className="deck-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 32 }}>
+              {[
+                { name: 'Starter', price: '$500', credits: '1,000', overage: '$0.50', highlight: false },
+                { name: 'Growth', price: '$1,500', credits: '5,000', overage: '$0.35', highlight: true },
+                { name: 'Scale', price: '$3,500', credits: '15,000', overage: '$0.20', highlight: false },
+              ].map((t, i) => (
+                <div key={t.name} style={{ ...revealScale(v(8), 300 + i * 120), padding: 24, borderRadius: 14, backgroundColor: t.highlight ? 'rgba(176,141,87,0.06)' : 'var(--bg-surface)', border: t.highlight ? '1px solid rgba(176,141,87,0.3)' : '1px solid var(--border-mid)', position: 'relative', overflow: 'hidden' }}>
+                  {t.highlight && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, transparent, var(--gold), transparent)' }} />}
+                  <div style={{ fontSize: 11, fontWeight: 600, color: t.highlight ? 'var(--gold)' : 'var(--text-faint)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 10, fontFamily: 'var(--font-mono), monospace' }}>{t.name}</div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginBottom: 20 }}>
+                    <span style={{ fontSize: 32, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.03em', lineHeight: 1 }}>{t.price}</span>
+                    <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>/mo</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, paddingBottom: 10, borderBottom: '1px solid var(--border-mid)' }}>
+                      <span style={{ color: 'var(--text-faint)' }}>Included</span>
+                      <span style={{ color: 'var(--text)', fontWeight: 600 }}>{t.credits} credits</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, paddingBottom: 10, borderBottom: '1px solid var(--border-mid)' }}>
+                      <span style={{ color: 'var(--text-faint)' }}>Overage</span>
+                      <span style={{ color: 'var(--text)', fontWeight: 600 }}>{t.overage}/credit</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
+                      <span style={{ color: 'var(--text-faint)' }}>HR team seats</span>
+                      <span style={{ color: 'var(--gold)', fontWeight: 600 }}>Unlimited</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Credit costs */}
+            <div style={{ ...reveal(v(8), 700), padding: 20, borderRadius: 12, backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-mid)' }}>
+              <p style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 14, fontFamily: 'var(--font-mono), monospace' }}>Credits scale with workflow complexity</p>
+              <div className="deck-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 32px' }}>
+                {[
+                  { action: 'Policy Q&A', credits: '1' },
+                  { action: 'Onboarding workflow', credits: '25' },
+                  { action: 'Leave approval', credits: '2' },
+                  { action: 'Offboarding workflow', credits: '35' },
+                  { action: 'Pay transparency report', credits: '30' },
+                  { action: 'RIF batch (per employee)', credits: '15' },
+                ].map((c) => (
+                  <div key={c.action} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, padding: '3px 0' }}>
+                    <span style={{ color: 'var(--text-muted)' }}>{c.action}</span>
+                    <span style={{ color: 'var(--gold)', fontWeight: 600, fontFamily: 'var(--font-mono), monospace' }}>{c.credits}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ 9 — MARKET ═══ */}
+        <section ref={setRef(9)} data-slide="9" style={{ ...slideBase, backgroundColor: 'var(--bg-surface)' }}>
+          <div style={glowLine(v(9))} />
+          <div style={{ position: 'relative', zIndex: 1, maxWidth: 800, width: '100%' }}>
+            <p style={{ ...reveal(v(9), 0), fontSize: 11, fontWeight: 500, color: 'var(--gold)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 24, fontFamily: 'var(--font-mono), monospace' }}>
               Market
             </p>
-            <h2 style={{ ...reveal(v(8), 100), fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 900, letterSpacing: '-0.03em', color: 'var(--text)', lineHeight: 1.1, marginBottom: 56 }}>
+            <h2 style={{ ...reveal(v(9), 100), fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 900, letterSpacing: '-0.03em', color: 'var(--text)', lineHeight: 1.1, marginBottom: 56 }}>
               Size the prize.
             </h2>
 
@@ -556,20 +624,20 @@ export default function PitchDeck() {
                 { label: 'SAM', value: '$4.2B', desc: 'Mid-market HR automation (50-500 employees)', pct: 55 },
                 { label: 'SOM', value: '$420M', desc: 'AI-first HR agent — leave, onboarding, ops', pct: 25 },
               ].map((m, i) => (
-                <div key={m.label} style={{ ...reveal(v(8), 200 + i * 150) }}>
+                <div key={m.label} style={{ ...reveal(v(9), 200 + i * 150) }}>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 16, marginBottom: 10 }}>
                     <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--gold)', fontFamily: 'var(--font-mono), monospace', minWidth: 32 }}>{m.label}</span>
                     <span style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.03em', lineHeight: 1 }}>{m.value}</span>
                   </div>
                   <div style={{ marginBottom: 6, height: 4, borderRadius: 2, backgroundColor: 'var(--border-mid)', overflow: 'hidden' }}>
-                    <div style={{ height: '100%', borderRadius: 2, backgroundColor: 'var(--gold)', width: v(8) ? `${m.pct}%` : '0%', transition: `width 1.2s ${EASE} ${400 + i * 200}ms`, opacity: 0.7 }} />
+                    <div style={{ height: '100%', borderRadius: 2, backgroundColor: 'var(--gold)', width: v(9) ? `${m.pct}%` : '0%', transition: `width 1.2s ${EASE} ${400 + i * 200}ms`, opacity: 0.7 }} />
                   </div>
                   <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>{m.desc}</p>
                 </div>
               ))}
             </div>
 
-            <div style={{ ...reveal(v(8), 900), marginTop: 48, padding: 24, borderRadius: 14, backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-mid)' }}>
+            <div style={{ ...reveal(v(9), 900), marginTop: 48, padding: 24, borderRadius: 14, backgroundColor: 'var(--bg)', border: '1px solid var(--border-mid)' }}>
               <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7 }}>
                 <strong style={{ color: 'var(--text)' }}>Wedge &amp; expand:</strong> Start with leave management (highest-frequency, lowest-risk). Expand into onboarding, offboarding, workforce intelligence. Each module deepens the moat and increases ACV.
               </p>
@@ -577,23 +645,23 @@ export default function PitchDeck() {
           </div>
         </section>
 
-        {/* ═══ 9 — TEAM ═══ */}
-        <section ref={setRef(9)} data-slide="9" style={{ ...slideBase, backgroundColor: 'var(--bg-surface)' }}>
-          <div style={glowLine(v(9))} />
+        {/* ═══ 10 — TEAM ═══ */}
+        <section ref={setRef(10)} data-slide="10" style={{ ...slideBase, backgroundColor: 'var(--bg)' }}>
+          <div style={glowLine(v(10))} />
           <div style={{ position: 'relative', zIndex: 1, maxWidth: 800, width: '100%' }}>
-            <p style={{ ...reveal(v(9), 0), fontSize: 11, fontWeight: 500, color: 'var(--gold)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 24, fontFamily: 'var(--font-mono), monospace' }}>
+            <p style={{ ...reveal(v(10), 0), fontSize: 11, fontWeight: 500, color: 'var(--gold)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 24, fontFamily: 'var(--font-mono), monospace' }}>
               Team
             </p>
-            <h2 style={{ ...reveal(v(9), 100), fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 900, letterSpacing: '-0.03em', color: 'var(--text)', lineHeight: 1.1, marginBottom: 48 }}>
+            <h2 style={{ ...reveal(v(10), 100), fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 900, letterSpacing: '-0.03em', color: 'var(--text)', lineHeight: 1.1, marginBottom: 48 }}>
               The people behind MambaHR.
             </h2>
 
             <div className="deck-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
               {[
-                { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: 'Previously [company]. Background in [domain]. Building MambaHR because HR deserves better infrastructure.', avatar: '/brian_bell.jpeg' },
-                { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Previously [company]. Background in [domain]. Leading the AI lab and agent architecture.', avatar: '/sebastian_kirsch.jpg' },
+                { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: '15+ years in People Ops at DocuSign, Asana, and Snowflake. Scaled HR through one of the largest IPOs in history.', avatar: '/brian_bell.jpeg' },
+                { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Founding engineer. Built security-critical products for a $600B Swiss bank. Ex Numbrs, Antler. Deep regulated-industry experience.', avatar: '/sebastian_kirsch.jpg' },
               ].map((p, i) => (
-                <div key={p.name} style={{ ...revealScale(v(9), 200 + i * 150), padding: 32, borderRadius: 16, backgroundColor: 'var(--bg)', border: '1px solid var(--border-mid)', position: 'relative', overflow: 'hidden' }}>
+                <div key={p.name} style={{ ...revealScale(v(10), 200 + i * 150), padding: 32, borderRadius: 16, backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-mid)', position: 'relative', overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(90deg, var(--gold), rgba(176,141,87,0.2), transparent)' }} />
                   <Image src={p.avatar} alt={p.name} width={56} height={56} style={{ borderRadius: 14, objectFit: 'cover', border: '1px solid var(--border-mid)', marginBottom: 20 }} />
                   <h3 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>{p.name}</h3>
@@ -605,18 +673,18 @@ export default function PitchDeck() {
           </div>
         </section>
 
-        {/* ═══ 10 — THE ASK + CLOSE ═══ */}
-        <section ref={setRef(10)} data-slide="10" style={{ ...slideBase, backgroundColor: 'var(--bg)' }}>
-          <div style={glowLine(v(10))} />
+        {/* ═══ 11 — THE ASK + CLOSE ═══ */}
+        <section ref={setRef(11)} data-slide="11" style={{ ...slideBase, backgroundColor: 'var(--bg-surface)' }}>
+          <div style={glowLine(v(11))} />
           <Particles />
           <div style={{ position: 'relative', zIndex: 1, maxWidth: 800, width: '100%', textAlign: 'center' }}>
-            <p style={{ ...reveal(v(10), 0), fontSize: 11, fontWeight: 500, color: 'var(--gold)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 24, fontFamily: 'var(--font-mono), monospace' }}>
+            <p style={{ ...reveal(v(11), 0), fontSize: 11, fontWeight: 500, color: 'var(--gold)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 24, fontFamily: 'var(--font-mono), monospace' }}>
               The Ask
             </p>
-            <h2 style={{ ...reveal(v(10), 100), fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, letterSpacing: '-0.04em', color: 'var(--text)', lineHeight: 1, marginBottom: 12 }}>
+            <h2 style={{ ...reveal(v(11), 100), fontSize: 'clamp(36px, 5vw, 72px)', fontWeight: 900, letterSpacing: '-0.04em', color: 'var(--text)', lineHeight: 1, marginBottom: 12 }}>
               $3M<span style={{ color: 'var(--gold)' }}>.</span>
             </h2>
-            <p style={{ ...reveal(v(10), 200), fontSize: 17, color: 'var(--text-muted)', marginBottom: 48, lineHeight: 1.5 }}>
+            <p style={{ ...reveal(v(11), 200), fontSize: 17, color: 'var(--text-muted)', marginBottom: 48, lineHeight: 1.5 }}>
               Seed round to build the defining HR AI company.
             </p>
 
@@ -626,7 +694,7 @@ export default function PitchDeck() {
                 { pct: '30%', title: 'Go-to-Market', items: ['10 design partners → 50 paid', 'Sales hire #1', 'Customer success foundation'] },
                 { pct: '20%', title: 'Research', items: ['HR-Bench public launch', 'Patent prosecution', 'Domain model training'] },
               ].map((b, i) => (
-                <div key={b.title} style={{ ...revealScale(v(10), 300 + i * 120), padding: 28, borderRadius: 16, backgroundColor: 'rgba(17,17,19,0.5)', backdropFilter: 'blur(16px)', border: '1px solid rgba(176,141,87,0.1)', position: 'relative', overflow: 'hidden' }}>
+                <div key={b.title} style={{ ...revealScale(v(11), 300 + i * 120), padding: 28, borderRadius: 16, backgroundColor: 'rgba(17,17,19,0.5)', backdropFilter: 'blur(16px)', border: '1px solid rgba(176,141,87,0.1)', position: 'relative', overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', top: 0, left: '10%', right: '10%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.25), transparent)' }} />
                   <div style={{ fontSize: 28, fontWeight: 900, color: 'var(--gold)', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 4 }}>{b.pct}</div>
                   <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>{b.title}</h3>
@@ -643,7 +711,7 @@ export default function PitchDeck() {
             </div>
 
             {/* Close tagline */}
-            <div style={reveal(v(10), 700)}>
+            <div style={reveal(v(11), 700)}>
               <div style={{ width: 48, height: 1, background: 'linear-gradient(90deg, transparent, var(--gold), transparent)', margin: '0 auto 24px', opacity: 0.4 }} />
               <p style={{ fontSize: 'clamp(16px, 2vw, 20px)', fontWeight: 600, color: 'var(--text)', letterSpacing: '-0.01em', marginBottom: 12 }}>
                 The future of HR is autonomous.
