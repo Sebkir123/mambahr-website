@@ -120,12 +120,9 @@ export default function RequestAccess() {
           We respond within 48 hours. No sales pitch — just a conversation about whether MambaHR is a fit.
         </p>
 
-        <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center', gap: 24 }}>
+        <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center' }}>
           <a href="/investors" style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none', borderBottom: '1px solid var(--border-mid)' }}>
             For investors
-          </a>
-          <a href="mailto:hello@mambahr.com" style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none', borderBottom: '1px solid var(--border-mid)' }}>
-            Contact us
           </a>
         </div>
       </div>
