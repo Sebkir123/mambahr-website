@@ -8,14 +8,14 @@ const team = [
   {
     name: 'Brian Bell',
     role: 'CEO & Co-Founder',
-    bio: 'Previously [company]. Background in [domain]. Building MambaHR because HR deserves better tooling.',
+    bio: '15+ years in People Operations at DocuSign, Asana, and Snowflake. Helped scale HR through one of the largest IPOs in history. Knows firsthand what breaks when companies grow fast — and built MambaHR to fix it.',
     linkedin: 'https://linkedin.com/in/brianbell',
     avatar: '/brian_bell.jpeg',
   },
   {
     name: 'Sebastian Kirsch',
     role: 'CTO & Co-Founder',
-    bio: 'Previously [company]. Background in [domain]. Leading the AI lab and agent architecture.',
+    bio: 'Founding engineer and technical project lead. Built security-critical enterprise products for a $600B Swiss bank. Ex Numbrs, Antler. Brings deep experience in regulated industries to MambaHR\'s agent architecture.',
     linkedin: 'https://linkedin.com/in/sebastiankirsch',
     avatar: '/sebastian_kirsch.jpg',
   },

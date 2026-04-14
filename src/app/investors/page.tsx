@@ -329,8 +329,8 @@ export default function InvestorsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 20 }}>
               {[
-                { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: 'Previously [company]. Background in [domain]. Building MambaHR because HR deserves better infrastructure.', linkedin: 'https://linkedin.com/in/brianbell', avatar: '/brian_bell.jpeg' },
-                { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Previously [company]. Background in [domain]. Leading the AI lab and agent architecture.', linkedin: 'https://linkedin.com/in/sebastiankirsch', avatar: '/sebastian_kirsch.jpg' },
+                { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: '15+ years in People Ops at DocuSign, Asana, and Snowflake. Scaled HR through one of the largest IPOs in history.', linkedin: 'https://linkedin.com/in/brianbell', avatar: '/brian_bell.jpeg' },
+                { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Founding engineer. Built security-critical products for a $600B Swiss bank. Ex Numbrs, Antler. Deep regulated-industry experience.', linkedin: 'https://linkedin.com/in/sebastiankirsch', avatar: '/sebastian_kirsch.jpg' },
               ].map((person) => (
                 <div key={person.role} className="card-hover" style={{ padding: 32, borderRadius: 14, backgroundColor: 'var(--bg-light-surface)', border: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(90deg, var(--gold), rgba(176,141,87,0.2), transparent)' }} />
