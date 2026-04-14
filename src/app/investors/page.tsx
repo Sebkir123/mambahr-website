@@ -114,6 +114,7 @@ const moats = [
 
 export default function InvestorsPage() {
   const [sent, setSent] = useState(false)
+  const [returning, setReturning] = useState(false)
   const [investorError, setInvestorError] = useState<string | null>(null)
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
@@ -370,8 +371,12 @@ export default function InvestorsPage() {
                     const d = new FormData(e.currentTarget)
                     if (turnstileToken) d.set('cf-turnstile-response', turnstileToken)
                     const result = await submitInvestorContact(d)
-                    if (result.success) setSent(true)
-                    else setInvestorError(result.error || 'Something went wrong.')
+                    if (result.success) {
+                      setSent(true)
+                      setReturning(!!result.returning)
+                    } else {
+                      setInvestorError(result.error || 'Something went wrong.')
+                    }
                   }}
                   style={{ textAlign: 'left' }}
                 >
@@ -395,9 +400,84 @@ export default function InvestorsPage() {
                 </form>
               </div>
             ) : (
-              <div style={{ padding: '40px 0' }}>
-                <div style={{ fontSize: 24, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>Thanks for reaching out.</div>
-                <p style={{ fontSize: 15, color: 'var(--text-muted)' }}>We&apos;ll get back to you within 24 hours.</p>
+              <div
+                style={{
+                  padding: '40px 32px',
+                  borderRadius: 16,
+                  backgroundColor: 'rgba(17,17,19,0.5)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(176,141,87,0.15)',
+                  boxShadow: '0 24px 80px rgba(0,0,0,0.3), inset 0 1px 0 rgba(176,141,87,0.08)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  animation: 'hero-fade-up 0.6s cubic-bezier(0.22,1,0.36,1) both',
+                }}
+              >
+                {/* Gold top shimmer */}
+                <div style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.4), transparent)' }} />
+
+                {/* Animated checkmark badge */}
+                <div style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(34,197,94,0.1)',
+                  border: '2px solid rgba(34,197,94,0.4)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '0 auto 24px',
+                  animation: 'hero-scale-in 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both',
+                  position: 'relative',
+                }}>
+                  <div style={{ position: 'absolute', inset: -8, borderRadius: '50%', border: '1px solid rgba(34,197,94,0.2)', animation: 'pulse-dot 2.5s ease-in-out infinite' }} />
+                  <svg width="28" height="22" viewBox="0 0 28 22" fill="none">
+                    <path d="M2 11l8 8L26 3" stroke="#22c55e" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+
+                <h3 style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.02em', animation: 'hero-fade-up 0.5s cubic-bezier(0.22,1,0.36,1) 0.4s both' }}>
+                  {returning ? 'Good to see you again.' : 'Thanks for reaching out.'}
+                </h3>
+
+                <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 24, animation: 'hero-fade-up 0.5s cubic-bezier(0.22,1,0.36,1) 0.5s both' }}>
+                  {returning ? (
+                    <>You&apos;ve already reached out — we have your message on file. One of the founders will be in touch soon.</>
+                  ) : (
+                    <>One of the founders will get back to you within 24 hours.</>
+                  )}
+                </p>
+
+                {/* Founders signature card */}
+                <div style={{
+                  padding: 20,
+                  borderRadius: 12,
+                  backgroundColor: 'rgba(255,255,255,0.02)',
+                  border: '1px solid var(--border)',
+                  textAlign: 'left',
+                  animation: 'hero-fade-up 0.5s cubic-bezier(0.22,1,0.36,1) 0.6s both',
+                }}>
+                  <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 14, fontFamily: 'var(--font-mono), monospace' }}>
+                    You&apos;ll hear from
+                  </div>
+
+                  <div className="flex items-center" style={{ gap: 12, padding: '8px 0', borderBottom: '1px solid var(--border)' }}>
+                    <Image src="/brian_bell.jpeg" alt="Brian Bell" width={36} height={36} style={{ borderRadius: 10, objectFit: 'cover', border: '1px solid var(--border-mid)' }} />
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Brian Bell</div>
+                      <div style={{ fontSize: 11, color: 'var(--gold)' }}>CEO &amp; Co-Founder</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center" style={{ gap: 12, padding: '8px 0' }}>
+                    <Image src="/sebastian_kirsch.jpg" alt="Sebastian Kirsch" width={36} height={36} style={{ borderRadius: 10, objectFit: 'cover', border: '1px solid var(--border-mid)' }} />
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Sebastian Kirsch</div>
+                      <div style={{ fontSize: 11, color: 'var(--gold)' }}>CTO &amp; Co-Founder</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 

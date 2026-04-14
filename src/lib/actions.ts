@@ -106,6 +106,11 @@ export async function submitInvestorContact(formData: FormData) {
       message: message || null,
     })
 
+  // Duplicate email — treat as success (returning visitor), skip notifications
+  if (error?.code === '23505') {
+    return { success: true, returning: true }
+  }
+
   if (error) {
     return { success: false, error: 'Something went wrong. Please try again.' }
   }
@@ -118,7 +123,7 @@ export async function submitInvestorContact(formData: FormData) {
     sendInvestorAck({ email, name }),
   ])
 
-  return { success: true }
+  return { success: true, returning: false }
 }
 
 const hrbenchSchema = z.object({
