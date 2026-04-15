@@ -53,7 +53,12 @@ export const metadata: Metadata = {
     images: ['/og-image.jpg'],
   },
   alternates: { canonical: 'https://mambahr.com' },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  robots: {
+    index: true,
+    follow: true,
+    noarchive: true,
+    googleBot: { index: true, follow: true, noarchive: true },
+  },
 }
 
 // Static JSON-LD — hardcoded constants, not user input
