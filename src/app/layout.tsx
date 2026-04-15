@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono, Instrument_Serif } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 
@@ -14,6 +14,14 @@ const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-mono',
+  display: 'swap',
+})
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: ['400'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
   display: 'swap',
 })
 
@@ -36,13 +44,13 @@ export const metadata: Metadata = {
     url: 'https://mambahr.com',
     siteName: 'MambaHR',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'MambaHR — The HR agent that never calls in sick.',
     description: 'The autonomous AI agent for people operations.',
-    images: ['/og-image.png'],
+    images: ['/og-image.jpg'],
   },
   alternates: { canonical: 'https://mambahr.com' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
@@ -87,7 +95,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID
 
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
+    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${instrumentSerif.variable}`}>
       <head>
         <script
           type="application/ld+json"

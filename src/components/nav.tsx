@@ -38,7 +38,7 @@ export default function Nav() {
         {/* Logo */}
         <Link
           href="/"
-          style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em', textDecoration: 'none' }}
+          style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 24, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.01em', textDecoration: 'none' }}
         >
           MambaHR
         </Link>

@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer style={{ padding: '40px 24px', borderTop: '1px solid var(--border)', backgroundColor: 'var(--bg)' }}>
       <div className="mx-auto flex flex-col md:flex-row items-center justify-between" style={{ maxWidth: 1100, gap: 16 }}>
-        <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em' }}>
+        <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 22, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.01em' }}>
           MambaHR
         </span>
 

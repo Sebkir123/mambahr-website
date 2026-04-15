@@ -8,13 +8,13 @@ export const metadata: Metadata = {
     title: 'About — MambaHR',
     description: 'MambaHR is a domain AI lab building the autonomous HR agent. Meet the team behind the company.',
     url: 'https://mambahr.com/about',
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About — MambaHR',
     description: 'MambaHR is a domain AI lab building the autonomous HR agent.',
-    images: ['/og-image.png'],
+    images: ['/og-image.jpg'],
   },
   alternates: { canonical: 'https://mambahr.com/about' },
 }
@@ -25,7 +25,7 @@ const teamSchema = {
   '@type': 'Organization',
   name: 'MambaHR',
   url: 'https://mambahr.com',
-  logo: 'https://mambahr.com/og-image.png',
+  logo: 'https://mambahr.com/og-image.jpg',
   description: 'Domain AI lab building the autonomous HR agent.',
   founders: [
     {
