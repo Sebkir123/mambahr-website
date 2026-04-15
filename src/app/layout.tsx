@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 
 const inter = Inter({
@@ -83,6 +84,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID
+
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
       <head>
@@ -93,6 +96,7 @@ export default function RootLayout({
       </head>
       <body style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
         {children}
+        {gaId && <GoogleAnalytics gaId={gaId} />}
       </body>
     </html>
   )
