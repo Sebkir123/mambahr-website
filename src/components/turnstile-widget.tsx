@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { Turnstile } from '@marsidev/react-turnstile'
 
 interface Props {
@@ -15,11 +16,14 @@ interface Props {
 export default function TurnstileWidget({ onSuccess, theme = 'dark' }: Props) {
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
-  if (!siteKey) {
-    // Dev mode — auto-pass with a dummy token so forms work without Turnstile setup
-    if (typeof window !== 'undefined') {
-      setTimeout(() => onSuccess('dev-mode-bypass'), 0)
+  // Dev mode — auto-pass with a dummy token so forms work without Turnstile setup
+  useEffect(() => {
+    if (!siteKey) {
+      onSuccess('dev-mode-bypass')
     }
+  }, [siteKey, onSuccess])
+
+  if (!siteKey) {
     return null
   }
 
