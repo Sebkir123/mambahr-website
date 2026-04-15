@@ -76,8 +76,13 @@ export default function RequestAccess() {
               />
             </div>
             <div style={{ marginBottom: 16 }}>
+              <label htmlFor="company-size" style={{ position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}>
+                Company size
+              </label>
               <select
+                id="company-size"
                 name="size"
+                aria-label="Company size"
                 style={{
                   width: '100%',
                   padding: '14px 16px',

@@ -39,7 +39,7 @@
 
   --gold: #B08D57;
   --gold-light: #C9A96E;
-  --gold-dark: #96783F;
+  --gold-dark: #8B6F38;  /* 4.74:1 on white — WCAG AA for all text sizes */
   --green: #22C55E;
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 }
