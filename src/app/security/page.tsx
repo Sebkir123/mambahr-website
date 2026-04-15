@@ -151,12 +151,34 @@ function AccessControlVisual() {
 }
 
 const faqItems = [
-  { q: 'Does MambaHR train AI models on my data?', a: 'No. Your HR data is never used to train, fine-tune, or improve any AI model. Inputs are processed for your specific request and immediately discarded. This is a contractual guarantee.' },
-  { q: 'Where is my data stored?', a: 'All data is stored in SOC 2 certified data centers in the United States with automatic daily backups and point-in-time recovery.' },
-  { q: 'How do you handle PII like SSNs and salary data?', a: 'All PII is encrypted at rest (AES-256) and in transit (TLS 1.3). PII fields have additional column-level encryption. Access requires explicit permissions and is logged.' },
-  { q: 'Can we delete employee data?', a: 'Yes. Data is purged from primary systems within 30 days and backups within 90 days of your request.' },
-  { q: 'How do you connect to our HRIS?', a: 'Via OAuth 2.0 with scopes you explicitly approve. We never store your HRIS credentials. You can revoke access anytime.' },
-  { q: 'Can we get your security documentation?', a: 'Yes. We provide a security addendum, DPA, and infrastructure docs to all design partners during onboarding.' },
+  {
+    q: 'How does MambaHR define customer data?',
+    a: 'Customer data is any information your organization shares with or through MambaHR — employee records, compensation data, policies, documents, conversations with the agent, and the results of its work. All of it is yours, always.',
+  },
+  {
+    q: 'How does MambaHR keep our data private and secure?',
+    a: 'Your data is encrypted in storage and in transit, isolated to your organization, and protected by strict access controls. Every agent action is logged, every approval is recorded, and nothing executes in your HR system without your explicit authorization.',
+  },
+  {
+    q: 'Where is our data hosted?',
+    a: 'MambaHR runs on enterprise-grade cloud infrastructure in the United States, with regional isolation, redundancy, and industry-standard protections built into every layer.',
+  },
+  {
+    q: 'How do you respect access controls for our data?',
+    a: 'Access is governed by your identity provider and the roles you define. MambaHR enforces least-privilege access — the agent, your team, and our systems only see what\'s required for a given task. All access is recorded in an immutable audit log.',
+  },
+  {
+    q: 'How does MambaHR ensure no one is training on our data?',
+    a: 'Your workforce data is never used to train AI models — ours or anyone else\'s. MambaHR uses AI to execute your workflows, not to learn from your data.',
+  },
+  {
+    q: 'Can we use our data to train our own models?',
+    a: 'Your data is yours. If you want to use it for your own analytics or training purposes, you own it fully and can export it at any time.',
+  },
+  {
+    q: 'How often do you perform security reviews?',
+    a: 'MambaHR\'s security practices are continuously reviewed and hardened. We conduct regular internal reviews, threat modeling on every new feature, and work with external experts to test our defenses.',
+  },
 ]
 
 function FAQAccordion() {
@@ -171,7 +193,7 @@ function FAQAccordion() {
               <path d="M5 8l5 5 5-5" stroke="#a8a29e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
-          <div style={{ maxHeight: open === i ? 300 : 0, overflow: 'hidden', transition: 'max-height 0.4s cubic-bezier(0.22,1,0.36,1)' }}>
+          <div style={{ maxHeight: open === i ? 500 : 0, overflow: 'hidden', transition: 'max-height 0.4s cubic-bezier(0.22,1,0.36,1)' }}>
             <p style={{ fontSize: 15, color: '#57534e', lineHeight: 1.7, paddingBottom: 24 }}>{item.a}</p>
           </div>
         </div>
@@ -341,7 +363,7 @@ function FAQItem({ item, index, isLast }: { item: { q: string; a: string }; inde
           <path d="M4.5 7l4.5 4.5L13.5 7" stroke="var(--text-faint)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
-      <div style={{ maxHeight: open ? 250 : 0, overflow: 'hidden', transition: 'max-height 0.4s cubic-bezier(0.22,1,0.36,1)' }}>
+      <div style={{ maxHeight: open ? 500 : 0, overflow: 'hidden', transition: 'max-height 0.4s cubic-bezier(0.22,1,0.36,1)' }}>
         <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7, paddingBottom: 20 }}>{item.a}</p>
       </div>
     </div>
