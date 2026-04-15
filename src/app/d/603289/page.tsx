@@ -658,8 +658,8 @@ export default function PitchDeck() {
 
             <div className="deck-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
               {[
-                { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: '15+ years in People Ops at DocuSign, Asana, and Snowflake. Scaled HR through one of the largest IPOs in history.', avatar: '/brian_bell.jpeg' },
-                { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Founding engineer. Built security-critical products for a $600B Swiss bank. Ex Numbrs, Antler. Deep regulated-industry experience.', avatar: '/sebastian_kirsch.jpg' },
+                { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: '15+ years in People Ops at DocuSign, Asana, and Snowflake. Scaled HR through one of the largest IPOs in history.', avatar: '/brian_bell.jpeg', linkedin: 'https://www.linkedin.com/in/brianjosephbell/' },
+                { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Founding engineer. Built security-critical products for a $600B Swiss bank. Ex Numbrs, Antler. Deep regulated-industry experience.', avatar: '/sebastian_kirsch.jpg', linkedin: 'https://www.linkedin.com/in/sebastiankirsch-/' },
               ].map((p, i) => (
                 <div key={p.name} style={{ ...revealScale(v(10), 200 + i * 150), padding: 32, borderRadius: 16, backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-mid)', position: 'relative', overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(90deg, var(--gold), rgba(176,141,87,0.2), transparent)' }} />
