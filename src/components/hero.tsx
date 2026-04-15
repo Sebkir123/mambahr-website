@@ -38,34 +38,6 @@ export default function Hero() {
           textAlign: 'center',
         }}
       >
-        {/* Status badge */}
-        <div
-          className="inline-flex items-center hero-badge"
-          style={{
-            gap: 8,
-            padding: '6px 16px',
-            borderRadius: 999,
-            border: '1px solid var(--border)',
-            marginBottom: 20,
-            fontSize: 12,
-            fontWeight: 600,
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase' as const,
-            color: 'var(--text-muted)',
-          }}
-        >
-          <span
-            style={{
-              width: 8,
-              height: 8,
-              borderRadius: '50%',
-              backgroundColor: 'var(--green)',
-              animation: 'pulse-dot 2s ease-in-out infinite',
-            }}
-          />
-          Private Beta — accepting design partners
-        </div>
-
         {/* H1 */}
         <h1
           style={{

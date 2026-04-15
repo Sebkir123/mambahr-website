@@ -19,6 +19,41 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://mambahr.com/about' },
 }
 
+// Hardcoded team schema — not user input, safe to inline as JSON-LD.
+const teamSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'MambaHR',
+  url: 'https://mambahr.com',
+  logo: 'https://mambahr.com/og-image.png',
+  description: 'Domain AI lab building the autonomous HR agent.',
+  founders: [
+    {
+      '@type': 'Person',
+      name: 'Brian Bell',
+      jobTitle: 'CEO & Co-Founder',
+      sameAs: 'https://www.linkedin.com/in/brianjosephbell/',
+    },
+    {
+      '@type': 'Person',
+      name: 'Sebastian Kirsch',
+      jobTitle: 'CTO & Co-Founder',
+      sameAs: 'https://www.linkedin.com/in/sebastiankirsch-/',
+    },
+  ],
+  sameAs: ['https://www.linkedin.com/company/mamba-hr'],
+}
+
+const teamJsonLd = JSON.stringify(teamSchema)
+  .replace(/</g, '\\u003c')
+  .replace(/>/g, '\\u003e')
+  .replace(/&/g, '\\u0026')
+
 export default function AboutLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: teamJsonLd }} />
+      {children}
+    </>
+  )
 }
