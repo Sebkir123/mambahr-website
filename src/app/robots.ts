@@ -5,6 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       { userAgent: '*', allow: '/' },
       { userAgent: '*', disallow: '/d/' },
+      { userAgent: '*', disallow: '/investors' },
+      { userAgent: '*', disallow: '/research' },
       { userAgent: 'ia_archiver', disallow: '/' },
       { userAgent: 'archive.org_bot', disallow: '/' },
     ],
