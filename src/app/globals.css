@@ -59,6 +59,15 @@ body {
   font-size: 16px;
 }
 
+/* ── Premium display headings ──
+   Instrument Serif at 400 weight reads as elegant and editorial,
+   not corporate-bold. Overrides legacy inline fontWeight: 800/900. */
+h1, h2, h3 {
+  font-family: var(--font-serif), Georgia, serif !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.015em;
+}
+
 /* ── Spinner ── */
 @keyframes spin {
   from { transform: rotate(0deg); }
