@@ -8,9 +8,7 @@ export default function Footer() {
 
         <div className="flex items-center flex-wrap justify-center" style={{ gap: 20 }}>
           <a href="/security" style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>Security</a>
-          <a href="/research" style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>Research</a>
           <a href="/about" style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>About</a>
-          <a href="/investors" style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>Investors</a>
         </div>
 
         <div className="flex items-center" style={{ gap: 12 }}>

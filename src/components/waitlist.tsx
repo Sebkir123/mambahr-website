@@ -222,11 +222,6 @@ export default function RequestAccess() {
           </p>
         )}
 
-        <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center' }}>
-          <a href="/investors" style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none', borderBottom: '1px solid var(--border-mid)' }}>
-            For investors
-          </a>
-        </div>
       </div>
     </section>
   )
