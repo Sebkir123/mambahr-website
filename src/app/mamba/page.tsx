@@ -223,45 +223,132 @@ export default function MambaPage() {
           </div>
         </section>
 
-        {/* Architecture light */}
-        <section style={{ background: 'var(--bg-cream)', padding: '100px 24px' }}>
-          <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center' }}>
-            <p className="eyebrow" style={{ marginBottom: 20 }}>UNDER THE HOOD</p>
-            <h2
-              style={{
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(28px, 3vw, 42px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 24,
-                lineHeight: 1.15,
-              }}
-            >
-              One agent. Thirteen specialists.
-            </h2>
-            <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 48 }}>
-              When you ask Mamba, it does not answer alone. An orchestrator routes your question to the right specialist — Hiring, Comp, Performance, Compliance — and they hand back the answer through the same rail.
-            </p>
+        {/* Under the hood — live routing log */}
+        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: 64, alignItems: 'flex-start' }}>
 
-            {/* Simplified topology */}
-            <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, padding: 32 }}>
-              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
-                <div style={{ background: '#1C1917', color: 'var(--gold)', borderRadius: 10, padding: '10px 20px', fontSize: 13, fontWeight: 600, fontFamily: 'var(--font-mono), monospace' }}>
-                  Orchestrator (Sonnet)
+              {/* Left: explanation */}
+              <div>
+                <p className="eyebrow" style={{ marginBottom: 20 }}>HOW IT ROUTES</p>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-serif), Georgia, serif',
+                    fontSize: 'clamp(32px, 4vw, 52px)',
+                    fontWeight: 400,
+                    letterSpacing: '-0.02em',
+                    color: 'var(--text)',
+                    marginBottom: 24,
+                    lineHeight: 1.0,
+                  }}
+                >
+                  One question.<br />The right specialist.<br />Every time.
+                </h2>
+                <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 32 }}>
+                  Mamba reads the message, classifies the intent, checks your role, and hands the request to the right specialist. The specialist works, cites sources, and returns the answer through the same rail.
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  {[
+                    { n: '01', t: 'Read', d: 'Parse the message in context — channel, thread, who is asking, what role.' },
+                    { n: '02', t: 'Route', d: 'Classify intent and select the specialist with the right tools and permissions.' },
+                    { n: '03', t: 'Resolve', d: 'Specialist runs the work, cites sources, returns the answer through Mamba.' },
+                  ].map((s) => (
+                    <div key={s.n} style={{ display: 'grid', gridTemplateColumns: '36px 1fr', gap: 14, alignItems: 'baseline' }}>
+                      <span className="mono" style={{ fontSize: 12, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.04em' }}>{s.n}</span>
+                      <div>
+                        <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', margin: 0 }}>{s.t}</p>
+                        <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.55, margin: '4px 0 0' }}>{s.d}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <p style={{ marginTop: 32, fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>
+                  14 specialist agents work behind one rail.<br />All gated by your policy. Every action audit-logged.
+                </p>
+              </div>
+
+              {/* Right: live routing log mockup */}
+              <div style={{ background: '#1C1917', border: '1px solid rgba(176,141,87,0.25)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 12px 40px rgba(28,25,23,0.18)' }}>
+                {/* Terminal-style header */}
+                <div style={{ background: 'rgba(255,255,255,0.04)', padding: '12px 18px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#22C55E' }} />
+                  <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.04em' }}>ROUTING LOG · LIVE</span>
+                  <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>app.mambahr.com</span>
+                </div>
+
+                {/* Log entries */}
+                <div style={{ padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 22, fontFamily: 'var(--font-mono), monospace' }}>
+                  {[
+                    {
+                      time: '09:14:02',
+                      who: 'Maya · #people-ops',
+                      msg: '"I need 3 days off next week"',
+                      intent: 'leave_request',
+                      routedTo: 'Time Off agent',
+                      action: 'approved · within policy',
+                      duration: '4.2s',
+                      status: 'auto',
+                    },
+                    {
+                      time: '09:13:47',
+                      who: 'Brian · DM',
+                      msg: '"Write the offer for Alex at $175k base"',
+                      intent: 'hire_action',
+                      routedTo: 'Hiring agent',
+                      action: 'drafted · awaiting CHRO',
+                      duration: '7.8s',
+                      status: 'hil',
+                    },
+                    {
+                      time: '09:13:14',
+                      who: 'Sarah · #people-ops',
+                      msg: '"How many hires this quarter?"',
+                      intent: 'reports_query',
+                      routedTo: 'Reports agent',
+                      action: 'returned · 14 hires Q2',
+                      duration: '1.1s',
+                      status: 'auto',
+                    },
+                  ].map((e, i) => (
+                    <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
+                        <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{e.time}</span>
+                        <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>{e.who}</span>
+                      </div>
+                      <p style={{ fontSize: 13, color: '#FFFFFF', margin: 0, fontFamily: 'system-ui, -apple-system, sans-serif', fontStyle: 'italic' }}>
+                        {e.msg}
+                      </p>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 3, paddingLeft: 10, borderLeft: '2px solid rgba(176,141,87,0.4)', marginTop: 4 }}>
+                        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: 0 }}>
+                          <span style={{ color: 'rgba(176,141,87,0.85)' }}>→ INTENT</span>     <span style={{ color: '#FFFFFF' }}>{e.intent}</span>
+                        </p>
+                        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: 0 }}>
+                          <span style={{ color: 'rgba(176,141,87,0.85)' }}>→ ROUTED</span>     <span style={{ color: '#FFFFFF' }}>{e.routedTo}</span>
+                        </p>
+                        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: 0 }}>
+                          <span style={{ color: 'rgba(176,141,87,0.85)' }}>→ ACTION</span>     <span style={{ color: '#FFFFFF' }}>{e.action}</span>
+                          <span style={{ marginLeft: 8, fontSize: 10, fontWeight: 700, padding: '1px 6px', borderRadius: 3, background: e.status === 'auto' ? 'rgba(34,197,94,0.15)' : 'rgba(176,141,87,0.18)', color: e.status === 'auto' ? '#22C55E' : 'var(--gold)' }}>
+                            {e.status === 'auto' ? 'AUTO' : 'HIL'}
+                          </span>
+                        </p>
+                        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: 0 }}>
+                          <span style={{ color: 'rgba(176,141,87,0.6)' }}>→ TIME</span>       <span>{e.duration}</span>
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Footer */}
+                <div style={{ padding: '12px 24px', background: 'rgba(255,255,255,0.03)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                  <p style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: 0 }}>
+                    <span style={{ color: '#22C55E' }}>●</span>  routing 47 actions/min · 14 specialist agents online
+                  </p>
                 </div>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}>
-                <div style={{ width: 1, height: 20, background: 'var(--border-mid)' }} />
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
-                {['Hiring', 'Onboarding', 'Lifecycle', 'Comp & Ben', 'Leave', 'Performance', 'L&D', 'ER', 'Compliance', 'Offboarding', 'Reports', 'Culture', 'HR Ops'].map((agent) => (
-                  <span key={agent} style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '6px 12px', fontSize: 12, fontWeight: 500, color: 'var(--text-muted)', fontFamily: 'var(--font-mono), monospace' }}>
-                    {agent}
-                  </span>
-                ))}
-              </div>
-              <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 16 }}>14 domain sub-agents · Haiku / Sonnet / Opus routing by task complexity</p>
+
             </div>
           </div>
         </section>
