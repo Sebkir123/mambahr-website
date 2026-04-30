@@ -1,16 +1,57 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { ReactNode, useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 
-type ProductItem = { label: string; href: string; description: string }
+// Inline single-stroke icons sized for the dropdown rail
+const Icon = ({ d }: { d: string }) => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+    {d.split('|').map((path, i) => <path key={i} d={path} />)}
+  </svg>
+)
+
+const TodayDot = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5l3 2" />
+  </svg>
+)
+
+const MambaIcon = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+    <path d="M3 12a9 9 0 1 1 9 9H3v-9z" />
+    <circle cx="9" cy="11" r="0.7" fill="currentColor" />
+    <circle cx="15" cy="11" r="0.7" fill="currentColor" />
+  </svg>
+)
+
+const PeopleIconSm = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+    <circle cx="9" cy="9" r="3" />
+    <path d="M3 19c0-3 2.7-5 6-5s4.5 1.3 5.5 3" />
+    <circle cx="17" cy="11" r="2.5" />
+    <path d="M14 19c.5-2 2-3 4-3s2.5 1 3 3" />
+  </svg>
+)
+
+const HiringIconSm = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+    <circle cx="9" cy="8" r="3" />
+    <path d="M3 19c0-3 2.7-5 6-5s4.5 1.3 5.5 3" />
+    <path d="M16 9h6m-3 -3v6" />
+  </svg>
+)
+
+type ProductItem = { label: string; href: string; description: string; icon: ReactNode }
 
 const productItems: ProductItem[] = [
-  { label: 'Today',  href: '/today',  description: 'Your daily HIL queue — 30 min, every morning' },
-  { label: 'Mamba',  href: '/mamba',  description: 'The agent in Slack and Teams' },
-  { label: 'People', href: '/people', description: 'Directory, comp, performance, leave' },
-  { label: 'Hiring', href: '/hiring', description: 'Recruiting and onboarding' },
+  { label: 'Today',  href: '/today',  description: 'Your daily HIL queue — 30 min, every morning', icon: TodayDot },
+  { label: 'Mamba',  href: '/mamba',  description: 'The agent in Slack and Teams',                  icon: MambaIcon },
+  { label: 'People', href: '/people', description: 'Directory, comp, performance, leave',           icon: PeopleIconSm },
+  { label: 'Hiring', href: '/hiring', description: 'Recruiting and onboarding',                      icon: HiringIconSm },
 ]
+
+void Icon
 
 export default function MegaNav() {
   const [scrolled, setScrolled] = useState(false)
@@ -162,7 +203,7 @@ export default function MegaNav() {
           </div>
         </div>
 
-        {/* Desktop dropdown — single column, 4 product items + see all link */}
+        {/* Desktop dropdown — 2-column editorial: items left, product preview right */}
         {productOpen && (
           <div
             onMouseEnter={openProduct}
@@ -174,58 +215,143 @@ export default function MegaNav() {
               right: 0,
               background: '#FFFFFF',
               borderBottom: '1px solid var(--border)',
-              boxShadow: '0 12px 40px rgba(0,0,0,0.08)',
+              boxShadow: '0 16px 48px rgba(0,0,0,0.08)',
               zIndex: 40,
             }}
           >
-            <div style={{ maxWidth: 720, margin: '0 auto', padding: '24px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                {productItems.map((item) => (
+            <div style={{ maxWidth: 1080, margin: '0 auto', padding: '36px 32px 32px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+
+              {/* Left: items + footer link */}
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', color: 'var(--text-faint)', textTransform: 'uppercase', margin: '0 0 18px 12px' }}>
+                  The product
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  {productItems.map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setProductOpen(false)}
+                      style={{
+                        display: 'flex',
+                        gap: 14,
+                        alignItems: 'flex-start',
+                        padding: '12px 12px',
+                        borderRadius: 10,
+                        textDecoration: 'none',
+                        background: 'transparent',
+                        transition: 'background 0.15s',
+                        color: 'var(--text)',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'var(--bg-warm)'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'transparent'
+                      }}
+                    >
+                      <span
+                        style={{
+                          width: 36,
+                          height: 36,
+                          borderRadius: 10,
+                          background: 'linear-gradient(135deg, var(--gold-tint) 0%, #E8DDC8 100%)',
+                          border: '1px solid rgba(176,141,87,0.25)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'var(--gold-dark)',
+                          flexShrink: 0,
+                        }}
+                      >
+                        {item.icon}
+                      </span>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em' }}>{item.label}</p>
+                        <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '2px 0 0', lineHeight: 1.45 }}>{item.description}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Footer link */}
+                <div style={{ marginTop: 'auto', paddingTop: 24 }}>
                   <Link
-                    key={item.label}
-                    href={item.href}
+                    href="/mamba"
                     onClick={() => setProductOpen(false)}
                     style={{
                       display: 'flex',
-                      flexDirection: 'column',
-                      gap: 4,
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
                       padding: '12px 16px',
                       borderRadius: 10,
                       textDecoration: 'none',
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: 'var(--gold-dark)',
                       background: 'transparent',
-                      transition: 'background 0.15s',
+                      border: '1px solid rgba(176,141,87,0.2)',
+                      transition: 'all 0.15s',
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bg-warm)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'var(--gold-tint)'
+                      e.currentTarget.style.borderColor = 'rgba(176,141,87,0.4)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'transparent'
+                      e.currentTarget.style.borderColor = 'rgba(176,141,87,0.2)'
+                    }}
                   >
-                    <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)' }}>{item.label}</span>
-                    <span style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.4 }}>{item.description}</span>
+                    Explore all 14 specialist agents
+                    <span style={{ fontSize: 14 }}>→</span>
                   </Link>
-                ))}
+                </div>
               </div>
-              <div style={{ marginTop: 8, paddingTop: 12, borderTop: '1px solid var(--border-faint)' }}>
-                <Link
-                  href="/mamba"
-                  onClick={() => setProductOpen(false)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '10px 16px',
-                    borderRadius: 10,
-                    textDecoration: 'none',
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: 'var(--gold-dark)',
-                    transition: 'background 0.15s',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--gold-tint)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
-                >
-                  See all 14 specialist agents
-                  <span style={{ fontSize: 14 }}>→</span>
-                </Link>
+
+              {/* Right: product preview — Today decision card mockup */}
+              <div style={{ background: 'var(--bg-warm)', borderRadius: 14, padding: 24, position: 'relative', overflow: 'hidden' }}>
+                {/* Decorative gold corner glow */}
+                <div style={{ position: 'absolute', top: -50, right: -50, width: 140, height: 140, background: 'radial-gradient(circle, rgba(176,141,87,0.18), transparent 70%)' }} />
+
+                <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', color: 'var(--text-faint)', textTransform: 'uppercase', margin: '0 0 18px', position: 'relative' }}>
+                  Live · 9:14 AM
+                </p>
+
+                {/* Mini Today queue header */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12, position: 'relative' }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E' }} />
+                  <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)' }}>Today queue · 3 items</span>
+                </div>
+
+                {/* Decision card mockup */}
+                <div style={{ background: '#FFFFFF', border: '1.5px solid rgba(176,141,87,0.4)', borderRadius: 12, padding: 16, boxShadow: '0 4px 16px rgba(0,0,0,0.04)', position: 'relative' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10, marginBottom: 8 }}>
+                    <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', margin: 0, lineHeight: 1.35 }}>
+                      Offer for Maya Chen — Senior Engineer
+                    </p>
+                    <span style={{ background: 'var(--gold-tint)', color: 'var(--gold-dark)', borderRadius: 4, padding: '2px 8px', fontSize: 9, fontWeight: 700, letterSpacing: '0.06em', flexShrink: 0 }}>URGENT</span>
+                  </div>
+                  <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: '0 0 10px' }}>$195k base · 0.18% equity · above band 8%</p>
+                  <p style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.5, margin: '0 0 12px' }}>
+                    Top candidate from 6-week search. Competing offer from Scale AI.
+                  </p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+                    <span style={{ background: '#FEF2F2', color: '#B91C1C', borderRadius: 4, padding: '2px 7px', fontSize: 10, fontWeight: 700, fontFamily: 'var(--font-mono), monospace' }}>L4</span>
+                    <span style={{ background: 'var(--bg-surface)', color: 'var(--text-muted)', borderRadius: 4, padding: '2px 7px', fontSize: 10, fontWeight: 600, fontFamily: 'var(--font-mono), monospace' }}>CUQ 0.88</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <button style={{ flex: 1, padding: '6px 0', borderRadius: 6, border: 'none', background: '#1C1917', color: '#FFFFFF', fontSize: 11, fontWeight: 600, cursor: 'pointer' }}>Approve</button>
+                    <button style={{ flex: 1, padding: '6px 0', borderRadius: 6, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: 11, fontWeight: 500, cursor: 'pointer' }}>Decline</button>
+                  </div>
+                </div>
+
+                {/* Caption */}
+                <p style={{ fontSize: 11, color: 'var(--text-faint)', margin: '14px 0 0', fontFamily: 'var(--font-mono), monospace', position: 'relative' }}>
+                  routing 47 actions/min
+                </p>
               </div>
+
             </div>
           </div>
         )}
