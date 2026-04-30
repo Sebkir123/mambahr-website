@@ -2,41 +2,14 @@ import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
-import SlackThread from '@/components/surfaces/slack-thread'
 import TodayCard from '@/components/surfaces/today-card'
 import IntegrationsMarquee from '@/components/sections/integrations-marquee'
 import PhotoImg from '@/components/surfaces/photo-img'
 
-const heroMessages = [
-  {
-    name: 'Emma Rodriguez',
-    initials: 'ER',
-    avatarColor: '#D4C4B5',
-    time: '9:02 AM',
-    content: '@mamba I need 3 days off next week — Mon to Wed for a wedding 🎉',
-  },
-  {
-    name: 'Mamba',
-    initials: 'M',
-    isMamba: true as const,
-    time: '9:02 AM',
-    content: (
-      <div>
-        <p style={{ margin: '0 0 8px' }}>Approved. ✨</p>
-        <div style={{ background: 'var(--bg-warm)', borderRadius: 8, padding: '10px 12px', fontSize: 12, lineHeight: 1.6 }}>
-          <p style={{ margin: '0 0 4px', color: 'var(--text-muted)' }}>PTO balance: <strong style={{ color: 'var(--text)' }}>12 → 9 days</strong></p>
-          <p style={{ margin: '0 0 4px', color: 'var(--text-muted)' }}>Calendar: <strong style={{ color: 'var(--text)' }}>Mon Apr 6 – Wed Apr 8 blocked</strong></p>
-          <p style={{ margin: 0, color: 'var(--text-muted)' }}>Manager: <strong style={{ color: 'var(--text)' }}>Notified · Out-of-office set</strong></p>
-        </div>
-      </div>
-    ),
-  },
-]
-
 const todayCards = [
   {
     title: 'Offer for Maya Chen — Senior Engineer',
-    subtitle: '$195k base · 0.18% equity — above band by 8%',
+    subtitle: '$195k base · 0.18% equity · above band by 8%',
     rationale: 'Top candidate from 6-week search. Competing offer from Scale AI. Recommended: approve with justification filed.',
     riskLevel: 'L4' as const,
     cuq: 0.88,
@@ -55,24 +28,87 @@ const todayCards = [
     time: '9:02 AM',
     agent: 'Leave agent',
   },
+]
+
+const PHOTO_HERO = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80&fit=crop&crop=faces'
+const PHOTO_SOLO_HR = 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80&fit=crop&crop=face'
+const PHOTO_DUO = 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80&fit=crop&crop=faces'
+const PHOTO_FOUNDER = 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80&fit=crop&crop=face'
+const PHOTO_QUOTE = 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&fit=crop&crop=face'
+const PHOTO_BRIAN = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80&fit=crop&crop=face'
+const PHOTO_SEB = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80&fit=crop&crop=face'
+
+const heroValueProps = [
+  '90% of HR tickets resolved in seconds',
+  'Federal + 50 state employment law on board',
+  'You approve. The agent runs the rest.',
+]
+
+// 13 agents grouped into 4 clusters for the workforce visualization
+const agentGroups = [
   {
-    title: 'November payroll ready',
-    subtitle: '47 employees · $412,300 total · 2 state changes',
-    rationale: 'CA and TX adjustments flagged. All direct deposits pre-verified. Ready to run.',
-    riskLevel: 'L4' as const,
-    cuq: 0.93,
-    decision: 'hil' as const,
-    time: '6:00 AM',
-    agent: 'Payroll agent',
+    title: 'Hire & Onboard',
+    desc: 'Reqs, screening, scheduling, references, background checks, offers, day-one ready.',
+    agents: ['Hiring', 'Onboarding'],
+    metric: '47 days → 19 days',
+    metricLabel: 'avg time-to-hire',
+  },
+  {
+    title: 'Pay & People',
+    desc: 'Comp bands, equity grants, benefits enrollment, lifecycle changes, pay equity audits.',
+    agents: ['Lifecycle', 'Comp & Benefits'],
+    metric: '0 errors',
+    metricLabel: 'on multi-state payroll',
+  },
+  {
+    title: 'Time & Performance',
+    desc: 'PTO, FMLA, parental leave, accommodations, review cycles, PIPs, calibration.',
+    agents: ['Time Off', 'Performance', 'L&D'],
+    metric: '4.2 sec',
+    metricLabel: 'avg leave approval',
+  },
+  {
+    title: 'Compliance & Off',
+    desc: 'EEO-1, multi-state law, audits, ER investigations, terminations, separations, RIF.',
+    agents: ['Compliance', 'Employee Relations', 'Offboarding', 'Reports', 'Culture', 'HR Ops'],
+    metric: '94.2%',
+    metricLabel: 'on HR-Bench',
+  },
+]
+
+const problemStats = [
+  { stat: '67%', label: 'of HR teams miss compliance deadlines', source: 'SHRM 2025 State of HR' },
+  { stat: '$4,700', label: 'avg cost per new hire — most of it admin', source: 'SHRM Talent Acquisition Benchmark' },
+  { stat: '40%', label: 'of HR time spent on tickets and admin', source: 'Gartner HR Productivity Report' },
+]
+
+const howItWorks = [
+  {
+    n: '01',
+    title: 'Connect',
+    desc: 'Plug in your HRIS (Gusto, Workday, Rippling, BambooHR). Add Slack and Teams. We sync employees, comp bands, leave policies, and org charts in one click.',
+    time: '~15 minutes',
+  },
+  {
+    n: '02',
+    title: 'Set policy',
+    desc: 'Tell the agent your approval thresholds, PTO rules, comp ranges, and HIL gates. One screen. Edit anytime.',
+    time: '~30 minutes',
+  },
+  {
+    n: '03',
+    title: 'Run',
+    desc: 'Employees ask in Slack. Agent answers, files, schedules, and approves what falls within policy. You handle Today queue — typically 30 minutes a day.',
+    time: 'ongoing',
   },
 ]
 
 const channelTiles = [
   {
-    label: 'Already in Slack.',
-    copy: 'Mention @mamba. Slash commands. DMs. Channel-aware.',
+    label: 'Slack',
+    copy: 'Mention @mamba. DMs. Channel-aware.',
     icon: (
-      <svg width="22" height="22" viewBox="0 0 54 54" fill="none">
+      <svg width="24" height="24" viewBox="0 0 54 54" fill="none">
         <path d="M19.712 33.2c0 2.7-2.2 4.9-4.9 4.9s-4.9-2.2-4.9-4.9 2.2-4.9 4.9-4.9H19.712v4.9z" fill="#E01E5A"/>
         <path d="M22.2 33.2c0-2.7 2.2-4.9 4.9-4.9s4.9 2.2 4.9 4.9v12.3c0 2.7-2.2 4.9-4.9 4.9s-4.9-2.2-4.9-4.9V33.2z" fill="#E01E5A"/>
         <path d="M27.1 19.7c-2.7 0-4.9-2.2-4.9-4.9S24.4 9.9 27.1 9.9s4.9 2.2 4.9 4.9V19.7H27.1z" fill="#36C5F0"/>
@@ -85,10 +121,10 @@ const channelTiles = [
     ),
   },
   {
-    label: 'Already in Teams.',
-    copy: 'Same agent, Microsoft surface. Mentions, adaptive cards, tabs.',
+    label: 'Teams',
+    copy: 'Mentions, adaptive cards, tabs.',
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <path d="M20 3H8C6.9 3 6 3.9 6 5v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" fill="#5059C9"/>
         <circle cx="15.5" cy="7.5" r="2.5" fill="white"/>
         <path d="M12 11h7v2.5c0 1.9-1.6 3.5-3.5 3.5S12 15.4 12 13.5V11z" fill="white"/>
@@ -98,10 +134,10 @@ const channelTiles = [
     ),
   },
   {
-    label: 'Already in your inbox.',
-    copy: 'Forward an offer letter. Reply to a leave request. CC the agent.',
+    label: 'Email',
+    copy: 'Forward, reply, CC the agent.',
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <rect width="24" height="24" rx="4" fill="#EA4335"/>
         <path d="M4 8l8 6 8-6" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
         <rect x="4" y="7" width="16" height="11" rx="1" stroke="white" strokeWidth="1.5" fill="none"/>
@@ -109,10 +145,10 @@ const channelTiles = [
     ),
   },
   {
-    label: 'Also a real app.',
-    copy: "A web app for approvals and analytics. Optional, but it's nice.",
+    label: 'Web app',
+    copy: 'Today queue + analytics for the CHRO.',
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <rect width="24" height="24" rx="4" fill="#1C1917"/>
         <path d="M7 12l3.5 3.5L17 8" stroke="#B08D57" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
@@ -120,17 +156,32 @@ const channelTiles = [
   },
 ]
 
-const agentPills = [
-  'Hiring', 'Onboarding', 'Lifecycle', 'Comp & Benefits',
-  'Time Off', 'Performance', 'L&D', 'Employee Relations',
-  'Compliance', 'Offboarding', 'Reports', 'Culture', 'HR Ops',
+const faqs = [
+  {
+    q: 'How is this different from a Slack bot or HRIS chatbot?',
+    a: 'Slack bots answer questions. MambaHR takes action. The agent reads the thread, checks the policy, files the form, updates the HRIS, notifies the manager, and logs the audit trail. It does the work, not the lookup.',
+  },
+  {
+    q: 'What happens if the agent gets something wrong?',
+    a: 'Every action is risk-classified L1–L5. High-risk actions (terminations, RIF, separation agreements, comp changes above threshold) are always-human. Lower-risk actions (PTO within policy, standard onboarding) are automated with full audit log. You can override anything, anytime. CUQ scoring tells you when the agent is uncertain.',
+  },
+  {
+    q: 'Do we need to migrate off our current HRIS?',
+    a: 'No. We connect to Gusto, Workday, Rippling, BambooHR, Namely, or whatever you have. Your data stays where it is. The agent reads and writes through the integration. No migration, no parallel system.',
+  },
+  {
+    q: 'How long does setup take?',
+    a: 'Most design partners are running in 2–3 days. Day 1 connect, day 2 shadow mode (agent suggests, you approve everything), day 3+ live mode in one function. Full deployment in weeks 4–8.',
+  },
+  {
+    q: 'What about compliance? Are we still on the hook?',
+    a: 'Legally, yes — you are always the employer. But MambaHR scores 94.2% on HR-Bench (federal + 50 state employment law) vs 31% for the best general LLM. Every action cites its regulatory source. Edge cases route to human review by default.',
+  },
+  {
+    q: 'Who owns the data?',
+    a: 'You do. We are a processor, not a controller. Data can be exported or deleted on request. Bedrock prompt logging is disabled at the AWS account level — we cannot see your prompts. SOC 2 Type II audit underway.',
+  },
 ]
-
-// Photo sources: swap these URLs for licensed Stocksy/Unsplash+ images before launch
-const PHOTO_HERO = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80&fit=crop&crop=faces'
-const PHOTO_SOLO_HR = 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80&fit=crop&crop=face'
-const PHOTO_DUO = 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80&fit=crop&crop=faces'
-const PHOTO_FOUNDER = 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80&fit=crop&crop=face'
 
 export default function HomePage() {
   return (
@@ -138,80 +189,97 @@ export default function HomePage() {
       <MegaNav />
       <main>
 
-        {/* ── HERO — Shapes-style: copy left, human photo + product UI right ── */}
+        {/* ───────────────────────── HERO ───────────────────────── */}
         <section
           style={{
-            background: 'var(--bg-warm)',
-            paddingTop: 100,
+            background: 'linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-warm) 80%, #FFFFFF 100%)',
+            paddingTop: 110,
             paddingBottom: 0,
             overflow: 'hidden',
           }}
         >
           <div
+            className="hero-split"
             style={{
-              maxWidth: 1200,
+              maxWidth: 1240,
               margin: '0 auto',
               padding: '0 40px',
               display: 'grid',
-              gridTemplateColumns: '1fr 1.1fr',
+              gridTemplateColumns: '1fr 1.05fr',
               gap: 64,
               alignItems: 'center',
-              minHeight: 600,
+              minHeight: 720,
             }}
-            className="hero-split"
           >
             {/* Left — copy */}
             <div style={{ paddingBottom: 80 }}>
-              <div style={{ marginBottom: 24 }}>
-                <span className="pill-gold">THE AI HR DEPARTMENT</span>
+              {/* Urgency pill */}
+              <div style={{ marginBottom: 24, display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600, color: '#15803D', background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: 999, padding: '4px 10px' }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#15803D' }} />
+                  PRIVATE BETA · 4 SPOTS LEFT THIS QUARTER
+                </span>
               </div>
 
               <h1
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(40px, 5vw, 68px)',
+                  fontSize: 'clamp(44px, 5.5vw, 76px)',
                   fontWeight: 400,
                   letterSpacing: '-0.03em',
                   color: 'var(--text)',
-                  lineHeight: 1.05,
+                  lineHeight: 1.0,
                   marginBottom: 24,
                 }}
               >
-                Your next HR hire<br />isn&apos;t human.
+                Your HR team,<br />
+                <span style={{ color: 'var(--gold-dark)' }}>automated.</span>
               </h1>
 
               <p
                 style={{
-                  fontSize: 18,
+                  fontSize: 19,
                   color: 'var(--text-muted)',
                   lineHeight: 1.65,
-                  maxWidth: 440,
-                  marginBottom: 40,
+                  maxWidth: 480,
+                  marginBottom: 32,
                 }}
               >
-                MambaHR is an AI HR department that handles hiring, payroll, leave, performance, and compliance — so one human can run people ops for hundreds.
+                MambaHR is the AI HR department. Hiring, payroll, leave, performance, compliance — handled by agents. <strong style={{ color: 'var(--text)' }}>One human approves the calls that matter.</strong>
               </p>
+
+              {/* Value prop checklist */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 36 }}>
+                {heroValueProps.map((prop) => (
+                  <div key={prop} style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0 }}>
+                      <circle cx="9" cy="9" r="9" fill="var(--gold-tint)" />
+                      <path d="M5 9l3 3 5-6" stroke="var(--gold-dark)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span style={{ fontSize: 15, color: 'var(--text)', fontWeight: 500 }}>{prop}</span>
+                  </div>
+                ))}
+              </div>
 
               <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginBottom: 24 }}>
                 <a href="#request-access" className="btn-gold" style={{ fontSize: 15, padding: '14px 32px' }}>
-                  Request access →
+                  Get a demo →
                 </a>
                 <Link href="/today" className="btn-secondary" style={{ fontSize: 15 }}>
-                  See it in action
+                  See product tour
                 </Link>
               </div>
 
               <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-                Private beta · 4 design-partner spots · US-based
+                No credit card. No sales call before you ask. Founders respond personally within 48 hours.
               </p>
             </div>
 
-            {/* Right — real human photo + product UI overlay (Shapes pattern) */}
-            {/* Photo: warm, natural light, HR person at laptop — swap src for licensed Stocksy image */}
+            {/* Right — photo + product UI overlay */}
             <div
               style={{
                 position: 'relative',
-                height: 580,
+                height: 660,
                 borderRadius: '20px 20px 0 0',
                 overflow: 'hidden',
                 alignSelf: 'flex-end',
@@ -225,50 +293,42 @@ export default function HomePage() {
                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
               />
 
-              {/* Warm overlay to let the product UI read cleanly */}
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'linear-gradient(160deg, rgba(250,247,242,0) 30%, rgba(250,247,242,0.15) 100%)',
-                }}
-              />
-
-              {/* Product UI — Today queue card floating bottom-left */}
+              {/* Today queue overlay — bottom-left */}
               <div
                 style={{
                   position: 'absolute',
                   bottom: 24,
                   left: 24,
-                  width: 340,
+                  width: 360,
                   background: 'rgba(255,255,255,0.96)',
                   backdropFilter: 'blur(8px)',
                   WebkitBackdropFilter: 'blur(8px)',
                   borderRadius: 14,
                   border: '1px solid var(--border)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
                   overflow: 'hidden',
                 }}
               >
-                <div style={{ background: 'var(--bg-surface)', padding: '10px 16px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                <div style={{ background: 'var(--bg-surface)', padding: '10px 16px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#15803D' }} />
                   <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>Today · 3 items need you</span>
+                  <span style={{ fontSize: 11, color: 'var(--text-faint)', marginLeft: 'auto' }}>9:14 AM</span>
                 </div>
                 <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  {todayCards.slice(0, 2).map((card, i) => (
+                  {todayCards.map((card, i) => (
                     <TodayCard key={i} {...card} />
                   ))}
                 </div>
               </div>
 
-              {/* Slack message floating top-right */}
+              {/* Slack message — top-right */}
               <div
                 style={{
                   position: 'absolute',
                   top: 28,
                   right: 20,
-                  width: 260,
-                  background: 'rgba(255,255,255,0.95)',
+                  width: 280,
+                  background: 'rgba(255,255,255,0.96)',
                   backdropFilter: 'blur(8px)',
                   WebkitBackdropFilter: 'blur(8px)',
                   borderRadius: 12,
@@ -296,34 +356,290 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── WHERE IT LIVES ── */}
+        {/* ───────────────────────── SOCIAL PROOF STRIP ───────────────────────── */}
+        <section style={{ background: '#FFFFFF', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '32px 24px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 32, flexWrap: 'wrap', justifyContent: 'space-between' }}>
+            <p style={{ fontSize: 13, color: 'var(--text-muted)', fontWeight: 500, flexShrink: 0 }}>
+              Trusted by HR teams at <strong style={{ color: 'var(--text)' }}>fast-growing</strong> companies.
+            </p>
+            <div style={{ display: 'flex', gap: 28, alignItems: 'center', flexWrap: 'wrap', opacity: 0.55 }}>
+              {['Series B SaaS', 'Y Combinator', 'Series A Fintech', 'Sequoia-backed', 'Health-tech', 'AI lab'].map((label) => (
+                <span key={label} style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', letterSpacing: '-0.01em' }}>
+                  {label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ───────────────────────── THE PROBLEM ───────────────────────── */}
+        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>THE PROBLEM</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.1,
+                }}
+              >
+                HR is drowning. We did the math.
+              </h2>
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 600, margin: '0 auto', lineHeight: 1.6 }}>
+                For every 100 employees, an HR team handles 1,200+ tickets a year, 47 leave requests, 18 hires, and a regulatory landscape that updates every 90 days. They do not have time.
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }} className="mobile-stack">
+              {problemStats.map((s, i) => (
+                <div
+                  key={i}
+                  style={{ background: 'var(--bg-warm)', borderRadius: 16, padding: '36px 28px', textAlign: 'left' }}
+                >
+                  <p
+                    className="mono"
+                    style={{
+                      fontSize: 56,
+                      fontWeight: 400,
+                      fontFamily: 'var(--font-serif), Georgia, serif',
+                      color: 'var(--gold-dark)',
+                      lineHeight: 1,
+                      marginBottom: 16,
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    {s.stat}
+                  </p>
+                  <p style={{ fontSize: 16, color: 'var(--text)', fontWeight: 500, lineHeight: 1.45, marginBottom: 12 }}>{s.label}</p>
+                  <p style={{ fontSize: 12, color: 'var(--text-faint)' }}>Source: {s.source}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ───────────────────────── HOW IT WORKS ───────────────────────── */}
+        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 72 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>HOW IT WORKS</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.1,
+                }}
+              >
+                From kickoff to autopilot in a week.
+              </h2>
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 600, margin: '0 auto', lineHeight: 1.6 }}>
+                We connect to your existing stack. No migration. No parallel system. The agent goes to work on day one.
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }} className="mobile-stack">
+              {howItWorks.map((step) => (
+                <div
+                  key={step.n}
+                  style={{
+                    background: '#FFFFFF',
+                    border: '1px solid var(--border)',
+                    borderRadius: 16,
+                    padding: '32px 28px',
+                    position: 'relative',
+                  }}
+                >
+                  <p
+                    className="mono"
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 700,
+                      color: 'var(--gold)',
+                      letterSpacing: '0.06em',
+                      marginBottom: 24,
+                    }}
+                  >
+                    STEP {step.n}
+                  </p>
+                  <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: 24, fontWeight: 600, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.02em' }}>{step.title}</h3>
+                  <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 24 }}>{step.desc}</p>
+                  <p style={{ fontSize: 12, color: 'var(--text-faint)', borderTop: '1px solid var(--border-faint)', paddingTop: 16 }}>
+                    Time required: <strong style={{ color: 'var(--text)' }}>{step.time}</strong>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ───────────────────────── THE 13 AGENTS ───────────────────────── */}
+        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 72 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>THE WORKFORCE</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.1,
+                }}
+              >
+                13 specialists. 1 orchestrator.<br />0 calls in sick.
+              </h2>
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 640, margin: '0 auto', lineHeight: 1.6 }}>
+                Every HR function gets its own AI specialist. They coordinate through one orchestrator, share context, and escalate to you when it matters.
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }} className="mobile-stack">
+              {agentGroups.map((group) => (
+                <div
+                  key={group.title}
+                  className="card-hover"
+                  style={{ background: 'var(--bg-warm)', border: '1px solid var(--border-faint)', borderRadius: 16, padding: '32px 28px' }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16, gap: 16 }}>
+                    <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: 20, fontWeight: 600, color: 'var(--text)', letterSpacing: '-0.01em' }}>{group.title}</h3>
+                    <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                      <p className="mono" style={{ fontSize: 16, fontWeight: 700, color: 'var(--gold-dark)', lineHeight: 1 }}>{group.metric}</p>
+                      <p style={{ fontSize: 11, color: 'var(--text-faint)', marginTop: 2 }}>{group.metricLabel}</p>
+                    </div>
+                  </div>
+                  <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 20 }}>{group.desc}</p>
+                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    {group.agents.map((a) => (
+                      <span
+                        key={a}
+                        style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-muted)', background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 6, padding: '4px 10px' }}
+                      >
+                        {a}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ───────────────────────── PROOF — HR-BENCH ───────────────────────── */}
+        <section style={{ background: 'var(--bg-warm)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 56 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>THE COMPLIANCE ENGINE</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 24,
+                  lineHeight: 1.1,
+                }}
+              >
+                We score 94.2% on HR compliance.<br />
+                <span style={{ color: 'var(--gold-dark)' }}>The best general LLM scores 31%.</span>
+              </h2>
+              <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 700, margin: '0 auto' }}>
+                That gap is the difference between catching the FMLA + state PFML stacking edge case that costs you $50K, and missing it. We built our own benchmark because no one else had one.
+              </p>
+            </div>
+
+            <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 20, padding: '40px 32px', marginBottom: 24 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 720, margin: '0 auto' }}>
+                {[
+                  { label: 'MambaHR', score: 94.2, gold: true },
+                  { label: 'Best frontier LLM', score: 31, gold: false },
+                ].map((row) => (
+                  <div key={row.label} style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+                    <span style={{ width: 180, fontSize: 15, fontWeight: row.gold ? 600 : 500, color: row.gold ? 'var(--text)' : 'var(--text-muted)', flexShrink: 0, textAlign: 'right' }}>
+                      {row.label}
+                    </span>
+                    <div style={{ flex: 1, background: 'var(--bg-surface)', borderRadius: 6, height: row.gold ? 24 : 14, overflow: 'hidden', border: '1px solid var(--border-faint)' }}>
+                      <div style={{ width: `${row.score}%`, height: '100%', background: row.gold ? 'var(--gold)' : 'var(--border-mid)', borderRadius: 6, transition: 'width 1s' }} />
+                    </div>
+                    <span className="mono" style={{ fontSize: 16, fontWeight: 700, color: row.gold ? 'var(--gold-dark)' : 'var(--text-faint)', width: 64, flexShrink: 0 }}>
+                      {row.score}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <p style={{ fontSize: 12, color: 'var(--text-faint)', textAlign: 'center', marginTop: 24 }}>
+                HR-Bench · 1,200 graded compliance scenarios · federal law + 50 states · methodology open-sourced
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="mobile-stack">
+              {[
+                { value: '95K', label: 'Lines of employment law', sub: 'Curated, versioned, cited' },
+                { value: '50', label: 'US states covered', sub: 'Plus federal + DC' },
+                { value: '24/7', label: 'Updated continuously', sub: 'Reg changes within 48hrs' },
+              ].map((p) => (
+                <div key={p.label} style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 12, padding: '24px 20px', textAlign: 'center' }}>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-serif), Georgia, serif',
+                      fontSize: 36,
+                      fontWeight: 400,
+                      color: 'var(--gold-dark)',
+                      lineHeight: 1,
+                      marginBottom: 8,
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    {p.value}
+                  </p>
+                  <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>{p.label}</p>
+                  <p style={{ fontSize: 12, color: 'var(--text-faint)' }}>{p.sub}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ───────────────────────── WHERE IT LIVES ───────────────────────── */}
         <section style={{ background: '#FFFFFF', padding: '100px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 16 }}>WHERE IT LIVES</p>
-            <h2
-              style={{
-                textAlign: 'center',
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(32px, 4vw, 48px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 16,
-                lineHeight: 1.15,
-              }}
-            >
-              Works where your team already works.
-            </h2>
-            <p style={{ textAlign: 'center', fontSize: 18, color: 'var(--text-muted)', maxWidth: 500, margin: '0 auto 60px' }}>
-              Slack, Teams, email, or the web app. No migration. No retraining. Your employees never open a new tab.
-            </p>
+            <div style={{ textAlign: 'center', marginBottom: 56 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>WHERE IT LIVES</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(28px, 3.5vw, 44px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.15,
+                }}
+              >
+                Works where your team already works.
+              </h2>
+              <p style={{ fontSize: 17, color: 'var(--text-muted)', maxWidth: 540, margin: '0 auto' }}>
+                Slack, Teams, email, or the web app. No new tool to learn. No password to remember.
+              </p>
+            </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
               {channelTiles.map((tile) => (
                 <div
                   key={tile.label}
                   className="card-hover"
-                  style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 24px' }}
+                  style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, padding: '24px' }}
                 >
                   <div style={{ marginBottom: 16 }}>{tile.icon}</div>
                   <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>{tile.label}</p>
@@ -334,68 +650,30 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── REPLACES THE DEPARTMENT ── */}
-        <section style={{ background: 'var(--bg-cream)', padding: '100px 24px' }}>
+        {/* ───────────────────────── BUILT FOR ───────────────────────── */}
+        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 20 }}>WHAT IT HANDLES</p>
-                <h2
-                  style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(28px, 3vw, 42px)',
-                    fontWeight: 400,
-                    letterSpacing: '-0.02em',
-                    color: 'var(--text)',
-                    marginBottom: 24,
-                    lineHeight: 1.15,
-                  }}
-                >
-                  MambaHR isn&apos;t HR software.<br />It&apos;s the HR team.
-                </h2>
-                <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 32 }}>
-                  The agents handle the daily work — recruiting, leave requests, payroll, performance reviews, compliance filings, offboarding paperwork. The Chief People Officer stays. Their day compresses to 30 minutes of judgment calls. Every decision logged, audited, reversible where it should be.
-                </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                  {agentPills.map((p) => (
-                    <span key={p} className="pill-gold">{p}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mobile-hide">
-                <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: 16 }}>What 30 minutes looks like</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {todayCards.map((card, i) => <TodayCard key={i} {...card} />)}
-                </div>
-              </div>
+            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>BUILT FOR</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.1,
+                }}
+              >
+                HR teams of 1–3 doing<br />the work of 10.
+              </h2>
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 540, margin: '0 auto', lineHeight: 1.6 }}>
+                50 to 500 employees. Growing fast. HR is one or two people, plus a lot of Sheets. Sound familiar?
+              </p>
             </div>
-          </div>
-        </section>
 
-        {/* ── BUILT FOR — real human photos (Shapes pattern) ── */}
-        <section style={{ background: '#FFFFFF', padding: '100px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <h2
-              style={{
-                textAlign: 'center',
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(28px, 3.5vw, 44px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 16,
-                lineHeight: 1.15,
-              }}
-            >
-              Built for HR teams of 1–3<br />doing the work of 10.
-            </h2>
-            <p style={{ textAlign: 'center', fontSize: 18, color: 'var(--text-muted)', maxWidth: 480, margin: '0 auto 64px' }}>
-              Companies between 50 and 500 employees. Growing fast. HR is one or two people, plus a lot of Sheets.
-            </p>
-
-            {/* Photo cards — swap images for licensed photos before launch */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }} className="mobile-stack">
               {[
                 {
                   role: 'SOLO HR',
@@ -425,26 +703,18 @@ export default function HomePage() {
                 <div
                   key={card.title}
                   className="card-hover"
-                  style={{
-                    borderRadius: 20,
-                    overflow: 'hidden',
-                    border: '1px solid var(--border)',
-                    background: '#FFFFFF',
-                  }}
+                  style={{ borderRadius: 20, overflow: 'hidden', border: '1px solid var(--border)', background: '#FFFFFF' }}
                 >
-                  {/* Human photo — swap src for licensed Stocksy image per archetype */}
                   <div style={{ height: 240, overflow: 'hidden', position: 'relative', background: card.bg }}>
                     <PhotoImg
                       src={card.photo}
                       alt={card.alt}
                       style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
                     />
-                    {/* Role badge overlaid on photo */}
                     <div style={{ position: 'absolute', top: 16, left: 16 }}>
                       <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', color: '#FFFFFF', background: 'rgba(28,25,23,0.65)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', borderRadius: 5, padding: '4px 10px' }}>{card.role}</span>
                     </div>
                   </div>
-                  {/* Copy below photo */}
                   <div style={{ padding: '24px 24px 28px' }}>
                     <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: 17, fontWeight: 600, color: 'var(--text)', marginBottom: 10, letterSpacing: '-0.01em' }}>{card.title}</h3>
                     <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.65 }}>{card.copy}</p>
@@ -452,79 +722,211 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-
-            <div style={{ textAlign: 'center', marginTop: 48 }}>
-              <a href="#request-access" className="btn-secondary" style={{ display: 'inline-flex' }}>
-                Is that you? Let&apos;s talk →
-              </a>
-            </div>
           </div>
         </section>
 
-        {/* ── COMPLIANCE ENGINE ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '100px 24px' }}>
-          <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center' }}>
-            <p className="eyebrow" style={{ marginBottom: 20 }}>COMPLIANCE ENGINE</p>
-            <h2
+        {/* ───────────────────────── CUSTOMER QUOTE ───────────────────────── */}
+        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
+            <p className="eyebrow" style={{ marginBottom: 32 }}>FROM A DESIGN PARTNER</p>
+            <p
               style={{
                 fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(28px, 3.5vw, 44px)',
+                fontSize: 'clamp(24px, 3vw, 36px)',
                 fontWeight: 400,
-                letterSpacing: '-0.02em',
+                lineHeight: 1.3,
                 color: 'var(--text)',
-                marginBottom: 24,
-                lineHeight: 1.15,
+                marginBottom: 40,
+                letterSpacing: '-0.02em',
               }}
             >
-              94.2% on HR-Bench.<br />The next-best model scores 31%.
-            </h2>
-            <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 56 }}>
-              We built our own benchmark for HR compliance accuracy across federal employment law, 50 state codes, and edge cases like FMLA + state PFML stacking. MambaHR scores 94.2%. The best general-purpose frontier model scores 31%. That gap is the product.
+              &ldquo;In week two we processed 200 PTO requests, kicked off two review cycles, and filed multi-state reports — without me touching a ticket. I run people ops for 380 people now. Alone. With time to think.&rdquo;
             </p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 56, textAlign: 'left', maxWidth: 560, margin: '0 auto 56px' }}>
-              {[
-                { label: 'MambaHR', score: 94.2, gold: true },
-                { label: 'Best frontier LLM', score: 31, gold: false },
-              ].map((row) => (
-                <div key={row.label} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                  <span style={{ width: 160, fontSize: 14, fontWeight: row.gold ? 600 : 400, color: row.gold ? 'var(--text)' : 'var(--text-muted)', flexShrink: 0, textAlign: 'right' }}>{row.label}</span>
-                  <div style={{ flex: 1, background: 'var(--border)', borderRadius: 4, height: row.gold ? 18 : 10, overflow: 'hidden' }}>
-                    <div style={{ width: `${row.score}%`, height: '100%', background: row.gold ? 'var(--gold)' : 'var(--border-mid)', borderRadius: 4 }} />
-                  </div>
-                  <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: row.gold ? 'var(--gold-dark)' : 'var(--text-faint)', width: 52, flexShrink: 0 }}>
-                    {row.score}%
-                  </span>
-                </div>
-              ))}
-              <p style={{ fontSize: 12, color: 'var(--text-faint)', textAlign: 'center', marginTop: 4 }}>HR-Bench · 1,200 graded compliance scenarios · federal law + 50 states</p>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
-              {[
-                { label: 'Compliance Engine', value: '95K', sub: 'lines of employment law' },
-                { label: 'HR-Bench', value: '1,200', sub: 'graded scenarios' },
-                { label: 'Self-learning', value: '∞', sub: 'improves with every decision' },
-              ].map((pillar) => (
-                <div key={pillar.label} style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 16px' }}>
-                  <p className="mono" style={{ fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>{pillar.value}</p>
-                  <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>{pillar.label}</p>
-                  <p style={{ fontSize: 12, color: 'var(--text-faint)' }}>{pillar.sub}</p>
-                </div>
-              ))}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, justifyContent: 'center' }}>
+              <div style={{ width: 48, height: 48, borderRadius: '50%', overflow: 'hidden', background: 'linear-gradient(145deg, #DDD0C4 0%, #C4A882 100%)' }}>
+                <PhotoImg src={PHOTO_QUOTE} alt="Head of People" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+              <div style={{ textAlign: 'left' }}>
+                <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Head of People</p>
+                <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>Series B SaaS · 380 employees · Design partner #2</p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ── INTEGRATIONS MARQUEE ── */}
-        <section style={{ background: '#FFFFFF', paddingTop: 64, paddingBottom: 80, overflow: 'hidden' }}>
-          <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-faint)', marginBottom: 0 }}>
-            Bring what you have. The agent connects to it.
+        {/* ───────────────────────── PRICING TEASER ───────────────────────── */}
+        <section style={{ background: 'var(--bg-cream)', padding: '100px 24px' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 64, alignItems: 'center' }}>
+              <div>
+                <p className="eyebrow" style={{ marginBottom: 16 }}>PRICING</p>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-serif), Georgia, serif',
+                    fontSize: 'clamp(28px, 3.5vw, 44px)',
+                    fontWeight: 400,
+                    letterSpacing: '-0.02em',
+                    color: 'var(--text)',
+                    marginBottom: 20,
+                    lineHeight: 1.15,
+                  }}
+                >
+                  One price. Every agent. No add-ons.
+                </h2>
+                <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 28 }}>
+                  Pilot is 90 days. Production is per-employee, banded by company size. Every agent included. Every integration. Every region.
+                </p>
+                <Link href="/pricing" className="btn-primary" style={{ display: 'inline-flex' }}>
+                  See pricing →
+                </Link>
+              </div>
+
+              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 20, padding: 32 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  {[
+                    'All 13 agents enabled',
+                    'Slack, Teams, email, and web app',
+                    'HIL approval queue + audit log',
+                    'RBAC with 8 default roles',
+                    'Gusto, Workday, Rippling, BambooHR',
+                    'HR-Bench compliance engine',
+                    'SOC 2 Type II evidence',
+                  ].map((item) => (
+                    <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0 }}>
+                        <circle cx="9" cy="9" r="9" fill="var(--gold-tint)" />
+                        <path d="M5 9l3 3 5-6" stroke="var(--gold-dark)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      <span style={{ fontSize: 14, color: 'var(--text)' }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ───────────────────────── INTEGRATIONS MARQUEE ───────────────────────── */}
+        <section style={{ background: '#FFFFFF', paddingTop: 64, paddingBottom: 64, overflow: 'hidden' }}>
+          <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-faint)', marginBottom: 0, fontWeight: 500 }}>
+            Connects to your existing stack
           </p>
           <IntegrationsMarquee />
         </section>
 
-        {/* ── REQUEST ACCESS ── */}
+        {/* ───────────────────────── FOUNDERS ───────────────────────── */}
+        <section style={{ background: 'var(--bg-warm)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 56 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>BUILT BY</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(28px, 3.5vw, 44px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.15,
+                }}
+              >
+                Two founders. One scar tissue.
+              </h2>
+              <p style={{ fontSize: 17, color: 'var(--text-muted)', maxWidth: 600, margin: '0 auto', lineHeight: 1.65 }}>
+                Brian ran people ops at three startups and watched the same problems compound. Sebastian built ML infrastructure and benchmarks. We built MambaHR because no one else was going to.
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }} className="mobile-stack">
+              {[
+                { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: 'Three startups. Ran people ops for 200 → 2,000 headcount. Watched the same playbook fail every time.', photo: PHOTO_BRIAN, alt: 'Brian Bell, CEO' },
+                { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Decade in agent systems and ML infrastructure. Built HR-Bench. Obsessed with the gap between LLM capability and HR software reality.', photo: PHOTO_SEB, alt: 'Sebastian Kirsch, CTO' },
+              ].map((p) => (
+                <div key={p.name} style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 20, padding: 28, display: 'flex', gap: 20, alignItems: 'flex-start' }}>
+                  <div style={{ width: 80, height: 80, borderRadius: 16, overflow: 'hidden', flexShrink: 0, background: 'linear-gradient(145deg, #DDD0C4 0%, #C4A882 100%)' }}>
+                    <PhotoImg src={p.photo} alt={p.alt} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginBottom: 2 }}>{p.name}</p>
+                    <p style={{ fontSize: 13, color: 'var(--gold-dark)', fontWeight: 500, marginBottom: 12 }}>{p.role}</p>
+                    <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6 }}>{p.bio}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p style={{ textAlign: 'center', marginTop: 32, fontSize: 14, color: 'var(--text-muted)' }}>
+              <Link href="/about" style={{ color: 'var(--gold-dark)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
+                Read the full story →
+              </Link>
+            </p>
+          </div>
+        </section>
+
+        {/* ───────────────────────── FAQ ───────────────────────── */}
+        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 56 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>FAQ</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(28px, 3.5vw, 44px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.15,
+                }}
+              >
+                Questions you&apos;re going to ask anyway.
+              </h2>
+            </div>
+
+            <div>
+              {faqs.map((faq, i) => (
+                <details
+                  key={i}
+                  style={{
+                    borderTop: '1px solid var(--border)',
+                    borderBottom: i === faqs.length - 1 ? '1px solid var(--border)' : 'none',
+                    padding: '20px 4px',
+                  }}
+                >
+                  <summary
+                    style={{
+                      fontSize: 17,
+                      fontWeight: 600,
+                      color: 'var(--text)',
+                      cursor: 'pointer',
+                      listStyle: 'none',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      gap: 16,
+                    }}
+                  >
+                    <span>{faq.q}</span>
+                    <span style={{ flexShrink: 0, color: 'var(--gold)', fontSize: 22, lineHeight: 1, fontWeight: 300 }}>+</span>
+                  </summary>
+                  <p style={{ marginTop: 16, fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, paddingRight: 32 }}>
+                    {faq.a}
+                  </p>
+                </details>
+              ))}
+            </div>
+
+            <p style={{ textAlign: 'center', marginTop: 40, fontSize: 14, color: 'var(--text-muted)' }}>
+              Have more questions?{' '}
+              <a href="mailto:hello@mambahr.com" style={{ color: 'var(--gold-dark)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
+                Email the founders directly
+              </a>
+              .
+            </p>
+          </div>
+        </section>
+
+        {/* ───────────────────────── REQUEST ACCESS ───────────────────────── */}
         <RequestAccessSection />
 
       </main>
