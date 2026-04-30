@@ -1,45 +1,69 @@
 import type { Metadata } from 'next'
+import { ReactNode } from 'react'
 import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
 import IntegrationsMarquee from '@/components/sections/integrations-marquee'
+import EmployeeDirectory from '@/components/surfaces/employee-directory'
+import {
+  HiringIcon, LifecycleIcon, CompIcon, TimeOffIcon,
+  PerformanceIcon, OffboardingIcon,
+} from '@/components/surfaces/agent-icons'
+
+// Custom directory icon — matches the agent-icon style
+const DirectoryIcon = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="16" rx="2" />
+    <circle cx="9" cy="10" r="2" />
+    <path d="M5 17c0-2 2-3.5 4-3.5s4 1.5 4 3.5" />
+    <path d="M14 9h5M14 13h5M14 17h5" />
+  </svg>
+)
 
 export const metadata: Metadata = {
   title: 'People — MambaHR',
   description: 'People ops without the ops. Directory, comp, performance, leave — one agent, every record, every change.',
 }
 
-const capabilities = [
+type Capability = { title: string; desc: string; icon: ReactNode; link?: string }
+
+const capabilities: Capability[] = [
   {
     title: 'Directory & Records',
     desc: 'Every employee, every change, every history — in one system of record. Migrate from Gusto, Workday, Rippling, BambooHR, Namely, or wherever your data lives today.',
-    icon: '👤',
+    icon: <DirectoryIcon />,
   },
   {
     title: 'Lifecycle Changes',
     desc: 'Manager change, transfer, promotion, demotion, location change. The agent updates every system, files every form, notifies every stakeholder.',
-    icon: '🔄',
+    icon: <LifecycleIcon />,
   },
   {
     title: 'Compensation & Benefits',
     desc: 'Comp recommendations within band. Open enrollment, life events. Pay equity audits. Equity refresh modeling. Carta integrated.',
-    icon: '$',
+    icon: <CompIcon />,
   },
   {
     title: 'Time Off & Leave',
     desc: 'Policy-aware PTO approvals in seconds. FMLA, CFRA, PFML stacking. Bereavement, USERRA, ADA accommodations. Every edge case handled.',
-    icon: '🗓',
+    icon: <TimeOffIcon />,
   },
   {
     title: 'Performance & Growth',
     desc: 'Review cycle launch, 360 synthesis, calibration packets, PIP drafting and tracking. Promotion recommendations with EEO disparate impact analysis.',
-    icon: '📈',
+    icon: <PerformanceIcon />,
+  },
+  {
+    title: 'Hiring & Onboarding',
+    desc: 'Reqs, screening, scheduling, references, offers, day-one ready. The full hiring loop coordinated through one agent.',
+    icon: <HiringIcon />,
+    link: '/hiring',
   },
   {
     title: 'Offboarding',
     desc: 'Resignation to revoked access. Final pay per state. Separation agreements drafted. Okta + downstream revoked. COBRA. Equipment recovery.',
-    icon: '🚪',
+    icon: <OffboardingIcon />,
   },
 ]
 
@@ -60,29 +84,37 @@ export default function PeoplePage() {
       <MegaNav />
       <main style={{ paddingTop: 64 }}>
 
-        {/* Hero */}
-        <section style={{ background: 'var(--bg-warm)', padding: '100px 24px 80px' }}>
-          <div style={{ maxWidth: 700, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: 20 }}>PEOPLE</p>
-            <h1
-              style={{
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(40px, 5vw, 64px)',
-                fontWeight: 400,
-                letterSpacing: '-0.03em',
-                color: 'var(--text)',
-                marginBottom: 24,
-                lineHeight: 1.05,
-              }}
-            >
-              People ops<br />without the ops.
-            </h1>
-            <p style={{ fontSize: 20, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 36 }}>
-              Directory, comp, performance, leave, lifecycle changes — the things a People team does every day, handled by an agent. You stay strategic.
-            </p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a href="#request-access" className="btn-gold">Request access →</a>
-              <Link href="/today" className="btn-secondary">See Today queue</Link>
+        {/* Hero — split with employee directory mockup */}
+        <section style={{ background: 'var(--bg-warm)', padding: '110px 24px 80px' }}>
+          <div className="hero-split" style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 64, alignItems: 'center' }}>
+            {/* Left: copy */}
+            <div>
+              <p className="eyebrow" style={{ marginBottom: 20 }}>PEOPLE</p>
+              <h1
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(40px, 5vw, 68px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.03em',
+                  color: 'var(--text)',
+                  marginBottom: 24,
+                  lineHeight: 1.0,
+                }}
+              >
+                People ops<br />without the ops.
+              </h1>
+              <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 36, maxWidth: 480 }}>
+                Directory, comp, performance, leave, lifecycle changes — the things a People team does every day, handled by an agent. You stay strategic.
+              </p>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                <a href="#request-access" className="btn-gold">Get a demo →</a>
+                <Link href="/today" className="btn-secondary">See Today queue</Link>
+              </div>
+            </div>
+
+            {/* Right: employee directory mockup */}
+            <div className="hero-today-panel">
+              <EmployeeDirectory />
             </div>
           </div>
         </section>
@@ -111,11 +143,31 @@ export default function PeoplePage() {
                 <div
                   key={cap.title}
                   className="card-hover"
-                  style={{ background: 'var(--bg-warm)', border: '1px solid var(--border-faint)', borderRadius: 16, padding: '28px 24px' }}
+                  style={{ background: 'var(--bg-warm)', border: '1px solid var(--border-faint)', borderRadius: 16, padding: '28px 24px', display: 'flex', flexDirection: 'column' }}
                 >
-                  <div style={{ fontSize: 28, marginBottom: 16 }}>{cap.icon}</div>
-                  <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 10, letterSpacing: 0 }}>{cap.title}</h3>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.65 }}>{cap.desc}</p>
+                  <div
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: 12,
+                      background: 'linear-gradient(135deg, var(--gold-tint) 0%, #E8DDC8 100%)',
+                      border: '1px solid rgba(176,141,87,0.25)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--gold-dark)',
+                      marginBottom: 18,
+                    }}
+                  >
+                    {cap.icon}
+                  </div>
+                  <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: 17, fontWeight: 600, color: 'var(--text)', marginBottom: 10, letterSpacing: '-0.01em' }}>{cap.title}</h3>
+                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.65, flex: 1 }}>{cap.desc}</p>
+                  {cap.link && (
+                    <Link href={cap.link} style={{ marginTop: 14, fontSize: 13, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none' }}>
+                      Learn more →
+                    </Link>
+                  )}
                 </div>
               ))}
             </div>
