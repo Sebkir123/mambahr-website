@@ -219,6 +219,17 @@ h4, h5, h6 {
   }
 }
 
+/* Mobile: collapse all 2-col grids that use inline grid styles */
+@media (max-width: 768px) {
+  .mobile-stack {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .mobile-hide {
+    display: none !important;
+  }
+}
+
 /* Selection */
 ::selection {
   background: var(--gold-tint);

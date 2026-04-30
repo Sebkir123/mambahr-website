@@ -298,6 +298,7 @@ export default function HomePage() {
         <section style={{ background: 'var(--bg-cream)', padding: '100px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div
+              className="mobile-stack"
               style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
@@ -331,7 +332,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div>
+              <div className="mobile-hide">
                 <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: 16 }}>What 30 minutes looks like</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {todayCards.map((card, i) => <TodayCard key={i} {...card} />)}
