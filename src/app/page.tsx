@@ -10,9 +10,8 @@ import AgentPipeline from '@/components/sections/agent-pipeline'
 import MigrationCard from '@/components/surfaces/migration-card'
 import PolicyCard from '@/components/surfaces/policy-card'
 
-// Free placeholder humans — randomuser.me gives reliable, varied portraits
-const HEADSHOT_W = (n: number) => `https://randomuser.me/api/portraits/women/${n}.jpg`
-const HEADSHOT_M = (n: number) => `https://randomuser.me/api/portraits/men/${n}.jpg`
+// Local placeholder portraits served from /public/avatars/
+const AVATAR = (name: string) => `/avatars/${name}.jpg`
 const SCENE_HRO = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80&fit=crop'
 const SCENE_HEAD_OF_PEOPLE = 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80&fit=crop'
 const SCENE_DUO = 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80&fit=crop'
@@ -117,8 +116,8 @@ const faqs = [
 ]
 
 const founders = [
-  { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: 'Three startups. Ran people ops for 200 → 2,000 headcount. Watched the same playbook fail every time.', avatar: HEADSHOT_M(75) },
-  { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Decade in agent systems and ML infrastructure. Designed the compliance engine. Obsessed with the gap between LLM capability and HR software reality.', avatar: HEADSHOT_M(83) },
+  { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: 'Three startups. Ran people ops for 200 → 2,000 headcount. Watched the same playbook fail every time.', avatar: AVATAR('brian') },
+  { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Decade in agent systems and ML infrastructure. Designed the compliance engine. Obsessed with the gap between LLM capability and HR software reality.', avatar: AVATAR('sebastian') },
 ]
 
 export default function HomePage() {
@@ -808,7 +807,7 @@ export default function HomePage() {
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, justifyContent: 'center' }}>
               <div style={{ width: 56, height: 56, borderRadius: '50%', overflow: 'hidden' }}>
-                <PhotoImg src={HEADSHOT_W(44)} alt="Head of People" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <PhotoImg src={AVATAR('head-of-people')} alt="Head of People" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
               <div style={{ textAlign: 'left' }}>
                 <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Head of People</p>

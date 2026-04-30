@@ -1,13 +1,13 @@
 import EmployeeRow, { Employee } from './employee-row'
 
 const employees: Employee[] = [
-  { name: 'Anna Wilson',     role: 'Sales Associate',      dept: 'Revenue', status: 'Active',          avatar: 'https://randomuser.me/api/portraits/women/44.jpg' },
-  { name: 'Dave Buchanan',   role: 'Marketing Specialist', dept: 'GTM',     status: 'Active',          avatar: 'https://randomuser.me/api/portraits/men/32.jpg' },
-  { name: 'Tom Harrison',    role: 'Senior Designer',      dept: 'Product', status: 'On PIP',          avatar: 'https://randomuser.me/api/portraits/men/52.jpg' },
-  { name: 'Violet Hayes',    role: 'Product Manager',      dept: 'Product', status: 'Maternity leave', avatar: 'https://randomuser.me/api/portraits/women/65.jpg' },
-  { name: 'Maya Chen',       role: 'Senior Engineer',      dept: 'Eng',     status: 'Pending offer',   avatar: 'https://randomuser.me/api/portraits/women/79.jpg' },
-  { name: 'Marcus Webb',     role: 'Account Exec',         dept: 'Revenue', status: 'On leave',        avatar: 'https://randomuser.me/api/portraits/men/41.jpg' },
-  { name: 'Priya Shah',      role: 'Data Engineer',        dept: 'Eng',     status: 'New hire',        avatar: 'https://randomuser.me/api/portraits/women/29.jpg' },
+  { name: 'Anna Wilson',     role: 'Sales Associate',      dept: 'Revenue', status: 'Active',          avatar: '/avatars/anna.jpg' },
+  { name: 'Dave Buchanan',   role: 'Marketing Specialist', dept: 'GTM',     status: 'Active',          avatar: '/avatars/dave.jpg' },
+  { name: 'Tom Harrison',    role: 'Senior Designer',      dept: 'Product', status: 'On PIP',          avatar: '/avatars/tom.jpg' },
+  { name: 'Violet Hayes',    role: 'Product Manager',      dept: 'Product', status: 'Maternity leave', avatar: '/avatars/violet.jpg' },
+  { name: 'Maya Chen',       role: 'Senior Engineer',      dept: 'Eng',     status: 'Pending offer',   avatar: '/avatars/maya.jpg' },
+  { name: 'Marcus Webb',     role: 'Account Exec',         dept: 'Revenue', status: 'On leave',        avatar: '/avatars/marcus.jpg' },
+  { name: 'Priya Shah',      role: 'Data Engineer',        dept: 'Eng',     status: 'New hire',        avatar: '/avatars/priya.jpg' },
 ]
 
 export default function EmployeeDirectory() {
