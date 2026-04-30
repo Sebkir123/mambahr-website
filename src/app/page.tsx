@@ -6,12 +6,7 @@ import TodayCard from '@/components/surfaces/today-card'
 import IntegrationsMarquee from '@/components/sections/integrations-marquee'
 import PhotoImg from '@/components/surfaces/photo-img'
 import EmployeeDirectory from '@/components/surfaces/employee-directory'
-import AgentCard from '@/components/surfaces/agent-card'
-import {
-  HiringIcon, OnboardingIcon, LifecycleIcon, CompIcon, TimeOffIcon,
-  PerformanceIcon, LDIcon, EmployeeRelationsIcon, ComplianceIcon,
-  OffboardingIcon, ReportsIcon, CultureIcon, HROpsIcon, ChangeMgmtIcon,
-} from '@/components/surfaces/agent-icons'
+import AgentConstellation from '@/components/sections/agent-constellation'
 import MigrationCard from '@/components/surfaces/migration-card'
 import PolicyCard from '@/components/surfaces/policy-card'
 
@@ -50,24 +45,6 @@ const heroValueProps = [
   '14 specialist agents. One orchestrator. Zero callouts.',
   '94.2% accuracy on federal + 50 state employment law.',
   'Replaces an HR team of 4. Keeps your CHRO in the loop.',
-]
-
-// 14 specialist agents — profile cards with custom function icons
-const agents = [
-  { icon: <HiringIcon />,            name: 'Hiring',            role: 'Recruiting, screening, offers',         status: 'working' as const, activity: 'Drafting offer for Maya Chen — $195k', resolved: 47 },
-  { icon: <OnboardingIcon />,        name: 'Onboarding',        role: 'Day-one ready in 3 days',                status: 'active'  as const, activity: '2 new hires starting Monday',          resolved: 18 },
-  { icon: <LifecycleIcon />,         name: 'Lifecycle',         role: 'Promotions, transfers, role changes',    status: 'idle'    as const, resolved: 12 },
-  { icon: <CompIcon />,              name: 'Comp & Benefits',   role: 'Bands, equity, enrollment',              status: 'working' as const, activity: 'Running pay equity audit',             resolved: 8  },
-  { icon: <TimeOffIcon />,           name: 'Time Off',          role: 'PTO, FMLA, parental, disability',        status: 'active'  as const, activity: '31 leave requests · 4.2s avg',         resolved: 31 },
-  { icon: <PerformanceIcon />,       name: 'Performance',       role: 'Reviews, PIPs, calibration',             status: 'active'  as const, activity: 'Q2 cycle: 23/47 packets done',         resolved: 23 },
-  { icon: <LDIcon />,                name: 'L&D',               role: 'Training, career paths, tuition',        status: 'idle'    as const, resolved: 6  },
-  { icon: <EmployeeRelationsIcon />, name: 'Employee Relations',role: 'Investigations, accommodations',         status: 'working' as const, activity: 'Triaging anonymous report',            resolved: 3  },
-  { icon: <ComplianceIcon />,        name: 'Compliance',        role: '95K lines of employment law',            status: 'active'  as const, activity: 'Filing EEO-1 — due May 31',            resolved: 14 },
-  { icon: <OffboardingIcon />,       name: 'Offboarding',       role: 'Resignations, terminations, RIF',        status: 'idle'    as const, resolved: 4  },
-  { icon: <ReportsIcon />,           name: 'Reports',           role: 'Headcount, turnover, DEI, board',        status: 'active'  as const, activity: 'Generating Q2 board pack',             resolved: 9  },
-  { icon: <CultureIcon />,           name: 'Culture',           role: 'Surveys, eNPS, recognition',             status: 'idle'    as const, resolved: 5  },
-  { icon: <HROpsIcon />,             name: 'HR Ops',            role: 'Data quality, vendor mgmt, policy',      status: 'active'  as const, activity: 'Auditing HRIS data',                   resolved: 7  },
-  { icon: <ChangeMgmtIcon />,        name: 'Change Management', role: 'Restructures, M&A, RIF planning',        status: 'working' as const, activity: 'Modeling Q3 reorg — 8 teams affected', resolved: 2  },
 ]
 
 const problemStats = [
@@ -444,10 +421,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ───────────────────────── THE AI WORKFORCE — 13 agents as profile cards ───────────────────────── */}
-        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 72, maxWidth: 720, margin: '0 auto 72px' }}>
+        {/* ───────────────────────── THE AI WORKFORCE — orchestrator + 14 agents constellation ───────────────────────── */}
+        <section style={{ background: '#FFFFFF', padding: '120px 24px', overflow: 'hidden' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 64, maxWidth: 720, margin: '0 auto 32px' }}>
               <p className="eyebrow" style={{ marginBottom: 16 }}>THE AI WORKFORCE</p>
               <h2
                 style={{
@@ -460,16 +437,14 @@ export default function HomePage() {
                   lineHeight: 1.1,
                 }}
               >
-                Meet the 14 specialists<br />running your HR.
+                One orchestrator.<br />14 specialist agents.
               </h2>
               <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                Each one a specialist. Each one always on. Each one logging every action it takes.
+                Mamba routes every request to the right specialist. They coordinate, they cite, they log. You see only what needs you.
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
-              {agents.map((a) => <AgentCard key={a.name} {...a} />)}
-            </div>
+            <AgentConstellation />
 
             <p style={{ textAlign: 'center', marginTop: 40, fontSize: 14, color: 'var(--text-muted)' }}>
               All coordinated by an orchestrator. All gated by your policy.{' '}
