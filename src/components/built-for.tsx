@@ -1,152 +1,83 @@
-export default function BuiltFor() {
-  const partners = [
-    { icon: '🏥', label: 'Healthcare' },
-    { icon: '💰', label: 'Financial Services' },
-    { icon: '⚡', label: 'Technology' },
-    { icon: '🏗️', label: 'Construction' },
-    { icon: '🎓', label: 'Education' },
-  ]
+'use client'
 
-  const features = [
+import { motion } from 'framer-motion'
+
+export default function BuiltFor() {
+  const items = [
     {
-      num: '01',
-      title: 'HR teams that are stretched thin',
-      desc: 'Whether you have 2 people ops people or 200 — the agent handles the repetitive work so your team can focus on people.',
+      icon: '◆', iconColor: '#B08D57',
+      title: 'Simple, transparent pricing',
+      desc: 'No pay-per-module surprises or inflated implementation fees. One clear price, all-inclusive.',
     },
     {
-      num: '02',
-      title: 'Companies scaling fast',
-      desc: 'Hiring fast means onboarding and admin pile up faster than your team can keep up. MambaHR absorbs that load automatically.',
+      icon: '◼', iconColor: '#3B82F6',
+      title: 'Live in days, not months',
+      desc: 'It\'s SaaS, not a major systems project. Most teams are up and running in days, not weeks.',
     },
     {
-      num: '03',
-      title: 'Works with any HRIS',
-      desc: 'Gusto, BambooHR, Rippling, Workday, ADP, and more. MambaHR integrates with your existing stack.',
+      icon: '●', iconColor: '#22C55E',
+      title: 'Support when you need it',
+      desc: 'You may not need much help but when you do, our support team is on hand. Real humans, fast replies.',
+    },
+    {
+      icon: '▲', iconColor: '#8B5CF6',
+      title: 'Product that teams actually use',
+      desc: 'A modern, intuitive HR platform that\'s easy to adopt across your entire organisation.',
+    },
+    {
+      icon: '◉', iconColor: '#EF4444',
+      title: 'Best-practice guidance built in',
+      desc: 'Our AI delivers best practices on all things HR, and benchmarks on demand. You look like the expert.',
+    },
+    {
+      icon: '■', iconColor: '#0891B2',
+      title: 'Robust access control',
+      desc: 'People data is sensitive. Get access & permissions built for GDPR, SOC 2, and data protection standards.',
     },
   ]
 
   return (
-    <section style={{ padding: '96px 24px', backgroundColor: 'var(--bg-light)' }}>
-      <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: 64 }}>
-          <p style={{ fontSize: 12, fontWeight: 500, color: 'var(--gold)', marginBottom: 16, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-            Built with people leaders
-          </p>
-          <h2
-  
-            style={{
-              fontSize: 'clamp(28px, 3.5vw, 44px)',
-              fontWeight: 800,
-              lineHeight: 1.15,
-              letterSpacing: '-0.02em',
-              color: 'var(--text-dark)',
-              marginBottom: 16,
-              maxWidth: 600,
-              margin: '0 auto 16px',
-            }}
-          >
-            Built with people leaders, not for them.
-          </h2>
-          <p style={{ fontSize: 16, color: 'var(--text-dark-muted)', maxWidth: 540, margin: '0 auto', lineHeight: 1.6 }}>
-            MambaHR is in private beta with design partners across industries.
-            From startups to enterprise — the agent scales with your organization.
-          </p>
-        </div>
-
-        {/* Industry tags */}
-        <div
-
-          className="flex flex-wrap justify-center"
-          style={{ gap: 12, marginBottom: 56 }}
+    <section className="py-32 bg-[#FAFAF9]">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-24"
         >
-          {partners.map((p) => (
-            <span
-              key={p.label}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                padding: '8px 16px',
-                borderRadius: 999,
-                backgroundColor: 'var(--bg-light-surface)',
-                border: '1px solid var(--border-light)',
-                fontSize: 13,
-                fontWeight: 500,
-                color: 'var(--text-dark-muted)',
-              }}
-            >
-              <span style={{ fontSize: 14 }}>{p.icon}</span>
-              {p.label}
-            </span>
-          ))}
-        </div>
+          <h2 className="text-[clamp(40px,5vw,56px)] font-medium text-[#1A1611] tracking-tight mb-4">
+            Built for HR leaders <span className="font-serif italic text-[#B08D57] font-normal">of the future.</span>
+          </h2>
+          <p className="text-xl text-[#57534E] max-w-[600px] mx-auto text-balance">
+            Everything you need to run a world-class people organization, without the legacy software bloat.
+          </p>
+        </motion.div>
 
-        {/* Feature cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: 20, marginBottom: 56 }}>
-          {features.map((item, i) => (
-            <div
-              key={item.num}
-    
-              className="card-hover"
-              style={{
-                padding: 28,
-                borderRadius: 12,
-                backgroundColor: 'var(--bg-light-surface)',
-                border: '1px solid var(--border-light)',
-                transitionDelay: `${i * 80}ms`,
-              }}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+          {items.map((item, i) => (
+            <motion.div 
+              key={item.title} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span
-                style={{
-                  fontSize: 11,
-                  fontWeight: 500,
-                  color: 'var(--gold)',
-                  fontFamily: 'var(--font-mono), monospace',
-                }}
+              {/* Ultra-minimal icon container like Bolto */}
+              <div 
+                className="w-12 h-12 rounded-xl flex items-center justify-center text-lg mb-6 shadow-sm border border-gray-100"
+                style={{ backgroundColor: `${item.iconColor}10`, color: item.iconColor }}
               >
-                {item.num}
-              </span>
-              <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-dark)', margin: '12px 0 8px' }}>
+                {item.icon}
+              </div>
+              <h3 className="text-[20px] font-medium text-[#1A1611] mb-3 tracking-tight">
                 {item.title}
               </h3>
-              <p style={{ fontSize: 14, color: 'var(--text-dark-muted)', lineHeight: 1.6 }}>
+              <p className="text-[16px] text-[#57534E] leading-[1.7]">
                 {item.desc}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
-
-        {/* Bottom stat + CTA */}
-        <div
-
-          style={{
-            textAlign: 'center',
-            padding: '40px 0 0',
-            borderTop: '1px solid var(--border-light)',
-          }}
-        >
-          <div style={{ fontSize: 56, fontWeight: 900, color: 'var(--text-dark)', letterSpacing: '-0.03em', lineHeight: 1 }}>
-            3,200+
-          </div>
-          <p style={{ fontSize: 14, color: 'var(--text-dark-muted)', marginTop: 8, marginBottom: 20 }}>
-            employees managed across beta partners
-          </p>
-          <a
-            href="#request-access"
-            style={{
-              display: 'inline-block',
-              padding: '12px 28px',
-              borderRadius: 999,
-              backgroundColor: 'var(--gold)',
-              color: '#fff',
-              fontSize: 14,
-              fontWeight: 600,
-              textDecoration: 'none',
-            }}
-          >
-            Request Early Access
-          </a>
         </div>
       </div>
     </section>

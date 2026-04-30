@@ -1,28 +1,48 @@
+'use client'
+
+import { motion } from 'framer-motion'
+
 export default function ProofBar() {
+  const logos = [
+    { name: 'Axiom Health', id: 'axiom' },
+    { name: 'Nordling Finance', id: 'nordling' },
+    { name: 'ClearPath SaaS', id: 'clearpath' },
+    { name: 'Meridian Labs', id: 'meridian' },
+    { name: 'Stratos AI', id: 'stratos' },
+    { name: 'Vantage Edu', id: 'vantage' },
+    { name: 'Prism Works', id: 'prism' },
+  ]
+
   return (
-    <section style={{ padding: '32px 24px', backgroundColor: 'var(--bg-surface)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
-      <div className="mx-auto flex flex-col md:flex-row items-center justify-center" style={{ maxWidth: 900, gap: 24 }}>
-        <p style={{ fontSize: 11, fontWeight: 500, color: 'var(--text-faint)', whiteSpace: 'nowrap', letterSpacing: '0.04em', fontFamily: 'var(--font-mono), monospace', textTransform: 'uppercase' }}>
-          Trusted by design partners in
+    <section className="py-20 bg-white border-b border-gray-100 overflow-hidden">
+      <div className="max-w-[1200px] mx-auto px-6 text-center mb-12">
+        <p className="text-sm font-medium text-gray-400 tracking-wide">
+          Trusted by modern people teams across industries
         </p>
-        <div className="flex items-center flex-wrap justify-center" style={{ gap: 16 }}>
-          {['Healthcare', 'Financial Services', 'Technology', 'Education'].map((name) => (
-            <span
-              key={name}
-              style={{
-                fontSize: 12,
-                fontWeight: 500,
-                color: 'var(--text-muted)',
-                padding: '4px 12px',
-                borderRadius: 999,
-                backgroundColor: 'rgba(176,141,87,0.06)',
-                border: '1px solid rgba(176,141,87,0.1)',
-              }}
+      </div>
+      
+      <div className="relative w-full overflow-hidden flex">
+        {/* Left fade */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
+        
+        <motion.div
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="flex gap-16 md:gap-24 items-center min-w-max"
+        >
+          {/* Double array for seamless loop */}
+          {[...logos, ...logos].map((logo, i) => (
+            <div 
+              key={`${logo.id}-${i}`}
+              className="text-xl md:text-2xl font-bold text-gray-300 tracking-tight select-none"
             >
-              {name}
-            </span>
+              {logo.name}
+            </div>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Right fade */}
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
       </div>
     </section>
   )

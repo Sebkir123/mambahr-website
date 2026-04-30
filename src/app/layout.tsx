@@ -27,20 +27,21 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mambahr.com'),
-  title: 'MambaHR — The HR Agent That Never Calls in Sick',
+  title: 'MambaHR — Your HR team, in Slack.',
   description:
-    'MambaHR is an autonomous AI agent that handles leave, onboarding, and people ops for HR teams of 50-500. Built on a proprietary HR decision engine.',
+    'MambaHR is an AI HR department that runs in Slack, Teams, and email. Hiring, payroll, leave, performance, compliance — the agents do the work. One human approves the calls that matter.',
   keywords: [
     'HR AI agent',
     'people operations AI',
     'HR automation',
     'AI HR software',
-    'HR decision engine',
-    'autonomous HR',
+    'HR in Slack',
+    'autonomous HR department',
+    'replace HR department',
   ],
   openGraph: {
-    title: 'MambaHR — The HR agent that never calls in sick.',
-    description: 'The autonomous AI agent for people operations. Leave, onboarding, people ops — handled in seconds.',
+    title: 'MambaHR — Your HR team, in Slack.',
+    description: 'An AI HR department that runs in the tools you already use. Hiring, payroll, leave, performance — the agents do the work.',
     url: 'https://mambahr.com',
     siteName: 'MambaHR',
     type: 'website',
@@ -48,8 +49,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MambaHR — The HR agent that never calls in sick.',
-    description: 'The autonomous AI agent for people operations.',
+    title: 'MambaHR — Your HR team, in Slack.',
+    description: 'An AI HR department that runs in the tools you already use.',
     images: ['/og-image.jpg'],
   },
   alternates: { canonical: 'https://mambahr.com' },

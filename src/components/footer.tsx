@@ -1,23 +1,113 @@
+'use client'
+
+import Link from 'next/link'
+
+const cols = [
+  {
+    title: 'Product',
+    links: [
+      { label: 'Today', href: '/today' },
+      { label: 'Mamba', href: '/mamba' },
+      { label: 'People', href: '/people' },
+      { label: 'Hiring', href: '/hiring' },
+      { label: 'Pricing', href: '/pricing' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About', href: '/about' },
+      { label: 'Customers', href: '/coming-soon/customers' },
+      { label: 'Changelog', href: '/coming-soon/changelog' },
+      { label: 'Careers', href: '/coming-soon/careers' },
+      { label: 'Contact', href: 'mailto:hello@mambahr.com' },
+    ],
+  },
+  {
+    title: 'Legal & Trust',
+    links: [
+      { label: 'Security', href: '/security' },
+      { label: 'Privacy', href: '/coming-soon/privacy' },
+      { label: 'Terms', href: '/coming-soon/terms' },
+      { label: 'SOC 2 (in progress)', href: '/security' },
+      { label: 'Investor deck', href: 'mailto:investors@mambahr.com' },
+    ],
+  },
+]
+
 export default function Footer() {
   return (
-    <footer style={{ padding: '40px 24px', borderTop: '1px solid var(--border)', backgroundColor: 'var(--bg)' }}>
-      <div className="mx-auto flex flex-col md:flex-row items-center justify-between" style={{ maxWidth: 1100, gap: 16 }}>
-        <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 22, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.01em' }}>
-          MambaHR
-        </span>
+    <footer style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--border)', padding: '64px 24px 40px' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        {/* Top row */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+            gap: 40,
+            marginBottom: 64,
+          }}
+        >
+          {/* Brand */}
+          <div>
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', marginBottom: 16 }}>
+              <span style={{ color: 'var(--gold)', fontSize: 18 }}>◆</span>
+              <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 16, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
+            </Link>
+            <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: 200 }}>
+              The AI HR department that runs in Slack, Teams, and email.
+            </p>
+            <a
+              href="https://linkedin.com/company/mambahr"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'inline-flex', marginTop: 20, color: 'var(--text-faint)' }}
+              aria-label="MambaHR on LinkedIn"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
 
-        <div className="flex items-center flex-wrap justify-center" style={{ gap: 20 }}>
-          <a href="/security" style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>Security</a>
-          <a href="/about" style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>About</a>
+          {cols.map((col) => (
+            <div key={col.title}>
+              <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--text-faint)', marginBottom: 16 }}>
+                {col.title}
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {col.links.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    style={{ fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.15s' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="flex items-center" style={{ gap: 12 }}>
-          <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>&copy; 2026 MambaHR Inc.</span>
-          <a href="https://linkedin.com/company/mamba-hr" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ color: 'var(--text-faint)' }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-            </svg>
-          </a>
+        {/* Bottom row */}
+        <div
+          style={{
+            borderTop: '1px solid var(--border)',
+            paddingTop: 24,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: 12,
+          }}
+        >
+          <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
+            © {new Date().getFullYear()} MambaHR, Inc. All rights reserved.
+          </p>
+          <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
+            Private beta · San Francisco, CA
+          </p>
         </div>
       </div>
     </footer>

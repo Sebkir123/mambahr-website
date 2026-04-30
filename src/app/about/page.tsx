@@ -1,493 +1,139 @@
-import Image from 'next/image'
-import Nav from '@/components/nav'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
-import AnimateOnScroll from '@/components/animate-on-scroll'
-import ParticleField from '@/components/particle-field'
+import { Waitlist } from '@/components/waitlist'
+
+export const metadata: Metadata = {
+  title: 'About — MambaHR',
+  description: "We're replacing the HR department, with a human in the loop. MambaHR is built by Brian Bell (CEO) and Sebastian Kirsch (CTO).",
+}
 
 const team = [
   {
     name: 'Brian Bell',
     role: 'CEO & Co-Founder',
-    bio: '15+ years in People Operations at DocuSign, Asana, and Snowflake. Helped scale HR through one of the largest IPOs in history. Knows firsthand what breaks when companies grow fast — and built MambaHR to fix it.',
-    linkedin: 'https://www.linkedin.com/in/brianjosephbell/',
-    avatar: '/brian_bell.jpeg',
+    bio: 'Brian has built and scaled people operations at three startups — watching the same problems compound each time: one HR person doing the work of ten, compliance gaps discovered in audits, good people lost to process failures. MambaHR is the team he wished every company could afford.',
+    linkedin: 'https://linkedin.com/in/brianbell',
   },
   {
     name: 'Sebastian Kirsch',
     role: 'CTO & Co-Founder',
-    bio: 'Founding engineer and technical project lead. Built security-critical enterprise products for a $600B Swiss bank. Ex Numbrs, Antler. Brings deep experience in regulated industries to MambaHR\'s agent architecture.',
-    linkedin: 'https://www.linkedin.com/in/sebastiankirsch-/',
-    avatar: '/sebastian_kirsch.jpg',
+    bio: 'Sebastian has spent a decade building agent systems and ML infrastructure. He designed the compliance engine, authored HR-Bench, and is obsessed with the gap between what frontier models can do and what HR software actually does with them. The gap is the business.',
+    linkedin: 'https://linkedin.com/in/sebastiankirsch',
   },
 ]
 
 const values = [
-  {
-    num: '01',
-    title: 'Autonomy over automation',
-    desc: 'We don\'t build dashboards with more buttons. We build an agent that does the work — so your team doesn\'t have to.',
-  },
-  {
-    num: '02',
-    title: 'Accuracy is non-negotiable',
-    desc: 'HR decisions affect people\'s lives. Every output is verified against encoded HR policies. Not a confident guess — an auditable answer.',
-  },
-  {
-    num: '03',
-    title: 'Research-first',
-    desc: 'We publish benchmarks, build proprietary datasets, and file patents. MambaHR is a lab, not a wrapper.',
-  },
-]
-
-const timeline = [
-  { date: 'Q2 2025', label: 'Started researching AI + HR — discovered that generic models fail catastrophically on real HR decisions' },
-  { date: 'Q4 2025', label: 'Built the first version of the HR decision engine — 95K lines of domain logic' },
-  { date: 'Q1 2026', label: 'MambaHR founded. Private beta launched with first design partners' },
+  { label: 'The human in the loop is a feature.', desc: "Every high-stakes HR decision has a person signing the paperwork. That's not a limitation — it's the design. Trust requires accountability." },
+  { label: 'Honesty is the product.', desc: 'The agent cites its sources. It shows its confidence score. It escalates when it does not know. An agent that never says it is uncertain is not trustworthy.' },
+  { label: 'Compliance is not marketing.', desc: 'We built HR-Bench because we needed to prove our compliance accuracy before asking any company to trust us with their people data.' },
+  { label: 'Small HR teams deserve enterprise tools.', desc: 'The compliance infrastructure, the audit trail, the FMLA stacking logic — all of it built for a Head of People running solo, not just for the Fortune 500.' },
 ]
 
 export default function AboutPage() {
   return (
     <>
-      <Nav />
-      <main>
-        {/* ═══ HERO — dark with bg-grid ═══ */}
-        <section
-          className="bg-grid relative"
-          style={{ paddingTop: 140, paddingBottom: 100, backgroundColor: 'var(--bg)', overflow: 'hidden' }}
-        >
-          <ParticleField />
-          <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 24px', position: 'relative', textAlign: 'center', zIndex: 1 }}>
-            <p
-              style={{
-                fontSize: 12,
-                fontWeight: 500,
-                color: 'var(--gold)',
-                marginBottom: 20,
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                fontFamily: 'var(--font-mono), monospace',
-              }}
-            >
-              Company
-            </p>
+      <MegaNav />
+      <main style={{ paddingTop: 64 }}>
+
+        {/* Hero */}
+        <section style={{ background: 'var(--bg-warm)', padding: '100px 24px', textAlign: 'center' }}>
+          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+            <p className="eyebrow" style={{ marginBottom: 20 }}>ABOUT</p>
             <h1
               style={{
-                fontSize: 'clamp(32px, 4.5vw, 56px)',
-                fontWeight: 800,
-                lineHeight: 1.08,
-                letterSpacing: '-0.02em',
+                fontFamily: 'var(--font-serif), Georgia, serif',
+                fontSize: 'clamp(36px, 4.5vw, 56px)',
+                fontWeight: 400,
+                letterSpacing: '-0.03em',
                 color: 'var(--text)',
-                maxWidth: 700,
-                margin: '0 auto 24px',
+                marginBottom: 24,
+                lineHeight: 1.1,
               }}
             >
-              We&apos;re building the{' '}
-              <span style={{ color: 'var(--gold)' }}>HR agent</span> the industry
-              should have built years ago.
+              Replacing the HR department,<br />with a human in the loop.
             </h1>
-            <p
-              style={{
-                fontSize: 17,
-                lineHeight: 1.65,
-                color: 'var(--text-muted)',
-                maxWidth: 540,
-                margin: '0 auto 48px',
-              }}
-            >
-              MambaHR is a domain AI lab focused on people operations. We combine
-              proprietary HR research with autonomous agent technology to
-              handle the work HR teams shouldn&apos;t be doing manually.
+            <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65 }}>
+              MambaHR is building the AI HR department. Not HR software — the HR team. The one that runs in Slack, handles the compliance filings, and asks you to approve the calls that matter.
             </p>
+          </div>
+        </section>
 
-            {/* Frosted stat strip */}
-            <div
-              style={{
-                backgroundColor: 'rgba(17,17,19,0.45)',
-                backdropFilter: 'blur(24px)',
-                WebkitBackdropFilter: 'blur(24px)',
-                borderRadius: 16,
-                border: '1px solid rgba(176,141,87,0.12)',
-                padding: '36px 24px',
-                maxWidth: 640,
-                margin: '0 auto',
-                boxShadow: '0 24px 80px rgba(0,0,0,0.4), inset 0 1px 0 rgba(176,141,87,0.08)',
-                position: 'relative',
-                overflow: 'hidden',
-              }}
-            >
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: '20%',
-                  right: '20%',
-                  height: 1,
-                  background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.3), transparent)',
-                }}
-              />
-              <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: 24 }}>
-                {[
-                  { value: '95K', label: 'Lines of domain logic' },
-                  { value: '7', label: 'Patents pending' },
-                  { value: '3,200+', label: 'Employees managed' },
-                ].map((stat, i) => (
-                  <div key={stat.label} style={{ textAlign: 'center', position: 'relative' }}>
-                    {i > 0 && (
-                      <div
-                        className="hidden md:block"
-                        style={{
-                          position: 'absolute',
-                          left: -12,
-                          top: '10%',
-                          bottom: '10%',
-                          width: 1,
-                          background: 'linear-gradient(to bottom, transparent, rgba(176,141,87,0.2), transparent)',
-                        }}
-                      />
-                    )}
-                    <div
-                      style={{
-                        fontSize: 18,
-                        fontWeight: 700,
-                        color: 'var(--text)',
-                        letterSpacing: '-0.01em',
-                        lineHeight: 1,
-                        marginBottom: 6,
-                      }}
-                    >
-                      {stat.value}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 11,
-                        color: 'var(--text-faint)',
-                        fontFamily: 'var(--font-mono), monospace',
-                        letterSpacing: '0.03em',
-                        textTransform: 'uppercase',
-                      }}
-                    >
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
+        {/* Story */}
+        <section style={{ background: '#FFFFFF', padding: '100px 24px' }}>
+          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+            <p className="eyebrow" style={{ marginBottom: 20 }}>THE STORY</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24, fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.8 }}>
+              <p>
+                The problem kept showing up the same way: one HR person doing the work of ten. A Notion doc that had not been touched in six months called &ldquo;PTO Policy.&rdquo; Compliance gaps discovered by auditors, not caught by the team. Good people churning out because their leave request fell into a queue and never came back.
+              </p>
+              <p>
+                The existing tools made the database better. They did not make the work go away. After three startups and the same structural failure each time, Brian and Sebastian started asking a different question: what if the work itself went away?
+              </p>
+              <p>
+                Frontier models had gotten good enough at legal reasoning to make this possible — but no one had built the benchmark to prove it. We built HR-Bench. 1,200 graded HR compliance scenarios across federal law and 50 state codes. MambaHR scores 94.2%. Frontier general-purpose models score in the low 30s. That gap is the product.
+              </p>
+              <p>
+                We are building the AI HR department. The Chief People Officer stays — for judgment, not work. The agents handle the rest.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* ═══ MISSION — light, two columns ═══ */}
-        <section style={{ padding: '96px 24px', backgroundColor: 'var(--bg-light)' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <p
-              style={{
-                fontSize: 12,
-                fontWeight: 500,
-                color: 'var(--gold)',
-                marginBottom: 16,
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                fontFamily: 'var(--font-mono), monospace',
-              }}
-            >
-              Mission
-            </p>
+        {/* Team */}
+        <section style={{ background: 'var(--bg-cream)', padding: '100px 24px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>THE TEAM</p>
             <h2
-    
               style={{
-                fontSize: 'clamp(28px, 3.5vw, 44px)',
-                fontWeight: 800,
-                letterSpacing: '-0.02em',
-                color: 'var(--text-dark)',
-                marginBottom: 48,
-              }}
-            >
-              The problem we&apos;re solving
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 48 }}>
-              {/* Left — narrative */}
-              <div>
-                <div style={{ fontSize: 16, color: 'var(--text-dark-muted)', lineHeight: 1.8 }}>
-                  <p style={{ marginBottom: 16 }}>
-                    HR teams are drowning. Not in people work — in admin. Leave requests,
-                    onboarding checklists, payroll updates, policy questions. The same
-                    tasks, repeated thousands of times, consuming 40% of an HR team&apos;s time.
-                  </p>
-                  <p style={{ marginBottom: 16 }}>
-                    The existing tools just organized the busywork into prettier dashboards.
-                    Nobody actually did the work. Until now.
-                  </p>
-                  <p>
-                    MambaHR is the first HR agent that doesn&apos;t just track tasks — it completes
-                    them. Autonomously, accurately, and with full policy verification built in.
-                  </p>
-                </div>
-              </div>
-
-              {/* Right — timeline */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-                {timeline.map((m, i) => (
-                  <div
-                    key={m.date}
-          
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 20,
-                      padding: '24px 20px',
-                      borderRadius: 12,
-                      backgroundColor: 'var(--bg-light-surface)',
-                      border: '1px solid var(--border-light)',
-                      marginBottom: i < timeline.length - 1 ? 12 : 0,
-                      position: 'relative',
-                      overflow: 'hidden',
-                      transitionDelay: `${i * 100}ms`,
-                    }}
-                  >
-                    {/* Gold number accent */}
-                    <div
-                      style={{
-                        fontSize: 28,
-                        fontWeight: 900,
-                        color: 'var(--gold)',
-                        letterSpacing: '-0.03em',
-                        lineHeight: 1,
-                        minWidth: 36,
-                        fontFamily: 'var(--font-mono), monospace',
-                        opacity: 0.6,
-                      }}
-                    >
-                      {String(i + 1).padStart(2, '0')}
-                    </div>
-                    {/* Divider */}
-                    <div
-                      style={{
-                        width: 1,
-                        alignSelf: 'stretch',
-                        backgroundColor: 'var(--border-light)',
-                      }}
-                    />
-                    <div>
-                      <div
-                        style={{
-                          fontSize: 12,
-                          fontWeight: 600,
-                          color: 'var(--gold)',
-                          fontFamily: 'var(--font-mono), monospace',
-                          letterSpacing: '0.04em',
-                          marginBottom: 4,
-                        }}
-                      >
-                        {m.date}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 15,
-                          fontWeight: 600,
-                          color: 'var(--text-dark)',
-                        }}
-                      >
-                        {m.label}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══ VALUES — light, same bg ═══ */}
-        <section style={{ padding: '0 24px 96px', backgroundColor: 'var(--bg-light)' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <p
-              style={{
-                fontSize: 12,
-                fontWeight: 500,
-                color: 'var(--gold)',
-                marginBottom: 16,
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                fontFamily: 'var(--font-mono), monospace',
-              }}
-            >
-              Values
-            </p>
-            <h2
-    
-              style={{
-                fontSize: 'clamp(28px, 3.5vw, 44px)',
-                fontWeight: 800,
-                letterSpacing: '-0.02em',
-                color: 'var(--text-dark)',
-                marginBottom: 48,
-              }}
-            >
-              What we believe
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: 16 }}>
-              {values.map((v, i) => (
-                <div
-                  key={v.title}
-        
-                  className="card-hover"
-                  style={{
-                    padding: 28,
-                    borderRadius: 14,
-                    backgroundColor: 'var(--bg-light-surface)',
-                    border: '1px solid var(--border-light)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    transitionDelay: `${i * 80}ms`,
-                  }}
-                >
-                  {/* Left gold accent bar */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      left: 0,
-                      top: '20%',
-                      bottom: '20%',
-                      width: 2,
-                      borderRadius: 1,
-                      backgroundColor: 'var(--gold)',
-                      opacity: 0.4,
-                    }}
-                  />
-                  <div style={{ paddingLeft: 12 }}>
-                    <span
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 500,
-                        color: 'var(--gold)',
-                        fontFamily: 'var(--font-mono), monospace',
-                      }}
-                    >
-                      {v.num}
-                    </span>
-                    <h3
-                      style={{
-                        fontSize: 16,
-                        fontWeight: 600,
-                        color: 'var(--text-dark)',
-                        margin: '10px 0 6px',
-                      }}
-                    >
-                      {v.title}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: 14,
-                        color: 'var(--text-dark-muted)',
-                        lineHeight: 1.6,
-                      }}
-                    >
-                      {v.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ═══ TEAM — dark with frosted glass ═══ */}
-        <section
-          className="bg-grid relative"
-          style={{ padding: '96px 24px', backgroundColor: 'var(--bg)', overflow: 'hidden' }}
-        >
-          <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-            <p
-              style={{
-                fontSize: 12,
-                fontWeight: 500,
-                color: 'var(--gold)',
-                marginBottom: 16,
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                fontFamily: 'var(--font-mono), monospace',
-              }}
-            >
-              Team
-            </p>
-            <h2
-    
-              style={{
-                fontSize: 'clamp(28px, 3.5vw, 44px)',
-                fontWeight: 800,
+                textAlign: 'center',
+                fontFamily: 'var(--font-serif), Georgia, serif',
+                fontSize: 'clamp(28px, 3vw, 42px)',
+                fontWeight: 400,
                 letterSpacing: '-0.02em',
                 color: 'var(--text)',
-                marginBottom: 48,
+                marginBottom: 64,
               }}
             >
-              The people behind MambaHR.
+              Two founders. One problem.
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
               {team.map((person) => (
                 <div
-                  key={person.role}
-        
-                  style={{
-                    padding: 32,
-                    borderRadius: 16,
-                    backgroundColor: 'rgba(17,17,19,0.5)',
-                    backdropFilter: 'blur(20px)',
-                    WebkitBackdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(176,141,87,0.1)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    boxShadow: '0 24px 80px rgba(0,0,0,0.3)',
-                  }}
+                  key={person.name}
+                  style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 20, padding: 32 }}
                 >
-                  {/* Gold top shimmer */}
                   <div
                     style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: '10%',
-                      right: '10%',
-                      height: 1,
-                      background: 'linear-gradient(90deg, transparent, rgba(176,141,87,0.25), transparent)',
-                    }}
-                  />
-                  {/* Avatar */}
-                  <Image
-                    src={person.avatar}
-                    alt={person.name}
-                    width={56}
-                    height={56}
-                    style={{
-                      borderRadius: 14,
-                      objectFit: 'cover',
-                      border: '1px solid var(--border-mid)',
+                      width: 64,
+                      height: 64,
+                      borderRadius: 16,
+                      background: 'var(--gold-tint)',
+                      border: '1px solid rgba(176,141,87,0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: 22,
+                      color: 'var(--gold)',
+                      fontFamily: 'var(--font-serif), Georgia, serif',
+                      fontWeight: 400,
                       marginBottom: 20,
                     }}
-                  />
-                  <h3 style={{ fontSize: 18, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>
-                    {person.name}
-                  </h3>
-                  <p style={{ fontSize: 13, color: 'var(--gold)', marginBottom: 14, fontWeight: 500 }}>
-                    {person.role}
-                  </p>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 16 }}>
-                    {person.bio}
-                  </p>
+                  >
+                    {person.name.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <p style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>{person.name}</p>
+                  <p style={{ fontSize: 13, color: 'var(--gold-dark)', fontWeight: 500, marginBottom: 16 }}>{person.role}</p>
+                  <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 20 }}>{person.bio}</p>
                   <a
                     href={person.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{
-                      fontSize: 13,
-                      fontWeight: 500,
-                      color: 'var(--text-faint)',
-                      textDecoration: 'none',
-                      borderBottom: '1px solid var(--border-mid)',
-                      paddingBottom: 2,
-                    }}
+                    style={{ fontSize: 13, color: 'var(--gold-dark)', textDecoration: 'underline', textUnderlineOffset: 3 }}
                   >
-                    LinkedIn &rarr;
+                    LinkedIn →
                   </a>
                 </div>
               ))}
@@ -495,63 +141,65 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ═══ CTA — dark with bg-grid ═══ */}
-        <section
-          className="bg-grid relative"
-          style={{ padding: '96px 24px', backgroundColor: 'var(--bg)', overflow: 'hidden' }}
-        >
-          {/* Radial gold glow */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: 500,
-              height: 300,
-              borderRadius: '50%',
-              background: 'radial-gradient(ellipse, rgba(176,141,87,0.1) 0%, transparent 70%)',
-              pointerEvents: 'none',
-              zIndex: 0,
-            }}
-          />
-          <div style={{ maxWidth: 500, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+        {/* Values */}
+        <section style={{ background: '#FFFFFF', padding: '100px 24px' }}>
+          <div style={{ maxWidth: 900, margin: '0 auto' }}>
+            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>WHAT WE BELIEVE</p>
             <h2
-    
               style={{
-                fontSize: 'clamp(28px, 3.5vw, 44px)',
-                fontWeight: 800,
+                textAlign: 'center',
+                fontFamily: 'var(--font-serif), Georgia, serif',
+                fontSize: 'clamp(28px, 3vw, 40px)',
+                fontWeight: 400,
                 letterSpacing: '-0.02em',
                 color: 'var(--text)',
-                marginBottom: 12,
+                marginBottom: 64,
               }}
             >
-              Ready to see MambaHR in action?
+              The principles behind the product.
             </h2>
-            <p style={{ fontSize: 15, color: 'var(--text-muted)', marginBottom: 36, lineHeight: 1.6 }}>
-              We&apos;re onboarding design partners now.
-            </p>
-            <a
-              href="/#request-access"
-              className="cta-glow"
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+              {values.map((v) => (
+                <div key={v.label} style={{ padding: '28px 0', borderTop: '1px solid var(--border)' }}>
+                  <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 10, lineHeight: 1.4 }}>{v.label}</p>
+                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.65 }}>{v.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Investor + CTA */}
+        <section style={{ background: '#1C1917', padding: '100px 24px', textAlign: 'center' }}>
+          <div style={{ maxWidth: 520, margin: '0 auto' }}>
+            <p className="eyebrow" style={{ color: 'rgba(176,141,87,0.9)', marginBottom: 20 }}>JOIN US</p>
+            <h2
               style={{
-                display: 'inline-block',
-                padding: '14px 32px',
-                borderRadius: 999,
-                backgroundColor: 'var(--gold)',
-                color: '#fff',
-                fontSize: 15,
-                fontWeight: 600,
-                textDecoration: 'none',
+                fontFamily: 'var(--font-serif), Georgia, serif',
+                fontSize: 'clamp(32px, 4vw, 48px)',
+                fontWeight: 400,
+                letterSpacing: '-0.02em',
+                color: '#FFFFFF',
+                marginBottom: 16,
+                lineHeight: 1.1,
               }}
             >
-              Request Access
-            </a>
+              Hire the agent.<br />Promote the human.
+            </h2>
+            <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.6)', marginBottom: 48, lineHeight: 1.6 }}>
+              We&apos;re onboarding design-partner companies now. Investors — reach out directly.
+            </p>
+            <Waitlist />
+            <div style={{ display: 'flex', gap: 24, justifyContent: 'center', marginTop: 24 }}>
+              <a href="mailto:investors@mambahr.com" style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', textDecoration: 'underline', textUnderlineOffset: 3 }}>Investor deck</a>
+              <Link href="/security" style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', textDecoration: 'underline', textUnderlineOffset: 3 }}>Security</Link>
+              <a href="mailto:hello@mambahr.com" style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', textDecoration: 'underline', textUnderlineOffset: 3 }}>Contact</a>
+            </div>
           </div>
         </section>
       </main>
       <Footer />
-      <AnimateOnScroll />
     </>
   )
 }
