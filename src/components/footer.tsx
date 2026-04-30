@@ -106,7 +106,7 @@ export default function Footer() {
             © {new Date().getFullYear()} MambaHR, Inc. All rights reserved.
           </p>
           <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-            Private beta · San Francisco, CA
+            San Francisco, CA
           </p>
         </div>
       </div>

@@ -6,14 +6,14 @@ import { Waitlist } from '@/components/waitlist'
 
 export const metadata: Metadata = {
   title: 'Pricing — MambaHR',
-  description: 'Design partner pricing. Four spots open this quarter. Custom pricing — we respond personally within 48 hours.',
+  description: 'Simple, transparent pricing for the AI HR department. Per-employee, all agents included.',
 }
 
 const tiers = [
   {
     name: 'Pilot',
     sub: 'First 90 days',
-    desc: 'Start in one department or function. Validate the ROI before full rollout.',
+    desc: 'Start in one HR function. Validate the impact, then expand to the full department.',
     features: [
       'Up to 100 employees',
       'All 13 agents enabled',
@@ -28,8 +28,8 @@ const tiers = [
   },
   {
     name: 'Production',
-    sub: 'After pilot, volume-based',
-    desc: 'Full deployment across all HR functions. Priced on employee count.',
+    sub: 'Per employee, per month',
+    desc: 'Full AI HR department. Every agent, every integration, priced by company size.',
     features: [
       'Unlimited employees',
       'All 13 agents enabled',
@@ -74,11 +74,11 @@ const included = [
 ]
 
 const faqs = [
-  { q: 'Why no published pricing?', a: "We're in private beta onboarding our first design-partner companies. Pricing depends on employee count, entity structure, and which integrations you need. We respond to every inquiry personally." },
-  { q: 'How do you charge — per seat, per employee, per agent?', a: "We're finalizing the production pricing model. The pilot is a fixed fee for 90 days. Production will be per-employee-per-month, banded by company size. All agents are included." },
-  { q: "What's the contract length?", a: "The pilot is 90 days, no commitment. Production contracts start at annual. Month-to-month available on request for early customers." },
+  { q: 'Why no published pricing?', a: "Pricing depends on employee count, entity structure, and which integrations you need. We respond to every inquiry personally — usually with a quote within 24 hours." },
+  { q: 'How do you charge — per seat, per employee, per agent?', a: "Per employee, per month, banded by company size. All 13 agents are included. No per-feature pricing, no add-ons, no surprise overage fees." },
+  { q: "What's the contract length?", a: "The pilot is 90 days, no long-term commitment. Production contracts start at annual. Month-to-month available on request." },
   { q: 'What does the pilot look like?', a: 'Day 1–3: connect your HRIS and run a data audit. Day 3–7: shadow mode (agents suggest actions, you approve everything). Day 7–14: live mode in one function (e.g., leave requests). Day 14+: expand by function as confidence grows.' },
-  { q: 'Can we start in one department?', a: 'Yes. The pilot is designed for that. Most customers start with Leave and then add Hiring and Compliance. Full deployment typically happens in weeks 4–8.' },
+  { q: 'Can we start in one HR function?', a: 'Yes. Most teams start with Leave and then add Hiring and Compliance. Full deployment typically happens in weeks 4–8.' },
   { q: 'What does migration look like?', a: "We connect to your existing HRIS — we don't replace it. Data stays where it is. We add the agent layer on top. The transition is additive, not destructive." },
   { q: "What's the security and compliance posture?", a: 'SOC 2 Type II audit starting month 7. ISO 27001 in parallel. GDPR DPIA for EU customers. HIPAA segregation for FMLA-medical scope. Full detail at /security.' },
   { q: 'Who owns the data?', a: 'You do. Full stop. We are a processor, not a controller. Data can be exported or deleted on request. Bedrock prompt logging disabled at the AWS account level — we cannot see your prompts.' },
@@ -105,10 +105,10 @@ export default function PricingPage() {
                 lineHeight: 1.1,
               }}
             >
-              Pricing for design partners.
+              Simple pricing.<br />Every agent included.
             </h1>
             <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-              We&apos;re onboarding our first four customers this quarter. Pricing is custom. The framework is below. We respond personally within 48 hours.
+              Per employee, per month. All 13 agents. All integrations. All channels. Priced by company size — talk to us for a quote.
             </p>
           </div>
         </section>
@@ -245,10 +245,10 @@ export default function PricingPage() {
                 lineHeight: 1.1,
               }}
             >
-              4 design-partner spots.<br />This quarter.
+              Talk to the founders.<br />Get a quote in 24 hours.
             </h2>
             <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.6)', marginBottom: 48, lineHeight: 1.6 }}>
-              We respond personally within 48 hours. No sales team. No demo calls before a conversation.
+              No sales team. No demo gauntlet. Brian and Sebastian respond to every inquiry personally.
             </p>
             <Waitlist />
             <p style={{ marginTop: 24, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>

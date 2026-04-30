@@ -116,7 +116,7 @@ export default function RequestAccessSection() {
           Hire the agent. Promote the human.
         </h2>
         <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.6)', marginBottom: 48, lineHeight: 1.6 }}>
-          We&apos;re onboarding four design-partner companies this quarter. Two-field form. We respond personally within 48 hours.
+          Bring the AI HR department to your team. Two-field form. Founders respond personally within 24 hours.
         </p>
         <Waitlist />
         <p style={{ marginTop: 24, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>

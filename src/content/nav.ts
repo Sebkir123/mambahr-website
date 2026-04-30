@@ -134,7 +134,7 @@ export const platformItems: NavItem[] = [
 
 export const companyItems: NavItem[] = [
   { label: 'About', href: '/about', description: 'The team and the mission', live: true },
-  { label: 'Pricing', href: '/pricing', description: 'Design partner pricing', live: true },
+  { label: 'Pricing', href: '/pricing', description: 'Per-employee, all agents included', live: true },
   { label: 'Customers', href: '/coming-soon/customers', description: 'How teams use MambaHR', live: false },
   { label: 'Changelog', href: '/coming-soon/changelog', description: "What's shipped", live: false },
   { label: 'Careers', href: '/coming-soon/careers', description: 'Join the team', live: false },
@@ -187,11 +187,11 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
   },
   customers: {
     title: 'Customers',
-    body: "We're onboarding our first design-partner companies now. Customer stories coming as we go live together.",
+    body: "How HR teams are running their entire department on MambaHR. Customer stories coming soon — for now, talk to the founders for references.",
   },
   changelog: {
     title: 'Changelog',
-    body: "We ship constantly. A public changelog is coming — for now, design partners get weekly updates directly.",
+    body: "We ship constantly. A public changelog is coming — for now, customers get weekly product updates directly.",
   },
   careers: {
     title: 'Careers',

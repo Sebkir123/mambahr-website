@@ -64,10 +64,10 @@ export async function sendWaitlistWelcome(opts: { email: string; company: string
       You&rsquo;re on the list.
     </h1>
     <p style="font-size:15px;line-height:1.7;color:#57534e;margin:0 0 16px 0;">
-      Thanks for your interest in MambaHR. We received your application for <strong>${opts.company}</strong> and we&rsquo;ll review it within 48 hours.
+      Thanks for your interest in MambaHR. We received your inquiry for <strong>${opts.company}</strong> and we&rsquo;ll respond within 24 hours.
     </p>
     <p style="font-size:15px;line-height:1.7;color:#57534e;margin:0 0 24px 0;">
-      We&rsquo;re selectively onboarding design partners who want to shape how HR ops gets done. If we think there&rsquo;s a fit, you&rsquo;ll hear from us with next steps — no sales pitch, just a real conversation.
+      MambaHR is the AI HR department — every function, every workflow, one human in the loop. If there&rsquo;s a fit for your team, we&rsquo;ll respond with next steps. No sales pitch, just a real conversation.
     </p>
     <div style="border-top:1px solid #e7e5e4;padding-top:24px;margin-top:24px;">
       <p style="font-size:13px;line-height:1.6;color:#78716c;margin:0;">

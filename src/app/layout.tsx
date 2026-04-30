@@ -75,7 +75,7 @@ const jsonLd = [
       '@type': 'Offer',
       price: '0',
       priceCurrency: 'USD',
-      description: 'Private beta — request access',
+      description: 'AI HR department — request access',
     },
     operatingSystem: 'Web',
   },

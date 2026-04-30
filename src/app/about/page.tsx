@@ -188,7 +188,7 @@ export default function AboutPage() {
               Hire the agent.<br />Promote the human.
             </h2>
             <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.6)', marginBottom: 48, lineHeight: 1.6 }}>
-              We&apos;re onboarding design-partner companies now. Investors — reach out directly.
+              Bring your HR team into the AI era. Investors — reach out directly.
             </p>
             <Waitlist />
             <div style={{ display: 'flex', gap: 24, justifyContent: 'center', marginTop: 24 }}>

@@ -39,9 +39,9 @@ const PHOTO_BRIAN = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w
 const PHOTO_SEB = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80&fit=crop&crop=face'
 
 const heroValueProps = [
-  '90% of HR tickets resolved in seconds',
-  'Federal + 50 state employment law on board',
-  'You approve. The agent runs the rest.',
+  '13 specialist agents. One orchestrator. Zero callouts.',
+  '94.2% accuracy on federal + 50 state employment law.',
+  'Replaces an HR team of 4. Keeps your CHRO in the loop.',
 ]
 
 // 13 agents grouped into 4 clusters for the workforce visualization
@@ -79,7 +79,7 @@ const agentGroups = [
 const problemStats = [
   { stat: '67%', label: 'of HR teams miss compliance deadlines', source: 'SHRM 2025 State of HR' },
   { stat: '$4,700', label: 'avg cost per new hire — most of it admin', source: 'SHRM Talent Acquisition Benchmark' },
-  { stat: '40%', label: 'of HR time spent on tickets and admin', source: 'Gartner HR Productivity Report' },
+  { stat: '40%', label: 'of HR time spent on admin instead of strategy', source: 'Gartner HR Productivity Report' },
 ]
 
 const howItWorks = [
@@ -171,7 +171,7 @@ const faqs = [
   },
   {
     q: 'How long does setup take?',
-    a: 'Most design partners are running in 2–3 days. Day 1 connect, day 2 shadow mode (agent suggests, you approve everything), day 3+ live mode in one function. Full deployment in weeks 4–8.',
+    a: 'Most teams are running in 2–3 days. Day 1 connect, day 2 shadow mode (agent suggests, you approve everything), day 3+ live mode in one function. Full deployment in weeks 4–8.',
   },
   {
     q: 'What about compliance? Are we still on the hook?',
@@ -213,12 +213,9 @@ export default function HomePage() {
           >
             {/* Left — copy */}
             <div style={{ paddingBottom: 80 }}>
-              {/* Urgency pill */}
-              <div style={{ marginBottom: 24, display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600, color: '#15803D', background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: 999, padding: '4px 10px' }}>
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#15803D' }} />
-                  PRIVATE BETA · 4 SPOTS LEFT THIS QUARTER
-                </span>
+              {/* Category pill */}
+              <div style={{ marginBottom: 24 }}>
+                <span className="pill-gold">THE AI HR DEPARTMENT</span>
               </div>
 
               <h1
@@ -271,7 +268,7 @@ export default function HomePage() {
               </div>
 
               <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-                No credit card. No sales call before you ask. Founders respond personally within 48 hours.
+                Live demo in 30 minutes · Connects to your existing stack · Founders respond within 24 hours
               </p>
             </div>
 
@@ -390,8 +387,8 @@ export default function HomePage() {
               >
                 HR is drowning. We did the math.
               </h2>
-              <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 600, margin: '0 auto', lineHeight: 1.6 }}>
-                For every 100 employees, an HR team handles 1,200+ tickets a year, 47 leave requests, 18 hires, and a regulatory landscape that updates every 90 days. They do not have time.
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 620, margin: '0 auto', lineHeight: 1.6 }}>
+                For every 100 employees, an HR department handles 47 leaves, 18 hires, hundreds of comp and policy decisions, and a regulatory landscape that updates every 90 days. The work doesn&apos;t end. The team can&apos;t scale.
               </p>
             </div>
 
@@ -686,7 +683,7 @@ export default function HomePage() {
                 {
                   role: '2-PERSON TEAM',
                   title: 'The PeopleOps duo',
-                  copy: 'Two people, 400 employees, a ticket queue that never empties. The agents clear the queue. They set the policy.',
+                  copy: 'Two people, 400 employees, a backlog they cannot win. MambaHR is the rest of the department. They set the policy and watch it run.',
                   photo: PHOTO_DUO,
                   alt: 'Two HR professionals reviewing work together',
                   bg: 'linear-gradient(145deg, #D4CCBE 0%, #B8A48C 100%)',
@@ -728,7 +725,7 @@ export default function HomePage() {
         {/* ───────────────────────── CUSTOMER QUOTE ───────────────────────── */}
         <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
           <div style={{ maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
-            <p className="eyebrow" style={{ marginBottom: 32 }}>FROM A DESIGN PARTNER</p>
+            <p className="eyebrow" style={{ marginBottom: 32 }}>WHAT THIS LOOKS LIKE IN PRACTICE</p>
             <p
               style={{
                 fontFamily: 'var(--font-serif), Georgia, serif',
@@ -740,7 +737,7 @@ export default function HomePage() {
                 letterSpacing: '-0.02em',
               }}
             >
-              &ldquo;In week two we processed 200 PTO requests, kicked off two review cycles, and filed multi-state reports — without me touching a ticket. I run people ops for 380 people now. Alone. With time to think.&rdquo;
+              &ldquo;By week two, our HR department was running itself. Two review cycles kicked off, multi-state filings done, every leave request handled. I went from running people ops to running people strategy. 380 employees. No HR team. Just me and Mamba.&rdquo;
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, justifyContent: 'center' }}>
               <div style={{ width: 48, height: 48, borderRadius: '50%', overflow: 'hidden', background: 'linear-gradient(145deg, #DDD0C4 0%, #C4A882 100%)' }}>
@@ -748,7 +745,7 @@ export default function HomePage() {
               </div>
               <div style={{ textAlign: 'left' }}>
                 <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Head of People</p>
-                <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>Series B SaaS · 380 employees · Design partner #2</p>
+                <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>Series B SaaS · 380 employees</p>
               </div>
             </div>
           </div>
