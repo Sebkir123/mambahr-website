@@ -76,7 +76,7 @@ export default function MegaNav() {
             }}
             onClick={() => setOpenPanel(null)}
           >
-            <span style={{ color: 'var(--gold)', fontSize: 20, lineHeight: 1 }}>◆</span>
+            <img src="/MambaHR_logo.png" alt="MambaHR" width={26} height={26} style={{ display: 'block', objectFit: 'contain' }} />
             <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 18, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>
               MambaHR
             </span>

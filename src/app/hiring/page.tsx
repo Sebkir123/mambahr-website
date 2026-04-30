@@ -186,7 +186,7 @@ export default function HiringPage() {
                 <div key={i} style={{ background: 'var(--bg-warm)', border: '1px solid var(--border)', borderRadius: 12, padding: '16px 20px' }}>
                   <p style={{ fontSize: 13, color: 'var(--text-muted)', fontFamily: 'var(--font-mono), monospace', marginBottom: 8 }}>{ex.cmd}</p>
                   <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <span style={{ width: 20, height: 20, borderRadius: 5, background: '#1C1917', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: 'var(--gold)', flexShrink: 0 }}>◆</span>
+                    <img src="/MambaHR_logo.png" alt="Mamba" width={20} height={20} style={{ display: 'block', objectFit: 'contain', flexShrink: 0 }} />
                     <p style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.5 }}>{ex.resp}</p>
                   </div>
                 </div>

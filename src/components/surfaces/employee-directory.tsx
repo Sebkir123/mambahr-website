@@ -1,13 +1,13 @@
 import EmployeeRow, { Employee } from './employee-row'
 
 const employees: Employee[] = [
-  { name: 'Anna Wilson',     role: 'Sales Associate',    dept: 'Revenue',     status: 'Active',          avatar: 'https://i.pravatar.cc/100?img=47' },
-  { name: 'Dave Buchanan',   role: 'Marketing Specialist', dept: 'GTM',       status: 'Active',          avatar: 'https://i.pravatar.cc/100?img=12' },
-  { name: 'Tom Harrison',    role: 'Senior Designer',    dept: 'Product',     status: 'On PIP',          avatar: 'https://i.pravatar.cc/100?img=33' },
-  { name: 'Violet Hayes',    role: 'Product Manager',    dept: 'Product',     status: 'Maternity leave', avatar: 'https://i.pravatar.cc/100?img=24' },
-  { name: 'Maya Chen',       role: 'Senior Engineer',    dept: 'Eng',         status: 'Pending offer',   avatar: 'https://i.pravatar.cc/100?img=49' },
-  { name: 'Marcus Webb',     role: 'Account Exec',       dept: 'Revenue',     status: 'On leave',        avatar: 'https://i.pravatar.cc/100?img=14' },
-  { name: 'Priya Shah',      role: 'Data Engineer',      dept: 'Eng',         status: 'New hire',        avatar: 'https://i.pravatar.cc/100?img=44' },
+  { name: 'Anna Wilson',     role: 'Sales Associate',      dept: 'Revenue', status: 'Active',          avatar: 'https://randomuser.me/api/portraits/women/44.jpg' },
+  { name: 'Dave Buchanan',   role: 'Marketing Specialist', dept: 'GTM',     status: 'Active',          avatar: 'https://randomuser.me/api/portraits/men/32.jpg' },
+  { name: 'Tom Harrison',    role: 'Senior Designer',      dept: 'Product', status: 'On PIP',          avatar: 'https://randomuser.me/api/portraits/men/52.jpg' },
+  { name: 'Violet Hayes',    role: 'Product Manager',      dept: 'Product', status: 'Maternity leave', avatar: 'https://randomuser.me/api/portraits/women/65.jpg' },
+  { name: 'Maya Chen',       role: 'Senior Engineer',      dept: 'Eng',     status: 'Pending offer',   avatar: 'https://randomuser.me/api/portraits/women/79.jpg' },
+  { name: 'Marcus Webb',     role: 'Account Exec',         dept: 'Revenue', status: 'On leave',        avatar: 'https://randomuser.me/api/portraits/men/41.jpg' },
+  { name: 'Priya Shah',      role: 'Data Engineer',        dept: 'Eng',     status: 'New hire',        avatar: 'https://randomuser.me/api/portraits/women/29.jpg' },
 ]
 
 export default function EmployeeDirectory() {

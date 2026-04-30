@@ -49,17 +49,19 @@ export default function SlackThread({ channel, messages, compact }: SlackThreadP
               style={{
                 width: compact ? 28 : 36,
                 height: compact ? 28 : 36,
-                borderRadius: msg.isMamba ? 8 : 6,
-                background: msg.isMamba ? '#1C1917' : (msg.avatarColor || '#E8E0D5'),
+                borderRadius: 8,
+                background: msg.isMamba ? '#FFFFFF' : (msg.avatarColor || '#E8E0D5'),
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexShrink: 0,
                 position: 'relative',
+                overflow: 'hidden',
+                border: msg.isMamba ? '1px solid var(--border)' : 'none',
               }}
             >
               {msg.isMamba ? (
-                <span style={{ color: 'var(--gold)', fontSize: compact ? 10 : 13 }}>◆</span>
+                <img src="/MambaHR_logo.png" alt="Mamba" width={compact ? 22 : 28} height={compact ? 22 : 28} style={{ display: 'block', objectFit: 'contain' }} />
               ) : (
                 <span style={{ fontSize: compact ? 10 : 12, fontWeight: 700, color: '#57534E' }}>{msg.initials}</span>
               )}

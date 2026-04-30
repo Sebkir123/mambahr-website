@@ -51,7 +51,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', marginBottom: 16 }}>
-              <span style={{ color: 'var(--gold)', fontSize: 18 }}>◆</span>
+              <img src="/MambaHR_logo.png" alt="MambaHR" width={22} height={22} style={{ display: 'block', objectFit: 'contain' }} />
               <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 16, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
             </Link>
             <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: 200 }}>

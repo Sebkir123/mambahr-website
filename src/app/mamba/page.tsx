@@ -98,17 +98,17 @@ const exampleThreads = [
 const channelDetails = [
   {
     label: 'Slack',
-    color: '#4A154B',
+    logo: '/slack-new-logo.svg',
     copy: 'Mention @mamba in any channel or DM. It reads the thread context, knows who asked, checks their role and permissions, and responds in the same thread. Slash commands available for power users.',
   },
   {
-    label: 'Teams',
-    color: '#464EB8',
+    label: 'Microsoft Teams',
+    logo: '/Microsoft_Symbol_0.svg',
     copy: 'Same agent on the Microsoft surface. Adaptive cards, @mentions, and tabs in Teams channels. Works with your existing Microsoft 365 identity.',
   },
   {
     label: 'Web app',
-    color: '#1C1917',
+    logo: '/MambaHR_logo.png',
     copy: 'The Today queue, People directory, hiring pipeline, reports, and settings — all in a web app at app.mambahr.com. Used by the CHRO for approvals and analytics. Optional for everyone else.',
   },
 ]
@@ -212,7 +212,9 @@ export default function MambaPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 20 }}>
               {channelDetails.map((ch) => (
                 <div key={ch.label} style={{ background: 'var(--bg-warm)', borderRadius: 16, padding: '28px 24px' }}>
-                  <div style={{ width: 36, height: 36, borderRadius: 8, background: ch.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, color: 'var(--gold)', marginBottom: 16 }}>◆</div>
+                  <div style={{ width: 36, height: 36, marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img src={ch.logo} alt={ch.label} width={32} height={32} style={{ display: 'block', objectFit: 'contain' }} />
+                  </div>
                   <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 10 }}>{ch.label}</p>
                   <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6 }}>{ch.copy}</p>
                 </div>
