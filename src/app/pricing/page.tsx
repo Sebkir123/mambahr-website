@@ -63,12 +63,14 @@ const tiers = [
 ]
 
 const included = [
+  'Full HRIS — system of record for every employee',
   'All 13 HR agents (Hiring, Leave, Compliance, Offboarding, and 9 more)',
   'Slack, Teams, Email, and Web app',
   'Human-in-the-Loop approval queue (Today)',
   'Immutable audit log on every agent action',
   'RBAC with 8 default roles',
-  'Gusto, Workday, Rippling, BambooHR, Okta, Carta, DocuSign integrations',
+  'Migration from any HRIS (Gusto, Workday, Rippling, BambooHR, Namely, Personio, HiBob)',
+  'Integrations: Okta, Carta, DocuSign, Greenhouse, Lever, Lattice, Checkr',
   'HR-Bench compliance engine (94.2% accuracy)',
   'SOC 2 compliance evidence (in progress)',
 ]
@@ -79,7 +81,7 @@ const faqs = [
   { q: "What's the contract length?", a: "The pilot is 90 days, no long-term commitment. Production contracts start at annual. Month-to-month available on request." },
   { q: 'What does the pilot look like?', a: 'Day 1–3: connect your HRIS and run a data audit. Day 3–7: shadow mode (agents suggest actions, you approve everything). Day 7–14: live mode in one function (e.g., leave requests). Day 14+: expand by function as confidence grows.' },
   { q: 'Can we start in one HR function?', a: 'Yes. Most teams start with Leave and then add Hiring and Compliance. Full deployment typically happens in weeks 4–8.' },
-  { q: 'What does migration look like?', a: "We connect to your existing HRIS — we don't replace it. Data stays where it is. We add the agent layer on top. The transition is additive, not destructive." },
+  { q: 'What does migration look like?', a: "MambaHR is the HRIS — we replace whatever you have today. Day 1 we map your data model from Gusto/Workday/Rippling/BambooHR/Namely/Personio/HiBob. Day 2 we run a dry-import and you verify. Day 3 we cut over. Most teams are fully migrated in a week." },
   { q: "What's the security and compliance posture?", a: 'SOC 2 Type II audit starting month 7. ISO 27001 in parallel. GDPR DPIA for EU customers. HIPAA segregation for FMLA-medical scope. Full detail at /security.' },
   { q: 'Who owns the data?', a: 'You do. Full stop. We are a processor, not a controller. Data can be exported or deleted on request. Bedrock prompt logging disabled at the AWS account level — we cannot see your prompts.' },
 ]

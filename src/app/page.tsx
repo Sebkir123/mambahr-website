@@ -85,9 +85,9 @@ const problemStats = [
 const howItWorks = [
   {
     n: '01',
-    title: 'Connect',
-    desc: 'Plug in your HRIS (Gusto, Workday, Rippling, BambooHR). Add Slack and Teams. We sync employees, comp bands, leave policies, and org charts in one click.',
-    time: '~15 minutes',
+    title: 'Migrate',
+    desc: 'Move off Gusto, Workday, Rippling, BambooHR, Namely, Personio — whatever you have. We pull employees, comp bands, leave policies, and org charts. One click. Done in a day.',
+    time: '~1 day',
   },
   {
     n: '02',
@@ -166,8 +166,8 @@ const faqs = [
     a: 'Every action is risk-classified L1–L5. High-risk actions (terminations, RIF, separation agreements, comp changes above threshold) are always-human. Lower-risk actions (PTO within policy, standard onboarding) are automated with full audit log. You can override anything, anytime. CUQ scoring tells you when the agent is uncertain.',
   },
   {
-    q: 'Do we need to migrate off our current HRIS?',
-    a: 'No. We connect to Gusto, Workday, Rippling, BambooHR, Namely, or whatever you have. Your data stays where it is. The agent reads and writes through the integration. No migration, no parallel system.',
+    q: 'Do we replace our current HRIS, or run alongside it?',
+    a: 'We replace it. MambaHR is the HRIS — system of record for employees, comp, leaves, performance, everything. We migrate your data from Gusto, Workday, Rippling, BambooHR, Namely, Personio, HiBob, or wherever it lives. Most teams cut over in a single day.',
   },
   {
     q: 'How long does setup take?',
@@ -439,7 +439,7 @@ export default function HomePage() {
                 From kickoff to autopilot in a week.
               </h2>
               <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 600, margin: '0 auto', lineHeight: 1.6 }}>
-                We connect to your existing stack. No migration. No parallel system. The agent goes to work on day one.
+                One day to migrate. One screen to set policy. After that, the agent runs your HR department.
               </p>
             </div>
 
@@ -781,11 +781,11 @@ export default function HomePage() {
               <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 20, padding: 32 }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                   {[
+                    'Full HRIS — system of record',
                     'All 13 agents enabled',
                     'Slack, Teams, email, and web app',
                     'HIL approval queue + audit log',
-                    'RBAC with 8 default roles',
-                    'Gusto, Workday, Rippling, BambooHR',
+                    'Migration from any HRIS — Gusto, Workday, Rippling',
                     'HR-Bench compliance engine',
                     'SOC 2 Type II evidence',
                   ].map((item) => (
@@ -806,7 +806,7 @@ export default function HomePage() {
         {/* ───────────────────────── INTEGRATIONS MARQUEE ───────────────────────── */}
         <section style={{ background: '#FFFFFF', paddingTop: 64, paddingBottom: 64, overflow: 'hidden' }}>
           <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-faint)', marginBottom: 0, fontWeight: 500 }}>
-            Connects to your existing stack
+            Plays nice with the rest of your stack
           </p>
           <IntegrationsMarquee />
         </section>

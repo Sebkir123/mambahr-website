@@ -1,8 +1,12 @@
+// Things MambaHR integrates WITH (we ARE the HRIS — these are the surrounding stack)
 const integrations = [
-  'Gusto', 'Workday', 'Rippling', 'BambooHR', 'Namely', 'Deel',
-  'Personio', 'HiBob', 'Carta', 'Okta', 'DocuSign', 'Slack',
-  'Microsoft Teams', 'Google Workspace', 'Greenhouse', 'Lever',
-  'Lattice', 'CultureAmp', 'Checkr', 'Hofy',
+  'Slack', 'Microsoft Teams', 'Gmail', 'Outlook',
+  'Okta', 'Microsoft Entra', 'Google Workspace',
+  'Carta', 'DocuSign', 'Adobe Sign',
+  'Greenhouse', 'Lever', 'Ashby',
+  'Lattice', 'CultureAmp',
+  'Checkr', 'Hofy', 'Apple Business',
+  'Brex', 'Ramp', 'Stripe',
 ]
 
 export default function IntegrationsMarquee() {

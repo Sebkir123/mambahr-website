@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const capabilities = [
   {
     title: 'Directory & Records',
-    desc: 'Every employee, every change, every history. Synced across Gusto, Workday, Rippling, BambooHR, or whatever you have. One source of truth.',
+    desc: 'Every employee, every change, every history — in one system of record. Migrate from Gusto, Workday, Rippling, BambooHR, Namely, or wherever your data lives today.',
     icon: '👤',
   },
   {
@@ -196,7 +196,7 @@ export default function PeoplePage() {
 
         {/* Integrations */}
         <section style={{ background: 'var(--bg-warm)', paddingTop: 80, paddingBottom: 80, overflow: 'hidden' }}>
-          <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-faint)', marginBottom: 4 }}>Bring what you have. The agent connects to it.</p>
+          <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-faint)', marginBottom: 4 }}>Plays nice with the rest of your stack</p>
           <IntegrationsMarquee />
         </section>
 
