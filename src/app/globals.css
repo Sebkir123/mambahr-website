@@ -228,6 +228,18 @@ h4, h5, h6 {
   .mobile-hide {
     display: none !important;
   }
+  /* Pipeline: stack frames vertically on mobile, hide arrows */
+  .pipeline-row {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .pipeline-row > div[style*="padding: 0 12px"] {
+    display: none !important;
+  }
+  .agent-directory {
+    grid-template-columns: 1fr !important;
+    column-gap: 0 !important;
+  }
 }
 
 /* Selection */

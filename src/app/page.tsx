@@ -6,7 +6,7 @@ import TodayCard from '@/components/surfaces/today-card'
 import IntegrationsMarquee from '@/components/sections/integrations-marquee'
 import PhotoImg from '@/components/surfaces/photo-img'
 import EmployeeDirectory from '@/components/surfaces/employee-directory'
-import AgentConstellation from '@/components/sections/agent-constellation'
+import AgentPipeline from '@/components/sections/agent-pipeline'
 import MigrationCard from '@/components/surfaces/migration-card'
 import PolicyCard from '@/components/surfaces/policy-card'
 
@@ -434,17 +434,17 @@ export default function HomePage() {
                   letterSpacing: '-0.02em',
                   color: 'var(--text)',
                   marginBottom: 16,
-                  lineHeight: 1.1,
+                  lineHeight: 1.05,
                 }}
               >
-                One orchestrator.<br />14 specialist agents.
+                One orchestrator.<br />Fourteen specialists.
               </h2>
               <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                Mamba routes every request to the right specialist. They coordinate, they cite, they log. You see only what needs you.
+                Every request enters through Mamba, gets routed to the right specialist, and resolves with a full audit trail. Watch one in flight.
               </p>
             </div>
 
-            <AgentConstellation />
+            <AgentPipeline />
 
             <p style={{ textAlign: 'center', marginTop: 40, fontSize: 14, color: 'var(--text-muted)' }}>
               All coordinated by an orchestrator. All gated by your policy.{' '}
