@@ -198,6 +198,16 @@ h4, h5, h6 {
   box-shadow: 0 8px 24px rgba(0,0,0,0.07);
 }
 
+/* FINDING-004: Hide Today panel on mobile — hero is too tall when stacked */
+@media (max-width: 680px) {
+  .hero-split {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-today-panel {
+    display: none !important;
+  }
+}
+
 /* Selection */
 ::selection {
   background: var(--gold-tint);
