@@ -42,6 +42,7 @@ export default function TodayCard({ title, subtitle, rationale, riskLevel, cuq, 
         </div>
         {urgent && (
           <span
+            className="gold-pulse"
             style={{
               background: 'var(--gold-tint)',
               color: 'var(--gold-dark)',

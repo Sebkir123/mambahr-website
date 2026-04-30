@@ -4,6 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
 import SlackThread from '@/components/surfaces/slack-thread'
+import RoutingLog from '@/components/surfaces/routing-log'
 
 export const metadata: Metadata = {
   title: 'Mamba — MambaHR',
@@ -269,85 +270,8 @@ export default function MambaPage() {
                 </p>
               </div>
 
-              {/* Right: live routing log mockup */}
-              <div style={{ background: '#1C1917', border: '1px solid rgba(176,141,87,0.25)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 12px 40px rgba(28,25,23,0.18)' }}>
-                {/* Terminal-style header */}
-                <div style={{ background: 'rgba(255,255,255,0.04)', padding: '12px 18px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#22C55E' }} />
-                  <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.04em' }}>ROUTING LOG · LIVE</span>
-                  <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>app.mambahr.com</span>
-                </div>
-
-                {/* Log entries */}
-                <div style={{ padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 22, fontFamily: 'var(--font-mono), monospace' }}>
-                  {[
-                    {
-                      time: '09:14:02',
-                      who: 'Maya · #people-ops',
-                      msg: '"I need 3 days off next week"',
-                      intent: 'leave_request',
-                      routedTo: 'Time Off agent',
-                      action: 'approved · within policy',
-                      duration: '4.2s',
-                      status: 'auto',
-                    },
-                    {
-                      time: '09:13:47',
-                      who: 'Brian · DM',
-                      msg: '"Write the offer for Alex at $175k base"',
-                      intent: 'hire_action',
-                      routedTo: 'Hiring agent',
-                      action: 'drafted · awaiting CHRO',
-                      duration: '7.8s',
-                      status: 'hil',
-                    },
-                    {
-                      time: '09:13:14',
-                      who: 'Sarah · #people-ops',
-                      msg: '"How many hires this quarter?"',
-                      intent: 'reports_query',
-                      routedTo: 'Reports agent',
-                      action: 'returned · 14 hires Q2',
-                      duration: '1.1s',
-                      status: 'auto',
-                    },
-                  ].map((e, i) => (
-                    <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
-                        <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{e.time}</span>
-                        <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>{e.who}</span>
-                      </div>
-                      <p style={{ fontSize: 13, color: '#FFFFFF', margin: 0, fontFamily: 'system-ui, -apple-system, sans-serif', fontStyle: 'italic' }}>
-                        {e.msg}
-                      </p>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 3, paddingLeft: 10, borderLeft: '2px solid rgba(176,141,87,0.4)', marginTop: 4 }}>
-                        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: 0 }}>
-                          <span style={{ color: 'rgba(176,141,87,0.85)' }}>→ INTENT</span>     <span style={{ color: '#FFFFFF' }}>{e.intent}</span>
-                        </p>
-                        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: 0 }}>
-                          <span style={{ color: 'rgba(176,141,87,0.85)' }}>→ ROUTED</span>     <span style={{ color: '#FFFFFF' }}>{e.routedTo}</span>
-                        </p>
-                        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: 0 }}>
-                          <span style={{ color: 'rgba(176,141,87,0.85)' }}>→ ACTION</span>     <span style={{ color: '#FFFFFF' }}>{e.action}</span>
-                          <span style={{ marginLeft: 8, fontSize: 10, fontWeight: 700, padding: '1px 6px', borderRadius: 3, background: e.status === 'auto' ? 'rgba(34,197,94,0.15)' : 'rgba(176,141,87,0.18)', color: e.status === 'auto' ? '#22C55E' : 'var(--gold)' }}>
-                            {e.status === 'auto' ? 'AUTO' : 'HIL'}
-                          </span>
-                        </p>
-                        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: 0 }}>
-                          <span style={{ color: 'rgba(176,141,87,0.6)' }}>→ TIME</span>       <span>{e.duration}</span>
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Footer */}
-                <div style={{ padding: '12px 24px', background: 'rgba(255,255,255,0.03)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                  <p style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: 0 }}>
-                    <span style={{ color: '#22C55E' }}>●</span>  routing 47 actions/min · 14 specialist agents online
-                  </p>
-                </div>
-              </div>
+              {/* Right: live routing log mockup (entries stream in on scroll) */}
+              <RoutingLog />
 
             </div>
           </div>

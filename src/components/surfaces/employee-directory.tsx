@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
 import EmployeeRow, { Employee } from './employee-row'
 
 const employees: Employee[] = [
@@ -11,8 +14,36 @@ const employees: Employee[] = [
 ]
 
 export default function EmployeeDirectory() {
+  const ref = useRef<HTMLDivElement>(null)
+  // Index of the row that just got "updated" — animates with status flash
+  const [flashIndex, setFlashIndex] = useState<number | null>(null)
+  const [pulseDot, setPulseDot] = useState(false)
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          // Wait a moment, then flash a row to imply "this just changed"
+          const t1 = setTimeout(() => setFlashIndex(4), 1800)  // Maya Chen: Pending offer (about to become hired)
+          const t2 = setTimeout(() => setFlashIndex(null), 1800 + 2400)
+          // Real-time dot pulse always running once visible
+          setPulseDot(true)
+          ;(obs as IntersectionObserver & { _ts?: ReturnType<typeof setTimeout>[] })._ts = [t1, t2]
+        }
+      },
+      { threshold: 0.3 },
+    )
+    if (ref.current) obs.observe(ref.current)
+    return () => {
+      const ts = (obs as IntersectionObserver & { _ts?: ReturnType<typeof setTimeout>[] })._ts
+      if (ts) ts.forEach(clearTimeout)
+      obs.disconnect()
+    }
+  }, [])
+
   return (
     <div
+      ref={ref}
       style={{
         background: '#FFFFFF',
         border: '1px solid var(--border)',
@@ -31,12 +62,32 @@ export default function EmployeeDirectory() {
           </svg>
           <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', margin: 0 }}>People · 1,247 employees</p>
         </div>
-        <span style={{ fontSize: 11, color: 'var(--text-faint)' }}>Real-time</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span
+            style={{
+              width: 6,
+              height: 6,
+              borderRadius: '50%',
+              background: '#22C55E',
+              animation: pulseDot ? 'gold-ring-pulse 2.4s ease-out infinite' : 'none',
+              boxShadow: '0 0 0 0 rgba(34,197,94,0.5)',
+            }}
+          />
+          <span style={{ fontSize: 11, color: 'var(--text-faint)' }}>Real-time</span>
+        </div>
       </div>
 
       {/* Rows */}
       <div>
-        {employees.map((e) => <EmployeeRow key={e.name} e={e} dense />)}
+        {employees.map((e, i) => (
+          <div
+            key={e.name}
+            className={flashIndex === i ? 'status-flash' : undefined}
+            style={{ transition: 'background 0.4s ease' }}
+          >
+            <EmployeeRow e={e} dense />
+          </div>
+        ))}
       </div>
     </div>
   )

@@ -245,6 +245,79 @@ h4, h5, h6 {
   }
 }
 
+/* ── LIVING-MOCKUP ANIMATIONS ──────────────────────── */
+
+/* Typing indicator — three bouncing dots */
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+  30%           { transform: translateY(-3px); opacity: 1; }
+}
+.typing-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.30s; }
+
+/* Soft fade-slide-in for chat messages, queue cards, log entries */
+@keyframes live-arrive {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.live-arrive {
+  animation: live-arrive 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Soft gold ring pulse — for "urgent" / "awaiting" badges */
+@keyframes gold-ring-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(176,141,87,0.45); }
+  70%  { box-shadow: 0 0 0 8px rgba(176,141,87,0);   }
+  100% { box-shadow: 0 0 0 0 rgba(176,141,87,0);    }
+}
+.gold-pulse {
+  animation: gold-ring-pulse 2.4s ease-out infinite;
+}
+
+/* Shimmer sweep — subtle horizontal gradient across an element */
+@keyframes shimmer-sweep {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0;  }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 30%, rgba(176,141,87,0.10) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: shimmer-sweep 2.5s ease-in-out infinite;
+}
+
+/* Caret blink */
+@keyframes caret-blink {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.caret { animation: caret-blink 1s step-end infinite; }
+
+/* Status update — fade between two backgrounds (used for "row just updated") */
+@keyframes status-flash {
+  0%   { background: rgba(176,141,87,0.12); }
+  60%  { background: rgba(176,141,87,0.06); }
+  100% { background: transparent; }
+}
+.status-flash {
+  animation: status-flash 2.4s ease-out;
+}
+
+/* Soft progress bar fill */
+@keyframes progress-fill {
+  from { width: 0%;   }
+  to   { width: var(--progress, 50%); }
+}
+.progress-fill {
+  animation: progress-fill 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* Selection */
 ::selection {
   background: var(--gold-tint);

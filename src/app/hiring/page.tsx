@@ -102,10 +102,13 @@ export default function HiringPage() {
                     <span className="mono" style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', textAlign: 'right' }}>{s.candidates}</span>
                   </div>
                 ))}
-                <div style={{ padding: '12px 20px', background: 'var(--gold-tint)', borderTop: '1px solid rgba(176,141,87,0.25)' }}>
-                  <p style={{ fontSize: 12, color: 'var(--gold-dark)', margin: 0, fontWeight: 600 }}>
-                    1 offer awaiting your approval →
-                  </p>
+                <div className="gold-pulse" style={{ padding: '12px 20px', background: 'var(--gold-tint)', borderTop: '1px solid rgba(176,141,87,0.25)', position: 'relative' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)' }} />
+                    <p style={{ fontSize: 12, color: 'var(--gold-dark)', margin: 0, fontWeight: 600 }}>
+                      1 offer awaiting your approval →
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
