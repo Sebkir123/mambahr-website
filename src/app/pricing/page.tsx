@@ -11,53 +11,60 @@ export const metadata: Metadata = {
 
 const tiers = [
   {
-    name: 'Pilot',
-    sub: 'First 90 days',
-    desc: 'Start in one HR function. Validate the impact, then expand to the full department.',
+    name: 'Starter',
+    range: '2 — 25 employees',
+    price: '$299',
+    unit: '/month flat',
+    outcome: 'Replaces your founder doing HR',
+    desc: 'Your first HR hire is an AI department. Onboarding, payroll, leave, compliance — handled. No FTE, no recruiter fees.',
     features: [
-      'Up to 100 employees',
+      'Up to 25 employees',
       'All 14 agents enabled',
-      'Slack + Teams + Email + Web',
-      'HIL approval queue',
-      'Audit log',
-      'Business-hour support',
-      'Weekly sync with founding team',
+      'Slack, Teams, Email, Web app',
+      'Migrate from any HRIS',
+      'Audit log on every action',
+      'Email support · 24h response',
+      'Cancel anytime',
     ],
-    cta: 'Talk to us',
+    cta: 'Start Starter',
     highlight: false,
   },
   {
-    name: 'Production',
-    sub: 'Per employee, per month',
-    desc: 'Full AI HR department. Every agent, every integration, priced by company size.',
+    name: 'Growth',
+    range: '25 — 500 employees',
+    price: '$14',
+    unit: '/employee/month',
+    outcome: 'Saves ~$300K/year on HR FTEs',
+    desc: 'Full AI HR department. The CHRO replaces a 4-person HR team. Compliance, performance, payroll — autopilot.',
     features: [
-      'Unlimited employees',
-      'All 14 agents enabled',
-      'Slack + Teams + Email + Web',
-      'HIL approval queue',
-      'Audit log + SOC 2 evidence',
-      'RBAC and custom roles',
+      'Everything in Starter',
+      'HIL approval workflows',
+      'SOC 2 Type II evidence',
+      'RBAC + custom roles',
       'Dedicated customer success',
-      'Priority support',
+      'Priority Slack support · 4h response',
+      'Annual or monthly billing',
     ],
-    cta: 'Talk to us',
+    cta: 'Start Growth',
     highlight: true,
   },
   {
     name: 'Enterprise',
-    sub: 'Multi-entity, custom security',
-    desc: 'For companies with multiple entities, international headcount, or advanced security requirements.',
+    range: '500+ employees',
+    price: 'Custom',
+    unit: 'volume + multi-entity',
+    outcome: 'Multi-entity HR on autopilot',
+    desc: 'Multiple legal entities, international headcount, advanced security. Custom HIL policy, dedicated infra, SLA.',
     features: [
-      'Everything in Production',
+      'Everything in Growth',
       'Multi-entity workspaces',
       'SAML SSO + SCIM',
       'Custom data residency',
       'Dedicated success manager',
-      'Legal counsel handoff integrations',
+      '24/7 priority support + SLA',
       'Custom HIL policy configuration',
-      'SLA guarantees',
     ],
-    cta: 'Talk to us',
+    cta: 'Talk to sales',
     highlight: false,
   },
 ]
@@ -107,43 +114,71 @@ export default function PricingPage() {
                 lineHeight: 1.1,
               }}
             >
-              Simple pricing.<br />Every agent included.
+              Three tiers.<br />Every agent in all of them.
             </h1>
             <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-              Per employee, per month. All 14 agents. All integrations. All channels. Priced by company size — talk to us for a quote.
+              From $299/month flat for early-stage startups to per-employee pricing at scale. Same product, same depth, different volume.
             </p>
           </div>
         </section>
 
         {/* Tiers */}
         <section style={{ background: '#FFFFFF', padding: '80px 24px 100px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
+          <div style={{ maxWidth: 1140, margin: '0 auto' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="mobile-stack">
               {tiers.map((tier) => (
                 <div
                   key={tier.name}
                   style={{
                     background: tier.highlight ? '#1C1917' : '#FFFFFF',
-                    border: tier.highlight ? 'none' : '1px solid var(--border)',
+                    border: tier.highlight ? '1px solid rgba(176,141,87,0.3)' : '1px solid var(--border)',
                     borderRadius: 20,
-                    padding: 32,
+                    padding: '36px 28px 28px',
                     display: 'flex',
                     flexDirection: 'column',
+                    position: 'relative',
+                    boxShadow: tier.highlight ? '0 8px 32px rgba(28,25,23,0.18)' : '0 1px 3px rgba(0,0,0,0.03)',
                   }}
                 >
+                  {tier.highlight && (
+                    <span style={{ position: 'absolute', top: 16, right: 16, fontSize: 9, fontWeight: 700, letterSpacing: '0.16em', color: 'var(--gold)', background: 'rgba(176,141,87,0.12)', border: '1px solid rgba(176,141,87,0.35)', borderRadius: 999, padding: '4px 10px' }}>
+                      MOST POPULAR
+                    </span>
+                  )}
+
+                  {/* Header */}
                   <div style={{ marginBottom: 24 }}>
-                    <p style={{ fontSize: 20, fontWeight: 700, color: tier.highlight ? '#FFFFFF' : 'var(--text)', marginBottom: 4 }}>{tier.name}</p>
-                    <p style={{ fontSize: 13, color: tier.highlight ? 'rgba(255,255,255,0.5)' : 'var(--text-faint)', marginBottom: 16 }}>{tier.sub}</p>
-                    <p style={{ fontSize: 14, color: tier.highlight ? 'rgba(255,255,255,0.7)' : 'var(--text-muted)', lineHeight: 1.6 }}>{tier.desc}</p>
+                    <p style={{ fontSize: 14, fontWeight: 700, color: tier.highlight ? '#FFFFFF' : 'var(--text)', margin: 0, letterSpacing: '-0.01em' }}>{tier.name}</p>
+                    <p style={{ fontSize: 12, color: tier.highlight ? 'rgba(255,255,255,0.5)' : 'var(--text-faint)', margin: '4px 0 0' }}>{tier.range}</p>
                   </div>
 
-                  <div style={{ flex: 1, marginBottom: 32 }}>
+                  {/* Price */}
+                  <div style={{ marginBottom: 20, paddingBottom: 20, borderBottom: tier.highlight ? '1px solid rgba(255,255,255,0.1)' : '1px solid var(--border-faint)' }}>
+                    <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 64, fontWeight: 400, color: tier.highlight ? '#FFFFFF' : 'var(--text)', letterSpacing: '-0.04em', lineHeight: 1 }}>
+                      {tier.price}
+                    </span>
+                    <span style={{ fontSize: 14, color: tier.highlight ? 'rgba(255,255,255,0.55)' : 'var(--text-muted)', marginLeft: 6 }}>
+                      {tier.unit}
+                    </span>
+                  </div>
+
+                  {/* Outcome */}
+                  <div style={{ marginBottom: 20 }}>
+                    <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: tier.highlight ? 'rgba(176,141,87,0.85)' : 'var(--gold-dark)', textTransform: 'uppercase', margin: '0 0 6px' }}>Outcome</p>
+                    <p style={{ fontSize: 15, fontWeight: 600, color: tier.highlight ? '#FFFFFF' : 'var(--text)', margin: 0, lineHeight: 1.4 }}>{tier.outcome}</p>
+                  </div>
+
+                  {/* Description */}
+                  <p style={{ fontSize: 13, color: tier.highlight ? 'rgba(255,255,255,0.65)' : 'var(--text-muted)', lineHeight: 1.6, marginBottom: 24 }}>{tier.desc}</p>
+
+                  {/* Features */}
+                  <div style={{ flex: 1, marginBottom: 24, paddingTop: 20, borderTop: tier.highlight ? '1px solid rgba(255,255,255,0.1)' : '1px solid var(--border-faint)' }}>
                     {tier.features.map((f) => (
                       <div key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', marginBottom: 10 }}>
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginTop: 2, flexShrink: 0 }}>
-                          <path d="M2 7l4 4 6-6" stroke={tier.highlight ? 'var(--gold)' : 'var(--gold)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginTop: 3, flexShrink: 0 }}>
+                          <path d="M2 7l4 4 6-6" stroke={tier.highlight ? 'var(--gold)' : 'var(--gold-dark)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <span style={{ fontSize: 13, color: tier.highlight ? 'rgba(255,255,255,0.8)' : 'var(--text-muted)', lineHeight: 1.4 }}>{f}</span>
+                        <span style={{ fontSize: 13, color: tier.highlight ? 'rgba(255,255,255,0.85)' : 'var(--text-muted)', lineHeight: 1.5 }}>{f}</span>
                       </div>
                     ))}
                   </div>

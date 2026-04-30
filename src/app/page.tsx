@@ -455,170 +455,359 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ───────────────────────── COMPLIANCE ENGINE ───────────────────────── */}
+        {/* ───────────────────────── COMPLIANCE ENGINE — what we catch that GPT misses ───────────────────────── */}
         <section style={{ background: 'var(--bg-warm)', padding: '120px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
-              {/* Left: copy */}
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 16 }}>THE COMPLIANCE ENGINE</p>
-                <h2
+            {/* Hero */}
+            <div style={{ maxWidth: 760, marginBottom: 64 }}>
+              <p className="eyebrow" style={{ marginBottom: 20 }}>THE COMPLIANCE ENGINE</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(36px, 4.5vw, 60px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 24,
+                  lineHeight: 1.0,
+                }}
+              >
+                The mistakes a general<br />
+                <span style={{ color: 'var(--gold-dark)' }}>LLM would make.</span>
+              </h2>
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 600 }}>
+                We graded MambaHR and the best frontier LLM on 1,200 real HR compliance scenarios. Three examples of what they got wrong — and what cost the company.
+              </p>
+            </div>
+
+            {/* Side-by-side compliance examples */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+              {[
+                {
+                  scenario: 'Employee on FMLA also requests CA CFRA — stack or sequential?',
+                  llm: 'Approves 12 weeks total. Misses CFRA stacking right under 2 CCR §11091.4(c).',
+                  mamba: 'Up to 24 weeks combined. Cites the regulation. Routes ambiguous edge to legal.',
+                  cost: '$30K back leave',
+                },
+                {
+                  scenario: 'Posting a $250K role in CO + NY + WA without salary disclosure.',
+                  llm: 'Drafts and posts the JD. No flag.',
+                  mamba: 'Blocks the post. Adds required salary range per state. Files internal posting.',
+                  cost: '$10K per violation, per state',
+                },
+                {
+                  scenario: 'New hire offer at $185K base — flat W-2 vs CA exempt classification.',
+                  llm: 'Generates a W-2 offer. No exemption analysis.',
+                  mamba: 'Verifies CA exemption test (salary basis + duties). Flags a borderline case for review.',
+                  cost: '$50K back wages + penalties',
+                },
+              ].map((row) => (
+                <div
+                  key={row.scenario}
                   style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(32px, 4vw, 48px)',
-                    fontWeight: 400,
-                    letterSpacing: '-0.02em',
-                    color: 'var(--text)',
-                    marginBottom: 24,
-                    lineHeight: 1.1,
+                    background: '#FFFFFF',
+                    border: '1px solid var(--border)',
+                    borderRadius: 16,
+                    overflow: 'hidden',
                   }}
                 >
-                  94.2% on HR-Bench.<br />
-                  <span style={{ color: 'var(--gold-dark)' }}>The best general LLM scores 31%.</span>
-                </h2>
-                <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 28 }}>
-                  That gap is the difference between catching an FMLA + state PFML stacking edge case and missing a $50K compliance violation.
-                </p>
-
-                {/* Bar chart */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 28 }}>
-                  {[
-                    { label: 'MambaHR', score: 94.2, gold: true },
-                    { label: 'Best frontier LLM', score: 31, gold: false },
-                  ].map((row) => (
-                    <div key={row.label} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                      <span style={{ width: 130, fontSize: 13, fontWeight: row.gold ? 600 : 500, color: row.gold ? 'var(--text)' : 'var(--text-muted)', flexShrink: 0, textAlign: 'right' }}>
-                        {row.label}
-                      </span>
-                      <div style={{ flex: 1, background: '#FFFFFF', borderRadius: 4, height: row.gold ? 18 : 10, overflow: 'hidden', border: '1px solid var(--border-faint)' }}>
-                        <div style={{ width: `${row.score}%`, height: '100%', background: row.gold ? 'var(--gold)' : 'var(--border-mid)', borderRadius: 4 }} />
-                      </div>
-                      <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: row.gold ? 'var(--gold-dark)' : 'var(--text-faint)', width: 48, flexShrink: 0 }}>
-                        {row.score}%
-                      </span>
+                  {/* Scenario header */}
+                  <div style={{ padding: '20px 28px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
+                    <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', margin: 0, lineHeight: 1.4 }}>
+                      {row.scenario}
+                    </p>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: '#B91C1C', background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 999, padding: '4px 10px', whiteSpace: 'nowrap', letterSpacing: '0.04em' }}>
+                      MISS COSTS {row.cost.toUpperCase()}
+                    </span>
+                  </div>
+                  {/* Two-column comparison */}
+                  <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+                    <div style={{ padding: '20px 28px', borderRight: '1px solid var(--border-faint)' }}>
+                      <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text-faint)', textTransform: 'uppercase', marginBottom: 10 }}>
+                        Best frontier LLM
+                      </p>
+                      <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>
+                        <span style={{ color: '#B91C1C', marginRight: 6, fontWeight: 700 }}>✗</span>
+                        {row.llm}
+                      </p>
                     </div>
-                  ))}
+                    <div style={{ padding: '20px 28px', background: 'rgba(176,141,87,0.04)' }}>
+                      <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'var(--gold-dark)', textTransform: 'uppercase', marginBottom: 10 }}>
+                        MambaHR
+                      </p>
+                      <p style={{ fontSize: 14, color: 'var(--text)', lineHeight: 1.55, margin: 0 }}>
+                        <span style={{ color: '#15803D', marginRight: 6, fontWeight: 700 }}>✓</span>
+                        {row.mamba}
+                      </p>
+                    </div>
+                  </div>
                 </div>
+              ))}
+            </div>
 
-                <p style={{ fontSize: 12, color: 'var(--text-faint)' }}>
-                  HR-Bench · 1,200 graded compliance scenarios · federal law + 50 states · methodology open-sourced
-                </p>
-              </div>
-
-              {/* Right: Decision card mockup — agent surfacing a compliance edge case */}
-              <div>
-                <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 14, padding: 20, boxShadow: '0 8px 24px rgba(0,0,0,0.06)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, paddingBottom: 12, borderBottom: '1px solid var(--border-faint)' }}>
-                    <span style={{ background: '#FEF2F2', color: '#B91C1C', borderRadius: 4, padding: '2px 8px', fontSize: 10, fontWeight: 700, fontFamily: 'var(--font-mono), monospace' }}>L4</span>
-                    <span style={{ background: 'var(--bg-surface)', color: 'var(--text-muted)', borderRadius: 4, padding: '2px 8px', fontSize: 10, fontWeight: 600, fontFamily: 'var(--font-mono), monospace' }}>CUQ 0.91</span>
-                    <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)' }}>Compliance agent · just now</span>
-                  </div>
-                  <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', margin: '0 0 8px' }}>
-                    FMLA + CA CFRA stacking — Marcus Webb
-                  </p>
-                  <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.55, marginBottom: 12 }}>
-                    Eligible for both: 14 mo tenure, 1,400 hrs ✓ · CA CFRA stacks with FMLA per <span style={{ color: 'var(--gold-dark)', fontWeight: 600 }}>2 CCR §11091.4(c)</span> · up to 12 weeks.
-                  </p>
-                  <div style={{ background: 'var(--bg-warm)', borderRadius: 8, padding: 12, marginBottom: 14, fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                    <p style={{ margin: '0 0 4px', fontWeight: 600, color: 'var(--text)' }}>Citations</p>
-                    <p style={{ margin: 0 }}>· 29 USC §2611 (FMLA eligibility)</p>
-                    <p style={{ margin: 0 }}>· CA Gov Code §12945.2 (CFRA stacking)</p>
-                    <p style={{ margin: 0 }}>· DLSE 7-2024 opinion letter</p>
-                  </div>
-                  <div style={{ display: 'flex', gap: 8 }}>
-                    <button style={{ flex: 1, padding: '8px', borderRadius: 7, border: 'none', background: '#1C1917', color: '#FFFFFF', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>Approve & file</button>
-                    <button style={{ flex: 1, padding: '8px', borderRadius: 7, border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: 12, fontWeight: 500, cursor: 'pointer' }}>Route to legal</button>
-                  </div>
+            {/* Score footer with mini-bars */}
+            <div style={{ marginTop: 40, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24, padding: '24px 0', borderTop: '1px solid var(--border)' }}>
+              <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: 0, lineHeight: 1.6 }}>
+                Across <strong style={{ color: 'var(--text)' }}>1,200 graded scenarios</strong> in HR-Bench:
+              </p>
+              <div style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
+                <div>
+                  <span className="mono" style={{ fontSize: 12, color: 'var(--text-faint)', display: 'block', letterSpacing: '0.04em' }}>BEST FRONTIER LLM</span>
+                  <span className="mono" style={{ fontSize: 28, fontWeight: 400, color: 'var(--text-muted)', fontFamily: 'var(--font-serif), Georgia, serif', letterSpacing: '-0.02em' }}>31.0%</span>
+                </div>
+                <span style={{ fontSize: 24, color: 'var(--text-faint)' }}>→</span>
+                <div>
+                  <span className="mono" style={{ fontSize: 12, color: 'var(--gold-dark)', display: 'block', letterSpacing: '0.04em', fontWeight: 600 }}>MAMBAHR</span>
+                  <span style={{ fontSize: 28, fontWeight: 400, color: 'var(--gold-dark)', fontFamily: 'var(--font-serif), Georgia, serif', letterSpacing: '-0.02em' }}>94.2%</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ───────────────────────── WHERE IT LIVES ───────────────────────── */}
-        <section style={{ background: '#FFFFFF', padding: '100px 24px' }}>
+        {/* ───────────────────────── WHERE IT LIVES — real channel mockups ───────────────────────── */}
+        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 56 }}>
+            <div style={{ marginBottom: 64, maxWidth: 720 }}>
               <p className="eyebrow" style={{ marginBottom: 16 }}>WHERE IT LIVES</p>
               <h2
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(28px, 3.5vw, 44px)',
+                  fontSize: 'clamp(36px, 4.5vw, 60px)',
                   fontWeight: 400,
                   letterSpacing: '-0.02em',
                   color: 'var(--text)',
                   marginBottom: 16,
-                  lineHeight: 1.15,
+                  lineHeight: 1.0,
                 }}
               >
-                Works where your team already works.
+                Four surfaces.<br />Same agent.
               </h2>
-              <p style={{ fontSize: 17, color: 'var(--text-muted)', maxWidth: 540, margin: '0 auto' }}>
-                Slack, Teams, email, or the web app. No new tool to learn. No password to remember.
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 580, lineHeight: 1.6 }}>
+                Mamba meets you in the tool you&apos;re already in. Same context, same memory, same audit trail across all four.
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
-              {channelTiles.map((tile) => (
-                <div
-                  key={tile.label}
-                  className="card-hover"
-                  style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, padding: '24px' }}
-                >
-                  <div style={{ marginBottom: 16 }}>{tile.icon}</div>
-                  <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>{tile.label}</p>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.55 }}>{tile.copy}</p>
+            {/* 2x2 grid of real channel mockups */}
+            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
+
+              {/* Slack mockup */}
+              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <svg width="18" height="18" viewBox="0 0 54 54" fill="none">
+                    <path d="M19.7 33.2c0 2.7-2.2 4.9-4.9 4.9s-4.9-2.2-4.9-4.9 2.2-4.9 4.9-4.9h4.9v4.9z" fill="#E01E5A"/>
+                    <path d="M22.2 33.2c0-2.7 2.2-4.9 4.9-4.9s4.9 2.2 4.9 4.9v12.3c0 2.7-2.2 4.9-4.9 4.9s-4.9-2.2-4.9-4.9V33.2z" fill="#E01E5A"/>
+                    <path d="M27.1 19.7c-2.7 0-4.9-2.2-4.9-4.9s2.2-4.9 4.9-4.9 4.9 2.2 4.9 4.9v4.9H27.1z" fill="#36C5F0"/>
+                    <path d="M27.1 22.2c2.7 0 4.9 2.2 4.9 4.9s-2.2 4.9-4.9 4.9H14.8c-2.7 0-4.9-2.2-4.9-4.9s2.2-4.9 4.9-4.9H27.1z" fill="#36C5F0"/>
+                    <path d="M40.6 27.1c0 2.7-2.2 4.9-4.9 4.9s-4.9-2.2-4.9-4.9V14.8c0-2.7 2.2-4.9 4.9-4.9s4.9 2.2 4.9 4.9v12.3z" fill="#2EB67D"/>
+                    <path d="M38.1 30.7c2.7 0 4.9 2.2 4.9 4.9s-2.2 4.9-4.9 4.9-4.9-2.2-4.9-4.9V30.7H38.1z" fill="#2EB67D"/>
+                    <path d="M33.2 38.1c0-2.7 2.2-4.9 4.9-4.9s4.9 2.2 4.9 4.9-2.2 4.9-4.9 4.9H33.2v-4.9z" fill="#ECB22E"/>
+                    <path d="M30.7 35.6c-2.7 0-4.9-2.2-4.9-4.9s2.2-4.9 4.9-4.9 4.9 2.2 4.9 4.9v12.3c0 2.7-2.2 4.9-4.9 4.9s-4.9-2.2-4.9-4.9V35.6z" fill="#ECB22E"/>
+                  </svg>
+                  <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Slack</span>
+                  <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>#people-ops</span>
                 </div>
-              ))}
+                <div style={{ padding: 20, flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                    <div style={{ width: 28, height: 28, borderRadius: 6, background: '#C4D4B5', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 10, fontWeight: 700, color: '#3F5530' }}>LT</div>
+                    <div>
+                      <div style={{ display: 'flex', gap: 6, alignItems: 'baseline' }}>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>Liam Torres</span>
+                        <span style={{ fontSize: 10, color: 'var(--text-faint)' }}>10:45 AM</span>
+                      </div>
+                      <p style={{ fontSize: 13, color: 'var(--text)', margin: '2px 0 0', lineHeight: 1.5 }}>@mamba what&apos;s the bereavement policy for an aunt?</p>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                    <div style={{ width: 28, height: 28, borderRadius: 6, background: '#1C1917', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <span style={{ color: 'var(--gold)', fontSize: 11 }}>◆</span>
+                    </div>
+                    <div>
+                      <div style={{ display: 'flex', gap: 6, alignItems: 'baseline' }}>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>Mamba</span>
+                        <span style={{ fontSize: 9, fontWeight: 600, background: 'var(--gold-tint)', color: 'var(--gold-dark)', borderRadius: 3, padding: '1px 5px' }}>APP</span>
+                        <span style={{ fontSize: 10, color: 'var(--text-faint)' }}>10:45 AM</span>
+                      </div>
+                      <p style={{ fontSize: 13, color: 'var(--text)', margin: '2px 0 0', lineHeight: 1.5 }}>Per policy §6.1: 1 paid day for non-immediate family. Want me to file it?</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Teams mockup */}
+              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 3H8C6.9 3 6 3.9 6 5v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" fill="#5059C9"/>
+                    <circle cx="15.5" cy="7.5" r="2.5" fill="white"/>
+                    <path d="M12 11h7v2.5c0 1.9-1.6 3.5-3.5 3.5S12 15.4 12 13.5V11z" fill="white"/>
+                    <path d="M2 9h6v7c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V9z" fill="#7B83EB"/>
+                    <circle cx="5" cy="6" r="2" fill="#7B83EB"/>
+                  </svg>
+                  <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Microsoft Teams</span>
+                  <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>Adaptive Card</span>
+                </div>
+                <div style={{ padding: 20, flex: 1 }}>
+                  <div style={{ background: 'var(--bg-surface)', borderLeft: '3px solid #5059C9', borderRadius: '0 8px 8px 0', padding: '14px 16px' }}>
+                    <p style={{ fontSize: 11, fontWeight: 700, color: '#5059C9', letterSpacing: '0.06em', textTransform: 'uppercase', margin: '0 0 8px' }}>Approval needed</p>
+                    <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', margin: '0 0 6px' }}>Q2 performance review packet — Eng team</p>
+                    <p style={{ fontSize: 12, color: 'var(--text-muted)', margin: '0 0 14px', lineHeight: 1.5 }}>23 packets ready · calibration scheduled June 15 · expected ratings within 1.2σ</p>
+                    <div style={{ display: 'flex', gap: 8 }}>
+                      <button style={{ background: '#5059C9', color: '#FFFFFF', border: 'none', borderRadius: 6, padding: '6px 14px', fontSize: 11, fontWeight: 600, cursor: 'pointer' }}>Approve all</button>
+                      <button style={{ background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border)', borderRadius: 6, padding: '6px 14px', fontSize: 11, fontWeight: 500, cursor: 'pointer' }}>Review one by one</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Email mockup */}
+              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <rect width="24" height="24" rx="4" fill="#EA4335"/>
+                    <path d="M4 8l8 6 8-6" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                    <rect x="4" y="7" width="16" height="11" rx="1" stroke="white" strokeWidth="1.5" fill="none"/>
+                  </svg>
+                  <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Email</span>
+                  <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)' }}>Forwarded · 2m ago</span>
+                </div>
+                <div style={{ padding: 20, flex: 1 }}>
+                  <div style={{ marginBottom: 10, paddingBottom: 10, borderBottom: '1px solid var(--border-faint)' }}>
+                    <p style={{ fontSize: 11, color: 'var(--text-faint)', margin: 0, fontFamily: 'var(--font-mono), monospace' }}>From: hr@acme.co  →  hr@mambahr.com</p>
+                    <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', margin: '4px 0 0' }}>Fwd: Signed offer letter — Jordan Kim</p>
+                  </div>
+                  <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.06em', textTransform: 'uppercase', margin: '0 0 8px' }}>Mamba auto-reply</p>
+                  <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
+                    Filed in Vault. Onboarding agent triggered: equipment ordered, Okta access provisioned, May 12 calendar invite sent. <span style={{ color: 'var(--gold-dark)', fontWeight: 600 }}>Audit log entry written.</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Web app mockup */}
+              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span style={{ width: 18, height: 18, borderRadius: 4, background: '#1C1917', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ color: 'var(--gold)', fontSize: 9 }}>◆</span>
+                  </span>
+                  <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Web app</span>
+                  <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>app.mambahr.com</span>
+                </div>
+                <div style={{ padding: 20, flex: 1 }}>
+                  <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.06em', textTransform: 'uppercase', margin: '0 0 12px' }}>Today · Tuesday morning</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {[
+                      { num: '03', label: 'Need your approval', color: 'var(--gold-dark)', bg: 'var(--gold-tint)' },
+                      { num: '14', label: 'Auto-resolved overnight', color: '#15803D', bg: '#F0FDF4' },
+                      { num: '02', label: 'Awaiting employee response', color: 'var(--text-muted)', bg: 'var(--bg-surface)' },
+                    ].map((row) => (
+                      <div key={row.label} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '10px 14px', background: row.bg, borderRadius: 8 }}>
+                        <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 22, fontWeight: 400, color: row.color, letterSpacing: '-0.02em', minWidth: 32 }}>{row.num}</span>
+                        <span style={{ fontSize: 12, color: 'var(--text)', fontWeight: 500 }}>{row.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
 
-        {/* ───────────────────────── BUILT FOR ───────────────────────── */}
+        {/* ───────────────────────── BUILT FOR — every stage, editorial typography ───────────────────────── */}
         <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 64 }}>
-              <p className="eyebrow" style={{ marginBottom: 16 }}>BUILT FOR</p>
+            <div style={{ marginBottom: 80, maxWidth: 720 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>BUILT FOR EVERY STAGE</p>
               <h2
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontSize: 'clamp(36px, 4.5vw, 60px)',
                   fontWeight: 400,
                   letterSpacing: '-0.02em',
                   color: 'var(--text)',
                   marginBottom: 16,
-                  lineHeight: 1.1,
+                  lineHeight: 1.0,
                 }}
               >
-                HR teams of 1–3 doing<br />the work of 10.
+                From 2 employees<br />to 5,000.
               </h2>
-              <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 540, margin: '0 auto', lineHeight: 1.6 }}>
-                50 to 500 employees. Growing fast. HR is one or two people, plus a lot of Sheets. Sound familiar?
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 580, lineHeight: 1.6 }}>
+                The agents scale with you. Same product, same depth — different policy thresholds, different volumes, different price.
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }} className="mobile-stack">
+            {/* Three stage cards — typography-driven, no photos */}
+            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0, border: '1px solid var(--border)', borderRadius: 20, overflow: 'hidden', background: '#FFFFFF' }}>
               {[
-                { role: 'SOLO HR',         title: 'The Head of People',  copy: 'Running recruiting, comp, performance, and leave — alone. MambaHR is the team they never got to hire.', avatar: HEADSHOT(45) },
-                { role: '2-PERSON TEAM',   title: 'The PeopleOps duo',   copy: 'Two people, 400 employees, a backlog they cannot win. MambaHR is the rest of the department. They set the policy and watch it run.', avatar: HEADSHOT(28) },
-                { role: 'PRE-HR HIRE',     title: 'The founder doing HR', copy: 'Until they can hire someone. MambaHR buys them the time to hire the right person — not just the next one.', avatar: HEADSHOT(7) },
-              ].map((card) => (
+                {
+                  range: '2 — 25',
+                  stage: 'STARTUP',
+                  title: "Founders running HR off Notion docs and Sheets.",
+                  copy: 'Your first HR hire is an AI department. Onboarding, payroll, leave, compliance — handled. Spend your time hiring engineers, not chasing W-4s.',
+                  outcome: 'Outcome: an HR department before your first HR hire',
+                },
+                {
+                  range: '25 — 500',
+                  stage: 'GROWTH',
+                  title: 'One CHRO doing the work of a 4-person HR team.',
+                  copy: 'The agents clear the backlog. The CHRO sets policy and approves the calls that matter. Compliance, performance cycles, multi-state payroll — running on autopilot.',
+                  outcome: 'Outcome: ~$300K/year saved on HR FTEs',
+                  highlight: true,
+                },
+                {
+                  range: '500 +',
+                  stage: 'ENTERPRISE',
+                  title: 'Multi-entity HR running with one human in the loop.',
+                  copy: 'Multiple legal entities, international headcount, advanced security. Same agents, customized HIL policy, dedicated success manager, SOC 2 + SCIM + custom data residency.',
+                  outcome: 'Outcome: enterprise HR ops at startup speed',
+                },
+              ].map((card, i) => (
                 <div
-                  key={card.title}
-                  className="card-hover"
-                  style={{ borderRadius: 20, overflow: 'hidden', border: '1px solid var(--border)', background: '#FFFFFF' }}
+                  key={card.range}
+                  style={{
+                    padding: '40px 32px 36px',
+                    borderRight: i < 2 ? '1px solid var(--border)' : 'none',
+                    background: card.highlight ? 'var(--bg-warm)' : '#FFFFFF',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 20,
+                  }}
                 >
-                  {/* Photo + role badge */}
-                  <div style={{ height: 240, overflow: 'hidden', position: 'relative', background: 'linear-gradient(145deg, #DDD0C4 0%, #C4A882 100%)' }}>
-                    <PhotoImg src={card.avatar} alt={card.title} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
-                    <div style={{ position: 'absolute', top: 16, left: 16 }}>
-                      <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', color: '#FFFFFF', background: 'rgba(28,25,23,0.65)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', borderRadius: 5, padding: '4px 10px' }}>{card.role}</span>
-                    </div>
+                  {/* Range — big serif number */}
+                  <div>
+                    <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.16em', color: card.highlight ? 'var(--gold-dark)' : 'var(--text-faint)', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                      {card.stage}
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-serif), Georgia, serif',
+                        fontSize: 'clamp(40px, 4vw, 56px)',
+                        fontWeight: 400,
+                        color: 'var(--text)',
+                        letterSpacing: '-0.03em',
+                        lineHeight: 1,
+                        margin: 0,
+                      }}
+                    >
+                      {card.range}
+                    </p>
+                    <p style={{ fontSize: 13, color: 'var(--text-faint)', margin: '6px 0 0', fontStyle: 'italic' }}>employees</p>
                   </div>
-                  <div style={{ padding: '24px 24px 28px' }}>
-                    <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: 17, fontWeight: 600, color: 'var(--text)', marginBottom: 10, letterSpacing: '-0.01em' }}>{card.title}</h3>
-                    <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.65 }}>{card.copy}</p>
+
+                  {/* Description */}
+                  <div style={{ flex: 1, paddingTop: 8, borderTop: card.highlight ? '1px solid rgba(176,141,87,0.25)' : '1px solid var(--border-faint)' }}>
+                    <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: 17, fontWeight: 600, color: 'var(--text)', margin: '16px 0 12px', lineHeight: 1.35, letterSpacing: '-0.01em' }}>
+                      {card.title}
+                    </h3>
+                    <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.65, margin: 0 }}>
+                      {card.copy}
+                    </p>
                   </div>
+
+                  {/* Outcome */}
+                  <p style={{ fontSize: 12, fontWeight: 600, color: card.highlight ? 'var(--gold-dark)' : 'var(--text-muted)', margin: 0, paddingTop: 16, borderTop: '1px solid var(--border-faint)' }}>
+                    {card.outcome}
+                  </p>
                 </div>
               ))}
             </div>
@@ -654,55 +843,125 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ───────────────────────── PRICING TEASER ───────────────────────── */}
-        <section style={{ background: 'var(--bg-cream)', padding: '100px 24px' }}>
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 64, alignItems: 'center' }}>
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 16 }}>PRICING</p>
-                <h2
+        {/* ───────────────────────── PRICING TEASER — 3 tiers with monthly + outcome ───────────────────────── */}
+        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1140, margin: '0 auto' }}>
+            <div style={{ marginBottom: 56, maxWidth: 720 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>PRICING</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(36px, 4.5vw, 60px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.0,
+                }}
+              >
+                Three tiers.<br />Every agent in all of them.
+              </h2>
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: 580 }}>
+                You pay monthly. We replace HR FTEs that cost <strong style={{ color: 'var(--text)' }}>$80K–$120K/year</strong> each. The math works at every stage.
+              </p>
+            </div>
+
+            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+              {[
+                {
+                  name: 'Starter',
+                  for: '2 — 25 employees',
+                  price: '$299',
+                  unit: '/month flat',
+                  outcome: 'Replaces your founder doing HR',
+                  features: ['All 14 agents', 'Slack, Teams, email, web', 'Migrate from any HRIS', 'Audit log on every action', 'Email support'],
+                  highlight: false,
+                },
+                {
+                  name: 'Growth',
+                  for: '25 — 500 employees',
+                  price: '$14',
+                  unit: '/employee/month',
+                  outcome: 'Saves ~$300K/year on HR FTEs',
+                  features: ['Everything in Starter', 'HIL approval workflows', 'SOC 2 Type II evidence', 'RBAC + custom roles', 'Dedicated success manager'],
+                  highlight: true,
+                },
+                {
+                  name: 'Enterprise',
+                  for: '500+ employees',
+                  price: 'Custom',
+                  unit: 'volume + multi-entity',
+                  outcome: 'Multi-entity HR on autopilot',
+                  features: ['Everything in Growth', 'Multi-entity workspaces', 'SAML SSO + SCIM', 'Custom data residency', '24/7 priority support + SLA'],
+                  highlight: false,
+                },
+              ].map((tier) => (
+                <div
+                  key={tier.name}
                   style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(28px, 3.5vw, 44px)',
-                    fontWeight: 400,
-                    letterSpacing: '-0.02em',
-                    color: 'var(--text)',
-                    marginBottom: 20,
-                    lineHeight: 1.15,
+                    background: tier.highlight ? '#1C1917' : '#FFFFFF',
+                    border: tier.highlight ? '1px solid rgba(176,141,87,0.3)' : '1px solid var(--border)',
+                    borderRadius: 20,
+                    padding: '36px 28px 28px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    position: 'relative',
+                    boxShadow: tier.highlight ? '0 8px 32px rgba(28,25,23,0.18)' : '0 1px 3px rgba(0,0,0,0.03)',
                   }}
                 >
-                  One price. Every agent. No add-ons.
-                </h2>
-                <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 28 }}>
-                  Pilot is 90 days. Production is per-employee, banded by company size. Every agent included. Every integration. Every region.
-                </p>
-                <Link href="/pricing" className="btn-primary" style={{ display: 'inline-flex' }}>
-                  See pricing →
-                </Link>
-              </div>
+                  {tier.highlight && (
+                    <span style={{ position: 'absolute', top: 16, right: 16, fontSize: 9, fontWeight: 700, letterSpacing: '0.16em', color: 'var(--gold)', background: 'rgba(176,141,87,0.12)', border: '1px solid rgba(176,141,87,0.35)', borderRadius: 999, padding: '4px 10px' }}>MOST POPULAR</span>
+                  )}
 
-              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 20, padding: 32 }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                  {[
-                    'Full HRIS — system of record',
-                    'All 14 agents enabled',
-                    'Slack, Teams, email, web app',
-                    'HIL approval queue + audit log',
-                    'Migration from any HRIS',
-                    'HR-Bench compliance engine',
-                    'SOC 2 Type II evidence',
-                  ].map((item) => (
-                    <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0 }}>
-                        <circle cx="9" cy="9" r="9" fill="var(--gold-tint)" />
-                        <path d="M5 9l3 3 5-6" stroke="var(--gold-dark)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      <span style={{ fontSize: 14, color: 'var(--text)' }}>{item}</span>
-                    </div>
-                  ))}
+                  {/* Tier header */}
+                  <div style={{ marginBottom: 24 }}>
+                    <p style={{ fontSize: 14, fontWeight: 700, color: tier.highlight ? '#FFFFFF' : 'var(--text)', margin: 0, letterSpacing: '-0.01em' }}>{tier.name}</p>
+                    <p style={{ fontSize: 12, color: tier.highlight ? 'rgba(255,255,255,0.5)' : 'var(--text-faint)', margin: '4px 0 0' }}>{tier.for}</p>
+                  </div>
+
+                  {/* Price */}
+                  <div style={{ marginBottom: 20, paddingBottom: 20, borderBottom: tier.highlight ? '1px solid rgba(255,255,255,0.1)' : '1px solid var(--border-faint)' }}>
+                    <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 56, fontWeight: 400, color: tier.highlight ? '#FFFFFF' : 'var(--text)', letterSpacing: '-0.04em', lineHeight: 1 }}>
+                      {tier.price}
+                    </span>
+                    <span style={{ fontSize: 13, color: tier.highlight ? 'rgba(255,255,255,0.55)' : 'var(--text-muted)', marginLeft: 6 }}>
+                      {tier.unit}
+                    </span>
+                  </div>
+
+                  {/* Outcome */}
+                  <div style={{ marginBottom: 24 }}>
+                    <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: tier.highlight ? 'rgba(176,141,87,0.85)' : 'var(--gold-dark)', textTransform: 'uppercase', margin: '0 0 6px' }}>Outcome</p>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: tier.highlight ? '#FFFFFF' : 'var(--text)', margin: 0, lineHeight: 1.4 }}>{tier.outcome}</p>
+                  </div>
+
+                  {/* Features */}
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
+                    {tier.features.map((f) => (
+                      <div key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginTop: 3, flexShrink: 0 }}>
+                          <path d="M2 7l4 4 6-6" stroke={tier.highlight ? 'var(--gold)' : 'var(--gold-dark)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <span style={{ fontSize: 13, color: tier.highlight ? 'rgba(255,255,255,0.85)' : 'var(--text-muted)', lineHeight: 1.5 }}>{f}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <Link
+                    href={tier.name === 'Enterprise' ? '#request-access' : '/pricing'}
+                    className={tier.highlight ? 'btn-gold' : 'btn-secondary'}
+                    style={{ justifyContent: 'center', textAlign: 'center' }}
+                  >
+                    {tier.name === 'Enterprise' ? 'Talk to sales' : 'Start ' + tier.name}
+                  </Link>
                 </div>
-              </div>
+              ))}
             </div>
+
+            <p style={{ textAlign: 'center', marginTop: 32, fontSize: 13, color: 'var(--text-muted)' }}>
+              All tiers include the full HRIS, all 14 agents, every integration, every channel. <Link href="/pricing" style={{ color: 'var(--gold-dark)', textDecoration: 'underline', textUnderlineOffset: 3 }}>See full breakdown →</Link>
+            </p>
           </div>
         </section>
 
