@@ -198,6 +198,17 @@ h4, h5, h6 {
   box-shadow: 0 8px 24px rgba(0,0,0,0.07);
 }
 
+/* FINDING-011: Inputs on dark background (request-access section) */
+#request-access input[type="email"],
+#request-access input[type="text"] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #FFFFFF !important;
+}
+#request-access input::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
 /* FINDING-004: Hide Today panel on mobile — hero is too tall when stacked */
 @media (max-width: 680px) {
   .hero-split {

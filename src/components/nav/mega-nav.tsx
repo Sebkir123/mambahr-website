@@ -92,7 +92,7 @@ export default function MegaNav() {
                 { label: 'Product', panel: 'product' as Panel },
                 { label: 'Platform', panel: 'platform' as Panel },
                 { label: 'Pricing', href: '/pricing' },
-                { label: 'Customers', href: '/coming-soon/customers' },
+                { label: 'Security', href: '/security' },
                 { label: 'Company', panel: 'company' as Panel },
               ] as Array<{ label: string; panel?: Panel; href?: string }>
             ).map((item) => (

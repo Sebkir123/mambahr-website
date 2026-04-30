@@ -55,7 +55,7 @@ export default function Footer() {
               <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 16, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
             </Link>
             <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: 200 }}>
-              The AI HR department that runs in Slack, Teams, and email.
+              The AI HR department. One human in the loop.
             </p>
             <a
               href="https://linkedin.com/company/mambahr"
