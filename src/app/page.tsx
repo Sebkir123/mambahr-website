@@ -5,6 +5,7 @@ import RequestAccessSection from '@/components/waitlist'
 import SlackThread from '@/components/surfaces/slack-thread'
 import TodayCard from '@/components/surfaces/today-card'
 import IntegrationsMarquee from '@/components/sections/integrations-marquee'
+import PhotoImg from '@/components/surfaces/photo-img'
 
 const heroMessages = [
   {
@@ -66,7 +67,6 @@ const todayCards = [
   },
 ]
 
-// FINDING-009: Real brand SVGs instead of colored squares with ◆
 const channelTiles = [
   {
     label: 'Already in Slack.',
@@ -126,24 +126,11 @@ const agentPills = [
   'Compliance', 'Offboarding', 'Reports', 'Culture', 'HR Ops',
 ]
 
-// FINDING-003: No emoji — use styled role labels
-const builtForCards = [
-  {
-    title: 'The Head of People',
-    role: 'SOLO HR',
-    copy: 'Running recruiting, comp, performance, and leave — alone. MambaHR is the team they never got to hire.',
-  },
-  {
-    title: 'The PeopleOps duo',
-    role: '2-PERSON TEAM',
-    copy: 'Two people, 400 employees, a ticket queue that never empties. The agents clear the queue. They set the policy.',
-  },
-  {
-    title: 'The founder doing HR',
-    role: 'PRE-HR HIRE',
-    copy: 'Until they can hire someone. MambaHR buys them the time to hire the right person — not just the next one.',
-  },
-]
+// Photo sources: swap these URLs for licensed Stocksy/Unsplash+ images before launch
+const PHOTO_HERO = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80&fit=crop&crop=faces'
+const PHOTO_SOLO_HR = 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80&fit=crop&crop=face'
+const PHOTO_DUO = 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80&fit=crop&crop=faces'
+const PHOTO_FOUNDER = 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80&fit=crop&crop=face'
 
 export default function HomePage() {
   return (
@@ -151,95 +138,161 @@ export default function HomePage() {
       <MegaNav />
       <main>
 
-        {/* ── HERO ── */}
+        {/* ── HERO — Shapes-style: copy left, human photo + product UI right ── */}
         <section
           style={{
-            background: 'linear-gradient(180deg, var(--bg-warm) 0%, #FFFFFF 100%)',
-            paddingTop: 160,
+            background: 'var(--bg-warm)',
+            paddingTop: 100,
             paddingBottom: 0,
             overflow: 'hidden',
           }}
         >
-          <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
-              <span className="pill-gold">THE AI HR DEPARTMENT</span>
+          <div
+            style={{
+              maxWidth: 1200,
+              margin: '0 auto',
+              padding: '0 40px',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1.1fr',
+              gap: 64,
+              alignItems: 'center',
+              minHeight: 600,
+            }}
+            className="hero-split"
+          >
+            {/* Left — copy */}
+            <div style={{ paddingBottom: 80 }}>
+              <div style={{ marginBottom: 24 }}>
+                <span className="pill-gold">THE AI HR DEPARTMENT</span>
+              </div>
+
+              <h1
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(40px, 5vw, 68px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.03em',
+                  color: 'var(--text)',
+                  lineHeight: 1.05,
+                  marginBottom: 24,
+                }}
+              >
+                Your next HR hire<br />isn&apos;t human.
+              </h1>
+
+              <p
+                style={{
+                  fontSize: 18,
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.65,
+                  maxWidth: 440,
+                  marginBottom: 40,
+                }}
+              >
+                MambaHR is an AI HR department that handles hiring, payroll, leave, performance, and compliance — so one human can run people ops for hundreds.
+              </p>
+
+              <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginBottom: 24 }}>
+                <a href="#request-access" className="btn-gold" style={{ fontSize: 15, padding: '14px 32px' }}>
+                  Request access →
+                </a>
+                <Link href="/today" className="btn-secondary" style={{ fontSize: 15 }}>
+                  See it in action
+                </Link>
+              </div>
+
+              <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
+                Private beta · 4 design-partner spots · US-based
+              </p>
             </div>
 
-            {/* FINDING-001: New headline — category-defining, not channel-defining */}
-            <h1
-              style={{
-                textAlign: 'center',
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(44px, 7vw, 80px)',
-                fontWeight: 400,
-                letterSpacing: '-0.03em',
-                color: 'var(--text)',
-                lineHeight: 1.0,
-                marginBottom: 28,
-              }}
-            >
-              Your next HR hire<br />isn&apos;t human.
-            </h1>
-
-            {/* FINDING-005: One sentence, leads with the most powerful claim */}
-            <p
-              style={{
-                textAlign: 'center',
-                fontSize: 'clamp(17px, 2vw, 20px)',
-                color: 'var(--text-muted)',
-                lineHeight: 1.6,
-                maxWidth: 540,
-                margin: '0 auto 40px',
-              }}
-            >
-              MambaHR is an AI HR department that handles hiring, payroll, leave, performance, and compliance — so one human can run people ops for hundreds.
-            </p>
-
-            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', marginBottom: 16 }}>
-              <a href="#request-access" className="btn-gold" style={{ fontSize: 15, padding: '14px 32px' }}>
-                Request access →
-              </a>
-              <Link href="/today" className="btn-secondary" style={{ fontSize: 15 }}>
-                See it in action
-              </Link>
-            </div>
-
-            {/* FINDING-014: Removed "SOC 2 in progress" — keep trust copy clean */}
-            <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-faint)', marginBottom: 80 }}>
-              Private beta · 4 design-partner spots open this quarter · US-based
-            </p>
-
-            {/* Split-screen hero visual — FINDING-004: hide Today panel on mobile */}
+            {/* Right — real human photo + product UI overlay (Shapes pattern) */}
+            {/* Photo: warm, natural light, HR person at laptop — swap src for licensed Stocksy image */}
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: 20,
-                maxWidth: 1000,
-                margin: '0 auto',
+                position: 'relative',
+                height: 580,
+                borderRadius: '20px 20px 0 0',
+                overflow: 'hidden',
+                alignSelf: 'flex-end',
+                background: 'linear-gradient(145deg, #E8DDD0 0%, #C9B99A 100%)',
               }}
-              className="hero-split"
+              className="hero-today-panel"
             >
-              <div>
-                <div style={{ background: 'var(--bg-surface)', borderRadius: '12px 12px 0 0', padding: '8px 16px', border: '1px solid var(--border)', borderBottom: 'none' }}>
-                  <p style={{ fontSize: 11, color: 'var(--text-faint)', fontWeight: 500, margin: 0 }}>Employee — in Slack</p>
+              <PhotoImg
+                src={PHOTO_HERO}
+                alt="HR professional at work"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+              />
+
+              {/* Warm overlay to let the product UI read cleanly */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(160deg, rgba(250,247,242,0) 30%, rgba(250,247,242,0.15) 100%)',
+                }}
+              />
+
+              {/* Product UI — Today queue card floating bottom-left */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 24,
+                  left: 24,
+                  width: 340,
+                  background: 'rgba(255,255,255,0.96)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  borderRadius: 14,
+                  border: '1px solid var(--border)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+                  overflow: 'hidden',
+                }}
+              >
+                <div style={{ background: 'var(--bg-surface)', padding: '10px 16px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#15803D' }} />
+                  <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>Today · 3 items need you</span>
                 </div>
-                <SlackThread channel="general" messages={heroMessages} />
+                <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {todayCards.slice(0, 2).map((card, i) => (
+                    <TodayCard key={i} {...card} />
+                  ))}
+                </div>
               </div>
 
-              <div className="hero-today-panel">
-                <div style={{ background: 'var(--bg-surface)', borderRadius: '12px 12px 0 0', padding: '8px 16px', border: '1px solid var(--border)', borderBottom: 'none' }}>
-                  <p style={{ fontSize: 11, color: 'var(--text-faint)', fontWeight: 500, margin: 0 }}>CHRO — in Today (8:30 AM)</p>
-                </div>
-                <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: '0 0 12px 12px', padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {todayCards.map((card, i) => <TodayCard key={i} {...card} />)}
+              {/* Slack message floating top-right */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 28,
+                  right: 20,
+                  width: 260,
+                  background: 'rgba(255,255,255,0.95)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  borderRadius: 12,
+                  border: '1px solid var(--border)',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.10)',
+                  padding: '12px 14px',
+                }}
+              >
+                <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                  <div style={{ width: 28, height: 28, borderRadius: 7, background: '#1C1917', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <span style={{ color: 'var(--gold)', fontSize: 10 }}>◆</span>
+                  </div>
+                  <div>
+                    <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 4 }}>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: '#1D1C1D' }}>Mamba</span>
+                      <span style={{ fontSize: 10, background: 'var(--gold-tint)', color: 'var(--gold-dark)', border: '1px solid rgba(176,141,87,0.2)', borderRadius: 3, padding: '1px 5px', fontWeight: 600 }}>APP</span>
+                    </div>
+                    <p style={{ fontSize: 12, color: '#1D1C1D', lineHeight: 1.5, margin: 0 }}>
+                      Emma&apos;s PTO approved. 3 days, Apr 6–8. Balance updated, manager notified. ✓
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-faint)', marginTop: 20, paddingBottom: 80 }}>
-              Same agent. Two surfaces. Employees work in Slack. The CHRO approves what matters in Today.
-            </p>
           </div>
         </section>
 
@@ -259,32 +312,19 @@ export default function HomePage() {
                 lineHeight: 1.15,
               }}
             >
-              {/* FINDING-006: Flip from defensive "No" to positive */}
               Works where your team already works.
             </h2>
             <p style={{ textAlign: 'center', fontSize: 18, color: 'var(--text-muted)', maxWidth: 500, margin: '0 auto 60px' }}>
               Slack, Teams, email, or the web app. No migration. No retraining. Your employees never open a new tab.
             </p>
 
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                gap: 16,
-              }}
-            >
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
               {channelTiles.map((tile) => (
                 <div
                   key={tile.label}
                   className="card-hover"
-                  style={{
-                    background: '#FFFFFF',
-                    border: '1px solid var(--border)',
-                    borderRadius: 16,
-                    padding: '28px 24px',
-                  }}
+                  style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 24px' }}
                 >
-                  {/* FINDING-009: Real brand icons */}
                   <div style={{ marginBottom: 16 }}>{tile.icon}</div>
                   <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>{tile.label}</p>
                   <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.55 }}>{tile.copy}</p>
@@ -297,17 +337,8 @@ export default function HomePage() {
         {/* ── REPLACES THE DEPARTMENT ── */}
         <section style={{ background: 'var(--bg-cream)', padding: '100px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <div
-              className="mobile-stack"
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: 80,
-                alignItems: 'center',
-              }}
-            >
+            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
               <div>
-                {/* FINDING-002: Remove internal eyebrow labels */}
                 <p className="eyebrow" style={{ marginBottom: 20 }}>WHAT IT HANDLES</p>
                 <h2
                   style={{
@@ -342,7 +373,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── BUILT FOR ── */}
+        {/* ── BUILT FOR — real human photos (Shapes pattern) ── */}
         <section style={{ background: '#FFFFFF', padding: '100px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <h2
@@ -363,20 +394,61 @@ export default function HomePage() {
               Companies between 50 and 500 employees. Growing fast. HR is one or two people, plus a lot of Sheets.
             </p>
 
-            {/* FINDING-003: No emoji — use role labels + left-aligned layout */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 1, border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden' }}>
-              {builtForCards.map((card, i) => (
+            {/* Photo cards — swap images for licensed photos before launch */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
+              {[
+                {
+                  role: 'SOLO HR',
+                  title: 'The Head of People',
+                  copy: 'Running recruiting, comp, performance, and leave — alone. MambaHR is the team they never got to hire.',
+                  photo: PHOTO_SOLO_HR,
+                  alt: 'HR professional at laptop',
+                  bg: 'linear-gradient(145deg, #DDD0C4 0%, #C4A882 100%)',
+                },
+                {
+                  role: '2-PERSON TEAM',
+                  title: 'The PeopleOps duo',
+                  copy: 'Two people, 400 employees, a ticket queue that never empties. The agents clear the queue. They set the policy.',
+                  photo: PHOTO_DUO,
+                  alt: 'Two HR professionals reviewing work together',
+                  bg: 'linear-gradient(145deg, #D4CCBE 0%, #B8A48C 100%)',
+                },
+                {
+                  role: 'PRE-HR HIRE',
+                  title: 'The founder doing HR',
+                  copy: 'Until they can hire someone. MambaHR buys them the time to hire the right person — not just the next one.',
+                  photo: PHOTO_FOUNDER,
+                  alt: 'Founder working at desk',
+                  bg: 'linear-gradient(145deg, #E2D8CC 0%, #CAAD8E 100%)',
+                },
+              ].map((card) => (
                 <div
                   key={card.title}
+                  className="card-hover"
                   style={{
-                    background: i % 2 === 0 ? 'var(--bg-warm)' : '#FFFFFF',
-                    padding: '36px 32px',
-                    borderRight: i < builtForCards.length - 1 ? '1px solid var(--border)' : 'none',
+                    borderRadius: 20,
+                    overflow: 'hidden',
+                    border: '1px solid var(--border)',
+                    background: '#FFFFFF',
                   }}
                 >
-                  <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', color: 'var(--gold-dark)', background: 'var(--gold-tint)', border: '1px solid rgba(176,141,87,0.2)', borderRadius: 4, padding: '3px 8px', marginBottom: 16 }}>{card.role}</span>
-                  <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: 18, fontWeight: 600, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.01em' }}>{card.title}</h3>
-                  <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.65 }}>{card.copy}</p>
+                  {/* Human photo — swap src for licensed Stocksy image per archetype */}
+                  <div style={{ height: 240, overflow: 'hidden', position: 'relative', background: card.bg }}>
+                    <PhotoImg
+                      src={card.photo}
+                      alt={card.alt}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+                    />
+                    {/* Role badge overlaid on photo */}
+                    <div style={{ position: 'absolute', top: 16, left: 16 }}>
+                      <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', color: '#FFFFFF', background: 'rgba(28,25,23,0.65)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', borderRadius: 5, padding: '4px 10px' }}>{card.role}</span>
+                    </div>
+                  </div>
+                  {/* Copy below photo */}
+                  <div style={{ padding: '24px 24px 28px' }}>
+                    <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: 17, fontWeight: 600, color: 'var(--text)', marginBottom: 10, letterSpacing: '-0.01em' }}>{card.title}</h3>
+                    <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.65 }}>{card.copy}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -392,7 +464,6 @@ export default function HomePage() {
         {/* ── COMPLIANCE ENGINE ── */}
         <section style={{ background: 'var(--bg-warm)', padding: '100px 24px' }}>
           <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center' }}>
-            {/* FINDING-002: "THE MOAT" → "COMPLIANCE ENGINE" */}
             <p className="eyebrow" style={{ marginBottom: 20 }}>COMPLIANCE ENGINE</p>
             <h2
               style={{
@@ -411,7 +482,6 @@ export default function HomePage() {
               We built our own benchmark for HR compliance accuracy across federal employment law, 50 state codes, and edge cases like FMLA + state PFML stacking. MambaHR scores 94.2%. The best general-purpose frontier model scores 31%. That gap is the product.
             </p>
 
-            {/* FINDING-007: Simplify to 2 bars — more credible */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 56, textAlign: 'left', maxWidth: 560, margin: '0 auto 56px' }}>
               {[
                 { label: 'MambaHR', score: 94.2, gold: true },
