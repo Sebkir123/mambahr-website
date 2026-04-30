@@ -141,29 +141,71 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Values */}
-        <section style={{ background: '#FFFFFF', padding: '100px 24px' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>WHAT WE BELIEVE</p>
-            <h2
-              style={{
-                textAlign: 'center',
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(28px, 3vw, 40px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 64,
-              }}
-            >
-              The principles behind the product.
-            </h2>
+        {/* Values — editorial numbered list */}
+        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div style={{ marginBottom: 64, maxWidth: 720 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>WHAT WE BELIEVE</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(36px, 4.5vw, 60px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.0,
+                }}
+              >
+                Four principles<br />behind the product.
+              </h2>
+            </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-              {values.map((v) => (
-                <div key={v.label} style={{ padding: '28px 0', borderTop: '1px solid var(--border)' }}>
-                  <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 10, lineHeight: 1.4 }}>{v.label}</p>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.65 }}>{v.desc}</p>
+            {/* Section divider rule */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 8 }}>
+              <span style={{ height: 1, background: 'var(--border)', flex: 1 }} />
+            </div>
+
+            <div>
+              {values.map((v, i) => (
+                <div
+                  key={v.label}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '64px 1fr',
+                    gap: 32,
+                    alignItems: 'baseline',
+                    padding: '32px 0',
+                    borderBottom: '1px solid var(--border-faint)',
+                  }}
+                >
+                  <span
+                    className="mono"
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: 'var(--gold-dark)',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 32, alignItems: 'baseline' }} className="mobile-stack">
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-serif), Georgia, serif',
+                        fontSize: 'clamp(22px, 2.5vw, 30px)',
+                        fontWeight: 400,
+                        color: 'var(--text)',
+                        letterSpacing: '-0.02em',
+                        lineHeight: 1.15,
+                        margin: 0,
+                      }}
+                    >
+                      {v.label}
+                    </h3>
+                    <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, margin: 0 }}>{v.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
