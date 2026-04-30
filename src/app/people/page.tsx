@@ -178,7 +178,7 @@ export default function PeoplePage() {
                 Every people action is compliance-checked.
               </h2>
               <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.7 }}>
-                The Compliance agent runs on every people workflow — checking state law, flagging edge cases, citing regulations, and escalating to legal when necessary. 94.2% accuracy on HR-Bench.
+                The Compliance agent runs on every people workflow — checking state law, flagging edge cases, citing regulations, and escalating to legal when necessary.
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>

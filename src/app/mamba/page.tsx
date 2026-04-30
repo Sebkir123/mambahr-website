@@ -107,11 +107,6 @@ const channelDetails = [
     copy: 'Same agent on the Microsoft surface. Adaptive cards, @mentions, and tabs in Teams channels. Works with your existing Microsoft 365 identity.',
   },
   {
-    label: 'Email',
-    color: '#EA4335',
-    copy: "Forward a contract. Reply to an offer. CC hr@mambahr.com on any thread. The agent reads the email, takes the appropriate action, and replies to the thread. Full audit log on every email interaction.",
-  },
-  {
     label: 'Web app',
     color: '#1C1917',
     copy: 'The Today queue, People directory, hiring pipeline, reports, and settings — all in a web app at app.mambahr.com. Used by the CHRO for approvals and analytics. Optional for everyone else.',

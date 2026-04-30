@@ -103,7 +103,7 @@ export const platformItems: NavItem[] = [
   {
     label: 'Channels',
     href: '/coming-soon/channels',
-    description: 'Slack, Teams, Email, Web',
+    description: 'Slack, Teams, Web app',
     live: false,
   },
   {
@@ -125,9 +125,9 @@ export const platformItems: NavItem[] = [
     live: true,
   },
   {
-    label: 'HR-Bench',
-    href: '/coming-soon/hr-bench',
-    description: '94.2% on HR compliance accuracy',
+    label: 'Compliance Engine',
+    href: '/coming-soon/compliance-engine',
+    description: 'Federal + 50 state employment law',
     live: false,
   },
 ]
@@ -181,9 +181,9 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
     title: 'Human-in-the-Loop',
     body: 'Every high-stakes action is gated. The agent surfaces a Decision Card — rationale, evidence, risk class, CUQ score — and you approve or decline. Terminations are always-human. Always.',
   },
-  'hr-bench': {
-    title: 'HR-Bench',
-    body: "The benchmark we built because no one else had one. 1,200 HR compliance scenarios across federal law and 50 state codes. MambaHR scores 94.2%. The next-best frontier model scores 31%. That gap is the product.",
+  'compliance-engine': {
+    title: 'Compliance Engine',
+    body: 'A curated employment-law dataset covering federal regulations and all 50 state codes. Every compliance call from MambaHR cites its regulatory source. Edge cases — FMLA + state PFML stacking, multi-state pay transparency, exempt classification — route to human review by default.',
   },
   customers: {
     title: 'Customers',

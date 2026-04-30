@@ -43,7 +43,7 @@ const todayCards = [
 
 const heroValueProps = [
   '14 specialist agents. One orchestrator. Zero callouts.',
-  '94.2% accuracy on federal + 50 state employment law.',
+  'Federal + 50 state employment law, cited on every action.',
   'Replaces an HR team of 4. Keeps your CHRO in the loop.',
 ]
 
@@ -111,13 +111,13 @@ const faqs = [
   { q: 'How is this different from a Slack bot or HRIS chatbot?', a: 'Slack bots answer questions. MambaHR takes action. The agent reads the thread, checks the policy, files the form, updates records, notifies the manager, and logs the audit trail. It does the work, not the lookup.' },
   { q: 'What happens if the agent gets something wrong?', a: 'Every action is risk-classified L1–L5. High-risk actions (terminations, RIF, separation agreements, comp changes above threshold) are always-human. Lower-risk actions (PTO within policy, standard onboarding) are automated with full audit log. You can override anything. CUQ scoring tells you when the agent is uncertain.' },
   { q: 'How long does setup take?', a: 'Most teams are running in 2–3 days. Day 1 connect, day 2 shadow mode (agent suggests, you approve everything), day 3+ live mode in one function. Full deployment in weeks 4–8.' },
-  { q: 'What about compliance? Are we still on the hook?', a: 'Legally, yes — you are always the employer. But MambaHR scores 94.2% on HR-Bench (federal + 50 state employment law) vs 31% for the best general LLM. Every action cites its regulatory source. Edge cases route to human review by default.' },
+  { q: 'What about compliance? Are we still on the hook?', a: 'Legally, yes — you are always the employer. MambaHR runs on a curated employment-law engine covering federal regulations and all 50 state codes. Every compliance call cites its regulatory source. Edge cases route to human review by default — your CHRO (or external counsel) signs off before anything binding goes out.' },
   { q: 'Who owns the data?', a: 'You do. We are a processor, not a controller. Data can be exported or deleted on request. Bedrock prompt logging is disabled at the AWS account level — we cannot see your prompts. SOC 2 Type II audit underway.' },
 ]
 
 const founders = [
   { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: 'Three startups. Ran people ops for 200 → 2,000 headcount. Watched the same playbook fail every time.', avatar: HEADSHOT(13) },
-  { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Decade in agent systems and ML infrastructure. Built HR-Bench. Obsessed with the gap between LLM capability and HR software reality.', avatar: HEADSHOT(60) },
+  { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Decade in agent systems and ML infrastructure. Designed the compliance engine. Obsessed with the gap between LLM capability and HR software reality.', avatar: HEADSHOT(60) },
 ]
 
 export default function HomePage() {
@@ -455,7 +455,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ───────────────────────── COMPLIANCE ENGINE — what we catch that GPT misses ───────────────────────── */}
+        {/* ───────────────────────── COMPLIANCE ENGINE — real edge cases the engine handles ───────────────────────── */}
         <section style={{ background: 'var(--bg-warm)', padding: '120px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             {/* Hero */}
@@ -472,34 +472,37 @@ export default function HomePage() {
                   lineHeight: 1.0,
                 }}
               >
-                The mistakes a general<br />
-                <span style={{ color: 'var(--gold-dark)' }}>LLM would make.</span>
+                The cases that<br />
+                <span style={{ color: 'var(--gold-dark)' }}>cost you money.</span>
               </h2>
               <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 600 }}>
-                We graded MambaHR and the best frontier LLM on 1,200 real HR compliance scenarios. Three examples of what they got wrong — and what cost the company.
+                Federal employment law, all 50 state codes, kept current and cited. Three real edge cases — and how MambaHR handles them, citation by citation.
               </p>
             </div>
 
-            {/* Side-by-side compliance examples */}
+            {/* Three deeper compliance scenario cards */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
               {[
                 {
                   scenario: 'Employee on FMLA also requests CA CFRA — stack or sequential?',
-                  llm: 'Approves 12 weeks total. Misses CFRA stacking right under 2 CCR §11091.4(c).',
-                  mamba: 'Up to 24 weeks combined. Cites the regulation. Routes ambiguous edge to legal.',
-                  cost: '$30K back leave',
+                  cost: '$30K back leave + DLSE penalty',
+                  analysis: 'Eligible for both: 14 mo tenure ✓ · 1,400 hrs ✓ · CA CFRA stacks with FMLA per 2 CCR §11091.4(c). Up to 24 weeks combined.',
+                  citations: ['29 USC §2611 (FMLA eligibility)', 'CA Gov Code §12945.2 (CFRA stacking)', 'DLSE 7-2024 opinion letter'],
+                  action: 'Approve 24 weeks combined · Route ambiguous overlap to legal',
                 },
                 {
-                  scenario: 'Posting a $250K role in CO + NY + WA without salary disclosure.',
-                  llm: 'Drafts and posts the JD. No flag.',
-                  mamba: 'Blocks the post. Adds required salary range per state. Files internal posting.',
+                  scenario: 'Posting a $250K role across CO + NY + WA without salary disclosure.',
                   cost: '$10K per violation, per state',
+                  analysis: 'Three jurisdictions trigger pay transparency. CO requires range in posting. NY requires range + bona fide hiring. WA requires range + benefits summary.',
+                  citations: ['CO C.R.S. §8-5-201 (Equal Pay for Equal Work)', 'NY S9427A (Pay Transparency Law)', 'WA RCW 49.58.110'],
+                  action: 'Block post · Add required ranges and benefits per jurisdiction',
                 },
                 {
-                  scenario: 'New hire offer at $185K base — flat W-2 vs CA exempt classification.',
-                  llm: 'Generates a W-2 offer. No exemption analysis.',
-                  mamba: 'Verifies CA exemption test (salary basis + duties). Flags a borderline case for review.',
-                  cost: '$50K back wages + penalties',
+                  scenario: 'New hire offer at $58K — exempt or non-exempt under CA + federal?',
+                  cost: '$50K back wages + 30% penalties',
+                  analysis: 'CA exempt minimum is 2× state minimum wage = $66,560 in 2026. Below threshold even before duties test. Cannot lawfully classify as exempt.',
+                  citations: ['29 CFR Part 541 (FLSA exempt tests)', 'CA Labor Code §515 (CA exempt threshold)', 'IWC Wage Order 4-2001'],
+                  action: 'Reclassify as non-exempt · Surface OT eligibility · Adjust offer letter',
                 },
               ].map((row) => (
                 <div
@@ -517,55 +520,66 @@ export default function HomePage() {
                       {row.scenario}
                     </p>
                     <span style={{ fontSize: 11, fontWeight: 700, color: '#B91C1C', background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 999, padding: '4px 10px', whiteSpace: 'nowrap', letterSpacing: '0.04em' }}>
-                      MISS COSTS {row.cost.toUpperCase()}
+                      EXPOSURE: {row.cost.toUpperCase()}
                     </span>
                   </div>
-                  {/* Two-column comparison */}
-                  <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-                    <div style={{ padding: '20px 28px', borderRight: '1px solid var(--border-faint)' }}>
-                      <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text-faint)', textTransform: 'uppercase', marginBottom: 10 }}>
-                        Best frontier LLM
-                      </p>
-                      <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>
-                        <span style={{ color: '#B91C1C', marginRight: 6, fontWeight: 700 }}>✗</span>
-                        {row.llm}
-                      </p>
-                    </div>
-                    <div style={{ padding: '20px 28px', background: 'rgba(176,141,87,0.04)' }}>
-                      <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'var(--gold-dark)', textTransform: 'uppercase', marginBottom: 10 }}>
-                        MambaHR
-                      </p>
-                      <p style={{ fontSize: 14, color: 'var(--text)', lineHeight: 1.55, margin: 0 }}>
-                        <span style={{ color: '#15803D', marginRight: 6, fontWeight: 700 }}>✓</span>
-                        {row.mamba}
-                      </p>
+                  {/* MambaHR analysis */}
+                  <div style={{ padding: '24px 28px' }}>
+                    <p style={{ fontSize: 14, color: 'var(--text)', lineHeight: 1.6, margin: '0 0 18px' }}>
+                      {row.analysis}
+                    </p>
+                    <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 20, alignItems: 'flex-start' }}>
+                      <div>
+                        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'var(--gold-dark)', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                          Citations
+                        </p>
+                        <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                          {row.citations.map((c) => (
+                            <li key={c} style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.55, marginBottom: 3 }}>
+                              · {c}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'var(--gold-dark)', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                          Action
+                        </p>
+                        <p style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.55, margin: 0, fontWeight: 500 }}>
+                          <span style={{ color: '#15803D', marginRight: 6, fontWeight: 700 }}>✓</span>
+                          {row.action}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Score footer with mini-bars */}
-            <div style={{ marginTop: 40, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24, padding: '24px 0', borderTop: '1px solid var(--border)' }}>
-              <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: 0, lineHeight: 1.6 }}>
-                Across <strong style={{ color: 'var(--text)' }}>1,200 graded scenarios</strong> in HR-Bench:
-              </p>
-              <div style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
-                <div>
-                  <span className="mono" style={{ fontSize: 12, color: 'var(--text-faint)', display: 'block', letterSpacing: '0.04em' }}>BEST FRONTIER LLM</span>
-                  <span className="mono" style={{ fontSize: 28, fontWeight: 400, color: 'var(--text-muted)', fontFamily: 'var(--font-serif), Georgia, serif', letterSpacing: '-0.02em' }}>31.0%</span>
+            {/* Methodology footer — honest claims about how the engine works */}
+            <div style={{ marginTop: 48, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, paddingTop: 32, borderTop: '1px solid var(--border)' }} className="mobile-stack">
+              {[
+                { stat: '50', unit: 'states + federal', desc: 'Every jurisdiction your employees live in' },
+                { stat: '100%', unit: 'cited', desc: 'Every compliance call cites its regulation' },
+                { stat: '< 48h', unit: 'reg updates', desc: 'New rulings reach the engine within 48 hours' },
+              ].map((m) => (
+                <div key={m.unit}>
+                  <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 36, fontWeight: 400, color: 'var(--gold-dark)', letterSpacing: '-0.02em', lineHeight: 1, margin: '0 0 4px' }}>
+                    {m.stat}
+                  </p>
+                  <p style={{ fontSize: 12, color: 'var(--text-faint)', fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', margin: '0 0 8px' }}>
+                    {m.unit}
+                  </p>
+                  <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>
+                    {m.desc}
+                  </p>
                 </div>
-                <span style={{ fontSize: 24, color: 'var(--text-faint)' }}>→</span>
-                <div>
-                  <span className="mono" style={{ fontSize: 12, color: 'var(--gold-dark)', display: 'block', letterSpacing: '0.04em', fontWeight: 600 }}>MAMBAHR</span>
-                  <span style={{ fontSize: 28, fontWeight: 400, color: 'var(--gold-dark)', fontFamily: 'var(--font-serif), Georgia, serif', letterSpacing: '-0.02em' }}>94.2%</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* ───────────────────────── WHERE IT LIVES — real channel mockups ───────────────────────── */}
+        {/* ───────────────────────── WHERE IT LIVES — 3 channels with real logos ───────────────────────── */}
         <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ marginBottom: 64, maxWidth: 720 }}>
@@ -581,29 +595,20 @@ export default function HomePage() {
                   lineHeight: 1.0,
                 }}
               >
-                Four surfaces.<br />Same agent.
+                Slack. Teams.<br />The web app.
               </h2>
               <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 580, lineHeight: 1.6 }}>
-                Mamba meets you in the tool you&apos;re already in. Same context, same memory, same audit trail across all four.
+                Mamba meets your team in the tool they already use. Same context, same memory, same audit trail across all three.
               </p>
             </div>
 
-            {/* 2x2 grid of real channel mockups */}
-            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
+            {/* 3-column grid of real channel mockups */}
+            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
 
               {/* Slack mockup */}
               <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <svg width="18" height="18" viewBox="0 0 54 54" fill="none">
-                    <path d="M19.7 33.2c0 2.7-2.2 4.9-4.9 4.9s-4.9-2.2-4.9-4.9 2.2-4.9 4.9-4.9h4.9v4.9z" fill="#E01E5A"/>
-                    <path d="M22.2 33.2c0-2.7 2.2-4.9 4.9-4.9s4.9 2.2 4.9 4.9v12.3c0 2.7-2.2 4.9-4.9 4.9s-4.9-2.2-4.9-4.9V33.2z" fill="#E01E5A"/>
-                    <path d="M27.1 19.7c-2.7 0-4.9-2.2-4.9-4.9s2.2-4.9 4.9-4.9 4.9 2.2 4.9 4.9v4.9H27.1z" fill="#36C5F0"/>
-                    <path d="M27.1 22.2c2.7 0 4.9 2.2 4.9 4.9s-2.2 4.9-4.9 4.9H14.8c-2.7 0-4.9-2.2-4.9-4.9s2.2-4.9 4.9-4.9H27.1z" fill="#36C5F0"/>
-                    <path d="M40.6 27.1c0 2.7-2.2 4.9-4.9 4.9s-4.9-2.2-4.9-4.9V14.8c0-2.7 2.2-4.9 4.9-4.9s4.9 2.2 4.9 4.9v12.3z" fill="#2EB67D"/>
-                    <path d="M38.1 30.7c2.7 0 4.9 2.2 4.9 4.9s-2.2 4.9-4.9 4.9-4.9-2.2-4.9-4.9V30.7H38.1z" fill="#2EB67D"/>
-                    <path d="M33.2 38.1c0-2.7 2.2-4.9 4.9-4.9s4.9 2.2 4.9 4.9-2.2 4.9-4.9 4.9H33.2v-4.9z" fill="#ECB22E"/>
-                    <path d="M30.7 35.6c-2.7 0-4.9-2.2-4.9-4.9s2.2-4.9 4.9-4.9 4.9 2.2 4.9 4.9v12.3c0 2.7-2.2 4.9-4.9 4.9s-4.9-2.2-4.9-4.9V35.6z" fill="#ECB22E"/>
-                  </svg>
+                  <img src="/slack-new-logo.svg" alt="Slack" width={20} height={20} style={{ display: 'block' }} />
                   <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Slack</span>
                   <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>#people-ops</span>
                 </div>
@@ -637,13 +642,7 @@ export default function HomePage() {
               {/* Teams mockup */}
               <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M20 3H8C6.9 3 6 3.9 6 5v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" fill="#5059C9"/>
-                    <circle cx="15.5" cy="7.5" r="2.5" fill="white"/>
-                    <path d="M12 11h7v2.5c0 1.9-1.6 3.5-3.5 3.5S12 15.4 12 13.5V11z" fill="white"/>
-                    <path d="M2 9h6v7c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V9z" fill="#7B83EB"/>
-                    <circle cx="5" cy="6" r="2" fill="#7B83EB"/>
-                  </svg>
+                  <img src="/Microsoft_Symbol_0.svg" alt="Microsoft Teams" width={20} height={20} style={{ display: 'block' }} />
                   <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Microsoft Teams</span>
                   <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>Adaptive Card</span>
                 </div>
@@ -654,41 +653,16 @@ export default function HomePage() {
                     <p style={{ fontSize: 12, color: 'var(--text-muted)', margin: '0 0 14px', lineHeight: 1.5 }}>23 packets ready · calibration scheduled June 15 · expected ratings within 1.2σ</p>
                     <div style={{ display: 'flex', gap: 8 }}>
                       <button style={{ background: '#5059C9', color: '#FFFFFF', border: 'none', borderRadius: 6, padding: '6px 14px', fontSize: 11, fontWeight: 600, cursor: 'pointer' }}>Approve all</button>
-                      <button style={{ background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border)', borderRadius: 6, padding: '6px 14px', fontSize: 11, fontWeight: 500, cursor: 'pointer' }}>Review one by one</button>
+                      <button style={{ background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border)', borderRadius: 6, padding: '6px 14px', fontSize: 11, fontWeight: 500, cursor: 'pointer' }}>Review</button>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Email mockup */}
-              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <rect width="24" height="24" rx="4" fill="#EA4335"/>
-                    <path d="M4 8l8 6 8-6" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-                    <rect x="4" y="7" width="16" height="11" rx="1" stroke="white" strokeWidth="1.5" fill="none"/>
-                  </svg>
-                  <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Email</span>
-                  <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)' }}>Forwarded · 2m ago</span>
-                </div>
-                <div style={{ padding: 20, flex: 1 }}>
-                  <div style={{ marginBottom: 10, paddingBottom: 10, borderBottom: '1px solid var(--border-faint)' }}>
-                    <p style={{ fontSize: 11, color: 'var(--text-faint)', margin: 0, fontFamily: 'var(--font-mono), monospace' }}>From: hr@acme.co  →  hr@mambahr.com</p>
-                    <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', margin: '4px 0 0' }}>Fwd: Signed offer letter — Jordan Kim</p>
-                  </div>
-                  <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.06em', textTransform: 'uppercase', margin: '0 0 8px' }}>Mamba auto-reply</p>
-                  <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
-                    Filed in Vault. Onboarding agent triggered: equipment ordered, Okta access provisioned, May 12 calendar invite sent. <span style={{ color: 'var(--gold-dark)', fontWeight: 600 }}>Audit log entry written.</span>
-                  </p>
                 </div>
               </div>
 
               {/* Web app mockup */}
               <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span style={{ width: 18, height: 18, borderRadius: 4, background: '#1C1917', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <span style={{ color: 'var(--gold)', fontSize: 9 }}>◆</span>
-                  </span>
+                  <img src="/MambaHR_logo.png" alt="MambaHR" width={20} height={20} style={{ display: 'block', objectFit: 'contain' }} />
                   <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Web app</span>
                   <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>app.mambahr.com</span>
                 </div>
@@ -874,7 +848,7 @@ export default function HomePage() {
                   price: '$299',
                   unit: '/month flat',
                   outcome: 'Replaces your founder doing HR',
-                  features: ['All 14 agents', 'Slack, Teams, email, web', 'Migrate from any HRIS', 'Audit log on every action', 'Email support'],
+                  features: ['All 14 agents', 'Slack + Teams + web app', 'Migrate from any HRIS', 'Audit log on every action', 'Email support'],
                   highlight: false,
                 },
                 {

@@ -20,7 +20,7 @@ const tiers = [
     features: [
       'Up to 25 employees',
       'All 14 agents enabled',
-      'Slack, Teams, Email, Web app',
+      'Slack, Teams, Web app',
       'Migrate from any HRIS',
       'Audit log on every action',
       'Email support · 24h response',
@@ -72,13 +72,13 @@ const tiers = [
 const included = [
   'Full HRIS — system of record for every employee',
   'All 14 HR agents (Hiring, Leave, Compliance, Change Management, and 10 more)',
-  'Slack, Teams, Email, and Web app',
+  'Slack, Teams, and Web app',
   'Human-in-the-Loop approval queue (Today)',
   'Immutable audit log on every agent action',
   'RBAC with 8 default roles',
   'Migration from any HRIS (Gusto, Workday, Rippling, BambooHR, Namely, Personio, HiBob)',
   'Integrations: Okta, Carta, DocuSign, Greenhouse, Lever, Lattice, Checkr',
-  'HR-Bench compliance engine (94.2% accuracy)',
+  'Compliance engine — federal + 50 state codes, every action cited',
   'SOC 2 compliance evidence (in progress)',
 ]
 

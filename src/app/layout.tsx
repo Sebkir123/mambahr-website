@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mambahr.com'),
   title: 'MambaHR — Your HR team, in Slack.',
   description:
-    'MambaHR is an AI HR department that runs in Slack, Teams, and email. Hiring, payroll, leave, performance, compliance — the agents do the work. One human approves the calls that matter.',
+    'MambaHR is an AI HR department that runs in Slack, Teams, and the web. Hiring, payroll, leave, performance, compliance — the agents do the work. One human approves the calls that matter.',
   keywords: [
     'HR AI agent',
     'people operations AI',

@@ -19,7 +19,7 @@ const team = [
   {
     name: 'Sebastian Kirsch',
     role: 'CTO & Co-Founder',
-    bio: 'Sebastian has spent a decade building agent systems and ML infrastructure. He designed the compliance engine, authored HR-Bench, and is obsessed with the gap between what frontier models can do and what HR software actually does with them. The gap is the business.',
+    bio: 'Sebastian has spent a decade building agent systems and ML infrastructure. He designed the compliance engine and is obsessed with the gap between what frontier models can do and what HR software actually does with them. The gap is the business.',
     linkedin: 'https://linkedin.com/in/sebastiankirsch',
   },
 ]
@@ -27,7 +27,7 @@ const team = [
 const values = [
   { label: 'The human in the loop is a feature.', desc: "Every high-stakes HR decision has a person signing the paperwork. That's not a limitation — it's the design. Trust requires accountability." },
   { label: 'Honesty is the product.', desc: 'The agent cites its sources. It shows its confidence score. It escalates when it does not know. An agent that never says it is uncertain is not trustworthy.' },
-  { label: 'Compliance is not marketing.', desc: 'We built HR-Bench because we needed to prove our compliance accuracy before asking any company to trust us with their people data.' },
+  { label: 'Compliance is not marketing.', desc: 'We built a curated employment-law engine — federal + all 50 state codes — because companies trust us with their people data, and we need to earn that every day.' },
   { label: 'Small HR teams deserve enterprise tools.', desc: 'The compliance infrastructure, the audit trail, the FMLA stacking logic — all of it built for a Head of People running solo, not just for the Fortune 500.' },
 ]
 
@@ -72,7 +72,7 @@ export default function AboutPage() {
                 The existing tools made the database better. They did not make the work go away. After three startups and the same structural failure each time, Brian and Sebastian started asking a different question: what if the work itself went away?
               </p>
               <p>
-                Frontier models had gotten good enough at legal reasoning to make this possible — but no one had built the benchmark to prove it. We built HR-Bench. 1,200 graded HR compliance scenarios across federal law and 50 state codes. MambaHR scores 94.2%. Frontier general-purpose models score in the low 30s. That gap is the product.
+                Frontier models had gotten good enough at legal reasoning to make this possible — but only with the right scaffolding. We curated an employment-law engine covering federal regulations and all 50 state codes, wired it into the agents, and made every compliance call cite its source. The result is an HR department that catches the edge cases that ruin a Friday afternoon — FMLA + state PFML stacking, multi-state pay transparency, exempt classification — and routes the ambiguous ones to a human.
               </p>
               <p>
                 We are building the AI HR department. The Chief People Officer stays — for judgment, not work. The agents handle the rest.
