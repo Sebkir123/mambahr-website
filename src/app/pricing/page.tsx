@@ -16,7 +16,7 @@ const tiers = [
     desc: 'Start in one HR function. Validate the impact, then expand to the full department.',
     features: [
       'Up to 100 employees',
-      'All 13 agents enabled',
+      'All 14 agents enabled',
       'Slack + Teams + Email + Web',
       'HIL approval queue',
       'Audit log',
@@ -32,7 +32,7 @@ const tiers = [
     desc: 'Full AI HR department. Every agent, every integration, priced by company size.',
     features: [
       'Unlimited employees',
-      'All 13 agents enabled',
+      'All 14 agents enabled',
       'Slack + Teams + Email + Web',
       'HIL approval queue',
       'Audit log + SOC 2 evidence',
@@ -64,7 +64,7 @@ const tiers = [
 
 const included = [
   'Full HRIS — system of record for every employee',
-  'All 13 HR agents (Hiring, Leave, Compliance, Offboarding, and 9 more)',
+  'All 14 HR agents (Hiring, Leave, Compliance, Change Management, and 10 more)',
   'Slack, Teams, Email, and Web app',
   'Human-in-the-Loop approval queue (Today)',
   'Immutable audit log on every agent action',
@@ -77,7 +77,7 @@ const included = [
 
 const faqs = [
   { q: 'Why no published pricing?', a: "Pricing depends on employee count, entity structure, and which integrations you need. We respond to every inquiry personally — usually with a quote within 24 hours." },
-  { q: 'How do you charge — per seat, per employee, per agent?', a: "Per employee, per month, banded by company size. All 13 agents are included. No per-feature pricing, no add-ons, no surprise overage fees." },
+  { q: 'How do you charge — per seat, per employee, per agent?', a: "Per employee, per month, banded by company size. All 14 agents are included. No per-feature pricing, no add-ons, no surprise overage fees." },
   { q: "What's the contract length?", a: "The pilot is 90 days, no long-term commitment. Production contracts start at annual. Month-to-month available on request." },
   { q: 'What does the pilot look like?', a: 'Day 1–3: connect your HRIS and run a data audit. Day 3–7: shadow mode (agents suggest actions, you approve everything). Day 7–14: live mode in one function (e.g., leave requests). Day 14+: expand by function as confidence grows.' },
   { q: 'Can we start in one HR function?', a: 'Yes. Most teams start with Leave and then add Hiring and Compliance. Full deployment typically happens in weeks 4–8.' },
@@ -110,7 +110,7 @@ export default function PricingPage() {
               Simple pricing.<br />Every agent included.
             </h1>
             <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-              Per employee, per month. All 13 agents. All integrations. All channels. Priced by company size — talk to us for a quote.
+              Per employee, per month. All 14 agents. All integrations. All channels. Priced by company size — talk to us for a quote.
             </p>
           </div>
         </section>

@@ -1,5 +1,7 @@
+import { ReactNode } from 'react'
+
 type AgentCardProps = {
-  letter: string
+  icon: ReactNode
   name: string
   role: string
   status: 'active' | 'idle' | 'working'
@@ -8,18 +10,20 @@ type AgentCardProps = {
 }
 
 const statusMap = {
-  active:  { dot: '#22C55E', label: 'On call'  },
-  working: { dot: '#EAB308', label: 'Working'  },
-  idle:    { dot: '#A8A29E', label: 'Idle'     },
+  active:  { dot: '#22C55E', label: 'On call' },
+  working: { dot: '#EAB308', label: 'Working' },
+  idle:    { dot: '#A8A29E', label: 'Idle'    },
 }
 
-export default function AgentCard({ letter, name, role, status, activity, resolved }: AgentCardProps) {
+export default function AgentCard({ icon, name, role, status, activity, resolved }: AgentCardProps) {
   const s = statusMap[status]
+  const isActive = status !== 'idle'
+
   return (
     <div
       style={{
         background: '#FFFFFF',
-        border: '1px solid var(--border)',
+        border: isActive ? '1px solid rgba(176,141,87,0.25)' : '1px solid var(--border)',
         borderRadius: 14,
         padding: '20px 18px',
         display: 'flex',
@@ -27,10 +31,11 @@ export default function AgentCard({ letter, name, role, status, activity, resolv
         gap: 14,
         position: 'relative',
         transition: 'all 0.18s cubic-bezier(0.16,1,0.3,1)',
+        boxShadow: isActive ? '0 1px 3px rgba(176,141,87,0.06)' : 'none',
       }}
       className="card-hover"
     >
-      {/* Top row: avatar + status */}
+      {/* Top row: icon + status */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
         <div
           style={{
@@ -42,14 +47,10 @@ export default function AgentCard({ letter, name, role, status, activity, resolv
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontFamily: 'var(--font-serif), Georgia, serif',
-            fontSize: 26,
-            fontWeight: 400,
             color: 'var(--gold-dark)',
-            letterSpacing: '-0.02em',
           }}
         >
-          {letter}
+          {icon}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 11, color: 'var(--text-muted)', fontWeight: 500 }}>
           <span style={{ width: 6, height: 6, borderRadius: '50%', background: s.dot }} />

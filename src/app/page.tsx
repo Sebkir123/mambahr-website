@@ -7,6 +7,11 @@ import IntegrationsMarquee from '@/components/sections/integrations-marquee'
 import PhotoImg from '@/components/surfaces/photo-img'
 import EmployeeDirectory from '@/components/surfaces/employee-directory'
 import AgentCard from '@/components/surfaces/agent-card'
+import {
+  HiringIcon, OnboardingIcon, LifecycleIcon, CompIcon, TimeOffIcon,
+  PerformanceIcon, LDIcon, EmployeeRelationsIcon, ComplianceIcon,
+  OffboardingIcon, ReportsIcon, CultureIcon, HROpsIcon, ChangeMgmtIcon,
+} from '@/components/surfaces/agent-icons'
 import MigrationCard from '@/components/surfaces/migration-card'
 import PolicyCard from '@/components/surfaces/policy-card'
 
@@ -42,26 +47,27 @@ const todayCards = [
 ]
 
 const heroValueProps = [
-  '13 specialist agents. One orchestrator. Zero callouts.',
+  '14 specialist agents. One orchestrator. Zero callouts.',
   '94.2% accuracy on federal + 50 state employment law.',
   'Replaces an HR team of 4. Keeps your CHRO in the loop.',
 ]
 
-// 13 agents — designed as profile cards with avatar (letter), name, role, status, activity
+// 14 specialist agents — profile cards with custom function icons
 const agents = [
-  { letter: 'H', name: 'Hiring',         role: 'Recruiting, screening, offers',           status: 'working' as const, activity: 'Drafting offer for Maya Chen — $195k', resolved: 47 },
-  { letter: 'O', name: 'Onboarding',     role: 'Day-one ready in 3 days',                 status: 'active'  as const, activity: '2 new hires starting Monday',          resolved: 18 },
-  { letter: 'L', name: 'Lifecycle',      role: 'Promotions, transfers, role changes',     status: 'idle'    as const, resolved: 12 },
-  { letter: 'C', name: 'Comp & Benefits',role: 'Bands, equity, enrollment',               status: 'working' as const, activity: 'Running pay equity audit',             resolved: 8  },
-  { letter: 'T', name: 'Time Off',       role: 'PTO, FMLA, parental, disability',         status: 'active'  as const, activity: 'Resolved 31 PTO requests in 4.2s avg', resolved: 31 },
-  { letter: 'P', name: 'Performance',    role: 'Reviews, PIPs, calibration',              status: 'active'  as const, activity: 'Q2 cycle: 23/47 packets done',         resolved: 23 },
-  { letter: 'L', name: 'L&D',            role: 'Training, career paths, tuition',         status: 'idle'    as const, resolved: 6  },
-  { letter: 'E', name: 'Employee Relations', role: 'Investigations, accommodations',      status: 'working' as const, activity: 'Triaging anonymous report',            resolved: 3  },
-  { letter: 'C', name: 'Compliance',     role: '95K lines of employment law',             status: 'active'  as const, activity: 'Filing EEO-1 — due May 31',            resolved: 14 },
-  { letter: 'O', name: 'Offboarding',    role: 'Resignations, terminations, RIF',         status: 'idle'    as const, resolved: 4  },
-  { letter: 'R', name: 'Reports',        role: 'Headcount, turnover, DEI, board',         status: 'active'  as const, activity: 'Generating Q2 board pack',             resolved: 9  },
-  { letter: 'C', name: 'Culture',        role: 'Surveys, eNPS, recognition',              status: 'idle'    as const, resolved: 5  },
-  { letter: 'O', name: 'HR Ops',         role: 'Data quality, vendor mgmt, policy',       status: 'active'  as const, activity: 'Auditing HRIS data',                   resolved: 7  },
+  { icon: <HiringIcon />,            name: 'Hiring',            role: 'Recruiting, screening, offers',         status: 'working' as const, activity: 'Drafting offer for Maya Chen — $195k', resolved: 47 },
+  { icon: <OnboardingIcon />,        name: 'Onboarding',        role: 'Day-one ready in 3 days',                status: 'active'  as const, activity: '2 new hires starting Monday',          resolved: 18 },
+  { icon: <LifecycleIcon />,         name: 'Lifecycle',         role: 'Promotions, transfers, role changes',    status: 'idle'    as const, resolved: 12 },
+  { icon: <CompIcon />,              name: 'Comp & Benefits',   role: 'Bands, equity, enrollment',              status: 'working' as const, activity: 'Running pay equity audit',             resolved: 8  },
+  { icon: <TimeOffIcon />,           name: 'Time Off',          role: 'PTO, FMLA, parental, disability',        status: 'active'  as const, activity: '31 leave requests · 4.2s avg',         resolved: 31 },
+  { icon: <PerformanceIcon />,       name: 'Performance',       role: 'Reviews, PIPs, calibration',             status: 'active'  as const, activity: 'Q2 cycle: 23/47 packets done',         resolved: 23 },
+  { icon: <LDIcon />,                name: 'L&D',               role: 'Training, career paths, tuition',        status: 'idle'    as const, resolved: 6  },
+  { icon: <EmployeeRelationsIcon />, name: 'Employee Relations',role: 'Investigations, accommodations',         status: 'working' as const, activity: 'Triaging anonymous report',            resolved: 3  },
+  { icon: <ComplianceIcon />,        name: 'Compliance',        role: '95K lines of employment law',            status: 'active'  as const, activity: 'Filing EEO-1 — due May 31',            resolved: 14 },
+  { icon: <OffboardingIcon />,       name: 'Offboarding',       role: 'Resignations, terminations, RIF',        status: 'idle'    as const, resolved: 4  },
+  { icon: <ReportsIcon />,           name: 'Reports',           role: 'Headcount, turnover, DEI, board',        status: 'active'  as const, activity: 'Generating Q2 board pack',             resolved: 9  },
+  { icon: <CultureIcon />,           name: 'Culture',           role: 'Surveys, eNPS, recognition',             status: 'idle'    as const, resolved: 5  },
+  { icon: <HROpsIcon />,             name: 'HR Ops',            role: 'Data quality, vendor mgmt, policy',      status: 'active'  as const, activity: 'Auditing HRIS data',                   resolved: 7  },
+  { icon: <ChangeMgmtIcon />,        name: 'Change Management', role: 'Restructures, M&A, RIF planning',        status: 'working' as const, activity: 'Modeling Q3 reorg — 8 teams affected', resolved: 2  },
 ]
 
 const problemStats = [
@@ -454,7 +460,7 @@ export default function HomePage() {
                   lineHeight: 1.1,
                 }}
               >
-                Meet the 13 agents<br />running your HR.
+                Meet the 14 specialists<br />running your HR.
               </h2>
               <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
                 Each one a specialist. Each one always on. Each one logging every action it takes.
@@ -704,7 +710,7 @@ export default function HomePage() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                   {[
                     'Full HRIS — system of record',
-                    'All 13 agents enabled',
+                    'All 14 agents enabled',
                     'Slack, Teams, email, web app',
                     'HIL approval queue + audit log',
                     'Migration from any HRIS',

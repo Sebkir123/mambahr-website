@@ -264,7 +264,7 @@ export default function MambaPage() {
                   </span>
                 ))}
               </div>
-              <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 16 }}>13 domain sub-agents · Haiku / Sonnet / Opus routing by task complexity</p>
+              <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 16 }}>14 domain sub-agents · Haiku / Sonnet / Opus routing by task complexity</p>
             </div>
           </div>
         </section>
