@@ -254,7 +254,7 @@ export default function HomePage() {
               >
                 <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
                   <div style={{ width: 24, height: 24, borderRadius: 6, background: '#FFFFFF', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
-                    <img src="/MambaHR_logo.png" alt="Mamba" width={20} height={20} style={{ display: 'block', objectFit: 'contain' }} />
+                    <img src="/MambaHR_logo.png" alt="Mamba" width={20} height={20} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
                   </div>
                   <div>
                     <div style={{ display: 'flex', gap: 5, alignItems: 'center', marginBottom: 3 }}>
@@ -625,7 +625,7 @@ export default function HomePage() {
                   </div>
                   <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                     <div style={{ width: 28, height: 28, borderRadius: 6, background: '#FFFFFF', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
-                      <img src="/MambaHR_logo.png" alt="Mamba" width={24} height={24} style={{ display: 'block', objectFit: 'contain' }} />
+                      <img src="/MambaHR_logo.png" alt="Mamba" width={24} height={24} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
                     </div>
                     <div>
                       <div style={{ display: 'flex', gap: 6, alignItems: 'baseline' }}>
@@ -662,7 +662,7 @@ export default function HomePage() {
               {/* Web app mockup */}
               <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <img src="/MambaHR_logo.png" alt="MambaHR" width={20} height={20} style={{ display: 'block', objectFit: 'contain' }} />
+                  <img src="/MambaHR_logo.png" alt="MambaHR" width={20} height={20} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
                   <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Web app</span>
                   <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>app.mambahr.com</span>
                 </div>

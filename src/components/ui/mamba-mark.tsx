@@ -10,7 +10,7 @@ export default function MambaMark({ size = 24, alt = 'MambaHR' }: MambaMarkProps
       alt={alt}
       width={size}
       height={size}
-      style={{ display: 'block', objectFit: 'contain', flexShrink: 0 }}
+      style={{ display: 'block', objectFit: 'contain', borderRadius: 6, flexShrink: 0 }}
     />
   )
 }

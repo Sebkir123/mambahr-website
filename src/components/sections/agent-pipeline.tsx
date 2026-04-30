@@ -98,7 +98,7 @@ export default function AgentPipeline() {
             <div style={{ position: 'absolute', top: -40, right: -40, width: 120, height: 120, background: 'radial-gradient(circle, rgba(176,141,87,0.18), transparent 70%)' }} />
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16, position: 'relative' }}>
-              <img src="/MambaHR_logo.png" alt="Mamba" width={22} height={22} style={{ display: 'block', objectFit: 'contain', filter: 'brightness(1.4)' }} />
+              <img src="/MambaHR_logo.png" alt="Mamba" width={22} height={22} style={{ display: 'block', objectFit: 'contain', borderRadius: 6, filter: 'brightness(1.4)' }} />
               <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 18, color: '#FFFFFF', letterSpacing: '-0.02em' }}>Mamba</span>
               <span style={{ marginLeft: 'auto', fontSize: 9, fontWeight: 700, color: 'rgba(176,141,87,0.85)', letterSpacing: '0.16em', background: 'rgba(176,141,87,0.12)', border: '1px solid rgba(176,141,87,0.25)', borderRadius: 999, padding: '2px 8px' }}>
                 ROUTED

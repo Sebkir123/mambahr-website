@@ -61,7 +61,7 @@ export default function SlackThread({ channel, messages, compact }: SlackThreadP
               }}
             >
               {msg.isMamba ? (
-                <img src="/MambaHR_logo.png" alt="Mamba" width={compact ? 22 : 28} height={compact ? 22 : 28} style={{ display: 'block', objectFit: 'contain' }} />
+                <img src="/MambaHR_logo.png" alt="Mamba" width={compact ? 22 : 28} height={compact ? 22 : 28} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
               ) : (
                 <span style={{ fontSize: compact ? 10 : 12, fontWeight: 700, color: '#57534E' }}>{msg.initials}</span>
               )}
