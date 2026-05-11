@@ -5,94 +5,36 @@ import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
 import SlackThread from '@/components/surfaces/slack-thread'
 import RoutingLog from '@/components/surfaces/routing-log'
+import MambaExamples from '@/components/sections/mamba-examples'
 
 export const metadata: Metadata = {
   title: 'Mamba — MambaHR',
-  description: '@mamba, take it from here. Mention the agent in Slack. It reads the thread, checks the policy, takes the action, logs the trail.',
+  description: '@mamba, take it from here. Mention the agent in any Slack channel — it reads the thread, checks the policy, takes the action, and replies in seconds.',
 }
 
 const heroMessages = [
   {
-    name: 'Priya Shah',
-    initials: 'PS',
-    avatarColor: '#C4B5D4',
-    time: '9:02 AM',
-    content: 'Hey, anyone know how parental leave works for adoption? Adopting in June.',
-  },
-  {
-    name: 'Marcus Webb',
-    initials: 'MW',
+    name: 'Maya Chen',
+    initials: 'MC',
     avatarColor: '#D4C4B5',
-    time: '9:04 AM',
-    content: '@mamba — can you help here?',
+    time: '9:14 AM',
+    content: '@mamba I need 3 days off next week — Mon to Wed for a wedding 🎉',
   },
   {
     name: 'Mamba',
     initials: 'M',
     isMamba: true as const,
-    time: '9:04 AM',
+    time: '9:14 AM',
     content: (
       <div>
-        <p style={{ margin: '0 0 10px' }}>Priya — congratulations! Here is what applies to you:</p>
-        <div style={{ background: 'var(--bg-warm)', borderRadius: 8, padding: '12px 14px', fontSize: 12, lineHeight: 1.7 }}>
-          <p style={{ margin: '0 0 4px' }}>
-            <strong style={{ color: 'var(--text)' }}>Eligibility:</strong>{' '}
-            <span style={{ color: 'var(--text-muted)' }}>18 months tenure ✓ (12 months required)</span>
-          </p>
-          <p style={{ margin: '0 0 4px' }}>
-            <strong style={{ color: 'var(--text)' }}>Federal:</strong>{' '}
-            <span style={{ color: 'var(--text-muted)' }}>12 weeks FMLA unpaid (adoption covered)</span>
-          </p>
-          <p style={{ margin: '0 0 4px' }}>
-            <strong style={{ color: 'var(--text)' }}>State (CA):</strong>{' '}
-            <span style={{ color: 'var(--text-muted)' }}>8 weeks CA CFRA — stacks with FMLA</span>
-          </p>
-          <p style={{ margin: 0 }}>
-            <strong style={{ color: 'var(--text)' }}>Company top-up:</strong>{' '}
-            <span style={{ color: 'var(--text-muted)' }}>8 weeks paid per policy §4.2</span>
-          </p>
+        <p style={{ margin: '0 0 10px' }}>Approved — enjoy the wedding 🎉</p>
+        <div style={{ background: 'var(--bg-warm)', borderRadius: 8, padding: '10px 12px', fontSize: 12, lineHeight: 1.7 }}>
+          <p style={{ margin: '0 0 3px' }}><strong style={{ color: 'var(--text)' }}>Balance:</strong> <span style={{ color: 'var(--text-muted)' }}>12 → 9 days</span></p>
+          <p style={{ margin: '0 0 3px' }}><strong style={{ color: 'var(--text)' }}>Calendar:</strong> <span style={{ color: 'var(--text-muted)' }}>Apr 7–9 blocked</span></p>
+          <p style={{ margin: 0 }}><strong style={{ color: 'var(--text)' }}>Manager:</strong> <span style={{ color: 'var(--text-muted)' }}>notified · OOO set</span></p>
         </div>
-        <p style={{ margin: '10px 0 0', fontSize: 12 }}>
-          Total: up to 20 weeks. Want to start the paperwork?{' '}
-          <span style={{ color: 'var(--gold-dark)', fontWeight: 500 }}>Start leave request →</span>
-        </p>
       </div>
     ),
-  },
-]
-
-const exampleThreads = [
-  {
-    label: 'Leave request',
-    channel: 'general',
-    messages: [
-      { name: 'Emma R.', initials: 'ER', avatarColor: '#D4C4B5', time: '9:02 AM', content: '@mamba I need 3 days off next week — Mon to Wed for a wedding 🎉' },
-      { name: 'Mamba', initials: 'M', isMamba: true as const, time: '9:02 AM', content: 'Approved. Balance 12 → 9 days. Calendar blocked, manager notified.' },
-    ],
-  },
-  {
-    label: 'Offer letter',
-    channel: 'recruiting',
-    messages: [
-      { name: 'Brian Bell', initials: 'BB', avatarColor: '#B5C4D4', time: '2:12 PM', content: '@mamba write the offer for Maya at $185k base + 0.15% equity, June 1 start' },
-      { name: 'Mamba', initials: 'M', isMamba: true as const, time: '2:13 PM', content: 'Draft ready — sent to you for review before routing to Maya. Includes equity grant, cliff, and vesting terms.' },
-    ],
-  },
-  {
-    label: 'Headcount question',
-    channel: 'people-ops',
-    messages: [
-      { name: 'Sarah Kim', initials: 'SK', avatarColor: '#D4D4B5', time: '4:00 PM', content: 'How many people have we hired this quarter?' },
-      { name: 'Mamba', initials: 'M', isMamba: true as const, time: '4:00 PM', content: '14 hires Q2 (vs 9 in Q1). Engineering: 8, GTM: 4, G&A: 2. Attrition: 2 voluntary. Net headcount: +12.' },
-    ],
-  },
-  {
-    label: 'Policy question',
-    channel: 'general',
-    messages: [
-      { name: 'Liam Torres', initials: 'LT', avatarColor: '#C4D4B5', time: '10:45 AM', content: "What's the bereavement policy for an aunt?" },
-      { name: 'Mamba', initials: 'M', isMamba: true as const, time: '10:45 AM', content: 'Per policy §6.1: 1 paid day for non-immediate family (aunt, uncle, cousin). No documentation required. Want to submit a request?' },
-    ],
   },
 ]
 
@@ -100,24 +42,53 @@ const channelDetails = [
   {
     label: 'Slack',
     logo: '/slack-new-logo.svg',
-    copy: 'Mention @mamba in any channel or DM. It reads the thread context, knows who asked, checks their role and permissions, and responds in the same thread. Slash commands available for power users.',
+    copy: 'Mention @mamba in any channel or DM. The agent reads the thread, checks who\'s asking, and replies in the same place. Slash commands available too.',
   },
   {
     label: 'Microsoft Teams',
     logo: '/Microsoft_Symbol_0.svg',
-    copy: 'Same agent on the Microsoft surface. Adaptive cards, @mentions, and tabs in Teams channels. Works with your existing Microsoft 365 identity.',
+    copy: 'Same agent on Teams. Adaptive cards, @mentions, and tabs in channels. Works with your existing Microsoft 365 identity.',
   },
   {
     label: 'Web app',
     logo: '/MambaHR_logo.png',
-    copy: 'The Today queue, People directory, hiring pipeline, reports, and settings — all in a web app at app.mambahr.com. Used by the CHRO for approvals and analytics. Optional for everyone else.',
+    copy: 'Today queue, people directory, hiring pipeline, reports, and settings — all at app.mambahr.com. Used for approvals and analytics.',
   },
 ]
 
 const trustCards = [
-  { label: 'RBAC scoped to your role', desc: 'The agent only surfaces information and actions your role is authorized to see. Managers see their reports. Employees see their own data.' },
-  { label: 'Every action audit-logged', desc: 'Every tool call, every decision, every approval — written to an immutable audit log. SOC 2 evidence on day one.' },
-  { label: 'PII never enters the LLM context', desc: 'SSNs, DOBs, bank accounts, medical information — never passed to the model. The agent works with identifiers and references, not raw data.' },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <circle cx="9" cy="7" r="3" stroke="var(--gold)" strokeWidth="1.4" />
+        <path d="M3 19c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="var(--gold)" strokeWidth="1.4" strokeLinecap="round" />
+        <path d="M15 10l3 3m0 0l-3 3m3-3h-5" stroke="var(--gold)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+    label: 'Scoped to your role',
+    desc: 'The agent only surfaces what your role can see. Managers see their team. Employees see themselves.',
+  },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect x="2" y="2" width="18" height="18" rx="3" stroke="var(--gold)" strokeWidth="1.4" />
+        <path d="M6 8h10M6 12h6M6 16h8" stroke="var(--gold)" strokeWidth="1.2" strokeLinecap="round" />
+      </svg>
+    ),
+    label: 'Every action audit-logged',
+    desc: 'Every tool call, every decision, every approval — written to an immutable, cryptographically signed audit log.',
+  },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect x="3" y="9" width="16" height="11" rx="2" stroke="var(--gold)" strokeWidth="1.4" />
+        <path d="M7 9V6a4 4 0 018 0v3" stroke="var(--gold)" strokeWidth="1.4" />
+        <circle cx="11" cy="14" r="1.5" fill="var(--gold)" />
+      </svg>
+    ),
+    label: 'PII never enters the model',
+    desc: 'SSNs, DOBs, bank accounts, medical info — never passed to the LLM. The agent works with references, not raw data.',
+  },
 ]
 
 export default function MambaPage() {
@@ -126,170 +97,163 @@ export default function MambaPage() {
       <MegaNav />
       <main style={{ paddingTop: 64 }}>
 
-        {/* Hero */}
-        <section style={{ background: '#FFFFFF', padding: '100px 24px 80px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
+        {/* ── HERO ── */}
+        <section style={{ background: '#FFFFFF', padding: '90px 24px 72px' }}>
+          <div className="hero-split" style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 72, alignItems: 'center' }}>
             <div>
-              <p className="eyebrow" style={{ marginBottom: 20 }}>MAMBA — THE AGENT</p>
+              <p className="eyebrow" style={{ marginBottom: 18 }}>MAMBA — THE AGENT</p>
               <h1
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(36px, 4.5vw, 58px)',
+                  fontSize: 'clamp(38px, 4.5vw, 60px)',
                   fontWeight: 400,
                   letterSpacing: '-0.03em',
                   color: 'var(--text)',
-                  marginBottom: 24,
-                  lineHeight: 1.05,
+                  marginBottom: 22,
+                  lineHeight: 1.0,
                 }}
               >
-                @mamba,<br />take it from here.
+                <span style={{ color: 'var(--gold-dark)' }}>@mamba,</span><br />take it from here.
               </h1>
-              <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 36 }}>
-                Mention the agent in any Slack channel. It reads the thread. Checks the policy. Takes the action. Logs the trail. Replies in seconds.
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 32, maxWidth: 460 }}>
+                Mention the agent in any Slack channel and it does the work — reads the thread, checks the policy, takes the action, replies in seconds. Your team stops processing tickets.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <a href="#request-access" className="btn-gold">Request access →</a>
                 <Link href="/today" className="btn-secondary">See Today queue</Link>
               </div>
             </div>
-            <div>
+            <div className="hero-today-panel">
               <SlackThread channel="people-ops" messages={heroMessages} />
             </div>
           </div>
         </section>
 
-        {/* Example threads */}
-        <section style={{ background: 'var(--bg-warm)', padding: '100px 24px' }}>
+        {/* ── INTERACTIVE EXAMPLES ── */}
+        <section style={{ background: 'var(--bg-warm)', padding: '88px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>WHAT YOU CAN ASK</p>
-            <h2
-              style={{
-                textAlign: 'center',
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(28px, 3vw, 44px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 16,
-                lineHeight: 1.15,
-              }}
-            >
-              It speaks HR.
-            </h2>
-            <p style={{ textAlign: 'center', fontSize: 17, color: 'var(--text-muted)', marginBottom: 64, maxWidth: 480, margin: '0 auto 64px' }}>
-              Natural language. No commands to memorize. No forms to fill. Just tell it what you need.
-            </p>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
-              {exampleThreads.map((thread) => (
-                <div key={thread.label}>
-                  <p style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 10 }}>{thread.label}</p>
-                  <SlackThread channel={thread.channel} messages={thread.messages} compact />
-                </div>
-              ))}
+            <div style={{ textAlign: 'center', marginBottom: 40 }}>
+              <p className="eyebrow" style={{ marginBottom: 14 }}>WHAT YOU CAN ASK</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(26px, 3vw, 38px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 14,
+                  lineHeight: 1.15,
+                }}
+              >
+                It speaks HR.
+              </h2>
+              <p style={{ fontSize: 16, color: 'var(--text-muted)', maxWidth: 480, margin: '0 auto', lineHeight: 1.6 }}>
+                No commands. No forms. Just type what you need — pick a category to see how it answers.
+              </p>
             </div>
+
+            <MambaExamples />
           </div>
         </section>
 
-        {/* Where it lives */}
-        <section style={{ background: '#FFFFFF', padding: '100px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>WHERE IT LIVES</p>
-            <h2
-              style={{
-                textAlign: 'center',
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(28px, 3vw, 44px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 64,
-                lineHeight: 1.15,
-              }}
-            >
-              One agent. Every surface.
-            </h2>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 20 }}>
-              {channelDetails.map((ch) => (
-                <div key={ch.label} style={{ background: 'var(--bg-warm)', borderRadius: 16, padding: '28px 24px' }}>
-                  <div style={{ width: 36, height: 36, marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img src={ch.logo} alt={ch.label} width={32} height={32} style={{ display: 'block', objectFit: 'contain' }} />
-                  </div>
-                  <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 10 }}>{ch.label}</p>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6 }}>{ch.copy}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Under the hood — live routing log */}
-        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
+        {/* ── HOW IT ROUTES ── */}
+        <section style={{ background: 'var(--bg-cream)', padding: '88px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: 64, alignItems: 'flex-start' }}>
-
-              {/* Left: explanation */}
               <div>
-                <p className="eyebrow" style={{ marginBottom: 20 }}>HOW IT ROUTES</p>
+                <p className="eyebrow" style={{ marginBottom: 16 }}>HOW IT ROUTES</p>
                 <h2
                   style={{
                     fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(32px, 4vw, 52px)',
+                    fontSize: 'clamp(26px, 3vw, 38px)',
                     fontWeight: 400,
                     letterSpacing: '-0.02em',
                     color: 'var(--text)',
-                    marginBottom: 24,
-                    lineHeight: 1.0,
+                    marginBottom: 18,
+                    lineHeight: 1.1,
                   }}
                 >
-                  One question.<br />The right specialist.<br />Every time.
+                  One question.<br />The right specialist.
                 </h2>
-                <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 32 }}>
-                  Mamba reads the message, classifies the intent, checks your role, and hands the request to the right specialist. The specialist works, cites sources, and returns the answer through the same rail.
+                <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.75, marginBottom: 28 }}>
+                  Mamba reads the message, classifies the intent, checks your role, and hands the request to the right specialist agent. The specialist runs the work, cites sources, and replies through Mamba.
                 </p>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                   {[
-                    { n: '01', t: 'Read', d: 'Parse the message in context — channel, thread, who is asking, what role.' },
-                    { n: '02', t: 'Route', d: 'Classify intent and select the specialist with the right tools and permissions.' },
-                    { n: '03', t: 'Resolve', d: 'Specialist runs the work, cites sources, returns the answer through Mamba.' },
+                    { n: '01', t: 'Read', d: 'Parses the message in context — channel, thread, who\'s asking.' },
+                    { n: '02', t: 'Route', d: 'Classifies intent and selects the specialist with the right tools.' },
+                    { n: '03', t: 'Resolve', d: 'Specialist runs the work, cites sources, returns the answer.' },
                   ].map((s) => (
                     <div key={s.n} style={{ display: 'grid', gridTemplateColumns: '36px 1fr', gap: 14, alignItems: 'baseline' }}>
-                      <span className="mono" style={{ fontSize: 12, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.04em' }}>{s.n}</span>
+                      <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.06em' }}>{s.n}</span>
                       <div>
                         <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', margin: 0 }}>{s.t}</p>
-                        <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.55, margin: '4px 0 0' }}>{s.d}</p>
+                        <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.55, margin: '3px 0 0' }}>{s.d}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <p style={{ marginTop: 32, fontSize: 13, color: 'var(--text-faint)', lineHeight: 1.6 }}>
-                  14 specialist agents work behind one rail.<br />All gated by your policy. Every action audit-logged.
+                <p style={{ marginTop: 28, fontSize: 12, color: 'var(--text-faint)', lineHeight: 1.6 }}>
+                  14 specialist agents · all gated by your policy · every action audit-logged
                 </p>
               </div>
 
-              {/* Right: live routing log mockup (entries stream in on scroll) */}
               <RoutingLog />
-
             </div>
           </div>
         </section>
 
-        {/* Trust */}
-        <section style={{ background: '#FFFFFF', padding: '80px 24px' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
-              {trustCards.map((card) => (
-                <div key={card.label} style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 24px' }}>
-                  <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>{card.label}</p>
-                  <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.55 }}>{card.desc}</p>
+        {/* ── WHERE IT LIVES ── */}
+        <section style={{ background: '#FFFFFF', padding: '88px 24px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+              <p className="eyebrow" style={{ marginBottom: 14 }}>WHERE IT LIVES</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(26px, 3vw, 38px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 0,
+                  lineHeight: 1.15,
+                }}
+              >
+                One agent. Every surface.
+              </h2>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+              {channelDetails.map((ch) => (
+                <div key={ch.label} style={{ background: 'var(--bg-warm)', borderRadius: 14, padding: '24px 22px', border: '1px solid var(--border-faint)' }}>
+                  <div style={{ width: 32, height: 32, marginBottom: 14, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img src={ch.logo} alt={ch.label} width={28} height={28} style={{ display: 'block', objectFit: 'contain' }} />
+                  </div>
+                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{ch.label}</p>
+                  <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{ch.copy}</p>
                 </div>
               ))}
             </div>
-            <p style={{ textAlign: 'center', marginTop: 24, fontSize: 13, color: 'var(--text-faint)' }}>
-              <Link href="/security" style={{ color: 'var(--gold-dark)', textDecoration: 'underline', textUnderlineOffset: 3 }}>Full security details →</Link>
+          </div>
+        </section>
+
+        {/* ── TRUST ── */}
+        <section style={{ background: 'var(--bg-warm)', padding: '72px 24px' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 32 }}>BUILT FOR THE MOST SENSITIVE DATA IN YOUR COMPANY</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
+              {trustCards.map((card) => (
+                <div key={card.label} style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px' }}>
+                  <div style={{ marginBottom: 12 }}>{card.icon}</div>
+                  <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>{card.label}</p>
+                  <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{card.desc}</p>
+                </div>
+              ))}
+            </div>
+            <p style={{ textAlign: 'center', marginTop: 28, fontSize: 13 }}>
+              <Link href="/security" style={{ color: 'var(--gold-dark)', fontWeight: 600, textDecoration: 'none' }}>Full security details →</Link>
             </p>
           </div>
         </section>

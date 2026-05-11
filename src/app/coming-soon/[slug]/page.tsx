@@ -5,10 +5,11 @@ import Footer from '@/components/footer'
 import { comingSoonContent } from '@/content/nav'
 import { Waitlist } from '@/components/waitlist'
 
-type Params = { slug: string }
+type Props = { params: Promise<{ slug: string }> }
 
-export function generateMetadata({ params }: { params: Params }) {
-  const content = comingSoonContent[params.slug]
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params
+  const content = comingSoonContent[slug]
   if (!content) return {}
   return {
     title: `${content.title} — MambaHR`,
@@ -16,8 +17,9 @@ export function generateMetadata({ params }: { params: Params }) {
   }
 }
 
-export default function ComingSoonPage({ params }: { params: Params }) {
-  const content = comingSoonContent[params.slug]
+export default async function ComingSoonPage({ params }: Props) {
+  const { slug } = await params
+  const content = comingSoonContent[slug]
   if (!content) notFound()
 
   return (

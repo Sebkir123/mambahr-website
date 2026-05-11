@@ -1,6 +1,3 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react'
 import { TimeOffIcon, HiringIcon, OnboardingIcon, LifecycleIcon, CompIcon,
   PerformanceIcon, LDIcon, EmployeeRelationsIcon, ComplianceIcon,
   OffboardingIcon, ReportsIcon, CultureIcon, HROpsIcon, ChangeMgmtIcon } from '@/components/surfaces/agent-icons'
@@ -22,8 +19,8 @@ const directory = [
   { num: '14', name: 'Change Management',  role: 'Restructures, M&A, RIF planning',          icon: <ChangeMgmtIcon /> },
 ]
 
-const Arrow = ({ visible }: { visible: boolean }) => (
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, padding: '0 12px', opacity: visible ? 1 : 0, transition: 'opacity 0.5s cubic-bezier(0.22,1,0.36,1)', transitionDelay: visible ? '0.2s' : '0s' }}>
+const Arrow = () => (
+  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, padding: '0 12px' }}>
     <svg width="32" height="14" viewBox="0 0 32 14" fill="none">
       <path d="M0 7h28m-5-5l5 5-5 5" stroke="var(--gold)" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" opacity="0.7" />
     </svg>
@@ -31,31 +28,9 @@ const Arrow = ({ visible }: { visible: boolean }) => (
 )
 
 export default function AgentPipeline() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [stage, setStage] = useState(0) // 0 = idle, 1 = inbound, 2 = orchestrator, 3 = resolved
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting && stage === 0) {
-          const t1 = setTimeout(() => setStage(1), 200)
-          const t2 = setTimeout(() => setStage(2), 1100)
-          const t3 = setTimeout(() => setStage(3), 2000)
-          ;(obs as IntersectionObserver & { _ts?: ReturnType<typeof setTimeout>[] })._ts = [t1, t2, t3]
-        }
-      },
-      { threshold: 0.3 },
-    )
-    if (ref.current) obs.observe(ref.current)
-    return () => {
-      const ts = (obs as IntersectionObserver & { _ts?: ReturnType<typeof setTimeout>[] })._ts
-      if (ts) ts.forEach(clearTimeout)
-      obs.disconnect()
-    }
-  }, [stage])
 
   return (
-    <div ref={ref}>
+    <div>
       {/* Live ticker label above pipeline */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 28 }}>
         <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E' }} />
@@ -67,8 +42,8 @@ export default function AgentPipeline() {
       {/* Three-frame pipeline */}
       <div className="pipeline-row" style={{ display: 'flex', alignItems: 'stretch', justifyContent: 'center', gap: 0, maxWidth: 1080, margin: '0 auto' }}>
 
-        {/* FRAME 1: Inbound — Slack-style */}
-        <div style={{ flex: 1, maxWidth: 320, opacity: stage >= 1 ? 1 : 0, transform: `translateY(${stage >= 1 ? 0 : 12}px)`, transition: 'opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1)' }}>
+        {/* FRAME 1: Inbound */}
+        <div style={{ flex: 1, maxWidth: 320 }}>
           <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text-faint)', textTransform: 'uppercase', marginBottom: 14 }}>
             Inbound
           </p>
@@ -102,10 +77,10 @@ export default function AgentPipeline() {
           </div>
         </div>
 
-        <Arrow visible={stage >= 2} />
+        <Arrow />
 
         {/* FRAME 2: Mamba orchestrator — dark, premium */}
-        <div style={{ flex: 1, maxWidth: 280, opacity: stage >= 2 ? 1 : 0, transform: `translateY(${stage >= 2 ? 0 : 12}px)`, transition: 'opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1)' }}>
+        <div style={{ flex: 1, maxWidth: 280 }}>
           <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text-faint)', textTransform: 'uppercase', marginBottom: 14 }}>
             Orchestrator
           </p>
@@ -150,10 +125,10 @@ export default function AgentPipeline() {
           </div>
         </div>
 
-        <Arrow visible={stage >= 3} />
+        <Arrow />
 
         {/* FRAME 3: Specialist response */}
-        <div style={{ flex: 1, maxWidth: 320, opacity: stage >= 3 ? 1 : 0, transform: `translateY(${stage >= 3 ? 0 : 12}px)`, transition: 'opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1)' }}>
+        <div style={{ flex: 1, maxWidth: 320 }}>
           <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text-faint)', textTransform: 'uppercase', marginBottom: 14 }}>
             Resolved in 4.2 sec
           </p>

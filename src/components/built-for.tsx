@@ -32,7 +32,7 @@ export default function BuiltFor() {
     {
       icon: '■', iconColor: '#0891B2',
       title: 'Robust access control',
-      desc: 'People data is sensitive. Get access & permissions built for GDPR, SOC 2, and data protection standards.',
+      desc: 'People data is sensitive. Get access & permissions built for GDPR, HIPAA, and data protection standards.',
     },
   ]
 

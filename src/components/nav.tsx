@@ -13,7 +13,7 @@ export default function Nav() {
   }, [])
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[rgba(250,249,246,0.9)] backdrop-blur-md border-b border-gray-200' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[rgba(255,255,255,0.95)] shadow-sm border-b border-[rgba(0,0,0,0.08)]' : 'bg-[rgba(255,255,255,0.75)] border-b border-[rgba(0,0,0,0.04)]'} backdrop-blur-md`}>
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
         {/* Logo */}

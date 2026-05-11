@@ -112,12 +112,12 @@ const faqs = [
   { q: 'What happens if the agent gets something wrong?', a: 'Every action is risk-classified L1–L5. High-risk actions (terminations, RIF, separation agreements, comp changes above threshold) are always-human. Lower-risk actions (PTO within policy, standard onboarding) are automated with full audit log. You can override anything. CUQ scoring tells you when the agent is uncertain.' },
   { q: 'How long does setup take?', a: 'Most teams are running in 2–3 days. Day 1 connect, day 2 shadow mode (agent suggests, you approve everything), day 3+ live mode in one function. Full deployment in weeks 4–8.' },
   { q: 'What about compliance? Are we still on the hook?', a: 'Legally, yes — you are always the employer. MambaHR runs on a curated employment-law engine covering federal regulations and all 50 state codes. Every compliance call cites its regulatory source. Edge cases route to human review by default — your CHRO (or external counsel) signs off before anything binding goes out.' },
-  { q: 'Who owns the data?', a: 'You do. We are a processor, not a controller. Data can be exported or deleted on request. Bedrock prompt logging is disabled at the AWS account level — we cannot see your prompts. SOC 2 Type II audit underway.' },
+  { q: 'Who owns the data?', a: 'You do. We are a processor, not a controller. Data can be exported or deleted on request. We never train AI models on your data — contractually guaranteed.' },
 ]
 
 const founders = [
-  { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: 'Three startups. Ran people ops for 200 → 2,000 headcount. Watched the same playbook fail every time.', avatar: AVATAR('brian') },
-  { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Decade in agent systems and ML infrastructure. Designed the compliance engine. Obsessed with the gap between LLM capability and HR software reality.', avatar: AVATAR('sebastian') },
+  { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', avatar: AVATAR('brian') },
+  { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.', avatar: AVATAR('sebastian') },
 ]
 
 export default function HomePage() {
@@ -203,7 +203,7 @@ export default function HomePage() {
               </div>
 
               <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-                Live demo in 30 minutes · Cuts over from any HRIS in a day · Founders respond within 24 hours
+                Live demo in 30 minutes · Cuts over from any HRIS in a day · Founders respond within&nbsp;24&nbsp;hours
               </p>
             </div>
 
@@ -579,106 +579,190 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ───────────────────────── WHERE IT LIVES — 3 channels with real logos ───────────────────────── */}
-        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <div style={{ marginBottom: 64, maxWidth: 720 }}>
-              <p className="eyebrow" style={{ marginBottom: 16 }}>WHERE IT LIVES</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(36px, 4.5vw, 60px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text)',
-                  marginBottom: 16,
-                  lineHeight: 1.0,
-                }}
-              >
-                Slack. Teams.<br />The web app.
-              </h2>
-              <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 580, lineHeight: 1.6 }}>
-                Mamba meets your team in the tool they already use. Same context, same memory, same audit trail across all three.
-              </p>
+        {/* ───────────────────────── WHERE IT LIVES — rich product mockups ───────────────────────── */}
+        <section style={{ background: '#FFFFFF', padding: '88px 24px' }}>
+          <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+            <div style={{ marginBottom: 48, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 32, flexWrap: 'wrap' }}>
+              <div style={{ maxWidth: 600 }}>
+                <p className="eyebrow" style={{ marginBottom: 14 }}>WHERE IT LIVES</p>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-serif), Georgia, serif',
+                    fontSize: 'clamp(28px, 3.4vw, 44px)',
+                    fontWeight: 400,
+                    letterSpacing: '-0.02em',
+                    color: 'var(--text)',
+                    margin: '0 0 14px',
+                    lineHeight: 1.1,
+                  }}
+                >
+                  One agent. Three surfaces. Same context.
+                </h2>
+                <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.65, margin: 0 }}>
+                  Mamba meets your team in the tools they already use — with one shared memory and one audit trail across all of them.
+                </p>
+              </div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 14px', borderRadius: 999, background: 'var(--bg-surface)', border: '1px solid var(--border)' }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E' }} />
+                <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--text-muted)', letterSpacing: '0.04em' }}>same employee · all 3 surfaces</span>
+              </div>
             </div>
 
-            {/* 3-column grid of real channel mockups */}
-            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
 
-              {/* Slack mockup */}
-              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <img src="/slack-new-logo.svg" alt="Slack" width={20} height={20} style={{ display: 'block' }} />
-                  <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Slack</span>
-                  <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>#people-ops</span>
+              {/* ── SLACK MOCKUP — full chrome ── */}
+              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
+                {/* Slack purple header */}
+                <div style={{ background: '#3F0E40', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <img src="/slack-new-logo.svg" alt="Slack" width={16} height={16} style={{ display: 'block', filter: 'brightness(0) invert(1)' }} />
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#FFFFFF' }}>mambahr-team</span>
+                  <span style={{ marginLeft: 'auto', fontSize: 10, color: 'rgba(255,255,255,0.5)' }}>3 online</span>
                 </div>
-                <div style={{ padding: 20, flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {/* Channel header */}
+                <div style={{ padding: '10px 18px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>#</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>people-ops</span>
+                  <span style={{ marginLeft: 'auto', fontSize: 10, color: 'var(--text-faint)' }}>12 members</span>
+                </div>
+                {/* Thread */}
+                <div style={{ padding: '14px 18px', flex: 1, display: 'flex', flexDirection: 'column', gap: 14 }}>
                   <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <div style={{ width: 28, height: 28, borderRadius: 6, background: '#C4D4B5', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 10, fontWeight: 700, color: '#3F5530' }}>LT</div>
-                    <div>
-                      <div style={{ display: 'flex', gap: 6, alignItems: 'baseline' }}>
-                        <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>Liam Torres</span>
-                        <span style={{ fontSize: 10, color: 'var(--text-faint)' }}>10:45 AM</span>
+                    <div style={{ width: 30, height: 30, borderRadius: 6, background: '#D4C4B5', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 11, fontWeight: 700, color: '#57534E' }}>MC</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', gap: 6, alignItems: 'baseline', marginBottom: 2 }}>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>Maya Chen</span>
+                        <span style={{ fontSize: 10, color: 'var(--text-faint)' }}>9:14 AM</span>
                       </div>
-                      <p style={{ fontSize: 13, color: 'var(--text)', margin: '2px 0 0', lineHeight: 1.5 }}>@mamba what&apos;s the bereavement policy for an aunt?</p>
+                      <p style={{ fontSize: 12, color: 'var(--text)', margin: 0, lineHeight: 1.5 }}>@mamba I need 3 days off next week — Mon to Wed for a wedding 🎉</p>
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <div style={{ width: 28, height: 28, borderRadius: 6, background: '#FFFFFF', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
-                      <img src="/MambaHR_logo.png" alt="Mamba" width={24} height={24} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
+                    <div style={{ width: 30, height: 30, borderRadius: 6, background: '#FFFFFF', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
+                      <img src="/MambaHR_logo.png" alt="Mamba" width={26} height={26} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
                     </div>
-                    <div>
-                      <div style={{ display: 'flex', gap: 6, alignItems: 'baseline' }}>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', gap: 6, alignItems: 'baseline', marginBottom: 4 }}>
                         <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>Mamba</span>
                         <span style={{ fontSize: 9, fontWeight: 600, background: 'var(--gold-tint)', color: 'var(--gold-dark)', borderRadius: 3, padding: '1px 5px' }}>APP</span>
-                        <span style={{ fontSize: 10, color: 'var(--text-faint)' }}>10:45 AM</span>
+                        <span style={{ fontSize: 10, color: 'var(--text-faint)' }}>9:14 AM</span>
                       </div>
-                      <p style={{ fontSize: 13, color: 'var(--text)', margin: '2px 0 0', lineHeight: 1.5 }}>Per policy §6.1: 1 paid day for non-immediate family. Want me to file it?</p>
+                      <p style={{ fontSize: 12, color: 'var(--text)', margin: '0 0 8px', lineHeight: 1.5 }}>Approved — enjoy the wedding 🎉</p>
+                      <div style={{ background: 'var(--bg-warm)', borderRadius: 8, padding: '8px 10px', fontSize: 11, lineHeight: 1.7, border: '1px solid var(--border-faint)' }}>
+                        <p style={{ margin: '0 0 1px', color: 'var(--text-muted)' }}><strong style={{ color: 'var(--text)' }}>Balance:</strong> 12 → 9 days</p>
+                        <p style={{ margin: '0 0 1px', color: 'var(--text-muted)' }}><strong style={{ color: 'var(--text)' }}>Calendar:</strong> Apr 7–9 blocked</p>
+                        <p style={{ margin: 0, color: 'var(--text-muted)' }}><strong style={{ color: 'var(--text)' }}>Manager:</strong> notified</p>
+                      </div>
+                      {/* Reactions */}
+                      <div style={{ display: 'flex', gap: 4, marginTop: 6 }}>
+                        <span style={{ fontSize: 10, padding: '2px 7px', background: '#EDF2F7', borderRadius: 12, border: '1px solid #E2E8F0' }}>🎉 3</span>
+                        <span style={{ fontSize: 10, padding: '2px 7px', background: '#EDF2F7', borderRadius: 12, border: '1px solid #E2E8F0' }}>✅ 1</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Teams mockup */}
-              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <img src="/Microsoft_Symbol_0.svg" alt="Microsoft Teams" width={20} height={20} style={{ display: 'block' }} />
-                  <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Microsoft Teams</span>
-                  <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>Adaptive Card</span>
+              {/* ── TEAMS MOCKUP — proper Teams chrome ── */}
+              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
+                {/* Teams purple header */}
+                <div style={{ background: '#4B53BC', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <img src="/Microsoft_Symbol_0.svg" alt="Microsoft Teams" width={16} height={16} style={{ display: 'block', filter: 'brightness(0) invert(1)' }} />
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#FFFFFF' }}>Microsoft Teams</span>
+                  <span style={{ marginLeft: 'auto', fontSize: 10, color: 'rgba(255,255,255,0.6)' }}>People Ops &gt; Approvals</span>
                 </div>
-                <div style={{ padding: 20, flex: 1 }}>
-                  <div style={{ background: 'var(--bg-surface)', borderLeft: '3px solid #5059C9', borderRadius: '0 8px 8px 0', padding: '14px 16px' }}>
-                    <p style={{ fontSize: 11, fontWeight: 700, color: '#5059C9', letterSpacing: '0.06em', textTransform: 'uppercase', margin: '0 0 8px' }}>Approval needed</p>
-                    <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', margin: '0 0 6px' }}>Q2 performance review packet — Eng team</p>
-                    <p style={{ fontSize: 12, color: 'var(--text-muted)', margin: '0 0 14px', lineHeight: 1.5 }}>23 packets ready · calibration scheduled June 15 · expected ratings within 1.2σ</p>
-                    <div style={{ display: 'flex', gap: 8 }}>
-                      <button style={{ background: '#5059C9', color: '#FFFFFF', border: 'none', borderRadius: 6, padding: '6px 14px', fontSize: 11, fontWeight: 600, cursor: 'pointer' }}>Approve all</button>
-                      <button style={{ background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border)', borderRadius: 6, padding: '6px 14px', fontSize: 11, fontWeight: 500, cursor: 'pointer' }}>Review</button>
+                {/* Teams body */}
+                <div style={{ padding: '14px 18px', flex: 1, display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  {/* Mamba bot message preamble */}
+                  <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                    <div style={{ width: 30, height: 30, borderRadius: '50%', background: '#FFFFFF', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
+                      <img src="/MambaHR_logo.png" alt="Mamba" width={24} height={24} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', gap: 6, alignItems: 'baseline', marginBottom: 6 }}>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>Mamba</span>
+                        <span style={{ fontSize: 9, fontWeight: 600, background: '#EFEEFC', color: '#4B53BC', borderRadius: 3, padding: '1px 5px' }}>BOT</span>
+                        <span style={{ fontSize: 10, color: 'var(--text-faint)' }}>9:14 AM</span>
+                      </div>
+                      {/* Adaptive card */}
+                      <div style={{ background: '#FFFFFF', borderLeft: '4px solid #4B53BC', borderRadius: '0 10px 10px 0', padding: '12px 14px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', border: '1px solid var(--border-faint)' }}>
+                        <p style={{ fontSize: 10, fontWeight: 700, color: '#4B53BC', letterSpacing: '0.06em', textTransform: 'uppercase', margin: '0 0 6px' }}>Time-off request · auto-approved</p>
+                        <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', margin: '0 0 4px' }}>Maya Chen · 3 days</p>
+                        <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: '0 0 10px', lineHeight: 1.5 }}>Apr 7–9 · within policy · balance 12 → 9 days</p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 5, padding: '8px 0', borderTop: '1px solid var(--border-faint)', borderBottom: '1px solid var(--border-faint)', margin: '0 0 10px' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
+                            <span style={{ color: 'var(--text-faint)' }}>Manager</span>
+                            <span style={{ color: 'var(--text)', fontWeight: 500 }}>B. Bell · notified</span>
+                          </div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
+                            <span style={{ color: 'var(--text-faint)' }}>Calendar</span>
+                            <span style={{ color: 'var(--text)', fontWeight: 500 }}>blocked · OOO set</span>
+                          </div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
+                            <span style={{ color: 'var(--text-faint)' }}>Audit ref</span>
+                            <span style={{ color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>act_4f81a2</span>
+                          </div>
+                        </div>
+                        <div style={{ display: 'flex', gap: 8 }}>
+                          <button style={{ background: '#4B53BC', color: '#FFFFFF', border: 'none', borderRadius: 4, padding: '6px 12px', fontSize: 11, fontWeight: 600, cursor: 'pointer' }}>View details</button>
+                          <button style={{ background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border)', borderRadius: 4, padding: '6px 12px', fontSize: 11, fontWeight: 500, cursor: 'pointer' }}>Override</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Web app mockup */}
-              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <img src="/MambaHR_logo.png" alt="MambaHR" width={20} height={20} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
-                  <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Web app</span>
-                  <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>app.mambahr.com</span>
+              {/* ── WEB APP MOCKUP — rich dashboard ── */}
+              <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
+                {/* App chrome — looks like macOS browser window */}
+                <div style={{ background: 'var(--bg-surface)', padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid var(--border-faint)' }}>
+                  <span style={{ width: 9, height: 9, borderRadius: '50%', background: '#FF5F57' }} />
+                  <span style={{ width: 9, height: 9, borderRadius: '50%', background: '#FEBC2E' }} />
+                  <span style={{ width: 9, height: 9, borderRadius: '50%', background: '#28C840' }} />
+                  <span style={{ marginLeft: 8, fontSize: 10, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>app.mambahr.com</span>
                 </div>
-                <div style={{ padding: 20, flex: 1 }}>
-                  <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.06em', textTransform: 'uppercase', margin: '0 0 12px' }}>Today · Tuesday morning</p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {[
-                      { num: '03', label: 'Need your approval', color: 'var(--gold-dark)', bg: 'var(--gold-tint)' },
-                      { num: '14', label: 'Auto-resolved overnight', color: '#15803D', bg: '#F0FDF4' },
-                      { num: '02', label: 'Awaiting employee response', color: 'var(--text-muted)', bg: 'var(--bg-surface)' },
-                    ].map((row) => (
-                      <div key={row.label} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '10px 14px', background: row.bg, borderRadius: 8 }}>
-                        <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 22, fontWeight: 400, color: row.color, letterSpacing: '-0.02em', minWidth: 32 }}>{row.num}</span>
-                        <span style={{ fontSize: 12, color: 'var(--text)', fontWeight: 500 }}>{row.label}</span>
-                      </div>
-                    ))}
+                {/* Top nav bar */}
+                <div style={{ padding: '10px 16px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <img src="/MambaHR_logo.png" alt="MambaHR" width={18} height={18} style={{ display: 'block', objectFit: 'contain', borderRadius: 4 }} />
+                  <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Today</span>
+                  <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#22C55E' }} />
+                    <span style={{ fontSize: 10, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>live</span>
+                  </span>
+                </div>
+                {/* Body */}
+                <div style={{ padding: '14px 16px', flex: 1 }}>
+                  <p style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 12px' }}>Tuesday morning</p>
+
+                  {/* Maya's leave request — glow because it just happened */}
+                  <div style={{ background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: 10, padding: '10px 12px', marginBottom: 10 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="#22C55E"/><path d="M3.5 6l1.8 1.8L8.5 4.5" stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: '#15803D', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Auto-resolved · 9:14 AM</span>
+                    </div>
+                    <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', margin: '0 0 2px' }}>Maya Chen · 3 days off</p>
+                    <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: 0 }}>Apr 7–9 · within policy</p>
+                  </div>
+
+                  {/* Approval queue */}
+                  <div style={{ background: 'var(--gold-tint)', border: '1px solid rgba(176,141,87,0.25)', borderRadius: 10, padding: '10px 12px', marginBottom: 10 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Need your approval</span>
+                      <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--gold-dark)', background: '#FFFFFF', borderRadius: 12, padding: '1px 8px' }}>3</span>
+                    </div>
+                    <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>Maya offer above band · Q2 review packet · Tom PIP draft</p>
+                  </div>
+
+                  {/* Stats footer */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, paddingTop: 10, borderTop: '1px solid var(--border-faint)' }}>
+                    <div>
+                      <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 22, fontWeight: 400, color: '#15803D', margin: 0, letterSpacing: '-0.02em', lineHeight: 1 }}>14</p>
+                      <p style={{ fontSize: 10, color: 'var(--text-faint)', margin: '2px 0 0' }}>Auto-resolved overnight</p>
+                    </div>
+                    <div>
+                      <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 22, fontWeight: 400, color: 'var(--text-muted)', margin: 0, letterSpacing: '-0.02em', lineHeight: 1 }}>02</p>
+                      <p style={{ fontSize: 10, color: 'var(--text-faint)', margin: '2px 0 0' }}>Awaiting employee</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -703,7 +787,7 @@ export default function HomePage() {
                   lineHeight: 1.0,
                 }}
               >
-                From 2 employees<br />to 5,000.
+                From two employees<br />to the enterprise.
               </h2>
               <p style={{ fontSize: 18, color: 'var(--text-muted)', maxWidth: 580, lineHeight: 1.6 }}>
                 The agents scale with you. Same product, same depth — different policy thresholds, different volumes, different price.
@@ -732,7 +816,7 @@ export default function HomePage() {
                   range: '500 +',
                   stage: 'ENTERPRISE',
                   title: 'Multi-entity HR running with one human in the loop.',
-                  copy: 'Multiple legal entities, international headcount, advanced security. Same agents, customized HIL policy, dedicated success manager, SOC 2 + SCIM + custom data residency.',
+                  copy: 'Multiple legal entities, international headcount, advanced security. Same agents, customized HIL policy, dedicated success manager, SCIM + custom data residency.',
                   outcome: 'Outcome: enterprise HR ops at startup speed',
                 },
               ].map((card, i) => (
@@ -857,7 +941,7 @@ export default function HomePage() {
                   price: '$14',
                   unit: '/employee/month',
                   outcome: 'Saves ~$300K/year on HR FTEs',
-                  features: ['Everything in Starter', 'HIL approval workflows', 'SOC 2 Type II evidence', 'RBAC + custom roles', 'Dedicated success manager'],
+                  features: ['Everything in Starter', 'HIL approval workflows', 'Cryptographic audit log', 'RBAC + custom roles', 'Dedicated success manager'],
                   highlight: true,
                 },
                 {

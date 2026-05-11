@@ -91,11 +91,12 @@ export default function MegaNav() {
           left: 0,
           right: 0,
           zIndex: 50,
-          transition: 'all 0.3s ease',
-          backgroundColor: scrolled || productOpen ? 'rgba(255,255,255,0.95)' : 'transparent',
-          backdropFilter: scrolled || productOpen ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: scrolled || productOpen ? 'blur(12px)' : 'none',
-          borderBottom: scrolled || productOpen ? '1px solid var(--border)' : '1px solid transparent',
+          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+          backgroundColor: scrolled || productOpen ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.75)',
+          backdropFilter: 'blur(16px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+          borderBottom: scrolled || productOpen ? '1px solid var(--border)' : '1px solid rgba(0,0,0,0.04)',
+          boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.03)' : 'none',
         }}
       >
         <div

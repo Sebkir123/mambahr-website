@@ -17,10 +17,22 @@ const cols = [
     title: 'Company',
     links: [
       { label: 'About', href: '/about' },
-      { label: 'Customers', href: '/coming-soon/customers' },
+      { label: 'Careers', href: 'mailto:jobs@mambahr.com' },
       { label: 'Changelog', href: '/coming-soon/changelog' },
-      { label: 'Careers', href: '/coming-soon/careers' },
       { label: 'Contact', href: 'mailto:hello@mambahr.com' },
+    ],
+  },
+  {
+    title: 'Compare',
+    links: [
+      { label: 'vs Rippling', href: '/compare/rippling' },
+      { label: 'vs Gusto', href: '/compare/gusto' },
+      { label: 'vs Deel', href: '/compare/deel' },
+      { label: 'vs BambooHR', href: '/compare/bamboohr' },
+      { label: 'vs Namely', href: '/compare/namely' },
+      { label: 'vs HiBob', href: '/compare/hibob' },
+      { label: 'vs ADP', href: '/compare/adp' },
+      { label: 'vs Workday', href: '/compare/workday' },
     ],
   },
   {
@@ -29,8 +41,6 @@ const cols = [
       { label: 'Security', href: '/security' },
       { label: 'Privacy', href: '/coming-soon/privacy' },
       { label: 'Terms', href: '/coming-soon/terms' },
-      { label: 'SOC 2 (in progress)', href: '/security' },
-      { label: 'Investor deck', href: 'mailto:investors@mambahr.com' },
     ],
   },
 ]

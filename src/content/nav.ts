@@ -121,7 +121,7 @@ export const platformItems: NavItem[] = [
   {
     label: 'Security & Trust',
     href: '/security',
-    description: 'SOC2, audit log, RBAC',
+    description: 'Encryption, audit log, RBAC',
     live: true,
   },
   {
