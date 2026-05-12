@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono, Instrument_Serif } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import StickyDemoButton from '@/components/sticky-demo-button'
 import './globals.css'
 
 const inter = Inter({
@@ -110,6 +111,7 @@ export default function RootLayout({
       </head>
       <body style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
         {children}
+        <StickyDemoButton />
         {gaId && <GoogleAnalytics gaId={gaId} />}
       </body>
     </html>
