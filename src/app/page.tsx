@@ -115,11 +115,6 @@ const faqs = [
   { q: 'Who owns the data?', a: 'You do. We are a processor, not a controller. Data can be exported or deleted on request. We never train AI models on your data — contractually guaranteed.' },
 ]
 
-const founders = [
-  { name: 'Brian Bell', role: 'CEO & Co-Founder', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', avatar: AVATAR('brian') },
-  { name: 'Sebastian Kirsch', role: 'CTO & Co-Founder', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.', avatar: AVATAR('sebastian') },
-]
-
 export default function HomePage() {
   return (
     <>
@@ -1078,52 +1073,6 @@ export default function HomePage() {
             Plays nice with the rest of your stack
           </p>
           <IntegrationsMarquee />
-        </section>
-
-        {/* ───────────────────────── FOUNDERS ───────────────────────── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 56 }}>
-              <p className="eyebrow" style={{ marginBottom: 16 }}>BUILT BY</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(28px, 3.5vw, 44px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text)',
-                  marginBottom: 16,
-                  lineHeight: 1.15,
-                }}
-              >
-                Two founders. One scar tissue.
-              </h2>
-              <p style={{ fontSize: 17, color: 'var(--text-muted)', maxWidth: 600, margin: '0 auto', lineHeight: 1.65 }}>
-                Brian ran people ops at three startups and watched the same problems compound. Sebastian built ML infrastructure and benchmarks. We built MambaHR because no one else was going to.
-              </p>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }} className="mobile-stack">
-              {founders.map((p) => (
-                <div key={p.name} style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 20, padding: 28, display: 'flex', gap: 20, alignItems: 'flex-start' }}>
-                  <div style={{ width: 80, height: 80, borderRadius: 16, overflow: 'hidden', flexShrink: 0 }}>
-                    <PhotoImg src={p.avatar} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </div>
-                  <div>
-                    <p style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginBottom: 2 }}>{p.name}</p>
-                    <p style={{ fontSize: 13, color: 'var(--gold-dark)', fontWeight: 500, marginBottom: 12 }}>{p.role}</p>
-                    <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6 }}>{p.bio}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <p style={{ textAlign: 'center', marginTop: 32, fontSize: 14, color: 'var(--text-muted)' }}>
-              <Link href="/about" style={{ color: 'var(--gold-dark)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
-                Read the full story →
-              </Link>
-            </p>
-          </div>
         </section>
 
         {/* ───────────────────────── FAQ ───────────────────────── */}
