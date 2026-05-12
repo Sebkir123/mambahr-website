@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { ReactNode } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
@@ -202,7 +203,7 @@ export default function PeoplePage() {
                 <div key={i} style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 12, padding: '16px 20px' }}>
                   <p style={{ fontSize: 13, color: 'var(--text-muted)', fontFamily: 'var(--font-mono), monospace', marginBottom: 8 }}>{ex.cmd}</p>
                   <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <img src="/MambaHR_logo.png" alt="Mamba" width={20} height={20} style={{ display: 'block', objectFit: 'contain', borderRadius: 6, flexShrink: 0 }} />
+                    <Image src="/MambaHR_logo.png" alt="Mamba" width={20} height={20} style={{ display: 'block', objectFit: 'contain', borderRadius: 6, flexShrink: 0 }} />
                     <p style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.5 }}>{ex.resp}</p>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
@@ -134,7 +135,7 @@ export default async function ComparePage({ params }: Props) {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 140px 140px', gap: 0, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)', padding: '14px 24px' }}>
                 <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Feature</span>
                 <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
-                  <img src="/MambaHR_logo.png" alt="MambaHR" width={14} height={14} style={{ objectFit: 'contain', borderRadius: 3 }} />
+                  <Image src="/MambaHR_logo.png" alt="MambaHR" width={14} height={14} style={{ objectFit: 'contain', borderRadius: 3 }} />
                   MambaHR
                 </span>
                 <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)', textAlign: 'center' }}>{c.name}</span>

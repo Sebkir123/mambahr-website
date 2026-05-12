@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
@@ -229,7 +230,7 @@ export default function MambaPage() {
               {channelDetails.map((ch) => (
                 <div key={ch.label} style={{ background: 'var(--bg-warm)', borderRadius: 14, padding: '24px 22px', border: '1px solid var(--border-faint)' }}>
                   <div style={{ width: 32, height: 32, marginBottom: 14, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img src={ch.logo} alt={ch.label} width={28} height={28} style={{ display: 'block', objectFit: 'contain' }} />
+                    <Image src={ch.logo} alt={ch.label} width={28} height={28} style={{ display: 'block', objectFit: 'contain' }} />
                   </div>
                   <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{ch.label}</p>
                   <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{ch.copy}</p>
