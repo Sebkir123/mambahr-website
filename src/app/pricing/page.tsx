@@ -94,9 +94,23 @@ const faqs = [
 ]
 
 export default function PricingPage() {
+  const faqJsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  })
   return (
     <>
       <MegaNav />
+      <script
+        type="application/ld+json"
+        // Hardcoded FAQ data — no user input, safe to inject as JSON-LD
+        dangerouslySetInnerHTML={{ __html: faqJsonLd }}
+      />
       <main style={{ paddingTop: 64 }}>
 
         {/* Hero */}

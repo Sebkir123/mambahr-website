@@ -122,9 +122,22 @@ const faqs = [
 ]
 
 export default function HomePage() {
+  const faqJsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  })
   return (
     <>
       <MegaNav />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: faqJsonLd }}
+      />
       <main>
 
         {/* ───────────────────────── HERO ───────────────────────── */}
