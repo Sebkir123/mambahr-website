@@ -178,7 +178,7 @@ export default function HomePage() {
                   marginBottom: 32,
                 }}
               >
-                MambaHR is the AI HR department. Hiring, payroll, leave, performance, compliance — handled by agents. <strong style={{ color: 'var(--text)' }}>One human approves the calls that matter.</strong>
+                MambaHR is the AI HR department. Hiring, payroll, leave, performance, compliance — the agents do the work. <strong style={{ color: 'var(--text)' }}>You sign off when it matters.</strong>
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 36 }}>
@@ -203,7 +203,7 @@ export default function HomePage() {
               </div>
 
               <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-                Live demo in 30 minutes · Cuts over from any HRIS in a day · Founders respond within&nbsp;24&nbsp;hours
+                Live demo in 30 minutes · Switch from any HRIS within 1 day · Founders respond within&nbsp;24&nbsp;hours
               </p>
             </div>
 
