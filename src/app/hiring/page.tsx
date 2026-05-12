@@ -60,7 +60,7 @@ export default function HiringPage() {
                 Reqs come in. The agent screens, schedules, references, and drafts the offer. You decide who joins.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <a href="#request-access" className="btn-gold">Get a demo →</a>
+                <a href="/demo" className="btn-gold">Get a demo →</a>
                 <Link href="/mamba" className="btn-secondary">See the agent in Slack</Link>
               </div>
             </div>

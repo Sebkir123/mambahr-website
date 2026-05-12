@@ -126,7 +126,7 @@ export default function TodayPage() {
               <p style={{ fontSize: 20, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 36 }}>
                 The agents ran the night shift. Recruiting screens, leave requests, comp changes, offboarding paperwork — done while you slept. This morning, a queue. Approve. Decline. Move on.
               </p>
-              <a href="#request-access" className="btn-gold">Request access →</a>
+              <a href="/demo" className="btn-gold">Request access →</a>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 12 }}>

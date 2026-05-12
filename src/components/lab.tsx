@@ -79,7 +79,7 @@ export default function Lab() {
             The first open benchmark for AI on HR decision-making. 500 scenarios across federal and state regulations.
           </p>
           <a
-            href="#request-access"
+            href="/demo"
             style={{
               fontSize: 14,
               fontWeight: 600,

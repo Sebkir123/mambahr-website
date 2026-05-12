@@ -27,7 +27,7 @@ export default function Nav() {
           <Link href="#product" className="text-sm font-medium text-gray-600 hover:text-gray-900">Product</Link>
           <Link href="#pricing" className="text-sm font-medium text-gray-600 hover:text-gray-900">Pricing</Link>
           <Link href="#security" className="text-sm font-medium text-gray-600 hover:text-gray-900">Security</Link>
-          <a href="#request-access" className="btn-primary py-2 px-5 text-sm">Get a demo</a>
+          <a href="/demo" className="btn-primary py-2 px-5 text-sm">Get a demo</a>
         </div>
         
       </div>

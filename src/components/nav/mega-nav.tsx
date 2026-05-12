@@ -185,7 +185,7 @@ export default function MegaNav() {
             >
               Sign in
             </Link>
-            <Link href="#request-access" className="btn-gold" style={{ fontSize: 13, padding: '9px 20px' }}>
+            <Link href="/demo" className="btn-gold" style={{ fontSize: 13, padding: '9px 20px' }}>
               Get a demo
             </Link>
             {/* Mobile hamburger */}
@@ -429,7 +429,7 @@ export default function MegaNav() {
             ))}
 
             <div style={{ marginTop: 32 }}>
-              <Link href="#request-access" className="btn-gold" onClick={() => setMobileOpen(false)} style={{ width: '100%', justifyContent: 'center' }}>
+              <Link href="/demo" className="btn-gold" onClick={() => setMobileOpen(false)} style={{ width: '100%', justifyContent: 'center' }}>
                 Get a demo
               </Link>
             </div>

@@ -119,7 +119,7 @@ export default function MambaPage() {
                 Mention the agent in any Slack channel and it does the work — reads the thread, checks the policy, takes the action, replies in seconds. Your team stops processing tickets.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <a href="#request-access" className="btn-gold">Request access →</a>
+                <a href="/demo" className="btn-gold">Request access →</a>
                 <Link href="/today" className="btn-secondary">See Today queue</Link>
               </div>
             </div>

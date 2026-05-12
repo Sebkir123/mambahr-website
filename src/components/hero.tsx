@@ -40,7 +40,7 @@ export default function Hero() {
 
           {/* CTAs */}
           <div className="flex flex-row justify-center items-center gap-4 mb-20 w-full">
-            <a href="#request-access" className="inline-flex items-center justify-center bg-[#1C1917] text-white px-8 py-4 rounded-xl font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all whitespace-nowrap text-lg">
+            <a href="/demo" className="inline-flex items-center justify-center bg-[#1C1917] text-white px-8 py-4 rounded-xl font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all whitespace-nowrap text-lg">
               Get a demo
             </a>
             <a href="#product" className="inline-flex items-center justify-center bg-white text-[#1C1917] border border-gray-200 px-8 py-4 rounded-xl font-medium shadow-sm hover:bg-gray-50 hover:-translate-y-0.5 transition-all whitespace-nowrap gap-2 text-lg">

@@ -185,7 +185,7 @@ export default function HomePage() {
               </div>
 
               <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginBottom: 24 }}>
-                <a href="#request-access" className="btn-gold" style={{ fontSize: 15, padding: '14px 32px' }}>
+                <a href="/demo" className="btn-gold" style={{ fontSize: 15, padding: '14px 32px' }}>
                   Get a demo →
                 </a>
                 <Link href="/today" className="btn-secondary" style={{ fontSize: 15 }}>
@@ -1047,7 +1047,7 @@ export default function HomePage() {
 
                   {/* CTA */}
                   <Link
-                    href={tier.name === 'Enterprise' ? '#request-access' : '/pricing'}
+                    href={tier.name === 'Enterprise' ? '/demo' : '/pricing'}
                     className={tier.highlight ? 'btn-gold' : 'btn-secondary'}
                     style={{ justifyContent: 'center', textAlign: 'center' }}
                   >

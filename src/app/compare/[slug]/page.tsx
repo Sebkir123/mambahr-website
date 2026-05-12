@@ -19,6 +19,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `MambaHR vs ${c.name} — ${c.tagline}`,
     description: c.heroSub,
+    openGraph: {
+      images: [{ url: `/api/og?line1=MambaHR+vs+${c.name}&line2=A+team+that+runs+the&highlight=work.`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: [`/api/og?line1=MambaHR+vs+${c.name}&line2=A+team+that+runs+the&highlight=work.`],
+    },
   }
 }
 
@@ -60,7 +67,7 @@ export default async function ComparePage({ params }: Props) {
               {c.heroSub}
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a href="#request-access" className="btn-gold">Get a demo →</a>
+              <a href="/demo" className="btn-gold">Get a demo →</a>
               <a href="#compare-table" className="btn-secondary">See the comparison ↓</a>
             </div>
           </div>
@@ -207,7 +214,7 @@ export default async function ComparePage({ params }: Props) {
               {c.bottomLine}
             </h2>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginTop: 32 }}>
-              <a href="#request-access" className="btn-gold">Get a demo →</a>
+              <a href="/demo" className="btn-gold">Get a demo →</a>
               <Link href="/mamba" className="btn-secondary">See how Mamba works</Link>
             </div>
           </div>
