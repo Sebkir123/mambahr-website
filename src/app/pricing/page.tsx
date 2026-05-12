@@ -7,6 +7,19 @@ import { Waitlist } from '@/components/waitlist'
 export const metadata: Metadata = {
   title: 'Pricing — MambaHR',
   description: 'Simple, transparent pricing for the AI HR department. Per-employee, all agents included.',
+  openGraph: {
+    title: 'Pricing — MambaHR',
+    description: 'Simple, transparent pricing for the AI HR department. Per-employee, all agents included.',
+    url: 'https://mambahr.com/pricing',
+    images: [{ url: '/api/og?line1=Pricing+that&line2=scales+with&highlight=managed+headcount.&subtitle=Tiers+by+managed+employees%2C+not+seats.+Free+for+design+partners+during+private+beta.&bottomRight=Pricing', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pricing — MambaHR',
+    description: 'Simple, transparent pricing for the AI HR department.',
+    images: ['/api/og?line1=Pricing+that&line2=scales+with&highlight=managed+headcount.&subtitle=Tiers+by+managed+employees%2C+not+seats.+Free+for+design+partners+during+private+beta.&bottomRight=Pricing'],
+  },
+  alternates: { canonical: 'https://mambahr.com/pricing' },
 }
 
 const tiers = [

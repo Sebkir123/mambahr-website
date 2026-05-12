@@ -16,16 +16,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const c = competitors[slug]
   if (!c) return {}
+  const ogUrl = `/api/og?line1=MambaHR+vs.&line2=${encodeURIComponent(c.name)}&highlight=&subtitle=${encodeURIComponent('See the side-by-side. Setup, scope, sign-off model, support, pricing.')}&bottomRight=${encodeURIComponent('Compare')}`
   return {
     title: `MambaHR vs ${c.name} — ${c.tagline}`,
     description: c.heroSub,
     openGraph: {
-      images: [{ url: `/api/og?line1=MambaHR+vs+${c.name}&line2=A+team+that+runs+the&highlight=work.`, width: 1200, height: 630 }],
+      title: `MambaHR vs ${c.name}`,
+      description: c.heroSub,
+      url: `https://mambahr.com/compare/${slug}`,
+      images: [{ url: ogUrl, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
-      images: [`/api/og?line1=MambaHR+vs+${c.name}&line2=A+team+that+runs+the&highlight=work.`],
+      title: `MambaHR vs ${c.name}`,
+      description: c.heroSub,
+      images: [ogUrl],
     },
+    alternates: { canonical: `https://mambahr.com/compare/${slug}` },
   }
 }
 

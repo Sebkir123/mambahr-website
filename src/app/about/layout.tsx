@@ -8,13 +8,13 @@ export const metadata: Metadata = {
     title: 'About — MambaHR',
     description: 'MambaHR is a domain AI lab building the autonomous HR agent. Meet the team behind the company.',
     url: 'https://mambahr.com/about',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/api/og?line1=The+HR+department&line2=is+changing&highlight=shape.&subtitle=We%27re+building+the+autonomous+AI+department.+Done+by+agents.+Signed+by+humans.&bottomRight=About+MambaHR', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About — MambaHR',
     description: 'MambaHR is a domain AI lab building the autonomous HR agent.',
-    images: ['/og-image.jpg'],
+    images: ['/api/og?line1=The+HR+department&line2=is+changing&highlight=shape.&subtitle=We%27re+building+the+autonomous+AI+department.+Done+by+agents.+Signed+by+humans.&bottomRight=About+MambaHR'],
   },
   alternates: { canonical: 'https://mambahr.com/about' },
 }

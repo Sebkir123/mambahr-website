@@ -46,13 +46,13 @@ export const metadata: Metadata = {
     url: 'https://mambahr.com',
     siteName: 'MambaHR',
     type: 'website',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/api/og?line1=Your+HR+team%2C&line2=automated.&highlight=&subtitle=Hiring%2C+payroll%2C+leave%2C+performance%2C+compliance+%E2%80%94+the+agents+do+the+work.+You+sign+off+when+it+matters.&bottomRight=14+specialists+%C2%B7+50-state+law+%C2%B7+1-day+setup', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'MambaHR — Your HR team, in Slack.',
     description: 'An AI HR department that runs in the tools you already use.',
-    images: ['/og-image.jpg'],
+    images: ['/api/og?line1=Your+HR+team%2C&line2=automated.&highlight=&subtitle=Hiring%2C+payroll%2C+leave%2C+performance%2C+compliance+%E2%80%94+the+agents+do+the+work.+You+sign+off+when+it+matters.&bottomRight=14+specialists+%C2%B7+50-state+law+%C2%B7+1-day+setup'],
   },
   alternates: { canonical: 'https://mambahr.com' },
   robots: {

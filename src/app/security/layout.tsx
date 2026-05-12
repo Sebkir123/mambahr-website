@@ -8,13 +8,13 @@ export const metadata: Metadata = {
     title: 'Security — MambaHR',
     description: 'Enterprise-grade security for HR operations. Encryption, zero data retention, full audit trail.',
     url: 'https://mambahr.com/security',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/api/og?line1=Built+for+the+most&line2=sensitive&highlight=HR+data.&subtitle=Federal+%2B+50-state+law%2C+immutable+audit+log%2C+AES-256%2C+TLS+1.3%2C+never+trained+on+your+data.&bottomRight=Security+%2B+Compliance', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Security — MambaHR',
     description: 'Enterprise-grade security for HR operations.',
-    images: ['/og-image.jpg'],
+    images: ['/api/og?line1=Built+for+the+most&line2=sensitive&highlight=HR+data.&subtitle=Federal+%2B+50-state+law%2C+immutable+audit+log%2C+AES-256%2C+TLS+1.3%2C+never+trained+on+your+data.&bottomRight=Security+%2B+Compliance'],
   },
   alternates: { canonical: 'https://mambahr.com/security' },
 }
