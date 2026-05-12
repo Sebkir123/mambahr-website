@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { useReducedMotion } from './use-reduced-motion'
 
 const HIDDEN_PATHS = ['/demo', '/coming-soon']
 const STORAGE_KEY = 'mamba_sticky_demo_dismissed_v1'
@@ -11,6 +12,7 @@ export default function StickyDemoButton() {
   const pathname = usePathname()
   const [visible, setVisible] = useState(false)
   const [dismissed, setDismissed] = useState(false)
+  const reducedMotion = useReducedMotion()
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -44,7 +46,7 @@ export default function StickyDemoButton() {
         padding: '10px 14px 10px 16px',
         borderRadius: 999,
         boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
-        animation: 'mamba-sticky-rise 0.35s ease-out',
+        animation: reducedMotion ? undefined : 'mamba-sticky-rise 0.35s ease-out',
       }}
     >
       <Link

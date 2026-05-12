@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { Scenario } from './types'
 import { useScenarioClock } from './use-scenario-clock'
+import { useReducedMotion } from '../use-reduced-motion'
 
 type Props = {
   scenarios: Scenario[]
@@ -12,13 +13,17 @@ export default function ScenarioPlayer({ scenarios }: Props) {
   const [activeIdx, setActiveIdx] = useState(0)
   const [paused, setPaused] = useState(false)
   const active = scenarios[activeIdx]
+  const reducedMotion = useReducedMotion()
   const { elapsedMs, progress, reset } = useScenarioClock({
     durationMs: active.durationMs,
-    paused,
+    paused: paused || reducedMotion,
     onComplete: useCallback(() => {
+      if (reducedMotion) return
       setActiveIdx((i) => (i + 1) % scenarios.length)
-    }, [scenarios.length]),
+    }, [scenarios.length, reducedMotion]),
   })
+
+  const renderElapsed = reducedMotion ? active.durationMs : elapsedMs
 
   useEffect(() => {
     reset()
@@ -98,7 +103,7 @@ export default function ScenarioPlayer({ scenarios }: Props) {
         </div>
 
         {/* Stage */}
-        <div style={{ padding: '32px 28px', minHeight: 440 }}>{active.render(elapsedMs)}</div>
+        <div style={{ padding: '32px 28px', minHeight: 440 }}>{active.render(renderElapsed)}</div>
 
         {/* Controls */}
         <div
@@ -115,32 +120,40 @@ export default function ScenarioPlayer({ scenarios }: Props) {
             fontFamily: 'var(--font-mono), monospace',
           }}
         >
-          <button
-            type="button"
-            onClick={reset}
-            style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 11, padding: 0 }}
-          >
-            ▶ Replay
-          </button>
-          <button
-            type="button"
-            onClick={() => setPaused((p) => !p)}
-            style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 11, padding: 0 }}
-          >
-            {paused ? '▶ Resume' : '⏸ Pause'}
-          </button>
-          <div
-            style={{
-              flex: 1,
-              height: 2,
-              background: 'rgba(0,0,0,0.06)',
-              borderRadius: 2,
-              overflow: 'hidden',
-            }}
-          >
-            <div style={{ width: `${progress * 100}%`, height: '100%', background: 'var(--gold-dark)', transition: 'width 0.05s linear' }} />
-          </div>
-          <span>{Math.ceil((active.durationMs - elapsedMs) / 1000)}s</span>
+          {reducedMotion ? (
+            <span style={{ color: 'var(--text-muted)' }}>
+              Reduced motion is on — scenarios shown as static frames. Click a tab to switch.
+            </span>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={reset}
+                style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 11, padding: 0 }}
+              >
+                ▶ Replay
+              </button>
+              <button
+                type="button"
+                onClick={() => setPaused((p) => !p)}
+                style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 11, padding: 0 }}
+              >
+                {paused ? '▶ Resume' : '⏸ Pause'}
+              </button>
+              <div
+                style={{
+                  flex: 1,
+                  height: 2,
+                  background: 'rgba(0,0,0,0.06)',
+                  borderRadius: 2,
+                  overflow: 'hidden',
+                }}
+              >
+                <div style={{ width: `${progress * 100}%`, height: '100%', background: 'var(--gold-dark)', transition: 'width 0.05s linear' }} />
+              </div>
+              <span>{Math.ceil((active.durationMs - elapsedMs) / 1000)}s</span>
+            </>
+          )}
         </div>
       </div>
     </div>

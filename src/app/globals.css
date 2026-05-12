@@ -363,12 +363,24 @@ h4, h5, h6 {
   box-shadow: 0 4px 20px rgba(176, 141, 87, 0.1);
 }
 
-@keyframes mamba-sticky-rise {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes mamba-sticky-rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes mamba-card-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 }
 
-@keyframes mamba-card-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  @keyframes mamba-sticky-rise {
+    from, to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes mamba-card-in {
+    from, to { opacity: 1; transform: translateY(0); }
+  }
 }
