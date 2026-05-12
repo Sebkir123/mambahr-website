@@ -12,6 +12,13 @@ import PolicyCard from '@/components/surfaces/policy-card'
 import SectionCta from '@/components/section-cta'
 import ScenarioPlayer from '@/components/scenarios/scenario-player'
 import { leaveScenario } from '@/components/scenarios/leave'
+import { onboardingScenario } from '@/components/scenarios/onboarding'
+import { terminationScenario } from '@/components/scenarios/termination'
+import { complianceQaScenario } from '@/components/scenarios/compliance-qa'
+import { payrollScenario } from '@/components/scenarios/payroll'
+import { compScenario } from '@/components/scenarios/comp'
+import { reviewsScenario } from '@/components/scenarios/reviews'
+import { stateCoverageScenario } from '@/components/scenarios/state-coverage'
 
 // Local placeholder portraits served from /public/avatars/
 const AVATAR = (name: string) => `/avatars/${name}.jpg`
@@ -488,7 +495,18 @@ export default function HomePage() {
               </p>
             </div>
 
-            <ScenarioPlayer scenarios={[leaveScenario]} />
+            <ScenarioPlayer
+              scenarios={[
+                leaveScenario,
+                onboardingScenario,
+                terminationScenario,
+                complianceQaScenario,
+                payrollScenario,
+                compScenario,
+                reviewsScenario,
+                stateCoverageScenario,
+              ]}
+            />
           </div>
         </section>
 
