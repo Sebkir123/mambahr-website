@@ -79,7 +79,7 @@ export default function AgentPipeline() {
 
         <Arrow />
 
-        {/* FRAME 2: Mamba orchestrator — dark, premium */}
+        {/* FRAME 2: Mamba coordinator — dark, premium */}
         <div style={{ flex: 1, maxWidth: 280 }}>
           <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text-faint)', textTransform: 'uppercase', marginBottom: 14 }}>
             Orchestrator

@@ -45,7 +45,7 @@ const HiringIconSm = (
 type ProductItem = { label: string; href: string; description: string; icon: ReactNode }
 
 const productItems: ProductItem[] = [
-  { label: 'Today',  href: '/today',  description: 'Your daily HIL queue — 30 min, every morning', icon: TodayDot },
+  { label: 'Today',  href: '/today',  description: 'Your daily sign-off queue — 30 min, every morning', icon: TodayDot },
   { label: 'Mamba',  href: '/mamba',  description: 'The agent in Slack and Teams',                  icon: MambaIcon },
   { label: 'People', href: '/people', description: 'Directory, comp, performance, leave',           icon: PeopleIconSm },
   { label: 'Hiring', href: '/hiring', description: 'Recruiting and onboarding',                      icon: HiringIconSm },

@@ -87,7 +87,7 @@ const mathRows = [
   { metric: 'HR FTE for 500 employees', legacy: '5', mamba: '1 (judgment only)' },
   { metric: 'Avg PTO request resolution', legacy: '4.2 hours', mamba: '4.2 seconds' },
   { metric: 'Time on operational admin work', legacy: '60%', mamba: '0%' },
-  { metric: 'Time on compliance filings', legacy: '15%', mamba: '0% (automated, HIL on submit)' },
+  { metric: 'Time on compliance filings', legacy: '15%', mamba: '0% (automated, you sign off on submit)' },
   { metric: 'Time on judgment and policy', legacy: '25%', mamba: '100%' },
 ]
 

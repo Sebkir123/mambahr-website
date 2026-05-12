@@ -84,7 +84,7 @@ export default function RoutingLog() {
                 <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', margin: 0 }}>
                   <span style={{ color: 'rgba(176,141,87,0.85)' }}>→ ACTION</span>     <span style={{ color: '#FFFFFF' }}>{e.action}</span>
                   <span style={{ marginLeft: 8, fontSize: 10, fontWeight: 700, padding: '1px 6px', borderRadius: 3, background: e.status === 'auto' ? 'rgba(34,197,94,0.15)' : 'rgba(176,141,87,0.18)', color: e.status === 'auto' ? '#22C55E' : 'var(--gold)' }}>
-                    {e.status === 'auto' ? 'AUTO' : 'HIL'}
+                    {e.status === 'auto' ? 'AUTO' : 'SIGN-OFF'}
                   </span>
                 </p>
                 <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', margin: 0 }}>

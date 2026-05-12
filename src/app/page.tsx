@@ -113,9 +113,9 @@ const channelTiles = [
 ]
 
 const faqs = [
-  { q: 'Do we replace our current HRIS, or run alongside it?', a: 'We replace it. MambaHR is the HRIS — system of record for employees, comp, leaves, performance, everything. We migrate your data from Gusto, Workday, Rippling, BambooHR, Namely, Personio, HiBob, or wherever it lives. Most teams cut over in a single day.' },
+  { q: 'Do we replace our current HRIS, or run alongside it?', a: 'We replace it. MambaHR is the HRIS — system of record for employees, comp, leaves, performance, everything. We migrate your data from Gusto, Workday, Rippling, BambooHR, Namely, Personio, HiBob, or wherever it lives. Most teams switch over in a single day.' },
   { q: 'How is this different from a Slack bot or HRIS chatbot?', a: 'Slack bots answer questions. MambaHR takes action. The agent reads the thread, checks the policy, files the form, updates records, notifies the manager, and logs the audit trail. It does the work, not the lookup.' },
-  { q: 'What happens if the agent gets something wrong?', a: 'Every action carries a status label. High-risk actions (terminations, RIF, separation agreements, comp changes above threshold) are always-human. Lower-risk actions (PTO within policy, standard onboarding) are automated with full audit log. You can override anything. When the agent is uncertain, the card routes to you for sign-off.' },
+  { q: 'What happens if the agent gets something wrong?', a: 'Every action carries a status label. High-risk actions (terminations, RIF, separation agreements, comp changes above threshold) are always you. Lower-risk actions (PTO within policy, standard onboarding) are automated with full audit log. You can override anything. When the agent is uncertain, the card routes to you for sign-off.' },
   { q: 'How long does setup take?', a: 'Most teams are running by end of day Friday and live Monday morning. Day 1: we pull your data from your old HRIS and you set policy on one screen. Day 2: the agent goes live. Some teams choose to start with one function (like leave) and add others over the first week — that\'s a trust pace, not a setup limitation.' },
   { q: 'What about compliance? Are we still on the hook?', a: 'Legally, yes — you are always the employer. MambaHR runs on a curated employment-law engine covering federal regulations and all 50 state codes. Every compliance call cites its regulatory source. Edge cases route to human review by default — your CHRO (or external counsel) signs off before anything binding goes out.' },
   { q: 'Who owns the data?', a: 'You do. We are a processor, not a controller. Data can be exported or deleted on request. We never train AI models on your data — contractually guaranteed.' },
@@ -436,10 +436,10 @@ export default function HomePage() {
                   Set your policy. One screen.
                 </h3>
                 <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 20 }}>
-                  Tell the agent your approval thresholds, PTO rules, comp ranges, and HIL gates. Toggle what runs automatically and what comes to you. Edit anytime.
+                  Tell the agent your approval thresholds, PTO rules, comp ranges, and human sign-off rules. Toggle what runs automatically and what comes to you. Edit anytime.
                 </p>
                 <p style={{ fontSize: 13, color: 'var(--text-faint)', fontStyle: 'italic' }}>
-                  High-risk actions stay always-human. The matrix is codified in code, not policy doc.
+                  High-risk actions stay with you. The matrix is codified in code, not policy doc.
                 </p>
               </div>
             </div>
@@ -510,7 +510,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ───────────────────────── THE AI WORKFORCE — orchestrator + 14 agents constellation ───────────────────────── */}
+        {/* ───────────────────────── THE AI WORKFORCE — Mamba coordinator + 14 specialists ───────────────────────── */}
         <section style={{ background: '#FFFFFF', padding: '120px 24px', overflow: 'hidden' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 64, maxWidth: 720, margin: '0 auto 32px' }}>
@@ -526,7 +526,7 @@ export default function HomePage() {
                   lineHeight: 1.05,
                 }}
               >
-                One orchestrator.<br />Fourteen specialists.
+                One agent in charge.<br />Fourteen specialists at work.
               </h2>
               <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
                 Every request enters through Mamba, gets routed to the right specialist, and resolves with a full audit trail. Watch one in flight.
@@ -536,7 +536,7 @@ export default function HomePage() {
             <AgentPipeline />
 
             <p style={{ textAlign: 'center', marginTop: 40, fontSize: 14, color: 'var(--text-muted)' }}>
-              All coordinated by an orchestrator. All gated by your policy.{' '}
+              All coordinated by a single agent. All gated by your policy.{' '}
               <Link href="/mamba" style={{ color: 'var(--gold-dark)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
                 See how they coordinate →
               </Link>
@@ -908,7 +908,7 @@ export default function HomePage() {
                   range: '500 +',
                   stage: 'ENTERPRISE',
                   title: 'Multi-entity HR running with one human in the loop.',
-                  copy: 'Multiple legal entities, international headcount, advanced security. Same agents, customized HIL policy, dedicated success manager, SCIM + custom data residency.',
+                  copy: 'Multiple legal entities, international headcount, advanced security. Same agents, customized sign-off policy, dedicated success manager, SCIM + custom data residency.',
                   outcome: 'Outcome: enterprise HR ops at startup speed',
                 },
               ].map((card, i) => (
@@ -1034,7 +1034,7 @@ export default function HomePage() {
                   price: '$14',
                   unit: '/employee/month',
                   outcome: 'Saves ~$300K/year on HR FTEs',
-                  features: ['Everything in Starter', 'HIL approval workflows', 'Cryptographic audit log', 'RBAC + custom roles', 'Dedicated success manager'],
+                  features: ['Everything in Starter', 'Human sign-off workflows', 'Cryptographic audit log', 'RBAC + custom roles', 'Dedicated success manager'],
                   highlight: true,
                 },
                 {

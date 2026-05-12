@@ -17,7 +17,7 @@ export const productSections: NavSection[] = [
       {
         label: 'Today',
         href: '/today',
-        description: 'Your HIL queue — 30 min, every morning',
+        description: 'Your sign-off queue — 30 min, every morning',
         live: true,
       },
       {
@@ -92,7 +92,7 @@ export const productSections: NavSection[] = [
       {
         label: 'Settings',
         href: '/coming-soon/settings',
-        description: 'RBAC, integrations, HIL policy',
+        description: 'RBAC, integrations, sign-off policy',
         live: false,
       },
     ],
@@ -113,9 +113,9 @@ export const platformItems: NavItem[] = [
     live: false,
   },
   {
-    label: 'Human-in-the-Loop',
+    label: 'Human sign-off',
     href: '/coming-soon/hil',
-    description: 'Decision Cards and gating policy',
+    description: 'Decision Cards and sign-off policy',
     live: false,
   },
   {
@@ -163,11 +163,11 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
   },
   workspaces: {
     title: 'Workspaces',
-    body: 'One agent across multiple legal entities. Sister companies, international entities, M&A integrations — each workspace gets its own RBAC, audit log, and HIL policy.',
+    body: 'One agent across multiple legal entities. Sister companies, international entities, M&A integrations — each workspace gets its own RBAC, audit log, and sign-off policy.',
   },
   settings: {
     title: 'Settings',
-    body: 'RBAC roles, integration credentials, HIL gating policy, audit log configuration, and the compliance engine rules. The control room for your AI HR department.',
+    body: 'RBAC roles, integration credentials, sign-off policy, audit log configuration, and the compliance engine rules. The control room for your AI HR department.',
   },
   channels: {
     title: 'Channels',
@@ -178,8 +178,8 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
     body: 'Connect your existing stack. Gusto, Workday, Rippling, BambooHR, Okta, Carta, DocuSign, Greenhouse, Lever, Lattice — the agent works inside your tools, not instead of them.',
   },
   hil: {
-    title: 'Human-in-the-Loop',
-    body: 'Every high-stakes action is gated. The agent surfaces a Decision Card — rationale, evidence, who decides — and you approve or decline. Terminations are always-human. Always.',
+    title: 'Human sign-off',
+    body: 'Every high-stakes action is gated. The agent surfaces a Decision Card — rationale, evidence, who decides — and you approve or decline. Terminations are always you. Always.',
   },
   'compliance-engine': {
     title: 'Compliance Engine',

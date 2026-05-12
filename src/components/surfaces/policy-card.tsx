@@ -20,7 +20,7 @@ export default function PolicyCard() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18, paddingBottom: 14, borderBottom: '1px solid var(--border-faint)' }}>
         <div>
-          <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', margin: 0 }}>HIL Policy</p>
+          <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', margin: 0 }}>Sign-off Policy</p>
           <p style={{ fontSize: 11, color: 'var(--text-faint)', margin: '2px 0 0' }}>Edited just now</p>
         </div>
         <button
