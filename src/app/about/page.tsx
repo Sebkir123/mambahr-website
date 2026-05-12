@@ -10,19 +10,29 @@ export const metadata: Metadata = {
 
 const principles = [
   {
-    n: '01',
-    title: 'Honesty is the product.',
-    body: "The agent cites its sources. Shows its work. Escalates when it doesn't know. An agent that never says it's uncertain isn't trustworthy — and the work we're trusted with is too sensitive for that.",
+    letter: 'M',
+    title: 'Make our customers unstoppable.',
+    body: "We build for outcomes, not features. Every workflow, every decision, every release should give our customers more speed, clarity, and control. If it doesn't help them win in real moments, it doesn't ship.",
   },
   {
-    n: '02',
-    title: 'A human signs the paperwork.',
-    body: "Every consequential decision routes to a person. Offers, terminations, PIPs, anything that lands in someone's life. That isn't a limitation. It's the design. Trust requires accountability.",
+    letter: 'A',
+    title: 'All in on the details.',
+    body: "We're obsessed with the craft. The small things matter because they compound into big outcomes. We simplify relentlessly, remove friction, and sweat the details so the product feels fast, clear, and effortless to use.",
   },
   {
-    n: '03',
-    title: 'Good work disappears.',
-    body: "The best HR is invisible. Leave approved in seconds. Offer ready before the candidate expects it. Nobody filing a ticket to learn their PTO balance. The job isn't to be seen — it's to be done.",
+    letter: 'M',
+    title: 'Move with urgency.',
+    body: "Speed is a feature. We don't let things sit, we don't overthink, and we don't wait for perfect. We ship, learn, and improve quickly because progress beats perfection every time.",
+  },
+  {
+    letter: 'B',
+    title: 'Be real.',
+    body: "No fluff. No hiding. We say what needs to be said, even when it's uncomfortable. We communicate directly, solve problems faster, and operate with honesty inside and outside the company.",
+  },
+  {
+    letter: 'A',
+    title: 'Act as one.',
+    body: "No silos. No passengers. We step in, back each other up, and take shared ownership of outcomes. We win together and we lose together.",
   },
 ]
 
@@ -107,60 +117,69 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ── PRINCIPLES — three named values ── */}
-        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ marginBottom: 64, maxWidth: 600 }}>
-              <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 18 }}>
-                What we believe
-              </p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(30px, 3.5vw, 44px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text)',
-                  margin: 0,
-                  lineHeight: 1.05,
-                }}
-              >
-                Three principles<br />we don&apos;t bend.
-              </h2>
-            </div>
+        {/* ── PRINCIPLES — five MAMBA values, vertical stack ── */}
+        <section style={{ background: 'var(--bg-warm)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+            <p className="eyebrow" style={{ marginBottom: 24 }}>WHAT WE BELIEVE</p>
+            <h2
+              style={{
+                fontFamily: 'var(--font-serif), Georgia, serif',
+                fontSize: 'clamp(40px, 5vw, 60px)',
+                fontWeight: 400,
+                letterSpacing: '-0.025em',
+                color: 'var(--text)',
+                marginBottom: 72,
+                lineHeight: 1.05,
+                maxWidth: 720,
+              }}
+            >
+              Five things<br />we don&apos;t bend.
+            </h2>
 
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               {principles.map((p, i) => (
                 <div
-                  key={p.n}
+                  key={i}
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: '60px 1fr',
-                    gap: 32,
+                    gridTemplateColumns: 'minmax(120px, 160px) 1fr',
+                    columnGap: 40,
                     padding: '40px 0',
-                    borderTop: '1px solid var(--border-faint)',
-                    borderBottom: i === principles.length - 1 ? '1px solid var(--border-faint)' : 'none',
-                    alignItems: 'baseline',
+                    borderTop: '1px solid var(--border)',
+                    borderBottom: i === principles.length - 1 ? '1px solid var(--border)' : 'none',
+                    alignItems: 'start',
                   }}
                 >
-                  <span className="mono" style={{ fontSize: 12, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.08em' }}>
-                    {p.n}
-                  </span>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: 40, alignItems: 'baseline' }} className="mobile-stack">
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-serif), Georgia, serif',
+                      fontSize: 'clamp(80px, 9vw, 140px)',
+                      fontWeight: 400,
+                      color: 'var(--gold-dark)',
+                      lineHeight: 0.85,
+                      letterSpacing: '-0.04em',
+                      textAlign: 'left',
+                    }}
+                  >
+                    {p.letter}
+                  </div>
+                  <div style={{ paddingTop: 12 }}>
                     <h3
                       style={{
                         fontFamily: 'var(--font-serif), Georgia, serif',
-                        fontSize: 'clamp(22px, 2.4vw, 30px)',
-                        fontWeight: 400,
+                        fontSize: 'clamp(24px, 2.6vw, 32px)',
+                        fontWeight: 500,
+                        letterSpacing: '-0.015em',
                         color: 'var(--text)',
-                        letterSpacing: '-0.02em',
-                        lineHeight: 1.15,
-                        margin: 0,
+                        marginBottom: 14,
+                        lineHeight: 1.2,
                       }}
                     >
                       {p.title}
                     </h3>
-                    <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.75, margin: 0 }}>{p.body}</p>
+                    <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 640 }}>
+                      {p.body}
+                    </p>
                   </div>
                 </div>
               ))}
