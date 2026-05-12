@@ -1,22 +1,28 @@
 'use client'
 
 import { useState } from 'react'
+import TurnstileWidget from './turnstile-widget'
 
 type Props = { compact?: boolean }
 
 export function Waitlist({ compact }: Props) {
   const [email, setEmail] = useState('')
   const [company, setCompany] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (!turnstileToken) {
+      setStatus('error')
+      return
+    }
     setStatus('loading')
     try {
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, company }),
+        body: JSON.stringify({ email, company, turnstileToken }),
       })
       setStatus(res.ok ? 'success' : 'error')
     } catch {
@@ -78,11 +84,12 @@ export function Waitlist({ compact }: Props) {
             }}
           />
         )}
+        <TurnstileWidget onSuccess={setTurnstileToken} theme={compact ? 'light' : 'dark'} />
         <button
           type="submit"
-          disabled={status === 'loading'}
+          disabled={status === 'loading' || !turnstileToken}
           className="btn-gold"
-          style={{ width: '100%', justifyContent: 'center', opacity: status === 'loading' ? 0.7 : 1 }}
+          style={{ width: '100%', justifyContent: 'center', opacity: status === 'loading' || !turnstileToken ? 0.7 : 1 }}
         >
           {status === 'loading' ? 'Sending…' : 'Request access'}
         </button>

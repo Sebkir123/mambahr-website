@@ -2,6 +2,33 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 import { sendWaitlistWelcome } from '@/lib/email'
 
+const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+
+async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY
+  // Dev mode — no secret configured → accept dummy token from widget bypass
+  if (!secret) return token === 'dev-mode-bypass'
+  if (!token) return false
+
+  try {
+    const formData = new URLSearchParams()
+    formData.append('secret', secret)
+    formData.append('response', token)
+    formData.append('remoteip', ip)
+
+    const res = await fetch(TURNSTILE_VERIFY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData.toString(),
+    })
+    if (!res.ok) return false
+    const data = (await res.json()) as { success: boolean }
+    return data.success === true
+  } catch {
+    return false
+  }
+}
+
 async function notifySlack(text: string) {
   const url = process.env.SLACK_WEBHOOK_WAITLIST
   if (!url) return
@@ -56,17 +83,23 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  let email: string, company: string
+  let email: string, company: string, turnstileToken: string
   try {
     const body = await req.json()
     email = String(body.email ?? '').trim()
     company = String(body.company ?? '').trim()
+    turnstileToken = String(body.turnstileToken ?? '').trim()
   } catch {
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 })
   }
 
   if (!email || !email.includes('@')) {
     return NextResponse.json({ error: 'Valid work email required.' }, { status: 400 })
+  }
+
+  const verified = await verifyTurnstile(turnstileToken, ip)
+  if (!verified) {
+    return NextResponse.json({ error: 'Verification failed. Refresh and try again.' }, { status: 403 })
   }
 
   const { error } = await supabase
