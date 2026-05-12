@@ -1,0 +1,44 @@
+# MambaHR
+
+> MambaHR is an autonomous AI HR department — a fully managed system that replaces your HRIS, payroll, hiring, and compliance tooling with 14 specialist agents that do the work end-to-end. One human approves the calls that matter; everything else runs itself.
+
+## What MambaHR actually is
+
+MambaHR is a standalone web application at app.mambahr.com. Not a Slack bot. Not a chatbot. Not an HRIS add-on. It IS the HRIS + payroll. The product handles the full HR operating surface — hiring, onboarding, payroll, leave (PTO + FMLA + state law), performance reviews, compliance, offboarding, terminations, comp adjustments — with 14 specialist agents coordinated by a single primary agent.
+
+## Who it's for
+
+- HR / People Ops teams at fast-growing companies (2 to 8,000+ employees)
+- Heads of People, CHROs, Chief People Officers replacing legacy HRIS stacks (Workday, Rippling, Gusto, BambooHR, Namely, Personio, HiBob)
+- Companies that want to grow headcount without growing HR headcount
+
+## What makes MambaHR different
+
+- **Agents do the work, not just notify.** Where Slack-bot competitors surface a question, MambaHR's agent reads the policy, checks eligibility, drafts paperwork, files records, notifies stakeholders, and writes the audit trail. End-to-end.
+- **Federal + 50-state employment law, cited on every action.** 95K lines of proprietary deterministic HR decision logic — not prompt engineering.
+- **Always-you safety.** Terminations, RIFs, separation agreements, and comp changes above your threshold are always routed to a human. Never automated.
+- **1–2 day setup.** Migrates from any HRIS in one day. Live the next day. No 4-to-8-week deployment.
+- **One screen of policy.** Approval thresholds, leave rules, comp ranges, sign-off gates — configured on a single page. Edit anytime.
+
+## Pricing model
+
+Pricing tiers based on managed headcount, not user seats. Free for design partners during private beta. Contact for current pricing.
+
+## Stage
+
+Private beta. 10 design partners. 3,200+ employees managed across healthcare, fintech, tech, construction, and education customers. Raising $3M seed (2026).
+
+## Founders
+
+- Brian Bell, CEO — previously people ops at three startups
+- Sebastian Kirsch, CTO — previously AI agent systems and ML infrastructure
+
+## Where to go next
+
+- Live demo: https://mambahr.com/demo (30 min with the founders, no slides)
+- Pricing: https://mambahr.com/pricing
+- Comparisons: https://mambahr.com/compare/workday · /rippling · /gusto · /bamboohr · /namely · /personio
+- Security & compliance: https://mambahr.com/security
+- About the team: https://mambahr.com/about
+- Detailed product surfaces: https://mambahr.com/today (daily queue) · /mamba (architecture) · /hiring (hiring agent) · /people (employee management)
+- Full content for AI crawlers: https://mambahr.com/llms-full.txt
