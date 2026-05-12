@@ -338,8 +338,7 @@ export default function MegaNav() {
                     Top candidate from 6-week search. Competing offer from Scale AI.
                   </p>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
-                    <span style={{ background: '#FEF2F2', color: '#B91C1C', borderRadius: 4, padding: '2px 7px', fontSize: 10, fontWeight: 700, fontFamily: 'var(--font-mono), monospace' }}>L4</span>
-                    <span style={{ background: 'var(--bg-surface)', color: 'var(--text-muted)', borderRadius: 4, padding: '2px 7px', fontSize: 10, fontWeight: 600, fontFamily: 'var(--font-mono), monospace' }}>CUQ 0.88</span>
+                    <span style={{ background: 'var(--bg-surface)', color: 'var(--text-muted)', borderRadius: 4, padding: '2px 7px', fontSize: 10, fontWeight: 600 }}>Needs sign-off</span>
                   </div>
                   <div style={{ display: 'flex', gap: 6 }}>
                     <button style={{ flex: 1, padding: '6px 0', borderRadius: 6, border: 'none', background: '#1C1917', color: '#FFFFFF', fontSize: 11, fontWeight: 600, cursor: 'pointer' }}>Approve</button>

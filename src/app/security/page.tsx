@@ -86,7 +86,7 @@ function AuditLogVisual() {
   const entries = [
     { time: '09:32:16', action: 'Leave request received', detail: 'from Maya Chen via Slack', actor: 'mamba.agent', ref: 'evt_4f81a2' },
     { time: '09:32:16', action: 'Policy checked', detail: '12 days remaining · within threshold', actor: 'compliance.engine', ref: 'evt_4f81a3' },
-    { time: '09:32:17', action: 'Leave approved', detail: 'auto-resolved · CUQ 0.97', actor: 'time-off.agent', ref: 'evt_4f81a4' },
+    { time: '09:32:17', action: 'Leave approved', detail: 'auto-resolved', actor: 'time-off.agent', ref: 'evt_4f81a4' },
     { time: '09:32:18', action: 'Calendar + payroll updated', detail: 'manager notified · OOO set', actor: 'mamba.agent', ref: 'evt_4f81a5' },
   ]
 

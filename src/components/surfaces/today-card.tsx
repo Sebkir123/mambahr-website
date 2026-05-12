@@ -1,29 +1,22 @@
-type RiskLevel = 'L1' | 'L2' | 'L3' | 'L4' | 'L5'
-type Decision = 'auto' | 'hil'
+type Status = 'auto' | 'sign-off' | 'always-you'
 
 type TodayCardProps = {
   title: string
   subtitle: string
   rationale: string
-  riskLevel: RiskLevel
-  cuq: number
-  decision: Decision
+  status: Status
   time: string
   agent: string
   urgent?: boolean
 }
 
-const riskColors: Record<RiskLevel, { bg: string; text: string }> = {
-  L1: { bg: '#F0FDF4', text: '#15803D' },
-  L2: { bg: '#F0FDF4', text: '#15803D' },
-  L3: { bg: '#FFF7ED', text: '#C2410C' },
-  L4: { bg: '#FFF7ED', text: '#C2410C' },
-  L5: { bg: '#FEF2F2', text: '#B91C1C' },
+const statusStyles: Record<Status, { bg: string; text: string; label: string }> = {
+  'auto':        { bg: '#F0FDF4', text: '#15803D', label: 'Auto-approved' },
+  'sign-off':    { bg: '#FFF7ED', text: '#C2410C', label: 'Needs your sign-off' },
+  'always-you':  { bg: '#FEF2F2', text: '#B91C1C', label: 'Always you' },
 }
 
-export default function TodayCard({ title, subtitle, rationale, riskLevel, cuq, decision, time, agent, urgent }: TodayCardProps) {
-  const risk = riskColors[riskLevel]
-
+export default function TodayCard({ title, subtitle, rationale, status, time, agent, urgent }: TodayCardProps) {
   return (
     <div
       style={{
@@ -66,35 +59,21 @@ export default function TodayCard({ title, subtitle, rationale, riskLevel, cuq, 
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
         <span
           style={{
-            background: risk.bg,
-            color: risk.text,
+            background: statusStyles[status].bg,
+            color: statusStyles[status].text,
             borderRadius: 4,
-            padding: '2px 8px',
+            padding: '2px 10px',
             fontSize: 11,
             fontWeight: 600,
-            fontFamily: 'var(--font-mono), monospace',
           }}
         >
-          {riskLevel}
-        </span>
-        <span
-          style={{
-            background: 'var(--bg-surface)',
-            color: 'var(--text-muted)',
-            borderRadius: 4,
-            padding: '2px 8px',
-            fontSize: 11,
-            fontWeight: 600,
-            fontFamily: 'var(--font-mono), monospace',
-          }}
-        >
-          CUQ {cuq.toFixed(2)}
+          {statusStyles[status].label}
         </span>
         <span style={{ fontSize: 11, color: 'var(--text-faint)', marginLeft: 'auto' }}>{time}</span>
       </div>
 
       {/* Actions */}
-      {decision === 'hil' && (
+      {(status === 'sign-off' || status === 'always-you') && (
         <div style={{ display: 'flex', gap: 8 }}>
           <button
             style={{
@@ -128,7 +107,7 @@ export default function TodayCard({ title, subtitle, rationale, riskLevel, cuq, 
           </button>
         </div>
       )}
-      {decision === 'auto' && (
+      {status === 'auto' && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#15803D', flexShrink: 0 }} />
           <span style={{ fontSize: 11, color: '#15803D', fontWeight: 500 }}>Auto-resolved by {agent}</span>

@@ -14,9 +14,7 @@ const cards = [
     title: 'Offer for Maya Chen — Senior Engineer',
     subtitle: '$195k base · 0.18% equity · above band by 8%',
     rationale: 'Top candidate from 6-week search. Competing offer from Scale AI. Recommended: approve with justification filed.',
-    riskLevel: 'L4' as const,
-    cuq: 0.88,
-    decision: 'hil' as const,
+    status: 'always-you' as const,
     time: '8:14 AM',
     agent: 'Hiring agent',
     urgent: true,
@@ -25,9 +23,7 @@ const cards = [
     title: 'PTO approved — Emma Rodriguez',
     subtitle: 'Mon Apr 6 – Wed Apr 8 · 3 days',
     rationale: 'Within policy. Balance 12 → 9 days. Calendar and manager notified.',
-    riskLevel: 'L2' as const,
-    cuq: 0.97,
-    decision: 'auto' as const,
+    status: 'auto' as const,
     time: '9:02 AM',
     agent: 'Leave agent',
   },
@@ -35,9 +31,7 @@ const cards = [
     title: 'November payroll ready',
     subtitle: '47 employees · $412,300 · 2 state changes',
     rationale: 'CA and TX adjustments flagged. All direct deposits pre-verified. Ready to run.',
-    riskLevel: 'L4' as const,
-    cuq: 0.93,
-    decision: 'hil' as const,
+    status: 'always-you' as const,
     time: '6:00 AM',
     agent: 'Payroll agent',
   },
@@ -45,9 +39,7 @@ const cards = [
     title: 'Background check cleared — Jordan Kim',
     subtitle: 'Role: Account Executive · Start: May 12',
     rationale: 'Clean report. Offer letter triggered for e-signature. Equipment order submitted.',
-    riskLevel: 'L3' as const,
-    cuq: 0.99,
-    decision: 'auto' as const,
+    status: 'auto' as const,
     time: '7:30 AM',
     agent: 'Hiring agent',
   },
@@ -55,9 +47,7 @@ const cards = [
     title: 'FMLA eligibility — Marcus Webb',
     subtitle: 'Intermittent leave · FMLA + CA CFRA stacking',
     rationale: 'Eligible: 14 months tenure, 1,400 hours. CA CFRA stacks with federal FMLA. Up to 12 weeks approved.',
-    riskLevel: 'L3' as const,
-    cuq: 0.91,
-    decision: 'hil' as const,
+    status: 'sign-off' as const,
     time: '5:45 AM',
     agent: 'Leave agent',
   },
@@ -65,9 +55,7 @@ const cards = [
     title: 'EEO-1 filing draft ready',
     subtitle: 'Annual federal filing · Due May 31',
     rationale: 'Component 1 data pulled and formatted. No anomalies detected. Review before submission.',
-    riskLevel: 'L4' as const,
-    cuq: 0.95,
-    decision: 'hil' as const,
+    status: 'always-you' as const,
     time: '4:00 AM',
     agent: 'Compliance agent',
   },
@@ -106,7 +94,7 @@ const mathRows = [
 const anatomyItems = [
   { label: 'The action', desc: 'What the agent did or wants to do' },
   { label: 'The rationale', desc: "Agent's summary in 3 lines, with citations" },
-  { label: 'Risk class and CUQ', desc: 'L1–L5 + confidence score, color-coded' },
+  { label: 'Status label', desc: 'One of: Auto-approved, Needs your sign-off, Always you.' },
   { label: 'One-click decision', desc: 'Approve, Decline, Request changes, Escalate' },
   { label: 'The trail', desc: 'Every prior step, timestamped, audited' },
 ]
@@ -181,7 +169,7 @@ export default function TodayPage() {
                 {[
                   { num: '01', title: 'The action', desc: 'What the agent did or wants to do — one line, scannable in a glance.' },
                   { num: '02', title: 'The rationale', desc: 'Three lines max, with the agent\'s reasoning and source citations.' },
-                  { num: '03', title: 'Risk class', desc: 'L1 to L5 — color-coded by reversibility and impact on the company.' },
+                  { num: '03', title: 'Status label', desc: 'Auto-approved, Needs your sign-off, or Always you — color-coded by who decides.' },
                 ].map((c) => (
                   <div key={c.num} style={{ display: 'flex', gap: 14, alignItems: 'flex-start', textAlign: 'right', flexDirection: 'row-reverse' }}>
                     <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.04em', minWidth: 24, marginTop: 2 }}>{c.num}</span>
@@ -202,9 +190,7 @@ export default function TodayPage() {
                     title="Offer for Maya Chen — Senior Engineer"
                     subtitle="$195k base · 0.18% equity · above band by 8%"
                     rationale="Top candidate from 6-week search. Competing offer from Scale AI. Recommended: approve with justification filed to comp committee."
-                    riskLevel="L4"
-                    cuq={0.88}
-                    decision="hil"
+                    status="always-you"
                     time="8:14 AM"
                     agent="Hiring agent"
                     urgent
@@ -215,7 +201,6 @@ export default function TodayPage() {
               {/* Right callouts */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }} className="mobile-hide">
                 {[
-                  { num: '04', title: 'CUQ score', desc: '0.00 to 1.00 — how confident the agent is in its own recommendation. Below 0.75 routes to human.' },
                   { num: '05', title: 'One-click decision', desc: 'Approve, decline, request changes, or escalate. Average approval takes 12 seconds.' },
                   { num: '06', title: 'The trail', desc: 'Every prior step the agent took. Timestamped. Audited. Exportable.' },
                 ].map((c) => (
@@ -235,8 +220,7 @@ export default function TodayPage() {
               {[
                 { num: '01', title: 'The action',        desc: 'What the agent did or wants to do.' },
                 { num: '02', title: 'The rationale',     desc: 'Three lines, with citations.' },
-                { num: '03', title: 'Risk class',         desc: 'L1–L5, color-coded.' },
-                { num: '04', title: 'CUQ score',          desc: 'How confident the agent is.' },
+                { num: '03', title: 'Status label',       desc: 'Auto-approved, Needs your sign-off, or Always you.' },
                 { num: '05', title: 'One-click decision', desc: '12-second average approval.' },
                 { num: '06', title: 'The trail',          desc: 'Every prior step, timestamped.' },
               ].map((c) => (

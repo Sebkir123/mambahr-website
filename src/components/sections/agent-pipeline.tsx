@@ -170,7 +170,7 @@ export default function AgentPipeline() {
 
             <div style={{ marginTop: 'auto', paddingTop: 14, borderTop: '1px solid var(--border-faint)' }}>
               <p style={{ fontSize: 10, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace', letterSpacing: '0.04em', margin: 0 }}>
-                CUQ 0.97 · L2 · resolved 9:14:04
+                resolved 9:14:04
               </p>
             </div>
           </div>

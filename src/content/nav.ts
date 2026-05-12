@@ -179,7 +179,7 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
   },
   hil: {
     title: 'Human-in-the-Loop',
-    body: 'Every high-stakes action is gated. The agent surfaces a Decision Card — rationale, evidence, risk class, CUQ score — and you approve or decline. Terminations are always-human. Always.',
+    body: 'Every high-stakes action is gated. The agent surfaces a Decision Card — rationale, evidence, who decides — and you approve or decline. Terminations are always-human. Always.',
   },
   'compliance-engine': {
     title: 'Compliance Engine',
