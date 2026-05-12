@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
@@ -268,7 +269,7 @@ export default function HomePage() {
               >
                 <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
                   <div style={{ width: 24, height: 24, borderRadius: 6, background: '#FFFFFF', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
-                    <img src="/MambaHR_logo.png" alt="Mamba" width={20} height={20} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
+                    <Image src="/MambaHR_logo.png" alt="Mamba" width={20} height={20} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
                   </div>
                   <div>
                     <div style={{ display: 'flex', gap: 5, alignItems: 'center', marginBottom: 3 }}>
@@ -718,7 +719,7 @@ export default function HomePage() {
               <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
                 {/* Slack purple header */}
                 <div style={{ background: '#3F0E40', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <img src="/slack-new-logo.svg" alt="Slack" width={16} height={16} style={{ display: 'block', filter: 'brightness(0) invert(1)' }} />
+                  <Image src="/slack-new-logo.svg" alt="Slack" width={16} height={16} style={{ display: 'block', filter: 'brightness(0) invert(1)' }} />
                   <span style={{ fontSize: 13, fontWeight: 600, color: '#FFFFFF' }}>mambahr-team</span>
                   <span style={{ marginLeft: 'auto', fontSize: 10, color: 'rgba(255,255,255,0.5)' }}>3 online</span>
                 </div>
@@ -742,7 +743,7 @@ export default function HomePage() {
                   </div>
                   <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                     <div style={{ width: 30, height: 30, borderRadius: 6, background: '#FFFFFF', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
-                      <img src="/MambaHR_logo.png" alt="Mamba" width={26} height={26} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
+                      <Image src="/MambaHR_logo.png" alt="Mamba" width={26} height={26} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', gap: 6, alignItems: 'baseline', marginBottom: 4 }}>
@@ -770,7 +771,7 @@ export default function HomePage() {
               <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
                 {/* Teams purple header */}
                 <div style={{ background: '#4B53BC', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <img src="/Microsoft_Symbol_0.svg" alt="Microsoft Teams" width={16} height={16} style={{ display: 'block', filter: 'brightness(0) invert(1)' }} />
+                  <Image src="/Microsoft_Symbol_0.svg" alt="Microsoft Teams" width={16} height={16} style={{ display: 'block', filter: 'brightness(0) invert(1)' }} />
                   <span style={{ fontSize: 13, fontWeight: 600, color: '#FFFFFF' }}>Microsoft Teams</span>
                   <span style={{ marginLeft: 'auto', fontSize: 10, color: 'rgba(255,255,255,0.6)' }}>People Ops &gt; Approvals</span>
                 </div>
@@ -779,7 +780,7 @@ export default function HomePage() {
                   {/* Mamba bot message preamble */}
                   <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                     <div style={{ width: 30, height: 30, borderRadius: '50%', background: '#FFFFFF', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
-                      <img src="/MambaHR_logo.png" alt="Mamba" width={24} height={24} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
+                      <Image src="/MambaHR_logo.png" alt="Mamba" width={24} height={24} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', gap: 6, alignItems: 'baseline', marginBottom: 6 }}>
@@ -827,7 +828,7 @@ export default function HomePage() {
                 </div>
                 {/* Top nav bar */}
                 <div style={{ padding: '10px 16px', borderBottom: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <img src="/MambaHR_logo.png" alt="MambaHR" width={18} height={18} style={{ display: 'block', objectFit: 'contain', borderRadius: 4 }} />
+                  <Image src="/MambaHR_logo.png" alt="MambaHR" width={18} height={18} style={{ display: 'block', objectFit: 'contain', borderRadius: 4 }} />
                   <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Today</span>
                   <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 5 }}>
                     <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#22C55E' }} />
