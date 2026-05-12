@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
@@ -11,15 +12,16 @@ import AgentPipeline from '@/components/sections/agent-pipeline'
 import MigrationCard from '@/components/surfaces/migration-card'
 import PolicyCard from '@/components/surfaces/policy-card'
 import SectionCta from '@/components/section-cta'
-import ScenarioPlayer from '@/components/scenarios/scenario-player'
-import { leaveScenario } from '@/components/scenarios/leave'
-import { onboardingScenario } from '@/components/scenarios/onboarding'
-import { terminationScenario } from '@/components/scenarios/termination'
-import { complianceQaScenario } from '@/components/scenarios/compliance-qa'
-import { payrollScenario } from '@/components/scenarios/payroll'
-import { compScenario } from '@/components/scenarios/comp'
-import { reviewsScenario } from '@/components/scenarios/reviews'
-import { stateCoverageScenario } from '@/components/scenarios/state-coverage'
+
+const ScenariosSection = dynamic(() => import('@/components/scenarios/scenarios-section'), {
+  loading: () => (
+    <div style={{ minHeight: 520, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <span style={{ fontSize: 13, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>
+        Loading scenarios…
+      </span>
+    </div>
+  ),
+})
 
 // Local placeholder portraits served from /public/avatars/
 const AVATAR = (name: string) => `/avatars/${name}.jpg`
@@ -509,18 +511,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <ScenarioPlayer
-              scenarios={[
-                leaveScenario,
-                onboardingScenario,
-                terminationScenario,
-                complianceQaScenario,
-                payrollScenario,
-                compScenario,
-                reviewsScenario,
-                stateCoverageScenario,
-              ]}
-            />
+            <ScenariosSection />
           </div>
         </section>
 
