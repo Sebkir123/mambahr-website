@@ -42,8 +42,8 @@ export default function RoutingLog() {
     <div ref={ref} style={{ background: '#1C1917', border: '1px solid rgba(176,141,87,0.25)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 12px 40px rgba(28,25,23,0.18)' }}>
       {/* Terminal header */}
       <div style={{ background: 'rgba(255,255,255,0.04)', padding: '12px 18px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#22C55E', boxShadow: '0 0 0 0 rgba(34,197,94,0.6)', animation: 'gold-ring-pulse 2.4s ease-out infinite' }} />
-        <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.04em' }}>ROUTING LOG · LIVE</span>
+        <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#22C55E' }} />
+        <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.04em' }}>ACTIVITY · 9:14 AM</span>
         <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>app.mambahr.com</span>
       </div>
 

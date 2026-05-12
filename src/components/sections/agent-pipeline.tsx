@@ -35,7 +35,7 @@ export default function AgentPipeline() {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 28 }}>
         <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E' }} />
         <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--text-muted)', letterSpacing: '0.04em' }}>
-          LIVE · 9:14 AM · routing 47 actions/min
+          9:14 AM · 47 actions routed
         </span>
       </div>
 
