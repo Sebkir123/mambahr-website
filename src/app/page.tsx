@@ -340,7 +340,7 @@ export default function HomePage() {
         {/* ───────────────────────── HOW IT WORKS — with hardcoded mockups ───────────────────────── */}
         <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
           <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 80, maxWidth: 720, margin: '0 auto 80px' }}>
+            <div style={{ textAlign: 'center', marginBottom: 80, maxWidth: 760, margin: '0 auto 80px' }}>
               <p className="eyebrow" style={{ marginBottom: 16 }}>HOW IT WORKS</p>
               <h2
                 style={{
@@ -349,14 +349,63 @@ export default function HomePage() {
                   fontWeight: 400,
                   letterSpacing: '-0.02em',
                   color: 'var(--text)',
-                  marginBottom: 16,
+                  marginBottom: 40,
                   lineHeight: 1.1,
                 }}
               >
-                From kickoff to autopilot in a week.
+                From kickoff to autopilot, in under a week.
               </h2>
-              <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                One day to migrate. One screen to set policy. After that, the agent runs your HR department.
+
+              {/* Numbered stanza — 1 · 1 · 0 */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'auto 1fr',
+                  columnGap: 28,
+                  rowGap: 18,
+                  maxWidth: 560,
+                  margin: '0 auto 32px',
+                  textAlign: 'left',
+                }}
+              >
+                {[
+                  { n: '1', label: 'day to switch from any HRIS.' },
+                  { n: '1', label: 'screen to set your policy.' },
+                  { n: '0', label: 'callouts after that.' },
+                ].map((row, i) => (
+                  <div key={i} style={{ display: 'contents' }}>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-serif), Georgia, serif',
+                        fontSize: 'clamp(64px, 7vw, 96px)',
+                        fontWeight: 400,
+                        color: 'var(--gold-dark)',
+                        lineHeight: 0.9,
+                        letterSpacing: '-0.04em',
+                        alignSelf: 'center',
+                      }}
+                    >
+                      {row.n}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-serif), Georgia, serif',
+                        fontSize: 'clamp(22px, 2.4vw, 30px)',
+                        color: 'var(--text)',
+                        lineHeight: 1.3,
+                        alignSelf: 'center',
+                        fontWeight: 400,
+                        letterSpacing: '-0.01em',
+                      }}
+                    >
+                      {row.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.6, fontStyle: 'italic' }}>
+                After that, the agent runs your HR department.
               </p>
             </div>
 
@@ -365,13 +414,13 @@ export default function HomePage() {
               <div>
                 <p className="mono" style={{ fontSize: 13, fontWeight: 700, color: 'var(--gold)', letterSpacing: '0.06em', marginBottom: 16 }}>STEP 01 · ~1 DAY</p>
                 <h3 style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 400, color: 'var(--text)', marginBottom: 16, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
-                  Migrate from your old HRIS.
+                  Switch from your old HRIS.
                 </h3>
                 <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 20 }}>
                   Move off Gusto, Workday, Rippling, BambooHR, Namely, Personio — whatever you have. We pull employees, comp records, org chart, leave balances, performance history, and documents. One click. Zero data loss.
                 </p>
                 <p style={{ fontSize: 13, color: 'var(--text-faint)', fontStyle: 'italic' }}>
-                  Most teams cut over end-of-day Friday. Live Monday morning.
+                  Most teams switch end-of-day Friday. Live Monday morning.
                 </p>
               </div>
               <MigrationCard />
