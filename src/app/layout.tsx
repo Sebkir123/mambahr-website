@@ -104,6 +104,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${instrumentSerif.variable}`}>
       <head>
+        <link rel="preconnect" href="https://dqoqnlecylqlwsahudjn.supabase.co" />
+        <link rel="dns-prefetch" href="https://dqoqnlecylqlwsahudjn.supabase.co" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://challenges.cloudflare.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLdString }}

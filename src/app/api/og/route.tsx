@@ -2,7 +2,28 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
+// In-memory rate limiter. Edge instances are short-lived so this is a
+// per-instance "spam dampener" rather than a hard global cap.
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
+const RATE_LIMIT_MAX = 60
+const ipBuckets = new Map<string, number[]>()
+
+function rateLimit(ip: string): boolean {
+  const now = Date.now()
+  const cutoff = now - RATE_LIMIT_WINDOW_MS
+  const timestamps = (ipBuckets.get(ip) ?? []).filter((t) => t > cutoff)
+  if (timestamps.length >= RATE_LIMIT_MAX) return false
+  timestamps.push(now)
+  ipBuckets.set(ip, timestamps)
+  return true
+}
+
 export async function GET(request: Request) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? 'unknown'
+  if (!rateLimit(ip)) {
+    return new Response('Too many requests', { status: 429, headers: { 'Retry-After': '3600' } })
+  }
+
   try {
     const { searchParams } = new URL(request.url)
 

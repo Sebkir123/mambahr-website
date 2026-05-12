@@ -989,7 +989,7 @@ export default function HomePage() {
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, justifyContent: 'center' }}>
               <div style={{ width: 56, height: 56, borderRadius: '50%', overflow: 'hidden' }}>
-                <PhotoImg src={AVATAR('head-of-people')} alt="Head of People" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <PhotoImg src={AVATAR('head-of-people')} alt="Head of People" sizes="56px" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
               <div style={{ textAlign: 'left' }}>
                 <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Head of People</p>

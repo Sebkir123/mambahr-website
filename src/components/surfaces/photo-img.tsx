@@ -9,9 +9,10 @@ type PhotoImgProps = {
   style?: CSSProperties
   width?: number
   height?: number
+  sizes?: string
 }
 
-export default function PhotoImg({ src, alt, style, width = 400, height = 400 }: PhotoImgProps) {
+export default function PhotoImg({ src, alt, style, width = 400, height = 400, sizes }: PhotoImgProps) {
   return (
     <Image
       src={src}
@@ -19,6 +20,7 @@ export default function PhotoImg({ src, alt, style, width = 400, height = 400 }:
       width={width}
       height={height}
       style={style}
+      sizes={sizes}
       onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
     />
   )
