@@ -1,5 +1,3 @@
-'use client'
-
 import type { Scenario } from './types'
 
 const TOTAL_EMPLOYEES = 247

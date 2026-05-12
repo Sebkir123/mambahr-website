@@ -1,5 +1,3 @@
-'use client'
-
 import type { Scenario } from './types'
 
 export const complianceQaScenario: Scenario = {
