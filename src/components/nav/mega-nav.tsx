@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 // Inline single-stroke icons sized for the dropdown rail
 const Icon = ({ d }: { d: string }) => (
@@ -117,7 +118,7 @@ export default function MegaNav() {
             style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }}
             onClick={() => setProductOpen(false)}
           >
-            <img src="/MambaHR_logo.png" alt="MambaHR" width={26} height={26} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
+            <Image src="/MambaHR_logo.png" alt="MambaHR" width={26} height={26} priority style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
             <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 18, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>
               MambaHR
             </span>

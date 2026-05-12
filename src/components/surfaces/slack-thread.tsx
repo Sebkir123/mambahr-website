@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 type Message = {
   name: string
@@ -95,7 +96,7 @@ export default function SlackThread({ channel, messages, compact }: SlackThreadP
                     overflow: 'hidden',
                   }}
                 >
-                  <img src="/MambaHR_logo.png" alt="Mamba" width={compact ? 22 : 28} height={compact ? 22 : 28} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
+                  <Image src="/MambaHR_logo.png" alt="Mamba" width={compact ? 22 : 28} height={compact ? 22 : 28} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0, paddingTop: 4 }}>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 6 }}>
@@ -136,7 +137,7 @@ export default function SlackThread({ channel, messages, compact }: SlackThreadP
                 }}
               >
                 {msg.isMamba ? (
-                  <img src="/MambaHR_logo.png" alt="Mamba" width={compact ? 22 : 28} height={compact ? 22 : 28} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
+                  <Image src="/MambaHR_logo.png" alt="Mamba" width={compact ? 22 : 28} height={compact ? 22 : 28} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
                 ) : (
                   <span style={{ fontSize: compact ? 10 : 12, fontWeight: 700, color: '#57534E' }}>{msg.initials}</span>
                 )}
