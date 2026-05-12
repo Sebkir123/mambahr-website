@@ -10,6 +10,8 @@ import AgentPipeline from '@/components/sections/agent-pipeline'
 import MigrationCard from '@/components/surfaces/migration-card'
 import PolicyCard from '@/components/surfaces/policy-card'
 import SectionCta from '@/components/section-cta'
+import ScenarioPlayer from '@/components/scenarios/scenario-player'
+import { leaveScenario } from '@/components/scenarios/leave'
 
 // Local placeholder portraits served from /public/avatars/
 const AVATAR = (name: string) => `/avatars/${name}.jpg`
@@ -460,6 +462,33 @@ export default function HomePage() {
               </div>
             </div>
             <SectionCta headline="See your migration plan in 30 minutes." />
+          </div>
+        </section>
+
+        {/* ───────────── WATCH THE AGENT WORK ───────────── */}
+        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1240, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 56, maxWidth: 720, margin: '0 auto 56px' }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>WATCH THE AGENT WORK</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.1,
+                }}
+              >
+                Pick a moment. See it handled in seconds.
+              </h2>
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                Real workflows the agent runs every day. Click a tab.
+              </p>
+            </div>
+
+            <ScenarioPlayer scenarios={[leaveScenario]} />
           </div>
         </section>
 
