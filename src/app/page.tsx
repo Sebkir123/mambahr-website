@@ -9,6 +9,7 @@ import EmployeeDirectory from '@/components/surfaces/employee-directory'
 import AgentPipeline from '@/components/sections/agent-pipeline'
 import MigrationCard from '@/components/surfaces/migration-card'
 import PolicyCard from '@/components/surfaces/policy-card'
+import SectionCta from '@/components/section-cta'
 
 // Local placeholder portraits served from /public/avatars/
 const AVATAR = (name: string) => `/avatars/${name}.jpg`
@@ -458,6 +459,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+            <SectionCta headline="See your migration plan in 30 minutes." />
           </div>
         </section>
 
@@ -492,6 +494,7 @@ export default function HomePage() {
                 See how they coordinate →
               </Link>
             </p>
+            <SectionCta headline="Meet your agents. 30 minutes, no slides." />
           </div>
         </section>
 
@@ -616,6 +619,7 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+            <SectionCta headline="Talk to the founders about your state coverage." />
           </div>
         </section>
 
@@ -808,6 +812,7 @@ export default function HomePage() {
               </div>
 
             </div>
+            <SectionCta headline="See it in Slack, Teams, or the web app." />
           </div>
         </section>
 
@@ -909,6 +914,7 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+            <SectionCta headline="Tell us your headcount. We'll size the agent." />
           </div>
         </section>
 
