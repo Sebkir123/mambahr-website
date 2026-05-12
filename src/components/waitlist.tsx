@@ -50,6 +50,7 @@ export function Waitlist({ compact }: Props) {
         <input
           type="email"
           required
+          aria-label="Work email"
           placeholder="work@company.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -68,6 +69,7 @@ export function Waitlist({ compact }: Props) {
         {!compact && (
           <input
             type="text"
+            aria-label="Company name"
             placeholder="Company name"
             value={company}
             onChange={(e) => setCompany(e.target.value)}

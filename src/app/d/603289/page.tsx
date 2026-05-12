@@ -148,6 +148,7 @@ function NavDots({ active, onNav }: { active: number; onNav: (i: number) => void
       {Array.from({ length: TOTAL }, (_, i) => (
         <button
           key={i}
+          type="button"
           onClick={() => onNav(i)}
           aria-label={`Slide ${i + 1}`}
           style={{

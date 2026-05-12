@@ -128,6 +128,9 @@ export default function MegaNav() {
           <div className="hidden md:flex" style={{ display: 'flex', alignItems: 'center', gap: 4, flex: 1, justifyContent: 'center' }}>
             {/* Product dropdown trigger */}
             <button
+              type="button"
+              aria-expanded={productOpen}
+              aria-haspopup="menu"
               onMouseEnter={openProduct}
               onMouseLeave={scheduleClose}
               onClick={() => setProductOpen(!productOpen)}
@@ -191,9 +194,11 @@ export default function MegaNav() {
             </Link>
             {/* Mobile hamburger */}
             <button
+              type="button"
               className="md:hidden"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileOpen}
               style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, color: 'var(--text)' }}
             >
               {mobileOpen ? (
@@ -374,6 +379,8 @@ export default function MegaNav() {
             {/* Product (collapsible) */}
             <div style={{ marginBottom: 8 }}>
               <button
+                type="button"
+                aria-expanded={mobileProductExpanded}
                 onClick={() => setMobileProductExpanded(!mobileProductExpanded)}
                 style={{
                   width: '100%',

@@ -120,6 +120,7 @@ export default function MambaExamples() {
         {examples.map((e, i) => (
           <button
             key={e.key}
+            type="button"
             onClick={() => setActive(i)}
             style={{
               padding: '9px 18px',

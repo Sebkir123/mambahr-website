@@ -255,6 +255,7 @@ function AccessControlVisual() {
         {roles.map((role, i) => (
           <button
             key={role.role}
+            type="button"
             onClick={() => setActive(i)}
             style={{
               padding: '10px 8px',
@@ -666,6 +667,8 @@ export default function SecurityPage() {
                   }}
                 >
                   <button
+                    type="button"
+                    aria-expanded={openFaq === i}
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     style={{
                       width: '100%',
