@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 const features = [
   {
@@ -176,9 +177,12 @@ export default function FeatureSections() {
                 
                 {/* Background Image filling the inner padding area nicely */}
                 <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-inner">
-                  <img 
-                    src={feature.image} 
+                  <Image
+                    src={feature.image}
                     alt={feature.headline}
+                    width={800}
+                    height={600}
+                    unoptimized
                     className="w-full h-full object-cover"
                   />
                   {/* Subtle overlay to ensure mockups pop */}

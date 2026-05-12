@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 type MambaMarkProps = {
   size?: number
   alt?: string
@@ -5,7 +7,7 @@ type MambaMarkProps = {
 
 export default function MambaMark({ size = 24, alt = 'MambaHR' }: MambaMarkProps) {
   return (
-    <img
+    <Image
       src="/MambaHR_logo.png"
       alt={alt}
       width={size}

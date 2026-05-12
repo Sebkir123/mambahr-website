@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 type Status = 'Active' | 'On leave' | 'New hire' | 'On PIP' | 'Pending offer' | 'Maternity leave'
 
 const statusColors: Record<Status, { bg: string; fg: string; dot: string }> = {
@@ -33,7 +35,7 @@ export default function EmployeeRow({ e, dense }: { e: Employee; dense?: boolean
       }}
     >
       <div style={{ width: 32, height: 32, borderRadius: '50%', overflow: 'hidden', background: 'var(--bg-warm)' }}>
-        <img src={e.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        <Image src={e.avatar} alt={e.name} width={32} height={32} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
       </div>
       <div style={{ minWidth: 0 }}>
         <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', margin: 0, lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
