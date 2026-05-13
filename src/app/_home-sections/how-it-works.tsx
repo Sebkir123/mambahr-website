@@ -8,72 +8,23 @@ export default function HowItWorksSection() {
   return (
     <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: 80, maxWidth: 760, margin: '0 auto 80px' }}>
-          <p className="eyebrow" style={{ marginBottom: 16 }}>HOW IT WORKS</p>
+        <div style={{ textAlign: 'center', marginBottom: 88, maxWidth: 760, margin: '0 auto 88px' }}>
+          <p className="eyebrow" style={{ marginBottom: 18 }}>HOW IT WORKS</p>
           <h2
             style={{
               fontFamily: 'var(--font-serif), Georgia, serif',
-              fontSize: 'clamp(32px, 4vw, 52px)',
+              fontSize: 'clamp(36px, 4.6vw, 60px)',
               fontWeight: 400,
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.03em',
               color: 'var(--text)',
-              marginBottom: 40,
-              lineHeight: 1.1,
+              marginBottom: 20,
+              lineHeight: 1.05,
             }}
           >
-            From kickoff to autopilot, in under a week.
+            From kickoff to autopilot.<br />In a day.
           </h2>
-
-          {/* Numbered stanza — 1 · 1 · 0 */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'auto 1fr',
-              columnGap: 28,
-              rowGap: 18,
-              maxWidth: 560,
-              margin: '0 auto 32px',
-              textAlign: 'left',
-            }}
-          >
-            {[
-              { n: '1', label: 'day to switch from any HRIS.' },
-              { n: '1', label: 'screen to set your policy.' },
-              { n: '0', label: 'callouts after that.' },
-            ].map((row, i) => (
-              <div key={i} style={{ display: 'contents' }}>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(64px, 7vw, 96px)',
-                    fontWeight: 400,
-                    color: 'var(--gold-dark)',
-                    lineHeight: 0.9,
-                    letterSpacing: '-0.04em',
-                    alignSelf: 'center',
-                  }}
-                >
-                  {row.n}
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(22px, 2.4vw, 30px)',
-                    color: 'var(--text)',
-                    lineHeight: 1.3,
-                    alignSelf: 'center',
-                    fontWeight: 400,
-                    letterSpacing: '-0.01em',
-                  }}
-                >
-                  {row.label}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.6, fontStyle: 'italic' }}>
-            After that, the agent runs your HR department.
+          <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+            Three steps. Then the agent takes it from there.
           </p>
         </div>
 
