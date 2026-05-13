@@ -337,32 +337,32 @@ function AccessControlVisual() {
 
 const faqItems = [
   {
-    q: 'Can anyone at MambaHR see our employee data?',
-    a: "No. Your data is yours. We use it to run your workflows — that is it. Nobody at MambaHR browses your records, and nothing is shared with anyone outside your company.",
+    q: 'Who owns our HR data?',
+    a: 'You do. Always. We use it to run your workflows — that is the only reason we touch it. Nobody at MambaHR browses your records, nothing is shared outside your company, and you can take all of it with you on the way out.',
   },
   {
-    q: 'Do you train AI on our data?',
-    a: "Never. Your team's names, salaries, performance reviews, health information — none of it is ever used to train an AI model. Not ours, not anyone else's. This is in your contract, in plain language.",
+    q: 'Is our data ever used to train AI?',
+    a: "Never. Your team's names, salaries, performance reviews, health information — none of it is ever used to train an AI model. Not ours, not anyone else's. This is written into your contract in plain language.",
   },
   {
     q: 'How is our data protected?',
-    a: 'Your data is encrypted when stored and when moving between systems — the same level of protection your bank uses. The keys are locked away in hardware that nobody at MambaHR can read.',
+    a: 'It is encrypted when stored and when moving between systems — the same level of protection your bank uses. The keys are locked away in hardware that nobody at MambaHR can read. Even our engineers cannot see your raw data.',
   },
   {
     q: 'Where is our data stored?',
-    a: 'In the United States, on enterprise cloud infrastructure. Your data does not leave the country.',
-  },
-  {
-    q: 'Who at MambaHR can access our data?',
-    a: 'A small on-call team can access production systems for emergencies, and even then their access is logged and limited. Nobody browses customer records as a matter of routine.',
-  },
-  {
-    q: 'What if something goes wrong?',
-    a: 'You hear from us within 24 hours of any incident that affects your data. A full write-up follows within a week — what happened, why, and what we changed so it does not happen again.',
+    a: 'In the United States, on enterprise cloud infrastructure. Your data never leaves the country.',
   },
   {
     q: 'How does access work for our team?',
-    a: 'Your team logs in with the accounts they already use — Google, Microsoft, or your existing single sign-on. Each person sees only what their role allows. When someone leaves the company, their access disappears the same minute.',
+    a: 'Your team logs in with the accounts they already use — Google, Microsoft, or your existing company login. Each person sees only what their role allows. When someone leaves the company, their access disappears the same minute.',
+  },
+  {
+    q: 'What about HIPAA, California, and background-check rules?',
+    a: 'Health information is kept in its own protected lane, handled the way HIPAA expects. California employees can request, correct, or delete their record anytime, in line with CCPA and CPRA. Background checks follow the same legal rules your provider already uses.',
+  },
+  {
+    q: 'If there is a security incident, what is your response?',
+    a: 'You hear from us within 24 hours of any incident that affects your data. A full write-up follows within a week — what happened, why, and what we changed so it does not happen again. No hiding, no spin.',
   },
 ]
 
