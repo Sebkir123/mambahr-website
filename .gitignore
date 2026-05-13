@@ -28,6 +28,13 @@ next-env.d.ts
 # Build artifacts
 # ─────────────────────────────────────────────────────────────
 *.tsbuildinfo
+.eslintcache
+
+# ─────────────────────────────────────────────────────────────
+# Local-only config overrides (next.config.local.ts, etc.)
+# .env files are handled in the Environment section above.
+# ─────────────────────────────────────────────────────────────
+*.local
 
 # ─────────────────────────────────────────────────────────────
 # Generated assets (regenerated on every build)
