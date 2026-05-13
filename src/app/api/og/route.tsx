@@ -149,7 +149,7 @@ export async function GET(request: Request) {
     )
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e)
-    console.log(message)
+    console.error('[api/og] image generation failed:', message)
     return new Response(`Failed to generate the image`, {
       status: 500,
     })

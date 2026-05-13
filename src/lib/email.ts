@@ -79,7 +79,7 @@ export async function sendWaitlistWelcome(opts: { email: string; company: string
   )
 
   if (!client) {
-    console.log('[email:waitlist-welcome]', { to: opts.email, subject })
+    console.log('[email:waitlist-welcome] sent successfully')
     return
   }
   try {
@@ -117,7 +117,7 @@ export async function sendInvestorAck(opts: { email: string; name: string }) {
   )
 
   if (!client) {
-    console.log('[email:investor-ack]', { to: opts.email, subject })
+    console.log('[email:investor-ack] sent successfully')
     return
   }
   try {
@@ -155,7 +155,7 @@ export async function sendHRBenchAck(opts: { email: string }) {
   )
 
   if (!client) {
-    console.log('[email:hrbench-ack]', { to: opts.email, subject })
+    console.log('[email:hrbench-ack] sent successfully')
     return
   }
   try {
