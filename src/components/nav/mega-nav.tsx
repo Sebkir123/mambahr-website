@@ -124,7 +124,7 @@ export default function MegaNav() {
             </span>
           </Link>
 
-          {/* Desktop links — 4 items: Product (dropdown), Pricing, Security, About */}
+          {/* Desktop links — Product (dropdown), Security, About */}
           <div className="hidden md:flex" style={{ display: 'flex', alignItems: 'center', gap: 4, flex: 1, justifyContent: 'center' }}>
             {/* Product dropdown trigger */}
             <button
@@ -157,7 +157,6 @@ export default function MegaNav() {
 
             {/* Direct links */}
             {[
-              { label: 'Pricing',  href: '/pricing'  },
               { label: 'Security', href: '/security' },
               { label: 'About',    href: '/about'    },
             ].map((item) => (
@@ -414,7 +413,6 @@ export default function MegaNav() {
 
             {/* Direct links */}
             {[
-              { label: 'Pricing',  href: '/pricing'  },
               { label: 'Security', href: '/security' },
               { label: 'About',    href: '/about'    },
             ].map((item) => (

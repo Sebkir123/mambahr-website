@@ -134,7 +134,6 @@ export const platformItems: NavItem[] = [
 
 export const companyItems: NavItem[] = [
   { label: 'About', href: '/about', description: 'The team and the mission', live: true },
-  { label: 'Pricing', href: '/pricing', description: 'Per-employee, all agents included', live: true },
   { label: 'Customers', href: '/coming-soon/customers', description: 'How teams use MambaHR', live: false },
   { label: 'Changelog', href: '/coming-soon/changelog', description: "What's shipped", live: false },
   { label: 'Careers', href: '/coming-soon/careers', description: 'Join the team', live: false },

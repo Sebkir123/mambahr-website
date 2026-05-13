@@ -11,7 +11,6 @@ const cols = [
       { label: 'Mamba', href: '/mamba' },
       { label: 'People', href: '/people' },
       { label: 'Hiring', href: '/hiring' },
-      { label: 'Pricing', href: '/pricing' },
     ],
   },
   {

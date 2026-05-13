@@ -12,7 +12,6 @@ import ComplianceEngineSection from './_home-sections/compliance-engine'
 import WhereItLivesSection from './_home-sections/where-it-lives'
 import BuiltForEveryStageSection from './_home-sections/built-for-every-stage'
 import TestimonialSection from './_home-sections/testimonial'
-import PricingSection from './_home-sections/pricing'
 import FaqSection from './_home-sections/faq'
 
 export default function HomePage() {
@@ -30,7 +29,6 @@ export default function HomePage() {
         <WhereItLivesSection />
         <BuiltForEveryStageSection />
         <TestimonialSection />
-        <PricingSection />
         <FaqSection />
         <RequestAccessSection />
       </main>

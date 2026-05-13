@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/mamba`,   lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${base}/people`,  lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/hiring`,  lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${base}/pricing`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${base}/about`,   lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${base}/security`,lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
   ]
