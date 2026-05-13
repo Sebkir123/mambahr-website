@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 
@@ -40,18 +41,14 @@ const leadership = [
     name: 'Brian Bell',
     role: 'CEO & co-founder',
     prev: 'People ops at three startups',
-    initials: 'BB',
-    bg: 'var(--gold-tint)',
-    fg: 'var(--gold-dark)',
+    photo: '/brian_bell.jpeg',
     linkedin: 'https://linkedin.com/in/brianbell',
   },
   {
     name: 'Sebastian Kirsch',
     role: 'CTO & co-founder',
     prev: 'AI agent systems · ML infrastructure',
-    initials: 'SK',
-    bg: 'var(--gold-dark)',
-    fg: 'var(--bg)',
+    photo: '/sebastian_kirsch.jpg',
     linkedin: 'https://linkedin.com/in/sebastiankirsch',
   },
 ]
@@ -225,22 +222,23 @@ export default function AboutPage() {
                 >
                   <div
                     style={{
-                      width: 72,
-                      height: 72,
+                      width: 88,
+                      height: 88,
                       borderRadius: '50%',
-                      background: person.bg,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: 22,
-                      fontFamily: 'var(--font-serif), Georgia, serif',
-                      color: person.fg,
-                      fontWeight: 400,
-                      letterSpacing: '-0.02em',
+                      overflow: 'hidden',
                       flexShrink: 0,
+                      position: 'relative',
+                      background: 'var(--bg-warm)',
+                      border: '1px solid var(--border)',
                     }}
                   >
-                    {person.initials}
+                    <Image
+                      src={person.photo}
+                      alt={person.name}
+                      fill
+                      sizes="88px"
+                      style={{ objectFit: 'cover' }}
+                    />
                   </div>
                   <div style={{ flex: 1, minWidth: 0, paddingTop: 6 }}>
                     <p style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', margin: '0 0 4px', letterSpacing: '-0.01em' }}>
