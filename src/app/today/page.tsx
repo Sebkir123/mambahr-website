@@ -2,6 +2,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
 import TodayCard from '@/components/surfaces/today-card'
+import DecisionCardAnatomy from '@/components/sections/decision-card-anatomy'
 
 const cards = [
   {
@@ -132,103 +133,8 @@ export default function TodayPage() {
           </div>
         </section>
 
-        {/* Decision Card anatomy — annotated dissection */}
-        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-            <div style={{ marginBottom: 64, maxWidth: 720 }}>
-              <p className="eyebrow" style={{ marginBottom: 20 }}>THE DECISION CARD</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(36px, 4.5vw, 60px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text)',
-                  marginBottom: 24,
-                  lineHeight: 1.0,
-                }}
-              >
-                Anatomy of a<br />decision-ready card.
-              </h2>
-              <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 580 }}>
-                No &ldquo;go investigate.&rdquo; The agent already did. Every card surfaces what you need to decide in 12 seconds. Here is what every part means.
-              </p>
-            </div>
-
-            {/* Annotated card with callouts */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr 1fr', gap: 32, alignItems: 'center' }} className="mobile-stack">
-
-              {/* Left callouts */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }} className="mobile-hide">
-                {[
-                  { num: '01', title: 'The action', desc: 'What the agent did or wants to do — one line, scannable in a glance.' },
-                  { num: '02', title: 'The rationale', desc: 'Three lines max, with the agent\'s reasoning and source citations.' },
-                  { num: '03', title: 'Status label', desc: 'Auto-approved, Needs your sign-off, or Always you — color-coded by who decides.' },
-                ].map((c) => (
-                  <div key={c.num} style={{ display: 'flex', gap: 14, alignItems: 'flex-start', textAlign: 'right', flexDirection: 'row-reverse' }}>
-                    <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.04em', minWidth: 24, marginTop: 2 }}>{c.num}</span>
-                    <div>
-                      <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', margin: 0 }}>{c.title}</p>
-                      <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '4px 0 0', lineHeight: 1.5 }}>{c.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Center: the card itself, larger */}
-              <div style={{ position: 'relative', padding: '20px 0' }}>
-                {/* Subtle gold glow ring */}
-                <div style={{ position: 'absolute', inset: -20, background: 'radial-gradient(circle, rgba(176,141,87,0.08), transparent 65%)', pointerEvents: 'none' }} />
-                <div style={{ position: 'relative', transform: 'scale(1.15)', transformOrigin: 'center' }}>
-                  <TodayCard
-                    title="Offer for Maya Chen — Senior Engineer"
-                    subtitle="$195k base · 0.18% equity · above band by 8%"
-                    rationale="Top candidate from 6-week search. Competing offer from Scale AI. Recommended: approve with justification filed to comp committee."
-                    status="always-you"
-                    time="8:14 AM"
-                    agent="Hiring agent"
-                    urgent
-                  />
-                </div>
-              </div>
-
-              {/* Right callouts */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }} className="mobile-hide">
-                {[
-                  { num: '05', title: 'One-click decision', desc: 'Approve, decline, request changes, or escalate. Average approval takes 12 seconds.' },
-                  { num: '06', title: 'The trail', desc: 'Every prior step the agent took. Timestamped. Audited. Exportable.' },
-                ].map((c) => (
-                  <div key={c.num} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                    <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.04em', minWidth: 24, marginTop: 2 }}>{c.num}</span>
-                    <div>
-                      <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', margin: 0 }}>{c.title}</p>
-                      <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '4px 0 0', lineHeight: 1.5 }}>{c.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Mobile-only: linear list of all 6 (since callouts are hidden) */}
-            <div className="mobile-callouts" style={{ display: 'none', flexDirection: 'column', gap: 16, marginTop: 40 }}>
-              {[
-                { num: '01', title: 'The action',        desc: 'What the agent did or wants to do.' },
-                { num: '02', title: 'The rationale',     desc: 'Three lines, with citations.' },
-                { num: '03', title: 'Status label',       desc: 'Auto-approved, Needs your sign-off, or Always you.' },
-                { num: '05', title: 'One-click decision', desc: '12-second average approval.' },
-                { num: '06', title: 'The trail',          desc: 'Every prior step, timestamped.' },
-              ].map((c) => (
-                <div key={c.num} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                  <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.04em', minWidth: 24, marginTop: 2 }}>{c.num}</span>
-                  <div>
-                    <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', margin: 0 }}>{c.title}</p>
-                    <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '4px 0 0', lineHeight: 1.5 }}>{c.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Decision Card anatomy — interactive annotated component */}
+        <DecisionCardAnatomy />
 
         {/* The math */}
         <section style={{ background: 'var(--bg-cream)', padding: '100px 24px' }}>
