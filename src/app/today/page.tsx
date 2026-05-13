@@ -79,11 +79,11 @@ const humanDecides = [
 ]
 
 const mathRows = [
-  { metric: 'HR FTE for 500 employees', legacy: '5', mamba: '1 (judgment only)' },
-  { metric: 'Avg PTO request resolution', legacy: '4.2 hours', mamba: '4.2 seconds' },
-  { metric: 'Time on operational admin work', legacy: '60%', mamba: '0%' },
-  { metric: 'Time on compliance filings', legacy: '15%', mamba: '0% (automated, you sign off on submit)' },
-  { metric: 'Time on judgment and policy', legacy: '25%', mamba: '100%' },
+  { metric: 'HR headcount for 500 employees', legacy: '5', mamba: '1', note: 'judgment only' },
+  { metric: 'Avg PTO request resolution',     legacy: '4.2 hr',  mamba: '4.2 sec' },
+  { metric: 'Time spent on operational admin', legacy: '60%',  mamba: '0%' },
+  { metric: 'Time spent on compliance filings', legacy: '15%', mamba: '0%',   note: 'automated, you sign on submit' },
+  { metric: 'Time spent on judgment + policy', legacy: '25%', mamba: '100%' },
 ]
 
 const anatomyItems = [
@@ -137,52 +137,133 @@ export default function TodayPage() {
         <DecisionCardAnatomy />
 
         {/* The math */}
-        <section style={{ background: 'var(--bg-cream)', padding: '100px 24px' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>THE MATH</p>
-            <h2
-              style={{
-                textAlign: 'center',
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(28px, 3vw, 42px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 64,
-                lineHeight: 1.15,
-              }}
-            >
-              What 30 minutes a day actually replaces.
-            </h2>
+        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 72, maxWidth: 720, marginLeft: 'auto', marginRight: 'auto' }}>
+              <p className="eyebrow" style={{ marginBottom: 20 }}>THE MATH</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.025em',
+                  color: 'var(--text)',
+                  marginBottom: 20,
+                  lineHeight: 1.05,
+                }}
+              >
+                What 30 minutes a day<br />actually replaces.
+              </h2>
+              <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                The work doesn&apos;t disappear. It shifts from admin to judgment.
+              </p>
+            </div>
 
-            <div style={{ border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', background: '#FFFFFF' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', background: 'var(--bg-surface)', padding: '12px 24px', borderBottom: '1px solid var(--border)' }}>
-                <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Metric</span>
-                <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Legacy HR</span>
-                <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--gold-dark)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>With MambaHR</span>
-              </div>
+            <div className="math-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
               {mathRows.map((row, i) => (
                 <div
                   key={i}
+                  className="math-row"
                   style={{
-                    display: 'grid',
-                    gridTemplateColumns: '2fr 1fr 1fr',
-                    padding: '16px 24px',
-                    borderBottom: i < mathRows.length - 1 ? '1px solid var(--border-faint)' : 'none',
-                    background: i % 2 === 0 ? '#FFFFFF' : 'var(--bg-surface)',
+                    background: 'var(--bg)',
+                    border: '1px solid var(--border)',
+                    borderRadius: 14,
+                    padding: '28px 28px 24px',
+                    gridColumn: i === mathRows.length - 1 ? '1 / -1' : 'auto',
                   }}
                 >
-                  <span style={{ fontSize: 14, color: 'var(--text)' }}>{row.metric}</span>
-                  <span style={{ fontSize: 14, color: 'var(--text-muted)', fontFamily: 'var(--font-mono), monospace' }}>{row.legacy}</span>
-                  <span style={{ fontSize: 14, color: 'var(--gold-dark)', fontWeight: 600, fontFamily: 'var(--font-mono), monospace' }}>{row.mamba}</span>
+                  <p
+                    className="mono"
+                    style={{
+                      fontSize: 10,
+                      fontWeight: 700,
+                      color: 'var(--text-faint)',
+                      letterSpacing: '0.12em',
+                      textTransform: 'uppercase',
+                      marginBottom: 16,
+                    }}
+                  >
+                    {String(i + 1).padStart(2, '0')} · {row.metric}
+                  </p>
+
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 18, flexWrap: 'wrap' }}>
+                    {/* Legacy number */}
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-serif), Georgia, serif',
+                        fontSize: 'clamp(32px, 4vw, 44px)',
+                        fontWeight: 400,
+                        color: 'var(--text-faint)',
+                        letterSpacing: '-0.025em',
+                        lineHeight: 1,
+                        textDecoration: 'line-through',
+                        textDecorationThickness: '1.5px',
+                      }}
+                    >
+                      {row.legacy}
+                    </span>
+
+                    {/* Arrow */}
+                    <span
+                      style={{
+                        fontSize: 22,
+                        color: 'var(--gold-dark)',
+                        lineHeight: 1,
+                        opacity: 0.6,
+                      }}
+                    >
+                      →
+                    </span>
+
+                    {/* MambaHR number */}
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-serif), Georgia, serif',
+                        fontSize: 'clamp(38px, 4.6vw, 52px)',
+                        fontWeight: 400,
+                        color: 'var(--gold-dark)',
+                        letterSpacing: '-0.03em',
+                        lineHeight: 1,
+                      }}
+                    >
+                      {row.mamba}
+                    </span>
+
+                    {row.note && (
+                      <span
+                        style={{
+                          fontSize: 13,
+                          color: 'var(--text-muted)',
+                          fontStyle: 'italic',
+                          marginLeft: 4,
+                          flex: '1 1 100%',
+                          marginTop: 8,
+                        }}
+                      >
+                        {row.note}
+                      </span>
+                    )}
+                  </div>
+
+                  <div style={{ display: 'flex', gap: 24, marginTop: 14, fontSize: 11, color: 'var(--text-faint)', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 600 }} className="mono">
+                    <span>Legacy HR</span>
+                    <span style={{ color: 'var(--gold-dark)' }}>With MambaHR</span>
+                  </div>
                 </div>
               ))}
             </div>
+
+            <style>{`
+              @media (max-width: 720px) {
+                .math-grid { grid-template-columns: 1fr !important; }
+                .math-row { grid-column: 1 !important; }
+              }
+            `}</style>
           </div>
         </section>
 
         {/* Agent vs human */}
-        <section style={{ background: '#FFFFFF', padding: '100px 24px' }}>
+        <section style={{ background: 'var(--bg)', padding: '120px 24px' }}>
           <div style={{ maxWidth: 900, margin: '0 auto' }}>
             <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>THE POLICY</p>
             <h2
@@ -203,43 +284,73 @@ export default function TodayPage() {
               Codified in code. Not a policy doc — a compiler check.
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-              <div style={{ background: 'var(--bg-warm)', borderRadius: 16, padding: 32 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
-                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#15803D' }} />
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#15803D' }}>Agent decides (with audit log)</span>
+            <div className="policy-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+              {/* Agent decides */}
+              <div style={{
+                background: 'var(--bg-warm)',
+                border: '1px solid var(--border)',
+                borderLeft: '3px solid var(--color-green)',
+                borderRadius: 14,
+                padding: '32px 32px 28px',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--color-green)' }} />
+                  <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: 'var(--color-green)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                    Agent decides
+                  </span>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 22, lineHeight: 1.55, fontStyle: 'italic' }}>
+                  Auto-resolved within your policy. Every action logged in the audit trail.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                   {agentDecides.map((item) => (
-                    <div key={item} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginTop: 2, flexShrink: 0 }}>
-                        <path d="M2 7l4 4 6-6" stroke="#15803D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginTop: 3, flexShrink: 0 }}>
+                        <path d="M2 7l4 4 6-6" stroke="var(--color-green)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
-                      <span style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.4 }}>{item}</span>
+                      <span style={{ fontSize: 14, color: 'var(--text)', lineHeight: 1.45 }}>{item}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div style={{ background: '#FEF2F2', borderRadius: 16, padding: 32 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
-                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#B91C1C' }} />
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#B91C1C' }}>Always you — no exceptions</span>
+              {/* You decide */}
+              <div style={{
+                background: 'var(--bg-warm)',
+                border: '1px solid var(--border)',
+                borderLeft: '3px solid var(--color-red)',
+                borderRadius: 14,
+                padding: '32px 32px 28px',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--color-red)' }} />
+                  <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: 'var(--color-red)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                    Always you
+                  </span>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 22, lineHeight: 1.55, fontStyle: 'italic' }}>
+                  No exceptions. The agent prepares everything; the decision stays with you.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                   {humanDecides.map((item) => (
-                    <div key={item} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginTop: 2, flexShrink: 0 }}>
-                        <circle cx="7" cy="7" r="5.5" stroke="#B91C1C" strokeWidth="1.5" />
-                        <path d="M7 4v3.5" stroke="#B91C1C" strokeWidth="1.5" strokeLinecap="round" />
-                        <circle cx="7" cy="10" r="0.5" fill="#B91C1C" />
+                    <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginTop: 3, flexShrink: 0 }}>
+                        <circle cx="7" cy="7" r="5.5" stroke="var(--color-red)" strokeWidth="1.8" />
+                        <path d="M7 4v3.5" stroke="var(--color-red)" strokeWidth="1.8" strokeLinecap="round" />
+                        <circle cx="7" cy="10" r="0.6" fill="var(--color-red)" />
                       </svg>
-                      <span style={{ fontSize: 14, color: '#7F1D1D', lineHeight: 1.4 }}>{item}</span>
+                      <span style={{ fontSize: 14, color: 'var(--text)', lineHeight: 1.45 }}>{item}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
+
+            <style>{`
+              @media (max-width: 720px) {
+                .policy-grid { grid-template-columns: 1fr !important; }
+              }
+            `}</style>
           </div>
         </section>
 
