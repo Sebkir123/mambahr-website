@@ -66,9 +66,9 @@ function DataShieldVisual() {
       })}
 
       {/* Footer */}
-      <div style={{ padding: '12px 22px', background: 'var(--gold-tint)', borderTop: '1px solid rgba(176,141,87,0.2)' }}>
+      <div style={{ padding: '12px 22px', background: 'var(--gold-tint)', borderTop: '1px solid var(--gold-light)' }}>
         <p style={{ fontSize: 11, color: 'var(--gold-dark)', fontWeight: 600, margin: 0, textAlign: 'center', letterSpacing: '0.02em' }}>
-          AES-256 · zero plaintext · ever
+          Bank-grade encryption · never readable as plain text · ever
         </p>
       </div>
     </div>
@@ -103,7 +103,7 @@ function AuditLogVisual() {
         </div>
         <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E', animation: 'gold-ring-pulse 2s ease-out infinite' }} />
-          <span style={{ fontSize: 10, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>live · tamper-proof</span>
+          <span style={{ fontSize: 10, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>live · cannot be edited</span>
         </span>
       </div>
 
@@ -170,7 +170,7 @@ function AuditLogVisual() {
       {/* Footer */}
       <div style={{ padding: '12px 20px', background: 'var(--bg-surface)', borderTop: '1px solid var(--border-faint)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: 0 }}>
-          Cryptographically signed · exportable · immutable
+          Recorded forever · exportable · cannot be changed
         </p>
         <span style={{ fontSize: 10, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>4 of 247 today</span>
       </div>
@@ -337,32 +337,32 @@ function AccessControlVisual() {
 
 const faqItems = [
   {
-    q: 'Can you see our employee data?',
-    a: "No. Your data is yours. We process it to run your workflows — that's it. No one at MambaHR browses your records, and nothing is shared with third parties.",
+    q: 'Can anyone at MambaHR see our employee data?',
+    a: "No. Your data is yours. We use it to run your workflows — that is it. Nobody at MambaHR browses your records, and nothing is shared with anyone outside your company.",
   },
   {
     q: 'Do you train AI on our data?',
-    a: "Never. Your HR data does not train any AI model — ours or any vendor's. The agent uses AI to run your work, not to learn from your people's information. This is contractual, in plain language.",
+    a: "Never. Your team's names, salaries, performance reviews, health information — none of it is ever used to train an AI model. Not ours, not anyone else's. This is in your contract, in plain language.",
   },
   {
-    q: 'How is our data encrypted?',
-    a: 'AES-256 at rest, TLS 1.3 in transit, AES-256 on backups. Encryption keys are managed in enterprise-grade key management — never accessible to humans.',
+    q: 'How is our data protected?',
+    a: 'Your data is encrypted when stored and when moving between systems — the same level of protection your bank uses. The keys are locked away in hardware that nobody at MambaHR can read.',
   },
   {
     q: 'Where is our data stored?',
-    a: 'United States only. Enterprise-grade cloud infrastructure, US-based regions for primary storage and backups.',
+    a: 'In the United States, on enterprise cloud infrastructure. Your data does not leave the country.',
   },
   {
     q: 'Who at MambaHR can access our data?',
-    a: 'Production access is restricted to a small on-call rotation, protected by hardware keys and fully audit-logged. The agent operates with the least privilege required for each action. Browsing customer records is never routine.',
+    a: 'A small on-call team can access production systems for emergencies, and even then their access is logged and limited. Nobody browses customer records as a matter of routine.',
   },
   {
-    q: 'How do you handle a security incident?',
-    a: 'Detect, contain, notify. Customer notification within 24 hours for any incident affecting data confidentiality. Full post-incident report — timeline, root cause, remediation — within 7 days.',
+    q: 'What if something goes wrong?',
+    a: 'You hear from us within 24 hours of any incident that affects your data. A full write-up follows within a week — what happened, why, and what we changed so it does not happen again.',
   },
   {
-    q: 'How do you handle HIPAA-protected data?',
-    a: "Health-related leave and benefits data is segregated and handled with HIPAA-informed controls — access scoping, encryption, audit logging. We're not a covered entity, but our controls meet the bar your covered-entity programs require from a business associate.",
+    q: 'How does access work for our team?',
+    a: 'Your team logs in with the accounts they already use — Google, Microsoft, or your existing single sign-on. Each person sees only what their role allows. When someone leaves the company, their access disappears the same minute.',
   },
 ]
 
@@ -449,7 +449,7 @@ export default function SecurityPage() {
                 {[
                   {
                     title: 'Encrypted',
-                    desc: 'Bank-grade · in transit and at rest',
+                    desc: 'Bank-grade — stored and in transit',
                     icon: (
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <rect x="3" y="7" width="10" height="7" rx="1.4" stroke="var(--gold-dark)" strokeWidth="1.3" />
@@ -458,8 +458,8 @@ export default function SecurityPage() {
                     ),
                   },
                   {
-                    title: 'Role-scoped',
-                    desc: 'Your team sees only what they should',
+                    title: 'Right person, right view',
+                    desc: 'Each person sees only what their role allows',
                     icon: (
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <circle cx="6" cy="5" r="2.5" stroke="var(--gold-dark)" strokeWidth="1.3" />
@@ -468,8 +468,8 @@ export default function SecurityPage() {
                     ),
                   },
                   {
-                    title: 'Audit-logged',
-                    desc: 'Every agent decision · tamper-proof',
+                    title: 'Recorded forever',
+                    desc: 'Every action logged · nobody can edit the record',
                     icon: (
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <rect x="2" y="2" width="12" height="12" rx="1.5" stroke="var(--gold-dark)" strokeWidth="1.3" />
@@ -478,7 +478,7 @@ export default function SecurityPage() {
                     ),
                   },
                   {
-                    title: 'Never trained on',
+                    title: 'Never trains AI',
                     desc: 'Contractually guaranteed · zero',
                     icon: (
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -616,102 +616,123 @@ export default function SecurityPage() {
           </div>
         </section>
 
-        {/* ── SPECIFICATIONS ── editorial spec sheet, not card grid ── */}
-        <section style={{ background: 'var(--bg-cream)', padding: '96px 24px' }}>
-          <div style={{ maxWidth: 820, margin: '0 auto' }}>
-            <div style={{ marginBottom: 56, maxWidth: 600 }}>
-              <p className="eyebrow" style={{ marginBottom: 16 }}>THE SPECIFICS</p>
+        {/* ── PROMISES IN PLAIN ENGLISH ── editorial, no jargon ── */}
+        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div style={{ marginBottom: 72, maxWidth: 680 }}>
+              <p className="eyebrow" style={{ marginBottom: 18 }}>PLAIN ANSWERS</p>
               <h2
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(28px, 3.4vw, 44px)',
+                  fontSize: 'clamp(32px, 4vw, 56px)',
                   fontWeight: 400,
-                  letterSpacing: '-0.025em',
+                  letterSpacing: '-0.03em',
                   color: 'var(--text)',
-                  lineHeight: 1.1,
-                  marginBottom: 16,
+                  lineHeight: 1.0,
+                  marginBottom: 20,
                 }}
               >
-                The exact specs<br />your CISO will ask for.
+                How we handle<br />your people&rsquo;s data.
               </h2>
-              <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                Built for the US market. Real practices, not aspirational checkboxes.
+              <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65 }}>
+                No fine print, no acronyms. The six things that matter &mdash; said straight.
               </p>
             </div>
 
-            {/* Spec groups — editorial typography, no cards */}
-            {[
-              {
-                group: 'Encryption',
-                rows: [
-                  { k: 'At rest',     v: 'AES-256' },
-                  { k: 'In transit',  v: 'TLS 1.3' },
-                  { k: 'Backups',     v: 'AES-256, encrypted' },
-                  { k: 'Key management', v: 'Enterprise KMS · never human-accessible' },
-                ],
-              },
-              {
-                group: 'Access',
-                rows: [
-                  { k: 'Authentication', v: 'SSO via Google, Okta, or Microsoft' },
-                  { k: 'Permissions',    v: 'Role-based, auto-synced from your IdP' },
-                  { k: 'Provisioning',   v: 'Access expires the moment someone leaves' },
-                  { k: 'Audit log',      v: 'Every action recorded · cryptographically signed · immutable' },
-                ],
-              },
-              {
-                group: 'Data',
-                rows: [
-                  { k: 'Residency',      v: 'United States' },
-                  { k: 'AI training',    v: 'Never used to train any model · contractual' },
-                  { k: 'Export',         v: 'Full export on demand · standard formats' },
-                  { k: 'Retention',      v: 'Per US legal requirements · you decide when to delete' },
-                ],
-              },
-              {
-                group: 'Sensitive scopes',
-                rows: [
-                  { k: 'Health data',         v: 'HIPAA-informed controls · segregated storage · scoped access' },
-                  { k: 'California residents', v: 'CCPA/CPRA — request, correct, delete anytime' },
-                  { k: 'Background data',     v: 'FCRA-compliant flows · separate pipelines from operational HR data' },
-                ],
-              },
-            ].map((section, sectionIdx) => (
-              <div key={section.group} style={{ marginBottom: sectionIdx === 3 ? 0 : 40 }}>
-                <p
-                  className="mono"
+            {/* Editorial promise rows */}
+            <div>
+              {[
+                {
+                  claim: 'Your data is yours.',
+                  body: 'It is encrypted when stored and when moving between systems — the same protection your bank uses. Nobody at MambaHR can read your employee records.',
+                },
+                {
+                  claim: 'Only the right people see your records.',
+                  body: 'Your team logs in with the accounts they already use — Google, Microsoft, or your existing single sign-on. Each person sees only what their role allows. When someone leaves the company, their access disappears the same minute.',
+                },
+                {
+                  claim: 'We never train AI on your people.',
+                  body: 'Names, salaries, performance reviews, health information — none of it trains any AI model. Not ours, not anyone else’s. This is in your contract, in plain language.',
+                },
+                {
+                  claim: 'Every action is recorded. Forever.',
+                  body: 'Every decision the agent makes is written to a record nobody can edit — including us. If your auditor or board asks why something was approved, you have the answer in one click.',
+                },
+                {
+                  claim: 'Health and California data gets extra care.',
+                  body: 'Health information is kept in its own protected lane, handled the way HIPAA expects. California employees can request, correct, or delete their record anytime — in line with CCPA and CPRA.',
+                },
+                {
+                  claim: 'If something goes wrong, you hear it from us.',
+                  body: 'Within 24 hours. A full write-up follows within a week — what happened, why, and what we changed so it does not happen again.',
+                },
+              ].map((p, i) => (
+                <div
+                  key={p.claim}
+                  className="promise-row"
                   style={{
-                    fontSize: 11,
-                    fontWeight: 700,
-                    color: 'var(--gold-dark)',
-                    letterSpacing: '0.14em',
-                    textTransform: 'uppercase',
-                    marginBottom: 14,
+                    display: 'grid',
+                    gridTemplateColumns: 'minmax(40px, 60px) 1fr',
+                    gap: 28,
+                    padding: '36px 0',
+                    borderTop: '1px solid var(--border)',
+                    borderBottom: i === 5 ? '1px solid var(--border)' : 'none',
+                    alignItems: 'baseline',
                   }}
                 >
-                  {section.group}
-                </p>
-                <div>
-                  {section.rows.map((row, i) => (
-                    <div
-                      key={row.k}
+                  {/* Subtle number marker */}
+                  <span
+                    className="mono"
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 700,
+                      color: 'var(--gold-dark)',
+                      letterSpacing: '0.08em',
+                    }}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+
+                  {/* Claim + body */}
+                  <div>
+                    <h3
                       style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'minmax(160px, 220px) 1fr',
-                        gap: 32,
-                        padding: '14px 0',
-                        borderTop: i === 0 ? '1px solid var(--border)' : 'none',
-                        borderBottom: '1px solid var(--border)',
-                        alignItems: 'baseline',
+                        fontFamily: 'var(--font-serif), Georgia, serif',
+                        fontSize: 'clamp(22px, 2.4vw, 30px)',
+                        fontWeight: 400,
+                        color: 'var(--text)',
+                        letterSpacing: '-0.02em',
+                        lineHeight: 1.15,
+                        margin: '0 0 12px',
                       }}
                     >
-                      <span style={{ fontSize: 14, color: 'var(--text-muted)', fontWeight: 500 }}>{row.k}</span>
-                      <span style={{ fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>{row.v}</span>
-                    </div>
-                  ))}
+                      {p.claim}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: 16,
+                        color: 'var(--text-muted)',
+                        lineHeight: 1.65,
+                        margin: 0,
+                        maxWidth: 680,
+                      }}
+                    >
+                      {p.body}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            <style>{`
+              @media (max-width: 640px) {
+                .promise-row {
+                  grid-template-columns: 1fr !important;
+                  gap: 12px !important;
+                  padding: 28px 0 !important;
+                }
+              }
+            `}</style>
           </div>
         </section>
 
