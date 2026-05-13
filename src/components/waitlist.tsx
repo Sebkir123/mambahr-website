@@ -19,11 +19,14 @@ export function Waitlist({ compact }: Props) {
     }
     setStatus('loading')
     try {
-      const res = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, company, turnstileToken }),
-      })
+      const res = await fetch(
+        'https://dqoqnlecylqlwsahudjn.supabase.co/functions/v1/handle-waitlist',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, company, turnstileToken }),
+        }
+      )
       setStatus(res.ok ? 'success' : 'error')
     } catch {
       setStatus('error')
