@@ -3,6 +3,10 @@ import '@/lib/env' // validates required env vars at request time
 import { supabase } from '@/lib/supabase'
 import { sendWaitlistWelcome } from '@/lib/email'
 
+function escapeSlack(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
 
 async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
@@ -123,7 +127,7 @@ export async function POST(req: NextRequest) {
 
   if (!error) {
     await Promise.all([
-      notifySlack(`New waitlist signup:\n• *Email:* ${email}\n• *Company:* ${company || '(not provided)'}`),
+      notifySlack(`New waitlist signup:\n• *Email:* ${escapeSlack(email)}\n• *Company:* ${escapeSlack(company) || '(not provided)'}`),
       sendWaitlistWelcome({ email, company }),
     ])
   }
