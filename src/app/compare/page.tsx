@@ -3,7 +3,6 @@ import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
-import { competitors } from './[slug]/data'
 
 export const metadata: Metadata = {
   title: 'Compare MambaHR — vs Rippling, Gusto, BambooHR, Workday',
@@ -11,21 +10,21 @@ export const metadata: Metadata = {
 }
 
 const cards = [
-  { slug: 'rippling', headline: 'vs Rippling', sub: 'Rippling runs payroll. MambaHR runs HR.', tag: 'Most requested' },
-  { slug: 'gusto', headline: 'vs Gusto', sub: 'Gusto pays your people. MambaHR manages them.', tag: null },
-  { slug: 'deel', headline: 'vs Deel', sub: 'Deel handles global contractors. MambaHR runs your whole department.', tag: null },
-  { slug: 'bamboohr', headline: 'vs BambooHR', sub: 'BambooHR stores your data. MambaHR acts on it.', tag: null },
-  { slug: 'namely', headline: 'vs Namely', sub: 'Namely makes HR software better. MambaHR makes it disappear.', tag: null },
-  { slug: 'hibob', headline: 'vs HiBob', sub: 'HiBob makes HR human. MambaHR makes it automatic.', tag: null },
-  { slug: 'adp', headline: 'vs ADP', sub: 'ADP has been running payroll since 1949. This is 2025.', tag: null },
-  { slug: 'workday', headline: 'vs Workday', sub: 'Built for 10,000 employees. You have 50.', tag: null },
+  { slug: 'rippling', name: 'Rippling', sub: 'Rippling is the stack. MambaHR is the department that runs on it.', tag: 'Most requested' },
+  { slug: 'gusto', name: 'Gusto', sub: 'Gusto handles payday. MambaHR handles every other day.', tag: null },
+  { slug: 'deel', name: 'Deel', sub: 'Deel pays global contractors. MambaHR runs your domestic HR.', tag: null },
+  { slug: 'bamboohr', name: 'BambooHR', sub: 'BambooHR stores your data. MambaHR acts on it.', tag: null },
+  { slug: 'namely', name: 'Namely', sub: 'Namely made the HRIS prettier. MambaHR makes it unnecessary.', tag: null },
+  { slug: 'hibob', name: 'HiBob', sub: 'HiBob made HR look modern. MambaHR makes it run itself.', tag: null },
+  { slug: 'adp', name: 'ADP', sub: 'ADP is the back office. MambaHR is the front line.', tag: null },
+  { slug: 'workday', name: 'Workday', sub: 'Workday is a project. MambaHR is a product.', tag: null },
 ]
 
 const differentiators = [
-  { num: '01', title: 'It does the work', desc: 'Leave approved. Offer drafted. Candidate screened. MambaHR handles the request end-to-end — not just surfaces the information for someone else to act on.' },
-  { num: '02', title: 'It lives in Slack', desc: 'No new software for your team to learn. Employees mention @mamba in any channel and get answers in seconds. Managers approve in a thread.' },
-  { num: '03', title: 'Human in the loop', desc: 'Every high-stakes decision — offers above band, terminations, PIPs — routes to you for approval before anything happens. The agent handles the routine, you handle the judgment.' },
-  { num: '04', title: 'Built for small teams', desc: 'The compliance engine, the audit trail, the 14 specialist agents — all of it built for the team with one HR person doing the work of ten.' },
+  { num: '01', title: 'It does the work.', desc: 'Leave approved. Offer drafted. Candidate screened. MambaHR handles the request end-to-end — not just surfaces the information for someone else to act on.' },
+  { num: '02', title: 'It lives in Slack.', desc: 'No new software to learn. Employees mention @mamba in any channel and get answers in seconds. Managers approve in a thread.' },
+  { num: '03', title: 'Human in the loop.', desc: 'Every high-stakes decision — offers above band, terminations, PIPs — routes to you for approval before anything happens. The agent handles the routine, you handle the judgment.' },
+  { num: '04', title: 'Built for the long tail.', desc: 'The compliance engine, the audit trail, the 14 specialist agents — all of it built for the HR lead doing the work of ten.' },
 ]
 
 export default function ComparePage() {
@@ -35,33 +34,50 @@ export default function ComparePage() {
       <main style={{ paddingTop: 64 }}>
 
         {/* ── HERO ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '100px 24px 72px' }}>
-          <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center' }}>
-            <p className="eyebrow" style={{ marginBottom: 20 }}>COMPARE</p>
+        <section style={{ background: 'var(--bg-warm)', padding: '120px 24px 88px' }}>
+          <div style={{ maxWidth: 880, margin: '0 auto' }}>
+            <p className="eyebrow" style={{ marginBottom: 24 }}>COMPARE</p>
             <h1
               style={{
                 fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(36px, 5vw, 60px)',
+                fontSize: 'clamp(40px, 5.5vw, 64px)',
                 fontWeight: 400,
-                letterSpacing: '-0.03em',
+                letterSpacing: '-0.035em',
                 color: 'var(--text)',
-                marginBottom: 24,
-                lineHeight: 1.05,
+                marginBottom: 28,
+                lineHeight: 1.0,
               }}
             >
-              How does MambaHR<br />
-              <span style={{ color: 'var(--gold-dark)' }}>compare to what you use today?</span>
+              How we compare<br />
+              <span style={{ color: 'var(--gold-dark)' }}>to what you use today.</span>
             </h1>
-            <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: 520, margin: '0 auto' }}>
-              Most HR tools store data and run payroll. MambaHR is the AI department that handles the actual work — so your team stops processing and starts deciding.
+            <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 580 }}>
+              Most HR tools store data and run payroll. MambaHR is the agent department that handles the work — so your HR lead stops processing tickets and starts setting policy.
             </p>
           </div>
         </section>
 
         {/* ── COMPARISON CARDS ── */}
-        <section style={{ background: '#FFFFFF', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
+        <section style={{ background: 'var(--bg)', padding: '96px 24px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ marginBottom: 48, maxWidth: 720 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>EIGHT COMPARISONS</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(28px, 3.2vw, 40px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.025em',
+                  color: 'var(--text)',
+                  margin: 0,
+                  lineHeight: 1.1,
+                }}
+              >
+                Which one are you on today?
+              </h2>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16 }}>
               {cards.map((card) => (
                 <Link
                   key={card.slug}
@@ -71,24 +87,78 @@ export default function ComparePage() {
                   <div
                     className="compare-card"
                     style={{
-                      padding: '28px 24px',
-                      background: 'var(--bg-warm)',
-                      border: '1px solid var(--border-faint)',
+                      padding: '32px 28px',
+                      background: card.tag ? 'var(--gold-tint)' : 'var(--bg-warm)',
+                      border: '1px solid var(--border)',
                       borderRadius: 16,
                       height: '100%',
                       cursor: 'pointer',
-                      transition: 'border-color 0.2s, box-shadow 0.2s',
+                      transition: 'border-color 0.2s, transform 0.2s',
                       position: 'relative',
+                      display: 'flex',
+                      flexDirection: 'column',
                     }}
                   >
                     {card.tag && (
-                      <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--gold-dark)', background: 'var(--gold-tint)', padding: '3px 8px', borderRadius: 20, letterSpacing: '0.04em', position: 'absolute', top: 20, right: 20 }}>
+                      <span style={{
+                        position: 'absolute',
+                        top: 16,
+                        right: 16,
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color: 'var(--gold-dark)',
+                        background: 'var(--bg)',
+                        border: '1px solid var(--gold)',
+                        padding: '3px 10px',
+                        borderRadius: 999,
+                        letterSpacing: '0.06em',
+                        textTransform: 'uppercase',
+                        fontFamily: 'var(--font-mono), monospace',
+                      }}>
                         {card.tag}
                       </span>
                     )}
-                    <p style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 10 }}>{card.headline}</p>
-                    <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 20 }}>{card.sub}</p>
-                    <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--gold-dark)' }}>See comparison →</span>
+                    <p style={{
+                      fontFamily: 'var(--font-mono), monospace',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: 'var(--text-faint)',
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      margin: '0 0 12px',
+                    }}>
+                      MambaHR vs
+                    </p>
+                    <p style={{
+                      fontFamily: 'var(--font-serif), Georgia, serif',
+                      fontSize: 28,
+                      fontWeight: 400,
+                      color: 'var(--text)',
+                      letterSpacing: '-0.025em',
+                      margin: '0 0 16px',
+                      lineHeight: 1.0,
+                    }}>
+                      {card.name}
+                    </p>
+                    <p style={{
+                      fontSize: 14,
+                      color: 'var(--text-muted)',
+                      lineHeight: 1.6,
+                      margin: '0 0 28px',
+                      flex: 1,
+                    }}>
+                      {card.sub}
+                    </p>
+                    <span style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: 'var(--gold-dark)',
+                      fontFamily: 'var(--font-mono), monospace',
+                      letterSpacing: '0.06em',
+                      textTransform: 'uppercase',
+                    }}>
+                      See comparison →
+                    </span>
                   </div>
                 </Link>
               ))}
@@ -97,22 +167,23 @@ export default function ComparePage() {
         </section>
 
         {/* ── WHY MAMBAHR IS DIFFERENT ── */}
-        <section style={{ background: 'var(--bg-cream)', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ marginBottom: 48 }}>
-              <p className="eyebrow" style={{ marginBottom: 14 }}>WHAT MAKES US DIFFERENT</p>
+        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+            <div style={{ marginBottom: 64, maxWidth: 720 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>WHAT MAKES US DIFFERENT</p>
               <h2
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(24px, 2.8vw, 36px)',
+                  fontSize: 'clamp(36px, 4.4vw, 56px)',
                   fontWeight: 400,
-                  letterSpacing: '-0.02em',
+                  letterSpacing: '-0.03em',
                   color: 'var(--text)',
                   margin: 0,
-                  lineHeight: 1.1,
+                  lineHeight: 1.0,
                 }}
               >
-                Not a tool. A department.
+                Not a tool.<br />
+                <span style={{ color: 'var(--gold-dark)' }}>A department.</span>
               </h2>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -121,17 +192,38 @@ export default function ComparePage() {
                   key={d.num}
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: '48px 1fr 1.8fr',
-                    gap: 24,
-                    padding: '28px 0',
-                    borderTop: '1px solid var(--border-faint)',
-                    borderBottom: i === differentiators.length - 1 ? '1px solid var(--border-faint)' : 'none',
+                    gridTemplateColumns: '60px 1fr 1.6fr',
+                    gap: 32,
+                    padding: '32px 0',
+                    borderTop: '1px solid var(--border)',
+                    borderBottom: i === differentiators.length - 1 ? '1px solid var(--border)' : 'none',
                     alignItems: 'baseline',
                   }}
+                  className="mobile-stack-rows"
                 >
-                  <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.06em' }}>{d.num}</span>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', margin: 0 }}>{d.title}</p>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7, margin: 0 }}>{d.desc}</p>
+                  <span style={{
+                    fontFamily: 'var(--font-mono), monospace',
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: 'var(--gold-dark)',
+                    letterSpacing: '0.08em',
+                  }}>
+                    {d.num}
+                  </span>
+                  <p style={{
+                    fontFamily: 'var(--font-serif), Georgia, serif',
+                    fontSize: 'clamp(20px, 2.2vw, 26px)',
+                    fontWeight: 400,
+                    color: 'var(--text)',
+                    margin: 0,
+                    letterSpacing: '-0.015em',
+                    lineHeight: 1.25,
+                  }}>
+                    {d.title}
+                  </p>
+                  <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7, margin: 0 }}>
+                    {d.desc}
+                  </p>
                 </div>
               ))}
             </div>

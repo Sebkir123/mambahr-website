@@ -35,14 +35,6 @@ const cols = [
       { label: 'vs Workday', href: '/compare/workday' },
     ],
   },
-  {
-    title: 'Legal & Trust',
-    links: [
-      { label: 'Security', href: '/security' },
-      { label: 'Privacy', href: '/coming-soon/privacy' },
-      { label: 'Terms', href: '/coming-soon/terms' },
-    ],
-  },
 ]
 
 export default function Footer() {

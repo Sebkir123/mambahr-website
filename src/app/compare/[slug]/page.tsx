@@ -9,6 +9,39 @@ import { competitors } from './data'
 
 type Props = { params: Promise<{ slug: string }> }
 
+function CellValue({ value, accent }: { value: string | boolean; accent: 'mamba' | 'them' }) {
+  if (typeof value === 'boolean') {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {value ? (
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-label="Yes">
+            <path d="M3 9.5l4 4 8-9" stroke="var(--color-green)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        ) : (
+          <span style={{ color: 'var(--text-faint)', fontSize: 18, lineHeight: 1, fontWeight: 400 }} aria-label="No">—</span>
+        )}
+      </div>
+    )
+  }
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <span style={{
+        fontSize: 12,
+        fontWeight: 600,
+        color: accent === 'mamba' ? 'var(--gold-dark)' : 'var(--text-muted)',
+        background: accent === 'mamba' ? 'var(--gold-tint)' : 'var(--bg-surface)',
+        border: accent === 'mamba' ? '1px solid var(--gold)' : '1px solid var(--border)',
+        padding: '4px 12px',
+        borderRadius: 999,
+        textAlign: 'center',
+        lineHeight: 1.3,
+      }}>
+        {value}
+      </span>
+    </div>
+  )
+}
+
 export async function generateStaticParams() {
   return Object.keys(competitors).map((slug) => ({ slug }))
 }
@@ -50,18 +83,18 @@ export default async function ComparePage({ params }: Props) {
       <main style={{ paddingTop: 64 }}>
 
         {/* ── HERO ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '100px 24px 72px' }}>
+        <section style={{ background: 'var(--bg-warm)', padding: '120px 24px 88px' }}>
           <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: 20 }}>MAMBAHR VS {c.name.toUpperCase()}</p>
+            <p className="eyebrow" style={{ marginBottom: 24 }}>MAMBAHR VS {c.name.toUpperCase()}</p>
             <h1
               style={{
                 fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(34px, 4.5vw, 58px)',
+                fontSize: 'clamp(36px, 5vw, 64px)',
                 fontWeight: 400,
-                letterSpacing: '-0.03em',
+                letterSpacing: '-0.035em',
                 color: 'var(--text)',
-                marginBottom: 28,
-                lineHeight: 1.05,
+                marginBottom: 32,
+                lineHeight: 1.0,
                 whiteSpace: 'pre-line',
               }}
             >
@@ -71,7 +104,7 @@ export default async function ComparePage({ params }: Props) {
                 </span>
               ))}
             </h1>
-            <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: 620, marginBottom: 36 }}>
+            <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 620, marginBottom: 36 }}>
               {c.heroSub}
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -82,30 +115,61 @@ export default async function ComparePage({ params }: Props) {
         </section>
 
         {/* ── THREE REASONS ── */}
-        <section style={{ background: '#FFFFFF', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: 14 }}>WHERE WE DIFFER</p>
-            <h2
-              style={{
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(24px, 2.8vw, 36px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 48,
-                lineHeight: 1.1,
-              }}
-            >
-              Why teams choose MambaHR over {c.name}.
-            </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+        <section style={{ background: 'var(--bg)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+            <div style={{ marginBottom: 64, maxWidth: 720 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>WHERE WE DIFFER</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(32px, 4vw, 48px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.03em',
+                  color: 'var(--text)',
+                  margin: 0,
+                  lineHeight: 1.05,
+                }}
+              >
+                Why teams pick MambaHR over {c.name}.
+              </h2>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
               {c.switchReasons.map((r, i) => (
-                <div key={i} style={{ padding: '28px 24px', background: 'var(--bg-warm)', borderRadius: 14, border: '1px solid var(--border-faint)' }}>
-                  <p style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.06em', marginBottom: 14 }}>
+                <div
+                  key={i}
+                  style={{
+                    padding: '32px 28px',
+                    background: 'var(--bg-warm)',
+                    borderRadius: 16,
+                    border: '1px solid var(--border)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <p style={{
+                    fontFamily: 'var(--font-mono), monospace',
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: 'var(--gold-dark)',
+                    letterSpacing: '0.08em',
+                    margin: '0 0 16px',
+                  }}>
                     {String(i + 1).padStart(2, '0')}
                   </p>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 10 }}>{r.title}</p>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.65, margin: 0 }}>{r.desc}</p>
+                  <p style={{
+                    fontFamily: 'var(--font-serif), Georgia, serif',
+                    fontSize: 'clamp(18px, 1.8vw, 22px)',
+                    fontWeight: 400,
+                    color: 'var(--text)',
+                    margin: '0 0 14px',
+                    letterSpacing: '-0.015em',
+                    lineHeight: 1.3,
+                  }}>
+                    {r.title}
+                  </p>
+                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.7, margin: 0 }}>
+                    {r.desc}
+                  </p>
                 </div>
               ))}
             </div>
@@ -113,27 +177,29 @@ export default async function ComparePage({ params }: Props) {
         </section>
 
         {/* ── COMPARISON TABLE ── */}
-        <section id="compare-table" style={{ background: 'var(--bg-cream)', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: 14 }}>FEATURE COMPARISON</p>
-            <h2
-              style={{
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(24px, 2.8vw, 36px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 40,
-                lineHeight: 1.1,
-              }}
-            >
-              MambaHR vs {c.name}, head to head.
-            </h2>
+        <section id="compare-table" style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 980, margin: '0 auto' }}>
+            <div style={{ marginBottom: 56, maxWidth: 720 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>FEATURE COMPARISON</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(32px, 4vw, 48px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.03em',
+                  color: 'var(--text)',
+                  margin: 0,
+                  lineHeight: 1.05,
+                }}
+              >
+                Head to head.
+              </h2>
+            </div>
 
-            <div style={{ background: '#FFFFFF', borderRadius: 16, border: '1px solid var(--border)', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+            <div style={{ background: 'var(--bg)', borderRadius: 16, border: '1px solid var(--border)', overflow: 'hidden' }}>
               {/* Table header */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 140px 140px', gap: 0, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)', padding: '14px 24px' }}>
-                <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Feature</span>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 160px 160px', gap: 0, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)', padding: '16px 24px' }}>
+                <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-mono), monospace' }}>Feature</span>
                 <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                   <Image src="/MambaHR_logo.png" alt="MambaHR" width={14} height={14} style={{ objectFit: 'contain', borderRadius: 3 }} />
                   MambaHR
@@ -142,86 +208,49 @@ export default async function ComparePage({ params }: Props) {
               </div>
 
               {/* Rows */}
-              {c.tableRows.map((row, i) => {
-                const mambaVal = typeof row.mamba === 'boolean' ? row.mamba : row.mamba
-                const themVal = typeof row.them === 'boolean' ? row.them : row.them
-
-                return (
-                  <div
-                    key={i}
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: '1fr 140px 140px',
-                      gap: 0,
-                      padding: '16px 24px',
-                      borderBottom: i < c.tableRows.length - 1 ? '1px solid var(--border-faint)' : 'none',
-                      background: i % 2 === 0 ? '#FFFFFF' : 'rgba(248,246,243,0.5)',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <div>
-                      <span style={{ fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>{row.feature}</span>
-                      {row.note && <p style={{ fontSize: 11, color: 'var(--text-faint)', margin: '3px 0 0', fontStyle: 'italic' }}>{row.note}</p>}
-                    </div>
-
-                    {/* MambaHR value */}
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                      {typeof mambaVal === 'boolean' ? (
-                        mambaVal ? (
-                          <span style={{ width: 24, height: 24, borderRadius: '50%', background: '#F0FDF4', border: '1px solid #BBF7D0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#15803D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                          </span>
-                        ) : (
-                          <span style={{ width: 24, height: 24, borderRadius: '50%', background: 'var(--bg-surface)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2l6 6M8 2L2 8" stroke="var(--text-faint)" strokeWidth="1.5" strokeLinecap="round" /></svg>
-                          </span>
-                        )
-                      ) : (
-                        <span style={{ fontSize: 12, color: 'var(--gold-dark)', fontWeight: 600, textAlign: 'center', background: 'var(--gold-tint)', padding: '3px 10px', borderRadius: 20 }}>{mambaVal}</span>
-                      )}
-                    </div>
-
-                    {/* Competitor value */}
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                      {typeof themVal === 'boolean' ? (
-                        themVal ? (
-                          <span style={{ width: 24, height: 24, borderRadius: '50%', background: '#F0FDF4', border: '1px solid #BBF7D0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#15803D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                          </span>
-                        ) : (
-                          <span style={{ width: 24, height: 24, borderRadius: '50%', background: 'var(--bg-surface)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2l6 6M8 2L2 8" stroke="var(--text-faint)" strokeWidth="1.5" strokeLinecap="round" /></svg>
-                          </span>
-                        )
-                      ) : (
-                        <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500, textAlign: 'center', background: 'var(--bg-surface)', padding: '3px 10px', borderRadius: 20 }}>{themVal}</span>
-                      )}
-                    </div>
+              {c.tableRows.map((row, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 160px 160px',
+                    gap: 0,
+                    padding: '18px 24px',
+                    borderBottom: i < c.tableRows.length - 1 ? '1px solid var(--border-faint)' : 'none',
+                    alignItems: 'center',
+                  }}
+                >
+                  <div>
+                    <span style={{ fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>{row.feature}</span>
+                    {row.note && <p style={{ fontSize: 11, color: 'var(--text-faint)', margin: '4px 0 0', fontStyle: 'italic' }}>{row.note}</p>}
                   </div>
-                )
-              })}
+
+                  <CellValue value={row.mamba} accent="mamba" />
+                  <CellValue value={row.them} accent="them" />
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* ── BOTTOM LINE ── */}
-        <section style={{ background: '#FFFFFF', padding: '80px 24px' }}>
-          <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
-            <p className="eyebrow" style={{ marginBottom: 16 }}>THE BOTTOM LINE</p>
+        <section style={{ background: 'var(--bg)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 820, margin: '0 auto' }}>
+            <p className="eyebrow" style={{ marginBottom: 20 }}>THE BOTTOM LINE</p>
             <h2
               style={{
                 fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(22px, 2.5vw, 32px)',
+                fontSize: 'clamp(28px, 3.4vw, 40px)',
                 fontWeight: 400,
-                letterSpacing: '-0.02em',
+                letterSpacing: '-0.025em',
                 color: 'var(--text)',
-                marginBottom: 20,
+                margin: '0 0 36px',
                 lineHeight: 1.2,
               }}
             >
               {c.bottomLine}
             </h2>
-            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginTop: 32 }}>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <a href="/demo" className="btn-gold">Request access →</a>
               <Link href="/mamba" className="btn-secondary">See how Mamba works</Link>
             </div>
@@ -238,27 +267,27 @@ export default async function ComparePage({ params }: Props) {
         </section>
 
         {/* ── OTHER COMPARISONS ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '56px 24px', borderTop: '1px solid var(--border-faint)' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 20 }}>Also comparing</p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+        <section style={{ background: 'var(--bg-warm)', padding: '72px 24px', borderTop: '1px solid var(--border-faint)' }}>
+          <div style={{ maxWidth: 980, margin: '0 auto' }}>
+            <p className="eyebrow" style={{ marginBottom: 24 }}>ALSO COMPARING</p>
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
               {otherSlugs.map((s) => (
                 <Link
                   key={s}
                   href={`/compare/${s}`}
                   style={{
-                    fontSize: 14,
-                    fontWeight: 500,
+                    fontSize: 13,
+                    fontWeight: 600,
                     color: 'var(--text-muted)',
-                    background: '#FFFFFF',
+                    background: 'var(--bg)',
                     border: '1px solid var(--border)',
-                    borderRadius: 8,
+                    borderRadius: 999,
                     padding: '8px 16px',
                     textDecoration: 'none',
-                    transition: 'border-color 0.15s',
+                    transition: 'border-color 0.15s, color 0.15s',
                   }}
                 >
-                  MambaHR vs {competitors[s].name} →
+                  vs {competitors[s].name}
                 </Link>
               ))}
             </div>
