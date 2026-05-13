@@ -39,21 +39,100 @@ const heroMessages = [
   },
 ]
 
+/* Channel preview mockups — small visual hints of what the agent looks like in each surface */
+
+function SlackPreview() {
+  return (
+    <div style={{ background: 'var(--bg)', border: '1px solid var(--border-faint)', borderRadius: 8, overflow: 'hidden' }}>
+      <div style={{ background: '#3F0E40', padding: '6px 10px' }}>
+        <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: 10, fontWeight: 500 }}># people-ops</span>
+      </div>
+      <div style={{ padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
+          <div style={{ width: 16, height: 16, borderRadius: 3, background: '#D4C4B5', flexShrink: 0, marginTop: 1 }} />
+          <p style={{ margin: 0, fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+            <strong style={{ color: 'var(--text)' }}>Emma</strong>&nbsp;&nbsp;@mamba PTO Friday?
+          </p>
+        </div>
+        <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
+          <div style={{ width: 16, height: 16, borderRadius: 3, background: 'var(--text)', flexShrink: 0, marginTop: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ color: 'var(--gold)', fontSize: 9, fontFamily: 'var(--font-serif), Georgia, serif', fontWeight: 700 }}>M</span>
+          </div>
+          <p style={{ margin: 0, fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4 }}>
+            <strong style={{ color: 'var(--text)' }}>Mamba</strong>&nbsp;&nbsp;
+            <span style={{ color: 'var(--color-green)' }}>✓</span> Approved · within policy
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function TeamsPreview() {
+  return (
+    <div style={{ background: 'var(--bg)', border: '1px solid var(--border-faint)', borderRadius: 8, overflow: 'hidden' }}>
+      <div style={{ background: '#4B53BC', padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
+        <span style={{ width: 10, height: 10, borderRadius: 2, background: 'rgba(255,255,255,0.9)', display: 'inline-block' }} />
+        <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 10, fontWeight: 500 }}>People Ops · Posts</span>
+      </div>
+      <div style={{ padding: '10px 12px' }}>
+        <div style={{ background: 'var(--bg-warm)', borderRadius: 6, padding: '8px 10px', borderLeft: '2px solid var(--gold-dark)' }}>
+          <p style={{ margin: '0 0 4px', fontSize: 10, fontWeight: 700, color: 'var(--text)' }}>Hiring update — Alex P.</p>
+          <p style={{ margin: 0, fontSize: 9, color: 'var(--text-muted)' }}>Offer drafted · awaiting CHRO</p>
+          <div style={{ marginTop: 6, display: 'flex', gap: 4 }}>
+            <span style={{ background: 'var(--text)', color: 'var(--bg)', padding: '2px 8px', borderRadius: 4, fontSize: 9, fontWeight: 600 }}>Review</span>
+            <span style={{ background: 'transparent', color: 'var(--text-muted)', padding: '2px 8px', borderRadius: 4, fontSize: 9, fontWeight: 500, border: '1px solid var(--border)' }}>Later</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function WebAppPreview() {
+  return (
+    <div style={{ background: 'var(--bg)', border: '1px solid var(--border-faint)', borderRadius: 8, overflow: 'hidden' }}>
+      <div style={{ background: 'var(--bg-surface)', padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 5, borderBottom: '1px solid var(--border-faint)' }}>
+        <span style={{ display: 'flex', gap: 3 }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--border-mid)' }} />
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--border-mid)' }} />
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--border-mid)' }} />
+        </span>
+        <span style={{ fontSize: 9, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace', marginLeft: 4 }}>app.mambahr.com</span>
+      </div>
+      <div style={{ padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 5 }}>
+        <p style={{ margin: 0, fontSize: 9, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Today · 3 items</p>
+        <div style={{ background: 'var(--bg-warm)', borderRadius: 4, padding: '6px 8px' }}>
+          <p style={{ margin: '0 0 2px', fontSize: 10, fontWeight: 600, color: 'var(--text)' }}>Parental leave — Maria K.</p>
+          <span style={{ background: '#FFF7ED', color: '#C2410C', padding: '1px 6px', borderRadius: 3, fontSize: 8, fontWeight: 600 }}>Needs sign-off</span>
+        </div>
+        <div style={{ display: 'flex', gap: 4 }}>
+          <span style={{ flex: 1, background: 'var(--bg-warm)', height: 6, borderRadius: 2 }} />
+          <span style={{ flex: 1, background: 'var(--bg-warm)', height: 6, borderRadius: 2 }} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const channelDetails = [
   {
     label: 'Slack',
     logo: '/slack-new-logo.svg',
-    copy: 'Mention @mamba in any channel or DM. The agent reads the thread, checks who\'s asking, and replies in the same place. Slash commands available too.',
+    copy: 'Mention @mamba in any channel or DM. Reads the thread, checks the policy, replies in seconds.',
+    preview: <SlackPreview />,
   },
   {
     label: 'Microsoft Teams',
     logo: '/Microsoft_Symbol_0.svg',
-    copy: 'Same agent on Teams. Adaptive cards, @mentions, and tabs in channels. Works with your existing Microsoft 365 identity.',
+    copy: 'Same agent on Teams. Adaptive cards, @mentions, tabs in channels.',
+    preview: <TeamsPreview />,
   },
   {
     label: 'Web app',
     logo: '/MambaHR_logo.png',
-    copy: 'Today queue, people directory, hiring pipeline, reports, and settings — all at app.mambahr.com. Used for approvals and analytics.',
+    copy: 'Today queue, people directory, hiring pipeline, reports — at app.mambahr.com.',
+    preview: <WebAppPreview />,
   },
 ]
 
@@ -259,13 +338,31 @@ export default function MambaPage() {
               </h2>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
               {channelDetails.map((ch) => (
-                <div key={ch.label} style={{ background: 'var(--bg-warm)', borderRadius: 14, padding: '24px 22px', border: '1px solid var(--border-faint)' }}>
-                  <div style={{ width: 32, height: 32, marginBottom: 14, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Image src={ch.logo} alt={ch.label} width={28} height={28} style={{ display: 'block', objectFit: 'contain' }} />
+                <div
+                  key={ch.label}
+                  style={{
+                    background: 'var(--bg-warm)',
+                    borderRadius: 16,
+                    padding: 20,
+                    border: '1px solid var(--border)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  {/* Mini preview at the top */}
+                  <div style={{ marginBottom: 22 }}>
+                    {ch.preview}
                   </div>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{ch.label}</p>
+
+                  {/* Bottom: logo + label + copy */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                    <div style={{ width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <Image src={ch.logo} alt="" width={22} height={22} style={{ display: 'block', objectFit: 'contain' }} />
+                    </div>
+                    <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em' }}>{ch.label}</p>
+                  </div>
                   <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{ch.copy}</p>
                 </div>
               ))}
