@@ -6,75 +6,6 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
 
-/* ── Encryption visual — always encrypted, with a scanning verifier ── */
-function DataShieldVisual() {
-  const [scan, setScan] = useState(-1)
-  useEffect(() => {
-    const t = setInterval(() => setScan(s => (s + 1) % 6), 900)
-    return () => clearInterval(t)
-  }, [])
-
-  const rows = [
-    { label: 'Social Security', cipher: 'a7f2 b9k1 d4x9 e6m3' },
-    { label: 'Annual salary', cipher: 'b3e8 m4p2 c1n6 r9q4' },
-    { label: 'Medical info', cipher: 'c1d4 w7r5 e2f8 t6v3' },
-  ]
-
-  return (
-    <div style={{ position: 'relative', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 16px 48px rgba(0,0,0,0.08)' }}>
-      {/* Header */}
-      <div style={{ padding: '16px 22px', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)', display: 'flex', alignItems: 'center', gap: 12 }}>
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M9 1l7 2.3v4.7c0 5-2.8 7.8-7 9.5C4.8 15.8 2 13 2 8V3.3L9 1z" fill="rgba(176,141,87,0.18)" stroke="var(--gold)" strokeWidth="1.4" />
-          <path d="M6 9l2.2 2.2L12 7" stroke="var(--gold)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        <div style={{ flex: 1 }}>
-          <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)', margin: 0 }}>Maya Chen · employee record</p>
-        </div>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '3px 10px', borderRadius: 20, background: '#F0FDF4', border: '1px solid #BBF7D0' }}>
-          <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#22C55E', animation: 'gold-ring-pulse 2s ease-out infinite' }} />
-          <span style={{ fontSize: 10, fontWeight: 700, color: '#15803D', letterSpacing: '0.04em' }}>SECURE</span>
-        </span>
-      </div>
-
-      {/* Rows — always encrypted, scanner highlights one at a time */}
-      {rows.map((row, i) => {
-        const isScanning = scan === i
-        return (
-          <div key={row.label} style={{
-            position: 'relative',
-            padding: '18px 22px',
-            borderBottom: i < rows.length - 1 ? '1px solid var(--border-faint)' : 'none',
-            background: isScanning ? 'rgba(176,141,87,0.04)' : 'transparent',
-            transition: 'background 0.6s ease',
-          }}>
-            {isScanning && (
-              <span style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 2, background: 'var(--gold)' }} />
-            )}
-
-            <p style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-faint)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 8px' }}>{row.label}</p>
-
-            <span style={{
-              fontFamily: 'var(--font-mono), monospace',
-              fontSize: 14,
-              color: isScanning ? 'var(--gold-dark)' : 'var(--text-muted)',
-              letterSpacing: '0.06em',
-              transition: 'color 0.5s',
-            }}>{row.cipher}</span>
-          </div>
-        )
-      })}
-
-      {/* Footer */}
-      <div style={{ padding: '12px 22px', background: 'var(--gold-tint)', borderTop: '1px solid var(--gold-light)' }}>
-        <p style={{ fontSize: 11, color: 'var(--gold-dark)', fontWeight: 600, margin: 0, textAlign: 'center', letterSpacing: '0.02em' }}>
-          Bank-grade encryption · never readable as plain text · ever
-        </p>
-      </div>
-    </div>
-  )
-}
-
 /* ── Audit log — always-visible entries with new entry pulsing in ── */
 function AuditLogVisual() {
   const [highlight, setHighlight] = useState(0)
@@ -419,93 +350,32 @@ export default function SecurityPage() {
       <MegaNav />
       <main style={{ paddingTop: 64 }}>
 
-        {/* ── HERO ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '110px 24px 80px' }}>
-          <div className="hero-split" style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 64, alignItems: 'center' }}>
-            <div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 20, padding: '5px 12px 5px 8px', background: 'var(--gold-tint)', border: '1px solid rgba(176,141,87,0.2)', borderRadius: 999 }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold-dark)' }} />
-                <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.08em' }}>SECURITY · TRUST</span>
-              </div>
-              <h1
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(36px, 4vw, 56px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.03em',
-                  color: 'var(--text)',
-                  marginBottom: 24,
-                  lineHeight: 1.05,
-                }}
-              >
-                Your employees&apos; data,<br /><span style={{ color: 'var(--gold-dark)' }}>handled with care.</span>
-              </h1>
-              <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 32, maxWidth: 480 }}>
-                SSNs, salaries, health records, performance reviews — we hold the most sensitive information in your company. Every layer of MambaHR was built for that reality.
-              </p>
-
-              {/* Pillar grid — replaces the bullet list */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 32, maxWidth: 480 }}>
-                {[
-                  {
-                    title: 'Encrypted',
-                    desc: 'Bank-grade — stored and in transit',
-                    icon: (
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <rect x="3" y="7" width="10" height="7" rx="1.4" stroke="var(--gold-dark)" strokeWidth="1.3" />
-                        <path d="M5 7V5a3 3 0 016 0v2" stroke="var(--gold-dark)" strokeWidth="1.3" />
-                      </svg>
-                    ),
-                  },
-                  {
-                    title: 'Right person, right view',
-                    desc: 'Each person sees only what their role allows',
-                    icon: (
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <circle cx="6" cy="5" r="2.5" stroke="var(--gold-dark)" strokeWidth="1.3" />
-                        <path d="M2 13c0-2.5 1.8-4 4-4s4 1.5 4 4" stroke="var(--gold-dark)" strokeWidth="1.3" strokeLinecap="round" />
-                      </svg>
-                    ),
-                  },
-                  {
-                    title: 'Recorded forever',
-                    desc: 'Every action logged · nobody can edit the record',
-                    icon: (
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <rect x="2" y="2" width="12" height="12" rx="1.5" stroke="var(--gold-dark)" strokeWidth="1.3" />
-                        <path d="M5 5h6M5 8h4M5 11h5" stroke="var(--gold-dark)" strokeWidth="1" strokeLinecap="round" />
-                      </svg>
-                    ),
-                  },
-                  {
-                    title: 'Never trains AI',
-                    desc: 'Contractually guaranteed · zero',
-                    icon: (
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <circle cx="8" cy="8" r="6.5" stroke="var(--gold-dark)" strokeWidth="1.3" />
-                        <path d="M3.5 12.5L12.5 3.5" stroke="var(--gold-dark)" strokeWidth="1.3" strokeLinecap="round" />
-                      </svg>
-                    ),
-                  },
-                ].map((p) => (
-                  <div key={p.title} style={{ background: 'var(--bg)', border: '1px solid var(--border-faint)', borderRadius: 12, padding: '14px 14px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                      {p.icon}
-                      <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', margin: 0 }}>{p.title}</p>
-                    </div>
-                    <p style={{ fontSize: 12, color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>{p.desc}</p>
-                  </div>
-                ))}
-              </div>
-
-              <a href="mailto:security@mambahr.com" className="btn-gold" style={{ display: 'inline-flex' }}>
-                Talk to us about security →
-              </a>
+        {/* ── HERO — minimal, typography only ── */}
+        <section style={{ background: 'var(--bg-warm)', padding: '160px 24px 120px' }}>
+          <div style={{ maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 28, padding: '5px 14px 5px 10px', background: 'var(--gold-tint)', border: '1px solid var(--gold-light)', borderRadius: 999 }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold-dark)' }} />
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.12em' }}>SECURITY · TRUST</span>
             </div>
-
-            <div className="hero-today-panel">
-              <DataShieldVisual />
-            </div>
+            <h1
+              style={{
+                fontFamily: 'var(--font-serif), Georgia, serif',
+                fontSize: 'clamp(44px, 6vw, 80px)',
+                fontWeight: 400,
+                letterSpacing: '-0.035em',
+                color: 'var(--text)',
+                marginBottom: 28,
+                lineHeight: 1.0,
+              }}
+            >
+              Your employees&rsquo; data,<br /><span style={{ color: 'var(--gold-dark)' }}>handled with care.</span>
+            </h1>
+            <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 40, maxWidth: 620, margin: '0 auto 40px' }}>
+              Pay, performance, health, history — we hold the most sensitive information in your company. Every layer of MambaHR was built for that reality.
+            </p>
+            <a href="mailto:security@mambahr.com" className="btn-gold" style={{ display: 'inline-flex' }}>
+              Talk to us about security →
+            </a>
           </div>
         </section>
 
@@ -800,31 +670,6 @@ export default function SecurityPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ── CTA ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '80px 24px', textAlign: 'center' }}>
-          <div style={{ maxWidth: 480, margin: '0 auto' }}>
-            <h2
-              style={{
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(24px, 2.8vw, 36px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 14,
-                lineHeight: 1.15,
-              }}
-            >
-              Still have questions?
-            </h2>
-            <p style={{ fontSize: 16, color: 'var(--text-muted)', marginBottom: 28, lineHeight: 1.6 }}>
-              Email us, send your security questionnaire, or get on a call. No slides, no spin.
-            </p>
-            <a href="mailto:security@mambahr.com" className="btn-gold" style={{ display: 'inline-flex' }}>
-              security@mambahr.com →
-            </a>
           </div>
         </section>
 
