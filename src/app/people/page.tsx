@@ -4,7 +4,6 @@ import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
-import IntegrationsMarquee from '@/components/sections/integrations-marquee'
 import EmployeeDirectory from '@/components/surfaces/employee-directory'
 import {
   HiringIcon, LifecycleIcon, CompIcon, TimeOffIcon,
@@ -239,12 +238,6 @@ export default function PeoplePage() {
               ))}
             </div>
           </div>
-        </section>
-
-        {/* Integrations */}
-        <section style={{ background: 'var(--bg-warm)', paddingTop: 80, paddingBottom: 80, overflow: 'hidden' }}>
-          <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-faint)', marginBottom: 4 }}>Plays nice with the rest of your stack</p>
-          <IntegrationsMarquee />
         </section>
 
         <RequestAccessSection />

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import IntegrationsMarquee from '@/components/sections/integrations-marquee'
 
 export default function PricingSection() {
   return (
@@ -125,13 +124,6 @@ export default function PricingSection() {
         </div>
       </section>
 
-      {/* ───────────────────────── INTEGRATIONS MARQUEE ───────────────────────── */}
-      <section style={{ background: '#FFFFFF', paddingTop: 64, paddingBottom: 64, overflow: 'hidden' }}>
-        <p style={{ textAlign: 'center', fontSize: 13, color: 'var(--text-faint)', marginBottom: 0, fontWeight: 500 }}>
-          Plays nice with the rest of your stack
-        </p>
-        <IntegrationsMarquee />
-      </section>
     </>
   )
 }
