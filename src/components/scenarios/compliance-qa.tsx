@@ -25,7 +25,7 @@ export const complianceQaScenario: Scenario = {
         {/* Agent thinking (brief) */}
         {agentThinking && !comparisonVisible && (
           <div style={{ marginLeft: 38, fontSize: 11, color: 'var(--text-muted)', fontFamily: 'var(--font-mono), monospace', marginBottom: 10 }}>
-            <strong style={{ color: 'var(--gold-dark)' }}>compliance.agent</strong> · reading state policies…
+            <strong style={{ color: 'var(--gold-dark)' }}>Compliance agent</strong> · reading state policies…
           </div>
         )}
 
@@ -33,7 +33,7 @@ export const complianceQaScenario: Scenario = {
         {comparisonVisible && (
           <div style={{ marginLeft: 38, marginBottom: 14, animation: 'mamba-card-in 0.35s ease-out' }}>
             <div style={{ fontSize: 11, color: 'var(--text-muted)', fontFamily: 'var(--font-mono), monospace', marginBottom: 8 }}>
-              <strong style={{ color: 'var(--gold-dark)' }}>compliance.agent</strong> · answered in 2.7s
+              <strong style={{ color: 'var(--gold-dark)' }}>Compliance agent</strong> · answered in 2.7s
             </div>
             <div
               style={{

@@ -51,7 +51,7 @@ export const reviewsScenario: Scenario = {
         {/* Agent header */}
         {elapsedMs >= 500 && (
           <div style={{ marginBottom: 10, fontSize: 11, color: 'var(--text-muted)' }}>
-            <strong style={{ color: 'var(--gold-dark)' }}>review.agent</strong> is drafting in parallel…
+            <strong style={{ color: 'var(--gold-dark)' }}>Performance agent</strong> is drafting in parallel…
           </div>
         )}
 

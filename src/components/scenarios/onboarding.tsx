@@ -54,7 +54,7 @@ export const onboardingScenario: Scenario = {
         {/* Agent header */}
         {agentVisible && (
           <div style={{ marginBottom: 10, fontSize: 11, color: 'var(--text-muted)' }}>
-            <strong style={{ color: 'var(--gold-dark)' }}>hiring.agent</strong> is orchestrating Day 1 setup…
+            <strong style={{ color: 'var(--gold-dark)' }}>Hiring agent</strong> is orchestrating Day 1 setup…
           </div>
         )}
 

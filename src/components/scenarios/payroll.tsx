@@ -46,7 +46,7 @@ export const payrollScenario: Scenario = {
         {/* Agent header */}
         {elapsedMs >= 600 && (
           <div style={{ marginBottom: 10, fontSize: 11, color: 'var(--text-muted)' }}>
-            <strong style={{ color: 'var(--gold-dark)' }}>payroll.agent</strong> running reconciliation…
+            <strong style={{ color: 'var(--gold-dark)' }}>Payroll agent</strong> running reconciliation…
           </div>
         )}
 

@@ -51,7 +51,7 @@ export const stateCoverageScenario: Scenario = {
         {/* Agent header */}
         {elapsedMs >= 500 && (
           <div style={{ marginBottom: 10, fontSize: 11, color: 'var(--text-muted)' }}>
-            <strong style={{ color: 'var(--gold-dark)' }}>compliance.agent</strong> · checking 50 state rules…
+            <strong style={{ color: 'var(--gold-dark)' }}>Compliance agent</strong> · checking 50 state rules…
           </div>
         )}
 

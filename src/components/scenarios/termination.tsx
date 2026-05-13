@@ -28,7 +28,7 @@ export const terminationScenario: Scenario = {
     return (
       <div style={{ fontFamily: 'var(--font-sans)', fontSize: 14, color: 'var(--text)' }}>
         <div style={{ marginBottom: 12, fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>
-          DM with people.agent · confidential
+          Private message · confidential
         </div>
 
         {/* Sarah's message */}
@@ -44,7 +44,7 @@ export const terminationScenario: Scenario = {
         {elapsedMs >= 2400 && (
           <AgentBlock>
             <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 6 }}>
-              <strong style={{ color: 'var(--gold-dark)' }}>termination.agent</strong> is working with care…
+              <strong style={{ color: 'var(--gold-dark)' }}>Offboarding agent</strong> is working with care…
             </div>
             <Thinking step={step} />
           </AgentBlock>

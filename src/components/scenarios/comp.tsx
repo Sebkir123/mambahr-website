@@ -27,7 +27,7 @@ export const compScenario: Scenario = {
     return (
       <div style={{ fontFamily: 'var(--font-sans)', fontSize: 14, color: 'var(--text)' }}>
         <div style={{ marginBottom: 12, fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>
-          DM with comp.agent
+          Private message · #people-ops
         </div>
 
         {/* Priya's message */}
@@ -43,7 +43,7 @@ export const compScenario: Scenario = {
         {elapsedMs >= 2300 && (
           <AgentBlock>
             <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 6 }}>
-              <strong style={{ color: 'var(--gold-dark)' }}>comp.agent</strong> is working…
+              <strong style={{ color: 'var(--gold-dark)' }}>Comp agent</strong> is working…
             </div>
             <Thinking step={step} />
           </AgentBlock>

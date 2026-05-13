@@ -44,7 +44,7 @@ export const leaveScenario: Scenario = {
         {elapsedMs >= 2200 && (
           <AgentBlock>
             <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 6 }}>
-              <strong style={{ color: 'var(--gold-dark)' }}>leave.agent</strong> is working…
+              <strong style={{ color: 'var(--gold-dark)' }}>Leave agent</strong> is working…
             </div>
             <Thinking step={step} />
           </AgentBlock>
