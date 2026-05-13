@@ -126,7 +126,7 @@ export default function MambaExamples() {
               padding: '9px 18px',
               borderRadius: 999,
               border: active === i ? '1px solid var(--gold)' : '1px solid var(--border)',
-              background: active === i ? 'var(--gold-tint)' : '#FFFFFF',
+              background: active === i ? 'var(--gold-tint)' : 'var(--bg)',
               color: active === i ? 'var(--gold-dark)' : 'var(--text-muted)',
               fontSize: 13,
               fontWeight: 600,
@@ -152,8 +152,8 @@ export default function MambaExamples() {
           letterSpacing: '0.06em',
           padding: '5px 10px',
           borderRadius: 20,
-          background: ex.badge.includes('approval') ? '#1C1917' : '#15803D',
-          color: '#FFFFFF',
+          background: ex.badge.includes('approval') ? 'var(--text)' : 'var(--color-green)',
+          color: 'var(--bg)',
           textTransform: 'uppercase',
         }}>
           {ex.badge}

@@ -99,7 +99,7 @@ export default function MambaPage() {
       <main style={{ paddingTop: 64 }}>
 
         {/* ── HERO ── */}
-        <section style={{ background: '#FFFFFF', padding: '90px 24px 72px' }}>
+        <section style={{ background: 'var(--bg)', padding: '90px 24px 72px' }}>
           <div className="hero-split" style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 72, alignItems: 'center' }}>
             <div>
               <p className="eyebrow" style={{ marginBottom: 18 }}>MAMBA — THE AGENT</p>
@@ -125,7 +125,7 @@ export default function MambaPage() {
               </div>
             </div>
             <div className="hero-today-panel">
-              <SlackThread channel="people-ops" messages={heroMessages} />
+              <SlackThread channel="people-ops" messages={heroMessages} instant />
             </div>
           </div>
         </section>
@@ -207,7 +207,7 @@ export default function MambaPage() {
         </section>
 
         {/* ── WHERE IT LIVES ── */}
-        <section style={{ background: '#FFFFFF', padding: '88px 24px' }}>
+        <section style={{ background: 'var(--bg)', padding: '88px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
               <p className="eyebrow" style={{ marginBottom: 14 }}>WHERE IT LIVES</p>
@@ -246,7 +246,7 @@ export default function MambaPage() {
             <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 32 }}>BUILT FOR THE MOST SENSITIVE DATA IN YOUR COMPANY</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
               {trustCards.map((card) => (
-                <div key={card.label} style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px' }}>
+                <div key={card.label} style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px' }}>
                   <div style={{ marginBottom: 12 }}>{card.icon}</div>
                   <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>{card.label}</p>
                   <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{card.desc}</p>
