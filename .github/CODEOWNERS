@@ -1,0 +1,4 @@
+# ── CI/CD pipeline ───────────────────────────────────────────
+# Any change to workflows, Dependabot config, or CODEOWNERS itself
+# requires review from the repo owner.
+.github/                    @Sebkir123
