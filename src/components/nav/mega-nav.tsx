@@ -182,15 +182,8 @@ export default function MegaNav() {
 
           {/* Right CTAs */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
-            <Link
-              href="https://app.mambahr.com"
-              className="hidden md:inline-flex"
-              style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-muted)', textDecoration: 'none' }}
-            >
-              Sign in
-            </Link>
             <Link href="/demo" className="btn-gold" style={{ fontSize: 13, padding: '9px 20px' }}>
-              Get a demo
+              Request access
             </Link>
             {/* Mobile hamburger */}
             <button
@@ -424,7 +417,6 @@ export default function MegaNav() {
               { label: 'Pricing',  href: '/pricing'  },
               { label: 'Security', href: '/security' },
               { label: 'About',    href: '/about'    },
-              { label: 'Sign in',  href: 'https://app.mambahr.com' },
             ].map((item) => (
               <Link
                 key={item.label}
@@ -438,7 +430,7 @@ export default function MegaNav() {
 
             <div style={{ marginTop: 32 }}>
               <Link href="/demo" className="btn-gold" onClick={() => setMobileOpen(false)} style={{ width: '100%', justifyContent: 'center' }}>
-                Get a demo
+                Request access
               </Link>
             </div>
           </div>

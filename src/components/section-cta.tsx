@@ -6,7 +6,7 @@ type Props = {
   href?: string
 }
 
-export default function SectionCta({ headline, buttonLabel = 'Book a demo →', href = '/demo' }: Props) {
+export default function SectionCta({ headline, buttonLabel = 'Request access →', href = '/demo' }: Props) {
   return (
     <div
       style={{

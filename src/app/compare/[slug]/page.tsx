@@ -75,7 +75,7 @@ export default async function ComparePage({ params }: Props) {
               {c.heroSub}
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a href="/demo" className="btn-gold">Get a demo →</a>
+              <a href="/demo" className="btn-gold">Request access →</a>
               <a href="#compare-table" className="btn-secondary">See the comparison ↓</a>
             </div>
           </div>
@@ -222,7 +222,7 @@ export default async function ComparePage({ params }: Props) {
               {c.bottomLine}
             </h2>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginTop: 32 }}>
-              <a href="/demo" className="btn-gold">Get a demo →</a>
+              <a href="/demo" className="btn-gold">Request access →</a>
               <Link href="/mamba" className="btn-secondary">See how Mamba works</Link>
             </div>
           </div>

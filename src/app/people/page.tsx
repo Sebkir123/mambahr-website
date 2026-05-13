@@ -102,7 +102,7 @@ export default function PeoplePage() {
                 Directory, comp, performance, leave, lifecycle changes — the things a People team does every day, handled by an agent. You stay strategic.
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <a href="/demo" className="btn-gold">Get a demo →</a>
+                <a href="/demo" className="btn-gold">Request access →</a>
                 <Link href="/today" className="btn-secondary">See Today queue</Link>
               </div>
             </div>

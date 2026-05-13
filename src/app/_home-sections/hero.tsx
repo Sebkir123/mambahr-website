@@ -99,7 +99,7 @@ export default function HeroSection() {
 
           <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginBottom: 24 }}>
             <a href="/demo" className="btn-gold" style={{ fontSize: 15, padding: '14px 32px' }}>
-              Get a demo →
+              Request access →
             </a>
             <Link href="/today" className="btn-secondary" style={{ fontSize: 15 }}>
               See product tour
