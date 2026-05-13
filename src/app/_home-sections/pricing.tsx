@@ -21,7 +21,7 @@ export default function PricingSection() {
               Three tiers.<br />Every agent in all of them.
             </h2>
             <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: 580 }}>
-              You pay monthly. We replace HR FTEs that cost <strong style={{ color: 'var(--text)' }}>$80K–$120K/year</strong> each. The math works at every stage.
+              You pay monthly. You get the leverage of HR FTEs that cost <strong style={{ color: 'var(--text)' }}>$80K–$120K/year</strong> each. The math works at every stage.
             </p>
           </div>
 
@@ -32,7 +32,7 @@ export default function PricingSection() {
                 for: '2 — 25 employees',
                 price: '$299',
                 unit: '/month flat',
-                outcome: 'Replaces your founder doing HR',
+                outcome: 'Gets your founder out of HR work',
                 features: ['All 14 agents', 'Slack + Teams + web app', 'Migrate from any HRIS', 'Audit log on every action', 'Email support'],
                 highlight: false,
               },
@@ -41,7 +41,7 @@ export default function PricingSection() {
                 for: '25 — 500 employees',
                 price: '$14',
                 unit: '/employee/month',
-                outcome: 'Saves ~$300K/year on HR FTEs',
+                outcome: 'Adds the leverage of ~$300K/year in HR capacity',
                 features: ['Everything in Starter', 'Human sign-off workflows', 'Cryptographic audit log', 'RBAC + custom roles', 'Dedicated success manager'],
                 highlight: true,
               },

@@ -39,7 +39,7 @@ export default function BuiltForEveryStageSection() {
               stage: 'GROWTH',
               title: 'One CHRO doing the work of a 4-person HR team.',
               copy: 'The agents clear the backlog. The CHRO sets policy and approves the calls that matter. Compliance, performance cycles, multi-state payroll — running on autopilot.',
-              outcome: 'Outcome: ~$300K/year saved on HR FTEs',
+              outcome: 'Outcome: ~$300K/year of HR capacity, without new hires',
               highlight: true,
             },
             {

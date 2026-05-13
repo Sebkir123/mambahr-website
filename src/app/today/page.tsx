@@ -79,11 +79,11 @@ const humanDecides = [
 ]
 
 const mathRows = [
-  { metric: 'HR headcount for 500 employees', legacy: '5', mamba: '1', note: 'judgment only' },
-  { metric: 'Avg PTO request resolution',     legacy: '4.2 hr',  mamba: '4.2 sec' },
-  { metric: 'Time spent on operational admin', legacy: '60%',  mamba: '0%' },
-  { metric: 'Time spent on compliance filings', legacy: '15%', mamba: '0%',   note: 'automated, you sign on submit' },
-  { metric: 'Time spent on judgment + policy', legacy: '25%', mamba: '100%' },
+  { metric: 'Avg PTO request resolution',       legacy: '4.2 hr', mamba: '4.2 sec' },
+  { metric: 'Time spent on operational admin',  legacy: '60%',    mamba: '0%' },
+  { metric: 'Time spent on compliance filings', legacy: '15%',    mamba: '0%', note: 'automated, you sign on submit' },
+  { metric: 'Time spent on judgment + policy',  legacy: '25%',    mamba: '100%' },
+  { metric: 'CHRO hours freed up per week',     legacy: '8 hr',   mamba: '32 hr', note: 'redirected to strategic work' },
 ]
 
 const anatomyItems = [
@@ -152,7 +152,7 @@ export default function TodayPage() {
                   lineHeight: 1.05,
                 }}
               >
-                What 30 minutes a day<br />actually replaces.
+                What 30 minutes a day<br />actually unlocks.
               </h2>
               <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.6 }}>
                 The work doesn&apos;t disappear. It shifts from admin to judgment.
