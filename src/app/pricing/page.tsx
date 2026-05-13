@@ -309,10 +309,10 @@ export default function PricingPage() {
                 lineHeight: 1.1,
               }}
             >
-              Talk to the founders.<br />Get a quote in 24 hours.
+              Request access.
             </h2>
             <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.6)', marginBottom: 48, lineHeight: 1.6 }}>
-              No sales team. No demo gauntlet. Brian and Sebastian respond to every inquiry personally.
+              MambaHR is in private beta. Leave your email and we&apos;ll reach out to schedule time.
             </p>
             <Waitlist />
             <p style={{ marginTop: 24, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>

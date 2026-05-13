@@ -9,7 +9,7 @@ export default function DemoPage() {
       <main>
         <section style={{ background: 'var(--bg-warm)', paddingTop: 140, paddingBottom: 80 }}>
           <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 24px', textAlign: 'center' }}>
-            <p className="eyebrow" style={{ marginBottom: 20 }}>BOOK A DEMO</p>
+            <p className="eyebrow" style={{ marginBottom: 20 }}>REQUEST ACCESS</p>
             <h1
               style={{
                 fontFamily: 'var(--font-serif), Georgia, serif',
@@ -21,13 +21,10 @@ export default function DemoPage() {
                 lineHeight: 1.05,
               }}
             >
-              See it work in 30 minutes.
+              Get early access.
             </h1>
-            <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: 640, margin: '0 auto 12px' }}>
-              No slides. No sales gauntlet. The founders walk you through the product live, answer your questions, and show you what setup would look like for your team.
-            </p>
-            <p style={{ fontSize: 14, color: 'var(--text-faint)' }}>
-              Brian Bell · Sebastian Kirsch · We respond within 24 hours.
+            <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: 580, margin: '0 auto' }}>
+              MambaHR is in private beta. Leave your email and we&apos;ll reach out to schedule time.
             </p>
           </div>
         </section>
@@ -35,7 +32,7 @@ export default function DemoPage() {
         <section style={{ background: '#FFFFFF', padding: '80px 24px 120px' }}>
           <div
             style={{
-              maxWidth: 720,
+              maxWidth: 480,
               margin: '0 auto',
               background: 'var(--bg-warm)',
               borderRadius: 16,
@@ -43,26 +40,7 @@ export default function DemoPage() {
               padding: '40px 32px',
             }}
           >
-            <div
-              style={{
-                background: '#FFFFFF',
-                border: '1px dashed var(--border)',
-                borderRadius: 12,
-                padding: '48px 24px',
-                textAlign: 'center',
-                marginBottom: 32,
-              }}
-            >
-              <p style={{ fontSize: 14, color: 'var(--text-faint)', marginBottom: 8, letterSpacing: '0.04em', fontWeight: 600 }}>CALENDAR</p>
-              <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.55 }}>
-                Calendar embed coming soon. For now, leave your email below and we&apos;ll send time slots within a day.
-              </p>
-            </div>
-
-            <div style={{ borderTop: '1px solid var(--border)', paddingTop: 28 }}>
-              <p style={{ fontSize: 13, color: 'var(--text-faint)', textAlign: 'center', marginBottom: 16, letterSpacing: '0.04em', fontWeight: 600 }}>OR EMAIL US</p>
-              <Waitlist compact />
-            </div>
+            <Waitlist />
           </div>
         </section>
       </main>

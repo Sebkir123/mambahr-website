@@ -107,7 +107,7 @@ export default function HeroSection() {
           </div>
 
           <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-            Live demo in 30 minutes · Switch from any HRIS within 1 day · Founders respond within&nbsp;24&nbsp;hours
+            Live demo in 30 minutes · Switch from any HRIS within 1 day
           </p>
         </div>
 

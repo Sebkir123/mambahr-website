@@ -72,7 +72,7 @@ export async function sendWaitlistWelcome(opts: { email: string; company: string
       You&rsquo;re on the list.
     </h1>
     <p style="font-size:15px;line-height:1.7;color:#57534e;margin:0 0 16px 0;">
-      Thanks for your interest in MambaHR. We received your inquiry for <strong>${escapeHtml(opts.company)}</strong> and we&rsquo;ll respond within 24 hours.
+      Thanks for your interest in MambaHR. We received your inquiry for <strong>${escapeHtml(opts.company)}</strong> and we&rsquo;ll be in touch soon.
     </p>
     <p style="font-size:15px;line-height:1.7;color:#57534e;margin:0 0 24px 0;">
       MambaHR is the AI HR department — every function, every workflow, one human in the loop. If there&rsquo;s a fit for your team, we&rsquo;ll respond with next steps. No sales pitch, just a real conversation.

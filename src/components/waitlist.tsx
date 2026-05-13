@@ -39,7 +39,7 @@ export function Waitlist({ compact }: Props) {
           </span>
           <span style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)' }}>You&apos;re on the list.</span>
         </div>
-        <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>We respond personally within 48 hours.</p>
+        <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>We&apos;ll be in touch.</p>
       </div>
     )
   }
@@ -125,7 +125,7 @@ export default function RequestAccessSection() {
           Hire the agent. Promote the human.
         </h2>
         <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.6)', marginBottom: 48, lineHeight: 1.6 }}>
-          Bring the AI HR department to your team. Two-field form. Founders respond personally within 24 hours.
+          Bring the AI HR department to your team.
         </p>
         <Waitlist />
         <p style={{ marginTop: 24, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>
