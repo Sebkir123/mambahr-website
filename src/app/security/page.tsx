@@ -338,31 +338,31 @@ function AccessControlVisual() {
 const faqItems = [
   {
     q: 'Can you see our employee data?',
-    a: "No. Your data belongs to you. We process it to run your requests — that's it. Our team cannot browse your records, and nothing is shared with third parties. You can export or delete everything at any time.",
+    a: "No. Your data is yours. We process it to run your workflows — that's it. No one at MambaHR browses your records, and nothing is shared with third parties.",
   },
   {
-    q: 'Do you use our data to train AI?',
-    a: "Never. Your HR data is never used to train AI models — not ours, not anyone else's. The agent uses AI to do your work, not to learn from your people's information. This is in your contract, in plain language.",
+    q: 'Do you train AI on our data?',
+    a: "Never. Your HR data does not train any AI model — ours or any vendor's. The agent uses AI to run your work, not to learn from your people's information. This is contractual, in plain language.",
   },
   {
-    q: 'What happens to data when someone is terminated?',
-    a: "Their records stay in the system as long as legally required (typically 3–7 years depending on your state). Everything is locked and audit-logged. You decide when to delete. We never delete unilaterally.",
+    q: 'How is our data encrypted?',
+    a: 'AES-256 at rest, TLS 1.3 in transit, AES-256 on backups. Encryption keys are managed in enterprise-grade key management — never accessible to humans.',
   },
   {
     q: 'Where is our data stored?',
-    a: 'Your data lives in the United States on enterprise-grade cloud infrastructure. If you need data in a specific region (EU, for example), that is available on Enterprise plans.',
+    a: 'United States only. Enterprise-grade cloud infrastructure, US-based regions for primary storage and backups.',
   },
   {
-    q: 'How does access control work?',
-    a: "You connect your existing identity provider (Google, Okta, or Microsoft). Your team's access follows their role — managers see their team, employees see their own records. When someone leaves, their access disappears automatically.",
+    q: 'Who at MambaHR can access our data?',
+    a: 'Production access is restricted to a small on-call rotation, protected by hardware keys and fully audit-logged. The agent operates with the least privilege required for each action. Browsing customer records is never routine.',
   },
   {
-    q: 'What certifications do you have?',
-    a: 'We are GDPR-compliant, follow HIPAA-informed controls for medical data, and meet CCPA/CPRA requirements. Independent security audits are part of our roadmap. We are happy to share our security questionnaire, controls documentation, and references on request.',
+    q: 'How do you handle a security incident?',
+    a: 'Detect, contain, notify. Customer notification within 24 hours for any incident affecting data confidentiality. Full post-incident report — timeline, root cause, remediation — within 7 days.',
   },
   {
-    q: 'What if we want to leave?',
-    a: 'Full data export available on demand — all records, documents, audit history, everything — in standard formats. No lock-in, no hostage data.',
+    q: 'How do you handle HIPAA-protected data?',
+    a: "Health-related leave and benefits data is segregated and handled with HIPAA-informed controls — access scoping, encryption, audit logging. We're not a covered entity, but our controls meet the bar your covered-entity programs require from a business associate.",
   },
 ]
 
@@ -616,11 +616,11 @@ export default function SecurityPage() {
           </div>
         </section>
 
-        {/* ── COMPLIANCE ── */}
+        {/* ── SPECIFICATIONS ── editorial spec sheet, not card grid ── */}
         <section style={{ background: 'var(--bg-cream)', padding: '96px 24px' }}>
-          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 56, maxWidth: 680, marginLeft: 'auto', marginRight: 'auto' }}>
-              <p className="eyebrow" style={{ marginBottom: 16 }}>CERTIFICATIONS</p>
+          <div style={{ maxWidth: 820, margin: '0 auto' }}>
+            <div style={{ marginBottom: 56, maxWidth: 600 }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>THE SPECIFICS</p>
               <h2
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
@@ -632,58 +632,86 @@ export default function SecurityPage() {
                   marginBottom: 16,
                 }}
               >
-                Enterprise-grade from day one.
+                The exact specs<br />your CISO will ask for.
               </h2>
               <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                The frameworks the most security-conscious buyers ask about — answered before they ask.
+                Built for the US market. Real practices, not aspirational checkboxes.
               </p>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16 }}>
-              {[
-                { name: 'GDPR',              status: 'Compliant',         desc: "You're always the data controller. Full data processing agreement available on request.", tone: 'good' as const },
-                { name: 'HIPAA',             status: 'Medical scope',     desc: 'Health leave and benefits data handled with HIPAA-informed controls and segregation.',     tone: 'info' as const },
-                { name: 'CCPA / CPRA',       status: 'Compliant',         desc: 'California employees can request, correct, or delete their data anytime.',                 tone: 'good' as const },
-                { name: 'Data residency',    status: 'US standard',       desc: 'US by default. EU and other regions available on Enterprise plans.',                      tone: 'good' as const },
-                { name: 'Independent audit', status: 'On the roadmap',    desc: 'Pursuing third-party security certification. Security questionnaire shared on request.',   tone: 'pending' as const },
-                { name: 'Encryption',        status: 'AES-256 / TLS 1.3', desc: 'Bank-grade encryption everywhere — at rest, in transit, in backups.',                      tone: 'good' as const },
-              ].map((cert) => {
-                const tones = {
-                  good:    { border: 'var(--color-green)', bg: '#F0FDF4', fg: 'var(--color-green)' },
-                  info:    { border: '#3B82F6',            bg: '#EFF6FF', fg: '#1D4ED8' },
-                  pending: { border: 'var(--gold-dark)',   bg: 'var(--gold-tint)', fg: 'var(--gold-dark)' },
-                }[cert.tone]
-                return (
-                  <div
-                    key={cert.name}
-                    style={{
-                      background: 'var(--bg)',
-                      border: '1px solid var(--border)',
-                      borderLeft: `3px solid ${tones.border}`,
-                      borderRadius: 12,
-                      padding: '24px 22px',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 12 }}>
-                      <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em' }}>{cert.name}</p>
-                      <span style={{
-                        fontSize: 10,
-                        fontWeight: 700,
-                        padding: '4px 10px',
-                        borderRadius: 999,
-                        background: tones.bg,
-                        color: tones.fg,
-                        letterSpacing: '0.05em',
-                        whiteSpace: 'nowrap',
-                        flexShrink: 0,
-                      }}>
-                        {cert.status.toUpperCase()}
-                      </span>
+
+            {/* Spec groups — editorial typography, no cards */}
+            {[
+              {
+                group: 'Encryption',
+                rows: [
+                  { k: 'At rest',     v: 'AES-256' },
+                  { k: 'In transit',  v: 'TLS 1.3' },
+                  { k: 'Backups',     v: 'AES-256, encrypted' },
+                  { k: 'Key management', v: 'Enterprise KMS · never human-accessible' },
+                ],
+              },
+              {
+                group: 'Access',
+                rows: [
+                  { k: 'Authentication', v: 'SSO via Google, Okta, or Microsoft' },
+                  { k: 'Permissions',    v: 'Role-based, auto-synced from your IdP' },
+                  { k: 'Provisioning',   v: 'Access expires the moment someone leaves' },
+                  { k: 'Audit log',      v: 'Every action recorded · cryptographically signed · immutable' },
+                ],
+              },
+              {
+                group: 'Data',
+                rows: [
+                  { k: 'Residency',      v: 'United States' },
+                  { k: 'AI training',    v: 'Never used to train any model · contractual' },
+                  { k: 'Export',         v: 'Full export on demand · standard formats' },
+                  { k: 'Retention',      v: 'Per US legal requirements · you decide when to delete' },
+                ],
+              },
+              {
+                group: 'Sensitive scopes',
+                rows: [
+                  { k: 'Health data',         v: 'HIPAA-informed controls · segregated storage · scoped access' },
+                  { k: 'California residents', v: 'CCPA/CPRA — request, correct, delete anytime' },
+                  { k: 'Background data',     v: 'FCRA-compliant flows · separate pipelines from operational HR data' },
+                ],
+              },
+            ].map((section, sectionIdx) => (
+              <div key={section.group} style={{ marginBottom: sectionIdx === 3 ? 0 : 40 }}>
+                <p
+                  className="mono"
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: 'var(--gold-dark)',
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    marginBottom: 14,
+                  }}
+                >
+                  {section.group}
+                </p>
+                <div>
+                  {section.rows.map((row, i) => (
+                    <div
+                      key={row.k}
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'minmax(160px, 220px) 1fr',
+                        gap: 32,
+                        padding: '14px 0',
+                        borderTop: i === 0 ? '1px solid var(--border)' : 'none',
+                        borderBottom: '1px solid var(--border)',
+                        alignItems: 'baseline',
+                      }}
+                    >
+                      <span style={{ fontSize: 14, color: 'var(--text-muted)', fontWeight: 500 }}>{row.k}</span>
+                      <span style={{ fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>{row.v}</span>
                     </div>
-                    <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: 0, lineHeight: 1.6 }}>{cert.desc}</p>
-                  </div>
-                )
-              })}
-            </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
