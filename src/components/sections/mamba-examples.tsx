@@ -158,7 +158,7 @@ export default function MambaExamples() {
         }}>
           {ex.badge}
         </span>
-        <SlackThread key={ex.key} channel={ex.channel} messages={messages} />
+        <SlackThread key={ex.key} channel={ex.channel} messages={messages} instant />
       </div>
     </div>
   )

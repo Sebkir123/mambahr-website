@@ -196,9 +196,42 @@ export default function MambaPage() {
                   ))}
                 </div>
 
-                <p style={{ marginTop: 28, fontSize: 12, color: 'var(--text-faint)', lineHeight: 1.6 }}>
-                  14 specialist agents · all gated by your policy · every action audit-logged
-                </p>
+                <div style={{
+                  marginTop: 36,
+                  paddingTop: 24,
+                  borderTop: '1px solid var(--border)',
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gap: 16,
+                }}>
+                  {[
+                    { value: '14', label: 'specialist agents' },
+                    { value: '100%', label: 'gated by your policy' },
+                    { value: 'every', label: 'action audit-logged' },
+                  ].map((stat) => (
+                    <div key={stat.label}>
+                      <p style={{
+                        fontFamily: 'var(--font-serif), Georgia, serif',
+                        fontSize: 28,
+                        fontWeight: 400,
+                        color: 'var(--gold-dark)',
+                        letterSpacing: '-0.025em',
+                        lineHeight: 1,
+                        margin: '0 0 6px',
+                      }}>
+                        {stat.value}
+                      </p>
+                      <p style={{
+                        fontSize: 12,
+                        color: 'var(--text-muted)',
+                        lineHeight: 1.4,
+                        margin: 0,
+                      }}>
+                        {stat.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <RoutingLog />
@@ -241,20 +274,62 @@ export default function MambaPage() {
         </section>
 
         {/* ── TRUST ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '72px 24px' }}>
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 32 }}>BUILT FOR THE MOST SENSITIVE DATA IN YOUR COMPANY</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
+        <section style={{ background: 'var(--bg-warm)', padding: '96px 24px' }}>
+          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 56, maxWidth: 680, marginLeft: 'auto', marginRight: 'auto' }}>
+              <p className="eyebrow" style={{ marginBottom: 18 }}>TRUST & SAFETY</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(28px, 3.4vw, 44px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.025em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.1,
+                }}
+              >
+                Built for the most sensitive<br />data in your company.
+              </h2>
+              <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                Every safeguard you&apos;d build yourself — already running before the agent ever takes an action.
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
               {trustCards.map((card) => (
-                <div key={card.label} style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px' }}>
-                  <div style={{ marginBottom: 12 }}>{card.icon}</div>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>{card.label}</p>
-                  <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{card.desc}</p>
+                <div
+                  key={card.label}
+                  style={{
+                    background: 'var(--bg)',
+                    border: '1px solid var(--border)',
+                    borderRadius: 14,
+                    padding: '28px 26px',
+                    transition: 'border-color 0.2s ease, transform 0.2s ease',
+                  }}
+                >
+                  <div style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: 10,
+                    background: 'var(--gold-tint)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: 18,
+                  }}>
+                    {card.icon}
+                  </div>
+                  <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', margin: '0 0 8px', letterSpacing: '-0.01em' }}>{card.label}</p>
+                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{card.desc}</p>
                 </div>
               ))}
             </div>
-            <p style={{ textAlign: 'center', marginTop: 28, fontSize: 13 }}>
-              <Link href="/security" style={{ color: 'var(--gold-dark)', fontWeight: 600, textDecoration: 'none' }}>Full security details →</Link>
+
+            <p style={{ textAlign: 'center', marginTop: 36, fontSize: 14 }}>
+              <Link href="/security" style={{ color: 'var(--gold-dark)', fontWeight: 600, textDecoration: 'none' }}>
+                Full security details →
+              </Link>
             </p>
           </div>
         </section>
