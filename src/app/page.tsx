@@ -3,7 +3,6 @@ import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
 
 import HeroSection from './_home-sections/hero'
-import SocialProofSection from './_home-sections/social-proof'
 import ProblemSection from './_home-sections/problem'
 import HowItWorksSection from './_home-sections/how-it-works'
 import ScenariosSection from './_home-sections/scenarios'
@@ -20,7 +19,6 @@ export default function HomePage() {
       <MegaNav />
       <main>
         <HeroSection />
-        <SocialProofSection />
         <ProblemSection />
         <HowItWorksSection />
         <ScenariosSection />
