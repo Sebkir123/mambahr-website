@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
@@ -33,7 +32,7 @@ function AuditLogVisual() {
           <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>Audit log · Maya Chen</span>
         </div>
         <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E', animation: 'gold-ring-pulse 2s ease-out infinite' }} />
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-green)', animation: 'gold-ring-pulse 2s ease-out infinite' }} />
           <span style={{ fontSize: 10, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>live · cannot be edited</span>
         </span>
       </div>
@@ -55,7 +54,7 @@ function AuditLogVisual() {
             {/* Left timestamp */}
             <div style={{ paddingTop: 2 }}>
               <p style={{ fontSize: 10, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace', margin: 0 }}>{entry.time}</p>
-              <p style={{ fontSize: 9, color: isHighlight ? '#15803D' : 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace', margin: '2px 0 0', transition: 'color 0.4s' }}>{entry.ref}</p>
+              <p style={{ fontSize: 9, color: isHighlight ? 'var(--color-green)' : 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace', margin: '2px 0 0', transition: 'color 0.4s' }}>{entry.ref}</p>
             </div>
 
             {/* Middle content */}
@@ -65,22 +64,21 @@ function AuditLogVisual() {
               <p style={{ fontSize: 10, color: 'var(--text-faint)', margin: '4px 0 0', fontFamily: 'var(--font-mono), monospace' }}>actor: {entry.actor}</p>
             </div>
 
-            {/* Right check */}
-            <div style={{ paddingTop: 2 }}>
-              <span style={{
-                display: 'flex',
-                width: 18,
-                height: 18,
-                borderRadius: '50%',
-                background: '#F0FDF4',
-                border: '1px solid #BBF7D0',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transform: isHighlight ? 'scale(1.15)' : 'scale(1)',
-                transition: 'transform 0.4s',
-              }}>
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4.5" stroke="#15803D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              </span>
+            {/* Right check — flat green tick, matches the compare table */}
+            <div style={{ paddingTop: 4, display: 'flex', justifyContent: 'center' }}>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                style={{
+                  transform: isHighlight ? 'scale(1.2)' : 'scale(1)',
+                  transition: 'transform 0.4s',
+                }}
+                aria-hidden="true"
+              >
+                <path d="M3 8.5l3.5 3.5L13 5" stroke="var(--color-green)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </div>
 
             {/* Highlight bar on the left when active */}
@@ -91,7 +89,7 @@ function AuditLogVisual() {
                 top: 0,
                 bottom: 0,
                 width: 2,
-                background: '#22C55E',
+                background: 'var(--color-green)',
               }} />
             )}
           </div>

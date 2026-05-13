@@ -196,7 +196,8 @@ export default async function ComparePage({ params }: Props) {
               </h2>
             </div>
 
-            <div style={{ background: 'var(--bg)', borderRadius: 16, border: '1px solid var(--border)', overflow: 'hidden' }}>
+            <div className="compare-table-scroll" style={{ background: 'var(--bg)', borderRadius: 16, border: '1px solid var(--border)', overflow: 'hidden' }}>
+              <div>
               {/* Table header */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 160px 160px', gap: 0, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)', padding: '16px 24px' }}>
                 <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-mono), monospace' }}>Feature</span>
@@ -229,6 +230,7 @@ export default async function ComparePage({ params }: Props) {
                   <CellValue value={row.them} accent="them" />
                 </div>
               ))}
+              </div>
             </div>
           </div>
         </section>

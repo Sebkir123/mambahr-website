@@ -58,6 +58,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Global keyboard focus ring — covers inline-styled buttons/links
+   that don't carry .btn-* classes (scenario player tabs, compare
+   chips, footer icon, etc.). Pointer focus stays unstyled. */
+:focus-visible {
+  outline: 2px solid var(--gold-dark);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 body {
   background-color: var(--bg);
   color: var(--text);
@@ -175,7 +184,7 @@ h4, h5, h6 {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background-color: #FFFFFF;
+  background-color: var(--bg);
   color: var(--text);
   border: 1px solid var(--border);
   padding: 12px 24px;
@@ -250,6 +259,23 @@ h4, h5, h6 {
   }
   .mobile-callouts {
     display: flex !important;
+  }
+  /* Compare index: numbered differentiator rows collapse to single col */
+  .mobile-stack-rows {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+}
+
+/* Compare table on narrow screens: enable horizontal scroll instead
+   of squashing the fixed-width MambaHR/competitor columns. */
+@media (max-width: 720px) {
+  .compare-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-table-scroll > div {
+    min-width: 560px;
   }
 }
 

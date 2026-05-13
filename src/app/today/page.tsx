@@ -86,14 +86,6 @@ const mathRows = [
   { metric: 'CHRO time on strategic work',      legacy: '8 hr/wk', mamba: '32 hr/wk' },
 ]
 
-const anatomyItems = [
-  { label: 'The action', desc: 'What the agent did or wants to do' },
-  { label: 'The rationale', desc: "Agent's summary in 3 lines, with citations" },
-  { label: 'Status label', desc: 'One of: Auto-approved, Needs your sign-off, Always you.' },
-  { label: 'One-click decision', desc: 'Approve, Decline, Request changes, Escalate' },
-  { label: 'The trail', desc: 'Every prior step, timestamped, audited' },
-]
-
 export default function TodayPage() {
   return (
     <>
