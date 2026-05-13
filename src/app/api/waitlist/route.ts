@@ -11,8 +11,9 @@ const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/sit
 
 async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY
-  // Dev mode — no secret configured → accept dummy token from widget bypass
-  if (!secret) return token === 'dev-mode-bypass'
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+  // No secret OR no site key (widget couldn't render) → accept bypass token
+  if (!secret || !siteKey) return token === 'dev-mode-bypass'
   if (!token) return false
 
   try {

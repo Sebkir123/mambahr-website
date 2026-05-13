@@ -22,8 +22,10 @@ function validateEnv() {
     if (!process.env[key]) missing.push(key)
   }
   if (missing.length > 0) {
-    throw new Error(
-      `Missing required environment variables:\n${missing.map((k) => `  • ${k}`).join('\n')}\n\nCopy .env.example to .env.local and fill in values.`
+    // Warn rather than throw so preview deployments without all vars still work.
+    // The individual routes handle missing vars gracefully (skip Slack/email, etc).
+    console.warn(
+      `[env] Missing environment variables — some features will be disabled:\n${missing.map((k) => `  • ${k}`).join('\n')}`
     )
   }
 }
