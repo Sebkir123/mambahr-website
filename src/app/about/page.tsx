@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 
@@ -40,17 +39,19 @@ const leadership = [
   {
     name: 'Brian Bell',
     role: 'CEO & co-founder',
-    prev: 'Previously people ops at three startups',
+    prev: 'People ops at three startups',
     initials: 'BB',
-    color: '#C4B5A5',
+    bg: 'var(--gold-tint)',
+    fg: 'var(--gold-dark)',
     linkedin: 'https://linkedin.com/in/brianbell',
   },
   {
     name: 'Sebastian Kirsch',
     role: 'CTO & co-founder',
-    prev: 'Previously AI agent systems · ML infrastructure',
+    prev: 'AI agent systems · ML infrastructure',
     initials: 'SK',
-    color: '#A5B5C4',
+    bg: 'var(--gold-dark)',
+    fg: 'var(--bg)',
     linkedin: 'https://linkedin.com/in/sebastiankirsch',
   },
 ]
@@ -87,7 +88,7 @@ export default function AboutPage() {
         </section>
 
         {/* ── MANIFESTO — three short paragraphs, editorial ── */}
-        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
+        <section style={{ background: 'var(--bg)', padding: '120px 24px' }}>
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
             <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 32 }}>
               Manifesto
@@ -120,7 +121,7 @@ export default function AboutPage() {
         {/* ── PRINCIPLES — five MAMBA values, vertical stack ── */}
         <section style={{ background: 'var(--bg-warm)', padding: '120px 24px' }}>
           <div style={{ maxWidth: 1040, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: 24 }}>WHAT WE BELIEVE</p>
+            <p className="eyebrow" style={{ marginBottom: 24 }}>WHAT WE BELIEVE · M·A·M·B·A</p>
             <h2
               style={{
                 fontFamily: 'var(--font-serif), Georgia, serif',
@@ -188,42 +189,52 @@ export default function AboutPage() {
         </section>
 
         {/* ── LEADERSHIP — restrained, Linear-style ── */}
-        <section style={{ background: '#FFFFFF', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ marginBottom: 56 }}>
-              <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 18 }}>
-                Leadership
-              </p>
+        <section style={{ background: 'var(--bg)', padding: '120px 24px' }}>
+          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+            <div style={{ marginBottom: 64, maxWidth: 720 }}>
+              <p className="eyebrow" style={{ marginBottom: 20 }}>LEADERSHIP</p>
               <h2
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(28px, 3vw, 38px)',
+                  fontSize: 'clamp(36px, 4vw, 52px)',
                   fontWeight: 400,
-                  letterSpacing: '-0.02em',
+                  letterSpacing: '-0.025em',
                   color: 'var(--text)',
-                  margin: 0,
-                  lineHeight: 1.1,
+                  margin: '0 0 20px',
+                  lineHeight: 1.05,
                 }}
               >
                 The two of us, for now.
               </h2>
+              <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, margin: 0 }}>
+                A people-ops operator and an AI-systems engineer, building the agent department they both wanted to use.
+              </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 32 }} className="mobile-stack">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 40 }} className="mobile-stack">
               {leadership.map((person) => (
-                <div key={person.name} style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '20px 0' }}>
+                <div
+                  key={person.name}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 24,
+                    padding: '32px 0 4px',
+                    borderTop: '1px solid var(--border)',
+                  }}
+                >
                   <div
                     style={{
-                      width: 56,
-                      height: 56,
+                      width: 72,
+                      height: 72,
                       borderRadius: '50%',
-                      background: person.color,
+                      background: person.bg,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: 17,
+                      fontSize: 22,
                       fontFamily: 'var(--font-serif), Georgia, serif',
-                      color: '#FFFFFF',
+                      color: person.fg,
                       fontWeight: 400,
                       letterSpacing: '-0.02em',
                       flexShrink: 0,
@@ -231,11 +242,30 @@ export default function AboutPage() {
                   >
                     {person.initials}
                   </div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', margin: '0 0 2px' }}>{person.name}</p>
-                    <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '0 0 2px' }}>{person.role}</p>
-                    <p style={{ fontSize: 12, color: 'var(--text-faint)', margin: '0 0 6px' }}>{person.prev}</p>
-                    <a href={person.linkedin} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none' }}>
+                  <div style={{ flex: 1, minWidth: 0, paddingTop: 6 }}>
+                    <p style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', margin: '0 0 4px', letterSpacing: '-0.01em' }}>
+                      {person.name}
+                    </p>
+                    <p style={{ fontSize: 14, color: 'var(--text-muted)', margin: '0 0 10px' }}>
+                      {person.role}
+                    </p>
+                    <p style={{ fontSize: 13, color: 'var(--text-faint)', margin: '0 0 14px', lineHeight: 1.55 }}>
+                      {person.prev}
+                    </p>
+                    <a
+                      href={person.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 700,
+                        color: 'var(--gold-dark)',
+                        textDecoration: 'none',
+                        letterSpacing: '0.04em',
+                        textTransform: 'uppercase',
+                        fontFamily: 'var(--font-mono), monospace',
+                      }}
+                    >
                       LinkedIn →
                     </a>
                   </div>
@@ -243,50 +273,13 @@ export default function AboutPage() {
               ))}
             </div>
 
-            <p style={{ fontSize: 14, color: 'var(--text-faint)', lineHeight: 1.6, marginTop: 48, maxWidth: 480 }}>
+            <p style={{ fontSize: 14, color: 'var(--text-faint)', lineHeight: 1.65, marginTop: 56, maxWidth: 520 }}>
               The team is small and growing. If the work above sounds like the work you want to be doing,{' '}
               <a href="mailto:jobs@mambahr.com" style={{ color: 'var(--gold-dark)', fontWeight: 600, textDecoration: 'none' }}>
                 jobs@mambahr.com
               </a>
               .
             </p>
-          </div>
-        </section>
-
-        {/* ── HIRING / CLOSER — type-led, calm ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '120px 24px', textAlign: 'center' }}>
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
-            <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 24 }}>
-              We&apos;re hiring
-            </p>
-            <h2
-              style={{
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(32px, 4vw, 52px)',
-                fontWeight: 400,
-                letterSpacing: '-0.025em',
-                color: 'var(--text)',
-                marginBottom: 24,
-                lineHeight: 1.0,
-              }}
-            >
-              Build the next<br />HR department<br />with us.
-            </h2>
-            <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 36, maxWidth: 540, margin: '0 auto 36px' }}>
-              We&apos;re looking for engineers, designers, and HR practitioners who think the existing tools should be replaced — not improved.
-            </p>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 24, flexWrap: 'wrap', justifyContent: 'center' }}>
-              <a href="mailto:jobs@mambahr.com" className="btn-gold">
-                jobs@mambahr.com →
-              </a>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 16, fontSize: 13, color: 'var(--text-muted)' }}>
-                <Link href="/security" style={{ color: 'inherit', textDecoration: 'none' }}>Security</Link>
-                <span style={{ color: 'var(--border-mid)' }}>·</span>
-                <a href="mailto:hello@mambahr.com" style={{ color: 'inherit', textDecoration: 'none' }}>hello@mambahr.com</a>
-                <span style={{ color: 'var(--border-mid)' }}>·</span>
-                <a href="https://linkedin.com/company/mambahr" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>LinkedIn</a>
-              </span>
-            </div>
           </div>
         </section>
       </main>
