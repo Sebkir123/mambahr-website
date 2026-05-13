@@ -39,15 +39,13 @@ const principles = [
 const leadership = [
   {
     name: 'Brian Bell',
-    role: 'CEO & co-founder',
-    prev: 'People ops at three startups',
+    role: 'Co-founder',
     photo: '/brian_bell.jpeg',
     linkedin: 'https://linkedin.com/in/brianbell',
   },
   {
     name: 'Sebastian Kirsch',
-    role: 'CTO & co-founder',
-    prev: 'AI agent systems · ML infrastructure',
+    role: 'Co-founder',
     photo: '/sebastian_kirsch.jpg',
     linkedin: 'https://linkedin.com/in/sebastiankirsch',
   },
@@ -197,15 +195,12 @@ export default function AboutPage() {
                   fontWeight: 400,
                   letterSpacing: '-0.025em',
                   color: 'var(--text)',
-                  margin: '0 0 20px',
+                  margin: 0,
                   lineHeight: 1.05,
                 }}
               >
                 The two of us, for now.
               </h2>
-              <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, margin: 0 }}>
-                A people-ops operator and an AI-systems engineer, building the agent department they both wanted to use.
-              </p>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 40 }} className="mobile-stack">
@@ -240,15 +235,12 @@ export default function AboutPage() {
                       style={{ objectFit: 'cover' }}
                     />
                   </div>
-                  <div style={{ flex: 1, minWidth: 0, paddingTop: 6 }}>
+                  <div style={{ flex: 1, minWidth: 0, paddingTop: 10 }}>
                     <p style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', margin: '0 0 4px', letterSpacing: '-0.01em' }}>
                       {person.name}
                     </p>
-                    <p style={{ fontSize: 14, color: 'var(--text-muted)', margin: '0 0 10px' }}>
+                    <p style={{ fontSize: 14, color: 'var(--text-muted)', margin: '0 0 14px' }}>
                       {person.role}
-                    </p>
-                    <p style={{ fontSize: 13, color: 'var(--text-faint)', margin: '0 0 14px', lineHeight: 1.55 }}>
-                      {person.prev}
                     </p>
                     <a
                       href={person.linkedin}
