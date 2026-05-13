@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import '@/lib/env' // validates required env vars at request time
 import { supabase } from '@/lib/supabase'
 import { sendWaitlistWelcome } from '@/lib/email'
 
