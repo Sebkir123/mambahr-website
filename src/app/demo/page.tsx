@@ -46,11 +46,11 @@ export default function DemoPage() {
         .access-input {
           width: 100%;
           padding: 14px 16px;
-          background: #FFFFFF;
+          background: var(--bg);
           border: 1px solid var(--border);
           border-radius: 10px;
           font-size: 15px;
-          font-family: var(--font-inter), system-ui, sans-serif;
+          font-family: var(--font-sans);
           color: var(--text);
           outline: none;
           box-sizing: border-box;
@@ -58,7 +58,7 @@ export default function DemoPage() {
         }
         .access-input:focus {
           border-color: var(--gold-dark);
-          box-shadow: 0 0 0 3px rgba(176,141,87,0.12);
+          box-shadow: 0 0 0 3px var(--gold-tint);
         }
         .access-input::placeholder { color: var(--text-faint); }
 
@@ -66,7 +66,7 @@ export default function DemoPage() {
         .access-input:-webkit-autofill,
         .access-input:-webkit-autofill:hover,
         .access-input:-webkit-autofill:focus {
-          -webkit-box-shadow: 0 0 0 1000px #FFFFFF inset !important;
+          -webkit-box-shadow: 0 0 0 1000px var(--bg) inset !important;
           -webkit-text-fill-color: var(--text) !important;
           transition: background-color 5000s ease-in-out 0s;
         }
@@ -75,7 +75,7 @@ export default function DemoPage() {
           width: 100%;
           padding: 16px 24px;
           background: var(--gold-dark);
-          color: #FFFFFF;
+          color: var(--bg);
           font-weight: 700;
           font-size: 15px;
           letter-spacing: 0.01em;
@@ -85,7 +85,7 @@ export default function DemoPage() {
           transition: background 0.15s, transform 0.1s;
         }
         .access-btn:hover:not(:disabled) {
-          background: #C4A06A;
+          background: var(--gold);
         }
         .access-btn:active:not(:disabled) {
           transform: translateY(1px);
@@ -99,7 +99,7 @@ export default function DemoPage() {
       <MegaNav />
       <main>
         <section style={{
-          background: 'linear-gradient(180deg, var(--bg-warm) 0%, #FFFFFF 100%)',
+          background: 'linear-gradient(180deg, var(--bg-warm) 0%, var(--bg) 100%)',
           paddingTop: 120,
           paddingBottom: 120,
           minHeight: 'calc(100vh - 80px)',
@@ -119,8 +119,8 @@ export default function DemoPage() {
                 <div style={{
                   width: 56, height: 56,
                   borderRadius: '50%',
-                  background: 'var(--gold-tint, rgba(176,141,87,0.1))',
-                  border: '1px solid rgba(176,141,87,0.25)',
+                  background: 'var(--gold-tint)',
+                  border: '1px solid var(--gold-light)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -221,12 +221,12 @@ export default function DemoPage() {
                   {status === 'error' && (
                     <p style={{
                       fontSize: 13,
-                      color: '#B91C1C',
+                      color: 'var(--color-red)',
                       textAlign: 'center',
                       marginTop: 14,
                     }}>
                       Something went wrong.{' '}
-                      <a href="mailto:hello@mambahr.com" style={{ color: '#B91C1C', textDecoration: 'underline' }}>
+                      <a href="mailto:hello@mambahr.com" style={{ color: 'var(--color-red)', textDecoration: 'underline' }}>
                         Email us
                       </a>
                     </p>
