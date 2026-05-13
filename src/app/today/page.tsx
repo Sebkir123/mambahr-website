@@ -138,7 +138,7 @@ export default function TodayPage() {
 
         {/* The math */}
         <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+          <div style={{ maxWidth: 880, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 72, maxWidth: 720, marginLeft: 'auto', marginRight: 'auto' }}>
               <p className="eyebrow" style={{ marginBottom: 20 }}>THE MATH</p>
               <h2
@@ -159,35 +159,67 @@ export default function TodayPage() {
               </p>
             </div>
 
-            <div className="math-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            {/* Editorial rows — no cards, no redundant labels */}
+            <div>
               {mathRows.map((row, i) => (
                 <div
                   key={i}
-                  className="math-row"
                   style={{
-                    background: 'var(--bg)',
-                    border: '1px solid var(--border)',
-                    borderRadius: 14,
-                    padding: '28px 28px 24px',
-                    gridColumn: i === mathRows.length - 1 ? '1 / -1' : 'auto',
+                    padding: '36px 0',
+                    borderTop: '1px solid var(--border)',
+                    borderBottom: i === mathRows.length - 1 ? '1px solid var(--border)' : 'none',
+                    display: 'grid',
+                    gridTemplateColumns: 'minmax(220px, 1.1fr) 1.4fr',
+                    gap: 32,
+                    alignItems: 'center',
                   }}
+                  className="math-row"
                 >
-                  <p
-                    className="mono"
-                    style={{
-                      fontSize: 10,
-                      fontWeight: 700,
-                      color: 'var(--text-faint)',
-                      letterSpacing: '0.12em',
-                      textTransform: 'uppercase',
-                      marginBottom: 16,
-                    }}
-                  >
-                    {String(i + 1).padStart(2, '0')} · {row.metric}
-                  </p>
+                  {/* Left: metric label */}
+                  <div>
+                    <p
+                      className="mono"
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 700,
+                        color: 'var(--text-faint)',
+                        letterSpacing: '0.12em',
+                        textTransform: 'uppercase',
+                        marginBottom: 6,
+                      }}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-serif), Georgia, serif',
+                        fontSize: 20,
+                        fontWeight: 400,
+                        color: 'var(--text)',
+                        letterSpacing: '-0.01em',
+                        lineHeight: 1.25,
+                        margin: 0,
+                      }}
+                    >
+                      {row.metric}
+                    </p>
+                    {row.note && (
+                      <p
+                        style={{
+                          fontSize: 13,
+                          color: 'var(--text-muted)',
+                          fontStyle: 'italic',
+                          marginTop: 8,
+                          marginBottom: 0,
+                        }}
+                      >
+                        {row.note}
+                      </p>
+                    )}
+                  </div>
 
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 18, flexWrap: 'wrap' }}>
-                    {/* Legacy number */}
+                  {/* Right: number transformation */}
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 20, flexWrap: 'wrap' }}>
                     <span
                       style={{
                         fontFamily: 'var(--font-serif), Georgia, serif',
@@ -203,23 +235,21 @@ export default function TodayPage() {
                       {row.legacy}
                     </span>
 
-                    {/* Arrow */}
                     <span
                       style={{
                         fontSize: 22,
                         color: 'var(--gold-dark)',
                         lineHeight: 1,
-                        opacity: 0.6,
+                        opacity: 0.5,
                       }}
                     >
                       →
                     </span>
 
-                    {/* MambaHR number */}
                     <span
                       style={{
                         fontFamily: 'var(--font-serif), Georgia, serif',
-                        fontSize: 'clamp(38px, 4.6vw, 52px)',
+                        fontSize: 'clamp(40px, 5vw, 60px)',
                         fontWeight: 400,
                         color: 'var(--gold-dark)',
                         letterSpacing: '-0.03em',
@@ -228,35 +258,18 @@ export default function TodayPage() {
                     >
                       {row.mamba}
                     </span>
-
-                    {row.note && (
-                      <span
-                        style={{
-                          fontSize: 13,
-                          color: 'var(--text-muted)',
-                          fontStyle: 'italic',
-                          marginLeft: 4,
-                          flex: '1 1 100%',
-                          marginTop: 8,
-                        }}
-                      >
-                        {row.note}
-                      </span>
-                    )}
-                  </div>
-
-                  <div style={{ display: 'flex', gap: 24, marginTop: 14, fontSize: 11, color: 'var(--text-faint)', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 600 }} className="mono">
-                    <span>Legacy HR</span>
-                    <span style={{ color: 'var(--gold-dark)' }}>With MambaHR</span>
                   </div>
                 </div>
               ))}
             </div>
 
             <style>{`
-              @media (max-width: 720px) {
-                .math-grid { grid-template-columns: 1fr !important; }
-                .math-row { grid-column: 1 !important; }
+              @media (max-width: 640px) {
+                .math-row {
+                  grid-template-columns: 1fr !important;
+                  gap: 16px !important;
+                  padding: 28px 0 !important;
+                }
               }
             `}</style>
           </div>
