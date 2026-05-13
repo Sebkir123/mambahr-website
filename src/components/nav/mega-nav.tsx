@@ -273,39 +273,6 @@ export default function MegaNav() {
                     </Link>
                   ))}
                 </div>
-
-                {/* Footer link */}
-                <div style={{ marginTop: 'auto', paddingTop: 24 }}>
-                  <Link
-                    href="/mamba"
-                    onClick={() => setProductOpen(false)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '12px 16px',
-                      borderRadius: 10,
-                      textDecoration: 'none',
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: 'var(--gold-dark)',
-                      background: 'transparent',
-                      border: '1px solid rgba(176,141,87,0.2)',
-                      transition: 'all 0.15s',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'var(--gold-tint)'
-                      e.currentTarget.style.borderColor = 'rgba(176,141,87,0.4)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'transparent'
-                      e.currentTarget.style.borderColor = 'rgba(176,141,87,0.2)'
-                    }}
-                  >
-                    Explore all 14 specialist agents
-                    <span style={{ fontSize: 14 }}>→</span>
-                  </Link>
-                </div>
               </div>
 
               {/* Right: product preview — Today decision card mockup */}
