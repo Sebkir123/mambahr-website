@@ -1,4 +1,5 @@
 import type { Scenario } from './types'
+import { btnPrimary, btnSecondary } from './_helpers'
 
 const TOTAL_EMPLOYEES = 247
 const RECON_START = 1200
@@ -152,6 +153,3 @@ export const payrollScenario: Scenario = {
     )
   },
 }
-
-const btnPrimary: React.CSSProperties = { background: '#1C1917', color: '#FFFFFF', border: 'none', padding: '6px 14px', borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: 'pointer' }
-const btnSecondary: React.CSSProperties = { background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border)', padding: '6px 14px', borderRadius: 6, fontSize: 12, fontWeight: 500, cursor: 'pointer' }
