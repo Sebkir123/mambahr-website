@@ -41,13 +41,13 @@ const leadership = [
     name: 'Brian Bell',
     role: 'Co-founder',
     photo: '/brian_bell.jpeg',
-    linkedin: 'https://linkedin.com/in/brianbell',
+    linkedin: 'https://www.linkedin.com/in/brianjosephbell/',
   },
   {
     name: 'Sebastian Kirsch',
     role: 'Co-founder',
     photo: '/sebastian_kirsch.jpg',
-    linkedin: 'https://linkedin.com/in/sebastiankirsch',
+    linkedin: 'https://www.linkedin.com/in/sebastiankirsch-/',
   },
 ]
 
