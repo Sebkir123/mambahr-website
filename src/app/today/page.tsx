@@ -1,13 +1,7 @@
-import type { Metadata } from 'next'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
 import TodayCard from '@/components/surfaces/today-card'
-
-export const metadata: Metadata = {
-  title: 'Today — MambaHR',
-  description: '30 minutes. Your whole HR day. The agents ran the night shift — this morning, a queue of decisions. Approve, decline, done.',
-}
 
 const cards = [
   {

@@ -1,14 +1,8 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
-
-export const metadata: Metadata = {
-  title: 'Hiring — MambaHR',
-  description: 'From req to offer. Without the loop. The agent screens, schedules, references, and drafts the offer. You decide who joins.',
-}
 
 const funnelSteps = [
   { num: '01', title: 'Req intake', agent: 'Reads Slack/form, drafts JD with comp band', you: 'Approve JD', hil: false },

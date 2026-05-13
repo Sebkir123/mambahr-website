@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { ReactNode } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -21,11 +20,6 @@ const DirectoryIcon = () => (
     <path d="M14 9h5M14 13h5M14 17h5" />
   </svg>
 )
-
-export const metadata: Metadata = {
-  title: 'People — MambaHR',
-  description: 'People ops without the ops. Directory, comp, performance, leave — one agent, every record, every change.',
-}
 
 type Capability = { title: string; desc: string; icon: ReactNode; link?: string }
 
