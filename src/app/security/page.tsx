@@ -21,7 +21,7 @@ function DataShieldVisual() {
   ]
 
   return (
-    <div style={{ position: 'relative', background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 16px 48px rgba(0,0,0,0.08)' }}>
+    <div style={{ position: 'relative', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 18, overflow: 'hidden', boxShadow: '0 16px 48px rgba(0,0,0,0.08)' }}>
       {/* Header */}
       <div style={{ padding: '16px 22px', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)', display: 'flex', alignItems: 'center', gap: 12 }}>
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -91,7 +91,7 @@ function AuditLogVisual() {
   ]
 
   return (
-    <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}>
+    <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}>
       {/* Header */}
       <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -238,7 +238,7 @@ function AccessControlVisual() {
   const r = roles[active]
 
   return (
-    <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}>
+    <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}>
       {/* Header */}
       <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)', display: 'flex', alignItems: 'center', gap: 10 }}>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -488,7 +488,7 @@ export default function SecurityPage() {
                     ),
                   },
                 ].map((p) => (
-                  <div key={p.title} style={{ background: '#FFFFFF', border: '1px solid var(--border-faint)', borderRadius: 12, padding: '14px 14px' }}>
+                  <div key={p.title} style={{ background: 'var(--bg)', border: '1px solid var(--border-faint)', borderRadius: 12, padding: '14px 14px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                       {p.icon}
                       <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', margin: 0 }}>{p.title}</p>
@@ -510,37 +510,54 @@ export default function SecurityPage() {
         </section>
 
         {/* ── FOUR GUARANTEES ── */}
-        <section style={{ background: '#FFFFFF', padding: '88px 24px' }}>
+        <section style={{ background: 'var(--bg)', padding: '96px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 14 }}>HOW WE PROTECT YOU</p>
-            <h2
-              style={{
-                textAlign: 'center',
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(26px, 3vw, 38px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 48,
-                lineHeight: 1.15,
-              }}
-            >
-              Four things we never compromise on.
-            </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
+            <div style={{ textAlign: 'center', marginBottom: 56, maxWidth: 680, marginLeft: 'auto', marginRight: 'auto' }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>HOW WE PROTECT YOU</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(28px, 3.4vw, 44px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.025em',
+                  color: 'var(--text)',
+                  marginBottom: 16,
+                  lineHeight: 1.1,
+                }}
+              >
+                Four things we<br />never compromise on.
+              </h2>
+              <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                The promises that don&apos;t shift, no matter the customer or contract.
+              </p>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
               {guarantees.map((g) => (
                 <div
                   key={g.title}
                   style={{
-                    padding: '28px 24px',
+                    padding: '30px 26px',
                     background: 'var(--bg-warm)',
-                    borderRadius: 14,
-                    border: '1px solid var(--border-faint)',
+                    borderRadius: 16,
+                    border: '1px solid var(--border)',
+                    display: 'flex',
+                    flexDirection: 'column',
                   }}
                 >
-                  <div style={{ marginBottom: 16 }}>{g.icon}</div>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{g.title}</p>
-                  <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{g.desc}</p>
+                  <div style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: 12,
+                    background: 'var(--gold-tint)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: 22,
+                  }}>
+                    {g.icon}
+                  </div>
+                  <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', margin: '0 0 8px', letterSpacing: '-0.01em' }}>{g.title}</p>
+                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{g.desc}</p>
                 </div>
               ))}
             </div>
@@ -548,7 +565,7 @@ export default function SecurityPage() {
         </section>
 
         {/* ── AUDIT TRAIL ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '88px 24px' }}>
+        <section style={{ background: 'var(--bg-warm)', padding: '96px 24px' }}>
           <div className="mobile-stack" style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 64, alignItems: 'center' }}>
             <div>
               <p className="eyebrow" style={{ marginBottom: 16 }}>FULL TRANSPARENCY</p>
@@ -574,7 +591,7 @@ export default function SecurityPage() {
         </section>
 
         {/* ── ACCESS CONTROL ── */}
-        <section style={{ background: '#FFFFFF', padding: '88px 24px' }}>
+        <section style={{ background: 'var(--bg)', padding: '96px 24px' }}>
           <div className="mobile-stack" style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 64, alignItems: 'center' }}>
             <AccessControlVisual />
             <div>
@@ -600,47 +617,78 @@ export default function SecurityPage() {
         </section>
 
         {/* ── COMPLIANCE ── */}
-        <section style={{ background: 'var(--bg-cream)', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <p className="eyebrow" style={{ marginBottom: 14 }}>CERTIFICATIONS</p>
+        <section style={{ background: 'var(--bg-cream)', padding: '96px 24px' }}>
+          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 56, maxWidth: 680, marginLeft: 'auto', marginRight: 'auto' }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>CERTIFICATIONS</p>
               <h2
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(24px, 2.8vw, 36px)',
+                  fontSize: 'clamp(28px, 3.4vw, 44px)',
                   fontWeight: 400,
-                  letterSpacing: '-0.02em',
+                  letterSpacing: '-0.025em',
                   color: 'var(--text)',
-                  lineHeight: 1.15,
-                  margin: 0,
+                  lineHeight: 1.1,
+                  marginBottom: 16,
                 }}
               >
                 Enterprise-grade from day one.
               </h2>
+              <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                The frameworks the most security-conscious buyers ask about — answered before they ask.
+              </p>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16 }}>
               {[
-                { name: 'GDPR', status: 'Compliant', desc: "You're always the data controller. Full data processing agreement available on request.", color: '#15803D', bg: '#F0FDF4' },
-                { name: 'HIPAA', status: 'Medical scope', desc: 'Health leave and benefits data handled with HIPAA-informed controls and segregation.', color: '#1D4ED8', bg: '#EFF6FF' },
-                { name: 'CCPA / CPRA', status: 'Compliant', desc: 'California employees can request, correct, or delete their data anytime.', color: '#15803D', bg: '#F0FDF4' },
-                { name: 'Data residency', status: 'US standard', desc: 'US by default. EU and other regions available on Enterprise plans.', color: '#15803D', bg: '#F0FDF4' },
-                { name: 'Independent audit', status: 'On the roadmap', desc: 'Pursuing third-party security certification. Security questionnaire shared on request.', color: 'var(--gold-dark)', bg: 'var(--gold-tint)' },
-                { name: 'Encryption', status: 'AES-256 / TLS 1.3', desc: 'Bank-grade encryption everywhere — at rest, in transit, in backups.', color: '#15803D', bg: '#F0FDF4' },
-              ].map((cert) => (
-                <div key={cert.name} style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 20px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', margin: 0 }}>{cert.name}</p>
-                    <span style={{ fontSize: 10, fontWeight: 700, padding: '3px 9px', borderRadius: 20, background: cert.bg, color: cert.color, letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>{cert.status}</span>
+                { name: 'GDPR',              status: 'Compliant',         desc: "You're always the data controller. Full data processing agreement available on request.", tone: 'good' as const },
+                { name: 'HIPAA',             status: 'Medical scope',     desc: 'Health leave and benefits data handled with HIPAA-informed controls and segregation.',     tone: 'info' as const },
+                { name: 'CCPA / CPRA',       status: 'Compliant',         desc: 'California employees can request, correct, or delete their data anytime.',                 tone: 'good' as const },
+                { name: 'Data residency',    status: 'US standard',       desc: 'US by default. EU and other regions available on Enterprise plans.',                      tone: 'good' as const },
+                { name: 'Independent audit', status: 'On the roadmap',    desc: 'Pursuing third-party security certification. Security questionnaire shared on request.',   tone: 'pending' as const },
+                { name: 'Encryption',        status: 'AES-256 / TLS 1.3', desc: 'Bank-grade encryption everywhere — at rest, in transit, in backups.',                      tone: 'good' as const },
+              ].map((cert) => {
+                const tones = {
+                  good:    { border: 'var(--color-green)', bg: '#F0FDF4', fg: 'var(--color-green)' },
+                  info:    { border: '#3B82F6',            bg: '#EFF6FF', fg: '#1D4ED8' },
+                  pending: { border: 'var(--gold-dark)',   bg: 'var(--gold-tint)', fg: 'var(--gold-dark)' },
+                }[cert.tone]
+                return (
+                  <div
+                    key={cert.name}
+                    style={{
+                      background: 'var(--bg)',
+                      border: '1px solid var(--border)',
+                      borderLeft: `3px solid ${tones.border}`,
+                      borderRadius: 12,
+                      padding: '24px 22px',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 12 }}>
+                      <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em' }}>{cert.name}</p>
+                      <span style={{
+                        fontSize: 10,
+                        fontWeight: 700,
+                        padding: '4px 10px',
+                        borderRadius: 999,
+                        background: tones.bg,
+                        color: tones.fg,
+                        letterSpacing: '0.05em',
+                        whiteSpace: 'nowrap',
+                        flexShrink: 0,
+                      }}>
+                        {cert.status.toUpperCase()}
+                      </span>
+                    </div>
+                    <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: 0, lineHeight: 1.6 }}>{cert.desc}</p>
                   </div>
-                  <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: 0, lineHeight: 1.55 }}>{cert.desc}</p>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </section>
 
         {/* ── FAQ ── */}
-        <section style={{ background: '#FFFFFF', padding: '88px 24px' }}>
+        <section style={{ background: 'var(--bg)', padding: '96px 24px' }}>
           <div style={{ maxWidth: 800, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
               <p className="eyebrow" style={{ marginBottom: 14 }}>QUESTIONS</p>
@@ -689,7 +737,7 @@ export default function SecurityPage() {
                       width: 24, height: 24,
                       borderRadius: '50%',
                       background: openFaq === i ? 'var(--text)' : 'var(--bg-surface)',
-                      color: openFaq === i ? '#FFFFFF' : 'var(--text-muted)',
+                      color: openFaq === i ? 'var(--bg)' : 'var(--text-muted)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       fontSize: 18, lineHeight: 1, fontWeight: 300,
                       transition: 'all 0.2s',
