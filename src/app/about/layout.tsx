@@ -3,18 +3,18 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'About — MambaHR',
   description:
-    'MambaHR is a domain AI lab building the autonomous HR agent. Meet the team behind the company.',
+    "The HR department is changing shape. We're building the AI HR department — the work, done end to end, with a human in the loop only when it matters. Meet the team behind the company.",
   openGraph: {
     title: 'About — MambaHR',
-    description: 'MambaHR is a domain AI lab building the autonomous HR agent. Meet the team behind the company.',
+    description: "The HR department is changing shape. We're building the AI HR department — the work, done end to end, with a human in the loop only when it matters. Meet the team behind the company.",
     url: 'https://mambahr.com/about',
-    images: [{ url: '/api/og?line1=The+HR+department&line2=is+changing&highlight=shape.&subtitle=We%27re+building+the+autonomous+AI+department.+Done+by+agents.+Signed+by+humans.&bottomRight=About+MambaHR', width: 1200, height: 630 }],
+    images: [{ url: '/mambahr_og_sharing.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About — MambaHR',
-    description: 'MambaHR is a domain AI lab building the autonomous HR agent.',
-    images: ['/api/og?line1=The+HR+department&line2=is+changing&highlight=shape.&subtitle=We%27re+building+the+autonomous+AI+department.+Done+by+agents.+Signed+by+humans.&bottomRight=About+MambaHR'],
+    description: "The HR department is changing shape. We're building the AI HR department — the work, done end to end, with a human in the loop only when it matters.",
+    images: ['/mambahr_og_sharing.png'],
   },
   alternates: { canonical: 'https://mambahr.com/about' },
 }
@@ -25,8 +25,8 @@ const teamSchema = {
   '@type': 'Organization',
   name: 'MambaHR',
   url: 'https://mambahr.com',
-  logo: 'https://mambahr.com/og-image.jpg',
-  description: 'Domain AI lab building the autonomous HR agent.',
+  logo: 'https://mambahr.com/MambaHR_logo.png',
+  description: 'AI HR department for US companies. The agent does the operational work; the human owns the judgment calls.',
   founders: [
     {
       '@type': 'Person',

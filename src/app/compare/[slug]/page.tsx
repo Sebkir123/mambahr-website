@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const c = competitors[slug]
   if (!c) return {}
-  const ogUrl = `/api/og?line1=MambaHR+vs.&line2=${encodeURIComponent(c.name)}&highlight=&subtitle=${encodeURIComponent('See the side-by-side. Setup, scope, sign-off model, support, pricing.')}&bottomRight=${encodeURIComponent('Compare')}`
+  const ogUrl = '/mambahr_og_sharing.png'
   return {
     title: `MambaHR vs ${c.name} — ${c.tagline}`,
     description: c.heroSub,

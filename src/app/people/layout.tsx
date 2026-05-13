@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 const ogImage =
-  '/api/og?line1=People+ops&line2=without+the&highlight=ops.&subtitle=Directory%2C+comp%2C+performance%2C+leave+%E2%80%94+one+agent%2C+every+record%2C+every+change.&bottomRight=People'
+  '/mambahr_og_sharing.png'
 
 export const metadata: Metadata = {
   title: 'People — MambaHR',
