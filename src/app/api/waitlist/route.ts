@@ -81,11 +81,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unsupported content type.' }, { status: 415 })
   }
 
-  const contentLength = Number(req.headers.get('content-length') ?? 0)
-  if (contentLength > 4096) {
-    return NextResponse.json({ error: 'Payload too large.' }, { status: 413 })
-  }
-
   const ip = getClientIp(req)
   const limit = rateLimit(ip)
   if (!limit.ok) {
@@ -100,7 +95,11 @@ export async function POST(req: NextRequest) {
 
   let email: string, company: string, turnstileToken: string
   try {
-    const body = await req.json()
+    const rawBody = await req.text()
+    if (rawBody.length > 4096) {
+      return NextResponse.json({ error: 'Payload too large.' }, { status: 413 })
+    }
+    const body = JSON.parse(rawBody)
     email = String(body.email ?? '').trim()
     company = String(body.company ?? '').trim()
     turnstileToken = String(body.turnstileToken ?? '').trim()
