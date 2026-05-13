@@ -83,7 +83,7 @@ const mathRows = [
   { metric: 'Time spent on operational admin',  legacy: '60%',    mamba: '0%' },
   { metric: 'Time spent on compliance filings', legacy: '15%',    mamba: '0%', note: 'automated, you sign on submit' },
   { metric: 'Time spent on judgment + policy',  legacy: '25%',    mamba: '100%' },
-  { metric: 'CHRO hours freed up per week',     legacy: '8 hr',   mamba: '32 hr', note: 'redirected to strategic work' },
+  { metric: 'CHRO time on strategic work',      legacy: '8 hr/wk', mamba: '32 hr/wk' },
 ]
 
 const anatomyItems = [
@@ -152,7 +152,7 @@ export default function TodayPage() {
                   lineHeight: 1.05,
                 }}
               >
-                What 30 minutes a day<br />actually unlocks.
+                Where your HR time<br />goes now.
               </h2>
               <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.6 }}>
                 The work doesn&apos;t disappear. It shifts from admin to judgment.

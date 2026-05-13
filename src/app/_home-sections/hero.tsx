@@ -26,7 +26,7 @@ const todayCards = [
 const heroValueProps = [
   '14 specialist agents. Zero callouts.',
   'Federal + 50 state employment law, cited on every action.',
-  'The leverage of a 4-person HR team. Your CHRO stays in the loop.',
+  'Operational HR, automated. Strategic HR, yours.',
 ]
 
 export default function HeroSection() {
