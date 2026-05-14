@@ -1,7 +1,11 @@
 'use client'
 
-import { useState } from 'react'
-import TurnstileWidget from './turnstile-widget'
+import { useState, Suspense, lazy } from 'react'
+
+// Defer Cloudflare Turnstile + @marsidev/react-turnstile until the user
+// shows real intent (focuses the email field). Keeps the form's JS off
+// the initial homepage bundle.
+const TurnstileWidget = lazy(() => import('./turnstile-widget'))
 
 type Props = { compact?: boolean }
 
@@ -10,6 +14,8 @@ export function Waitlist({ compact }: Props) {
   const [company, setCompany] = useState('')
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  // Turnstile module loads lazily once the user shows form intent.
+  const [showTurnstile, setShowTurnstile] = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -57,6 +63,7 @@ export function Waitlist({ compact }: Props) {
           placeholder="work@company.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onFocus={() => setShowTurnstile(true)}
           style={{
             width: '100%',
             padding: compact ? '10px 14px' : '13px 16px',
@@ -89,7 +96,11 @@ export function Waitlist({ compact }: Props) {
             }}
           />
         )}
-        <TurnstileWidget onSuccess={setTurnstileToken} theme={compact ? 'light' : 'dark'} />
+        {showTurnstile && (
+          <Suspense fallback={null}>
+            <TurnstileWidget onSuccess={setTurnstileToken} theme={compact ? 'light' : 'dark'} />
+          </Suspense>
+        )}
         <button
           type="submit"
           disabled={status === 'loading' || !turnstileToken}
