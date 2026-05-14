@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -39,7 +37,7 @@ const cols = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--border)', padding: '64px 24px 40px' }}>
+    <footer className="site-footer" style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--border)', padding: '64px 24px 40px' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         {/* Top row */}
         <div
@@ -80,9 +78,8 @@ export default function Footer() {
                   <Link
                     key={link.label}
                     href={link.href}
+                    prefetch={false}
                     style={{ fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.15s' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
                   >
                     {link.label}
                   </Link>

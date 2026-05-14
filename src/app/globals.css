@@ -280,6 +280,11 @@ h4, h5, h6 {
   }
 }
 
+/* Footer link hover — CSS replaces JS handlers so footer is a server component. */
+.site-footer a[href]:hover {
+  color: var(--text) !important;
+}
+
 /* Compare table on narrow screens: enable horizontal scroll instead
    of squashing the fixed-width MambaHR/competitor columns. */
 @media (max-width: 720px) {
