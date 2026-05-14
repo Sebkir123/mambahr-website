@@ -257,6 +257,19 @@ h4, h5, h6 {
     grid-template-columns: 1fr !important;
     column-gap: 0 !important;
   }
+  /* Directory row: stack name + role on mobile so the role text
+     can wrap instead of being clipped on the right. */
+  .agent-directory > div > div:last-child {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+  .agent-directory > div > div:last-child > span:last-child {
+    text-align: left !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
   .mobile-callouts {
     display: flex !important;
   }
@@ -418,3 +431,4 @@ h4, h5, h6 {
     from, to { opacity: 1; transform: translateY(0); }
   }
 }
+
