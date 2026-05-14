@@ -125,7 +125,7 @@ export default function MegaNav() {
           </Link>
 
           {/* Desktop links — Product (dropdown), Security, About */}
-          <div className="hidden md:flex" style={{ display: 'flex', alignItems: 'center', gap: 4, flex: 1, justifyContent: 'center' }}>
+          <div className="hidden md:flex" style={{ alignItems: 'center', gap: 4, flex: 1, justifyContent: 'center' }}>
             {/* Product dropdown trigger */}
             <button
               type="button"
