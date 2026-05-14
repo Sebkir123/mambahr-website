@@ -101,7 +101,7 @@ export default function HeroSection() {
             <a href="/demo" className="btn-gold" style={{ fontSize: 15, padding: '14px 32px' }}>
               Request access →
             </a>
-            <Link href="/today" className="btn-secondary" style={{ fontSize: 15 }}>
+            <Link href="/today" prefetch={false} className="btn-secondary" style={{ fontSize: 15 }}>
               See product tour
             </Link>
           </div>

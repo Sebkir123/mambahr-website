@@ -115,6 +115,7 @@ export default function MegaNav() {
           {/* Logo */}
           <Link
             href="/"
+            prefetch={false}
             style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }}
             onClick={() => setProductOpen(false)}
           >
