@@ -8,13 +8,13 @@ export const metadata: Metadata = {
     title: 'About — MambaHR',
     description: "The HR department is changing shape. We're building the AI HR department — the work, done end to end, with a human in the loop only when it matters. Meet the team behind the company.",
     url: 'https://mambahr.com/about',
-    images: [{ url: '/mambahr_og_sharing.png', width: 1200, height: 630 }],
+    images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About — MambaHR',
     description: "The HR department is changing shape. We're building the AI HR department — the work, done end to end, with a human in the loop only when it matters.",
-    images: ['/mambahr_og_sharing.png'],
+    images: ['/mambahr_og_sharing.jpg'],
   },
   alternates: { canonical: 'https://mambahr.com/about' },
 }

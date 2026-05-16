@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 const ogImage =
-  '/mambahr_og_sharing.png'
+  '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
   title: 'Today — MambaHR',

@@ -44,6 +44,9 @@ export const env = {
   slackWebhookWaitlist: process.env.SLACK_WEBHOOK_WAITLIST as string,
   supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL as string,
   supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
+  // Optional: enables durable per-IP rate-limiting via the check_signup_rate_limit RPC.
+  // Without it, the route falls back to the in-memory limiter (per-lambda-instance only).
+  supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
   gaId: process.env.NEXT_PUBLIC_GA_ID,
   turnstileSiteKey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
 } as const

@@ -46,13 +46,13 @@ export const metadata: Metadata = {
     url: 'https://mambahr.com',
     siteName: 'MambaHR',
     type: 'website',
-    images: [{ url: '/mambahr_og_sharing.png', width: 1200, height: 630 }],
+    images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'MambaHR — Your HR team, in Slack.',
     description: 'An AI HR department that runs in the tools you already use.',
-    images: ['/mambahr_og_sharing.png'],
+    images: ['/mambahr_og_sharing.jpg'],
   },
   alternates: { canonical: 'https://mambahr.com' },
   robots: {
@@ -106,8 +106,8 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://dqoqnlecylqlwsahudjn.supabase.co" />
         <link rel="dns-prefetch" href="https://dqoqnlecylqlwsahudjn.supabase.co" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://challenges.cloudflare.com" />
+        {gaId && <link rel="preconnect" href="https://www.googletagmanager.com" />}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLdString }}

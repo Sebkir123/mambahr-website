@@ -6,6 +6,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
 import { competitors } from './data'
+import { JsonLd } from '@/components/json-ld'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -50,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const c = competitors[slug]
   if (!c) return {}
-  const ogUrl = '/mambahr_og_sharing.png'
+  const ogUrl = '/mambahr_og_sharing.jpg'
   return {
     title: `MambaHR vs ${c.name} — ${c.tagline}`,
     description: c.heroSub,
@@ -77,8 +78,32 @@ export default async function ComparePage({ params }: Props) {
 
   const otherSlugs = Object.keys(competitors).filter((s) => s !== slug)
 
+  // Comparison-aware structured data: helps search engines surface this page for
+  // "MambaHR vs <competitor>" queries. Content is drawn entirely from the hardcoded
+  // competitor record — no user input.
+  const comparisonJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `MambaHR vs ${c.name}`,
+    description: c.heroSub,
+    url: `https://mambahr.com/compare/${slug}`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://mambahr.com/compare/${slug}` },
+    author: { '@type': 'Organization', name: 'MambaHR', url: 'https://mambahr.com' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'MambaHR',
+      url: 'https://mambahr.com',
+      logo: { '@type': 'ImageObject', url: 'https://mambahr.com/MambaHR_logo.png' },
+    },
+    about: [
+      { '@type': 'SoftwareApplication', name: 'MambaHR', url: 'https://mambahr.com', applicationCategory: 'BusinessApplication' },
+      { '@type': 'SoftwareApplication', name: c.name, applicationCategory: 'BusinessApplication' },
+    ],
+  }
+
   return (
     <>
+      <JsonLd data={comparisonJsonLd} />
       <MegaNav />
       <main style={{ paddingTop: 64 }}>
 

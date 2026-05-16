@@ -1,7 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server'
-import '@/lib/env' // validates required env vars at request time
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { env } from '@/lib/env'
 import { supabase } from '@/lib/supabase'
 import { sendWaitlistWelcome } from '@/lib/email'
+
+// Service-role client used only for the rate-limit RPC (which is locked down to service_role).
+// Typed as SupabaseClient (no generated DB types) so the untyped rpc() call type-checks.
+// Lazily created so the module doesn't crash in environments without the key set.
+let adminClient: SupabaseClient | null = null
+function getAdminClient(): SupabaseClient | null {
+  if (adminClient) return adminClient
+  if (!env.supabaseServiceRoleKey) return null
+  adminClient = createClient(env.supabaseUrl, env.supabaseServiceRoleKey, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  })
+  return adminClient
+}
+
+async function checkSupabaseRateLimit(ip: string): Promise<boolean> {
+  const client = getAdminClient()
+  if (!client) return true // No service-role key configured → skip durable check.
+  const { data, error } = await client.rpc('check_signup_rate_limit', {
+    p_ip: ip,
+    p_max: 5,
+    p_window_secs: 3600,
+  })
+  // Fail open: if the DB call errors, fall back to the in-memory limiter alone rather than blocking
+  // legitimate signups. The in-memory limiter is still the first line of defense.
+  if (error) return true
+  return data === true
+}
 
 function escapeSlack(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -91,6 +119,15 @@ export async function POST(req: NextRequest) {
         status: 429,
         headers: { 'Retry-After': String(limit.retryAfterSec ?? 3600) },
       }
+    )
+  }
+
+  // Second-layer durable check that survives lambda cold-starts across instances.
+  const durableOk = await checkSupabaseRateLimit(ip)
+  if (!durableOk) {
+    return NextResponse.json(
+      { error: 'Too many requests. Try again later.' },
+      { status: 429, headers: { 'Retry-After': '3600' } }
     )
   }
 
