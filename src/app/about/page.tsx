@@ -99,7 +99,7 @@ export default function AboutPage() {
               </p>
 
               <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.75, margin: 0 }}>
-                Then frontier AI became good enough to do legal reasoning. Not summarize a policy — actually reason about whether FMLA stacks with California CFRA for an employee in their second trimester. Not generate a draft — actually run the offer cycle, check the band, route for approval, send the signature link.
+                Then AI got good enough to do the reasoning underneath the work. Not summarize a policy — work through whether FMLA stacks with California CFRA for an employee in their second trimester, cite the statute, and send the hard calls to a human. Not generate a draft — run the offer cycle, check the band, route for approval, send the signature link.
               </p>
 
               <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.75, margin: 0 }}>

@@ -336,7 +336,7 @@ const guarantees = [
       </svg>
     ),
     title: 'Right person sees the right thing',
-    desc: 'Role-based access enforced at every layer. Managers see their team. Employees see their own record.',
+    desc: 'Each person sees only what their role allows. Managers see their team. Employees see their own record.',
   },
 ]
 
@@ -601,6 +601,26 @@ export default function SecurityPage() {
                 }
               }
             `}</style>
+          </div>
+        </section>
+
+        {/* ── PROCUREMENT STRIP — the checklist terms a security reviewer asks for ── */}
+        <section style={{ background: 'var(--bg-warm)', padding: '72px 24px', borderTop: '1px solid var(--border)' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <p className="eyebrow" style={{ marginBottom: 24, textAlign: 'center' }}>For your IT &amp; security team</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
+              {[
+                { t: 'Single sign-on + SCIM', d: 'Okta, Microsoft Entra, or Google Workspace. Accounts provision and deprovision automatically.' },
+                { t: 'SOC 2', d: 'Control evidence is collected continuously, so your review moves faster.' },
+                { t: 'Data stays in the US', d: 'Stored on enterprise US cloud infrastructure. It never leaves the country.' },
+                { t: 'Background checks follow FCRA', d: 'Run through Checkr, with the adverse-action steps the law requires.' },
+              ].map((c) => (
+                <div key={c.t} style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 14, padding: '22px 22px' }}>
+                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', margin: '0 0 8px', letterSpacing: '-0.01em' }}>{c.t}</p>
+                  <p style={{ fontSize: 13.5, color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>{c.d}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

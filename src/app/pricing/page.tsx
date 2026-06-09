@@ -216,9 +216,25 @@ const FAQ: { q: string; a: string }[] = [
 
 const serif = 'var(--font-serif), Georgia, serif'
 
+// FAQ structured data — moved here from the home page when the FAQ relocated to /pricing.
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+}
+const faqJsonLdString = JSON.stringify(faqJsonLd)
+  .replace(/</g, '\\u003c')
+  .replace(/>/g, '\\u003e')
+  .replace(/&/g, '\\u0026')
+
 export default function PricingPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLdString }} />
       <MegaNav />
       <main style={{ paddingTop: 64 }}>
         {/* ── HERO ── */}
@@ -392,7 +408,7 @@ export default function PricingPage() {
         </section>
 
         {/* ── EXPORTS EXPLAINER — we do exports, not payroll ── */}
-        <section style={{ background: 'var(--bg)', padding: '88px 24px' }}>
+        <section id="exports" style={{ background: 'var(--bg)', padding: '88px 24px', scrollMarginTop: 72 }}>
           <div style={{ maxWidth: 880, margin: '0 auto' }}>
             <p className="eyebrow" style={{ marginBottom: 16 }}>WORKS WITH YOUR STACK</p>
             <h2 style={{ fontFamily: serif, fontSize: 'clamp(26px, 3vw, 38px)', fontWeight: 400, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 14, lineHeight: 1.1 }}>

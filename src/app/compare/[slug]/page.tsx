@@ -279,7 +279,7 @@ export default async function ComparePage({ params }: Props) {
             </h2>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <a href="/demo" className="btn-gold">Request access →</a>
-              <Link href="/mamba" className="btn-secondary">See how Mamba works</Link>
+              <Link href="/mamba" className="btn-secondary">See the AI agent</Link>
             </div>
           </div>
         </section>
