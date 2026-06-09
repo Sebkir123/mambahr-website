@@ -13,8 +13,8 @@ const EXAMPLE = {
 
 const STATS = [
   { stat: '50', label: 'States + federal' },
-  { stat: '100%', label: 'Always cited' },
-  { stat: '< 48h', label: 'New rulings live' },
+  { stat: '100%', label: 'Decisions cited' },
+  { stat: '500+', label: 'Rules, kept current' },
 ]
 
 export default function ComplianceEngineSection() {
@@ -38,12 +38,12 @@ export default function ComplianceEngineSection() {
               lineHeight: 1.05,
             }}
           >
-            Compliant in every state,<br />
-            <span style={{ color: 'var(--gold-dark)' }}>automatically.</span>
+            Federal law and all 50 states,<br />
+            <span style={{ color: 'var(--gold-dark)' }}>kept current.</span>
           </h2>
           <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, margin: '0 0 32px', maxWidth: 440 }}>
-            Federal law and all 50 state codes, kept current. Every decision comes with the regulation behind it —
-            and anything ambiguous routes to your legal team.
+            A federal baseline everywhere, plus state-specific rules — paid leave, wage, pay transparency — where
+            states differ. Every decision comes with the regulation behind it, and anything ambiguous routes to a human.
           </p>
 
           <div style={{ display: 'flex', gap: 36, marginBottom: 32, flexWrap: 'wrap' }}>
@@ -59,8 +59,8 @@ export default function ComplianceEngineSection() {
             ))}
           </div>
 
-          <Link href="/demo" style={{ fontSize: 14, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none' }}>
-            Talk to us about your state coverage →
+          <Link href="/product#compliance" prefetch={false} style={{ fontSize: 14, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none' }}>
+            See how compliance works →
           </Link>
         </div>
 

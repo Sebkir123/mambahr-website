@@ -113,23 +113,13 @@ export default function HeroSection() {
             Hiring, onboarding, leave, performance, compliance — MambaHR does the everyday HR work and brings you only the calls that need a person. <strong style={{ color: 'var(--text)' }}>You approve. It runs.</strong>
           </p>
 
-          <div data-animate data-animate-delay="400" style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginBottom: 24 }}>
+          <div data-animate data-animate-delay="400" style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
             <a href="/demo" className="btn-gold" style={{ fontSize: 15, padding: '14px 32px' }}>
               Request access →
             </a>
-            <Link href="/today" prefetch={false} className="btn-secondary" style={{ fontSize: 15 }}>
-              See product tour
+            <Link href="/product" prefetch={false} className="btn-secondary" style={{ fontSize: 15 }}>
+              See it run
             </Link>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <p style={{ fontSize: 14.5, color: 'var(--text)', fontWeight: 600, margin: 0, letterSpacing: '-0.01em' }}>
-              A fraction of your next HR hire.{' '}
-              <span style={{ color: 'var(--gold-dark)' }}>Founding pricing — first 20 companies.</span>
-            </p>
-            <p style={{ fontSize: 13, color: 'var(--text-faint)', margin: 0 }}>
-              Live demo in 30 minutes · Switch from any HR system in a day · Built by HR operators
-            </p>
           </div>
         </div>
 

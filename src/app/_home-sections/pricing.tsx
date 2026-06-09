@@ -5,15 +5,12 @@ import Link from 'next/link'
 // team and does the work; the human keeps the judgment. Annual minimums are
 // shown as a qualifier line, not the headline, so the per-employee price reads
 // first and smaller teams aren't bounced before they understand the value.
-const BOOK_A_CALL_HREF = '/demo'
-
 type Tier = {
   name: string
   pepm: string
   minimum: string
   who: string
   includes: string[]
-  cta: string
   popular?: boolean
 }
 
@@ -24,7 +21,6 @@ const TIERS: Tier[] = [
     minimum: '$10k/yr minimum',
     who: 'HR structure before you hire your first HR person.',
     includes: ['Employee records & org chart', 'AI HR helpdesk', 'Documents & basic workflows', 'Payroll-ready exports'],
-    cta: 'Start here',
   },
   {
     name: 'HR Ops Manager',
@@ -32,7 +28,6 @@ const TIERS: Tier[] = [
     minimum: '$24k/yr minimum',
     who: 'A full HR ops team’s worth of work, for a growing company.',
     includes: ['Everything in HR Starter', 'Onboarding & offboarding', 'Offers & approval routing', 'Performance & leave workflows'],
-    cta: 'Most teams start here',
     popular: true,
   },
   {
@@ -41,7 +36,6 @@ const TIERS: Tier[] = [
     minimum: '$45k/yr minimum',
     who: 'Ops plus HRBP-level support across compliance and change.',
     includes: ['Everything in HR Ops Manager', 'RIF & change planning', 'Advanced compliance & audit', 'SSO, custom workflows'],
-    cta: 'Scale up',
   },
   {
     name: 'Enterprise',
@@ -49,7 +43,6 @@ const TIERS: Tier[] = [
     minimum: 'from $100k/yr',
     who: 'Complex workflows, multi-entity, security review.',
     includes: ['Everything in AI HR Department', 'Custom implementation', 'Procurement & security support', 'Enterprise integrations'],
-    cta: 'Talk to founders',
   },
 ]
 
@@ -83,7 +76,7 @@ export default function PricingSection() {
         <p style={{ fontSize: 14, color: 'var(--text-muted)', margin: '0 0 36px', lineHeight: 1.6, maxWidth: 720 }}>
           An HR generalist runs <strong style={{ color: 'var(--text)', fontWeight: 600 }}>$85k–$120k a year</strong>.
           MambaHR gives your lean team that firepower from <strong style={{ color: 'var(--text)', fontWeight: 600 }}>$24k</strong> —
-          so the people you do have spend their time on judgment, not paperwork.
+          live in days, not months, so the people you do have spend their time on judgment, not paperwork.
         </p>
 
         {/* Tier cards */}
@@ -154,14 +147,6 @@ export default function PricingSection() {
                   </li>
                 ))}
               </ul>
-
-              <Link
-                href={BOOK_A_CALL_HREF}
-                className={t.popular ? 'btn-gold' : 'btn-secondary'}
-                style={{ justifyContent: 'center', width: '100%', fontSize: 13 }}
-              >
-                {t.cta} →
-              </Link>
             </div>
           ))}
         </div>

@@ -1,7 +1,7 @@
-const STATS: { value: string; label: string; source: string }[] = [
-  { value: '67%', label: 'of HR teams miss compliance deadlines', source: 'SHRM 2025 State of HR' },
-  { value: '$4,700', label: 'average cost per new hire — most of it admin', source: 'SHRM Talent Acquisition Benchmark' },
-  { value: '40%', label: 'of HR time spent on admin instead of strategy', source: 'Gartner HR Productivity Report' },
+const STATS: { value: string; label: string }[] = [
+  { value: '67%', label: 'of HR teams miss compliance deadlines' },
+  { value: '$4,700', label: 'average cost per new hire — most of it admin' },
+  { value: '40%', label: 'of HR time spent on admin instead of strategy' },
 ]
 
 export default function ProblemSection() {
@@ -86,10 +86,9 @@ export default function ProblemSection() {
               >
                 {s.value}
               </p>
-              <p style={{ fontSize: 16, color: '#FBF7F0', fontWeight: 500, lineHeight: 1.45, marginBottom: 10, maxWidth: 240, marginLeft: 'auto', marginRight: 'auto' }}>
+              <p style={{ fontSize: 16, color: '#FBF7F0', fontWeight: 500, lineHeight: 1.45, marginBottom: 0, maxWidth: 240, marginLeft: 'auto', marginRight: 'auto' }}>
                 {s.label}
               </p>
-              <p style={{ fontSize: 11, color: 'rgba(251,247,240,0.4)', letterSpacing: '0.02em' }}>{s.source}</p>
             </div>
           ))}
         </div>

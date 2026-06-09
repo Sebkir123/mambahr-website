@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import SectionCta from '@/components/section-cta'
 
 export default function WhereItLivesSection() {
   return (
@@ -22,7 +21,7 @@ export default function WhereItLivesSection() {
               Slack, Teams, or the web.<br />Same answer everywhere.
             </h2>
             <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.65, margin: 0 }}>
-              Mamba works in the tools your team already uses — one shared memory and one record of everything, everywhere.
+              The agent works in the tools your team already uses — one shared memory and one record of everything, everywhere.
             </p>
           </div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 14px', borderRadius: 999, background: 'var(--bg-surface)', border: '1px solid var(--border)' }}>
@@ -191,7 +190,6 @@ export default function WhereItLivesSection() {
           </div>
 
         </div>
-        <SectionCta headline="See it in Slack, Teams, or the web app." />
       </div>
     </section>
   )

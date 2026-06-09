@@ -1,7 +1,6 @@
 import TodayCard from '@/components/surfaces/today-card'
 import MigrationCard from '@/components/surfaces/migration-card'
 import PolicyCard from '@/components/surfaces/policy-card'
-import SectionCta from '@/components/section-cta'
 import { todayCards } from './hero'
 
 export default function HowItWorksSection() {
@@ -36,7 +35,7 @@ export default function HowItWorksSection() {
               Switch from your old HRIS.
             </h3>
             <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 20 }}>
-              Move off Gusto, Workday, Rippling, BambooHR, Namely, Personio — whatever you have. We pull employees, comp records, org chart, leave balances, performance history, and documents. One click. Zero data loss.
+              Move off Gusto, Workday, Rippling, BambooHR, Namely, ADP — whatever you have. We pull employees, comp records, org chart, leave balances, performance history, and documents. One import, nothing left behind.
             </p>
             <p style={{ fontSize: 13, color: 'var(--text-faint)', fontStyle: 'italic' }}>
               Most teams switch end-of-day Friday. Live Monday morning.
@@ -86,7 +85,6 @@ export default function HowItWorksSection() {
             </div>
           </div>
         </div>
-        <SectionCta headline="See your migration plan in 30 minutes." />
       </div>
     </section>
   )
