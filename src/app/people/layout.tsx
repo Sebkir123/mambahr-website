@@ -4,11 +4,11 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'People — MambaHR',
+  title: 'Employee records — MambaHR',
   description:
     'People ops without the ops. Directory, comp, performance, leave — one agent, every record, every change.',
   openGraph: {
-    title: 'People — MambaHR',
+    title: 'Employee records — MambaHR',
     description:
       'Directory, comp, performance, leave — one agent across every record and every change.',
     url: 'https://mambahr.com/people',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'People — MambaHR',
+    title: 'Employee records — MambaHR',
     description:
       'Directory, comp, performance, leave — one agent across every record and every change.',
     images: [ogImage],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'People — MambaHR',
+  name: 'Employee records — MambaHR',
   url: 'https://mambahr.com/people',
   description:
     'MambaHR people-management surface: directory, records, comp, performance, leave, and offboarding handled by one agent.',

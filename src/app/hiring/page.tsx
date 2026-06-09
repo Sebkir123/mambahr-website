@@ -7,7 +7,7 @@ import RequestAccessSection from '@/components/waitlist'
 const funnelSteps = [
   { num: '01', title: 'Req intake', agent: 'Reads Slack/form, drafts JD with comp band', you: 'Approve JD', hil: false },
   { num: '02', title: 'Posting', agent: 'Posts to ATS, LinkedIn, Indeed, job boards', you: '—', hil: false },
-  { num: '03', title: 'Screening', agent: 'Ranks resumes, drafts shortlist with rationale', you: '—', hil: false },
+  { num: '03', title: 'Screening', agent: 'Screens + ranks with a bias-audit gate; you decide', you: '—', hil: false },
   { num: '04', title: 'Scheduling', agent: 'Multi-calendar, time-zone aware, panel-coordinated', you: '—', hil: false },
   { num: '05', title: 'Interview kit', agent: 'Loads scorecards, briefs panel, synthesizes feedback', you: '—', hil: false },
   { num: '06', title: 'References', agent: 'Requests, follows up, summarizes, flags concerns', you: '—', hil: false },
@@ -16,10 +16,10 @@ const funnelSteps = [
 ]
 
 const onboardingSteps = [
-  'I-9 + right-to-work verification (3-day window enforced)',
+  'I-9 verified, E-Verify cleared',
   'W-4 (federal + state) + direct deposit',
-  'Equipment provisioned (Apple Business, Hofy, etc.)',
-  'Access provisioned (Okta SSO + downstream via SCIM)',
+  'Device set up (Jamf)',
+  'Accounts provisioned (Okta SSO + SCIM)',
   'Buddy assigned + intro scheduled',
   'Day-one orientation + handbook acknowledgment',
   '30/60/90-day check-in cadence set',
@@ -37,7 +37,7 @@ export default function HiringPage() {
         <section style={{ background: 'var(--bg-warm)', padding: '110px 24px 80px' }}>
           <div className="hero-split" style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 64, alignItems: 'center' }}>
             <div>
-              <p className="eyebrow" style={{ marginBottom: 20 }}>HIRING</p>
+              <p className="eyebrow" style={{ marginBottom: 20 }}>HIRING & ATS</p>
               <h1
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
@@ -189,7 +189,7 @@ export default function HiringPage() {
                 Day one ready,<br />before day one.
               </h2>
               <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.7 }}>
-                Once they accept, the onboarding agent takes over. By the time they log in on day one, everything works — access, equipment, benefits, training, their first meeting.
+                Once they accept, the onboarding agent takes over. By the time they log in on day one, everything works — accounts, device, benefits, training, their first meeting.
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

@@ -29,18 +29,18 @@ const capabilities: Capability[] = [
     icon: <DirectoryIcon />,
   },
   {
-    title: 'Lifecycle Changes',
+    title: 'Promotions & transfers',
     desc: 'Manager change, transfer, promotion, demotion, location change. The agent updates every system, files every form, notifies every stakeholder.',
     icon: <LifecycleIcon />,
   },
   {
-    title: 'Compensation & Benefits',
-    desc: 'Comp recommendations within band. Open enrollment, life events. Pay equity audits. Equity refresh modeling. Carta integrated.',
+    title: 'Compensation & benefits',
+    desc: 'Comp recommendations within band. 401(k) enrollment and qualifying life events. Pay-equity audits. Equity grants via Carta.',
     icon: <CompIcon />,
   },
   {
-    title: 'Time Off & Leave',
-    desc: 'Policy-aware PTO approvals in seconds. FMLA, CFRA, PFML stacking. Bereavement, USERRA, ADA accommodations. Every edge case handled.',
+    title: 'Time off & leave',
+    desc: 'Policy-aware PTO approvals in seconds. FMLA eligibility plus state paid-leave stacking — CA CFRA, NY, MA, CO. Bereavement, USERRA, ADA. Anything ambiguous routes to a human.',
     icon: <TimeOffIcon />,
   },
   {
@@ -56,14 +56,14 @@ const capabilities: Capability[] = [
   },
   {
     title: 'Offboarding',
-    desc: 'Resignation to revoked access. Final pay per state. Separation agreements drafted. Okta + downstream revoked. COBRA. Equipment recovery.',
+    desc: 'Resignation to revoked access. Final pay per state. Separation agreements drafted. Okta + downstream access revoked. COBRA. Device wiped (Jamf).',
     icon: <OffboardingIcon />,
   },
 ]
 
 const complianceItems = [
-  'FMLA, CFRA, state PFML (all 11 states)',
-  'Multi-state employment law tracking',
+  'FMLA + state paid leave (CA, NY, MA, CO)',
+  'Federal baseline + state-specific rules',
   'Pay transparency (CO/NY/WA/CA)',
   'Equal pay laws and audit support',
   'ADA accommodation workflows',
@@ -83,7 +83,7 @@ export default function PeoplePage() {
           <div className="hero-split" style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 64, alignItems: 'center' }}>
             {/* Left: copy */}
             <div>
-              <p className="eyebrow" style={{ marginBottom: 20 }}>PEOPLE</p>
+              <p className="eyebrow" style={{ marginBottom: 20 }}>EMPLOYEE RECORDS</p>
               <h1
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
@@ -102,7 +102,7 @@ export default function PeoplePage() {
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <a href="/demo" className="btn-gold">Request access →</a>
-                <Link href="/today" className="btn-secondary">See Today queue</Link>
+                <Link href="/today" className="btn-secondary">See the approvals queue</Link>
               </div>
             </div>
 

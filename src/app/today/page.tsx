@@ -23,9 +23,9 @@ const cards = [
     agent: 'Leave agent',
   },
   {
-    title: 'November payroll ready',
+    title: 'November payroll export ready',
     subtitle: '47 employees · $412,300 · 2 state changes',
-    rationale: 'CA and TX adjustments flagged. All direct deposits pre-verified. Ready to run.',
+    rationale: 'CA and TX adjustments flagged. Change file built in your provider format. Review before you upload.',
     status: 'always-you' as const,
     time: '6:00 AM',
     agent: 'Payroll agent',
@@ -33,7 +33,7 @@ const cards = [
   {
     title: 'Background check cleared — Jordan Kim',
     subtitle: 'Role: Account Executive · Start: May 12',
-    rationale: 'Clean report. Offer letter triggered for e-signature. Equipment order submitted.',
+    rationale: 'Clean report. Offer letter triggered for e-signature. Accounts and device provisioned.',
     status: 'auto' as const,
     time: '7:30 AM',
     agent: 'Hiring agent',
@@ -79,11 +79,10 @@ const humanDecides = [
 ]
 
 const mathRows = [
-  { metric: 'Avg PTO request resolution',       legacy: '4.2 hr', mamba: '4.2 sec' },
-  { metric: 'Time spent on operational admin',  legacy: '60%',    mamba: '0%' },
-  { metric: 'Time spent on compliance filings', legacy: '15%',    mamba: '0%', note: 'automated, you sign on submit' },
-  { metric: 'Time spent on judgment + policy',  legacy: '25%',    mamba: '100%' },
-  { metric: 'CHRO time on strategic work',      legacy: '8 hr/wk', mamba: '32 hr/wk' },
+  { metric: 'Routine approvals (PTO, within policy)', legacy: 'hours', mamba: 'seconds' },
+  { metric: 'Operational admin',                      legacy: 'your inbox', mamba: 'the agent' },
+  { metric: 'Compliance filings',                     legacy: 'manual', mamba: 'drafted', note: 'you sign on submit' },
+  { metric: 'Where your week goes',                   legacy: 'paperwork', mamba: 'judgment' },
 ]
 
 export default function TodayPage() {
@@ -96,7 +95,7 @@ export default function TodayPage() {
         <section style={{ background: 'var(--bg-warm)', padding: '100px 24px 80px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ maxWidth: 640, marginBottom: 64 }}>
-              <p className="eyebrow" style={{ marginBottom: 20 }}>TODAY</p>
+              <p className="eyebrow" style={{ marginBottom: 20 }}>APPROVALS</p>
               <h1
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',

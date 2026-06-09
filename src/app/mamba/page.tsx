@@ -9,8 +9,8 @@ import RoutingLog from '@/components/surfaces/routing-log'
 import MambaExamples from '@/components/sections/mamba-examples'
 
 export const metadata: Metadata = {
-  title: 'Mamba — MambaHR',
-  description: '@mamba, take it from here. Mention the agent in any Slack channel — it reads the thread, checks the policy, takes the action, and replies in seconds.',
+  title: 'The AI agent — MambaHR',
+  description: 'The AI HR agent. Mention it in any Slack channel or Teams chat — it reads the thread, checks the policy, takes the action, and replies in seconds.',
 }
 
 const heroMessages = [
@@ -101,7 +101,7 @@ function WebAppPreview() {
         <span style={{ fontSize: 9, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace', marginLeft: 4 }}>app.mambahr.com</span>
       </div>
       <div style={{ padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 5 }}>
-        <p style={{ margin: 0, fontSize: 9, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Today · 3 items</p>
+        <p style={{ margin: 0, fontSize: 9, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Approvals · 3 items</p>
         <div style={{ background: 'var(--bg-warm)', borderRadius: 4, padding: '6px 8px' }}>
           <p style={{ margin: '0 0 2px', fontSize: 10, fontWeight: 600, color: 'var(--text)' }}>Parental leave — Maria K.</p>
           <span style={{ background: '#FFF7ED', color: '#C2410C', padding: '1px 6px', borderRadius: 3, fontSize: 8, fontWeight: 600 }}>Needs sign-off</span>
@@ -131,7 +131,7 @@ const channelDetails = [
   {
     label: 'Web app',
     logo: '/MambaHR_logo.png',
-    copy: 'Today queue, people directory, hiring pipeline, reports — at app.mambahr.com.',
+    copy: 'Approvals queue, employee records, hiring pipeline, reports — at app.mambahr.com.',
     preview: <WebAppPreview />,
   },
 ]
@@ -155,8 +155,8 @@ const trustCards = [
         <path d="M6 8h10M6 12h6M6 16h8" stroke="var(--gold)" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
     ),
-    label: 'Every action audit-logged',
-    desc: 'Every tool call, every decision, every approval — written to an immutable, cryptographically signed audit log.',
+    label: 'Every action recorded',
+    desc: 'Every tool call, decision, and approval is written to a tamper-proof record nobody can edit after the fact.',
   },
   {
     icon: (
@@ -166,8 +166,8 @@ const trustCards = [
         <circle cx="11" cy="14" r="1.5" fill="var(--gold)" />
       </svg>
     ),
-    label: 'PII never enters the model',
-    desc: 'SSNs, DOBs, bank accounts, medical info — never passed to the LLM. The agent works with references, not raw data.',
+    label: 'Personal data stays out of the AI',
+    desc: 'Social security numbers, birth dates, bank and medical details are stripped before anything reaches the AI. It works with references, not raw records.',
   },
 ]
 
@@ -181,7 +181,7 @@ export default function MambaPage() {
         <section style={{ background: 'var(--bg)', padding: '90px 24px 72px' }}>
           <div className="hero-split" style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 72, alignItems: 'center' }}>
             <div>
-              <p className="eyebrow" style={{ marginBottom: 18 }}>MAMBA — THE AGENT</p>
+              <p className="eyebrow" style={{ marginBottom: 18 }}>THE AI AGENT</p>
               <h1
                 style={{
                   fontFamily: 'var(--font-serif), Georgia, serif',
@@ -200,7 +200,7 @@ export default function MambaPage() {
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <a href="/demo" className="btn-gold">Request access →</a>
-                <Link href="/today" className="btn-secondary">See Today queue</Link>
+                <Link href="/today" className="btn-secondary">See the approvals queue</Link>
               </div>
             </div>
             <div className="hero-today-panel">
@@ -285,8 +285,8 @@ export default function MambaPage() {
                 }}>
                   {[
                     { value: '14', label: 'specialist agents' },
-                    { value: '100%', label: 'gated by your policy' },
-                    { value: 'every', label: 'action audit-logged' },
+                    { value: '100%', label: 'runs on your policy' },
+                    { value: 'every', label: 'action recorded' },
                   ].map((stat) => (
                     <div key={stat.label}>
                       <p style={{

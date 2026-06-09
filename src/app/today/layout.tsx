@@ -4,11 +4,11 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'Today — MambaHR',
+  title: 'Approvals — MambaHR',
   description:
     '30 minutes. Your whole HR day. The agents ran the night shift — this morning, a queue of decisions. Approve, decline, done.',
   openGraph: {
-    title: 'Today — MambaHR',
+    title: 'Approvals — MambaHR',
     description:
       'The daily HR queue. Sign-off items, auto-resolved actions, and policy decisions in one screen.',
     url: 'https://mambahr.com/today',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Today — MambaHR',
+    title: 'Approvals — MambaHR',
     description:
       'The daily HR queue. Sign-off items, auto-resolved actions, and policy decisions in one screen.',
     images: [ogImage],
@@ -27,14 +27,14 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Today — MambaHR',
+  name: 'Approvals — MambaHR',
   url: 'https://mambahr.com/today',
   description:
     'The daily HR queue surface for MambaHR. The agents run HR end-to-end; you sign off on the decisions that matter.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
-    name: 'Today queue',
+    name: 'Approvals queue',
     description:
       'Daily sign-off queue: routine actions auto-resolve, judgment calls route to a human, high-stakes decisions are always-you. Every card shows the action, rationale, status, decision buttons, and full audit trail.',
   },

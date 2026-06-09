@@ -4,11 +4,11 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'Hiring — MambaHR',
+  title: 'Hiring & ATS — MambaHR',
   description:
     'From req to offer. Without the loop. The agent screens, schedules, references, and drafts the offer. You decide who joins.',
   openGraph: {
-    title: 'Hiring — MambaHR',
+    title: 'Hiring & ATS — MambaHR',
     description:
       'From req to offer without the loop. Agent runs sourcing, screening, scheduling, references, and offer drafting.',
     url: 'https://mambahr.com/hiring',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hiring — MambaHR',
+    title: 'Hiring & ATS — MambaHR',
     description:
       'From req to offer without the loop. Agent runs sourcing, screening, scheduling, references, and offer drafting.',
     images: [ogImage],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Hiring — MambaHR',
+  name: 'Hiring & ATS — MambaHR',
   url: 'https://mambahr.com/hiring',
   description:
     'MambaHR hiring surface: agent-driven req intake, sourcing, screening, scheduling, references, background check, and offer drafting. Humans approve hires and offers above band.',
