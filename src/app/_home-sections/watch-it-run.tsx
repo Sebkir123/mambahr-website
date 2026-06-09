@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Beat, Page } from '@/components/ui/page'
 
 const checklist = [
@@ -76,12 +77,18 @@ export default function WatchItRunSection() {
         </div>
 
         {/* Compressed pull-quote */}
-        <figure style={{ maxWidth: 820, margin: '72px auto 0', textAlign: 'center' }}>
-          <blockquote style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(21px, 2.6vw, 28px)', fontWeight: 400, lineHeight: 1.4, letterSpacing: '-0.02em', color: 'var(--text)', margin: 0 }}>
-            &ldquo;By week two, the agent was handling the operational lane — leave, classifications, multi-state filings, onboarding. I started doing the role I was actually hired for.&rdquo;
+        <figure style={{ maxWidth: 760, margin: '80px auto 0', textAlign: 'center' }}>
+          <blockquote style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(22px, 2.8vw, 30px)', fontWeight: 400, lineHeight: 1.38, letterSpacing: '-0.02em', color: 'var(--text)', margin: 0 }}>
+            &ldquo;By week two, the agent was handling the operational lane — leave, classifications, multi-state filings, onboarding. <em style={{ fontStyle: 'italic', color: 'var(--gold-dark)' }}>I started doing the role I was actually hired for.</em>&rdquo;
           </blockquote>
-          <figcaption style={{ marginTop: 18, fontSize: 12, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace', letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 600 }}>
-            Head of People · MambaHR design partner
+          <figcaption style={{ marginTop: 28, display: 'inline-flex', alignItems: 'center', gap: 14 }}>
+            <span style={{ width: 48, height: 48, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '1px solid var(--border)', position: 'relative', background: 'var(--bg-warm)' }}>
+              <Image src="/avatars/head-of-people.jpg" alt="" fill sizes="48px" style={{ objectFit: 'cover' }} />
+            </span>
+            <span style={{ textAlign: 'left' }}>
+              <span style={{ display: 'block', fontSize: 14.5, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.01em' }}>Head of People</span>
+              <span style={{ display: 'block', fontSize: 12.5, color: 'var(--text-faint)', marginTop: 1 }}>MambaHR design partner · in private beta</span>
+            </span>
           </figcaption>
         </figure>
       </Page>

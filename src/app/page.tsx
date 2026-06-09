@@ -5,7 +5,7 @@ import RequestAccessSection from '@/components/waitlist'
 import HeroSection from './_home-sections/hero'
 import ProofStrip from './_home-sections/proof-strip'
 import ProblemSection from './_home-sections/problem'
-import CoverageSection from './_home-sections/coverage'
+import BentoSection from './_home-sections/bento'
 import WatchItRunSection from './_home-sections/watch-it-run'
 import WhereItLivesSection from './_home-sections/where-it-lives'
 import ComplianceEngineSection from './_home-sections/compliance-engine'
@@ -22,8 +22,8 @@ export default function HomePage() {
         <HeroSection />
         <ProofStrip />
         <ProblemSection />
-        {/* What it covers — categories, then one deep proof */}
-        <CoverageSection />
+        {/* The whole department — modern bento overview */}
+        <BentoSection />
         <WatchItRunSection />
         {/* Why it's different */}
         <WhereItLivesSection />

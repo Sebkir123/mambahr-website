@@ -19,58 +19,67 @@ const STATS = [
 
 export default function ComplianceEngineSection() {
   return (
-    <section style={{ background: 'var(--bg-warm)', padding: '120px 24px' }}>
+    <section style={{ background: '#15110D', padding: 'var(--beat-pad) 24px', position: 'relative', overflow: 'hidden' }}>
+      {/* warm gold glow, right side, behind the floating card */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute', top: '-10%', right: '-6%', width: 760, height: 760, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(201,169,110,0.18) 0%, rgba(201,169,110,0) 66%)',
+          pointerEvents: 'none',
+        }}
+      />
       <div
         className="scenario-split"
-        style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 56, alignItems: 'center' }}
+        style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 56, alignItems: 'center', position: 'relative', zIndex: 1 }}
       >
         {/* LEFT — the claim */}
         <div>
-          <p className="eyebrow" style={{ marginBottom: 20 }}>STAY COMPLIANT</p>
+          <p className="eyebrow" style={{ marginBottom: 20, color: 'var(--gold-light)' }}>STAY COMPLIANT</p>
           <h2
             style={{
               fontFamily: 'var(--font-serif), Georgia, serif',
-              fontSize: 'clamp(34px, 4.2vw, 54px)',
+              fontSize: 'clamp(36px, 4.4vw, 56px)',
               fontWeight: 400,
               letterSpacing: '-0.02em',
-              color: 'var(--text)',
+              color: '#FBF7F0',
               margin: '0 0 20px',
-              lineHeight: 1.05,
+              lineHeight: 1.04,
             }}
           >
             Federal law and all 50 states,<br />
-            <span style={{ color: 'var(--gold-dark)' }}>kept current.</span>
+            <span style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>kept current.</span>
           </h2>
-          <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, margin: '0 0 32px', maxWidth: 440 }}>
+          <p style={{ fontSize: 17, color: 'rgba(251,247,240,0.64)', lineHeight: 1.65, margin: '0 0 36px', maxWidth: 460 }}>
             A federal baseline everywhere, plus state-specific rules — paid leave, wage, pay transparency — where
             states differ. Every decision comes with the regulation behind it, and anything ambiguous routes to a human.
           </p>
 
-          <div style={{ display: 'flex', gap: 36, marginBottom: 32, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 40, marginBottom: 36, flexWrap: 'wrap' }}>
             {STATS.map((s) => (
               <div key={s.label}>
-                <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 36, fontWeight: 400, color: 'var(--gold-dark)', letterSpacing: '-0.03em', lineHeight: 1, margin: '0 0 6px' }}>
+                <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 42, fontWeight: 400, color: 'var(--gold-light)', letterSpacing: '-0.03em', lineHeight: 1, margin: '0 0 8px' }}>
                   {s.stat}
                 </p>
-                <p style={{ fontSize: 12, color: 'var(--text-faint)', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', margin: 0, fontFamily: 'var(--font-mono), monospace' }}>
+                <p style={{ fontSize: 12, color: 'rgba(251,247,240,0.45)', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', margin: 0, fontFamily: 'var(--font-mono), monospace' }}>
                   {s.label}
                 </p>
               </div>
             ))}
           </div>
 
-          <Link href="/product#compliance" prefetch={false} style={{ fontSize: 14, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none' }}>
+          <Link href="/product#compliance" prefetch={false} style={{ fontSize: 14, fontWeight: 600, color: 'var(--gold-light)', textDecoration: 'none' }}>
             See how compliance works →
           </Link>
         </div>
 
-        {/* RIGHT — one case, floating */}
+        {/* RIGHT — one case, floating bright on the dark band */}
         <div
           style={{
             background: 'var(--bg)',
-            border: '1px solid var(--border)',
-            borderRadius: 16,
-            boxShadow: 'var(--shadow-float), var(--sheen)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: 18,
+            boxShadow: '0 30px 70px rgba(0,0,0,0.45), var(--sheen)',
             padding: '30px 32px',
           }}
         >
@@ -78,7 +87,7 @@ export default function ComplianceEngineSection() {
             <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(20px, 2.2vw, 26px)', fontWeight: 400, color: 'var(--text)', margin: 0, letterSpacing: '-0.015em', lineHeight: 1.25, maxWidth: 440 }}>
               {EXAMPLE.scenario}
             </p>
-            <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--color-red)', background: 'var(--bg-warm)', border: '1px solid var(--border)', borderRadius: 999, padding: '5px 12px', whiteSpace: 'nowrap', letterSpacing: '0.08em', textTransform: 'uppercase', flexShrink: 0 }}>
+            <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--color-red)', background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 999, padding: '5px 12px', whiteSpace: 'nowrap', letterSpacing: '0.08em', textTransform: 'uppercase', flexShrink: 0 }}>
               {EXAMPLE.risk}
             </span>
           </div>
@@ -107,6 +116,12 @@ export default function ComplianceEngineSection() {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .scenario-split { grid-template-columns: 1fr !important; gap: 40px !important; }
+        }
+      `}</style>
     </section>
   )
 }
