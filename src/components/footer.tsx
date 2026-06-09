@@ -5,10 +5,11 @@ const cols = [
   {
     title: 'Product',
     links: [
-      { label: 'Today', href: '/today' },
-      { label: 'Mamba', href: '/mamba' },
-      { label: 'People', href: '/people' },
-      { label: 'Hiring', href: '/hiring' },
+      { label: 'The AI agent', href: '/mamba' },
+      { label: 'Approvals', href: '/today' },
+      { label: 'Employee records', href: '/people' },
+      { label: 'Hiring & ATS', href: '/hiring' },
+      { label: 'See it run', href: '/product' },
       { label: 'Pricing', href: '/pricing' },
     ],
   },
@@ -16,8 +17,8 @@ const cols = [
     title: 'Company',
     links: [
       { label: 'About', href: '/about' },
+      { label: 'Security', href: '/security' },
       { label: 'Careers', href: 'mailto:jobs@mambahr.com' },
-      { label: 'Changelog', href: '/coming-soon/changelog' },
       { label: 'Contact', href: 'mailto:hello@mambahr.com' },
     ],
   },
