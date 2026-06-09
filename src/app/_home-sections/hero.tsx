@@ -36,21 +36,20 @@ export default function HeroSection() {
       <div aria-hidden style={{ position: 'absolute', top: '-16%', left: '50%', transform: 'translateX(-50%)', width: 1000, height: 760, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(201,169,110,0.20) 0%, rgba(201,169,110,0) 62%)', pointerEvents: 'none' }} />
 
       {/* Centered copy */}
-      <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px', textAlign: 'center', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: 1060, margin: '0 auto', padding: '0 24px', textAlign: 'center', position: 'relative', zIndex: 2 }}>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--gold-tint)', border: '1px solid var(--gold-light)', borderRadius: 999, padding: '6px 14px', fontSize: 12.5, fontWeight: 600, color: 'var(--gold-dark)', marginBottom: 30 }}>
           <Dot c="var(--gold-dark)" /> Founding pricing — first 20 companies
         </span>
-        <h1 style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(50px, 7.6vw, 92px)', fontWeight: 400, letterSpacing: '-0.035em', color: 'var(--text)', lineHeight: 0.98, margin: '0 0 28px' }}>
-          Your HR work,<br /><span style={{ fontStyle: 'italic', color: 'var(--gold)' }}>automated.</span>
+        <h1 className="hero-h1" style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(38px, 5.6vw, 78px)', fontWeight: 400, letterSpacing: '-0.035em', color: 'var(--text)', lineHeight: 1.02, margin: '0 0 30px', whiteSpace: 'nowrap' }}>
+          Your HR work, <span style={{ fontStyle: 'italic', color: 'var(--gold)' }}>automated.</span>
         </h1>
-        <p style={{ fontSize: 'clamp(19px, 2.1vw, 22px)', color: 'var(--text-muted)', lineHeight: 1.5, maxWidth: 620, margin: '0 auto 38px' }}>
-          Hiring, onboarding, leave, performance, compliance — the agent does the work and brings you only the calls that need a person.
+        <p style={{ fontSize: 'clamp(19px, 2.1vw, 22px)', color: 'var(--text-muted)', lineHeight: 1.5, maxWidth: 540, margin: '0 auto 40px' }}>
+          The work is handled. You approve only the calls that need a person.
         </p>
-        <div style={{ display: 'flex', gap: 14, alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
           <a href="/demo" className="btn-gold" style={{ fontSize: 16, padding: '16px 36px' }}>Request access →</a>
           <Link href="/product" prefetch={false} style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', textDecoration: 'none' }}>See it run</Link>
         </div>
-        <p style={{ marginTop: 26, fontSize: 13.5, color: 'var(--text-faint)' }}>Live in a day · Slack, Teams &amp; web · built by HR operators</p>
       </div>
 
       {/* Big product dashboard, centered, with side cards peeking in */}
@@ -130,6 +129,9 @@ export default function HeroSection() {
       </div>
 
       <style>{`
+        @media (max-width: 680px) {
+          .hero-h1 { white-space: normal !important; }
+        }
         @media (max-width: 860px) {
           .hero-peek { display: none !important; }
         }
