@@ -4,11 +4,11 @@ import RequestAccessSection from '@/components/waitlist'
 
 import HeroSection from './_home-sections/hero'
 import ProofStrip from './_home-sections/proof-strip'
-import ProblemSection from './_home-sections/problem'
 import BentoSection from './_home-sections/bento'
-import WatchItRunSection from './_home-sections/watch-it-run'
+import MetricBand from './_home-sections/metric-band'
 import WhereItLivesSection from './_home-sections/where-it-lives'
 import ComplianceEngineSection from './_home-sections/compliance-engine'
+import HumansSection from './_home-sections/humans'
 import HowItWorksSection from './_home-sections/how-it-works'
 import PricingSection from './_home-sections/pricing'
 import ResourcesSection from './_home-sections/resources'
@@ -18,19 +18,20 @@ export default function HomePage() {
     <>
       <MegaNav />
       <main>
-        {/* What it is */}
+        {/* Hero — big product shot, shapes.co / bolto pattern */}
         <HeroSection />
         <ProofStrip />
-        <ProblemSection />
-        {/* The whole department — modern bento overview */}
+        {/* The whole department — modern colorful bento */}
         <BentoSection />
-        <WatchItRunSection />
-        {/* Why it's different */}
+        {/* Bold saturated stat band */}
+        <MetricBand />
+        {/* Proof it works — channels + compliance */}
         <WhereItLivesSection />
         <ComplianceEngineSection />
-        {/* Getting started */}
+        {/* Humans */}
+        <HumansSection />
+        {/* Getting started + convert */}
         <HowItWorksSection />
-        {/* Price + convert */}
         <PricingSection />
         <ResourcesSection />
         <RequestAccessSection />
