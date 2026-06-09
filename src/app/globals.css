@@ -57,8 +57,8 @@
   --sheen:          inset 0 1px 0 rgba(255,255,255,0.7);
 
   --font-sans:  var(--font-inter), system-ui, sans-serif;
-  --font-serif: var(--font-serif), Georgia, serif;
-  --font-mono:  var(--font-mono), 'SF Mono', 'Fira Code', monospace;
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --font-mono:  var(--font-jetbrains), 'SF Mono', 'Fira Code', monospace;
 
   /* Layout rhythm — every beat uses one max-width + vertical scale so the
      page breathes consistently instead of each section reinventing spacing. */
