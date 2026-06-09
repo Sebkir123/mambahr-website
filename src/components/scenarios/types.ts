@@ -5,4 +5,7 @@ export type Scenario = {
   label: string
   durationMs: number
   render: (elapsedMs: number) => ReactNode
+  // Benefit copy shown above the mockup (shapes.co-style outcome line).
+  headline?: string
+  blurb?: string
 }

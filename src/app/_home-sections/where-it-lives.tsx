@@ -5,9 +5,9 @@ export default function WhereItLivesSection() {
   return (
     <section style={{ background: '#FFFFFF', padding: '88px 24px' }}>
       <div style={{ maxWidth: 1180, margin: '0 auto' }}>
-        <div style={{ marginBottom: 48, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 32, flexWrap: 'wrap' }}>
+        <div data-animate style={{ marginBottom: 48, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 32, flexWrap: 'wrap' }}>
           <div style={{ maxWidth: 600 }}>
-            <p className="eyebrow" style={{ marginBottom: 14 }}>WHERE IT LIVES</p>
+            <p className="eyebrow" style={{ marginBottom: 14 }}>WORKS WHERE YOU WORK</p>
             <h2
               style={{
                 fontFamily: 'var(--font-serif), Georgia, serif',
@@ -19,10 +19,10 @@ export default function WhereItLivesSection() {
                 lineHeight: 1.1,
               }}
             >
-              One agent. Three surfaces. Same context.
+              Slack, Teams, or the web.<br />Same answer everywhere.
             </h2>
             <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.65, margin: 0 }}>
-              Mamba meets your team in the tools they already use — with one shared memory and one audit trail across all of them.
+              Mamba works in the tools your team already uses — one shared memory and one record of everything, everywhere.
             </p>
           </div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 14px', borderRadius: 999, background: 'var(--bg-surface)', border: '1px solid var(--border)' }}>
@@ -34,7 +34,7 @@ export default function WhereItLivesSection() {
         <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
 
           {/* ── SLACK MOCKUP — full chrome ── */}
-          <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
+          <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-md)' }}>
             {/* Slack purple header */}
             <div style={{ background: '#3F0E40', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
               <Image src="/slack-new-logo.svg" alt="Slack" width={16} height={16} style={{ display: 'block', filter: 'brightness(0) invert(1)' }} />
@@ -86,7 +86,7 @@ export default function WhereItLivesSection() {
           </div>
 
           {/* ── TEAMS MOCKUP — proper Teams chrome ── */}
-          <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
+          <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-md)' }}>
             {/* Teams purple header */}
             <div style={{ background: '#4B53BC', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
               <Image src="/Microsoft_Symbol_0.svg" alt="Microsoft Teams" width={16} height={16} style={{ display: 'block', filter: 'brightness(0) invert(1)' }} />
@@ -136,7 +136,7 @@ export default function WhereItLivesSection() {
           </div>
 
           {/* ── WEB APP MOCKUP — rich dashboard ── */}
-          <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
+          <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: 'var(--shadow-md)' }}>
             {/* App chrome — looks like macOS browser window */}
             <div style={{ background: 'var(--bg-surface)', padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid var(--border-faint)' }}>
               <span style={{ width: 9, height: 9, borderRadius: '50%', background: '#FF5F57' }} />

@@ -857,7 +857,7 @@ export default function PitchDeck() {
               ].map((p, i) => (
                 <div key={p.name} style={{ ...revealScale(v(10), 300 + i * 150), padding: 28, borderRadius: 16, backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-mid)', position: 'relative', overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(90deg, #C9A96E, rgba(176,141,87,0.2), rgba(201,169,110,0))' }} />
-                  <Image src={p.avatar} alt={p.name} width={56} height={56} style={{ borderRadius: 14, objectFit: 'cover', border: '1px solid var(--border-mid)', marginBottom: 18 }} />
+                  <Image src={p.avatar} alt={p.name} width={56} height={56} loading="eager" style={{ borderRadius: 14, objectFit: 'cover', border: '1px solid var(--border-mid)', marginBottom: 18 }} />
                   <h3 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>{p.name}</h3>
                   <p style={{ fontSize: 13, color: 'var(--gold)', fontWeight: 500, marginBottom: 14 }}>{p.role}</p>
                   <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6 }}>{p.bio}</p>

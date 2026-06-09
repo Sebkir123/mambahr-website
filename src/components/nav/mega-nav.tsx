@@ -158,6 +158,8 @@ export default function MegaNav() {
 
             {/* Direct links */}
             {[
+              { label: 'Pricing',  href: '/pricing'  },
+              { label: 'Compare',  href: '/compare'  },
               { label: 'Security', href: '/security' },
               { label: 'About',    href: '/about'    },
             ].map((item) => (
@@ -381,6 +383,8 @@ export default function MegaNav() {
 
             {/* Direct links */}
             {[
+              { label: 'Pricing',  href: '/pricing'  },
+              { label: 'Compare',  href: '/compare'  },
               { label: 'Security', href: '/security' },
               { label: 'About',    href: '/about'    },
             ].map((item) => (

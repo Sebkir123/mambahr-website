@@ -8,7 +8,7 @@ export default function HowItWorksSection() {
   return (
     <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: 88, maxWidth: 760, margin: '0 auto 88px' }}>
+        <div data-animate style={{ textAlign: 'center', marginBottom: 88, maxWidth: 760, margin: '0 auto 88px' }}>
           <p className="eyebrow" style={{ marginBottom: 18 }}>HOW IT WORKS</p>
           <h2
             style={{
@@ -21,7 +21,7 @@ export default function HowItWorksSection() {
               lineHeight: 1.05,
             }}
           >
-            From kickoff to autopilot.<br />In a day.
+            Up and running,<br />in a day.
           </h2>
           <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
             Three steps. Then the agent takes it from there.
@@ -76,7 +76,7 @@ export default function HowItWorksSection() {
               Your CHRO does judgment. Everything else does itself.
             </p>
           </div>
-          <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 14, padding: 16, boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
+          <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 14, padding: 16, boxShadow: 'var(--shadow-md)' }}>
             <div style={{ background: 'var(--bg-surface)', borderRadius: 8, padding: '8px 12px', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#15803D' }} />
               <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>Today queue · 3 items need you</span>

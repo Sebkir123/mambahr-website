@@ -47,9 +47,9 @@ export default function EmployeeDirectory() {
       style={{
         background: '#FFFFFF',
         border: '1px solid var(--border)',
-        borderRadius: 14,
+        borderRadius: 16,
         overflow: 'hidden',
-        boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+        boxShadow: 'var(--shadow-float)',
       }}
     >
       {/* Header */}

@@ -23,12 +23,6 @@ const todayCards = [
   },
 ]
 
-const heroValueProps = [
-  '14 specialist agents. Zero callouts.',
-  'Federal + 50 state employment law, cited on every action.',
-  'Operational HR, automated. Strategic HR, yours.',
-]
-
 export default function HeroSection() {
   return (
     <section
@@ -37,8 +31,34 @@ export default function HeroSection() {
         paddingTop: 110,
         paddingBottom: 0,
         overflow: 'hidden',
+        position: 'relative',
       }}
     >
+      {/* Breathing gold atmosphere */}
+      <div
+        aria-hidden
+        className="hero-glow"
+        style={{
+          position: 'absolute',
+          top: '-10%',
+          left: '8%',
+          width: 620,
+          height: 620,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(201,169,110,0.22) 0%, rgba(201,169,110,0) 68%)',
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}
+      />
+      <style>{`
+        @media (prefers-reduced-motion: no-preference) {
+          .hero-glow { animation: heroBreathe 9s ease-in-out infinite; }
+          @keyframes heroBreathe {
+            0%, 100% { transform: scale(1);   opacity: 0.85; }
+            50%      { transform: scale(1.18); opacity: 1; }
+          }
+        }
+      `}</style>
       <div
         className="hero-split"
         style={{
@@ -50,15 +70,21 @@ export default function HeroSection() {
           gap: 64,
           alignItems: 'center',
           minHeight: 720,
+          position: 'relative',
+          zIndex: 1,
         }}
       >
         {/* Left — copy */}
         <div style={{ paddingBottom: 80 }}>
-          <div style={{ marginBottom: 24 }}>
-            <span className="pill-gold">THE AI HR DEPARTMENT</span>
+          <div data-animate style={{ marginBottom: 22 }}>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--gold-dark)' }}>
+              The AI HR Department
+            </span>
           </div>
 
           <h1
+            data-animate
+            data-animate-delay="100"
             style={{
               fontFamily: 'var(--font-serif), Georgia, serif',
               fontSize: 'clamp(44px, 5.5vw, 76px)',
@@ -69,11 +95,13 @@ export default function HeroSection() {
               marginBottom: 24,
             }}
           >
-            Your HR team,<br />
-            <span style={{ color: 'var(--gold-dark)' }}>automated.</span>
+            Your HR work,<br />
+            <span style={{ color: 'var(--gold)' }}>automated.</span>
           </h1>
 
           <p
+            data-animate
+            data-animate-delay="200"
             style={{
               fontSize: 19,
               color: 'var(--text-muted)',
@@ -82,22 +110,10 @@ export default function HeroSection() {
               marginBottom: 32,
             }}
           >
-            MambaHR is the AI HR department. Hiring, payroll, leave, performance, compliance — the agents do the work. <strong style={{ color: 'var(--text)' }}>You sign off when it matters.</strong>
+            Hiring, onboarding, leave, performance, compliance — MambaHR does the everyday HR work and brings you only the calls that need a person. <strong style={{ color: 'var(--text)' }}>You approve. It runs.</strong>
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 36 }}>
-            {heroValueProps.map((prop) => (
-              <div key={prop} style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0 }}>
-                  <circle cx="9" cy="9" r="9" fill="var(--gold-tint)" />
-                  <path d="M5 9l3 3 5-6" stroke="var(--gold-dark)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <span style={{ fontSize: 15, color: 'var(--text)', fontWeight: 500 }}>{prop}</span>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginBottom: 24 }}>
+          <div data-animate data-animate-delay="400" style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginBottom: 24 }}>
             <a href="/demo" className="btn-gold" style={{ fontSize: 15, padding: '14px 32px' }}>
               Request access →
             </a>
@@ -106,9 +122,15 @@ export default function HeroSection() {
             </Link>
           </div>
 
-          <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-            Live demo in 30 minutes · Switch from any HRIS within 1 day
-          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <p style={{ fontSize: 14.5, color: 'var(--text)', fontWeight: 600, margin: 0, letterSpacing: '-0.01em' }}>
+              A fraction of your next HR hire.{' '}
+              <span style={{ color: 'var(--gold-dark)' }}>Founding pricing — first 20 companies.</span>
+            </p>
+            <p style={{ fontSize: 13, color: 'var(--text-faint)', margin: 0 }}>
+              Live demo in 30 minutes · Switch from any HR system in a day · Built by HR operators
+            </p>
+          </div>
         </div>
 
         {/* Right — Employee Directory + Today Card overlay (Shapes pattern, hardcoded mockup) */}
@@ -128,7 +150,7 @@ export default function HeroSection() {
               background: '#FFFFFF',
               borderRadius: 14,
               border: '1px solid var(--border)',
-              boxShadow: '0 12px 32px rgba(0,0,0,0.12)',
+              boxShadow: 'var(--shadow-float), var(--sheen)',
               overflow: 'hidden',
             }}
           >
@@ -152,7 +174,7 @@ export default function HeroSection() {
               background: '#FFFFFF',
               borderRadius: 12,
               border: '1px solid var(--border)',
-              boxShadow: '0 6px 20px rgba(0,0,0,0.08)',
+              boxShadow: 'var(--shadow-md), var(--sheen)',
               padding: '10px 12px',
             }}
           >

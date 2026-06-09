@@ -7,7 +7,7 @@ export default function AiWorkforceSection() {
     <section style={{ background: '#FFFFFF', padding: '120px 24px', overflow: 'hidden' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 64, maxWidth: 720, margin: '0 auto 32px' }}>
-          <p className="eyebrow" style={{ marginBottom: 16 }}>THE AI WORKFORCE</p>
+          <p className="eyebrow" style={{ marginBottom: 16 }}>NOT ANOTHER CHATBOT</p>
           <h2
             style={{
               fontFamily: 'var(--font-serif), Georgia, serif',
@@ -19,10 +19,10 @@ export default function AiWorkforceSection() {
               lineHeight: 1.05,
             }}
           >
-            One agent in charge.<br />Fourteen specialists at work.
+            It’s not one chatbot.<br />It’s your whole HR team.
           </h2>
           <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-            Every request enters through Mamba, gets routed to the right specialist, and resolves with a full audit trail. Watch one in flight.
+            Ask once. Mamba sends it to the right specialist — hiring, leave, payroll, compliance — and it comes back done, with a full record of what happened. Watch one run.
           </p>
         </div>
 

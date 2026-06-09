@@ -49,13 +49,60 @@
   --border-mid:   #D6D3D1;
   --border-faint: #F1EFEC;
 
+  /* Warm, layered elevation — makes product surfaces feel like physical
+     objects floating, not flat panels. Tint is warm brown-black, never gray. */
+  --shadow-sm:      0 1px 2px rgba(28,17,8,0.05), 0 2px 6px rgba(28,17,8,0.04);
+  --shadow-md:      0 1px 2px rgba(28,17,8,0.04), 0 8px 18px rgba(28,17,8,0.06), 0 18px 36px rgba(28,17,8,0.07);
+  --shadow-float:   0 2px 4px rgba(28,17,8,0.04), 0 14px 28px rgba(28,17,8,0.08), 0 36px 64px rgba(28,17,8,0.12);
+  --sheen:          inset 0 1px 0 rgba(255,255,255,0.7);
+
   --font-sans:  var(--font-inter), system-ui, sans-serif;
   --font-serif: var(--font-serif), Georgia, serif;
   --font-mono:  var(--font-mono), 'SF Mono', 'Fira Code', monospace;
+
+  /* Layout rhythm — every beat uses one max-width + vertical scale so the
+     page breathes consistently instead of each section reinventing spacing. */
+  --page-max:        1120px;
+  --page-pad:        24px;
+  --beat-pad:        clamp(80px, 11vw, 152px);
+  --beat-pad-tight:  clamp(56px, 7vw, 88px);
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ── TYPE SCALE ─────────────────────────────────────
+   Instrument Serif for display/headlines, Inter for lead/body.
+   Beats use these instead of hand-tuning font-size inline. */
+.t-display {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(56px, 7vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+.t-h2 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+.t-lead {
+  font-size: clamp(19px, 2.2vw, 20px);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.t-body {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Wider horizontal gutter on tablet/desktop; 24px stays on phones. */
+@media (min-width: 768px) {
+  .page { padding-left: 40px; padding-right: 40px; }
 }
 
 /* Global keyboard focus ring — covers inline-styled buttons/links
@@ -105,16 +152,15 @@ h4, h5, h6 {
 }
 
 /* Scroll-triggered animation */
+/* Reveal-on-scroll disabled — content is always visible (no JS dependency,
+   no blank sections). Attributes left in place as harmless no-ops. */
 [data-animate] {
-  opacity: 0;
-  transform: translateY(16px);
-  transition:
-    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+  transform: none;
 }
 [data-animate].is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 [data-animate-delay="100"] { transition-delay: 0.1s; }
 [data-animate-delay="200"] { transition-delay: 0.2s; }
@@ -435,5 +481,29 @@ h4, h5, h6 {
   @keyframes mamba-card-in {
     from, to { opacity: 1; transform: translateY(0); }
   }
+
+  /* Never leave reveal-animated content hidden when motion is reduced */
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Depth: cards that lift toward you on hover */
+.card-lift {
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.28s ease;
+  will-change: transform;
+}
+.card-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-float);
+  border-color: var(--gold-light);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-lift:hover { transform: none; }
 }
 
