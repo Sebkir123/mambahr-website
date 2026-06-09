@@ -35,20 +35,17 @@ export default function HeroSection() {
     <section style={{ background: 'linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-cream) 100%)', paddingTop: 138, paddingBottom: 0, overflow: 'hidden', position: 'relative' }}>
       <div aria-hidden style={{ position: 'absolute', top: '-16%', left: '50%', transform: 'translateX(-50%)', width: 1000, height: 760, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(201,169,110,0.20) 0%, rgba(201,169,110,0) 62%)', pointerEvents: 'none' }} />
 
-      {/* Centered copy */}
-      <div style={{ maxWidth: 1060, margin: '0 auto', padding: '0 24px', textAlign: 'center', position: 'relative', zIndex: 2 }}>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--gold-tint)', border: '1px solid var(--gold-light)', borderRadius: 999, padding: '6px 14px', fontSize: 12.5, fontWeight: 600, color: 'var(--gold-dark)', marginBottom: 30 }}>
-          <Dot c="var(--gold-dark)" /> Founding pricing — first 20 companies
-        </span>
-        <h1 className="hero-h1" style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(38px, 5.6vw, 78px)', fontWeight: 400, letterSpacing: '-0.035em', color: 'var(--text)', lineHeight: 1.02, margin: '0 0 30px', whiteSpace: 'nowrap' }}>
+      {/* Centered copy — shapes.co restraint: one idea, one CTA, max air */}
+      <div style={{ maxWidth: 1080, margin: '0 auto', padding: '24px 24px 0', textAlign: 'center', position: 'relative', zIndex: 2 }}>
+        <h1 className="hero-h1" style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(40px, 6vw, 84px)', fontWeight: 400, letterSpacing: '-0.035em', color: 'var(--text)', lineHeight: 1.02, margin: '0 0 34px', whiteSpace: 'nowrap' }}>
           Your HR work, <span style={{ fontStyle: 'italic', color: 'var(--gold)' }}>automated.</span>
         </h1>
-        <p style={{ fontSize: 'clamp(19px, 2.1vw, 22px)', color: 'var(--text-muted)', lineHeight: 1.5, maxWidth: 540, margin: '0 auto 40px' }}>
+        <p style={{ fontSize: 'clamp(19px, 2.1vw, 22px)', color: 'var(--text-muted)', lineHeight: 1.5, maxWidth: 540, margin: '0 auto 48px' }}>
           The work is handled. You approve only the calls that need a person.
         </p>
-        <div style={{ display: 'flex', gap: 16, alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="/demo" className="btn-gold" style={{ fontSize: 16, padding: '16px 36px' }}>Request access →</a>
-          <Link href="/product" prefetch={false} style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', textDecoration: 'none' }}>See it run</Link>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 }}>
+          <a href="/demo" className="btn-gold" style={{ fontSize: 16, padding: '17px 42px' }}>Request access →</a>
+          <Link href="/product" prefetch={false} style={{ fontSize: 15, fontWeight: 500, color: 'var(--text-muted)', textDecoration: 'none' }}>or see it run →</Link>
         </div>
       </div>
 
