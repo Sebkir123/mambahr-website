@@ -16,6 +16,9 @@ export default function Cta() {
           <input className="input" type="email" placeholder="you@company.com" aria-label="Work email" />
           <button className="btn" type="submit">Request access</button>
         </form>
+        <div className="trust">
+          <span>Live the next morning</span><i /><span>Your data stays in the US</span><i /><span>A human on the big calls</span>
+        </div>
       </div>
 
       <style jsx>{`
@@ -31,7 +34,12 @@ export default function Cta() {
           text-align: center;
           position: relative;
           overflow: hidden;
-          background: radial-gradient(120% 140% at 50% -20%, #D4AA7C 0%, #B98A4E 46%, #6A5DA6 100%);
+          /* gold → rose → violet, routed through a warm rose so the midpoint
+             never goes muddy brown-gray */
+          background:
+            radial-gradient(90% 80% at 18% 0%, rgba(244, 200, 138, 0.85), transparent 58%),
+            radial-gradient(85% 75% at 88% 100%, rgba(94, 80, 158, 0.9), transparent 62%),
+            linear-gradient(160deg, #C99655 0%, #B07A78 48%, #7A6AB0 100%);
           background-size: 150% 150%;
           animation: ctaGlow 20s ease-in-out infinite;
         }
@@ -46,9 +54,23 @@ export default function Cta() {
           content: '';
           position: absolute;
           inset: 0;
-          background: radial-gradient(70% 60% at 50% 120%, rgba(255, 255, 255, 0.25), transparent 60%);
+          background:
+            radial-gradient(55% 45% at 50% 30%, rgba(255, 255, 255, 0.16), transparent 65%),
+            radial-gradient(70% 60% at 50% 120%, rgba(255, 255, 255, 0.18), transparent 60%);
           pointer-events: none;
         }
+        .trust {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-top: 26px;
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.78);
+        }
+        .trust i { width: 4px; height: 4px; border-radius: 999px; background: rgba(255, 255, 255, 0.45); }
         .eyebrow {
           position: relative;
           font-family: var(--font-mono);
