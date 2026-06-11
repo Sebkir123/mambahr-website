@@ -83,7 +83,7 @@ export function PageHero({
         </div>
       </div>
       <div className="stage" data-reveal data-delay="4">
-        <div className="frag">{children}</div>
+        <div className={`frag${photo ? ' has-photo' : ''}`}>{children}</div>
         {photo && (
           <figure className="photo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -198,10 +198,13 @@ export function PageHero({
           margin: clamp(48px, 6vw, 72px) auto 0;
         }
         .frag { position: relative; }
+        /* Reserve the photo's width minus a 24px deliberate overlap — keeps the
+           polaroid lapping the card edge without ever covering row content. */
+        .frag.has-photo { margin-right: calc(clamp(180px, 22vw, 248px) - 24px); }
         .photo {
           position: absolute;
-          right: -22px;
-          bottom: -34px;
+          right: 0;
+          bottom: -56px;
           width: clamp(180px, 22vw, 248px);
           margin: 0;
           border-radius: 16px;
@@ -584,19 +587,21 @@ export function PageCta({
     <section className="pc">
       <div className="panel" data-reveal>
         <span className="v2-grain" />
-        <div className="faces" aria-hidden="true">
-          {FACES.map((p) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={p} src={`/avatars/${p}.jpg`} alt="" width={38} height={38} />
-          ))}
-        </div>
         <h2 className="t">{title}</h2>
         <p className="s">{sub}</p>
         <div className="btns">
           <Link href="/demo" className="b">Book a demo</Link>
           <Link href="/product" className="b2">See it run</Link>
         </div>
-        <p className="trust">No setup project · Your data imported in a day · You approve the big calls</p>
+        <div className="proofline">
+          <div className="faces" aria-hidden="true">
+            {FACES.map((p) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={p} src={`/avatars/${p}.jpg`} alt="" width={30} height={30} />
+            ))}
+          </div>
+          <p className="trust">No setup project · Your data imported in a day · You approve the big calls</p>
+        </div>
       </div>
       <style jsx>{`
         .pc { padding: clamp(32px, 5vw, 64px) var(--page-pad) clamp(72px, 9vw, 104px); background: var(--bg); }
@@ -613,15 +618,6 @@ export function PageCta({
             radial-gradient(85% 75% at 88% 100%, rgba(94, 80, 158, 0.9), transparent 62%),
             linear-gradient(160deg, #C99655 0%, #B07A78 48%, #7A6AB0 100%);
         }
-        .faces { position: relative; display: flex; justify-content: center; margin-bottom: 20px; }
-        .faces img {
-          width: 38px; height: 38px; border-radius: 999px; object-fit: cover;
-          border: 2px solid rgba(255, 255, 255, 0.85);
-          margin-left: -10px;
-          box-shadow: 0 6px 14px rgba(20, 18, 14, 0.25);
-          background: var(--bg-elevated);
-        }
-        .faces img:first-child { margin-left: 0; }
         .t {
           position: relative;
           font-family: var(--font-serif);
@@ -632,6 +628,12 @@ export function PageCta({
           letter-spacing: -0.02em;
           margin: 0;
           text-shadow: 0 2px 18px rgba(20, 18, 14, 0.18);
+        }
+        /* The shared <Em> gradient is unreadable on the gradient panel — force white. */
+        .t :global(span) {
+          background: none !important;
+          color: #fff !important;
+          -webkit-text-fill-color: #fff;
         }
         .s { position: relative; color: rgba(255, 255, 255, 0.92); font-size: 16.5px; margin: 16px 0 28px; }
         .btns { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -660,7 +662,17 @@ export function PageCta({
         }
         :global(.pc .b2:hover) { background: #fff; }
         @media (prefers-reduced-motion: reduce) { :global(.pc .b:hover) { transform: none; } }
-        .trust { position: relative; color: rgba(255, 255, 255, 0.78); font-size: 13px; margin: 22px 0 0; }
+        .proofline { position: relative; display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 26px; flex-wrap: wrap; }
+        .faces { display: flex; }
+        .faces img {
+          width: 30px; height: 30px; border-radius: 999px; object-fit: cover;
+          border: 2px solid rgba(255, 255, 255, 0.85);
+          margin-left: -9px;
+          box-shadow: 0 6px 14px rgba(20, 18, 14, 0.25);
+          background: var(--bg-elevated);
+        }
+        .faces img:first-child { margin-left: 0; }
+        .trust { color: rgba(255, 255, 255, 0.82); font-size: 13px; margin: 0; }
       `}</style>
     </section>
   )
