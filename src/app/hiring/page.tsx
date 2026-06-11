@@ -1,249 +1,319 @@
-import Link from 'next/link'
-import Image from 'next/image'
+'use client'
+
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
-import RequestAccessSection from '@/components/waitlist'
-import { Beat, Page } from '@/components/ui/page'
+import RevealInit from '@/app/v2/_sections/reveal-init'
+import CountUp from '@/app/v2/_sections/count-up'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
 
-const funnelSteps = [
-  { num: '01', title: 'Req intake', agent: 'Reads Slack/form, drafts JD with comp band', you: 'Approve JD', hil: false },
-  { num: '02', title: 'Posting', agent: 'Posts to ATS, LinkedIn, Indeed, job boards', you: '—', hil: false },
-  { num: '03', title: 'Screening', agent: 'Screens + ranks with a bias-audit gate; you decide', you: '—', hil: false },
-  { num: '04', title: 'Scheduling', agent: 'Multi-calendar, time-zone aware, panel-coordinated', you: '—', hil: false },
-  { num: '05', title: 'Interview kit', agent: 'Loads scorecards, briefs panel, synthesizes feedback', you: '—', hil: false },
-  { num: '06', title: 'References', agent: 'Requests, follows up, summarizes, flags concerns', you: '—', hil: false },
-  { num: '07', title: 'Background check', agent: 'Runs Checkr, flags issues, tracks timing', you: '—', hil: false },
-  { num: '08', title: 'Offer', agent: 'Drafts, models counter-offer, sends for signature', you: 'Approve offers above band', hil: true },
+/* ── Hero fragment: live pipeline card ── */
+const STAGES = [
+  { name: 'Sourcing', count: 47, state: 'done', note: 'Posted to 9 job boards' },
+  { name: 'Screening', count: 12, state: 'done', note: 'Ranked overnight, notes attached' },
+  { name: 'Interviews', count: 8, state: 'done', note: 'All panels scheduled, kits sent' },
+  { name: 'References', count: 2, state: 'done', note: '4 of 4 calls complete' },
+  { name: 'Offer · Maya Chen', count: 1, state: 'you', note: 'Draft ready — awaiting you' },
 ]
 
-const onboardingSteps = [
-  'I-9 verified, E-Verify cleared',
-  'W-4 (federal + state) + direct deposit',
-  'Device set up (Jamf)',
-  'Accounts provisioned (Okta SSO + SCIM)',
-  'Buddy assigned + intro scheduled',
-  'Day-one orientation + handbook acknowledgment',
-  '30/60/90-day check-in cadence set',
-  'Required training assigned (anti-harassment, security)',
-  'New-hire announcement drafted',
+function PipelineCard() {
+  return (
+    <div className="pl agent-edge agent-working agent-lg">
+      <div className="head">
+        <div>
+          <div className="role">Senior Engineer</div>
+          <div className="meta">NYC hybrid · $180–205k · day 6</div>
+        </div>
+        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · working</span>
+      </div>
+      {STAGES.map((s) => (
+        <div key={s.name} className={`row${s.state === 'you' ? ' yours' : ''}`}>
+          <span className={`mark${s.state === 'you' ? ' gold' : ''}`} aria-hidden="true" />
+          <div className="main">
+            <div className="top">
+              <span className="nm">{s.name}</span>
+              <span className="ct">{s.count}</span>
+            </div>
+            <div className="note">{s.note}</div>
+          </div>
+          <span className={`tag${s.state === 'you' ? ' gold' : ''}`}>
+            {s.state === 'you' ? 'Awaiting you' : 'Done'}
+          </span>
+        </div>
+      ))}
+      <style jsx>{`
+        .pl {
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          box-shadow: var(--shadow-float);
+          padding: 6px 0 8px;
+        }
+        .head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          padding: 16px 20px 14px;
+          border-bottom: 1px solid var(--border-faint);
+        }
+        .role { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+        .meta { font-size: 12.5px; color: var(--text-faint); margin-top: 3px; }
+        .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
+        .row + .row { border-top: 1px solid var(--border-faint); }
+        .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
+        .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
+        .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #8A6535); }
+        .main { flex: 1; min-width: 0; }
+        .top { display: flex; align-items: baseline; gap: 8px; }
+        .nm { font-size: 14px; font-weight: 600; color: var(--text); }
+        .ct { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
+        .note { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        .tag {
+          flex: none;
+          font-family: var(--font-mono);
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--color-green);
+          background: rgba(22, 130, 70, 0.08);
+          border-radius: 999px;
+          padding: 3px 9px;
+        }
+        .tag.gold { color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+      `}</style>
+    </div>
+  )
+}
+
+/* ── Feature visual: hosted careers page fragment ── */
+const ROLES = [
+  { title: 'Senior Engineer', loc: 'New York · Hybrid', pay: '$180k–$205k', hot: true },
+  { title: 'Account Executive', loc: 'Remote · US', pay: '$95k–$120k + comm.' },
+  { title: 'People Operations Manager', loc: 'Austin · On-site', pay: '$110k–$135k' },
 ]
+
+function CareersSite() {
+  return (
+    <div className="cs">
+      <div className="bar">
+        <span className="dots"><b /><b /><b /></span>
+        <span className="addr">jobs.yourcompany.com</span>
+      </div>
+      <div className="body">
+        <div className="co">
+          <span className="logo">A</span>
+          <div>
+            <div className="co-n">Arcadia Labs</div>
+            <div className="co-t">We&rsquo;re hiring across three teams</div>
+          </div>
+        </div>
+        {ROLES.map((r) => (
+          <div key={r.title} className="job">
+            <div className="j-main">
+              <div className="j-t">
+                {r.title}
+                {r.hot && <span className="j-hot">12 applicants today</span>}
+              </div>
+              <div className="j-m">{r.loc} · {r.pay}</div>
+            </div>
+            <span className="j-apply">Apply</span>
+          </div>
+        ))}
+        <div className="foot">Equal-opportunity questions handled at apply — nothing for you to set up.</div>
+      </div>
+      <style jsx>{`
+        .cs {
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          box-shadow: var(--shadow-float);
+          overflow: hidden;
+        }
+        .bar {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          height: 40px;
+          padding: 0 14px;
+          background: #F8F6F1;
+          border-bottom: 1px solid var(--border);
+        }
+        .dots { display: flex; gap: 6px; }
+        .dots b { width: 9px; height: 9px; border-radius: 999px; background: #e3ddd6; }
+        .dots b:first-child { background: #f0a59a; }
+        .dots b:nth-child(2) { background: #f4ce8e; }
+        .dots b:nth-child(3) { background: #a9cfa6; }
+        .addr {
+          margin: 0 auto;
+          font-size: 12px;
+          color: var(--text-faint);
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 7px;
+          padding: 3px 16px;
+        }
+        .body { padding: 20px 22px 18px; }
+        .co { display: flex; align-items: center; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--border-faint); }
+        .logo {
+          width: 36px; height: 36px; border-radius: 10px;
+          background: linear-gradient(135deg, #B98A4E, #6A5DA6);
+          color: #fff; font-family: var(--font-serif); font-size: 19px;
+          display: flex; align-items: center; justify-content: center;
+        }
+        .co-n { font-size: 15px; font-weight: 700; color: var(--text); }
+        .co-t { font-size: 12.5px; color: var(--text-muted); margin-top: 1px; }
+        .job { display: flex; align-items: center; gap: 12px; padding: 14px 4px; }
+        .job + .job { border-top: 1px solid var(--border-faint); }
+        .j-main { flex: 1; min-width: 0; }
+        .j-t { font-size: 14.5px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+        .j-hot {
+          font-family: var(--font-mono);
+          font-size: 10px;
+          color: #8A6535;
+          background: var(--gold-tint);
+          border: 1px solid rgba(138, 101, 53, 0.22);
+          border-radius: 999px;
+          padding: 2px 8px;
+        }
+        .j-m { font-size: 12.5px; color: var(--text-muted); margin-top: 3px; }
+        .j-apply {
+          flex: none;
+          font-size: 13px;
+          font-weight: 600;
+          color: #fff;
+          background: #1A1A19;
+          border-radius: 999px;
+          padding: 8px 18px;
+        }
+        .foot { font-size: 11.5px; color: var(--text-faint); padding-top: 14px; border-top: 1px solid var(--border-faint); margin-top: 2px; }
+      `}</style>
+    </div>
+  )
+}
+
+/* ── Feature visual: real photo + floating done card ── */
+function HumanCall() {
+  return (
+    <div className="hc">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="ph" src="/v2-people/team2.jpg" alt="A hiring panel meeting a candidate" />
+      <div className="float agent-edge agent-done">
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <div className="f-t">Offer signed · Maya Chen</div>
+        <div className="f-m">Senior Engineer · starts June 22</div>
+      </div>
+      <style jsx>{`
+        .hc { position: relative; }
+        .ph {
+          display: block;
+          width: 100%;
+          border-radius: 18px;
+          box-shadow: var(--shadow-float);
+          object-fit: cover;
+          aspect-ratio: 4 / 3;
+        }
+        .float {
+          position: absolute;
+          right: -14px;
+          bottom: -22px;
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          box-shadow: var(--shadow-float);
+          padding: 14px 18px;
+          transform: rotate(1.5deg);
+        }
+        .f-t { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 10px; }
+        .f-m { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        @media (max-width: 880px) {
+          .float { right: 8px; bottom: -16px; }
+        }
+      `}</style>
+    </div>
+  )
+}
 
 export default function HiringPage() {
   return (
     <>
       <MegaNav />
-      <main style={{ paddingTop: 64 }}>
+      <RevealInit />
+      <CountUp />
+      <main>
+        <PageHero
+          eyebrow="Hiring & ATS"
+          title={<>Hiring, <Em>handled.</Em></>}
+          lead="Mamba posts the role, screens and ranks every applicant, schedules every interview, checks references, and drafts the offer. You make one decision: who joins."
+          proof="Trusted by lean people teams"
+          photo="/v2-people/feat.jpg"
+          photoChip="Mamba · done"
+          photoCaption="Maya signed · starts June 22"
+        >
+          <PipelineCard />
+        </PageHero>
 
-        {/* Hero */}
-        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
-          <Page>
-            <div className="hero-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 64, alignItems: 'center' }}>
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 20 }}>HIRING & ATS</p>
-                <h1
-                  style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(40px, 5vw, 68px)',
-                    fontWeight: 400,
-                    letterSpacing: '-0.03em',
-                    color: 'var(--text)',
-                    marginBottom: 24,
-                    lineHeight: 1.0,
-                  }}
-                >
-                  From req to offer.<br /><span style={{ color: 'var(--gold-dark)' }}>Without the loop.</span>
-                </h1>
-                <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 36, maxWidth: 480 }}>
-                  Reqs come in. The agent screens, schedules, references, and drafts the offer. You decide who joins.
-                </p>
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <a href="/demo" className="btn-gold">Request access →</a>
-                  <Link href="/mamba" className="btn-secondary">See the agent in Slack</Link>
-                </div>
-              </div>
+        <AgentLoop
+          eyebrow="How it runs"
+          title="The hiring loop"
+          lead="Every step that used to mean chasing calendars and inboxes — handled. The judgment calls stay with you, clearly marked."
+          steps={[
+            { n: '01', label: 'Req intake', desc: 'Tell Mamba the role, the team, and the budget — in Slack, Teams, or the app. The req is ready in minutes.', who: 'agent', time: '4 min' },
+            { n: '02', label: 'Posted everywhere', desc: 'The role goes live on your careers page and the major job boards, written in your voice.', who: 'agent', time: 'same day' },
+            { n: '03', label: 'Screening & ranking', desc: 'Every applicant read, ranked, and recommended with reasons — you make every advance-or-pass call.', who: 'you', img: '/avatars/tom.jpg' },
+            { n: '04', label: 'Scheduling', desc: 'Panels, rooms, and reschedules handled across every calendar. No back-and-forth.', who: 'agent', time: 'instant' },
+            { n: '05', label: 'Interview kits & feedback', desc: 'Each interviewer gets a tailored kit; feedback is gathered and summarized the same day.', who: 'agent' },
+            { n: '06', label: 'References', desc: 'Calls arranged, notes captured, themes pulled out for you to read in two minutes.', who: 'agent', img: '/avatars/dave.jpg' },
+            { n: '07', label: 'Background check', desc: 'Run through Checkr the moment you give the nod, with status tracked to the finish.', who: 'agent' },
+            { n: '08', label: 'Offer out the door', desc: 'Offer drafted in band and prepared for signature through DocuSign. You approve and the offer goes out.', who: 'you', img: '/avatars/maya.jpg' },
+          ]}
+        />
 
-              {/* Right: candidate pipeline mockup */}
-              <div className="hero-today-panel">
-                <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', boxShadow: '0 8px 32px rgba(0,0,0,0.06)' }}>
-                  <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)', display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <circle cx="5" cy="5" r="2.5" stroke="var(--text-muted)" strokeWidth="1.4" />
-                      <path d="M2 12c0-2 1.5-3 3-3s3 1 3 3M9 7l3 3-3 3" stroke="var(--text-muted)" strokeWidth="1.4" strokeLinecap="round" />
-                    </svg>
-                    <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Senior Engineer · NYC hybrid</span>
-                    <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>day 6 of 14</span>
-                  </div>
-                  {[
-                    { stage: 'Sourcing',           candidates: 47, status: 'done',     detail: 'Greenhouse + LinkedIn + Indeed' },
-                    { stage: 'Screening',          candidates: 12, status: 'done',     detail: 'AI ranked, top 12 forwarded' },
-                    { stage: 'Phone screens',      candidates: 8,  status: 'done',     detail: 'scheduled by agent' },
-                    { stage: 'Onsite loops',       candidates: 4,  status: 'progress', detail: '3 done · 1 tomorrow' },
-                    { stage: 'References',         candidates: 2,  status: 'progress', detail: 'requested · awaiting' },
-                    { stage: 'Offers',             candidates: 1,  status: 'await',    detail: 'Maya Chen · awaiting your approval' },
-                  ].map((s, i) => (
-                    <div key={s.stage} style={{ display: 'grid', gridTemplateColumns: '20px 1fr 32px', gap: 14, alignItems: 'center', padding: '14px 20px', borderBottom: i < 5 ? '1px solid var(--border-faint)' : 'none' }}>
-                      {s.status === 'done' ? (
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                          <circle cx="9" cy="9" r="9" fill="#22C55E" />
-                          <path d="M5 9l3 3 5-6" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      ) : s.status === 'progress' ? (
-                        <div style={{ width: 14, height: 14, borderRadius: '50%', border: '2px solid var(--border-mid)', borderTopColor: 'var(--gold)' }} />
-                      ) : (
-                        <span style={{ width: 12, height: 12, borderRadius: '50%', background: 'var(--gold-tint)', border: '2px solid var(--gold)' }} />
-                      )}
-                      <div>
-                        <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', margin: 0 }}>{s.stage}</p>
-                        <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: '2px 0 0' }}>{s.detail}</p>
-                      </div>
-                      <span className="mono" style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', textAlign: 'right' }}>{s.candidates}</span>
-                    </div>
-                  ))}
-                  <div className="gold-pulse" style={{ padding: '12px 20px', background: 'var(--gold-tint)', borderTop: '1px solid rgba(176,141,87,0.25)', position: 'relative' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)' }} />
-                      <p style={{ fontSize: 12, color: 'var(--gold-dark)', margin: 0, fontWeight: 600 }}>
-                        1 offer awaiting your approval →
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Page>
-        </Beat>
+        <FeatureSplit
+          eyebrow="The job portal"
+          title={<>Your job site, <Em>live in a day.</Em></>}
+          lead="A branded job board on your own address — no agency, no setup project. Candidates apply, applications land in your pipeline already read, and the questions hiring law requires are collected quietly."
+          bullets={[
+            'Your logo, your colors, your domain — looks like you built it',
+            'Every application lands in the pipeline already read and ranked',
+            'Required hiring-law questions asked once, stored properly, never your problem',
+          ]}
+        >
+          <CareersSite />
+        </FeatureSplit>
 
-        {/* Funnel timeline */}
-        <Beat bg="white">
-          <Page>
-            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>THE HIRING LOOP</p>
-            <h2
-              style={{
-                textAlign: 'center',
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(28px, 3vw, 44px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 64,
-                lineHeight: 1.15,
-              }}
-            >
-              A complete hiring loop, run by the agent.
-            </h2>
+        <FeatureSplit
+          flip
+          warm
+          eyebrow="The human part"
+          title={<>The final call stays <Em>human.</Em></>}
+          lead="Interviews, culture, and who gets the offer stay yours — the part only you can do. Mamba clears the admin so the people you meet are worth meeting, and the week you save goes into meeting them."
+          bullets={[
+            'Mamba recommends; it never advances or rejects anyone on its own',
+            'Every shortlist comes with the why, in plain English',
+            'The offer waits for your signature, every single time',
+          ]}
+        >
+          <HumanCall />
+        </FeatureSplit>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-              {funnelSteps.map((step, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '56px 1fr 1fr 1fr',
-                    gap: 24,
-                    alignItems: 'center',
-                    padding: '20px 24px',
-                    borderBottom: i < funnelSteps.length - 1 ? '1px solid var(--border-faint)' : 'none',
-                    background: i % 2 === 0 ? '#FFFFFF' : 'var(--bg-surface)',
-                    borderRadius: i === 0 ? '12px 12px 0 0' : i === funnelSteps.length - 1 ? '0 0 12px 12px' : 0,
-                  }}
-                >
-                  <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, fontWeight: 700, color: 'var(--gold)' }}>{step.num}</span>
-                  <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>{step.title}</span>
-                  <span style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.45 }}>{step.agent}</span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    {step.hil ? (
-                      <>
-                        <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)', flexShrink: 0 }} />
-                        <span style={{ fontSize: 13, color: 'var(--gold-dark)', fontWeight: 500 }}>{step.you}</span>
-                      </>
-                    ) : (
-                      <span style={{ fontSize: 13, color: 'var(--text-faint)' }}>Agent handles</span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+        <StatTrio
+          stats={[
+            { n: 6, suffix: ' days', label: 'median req-to-offer with Mamba running the loop' },
+            { n: 47, label: 'candidates sourced for one role, screened overnight' },
+            { n: 1, label: 'decision that stays yours: who joins' },
+          ]}
+        />
 
-            <div style={{ display: 'grid', gridTemplateColumns: '56px 1fr 1fr 1fr', gap: 24, padding: '12px 24px', marginTop: 8 }}>
-              <span />
-              <span />
-              <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-faint)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Agent does</span>
-              <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--gold-dark)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>You approve</span>
-            </div>
-          </Page>
-        </Beat>
+        <QuoteBand
+          quote="The chase is gone. No more calendar Tetris, no more resume piles on a Sunday night. I open the pipeline, read three ranked candidates, and make the call. Hiring finally feels like judgment, not admin."
+          name="Marcus Lee"
+          role="People Ops Lead"
+          img="/v2-people/marcus.jpg"
+          metric="Saved 9 hrs / week"
+        />
 
-        {/* Day one ready */}
-        <Beat bg="cream">
-          <Page style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'start' }} className="mobile-stack">
-            <div>
-              <p className="eyebrow" style={{ marginBottom: 20 }}>ONBOARDING</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(28px, 3vw, 42px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text)',
-                  marginBottom: 20,
-                  lineHeight: 1.15,
-                }}
-              >
-                Day one ready,<br />before day one.
-              </h2>
-              <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.7 }}>
-                Once they accept, the onboarding agent takes over. By the time they log in on day one, everything works — accounts, device, benefits, training, their first meeting.
-              </p>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {onboardingSteps.map((step, i) => (
-                <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginTop: 2, flexShrink: 0 }}>
-                    <circle cx="8" cy="8" r="7" stroke="var(--gold)" strokeWidth="1.5" />
-                    <path d="M5 8l2.5 2.5 3.5-4" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.5 }}>{step}</span>
-                </div>
-              ))}
-            </div>
-          </Page>
-        </Beat>
-
-        {/* In Slack */}
-        <Beat bg="white">
-          <Page style={{ textAlign: 'center' }}>
-            <p className="eyebrow" style={{ marginBottom: 20 }}>IN SLACK</p>
-            <h2
-              style={{
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(24px, 2.5vw, 36px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 40,
-              }}
-            >
-              The whole loop, from a thread.
-            </h2>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, textAlign: 'left', maxWidth: 800, margin: '0 auto' }}>
-              {[
-                { cmd: '@mamba open a req for Senior Engineer, NYC hybrid, $160–190k', resp: 'JD drafted, posted to Greenhouse. 3 sourcing strategies initiated. Shortlist expected in 3 days.' },
-                { cmd: '@mamba write the offer for Alex at $175k + 0.12% equity, May 15 start', resp: 'Offer drafted. Above band by 4% — flagging for your approval before it goes to Alex. Review link sent.' },
-              ].map((ex, i) => (
-                <div key={i} style={{ background: 'var(--bg-warm)', border: '1px solid var(--border)', borderRadius: 12, padding: '16px 20px' }}>
-                  <p style={{ fontSize: 13, color: 'var(--text-muted)', fontFamily: 'var(--font-mono), monospace', marginBottom: 8 }}>{ex.cmd}</p>
-                  <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <Image src="/MambaHR_logo.png" alt="Mamba" width={20} height={20} style={{ display: 'block', objectFit: 'contain', borderRadius: 6, flexShrink: 0 }} />
-                    <p style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.5 }}>{ex.resp}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Page>
-        </Beat>
-
-        <RequestAccessSection />
+        <PageCta title={<>Hire faster. <Em>Decide better.</Em></>} />
       </main>
       <Footer />
     </>

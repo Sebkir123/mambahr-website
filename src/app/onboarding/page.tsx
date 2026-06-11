@@ -1,98 +1,281 @@
+'use client'
+
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
-import RequestAccessSection from '@/components/waitlist'
-import { Beat, Page } from '@/components/ui/page'
+import RevealInit from '@/app/v2/_sections/reveal-init'
+import CountUp from '@/app/v2/_sections/count-up'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
 
-const checklist = [
-  { label: 'Offer letter generated + countersigned', meta: 'DocuSign' },
-  { label: 'I-9 verified, E-Verify cleared', meta: 'Federal' },
-  { label: 'Accounts provisioned', meta: 'Okta · Google · Slack' },
-  { label: 'Device set up', meta: 'Jamf' },
-  { label: 'Onboarding buddy assigned', meta: 'Eng team' },
-  { label: 'First-week calendar invites sent', meta: '5 meetings' },
+/* ── Hero fragment: day-one timeline card ── */
+const DAY1 = [
+  { time: '9:02 AM', label: 'Offer countersigned', meta: 'DocuSign' },
+  { time: '9:03 AM', label: 'I-9 filed, E-Verify cleared', meta: 'Federal' },
+  { time: '9:05 AM', label: 'Email, Slack, laptop logins live', meta: 'Okta · Google · Slack' },
+  { time: '9:07 AM', label: 'First-week calendar sent', meta: '11 invites' },
 ]
 
-const Check = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
-    <circle cx="8" cy="8" r="8" fill="var(--green)" />
-    <path d="M4.5 8.2l2.3 2.3 4.7-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-)
+function DayOneCard() {
+  return (
+    <div className="d1 agent-edge agent-done agent-lg">
+      <div className="head">
+        <div className="who">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/avatars/dave.jpg" alt="Alex Park" width={38} height={38} />
+          <div>
+            <div className="nm">Alex Park</div>
+            <div className="meta">Product Designer · starts Monday</div>
+          </div>
+        </div>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done in 4m 12s</span>
+      </div>
+      {DAY1.map((r) => (
+        <div key={r.label} className="row">
+          <span className="time">{r.time}</span>
+          <span className="mark" aria-hidden="true" />
+          <span className="lbl">{r.label}</span>
+          <span className="src">{r.meta}</span>
+        </div>
+      ))}
+      <div className="foot">Everything ready before Alex&rsquo;s first coffee.</div>
+      <style jsx>{`
+        .d1 {
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          box-shadow: var(--shadow-float);
+          padding: 6px 0 0;
+        }
+        .head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          flex-wrap: wrap;
+          padding: 16px 20px 14px;
+          border-bottom: 1px solid var(--border-faint);
+        }
+        .who { display: flex; align-items: center; gap: 11px; }
+        .who img { width: 38px; height: 38px; border-radius: 999px; object-fit: cover; }
+        .nm { font-size: 15px; font-weight: 700; color: var(--text); }
+        .meta { font-size: 12.5px; color: var(--text-faint); margin-top: 1px; }
+        .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
+        .row + .row { border-top: 1px solid var(--border-faint); }
+        .time { flex: none; font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); width: 56px; }
+        .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
+        .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .lbl { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; color: var(--text); }
+        .src { flex: none; font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); }
+        .foot {
+          font-size: 12px;
+          color: var(--text-muted);
+          padding: 12px 20px 14px;
+          border-top: 1px solid var(--border-faint);
+          background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0));
+          border-radius: 0 0 16px 16px;
+        }
+        @media (max-width: 640px) { .src { display: none; } }
+      `}</style>
+    </div>
+  )
+}
+
+/* ── Feature visual: exit checklist fragment ── */
+const EXIT = [
+  { label: 'Final paycheck calculated for California rules', meta: 'Due last day', state: 'done' },
+  { label: 'COBRA notice prepared and queued', meta: 'Benefits', state: 'done' },
+  { label: 'Handover doc collected from manager', meta: 'Knowledge', state: 'done' },
+  { label: 'Switch off all logins at 5:00 PM Friday', meta: 'Email · Slack · laptop', state: 'you' },
+]
+
+function ExitChecklist() {
+  return (
+    <div className="ex agent-edge agent-working">
+      <div className="head">
+        <div>
+          <div className="t">Exit · Jordan Mills</div>
+          <div className="m">Last day Friday, June 19</div>
+        </div>
+        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · working</span>
+      </div>
+      {EXIT.map((r) => (
+        <div key={r.label} className={`row${r.state === 'you' ? ' yours' : ''}`}>
+          <span className={`mark${r.state === 'you' ? ' gold' : ''}`} aria-hidden="true" />
+          <div className="main">
+            <div className="lbl">{r.label}</div>
+            <div className="meta">{r.meta}</div>
+          </div>
+          <span className={`tag${r.state === 'you' ? ' gold' : ''}`}>
+            {r.state === 'you' ? 'Awaiting your sign-off' : 'Done'}
+          </span>
+        </div>
+      ))}
+      <style jsx>{`
+        .ex {
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          box-shadow: var(--shadow-float);
+          padding: 6px 0 8px;
+        }
+        .head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          flex-wrap: wrap;
+          padding: 16px 20px 14px;
+          border-bottom: 1px solid var(--border-faint);
+        }
+        .t { font-size: 15px; font-weight: 700; color: var(--text); }
+        .m { font-size: 12.5px; color: var(--text-faint); margin-top: 2px; }
+        .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
+        .row + .row { border-top: 1px solid var(--border-faint); }
+        .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
+        .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
+        .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #8A6535); }
+        .main { flex: 1; min-width: 0; }
+        .lbl { font-size: 13.5px; font-weight: 600; color: var(--text); }
+        .meta { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+        .tag {
+          flex: none;
+          font-family: var(--font-mono);
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--color-green);
+          background: rgba(22, 130, 70, 0.08);
+          border-radius: 999px;
+          padding: 3px 9px;
+        }
+        .tag.gold { color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+        @media (max-width: 640px) { .row { flex-wrap: wrap; } }
+      `}</style>
+    </div>
+  )
+}
+
+/* ── Feature visual: real photo + floating mini-card ── */
+function FirstDay() {
+  return (
+    <div className="fd">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="ph" src="/v2-people/team.jpg" alt="A new hire being welcomed by the team" />
+      <div className="float agent-edge agent-done">
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <div className="f-t">Day 1 ready · Alex Park</div>
+        <div className="f-m">Logins live · buddy assigned · week planned</div>
+      </div>
+      <style jsx>{`
+        .fd { position: relative; }
+        .ph {
+          display: block;
+          width: 100%;
+          border-radius: 18px;
+          box-shadow: var(--shadow-float);
+          object-fit: cover;
+          aspect-ratio: 4 / 3;
+        }
+        .float {
+          position: absolute;
+          right: -14px;
+          bottom: -22px;
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          box-shadow: var(--shadow-float);
+          padding: 14px 18px;
+          transform: rotate(-1.5deg);
+        }
+        .f-t { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 10px; }
+        .f-m { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        @media (max-width: 880px) {
+          .float { right: 8px; bottom: -16px; }
+        }
+      `}</style>
+    </div>
+  )
+}
 
 export default function OnboardingPage() {
   return (
     <>
       <MegaNav />
-      <main style={{ paddingTop: 64 }}>
-        {/* Hero */}
-        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
-          <Page>
-            <div className="hero-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 64, alignItems: 'center' }}>
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 20 }}>ONBOARDING & OFFBOARDING</p>
-                <h1 style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(40px, 5vw, 68px)', fontWeight: 400, letterSpacing: '-0.03em', color: 'var(--text)', marginBottom: 24, lineHeight: 1.0 }}>
-                  Day one to last day.<br />
-                  <span style={{ color: 'var(--gold-dark)' }}>One workflow.</span>
-                </h1>
-                <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 36, maxWidth: 480 }}>
-                  From a signed offer letter to account deprovisioning. The agent runs the entire workflow, with you in the loop for sign-offs.
-                </p>
-                <a href="/demo" className="btn-gold">Request access →</a>
-              </div>
+      <RevealInit />
+      <CountUp />
+      <main>
+        <PageHero
+          eyebrow="Onboarding & offboarding"
+          title={<>Day one, <Em>ready.</Em></>}
+          lead="Paperwork filed and verified, logins working, first week planned — before your new hire walks in. And when someone leaves, a clean exit with nothing forgotten."
+          proof="Loved by new hires and HR alike"
+          photo="/v2-people/marcus.jpg"
+          photoChip="Mamba · done in 4m"
+          photoCaption="Alex set up · logins live by 9 AM"
+        >
+          <DayOneCard />
+        </PageHero>
 
-              {/* Onboarding Checklist Mockup */}
-              <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 18, boxShadow: 'var(--shadow-float), var(--sheen)', overflow: 'hidden' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '18px 20px', borderBottom: '1px solid var(--border)', background: 'var(--bg-warm)' }}>
-                  <span style={{ width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg, var(--gold-light), var(--gold-dark))', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 700, flexShrink: 0 }}>
-                    AR
-                  </span>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontSize: 15, fontWeight: 600, margin: 0, letterSpacing: '-0.01em' }}>Alex Rivera</p>
-                    <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '1px 0 0' }}>Senior Engineer · starts Monday</p>
-                  </div>
-                  <span className="gold-pulse" style={{ background: 'var(--gold-tint)', color: 'var(--gold-dark)', borderRadius: 999, padding: '5px 12px', fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', flexShrink: 0 }}>
-                    DAY 1 READY
-                  </span>
-                </div>
-                <div style={{ padding: '12px 20px 4px', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span className="mono" style={{ fontSize: 11, color: 'var(--text-faint)', letterSpacing: '0.04em' }}>ONBOARDING · 6 OF 6 READY</span>
-                </div>
-                <div style={{ padding: '8px 20px 20px' }}>
-                  {checklist.map((item) => (
-                    <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 0', borderBottom: '1px solid var(--border-faint)' }}>
-                      <Check />
-                      <span style={{ flex: 1, fontSize: 14.5, color: 'var(--text)' }}>{item.label}</span>
-                      <span className="mono" style={{ fontSize: 11, color: 'var(--text-faint)', whiteSpace: 'nowrap' }}>{item.meta}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Page>
-        </Beat>
+        <AgentLoop
+          eyebrow="How it runs"
+          title="From yes to day one"
+          lead="The moment the offer is accepted, everything starts moving. By Monday morning there&rsquo;s nothing left on your list but the welcome."
+          steps={[
+            { n: '01', label: 'Offer signature', desc: 'The accepted offer is countersigned through DocuSign and filed where you can always find it.', who: 'agent', time: 'minutes' },
+            { n: '02', label: 'I-9 & E-Verify', desc: 'Work-eligibility paperwork collected, verified, and filed — correctly, the first time.', who: 'agent', time: 'day 1' },
+            { n: '03', label: 'Logins ready', desc: 'Email, Slack, and every tool they need — live through Okta, Entra, or Google before they sit down.', who: 'agent', time: 'before 9 AM' },
+            { n: '04', label: 'Equipment & buddy', desc: 'Laptop ordered and shipped to their door; an onboarding buddy picked and briefed.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '05', label: 'First-week schedule', desc: 'Intros, team lunches, and training sessions on everyone&rsquo;s calendar — no one has to remember.', who: 'agent' },
+            { n: '06', label: '30-day check-in', desc: 'A quiet pulse at day 30: how it&rsquo;s going, what&rsquo;s missing — flagged to you only if something&rsquo;s off.', who: 'agent', time: 'day 30', img: '/avatars/dave.jpg' },
+            { n: '07', label: 'The welcome', desc: 'You give the welcome. The handshake, the story, the why-we-hired-you — that&rsquo;s yours.', who: 'you', img: '/avatars/anna.jpg' },
+          ]}
+        />
 
-        {/* Detailed capabilities beat */}
-        <Beat bg="white">
-          <Page narrow>
-            <h2 className="t-h2" style={{ textAlign: 'center', marginBottom: 48 }}>Complete automation from signed offer to exit.</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-              <div>
-                <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Day-One Readiness</h3>
-                <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                  Once a candidate accept letters generated and signed via DocuSign, the agent handles the setup. It triggers I-9 and E-Verify checks, provisions accounts in Okta, Google Workspace, and Slack, sets up hardware management via Jamf, assigns their onboarding buddy, and schedules first-week meetings.
-                </p>
-              </div>
-              <div style={{ borderTop: '1px solid var(--border-faint)', paddingTop: 32 }}>
-                <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Compliant Offboarding</h3>
-                <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                  When an employee exits, the agent executes the reverse process. It handles state-specific final pay calculations, drafts separation agreements, coordinates COBRA triggers, and revokes accounts instantly. Terminations are always gated by human approval.
-                </p>
-              </div>
-            </div>
-          </Page>
-        </Beat>
+        <FeatureSplit
+          eyebrow="Offboarding"
+          title={<>Exits with <Em>zero loose ends.</Em></>}
+          lead="Exits are where details get expensive. Mamba gets the final paycheck right for their state, prepares the COBRA notices, collects the handover — and switches off every login only after your sign-off."
+          bullets={[
+            'Final pay timed to each state&rsquo;s rules — California&rsquo;s last-day deadline included',
+            'Benefits notices prepared and sent on schedule, automatically',
+            'Nothing gets switched off until you say so',
+          ]}
+        >
+          <ExitChecklist />
+        </FeatureSplit>
 
-        <RequestAccessSection />
+        <FeatureSplit
+          flip
+          warm
+          eyebrow="The first impression"
+          title={<>Day one, like <Em>the brochure.</Em></>}
+          lead="Nobody remembers a smooth start — they remember a broken one. When the laptop works, the calendar is full, and the buddy says hi at 9:05, your new hire spends day one meeting people instead of waiting on logins."
+          bullets={[
+            'A first week that says we were ready for you',
+            'Managers get a nudge list, not a to-do list',
+            'New hires answer one short form — Mamba does the rest',
+          ]}
+        >
+          <FirstDay />
+        </FeatureSplit>
+
+        <StatTrio
+          stats={[
+            { n: 4, suffix: ' min', label: 'from signed offer to day-one setup complete' },
+            { n: 11, label: 'first-week invites sent automatically per new hire' },
+            { n: 0, label: 'forgotten logins on exit — every account accounted for' },
+          ]}
+        />
+
+        <QuoteBand
+          quote="We switched on a Thursday and onboarded two people the following Monday. Offer signed, paperwork verified, logins live, calendars full — and I never opened a checklist. I just showed up to say welcome."
+          name="Sofia Reyes"
+          role="Director of HR"
+          img="/v2-people/sofia.jpg"
+          metric="Live in a day"
+        />
+
+        <PageCta title={<>Day one, done. <Em>Day 4,000, too.</Em></>} />
       </main>
       <Footer />
     </>

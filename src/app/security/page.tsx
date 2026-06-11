@@ -1,702 +1,280 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
-import RequestAccessSection from '@/components/waitlist'
-import { Beat, Page } from '@/components/ui/page'
+import RevealInit from '@/app/v2/_sections/reveal-init'
+import CountUp from '@/app/v2/_sections/count-up'
+import { PageHero, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
 
-/* ── Audit log — always-visible entries with new entry pulsing in ── */
-function AuditLogVisual() {
-  const [highlight, setHighlight] = useState(0)
-  useEffect(() => {
-    const t = setInterval(() => setHighlight(h => (h + 1) % 4), 2200)
-    return () => clearInterval(t)
-  }, [])
+/* ── Hero fragment: dark security log ── */
+const LOG = [
+  { time: '09:31:08', text: 'Access granted · role: HR admin', tag: 'logged' },
+  { time: '09:31:42', text: 'Record changed · comp · by Mamba', tag: 'rule cited' },
+  { time: '09:32:15', text: 'Export requested · approved by B. Bell', tag: 'logged' },
+  { time: '09:33:01', text: 'Document viewed · offer · by HR admin', tag: 'logged' },
+]
 
-  const entries = [
-    { time: '09:32:16', action: 'Leave request received', detail: 'from Maya Chen via Slack', actor: 'mamba.agent', ref: 'evt_4f81a2' },
-    { time: '09:32:16', action: 'Policy checked', detail: '12 days remaining · within threshold', actor: 'compliance.engine', ref: 'evt_4f81a3' },
-    { time: '09:32:17', action: 'Leave approved', detail: 'auto-resolved', actor: 'time-off.agent', ref: 'evt_4f81a4' },
-    { time: '09:32:18', action: 'Calendar + payroll updated', detail: 'manager notified · OOO set', actor: 'mamba.agent', ref: 'evt_4f81a5' },
-  ]
-
+function SecurityLogCard() {
   return (
-    <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}>
-      {/* Header */}
-      <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <rect x="2" y="2" width="12" height="12" rx="2" stroke="var(--gold)" strokeWidth="1.3" />
-            <path d="M5 5h6M5 8h4M5 11h5" stroke="var(--gold)" strokeWidth="1" strokeLinecap="round" />
-          </svg>
-          <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>Audit log · Maya Chen</span>
-        </div>
-        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-green)', animation: 'gold-ring-pulse 2s ease-out infinite' }} />
-          <span style={{ fontSize: 10, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>live · cannot be edited</span>
-        </span>
+    <div className="sec agent-edge agent-done">
+      <span className="v2-grain" />
+      <div className="s-head">
+        <span className="s-t">Audit log</span>
+        <span className="s-chip"><i />Every action logged</span>
       </div>
-
-      {/* Entries — all visible, current one highlighted */}
-      {entries.map((entry, i) => {
-        const isHighlight = highlight === i
-        return (
-          <div key={entry.ref} style={{
-            display: 'grid',
-            gridTemplateColumns: '60px 1fr 22px',
-            gap: 14,
-            padding: '14px 20px',
-            borderBottom: i < entries.length - 1 ? '1px solid var(--border-faint)' : 'none',
-            background: isHighlight ? 'rgba(34,197,94,0.06)' : 'transparent',
-            transition: 'background 0.6s ease',
-            position: 'relative',
-          }}>
-            {/* Left timestamp */}
-            <div style={{ paddingTop: 2 }}>
-              <p style={{ fontSize: 10, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace', margin: 0 }}>{entry.time}</p>
-              <p style={{ fontSize: 9, color: isHighlight ? 'var(--color-green)' : 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace', margin: '2px 0 0', transition: 'color 0.4s' }}>{entry.ref}</p>
-            </div>
-
-            {/* Middle content */}
-            <div>
-              <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', margin: 0 }}>{entry.action}</p>
-              <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: '3px 0 0' }}>{entry.detail}</p>
-              <p style={{ fontSize: 10, color: 'var(--text-faint)', margin: '4px 0 0', fontFamily: 'var(--font-mono), monospace' }}>actor: {entry.actor}</p>
-            </div>
-
-            {/* Right check — flat green tick, matches the compare table */}
-            <div style={{ paddingTop: 4, display: 'flex', justifyContent: 'center' }}>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style={{
-                  transform: isHighlight ? 'scale(1.2)' : 'scale(1)',
-                  transition: 'transform 0.4s',
-                }}
-                aria-hidden="true"
-              >
-                <path d="M3 8.5l3.5 3.5L13 5" stroke="var(--color-green)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-
-            {/* Highlight bar on the left when active */}
-            {isHighlight && (
-              <span style={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                bottom: 0,
-                width: 2,
-                background: 'var(--color-green)',
-              }} />
-            )}
+      <div className="rows">
+        {LOG.map((r) => (
+          <div className="row" key={r.time}>
+            <span className="time">{r.time}</span>
+            <span className="ok" aria-hidden="true" />
+            <span className="txt">{r.text}</span>
+            <span className="tag">{r.tag}</span>
           </div>
-        )
-      })}
-
-      {/* Footer */}
-      <div style={{ padding: '12px 20px', background: 'var(--bg-surface)', borderTop: '1px solid var(--border-faint)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: 0 }}>
-          Recorded forever · exportable · cannot be changed
-        </p>
-        <span style={{ fontSize: 10, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace' }}>4 of 247 today</span>
+        ))}
       </div>
+      <div className="s-foot">
+        <span>Kept forever · cannot be edited — not even by us</span>
+        <span className="mono">4 of 247 today</span>
+      </div>
+      <style jsx>{`
+        .sec { position: relative; overflow: hidden; background: #14110C; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 20px 0 0; box-shadow: var(--shadow-float); }
+        .s-head { display: flex; align-items: center; justify-content: space-between; padding: 0 22px 16px; }
+        .s-t { font-family: var(--font-serif); font-size: 19px; color: #FFF2E6; letter-spacing: -0.01em; }
+        .s-chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: #D4AA7C; background: rgba(212, 170, 124, 0.12); border: 1px solid rgba(212, 170, 124, 0.25); border-radius: 999px; padding: 4px 10px; }
+        .s-chip i { width: 6px; height: 6px; border-radius: 999px; background: #D4AA7C; }
+        .rows { border-top: 1px solid rgba(255, 255, 255, 0.07); }
+        .row { display: flex; align-items: center; gap: 12px; padding: 13px 22px; font-family: var(--font-mono); font-size: 12px; }
+        .row + .row { border-top: 1px solid rgba(255, 255, 255, 0.06); }
+        .time { color: rgba(255, 242, 230, 0.4); flex: none; }
+        .ok { flex: none; width: 14px; height: 14px; border-radius: 999px; background: rgba(46, 160, 94, 0.2); border: 1px solid rgba(110, 200, 140, 0.5); position: relative; }
+        .ok::after { content: ''; position: absolute; left: 4.5px; top: 2px; width: 3px; height: 7px; border: solid #8FD6A8; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
+        .txt { color: rgba(255, 242, 230, 0.88); flex: 1; min-width: 0; }
+        .tag { flex: none; font-size: 10px; color: #AEA2E6; background: rgba(106, 93, 166, 0.22); border-radius: 999px; padding: 3px 9px; }
+        .s-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 22px; border-top: 1px solid rgba(255, 255, 255, 0.07); font-size: 11.5px; color: rgba(255, 242, 230, 0.5); flex-wrap: wrap; }
+        .mono { font-family: var(--font-mono); font-size: 10.5px; color: rgba(255, 242, 230, 0.35); }
+        @media (max-width: 520px) { .tag { display: none; } }
+      `}</style>
     </div>
   )
 }
 
-/* ── Access control — auto-cycling visual showing what each role sees ── */
-function AccessControlVisual() {
-  const [active, setActive] = useState(0)
-  useEffect(() => {
-    const t = setInterval(() => setActive(a => (a + 1) % 4), 3200)
-    return () => clearInterval(t)
-  }, [])
+/* ── Commitments section (page-local, styled like AgentLoop's card) ── */
+const COMMITMENTS = [
+  { n: '01', label: 'Encrypted in transit and at rest', desc: 'Your records are encrypted while stored and while moving between systems — the same protection your bank uses.', tag: 'Always on' },
+  { n: '02', label: 'Access by role — least privilege', desc: 'Each person sees only what their role allows. Managers see their team; employees see their own record.', tag: 'Always on' },
+  { n: '03', label: 'Every change logged with who and why', desc: 'Every action — by a person or by Mamba — is written to a record nobody can edit, with the reason attached.', tag: 'Always on' },
+  { n: '04', label: 'Your data stays in the US', desc: 'Stored on enterprise US cloud infrastructure. It never leaves the country.', tag: 'In your contract' },
+  { n: '05', label: 'Never used to train AI', desc: 'Names, salaries, reviews, health information — none of it trains any AI model. Not ours, not anyone else’s.', tag: 'In your contract' },
+]
 
-  type FieldVis = 'visible' | 'masked' | 'hidden'
-  type Role = {
-    role: string
-    badge: string
-    bg: string
-    fg: string
-    dot: string
-    fields: { label: string; value: string; vis: FieldVis }[]
-  }
-
-  const roles: Role[] = [
-    {
-      role: 'You (Admin)', badge: 'Full access', bg: 'var(--gold-tint)', fg: 'var(--gold-dark)', dot: 'var(--gold)',
-      fields: [
-        { label: 'Name', value: 'Maya Chen', vis: 'visible' },
-        { label: 'Salary', value: '$124,000', vis: 'visible' },
-        { label: 'SSN', value: '123-45-6789', vis: 'visible' },
-        { label: 'Performance', value: 'Exceeds (4.5/5)', vis: 'visible' },
-      ],
-    },
-    {
-      role: 'HR Manager', badge: 'PII + approvals', bg: '#EFF6FF', fg: '#1D4ED8', dot: '#3B82F6',
-      fields: [
-        { label: 'Name', value: 'Maya Chen', vis: 'visible' },
-        { label: 'Salary', value: '$124,000', vis: 'visible' },
-        { label: 'SSN', value: '••• •• 6789', vis: 'masked' },
-        { label: 'Performance', value: 'Exceeds (4.5/5)', vis: 'visible' },
-      ],
-    },
-    {
-      role: "Maya's Manager", badge: 'Direct report', bg: '#F5F3FF', fg: '#6D28D9', dot: '#8B5CF6',
-      fields: [
-        { label: 'Name', value: 'Maya Chen', vis: 'visible' },
-        { label: 'Salary', value: 'Within band', vis: 'masked' },
-        { label: 'SSN', value: 'Restricted', vis: 'hidden' },
-        { label: 'Performance', value: 'Exceeds (4.5/5)', vis: 'visible' },
-      ],
-    },
-    {
-      role: 'Coworker', badge: 'Public profile only', bg: 'var(--bg-surface)', fg: 'var(--text-muted)', dot: 'var(--text-muted)',
-      fields: [
-        { label: 'Name', value: 'Maya Chen', vis: 'visible' },
-        { label: 'Salary', value: 'Restricted', vis: 'hidden' },
-        { label: 'SSN', value: 'Restricted', vis: 'hidden' },
-        { label: 'Performance', value: 'Restricted', vis: 'hidden' },
-      ],
-    },
-  ]
-
-  const r = roles[active]
-
+function Commitments() {
   return (
-    <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}>
-      {/* Header */}
-      <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border)', background: 'var(--bg-surface)', display: 'flex', alignItems: 'center', gap: 10 }}>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <circle cx="6" cy="5" r="3" stroke="var(--gold)" strokeWidth="1.3" />
-          <path d="M2 14c0-2.5 1.8-4 4-4s4 1.5 4 4" stroke="var(--gold)" strokeWidth="1.3" strokeLinecap="round" />
-          <circle cx="11.5" cy="6" r="2.2" stroke="var(--gold)" strokeWidth="1.3" />
-          <path d="M9.5 14c.3-1.5 1.3-2.5 3-2.5s2.7 1 3 2.5" stroke="var(--gold)" strokeWidth="1.3" strokeLinecap="round" />
-        </svg>
-        <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>Same record. Different views.</span>
-      </div>
-
-      {/* Role tabs */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, borderBottom: '1px solid var(--border-faint)' }}>
-        {roles.map((role, i) => (
-          <button
-            key={role.role}
-            type="button"
-            onClick={() => setActive(i)}
-            style={{
-              padding: '10px 8px',
-              border: 'none',
-              borderBottom: active === i ? `2px solid ${role.dot}` : '2px solid transparent',
-              background: active === i ? 'rgba(0,0,0,0.02)' : 'transparent',
-              cursor: 'pointer',
-              fontSize: 11,
-              fontWeight: active === i ? 700 : 500,
-              color: active === i ? 'var(--text)' : 'var(--text-muted)',
-              transition: 'all 0.25s',
-            }}
-          >
-            {role.role.split(' ')[0]}
-          </button>
-        ))}
-      </div>
-
-      {/* Active role view */}
-      <div style={{ padding: '18px 20px' }}>
-        {/* Role label */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: r.dot }} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>Viewing as: {r.role}</span>
-          </div>
-          <span style={{ fontSize: 10, fontWeight: 700, padding: '3px 10px', borderRadius: 20, background: r.bg, color: r.fg, letterSpacing: '0.04em' }}>
-            {r.badge.toUpperCase()}
-          </span>
+    <section className="cm">
+      <div className="wrap">
+        <div className="head" data-reveal>
+          <p className="eyebrow">Our commitments</p>
+          <h2 className="title">How we treat your data</h2>
+          <p className="lead">No fine print, no acronyms. The five things that hold, no matter the customer or the contract.</p>
         </div>
-
-        {/* Field rows */}
-        <div style={{ background: 'var(--bg-surface)', borderRadius: 10, padding: '4px 14px' }}>
-          {r.fields.map((f, i) => (
-            <div key={f.label} style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '11px 0',
-              borderBottom: i < r.fields.length - 1 ? '1px solid var(--border-faint)' : 'none',
-            }}>
-              <span style={{ fontSize: 11, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{f.label}</span>
-              <span style={{
-                fontSize: 12,
-                fontWeight: 600,
-                color: f.vis === 'visible' ? 'var(--text)' : f.vis === 'masked' ? 'var(--text-muted)' : 'var(--text-faint)',
-                fontFamily: 'var(--font-mono), monospace',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                transition: 'color 0.4s',
-              }}>
-                {f.vis === 'hidden' && (
-                  <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-                    <rect x="2" y="4.5" width="7" height="5" rx="1" stroke="var(--text-faint)" strokeWidth="1" />
-                    <path d="M3.5 4.5v-1a2 2 0 014 0v1" stroke="var(--text-faint)" strokeWidth="1" />
-                  </svg>
-                )}
-                {f.value}
-              </span>
+        <div className="card agent-edge agent-done" data-reveal data-delay="1">
+          {COMMITMENTS.map((c) => (
+            <div className="row" key={c.n}>
+              <span className="num">{c.n}</span>
+              <span className="mark" aria-hidden="true" />
+              <div className="main">
+                <div className="lbl">{c.label}</div>
+                <div className="desc">{c.desc}</div>
+              </div>
+              <span className="tag">{c.tag}</span>
             </div>
           ))}
         </div>
       </div>
+      <style jsx>{`
+        .cm { background: var(--bg); padding-block: clamp(88px, 11vw, 144px); }
+        .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
+        .head { margin-bottom: clamp(36px, 4vw, 52px); text-align: center; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
+        .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
+        .card { background: var(--bg); border: 1px solid var(--border); border-radius: 18px; padding: 8px 0; box-shadow: var(--shadow-float); max-width: 920px; margin: 0 auto; }
+        .row { display: flex; align-items: center; gap: 16px; padding: 16px clamp(18px, 2.4vw, 28px); }
+        .row + .row { border-top: 1px solid var(--border-faint); }
+        .num { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); width: 22px; flex: none; }
+        .mark { flex: none; width: 18px; height: 18px; border-radius: 999px; background: var(--color-green); position: relative; }
+        .mark::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .lbl { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+        .desc { font-size: 13.5px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
+        .main { flex: 1; min-width: 0; }
+        .tag { flex: none; font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+        @media (max-width: 640px) { .row { flex-wrap: wrap; } }
+      `}</style>
+    </section>
+  )
+}
 
-      {/* Footer */}
-      <div style={{ padding: '12px 20px', background: 'var(--bg-surface)', borderTop: '1px solid var(--border-faint)', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <circle cx="6" cy="6" r="5" stroke="var(--text-muted)" strokeWidth="1" />
-          <path d="M6 4v3M6 8.5v.1" stroke="var(--text-muted)" strokeWidth="1.2" strokeLinecap="round" />
-        </svg>
-        <p style={{ fontSize: 11, color: 'var(--text-muted)', margin: 0 }}>
-          Connects to Google, Okta, or Microsoft · access changes auto-sync
-        </p>
+/* ── SSO fragment ── */
+function SsoCard() {
+  return (
+    <div className="sso agent-edge agent-done">
+      <div className="s-head">
+        <span className="s-t">Single sign-on</span>
+        <span className="s-sub">Your login, your rules</span>
       </div>
+      {[
+        { name: 'Okta', d: 'Sign-on + user provisioning', mark: 'O' },
+        { name: 'Microsoft Entra', d: 'Sign-on + user provisioning', mark: 'E' },
+        { name: 'WorkOS', d: 'Sign-on for everything else', mark: 'W' },
+      ].map((p) => (
+        <div className="row" key={p.name}>
+          <span className="mark">{p.mark}</span>
+          <div className="main">
+            <div className="nm">{p.name}</div>
+            <div className="dd">{p.d}</div>
+          </div>
+          <span className="chip"><i />connected</span>
+        </div>
+      ))}
+      <div className="s-foot">
+        <span className="mono">Offboarded at 4:02 PM → locked out at 4:02 PM</span>
+      </div>
+      <style jsx>{`
+        .sso { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 18px 0 0; box-shadow: var(--shadow-float); }
+        .s-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 0 20px 14px; flex-wrap: wrap; }
+        .s-t { font-family: var(--font-serif); font-size: 19px; color: var(--text); }
+        .s-sub { font-size: 12px; color: var(--text-faint); }
+        .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; border-top: 1px solid var(--border-faint); }
+        .mark { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--gold-tint); color: var(--gold-dark); font-family: var(--font-serif); font-size: 16px; display: flex; align-items: center; justify-content: center; }
+        .main { flex: 1; min-width: 0; }
+        .nm { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .dd { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+        .chip { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
+        .chip i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
+        .s-foot { padding: 12px 20px; border-top: 1px solid var(--border-faint); background: var(--bg-warm); border-radius: 0 0 16px 16px; }
+        .mono { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+      `}</style>
     </div>
   )
 }
 
-const faqItems = [
-  {
-    q: 'Who owns our HR data?',
-    a: 'You do. Always. We use it to run your workflows — that is the only reason we touch it. Nobody at MambaHR browses your records, nothing is shared outside your company, and you can take all of it with you on the way out.',
-  },
-  {
-    q: 'Is our data ever used to train AI?',
-    a: "Never. Your team's names, salaries, performance reviews, health information — none of it is ever used to train an AI model. Not ours, not anyone else's. This is written into your contract in plain language.",
-  },
-  {
-    q: 'How is our data protected?',
-    a: 'It is encrypted when stored and when moving between systems — the same level of protection your bank uses. The keys are locked away in hardware that nobody at MambaHR can read. Even our engineers cannot see your raw data.',
-  },
-  {
-    q: 'Where is our data stored?',
-    a: 'In the United States, on enterprise cloud infrastructure. Your data never leaves the country.',
-  },
-  {
-    q: 'How does access work for our team?',
-    a: 'Your team logs in with the accounts they already use — Google, Microsoft, or your existing company login. Each person sees only what their role allows. When someone leaves the company, their access disappears the same minute.',
-  },
-  {
-    q: 'What about HIPAA, California, and background-check rules?',
-    a: 'Health information is kept in its own protected lane, handled the way HIPAA expects. California employees can request, correct, or delete their record anytime, in line with CCPA and CPRA. Background checks follow the same legal rules your provider already uses.',
-  },
-  {
-    q: 'If there is a security incident, what is your response?',
-    a: 'You hear from us within 24 hours of any incident that affects your data. A full write-up follows within a week — what happened, why, and what we changed so it does not happen again. No hiding, no spin.',
-  },
-]
-
-const guarantees = [
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M14 2l11 3.5v7c0 8-4.5 12.5-11 15C7.5 24.5 3 20 3 12.5V5.5L14 2z" fill="rgba(176,141,87,0.12)" stroke="var(--gold)" strokeWidth="1.4" />
-        <path d="M9 14l4 4 6-7" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: 'Your data stays yours',
-    desc: 'We process it. We never own it. Full export or deletion on demand, no questions asked.',
-  },
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="4" y="12" width="20" height="14" rx="3" stroke="var(--gold)" strokeWidth="1.4" />
-        <path d="M9 12V9a5 5 0 0110 0v3" stroke="var(--gold)" strokeWidth="1.4" />
-        <circle cx="14" cy="19" r="2" fill="var(--gold)" />
-      </svg>
-    ),
-    title: 'No training on your people',
-    desc: "Your team's names, salaries, and performance reviews never train an AI model. Ever. It's in the contract.",
-  },
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="11" stroke="var(--gold)" strokeWidth="1.4" />
-        <path d="M9 14l4 4 7-7" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: 'Everything is logged',
-    desc: 'Every decision the agent makes is recorded. Who triggered it, what policy applied, what changed.',
-  },
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="11" cy="9" r="4" stroke="var(--gold)" strokeWidth="1.4" />
-        <path d="M4 24c0-4.4 3.1-8 7-8s7 3.6 7 8" stroke="var(--gold)" strokeWidth="1.4" strokeLinecap="round" />
-        <path d="M19 13l4 4m0 0l-4 4m4-4h-7" stroke="var(--gold)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: 'Right person sees the right thing',
-    desc: 'Each person sees only what their role allows. Managers see their team. Employees see their own record.',
-  },
-]
+/* ── Approval gate fragment ── */
+function ApprovalGateCard() {
+  return (
+    <div className="gate agent-edge agent-done">
+      <div className="g-head">
+        <span className="g-t">High-stakes actions</span>
+        <span className="g-sub">The agent stops. A person decides.</span>
+      </div>
+      {[
+        { img: '/avatars/maya.jpg', t: 'Offer · Maya Chen', m: '$195k · above band 8%', hold: true },
+        { img: '/avatars/tom.jpg', t: 'Comp change · Tom Harrison', m: '+12% merit · within band', hold: true },
+        { img: '/avatars/priya.jpg', t: 'Address update · Priya Shah', m: 'Filed automatically · logged', hold: false },
+      ].map((r) => (
+        <div className="row" key={r.t}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={r.img} alt="" width={30} height={30} />
+          <div className="main">
+            <div className="t">{r.t}</div>
+            <div className="m">{r.m}</div>
+          </div>
+          {r.hold
+            ? <span className="hold">requires human sign-off</span>
+            : <span className="done-c"><i aria-hidden="true" />done</span>}
+        </div>
+      ))}
+      <div className="g-foot">
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <span className="g-note">Routine work runs; the big calls wait for you</span>
+      </div>
+      <style jsx>{`
+        .gate { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 18px 0 0; box-shadow: var(--shadow-float); }
+        .g-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 0 20px 14px; flex-wrap: wrap; }
+        .g-t { font-family: var(--font-serif); font-size: 19px; color: var(--text); }
+        .g-sub { font-size: 12px; color: var(--text-faint); }
+        .row { display: flex; align-items: center; gap: 12px; padding: 12px 20px; border-top: 1px solid var(--border-faint); }
+        .row img { width: 30px; height: 30px; border-radius: 999px; object-fit: cover; flex: none; }
+        .main { flex: 1; min-width: 0; }
+        .t { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .m { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+        .hold { flex: none; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+        .done-c { flex: none; display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
+        .done-c i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
+        .g-foot { display: flex; align-items: center; gap: 10px; padding: 13px 20px; border-top: 1px solid var(--border-faint); flex-wrap: wrap; }
+        .g-note { font-size: 12px; color: var(--text-muted); }
+        @media (max-width: 460px) { .hold { display: none; } }
+      `}</style>
+    </div>
+  )
+}
 
 export default function SecurityPage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null)
-
   return (
     <>
       <MegaNav />
-      <main style={{ paddingTop: 64 }}>
+      <RevealInit />
+      <CountUp />
+      <main>
+        <PageHero
+          eyebrow="Security"
+          title={<>Locked down, <Em>logged.</Em></>}
+          lead="Salaries, reviews, health information — the most sensitive data your company holds. Encrypted everywhere, access by role, every change on the record, and never used to train AI. In writing."
+          proof="Security teams welcome on the demo"
+          photo="/v2-people/sofia.jpg"
+          photoChip="Mamba · done"
+          photoCaption="Audit question answered the same morning"
+        >
+          <SecurityLogCard />
+        </PageHero>
 
-        {/* ── HERO — minimal, typography only ── */}
-        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
-          <Page style={{ textAlign: 'center' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 28, padding: '5px 14px 5px 10px', background: 'var(--gold-tint)', border: '1px solid var(--gold-light)', borderRadius: 999 }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold-dark)' }} />
-              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.12em' }}>SECURITY · TRUST</span>
-            </div>
-            <h1
-              style={{
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(44px, 6vw, 80px)',
-                fontWeight: 400,
-                letterSpacing: '-0.035em',
-                color: 'var(--text)',
-                marginBottom: 28,
-                lineHeight: 1.0,
-              }}
-            >
-              Your employees&rsquo; data,<br /><span style={{ color: 'var(--gold-dark)' }}>handled with care.</span>
-            </h1>
-            <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 40, maxWidth: 620, margin: '0 auto 40px' }}>
-              Pay, performance, health, history — we hold the most sensitive information in your company. Every layer of MambaHR was built for that reality.
-            </p>
-            <a href="mailto:security@mambahr.com" className="btn-gold" style={{ display: 'inline-flex' }}>
-              Talk to us about security →
-            </a>
-          </Page>
-        </Beat>
+        <Commitments />
 
-        {/* ── FOUR GUARANTEES ── */}
-        <Beat bg="white">
-          <Page>
-            <div style={{ textAlign: 'center', marginBottom: 56, maxWidth: 680, marginLeft: 'auto', marginRight: 'auto' }}>
-              <p className="eyebrow" style={{ marginBottom: 16 }}>HOW WE PROTECT YOU</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(28px, 3.4vw, 44px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.025em',
-                  color: 'var(--text)',
-                  marginBottom: 16,
-                  lineHeight: 1.1,
-                }}
-              >
-                Four things we<br />never compromise on.
-              </h2>
-              <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                The promises that don&rsquo;t shift, no matter the customer or contract.
-              </p>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
-              {guarantees.map((g) => (
-                <div
-                  key={g.title}
-                  style={{
-                    padding: '30px 26px',
-                    background: 'var(--bg-warm)',
-                    borderRadius: 16,
-                    border: '1px solid var(--border)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}
-                >
-                  <div style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 12,
-                    background: 'var(--gold-tint)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: 22,
-                  }}>
-                    {g.icon}
-                  </div>
-                  <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', margin: '0 0 8px', letterSpacing: '-0.01em' }}>{g.title}</p>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{g.desc}</p>
-                </div>
-              ))}
-            </div>
-          </Page>
-        </Beat>
+        <FeatureSplit
+          eyebrow="Access"
+          title={<>You control <Em>the keys</Em></>}
+          lead="Orphaned accounts are how breaches start. Sign-on and user provisioning run through WorkOS, Okta, or Microsoft Entra, access follows your org chart — and when someone is offboarded, they’re locked out the same minute."
+          bullets={[
+            'Your team signs in with the accounts they already use',
+            'Permissions follow each person’s role, automatically',
+            'Offboarded means locked out — no orphaned accounts',
+          ]}
+        >
+          <SsoCard />
+        </FeatureSplit>
 
-        {/* ── AUDIT TRAIL ── */}
-        <Beat bg="warm">
-          <Page>
-            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 64, alignItems: 'center' }}>
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 16 }}>FULL TRANSPARENCY</p>
-                <h2
-                  style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(24px, 2.8vw, 36px)',
-                    fontWeight: 400,
-                    letterSpacing: '-0.02em',
-                    color: 'var(--text)',
-                    marginBottom: 16,
-                    lineHeight: 1.15,
-                  }}
-                >
-                  The agent does nothing you can&rsquo;t see.
-                </h2>
-                <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.75, margin: 0 }}>
-                  Every decision is logged — who triggered it, what policy applied, what changed. If someone asks &ldquo;why was that approved?&rdquo; you have the answer in seconds.
-                </p>
-              </div>
-              <AuditLogVisual />
-            </div>
-          </Page>
-        </Beat>
+        <FeatureSplit
+          flip
+          warm
+          eyebrow="Human oversight"
+          title={<>A human on <Em>the big calls</Em></>}
+          lead="The agent acts within the policy you set. Offers above band, terminations, big comp changes — those always stop and wait for a person to sign off. Every time, with the reasoning attached."
+          bullets={[
+            'You decide which actions need a person',
+            'Nothing high-stakes happens without a named approver',
+            'Every approval — and every decline — is on the record',
+          ]}
+        >
+          <ApprovalGateCard />
+        </FeatureSplit>
 
-        {/* ── ACCESS CONTROL ── */}
-        <Beat bg="white">
-          <Page>
-            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 64, alignItems: 'center' }}>
-              <AccessControlVisual />
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 16 }}>ACCESS CONTROL</p>
-                <h2
-                  style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(24px, 2.8vw, 36px)',
-                    fontWeight: 400,
-                    letterSpacing: '-0.02em',
-                    color: 'var(--text)',
-                    marginBottom: 16,
-                    lineHeight: 1.15,
-                  }}
-                >
-                  Nobody sees more than they should.
-                </h2>
-                <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.75, margin: 0 }}>
-                  Connect your existing Google, Okta, or Microsoft login. Permissions follow each person&rsquo;s role automatically — and disappear the moment they leave.
-                </p>
-              </div>
-            </div>
-          </Page>
-        </Beat>
+        <StatTrio
+          stats={[
+            { n: 100, suffix: '%', label: 'of changes logged with who and why' },
+            { n: 0, label: 'AI training on your data — contractual' },
+            { n: 1, label: 'human required on every high-stakes action' },
+          ]}
+        />
 
-        {/* ── PROMISES IN PLAIN ENGLISH ── */}
-        <Beat bg="cream">
-          <Page>
-            <div style={{ marginBottom: 72, maxWidth: 680 }}>
-              <p className="eyebrow" style={{ marginBottom: 18 }}>PLAIN ANSWERS</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(32px, 4vw, 56px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.03em',
-                  color: 'var(--text)',
-                  lineHeight: 1.0,
-                  marginBottom: 20,
-                }}
-              >
-                How we handle<br />your people&rsquo;s data.
-              </h2>
-              <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65 }}>
-                No fine print, no acronyms. The six things that matter — said straight.
-              </p>
-            </div>
+        <QuoteBand
+          quote="I asked the hard questions before we signed — who sees what, where the data lives, what trains their AI. The answers were in the contract, not a slide deck."
+          name="Dana Whitfield"
+          role="Head of People"
+          img="/v2-people/feat.jpg"
+        />
 
-            {/* Editorial promise rows */}
-            <div>
-              {[
-                {
-                  claim: 'Your data is yours.',
-                  body: 'It is encrypted when stored and when moving between systems — the same protection your bank uses. Nobody at MambaHR can read your employee records.',
-                },
-                {
-                  claim: 'Only the right people see your records.',
-                  body: 'Your team logs in with the accounts they already use — Google, Microsoft, or your existing single sign-on. Each person sees only what their role allows. When someone leaves the company, their access disappears the same minute.',
-                },
-                {
-                  claim: 'We never train AI on your people.',
-                  body: 'Names, salaries, performance reviews, health information — none of it trains any AI model. Not ours, not anyone else’s. This is in your contract, in plain language.',
-                },
-                {
-                  claim: 'Every action is recorded. Forever.',
-                  body: 'Every decision the agent makes is written to a record nobody can edit — including us. If your auditor or board asks why something was approved, you have the answer in one click.',
-                },
-                {
-                  claim: 'Health and California data gets extra care.',
-                  body: 'Health information is kept in its own protected lane, handled the way HIPAA expects. California employees can request, correct, or delete their record anytime — in line with CCPA and CPRA.',
-                },
-                {
-                  claim: 'If something goes wrong, you hear it from us.',
-                  body: 'Within 24 hours. A full write-up follows within a week — what happened, why, and what we changed so it does not happen again.',
-                },
-              ].map((p, i) => (
-                <div
-                  key={p.claim}
-                  className="promise-row"
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'minmax(40px, 60px) 1fr',
-                    gap: 28,
-                    padding: '36px 0',
-                    borderTop: '1px solid var(--border)',
-                    borderBottom: i === 5 ? '1px solid var(--border)' : 'none',
-                    alignItems: 'baseline',
-                  }}
-                >
-                  {/* Subtle number marker */}
-                  <span
-                    className="mono"
-                    style={{
-                      fontSize: 13,
-                      fontWeight: 700,
-                      color: 'var(--gold-dark)',
-                      letterSpacing: '0.08em',
-                    }}
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-
-                  {/* Claim + body */}
-                  <div>
-                    <h3
-                      style={{
-                        fontFamily: 'var(--font-serif), Georgia, serif',
-                        fontSize: 'clamp(22px, 2.4vw, 30px)',
-                        fontWeight: 400,
-                        color: 'var(--text)',
-                        letterSpacing: '-0.02em',
-                        lineHeight: 1.15,
-                        margin: '0 0 12px',
-                      }}
-                    >
-                      {p.claim}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: 16,
-                        color: 'var(--text-muted)',
-                        lineHeight: 1.65,
-                        margin: 0,
-                        maxWidth: 680,
-                      }}
-                    >
-                      {p.body}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <style>{`
-              @media (max-width: 640px) {
-                .promise-row {
-                  grid-template-columns: 1fr !important;
-                  gap: 12px !important;
-                  padding: 28px 0 !important;
-                }
-              }
-            `}</style>
-          </Page>
-        </Beat>
-
-        {/* ── PROCUREMENT STRIP ── */}
-        <Beat bg="warm" style={{ borderTop: '1px solid var(--border)' }}>
-          <Page>
-            <p className="eyebrow" style={{ marginBottom: 24, textTransform: 'none', textAlign: 'center' }}>For your IT & security team</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
-              {[
-                { t: 'Single sign-on + SCIM', d: 'Okta, Microsoft Entra, or Google Workspace. Accounts provision and deprovision automatically.' },
-                { t: 'SOC 2', d: 'Control evidence is collected continuously, so your review moves faster.' },
-                { t: 'Data stays in the US', d: 'Stored on enterprise US cloud infrastructure. It never leaves the country.' },
-                { t: 'Background checks follow FCRA', d: 'Run through Checkr, with the adverse-action steps the law requires.' },
-              ].map((c) => (
-                <div key={c.t} style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 14, padding: '22px 22px' }}>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', margin: '0 0 8px', letterSpacing: '-0.01em' }}>{c.t}</p>
-                  <p style={{ fontSize: 13.5, color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>{c.d}</p>
-                </div>
-              ))}
-            </div>
-          </Page>
-        </Beat>
-
-        {/* ── FAQ ── */}
-        <Beat bg="white">
-          <Page style={{ maxWidth: 800 }}>
-            <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <p className="eyebrow" style={{ marginBottom: 14 }}>QUESTIONS</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(24px, 2.8vw, 36px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text)',
-                  lineHeight: 1.15,
-                }}
-              >
-                Things people ask before they trust us.
-              </h2>
-            </div>
-            <div>
-              {faqItems.map((faq, i) => (
-                <div
-                  key={i}
-                  style={{
-                    borderTop: '1px solid var(--border)',
-                    borderBottom: i === faqItems.length - 1 ? '1px solid var(--border)' : 'none',
-                  }}
-                >
-                  <button
-                    type="button"
-                    aria-expanded={openFaq === i}
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    style={{
-                      width: '100%',
-                      padding: '22px 4px',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      gap: 16,
-                      textAlign: 'left',
-                    }}
-                  >
-                    <span style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', lineHeight: 1.3 }}>{faq.q}</span>
-                    <span style={{
-                      flexShrink: 0,
-                      width: 24, height: 24,
-                      borderRadius: '50%',
-                      background: openFaq === i ? 'var(--text)' : 'var(--bg-surface)',
-                      color: openFaq === i ? 'var(--bg)' : 'var(--text-muted)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: 18, lineHeight: 1, fontWeight: 300,
-                      transition: 'all 0.2s',
-                    }}>{openFaq === i ? '−' : '+'}</span>
-                  </button>
-                  {openFaq === i && (
-                    <p style={{ margin: '0 0 24px 0', padding: '0 32px 0 0', fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.75 }}>
-                      {faq.a}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </Page>
-        </Beat>
-
-        <RequestAccessSection />
+        <PageCta
+          title={<>Trust, <Em>verifiable.</Em></>}
+          sub="Bring your security team to the demo. We like those calls."
+        />
       </main>
       <Footer />
     </>

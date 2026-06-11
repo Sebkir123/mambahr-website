@@ -1,441 +1,559 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import Image from 'next/image'
+'use client'
+
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
-import RequestAccessSection from '@/components/waitlist'
-import SlackThread from '@/components/surfaces/slack-thread'
-import RoutingLog from '@/components/surfaces/routing-log'
-import MambaExamples from '@/components/sections/mamba-examples'
-import { Beat, Page } from '@/components/ui/page'
+import RevealInit from '@/app/v2/_sections/reveal-init'
+import CountUp from '@/app/v2/_sections/count-up'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
 
-export const metadata: Metadata = {
-  title: 'The AI agent — MambaHR',
-  description: 'The AI HR agent. Mention it in any Slack channel or Teams chat — it reads the thread, checks the policy, takes the action, and replies in seconds.',
-}
-
-const heroMessages = [
-  {
-    name: 'Maya Chen',
-    initials: 'MC',
-    avatarColor: '#D4C4B5',
-    time: '9:14 AM',
-    content: '@mamba I need 3 days off next week — Mon to Wed for a wedding 🎉',
-  },
-  {
-    name: 'Mamba',
-    initials: 'M',
-    isMamba: true as const,
-    time: '9:14 AM',
-    content: (
-      <div>
-        <p style={{ margin: '0 0 10px' }}>Approved — enjoy the wedding 🎉</p>
-        <div style={{ background: 'var(--bg-warm)', borderRadius: 8, padding: '10px 12px', fontSize: 12, lineHeight: 1.7 }}>
-          <p style={{ margin: '0 0 3px' }}><strong style={{ color: 'var(--text)' }}>Balance:</strong> <span style={{ color: 'var(--text-muted)' }}>12 → 9 days</span></p>
-          <p style={{ margin: '0 0 3px' }}><strong style={{ color: 'var(--text)' }}>Calendar:</strong> <span style={{ color: 'var(--text-muted)' }}>Apr 7–9 blocked</span></p>
-          <p style={{ margin: 0 }}><strong style={{ color: 'var(--text)' }}>Manager:</strong> <span style={{ color: 'var(--text-muted)' }}>notified · OOO set</span></p>
-        </div>
-      </div>
-    ),
-  },
-]
-
-/* Channel preview mockups — small visual hints of what the agent looks like in each surface */
-
-function SlackPreview() {
+/* ── Hero fragment: a realistic Slack window — policy answer + letter receipt ── */
+function SlackWindow() {
   return (
-    <div style={{ background: 'var(--bg)', border: '1px solid var(--border-faint)', borderRadius: 8, overflow: 'hidden' }}>
-      <div style={{ background: '#3F0E40', padding: '6px 10px' }}>
-        <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: 10, fontWeight: 500 }}># people-ops</span>
+    <div className="sw agent-edge agent-working agent-lg">
+      <div className="sw-bar">
+        <span className="dots"><i /><i /><i /></span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="sw-logo" src="/slack-new-logo.svg" alt="Slack" width={16} height={16} />
+        <span className="sw-find">Search MambaHR</span>
       </div>
-      <div style={{ padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
-          <div style={{ width: 16, height: 16, borderRadius: 3, background: '#D4C4B5', flexShrink: 0, marginTop: 1 }} />
-          <p style={{ margin: 0, fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4 }}>
-            <strong style={{ color: 'var(--text)' }}>Emma</strong>&nbsp;&nbsp;@mamba PTO Friday?
-          </p>
-        </div>
-        <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
-          <div style={{ width: 16, height: 16, borderRadius: 3, background: 'var(--text)', flexShrink: 0, marginTop: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: 'var(--gold)', fontSize: 9, fontFamily: 'var(--font-serif), Georgia, serif', fontWeight: 700 }}>M</span>
+      <div className="sw-body">
+        <aside className="sw-side">
+          <div className="sw-ws">
+            MambaHR
+            <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" /></svg>
           </div>
-          <p style={{ margin: 0, fontSize: 10, color: 'var(--text-muted)', lineHeight: 1.4 }}>
-            <strong style={{ color: 'var(--text)' }}>Mamba</strong>&nbsp;&nbsp;
-            <span style={{ color: 'var(--color-green)' }}>✓</span> Approved · within policy
-          </p>
-        </div>
+          <div className="sw-sec">Channels</div>
+          <span className="sw-ch on"><span className="hash">#</span>people-ops</span>
+          <span className="sw-ch"><span className="hash">#</span>hiring</span>
+          <span className="sw-ch"><span className="hash">#</span>benefits</span>
+          <div className="sw-sec">Direct messages</div>
+          <span className="sw-dm first"><span className="seg green" />MambaHR<span className="badge">1</span></span>
+          <span className="sw-dm"><span className="seg" />Brian Bell</span>
+        </aside>
+
+        <main className="sw-main">
+          <div className="sw-head">
+            <span className="h-ch"><span className="hash">#</span>people-ops</span>
+            <span className="h-mem">
+              <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="5" r="3" fill="currentColor" /><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5" fill="currentColor" /></svg>
+              12
+            </span>
+          </div>
+
+          <div className="sw-feed">
+            <div className="m">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="av" src="/avatars/dave.jpg" alt="Dave Buchanan" width={36} height={36} />
+              <div className="m-body">
+                <div className="m-h"><b>Dave Buchanan</b><time>9:02 AM</time></div>
+                <div className="m-t"><span className="mention">@MambaHR</span> what&rsquo;s our parental leave policy?</div>
+              </div>
+            </div>
+
+            <div className="m">
+              <div className="av app">M</div>
+              <div className="m-body">
+                <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:02 AM</time></div>
+                <div className="m-t">16 weeks, fully paid, for every new parent &mdash; birth, adoption, or foster.</div>
+                <div className="attach">
+                  <div className="a-row"><span className="a-k">Paid leave</span><span className="a-v">16 weeks at 100%</span></div>
+                  <div className="a-row"><span className="a-k">Eligibility</span><span className="a-v">Day one, all employees</span></div>
+                  <div className="a-row"><span className="a-k">Source</span><span className="a-v">Parental Leave Policy &sect; 2.1</span></div>
+                  <div className="a-foot"><span className="ok-dot" />Answered from your handbook &middot; ref <span className="mono">pol_8c21e4</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="m">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="av" src="/avatars/priya.jpg" alt="Priya Shah" width={36} height={36} />
+              <div className="m-body">
+                <div className="m-h"><b>Priya Shah</b><time>9:11 AM</time></div>
+                <div className="m-t"><span className="mention">@MambaHR</span> I need an employment verification letter for my mortgage</div>
+              </div>
+            </div>
+
+            <div className="m">
+              <div className="av app">M</div>
+              <div className="m-body">
+                <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:11 AM</time></div>
+                <div className="m-t">Done &mdash; sent to her email, filed.</div>
+                <div className="attach">
+                  <div className="a-row"><span className="a-k">Letter</span><span className="a-v">Employment verification, signed</span></div>
+                  <div className="a-row"><span className="a-k">Sent to</span><span className="a-v">priya@company.com</span></div>
+                  <div className="a-foot"><span className="ok-dot" />Logged &middot; filed to her record &middot; ref <span className="mono">doc_2b94f7</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="typing">
+              <span className="typing-dot" /><span className="typing-dot" /><span className="typing-dot" />
+              <span className="typing-t"><b>Mamba</b> is filing the letter&hellip;</span>
+            </div>
+          </div>
+
+          <div className="sw-composer">
+            <span>Message #people-ops</span>
+            <span className="send" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 8l12-5-5 12-2-5-5-2z" fill="currentColor" /></svg>
+            </span>
+          </div>
+        </main>
       </div>
+
+      <style jsx>{`
+        .sw {
+          border-radius: 14px;
+          background: var(--bg);
+          box-shadow: var(--shadow-float);
+          border: 1px solid var(--border);
+          overflow: hidden;
+          font-size: 13px;
+        }
+        .sw-bar {
+          height: 38px;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 0 14px;
+          background: #F8F6F1;
+          border-bottom: 1px solid var(--border);
+        }
+        .dots { display: flex; gap: 6px; }
+        .dots i { width: 10px; height: 10px; border-radius: 999px; background: #e3ddd6; display: block; }
+        .dots i:first-child { background: #f0a59a; }
+        .dots i:nth-child(2) { background: #f4ce8e; }
+        .dots i:nth-child(3) { background: #a9cfa6; }
+        .sw-logo { flex: none; }
+        .sw-find {
+          font-size: 12px;
+          color: var(--text-faint);
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 7px;
+          padding: 3px 12px;
+          margin: 0 auto;
+          min-width: 200px;
+          text-align: center;
+        }
+        .sw-body { display: grid; grid-template-columns: 178px 1fr; }
+        .sw-side { background: #3F0E40; padding: 14px 10px; }
+        .sw-ws {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-weight: 700;
+          font-size: 14px;
+          color: #fff;
+          padding: 4px 8px 12px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+          margin-bottom: 10px;
+        }
+        .sw-ws svg { color: rgba(255, 255, 255, 0.6); }
+        .sw-sec { font-size: 11px; color: rgba(255, 255, 255, 0.55); padding: 10px 8px 5px; letter-spacing: 0.02em; }
+        .sw-ch,
+        .sw-dm {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          padding: 5px 8px;
+          border-radius: 6px;
+          color: rgba(255, 255, 255, 0.72);
+          font-size: 13.5px;
+        }
+        .hash { color: rgba(255, 255, 255, 0.5); font-weight: 600; }
+        .sw-ch.on { background: #1164A3; color: #fff; font-weight: 600; }
+        .sw-ch.on .hash { color: rgba(255, 255, 255, 0.85); }
+        .sw-dm .seg { width: 9px; height: 9px; border-radius: 3px; border: 1.5px solid rgba(255, 255, 255, 0.45); }
+        .sw-dm .seg.green { background: #2EB67D; border-color: transparent; }
+        .sw-dm.first { color: #fff; font-weight: 600; }
+        .sw-dm .badge {
+          margin-left: auto;
+          background: #E01E5A;
+          color: #fff;
+          font-size: 10.5px;
+          font-weight: 700;
+          border-radius: 999px;
+          padding: 1px 7px;
+        }
+        .sw-main { display: flex; flex-direction: column; }
+        .sw-head { display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--border); }
+        .h-ch { font-weight: 700; font-size: 15px; color: var(--text); display: flex; gap: 2px; }
+        .h-ch .hash { color: var(--text-faint); }
+        .h-mem {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 12px;
+          color: var(--text-faint);
+          border: 1px solid var(--border);
+          border-radius: 7px;
+          padding: 2px 8px;
+        }
+        .sw-feed { padding: 16px 20px 6px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+        .m { display: flex; gap: 11px; }
+        .av { width: 36px; height: 36px; border-radius: 9px; object-fit: cover; flex: none; }
+        .av.app {
+          background: #1A1A19;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-serif);
+          font-size: 19px;
+        }
+        .m-body { min-width: 0; }
+        .m-h { display: flex; align-items: baseline; gap: 8px; }
+        .m-h b { font-size: 13.5px; color: var(--text); font-weight: 700; }
+        .m-h time { font-size: 11px; color: var(--text-faint); }
+        .apptag {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          color: var(--text-muted);
+          background: var(--bg-elevated);
+          border-radius: 4px;
+          padding: 1px 5px;
+        }
+        .m-t { font-size: 13.5px; line-height: 1.45; color: var(--text); margin-top: 2px; }
+        .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+        .attach {
+          margin-top: 8px;
+          border-left: 3px solid var(--gold);
+          background: #FAF6EF;
+          border-radius: 0 10px 10px 0;
+          padding: 10px 13px;
+          max-width: 440px;
+        }
+        .a-row { display: flex; justify-content: space-between; gap: 16px; padding: 2.5px 0; }
+        .a-k { font-size: 12px; color: var(--text-faint); }
+        .a-v { font-size: 12px; color: var(--text); font-weight: 600; text-align: right; }
+        .a-foot {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          margin-top: 8px;
+          padding-top: 8px;
+          border-top: 1px solid var(--border);
+          font-size: 11px;
+          color: var(--text-faint);
+        }
+        .ok-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); flex: none; }
+        .mono { font-family: var(--font-mono); font-size: 10.5px; }
+        .typing { display: flex; align-items: center; gap: 4px; padding: 2px 0 0; }
+        .typing-t { font-size: 12px; color: var(--text-faint); margin-left: 7px; }
+        .typing-t b { color: var(--violet); font-weight: 600; }
+        .sw-composer {
+          margin: 8px 18px 14px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border: 1px solid var(--border-mid);
+          border-radius: 10px;
+          padding: 10px 14px;
+          color: var(--text-faint);
+          font-size: 13.5px;
+        }
+        .send {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 28px;
+          height: 24px;
+          border-radius: 5px;
+          background: #007A5A;
+          color: #fff;
+        }
+        @media (max-width: 520px) {
+          .sw-side { display: none; }
+          .sw-body { grid-template-columns: 1fr; }
+        }
+      `}</style>
     </div>
   )
 }
 
-function TeamsPreview() {
+/* ── Triple-surface fragment: the same request in Slack, Teams, and the app ── */
+function TripleSurface() {
   return (
-    <div style={{ background: 'var(--bg)', border: '1px solid var(--border-faint)', borderRadius: 8, overflow: 'hidden' }}>
-      <div style={{ background: '#4B53BC', padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
-        <span style={{ width: 10, height: 10, borderRadius: 2, background: 'rgba(255,255,255,0.9)', display: 'inline-block' }} />
-        <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 10, fontWeight: 500 }}>People Ops · Posts</span>
-      </div>
-      <div style={{ padding: '10px 12px' }}>
-        <div style={{ background: 'var(--bg-warm)', borderRadius: 6, padding: '8px 10px', borderLeft: '2px solid var(--gold-dark)' }}>
-          <p style={{ margin: '0 0 4px', fontSize: 10, fontWeight: 700, color: 'var(--text)' }}>Hiring update — Alex P.</p>
-          <p style={{ margin: 0, fontSize: 9, color: 'var(--text-muted)' }}>Offer drafted · awaiting CHRO</p>
-          <div style={{ marginTop: 6, display: 'flex', gap: 4 }}>
-            <span style={{ background: 'var(--text)', color: 'var(--bg)', padding: '2px 8px', borderRadius: 4, fontSize: 9, fontWeight: 600 }}>Review</span>
-            <span style={{ background: 'transparent', color: 'var(--text-muted)', padding: '2px 8px', borderRadius: 4, fontSize: 9, fontWeight: 500, border: '1px solid var(--border)' }}>Later</span>
+    <div className="tri">
+      <div className="card slack agent-edge agent-done">
+        <div className="c-head">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/slack-new-logo.svg" alt="Slack" width={14} height={14} />
+          <span>Slack &middot; #people-ops</span>
+        </div>
+        <div className="c-msg">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="c-av" src="/avatars/maya.jpg" alt="Maya Chen" width={28} height={28} />
+          <div>
+            <div className="c-who"><b>Maya Chen</b><time>9:14 AM</time></div>
+            <div className="c-t"><span className="mention">@MambaHR</span> Maya &middot; 3 days off</div>
           </div>
         </div>
+        <div className="c-foot"><span className="ok" />Approved &middot; calendar blocked</div>
       </div>
+
+      <div className="card teams">
+        <div className="c-head teams-h">
+          <span className="teams-logo" aria-hidden="true">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#fff"><path d="M2 4.5h7v2.3H6.7V12H4.3V6.8H2zM10 6h4v4.6a2.4 2.4 0 01-2.4 2.4H10z" /><circle cx="12" cy="3.6" r="1.7" /></svg>
+          </span>
+          <span>Microsoft Teams &middot; People chat</span>
+        </div>
+        <div className="c-msg">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="c-av" src="/avatars/maya.jpg" alt="Maya Chen" width={28} height={28} />
+          <div>
+            <div className="c-who"><b>Maya Chen</b><time>9:14 AM</time></div>
+            <div className="c-bubble">Maya &middot; 3 days off</div>
+          </div>
+        </div>
+        <div className="c-foot"><span className="ok" />Same agent &middot; same memory</div>
+      </div>
+
+      <div className="card app">
+        <div className="c-head app-h">
+          <span className="dots3"><i /><i /><i /></span>
+          <span className="addr">app.mambahr.com</span>
+        </div>
+        <div className="c-row">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="c-av round" src="/avatars/maya.jpg" alt="Maya Chen" width={28} height={28} />
+          <div className="c-main">
+            <div className="c-t"><b>Maya &middot; 3 days off</b></div>
+            <div className="c-sub">Time off &middot; Apr 7&ndash;9 &middot; within policy</div>
+          </div>
+          <span className="pill">Approved</span>
+        </div>
+        <div className="c-foot"><span className="ok" />One record &middot; ref <span className="mono">leave_4f81a2</span></div>
+      </div>
+
+      <style jsx>{`
+        .tri { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; }
+        .card {
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          box-shadow: var(--shadow-md);
+          overflow: hidden;
+          font-size: 13px;
+        }
+        .card.slack { transform: translateX(-18px); z-index: 3; position: relative; }
+        .card.teams { transform: translateX(22px); margin-top: -10px; z-index: 2; position: relative; }
+        .card.app { transform: translateX(-6px); margin-top: -10px; z-index: 1; position: relative; box-shadow: var(--shadow-float); }
+        .c-head {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 9px 14px;
+          font-size: 11.5px;
+          font-weight: 600;
+          color: var(--text-muted);
+          background: #F8F6F1;
+          border-bottom: 1px solid var(--border);
+        }
+        .c-head.teams-h { background: #464EB8; color: #fff; border-bottom-color: #464EB8; }
+        .teams-logo {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 18px;
+          height: 18px;
+          border-radius: 5px;
+          background: rgba(255, 255, 255, 0.18);
+        }
+        .c-head.app-h { gap: 10px; }
+        .dots3 { display: flex; gap: 5px; }
+        .dots3 i { width: 8px; height: 8px; border-radius: 999px; background: #e3ddd6; display: block; }
+        .dots3 i:first-child { background: #f0a59a; }
+        .dots3 i:nth-child(2) { background: #f4ce8e; }
+        .dots3 i:nth-child(3) { background: #a9cfa6; }
+        .addr {
+          margin: 0 auto;
+          font-size: 11px;
+          color: var(--text-faint);
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 2px 12px;
+        }
+        .c-msg { display: flex; gap: 10px; padding: 12px 14px 4px; }
+        .c-av { width: 28px; height: 28px; border-radius: 7px; object-fit: cover; flex: none; }
+        .c-av.round { border-radius: 999px; }
+        .c-who { display: flex; align-items: baseline; gap: 7px; }
+        .c-who b { font-size: 12.5px; color: var(--text); }
+        .c-who time { font-size: 10.5px; color: var(--text-faint); }
+        .c-t { font-size: 13px; color: var(--text); margin-top: 2px; }
+        .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+        .c-bubble {
+          margin-top: 4px;
+          display: inline-block;
+          background: #F1F0FA;
+          border-radius: 4px 12px 12px 12px;
+          padding: 6px 11px;
+          font-size: 12.5px;
+          color: var(--text);
+        }
+        .c-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px 4px; }
+        .c-main { flex: 1; min-width: 0; }
+        .c-sub { font-size: 11.5px; color: var(--text-faint); margin-top: 2px; }
+        .pill {
+          flex: none;
+          font-size: 11.5px;
+          font-weight: 600;
+          color: var(--color-green);
+          background: rgba(22, 130, 80, 0.08);
+          border-radius: 999px;
+          padding: 4px 11px;
+        }
+        .c-foot {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          padding: 8px 14px 11px;
+          font-size: 11px;
+          color: var(--text-faint);
+        }
+        .ok { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); flex: none; }
+        .mono { font-family: var(--font-mono); font-size: 10.5px; }
+        @media (max-width: 560px) {
+          .card.slack, .card.teams, .card.app { transform: none; }
+        }
+      `}</style>
     </div>
   )
 }
 
-function WebAppPreview() {
+/* ── Big photo + floating mini-card ── */
+function TeamPhoto() {
   return (
-    <div style={{ background: 'var(--bg)', border: '1px solid var(--border-faint)', borderRadius: 8, overflow: 'hidden' }}>
-      <div style={{ background: 'var(--bg-surface)', padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 5, borderBottom: '1px solid var(--border-faint)' }}>
-        <span style={{ display: 'flex', gap: 3 }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--border-mid)' }} />
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--border-mid)' }} />
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--border-mid)' }} />
-        </span>
-        <span style={{ fontSize: 9, color: 'var(--text-faint)', fontFamily: 'var(--font-mono), monospace', marginLeft: 4 }}>app.mambahr.com</span>
+    <div className="tp">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="photo" src="/v2-people/team.jpg" alt="A team at work, no HR portal in sight" />
+      <div className="float">
+        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba &middot; working</span>
+        <div className="f-n"><span data-count="847">847</span></div>
+        <div className="f-l">questions answered this quarter</div>
       </div>
-      <div style={{ padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 5 }}>
-        <p style={{ margin: 0, fontSize: 9, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Approvals · 3 items</p>
-        <div style={{ background: 'var(--bg-warm)', borderRadius: 4, padding: '6px 8px' }}>
-          <p style={{ margin: '0 0 2px', fontSize: 10, fontWeight: 600, color: 'var(--text)' }}>Parental leave — Maria K.</p>
-          <span style={{ background: '#FFF7ED', color: '#C2410C', padding: '1px 6px', borderRadius: 3, fontSize: 8, fontWeight: 600 }}>Needs sign-off</span>
-        </div>
-        <div style={{ display: 'flex', gap: 4 }}>
-          <span style={{ flex: 1, background: 'var(--bg-warm)', height: 6, borderRadius: 2 }} />
-          <span style={{ flex: 1, background: 'var(--bg-warm)', height: 6, borderRadius: 2 }} />
-        </div>
-      </div>
+      <style jsx>{`
+        .tp { position: relative; max-width: 560px; margin: 0 auto; }
+        .photo {
+          width: 100%;
+          display: block;
+          border-radius: 18px;
+          object-fit: cover;
+          aspect-ratio: 4 / 3;
+          box-shadow: var(--shadow-float);
+        }
+        .float {
+          position: absolute;
+          right: -14px;
+          bottom: 26px;
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          padding: 14px 18px;
+          box-shadow: var(--shadow-float);
+        }
+        .f-n {
+          font-family: var(--font-serif);
+          font-size: 34px;
+          line-height: 1;
+          margin-top: 10px;
+          background: linear-gradient(110deg, #8A6535, #6A5DA6);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+        .f-l { font-size: 12px; color: var(--text-faint); margin-top: 4px; max-width: 160px; }
+        @media (max-width: 880px) {
+          .float { right: 8px; }
+        }
+      `}</style>
     </div>
   )
 }
-
-const channelDetails = [
-  {
-    label: 'Slack',
-    logo: '/slack-new-logo.svg',
-    copy: 'Mention @mamba in any channel or DM. Reads the thread, checks the policy, replies in seconds.',
-    preview: <SlackPreview />,
-  },
-  {
-    label: 'Microsoft Teams',
-    logo: '/Microsoft_Symbol_0.svg',
-    copy: 'Same agent on Teams. Adaptive cards, @mentions, tabs in channels.',
-    preview: <TeamsPreview />,
-  },
-  {
-    label: 'Web app',
-    logo: '/MambaHR_logo.png',
-    copy: 'Approvals queue, employee records, hiring pipeline, reports — at app.mambahr.com.',
-    preview: <WebAppPreview />,
-  },
-]
-
-const trustCards = [
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <circle cx="9" cy="7" r="3" stroke="var(--gold)" strokeWidth="1.4" />
-        <path d="M3 19c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="var(--gold)" strokeWidth="1.4" strokeLinecap="round" />
-        <path d="M15 10l3 3m0 0l-3 3m3-3h-5" stroke="var(--gold)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    label: 'Scoped to your role',
-    desc: 'The agent only surfaces what your role can see. Managers see their team. Employees see themselves.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <rect x="2" y="2" width="18" height="18" rx="3" stroke="var(--gold)" strokeWidth="1.4" />
-        <path d="M6 8h10M6 12h6M6 16h8" stroke="var(--gold)" strokeWidth="1.2" strokeLinecap="round" />
-      </svg>
-    ),
-    label: 'Every action recorded',
-    desc: 'Every tool call, decision, and approval is written to a tamper-proof record nobody can edit after the fact.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <rect x="3" y="9" width="16" height="11" rx="2" stroke="var(--gold)" strokeWidth="1.4" />
-        <path d="M7 9V6a4 4 0 018 0v3" stroke="var(--gold)" strokeWidth="1.4" />
-        <circle cx="11" cy="14" r="1.5" fill="var(--gold)" />
-      </svg>
-    ),
-    label: 'Personal data stays out of the AI',
-    desc: 'Social security numbers, birth dates, bank and medical details are stripped before anything reaches the AI. It works with references, not raw records.',
-  },
-]
 
 export default function MambaPage() {
   return (
     <>
       <MegaNav />
-      <main style={{ paddingTop: 64 }}>
+      <RevealInit />
+      <CountUp />
 
-        {/* ── HERO ── */}
-        <Beat bg="white" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
-          <Page>
-            <div className="hero-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 72, alignItems: 'center' }}>
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 18 }}>THE AI AGENT</p>
-                <h1
-                  style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(38px, 4.5vw, 60px)',
-                    fontWeight: 400,
-                    letterSpacing: '-0.03em',
-                    color: 'var(--text)',
-                    marginBottom: 22,
-                    lineHeight: 1.0,
-                  }}
-                >
-                  <span style={{ color: 'var(--gold-dark)' }}>@mamba,</span><br />take it from here.
-                </h1>
-                <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 32, maxWidth: 460 }}>
-                  Mention the agent in any Slack channel and it does the work — reads the thread, checks the policy, takes the action, replies in seconds. Your team stops processing tickets.
-                </p>
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <a href="/demo" className="btn-gold">Request access →</a>
-                  <Link href="/today" className="btn-secondary">See approvals queue</Link>
-                </div>
-              </div>
-              <div className="hero-today-panel">
-                <SlackThread channel="people-ops" messages={heroMessages} instant />
-              </div>
-            </div>
-          </Page>
-        </Beat>
+      <PageHero
+        eyebrow="The AI agent"
+        title={<>Not a tool. <Em>A hire.</Em></>}
+        lead="Your team messages @MambaHR like a person. It reads the thread, checks your policy, does the work, and logs it — in Slack, Microsoft Teams, or the MambaHR app."
+        photo="/v2-people/sofia.jpg"
+        photoChip="Mamba · done"
+        photoCaption="Letter sent · filed · 9:11 AM"
+      >
+        <SlackWindow />
+      </PageHero>
 
-        {/* ── INTERACTIVE EXAMPLES ── */}
-        <Beat bg="warm">
-          <Page>
-            <div style={{ textAlign: 'center', marginBottom: 40 }}>
-              <p className="eyebrow" style={{ marginBottom: 14 }}>WHAT YOU CAN ASK</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(26px, 3vw, 38px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text)',
-                  marginBottom: 14,
-                  lineHeight: 1.15,
-                }}
-              >
-                It speaks HR.
-              </h2>
-              <p style={{ fontSize: 16, color: 'var(--text-muted)', maxWidth: 480, margin: '0 auto', lineHeight: 1.6 }}>
-                No commands. No forms. Just type what you need — pick a category to see how it answers.
-              </p>
-            </div>
+      <AgentLoop
+        eyebrow="Behind every reply"
+        title={<>What happens to <Em>every message</Em></>}
+        lead="Each request runs the same loop — whether it’s a quick policy question or a new hire’s first day."
+        steps={[
+          { n: '01', label: 'Reads the thread — and the person', desc: 'It knows who’s asking, their role, their manager, and what was already said.', who: 'agent', time: '< 1s', img: '/avatars/dave.jpg' },
+          { n: '02', label: 'Checks your policy and the law', desc: 'Your handbook first, then the rules for the state the person works in.', who: 'agent', time: '2s' },
+          { n: '03', label: 'Does the work', desc: 'Books the time off, files the letter, updates the record, schedules what needs scheduling.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
+          { n: '04', label: 'Answers with the receipt attached', desc: 'Not just “done” — what changed, which rule applied, and where it’s filed.', who: 'agent' },
+          { n: '05', label: 'The big calls come to you first', desc: 'Offers above band, terminations, comp above your threshold — always a human decision.', who: 'you', img: '/avatars/anna.jpg' },
+          { n: '06', label: 'Logs it all', desc: 'Every action lands in one record, so there’s never a question about what happened.', who: 'agent' },
+        ]}
+      />
 
-            <MambaExamples />
-          </Page>
-        </Beat>
+      <FeatureSplit
+        eyebrow="Every channel"
+        title={<>Same brain, <Em>every door</Em></>}
+        lead="Slack, Microsoft Teams, and the MambaHR app — one agent, one memory, one record. Ask in Slack, approve in the app, and nothing gets lost in between."
+        bullets={[
+          'Mention it in any channel or DM — it picks up the whole thread',
+          'Start in Teams, finish in the app — the context follows',
+          'One record of everything, no matter where it was asked',
+        ]}
+      >
+        <TripleSurface />
+      </FeatureSplit>
 
-        {/* ── HOW IT ROUTES ── */}
-        <Beat bg="cream">
-          <Page>
-            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: 64, alignItems: 'flex-start' }}>
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 16 }}>HOW IT ROUTES</p>
-                <h2
-                  style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(26px, 3vw, 38px)',
-                    fontWeight: 400,
-                    letterSpacing: '-0.02em',
-                    color: 'var(--text)',
-                    marginBottom: 18,
-                    lineHeight: 1.1,
-                  }}
-                >
-                  One question.<br />The right specialist.
-                </h2>
-                <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.75, marginBottom: 28 }}>
-                  Mamba reads the message, classifies the intent, checks your role, and hands the request to the right specialist agent. The specialist runs the work, cites sources, and replies through Mamba.
-                </p>
+      <FeatureSplit
+        flip
+        warm
+        eyebrow="Zero rollout"
+        title={<>Zero training. <Em>Zero logins.</Em></>}
+        lead="No training. No new logins. No portal your employees will forget the password to. They message the way they already message — and the work gets done."
+        bullets={[
+          'Employees never log into anything new',
+          'Managers approve from wherever they already are',
+          'Live in a day, not a quarter',
+        ]}
+      >
+        <TeamPhoto />
+      </FeatureSplit>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                  {[
-                    { n: '01', t: 'Read', d: 'Parses the message in context — channel, thread, who\'s asking.' },
-                    { n: '02', t: 'Route', d: 'Classifies intent and selects the specialist with the right tools.' },
-                    { n: '03', t: 'Resolve', d: 'Specialist runs the work, cites sources, returns the answer.' },
-                  ].map((s) => (
-                    <div key={s.n} style={{ display: 'grid', gridTemplateColumns: '36px 1fr', gap: 14, alignItems: 'baseline' }}>
-                      <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.06em' }}>{s.n}</span>
-                      <div>
-                        <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', margin: 0 }}>{s.t}</p>
-                        <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.55, margin: '3px 0 0' }}>{s.d}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+      <StatTrio
+        stats={[
+          { n: 9, suffix: 's', label: 'median answer, with receipt' },
+          { n: 24, suffix: '/7', label: 'never sick, never on vacation' },
+          { n: 100, suffix: '%', label: 'of actions logged with the rule followed' },
+        ]}
+      />
 
-                <div style={{
-                  marginTop: 36,
-                  paddingTop: 24,
-                  borderTop: '1px solid var(--border)',
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
-                  gap: 16,
-                }}>
-                  {[
-                    { value: '14', label: 'specialist agents' },
-                    { value: '100%', label: 'runs on your policy' },
-                    { value: 'every', label: 'action recorded' },
-                  ].map((stat) => (
-                    <div key={stat.label}>
-                      <p style={{
-                        fontFamily: 'var(--font-serif), Georgia, serif',
-                        fontSize: 28,
-                        fontWeight: 400,
-                        color: 'var(--gold-dark)',
-                        letterSpacing: '-0.025em',
-                        lineHeight: 1,
-                        margin: '0 0 6px',
-                      }}>
-                        {stat.value}
-                      </p>
-                      <p style={{
-                        fontSize: 12,
-                        color: 'var(--text-muted)',
-                        lineHeight: 1.4,
-                        margin: 0,
-                      }}>
-                        {stat.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+      <QuoteBand
+        quote="By week two, Mamba had taken leave and onboarding off my desk completely."
+        name="Dana Whitfield"
+        role="People lead, 220-person company"
+        img="/v2-people/feat.jpg"
+        metric="Saved 12 hrs / week"
+      />
 
-              <RoutingLog />
-            </div>
-          </Page>
-        </Beat>
+      <PageCta title={<>Meet your next <Em>team member.</Em></>} />
 
-        {/* ── WHERE IT LIVES ── */}
-        <Beat bg="white">
-          <Page>
-            <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <p className="eyebrow" style={{ marginBottom: 14 }}>WHERE IT LIVES</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(26px, 3vw, 38px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text)',
-                  marginBottom: 0,
-                  lineHeight: 1.15,
-                }}
-              >
-                One agent. Every surface.
-              </h2>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
-              {channelDetails.map((ch) => (
-                <div
-                  key={ch.label}
-                  style={{
-                    background: 'var(--bg-warm)',
-                    borderRadius: 16,
-                    padding: 20,
-                    border: '1px solid var(--border)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}
-                >
-                  {/* Mini preview at the top */}
-                  <div style={{ marginBottom: 22 }}>
-                    {ch.preview}
-                  </div>
-
-                  {/* Bottom: logo + label + copy */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-                    <div style={{ width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <Image src={ch.logo} alt="" width={22} height={22} style={{ display: 'block', objectFit: 'contain' }} />
-                    </div>
-                    <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em' }}>{ch.label}</p>
-                  </div>
-                  <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{ch.copy}</p>
-                </div>
-              ))}
-            </div>
-          </Page>
-        </Beat>
-
-        {/* ── TRUST ── */}
-        <Beat bg="warm">
-          <Page>
-            <div style={{ textAlign: 'center', marginBottom: 56, maxWidth: 680, marginLeft: 'auto', marginRight: 'auto' }}>
-              <p className="eyebrow" style={{ marginBottom: 18 }}>TRUST & SAFETY</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(28px, 3.4vw, 44px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.025em',
-                  color: 'var(--text)',
-                  marginBottom: 16,
-                  lineHeight: 1.1,
-                }}
-              >
-                Built for the most sensitive<br />data in your company.
-              </h2>
-              <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                Every safeguard you&rsquo;d build yourself — already running before the agent ever takes an action.
-              </p>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
-              {trustCards.map((card) => (
-                <div
-                  key={card.label}
-                  style={{
-                    background: 'var(--bg)',
-                    border: '1px solid var(--border)',
-                    borderRadius: 14,
-                    padding: '28px 26px',
-                    transition: 'border-color 0.2s ease, transform 0.2s ease',
-                  }}
-                >
-                  <div style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: 10,
-                    background: 'var(--gold-tint)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: 18,
-                  }}>
-                    {card.icon}
-                  </div>
-                  <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', margin: '0 0 8px', letterSpacing: '-0.01em' }}>{card.label}</p>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>{card.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <p style={{ textAlign: 'center', marginTop: 36, fontSize: 14 }}>
-              <Link href="/security" style={{ color: 'var(--gold-dark)', fontWeight: 600, textDecoration: 'none' }}>
-                Full security details →
-              </Link>
-            </p>
-          </Page>
-        </Beat>
-
-        <RequestAccessSection />
-      </main>
       <Footer />
     </>
   )

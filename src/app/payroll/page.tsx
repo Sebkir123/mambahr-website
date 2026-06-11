@@ -1,99 +1,262 @@
+'use client'
+
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
-import RequestAccessSection from '@/components/waitlist'
-import { Beat, Page } from '@/components/ui/page'
+import RevealInit from '@/app/v2/_sections/reveal-init'
+import CountUp from '@/app/v2/_sections/count-up'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
 
-const changeTypes = [
-  'New hire payroll records',
-  'Termination final pay adjustments',
-  'Compensation band increases',
-  'Job title & manager changes',
-  'FMLA / Paid family leave timesheets',
-  'Benefits election deductions (401k)',
-  'Qualifying life event updates',
-  'Audit trails on historical changes',
-]
+/* ── Hero fragment: the pay cycle, prepped ── */
+function PayCycleCard() {
+  const rows = [
+    { img: '/avatars/maya.jpg', name: 'Maya Chen', what: 'Merit raise +12%', note: 'priced against band' },
+    { img: '/avatars/anna.jpg', name: 'Alex Park', what: 'New hire added', note: 'first check prorated' },
+    { img: '/avatars/marcus.jpg', name: 'Marcus Webb', what: 'Final pay', note: 'state-correct timing' },
+    { img: '/avatars/priya.jpg', name: 'Priya Shah', what: '401(k) enrolled', note: 'deduction set' },
+  ]
+  return (
+    <div className="pcc agent-edge agent-working agent-lg">
+      <div className="head">
+        <div>
+          <div className="t">Pay cycle · June 15</div>
+          <div className="s">42 people · 4 changes this cycle</div>
+        </div>
+        <span className="fmt">Format: ADP</span>
+      </div>
+      {rows.map((r) => (
+        <div key={r.name} className="row">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="av" src={r.img} alt="" width={32} height={32} />
+          <div className="main">
+            <div className="who">{r.name}</div>
+            <div className="what">{r.what} · {r.note}</div>
+          </div>
+          <span className="check" aria-hidden="true" />
+        </div>
+      ))}
+      <div className="foot">
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · ready for upload</span>
+        <span className="zero">0 discrepancies</span>
+      </div>
+      <style jsx>{`
+        .pcc {
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          box-shadow: var(--shadow-float);
+          overflow: hidden;
+        }
+        .head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          padding: 18px 20px;
+          border-bottom: 1px solid var(--border-faint);
+          background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
+        }
+        .t { font-weight: 700; font-size: 15px; color: var(--text); letter-spacing: -0.01em; }
+        .s { font-size: 12.5px; color: var(--text-faint); margin-top: 2px; }
+        .fmt {
+          font-family: var(--font-mono);
+          font-size: 10.5px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--gold-dark);
+          background: var(--gold-tint);
+          border: 1px solid rgba(138, 101, 53, 0.25);
+          border-radius: 999px;
+          padding: 4px 10px;
+          white-space: nowrap;
+        }
+        .row { display: flex; align-items: center; gap: 12px; padding: 12px 20px; }
+        .row + .row { border-top: 1px solid var(--border-faint); }
+        .av { width: 32px; height: 32px; border-radius: 999px; object-fit: cover; flex: none; }
+        .main { flex: 1; min-width: 0; }
+        .who { font-size: 13.5px; font-weight: 600; color: var(--text); }
+        .what { font-size: 12.5px; color: var(--text-muted); margin-top: 1px; }
+        .check { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
+        .check::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .foot {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          padding: 14px 20px;
+          border-top: 1px solid var(--border-faint);
+          background: #FAF6EF;
+        }
+        .zero { font-family: var(--font-mono); font-size: 11.5px; color: var(--color-green); font-weight: 600; }
+      `}</style>
+    </div>
+  )
+}
+
+/* ── Feature fragment: a life event, enrolled ── */
+function EnrollCard() {
+  return (
+    <div className="ec agent-edge agent-done agent-lg">
+      <div className="top">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="av" src="/avatars/priya.jpg" alt="" width={42} height={42} />
+        <div className="id">
+          <div className="who">Priya Shah</div>
+          <div className="ev">Life event · Marriage · reported Tue 2:14 PM</div>
+        </div>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+      </div>
+      <div className="rows">
+        <div className="r"><span className="k">Enrollment window</span><span className="v">Opened same day · 30 days</span></div>
+        <div className="r"><span className="k">401(k)</span><span className="v">Enrolled via Guideline · 6%</span></div>
+        <div className="r"><span className="k">Dependents</span><span className="v">+1 added · verified</span></div>
+        <div className="r"><span className="k">Next paycheck</span><span className="v">Deductions updated · June 15</span></div>
+      </div>
+      <div className="foot"><span className="dot" aria-hidden="true" />Confirmation sent to Priya · Wed 9:02 AM</div>
+      <style jsx>{`
+        .ec {
+          background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          box-shadow: var(--shadow-float);
+          padding: 22px 24px;
+        }
+        .top { display: flex; align-items: center; gap: 13px; flex-wrap: wrap; }
+        .av { width: 42px; height: 42px; border-radius: 999px; object-fit: cover; flex: none; }
+        .id { flex: 1; min-width: 0; }
+        .who { font-size: 15px; font-weight: 700; color: var(--text); }
+        .ev { font-size: 12.5px; color: var(--text-faint); margin-top: 2px; }
+        .rows { margin-top: 18px; border: 1px solid var(--border-faint); border-radius: 12px; overflow: hidden; background: var(--bg); }
+        .r { display: flex; justify-content: space-between; gap: 16px; padding: 10px 14px; }
+        .r + .r { border-top: 1px solid var(--border-faint); }
+        .k { font-size: 12.5px; color: var(--text-faint); }
+        .v { font-size: 12.5px; font-weight: 600; color: var(--text); text-align: right; }
+        .foot { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 12px; color: var(--text-muted); }
+        .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
+      `}</style>
+    </div>
+  )
+}
+
+/* ── Feature fragment: photo + floating mini-card ── */
+function PaydayPhoto() {
+  return (
+    <div className="pp">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="photo" src="/v2-people/team.jpg" alt="A people team on payday, relaxed" />
+      <div className="mini">
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <div className="mini-t">Pay file reconciled twice</div>
+        <div className="mini-s">0 discrepancies · ready to upload</div>
+      </div>
+      <style jsx>{`
+        .pp { position: relative; }
+        .photo {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: 18px;
+          object-fit: cover;
+          aspect-ratio: 5 / 4;
+          box-shadow: var(--shadow-float);
+        }
+        .mini {
+          position: absolute;
+          left: -18px;
+          bottom: 26px;
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          padding: 14px 16px;
+          box-shadow: var(--shadow-float);
+          max-width: 240px;
+        }
+        .mini-t { font-size: 13.5px; font-weight: 700; color: var(--text); margin-top: 10px; }
+        .mini-s { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        @media (max-width: 880px) { .mini { left: 12px; } }
+      `}</style>
+    </div>
+  )
+}
 
 export default function PayrollPage() {
   return (
     <>
       <MegaNav />
-      <main style={{ paddingTop: 64 }}>
-        {/* Hero */}
-        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
-          <Page>
-            <div className="hero-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 64, alignItems: 'center' }}>
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 20 }}>PAYROLL EXPORTS</p>
-                <h1 style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(40px, 5vw, 68px)', fontWeight: 400, letterSpacing: '-0.03em', color: 'var(--text)', marginBottom: 24, lineHeight: 1.0 }}>
-                  Keep your payroll.<br />
-                  <span style={{ color: 'var(--gold-dark)' }}>We get it ready.</span>
-                </h1>
-                <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 36, maxWidth: 480 }}>
-                  MambaHR compiles every new hire, comp bump, and leave adjustment into a clean change file formatted for your provider. No double-entry.
-                </p>
-                <a href="/demo" className="btn-gold">Request access →</a>
-              </div>
+      <RevealInit />
+      <CountUp />
+      <main>
+        <PageHero
+          eyebrow="Payroll & benefits"
+          title={<>Payday, <Em>perfect.</Em></>}
+          lead={'Every raise, new hire, exit, and life event lands in your provider’s file before payday — double-checked, reconciled, and ready to upload.'}
+          proof="Trusted with payday by lean teams"
+          photo="/v2-people/team2.jpg"
+          photoChip="Mamba · ready"
+          photoCaption="42 paid right · 0 discrepancies"
+        >
+          <PayCycleCard />
+        </PageHero>
 
-              {/* Payroll Export Mockup */}
-              <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 18, boxShadow: 'var(--shadow-float), var(--sheen)', padding: '26px 28px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-                  <p style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--gold-dark)', fontFamily: 'var(--font-mono), monospace', margin: 0 }}>
-                    PAYROLL CHANGE REPORT
-                  </p>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--gold-dark)', background: 'var(--gold-tint)', border: '1px solid rgba(176,141,87,0.25)', borderRadius: 999, padding: '4px 10px' }}>
-                    EXPORT READY
-                  </span>
-                </div>
-                <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Cycle: November 15 · Monthly Pay</h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12.5, color: 'var(--text-muted)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-faint)', paddingBottom: 6 }}>
-                    <span>Priya Shah (New Hire)</span>
-                    <span style={{ color: 'var(--text)', fontWeight: 600 }}>+$8,333.33</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-faint)', paddingBottom: 6 }}>
-                    <span>Alex Rivera (Comp Increase)</span>
-                    <span style={{ color: 'var(--text)', fontWeight: 600 }}>+$833.33</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: 4 }}>
-                    <span>Marcus Webb (Unpaid FMLA Adjustment)</span>
-                    <span style={{ color: 'var(--color-red)', fontWeight: 600 }}>-$1,240.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Page>
-        </Beat>
+        <AgentLoop
+          eyebrow="The pay cycle"
+          title={<>The pay cycle, <Em>done early.</Em></>}
+          lead={'Mamba tracks every change all month, then turns them into one clean, payroll-ready file in your provider’s format. You upload it. That’s the whole job.'}
+          steps={[
+            { n: '01', label: 'Collects every change', desc: 'Raises, new hires, exits, address moves, deduction updates — gathered the moment they happen, not the night before.', who: 'agent', time: 'all month' },
+            { n: '02', label: 'Prices raises against bands', desc: 'Every merit change checked against your comp bands before it touches the file.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
+            { n: '03', label: 'Computes final pay by state rules', desc: 'Exits get state-correct final pay — timing, accrued PTO payout, the lot.', who: 'agent', time: 'instant', img: '/avatars/tom.jpg' },
+            { n: '04', label: 'Builds the file in your provider format', desc: 'ADP, Workday, Gusto, Rippling — the change file arrives in the exact format your provider expects.', who: 'agent', time: '2 days early' },
+            { n: '05', label: 'Reconciles twice', desc: 'Every line checked against the record, then checked again. Discrepancies get caught before you ever see the file.', who: 'agent', time: 'twice' },
+            { n: '06', label: 'You upload. Done.', desc: 'One clean file, ready for your payroll provider. Payday runs without a scramble.', who: 'you', img: '/avatars/anna.jpg' },
+          ]}
+        />
 
-        {/* Detailed capability details */}
-        <Beat bg="white">
-          <Page narrow>
-            <h2 className="t-h2" style={{ textAlign: 'center', marginBottom: 48 }}>Works alongside your existing payroll system.</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-              <div>
-                <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>We Don&apos;t Run Payroll. We Prep It.</h3>
-                <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                  MambaHR does not process tax filings or disperse paychecks directly. Instead, the agent tracks every structural change across your team and drafts a change log ready for your payroll processor. Download the CSV in Gusto, Workday, Rippling, Namely, or ADP formats and upload it to run payroll in minutes.
-                </p>
-              </div>
-              <div style={{ borderTop: '1px solid var(--border-faint)', paddingTop: 32 }}>
-                <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Tracked Changes Included:</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px 24px', marginTop: 12 }}>
-                  {changeTypes.map((type) => (
-                    <div key={type} style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
-                        <path d="M2 7l4 4 6-6" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      <span style={{ fontSize: 14, color: 'var(--text-muted)' }}>{type}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Page>
-        </Beat>
+        <FeatureSplit
+          eyebrow="Benefits"
+          title={<>Life events, <Em>enrolled.</Em></>}
+          lead="A birth, a marriage, a move — Mamba spots the qualifying life event, opens the window, and walks the enrollment through. 401(k) runs on Guideline, end to end."
+          bullets={[
+            'Qualifying life events caught the day they happen',
+            '401(k) enrollment and deduction changes via Guideline',
+            'Enrollment windows tracked — never missed, never expired',
+            'Every change lands in the next pay file automatically',
+          ]}
+        >
+          <EnrollCard />
+        </FeatureSplit>
 
-        <RequestAccessSection />
+        <FeatureSplit
+          flip
+          warm
+          eyebrow="The feeling"
+          title={<>No more Sunday-night <Em>sweeps.</Em></>}
+          lead={'No more Sunday-night spreadsheet sweeps. No more “did the raise make it in?” The file is built, reconciled, and waiting for you — days before anyone gets paid.'}
+          bullets={[
+            'Every change accounted for, with the receipt to prove it',
+            'Discrepancies caught and fixed before the file reaches you',
+            'A full trail of what changed, when, and why',
+          ]}
+        >
+          <PaydayPhoto />
+        </FeatureSplit>
+
+        <StatTrio
+          stats={[
+            { n: 24, suffix: 'h', label: 'of payroll prep, gone each month' },
+            { n: 0, label: 'missed enrollment windows' },
+            { n: 2, suffix: '×', label: 'every file reconciled before you see it' },
+          ]}
+        />
+
+        <QuoteBand
+          quote="We switched on a Friday and ran payday Monday without a hiccup. Every change was already in the file — I just uploaded it."
+          name="Sofia Reyes"
+          role="Head of People, 140-person company"
+          img="/v2-people/sofia.jpg"
+          metric="Live in a day"
+        />
+
+        <PageCta title={<>Make payday <Em>a non-event.</Em></>} />
       </main>
       <Footer />
     </>

@@ -1,253 +1,254 @@
-import { ReactNode } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+'use client'
+
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
-import RequestAccessSection from '@/components/waitlist'
-import EmployeeDirectory from '@/components/surfaces/employee-directory'
-import { Beat, Page } from '@/components/ui/page'
-import {
-  HiringIcon, LifecycleIcon, CompIcon, TimeOffIcon,
-  PerformanceIcon, OffboardingIcon,
-} from '@/components/surfaces/agent-icons'
+import RevealInit from '@/app/v2/_sections/reveal-init'
+import CountUp from '@/app/v2/_sections/count-up'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
 
-// Custom directory icon — matches the agent-icon style
-const DirectoryIcon = () => (
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="16" rx="2" />
-    <circle cx="9" cy="10" r="2" />
-    <path d="M5 17c0-2 2-3.5 4-3.5s4 1.5 4 3.5" />
-    <path d="M14 9h5M14 13h5M14 17h5" />
-  </svg>
-)
-
-type Capability = { title: string; desc: string; icon: ReactNode; link?: string }
-
-const capabilities: Capability[] = [
-  {
-    title: 'Directory & Records',
-    desc: 'Every employee, every change, every history — in one system of record. Migrate from Gusto, Workday, Rippling, BambooHR, Namely, or wherever your data lives today.',
-    icon: <DirectoryIcon />,
-  },
-  {
-    title: 'Promotions & transfers',
-    desc: 'Manager change, transfer, promotion, demotion, location change. The agent updates records, drafts letters, and alerts stakeholders.',
-    icon: <LifecycleIcon />,
-  },
-  {
-    title: 'Compensation & benefits',
-    desc: 'Comp recommendations within band. 401(k) eligibility checks under IRS limits. Pay-equity audits. Equity grant logging via Carta.',
-    icon: <CompIcon />,
-  },
-  {
-    title: 'Time off & leave',
-    desc: 'Policy-aware PTO approvals in seconds. FMLA eligibility plus state paid-leave stacking — CA CFRA, NY, MA, CO. Bereavement, USERRA, ADA. Anything ambiguous routes to a human.',
-    icon: <TimeOffIcon />,
-    link: '/leave',
-  },
-  {
-    title: 'Performance & Growth',
-    desc: 'Review cycle launch, 360 synthesis, calibration packets, PIP drafting and tracking. Promotion recommendations with EEO disparate impact analysis.',
-    icon: <PerformanceIcon />,
-    link: '/performance',
-  },
-  {
-    title: 'Hiring & ATS',
-    desc: 'Reqs, screening, scheduling, references, offers, day-one ready. The full hiring loop coordinated through one agent.',
-    icon: <HiringIcon />,
-    link: '/hiring',
-  },
-  {
-    title: 'Offboarding',
-    desc: 'Resignation to revoked access. Final pay calculations. Separation agreements drafted. Okta and Google Workspace deprovisioning. COBRA triggers. Device setup coordinated via Jamf.',
-    icon: <OffboardingIcon />,
-  },
+/* ── Hero fragment: people table inside an app window ── */
+const PEOPLE = [
+  { img: '/avatars/anna.jpg', name: 'Anna Wilson', role: 'Sales', status: 'Active', tone: 'ok' },
+  { img: '/avatars/priya.jpg', name: 'Priya Shah', role: 'Data Eng', status: 'Active', tone: 'ok' },
+  { img: '/avatars/maya.jpg', name: 'Maya Chen', role: 'Senior Eng', status: 'On leave', tone: 'warm' },
+  { img: '/avatars/dave.jpg', name: 'Dave Buchanan', role: 'Marketing', status: 'New hire', tone: 'vio' },
 ]
 
-const complianceItems = [
-  'FMLA + state paid leave (CA, NY, MA, CO)',
-  'Federal baseline + state-specific rules',
-  'Pay transparency (CO/NY/WA/CA)',
-  'Equal pay laws and audit support',
-  'ADA accommodation workflows',
-  'USERRA military leave',
-  'WARN Act + mini-WARN compliance',
-  'I-9 reverification on work-auth expiration',
+function PeopleWindow() {
+  return (
+    <div className="win agent-edge agent-done">
+      <div className="bar">
+        <span className="dots"><b /><b /><b /></span>
+        <span className="addr">app.mambahr.com</span>
+      </div>
+      <div className="body">
+        <div className="head">
+          <div className="ht">
+            <span className="title">People</span>
+            <span className="live"><i />Live</span>
+          </div>
+          <span className="count">1,247 employees</span>
+        </div>
+        <div className="table">
+          <div className="th"><span>Name</span><span>Team</span><span>Status</span><span className="r">Updated</span></div>
+          {PEOPLE.map((p, i) => (
+            <div className="tr" key={p.name}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <span className="who"><img src={p.img} alt="" width={26} height={26} />{p.name}</span>
+              <span className="team">{p.role}</span>
+              <span><span className={`chip ${p.tone}`}>{p.status}</span></span>
+              <span className="r time">{['9:14 AM', '9:02 AM', '8:47 AM', '8:41 AM'][i]}</span>
+            </div>
+          ))}
+        </div>
+        <div className="foot">
+          <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+          <span className="foot-t">Dave&rsquo;s record created from his signed offer · nothing typed</span>
+        </div>
+      </div>
+      <style jsx>{`
+        .win { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-float); }
+        .bar { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 14px; background: #F8F6F1; border-bottom: 1px solid var(--border); }
+        .dots { display: flex; gap: 6px; }
+        .dots b { width: 9px; height: 9px; border-radius: 999px; background: #e3ddd6; }
+        .dots b:first-child { background: #f0a59a; }
+        .dots b:nth-child(2) { background: #f4ce8e; }
+        .dots b:nth-child(3) { background: #a9cfa6; }
+        .addr { margin: 0 auto; font-size: 11.5px; color: var(--text-faint); background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 2px 16px; }
+        .body { padding: 16px 18px 18px; }
+        .head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 12px; }
+        .ht { display: flex; align-items: center; gap: 10px; }
+        .title { font-family: var(--font-serif); font-size: 21px; color: var(--text); letter-spacing: -0.01em; }
+        .live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 3px 9px; }
+        .live i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
+        .count { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); }
+        .table { border: 1px solid var(--border); border-radius: 11px; overflow: hidden; }
+        .th, .tr { display: grid; grid-template-columns: 1.5fr 0.9fr 0.9fr 0.7fr; align-items: center; gap: 10px; padding: 10px 14px; }
+        .th { font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); background: #F8F6F1; border-bottom: 1px solid var(--border); padding-block: 8px; }
+        .tr + .tr { border-top: 1px solid var(--border-faint); }
+        .who { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 600; color: var(--text); }
+        .who img { width: 26px; height: 26px; border-radius: 999px; object-fit: cover; }
+        .team { font-size: 12.5px; color: var(--text-muted); }
+        .chip { font-size: 11px; font-weight: 600; border-radius: 999px; padding: 3px 9px; }
+        .chip.ok { color: var(--color-green); background: rgba(34, 160, 94, 0.09); }
+        .chip.warm { color: var(--gold-dark); background: var(--gold-tint); }
+        .chip.vio { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); }
+        .r { text-align: right; }
+        .time { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); }
+        .foot { display: flex; align-items: center; gap: 10px; margin-top: 13px; flex-wrap: wrap; }
+        .foot-t { font-size: 12px; color: var(--text-muted); }
+        @media (max-width: 520px) { .th span:last-child, .tr .time { display: none; } }
+      `}</style>
+    </div>
+  )
+}
+
+/* ── Org chart fragment ── */
+const MANAGERS = [
+  { img: '/avatars/anna.jpg', name: 'Anna Wilson', team: 'Sales', n: 14 },
+  { img: '/avatars/marcus.jpg', name: 'Marcus Lee', team: 'Engineering', n: 31 },
+  { img: '/avatars/violet.jpg', name: 'Violet Kim', team: 'Marketing', n: 9 },
 ]
+
+function OrgChartCard() {
+  return (
+    <div className="org agent-edge agent-done">
+      <div className="o-head">
+        <span className="o-t">Org chart</span>
+        <span className="o-sub">Always current — drawn from the record</span>
+      </div>
+      <div className="ceo">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/avatars/brian.jpg" alt="" width={34} height={34} />
+        <div>
+          <div className="nm">Brian Bell</div>
+          <div className="rl">CEO</div>
+        </div>
+      </div>
+      <div className="lines" aria-hidden="true"><i /><i /><i /></div>
+      <div className="row">
+        {MANAGERS.map((m) => (
+          <div className="mgr" key={m.name}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={m.img} alt="" width={28} height={28} />
+            <div className="nm">{m.name}</div>
+            <div className="rl">{m.team}</div>
+            <span className="ct">{m.n} reports</span>
+          </div>
+        ))}
+      </div>
+      <div className="o-foot">
+        <span className="mono">Headcount: 1,247 · 0 unknowns</span>
+      </div>
+      <style jsx>{`
+        .org { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 22px 22px 18px; box-shadow: var(--shadow-float); }
+        .o-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+        .o-t { font-family: var(--font-serif); font-size: 19px; color: var(--text); }
+        .o-sub { font-size: 12px; color: var(--text-faint); }
+        .ceo { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--border); border-radius: 12px; padding: 9px 16px 9px 10px; background: var(--bg-warm); box-shadow: var(--shadow-sm); margin: 0 auto; display: flex; width: fit-content; }
+        .ceo img { width: 34px; height: 34px; border-radius: 999px; object-fit: cover; }
+        .nm { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.2; }
+        .rl { font-size: 11.5px; color: var(--text-muted); }
+        .lines { display: flex; justify-content: center; gap: 26%; height: 22px; margin: 4px 0; }
+        .lines i { width: 1px; background: var(--border); transform: skewX(0deg); }
+        .lines i:first-child { transform: rotate(28deg); }
+        .lines i:last-child { transform: rotate(-28deg); }
+        .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .mgr { border: 1px solid var(--border-faint); border-radius: 12px; padding: 12px 10px; text-align: center; background: var(--bg); box-shadow: var(--shadow-sm); }
+        .mgr img { width: 28px; height: 28px; border-radius: 999px; object-fit: cover; margin-bottom: 6px; }
+        .ct { display: inline-block; margin-top: 7px; font-family: var(--font-mono); font-size: 9.5px; color: var(--gold-dark); background: var(--gold-tint); border-radius: 999px; padding: 2px 8px; }
+        .o-foot { margin-top: 16px; border-top: 1px solid var(--border-faint); padding-top: 11px; text-align: center; }
+        .mono { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); }
+      `}</style>
+    </div>
+  )
+}
+
+/* ── Import photo with floating card ── */
+function ImportStage() {
+  return (
+    <div className="imp">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="photo" src="/v2-people/team.jpg" alt="A people team working together" />
+      <div className="float agent-edge agent-done">
+        <span className="f-check" aria-hidden="true" />
+        <div>
+          <div className="f-t">1,247 records imported</div>
+          <div className="f-s">0 lost · from Gusto · <span className="mono">today, 2:14 PM</span></div>
+        </div>
+      </div>
+      <style jsx>{`
+        .imp { position: relative; }
+        .photo { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: var(--shadow-float); }
+        .float { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 13px; padding: 12px 18px 12px 14px; box-shadow: var(--shadow-md); }
+        .f-check { flex: none; width: 20px; height: 20px; border-radius: 999px; background: var(--color-green); position: relative; }
+        .f-check::after { content: ''; position: absolute; left: 7px; top: 4px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .f-t { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .f-s { font-size: 11.5px; color: var(--text-muted); margin-top: 1px; }
+        .mono { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); }
+      `}</style>
+    </div>
+  )
+}
 
 export default function PeoplePage() {
   return (
     <>
       <MegaNav />
-      <main style={{ paddingTop: 64 }}>
+      <RevealInit />
+      <CountUp />
+      <main>
+        <PageHero
+          eyebrow="Employee records"
+          title={<>One record, <Em>current.</Em></>}
+          lead="Stop paying someone to retype what already happened. The agent that does the work keeps the record — every person, every detail, right by itself."
+          proof="The system of record for lean people teams"
+          photo="/v2-people/team2.jpg"
+          photoChip="Mamba · done"
+          photoCaption="Dave on the books before his first coffee"
+        >
+          <PeopleWindow />
+        </PageHero>
 
-        {/* Hero — split with employee directory mockup */}
-        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
-          <Page>
-            <div className="hero-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 64, alignItems: 'center' }}>
-              {/* Left: copy */}
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 20 }}>EMPLOYEE RECORDS / HRIS</p>
-                <h1
-                  style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(40px, 5vw, 68px)',
-                    fontWeight: 400,
-                    letterSpacing: '-0.03em',
-                    color: 'var(--text)',
-                    marginBottom: 24,
-                    lineHeight: 1.0,
-                  }}
-                >
-                  People ops<br />without the ops.
-                </h1>
-                <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 36, maxWidth: 480 }}>
-                  Directory, comp, performance, leave, lifecycle changes — the things a People team does every day, handled by an agent. You stay strategic.
-                </p>
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <a href="/demo" className="btn-gold">Request access →</a>
-                  <Link href="/today" className="btn-secondary">See approvals queue</Link>
-                </div>
-              </div>
+        <AgentLoop
+          eyebrow="The record keeps itself"
+          title="Why it never goes stale"
+          lead="Old systems go stale because a person has to remember to type. Here, the work and the record are the same thing."
+          steps={[
+            { n: '01', label: 'Someone’s hired', desc: 'The record creates itself from the signed offer — name, role, comp, start date.', who: 'agent', time: 'instant', img: '/avatars/dave.jpg' },
+            { n: '02', label: 'A raise is approved', desc: 'Comp updated everywhere it lives — the record, the band, the payroll file.', who: 'agent', time: 'same minute' },
+            { n: '03', label: 'An address changes in Slack', desc: 'Priya mentions she moved; it’s filed in seconds, taxes rechecked.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
+            { n: '04', label: 'Leave is approved', desc: 'The calendar and payday reflect it before anyone has to ask.', who: 'agent', time: 'same minute' },
+            { n: '05', label: 'Every change is logged', desc: 'Who changed what, when, and why — kept with the record forever.', who: 'agent', time: 'always' },
+            { n: '06', label: 'You just look things up', desc: 'Headcount, tenure, who reports to whom — they’re right, every time.', who: 'you', img: '/avatars/anna.jpg' },
+          ]}
+        />
 
-              {/* Right: employee directory mockup */}
-              <div className="hero-today-panel">
-                <EmployeeDirectory />
-              </div>
-            </div>
-          </Page>
-        </Beat>
+        <FeatureSplit
+          eyebrow="Org chart"
+          title={<>The org chart <Em>draws itself</Em></>}
+          lead="Your CEO asks for headcount by team and you answer in the meeting, not after a weekend of spreadsheet archaeology. Reporting lines are always true because they come straight from the record."
+          bullets={[
+            'Reporting lines update the moment a transfer happens',
+            'Headcount by team, location, or manager — instantly',
+            'New hires appear on day one, leavers come off the same day',
+          ]}
+        >
+          <OrgChartCard />
+        </FeatureSplit>
 
-        {/* Capabilities */}
-        <Beat bg="white">
-          <Page>
-            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>WHAT&rsquo;S COVERED</p>
-            <h2
-              style={{
-                textAlign: 'center',
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(28px, 3vw, 44px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 64,
-                lineHeight: 1.15,
-              }}
-            >
-              Everything a People team does.
-            </h2>
+        <FeatureSplit
+          flip
+          warm
+          eyebrow="Switching"
+          title={<>Switch in a day, <Em>keep it all</Em></>}
+          lead="The migration project you’ve been dreading is one import. Gusto, Workday, Rippling, BambooHR, Namely, or ADP — one-time, done in a day, every history and balance carried over. Then your old system retires."
+          bullets={[
+            'Every record, every history, every balance carried over',
+            'We check the import line by line before you go live',
+            'No parallel running, no re-keying, no cleanup project',
+          ]}
+        >
+          <ImportStage />
+        </FeatureSplit>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
-              {capabilities.map((cap) => (
-                <div
-                  key={cap.title}
-                  className="card-hover"
-                  style={{ background: 'var(--bg-warm)', border: '1px solid var(--border-faint)', borderRadius: 16, padding: '28px 24px', display: 'flex', flexDirection: 'column' }}
-                >
-                  <div
-                    style={{
-                      width: 44,
-                      height: 44,
-                      borderRadius: 12,
-                      background: 'linear-gradient(135deg, var(--gold-tint) 0%, #E8DDC8 100%)',
-                      border: '1px solid rgba(176,141,87,0.25)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--gold-dark)',
-                      marginBottom: 18,
-                    }}
-                  >
-                    {cap.icon}
-                  </div>
-                  <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: 17, fontWeight: 600, color: 'var(--text)', marginBottom: 10, letterSpacing: '-0.01em' }}>{cap.title}</h3>
-                  <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.65, flex: 1 }}>{cap.desc}</p>
-                  {cap.link && (
-                    <Link href={cap.link} style={{ marginTop: 14, fontSize: 13, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none' }}>
-                      Learn more →
-                    </Link>
-                  )}
-                </div>
-              ))}
-            </div>
-          </Page>
-        </Beat>
+        <StatTrio
+          stats={[
+            { n: 1247, label: 'records, current to the minute' },
+            { n: 1, suffix: ' day', label: 'to switch from your old system' },
+            { n: 0, label: 'stale spreadsheets' },
+          ]}
+        />
 
-        {/* In Slack */}
-        <Beat bg="cream">
-          <Page narrow>
-            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>IN SLACK</p>
-            <h2
-              style={{
-                textAlign: 'center',
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(28px, 3vw, 42px)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
-                color: 'var(--text)',
-                marginBottom: 48,
-                lineHeight: 1.15,
-              }}
-            >
-              Every people workflow — from a thread.
-            </h2>
+        <QuoteBand
+          quote="We switched on a Tuesday. By Wednesday morning every record was in, every balance was right, and I deleted the spreadsheet I’d been babysitting for three years."
+          name="Sofia Reyes"
+          role="Head of People, 210-person company"
+          img="/v2-people/sofia.jpg"
+          metric="Live in a day"
+        />
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {[
-                { cmd: '@mamba update Sarah\'s title to Staff Engineer and adjust comp to $210k', resp: 'Done. Title updated in HRIS records, comp change filed, letter generated for e-sign, payroll change report queued for next cycle.' },
-                { cmd: '@mamba what\'s Alex\'s current PTO balance?', resp: 'Alex has 14 days remaining (out of 20 annual). Next accrual: May 1.' },
-                { cmd: '@mamba kick off Q2 performance reviews for the engineering team', resp: 'Review cycle started. 23 review packets generated. 23 invitations sent. Calibration session scheduled for June 15.' },
-              ].map((ex, i) => (
-                <div key={i} style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 12, padding: '16px 20px' }}>
-                  <p style={{ fontSize: 13, color: 'var(--text-muted)', fontFamily: 'var(--font-mono), monospace', marginBottom: 8 }}>{ex.cmd}</p>
-                  <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <Image src="/MambaHR_logo.png" alt="Mamba" width={20} height={20} style={{ display: 'block', objectFit: 'contain', borderRadius: 6, flexShrink: 0 }} />
-                    <p style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.5 }}>{ex.resp}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Page>
-        </Beat>
-
-        {/* Compliance */}
-        <Beat bg="white">
-          <Page>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }} className="mobile-stack">
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 20 }}>COMPLIANCE BUILT-IN</p>
-                <h2
-                  style={{
-                    fontFamily: 'var(--font-serif), Georgia, serif',
-                    fontSize: 'clamp(28px, 3vw, 40px)',
-                    fontWeight: 400,
-                    letterSpacing: '-0.02em',
-                    color: 'var(--text)',
-                    marginBottom: 20,
-                    lineHeight: 1.15,
-                  }}
-                >
-                  Every people action is compliance-checked.
-                </h2>
-                <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.7 }}>
-                  The Compliance agent runs on every people workflow — checking state law, flagging edge cases, citing regulations, and escalating to legal when necessary.
-                </p>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {complianceItems.map((item) => (
-                  <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
-                      <path d="M2 7l4 4 6-6" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span style={{ fontSize: 14, color: 'var(--text-muted)' }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Page>
-        </Beat>
-
-        <RequestAccessSection />
+        <PageCta title={<>Your people, <Em>on the record.</Em></>} />
       </main>
       <Footer />
     </>

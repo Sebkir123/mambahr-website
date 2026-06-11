@@ -1,83 +1,350 @@
+'use client'
+
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
-import RequestAccessSection from '@/components/waitlist'
-import { Beat, Page } from '@/components/ui/page'
+import RevealInit from '@/app/v2/_sections/reveal-init'
+import CountUp from '@/app/v2/_sections/count-up'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+
+/* ── Hero fragment: the Slack exchange, done in seconds ── */
+function SlackApprovalCard() {
+  return (
+    <div className="sac agent-edge agent-done agent-lg">
+      <div className="bar">
+        <span className="dots"><i /><i /><i /></span>
+        <span className="chn"><span className="hash">#</span>people-ops</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done in seconds</span>
+      </div>
+      <div className="feed">
+        <div className="m">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="av" src="/avatars/maya.jpg" alt="Maya Chen" width={38} height={38} />
+          <div className="m-body">
+            <div className="m-h"><b>Maya Chen</b><time>9:14 AM</time></div>
+            <div className="m-t">
+              <span className="mention">@MambaHR</span> I need 3 days off next week, Mon&ndash;Wed for a wedding
+            </div>
+          </div>
+        </div>
+        <div className="m">
+          <div className="av app" aria-hidden="true">M</div>
+          <div className="m-body">
+            <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:14 AM</time></div>
+            <div className="m-t">Approved &mdash; enjoy the wedding.</div>
+            <div className="attach">
+              <div className="a-row"><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
+              <div className="a-row"><span className="a-k">Calendar</span><span className="a-v">Mon&ndash;Wed blocked, OOO set</span></div>
+              <div className="a-row"><span className="a-k">Manager</span><span className="a-v">B. Bell notified</span></div>
+              <div className="a-foot"><span className="ok-dot" aria-hidden="true" />Within policy &middot; logged &middot; ref <span className="mono">leave_4f81a2</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <style jsx>{`
+        .sac {
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          box-shadow: var(--shadow-float);
+          overflow: hidden;
+        }
+        .bar {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 10px 16px;
+          background: #F8F6F1;
+          border-bottom: 1px solid var(--border);
+        }
+        .dots { display: flex; gap: 6px; }
+        .dots i { width: 10px; height: 10px; border-radius: 999px; background: #e3ddd6; display: block; }
+        .dots i:first-child { background: #f0a59a; }
+        .dots i:nth-child(2) { background: #f4ce8e; }
+        .dots i:nth-child(3) { background: #a9cfa6; }
+        .chn { font-weight: 700; font-size: 13.5px; color: var(--text); }
+        .hash { color: var(--text-faint); margin-right: 1px; }
+        .bar :global(.mamba-chip) { margin-left: auto; }
+        .feed { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 20px; }
+        .m { display: flex; gap: 11px; }
+        .av { width: 38px; height: 38px; border-radius: 9px; object-fit: cover; flex: none; }
+        .av.app {
+          background: #14110C;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-serif);
+          font-size: 20px;
+        }
+        .m-body { min-width: 0; }
+        .m-h { display: flex; align-items: baseline; gap: 8px; }
+        .m-h b { font-size: 14px; color: var(--text); font-weight: 700; }
+        .m-h time { font-size: 11.5px; color: var(--text-faint); }
+        .apptag {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          color: var(--text-muted);
+          background: var(--bg-surface);
+          border-radius: 4px;
+          padding: 1px 5px;
+        }
+        .m-t { font-size: 14px; line-height: 1.5; color: var(--text); margin-top: 3px; }
+        .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+        .attach {
+          margin-top: 9px;
+          border-left: 3px solid var(--gold);
+          background: #FAF6EF;
+          border-radius: 0 10px 10px 0;
+          padding: 12px 14px;
+          max-width: 360px;
+        }
+        .a-row { display: flex; justify-content: space-between; gap: 16px; padding: 3px 0; }
+        .a-k { font-size: 12.5px; color: var(--text-faint); }
+        .a-v { font-size: 12.5px; color: var(--text); font-weight: 600; }
+        .a-foot {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          margin-top: 9px;
+          padding-top: 9px;
+          border-top: 1px solid var(--border);
+          font-size: 11.5px;
+          color: var(--text-faint);
+        }
+        .ok-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
+        .mono { font-family: var(--font-mono); font-size: 11px; }
+        @media (max-width: 520px) { .bar :global(.mamba-chip) { display: none; } }
+      `}</style>
+    </div>
+  )
+}
+
+/* ── Feature fragment: the hard leave, answered with the law ── */
+function ParentalLeaveCard() {
+  return (
+    <div className="plc agent-edge agent-done agent-lg">
+      <div className="msg">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="av" src="/avatars/violet.jpg" alt="" width={42} height={42} />
+        <div className="m-body">
+          <div className="m-who">Violet Hayes · California</div>
+          <div className="q">&ldquo;I&rsquo;m having a baby in June. How much leave can I take?&rdquo;</div>
+        </div>
+      </div>
+      <div className="msg reply">
+        <div className="m-logo" aria-hidden="true">M</div>
+        <div className="m-body">
+          <div className="m-who">Mamba <span className="m-time">6 seconds later</span></div>
+          <div className="a">
+            Up to 24 weeks, job protected.
+            <span className="a-sub">Federal and state stacked correctly — calendar blocked, payday updated.</span>
+            <span className="laws">
+              <span className="law">FMLA</span>
+              <span className="law">CA CFRA</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <style jsx>{`
+        .plc {
+          background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
+          border: 1px solid var(--border);
+          border-radius: 18px;
+          padding: clamp(24px, 3vw, 34px);
+          box-shadow: var(--shadow-float);
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+        .msg { display: flex; gap: 14px; align-items: flex-start; }
+        .av { width: 42px; height: 42px; border-radius: 999px; object-fit: cover; flex: none; }
+        .m-logo {
+          flex: none;
+          width: 42px;
+          height: 42px;
+          border-radius: 12px;
+          background: #14110C;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-serif);
+          font-size: 22px;
+        }
+        .m-body { min-width: 0; }
+        .m-who {
+          font-family: var(--font-mono);
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: var(--text-faint);
+        }
+        .m-time { text-transform: none; letter-spacing: 0; color: var(--color-green); margin-left: 6px; }
+        .q {
+          font-family: var(--font-serif);
+          font-size: clamp(20px, 2.2vw, 25px);
+          line-height: 1.3;
+          letter-spacing: -0.01em;
+          color: var(--text);
+          margin-top: 8px;
+        }
+        .a {
+          margin-top: 10px;
+          background: linear-gradient(160deg, #FFF2E6, #FBE6D6);
+          border: 1px solid #E6D3BC;
+          border-radius: 4px 16px 16px 16px;
+          padding: 16px 18px;
+          font-size: 17px;
+          font-weight: 700;
+          color: var(--text);
+          letter-spacing: -0.01em;
+        }
+        .a-sub {
+          display: block;
+          margin-top: 6px;
+          font-size: 13.5px;
+          font-weight: 400;
+          color: var(--text-muted);
+        }
+        .laws { display: flex; gap: 8px; margin-top: 12px; }
+        .law {
+          font-family: var(--font-mono);
+          font-size: 10.5px;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          color: var(--gold-dark);
+          background: var(--bg);
+          border: 1px solid rgba(138, 101, 53, 0.3);
+          border-radius: 999px;
+          padding: 4px 11px;
+        }
+      `}</style>
+    </div>
+  )
+}
+
+/* ── Feature fragment: team photo + coverage mini-card ── */
+function VacationPhoto() {
+  return (
+    <div className="vp">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="photo" src="/v2-people/team2.jpg" alt="A team that actually takes its vacations" />
+      <div className="mini">
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <div className="mini-t">3 out next week · covered</div>
+        <div className="mini-s">Calendars blocked · handoffs noted</div>
+      </div>
+      <style jsx>{`
+        .vp { position: relative; }
+        .photo {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: 18px;
+          object-fit: cover;
+          aspect-ratio: 5 / 4;
+          box-shadow: var(--shadow-float);
+        }
+        .mini {
+          position: absolute;
+          left: -18px;
+          bottom: 26px;
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          padding: 14px 16px;
+          box-shadow: var(--shadow-float);
+          max-width: 250px;
+        }
+        .mini-t { font-size: 13.5px; font-weight: 700; color: var(--text); margin-top: 10px; }
+        .mini-s { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        @media (max-width: 880px) { .mini { left: 12px; } }
+      `}</style>
+    </div>
+  )
+}
 
 export default function LeavePage() {
   return (
     <>
       <MegaNav />
-      <main style={{ paddingTop: 64 }}>
-        {/* Hero */}
-        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
-          <Page>
-            <div className="hero-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 64, alignItems: 'center' }}>
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 20 }}>TIME OFF & LEAVE</p>
-                <h1 style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(40px, 5vw, 68px)', fontWeight: 400, letterSpacing: '-0.03em', color: 'var(--text)', marginBottom: 24, lineHeight: 1.0 }}>
-                  Leave that reads the<br />
-                  <span style={{ color: 'var(--gold-dark)' }}>statute for you.</span>
-                </h1>
-                <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 36, maxWidth: 480 }}>
-                  PTO, FMLA eligibility, and state paid-leave stacking. The agent evaluates every request against your policy and the law, routing only what requires a human.
-                </p>
-                <a href="/demo" className="btn-gold">Request access →</a>
-              </div>
+      <RevealInit />
+      <CountUp />
+      <main>
+        <PageHero
+          eyebrow="Time off & leave"
+          title={<>Time off, <Em>approved.</Em></>}
+          lead={'Normal time off approves itself in seconds. Family and medical leave gets handled the legally-safe way — calendar blocked, payday updated, the law attached.'}
+          proof="Loved by teams in 11+ states"
+          photo="/v2-people/sofia.jpg"
+          photoChip="Mamba · done"
+          photoCaption="Maya approved · OOO set in 9s"
+        >
+          <SlackApprovalCard />
+        </PageHero>
 
-              {/* FMLA Cited Mockup */}
-              <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 18, boxShadow: 'var(--shadow-float), var(--sheen)', padding: '28px 30px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 20 }}>
-                  <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 22, fontWeight: 400, color: 'var(--text)', margin: 0, letterSpacing: '-0.015em', lineHeight: 1.25 }}>
-                    Marcus Webb — FMLA Eligibility Request
-                  </p>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--gold-dark)', background: 'var(--gold-tint)', border: '1px solid rgba(176,141,87,0.25)', borderRadius: 999, padding: '5px 12px', whiteSpace: 'nowrap', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                    NEEDS SIGN-OFF
-                  </span>
-                </div>
-                <div style={{ background: 'var(--gold-tint)', borderLeft: '3px solid var(--gold-dark)', borderRadius: '0 10px 10px 0', padding: '16px 20px', marginBottom: 18 }}>
-                  <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.12em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: 'var(--font-mono), monospace' }}>
-                    Agent Assessment
-                  </p>
-                  <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)', margin: '0 0 6px', lineHeight: 1.35 }}>
-                    Eligible: FMLA & CA CFRA stacking.
-                  </p>
-                  <p style={{ fontSize: 13.5, color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
-                    Employee has 14 months tenure and 1,400 hours worked. Under California rules, CFRA stacks on top of federal FMLA. Approve up to 12 weeks of job-protected leave.
-                  </p>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ fontSize: 11, color: 'var(--text-faint)', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-mono), monospace' }}>Citing:</span>
-                  {['FMLA', 'CA CFRA', 'DLSE 7-2024'].map((r) => (
-                    <span key={r} style={{ fontSize: 11.5, color: 'var(--text-muted)', background: 'var(--bg-surface)', border: '1px solid var(--border-faint)', borderRadius: 5, padding: '2px 8px', fontFamily: 'var(--font-mono), monospace' }}>{r}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Page>
-        </Beat>
+        <AgentLoop
+          eyebrow="The leave loop"
+          title={<>When someone <Em>asks.</Em></>}
+          lead={'Every request runs the same path: the easy ones finish in seconds, the regulated ones get the statute check, and only the genuinely ambiguous ones reach you.'}
+          steps={[
+            { n: '01', label: 'Reads the request', desc: 'Slack, Teams, or the MambaHR app — Mamba understands the dates, the reason, and who is asking.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
+            { n: '02', label: 'Checks balance and policy', desc: 'Accrued days, blackout dates, notice rules — checked against your actual policy, not a guess.', who: 'agent', time: 'seconds' },
+            { n: '03', label: 'Checks FMLA and state leave when it applies', desc: 'Parental or medical leave triggers the eligibility check — federal and state, stacked correctly.', who: 'agent', time: 'seconds' },
+            { n: '04', label: 'Books calendar and updates payday', desc: 'OOO set, coverage visible, and the pay record adjusted so payday is right without anyone touching it.', who: 'agent', time: 'same minute' },
+            { n: '05', label: 'Notifies the manager', desc: 'A clean note with dates and coverage — no approval ping-pong for in-policy requests.', who: 'agent', time: 'same minute', img: '/avatars/anna.jpg' },
+            { n: '06', label: 'The edge cases', desc: 'Anything ambiguous comes to you — with the balance, the policy, and the relevant law already laid out.', who: 'you', img: '/avatars/tom.jpg' },
+          ]}
+        />
 
-        {/* Details page */}
-        <Beat bg="white">
-          <Page narrow>
-            <h2 className="t-h2" style={{ textAlign: 'center', marginBottom: 48 }}>Routine time-off auto-approved. Complex cases routed.</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-              <div>
-                <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Routine PTO & Sick Time</h3>
-                <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                  Employees mention the agent in Slack or Teams to request time off. The agent instantly verifies their accrual balance, checks for calendar conflicts within their department, and either auto-approves within your policy or notifies their manager.
-                </p>
-              </div>
-              <div style={{ borderTop: '1px solid var(--border-faint)', paddingTop: 32 }}>
-                <h3 style={{ fontSize: 20, fontWeight: 600, marginBottom: 8 }}>Extended & Statutory Leaves</h3>
-                <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                  For parental, FMLA, state-specific paid family leave, or disability accommodations, the agent runs the calculations. It reads state statutes to stack FMLA, CA CFRA, MA PFML, or CO FAMLI properly, ensuring your organization stays compliant with local employment laws. Anything ambiguous or health-related escalates to you.
-                </p>
-              </div>
-            </div>
-          </Page>
-        </Beat>
+        <FeatureSplit
+          eyebrow="Family & medical leave"
+          title={<>The hard leave, <Em>handled.</Em></>}
+          lead={'Parental and medical leave is where mistakes get expensive. Mamba checks eligibility, stacks federal and state entitlements correctly, and attaches the statute to every answer — so Legal never gets a panicked call.'}
+          bullets={[
+            'FMLA eligibility checked before anything is promised',
+            'State paid leave — CA CFRA, NY, MA, CO — stacked correctly with federal',
+            'Every answer cites the law it followed',
+            'The risky calls route to a human, with the homework done',
+          ]}
+        >
+          <ParentalLeaveCard />
+        </FeatureSplit>
 
-        <RequestAccessSection />
+        <FeatureSplit
+          flip
+          warm
+          eyebrow="The culture part"
+          title={<>Vacations, actually <Em>taken.</Em></>}
+          lead={'No guilt-tripping forms, no week-long approval limbo. Balances are always current, coverage is visible to everyone, and asking for time off feels like asking a colleague — because that’s what it is.'}
+          bullets={[
+            'Balances always current — no “let me check the spreadsheet”',
+            'Team coverage visible before anyone says yes',
+            'Approvals in seconds, so people actually book the trip',
+          ]}
+        >
+          <VacationPhoto />
+        </FeatureSplit>
+
+        <StatTrio
+          stats={[
+            { n: 9, suffix: 's', label: 'median time-off approval' },
+            { n: 50, label: 'states of leave law, kept current' },
+            { n: 0, label: 'leave letters your lawyer had to write' },
+          ]}
+        />
+
+        <QuoteBand
+          quote="We have people in eleven states and I used to dread every leave question. Now the answer comes back in seconds — with the law attached."
+          name="Marcus Lee"
+          role="People Operations Lead, multi-state team"
+          img="/v2-people/marcus.jpg"
+          metric="Saved 9 hrs / week"
+        />
+
+        <PageCta title={<>Time off that takes <Em>none of yours.</Em></>} />
       </main>
       <Footer />
     </>
