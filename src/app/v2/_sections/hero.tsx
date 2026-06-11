@@ -204,7 +204,7 @@ export default function Hero() {
         @media (prefers-reduced-motion: reduce) {
           .blob { animation: none; }
         }
-        .top { position: relative; max-width: 860px; margin: 0 auto; text-align: center; }
+        .top { position: relative; max-width: 980px; margin: 0 auto; text-align: center; }
         .eyebrow {
           font-family: var(--font-mono);
           font-size: 12px;
@@ -215,7 +215,7 @@ export default function Hero() {
         .title {
           font-family: var(--font-serif);
           font-weight: 400;
-          font-size: clamp(58px, 9vw, 116px);
+          font-size: clamp(50px, 7.4vw, 92px);
           line-height: 0.98;
           letter-spacing: -0.035em;
           color: var(--text);

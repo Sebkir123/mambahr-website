@@ -29,7 +29,7 @@ export default function Compliance() {
         <div className="copy" data-reveal data-delay="1">
           <p className="eyebrow">Stay compliant</p>
           <h2 className="title">
-            The right answer, <span className="em">with the law attached.</span>
+            Right answer. <span className="em">Law attached.</span>
           </h2>
           <p className="lead">
             Employment law changes almost every week. Mamba keeps up — and a human signs
@@ -126,7 +126,7 @@ export default function Compliance() {
         .title {
           font-family: var(--font-serif);
           font-weight: 400;
-          font-size: clamp(36px, 4.6vw, 56px);
+          font-size: clamp(26px, 2.8vw, 37px);
           line-height: 1.08;
           letter-spacing: -0.025em;
           color: var(--text);

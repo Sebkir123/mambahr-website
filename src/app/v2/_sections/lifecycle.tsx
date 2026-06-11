@@ -214,9 +214,9 @@ export default function Lifecycle() {
       <style jsx>{`
         .lc { background: var(--bg); padding-block: clamp(96px, 13vw, 168px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
-        .head { max-width: 760px; margin-bottom: clamp(44px, 5vw, 64px); }
+        .head { max-width: none; margin-bottom: clamp(44px, 5vw, 64px); }
         .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 18px; }
-        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(38px, 5vw, 60px); line-height: 1.08; letter-spacing: -0.025em; color: var(--text); margin: 0; }
+        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.08; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
         .lead { font-size: clamp(18px, 2vw, 20px); line-height: 1.55; color: var(--text-muted); margin: 20px 0 0; max-width: 600px; }
 

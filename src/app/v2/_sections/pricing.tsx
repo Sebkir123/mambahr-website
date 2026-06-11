@@ -55,10 +55,6 @@ export default function Pricing() {
             An HR generalist runs $85k&ndash;$120k a year. MambaHR does the same work from
             $24k — and never calls in sick.
           </p>
-          <p className="founding">
-            <span className="f-dot" aria-hidden="true" />
-            Founding pricing — first 20 companies, locked for the life of your contract
-          </p>
         </div>
 
         <div className="grid">
@@ -95,7 +91,7 @@ export default function Pricing() {
           padding: 0 var(--page-pad);
         }
         .head {
-          max-width: 680px;
+          max-width: none;
           margin-bottom: clamp(44px, 5vw, 64px);
         }
         .eyebrow {
@@ -109,7 +105,7 @@ export default function Pricing() {
         .title {
           font-family: var(--font-serif);
           font-weight: 400;
-          font-size: clamp(36px, 4.8vw, 58px);
+          font-size: clamp(30px, 3.6vw, 46px);
           line-height: 1.05;
           letter-spacing: -0.025em;
           color: var(--text);
@@ -127,29 +123,6 @@ export default function Pricing() {
           line-height: 1.6;
           color: var(--text-muted);
           margin: 20px 0 0;
-        }
-        .founding {
-          display: inline-flex;
-          align-items: center;
-          gap: 9px;
-          margin: 18px 0 0;
-          padding: 9px 15px;
-          font-family: var(--font-mono);
-          font-size: 11.5px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--gold-dark);
-          background: var(--gold-tint);
-          border: 1px solid rgba(138, 101, 53, 0.22);
-          border-radius: 999px;
-        }
-        .f-dot {
-          flex: none;
-          width: 7px;
-          height: 7px;
-          border-radius: 999px;
-          background: var(--gold);
-          animation: mcPulse 2.4s ease-in-out infinite;
         }
         .size {
           font-family: var(--font-mono);

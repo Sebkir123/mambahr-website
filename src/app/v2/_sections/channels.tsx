@@ -7,7 +7,7 @@ export default function Channels() {
         <div className="copy" data-reveal>
           <p className="eyebrow">Where your team already works</p>
           <h2 className="title">
-            Your AI hire works in <span className="em">Slack and Teams.</span>
+            Lives in <span className="em">Slack and Teams.</span>
           </h2>
           <p className="lead">
             No new tool to learn. No portal to log into. Your team messages
@@ -144,7 +144,7 @@ export default function Channels() {
         .title {
           font-family: var(--font-serif);
           font-weight: 400;
-          font-size: clamp(34px, 4.4vw, 54px);
+          font-size: clamp(26px, 2.6vw, 34px);
           line-height: 1.08;
           letter-spacing: -0.025em;
           color: var(--text);

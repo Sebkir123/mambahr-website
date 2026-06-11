@@ -7,12 +7,10 @@ export default function PeopleBand() {
         <div className="copy" data-reveal>
           <p className="eyebrow">Built for people teams</p>
           <h2 className="title">
-            HR is a people job.<br />
             We do the <span className="em">paperwork part.</span>
           </h2>
           <p className="lead">
-            MambaHR takes the admin off your team&rsquo;s plate so they can do the human work
-            only they can — the coaching, the culture, the hard conversations.
+            HR is a people job. Mamba takes the admin so your team can do the work only humans can — the coaching, the culture, the hard conversations.
           </p>
           <ul className="points">
             <li><span className="tick" aria-hidden="true" />The agent handles the filings, approvals, and follow-ups</li>
@@ -59,7 +57,7 @@ export default function PeopleBand() {
         .title {
           font-family: var(--font-serif);
           font-weight: 400;
-          font-size: clamp(36px, 4.6vw, 56px);
+          font-size: clamp(28px, 3.2vw, 42px);
           line-height: 1.08;
           letter-spacing: -0.025em;
           color: var(--text);

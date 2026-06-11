@@ -12,9 +12,7 @@ export default function Statement() {
       <span className="v2-grain" />
       <div className="inner">
         <h2 className="line" data-reveal>
-          You bought the software.
-          <br />
-          You still hired the team to <span className="em">run it.</span>
+          You bought the software. You still <span className="em">do the work.</span>
         </h2>
         <p className="body" data-reveal data-delay="1">
           Every HRIS needs people clicking the buttons. For every dollar spent on the
@@ -61,7 +59,7 @@ export default function Statement() {
           font-family: var(--font-serif);
           color: #fff;
           font-weight: 400;
-          font-size: clamp(36px, 5.6vw, 68px);
+          font-size: clamp(26px, 3.6vw, 46px);
           line-height: 1.08;
           letter-spacing: -0.025em;
           margin: 0;

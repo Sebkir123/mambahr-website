@@ -54,7 +54,7 @@ export default function Faq() {
         .wrap { max-width: 860px; margin: 0 auto; padding: 0 var(--page-pad); }
         .head { margin-bottom: clamp(32px, 4vw, 48px); }
         .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 18px; }
-        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(34px, 4.4vw, 54px); line-height: 1.06; letter-spacing: -0.025em; color: var(--text); margin: 0; }
+        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.06; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
 
         .list { border-top: 1px solid var(--border); }

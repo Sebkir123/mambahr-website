@@ -58,9 +58,9 @@ export default function Resources() {
       <style jsx>{`
         .rs { background: var(--bg); padding-block: clamp(96px, 13vw, 168px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
-        .head { max-width: 680px; margin-bottom: clamp(36px, 4vw, 52px); }
+        .head { max-width: none; margin-bottom: clamp(36px, 4vw, 52px); }
         .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 18px; }
-        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(34px, 4.4vw, 54px); line-height: 1.06; letter-spacing: -0.025em; color: var(--text); margin: 0; }
+        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.06; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
         .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 18px 0 0; }
 

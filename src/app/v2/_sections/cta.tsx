@@ -7,10 +7,10 @@ export default function Cta() {
         <span className="v2-grain" />
         <p className="eyebrow">Request access</p>
         <h2 className="title">
-          Hire the agent.<br /><span className="em">Promote the human.</span>
+          Hire the agent. <span className="em">Promote the human.</span>
         </h2>
         <p className="sub">
-          Founding pricing for the first 20 companies. Live demo in 30 minutes.
+          A live demo in 30 minutes. Live the next morning.
         </p>
         <form className="form" onSubmit={(e) => e.preventDefault()}>
           <input className="input" type="email" placeholder="you@company.com" aria-label="Work email" />
@@ -63,7 +63,7 @@ export default function Cta() {
           font-family: var(--font-serif);
           font-weight: 400;
           color: #fff;
-          font-size: clamp(40px, 6vw, 76px);
+          font-size: clamp(32px, 4.4vw, 56px);
           line-height: 1;
           letter-spacing: -0.03em;
           margin: 0;

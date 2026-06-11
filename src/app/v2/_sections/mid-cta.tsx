@@ -14,7 +14,7 @@ export default function MidCta() {
         <h3 className="line">Stop paying people to <span className="em">push buttons.</span></h3>
         <p className="sub">See what your team gets back — in a 30-minute walkthrough with the founders.</p>
         <a href="#access" className="btn">Request access</a>
-        <span className="note">Founding pricing · first 20 companies</span>
+        <span className="note">Live the next morning · no setup project</span>
       </div>
 
       <style jsx>{`
