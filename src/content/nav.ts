@@ -36,6 +36,8 @@ export const byFunction: NavItem[] = [
  * closest existing page. Keyword coverage without new pages.
  */
 export const alsoHandled: { label: string; href: string }[] = [
+  { label: 'Careers page', href: '/job-portal' },
+  { label: 'Job board', href: '/job-portal' },
   { label: 'Performance reviews', href: '/performance' },
   { label: 'Org chart', href: '/people' },
   { label: 'PTO tracking', href: '/leave' },
@@ -52,6 +54,7 @@ export const alsoHandled: { label: string; href: string }[] = [
 
 export const howItWorks: NavItem[] = [
   { label: 'The AI agent',        href: '/mamba',      description: 'Works in Slack, Teams, and the web', live: true, icon: 'agent' },
+  { label: 'Job portal',          href: '/job-portal', description: 'Your careers page, hosted',          live: true, icon: 'hiring' },
   { label: 'Approvals',           href: '/today',      description: 'Your day in three taps',             live: true, icon: 'today' },
   { label: 'Employee records',    href: '/people',     description: 'HRIS, org chart — always current',   live: true, icon: 'people' },
   { label: 'Documents & e-sign',  href: '/documents',  description: 'Generated, signed, filed',           live: true, icon: 'documents' },
