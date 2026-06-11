@@ -87,7 +87,7 @@ function MathCard() {
     <div className="mc agent-edge agent-working agent-lg">
       <div className="head">
         <span className="t">The math your CFO will do anyway</span>
-        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · working</span>
+        <span className="at">at 100 employees</span>
       </div>
       <div className="rows">
         <div className="r">
@@ -115,6 +115,7 @@ function MathCard() {
         .mc { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
         .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 22px; border-bottom: 1px solid var(--border-faint); }
         .t { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .at { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); white-space: nowrap; }
         .rows { padding: 18px 22px 6px; display: flex; flex-direction: column; gap: 18px; }
         .r-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
         .r-l { font-size: 13.5px; font-weight: 600; color: var(--text); }
@@ -155,6 +156,15 @@ export default function PricingPage() {
               <Link href="/demo" className="btn-p">Book a demo</Link>
               <Link href="/product" className="btn-g">See it run</Link>
             </div>
+            <div className="proof" data-reveal data-delay="3">
+              <div className="faces">
+                {['priya', 'anna', 'maya', 'dave', 'brian'].map((p) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={p} src={`/avatars/${p}.jpg`} alt="" width={34} height={34} />
+                ))}
+              </div>
+              <span className="proof-t">Replacing HR admin work at lean teams</span>
+            </div>
           </div>
           <div className="stage" data-reveal data-delay="4">
             <MathCard />
@@ -174,6 +184,28 @@ export default function PricingPage() {
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(42px, 5.8vw, 76px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 18px 0 0; white-space: nowrap; }
             .lead { font-size: clamp(17px, 2vw, 20px); line-height: 1.55; color: var(--text-muted); max-width: 660px; margin: 22px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+            :global(.ph .btn-p) {
+              display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 15.5px;
+              padding: 14px 28px; border-radius: 999px; text-decoration: none;
+              box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22); transition: transform 0.15s ease;
+            }
+            :global(.ph .btn-p:hover) { transform: translateY(-2px); }
+            :global(.ph .btn-g) {
+              display: inline-block; color: var(--text); font-weight: 600; font-size: 15.5px;
+              padding: 14px 24px; border-radius: 999px; border: 1px solid var(--border-mid);
+              background: rgba(255, 255, 255, 0.6); text-decoration: none;
+            }
+            :global(.ph .btn-g:hover) { background: #fff; }
+            @media (prefers-reduced-motion: reduce) { :global(.ph .btn-p:hover) { transform: none; } }
+            .proof { display: flex; align-items: center; gap: 13px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+            .faces { display: flex; }
+            .faces img {
+              width: 34px; height: 34px; border-radius: 999px; object-fit: cover;
+              border: 2px solid #fff; box-shadow: var(--shadow-sm);
+              margin-left: -9px; background: var(--bg-elevated);
+            }
+            .faces img:first-child { margin-left: 0; }
+            .proof-t { font-size: 14px; font-weight: 600; color: var(--text); }
             .stage { position: relative; max-width: 720px; margin: clamp(44px, 5.4vw, 64px) auto 0; }
             @media (max-width: 880px) { .title { white-space: normal; } }
           `}</style>
@@ -213,7 +245,7 @@ export default function PricingPage() {
             .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-float); }
             @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
             .card.pop { background: linear-gradient(180deg, #FFFDF8, var(--bg)); box-shadow: var(--shadow-float); }
-            .pop-tag { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 4px 12px; white-space: nowrap; }
+            .pop-tag { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); z-index: 3; font-family: var(--font-mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 5px 13px; white-space: nowrap; box-shadow: 0 0 0 4px var(--bg), 0 6px 14px rgba(20, 18, 14, 0.16); }
             .c-name { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
             .c-size { font-family: var(--font-mono); font-size: 11px; color: var(--gold-dark); margin-top: 4px; }
             .c-price { display: flex; align-items: baseline; gap: 6px; margin-top: 18px; }
@@ -246,7 +278,7 @@ export default function PricingPage() {
             </div>
           </div>
           <style jsx>{`
-            .inc { background: var(--bg); padding: 0 var(--page-pad) clamp(56px, 7vw, 88px); }
+            .inc { background: var(--bg); padding: 0 var(--page-pad) clamp(8px, 1vw, 16px); }
             .wrap { max-width: var(--page-max); margin: 0 auto; border-top: 1px solid var(--border-faint); padding-top: clamp(28px, 3.4vw, 40px); display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
             .inc-l { font-family: var(--font-mono); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin: 0; white-space: nowrap; }
             .chips { display: flex; flex-wrap: wrap; gap: 9px; }
