@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { byFunction, howItWorks, type NavItem } from '@/content/nav'
+import { byFunction, howItWorks, alsoHandled, type NavItem } from '@/content/nav'
 
 // Single-stroke icons, keyed to NavItem.icon. Icons are JSX so they live here,
 // not in nav.ts. 20×20, currentColor, gold inside the dropdown chip.
@@ -196,7 +196,7 @@ export default function MegaNav() {
               className="nav-dropdown"
               style={{
                 pointerEvents: 'auto',
-                maxWidth: 940,
+                maxWidth: 1020,
                 margin: '0 auto',
                 background: '#FFFFFF',
                 border: '1px solid var(--border)',
@@ -210,20 +210,95 @@ export default function MegaNav() {
                 aria-hidden="true"
                 style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, #B98A4E, #6A5DA6)', opacity: 0.7 }}
               />
-              <div style={{ padding: '30px 32px 26px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+              <div style={{ padding: '28px 32px 24px', display: 'grid', gridTemplateColumns: '1.55fr 1fr', gap: 40 }}>
+                {/* Everything HR — the procurement checklist, two compact columns */}
                 <div>
-                  <p style={colLabel}>By function</p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <p style={colLabel}>Everything HR, handled</p>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px 16px' }}>
                     {byFunction.map((item) => <MenuItem key={item.label} item={item} onNavigate={() => setProductOpen(false)} />)}
                   </div>
                 </div>
+
+                {/* The agent panel + surfaces rail */}
                 <div>
-                  <p style={colLabel}>How it works</p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    {howItWorks.map((item) => <MenuItem key={item.label} item={item} onNavigate={() => setProductOpen(false)} />)}
+                  <p style={colLabel}>Run by one AI hire</p>
+                  <Link
+                    href="/mamba"
+                    onClick={() => setProductOpen(false)}
+                    style={{
+                      display: 'block',
+                      textDecoration: 'none',
+                      borderRadius: 14,
+                      padding: '16px 16px 14px',
+                      marginBottom: 10,
+                      background:
+                        'radial-gradient(80% 60% at 15% 0%, rgba(185,138,78,0.25), transparent 60%), radial-gradient(70% 55% at 95% 100%, rgba(106,93,166,0.28), transparent 60%), #14110C',
+                    }}
+                  >
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-mono), monospace', fontSize: 10.5, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#AEA2E6' }}>
+                      <span style={{ width: 8, height: 8, borderRadius: 999, background: '#AEA2E6', display: 'inline-block' }} />
+                      Mamba · working
+                    </span>
+                    <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 19, lineHeight: 1.25, letterSpacing: '-0.01em', color: '#fff', margin: '10px 0 6px' }}>
+                      One agent runs all of it.
+                    </p>
+                    <p style={{ fontSize: 12.5, lineHeight: 1.5, color: 'rgba(255,255,255,0.65)', margin: 0 }}>
+                      You approve the big calls. Everything else just gets done.
+                    </p>
+                  </Link>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    {howItWorks.map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => setProductOpen(false)}
+                        className="nav-rail-link"
+                        style={{
+                          display: 'flex',
+                          alignItems: 'baseline',
+                          justifyContent: 'space-between',
+                          gap: 12,
+                          padding: '8px 10px',
+                          borderRadius: 8,
+                          textDecoration: 'none',
+                        }}
+                      >
+                        <span style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--text)' }}>{item.label}</span>
+                        <span style={{ fontSize: 11.5, color: 'var(--text-faint)', textAlign: 'right' }}>{item.description}</span>
+                      </Link>
+                    ))}
                   </div>
                 </div>
               </div>
+              {/* The procurement checklist — exact keywords buyers scan for */}
+              <div style={{ padding: '0 32px 20px' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: 8, paddingTop: 18, borderTop: '1px solid var(--border-faint)' }}>
+                  <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-faint)', marginRight: 4 }}>
+                    Also handled
+                  </span>
+                  {alsoHandled.map((k) => (
+                    <Link
+                      key={k.label}
+                      href={k.href}
+                      onClick={() => setProductOpen(false)}
+                      className="nav-kw"
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 500,
+                        color: 'var(--text-muted)',
+                        textDecoration: 'none',
+                        border: '1px solid var(--border)',
+                        borderRadius: 999,
+                        padding: '4px 11px',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {k.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               <div
                 style={{
                   display: 'flex',

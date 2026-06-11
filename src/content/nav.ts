@@ -19,22 +19,42 @@ export type NavSection = {
  * Every href resolves to a real page or an in-page anchor we create.
  */
 export const byFunction: NavItem[] = [
-  { label: 'Hiring & ATS',             href: '/hiring',       description: 'Reqs, screening, offers, onboarding',  live: true, icon: 'hiring' },
-  { label: 'Onboarding & offboarding', href: '/onboarding',   description: 'Day-one accounts to clean exits',      live: true, icon: 'onboarding' },
-  { label: 'Time off & leave',         href: '/leave',        description: 'PTO, FMLA, state paid-leave',          live: true, icon: 'timeoff' },
-  { label: 'Performance',              href: '/performance',  description: 'Reviews, calibration, PIPs',           live: true, icon: 'performance' },
-  { label: 'Compensation',             href: '/compensation', description: 'Bands, pay equity, raises',            live: true, icon: 'comp' },
-  { label: 'Compliance',               href: '/compliance',   description: 'Federal + 50-state, every cite',       live: true, icon: 'compliance' },
-  { label: 'Headcount & RIF',          href: '/rif',          description: 'Planning, severance, WARN notices',    live: true, icon: 'rif' },
-  { label: 'Payroll-ready exports',    href: '/payroll',      description: 'Change files in your provider format', live: true, icon: 'payroll' },
+  { label: 'Hiring & ATS',          href: '/hiring',       description: 'Post, screen, offer — signed the same week', live: true, icon: 'hiring' },
+  { label: 'Onboarding',            href: '/onboarding',   description: 'Day-one ready before they arrive',           live: true, icon: 'onboarding' },
+  { label: 'Payroll & benefits',    href: '/payroll',      description: 'Payday and 401(k), on autopilot',            live: true, icon: 'payroll' },
+  { label: 'Time off & leave',      href: '/leave',        description: 'PTO to FMLA, approved in seconds',           live: true, icon: 'timeoff' },
+  { label: 'Performance',           href: '/performance',  description: 'Reviews that write themselves',              live: true, icon: 'performance' },
+  { label: 'Compensation',          href: '/compensation', description: 'Every raise priced against your bands',      live: true, icon: 'comp' },
+  { label: 'Compliance',            href: '/compliance',   description: '50 states, every answer cites the law',      live: true, icon: 'compliance' },
+  { label: 'Headcount & RIF',       href: '/rif',          description: 'Layoffs and reorgs, done right',             live: true, icon: 'rif' },
+]
+
+/**
+ * The procurement-checklist keywords buyers scan for. Rendered as small
+ * tag-chips in the dropdown — exact search phrases, each pointing at the
+ * closest existing page. Keyword coverage without new pages.
+ */
+export const alsoHandled: { label: string; href: string }[] = [
+  { label: 'Performance reviews', href: '/performance' },
+  { label: 'Org chart', href: '/people' },
+  { label: 'PTO tracking', href: '/leave' },
+  { label: 'Offer letters', href: '/hiring' },
+  { label: 'E-signatures', href: '/documents' },
+  { label: 'I-9 & E-Verify', href: '/onboarding' },
+  { label: '401(k) & benefits', href: '/payroll' },
+  { label: 'Pay equity', href: '/compensation' },
+  { label: 'EEO-1 reporting', href: '/compliance' },
+  { label: 'Severance & COBRA', href: '/rif' },
+  { label: 'Employee database', href: '/people' },
+  { label: 'Audit trail', href: '/security' },
 ]
 
 export const howItWorks: NavItem[] = [
   { label: 'The AI agent',        href: '/mamba',      description: 'Works in Slack, Teams, and the web', live: true, icon: 'agent' },
-  { label: 'Approvals',           href: '/today',      description: 'Your daily sign-off queue',          live: true, icon: 'today' },
-  { label: 'Employee records',    href: '/people',     description: 'HRIS, org chart, comp, leave',       live: true, icon: 'people' },
-  { label: 'Documents & e-sign',  href: '/documents',  description: 'Generate, sign, file, retain',       live: true, icon: 'documents' },
-  { label: 'Security',            href: '/security',   description: 'Encryption, access controls, audit trail', live: true, icon: 'security' },
+  { label: 'Approvals',           href: '/today',      description: 'Your day in three taps',             live: true, icon: 'today' },
+  { label: 'Employee records',    href: '/people',     description: 'HRIS, org chart — always current',   live: true, icon: 'people' },
+  { label: 'Documents & e-sign',  href: '/documents',  description: 'Generated, signed, filed',           live: true, icon: 'documents' },
+  { label: 'Security',            href: '/security',   description: 'Encrypted, logged, US-resident',     live: true, icon: 'security' },
 ]
 
 export const companyItems: NavItem[] = [
