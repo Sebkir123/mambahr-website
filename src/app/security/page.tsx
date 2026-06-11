@@ -60,7 +60,7 @@ function SecurityLogCard() {
 
 /* ── Commitments section (page-local, styled like AgentLoop's card) ── */
 const COMMITMENTS = [
-  { n: '01', label: 'Encrypted in transit and at rest', desc: 'Your records are encrypted while stored and while moving between systems — the same protection your bank uses.', tag: 'Always on' },
+  { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption at rest, TLS 1.2+ in transit. Your records are protected while stored and while moving between systems.', tag: 'Always on' },
   { n: '02', label: 'Access by role — least privilege', desc: 'Each person sees only what their role allows. Managers see their team; employees see their own record.', tag: 'Always on' },
   { n: '03', label: 'Every change logged with who and why', desc: 'Every action — by a person or by Mamba — is written to a record nobody can edit, with the reason attached.', tag: 'Always on' },
   { n: '04', label: 'Your data stays in the US', desc: 'Stored on enterprise US cloud infrastructure. It never leaves the country.', tag: 'In your contract' },
@@ -207,6 +207,83 @@ function ApprovalGateCard() {
   )
 }
 
+/* ── The security questionnaire, answered on the page ── */
+const REVIEW = [
+  {
+    q: 'Where does our data live?',
+    a: 'On enterprise AWS infrastructure in the United States. It never leaves the country, and US residency is written into your contract.',
+  },
+  {
+    q: 'How is it encrypted?',
+    a: 'AES-256 at rest, TLS 1.2 or higher in transit — for the database, documents, and every backup.',
+  },
+  {
+    q: 'Who at MambaHR can see it?',
+    a: 'Access is role-based and least-privilege on our side too. Production access is restricted, logged, and reviewed — and every access lands in the same immutable audit trail you can read.',
+  },
+  {
+    q: 'What about backups and recovery?',
+    a: 'Encrypted automated backups with point-in-time recovery, tested restores, and infrastructure that fails over without your data going anywhere.',
+  },
+  {
+    q: 'What if we leave?',
+    a: 'Your data is yours. Full export in standard formats whenever you ask — including on the way out — then verified deletion within 30 days of contract end.',
+  },
+  {
+    q: 'Who are your subprocessors?',
+    a: 'A short list, led by AWS (US) for infrastructure and AI processing and WorkOS for sign-on. The full list comes with your contract, and we notify you before it changes.',
+  },
+  {
+    q: 'What happens if there’s an incident?',
+    a: 'We notify you without undue delay, tell you exactly what was touched, and give you what your own notifications require. That commitment is in the contract, not a blog post.',
+  },
+  {
+    q: 'Does any of it train AI?',
+    a: 'No. Names, salaries, reviews, health information — none of it trains any model, ours or anyone else’s. Contractual, not configurable.',
+  },
+]
+
+function SecurityReview() {
+  return (
+    <section className="sr">
+      <div className="wrap">
+        <div className="head" data-reveal>
+          <p className="eyebrow">For your security review</p>
+          <h2 className="title">The questionnaire, <Em>answered.</Em></h2>
+          <p className="lead">The questions your IT and legal reviewers will ask, answered before they ask them. Forward this page — or bring them to the demo.</p>
+        </div>
+        <div className="grid">
+          {REVIEW.map((r, i) => (
+            <div key={r.q} className="item" data-reveal data-delay={String(Math.min((i % 4) + 1, 4))}>
+              <h3 className="q">{r.q}</h3>
+              <p className="a">{r.a}</p>
+            </div>
+          ))}
+        </div>
+        <p className="contact" data-reveal>
+          Something we didn&rsquo;t cover? <a href="mailto:founders@mambahr.com">security questions go straight to the founders</a>.
+        </p>
+      </div>
+      <style jsx>{`
+        .sr { background: var(--bg-warm); padding: clamp(72px, 9vw, 120px) var(--page-pad); }
+        .wrap { max-width: var(--page-max); margin: 0 auto; }
+        .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 56px); }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
+        .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
+        .item { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(20px, 2.4vw, 28px); box-shadow: var(--shadow-sm); }
+        .q { font-size: 16px; font-weight: 700; color: var(--text); margin: 0; letter-spacing: -0.01em; }
+        .a { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin: 10px 0 0; }
+        .contact { text-align: center; font-size: 14px; color: var(--text-muted); margin: 28px 0 0; }
+        :global(.sr .contact a) { color: var(--gold-dark); font-weight: 700; text-decoration: none; }
+        :global(.sr .contact a:hover) { text-decoration: underline; }
+        @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+      `}</style>
+    </section>
+  )
+}
+
 export default function SecurityPage() {
   return (
     <>
@@ -263,6 +340,8 @@ export default function SecurityPage() {
             { n: 1, label: 'human required on every high-stakes action' },
           ]}
         />
+
+        <SecurityReview />
 
         <QuoteBand
           quote="I asked the hard questions before we signed — who sees what, where the data lives, what trains their AI. The answers were in the contract, not a slide deck."
