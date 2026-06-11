@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { byFunction, howItWorks, type NavItem } from '@/content/nav'
 
 // Single-stroke icons, keyed to NavItem.icon. Icons are JSX so they live here,
@@ -74,6 +75,7 @@ export default function MegaNav() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileProductExpanded, setMobileProductExpanded] = useState(false)
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -109,6 +111,21 @@ export default function MegaNav() {
           boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.03)' : 'none',
         }}
       >
+        {/* gradient hairline — fades in on scroll */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: -1,
+            height: 1,
+            background: 'linear-gradient(90deg, transparent, #B98A4E 30%, #6A5DA6 70%, transparent)',
+            opacity: scrolled ? 0.5 : 0,
+            transition: 'opacity 0.3s ease',
+            pointerEvents: 'none',
+          }}
+        />
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32 }}>
           {/* Logo */}
           <Link href="/" prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }} onClick={() => setProductOpen(false)}>
@@ -134,7 +151,13 @@ export default function MegaNav() {
             </button>
 
             {topLinks.map((item) => (
-              <Link key={item.label} href={item.href} onMouseEnter={scheduleClose} style={{ padding: '8px 12px', fontSize: 14, fontWeight: 500, color: 'var(--text-muted)', textDecoration: 'none', borderRadius: 6, transition: 'color 0.15s' }}>
+              <Link
+                key={item.label}
+                href={item.href}
+                onMouseEnter={scheduleClose}
+                className={`nav-top-link${pathname?.startsWith(item.href) ? ' nav-active' : ''}`}
+                style={{ padding: '8px 12px', fontSize: 14, fontWeight: 500, color: 'var(--text-muted)', textDecoration: 'none', borderRadius: 6 }}
+              >
                 {item.label}
               </Link>
             ))}
@@ -142,7 +165,7 @@ export default function MegaNav() {
 
           {/* Right CTA — single conversion action */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
-            <Link href="/demo" className="btn-gold" style={{ fontSize: 13, padding: '9px 20px' }}>
+            <Link href="/demo" className="btn-dark">
               Book a demo
             </Link>
             <button
@@ -162,25 +185,66 @@ export default function MegaNav() {
           </div>
         </div>
 
-        {/* Desktop dropdown — two buyer-vocabulary columns */}
+        {/* Desktop dropdown — floating card, two buyer-vocabulary columns */}
         {productOpen && (
           <div
             onMouseEnter={openProduct}
             onMouseLeave={scheduleClose}
-            style={{ position: 'absolute', top: '100%', left: 0, right: 0, background: '#FFFFFF', borderBottom: '1px solid var(--border)', boxShadow: '0 16px 48px rgba(0,0,0,0.08)', zIndex: 40 }}
+            style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 40, padding: '10px 24px 0', pointerEvents: 'none' }}
           >
-            <div style={{ maxWidth: 940, margin: '0 auto', padding: '32px 32px 28px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
-              <div>
-                <p style={colLabel}>By function</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  {byFunction.map((item) => <MenuItem key={item.label} item={item} onNavigate={() => setProductOpen(false)} />)}
+            <div
+              className="nav-dropdown"
+              style={{
+                pointerEvents: 'auto',
+                maxWidth: 940,
+                margin: '0 auto',
+                background: '#FFFFFF',
+                border: '1px solid var(--border)',
+                borderRadius: 18,
+                boxShadow: '0 24px 64px rgba(20,18,14,0.14), 0 4px 16px rgba(20,18,14,0.06)',
+                overflow: 'hidden',
+                position: 'relative',
+              }}
+            >
+              <div
+                aria-hidden="true"
+                style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, #B98A4E, #6A5DA6)', opacity: 0.7 }}
+              />
+              <div style={{ padding: '30px 32px 26px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+                <div>
+                  <p style={colLabel}>By function</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    {byFunction.map((item) => <MenuItem key={item.label} item={item} onNavigate={() => setProductOpen(false)} />)}
+                  </div>
+                </div>
+                <div>
+                  <p style={colLabel}>How it works</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    {howItWorks.map((item) => <MenuItem key={item.label} item={item} onNavigate={() => setProductOpen(false)} />)}
+                  </div>
                 </div>
               </div>
-              <div>
-                <p style={colLabel}>How it works</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  {howItWorks.map((item) => <MenuItem key={item.label} item={item} onNavigate={() => setProductOpen(false)} />)}
-                </div>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 16,
+                  padding: '14px 32px',
+                  background: 'var(--bg-surface)',
+                  borderTop: '1px solid var(--border-faint)',
+                }}
+              >
+                <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 14.5, color: 'var(--text-muted)' }}>
+                  One agent. The whole department.
+                </span>
+                <Link
+                  href="/product"
+                  onClick={() => setProductOpen(false)}
+                  style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none', whiteSpace: 'nowrap' }}
+                >
+                  See it run →
+                </Link>
               </div>
             </div>
           </div>
@@ -230,7 +294,7 @@ export default function MegaNav() {
             ))}
 
             <div style={{ marginTop: 32 }}>
-              <Link href="/demo" className="btn-gold" onClick={() => setMobileOpen(false)} style={{ width: '100%', justifyContent: 'center' }}>
+              <Link href="/demo" className="btn-dark" onClick={() => setMobileOpen(false)} style={{ width: '100%', justifyContent: 'center', padding: '13px 20px', fontSize: 15 }}>
                 Book a demo
               </Link>
             </div>

@@ -565,6 +565,60 @@ h4, h5, h6 {
   .agent-working::after { animation: none; opacity: 0; }
 }
 
+/* ── Nav polish — dark CTA pill, link hovers, dropdown entrance ── */
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #1A1A19;
+  color: #FFFFFF;
+  padding: 9px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(20, 18, 14, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-dark:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(20, 18, 14, 0.24);
+}
+.nav-top-link {
+  position: relative;
+  transition: color 0.15s ease;
+}
+.nav-top-link:hover { color: var(--text) !important; }
+.nav-top-link::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--violet));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.22s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.nav-top-link:hover::after { transform: scaleX(1); }
+.nav-top-link.nav-active { color: var(--text) !important; }
+.nav-top-link.nav-active::after { transform: scaleX(1); opacity: 0.6; }
+@keyframes navDropIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+.nav-dropdown { animation: navDropIn 0.22s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .btn-dark { transition: none; }
+  .btn-dark:hover { transform: none; }
+  .nav-top-link::after { transition: none; }
+  .nav-dropdown { animation: none; }
+}
+
 /* ── Mamba status chip — pairs with .agent-edge surfaces.
    "MAMBA · WORKING" (violet, pulsing dot) / "MAMBA · DONE" (gold check).
    Matches the design-gallery agent cards. */
