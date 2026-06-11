@@ -22,6 +22,7 @@
 //   supabase functions deploy handle-demo-request --project-ref dqoqnlecylqlwsahudjn
 
 import { createClient } from 'jsr:@supabase/supabase-js@2'
+import { renderEmail, escapeHtml as esc } from '../_shared/email.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -44,9 +45,6 @@ async function getSecret(name: string): Promise<string | null> {
   return data as string
 }
 
-function escapeHtml(s: string) {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-}
 function escapeSlack(s: string) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
@@ -160,7 +158,15 @@ Deno.serve(async (req: Request) => {
         from: 'MambaHR <team@mambahr.com>',
         to: email,
         subject: 'Your MambaHR demo — we’ll be in touch today',
-        html: `<!DOCTYPE html><html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fafaf7;margin:0;padding:48px 24px;"><div style="max-width:520px;margin:0 auto;"><p style="font-size:20px;font-weight:800;letter-spacing:-0.02em;color:#1a1611;margin:0 0 32px;">MambaHR</p><div style="background:#fff;border:1px solid #e7e5e4;border-radius:16px;padding:40px 32px;"><h1 style="font-size:24px;font-weight:800;letter-spacing:-0.02em;margin:0 0 16px;color:#1a1611;">We got your demo request.</h1><p style="font-size:15px;line-height:1.7;color:#57534e;margin:0 0 16px;">Thanks for your interest in MambaHR. A founder will reach out today &mdash; from a real address, not a no-reply &mdash; to set up 30 minutes for <strong>${escapeHtml(company || 'your team')}</strong>.</p><p style="font-size:15px;line-height:1.7;color:#57534e;margin:0 0 24px;">On the call we&rsquo;ll run the AI HR department on your scenarios and price it against your headcount &mdash; no deck, just the product.</p><div style="border-top:1px solid #e7e5e4;padding-top:24px;margin-top:24px;"><a href="https://mambahr.com" style="color:#B08D57;font-weight:600;text-decoration:none;font-size:13px;">mambahr.com &rarr;</a></div></div></div></body></html>`,
+        html: renderEmail({
+          preheader: 'A founder will reach out today to set up your 30-minute demo.',
+          eyebrow: 'Demo request',
+          heading: 'We got your demo request.',
+          bodyHtml:
+            `<p style="margin:0 0 16px;">Thanks for your interest in MambaHR. A founder will reach out today &mdash; from a real address, not a no-reply &mdash; to set up 30 minutes for <strong style="color:#1A1A19;">${esc(company || 'your team')}</strong>.</p>` +
+            `<p style="margin:0;">On the call we&rsquo;ll run the AI HR department on your scenarios and price it against your headcount &mdash; no deck, just the product.</p>`,
+          button: { label: 'See it run', url: 'https://mambahr.com/product' },
+        }),
       }),
     }).catch((e) => console.error('[handle-demo-request] email error:', e))
   }
