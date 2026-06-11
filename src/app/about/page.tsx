@@ -1,9 +1,11 @@
 'use client'
 
+import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
-import { PageCta, Em } from '@/components/v2/page-kit'
+import CountUp from '@/app/v2/_sections/count-up'
+import { StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 
 const PRINCIPLES = [
   {
@@ -33,7 +35,23 @@ const PRINCIPLES = [
   },
 ]
 
-const FOUNDERS = [
+/* The platform — everything the department runs, each a real page. */
+const PLATFORM = [
+  { label: 'Hiring & ATS', desc: 'Req to signed offer', href: '/hiring' },
+  { label: 'Job portal', desc: 'Your careers page, hosted', href: '/job-portal' },
+  { label: 'Onboarding', desc: 'Day-one ready', href: '/onboarding' },
+  { label: 'Payroll & benefits', desc: 'Export-ready, every cycle', href: '/payroll' },
+  { label: 'Time off & leave', desc: 'PTO to FMLA', href: '/leave' },
+  { label: 'Performance', desc: 'Reviews, written', href: '/performance' },
+  { label: 'Compensation', desc: 'Priced to your bands', href: '/compensation' },
+  { label: 'Compliance', desc: 'All 50 states, cited', href: '/compliance' },
+  { label: 'Headcount & RIF', desc: 'Hard days, done right', href: '/rif' },
+  { label: 'Employee records', desc: 'The system of record', href: '/people' },
+  { label: 'Documents & e-sign', desc: 'Signed and filed', href: '/documents' },
+  { label: 'Security', desc: 'Locked down, logged', href: '/security' },
+]
+
+const LEADERSHIP = [
   {
     name: 'Brian Bell',
     role: 'Co-founder & CEO',
@@ -53,6 +71,7 @@ export default function AboutPage() {
     <>
       <MegaNav />
       <RevealInit />
+      <CountUp />
       <main>
         {/* ── Hero ── */}
         <section className="ah">
@@ -60,17 +79,17 @@ export default function AboutPage() {
           <span className="v2-grain" />
           <div className="top">
             <p className="eyebrow" data-reveal>About MambaHR</p>
-            <h1 className="title" data-reveal data-delay="1">HR is <Em>changing shape.</Em></h1>
+            <h1 className="title" data-reveal data-delay="1">The AI HR <Em>department.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
-              For thirty years, HR software was a database with a UI. We&rsquo;re building what comes
-              next — an AI department that <b>does</b> the work, end to end, with a human in the loop
-              only when it matters.
+              For thirty years, HR software was a database with a UI — and companies paid people to click
+              through it. MambaHR is the company building what comes next: an AI department that <b>does</b> the
+              work end to end, with a human on the calls that matter.
             </p>
           </div>
           <div className="stage" data-reveal data-delay="3">
             <div className="photo-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/v2-people/team.jpg" alt="A small team at work" />
+              <img src="/v2-people/team.jpg" alt="A team at work" />
               <div className="float agent-edge agent-working">
                 <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · working</span>
                 <div className="f-t">The AI HR department</div>
@@ -91,7 +110,7 @@ export default function AboutPage() {
             .top { position: relative; max-width: 980px; margin: 0 auto; text-align: center; }
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(42px, 5.8vw, 76px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 18px 0 0; white-space: nowrap; }
-            .lead { font-size: clamp(17px, 2vw, 20px); line-height: 1.58; color: var(--text-muted); max-width: 640px; margin: 22px auto 0; }
+            .lead { font-size: clamp(17px, 2vw, 20px); line-height: 1.58; color: var(--text-muted); max-width: 660px; margin: 22px auto 0; }
             .lead b { color: var(--text); font-weight: 600; }
             .stage { position: relative; max-width: 880px; margin: clamp(44px, 5.4vw, 64px) auto 0; }
             .photo-wrap { position: relative; }
@@ -103,10 +122,18 @@ export default function AboutPage() {
           `}</style>
         </section>
 
+        <StatTrio
+          stats={[
+            { n: 50, label: 'states covered — every compliance answer cites the law' },
+            { n: 24, suffix: '/7', label: 'the department works around the clock, not business hours' },
+            { n: 1, suffix: ' day', label: 'from signed to live — data imported, no setup project' },
+          ]}
+        />
+
         {/* ── Manifesto ── */}
         <section className="man">
           <div className="wrap">
-            <p className="eyebrow" data-reveal>Manifesto</p>
+            <p className="eyebrow" data-reveal>Why we exist</p>
             <p className="lede" data-reveal data-delay="1">
               Most HR teams are drowning. One person doing the work of ten. Compliance gaps caught by
               auditors, not by the team. Good people lost because their leave request fell into a queue
@@ -130,7 +157,7 @@ export default function AboutPage() {
             <p className="close" data-reveal data-delay="3">That&rsquo;s what we&rsquo;re building.</p>
           </div>
           <style jsx>{`
-            .man { background: var(--bg); padding: clamp(88px, 11vw, 144px) var(--page-pad); }
+            .man { background: var(--bg); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
             .wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 26px; }
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: #8A6535; margin: 0; }
             .lede { font-family: var(--font-serif); font-size: clamp(22px, 2.5vw, 30px); line-height: 1.42; letter-spacing: -0.01em; color: var(--text); margin: 0; }
@@ -139,11 +166,65 @@ export default function AboutPage() {
           `}</style>
         </section>
 
+        {/* ── The platform ── */}
+        <section className="pf">
+          <div className="wrap">
+            <div className="head" data-reveal>
+              <p className="eyebrow">What we build</p>
+              <h2 className="title">One department, <Em>every job.</Em></h2>
+              <p className="lead">
+                MambaHR is the system of record and the worker in one — the ATS and the recruiter, the
+                careers page and the coordinator, the HRIS and the ops manager. Twelve functions, one agent,
+                every action logged.
+              </p>
+            </div>
+            <div className="grid">
+              {PLATFORM.map((p, i) => (
+                <Link key={p.label} href={p.href} className="cell" data-reveal data-delay={String(Math.min((i % 4) + 1, 4))}>
+                  <span className="c-l">{p.label}</span>
+                  <span className="c-d">{p.desc}</span>
+                  <span className="c-a" aria-hidden="true">→</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <style jsx>{`
+            .pf { background: var(--bg-warm); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
+            .wrap { max-width: var(--page-max); margin: 0 auto; }
+            .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 52px); }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
+            .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 640px; }
+            .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.4vw, 18px); }
+            :global(.pf .cell) {
+              position: relative;
+              display: flex;
+              flex-direction: column;
+              gap: 4px;
+              background: var(--bg);
+              border: 1px solid var(--border);
+              border-radius: 14px;
+              padding: 18px 18px 16px;
+              text-decoration: none;
+              box-shadow: var(--shadow-sm);
+              transition: transform 0.16s ease, box-shadow 0.16s ease;
+            }
+            :global(.pf .cell:hover) { transform: translateY(-3px); box-shadow: var(--shadow-float); }
+            @media (prefers-reduced-motion: reduce) { :global(.pf .cell:hover) { transform: none; } }
+            .c-l { font-size: 14.5px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+            .c-d { font-size: 12.5px; color: var(--text-muted); }
+            .c-a { position: absolute; top: 16px; right: 16px; font-size: 13px; color: var(--gold-dark); opacity: 0; transition: opacity 0.16s ease; }
+            :global(.pf .cell:hover) .c-a { opacity: 1; }
+            @media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+            @media (max-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+          `}</style>
+        </section>
+
         {/* ── Principles ── */}
         <section className="pr">
           <div className="wrap">
             <div className="head" data-reveal>
-              <p className="eyebrow">What we believe · M·A·M·B·A</p>
+              <p className="eyebrow">How we operate · M·A·M·B·A</p>
               <h2 className="title">Five things we <Em>don&rsquo;t bend.</Em></h2>
             </div>
             <div className="list">
@@ -159,7 +240,7 @@ export default function AboutPage() {
             </div>
           </div>
           <style jsx>{`
-            .pr { background: var(--bg-warm); padding: clamp(88px, 11vw, 144px) var(--page-pad); }
+            .pr { background: var(--bg); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
@@ -183,16 +264,19 @@ export default function AboutPage() {
           `}</style>
         </section>
 
-        {/* ── Founders ── */}
+        {/* ── Leadership ── */}
         <section className="fd">
           <div className="wrap">
             <div className="head" data-reveal>
-              <p className="eyebrow">Founders</p>
-              <h2 className="title">The two of us, <Em>for now.</Em></h2>
-              <p className="lead">Two founders, one HIL, and an agent that doesn&rsquo;t sleep. We answer our own sales calls, our own support tickets, and our own security questionnaires.</p>
+              <p className="eyebrow">Leadership</p>
+              <h2 className="title">Founder-led, <Em>by design.</Em></h2>
+              <p className="lead">
+                MambaHR is built and run by its founders — which means the people who designed the product
+                are the same people on your demo, your implementation, and your security review.
+              </p>
             </div>
             <div className="grid">
-              {FOUNDERS.map((p, i) => (
+              {LEADERSHIP.map((p, i) => (
                 <a key={p.name} className="card" href={p.linkedin} target="_blank" rel="noopener noreferrer" data-reveal data-delay={String(i + 1)}>
                   <div className="ph">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -209,18 +293,20 @@ export default function AboutPage() {
                 </a>
               ))}
             </div>
-            <p className="jobs" data-reveal>
-              The team is small and growing. If this sounds like the work you want to be doing,{' '}
-              <a href="mailto:jobs@mambahr.com">jobs@mambahr.com</a>.
-            </p>
+            <div className="facts" data-reveal>
+              <span className="fact"><i aria-hidden="true" />Headquartered in San Francisco</span>
+              <span className="fact"><i aria-hidden="true" />US data residency</span>
+              <span className="fact"><i aria-hidden="true" />All 50 states covered</span>
+              <span className="fact"><i aria-hidden="true" />We&rsquo;re hiring — <a href="mailto:jobs@mambahr.com">jobs@mambahr.com</a></span>
+            </div>
           </div>
           <style jsx>{`
-            .fd { background: var(--bg); padding: clamp(88px, 11vw, 144px) var(--page-pad); }
+            .fd { background: var(--bg-warm); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
             .wrap { max-width: 880px; margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 52px); }
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-            .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 560px; }
+            .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 600px; }
             .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
             :global(.fd .card) { display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; background: var(--bg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); text-decoration: none; transition: transform 0.18s ease, box-shadow 0.18s ease; }
             :global(.fd .card:hover) { transform: translateY(-4px); box-shadow: var(--shadow-float); }
@@ -233,9 +319,11 @@ export default function AboutPage() {
             .rl { color: rgba(255, 255, 255, 0.85); font-size: 13px; }
             .foot { display: flex; align-items: center; justify-content: flex-end; padding: 12px 16px; border-top: 1px solid var(--border-faint); }
             .li { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold-dark); }
-            .jobs { text-align: center; font-size: 14px; color: var(--text-muted); margin: 32px 0 0; }
-            :global(.fd .jobs a) { color: var(--gold-dark); font-weight: 700; text-decoration: none; }
-            :global(.fd .jobs a:hover) { text-decoration: underline; }
+            .facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin-top: clamp(28px, 3.4vw, 40px); padding-top: clamp(20px, 2.4vw, 28px); border-top: 1px solid var(--border-faint); }
+            .fact { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 500; color: var(--text-muted); }
+            .fact i { width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, #B98A4E, #6A5DA6); }
+            :global(.fd .fact a) { color: var(--gold-dark); font-weight: 700; text-decoration: none; }
+            :global(.fd .fact a:hover) { text-decoration: underline; }
             @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
           `}</style>
         </section>
