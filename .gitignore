@@ -139,3 +139,7 @@ test-results/
 # Project docs — kept locally, not in the repo
 # ─────────────────────────────────────────────────────────────
 /docs/
+
+# Supabase CLI local state
+supabase/.temp/
+supabase/.branches/
