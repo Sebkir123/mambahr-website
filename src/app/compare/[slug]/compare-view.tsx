@@ -34,6 +34,15 @@ export default function CompareView({ data }: { data: CompetitorData }) {
               <Link href="/demo" className="btn-p">Book a demo</Link>
               <Link href="/pricing" className="btn-g">See pricing</Link>
             </div>
+            <div className="proof" data-reveal data-delay="3">
+              <div className="faces">
+                {['priya', 'anna', 'maya', 'dave', 'brian'].map((p) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={p} src={`/avatars/${p}.jpg`} alt="" width={34} height={34} />
+                ))}
+              </div>
+              <span className="proof-t">Teams compare. Then they switch.</span>
+            </div>
           </div>
           <style jsx>{`
             .ch { position: relative; overflow: hidden; padding: clamp(124px, 14vw, 168px) var(--page-pad) clamp(56px, 7vw, 84px); background: linear-gradient(180deg, #F7F3EB 0%, var(--bg-warm) 58%); }
@@ -76,6 +85,15 @@ export default function CompareView({ data }: { data: CompetitorData }) {
             }
             :global(.ch .btn-g:hover) { background: #fff; }
             @media (prefers-reduced-motion: reduce) { :global(.ch .btn-p:hover) { transform: none; } }
+            .proof { display: flex; align-items: center; gap: 13px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+            .faces { display: flex; }
+            .faces img {
+              width: 34px; height: 34px; border-radius: 999px; object-fit: cover;
+              border: 2px solid #fff; box-shadow: var(--shadow-sm);
+              margin-left: -9px; background: var(--bg-elevated);
+            }
+            .faces img:first-child { margin-left: 0; }
+            .proof-t { font-size: 14px; font-weight: 600; color: var(--text); }
             @media (max-width: 880px) { .title, .title2 { white-space: normal; } }
           `}</style>
         </section>
@@ -145,6 +163,10 @@ export default function CompareView({ data }: { data: CompetitorData }) {
                 </div>
               ))}
             </div>
+            <div className="money" data-reveal>
+              <p className="money-t">{data.costLine}</p>
+              <Link href="/pricing" className="money-a">Do the math on pricing →</Link>
+            </div>
           </div>
           <style jsx>{`
             .tb { background: var(--bg-warm); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
@@ -176,6 +198,24 @@ export default function CompareView({ data }: { data: CompetitorData }) {
               .row { grid-template-columns: 1.2fr 1fr 1fr; }
               .f { padding: 12px 14px; font-size: 13px; }
             }
+            .money {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 16px;
+              flex-wrap: wrap;
+              margin-top: clamp(18px, 2.2vw, 26px);
+              border: 1px solid rgba(138, 101, 53, 0.25);
+              border-radius: 16px;
+              padding: clamp(18px, 2.2vw, 24px) clamp(20px, 2.6vw, 30px);
+              background:
+                radial-gradient(70% 100% at 4% 0%, rgba(196, 154, 108, 0.18), transparent 55%),
+                radial-gradient(60% 100% at 100% 100%, rgba(106, 93, 166, 0.14), transparent 55%),
+                var(--bg);
+            }
+            .money-t { font-family: var(--font-serif); font-size: clamp(16.5px, 1.9vw, 19.5px); line-height: 1.45; color: var(--text); margin: 0; max-width: 620px; letter-spacing: -0.01em; }
+            :global(.tb .money-a) { flex: none; font-size: 13.5px; font-weight: 700; color: var(--gold-dark); text-decoration: none; white-space: nowrap; }
+            :global(.tb .money-a:hover) { text-decoration: underline; }
           `}</style>
         </section>
 
@@ -195,6 +235,57 @@ export default function CompareView({ data }: { data: CompetitorData }) {
               color: var(--text);
               margin: 0;
             }
+          `}</style>
+        </section>
+
+        {/* ── Switching, de-risked ── */}
+        <section className="sw">
+          <div className="wrap">
+            <div className="head" data-reveal>
+              <p className="eyebrow">The part everyone dreads</p>
+              <h2 className="title">Switching takes a day, <Em>not a quarter.</Em></h2>
+            </div>
+            <div className="grid">
+              <div className="step" data-reveal data-delay="1">
+                <span className="d">Day 1</span>
+                <h3 className="t">Your data imports</h3>
+                <p className="b">People, history, documents, time-off balances — pulled from {data.name} in one pass. Nothing re-keyed, nothing lost.</p>
+              </div>
+              <div className="step" data-reveal data-delay="2">
+                <span className="d">Day 2</span>
+                <h3 className="t">The department is live</h3>
+                <p className="b">Slack and Teams connected, policies loaded, approvals routed to the right people. Your team just starts asking.</p>
+              </div>
+              <div className="step" data-reveal data-delay="3">
+                <span className="d">Week 1</span>
+                <h3 className="t">The work is getting done</h3>
+                <p className="b">Leave approved, questions answered with citations, the first payroll change file ready to load. You approve the big calls.</p>
+              </div>
+            </div>
+          </div>
+          <style jsx>{`
+            .sw { background: var(--bg-warm); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
+            .wrap { max-width: var(--page-max); margin: 0 auto; }
+            .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
+            .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 22px); }
+            .step { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
+            .d {
+              display: inline-block;
+              font-family: var(--font-mono);
+              font-size: 10.5px;
+              font-weight: 600;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+              color: #fff;
+              background: linear-gradient(120deg, #B98A4E, #6A5DA6);
+              border-radius: 999px;
+              padding: 4px 11px;
+            }
+            .t { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 14px 0 8px; }
+            .b { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin: 0; }
+            @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
           `}</style>
         </section>
 

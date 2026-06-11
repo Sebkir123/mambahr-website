@@ -7,6 +7,8 @@ export type CompetitorData = {
   switchReasons: { title: string; desc: string }[]
   tableRows: { feature: string; mamba: string | boolean; them: string | boolean; note?: string }[]
   bottomLine: string
+  /** One-line price anchor rendered under the table — money on the page. */
+  costLine: string
 }
 
 export const competitors: Record<string, CompetitorData> = {
@@ -43,6 +45,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Every action audit-logged', mamba: true, them: true },
     ],
     bottomLine: "Rippling is the modern HR stack. MambaHR is the modern HR department — the work, done.",
+    costLine: "Most teams pay MambaHR less than their Rippling module tree — and it does the work instead of hosting it. From $14 per employee.",
   },
 
   gusto: {
@@ -78,6 +81,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Every decision logged and traceable', mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Gusto is great payroll. MambaHR is everything else — and it gets your payroll ready. One product. One team. One bill.',
+    costLine: "Keep Gusto for payday if you love it. MambaHR feeds it the change file and does the other twelve jobs — from $14 per employee.",
   },
 
   deel: {
@@ -88,11 +92,11 @@ export const competitors: Record<string, CompetitorData> = {
     heroSub: "Deel cracked global contractor payments and employer-of-record. For the people you actually employ — leave, hires, onboarding, performance, compliance — MambaHR is the AI HR department, in one product.",
     switchReasons: [
       {
-        title: "Contractors aren't employees",
+        title: "Contractors aren't employees.",
         desc: "Deel optimized for global contractors and EOR. Your full-time team needs something different — performance cycles, US leave management, multi-state compliance, onboarding that runs itself. That's MambaHR.",
       },
       {
-        title: "Forms aren't automation",
+        title: "Forms aren't automation.",
         desc: "Deel added HR features as forms and workflows. Someone still has to fill them in. MambaHR's agents resolve requests end-to-end — no dashboard, no ticket, no waiting.",
       },
       {
@@ -114,6 +118,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Audit log on every action', mamba: true, them: 'Partial' },
     ],
     bottomLine: "Deel is the way to pay anyone, anywhere. MambaHR is the way to run the people on your payroll. Different problems. Pick the one that's actually yours.",
+    costLine: "Keep Deel for global contractors. For the team on your US payroll, MambaHR runs the whole department from $14 per employee.",
   },
 
   bamboohr: {
@@ -149,6 +154,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Audit log on every action', mamba: true, them: 'Partial' },
     ],
     bottomLine: 'BambooHR is where your HR data lives. MambaHR is where the work gets done.',
+    costLine: "For roughly what BambooHR charges to store the work, MambaHR does the work. From $14 per employee, everything included.",
   },
 
   namely: {
@@ -184,6 +190,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Audit log on every action', mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Namely is HRIS at its cleanest. MambaHR is the next category — an HR department that runs itself.',
+    costLine: "No modules, no implementation retainer — MambaHR is $14–$30 per employee with everything included, live in a day.",
   },
 
   hibob: {
@@ -220,6 +227,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Audit log on every action', mamba: true, them: 'Partial' },
     ],
     bottomLine: 'HiBob is a great HRIS for the modern workplace. MambaHR is the next thing after the HRIS — the agent department that runs it.',
+    costLine: "HiBob prices like an HRIS. MambaHR prices like a department you don't have to hire — $14–$30 per employee, all in.",
   },
 
   adp: {
@@ -256,6 +264,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Audit log on every action', mamba: true, them: true },
     ],
     bottomLine: 'ADP is the back office of HR. MambaHR is the front line — the agent that talks to your employees, makes the calls, and only routes the judgment ones to you.',
+    costLine: "ADP bills like the back office it is. MambaHR is $14–$30 per employee, flat — no modules, no add-ons, no surprise invoices.",
   },
 
   workday: {
@@ -291,5 +300,6 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Audit log on every action', mamba: true, them: true },
     ],
     bottomLine: "Workday is the right answer when you need finance, HCM, and global ERP under one configurable platform. MambaHR is the right answer when you want HR to run itself.",
+    costLine: "A Workday implementation can cost more than a decade of MambaHR. We're $14–$30 per employee and live in a day.",
   },
 }
