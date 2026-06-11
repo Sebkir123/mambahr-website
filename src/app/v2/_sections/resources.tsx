@@ -7,7 +7,10 @@ const BULLETS = [
   'Manager, employee, and team scripts',
 ]
 
-const MORE = ['Multi-State Leave Compliance Checklist', 'The First-90-Days Onboarding Kit']
+const MORE = [
+  { title: 'Multi-State Leave Compliance Checklist', kicker: 'Checklist' },
+  { title: 'The First-90-Days Onboarding Kit', kicker: 'Kit' },
+]
 
 export default function Resources() {
   return (
@@ -20,11 +23,14 @@ export default function Resources() {
         </div>
 
         <div className="feature" data-reveal data-delay="1">
-          <div className="cover">
-            <div className="cover-brand"><span className="m">M</span>MambaHR</div>
-            <div className="cover-kicker">Field guide</div>
-            <div className="cover-title">The Defensible Layoff Playbook</div>
-            <div className="cover-foot">A people leader&rsquo;s field guide</div>
+          <div className="cover-stage">
+            <div className="cover">
+              <span className="v2-grain" />
+              <div className="cover-brand"><span className="m">M</span>MambaHR</div>
+              <div className="cover-kicker">Field guide № 01</div>
+              <div className="cover-title">The Defensible Layoff Playbook</div>
+              <div className="cover-foot">A people leader&rsquo;s field guide</div>
+            </div>
           </div>
 
           <div className="content">
@@ -41,7 +47,7 @@ export default function Resources() {
             </ul>
             <form className="grab" onSubmit={(e) => e.preventDefault()}>
               <input className="email" type="email" placeholder="you@company.com" aria-label="Work email" />
-              <button className="btn" type="submit">Get the PDF</button>
+              <button className="btn" type="submit">Send me the playbook</button>
             </form>
             <span className="note">Free · no sales call · unsubscribe anytime</span>
           </div>
@@ -50,7 +56,14 @@ export default function Resources() {
         <div className="more" data-reveal data-delay="2">
           <span className="more-l">More guides</span>
           {MORE.map((m) => (
-            <a key={m} className="more-item">{m}<span className="arr" aria-hidden="true">→</span></a>
+            <a key={m.title} className="more-item">
+              <span className="mini-cover" aria-hidden="true">
+                <span className="mini-m">M</span>
+                <span className="mini-k">{m.kicker}</span>
+              </span>
+              <span className="more-t">{m.title}</span>
+              <span className="arr" aria-hidden="true">→</span>
+            </a>
           ))}
         </div>
       </div>
@@ -74,9 +87,15 @@ export default function Resources() {
           padding: clamp(20px, 2.4vw, 28px);
           box-shadow: var(--shadow-md);
         }
+        .cover-stage { perspective: 1200px; display: flex; }
         .cover {
-          background: linear-gradient(165deg, #1A1A19, #241B12);
-          border-radius: 14px;
+          flex: 1;
+          background:
+            radial-gradient(80% 50% at 18% 0%, rgba(185, 138, 78, 0.35), transparent 60%),
+            radial-gradient(70% 60% at 95% 100%, rgba(106, 93, 166, 0.3), transparent 60%),
+            linear-gradient(165deg, #1A1A19, #241B12);
+          border-radius: 6px 14px 14px 6px;
+          border-left: 4px solid rgba(255, 255, 255, 0.12); /* book spine */
           padding: 26px 24px;
           min-height: 320px;
           display: flex;
@@ -84,12 +103,15 @@ export default function Resources() {
           color: #fff;
           position: relative;
           overflow: hidden;
+          transform: rotateY(7deg) rotateZ(-1deg);
+          transform-origin: left center;
+          box-shadow: 14px 22px 44px rgba(20, 18, 14, 0.28);
+          transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
         }
-        .cover::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(80% 50% at 20% 0%, rgba(185, 138, 78, 0.28), transparent 60%);
+        .cover-stage:hover .cover { transform: rotateY(2deg) rotateZ(0deg); }
+        @media (prefers-reduced-motion: reduce) {
+          .cover { transform: none; transition: none; }
+          .cover-stage:hover .cover { transform: none; }
         }
         .cover-brand { position: relative; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; }
         .cover-brand .m { width: 22px; height: 22px; border-radius: 6px; background: #fff; color: #1A1A19; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 14px; }
@@ -110,11 +132,45 @@ export default function Resources() {
         .btn { background: #1A1A19; color: #fff; font-weight: 600; font-size: 14.5px; border: none; border-radius: 999px; padding: 13px 24px; cursor: pointer; }
         .note { font-size: 12px; color: var(--text-faint); margin-top: 12px; }
 
-        .more { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+        .more { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
         .more-l { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); }
-        .more-item { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: 8px 15px; cursor: pointer; }
-        .more-item:hover { color: var(--text); border-color: var(--border-mid); }
+        .more-item {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          font-size: 13.5px;
+          font-weight: 600;
+          color: var(--text-muted);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          padding: 8px 16px 8px 8px;
+          cursor: pointer;
+          background: var(--bg);
+          box-shadow: var(--shadow-sm);
+          transition: transform 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
+        }
+        .more-item:hover { color: var(--text); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .mini-cover {
+          width: 38px;
+          height: 48px;
+          border-radius: 3px 6px 6px 3px;
+          border-left: 2px solid rgba(255, 255, 255, 0.18);
+          background:
+            radial-gradient(90% 60% at 20% 0%, rgba(185, 138, 78, 0.4), transparent 60%),
+            linear-gradient(165deg, #1A1A19, #241B12);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 5px 6px;
+        }
+        .mini-m { font-family: var(--font-serif); font-size: 11px; color: #fff; }
+        .mini-k { font-family: var(--font-mono); font-size: 6.5px; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255, 255, 255, 0.55); }
+        .more-t { max-width: 220px; line-height: 1.3; }
         .arr { color: var(--gold-dark); }
+        @media (prefers-reduced-motion: reduce) {
+          .more-item { transition: none; }
+          .more-item:hover { transform: none; }
+        }
 
         @media (max-width: 820px) {
           .feature { grid-template-columns: 1fr; }
