@@ -8,7 +8,7 @@ import TurnstileWidget from '@/components/turnstile-widget'
 import { Em } from '@/components/v2/page-kit'
 
 const EDGE_FN_URL =
-  'https://dqoqnlecylqlwsahudjn.supabase.co/functions/v1/handle-waitlist'
+  'https://dqoqnlecylqlwsahudjn.supabase.co/functions/v1/handle-demo-request'
 
 const SEE = [
   'Your real questions, answered live with the law cited',
