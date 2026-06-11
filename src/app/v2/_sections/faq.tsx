@@ -11,7 +11,7 @@ const QA = [
   },
   {
     q: 'Is our people data safe?',
-    a: 'Yes. SOC 2 Type II, encryption in transit and at rest, role-based access, and a full audit trail on every change. Your data stays in the US, and we never train AI on it — guaranteed in your contract.',
+    a: 'Yes. Encryption in transit and at rest, role-based access, and a full audit trail on every change. Your data stays in the US, and we never train AI on it — guaranteed in your contract.',
   },
   {
     q: 'What happens if it gets something wrong?',

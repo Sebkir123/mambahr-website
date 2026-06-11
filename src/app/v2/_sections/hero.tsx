@@ -51,7 +51,7 @@ export default function Hero() {
           <span className="proof-t">Loved by lean people teams</span>
         </div>
         <div className="trust" data-reveal data-delay="3">
-          <span>SOC 2 Type II</span><i />
+          <span>Every action logged</span><i />
           <span>Live in a day</span><i />
           <span>Built by people-team operators</span>
         </div>

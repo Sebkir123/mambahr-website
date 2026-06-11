@@ -20,23 +20,15 @@ export default function Compliance() {
           <div className="ans">
             <div className="ans-head">Up to 24 weeks, job protected.</div>
             <p className="ans-body">
-              Federal and California leave stack. Mamba answered her in seconds, blocked the
-              calendar, and filed the paperwork — your legal counsel never had to pick up the phone.
+              Answered in seconds — calendar blocked, paperwork filed, nothing for you to chase.
             </p>
-            <div className="done-row">
-              <span className="d-check" aria-hidden="true" />
-              Answered · booked · filed — in under a minute
-            </div>
           </div>
 
           <div className="cites">
             <span className="cl">The law behind it</span>
             <span className="chip">FMLA</span>
             <span className="chip">CA CFRA</span>
-            <span className="chip">DLSE 7-2024</span>
           </div>
-
-          <div className="risk">Get this answer wrong, and it&rsquo;s $30k+ in back pay and penalties.</div>
         </div>
 
         <div className="copy" data-reveal data-delay="1">
@@ -45,17 +37,16 @@ export default function Compliance() {
             The right answer, <span className="em">with the law attached.</span>
           </h2>
           <p className="lead">
-            Employment law changes somewhere in America almost every week. MambaHR keeps up so
-            you don&rsquo;t have to — every answer is checked against current law, and the risky
-            calls go to a human before anything happens.
+            Employment law changes almost every week. Mamba keeps up, shows the law behind every
+            answer, and sends the risky calls to a human first.
           </p>
           <div className="kpis">
-            <div><div className="kn"><span data-count="50">50</span></div><div className="kl">states covered, kept current</div></div>
-            <div><div className="kn"><span data-count="100">100</span>%</div><div className="kl">of answers show their source</div></div>
-            <div><div className="kn">1</div><div className="kl">human approves the big calls</div></div>
+            <div><div className="kn"><span data-count="50">50</span></div><div className="kl">states, kept current</div></div>
+            <div><div className="kn"><span data-count="100">100</span>%</div><div className="kl">of answers cite the law</div></div>
+            <div><div className="kn">1</div><div className="kl">human on the big calls</div></div>
           </div>
           <div className="sec">
-            {['SOC 2 Type II', 'Encrypted end to end', 'Full audit trail', 'Your data stays in the US', 'Never trained on your data'].map((s) => (
+            {['Encrypted end to end', 'Your data stays in the US', 'Never trained on your data'].map((s) => (
               <span key={s} className="sec-b"><span className="sec-i" aria-hidden="true" />{s}</span>
             ))}
           </div>

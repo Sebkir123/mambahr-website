@@ -34,7 +34,7 @@ export const howItWorks: NavItem[] = [
   { label: 'Approvals',           href: '/today',      description: 'Your daily sign-off queue',          live: true, icon: 'today' },
   { label: 'Employee records',    href: '/people',     description: 'HRIS, org chart, comp, leave',       live: true, icon: 'people' },
   { label: 'Documents & e-sign',  href: '/documents',  description: 'Generate, sign, file, retain',       live: true, icon: 'documents' },
-  { label: 'Security',            href: '/security',   description: 'SSO, SCIM, SOC 2, audit trail',       live: true, icon: 'security' },
+  { label: 'Security',            href: '/security',   description: 'Encryption, access controls, audit trail', live: true, icon: 'security' },
 ]
 
 export const companyItems: NavItem[] = [
