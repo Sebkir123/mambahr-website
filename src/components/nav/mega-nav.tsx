@@ -53,8 +53,8 @@ function MenuItem({ item, onNavigate }: { item: NavItem; onNavigate: () => void 
         {item.icon ? iconMap[item.icon] : null}
       </span>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ fontSize: 14.5, fontWeight: 600, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em' }}>{item.label}</p>
-        <p style={{ fontSize: 12.5, color: 'var(--text-muted)', margin: '2px 0 0', lineHeight: 1.4 }}>{item.description}</p>
+        <p style={{ fontSize: 14.5, fontWeight: 600, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em', whiteSpace: 'nowrap' }}>{item.label}</p>
+        <p style={{ fontSize: 12.5, color: 'var(--text-muted)', margin: '2px 0 0', lineHeight: 1.4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.description}</p>
       </div>
     </Link>
   )
@@ -210,7 +210,7 @@ export default function MegaNav() {
                 aria-hidden="true"
                 style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, #B98A4E, #6A5DA6)', opacity: 0.7 }}
               />
-              <div style={{ padding: '28px 32px 24px', display: 'grid', gridTemplateColumns: '1.55fr 1fr', gap: 40 }}>
+              <div style={{ padding: '28px 32px 24px', display: 'grid', gridTemplateColumns: '1.9fr 0.85fr', gap: 32 }}>
                 {/* Everything HR — the procurement checklist, two compact columns */}
                 <div>
                   <p style={colLabel}>Everything HR, handled</p>
@@ -219,34 +219,10 @@ export default function MegaNav() {
                   </div>
                 </div>
 
-                {/* The agent panel + surfaces rail */}
-                <div>
-                  <p style={colLabel}>Run by one AI hire</p>
-                  <Link
-                    href="/mamba"
-                    onClick={() => setProductOpen(false)}
-                    style={{
-                      display: 'block',
-                      textDecoration: 'none',
-                      borderRadius: 14,
-                      padding: '16px 16px 14px',
-                      marginBottom: 10,
-                      background:
-                        'radial-gradient(80% 60% at 15% 0%, rgba(185,138,78,0.25), transparent 60%), radial-gradient(70% 55% at 95% 100%, rgba(106,93,166,0.28), transparent 60%), #14110C',
-                    }}
-                  >
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-mono), monospace', fontSize: 10.5, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#AEA2E6' }}>
-                      <span style={{ width: 8, height: 8, borderRadius: 999, background: '#AEA2E6', display: 'inline-block' }} />
-                      Mamba · working
-                    </span>
-                    <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 19, lineHeight: 1.25, letterSpacing: '-0.01em', color: '#fff', margin: '10px 0 6px' }}>
-                      One agent runs all of it.
-                    </p>
-                    <p style={{ fontSize: 12.5, lineHeight: 1.5, color: 'rgba(255,255,255,0.65)', margin: 0 }}>
-                      You approve the big calls. Everything else just gets done.
-                    </p>
-                  </Link>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {/* The platform rail — label-only links, no competing panel */}
+                <div style={{ borderLeft: '1px solid var(--border-faint)', paddingLeft: 28 }}>
+                  <p style={{ ...colLabel, marginLeft: 10 }}>The platform</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                     {howItWorks.map((item) => (
                       <Link
                         key={item.label}
@@ -255,19 +231,40 @@ export default function MegaNav() {
                         className="nav-rail-link"
                         style={{
                           display: 'flex',
-                          alignItems: 'baseline',
+                          alignItems: 'center',
                           justifyContent: 'space-between',
                           gap: 12,
-                          padding: '8px 10px',
+                          padding: '9px 10px',
                           borderRadius: 8,
                           textDecoration: 'none',
                         }}
                       >
-                        <span style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--text)' }}>{item.label}</span>
-                        <span style={{ fontSize: 11.5, color: 'var(--text-faint)', textAlign: 'right' }}>{item.description}</span>
+                        <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', whiteSpace: 'nowrap' }}>{item.label}</span>
+                        <span aria-hidden="true" style={{ fontSize: 13, color: 'var(--text-faint)' }}>→</span>
                       </Link>
                     ))}
                   </div>
+                  <Link
+                    href="/mamba"
+                    onClick={() => setProductOpen(false)}
+                    style={{
+                      display: 'block',
+                      marginTop: 14,
+                      padding: '12px 14px',
+                      borderRadius: 12,
+                      textDecoration: 'none',
+                      background: 'var(--bg-warm)',
+                      border: '1px solid var(--border-faint)',
+                    }}
+                  >
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-mono), monospace', fontSize: 10, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--gold-dark)' }}>
+                      <span style={{ width: 7, height: 7, borderRadius: 999, background: '#6A5DA6', display: 'inline-block' }} />
+                      Meet Mamba
+                    </span>
+                    <span style={{ display: 'block', fontSize: 13, lineHeight: 1.45, color: 'var(--text-muted)', marginTop: 5 }}>
+                      The AI hire behind every page on the left.
+                    </span>
+                  </Link>
                 </div>
               </div>
               {/* The procurement checklist — exact keywords buyers scan for */}
@@ -283,13 +280,14 @@ export default function MegaNav() {
                       onClick={() => setProductOpen(false)}
                       className="nav-kw"
                       style={{
-                        fontSize: 12,
+                        fontSize: 11.5,
                         fontWeight: 500,
                         color: 'var(--text-muted)',
                         textDecoration: 'none',
-                        border: '1px solid var(--border)',
+                        border: '1px solid var(--border-faint)',
+                        background: 'var(--bg-surface)',
                         borderRadius: 999,
-                        padding: '4px 11px',
+                        padding: '3px 10px',
                         whiteSpace: 'nowrap',
                       }}
                     >

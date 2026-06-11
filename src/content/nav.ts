@@ -19,14 +19,15 @@ export type NavSection = {
  * Every href resolves to a real page or an in-page anchor we create.
  */
 export const byFunction: NavItem[] = [
-  { label: 'Hiring & ATS',          href: '/hiring',       description: 'Post, screen, offer — signed the same week', live: true, icon: 'hiring' },
-  { label: 'Onboarding',            href: '/onboarding',   description: 'Day-one ready before they arrive',           live: true, icon: 'onboarding' },
-  { label: 'Payroll & benefits',    href: '/payroll',      description: 'Payday and 401(k), on autopilot',            live: true, icon: 'payroll' },
-  { label: 'Time off & leave',      href: '/leave',        description: 'PTO to FMLA, approved in seconds',           live: true, icon: 'timeoff' },
-  { label: 'Performance',           href: '/performance',  description: 'Reviews that write themselves',              live: true, icon: 'performance' },
-  { label: 'Compensation',          href: '/compensation', description: 'Every raise priced against your bands',      live: true, icon: 'comp' },
-  { label: 'Compliance',            href: '/compliance',   description: '50 states, every answer cites the law',      live: true, icon: 'compliance' },
-  { label: 'Headcount & RIF',       href: '/rif',          description: 'Layoffs and reorgs, done right',             live: true, icon: 'rif' },
+  // Descriptions are ONE line in the mega menu — keep ≤ 28 chars so they never wrap.
+  { label: 'Hiring & ATS',          href: '/hiring',       description: 'Req to signed offer, fast',   live: true, icon: 'hiring' },
+  { label: 'Onboarding',            href: '/onboarding',   description: 'Ready before they arrive',    live: true, icon: 'onboarding' },
+  { label: 'Payroll & benefits',    href: '/payroll',      description: 'Payday, on autopilot',        live: true, icon: 'payroll' },
+  { label: 'Time off & leave',      href: '/leave',        description: 'PTO to FMLA, in seconds',     live: true, icon: 'timeoff' },
+  { label: 'Performance',           href: '/performance',  description: 'Reviews, written for you',    live: true, icon: 'performance' },
+  { label: 'Compensation',          href: '/compensation', description: 'Raises priced to your bands', live: true, icon: 'comp' },
+  { label: 'Compliance',            href: '/compliance',   description: 'Every answer cites the law',  live: true, icon: 'compliance' },
+  { label: 'Headcount & RIF',       href: '/rif',          description: 'The hard days, done right',   live: true, icon: 'rif' },
 ]
 
 /**
