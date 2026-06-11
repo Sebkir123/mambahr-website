@@ -1,10 +1,47 @@
 'use client'
 
 const TIERS = [
-  { name: 'HR Starter', price: '$14', unit: '/employee/mo', min: '$10k/yr minimum', blurb: 'HR structure before your first HR hire.', feats: ['Employee records & org chart', 'AI HR helpdesk', 'Documents & workflows', 'Payroll-ready exports'], cta: 'Start here' },
-  { name: 'HR Ops Manager', price: '$22', unit: '/employee/mo', min: '$24k/yr minimum', blurb: "A full HR ops team's worth of work.", feats: ['Everything in Starter', 'Onboarding & offboarding', 'Offers & approval routing', 'Performance & leave'], cta: 'Most teams start here', popular: true },
-  { name: 'AI HR Department', price: '$30', unit: '/employee/mo', min: '$45k/yr minimum', blurb: 'Ops plus HRBP-level support.', feats: ['Everything in Ops Manager', 'RIF & change planning', 'Advanced compliance & audit', 'SSO, custom workflows'], cta: 'Scale up' },
-  { name: 'Enterprise', price: 'Custom', unit: '', min: 'from $100k/yr', blurb: 'Multi-entity, security review.', feats: ['Everything in AI HR Dept', 'Custom implementation', 'Procurement & security', 'Enterprise integrations'], cta: 'Talk to founders' },
+  {
+    name: 'HR Starter',
+    size: 'For teams of 10–50',
+    price: '$14',
+    unit: '/employee/mo',
+    min: '$10k/yr minimum',
+    blurb: 'Run HR properly before you hire HR.',
+    feats: ['Employee records & org chart', 'Every employee question, answered', 'Offer letters & documents, generated', 'Payroll-ready exports'],
+    cta: 'Start here',
+  },
+  {
+    name: 'HR Ops Manager',
+    size: 'For teams of 50–250',
+    price: '$22',
+    unit: '/employee/mo',
+    min: '$24k/yr minimum',
+    blurb: 'A full HR ops hire — for a tenth of one.',
+    feats: ['Everything in Starter', 'Onboarding & offboarding, done', 'Offers sent, approvals routed', 'Time off, leave & reviews handled'],
+    cta: 'Most teams start here',
+    popular: true,
+  },
+  {
+    name: 'AI HR Department',
+    size: 'For teams of 250–1,000',
+    price: '$30',
+    unit: '/employee/mo',
+    min: '$45k/yr minimum',
+    blurb: 'Your whole HR department, run for you.',
+    feats: ['Everything in Ops Manager', 'Layoffs & reorgs, done right', 'Deep compliance + full audit trail', 'SSO & custom workflows'],
+    cta: 'Scale up',
+  },
+  {
+    name: 'Enterprise',
+    size: 'For 1,000+ and multi-entity',
+    price: 'Custom',
+    unit: '',
+    min: 'from $100k/yr',
+    blurb: 'For complex orgs with procurement to satisfy.',
+    feats: ['Everything in AI HR Dept', 'Custom implementation', 'Procurement & security review', 'Enterprise integrations'],
+    cta: 'Talk to founders',
+  },
 ]
 
 export default function Pricing() {
@@ -15,9 +52,12 @@ export default function Pricing() {
           <p className="eyebrow">Pricing</p>
           <h2 className="title">A fraction of a <span className="em">full HR team.</span></h2>
           <p className="lead">
-            An HR generalist runs $85k&ndash;$120k a year. MambaHR gives your lean team that
-            firepower from $24k. Founding pricing for the first 20 companies, locked for the
-            life of the contract.
+            An HR generalist runs $85k&ndash;$120k a year. MambaHR does the same work from
+            $24k — and never calls in sick.
+          </p>
+          <p className="founding">
+            <span className="f-dot" aria-hidden="true" />
+            Founding pricing — first 20 companies, locked for the life of your contract
           </p>
         </div>
 
@@ -26,6 +66,7 @@ export default function Pricing() {
             <div key={t.name} className={`card${t.popular ? ' pop' : ''}`} data-reveal data-delay={String(i + 1)}>
               {t.popular && <span className="ribbon">Most popular</span>}
               <div className="name">{t.name}</div>
+              <div className="size">{t.size}</div>
               <div className="price">
                 <span className="amt">{t.price}</span>
                 <span className="unit">{t.unit}</span>
@@ -86,6 +127,37 @@ export default function Pricing() {
           line-height: 1.6;
           color: var(--text-muted);
           margin: 20px 0 0;
+        }
+        .founding {
+          display: inline-flex;
+          align-items: center;
+          gap: 9px;
+          margin: 18px 0 0;
+          padding: 9px 15px;
+          font-family: var(--font-mono);
+          font-size: 11.5px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--gold-dark);
+          background: var(--gold-tint);
+          border: 1px solid rgba(138, 101, 53, 0.22);
+          border-radius: 999px;
+        }
+        .f-dot {
+          flex: none;
+          width: 7px;
+          height: 7px;
+          border-radius: 999px;
+          background: var(--gold);
+          animation: mcPulse 2.4s ease-in-out infinite;
+        }
+        .size {
+          font-family: var(--font-mono);
+          font-size: 10.5px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--text-faint);
+          margin-top: 5px;
         }
         .grid {
           display: grid;
