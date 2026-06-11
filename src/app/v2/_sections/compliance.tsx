@@ -5,44 +5,57 @@ export default function Compliance() {
     <section className="cm">
       <div className="wrap">
         <div className="card agent-edge agent-done agent-lg" data-reveal>
-          <span className="mamba-chip done mc-top"><span className="mc-i" aria-hidden="true" />Mamba · answered</span>
-          <div className="q">
-            Employee on FMLA also requests CA CFRA — stack or run sequential?
+          <div className="who">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="who-av" src="/avatars/violet.jpg" alt="" width={40} height={40} />
+            <div>
+              <div className="who-n">Violet Hayes</div>
+              <div className="who-r">Product Manager · California</div>
+            </div>
+            <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · answered</span>
           </div>
-          <div className="risk">Risk · $30K back leave + penalty</div>
+
+          <div className="q">&ldquo;I&rsquo;m having a baby in June. How much leave can I take?&rdquo;</div>
+
           <div className="ans">
-            <div className="ans-label">The agent&rsquo;s answer</div>
-            <div className="ans-head">Approve up to 24 weeks combined.</div>
+            <div className="ans-head">Up to 24 weeks, job protected.</div>
             <p className="ans-body">
-              Eligible for both (14-month tenure, 1,400 hours). CA leave stacks on top of
-              federal FMLA. Anything ambiguous routes to your legal team.
+              Federal and California leave stack. Mamba answered her in seconds, blocked the
+              calendar, and filed the paperwork — your legal counsel never had to pick up the phone.
             </p>
+            <div className="done-row">
+              <span className="d-check" aria-hidden="true" />
+              Answered · booked · filed — in under a minute
+            </div>
           </div>
+
           <div className="cites">
-            <span className="cl">Backed by</span>
+            <span className="cl">The law behind it</span>
             <span className="chip">FMLA</span>
             <span className="chip">CA CFRA</span>
             <span className="chip">DLSE 7-2024</span>
           </div>
+
+          <div className="risk">Get this answer wrong, and it&rsquo;s $30k+ in back pay and penalties.</div>
         </div>
 
         <div className="copy" data-reveal data-delay="1">
           <p className="eyebrow">Stay compliant</p>
           <h2 className="title">
-            Compliant, <span className="em">with the receipts.</span>
+            The right answer, <span className="em">with the law attached.</span>
           </h2>
           <p className="lead">
-            Federal employment law plus state-specific rules for all 50 states, kept current.
-            Every decision comes with the statute attached. Anything ambiguous routes to your
-            legal team.
+            Employment law changes somewhere in America almost every week. MambaHR keeps up so
+            you don&rsquo;t have to — every answer is checked against current law, and the risky
+            calls go to a human before anything happens.
           </p>
           <div className="kpis">
-            <div><div className="kn"><span data-count="50">50</span></div><div className="kl">States + federal</div></div>
-            <div><div className="kn"><span data-count="100">100</span>%</div><div className="kl">Cited to source</div></div>
-            <div><div className="kn">1</div><div className="kl">Human on the calls that matter</div></div>
+            <div><div className="kn"><span data-count="50">50</span></div><div className="kl">states covered, kept current</div></div>
+            <div><div className="kn"><span data-count="100">100</span>%</div><div className="kl">of answers show their source</div></div>
+            <div><div className="kn">1</div><div className="kl">human approves the big calls</div></div>
           </div>
           <div className="sec">
-            {['SOC 2 Type II', 'Encrypted end to end', 'Role-based access', 'Full audit trail', 'US data residency', 'Never trained on your data'].map((s) => (
+            {['SOC 2 Type II', 'Encrypted end to end', 'Full audit trail', 'Your data stays in the US', 'Never trained on your data'].map((s) => (
               <span key={s} className="sec-b"><span className="sec-i" aria-hidden="true" />{s}</span>
             ))}
           </div>
@@ -67,55 +80,60 @@ export default function Compliance() {
           background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
           border: 1px solid var(--border);
           border-radius: 18px;
-          padding: 28px;
+          padding: 26px;
           box-shadow: var(--shadow-float);
         }
-        :global(.mc-top) { margin-bottom: 16px; }
+        .who {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding-bottom: 16px;
+          border-bottom: 1px solid var(--border-faint);
+        }
+        .who-av { width: 40px; height: 40px; border-radius: 999px; object-fit: cover; }
+        .who-n { font-size: 14.5px; font-weight: 700; color: var(--text); }
+        .who-r { font-size: 12px; color: var(--text-faint); margin-top: 1px; }
+        .who :global(.mamba-chip) { margin-left: auto; }
         .q {
           font-family: var(--font-serif);
-          font-size: 22px;
+          font-size: clamp(20px, 2.2vw, 25px);
           line-height: 1.3;
           color: var(--text);
           letter-spacing: -0.01em;
-        }
-        .risk {
-          display: inline-block;
-          margin-top: 14px;
-          font-family: var(--font-mono);
-          font-size: 11px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--color-red);
-          background: rgba(220, 38, 38, 0.08);
-          padding: 4px 10px;
-          border-radius: 999px;
+          margin: 18px 0;
         }
         .ans {
-          margin-top: 20px;
           padding: 18px;
           border-left: 3px solid #B98A4E;
           background: linear-gradient(160deg, #FFF2E6, #FBE6D6);
           border-radius: 0 14px 14px 0;
         }
-        .ans-label {
-          font-family: var(--font-mono);
-          font-size: 10.5px;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          color: #8A6535;
-        }
         .ans-head {
-          font-size: 17px;
-          font-weight: 600;
+          font-size: 17.5px;
+          font-weight: 700;
           color: var(--text);
-          margin-top: 8px;
+          letter-spacing: -0.01em;
         }
         .ans-body {
-          font-size: 13.5px;
-          line-height: 1.55;
+          font-size: 14px;
+          line-height: 1.6;
           color: var(--text-muted);
           margin: 8px 0 0;
         }
+        .done-row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-top: 13px;
+          padding-top: 13px;
+          border-top: 1px solid rgba(138, 101, 53, 0.16);
+          font-family: var(--font-mono);
+          font-size: 11px;
+          color: var(--color-green);
+          font-weight: 600;
+        }
+        .d-check { flex: none; width: 15px; height: 15px; border-radius: 999px; background: var(--color-green); position: relative; }
+        .d-check::after { content: ''; position: absolute; left: 5px; top: 3px; width: 3px; height: 6px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .cites {
           display: flex;
           align-items: center;
@@ -138,6 +156,13 @@ export default function Compliance() {
           border: 1px solid var(--border);
           padding: 4px 9px;
           border-radius: 999px;
+        }
+        .risk {
+          margin-top: 16px;
+          font-size: 12.5px;
+          font-style: italic;
+          font-family: var(--font-serif);
+          color: #A8552F;
         }
         .eyebrow {
           font-family: var(--font-mono);
@@ -168,7 +193,7 @@ export default function Compliance() {
           line-height: 1.6;
           color: var(--text-muted);
           margin: 22px 0 0;
-          max-width: 460px;
+          max-width: 480px;
         }
         .kpis {
           display: flex;
@@ -185,7 +210,8 @@ export default function Compliance() {
           font-size: 12.5px;
           color: var(--text-faint);
           margin-top: 8px;
-          max-width: 120px;
+          max-width: 130px;
+          line-height: 1.4;
         }
         .sec {
           display: flex;
