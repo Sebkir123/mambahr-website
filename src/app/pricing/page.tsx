@@ -1,5 +1,6 @@
 'use client'
 
+import { Fragment } from 'react'
 import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
@@ -13,31 +14,35 @@ const TIERS = [
     size: 'For teams of 10–50',
     price: '$14',
     unit: '/employee/mo',
-    min: '$10k/yr minimum',
-    blurb: 'Run HR properly before you hire HR.',
-    feats: ['Employee records & org chart', 'Every employee question, answered', 'Offer letters & documents, generated', 'Payroll-ready exports'],
-    cta: 'Start here',
+    min: '$10k/yr minimum · billed annually',
+    blurb: 'HR structure before your first HR hire.',
+    replaces: ['HR admin support', 'Records & org-chart cleanup', 'Payroll-change spreadsheets'],
+    feats: ['Employee records & org chart', 'Every employee question, answered', 'Documents generated & stored', 'Payroll & benefits-ready exports'],
+    cta: 'Hire MambaHR',
   },
   {
     name: 'HR Ops Manager',
     size: 'For teams of 50–250',
     price: '$22',
     unit: '/employee/mo',
-    min: '$24k/yr minimum',
-    blurb: 'A full HR ops hire — for a tenth of one.',
+    min: '$24k/yr minimum · billed annually',
+    blurb: 'Your next HR Ops hire — for a tenth of one.',
+    replaces: ['HR coordinator', 'People ops generalist', 'Manual on/offboarding'],
     feats: ['Everything in Starter', 'Onboarding & offboarding, done', 'Offers sent, approvals routed', 'Time off, leave & reviews handled'],
-    cta: 'Most teams start here',
+    cta: 'Hire your Ops Manager',
     popular: true,
+    badge: 'Replaces your next HR Ops hire',
   },
   {
     name: 'AI HR Department',
     size: 'For teams of 250–1,000',
     price: '$30',
     unit: '/employee/mo',
-    min: '$45k/yr minimum',
-    blurb: 'Your whole HR department, run for you.',
-    feats: ['Everything in Ops Manager', 'Layoffs & reorgs, done right', 'Deep compliance + full audit trail', 'SSO & custom workflows'],
-    cta: 'Scale up',
+    min: '$45k/yr minimum · billed annually',
+    blurb: 'Ops plus junior-HRBP work, run for you.',
+    replaces: ['HR Ops Manager', 'HR generalist', 'Junior HRBP workflows'],
+    feats: ['Everything in Ops Manager', 'RIF & change planning, done right', 'Deep compliance + full audit trail', 'SSO, custom workflows & security review'],
+    cta: 'Build your department',
   },
   {
     name: 'Enterprise',
@@ -46,23 +51,108 @@ const TIERS = [
     unit: '',
     min: 'from $100k/yr',
     blurb: 'For complex orgs with procurement to satisfy.',
-    feats: ['Everything in AI HR Dept', 'Custom implementation', 'Procurement & security review', 'Enterprise integrations'],
+    replaces: ['High-volume HR ops teams', 'Custom approval chains', 'Manual audit prep'],
+    feats: ['Everything in AI HR Dept', 'Custom implementation & approval logic', 'Procurement & security review', 'Enterprise integrations & success support'],
     cta: 'Talk to founders',
   },
 ]
 
-const INCLUDED = [
-  'All 50 states, kept current',
-  'Slack, Teams & the MambaHR app',
-  'You approve the big calls',
-  'Full audit trail',
-  'US data residency',
-  'Your data imported in a day',
-  'No implementation fee',
-  'Real humans when you need us',
+/* Plan matrix: tier index = first column where the feature is included. */
+const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
+  {
+    group: 'Core — every plan',
+    rows: [
+      { f: 'Employee records', from: 0 },
+      { f: 'Org chart & team visibility', from: 0 },
+      { f: 'AI HR helpdesk', from: 0 },
+      { f: 'People dashboards', from: 0 },
+      { f: 'Workforce risk signals', from: 0 },
+      { f: 'HR document storage', from: 0 },
+      { f: 'Workflows & approvals', from: 0 },
+      { f: 'Compliance guidance', from: 0 },
+      { f: 'Payroll-ready exports', from: 0 },
+      { f: 'Benefits-ready exports', from: 0 },
+      { f: 'Slack, Teams & the MambaHR app', from: 0 },
+    ],
+  },
+  {
+    group: 'HR Ops Manager and up',
+    rows: [
+      { f: 'Onboarding, run end to end', from: 1 },
+      { f: 'Offboarding, run end to end', from: 1 },
+      { f: 'Offer & HR document generation', from: 1 },
+      { f: 'Approval routing', from: 1 },
+      { f: 'Manager & team insights', from: 1 },
+      { f: 'Performance cycles, run', from: 1 },
+      { f: 'Leave & policy handling', from: 1 },
+      { f: 'Payroll & benefits change reports', from: 1 },
+      { f: 'Audit trails', from: 1 },
+      { f: 'Integrations', from: 1 },
+      { f: 'Implementation support', from: 1 },
+    ],
+  },
+  {
+    group: 'AI HR Department and up',
+    rows: [
+      { f: 'Advanced workflow automation', from: 2 },
+      { f: 'RIF & change planning', from: 2 },
+      { f: 'Advanced compliance workflows', from: 2 },
+      { f: 'Advanced audit trails', from: 2 },
+      { f: 'Custom workflows', from: 2 },
+      { f: 'SSO & security review', from: 2 },
+      { f: 'Premium payroll & benefits exports', from: 2 },
+      { f: 'Priority support', from: 2 },
+    ],
+  },
+  {
+    group: 'Enterprise only',
+    rows: [
+      { f: 'Custom implementation', from: 3 },
+      { f: 'Advanced security & procurement support', from: 3 },
+      { f: 'High-volume workflows & custom approval logic', from: 3 },
+      { f: 'Custom payroll, benefits & reporting requirements', from: 3 },
+      { f: 'Dedicated success support & enterprise integrations', from: 3 },
+    ],
+  },
+]
+
+const COST_ROWS = [
+  { hire: 'HR Coordinator', cost: '$70k–$95k', alt: 'HR Starter or Ops Manager' },
+  { hire: 'HR Generalist', cost: '$85k–$120k', alt: 'HR Ops Manager' },
+  { hire: 'HR Ops Manager', cost: '$110k–$150k', alt: 'Ops Manager or AI HR Dept' },
+  { hire: 'Junior HRBP', cost: '$100k–$140k', alt: 'AI HR Department' },
+]
+
+const EXPORTS = [
+  'New-hire payroll reports',
+  'Termination reports',
+  'Compensation changes',
+  'Job, manager & location changes',
+  'Leave & time-away reports',
+  'Benefits eligibility',
+  'COBRA triggers',
+  'Open-enrollment changes',
+  'Deduction changes',
+  'Audit-ready change history',
 ]
 
 const FAQS = [
+  {
+    q: 'Is MambaHR software or an HR department?',
+    a: 'It’s your HR department. There’s a system underneath — records, documents, audit trails — but you’re not buying screens to click. You’re buying the work: onboarding done, changes processed, questions answered, exports ready. You approve the big calls.',
+  },
+  {
+    q: 'Can it replace our first HR hire?',
+    a: 'For most teams under 250 people, yes — that’s the job it was built for. It does the repeatable work that forces an early HR hire: records, onboarding, offboarding, changes, documents, manager questions. When you do hire HR, they start with a running department instead of a backlog.',
+  },
+  {
+    q: 'Does it replace a human HRBP?',
+    a: 'No, and we won’t pretend otherwise. Mamba runs the repeatable HRBP-level work — performance cycles, compliance checks, documentation, manager support. Investigations, sensitive employee relations, and legal judgment stay with qualified humans. The big calls are always yours.',
+  },
+  {
+    q: 'Does it process payroll or run our benefits?',
+    a: 'Not today — and we say that plainly. Mamba keeps the work around payroll and benefits clean and delivers ready-to-load files to your existing provider, broker, or PEO. No rip-and-replace, no missed changes.',
+  },
   {
     q: 'Why a per-employee price?',
     a: 'Because that’s how the work scales. Every employee brings questions, time off, reviews, and paperwork. One price per person, everything handled — no modules, no add-ons, no surprise invoices.',
@@ -72,12 +162,12 @@ const FAQS = [
     a: 'Each plan has an annual minimum so we can put real depth behind every account. If the per-employee math comes in under it, the minimum applies. Most teams clear it quickly as they grow.',
   },
   {
-    q: 'Is there an implementation fee?',
-    a: 'No. Your data is imported from your current systems in about a day, and the demo you see is the product you get. If standing it up took a six-month project, we’d be the thing we replaced.',
+    q: 'Which plan should we choose?',
+    a: 'Most growing companies start with HR Ops Manager — it replaces the hire they were about to make. Choose Starter if you mainly need records, answers, and clean exports. Choose AI HR Department when compliance, performance, and workforce changes need to run themselves too.',
   },
   {
-    q: 'Can we change plans as we grow?',
-    a: 'Yes — plans follow your headcount. Cross 50 people and you move up with no migration, no re-setup, no renegotiation theater. Your record stays exactly where it is.',
+    q: 'Is founding customer pricing real?',
+    a: 'Yes — for the first 20 companies. Founding customers get discounted annual pricing, onboarding directly with the founders, and priority input into the roadmap. When the 20 seats are gone, they’re gone.',
   },
 ]
 
@@ -147,10 +237,11 @@ export default function PricingPage() {
           <span className="v2-grain" />
           <div className="top">
             <p className="eyebrow" data-reveal>Pricing</p>
-            <h1 className="title" data-reveal data-delay="1">One hire, <Em>every job.</Em></h1>
+            <h1 className="title" data-reveal data-delay="1">Before you hire HR, <Em>hire MambaHR.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
-              An HR generalist runs $85k&ndash;$120k a year — one person, one job, business hours.
-              MambaHR runs your whole department from $10k a year. Priced per employee, the way the work actually scales.
+              The first AI HR department for startups and growing companies. It runs onboarding, offboarding,
+              employee changes, documents, compliance, and payroll-ready exports — from a fraction of the cost
+              of your next HR hire. Priced per employee, the way the work actually scales.
             </p>
             <div className="ctas" data-reveal data-delay="3">
               <Link href="/demo" className="btn-p">Book a demo</Link>
@@ -179,10 +270,10 @@ export default function PricingPage() {
             @keyframes prA { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(120px, 80px) scale(1.16); } }
             @keyframes prB { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-110px, 60px) scale(1.1); } }
             @media (prefers-reduced-motion: reduce) { .blob { animation: none; } }
-            .top { position: relative; max-width: 980px; margin: 0 auto; text-align: center; }
+            .top { position: relative; max-width: 1040px; margin: 0 auto; text-align: center; }
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(42px, 5.8vw, 76px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 18px 0 0; white-space: nowrap; }
-            .lead { font-size: clamp(17px, 2vw, 20px); line-height: 1.55; color: var(--text-muted); max-width: 660px; margin: 22px auto 0; }
+            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 4vw, 54px); line-height: 1.04; letter-spacing: -0.028em; color: var(--text); margin: 18px 0 0; white-space: nowrap; }
+            .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 690px; margin: 22px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
             :global(.ph .btn-p) {
               display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 15.5px;
@@ -207,7 +298,48 @@ export default function PricingPage() {
             .faces img:first-child { margin-left: 0; }
             .proof-t { font-size: 14px; font-weight: 600; color: var(--text); }
             .stage { position: relative; max-width: 720px; margin: clamp(44px, 5.4vw, 64px) auto 0; }
-            @media (max-width: 880px) { .title { white-space: normal; } }
+            @media (max-width: 940px) { .title { white-space: normal; } }
+          `}</style>
+        </section>
+
+        {/* ── Founding customers ── */}
+        <section className="found">
+          <div className="band" data-reveal>
+            <div className="f-copy">
+              <span className="f-tag">First 20 companies</span>
+              <p className="f-t">Founding customer pricing is open.</p>
+              <p className="f-s">Discounted annual pricing, onboarding directly with the founders, and priority say in the roadmap.</p>
+            </div>
+            <Link href="/demo" className="f-cta">Get founding pricing</Link>
+          </div>
+          <style jsx>{`
+            .found { background: var(--bg); padding: clamp(40px, 5vw, 64px) var(--page-pad) 0; }
+            .band {
+              max-width: var(--page-max);
+              margin: 0 auto;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 20px;
+              flex-wrap: wrap;
+              border: 1px solid var(--border);
+              border-radius: 18px;
+              padding: clamp(20px, 2.6vw, 30px) clamp(22px, 3vw, 36px);
+              background:
+                radial-gradient(70% 100% at 4% 0%, rgba(196, 154, 108, 0.18), transparent 55%),
+                radial-gradient(60% 100% at 100% 100%, rgba(106, 93, 166, 0.14), transparent 55%),
+                var(--bg);
+              box-shadow: var(--shadow-sm);
+            }
+            .f-tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 4px 11px; }
+            .f-t { font-family: var(--font-serif); font-size: clamp(19px, 2.2vw, 24px); color: var(--text); margin: 10px 0 0; letter-spacing: -0.01em; }
+            .f-s { font-size: 14px; color: var(--text-muted); margin: 6px 0 0; line-height: 1.5; }
+            :global(.found .f-cta) {
+              flex: none; display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 14.5px;
+              padding: 13px 24px; border-radius: 999px; text-decoration: none;
+              box-shadow: 0 10px 22px rgba(20, 18, 14, 0.18);
+            }
+            :global(.found .f-cta:hover) { background: #2A2A28; }
           `}</style>
         </section>
 
@@ -217,7 +349,7 @@ export default function PricingPage() {
             <div className="grid">
               {TIERS.map((t, i) => (
                 <div key={t.name} className={`card${t.popular ? ' pop agent-edge agent-working agent-lg' : ''}`} data-reveal data-delay={String(Math.min(i + 1, 4))}>
-                  {t.popular && <span className="pop-tag">Most popular</span>}
+                  {t.badge && <span className="pop-tag">{t.badge}</span>}
                   <div className="c-name">{t.name}</div>
                   <div className="c-size">{t.size}</div>
                   <div className="c-price">
@@ -226,6 +358,12 @@ export default function PricingPage() {
                   </div>
                   <div className="c-min">{t.min}</div>
                   <p className="c-blurb">{t.blurb}</p>
+                  <div className="c-rep">
+                    <span className="c-rep-l">Replaces or delays</span>
+                    <ul>
+                      {t.replaces.map((r) => <li key={r}>{r}</li>)}
+                    </ul>
+                  </div>
                   <ul className="c-feats">
                     {t.feats.map((f) => (
                       <li key={f}><span className="tick" aria-hidden="true" />{f}</li>
@@ -236,24 +374,61 @@ export default function PricingPage() {
               ))}
             </div>
             <p className="note" data-reveal>Annual billing. Every employee on the platform counts once — contractors and board members don&rsquo;t.</p>
+
+            {/* Collapsible full matrix */}
+            <details className="matrix" data-reveal>
+              <summary>Compare all plans in detail</summary>
+              <div className="m-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      {TIERS.map((t) => <th key={t.name}>{t.name}</th>)}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {MATRIX.map((g) => (
+                      <Fragment key={g.group}>
+                        <tr className="g-row"><td colSpan={5}>{g.group}</td></tr>
+                        {g.rows.map((r) => (
+                          <tr key={r.f}>
+                            <td>{r.f}</td>
+                            {TIERS.map((t, ti) => (
+                              <td key={t.name} className="c">
+                                {ti >= r.from ? <span className="yes" aria-label="Included">✓</span> : <span className="no" aria-label="Not included">—</span>}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </Fragment>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
           </div>
           <style jsx>{`
-            .tiers { background: var(--bg); padding: clamp(64px, 8vw, 104px) var(--page-pad) clamp(40px, 5vw, 64px); }
+            .tiers { background: var(--bg); padding: clamp(48px, 6vw, 72px) var(--page-pad) clamp(40px, 5vw, 64px); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 1.6vw, 20px); align-items: stretch; }
             .card { position: relative; display: flex; flex-direction: column; background: var(--bg); border: 1px solid var(--border); border-radius: 18px; padding: clamp(22px, 2.4vw, 30px) clamp(18px, 2vw, 26px); box-shadow: var(--shadow-sm); transition: transform 0.18s ease, box-shadow 0.18s ease; }
             .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-float); }
             @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
             .card.pop { background: linear-gradient(180deg, #FFFDF8, var(--bg)); box-shadow: var(--shadow-float); }
-            .pop-tag { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); z-index: 3; font-family: var(--font-mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 5px 13px; white-space: nowrap; box-shadow: 0 0 0 4px var(--bg), 0 6px 14px rgba(20, 18, 14, 0.16); }
+            .pop-tag { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); z-index: 3; font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 5px 12px; white-space: nowrap; box-shadow: 0 0 0 4px var(--bg), 0 6px 14px rgba(20, 18, 14, 0.16); }
             .c-name { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
             .c-size { font-family: var(--font-mono); font-size: 11px; color: var(--gold-dark); margin-top: 4px; }
             .c-price { display: flex; align-items: baseline; gap: 6px; margin-top: 18px; }
-            .c-n { font-family: var(--font-serif); font-size: clamp(34px, 3vw, 42px); line-height: 1; color: var(--text); letter-spacing: -0.02em; }
+            .c-n { font-family: var(--font-serif); font-size: clamp(32px, 2.8vw, 40px); line-height: 1; color: var(--text); letter-spacing: -0.02em; }
             .c-u { font-size: 13px; color: var(--text-faint); }
-            .c-min { font-size: 12px; color: var(--text-faint); margin-top: 6px; }
-            .c-blurb { font-size: 13.5px; line-height: 1.5; color: var(--text-muted); margin: 14px 0 0; min-height: 40px; }
-            .c-feats { list-style: none; padding: 0; margin: 16px 0 22px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
+            .c-min { font-size: 11.5px; color: var(--text-faint); margin-top: 6px; }
+            .c-blurb { font-size: 13.5px; line-height: 1.5; color: var(--text-muted); margin: 13px 0 0; min-height: 40px; }
+            .c-rep { margin-top: 13px; border: 1px solid var(--border-faint); background: var(--bg-warm); border-radius: 12px; padding: 11px 13px; }
+            .c-rep-l { font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); }
+            .c-rep ul { list-style: none; margin: 7px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+            .c-rep li { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; padding-left: 14px; position: relative; }
+            .c-rep li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, #B98A4E, #6A5DA6); }
+            .c-feats { list-style: none; padding: 0; margin: 14px 0 20px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
             .c-feats li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.45; color: var(--text-muted); }
             .tick { flex: none; width: 16px; height: 16px; margin-top: 1px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
             .tick::after { content: ''; position: absolute; left: 5px; top: 2.5px; width: 3px; height: 7px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
@@ -262,26 +437,118 @@ export default function PricingPage() {
             :global(.tiers .c-cta.dark) { color: #fff; background: #1A1A19; border-color: #1A1A19; box-shadow: 0 10px 22px rgba(20, 18, 14, 0.18); }
             :global(.tiers .c-cta.dark:hover) { background: #2A2A28; }
             .note { text-align: center; font-size: 13px; color: var(--text-faint); margin: 26px 0 0; }
+            .matrix { margin-top: clamp(28px, 3.4vw, 40px); border: 1px solid var(--border); border-radius: 16px; background: var(--bg); overflow: hidden; }
+            .matrix summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 20px; font-size: 14.5px; font-weight: 700; color: var(--text); }
+            .matrix summary::-webkit-details-marker { display: none; }
+            .matrix summary::after { content: '+'; font-family: var(--font-mono); font-size: 16px; color: var(--gold-dark); }
+            .matrix[open] summary::after { content: '–'; }
+            .matrix[open] summary { border-bottom: 1px solid var(--border-faint); }
+            .m-scroll { overflow-x: auto; }
+            table { width: 100%; border-collapse: collapse; font-size: 13px; }
+            th { text-align: left; font-size: 12px; font-weight: 700; color: var(--text); padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-surface); white-space: nowrap; }
+            th + th, td.c { text-align: center; }
+            td { padding: 9px 16px; color: var(--text-muted); border-bottom: 1px solid var(--border-faint); }
+            .g-row td { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); background: var(--bg-warm); padding: 8px 16px; }
+            .yes { color: var(--color-green); font-weight: 700; }
+            .no { color: var(--border-mid); }
             @media (max-width: 1080px) { .grid { grid-template-columns: repeat(2, 1fr); } }
             @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
           `}</style>
         </section>
 
-        {/* ── Every plan includes ── */}
-        <section className="inc">
-          <div className="wrap" data-reveal>
-            <p className="inc-l">Every plan includes</p>
-            <div className="chips">
-              {INCLUDED.map((c) => (
-                <span key={c} className="chip"><span className="dot" aria-hidden="true" />{c}</span>
+        {/* ── Cost comparison ── */}
+        <section className="cost">
+          <div className="wrap">
+            <div className="head" data-reveal>
+              <p className="eyebrow">Compare the cost</p>
+              <h2 className="title">Cheaper than the <Em>hire.</Em></h2>
+              <p className="lead">Real HR execution for a fraction of the cost of one full-time HR hire — and you can still make that hire later, into a running department.</p>
+            </div>
+            <div className="table" data-reveal data-delay="1">
+              <div className="row hd">
+                <span>Traditional hire</span>
+                <span>Estimated annual cost</span>
+                <span>The MambaHR alternative</span>
+              </div>
+              {COST_ROWS.map((r) => (
+                <div key={r.hire} className="row">
+                  <span className="h">{r.hire}</span>
+                  <span className="c">{r.cost}</span>
+                  <span className="a">{r.alt}</span>
+                </div>
+              ))}
+            </div>
+            <p className="compare-line" data-reveal data-delay="2">
+              Simpler than Rippling. Faster than Workday. More execution than BambooHR. Cheaper than the hire.{' '}
+              <Link href="/compare">See the comparisons →</Link>
+            </p>
+          </div>
+          <style jsx>{`
+            .cost { background: var(--bg-warm); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
+            .wrap { max-width: 920px; margin: 0 auto; }
+            .head { text-align: center; margin-bottom: clamp(30px, 3.6vw, 44px); }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
+            .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 600px; }
+            .table { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-float); }
+            .row { display: grid; grid-template-columns: 1.1fr 1fr 1.3fr; gap: 12px; padding: 14px 22px; align-items: baseline; }
+            .row + .row { border-top: 1px solid var(--border-faint); }
+            .row.hd { background: var(--bg-surface); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); }
+            .h { font-size: 14.5px; font-weight: 700; color: var(--text); }
+            .c { font-family: var(--font-serif); font-size: 17px; color: var(--text); }
+            .a { font-size: 13.5px; font-weight: 600; background: linear-gradient(110deg, #8A6535, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+            .compare-line { text-align: center; font-size: 14px; color: var(--text-muted); margin: 24px 0 0; }
+            :global(.cost .compare-line a) { color: var(--gold-dark); font-weight: 700; text-decoration: none; }
+            :global(.cost .compare-line a:hover) { text-decoration: underline; }
+            @media (max-width: 640px) { .row { grid-template-columns: 1fr; gap: 4px; } }
+          `}</style>
+        </section>
+
+        {/* ── Guarantee ── */}
+        <section className="guar">
+          <div className="band" data-reveal>
+            <div className="g-mark" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" /><path d="M9 12l2 2 4-4" /></svg>
+            </div>
+            <div className="g-copy">
+              <p className="g-t">The implementation confidence guarantee</p>
+              <p className="g-s">If MambaHR isn&rsquo;t set up and doing useful HR work within 30 days, we extend your first year at no additional cost until it is.</p>
+            </div>
+          </div>
+          <style jsx>{`
+            .guar { background: var(--bg-warm); padding: 0 var(--page-pad) clamp(64px, 8vw, 96px); }
+            .band { max-width: 920px; margin: 0 auto; display: flex; align-items: center; gap: 20px; border: 1px solid rgba(138, 101, 53, 0.25); background: linear-gradient(120deg, #FFF6EC, #F4F2FA); border-radius: 16px; padding: clamp(20px, 2.6vw, 28px) clamp(22px, 3vw, 32px); }
+            .g-mark { flex: none; width: 52px; height: 52px; border-radius: 999px; background: linear-gradient(135deg, #B98A4E, #6A5DA6); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 22px rgba(106, 93, 166, 0.25); }
+            .g-t { font-family: var(--font-serif); font-size: clamp(18px, 2vw, 22px); color: var(--text); margin: 0; letter-spacing: -0.01em; }
+            .g-s { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 6px 0 0; }
+          `}</style>
+        </section>
+
+        {/* ── Payroll & benefits honesty ── */}
+        <section className="pb">
+          <div className="wrap">
+            <div className="copy" data-reveal>
+              <p className="eyebrow">No rip-and-replace</p>
+              <h2 className="title">Keep your payroll. <Em>We feed it.</Em></h2>
+              <p className="lead">
+                MambaHR doesn&rsquo;t process payroll or administer benefits today — and we say that plainly.
+                What it does is keep all the work around them clean: every hire, change, and exit lands in a
+                ready-to-load file for your payroll provider, benefits broker, or PEO. Nothing missed, nothing re-keyed.
+              </p>
+            </div>
+            <div className="chips" data-reveal data-delay="1">
+              {EXPORTS.map((e) => (
+                <span key={e} className="chip"><span className="dot" aria-hidden="true" />{e}</span>
               ))}
             </div>
           </div>
           <style jsx>{`
-            .inc { background: var(--bg); padding: 0 var(--page-pad) clamp(8px, 1vw, 16px); }
-            .wrap { max-width: var(--page-max); margin: 0 auto; border-top: 1px solid var(--border-faint); padding-top: clamp(28px, 3.4vw, 40px); display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
-            .inc-l { font-family: var(--font-mono); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin: 0; white-space: nowrap; }
-            .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+            .pb { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
+            .wrap { max-width: 920px; margin: 0 auto; text-align: center; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
+            .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.65; color: var(--text-muted); margin: 18px auto 0; max-width: 640px; }
+            .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin-top: 28px; }
             .chip { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: var(--text-muted); background: var(--bg-surface); border: 1px solid var(--border-faint); border-radius: 999px; padding: 6px 13px; white-space: nowrap; }
             .dot { width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, #B98A4E, #6A5DA6); }
           `}</style>
@@ -291,11 +558,11 @@ export default function PricingPage() {
           stats={[
             { n: 84, prefix: '$', suffix: 'k', label: 'back in the budget vs. a first HR hire, at 100 employees' },
             { n: 27, label: 'hours of HR admin handled in a typical week — nights included' },
-            { n: 1, suffix: ' day', label: 'from signed to live — your data imported, no setup project' },
+            { n: 30, suffix: ' days', label: 'to useful HR work, guaranteed — or your first year extends free' },
           ]}
         />
 
-        {/* ── Pricing questions ── */}
+        {/* ── FAQ ── */}
         <section className="faq">
           <div className="wrap">
             <div className="head" data-reveal>
@@ -304,7 +571,7 @@ export default function PricingPage() {
             </div>
             <div className="grid">
               {FAQS.map((f, i) => (
-                <div key={f.q} className="item" data-reveal data-delay={String(Math.min(i + 1, 4))}>
+                <div key={f.q} className="item" data-reveal data-delay={String(Math.min((i % 4) + 1, 4))}>
                   <h3 className="q">{f.q}</h3>
                   <p className="a">{f.a}</p>
                 </div>
@@ -334,8 +601,8 @@ export default function PricingPage() {
         />
 
         <PageCta
-          title={<>Do the math <Em>live.</Em></>}
-          sub="A 30-minute demo with your real headcount. We'll quote it on the call."
+          title={<>Before you hire HR, <Em>hire MambaHR.</Em></>}
+          sub="Built to do the work. A 30-minute demo with your real headcount — we'll quote it on the call."
         />
       </main>
       <Footer />
