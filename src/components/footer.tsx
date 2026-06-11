@@ -24,6 +24,7 @@ const cols = [
   },
   {
     title: 'Compare',
+    twoCol: true,
     links: [
       { label: 'vs Rippling', href: '/compare/rippling' },
       { label: 'vs Gusto', href: '/compare/gusto' },
@@ -39,35 +40,87 @@ const cols = [
 
 export default function Footer() {
   return (
-    <footer className="site-footer" style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--border)', padding: '64px 24px 40px' }}>
+    <footer className="site-footer" style={{ background: 'var(--bg-surface)', position: 'relative', padding: '0 24px 40px' }}>
+      {/* gradient hairline */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 1,
+          background: 'linear-gradient(90deg, transparent, #B98A4E 30%, #6A5DA6 70%, transparent)',
+          opacity: 0.55,
+        }}
+      />
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        {/* Top row */}
+        {/* Serif sign-off */}
+        <div
+          style={{
+            padding: '56px 0 44px',
+            borderBottom: '1px solid var(--border-faint)',
+            marginBottom: 48,
+          }}
+        >
+          <p
+            style={{
+              fontFamily: 'var(--font-serif), Georgia, serif',
+              fontSize: 'clamp(28px, 3.6vw, 44px)',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.1,
+              color: 'var(--text)',
+              margin: 0,
+            }}
+          >
+            HR that runs itself.{' '}
+            <span
+              style={{
+                fontStyle: 'italic',
+                background: 'linear-gradient(100deg, #B98A4E, #6A5DA6)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              Yours can too.
+            </span>
+          </p>
+        </div>
+
+        {/* Columns */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
             gap: 40,
-            marginBottom: 64,
+            marginBottom: 56,
           }}
         >
           {/* Brand */}
           <div>
-            <Link href="/" prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', marginBottom: 16 }}>
+            <Link href="/" prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', marginBottom: 14 }}>
               <Image src="/MambaHR_logo.png" alt="MambaHR" width={22} height={22} style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
-              <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 16, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
+              <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 17, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
             </Link>
-            <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: 200 }}>
+            <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.55, maxWidth: 210, margin: 0 }}>
               The AI HR department. One human in the loop.
             </p>
-            <a
-              href="https://linkedin.com/company/mambahr"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: 'inline-flex', marginTop: 20, color: 'var(--text-faint)' }}
-              aria-label="MambaHR on LinkedIn"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
+            <p style={{ display: 'inline-flex', alignItems: 'center', gap: 7, marginTop: 18, fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--text-faint)' }}>
+              <span style={{ width: 7, height: 7, borderRadius: 999, background: 'var(--color-green)', display: 'inline-block' }} />
+              All systems handled
+            </p>
+            <div>
+              <a
+                href="https://linkedin.com/company/mambahr"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'inline-flex', marginTop: 16, color: 'var(--text-faint)' }}
+                aria-label="MambaHR on LinkedIn"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
           </div>
 
           {cols.map((col) => (
@@ -75,7 +128,13 @@ export default function Footer() {
               <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--text-faint)', marginBottom: 16 }}>
                 {col.title}
               </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div
+                style={
+                  col.twoCol
+                    ? { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px 18px' }
+                    : { display: 'flex', flexDirection: 'column', gap: 10 }
+                }
+              >
                 {col.links.map((link) => (
                   <Link
                     key={link.label}
@@ -107,7 +166,7 @@ export default function Footer() {
             © {new Date().getFullYear()} MambaHR, Inc. All rights reserved.
           </p>
           <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-            San Francisco, CA
+            Made in San Francisco
           </p>
         </div>
       </div>
