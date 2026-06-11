@@ -1,0 +1,7 @@
+project_id = "dqoqnlecylqlwsahudjn"
+
+# Public marketing-form endpoints: no Supabase JWT — they're called from the
+# anonymous landing site and protected by Cloudflare Turnstile, not by auth.
+# Without this, deploys default to verify_jwt = true and the form gets 401.
+[functions.handle-demo-request]
+verify_jwt = false
