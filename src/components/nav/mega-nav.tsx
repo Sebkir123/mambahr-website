@@ -143,7 +143,7 @@ export default function MegaNav() {
           {/* Right CTA — single conversion action */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
             <Link href="/demo" className="btn-gold" style={{ fontSize: 13, padding: '9px 20px' }}>
-              Request access
+              Book a demo
             </Link>
             <button
               type="button"
@@ -231,7 +231,7 @@ export default function MegaNav() {
 
             <div style={{ marginTop: 32 }}>
               <Link href="/demo" className="btn-gold" onClick={() => setMobileOpen(false)} style={{ width: '100%', justifyContent: 'center' }}>
-                Request access
+                Book a demo
               </Link>
             </div>
           </div>

@@ -38,7 +38,7 @@ export default function Hero() {
           you compliant in all 50 states — and only brings you the calls that need a person.
         </p>
         <div className="ctas" data-reveal data-delay="3">
-          <a href="#access" className="btn-primary">Request access</a>
+          <a href="#access" className="btn-primary">Book a demo</a>
           <a href="#run" className="btn-ghost">See it in action</a>
         </div>
         <div className="proof" data-reveal data-delay="3">
@@ -51,7 +51,7 @@ export default function Hero() {
           <span className="proof-t">Loved by lean people teams</span>
         </div>
         <div className="trust" data-reveal data-delay="3">
-          <span>Every action logged</span><i />
+          <span>Works 24/7</span><i />
           <span>Live in a day</span><i />
           <span>Built by people-team operators</span>
         </div>

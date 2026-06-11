@@ -115,7 +115,7 @@ const STAGES: Stage[] = [
 ]
 
 export default function Lifecycle() {
-  const [active, setActive] = useState(1)
+  const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
   const timer = useRef<ReturnType<typeof setInterval> | null>(null)
 

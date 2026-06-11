@@ -5,7 +5,7 @@ export default function Cta() {
     <section className="cta" id="access">
       <div className="panel" data-reveal>
         <span className="v2-grain" />
-        <p className="eyebrow">Request access</p>
+        <p className="eyebrow">Get started</p>
         <h2 className="title">
           Hire the agent. <span className="em">Promote the human.</span>
         </h2>
@@ -14,10 +14,10 @@ export default function Cta() {
         </p>
         <form className="form" onSubmit={(e) => e.preventDefault()}>
           <input className="input" type="email" placeholder="you@company.com" aria-label="Work email" />
-          <button className="btn" type="submit">Request access</button>
+          <button className="btn" type="submit">Book a demo</button>
         </form>
         <div className="trust">
-          <span>Live the next morning</span><i /><span>Your data stays in the US</span><i /><span>A human on the big calls</span>
+          <span>Switch in a day</span><i /><span>Your data stays in the US</span><i /><span>A human on the big calls</span>
         </div>
       </div>
 

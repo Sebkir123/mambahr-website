@@ -20,7 +20,7 @@ export default function Outcomes() {
           <article className="card dark" data-reveal data-delay="1">
             <span className="lbl muted">Hours back, every week</span>
             <div className="num big"><span data-count="27">27</span><em>hrs</em></div>
-            <p className="cap ondark">Payroll, onboarding, leave, and compliance — running without you.</p>
+            <p className="cap ondark">Payroll, onboarding, leave, and compliance — on autopilot.</p>
             <div className="spark">
               {SPARK.map((h, i) => (
                 <span key={i} style={{ height: `${h}%` }} />

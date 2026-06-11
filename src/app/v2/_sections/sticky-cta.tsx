@@ -34,7 +34,7 @@ export default function StickyCta() {
     <div className={`fcta${show ? ' show' : ''}`} aria-hidden={!show}>
       <a href="#access" className="pill">
         <span className="m" aria-hidden="true">M</span>
-        Request access
+        Book a demo
       </a>
       <button className="x" type="button" aria-label="Dismiss" onClick={() => setDismissed(true)}>
         <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 1.5l7 7m0-7l-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>

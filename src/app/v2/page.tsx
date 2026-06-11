@@ -36,9 +36,9 @@ export default function V2Page() {
         <Hero />
         <Logos />
         <Statement />
-        {/* Human moment early: the team we free up — bridges problem → solution. */}
-        <PeopleBand />
         <Difference />
+        {/* The philosophy + human moment — after the proof, before the product. */}
+        <PeopleBand />
         <Bento />
         <Channels />
         <Lifecycle />
