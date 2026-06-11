@@ -83,21 +83,24 @@ export function PageHero({
         </div>
       </div>
       <div className="stage" data-reveal data-delay="4">
-        <div className={`frag${photo ? ' has-photo' : ''}`}>{children}</div>
-        {photo && (
-          <figure className="photo">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={photo} alt="" />
-            {(photoChip || photoCaption) && (
-              <figcaption className="photo-cap">
-                {photoChip && (
+        <div className={`duo${photo ? ' has-photo' : ''}`}>
+          <div className="frag">{children}</div>
+          {photo && (
+            <figure className="person">
+              <div className="p-img">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={photo} alt="" />
+                <span className="p-scrim" aria-hidden="true" />
+                {photoCaption && <span className="p-name">{photoCaption}</span>}
+              </div>
+              {photoChip && (
+                <figcaption className="p-foot">
                   <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />{photoChip}</span>
-                )}
-                {photoCaption && <span className="cap-t">{photoCaption}</span>}
-              </figcaption>
-            )}
-          </figure>
-        )}
+                </figcaption>
+              )}
+            </figure>
+          )}
+        </div>
       </div>
       <style jsx>{`
         .ph {
@@ -197,37 +200,49 @@ export function PageHero({
           max-width: 1020px;
           margin: clamp(48px, 6vw, 72px) auto 0;
         }
-        .frag { position: relative; }
-        /* Reserve the photo's width minus a 24px deliberate overlap — keeps the
-           polaroid lapping the card edge without ever covering row content. */
-        .frag.has-photo { margin-right: calc(clamp(180px, 22vw, 248px) - 24px); }
-        .photo {
-          position: absolute;
-          right: 0;
-          bottom: -56px;
-          width: clamp(180px, 22vw, 248px);
+        .duo { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: stretch; }
+        .duo.has-photo { grid-template-columns: 1fr clamp(220px, 25vw, 282px); }
+        .frag { position: relative; min-width: 0; }
+        .person {
           margin: 0;
-          border-radius: 16px;
-          overflow: hidden;
-          border: 4px solid #fff;
-          box-shadow: 0 24px 48px rgba(20, 18, 14, 0.22);
-          transform: rotate(2.4deg);
-          background: var(--bg-elevated);
-        }
-        .photo img { display: block; width: 100%; height: clamp(130px, 15vw, 170px); object-fit: cover; }
-        .photo-cap {
           display: flex;
           flex-direction: column;
-          gap: 4px;
-          align-items: flex-start;
-          background: #fff;
-          padding: 9px 12px 11px;
+          border-radius: 18px;
+          overflow: hidden;
+          background: var(--bg);
+          border: 1px solid var(--border);
+          box-shadow: var(--shadow-float);
         }
-        .cap-t { font-size: 12px; font-weight: 600; color: var(--text); }
+        .p-img { position: relative; flex: 1; min-height: 260px; }
+        .p-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .p-scrim {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(20, 17, 12, 0) 52%, rgba(20, 17, 12, 0.62) 100%);
+        }
+        .p-name {
+          position: absolute;
+          left: 16px;
+          right: 16px;
+          bottom: 14px;
+          color: #fff;
+          font-size: 14.5px;
+          font-weight: 600;
+          line-height: 1.35;
+          letter-spacing: -0.01em;
+          text-shadow: 0 1px 8px rgba(20, 17, 12, 0.4);
+        }
+        .p-foot {
+          display: flex;
+          align-items: center;
+          padding: 12px 14px;
+          background: var(--bg);
+          border-top: 1px solid var(--border-faint);
+        }
         @media (max-width: 880px) {
           .title { white-space: normal; }
-          .photo { position: static; transform: none; width: 100%; margin-top: 18px; }
-          .photo img { height: 200px; }
+          .duo.has-photo { grid-template-columns: 1fr; }
+          .p-img { min-height: 220px; }
         }
       `}</style>
     </section>

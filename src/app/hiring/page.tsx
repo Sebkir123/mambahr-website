@@ -7,12 +7,12 @@ import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
 
 /* ── Hero fragment: live pipeline card ── */
-const STAGES = [
+const STAGES: { name: string; count: number; state: string; note: string; imgs?: string[] }[] = [
   { name: 'Sourcing', count: 47, state: 'done', note: 'Posted to 9 job boards' },
-  { name: 'Screening', count: 12, state: 'done', note: 'Ranked overnight, notes attached' },
-  { name: 'Interviews', count: 8, state: 'done', note: 'All panels scheduled, kits sent' },
+  { name: 'Screening', count: 12, state: 'done', note: 'Ranked overnight, notes attached', imgs: ['/avatars/tom.jpg', '/avatars/priya.jpg', '/avatars/dave.jpg'] },
+  { name: 'Interviews', count: 8, state: 'done', note: 'All panels scheduled, kits sent', imgs: ['/avatars/anna.jpg', '/avatars/marcus.jpg'] },
   { name: 'References', count: 2, state: 'done', note: '4 of 4 calls complete' },
-  { name: 'Offer · Maya Chen', count: 1, state: 'you', note: 'Draft ready — awaiting you' },
+  { name: 'Offer · Maya Chen', count: 1, state: 'you', note: 'Draft ready — awaiting you', imgs: ['/avatars/maya.jpg'] },
 ]
 
 function PipelineCard() {
@@ -25,6 +25,10 @@ function PipelineCard() {
         </div>
         <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · working</span>
       </div>
+      <div className="prog" aria-hidden="true">
+        <span className="prog-bar"><i /></span>
+        <span className="prog-t">4 of 5 stages done · offer drafted day 6</span>
+      </div>
       {STAGES.map((s) => (
         <div key={s.name} className={`row${s.state === 'you' ? ' yours' : ''}`}>
           <span className={`mark${s.state === 'you' ? ' gold' : ''}`} aria-hidden="true" />
@@ -35,6 +39,14 @@ function PipelineCard() {
             </div>
             <div className="note">{s.note}</div>
           </div>
+          {s.imgs && (
+            <span className="avs" aria-hidden="true">
+              {s.imgs.map((im) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img key={im} src={im} alt="" width={24} height={24} />
+              ))}
+            </span>
+          )}
           <span className={`tag${s.state === 'you' ? ' gold' : ''}`}>
             {s.state === 'you' ? 'Awaiting you' : 'Done'}
           </span>
@@ -58,6 +70,13 @@ function PipelineCard() {
         }
         .role { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
         .meta { font-size: 12.5px; color: var(--text-faint); margin-top: 3px; }
+        .prog { display: flex; align-items: center; gap: 12px; padding: 11px 20px; border-bottom: 1px solid var(--border-faint); }
+        .prog-bar { flex: 1; height: 5px; border-radius: 999px; background: var(--border-faint); overflow: hidden; }
+        .prog-bar i { display: block; height: 100%; width: 80%; border-radius: 999px; background: linear-gradient(90deg, #B98A4E, #6A5DA6); }
+        .prog-t { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); white-space: nowrap; }
+        .avs { display: flex; flex: none; }
+        .avs img { width: 24px; height: 24px; border-radius: 999px; object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); margin-left: -7px; background: var(--bg-elevated); }
+        .avs img:first-child { margin-left: 0; }
         .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
