@@ -464,7 +464,7 @@ export default function PricingPage() {
               <h2 className="title">Cheaper than the <Em>hire.</Em></h2>
               <p className="lead">Real HR execution for a fraction of the cost of one full-time HR hire — and you can still make that hire later, into a running department.</p>
             </div>
-            <div className="table" data-reveal data-delay="1">
+            <div className="cost-table" data-reveal data-delay="1">
               <div className="row hd">
                 <span>Traditional hire</span>
                 <span>Estimated annual cost</span>
@@ -490,7 +490,7 @@ export default function PricingPage() {
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 600px; }
-            .table { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-float); }
+            .cost-table { display: block; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-float); }
             .row { display: grid; grid-template-columns: 1.1fr 1fr 1.3fr; gap: 12px; padding: 14px 22px; align-items: baseline; }
             .row + .row { border-top: 1px solid var(--border-faint); }
             .row.hd { background: var(--bg-surface); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); }
