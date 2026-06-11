@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono, Instrument_Serif } from 'next/font/google'
+import { Inter, JetBrains_Mono, Instrument_Serif, Fraunces } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 
@@ -22,6 +22,15 @@ const instrumentSerif = Instrument_Serif({
   weight: ['400'],
   style: ['normal', 'italic'],
   variable: '--font-instrument',
+  display: 'swap',
+})
+
+// Design-system display face — Warm Editorial Premium uses Fraunces.
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
   display: 'swap',
 })
 
@@ -101,7 +110,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID
 
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${instrumentSerif.variable}`}>
+    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${instrumentSerif.variable} ${fraunces.variable}`}>
       <head>
         <link rel="preconnect" href="https://dqoqnlecylqlwsahudjn.supabase.co" />
         <link rel="dns-prefetch" href="https://dqoqnlecylqlwsahudjn.supabase.co" />

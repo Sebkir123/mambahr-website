@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Beat, Page } from '@/components/ui/page'
 
 type FeatureId = 'action' | 'rationale' | 'status' | 'time' | 'decision'
 
@@ -38,8 +39,8 @@ export default function DecisionCardAnatomy() {
     active === id ? '0 0 0 2px var(--gold-dark), 0 8px 24px rgba(0,0,0,0.10)' : 'none'
 
   return (
-    <section style={{ background: 'var(--bg)', padding: '120px 24px' }}>
-      <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+    <Beat bg="white">
+      <Page>
 
         {/* Header */}
         <div style={{ marginBottom: 80, maxWidth: 720 }}>
@@ -316,7 +317,7 @@ export default function DecisionCardAnatomy() {
             }
           }
         `}</style>
-      </div>
-    </section>
+      </Page>
+    </Beat>
   )
 }

@@ -7,6 +7,7 @@ import RequestAccessSection from '@/components/waitlist'
 import SlackThread from '@/components/surfaces/slack-thread'
 import RoutingLog from '@/components/surfaces/routing-log'
 import MambaExamples from '@/components/sections/mamba-examples'
+import { Beat, Page } from '@/components/ui/page'
 
 export const metadata: Metadata = {
   title: 'The AI agent — MambaHR',
@@ -178,40 +179,42 @@ export default function MambaPage() {
       <main style={{ paddingTop: 64 }}>
 
         {/* ── HERO ── */}
-        <section style={{ background: 'var(--bg)', padding: '90px 24px 72px' }}>
-          <div className="hero-split" style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 72, alignItems: 'center' }}>
-            <div>
-              <p className="eyebrow" style={{ marginBottom: 18 }}>THE AI AGENT</p>
-              <h1
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(38px, 4.5vw, 60px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.03em',
-                  color: 'var(--text)',
-                  marginBottom: 22,
-                  lineHeight: 1.0,
-                }}
-              >
-                <span style={{ color: 'var(--gold-dark)' }}>@mamba,</span><br />take it from here.
-              </h1>
-              <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 32, maxWidth: 460 }}>
-                Mention the agent in any Slack channel and it does the work — reads the thread, checks the policy, takes the action, replies in seconds. Your team stops processing tickets.
-              </p>
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <a href="/demo" className="btn-gold">Request access →</a>
-                <Link href="/today" className="btn-secondary">See the approvals queue</Link>
+        <Beat bg="white" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
+          <Page>
+            <div className="hero-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 72, alignItems: 'center' }}>
+              <div>
+                <p className="eyebrow" style={{ marginBottom: 18 }}>THE AI AGENT</p>
+                <h1
+                  style={{
+                    fontFamily: 'var(--font-serif), Georgia, serif',
+                    fontSize: 'clamp(38px, 4.5vw, 60px)',
+                    fontWeight: 400,
+                    letterSpacing: '-0.03em',
+                    color: 'var(--text)',
+                    marginBottom: 22,
+                    lineHeight: 1.0,
+                  }}
+                >
+                  <span style={{ color: 'var(--gold-dark)' }}>@mamba,</span><br />take it from here.
+                </h1>
+                <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 32, maxWidth: 460 }}>
+                  Mention the agent in any Slack channel and it does the work — reads the thread, checks the policy, takes the action, replies in seconds. Your team stops processing tickets.
+                </p>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                  <a href="/demo" className="btn-gold">Request access →</a>
+                  <Link href="/today" className="btn-secondary">See approvals queue</Link>
+                </div>
+              </div>
+              <div className="hero-today-panel">
+                <SlackThread channel="people-ops" messages={heroMessages} instant />
               </div>
             </div>
-            <div className="hero-today-panel">
-              <SlackThread channel="people-ops" messages={heroMessages} instant />
-            </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── INTERACTIVE EXAMPLES ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <Beat bg="warm">
+          <Page>
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
               <p className="eyebrow" style={{ marginBottom: 14 }}>WHAT YOU CAN ASK</p>
               <h2
@@ -233,12 +236,12 @@ export default function MambaPage() {
             </div>
 
             <MambaExamples />
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── HOW IT ROUTES ── */}
-        <section style={{ background: 'var(--bg-cream)', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <Beat bg="cream">
+          <Page>
             <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: 64, alignItems: 'flex-start' }}>
               <div>
                 <p className="eyebrow" style={{ marginBottom: 16 }}>HOW IT ROUTES</p>
@@ -315,12 +318,12 @@ export default function MambaPage() {
 
               <RoutingLog />
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── WHERE IT LIVES ── */}
-        <section style={{ background: 'var(--bg)', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <Beat bg="white">
+          <Page>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
               <p className="eyebrow" style={{ marginBottom: 14 }}>WHERE IT LIVES</p>
               <h2
@@ -367,12 +370,12 @@ export default function MambaPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── TRUST ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '96px 24px' }}>
-          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+        <Beat bg="warm">
+          <Page>
             <div style={{ textAlign: 'center', marginBottom: 56, maxWidth: 680, marginLeft: 'auto', marginRight: 'auto' }}>
               <p className="eyebrow" style={{ marginBottom: 18 }}>TRUST & SAFETY</p>
               <h2
@@ -389,7 +392,7 @@ export default function MambaPage() {
                 Built for the most sensitive<br />data in your company.
               </h2>
               <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                Every safeguard you&apos;d build yourself — already running before the agent ever takes an action.
+                Every safeguard you&rsquo;d build yourself — already running before the agent ever takes an action.
               </p>
             </div>
 
@@ -428,8 +431,8 @@ export default function MambaPage() {
                 Full security details →
               </Link>
             </p>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         <RequestAccessSection />
       </main>

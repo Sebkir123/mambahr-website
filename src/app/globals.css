@@ -1,63 +1,74 @@
 @import "tailwindcss";
 
 @theme {
-  /* Surfaces */
-  --color-bg:           #FFFFFF;
-  --color-bg-warm:      #FAF7F2;
-  --color-bg-cream:     #F0EBE1;
-  --color-bg-surface:   #FAFAF9;
-  --color-bg-elevated:  #F5F5F4;
+  /* Surfaces — Warm Editorial Premium (MambaHR design system, light mode) */
+  --color-bg:           #FEFDFA;
+  --color-bg-warm:      #F4F2EC;
+  --color-bg-cream:     #ECE9E2;
+  --color-bg-surface:   #F8F6F1;
+  --color-bg-elevated:  #ECE9E2;
 
   /* Text */
-  --color-text:         #1C1917;
-  --color-text-muted:   #57534E;
-  --color-text-faint:   #A8A29E;
+  --color-text:         #1A1A19;
+  --color-text-muted:   #3D3D3A;
+  --color-text-faint:   #7A7A75;
 
-  /* Brand */
-  --color-gold:         #B08D57;
-  --color-gold-dark:    #8E6F40;
-  --color-gold-light:   #C9A96E;
-  --color-gold-tint:    #F5EFE3;
+  /* Brand — gold accent + iris-violet AI secondary */
+  --color-gold:         #8A6535;
+  --color-gold-dark:    #6B4E26;
+  --color-gold-light:   #C49A6C;
+  --color-gold-tint:    #F2ECE0;
+  --color-violet:       #6A5DA6;
+  --color-peach:        #FFE8D6;
+  --color-peach-deep:   #FFD8B5;
 
   /* Borders */
-  --color-border:       #E7E5E4;
-  --color-border-mid:   #D6D3D1;
-  --color-border-faint: #F1EFEC;
+  --color-border:       rgba(0,0,0,0.12);
+  --color-border-mid:   rgba(0,0,0,0.18);
+  --color-border-faint: rgba(0,0,0,0.07);
 
   /* Status */
-  --color-green:        #15803D;
-  --color-red:          #B91C1C;
+  --color-green:        #16A34A;
+  --color-red:          #DC2626;
 }
 
 :root {
-  --bg:           #FFFFFF;
-  --bg-warm:      #FAF7F2;
-  --bg-cream:     #F0EBE1;
-  --bg-surface:   #FAFAF9;
-  --bg-elevated:  #F5F5F4;
+  --bg:           #FEFDFA;
+  --bg-warm:      #F4F2EC;
+  --bg-cream:     #ECE9E2;
+  --bg-surface:   #F8F6F1;
+  --bg-elevated:  #ECE9E2;
 
-  --text:         #1C1917;
-  --text-muted:   #57534E;
-  --text-faint:   #A8A29E;
+  --text:         #1A1A19;
+  --text-muted:   #3D3D3A;
+  --text-faint:   #7A7A75;
 
-  --gold:         #B08D57;
-  --gold-dark:    #8E6F40;
-  --gold-light:   #C9A96E;
-  --gold-tint:    #F5EFE3;
+  --gold:         #8A6535;
+  --gold-dark:    #6B4E26;
+  --gold-light:   #C49A6C;
+  --gold-tint:    #F2ECE0;
+  --violet:       #6A5DA6;
+  --violet-soft:  rgba(106,93,166,0.12);
+  --peach:        #FFE8D6;
+  --peach-deep:   #FFD8B5;
 
-  --border:       #E7E5E4;
-  --border-mid:   #D6D3D1;
-  --border-faint: #F1EFEC;
+  --border:       rgba(0,0,0,0.12);
+  --border-mid:   rgba(0,0,0,0.18);
+  --border-faint: rgba(0,0,0,0.07);
 
-  /* Warm, layered elevation — makes product surfaces feel like physical
-     objects floating, not flat panels. Tint is warm brown-black, never gray. */
-  --shadow-sm:      0 1px 2px rgba(28,17,8,0.05), 0 2px 6px rgba(28,17,8,0.04);
-  --shadow-md:      0 1px 2px rgba(28,17,8,0.04), 0 8px 18px rgba(28,17,8,0.06), 0 18px 36px rgba(28,17,8,0.07);
-  --shadow-float:   0 2px 4px rgba(28,17,8,0.04), 0 14px 28px rgba(28,17,8,0.08), 0 36px 64px rgba(28,17,8,0.12);
-  --sheen:          inset 0 1px 0 rgba(255,255,255,0.7);
+  /* Brand gradients — gold → iris-violet accent + warm washes */
+  --grad:       linear-gradient(100deg, #B98A4E 0%, #8A6535 48%, #6A5DA6 100%);
+  --grad-warm:  linear-gradient(135deg, #F6EAD6, #FBDFC9 55%, #EBD3DE);
+  --grad-gold:  linear-gradient(100deg, #D4AA7C, #8A6535);
 
-  --font-sans:  var(--font-inter), system-ui, sans-serif;
-  --font-serif: var(--font-instrument), Georgia, serif;
+  /* Design-system light-mode elevation — warm, low-alpha. */
+  --shadow-sm:      0 2px 4px rgba(20,18,14,0.06), 0 1px 2px rgba(20,18,14,0.04);
+  --shadow-md:      0 4px 12px rgba(20,18,14,0.08), 0 1px 3px rgba(20,18,14,0.05);
+  --shadow-float:   0 20px 56px rgba(20,18,14,0.12), 0 4px 12px rgba(20,18,14,0.08);
+  --sheen:          inset 0 1px 0 rgba(255,255,255,0.6);
+
+  --font-sans:  var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: var(--font-fraunces), 'Fraunces', Georgia, serif;
   --font-mono:  var(--font-jetbrains), 'SF Mono', 'Fira Code', monospace;
 
   /* Layout rhythm — every beat uses one max-width + vertical scale so the
@@ -505,5 +516,100 @@ h4, h5, h6 {
 }
 @media (prefers-reduced-motion: reduce) {
   .card-lift:hover { transform: none; }
+}
+
+/* ── Agent gradient border — the "Mamba is working / done" ring.
+   Matches the app's <AgentBorder> / design-preview treatment. A masked
+   ::before paints a gold→violet ring on ANY card (no wrapper); .agent-working
+   flows the gradient + breathes a violet glow, .agent-done is a static ring.
+   Add `agent-edge agent-working|agent-done` to a card; its own border is
+   neutralized so the ring is the only edge. */
+@keyframes pvFlow { to { background-position: 200% 0; } }
+@keyframes pvBreathe { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+
+.agent-edge { position: relative; border-color: transparent !important; }
+.agent-edge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(110deg, var(--gold), var(--violet), var(--gold), var(--violet), var(--gold));
+  background-size: 200% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+}
+.agent-edge::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  box-shadow: 0 0 0 1px rgba(106, 93, 166, 0.22), 0 6px 28px rgba(106, 93, 166, 0.22);
+  opacity: 0;
+  pointer-events: none;
+}
+.agent-working::before { animation: pvFlow 4s linear infinite; }
+.agent-working::after { animation: pvBreathe 3.2s ease-in-out infinite; }
+/* Large ring — the prominent treatment for marquee agent cards. */
+.agent-edge.agent-lg::before { padding: 2.5px; }
+.agent-done::before {
+  background: linear-gradient(110deg, var(--gold), var(--violet) 55%, var(--gold));
+  background-size: 100% 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .agent-working::before { animation: none; }
+  .agent-working::after { animation: none; opacity: 0; }
+}
+
+/* ── Mamba status chip — pairs with .agent-edge surfaces.
+   "MAMBA · WORKING" (violet, pulsing dot) / "MAMBA · DONE" (gold check).
+   Matches the design-gallery agent cards. */
+.mamba-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.mamba-chip.working { color: var(--violet); }
+.mamba-chip.working .mc-i {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--violet);
+  animation: mcPulse 2.2s ease-in-out infinite;
+}
+.mamba-chip.done { color: var(--gold); }
+.mamba-chip.done .mc-i {
+  width: 15px;
+  height: 15px;
+  border-radius: 999px;
+  background: var(--gold);
+  position: relative;
+}
+.mamba-chip.done .mc-i::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 3px;
+  width: 3px;
+  height: 6px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+@keyframes mcPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(106, 93, 166, 0.45); }
+  50% { box-shadow: 0 0 0 6px rgba(106, 93, 166, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mamba-chip.working .mc-i { animation: none; }
 }
 

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
+import { Beat, Page } from '@/components/ui/page'
 import { competitors } from './data'
 import { JsonLd } from '@/components/json-ld'
 
@@ -108,40 +109,42 @@ export default async function ComparePage({ params }: Props) {
       <main style={{ paddingTop: 64 }}>
 
         {/* ── HERO ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '120px 24px 88px' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: 24 }}>MAMBAHR VS {c.name.toUpperCase()}</p>
-            <h1
-              style={{
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(36px, 5vw, 64px)',
-                fontWeight: 400,
-                letterSpacing: '-0.035em',
-                color: 'var(--text)',
-                marginBottom: 32,
-                lineHeight: 1.0,
-                whiteSpace: 'pre-line',
-              }}
-            >
-              {c.heroHeadline.split('\n').map((line, i) => (
-                <span key={i} style={{ color: i === 1 ? 'var(--gold-dark)' : 'var(--text)' }}>
-                  {line}{i === 0 ? <br /> : ''}
-                </span>
-              ))}
-            </h1>
-            <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 620, marginBottom: 36 }}>
-              {c.heroSub}
-            </p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a href="/demo" className="btn-gold">Request access →</a>
-              <a href="#compare-table" className="btn-secondary">See the comparison ↓</a>
+        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
+          <Page>
+            <div style={{ maxWidth: 900 }}>
+              <p className="eyebrow" style={{ marginBottom: 24 }}>MAMBAHR VS {c.name.toUpperCase()}</p>
+              <h1
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(36px, 5vw, 64px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.035em',
+                  color: 'var(--text)',
+                  marginBottom: 32,
+                  lineHeight: 1.0,
+                  whiteSpace: 'pre-line',
+                }}
+              >
+                {c.heroHeadline.split('\n').map((line, i) => (
+                  <span key={i} style={{ color: i === 1 ? 'var(--gold-dark)' : 'var(--text)' }}>
+                    {line}{i === 0 ? <br /> : ''}
+                  </span>
+                ))}
+              </h1>
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 620, marginBottom: 36 }}>
+                {c.heroSub}
+              </p>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                <a href="/demo" className="btn-gold">Request access →</a>
+                <a href="#compare-table" className="btn-secondary">See the comparison ↓</a>
+              </div>
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── THREE REASONS ── */}
-        <section style={{ background: 'var(--bg)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+        <Beat bg="white">
+          <Page>
             <div style={{ marginBottom: 64, maxWidth: 720 }}>
               <p className="eyebrow" style={{ marginBottom: 16 }}>WHERE WE DIFFER</p>
               <h2
@@ -198,12 +201,12 @@ export default async function ComparePage({ params }: Props) {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── COMPARISON TABLE ── */}
-        <section id="compare-table" style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 980, margin: '0 auto' }}>
+        <Beat bg="cream" id="compare-table">
+          <Page>
             <div style={{ marginBottom: 56, maxWidth: 720 }}>
               <p className="eyebrow" style={{ marginBottom: 16 }}>FEATURE COMPARISON</p>
               <h2
@@ -223,79 +226,81 @@ export default async function ComparePage({ params }: Props) {
 
             <div className="compare-table-scroll" style={{ background: 'var(--bg)', borderRadius: 16, border: '1px solid var(--border)', overflow: 'hidden' }}>
               <div>
-              {/* Table header */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 160px 160px', gap: 0, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)', padding: '16px 24px' }}>
-                <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-mono), monospace' }}>Feature</span>
-                <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
-                  <Image src="/MambaHR_logo.png" alt="MambaHR" width={14} height={14} style={{ objectFit: 'contain', borderRadius: 3 }} />
-                  MambaHR
-                </span>
-                <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)', textAlign: 'center' }}>{c.name}</span>
-              </div>
-
-              {/* Rows */}
-              {c.tableRows.map((row, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 160px 160px',
-                    gap: 0,
-                    padding: '18px 24px',
-                    borderBottom: i < c.tableRows.length - 1 ? '1px solid var(--border-faint)' : 'none',
-                    alignItems: 'center',
-                  }}
-                >
-                  <div>
-                    <span style={{ fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>{row.feature}</span>
-                    {row.note && <p style={{ fontSize: 11, color: 'var(--text-faint)', margin: '4px 0 0', fontStyle: 'italic' }}>{row.note}</p>}
-                  </div>
-
-                  <CellValue value={row.mamba} accent="mamba" />
-                  <CellValue value={row.them} accent="them" />
+                {/* Table header */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 160px 160px', gap: 0, background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)', padding: '16px 24px' }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-mono), monospace' }}>Feature</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                    <Image src="/MambaHR_logo.png" alt="MambaHR" width={14} height={14} style={{ objectFit: 'contain', borderRadius: 3 }} />
+                    MambaHR
+                  </span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)', textAlign: 'center' }}>{c.name}</span>
                 </div>
-              ))}
+
+                {/* Rows */}
+                {c.tableRows.map((row, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: '1fr 160px 160px',
+                      gap: 0,
+                      padding: '18px 24px',
+                      borderBottom: i < c.tableRows.length - 1 ? '1px solid var(--border-faint)' : 'none',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <div>
+                      <span style={{ fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>{row.feature}</span>
+                      {row.note && <p style={{ fontSize: 11, color: 'var(--text-faint)', margin: '4px 0 0', fontStyle: 'italic' }}>{row.note}</p>}
+                    </div>
+
+                    <CellValue value={row.mamba} accent="mamba" />
+                    <CellValue value={row.them} accent="them" />
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── BOTTOM LINE ── */}
-        <section style={{ background: 'var(--bg)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 820, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: 20 }}>THE BOTTOM LINE</p>
-            <h2
-              style={{
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(28px, 3.4vw, 40px)',
-                fontWeight: 400,
-                letterSpacing: '-0.025em',
-                color: 'var(--text)',
-                margin: '0 0 36px',
-                lineHeight: 1.2,
-              }}
-            >
-              {c.bottomLine}
-            </h2>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a href="/demo" className="btn-gold">Request access →</a>
-              <Link href="/mamba" className="btn-secondary">See the AI agent</Link>
+        <Beat bg="white">
+          <Page>
+            <div style={{ maxWidth: 820 }}>
+              <p className="eyebrow" style={{ marginBottom: 20 }}>THE BOTTOM LINE</p>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(28px, 3.4vw, 40px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.025em',
+                  color: 'var(--text)',
+                  margin: '0 0 36px',
+                  lineHeight: 1.2,
+                }}
+              >
+                {c.bottomLine}
+              </h2>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                <a href="/demo" className="btn-gold">Request access →</a>
+                <Link href="/mamba" className="btn-secondary">See the AI agent</Link>
+              </div>
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── LEGAL DISCLAIMER ── */}
-        <section style={{ background: 'var(--bg-surface)', padding: '32px 24px', borderTop: '1px solid var(--border-faint)' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
+        <Beat bg="white" style={{ paddingTop: '32px', paddingBottom: '32px', borderTop: '1px solid var(--border-faint)' }}>
+          <Page>
             <p style={{ fontSize: 12, color: 'var(--text-faint)', lineHeight: 1.65, margin: 0 }}>
-              <strong style={{ fontWeight: 600 }}>Disclaimer:</strong> This comparison is based on publicly available information about {c.name} as of April 2026 and reflects our understanding of each product&apos;s general capabilities. Features, pricing, and availability may have changed. &ldquo;Not included&rdquo; refers to features not present in the standard product based on public documentation — not a statement about the vendor&apos;s roadmap or custom arrangements. We encourage you to verify current capabilities directly with {c.name} before making purchasing decisions. All product names and trademarks belong to their respective owners.
+              <strong style={{ fontWeight: 600 }}>Disclaimer:</strong> This comparison is based on publicly available information about {c.name} as of April 2026 and reflects our understanding of each product&rsquo;s general capabilities. Features, pricing, and availability may have changed. &ldquo;Not included&rdquo; refers to features not present in the standard product based on public documentation — not a statement about the vendor&rsquo;s roadmap or custom arrangements. We encourage you to verify current capabilities directly with {c.name} before making purchasing decisions. All product names and trademarks belong to their respective owners.
             </p>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── OTHER COMPARISONS ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '72px 24px', borderTop: '1px solid var(--border-faint)' }}>
-          <div style={{ maxWidth: 980, margin: '0 auto' }}>
+        <Beat bg="warm" style={{ paddingTop: '40px', paddingBottom: '40px', borderTop: '1px solid var(--border-faint)' }}>
+          <Page>
             <p className="eyebrow" style={{ marginBottom: 24 }}>ALSO COMPARING</p>
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
               {otherSlugs.map((s) => (
@@ -318,8 +323,8 @@ export default async function ComparePage({ params }: Props) {
                 </Link>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         <RequestAccessSection />
       </main>

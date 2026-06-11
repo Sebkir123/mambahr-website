@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
+import { Beat, Page } from '@/components/ui/page'
 
 export const metadata: Metadata = {
   title: 'About — MambaHR',
@@ -58,8 +59,8 @@ export default function AboutPage() {
       <main style={{ paddingTop: 64 }}>
 
         {/* ── HERO — claim about the world ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '120px 24px 96px' }}>
-          <div style={{ maxWidth: 880, margin: '0 auto' }}>
+        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
+          <Page>
             <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 28 }}>
               About MambaHR
             </p>
@@ -77,14 +78,14 @@ export default function AboutPage() {
               The HR department<br />is changing shape.
             </h1>
             <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 620 }}>
-              For thirty years, HR software was a database with a UI. We&apos;re building what comes next — an AI department that <em style={{ color: 'var(--text)', fontStyle: 'normal', fontWeight: 600 }}>does</em> the work, end to end, with a human in the loop only when it matters.
+              For thirty years, HR software was a database with a UI. We&rsquo;re building what comes next — an AI department that <em style={{ color: 'var(--text)', fontStyle: 'normal', fontWeight: 600 }}>does</em> the work, end to end, with a human in the loop only when it matters.
             </p>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── MANIFESTO — three short paragraphs, editorial ── */}
-        <section style={{ background: 'var(--bg)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+        <Beat bg="white">
+          <Page narrow>
             <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-faint)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 32 }}>
               Manifesto
             </p>
@@ -95,7 +96,7 @@ export default function AboutPage() {
               </p>
 
               <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.75, margin: 0 }}>
-                The tools got better — better dashboards, better forms, better databases. The work didn&apos;t go anywhere. It just got prettier wrappers.
+                The tools got better — better dashboards, better forms, better databases. The work didn&rsquo;t go anywhere. It just got prettier wrappers.
               </p>
 
               <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.75, margin: 0 }}>
@@ -107,15 +108,15 @@ export default function AboutPage() {
               </p>
 
               <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 'clamp(20px, 2.2vw, 26px)', lineHeight: 1.4, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em', borderLeft: '3px solid var(--gold)', paddingLeft: 24, marginTop: 12 }}>
-                That&apos;s what we&apos;re building.
+                That&rsquo;s what we&rsquo;re building.
               </p>
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── PRINCIPLES — five MAMBA values, vertical stack ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+        <Beat bg="warm">
+          <Page>
             <p className="eyebrow" style={{ marginBottom: 24 }}>WHAT WE BELIEVE · M·A·M·B·A</p>
             <h2
               style={{
@@ -129,7 +130,7 @@ export default function AboutPage() {
                 maxWidth: 720,
               }}
             >
-              Five things<br />we don&apos;t bend.
+              Five things<br />we don&rsquo;t bend.
             </h2>
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -180,12 +181,12 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── LEADERSHIP — restrained, Linear-style ── */}
-        <section style={{ background: 'var(--bg)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+        <Beat bg="white">
+          <Page>
             <div style={{ marginBottom: 64, maxWidth: 720 }}>
               <p className="eyebrow" style={{ marginBottom: 20 }}>LEADERSHIP</p>
               <h2
@@ -270,8 +271,8 @@ export default function AboutPage() {
               </a>
               .
             </p>
-          </div>
-        </section>
+          </Page>
+        </Beat>
       </main>
       <Footer />
     </>

@@ -120,6 +120,7 @@ function Particles() {
 }
 
 /* ── Agent Pulse (sonar visualization) ── */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function AgentPulse() {
   return (
     <div style={{ position: 'relative', width: 220, height: 220 }}>

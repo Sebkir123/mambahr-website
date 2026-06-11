@@ -19,22 +19,22 @@ export type NavSection = {
  * Every href resolves to a real page or an in-page anchor we create.
  */
 export const byFunction: NavItem[] = [
-  { label: 'Hiring & ATS',             href: '/hiring',              description: 'Reqs, screening, offers, onboarding',  live: true, icon: 'hiring' },
-  { label: 'Onboarding & offboarding', href: '/product#onboarding',  description: 'Day-one accounts to clean exits',      live: true, icon: 'onboarding' },
-  { label: 'Time off & leave',         href: '/product#leave',       description: 'PTO, FMLA, state paid-leave',          live: true, icon: 'timeoff' },
-  { label: 'Performance',              href: '/product#performance', description: 'Reviews, calibration, PIPs',           live: true, icon: 'performance' },
-  { label: 'Compensation',             href: '/product#comp',        description: 'Bands, pay equity, raises',            live: true, icon: 'comp' },
-  { label: 'Compliance',               href: '/product#compliance',  description: 'Federal + 50-state, every cite',       live: true, icon: 'compliance' },
-  { label: 'Headcount & RIF',          href: '/product#rif',         description: 'Planning, severance, WARN notices',    live: true, icon: 'rif' },
-  { label: 'Payroll-ready exports',    href: '/pricing#exports',     description: 'Change files in your provider format', live: true, icon: 'payroll' },
+  { label: 'Hiring & ATS',             href: '/hiring',       description: 'Reqs, screening, offers, onboarding',  live: true, icon: 'hiring' },
+  { label: 'Onboarding & offboarding', href: '/onboarding',   description: 'Day-one accounts to clean exits',      live: true, icon: 'onboarding' },
+  { label: 'Time off & leave',         href: '/leave',        description: 'PTO, FMLA, state paid-leave',          live: true, icon: 'timeoff' },
+  { label: 'Performance',              href: '/performance',  description: 'Reviews, calibration, PIPs',           live: true, icon: 'performance' },
+  { label: 'Compensation',             href: '/compensation', description: 'Bands, pay equity, raises',            live: true, icon: 'comp' },
+  { label: 'Compliance',               href: '/compliance',   description: 'Federal + 50-state, every cite',       live: true, icon: 'compliance' },
+  { label: 'Headcount & RIF',          href: '/rif',          description: 'Planning, severance, WARN notices',    live: true, icon: 'rif' },
+  { label: 'Payroll-ready exports',    href: '/payroll',      description: 'Change files in your provider format', live: true, icon: 'payroll' },
 ]
 
 export const howItWorks: NavItem[] = [
-  { label: 'The AI agent',        href: '/mamba',            description: 'Works in Slack, Teams, and the web', live: true, icon: 'agent' },
-  { label: 'Approvals',           href: '/today',            description: 'Your daily sign-off queue',          live: true, icon: 'today' },
-  { label: 'Employee records',    href: '/people',           description: 'HRIS, org chart, comp, leave',       live: true, icon: 'people' },
-  { label: 'Documents & e-sign',  href: '/product#documents', description: 'Generate, sign, file, retain',       live: true, icon: 'documents' },
-  { label: 'Security',            href: '/security',         description: 'SSO, SCIM, SOC 2, audit trail',       live: true, icon: 'security' },
+  { label: 'The AI agent',        href: '/mamba',      description: 'Works in Slack, Teams, and the web', live: true, icon: 'agent' },
+  { label: 'Approvals',           href: '/today',      description: 'Your daily sign-off queue',          live: true, icon: 'today' },
+  { label: 'Employee records',    href: '/people',     description: 'HRIS, org chart, comp, leave',       live: true, icon: 'people' },
+  { label: 'Documents & e-sign',  href: '/documents',  description: 'Generate, sign, file, retain',       live: true, icon: 'documents' },
+  { label: 'Security',            href: '/security',   description: 'SSO, SCIM, SOC 2, audit trail',       live: true, icon: 'security' },
 ]
 
 export const companyItems: NavItem[] = [

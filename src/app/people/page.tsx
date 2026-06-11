@@ -5,6 +5,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
 import EmployeeDirectory from '@/components/surfaces/employee-directory'
+import { Beat, Page } from '@/components/ui/page'
 import {
   HiringIcon, LifecycleIcon, CompIcon, TimeOffIcon,
   PerformanceIcon, OffboardingIcon,
@@ -30,33 +31,35 @@ const capabilities: Capability[] = [
   },
   {
     title: 'Promotions & transfers',
-    desc: 'Manager change, transfer, promotion, demotion, location change. The agent updates every system, files every form, notifies every stakeholder.',
+    desc: 'Manager change, transfer, promotion, demotion, location change. The agent updates records, drafts letters, and alerts stakeholders.',
     icon: <LifecycleIcon />,
   },
   {
     title: 'Compensation & benefits',
-    desc: 'Comp recommendations within band. 401(k) enrollment and qualifying life events. Pay-equity audits. Equity grants via Carta.',
+    desc: 'Comp recommendations within band. 401(k) eligibility checks under IRS limits. Pay-equity audits. Equity grant logging via Carta.',
     icon: <CompIcon />,
   },
   {
     title: 'Time off & leave',
     desc: 'Policy-aware PTO approvals in seconds. FMLA eligibility plus state paid-leave stacking — CA CFRA, NY, MA, CO. Bereavement, USERRA, ADA. Anything ambiguous routes to a human.',
     icon: <TimeOffIcon />,
+    link: '/leave',
   },
   {
     title: 'Performance & Growth',
     desc: 'Review cycle launch, 360 synthesis, calibration packets, PIP drafting and tracking. Promotion recommendations with EEO disparate impact analysis.',
     icon: <PerformanceIcon />,
+    link: '/performance',
   },
   {
-    title: 'Hiring & Onboarding',
+    title: 'Hiring & ATS',
     desc: 'Reqs, screening, scheduling, references, offers, day-one ready. The full hiring loop coordinated through one agent.',
     icon: <HiringIcon />,
     link: '/hiring',
   },
   {
     title: 'Offboarding',
-    desc: 'Resignation to revoked access. Final pay per state. Separation agreements drafted. Okta + downstream access revoked. COBRA. Device wiped (Jamf).',
+    desc: 'Resignation to revoked access. Final pay calculations. Separation agreements drafted. Okta and Google Workspace deprovisioning. COBRA triggers. Device setup coordinated via Jamf.',
     icon: <OffboardingIcon />,
   },
 ]
@@ -79,44 +82,46 @@ export default function PeoplePage() {
       <main style={{ paddingTop: 64 }}>
 
         {/* Hero — split with employee directory mockup */}
-        <section style={{ background: 'var(--bg-warm)', padding: '110px 24px 80px' }}>
-          <div className="hero-split" style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 64, alignItems: 'center' }}>
-            {/* Left: copy */}
-            <div>
-              <p className="eyebrow" style={{ marginBottom: 20 }}>EMPLOYEE RECORDS</p>
-              <h1
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(40px, 5vw, 68px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.03em',
-                  color: 'var(--text)',
-                  marginBottom: 24,
-                  lineHeight: 1.0,
-                }}
-              >
-                People ops<br />without the ops.
-              </h1>
-              <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 36, maxWidth: 480 }}>
-                Directory, comp, performance, leave, lifecycle changes — the things a People team does every day, handled by an agent. You stay strategic.
-              </p>
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <a href="/demo" className="btn-gold">Request access →</a>
-                <Link href="/today" className="btn-secondary">See the approvals queue</Link>
+        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
+          <Page>
+            <div className="hero-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1.05fr', gap: 64, alignItems: 'center' }}>
+              {/* Left: copy */}
+              <div>
+                <p className="eyebrow" style={{ marginBottom: 20 }}>EMPLOYEE RECORDS / HRIS</p>
+                <h1
+                  style={{
+                    fontFamily: 'var(--font-serif), Georgia, serif',
+                    fontSize: 'clamp(40px, 5vw, 68px)',
+                    fontWeight: 400,
+                    letterSpacing: '-0.03em',
+                    color: 'var(--text)',
+                    marginBottom: 24,
+                    lineHeight: 1.0,
+                  }}
+                >
+                  People ops<br />without the ops.
+                </h1>
+                <p style={{ fontSize: 19, color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: 36, maxWidth: 480 }}>
+                  Directory, comp, performance, leave, lifecycle changes — the things a People team does every day, handled by an agent. You stay strategic.
+                </p>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                  <a href="/demo" className="btn-gold">Request access →</a>
+                  <Link href="/today" className="btn-secondary">See approvals queue</Link>
+                </div>
+              </div>
+
+              {/* Right: employee directory mockup */}
+              <div className="hero-today-panel">
+                <EmployeeDirectory />
               </div>
             </div>
-
-            {/* Right: employee directory mockup */}
-            <div className="hero-today-panel">
-              <EmployeeDirectory />
-            </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* Capabilities */}
-        <section style={{ background: '#FFFFFF', padding: '100px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>WHAT&apos;S COVERED</p>
+        <Beat bg="white">
+          <Page>
+            <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>WHAT&rsquo;S COVERED</p>
             <h2
               style={{
                 textAlign: 'center',
@@ -165,12 +170,12 @@ export default function PeoplePage() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* In Slack */}
-        <section style={{ background: 'var(--bg-cream)', padding: '100px 24px' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
+        <Beat bg="cream">
+          <Page narrow>
             <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>IN SLACK</p>
             <h2
               style={{
@@ -189,7 +194,7 @@ export default function PeoplePage() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {[
-                { cmd: '@mamba update Sarah\'s title to Staff Engineer and adjust comp to $210k', resp: 'Done. Title updated in HRIS, comp change filed, letter generated for e-sign, payroll notified for next cycle.' },
+                { cmd: '@mamba update Sarah\'s title to Staff Engineer and adjust comp to $210k', resp: 'Done. Title updated in HRIS records, comp change filed, letter generated for e-sign, payroll change report queued for next cycle.' },
                 { cmd: '@mamba what\'s Alex\'s current PTO balance?', resp: 'Alex has 14 days remaining (out of 20 annual). Next accrual: May 1.' },
                 { cmd: '@mamba kick off Q2 performance reviews for the engineering team', resp: 'Review cycle started. 23 review packets generated. 23 invitations sent. Calibration session scheduled for June 15.' },
               ].map((ex, i) => (
@@ -202,43 +207,45 @@ export default function PeoplePage() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* Compliance */}
-        <section style={{ background: '#FFFFFF', padding: '100px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
-            <div>
-              <p className="eyebrow" style={{ marginBottom: 20 }}>COMPLIANCE BUILT-IN</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(28px, 3vw, 40px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text)',
-                  marginBottom: 20,
-                  lineHeight: 1.15,
-                }}
-              >
-                Every people action is compliance-checked.
-              </h2>
-              <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.7 }}>
-                The Compliance agent runs on every people workflow — checking state law, flagging edge cases, citing regulations, and escalating to legal when necessary.
-              </p>
+        <Beat bg="white">
+          <Page>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }} className="mobile-stack">
+              <div>
+                <p className="eyebrow" style={{ marginBottom: 20 }}>COMPLIANCE BUILT-IN</p>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-serif), Georgia, serif',
+                    fontSize: 'clamp(28px, 3vw, 40px)',
+                    fontWeight: 400,
+                    letterSpacing: '-0.02em',
+                    color: 'var(--text)',
+                    marginBottom: 20,
+                    lineHeight: 1.15,
+                  }}
+                >
+                  Every people action is compliance-checked.
+                </h2>
+                <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.7 }}>
+                  The Compliance agent runs on every people workflow — checking state law, flagging edge cases, citing regulations, and escalating to legal when necessary.
+                </p>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {complianceItems.map((item) => (
+                  <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
+                      <path d="M2 7l4 4 6-6" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span style={{ fontSize: 14, color: 'var(--text-muted)' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {complianceItems.map((item) => (
-                <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
-                    <path d="M2 7l4 4 6-6" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span style={{ fontSize: 14, color: 'var(--text-muted)' }}>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         <RequestAccessSection />
       </main>

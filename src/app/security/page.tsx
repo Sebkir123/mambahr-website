@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
+import { Beat, Page } from '@/components/ui/page'
 
 /* ── Audit log — always-visible entries with new entry pulsing in ── */
 function AuditLogVisual() {
@@ -349,8 +350,8 @@ export default function SecurityPage() {
       <main style={{ paddingTop: 64 }}>
 
         {/* ── HERO — minimal, typography only ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '160px 24px 120px' }}>
-          <div style={{ maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
+        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
+          <Page style={{ textAlign: 'center' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 28, padding: '5px 14px 5px 10px', background: 'var(--gold-tint)', border: '1px solid var(--gold-light)', borderRadius: 999 }}>
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold-dark)' }} />
               <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold-dark)', letterSpacing: '0.12em' }}>SECURITY · TRUST</span>
@@ -374,12 +375,12 @@ export default function SecurityPage() {
             <a href="mailto:security@mambahr.com" className="btn-gold" style={{ display: 'inline-flex' }}>
               Talk to us about security →
             </a>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── FOUR GUARANTEES ── */}
-        <section style={{ background: 'var(--bg)', padding: '96px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <Beat bg="white">
+          <Page>
             <div style={{ textAlign: 'center', marginBottom: 56, maxWidth: 680, marginLeft: 'auto', marginRight: 'auto' }}>
               <p className="eyebrow" style={{ marginBottom: 16 }}>HOW WE PROTECT YOU</p>
               <h2
@@ -396,7 +397,7 @@ export default function SecurityPage() {
                 Four things we<br />never compromise on.
               </h2>
               <p style={{ fontSize: 16, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                The promises that don&apos;t shift, no matter the customer or contract.
+                The promises that don&rsquo;t shift, no matter the customer or contract.
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
@@ -429,64 +430,68 @@ export default function SecurityPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── AUDIT TRAIL ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '96px 24px' }}>
-          <div className="mobile-stack" style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 64, alignItems: 'center' }}>
-            <div>
-              <p className="eyebrow" style={{ marginBottom: 16 }}>FULL TRANSPARENCY</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(24px, 2.8vw, 36px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text)',
-                  marginBottom: 16,
-                  lineHeight: 1.15,
-                }}
-              >
-                The agent does nothing you can&apos;t see.
-              </h2>
-              <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.75, margin: 0 }}>
-                Every decision is logged — who triggered it, what policy applied, what changed. If someone asks &ldquo;why was that approved?&rdquo; you have the answer in seconds.
-              </p>
+        <Beat bg="warm">
+          <Page>
+            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 64, alignItems: 'center' }}>
+              <div>
+                <p className="eyebrow" style={{ marginBottom: 16 }}>FULL TRANSPARENCY</p>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-serif), Georgia, serif',
+                    fontSize: 'clamp(24px, 2.8vw, 36px)',
+                    fontWeight: 400,
+                    letterSpacing: '-0.02em',
+                    color: 'var(--text)',
+                    marginBottom: 16,
+                    lineHeight: 1.15,
+                  }}
+                >
+                  The agent does nothing you can&rsquo;t see.
+                </h2>
+                <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.75, margin: 0 }}>
+                  Every decision is logged — who triggered it, what policy applied, what changed. If someone asks &ldquo;why was that approved?&rdquo; you have the answer in seconds.
+                </p>
+              </div>
+              <AuditLogVisual />
             </div>
-            <AuditLogVisual />
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── ACCESS CONTROL ── */}
-        <section style={{ background: 'var(--bg)', padding: '96px 24px' }}>
-          <div className="mobile-stack" style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 64, alignItems: 'center' }}>
-            <AccessControlVisual />
-            <div>
-              <p className="eyebrow" style={{ marginBottom: 16 }}>ACCESS CONTROL</p>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-serif), Georgia, serif',
-                  fontSize: 'clamp(24px, 2.8vw, 36px)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text)',
-                  marginBottom: 16,
-                  lineHeight: 1.15,
-                }}
-              >
-                Nobody sees more than they should.
-              </h2>
-              <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.75, margin: 0 }}>
-                Connect your existing Google, Okta, or Microsoft login. Permissions follow each person&apos;s role automatically — and disappear the moment they leave.
-              </p>
+        <Beat bg="white">
+          <Page>
+            <div className="mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 64, alignItems: 'center' }}>
+              <AccessControlVisual />
+              <div>
+                <p className="eyebrow" style={{ marginBottom: 16 }}>ACCESS CONTROL</p>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-serif), Georgia, serif',
+                    fontSize: 'clamp(24px, 2.8vw, 36px)',
+                    fontWeight: 400,
+                    letterSpacing: '-0.02em',
+                    color: 'var(--text)',
+                    marginBottom: 16,
+                    lineHeight: 1.15,
+                  }}
+                >
+                  Nobody sees more than they should.
+                </h2>
+                <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.75, margin: 0 }}>
+                  Connect your existing Google, Okta, or Microsoft login. Permissions follow each person&rsquo;s role automatically — and disappear the moment they leave.
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
-        {/* ── PROMISES IN PLAIN ENGLISH ── editorial, no jargon ── */}
-        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+        {/* ── PROMISES IN PLAIN ENGLISH ── */}
+        <Beat bg="cream">
+          <Page>
             <div style={{ marginBottom: 72, maxWidth: 680 }}>
               <p className="eyebrow" style={{ marginBottom: 18 }}>PLAIN ANSWERS</p>
               <h2
@@ -503,7 +508,7 @@ export default function SecurityPage() {
                 How we handle<br />your people&rsquo;s data.
               </h2>
               <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65 }}>
-                No fine print, no acronyms. The six things that matter &mdash; said straight.
+                No fine print, no acronyms. The six things that matter — said straight.
               </p>
             </div>
 
@@ -601,13 +606,13 @@ export default function SecurityPage() {
                 }
               }
             `}</style>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
-        {/* ── PROCUREMENT STRIP — the checklist terms a security reviewer asks for ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '72px 24px', borderTop: '1px solid var(--border)' }}>
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: 24, textAlign: 'center' }}>For your IT &amp; security team</p>
+        {/* ── PROCUREMENT STRIP ── */}
+        <Beat bg="warm" style={{ borderTop: '1px solid var(--border)' }}>
+          <Page>
+            <p className="eyebrow" style={{ marginBottom: 24, textTransform: 'none', textAlign: 'center' }}>For your IT & security team</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
               {[
                 { t: 'Single sign-on + SCIM', d: 'Okta, Microsoft Entra, or Google Workspace. Accounts provision and deprovision automatically.' },
@@ -621,12 +626,12 @@ export default function SecurityPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── FAQ ── */}
-        <section style={{ background: 'var(--bg)', padding: '96px 24px' }}>
-          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+        <Beat bg="white">
+          <Page style={{ maxWidth: 800 }}>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
               <p className="eyebrow" style={{ marginBottom: 14 }}>QUESTIONS</p>
               <h2
@@ -688,8 +693,8 @@ export default function SecurityPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         <RequestAccessSection />
       </main>

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
+import { Beat, Page } from '@/components/ui/page'
 
 export const metadata: Metadata = {
   title: 'Compare MambaHR — vs Rippling, Gusto, BambooHR, Workday',
@@ -34,32 +35,34 @@ export default function ComparePage() {
       <main style={{ paddingTop: 64 }}>
 
         {/* ── HERO ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '120px 24px 88px' }}>
-          <div style={{ maxWidth: 880, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: 24 }}>COMPARE</p>
-            <h1
-              style={{
-                fontFamily: 'var(--font-serif), Georgia, serif',
-                fontSize: 'clamp(40px, 5.5vw, 64px)',
-                fontWeight: 400,
-                letterSpacing: '-0.035em',
-                color: 'var(--text)',
-                marginBottom: 28,
-                lineHeight: 1.0,
-              }}
-            >
-              How we compare<br />
-              <span style={{ color: 'var(--gold-dark)' }}>to what you use today.</span>
-            </h1>
-            <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 580 }}>
-              Most HR tools store data and run payroll. MambaHR is the agent department that handles the work — so your HR lead stops processing tickets and starts setting policy.
-            </p>
-          </div>
-        </section>
+        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
+          <Page>
+            <div style={{ maxWidth: 880 }}>
+              <p className="eyebrow" style={{ marginBottom: 24 }}>COMPARE</p>
+              <h1
+                style={{
+                  fontFamily: 'var(--font-serif), Georgia, serif',
+                  fontSize: 'clamp(40px, 5.5vw, 64px)',
+                  fontWeight: 400,
+                  letterSpacing: '-0.035em',
+                  color: 'var(--text)',
+                  marginBottom: 28,
+                  lineHeight: 1.0,
+                }}
+              >
+                How we compare<br />
+                <span style={{ color: 'var(--gold-dark)' }}>to what you use today.</span>
+              </h1>
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 580 }}>
+                Most HR tools store data and run payroll. MambaHR is the agent department that handles the work — so your HR lead stops processing tickets and starts setting policy.
+              </p>
+            </div>
+          </Page>
+        </Beat>
 
         {/* ── COMPARISON CARDS ── */}
-        <section style={{ background: 'var(--bg)', padding: '96px 24px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <Beat bg="white">
+          <Page>
             <div style={{ marginBottom: 48, maxWidth: 720 }}>
               <p className="eyebrow" style={{ marginBottom: 16 }}>EIGHT COMPARISONS</p>
               <h2
@@ -163,12 +166,12 @@ export default function ComparePage() {
                 </Link>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── WHY MAMBAHR IS DIFFERENT ── */}
-        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+        <Beat bg="cream">
+          <Page>
             <div style={{ marginBottom: 64, maxWidth: 720 }}>
               <p className="eyebrow" style={{ marginBottom: 16 }}>WHAT MAKES US DIFFERENT</p>
               <h2
@@ -227,8 +230,8 @@ export default function ComparePage() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         <RequestAccessSection />
       </main>

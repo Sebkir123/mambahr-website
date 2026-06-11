@@ -11,14 +11,14 @@ type Cell = { icon: ReactNode; name: string; line: string; href: string; feature
 // Buyer-category coverage. Every line maps to a SAFE claim in features.md.
 const cells: Cell[] = [
   { icon: <HiringIcon />,      name: 'Hiring & ATS',             line: 'Reqs to signed offer, with a bias-audit gate.',    href: '/hiring' },
-  { icon: <OnboardingIcon />,  name: 'Onboarding & offboarding', line: 'Day-one accounts, I-9/E-Verify, clean exits.',      href: '/product#onboarding', featured: true },
-  { icon: <TimeOffIcon />,     name: 'Time off & leave',         line: 'PTO, FMLA, and state paid-leave stacking.',        href: '/product#leave' },
-  { icon: <ReportsIcon />,     name: 'Payroll-ready exports',    line: "Per-cycle change files in your provider's format.", href: '/pricing#exports' },
-  { icon: <PerformanceIcon />, name: 'Performance management',   line: 'Cited review drafts, calibration, PIPs.',          href: '/product#performance' },
-  { icon: <CompIcon />,        name: 'Compensation',             line: 'Bands, pay-equity checks, raise guardrails.',      href: '/product#comp' },
-  { icon: <CultureIcon />,     name: 'Benefits',                 line: '401(k) enrollment + qualifying life events.',      href: '/product#leave' },
-  { icon: <ComplianceIcon />,  name: 'Compliance',               line: 'Federal + 50-state rules, every decision cited.',  href: '/product#compliance' },
-  { icon: <ChangeMgmtIcon />,  name: 'Headcount & RIF',          line: 'Planning, severance math, WARN notices.',          href: '/product#rif' },
+  { icon: <OnboardingIcon />,  name: 'Onboarding & offboarding', line: 'Day-one accounts, I-9/E-Verify, clean exits.',      href: '/onboarding', featured: true },
+  { icon: <TimeOffIcon />,     name: 'Time off & leave',         line: 'PTO, FMLA, and state paid-leave stacking.',        href: '/leave' },
+  { icon: <ReportsIcon />,     name: 'Payroll-ready exports',    line: "Per-cycle change files in your provider's format.", href: '/payroll' },
+  { icon: <PerformanceIcon />, name: 'Performance management',   line: 'Cited review drafts, calibration, PIPs.',          href: '/performance' },
+  { icon: <CompIcon />,        name: 'Compensation',             line: 'Bands, pay-equity checks, raise guardrails.',      href: '/compensation' },
+  { icon: <CultureIcon />,     name: 'Benefits',                 line: '401(k) enrollment + qualifying life events.',      href: '/leave' },
+  { icon: <ComplianceIcon />,  name: 'Compliance',               line: 'Federal + 50-state rules, every decision cited.',  href: '/compliance' },
+  { icon: <ChangeMgmtIcon />,  name: 'Headcount & RIF',          line: 'Planning, severance math, WARN notices.',          href: '/rif' },
 ]
 
 export default function CoverageSection() {

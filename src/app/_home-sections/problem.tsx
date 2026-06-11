@@ -1,3 +1,5 @@
+import { Beat, Page } from '@/components/ui/page'
+
 const STATS: { value: string; label: string }[] = [
   { value: '67%', label: 'of HR teams miss compliance deadlines' },
   { value: '$4,700', label: 'average cost per new hire — most of it admin' },
@@ -6,7 +8,7 @@ const STATS: { value: string; label: string }[] = [
 
 export default function ProblemSection() {
   return (
-    <section style={{ background: '#15110D', padding: '120px 24px', position: 'relative', overflow: 'hidden' }}>
+    <Beat bg="dark" style={{ position: 'relative', overflow: 'hidden' }}>
       {/* warm gold glow, top-center */}
       <div
         aria-hidden
@@ -36,7 +38,7 @@ export default function ProblemSection() {
         }}
       />
 
-      <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
+      <Page style={{ position: 'relative' }}>
         <div data-animate style={{ textAlign: 'center', marginBottom: 72 }}>
           <p className="eyebrow" style={{ marginBottom: 16, color: 'var(--gold-light)' }}>THE PROBLEM</p>
           <h2
@@ -92,7 +94,7 @@ export default function ProblemSection() {
             </div>
           ))}
         </div>
-      </div>
-    </section>
+      </Page>
+    </Beat>
   )
 }

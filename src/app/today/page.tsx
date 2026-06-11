@@ -3,6 +3,7 @@ import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
 import TodayCard from '@/components/surfaces/today-card'
 import DecisionCardAnatomy from '@/components/sections/decision-card-anatomy'
+import { Beat, Page } from '@/components/ui/page'
 
 const cards = [
   {
@@ -92,8 +93,8 @@ export default function TodayPage() {
       <main style={{ paddingTop: 64 }}>
 
         {/* Hero */}
-        <section style={{ background: 'var(--bg-warm)', padding: '100px 24px 80px' }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
+          <Page>
             <div style={{ maxWidth: 640, marginBottom: 64 }}>
               <p className="eyebrow" style={{ marginBottom: 20 }}>APPROVALS</p>
               <h1
@@ -121,15 +122,15 @@ export default function TodayPage() {
             <p style={{ fontSize: 12, color: 'var(--text-faint)', marginTop: 16, textAlign: 'center' }}>
               6 items in queue · 3 require your approval · Agents resolved 14 overnight
             </p>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* Decision Card anatomy — interactive annotated component */}
         <DecisionCardAnatomy />
 
         {/* The math */}
-        <section style={{ background: 'var(--bg-cream)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 880, margin: '0 auto' }}>
+        <Beat bg="cream">
+          <Page>
             <div style={{ textAlign: 'center', marginBottom: 72, maxWidth: 720, marginLeft: 'auto', marginRight: 'auto' }}>
               <p className="eyebrow" style={{ marginBottom: 20 }}>THE MATH</p>
               <h2
@@ -146,7 +147,7 @@ export default function TodayPage() {
                 Where your HR time<br />goes now.
               </h2>
               <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                The work doesn&apos;t disappear. It shifts from admin to judgment.
+                The work doesn&rsquo;t disappear. It shifts from admin to judgment.
               </p>
             </div>
 
@@ -263,12 +264,12 @@ export default function TodayPage() {
                 }
               }
             `}</style>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* Agent vs human */}
-        <section style={{ background: 'var(--bg)', padding: '120px 24px' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
+        <Beat bg="white">
+          <Page>
             <p className="eyebrow" style={{ textAlign: 'center', marginBottom: 20 }}>THE POLICY</p>
             <h2
               style={{
@@ -355,8 +356,8 @@ export default function TodayPage() {
                 .policy-grid { grid-template-columns: 1fr !important; }
               }
             `}</style>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         <RequestAccessSection />
       </main>

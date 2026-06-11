@@ -4,6 +4,7 @@ import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RequestAccessSection from '@/components/waitlist'
+import { Beat, Page } from '@/components/ui/page'
 
 export const metadata: Metadata = {
   title: 'Pricing — MambaHR | Your first AI HR department',
@@ -238,24 +239,26 @@ export default function PricingPage() {
       <MegaNav />
       <main style={{ paddingTop: 64 }}>
         {/* ── HERO ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '104px 24px 72px' }}>
-          <div style={{ maxWidth: 880, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: 22 }}>PRICING</p>
-            <h1 style={{ fontFamily: serif, fontSize: 'clamp(40px, 5.5vw, 64px)', fontWeight: 400, letterSpacing: '-0.035em', color: 'var(--text)', marginBottom: 24, lineHeight: 1.0 }}>
-              All the work of a full HR team,<br />
-              <span style={{ color: 'var(--gold-dark)' }}>for a fraction of the cost.</span>
-            </h1>
-            <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 620 }}>
-              Priced per employee, billed annually. Built to give lean teams real HR execution — recruiting,
-              onboarding, performance, compliance, and payroll-ready exports — without hiring a full People team first.
-              <strong style={{ color: 'var(--text)', fontWeight: 600 }}> Founding pricing for the first 20 companies.</strong>
-            </p>
-          </div>
-        </section>
+        <Beat bg="warm" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
+          <Page>
+            <div style={{ maxWidth: 880 }}>
+              <p className="eyebrow" style={{ marginBottom: 22 }}>PRICING</p>
+              <h1 style={{ fontFamily: serif, fontSize: 'clamp(40px, 5.5vw, 64px)', fontWeight: 400, letterSpacing: '-0.035em', color: 'var(--text)', marginBottom: 24, lineHeight: 1.0 }}>
+                All the work of a full HR team,<br />
+                <span style={{ color: 'var(--gold-dark)' }}>for a fraction of the cost.</span>
+              </h1>
+              <p style={{ fontSize: 18, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 620 }}>
+                Priced per employee, billed annually. Built to give lean teams real HR execution — recruiting,
+                onboarding, performance, compliance, and payroll-ready exports — without hiring a full People team first.
+                <strong style={{ color: 'var(--text)', fontWeight: 600 }}> Founding pricing for the first 20 companies.</strong>
+              </p>
+            </div>
+          </Page>
+        </Beat>
 
         {/* ── PLAN CARDS ── */}
-        <section style={{ background: 'var(--bg)', padding: '64px 24px' }}>
-          <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+        <Beat bg="white">
+          <Page>
             <div className="pricing-plans" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
               {PLANS.map((p) => (
                 <div
@@ -304,12 +307,12 @@ export default function PricingPage() {
             <p style={{ fontSize: 13, color: 'var(--text-faint)', textAlign: 'center', marginTop: 24 }}>
               Annual minimums and founding rates are confirmed on a 30-minute call.
             </p>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── COMPARE THE COST ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 880, margin: '0 auto' }}>
+        <Beat bg="warm">
+          <Page>
             <h2 style={{ fontFamily: serif, fontSize: 'clamp(30px, 3.6vw, 44px)', fontWeight: 400, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 14, lineHeight: 1.05 }}>
               Compare the cost.
             </h2>
@@ -331,12 +334,12 @@ export default function PricingPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── COMPARE YOUR OPTIONS (vs tools) ── */}
-        <section style={{ background: 'var(--bg)', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 980, margin: '0 auto' }}>
+        <Beat bg="white">
+          <Page>
             <h2 style={{ fontFamily: serif, fontSize: 'clamp(30px, 3.6vw, 44px)', fontWeight: 400, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 14, lineHeight: 1.05 }}>
               Compare your options.
             </h2>
@@ -364,12 +367,12 @@ export default function PricingPage() {
               Simpler than Rippling, faster than Workday, more execution-focused than BambooHR — and it works around
               your existing payroll instead of replacing it.
             </p>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── FEATURE MATRIX ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+        <Beat bg="warm">
+          <Page>
             <h2 style={{ fontFamily: serif, fontSize: 'clamp(30px, 3.6vw, 44px)', fontWeight: 400, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 36, lineHeight: 1.05 }}>
               Compare plans.
             </h2>
@@ -404,12 +407,12 @@ export default function PricingPage() {
                 </tbody>
               </table>
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── EXPORTS EXPLAINER — we do exports, not payroll ── */}
-        <section id="exports" style={{ background: 'var(--bg)', padding: '88px 24px', scrollMarginTop: 72 }}>
-          <div style={{ maxWidth: 880, margin: '0 auto' }}>
+        <Beat bg="white" id="exports" style={{ scrollMarginTop: 72 }}>
+          <Page>
             <p className="eyebrow" style={{ marginBottom: 16 }}>WORKS WITH YOUR STACK</p>
             <h2 style={{ fontFamily: serif, fontSize: 'clamp(26px, 3vw, 38px)', fontWeight: 400, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 14, lineHeight: 1.1 }}>
               Keep your payroll. We get it ready.
@@ -425,12 +428,12 @@ export default function PricingPage() {
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
+          </Page>
+        </Beat>
 
         {/* ── PRICING FAQ (this page only) ── */}
-        <section style={{ background: 'var(--bg-warm)', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 760, margin: '0 auto' }}>
+        <Beat bg="warm">
+          <Page>
             <h2 style={{ fontFamily: serif, fontSize: 'clamp(30px, 3.6vw, 44px)', fontWeight: 400, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 36, lineHeight: 1.05 }}>
               Pricing questions.
             </h2>
@@ -442,8 +445,8 @@ export default function PricingPage() {
                 </details>
               ))}
             </div>
-          </div>
-        </section>
+          </Page>
+        </Beat>
       </main>
 
       <RequestAccessSection />
