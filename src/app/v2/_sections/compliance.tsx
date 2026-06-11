@@ -5,29 +5,24 @@ export default function Compliance() {
     <section className="cm">
       <div className="wrap">
         <div className="card agent-edge agent-done agent-lg" data-reveal>
-          <div className="who">
+          <div className="msg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="who-av" src="/avatars/violet.jpg" alt="" width={40} height={40} />
-            <div>
-              <div className="who-n">Violet Hayes</div>
-              <div className="who-r">Product Manager · California</div>
+            <img className="av" src="/avatars/violet.jpg" alt="" width={42} height={42} />
+            <div className="m-body">
+              <div className="m-who">Violet · California</div>
+              <div className="q">&ldquo;I&rsquo;m having a baby in June. How much leave can I take?&rdquo;</div>
             </div>
-            <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · answered</span>
           </div>
 
-          <div className="q">&ldquo;I&rsquo;m having a baby in June. How much leave can I take?&rdquo;</div>
-
-          <div className="ans">
-            <div className="ans-head">Up to 24 weeks, job protected.</div>
-            <p className="ans-body">
-              Answered in seconds — calendar blocked, paperwork filed, nothing for you to chase.
-            </p>
-          </div>
-
-          <div className="cites">
-            <span className="cl">The law behind it</span>
-            <span className="chip">FMLA</span>
-            <span className="chip">CA CFRA</span>
+          <div className="msg reply">
+            <div className="m-logo" aria-hidden="true">M</div>
+            <div className="m-body">
+              <div className="m-who">Mamba <span className="m-time">6 seconds later</span></div>
+              <div className="a">
+                Up to 24 weeks, job protected.
+                <span className="a-sub">Booked, filed, done — backed by FMLA &amp; CA CFRA.</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -37,18 +32,11 @@ export default function Compliance() {
             The right answer, <span className="em">with the law attached.</span>
           </h2>
           <p className="lead">
-            Employment law changes almost every week. Mamba keeps up, shows the law behind every
-            answer, and sends the risky calls to a human first.
+            Employment law changes almost every week. Mamba keeps up — and a human signs
+            off on the big calls.
           </p>
-          <div className="kpis">
-            <div><div className="kn"><span data-count="50">50</span></div><div className="kl">states, kept current</div></div>
-            <div><div className="kn"><span data-count="100">100</span>%</div><div className="kl">of answers cite the law</div></div>
-            <div><div className="kn">1</div><div className="kl">human on the big calls</div></div>
-          </div>
-          <div className="sec">
-            {['Encrypted end to end', 'Your data stays in the US', 'Never trained on your data'].map((s) => (
-              <span key={s} className="sec-b"><span className="sec-i" aria-hidden="true" />{s}</span>
-            ))}
+          <div className="trust">
+            <span>All 50 states</span><i /><span>Every answer cites the law</span><i /><span>Zero guesswork</span>
           </div>
         </div>
       </div>
@@ -71,89 +59,61 @@ export default function Compliance() {
           background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
           border: 1px solid var(--border);
           border-radius: 18px;
-          padding: 26px;
+          padding: clamp(26px, 3vw, 38px);
           box-shadow: var(--shadow-float);
+          display: flex;
+          flex-direction: column;
+          gap: 26px;
         }
-        .who {
+        .msg { display: flex; gap: 14px; align-items: flex-start; }
+        .av { width: 42px; height: 42px; border-radius: 999px; object-fit: cover; flex: none; }
+        .m-logo {
+          flex: none;
+          width: 42px;
+          height: 42px;
+          border-radius: 12px;
+          background: #1A1A19;
+          color: #fff;
           display: flex;
           align-items: center;
-          gap: 12px;
-          padding-bottom: 16px;
-          border-bottom: 1px solid var(--border-faint);
-        }
-        .who-av { width: 40px; height: 40px; border-radius: 999px; object-fit: cover; }
-        .who-n { font-size: 14.5px; font-weight: 700; color: var(--text); }
-        .who-r { font-size: 12px; color: var(--text-faint); margin-top: 1px; }
-        .who :global(.mamba-chip) { margin-left: auto; }
-        .q {
+          justify-content: center;
           font-family: var(--font-serif);
-          font-size: clamp(20px, 2.2vw, 25px);
-          line-height: 1.3;
-          color: var(--text);
-          letter-spacing: -0.01em;
-          margin: 18px 0;
+          font-size: 22px;
         }
-        .ans {
-          padding: 18px;
-          border-left: 3px solid #B98A4E;
-          background: linear-gradient(160deg, #FFF2E6, #FBE6D6);
-          border-radius: 0 14px 14px 0;
-        }
-        .ans-head {
-          font-size: 17.5px;
-          font-weight: 700;
-          color: var(--text);
-          letter-spacing: -0.01em;
-        }
-        .ans-body {
-          font-size: 14px;
-          line-height: 1.6;
-          color: var(--text-muted);
-          margin: 8px 0 0;
-        }
-        .done-row {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          margin-top: 13px;
-          padding-top: 13px;
-          border-top: 1px solid rgba(138, 101, 53, 0.16);
-          font-family: var(--font-mono);
-          font-size: 11px;
-          color: var(--color-green);
-          font-weight: 600;
-        }
-        .d-check { flex: none; width: 15px; height: 15px; border-radius: 999px; background: var(--color-green); position: relative; }
-        .d-check::after { content: ''; position: absolute; left: 5px; top: 3px; width: 3px; height: 6px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .cites {
-          display: flex;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 8px;
-          margin-top: 18px;
-        }
-        .cl {
+        .m-body { min-width: 0; }
+        .m-who {
           font-family: var(--font-mono);
           font-size: 11px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: var(--text-faint);
         }
-        .chip {
-          font-family: var(--font-mono);
-          font-size: 11px;
-          color: var(--text-muted);
-          background: var(--bg);
-          border: 1px solid var(--border);
-          padding: 4px 9px;
-          border-radius: 999px;
-        }
-        .risk {
-          margin-top: 16px;
-          font-size: 12.5px;
-          font-style: italic;
+        .m-time { text-transform: none; letter-spacing: 0; color: var(--color-green); margin-left: 6px; }
+        .q {
           font-family: var(--font-serif);
-          color: #A8552F;
+          font-size: clamp(21px, 2.3vw, 27px);
+          line-height: 1.3;
+          letter-spacing: -0.01em;
+          color: var(--text);
+          margin-top: 8px;
+        }
+        .a {
+          margin-top: 10px;
+          background: linear-gradient(160deg, #FFF2E6, #FBE6D6);
+          border: 1px solid #E6D3BC;
+          border-radius: 4px 16px 16px 16px;
+          padding: 16px 18px;
+          font-size: 17px;
+          font-weight: 700;
+          color: var(--text);
+          letter-spacing: -0.01em;
+        }
+        .a-sub {
+          display: block;
+          margin-top: 6px;
+          font-size: 13.5px;
+          font-weight: 400;
+          color: var(--text-muted);
         }
         .eyebrow {
           font-family: var(--font-mono);
@@ -184,64 +144,18 @@ export default function Compliance() {
           line-height: 1.6;
           color: var(--text-muted);
           margin: 22px 0 0;
-          max-width: 480px;
+          max-width: 440px;
         }
-        .kpis {
+        .trust {
           display: flex;
-          gap: 32px;
-          margin-top: 32px;
-        }
-        .kn {
-          font-family: var(--font-serif);
-          font-size: 40px;
-          line-height: 1;
-          color: var(--text);
-        }
-        .kl {
-          font-size: 12.5px;
-          color: var(--text-faint);
-          margin-top: 8px;
-          max-width: 130px;
-          line-height: 1.4;
-        }
-        .sec {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-          margin-top: 30px;
-          padding-top: 26px;
-          border-top: 1px solid var(--border);
-        }
-        .sec-b {
-          display: inline-flex;
           align-items: center;
-          gap: 7px;
-          font-size: 12.5px;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-top: 28px;
+          font-size: 13.5px;
           color: var(--text-muted);
-          background: var(--bg);
-          border: 1px solid var(--border);
-          border-radius: 999px;
-          padding: 6px 12px 6px 10px;
         }
-        .sec-i {
-          flex: none;
-          width: 15px;
-          height: 15px;
-          border-radius: 999px;
-          background: var(--color-green);
-          position: relative;
-        }
-        .sec-i::after {
-          content: '';
-          position: absolute;
-          left: 5px;
-          top: 3px;
-          width: 3px;
-          height: 6px;
-          border: solid #fff;
-          border-width: 0 2px 2px 0;
-          transform: rotate(45deg);
-        }
+        .trust i { width: 4px; height: 4px; border-radius: 999px; background: var(--border-mid); }
         @media (max-width: 880px) {
           .wrap { grid-template-columns: 1fr; }
           .card { order: 2; }
