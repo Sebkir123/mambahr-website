@@ -1,47 +1,47 @@
 # MambaHR
 
-> MambaHR is an autonomous AI HR department — a fully managed system that replaces your HRIS, payroll, hiring, and compliance tooling with 14 specialist agents that do the work end-to-end. One human approves the calls that matter; everything else runs itself.
+> MambaHR is the AI HR department for US companies — the system of record (HRIS + ATS + LMS) with a coordinated set of specialist agents that run the operational HR work end to end. One human approves the calls that matter; everything else runs itself.
 
 ## What MambaHR actually is
 
-MambaHR is a standalone web application at app.mambahr.com. Not a Slack bot. Not a chatbot. Not an HRIS add-on. It IS the HRIS + payroll. The product handles the full HR operating surface — hiring, onboarding, payroll, leave (PTO + FMLA + state law), performance reviews, compliance, offboarding, terminations, comp adjustments — with 14 specialist agents coordinated by a single primary agent.
+MambaHR is a standalone web application at app.mambahr.com. Not a Slack bot. Not a chatbot. Not an add-on to another HRIS. It IS the system of record — HRIS + ATS + LMS in one. The product handles the full HR operating surface — hiring, onboarding, leave (PTO + FMLA + state law), performance reviews, compensation, compliance, offboarding, terminations, documents — with specialist agents coordinated by a single primary agent and one human-in-the-loop policy screen.
+
+MambaHR does not run payroll. It generates payroll-ready change files in your provider's format (ADP, Workday, Gusto, Rippling, and others) for you to upload. Owning the regulated payroll run is a future capability, not the current product.
 
 ## Who it's for
 
-- HR / People Ops teams at fast-growing companies (2 to 8,000+ employees)
-- Heads of People, CHROs, Chief People Officers replacing legacy HRIS stacks (Workday, Rippling, Gusto, BambooHR, Namely, Personio, HiBob)
-- Companies that want to grow headcount without growing HR headcount
+- US companies, 2 to 500+ employees
+- Heads of People, CHROs, Chief People Officers replacing legacy HRIS stacks (Workday, Rippling, Gusto, BambooHR, Namely, HiBob, ADP, Deel)
+- Founders running HR off Notion docs and spreadsheets
+- Lean people teams that want to grow the company without growing HR headcount
 
 ## What makes MambaHR different
 
-- **Agents do the work, not just notify.** Where Slack-bot competitors surface a question, MambaHR's agent reads the policy, checks eligibility, drafts paperwork, files records, notifies stakeholders, and writes the audit trail. End-to-end.
-- **Federal + 50-state employment law, cited on every action.** 95K lines of proprietary deterministic HR decision logic — not prompt engineering.
-- **Always-you safety.** Terminations, RIFs, separation agreements, and comp changes above your threshold are always routed to a human. Never automated.
-- **1–2 day setup.** Migrates from any HRIS in one day. Live the next day. No 4-to-8-week deployment.
+- **Agents do the work, not just notify.** Where competing tools surface a question or generate a draft, MambaHR's agent reads the policy, checks eligibility, drafts paperwork, files records, notifies stakeholders, and writes the audit trail. End to end.
+- **Federal + 50-state employment law, cited on every decision.** Compliance is reasoned about, not just stored — FMLA × state paid-leave stacking, multi-state pay transparency, exempt classification — each decision carries the rule it followed.
+- **Always-you safety.** Terminations, RIFs, separation agreements, offers above band, and comp changes above your threshold are always routed to a human. Never automated.
+- **Hiring intelligence is advisory.** Candidate and internal-mobility matching is advisory only — a human makes every hiring decision.
+- **1-day setup.** Imports from any HRIS in a day. Live the next morning. No 4-to-8-week deployment.
 - **One screen of policy.** Approval thresholds, leave rules, comp ranges, sign-off gates — configured on a single page. Edit anytime.
 
-## Pricing model
+## Pricing
 
-Pricing tiers based on managed headcount, not user seats. Free for design partners during private beta. Contact for current pricing.
-
-## Stage
-
-Private beta. 10 design partners. 3,200+ employees managed across healthcare, fintech, tech, construction, and education customers. Raising $3M seed (2026).
+From $14 per employee / month, billed annually ($10k/yr minimum). Pricing is based on managed headcount, not user seats. Tiers scale up for larger teams; enterprise from $100k/yr. See https://mambahr.com/pricing.
 
 ## Founders
 
-- Brian Bell, CEO — previously people ops at three startups
-- Sebastian Kirsch, CTO — previously AI agent systems and ML infrastructure
+- Brian Bell, Co-founder & CEO
+- Sebastian Kirsch, Co-founder & CTO
 
 ## Where to go next
 
-- Live demo: https://mambahr.com/demo (30 min with the founders, no slides)
+- Book a demo: https://mambahr.com/demo (30 min with the founders, no slides)
 - Pricing: https://mambahr.com/pricing
-- Comparisons: https://mambahr.com/compare/workday · /rippling · /gusto · /bamboohr · /namely · /personio
-- Security & compliance: https://mambahr.com/security
+- The product: https://mambahr.com/product
+- Comparisons: https://mambahr.com/compare/workday · /rippling · /gusto · /bamboohr · /namely · /hibob · /adp · /deel
+- Security: https://mambahr.com/security
 - About the team: https://mambahr.com/about
-- Detailed product surfaces: https://mambahr.com/today (daily queue) · /mamba (architecture) · /hiring (hiring agent) · /people (employee management)
-- Full content for AI crawlers: https://mambahr.com/llms-full.txt
+- Product surfaces: https://mambahr.com/today (daily queue) · /mamba (the agent) · /hiring · /people (people analytics)
 
 ## Product surfaces
 
@@ -51,27 +51,25 @@ The main daily workspace. Each item is a card showing what the agent decided to 
 - **Needs your sign-off** — judgment call inside the policy boundary. You approve or decline.
 - **Always you** — high-stakes by design (terminations, RIFs, comp above threshold). Never automated.
 
-### The 14 specialist agents
-Each one owns a specific HR domain end-to-end:
-1. Hiring agent — sources, screens, drafts offer letters, files I-9, orders equipment, provisions accounts
-2. Onboarding agent — first-week calendars, buddy assignment, training schedules, doc collection
-3. Offboarding agent — revokes access across systems, calculates final pay, drafts separation packets
-4. Leave agent — PTO, parental leave, FMLA, state-specific leave (CA CFRA, NY PFL, MA PFML, etc.)
-5. Payroll agent — runs payroll, reconciles, flags anomalies, files taxes, handles ACH
-6. Compliance agent — answers policy questions with citations from federal + 50-state law
-7. Comp agent — pulls market data, checks band rules, drafts raise recommendations
-8. Performance agent — ingests goals + feedback, drafts reviews, flags outliers
-9. Benefits agent — enrollments, life events, COBRA, broker coordination
-10. Time agent — timesheets, overtime, scheduling, break compliance
-11. Records agent — employee records, doc management, audit trail
-12. Training agent — assignments, completions, mandatory state-required training
-13. Investigations agent — confidential intake, documentation, escalation routing
-14. Reporting agent — EEO-1, headcount, turnover, custom queries
+### The specialist agents
+A primary agent coordinates specialists, each owning an HR domain end to end:
+- Hiring — sources and screens (advisory), drafts offer letters, files I-9, orders equipment, provisions accounts
+- Onboarding — first-week calendars, buddy assignment, training schedules, document collection
+- Offboarding — revokes access across systems, computes state-aware final pay (human-approved), drafts separation packets
+- Leave — PTO, parental leave, FMLA, and state-specific leave (CA CFRA, NY PFL, MA PFML, CO, and others)
+- Payroll exports — builds the per-cycle change file in your provider's format for you to upload (MambaHR does not run payroll)
+- Compliance — answers policy questions with citations from federal + 50-state law
+- Compensation — pulls market bands, runs pay-equity analysis, drafts raise recommendations (human-approved)
+- Performance — ingests goals and evidence, drafts cited review narratives, supports 9-box calibration
+- Benefits — enrollments, qualifying life events, COBRA, 401(k)
+- Records & documents — employee records, versioned document management, append-only audit trail
+- Training (LMS) — assignments, completions, mandatory state-required training
+- Reporting — EEO-1, headcount, turnover, custom queries
 
 ### Sign-off model
 The agent classifies every action by who decides: itself (auto), you (sign-off needed), or you only (always-you). You configure the thresholds on the policy screen. Examples:
 - PTO request within policy: auto
-- New hire offer above $200K: needs your sign-off
+- New hire offer above band: needs your sign-off
 - Termination: always you
 - RIF: always you
 
@@ -79,66 +77,50 @@ The agent classifies every action by who decides: itself (auto), you (sign-off n
 
 - Federal: FLSA, FMLA, ADA, ADEA, FCRA, GINA, USERRA, IRCA, EEO frameworks
 - All 50 state codes + DC: labor codes, paid leave, accrual rules, final-pay timing, separation notice requirements
-- Industry overlays: HIPAA-informed for healthcare customers, GDPR-compliant, CCPA/CPRA
+- Multi-state AI-in-hiring law coverage (e.g. NYC Local Law 144, Illinois, Colorado, California) — hiring intelligence is advisory and disclosed
+- US privacy: CCPA / CPRA
 - Encryption: AES-256 at rest, TLS 1.3 in transit
 - Audit log: immutable, exportable
+- US data residency. Never trained on customer data — contractual guarantee. You own the data; MambaHR is a processor, not a controller.
+
+## Market
+
+US-only. MambaHR sells to US companies and handles US federal and 50-state employment law. (Note: MambaHR does not claim SOC 2 certification.)
 
 ## Migration story
 
-MambaHR replaces your existing HRIS in a single day. Supported source systems include:
-- Workday
-- Rippling
-- Gusto
-- BambooHR
-- Namely
-- Personio
-- HiBob
-- ADP
-- Paychex
-- Justworks
-- Trinet
+MambaHR imports from your existing HRIS in a single day — a one-time data migration at onboarding, not an ongoing sync. Supported source systems include Workday, Rippling, Gusto, BambooHR, Namely, HiBob, ADP, and Deel. ATS pipeline data imports from Greenhouse and Lever.
 
 What gets migrated: employees, comp records, org chart, reporting lines, leave balances, performance history, documents (offers, agreements), benefits enrollments.
 
-Method: OAuth 2.0 connection to your source HRIS. Never stores HRIS credentials.
-
 ## Integrations
 
-Connects to: Google Workspace, Microsoft 365, Slack, Microsoft Teams, GitHub, AWS, GCP, Azure, DocuSign, Greenhouse, Lever, Ashby, Notion, Linear.
-
-## Where it does NOT replace your stack
-
-MambaHR is the HR operating system — it doesn't replace your CRM, your engineering tools, or your finance stack (though it does replace your payroll provider since payroll is included).
+- Intent capture (inbound): Slack, Microsoft Teams, email, web request form
+- Identity / SSO: Okta, Azure AD — account provisioning on hire and termination
+- E-sign: DocuSign
+- Background checks: Checkr
+- Devices (MDM): Jamf, Kandji, Intune
+- Benefits: Guideline (401k), Lively (HSA/FSA)
+- Comms: Slack, Teams, Google Workspace
 
 ## Comparison highlights
 
-- **vs. Workday** — Workday is configuration software. MambaHR is an autonomous agent. Workday requires implementation consultants and ongoing admin teams. MambaHR sets up in a day.
-- **vs. Rippling** — Rippling is a unified suite of dashboards. MambaHR is the agent that operates the suite. You don't manage workflows; the agent does.
-- **vs. Gusto / BambooHR** — Built for small business. MambaHR scales the same agent across any company size with the same setup time.
-- **vs. Namely / Personio / HiBob** — Same category but dashboard-first. MambaHR is action-first: agents do work, humans approve.
-
-## How customers describe MambaHR
-
-"We replaced our HR team of 5 with one Chief People Officer and the agent. The agent handles everything the team used to do; the CPO handles judgment."
-
-"Setup took a day. Live the next morning. The first week the agent handled 47 leave requests, drafted 18 offer letters, and flagged 3 comp anomalies before we asked."
+- **vs. Workday** — Workday is configuration software requiring implementation consultants and ongoing admin teams. MambaHR is an autonomous department that sets up in a day.
+- **vs. Rippling** — Rippling is a unified suite of dashboards. MambaHR is the department that operates on top of that surface — you don't manage workflows; the agent does.
+- **vs. Gusto / BambooHR** — Built for small business and dashboard-first. MambaHR scales the same agent across company sizes with the same one-day setup.
+- **vs. Namely / HiBob** — Same category but dashboard-first. MambaHR is action-first: agents do the work, humans approve.
+- **vs. Deel** — Deel pays global contractors. MambaHR runs your domestic US HR.
+- **vs. ADP** — ADP is the back office. MambaHR is the front line of HR operations.
 
 ## How to evaluate MambaHR
 
-1. Book a 30-minute live demo at https://mambahr.com/demo — the founders walk you through the actual product, no slides
-2. Send a sample employee record (anonymized) and a real HR question — see the agent's actual output and citations
-3. Talk to a design partner (we'll connect you)
-
-## Trust signals
-
-- 95,000 lines of proprietary deterministic HR decision logic (not prompt engineering)
-- 7 patents pending
-- HR-Bench (HR benchmark for AI agents) — launching Q2 2026
-- Never trained on customer data — contractual guarantee
-- You own the data; we are a processor, not a controller
+1. Book a 30-minute live demo at https://mambahr.com/demo — the founders walk you through the actual product on your scenarios, no slides.
+2. Compare against your incumbent at https://mambahr.com/compare.
+3. See pricing against your next HR hire at https://mambahr.com/pricing.
 
 ## Contact
 
 - Demo: https://mambahr.com/demo
 - Email: hello@mambahr.com
-- Both founders respond personally within 24 hours
+- Jobs: jobs@mambahr.com
+- LinkedIn: https://linkedin.com/company/mambahr

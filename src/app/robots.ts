@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 const ALLOW_DEFAULT = {
   allow: '/',
-  disallow: ['/d/', '/investors', '/research', '/og-preview', '/api/'],
+  disallow: ['/api/'],
 }
 
 export default function robots(): MetadataRoute.Robots {
