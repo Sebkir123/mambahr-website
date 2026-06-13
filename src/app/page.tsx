@@ -1,45 +1,50 @@
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
-import RequestAccessSection from '@/components/waitlist'
 
-import HeroSection from './_home-sections/hero'
-import ProofStrip from './_home-sections/proof-strip'
-import ProblemSection from './_home-sections/problem'
-import CoverageSection from './_home-sections/coverage'
-import WatchItRunSection from './_home-sections/watch-it-run'
-import WhereItLivesSection from './_home-sections/where-it-lives'
-import ComplianceEngineSection from './_home-sections/compliance-engine'
-import HowItWorksSection from './_home-sections/how-it-works'
-import PricingSection from './_home-sections/pricing'
-import ResourcesSection from './_home-sections/resources'
+import Hero from './v2/_sections/hero'
+import Logos from './v2/_sections/logos'
+import Statement from './v2/_sections/statement'
+import Difference from './v2/_sections/difference'
+import Bento from './v2/_sections/bento'
+import Channels from './v2/_sections/channels'
+import Lifecycle from './v2/_sections/lifecycle'
+import Outcomes from './v2/_sections/outcomes'
+import Compliance from './v2/_sections/compliance'
+import PeopleBand from './v2/_sections/people-band'
+import Testimonials from './v2/_sections/testimonials'
+import Pricing from './v2/_sections/pricing'
+import Faq from './v2/_sections/faq'
+import Resources from './v2/_sections/resources'
+import Cta from './v2/_sections/cta'
+import MidCta from './v2/_sections/mid-cta'
+import RevealInit from './v2/_sections/reveal-init'
+import CountUp from './v2/_sections/count-up'
+import StickyCta from './v2/_sections/sticky-cta'
 
 export default function HomePage() {
   return (
     <>
       <MegaNav />
+      <RevealInit />
+      <CountUp />
+      <StickyCta />
       <main>
-        {/* 1. Hero */}
-        <HeroSection />
-        {/* 2. Proof Strip */}
-        <ProofStrip />
-        {/* 3. The Problem */}
-        <ProblemSection />
-        {/* 4. Coverage Grid */}
-        <CoverageSection />
-        {/* 5. Flagship Proof */}
-        <WatchItRunSection />
-        {/* 6. Works where you work */}
-        <WhereItLivesSection />
-        {/* 7. Compliance Trust */}
-        <ComplianceEngineSection />
-        {/* 8. How it works */}
-        <HowItWorksSection />
-        {/* 9. Pricing */}
-        <PricingSection />
-        {/* 10. Lead magnet */}
-        <ResourcesSection />
-        {/* 11. Final CTA */}
-        <RequestAccessSection />
+        <Hero />
+        <Logos />
+        <Statement />
+        <Difference />
+        <PeopleBand />
+        <Bento />
+        <Channels />
+        <Lifecycle />
+        <Outcomes />
+        <MidCta />
+        <Compliance />
+        <Testimonials />
+        <Pricing />
+        <Faq />
+        <Resources />
+        <Cta />
       </main>
       <Footer />
     </>
