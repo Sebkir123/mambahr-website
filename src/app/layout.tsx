@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono, Instrument_Serif, Fraunces } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
@@ -72,6 +72,12 @@ export const metadata: Metadata = {
     noarchive: true,
     googleBot: { index: true, follow: true, noarchive: true },
   },
+}
+
+// Browser/OS chrome color — matches the oat background of the Warm Editorial
+// Premium system so the address bar blends into the page on mobile Safari/Chrome.
+export const viewport: Viewport = {
+  themeColor: '#F4F2EC',
 }
 
 // Static JSON-LD — hardcoded constants, not user input

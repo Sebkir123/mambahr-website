@@ -62,9 +62,21 @@ export default async function ComparePage({ params }: Props) {
     ],
   }
 
+  // Breadcrumb trail (Home › Compare › MambaHR vs <competitor>) so search and
+  // answer engines understand this page's place in the site hierarchy.
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://mambahr.com' },
+      { '@type': 'ListItem', position: 2, name: 'Compare', item: 'https://mambahr.com/compare' },
+      { '@type': 'ListItem', position: 3, name: `MambaHR vs ${c.name}`, item: `https://mambahr.com/compare/${slug}` },
+    ],
+  }
+
   return (
     <>
-      <JsonLd data={comparisonJsonLd} />
+      <JsonLd data={[comparisonJsonLd, breadcrumbJsonLd]} />
       <CompareView data={c} />
     </>
   )
