@@ -112,7 +112,7 @@ export default function Footer() {
             </p>
             <div>
               <a
-                href="https://linkedin.com/company/mambahr"
+                href="https://www.linkedin.com/company/mamba-hr/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ display: 'inline-flex', marginTop: 16, color: 'var(--text-faint)' }}

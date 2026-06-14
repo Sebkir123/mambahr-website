@@ -124,7 +124,7 @@ const jsonLd = [
       { '@type': 'Person', name: 'Brian Bell', jobTitle: 'Co-founder & CEO' },
       { '@type': 'Person', name: 'Sebastian Kirsch', jobTitle: 'Co-founder & CTO' },
     ],
-    sameAs: ['https://linkedin.com/company/mambahr'],
+    sameAs: ['https://www.linkedin.com/company/mamba-hr/'],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'sales',
