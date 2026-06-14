@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono, Instrument_Serif, Fraunces } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import StyledJsxRegistry from './styled-jsx-registry'
 import './globals.css'
 
 const inter = Inter({
@@ -166,7 +167,7 @@ export default function RootLayout({
         />
       </head>
       <body style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
-        {children}
+        <StyledJsxRegistry>{children}</StyledJsxRegistry>
         {gaId && <GoogleAnalytics gaId={gaId} />}
       </body>
     </html>
