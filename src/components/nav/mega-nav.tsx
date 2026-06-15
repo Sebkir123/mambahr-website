@@ -130,7 +130,7 @@ export default function MegaNav() {
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32 }}>
           {/* Logo */}
           <Link href="/" prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }} onClick={() => setProductOpen(false)}>
-            <Image src="/MambaHR_logo.png" alt="MambaHR" width={26} height={26} priority style={{ display: 'block', objectFit: 'contain', borderRadius: 6 }} />
+            <Image src="/brand/mamba-mark-gold.png" alt="MambaHR" width={24} height={24} priority style={{ display: 'block', objectFit: 'contain' }} />
             <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 18, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
           </Link>
 
