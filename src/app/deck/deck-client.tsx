@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import { MambaMark, MambaLockup } from '@/components/mamba-mark'
 import s from './deck.module.css'
 
 const SLIDE_TITLES = [
@@ -92,7 +93,7 @@ export default function Deck() {
       </div>
 
       <div className={s.brand} aria-hidden="true">
-        <Image src="/brand/mamba-mark-gold.png" alt="" width={22} height={22} className={s.brandMark} />
+        <MambaMark size={20} color="var(--gold)" className={s.brandMark} />
         <span className={s.brandWord}>MambaHR</span>
       </div>
 
@@ -119,7 +120,7 @@ export default function Deck() {
         {/* 01 · Title */}
         <section ref={setRef(0)} className={`${s.slide} ${s.center}`} aria-label="Title">
           <div className={s.inner}>
-            <Image src="/brand/mamba-mark-gold.png" alt="MambaHR" width={60} height={60} priority className={s.titleLogo} />
+            <MambaLockup size={124} className={s.titleLogo} />
             <h1 className={s.wordmark}>Mamba<span className={s.gold}>HR</span></h1>
             <p className={s.titleLead}>The AI HR Department.</p>
             <p className={s.titleSub}>We don&rsquo;t sell software seats.<br />We sell digital headcount.</p>
@@ -167,7 +168,7 @@ export default function Deck() {
         <section ref={setRef(2)} className={s.slide} aria-label="Why now">
           <div className={s.inner}>
             <p className={s.eyebrow}>Why now</p>
-            <h2 className={s.display}>The services dollar<br />just became <span className={s.gold}>capturable</span>.</h2>
+            <h2 className={s.display}>The services dollar<br />just became <em>capturable</em>.</h2>
             <p className={s.lead}>
               Frontier models crossed the reliability line. The $6 services dollar is now capturable at software margins.
             </p>
@@ -198,7 +199,7 @@ export default function Deck() {
         <section ref={setRef(3)} className={`${s.slide} ${s.center}`} aria-label="The paradigm shift">
           <div className={s.inner}>
             <p className={s.eyebrow}>The paradigm shift</p>
-            <h2 className={s.display}>Sell outcomes. <span className={s.gold}>Not seats.</span></h2>
+            <h2 className={s.display}>Sell outcomes. <em>Not seats.</em></h2>
             <div className={s.compare}>
               <div className={`${s.panel} ${s.panelOld}`}>
                 <p className={`${s.colHead} ${s.colOld}`}>The old game · SaaS copilots</p>
@@ -228,7 +229,7 @@ export default function Deck() {
         <section ref={setRef(4)} className={s.slide} aria-label="The product">
           <div className={s.inner}>
             <p className={s.eyebrow}>The product</p>
-            <h2 className={s.display}>The HRIS that does<br />the <span className={s.gold}>actual work</span>.</h2>
+            <h2 className={s.display}>The HRIS that does<br />the <em>actual work</em>.</h2>
             <p className={s.lead}>
               Not a copilot. Not a wrapper. MambaHR is the system of record and the AI department that runs it.
             </p>
@@ -261,7 +262,7 @@ export default function Deck() {
         <section ref={setRef(5)} className={`${s.slide} ${s.center}`} aria-label="How it works">
           <div className={s.inner}>
             <p className={s.eyebrow}>How it works</p>
-            <h2 className={s.display}>A System of <span className={s.gold}>Action.</span></h2>
+            <h2 className={s.display}>A System of <em>Action.</em></h2>
             <p className={s.lead}>The human approves. MambaHR executes.</p>
             <div className={s.grid3}>
               <div className={s.stepCard}>
@@ -293,7 +294,7 @@ export default function Deck() {
         <section ref={setRef(6)} className={s.slide} aria-label="The moat">
           <div className={s.inner}>
             <p className={s.eyebrow}>Moat · why incumbents can&rsquo;t follow</p>
-            <h2 className={s.display}>Databases can&rsquo;t become<br /><span className={s.gold}>autonomous departments.</span></h2>
+            <h2 className={s.display}>Databases can&rsquo;t become<br /><em>autonomous departments.</em></h2>
             <div className={s.compare}>
               <div className={`${s.panel} ${s.panelOld}`}>
                 <p className={`${s.colHead} ${s.colOld}`}>Rippling · Gusto · BambooHR · Workday</p>
@@ -327,7 +328,7 @@ export default function Deck() {
         <section ref={setRef(7)} className={s.slide} aria-label="Traction">
           <div className={s.inner}>
             <p className={s.eyebrow}>Traction</p>
-            <h2 className={s.display}>Replacing headcount plans,<br />not buying <span className={s.gold}>software</span>.</h2>
+            <h2 className={s.display}>Replacing headcount plans,<br />not buying <em>software</em>.</h2>
             <p className={s.lead}>Design partners aren&rsquo;t buying a tool. They&rsquo;re replacing a headcount plan.</p>
             <div className={s.strip}>
               <div className={s.statBlock}><span className={s.statNum}>10</span><span className={s.statLabel}>Design partners · in private beta</span></div>
@@ -346,7 +347,7 @@ export default function Deck() {
         <section ref={setRef(8)} className={s.slide} aria-label="Business model">
           <div className={s.inner}>
             <p className={s.eyebrow}>Business model · digital headcount</p>
-            <h2 className={s.display}>Priced as one HR admin.<br /><span className={s.gold}>Working 24/7.</span></h2>
+            <h2 className={s.display}>Priced as one HR admin.<br /><em>Working 24/7.</em></h2>
             <p className={s.lead}>Platform fee + per-outcome usage. &gt;90% gross margin.</p>
             <div className={s.priceRow}>
               <div className={`${s.priceCard} ${s.priceMuted}`}>
@@ -377,7 +378,7 @@ export default function Deck() {
         <section ref={setRef(9)} className={s.slide} aria-label="Market">
           <div className={s.inner}>
             <p className={s.eyebrow}>Market · the real TAM</p>
-            <h2 className={s.display}>We&rsquo;re not sized to software.<br />We&rsquo;re sized to <span className={s.gold}>labor</span>.</h2>
+            <h2 className={s.display}>We&rsquo;re not sized to software.<br />We&rsquo;re sized to <em>labor</em>.</h2>
             <p className={s.lead}>
               Incumbents fight over the $18B software dollar. We&rsquo;re priced against the $315B+ labor bill.
             </p>
@@ -475,7 +476,7 @@ export default function Deck() {
               <div className={s.comp}><span className={s.compName}>Sierra</span><span className={s.compVal}>$10B</span><span className={s.compMult}>67× ARR</span><span className={s.compNote}>$150M ARR · Support AI</span></div>
               <div className={`${s.comp} ${s.compUs}`}><span className={s.compName}>MambaHR</span><span className={`${s.compVal} ${s.gold}`}>?</span><span className={s.compMult}>HR AI</span><span className={s.compNote}>$315B labor TAM</span></div>
             </div>
-            <p className={s.closeLine}>The <span className={s.gold}>$6 services dollar</span>,<br />re-priced at software margins.</p>
+            <p className={s.closeLine}>The <em>$6 services dollar</em>,<br />re-priced at software margins.</p>
           </div>
         </section>
 

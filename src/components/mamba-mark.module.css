@@ -1,0 +1,44 @@
+/* The serif-M silhouette, tinted by currentColor via a CSS mask. */
+.mark {
+  display: inline-block;
+  background: currentColor;
+  -webkit-mask: url('/brand/mamba-mark.png') center / contain no-repeat;
+  mask: url('/brand/mamba-mark.png') center / contain no-repeat;
+  flex-shrink: 0;
+}
+
+/* Brand lockup — hairline gold double-rule frame + ink M + gold→violet dash. */
+.lockup {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gold-light);
+  background: transparent;
+}
+/* the inner rule of the double frame */
+.lockup::before {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border: 1px solid color-mix(in srgb, var(--gold-light) 55%, transparent);
+  pointer-events: none;
+}
+.lockupMark {
+  width: 58%;
+  height: 58%;
+  margin-bottom: 6%;
+  background: currentColor;
+  -webkit-mask: url('/brand/mamba-mark.png') center / contain no-repeat;
+  mask: url('/brand/mamba-mark.png') center / contain no-repeat;
+}
+.lockupDash {
+  position: absolute;
+  bottom: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22%;
+  height: 2px;
+  border-radius: var(--radius-full);
+  background: var(--grad);
+}
