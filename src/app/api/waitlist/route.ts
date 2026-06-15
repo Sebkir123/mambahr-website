@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
-import { supabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase'
 import { sendWaitlistWelcome } from '@/lib/email'
 
 // Service-role client used only for the rate-limit RPC (which is locked down to service_role).
@@ -154,7 +154,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Verification failed. Refresh and try again.' }, { status: 403 })
   }
 
-  const { error } = await supabase
+  const { error } = await getSupabase()
     .from('waitlist')
     .insert({ email, company })
 
