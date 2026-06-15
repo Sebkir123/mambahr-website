@@ -75,7 +75,7 @@
 .gold { color: var(--gold); }
 
 /* ── 01 · Title ── */
-.titleLogo { display: block; border-radius: 10px; margin: 0 auto 1.6rem; }
+.titleLogo { display: block; margin: 0 auto 1.6rem; }
 .wordmark {
   font-weight: 300;
   font-size: clamp(3.4rem, 9vw, 7.2rem);

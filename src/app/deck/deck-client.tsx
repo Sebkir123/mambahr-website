@@ -92,7 +92,7 @@ export default function Deck() {
       </div>
 
       <div className={s.brand} aria-hidden="true">
-        <Image src="/MambaHR_logo.png" alt="" width={24} height={24} className={s.brandMark} />
+        <Image src="/brand/mamba-mark-gold.png" alt="" width={22} height={22} className={s.brandMark} />
         <span className={s.brandWord}>MambaHR</span>
       </div>
 
@@ -119,7 +119,7 @@ export default function Deck() {
         {/* 01 · Title */}
         <section ref={setRef(0)} className={`${s.slide} ${s.center}`} aria-label="Title">
           <div className={s.inner}>
-            <Image src="/MambaHR_logo.png" alt="MambaHR" width={56} height={56} priority className={s.titleLogo} />
+            <Image src="/brand/mamba-mark-gold.png" alt="MambaHR" width={60} height={60} priority className={s.titleLogo} />
             <h1 className={s.wordmark}>Mamba<span className={s.gold}>HR</span></h1>
             <p className={s.titleLead}>The AI HR Department.</p>
             <p className={s.titleSub}>We don&rsquo;t sell software seats.<br />We sell digital headcount.</p>
