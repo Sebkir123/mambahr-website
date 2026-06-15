@@ -19,10 +19,12 @@
 .deck::-webkit-scrollbar { width: 0; height: 0; }
 .deck { scrollbar-width: none; }
 
-/* The marketing site forces Fraunces serif on every h1/h2/h3. The product
-   design system (design-preview) is sans throughout — match it here so the
-   deck reads as the app's design system, not the marketing brand. */
-.deck h1, .deck h2, .deck h3, .deck h4, .deck p, .deck span, .deck li, .deck cite { font-family: var(--font-sans); }
+/* Warm Editorial Premium typography roles (from the product design system):
+   serif Fraunces for hero/display + big numerals, sans for titles + body,
+   mono for eyebrows/labels/meta. The deck base sets sans (above) which every
+   child inherits; per-role classes opt into serif/mono. We deliberately do NOT
+   set a `.deck h1/h2/h3` element rule — its higher specificity would override
+   the single-class serif/mono roles below and force everything back to sans. */
 
 /* ── Slide shell — alternating warm surfaces ── */
 .slide {
@@ -49,22 +51,25 @@
 
 /* ── Type primitives ── */
 .eyebrow {
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold-dark);
   margin: 0 0 1.4rem;
 }
 .display {
-  font-family: var(--font-sans);
-  font-weight: 300;
-  font-size: clamp(2.4rem, 5.4vw, 4.6rem);
-  line-height: 1.04;
-  letter-spacing: -0.03em;
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 340;
+  font-size: clamp(2.5rem, 5.6vw, 4.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
   color: var(--text);
   margin: 0;
 }
+.display em { font-style: italic; color: var(--gold); }
 .lead {
   font-size: clamp(1rem, 1.5vw, 1.3rem);
   line-height: 1.55;
@@ -75,11 +80,13 @@
 .gold { color: var(--gold); }
 
 /* ── 01 · Title ── */
-.titleLogo { display: block; margin: 0 auto 1.6rem; }
+.titleLogo { margin: 0 auto 1.8rem; }
 .wordmark {
-  font-weight: 300;
-  font-size: clamp(3.4rem, 9vw, 7.2rem);
-  letter-spacing: -0.05em;
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 360;
+  font-size: clamp(3.4rem, 9vw, 7rem);
+  letter-spacing: -0.02em;
   line-height: 1;
   margin: 0;
   color: var(--text);
@@ -125,8 +132,8 @@
   margin-top: 2.6rem;
 }
 .ratioCol { display: flex; flex-direction: column; gap: 0.3rem; }
-.ratioLabel { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); }
-.ratioFig { font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -0.02em; color: var(--text); line-height: 1; }
+.ratioLabel { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); }
+.ratioFig { font-family: var(--font-serif); font-optical-sizing: auto; font-size: clamp(2.6rem, 5vw, 3.6rem); font-weight: 420; letter-spacing: -0.01em; color: var(--text); line-height: 1; }
 .ratioNote { font-size: 0.85rem; color: var(--text-muted); }
 .bars { display: flex; flex-direction: column; gap: 0.8rem; }
 .barTrack {
@@ -139,7 +146,7 @@
   align-items: center;
 }
 .barFillSoftware { height: 100%; width: 14%; border-radius: var(--radius-full); background: var(--text-faint); }
-.barFillServices { height: 100%; width: 100%; border-radius: var(--radius-full); background: var(--grad-gold); }
+.barFillServices { height: 100%; width: 100%; border-radius: var(--radius-full); background: var(--grad); }
 
 /* ── Quote ── */
 .quote { margin: 2.6rem 0 0; border-left: 2px solid var(--gold-light); padding-left: 1.4rem; }
@@ -150,9 +157,9 @@
 /* ── Card grids ── */
 .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.4rem; text-align: left; }
 .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2.4rem; text-align: left; }
-.cardTitle { font-size: 1.15rem; font-weight: 600; color: var(--text); margin: 0 0 0.5rem; }
+.cardTitle { font-family: var(--font-sans); font-size: 1.15rem; font-weight: 600; color: var(--text); margin: 0 0 0.5rem; }
 .cardBody { font-size: 0.92rem; line-height: 1.5; color: var(--text-muted); margin: 0; }
-.cardNum { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; color: var(--text-faint); }
+.cardNum { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; color: var(--text-faint); }
 
 .statCard, .flowCard, .stepCard {
   position: relative;
@@ -168,28 +175,28 @@
   position: absolute;
   inset: 0 0 auto 0;
   height: 2px;
-  background: var(--grad-gold);
+  background: var(--grad);
 }
-.statFig { display: block; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; color: var(--text); line-height: 1; }
-.statKicker { display: block; margin: 0.5rem 0 0.9rem; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+.statFig { display: block; font-family: var(--font-serif); font-optical-sizing: auto; font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 440; letter-spacing: -0.01em; color: var(--text); line-height: 1; }
+.statKicker { display: block; margin: 0.5rem 0 0.9rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
 
 /* ── 05 · Product flow ── */
-.flowKey { display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 0.7rem; }
+.flowKey { display: block; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 0.7rem; }
 .tagRow { display: flex; gap: 0.6rem; margin-top: 1.6rem; }
-.tag { padding: 0.4rem 0.9rem; border-radius: var(--radius-full); border: 1px solid var(--bg-cream); background: var(--bg-surface); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.tag { padding: 0.4rem 0.9rem; border-radius: var(--radius-full); border: 1px solid var(--bg-cream); background: var(--bg-surface); font-family: var(--font-mono); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
 .tagGold { border-color: var(--gold-light); background: var(--gold-tint); color: var(--gold-dark); }
 
 /* ── 06 · How it works steps ── */
 .stepIcon { font-size: 1.3rem; color: var(--gold); display: inline-block; margin-bottom: 0.9rem; }
 .pillRow { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
-.miniPill { padding: 0.28rem 0.7rem; border-radius: var(--radius-full); background: var(--bg-warm); border: 1px solid var(--bg-cream); font-size: 0.72rem; color: var(--text-muted); }
+.miniPill { padding: 0.28rem 0.7rem; border-radius: var(--radius-full); background: var(--bg-warm); border: 1px solid var(--bg-cream); font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); }
 
 /* ── Compare panels ── */
 .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2.4rem; text-align: left; }
 .panel { padding: 1.8rem; border-radius: var(--radius-md, 14px); border: 1px solid var(--bg-cream); background: var(--bg-surface); }
 .panelOld { opacity: 0.92; }
 .panelNew { border-color: var(--gold-light); background: var(--gold-tint); }
-.colHead { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 1.1rem; }
+.colHead { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 1.1rem; }
 .colOld { color: var(--text-faint); }
 .colNew { color: var(--gold-dark); }
 .rowList { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
@@ -200,7 +207,7 @@
 /* ── Stat strip ── */
 .strip { display: flex; flex-wrap: wrap; gap: clamp(1.5rem, 5vw, 3.5rem); margin-top: 2.6rem; padding-top: 2rem; border-top: 1px solid var(--bg-cream); text-align: left; }
 .statBlock { display: flex; flex-direction: column; gap: 0.4rem; }
-.statNum { font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; color: var(--gold-dark); line-height: 1; }
+.statNum { font-family: var(--font-serif); font-optical-sizing: auto; font-size: clamp(2rem, 3.2vw, 2.8rem); font-weight: 440; letter-spacing: -0.01em; color: var(--gold-dark); line-height: 1; }
 .statLabel { font-size: 0.82rem; color: var(--text-muted); max-width: 22ch; }
 
 /* ── 09 · Business model pricing ── */
@@ -208,8 +215,8 @@
 .priceCard { padding: 1.8rem; border-radius: var(--radius-md, 14px); border: 1px solid var(--bg-cream); background: var(--bg-surface); display: flex; flex-direction: column; gap: 0.5rem; }
 .priceHero { border-color: var(--gold-light); background: var(--gold-tint); box-shadow: var(--shadow-md); }
 .priceMuted { opacity: 0.9; }
-.priceLabel { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); }
-.priceFig { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em; color: var(--text); line-height: 1; }
+.priceLabel { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); }
+.priceFig { font-family: var(--font-serif); font-optical-sizing: auto; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 440; letter-spacing: -0.01em; color: var(--text); line-height: 1; }
 .priceNote { font-size: 0.88rem; line-height: 1.45; color: var(--text-muted); margin: 0; }
 
 /* ── 10 · Market layers ── */
@@ -219,57 +226,58 @@
 .layer3 { border-color: var(--gold-light); background: var(--gold-tint); }
 .layerStruck { opacity: 0.6; }
 .layerStruck .layerFig { text-decoration: line-through; color: var(--text-faint); }
-.layerTier { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); }
-.layerFig { font-size: clamp(1.8rem, 3.4vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; color: var(--text); line-height: 1; }
+.layerTier { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); }
+.layerFig { font-family: var(--font-serif); font-optical-sizing: auto; font-size: clamp(2rem, 3.4vw, 3rem); font-weight: 440; letter-spacing: -0.01em; color: var(--text); line-height: 1; }
 .layerName { font-size: 0.92rem; line-height: 1.45; color: var(--text-muted); }
 .layerName em { font-style: normal; color: var(--text-faint); font-size: 0.82rem; }
 .noteRow { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.6rem; text-align: left; }
 .note { font-size: 0.9rem; line-height: 1.5; color: var(--text-muted); }
-.noteHead { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 0.3rem; }
+.noteHead { display: block; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 0.3rem; }
 
 /* ── 11 · Team ── */
 .team { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2.4rem; text-align: left; }
 .person { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1.8rem; border-radius: var(--radius-md, 14px); border: 1px solid var(--bg-cream); background: var(--bg-surface); position: relative; overflow: hidden; }
-.person::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 2px; background: var(--grad-gold); }
+.person::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 2px; background: var(--grad); }
 .avatar { border-radius: var(--radius-full); object-fit: cover; flex-shrink: 0; }
-.personName { font-size: 1.2rem; font-weight: 600; color: var(--text); margin: 0; }
+.personName { font-family: var(--font-sans); font-size: 1.2rem; font-weight: 600; color: var(--text); margin: 0; }
 .personRole { font-size: 0.85rem; color: var(--gold-dark); margin: 0.2rem 0 0.7rem; }
 .personBio { font-size: 0.9rem; line-height: 1.5; color: var(--text-muted); margin: 0; }
 
 /* ── 12 · The ask ── */
-.askFig { font-weight: 300; font-size: clamp(4rem, 12vw, 9rem); letter-spacing: -0.05em; line-height: 1; margin: 0.6rem 0 0; color: var(--text); }
+.askFig { font-family: var(--font-serif); font-optical-sizing: auto; font-weight: 380; font-size: clamp(4rem, 12vw, 9rem); letter-spacing: -0.03em; line-height: 1; margin: 0.6rem 0 0; color: var(--text); }
 .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.6rem; text-align: left; }
 .milestone { padding: 1.6rem; border-radius: var(--radius-md, 14px); border: 1px solid var(--bg-cream); background: var(--bg-surface); }
-.msWhen { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); }
-.msWhat { font-size: 1.15rem; font-weight: 600; color: var(--text); margin: 0.5rem 0 0.9rem; }
+.msWhen { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); }
+.msWhat { font-family: var(--font-sans); font-size: 1.15rem; font-weight: 600; color: var(--text); margin: 0.5rem 0 0.9rem; }
 .msList { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
 .msList li { position: relative; padding-left: 1rem; font-size: 0.88rem; color: var(--text-muted); }
 .msList li::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; border-radius: var(--radius-full); background: var(--gold-light); }
 
-.compEyebrow { margin: 2.8rem 0 1rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); }
+.compEyebrow { margin: 2.8rem 0 1rem; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); }
 .comps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: left; }
 .comp { padding: 1.4rem; border-radius: var(--radius-md, 14px); border: 1px solid var(--bg-cream); background: var(--bg-surface); display: flex; flex-direction: column; gap: 0.25rem; }
 .compUs { border-color: var(--gold-light); background: var(--gold-tint); }
-.compName { font-size: 0.95rem; font-weight: 600; color: var(--text); }
-.compVal { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; color: var(--text); line-height: 1; }
+.compName { font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600; color: var(--text); }
+.compVal { font-family: var(--font-serif); font-optical-sizing: auto; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 440; letter-spacing: -0.01em; color: var(--text); line-height: 1; }
 .compMult { font-size: 0.8rem; font-weight: 600; color: var(--gold-dark); }
 .compNote { font-size: 0.8rem; color: var(--text-faint); }
-.closeLine { margin-top: 2.8rem; font-weight: 300; font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.2; letter-spacing: -0.02em; color: var(--text); }
+.closeLine { margin-top: 2.8rem; font-family: var(--font-serif); font-optical-sizing: auto; font-weight: 360; font-size: clamp(1.7rem, 3.4vw, 2.8rem); line-height: 1.2; letter-spacing: -0.02em; color: var(--text); }
+.closeLine em { font-style: italic; color: var(--gold); }
 
 /* ── Fixed chrome ── */
 .progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: var(--z-sticky, 200); }
-.progressFill { height: 100%; transform-origin: 0 50%; background: var(--grad-gold); transition: transform 0.1s linear; }
+.progressFill { height: 100%; transform-origin: 0 50%; background: var(--grad); transition: transform 0.1s linear; }
 
 .brand { position: fixed; top: clamp(20px, 3vw, 36px); left: clamp(24px, 4vw, 56px); display: flex; align-items: center; gap: 0.55rem; z-index: var(--z-nav, 210); }
-.brandMark { border-radius: 6px; display: block; }
-.brandWord { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; color: var(--text); }
+.brandMark { display: block; }
+.brandWord { font-family: var(--font-serif); font-optical-sizing: auto; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.02em; color: var(--text); }
 
 .dots { position: fixed; top: 50%; right: clamp(18px, 2.5vw, 34px); transform: translateY(-50%); display: flex; flex-direction: column; gap: 0.65rem; z-index: var(--z-nav, 210); }
 .dot { width: 8px; height: 8px; padding: 0; border: none; border-radius: var(--radius-full); background: var(--text-faint); opacity: 0.4; cursor: pointer; transition: opacity 0.2s, transform 0.2s, background 0.2s; }
 .dot:hover { opacity: 0.8; }
 .dotActive { background: var(--gold); opacity: 1; transform: scale(1.4); }
 
-.counter { position: fixed; bottom: clamp(20px, 3vw, 36px); right: clamp(24px, 4vw, 56px); font-size: 0.8rem; font-variant-numeric: tabular-nums; letter-spacing: 0.05em; color: var(--text-faint); z-index: var(--z-nav, 210); }
+.counter { position: fixed; bottom: clamp(20px, 3vw, 36px); right: clamp(24px, 4vw, 56px); font-family: var(--font-mono); font-size: 0.78rem; font-variant-numeric: tabular-nums; letter-spacing: 0.05em; color: var(--text-faint); z-index: var(--z-nav, 210); }
 
 .hint { position: fixed; bottom: clamp(20px, 3vw, 36px); left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-faint); z-index: var(--z-nav, 210); transition: opacity 0.4s; pointer-events: none; }
 .hintKey { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 0.3rem; border-radius: 6px; border: 1px solid var(--bg-cream); background: var(--bg-surface); }

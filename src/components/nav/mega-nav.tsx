@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { byFunction, howItWorks, alsoHandled, type NavItem } from '@/content/nav'
+import { MambaMark } from '@/components/mamba-mark'
 
 // Single-stroke icons, keyed to NavItem.icon. Icons are JSX so they live here,
 // not in nav.ts. 20×20, currentColor, gold inside the dropdown chip.
@@ -130,7 +131,7 @@ export default function MegaNav() {
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32 }}>
           {/* Logo */}
           <Link href="/" prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }} onClick={() => setProductOpen(false)}>
-            <Image src="/brand/mamba-mark-gold.png" alt="MambaHR" width={24} height={24} priority style={{ display: 'block', objectFit: 'contain' }} />
+            <MambaMark size={22} color="var(--gold)" title="MambaHR" />
             <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 18, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
           </Link>
 

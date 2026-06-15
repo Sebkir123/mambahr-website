@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { MambaMark } from '@/components/mamba-mark'
 
 const cols = [
   {
@@ -101,7 +102,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', marginBottom: 14 }}>
-              <Image src="/brand/mamba-mark-gold.png" alt="MambaHR" width={20} height={20} style={{ display: 'block', objectFit: 'contain' }} />
+              <MambaMark size={20} color="var(--gold)" title="MambaHR" />
               <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 17, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
             </Link>
             <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.55, maxWidth: 210, margin: 0 }}>
