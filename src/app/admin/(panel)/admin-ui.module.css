@@ -1,0 +1,117 @@
+/* Shared admin chrome: page headers, buttons, cards, tables, badges. */
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.h1 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0;
+}
+.subtitle {
+  font-size: 14px;
+  color: var(--text-faint);
+  margin: 4px 0 0;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--grad);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  text-decoration: none;
+}
+.btnPrimary:disabled { opacity: 0.6; cursor: default; }
+
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border: 1px solid var(--border-mid);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  text-decoration: none;
+}
+.btnGhost:hover { background: var(--bg-surface); color: var(--text); }
+
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border-faint);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-faint);
+}
+.table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-faint);
+  color: var(--text-muted);
+  vertical-align: middle;
+}
+.table tr:last-child td { border-bottom: none; }
+.rowLink {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+}
+.rowLink:hover { color: var(--gold-dark); }
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badgePublished { background: rgba(22, 163, 74, 0.12); color: var(--color-green); }
+.badgeDraft { background: var(--bg-elevated); color: var(--text-faint); }
+.badgeScheduled { background: var(--violet-soft); color: var(--violet); }
+
+.empty {
+  padding: 56px 24px;
+  text-align: center;
+  color: var(--text-faint);
+}
+.empty h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+.empty p { font-size: 14px; margin: 0 0 20px; }

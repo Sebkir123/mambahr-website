@@ -66,6 +66,7 @@ const topLinks = [
   { label: 'Pricing',  href: '/pricing'  },
   { label: 'Compare',  href: '/compare'  },
   { label: 'Security', href: '/security' },
+  { label: 'Blog',     href: '/blog'     },
   { label: 'About',    href: '/about'    },
 ]
 

@@ -1,0 +1,119 @@
+.wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(90% 120% at 20% 0%, rgba(106, 93, 166, 0.08), transparent 55%),
+    radial-gradient(80% 120% at 90% 100%, rgba(138, 101, 53, 0.1), transparent 55%),
+    var(--bg-warm);
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-float);
+  padding: 40px 36px;
+  text-align: center;
+}
+
+.mark {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+
+.sub {
+  font-size: 14px;
+  color: var(--text-faint);
+  margin: 0 0 28px;
+  line-height: 1.5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--border-mid);
+  border-radius: 10px;
+  background: var(--bg-surface);
+  font-size: 15px;
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+.input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--violet-soft);
+}
+
+.button {
+  margin-top: 6px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--grad);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+.button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.error {
+  font-size: 13px;
+  color: var(--color-red);
+  margin: 4px 0 0;
+}
+
+.sentBox {
+  background: var(--gold-tint);
+  border: 1px solid var(--border-faint);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: left;
+}
+.sentTitle {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+.sentBody {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}

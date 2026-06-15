@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { execFileSync } from 'node:child_process'
 import { competitors } from './compare/[slug]/data'
+import { getPublishedSlugs } from '@/lib/blog-queries'
 
 const COMPARE_SLUGS = Object.keys(competitors)
 const BASE = 'https://mambahr.com'
@@ -49,11 +50,12 @@ const STATIC_ROUTES: StaticRoute[] = [
   { path: '/documents',    file: 'src/app/documents/page.tsx',       changeFrequency: 'monthly', priority: 0.8 },
   { path: '/security',     file: 'src/app/security/page.tsx',        changeFrequency: 'monthly', priority: 0.75 },
   { path: '/about',        file: 'src/app/about/page.tsx',           changeFrequency: 'monthly', priority: 0.7 },
+  { path: '/blog',         file: 'src/app/blog/page.tsx',            changeFrequency: 'daily',   priority: 0.8 },
 ]
 
 const COMPARE_SLUG_FILE = 'src/app/compare/[slug]/data.ts'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = STATIC_ROUTES.map((r) => ({
     url: `${BASE}${r.path}`,
     lastModified: gitMtime(r.file),
@@ -69,5 +71,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }))
 
-  return [...staticRoutes, ...compareRoutes]
+  // Published blog posts. RLS keeps this to live posts only; a transient DB
+  // error just yields an empty list rather than failing the whole sitemap.
+  let blogRoutes: MetadataRoute.Sitemap = []
+  try {
+    const slugs = await getPublishedSlugs()
+    blogRoutes = slugs.map((s) => ({
+      url: `${BASE}/blog/${s.slug}`,
+      lastModified: new Date(s.date),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    }))
+  } catch {
+    blogRoutes = []
+  }
+
+  return [...staticRoutes, ...compareRoutes, ...blogRoutes]
 }
