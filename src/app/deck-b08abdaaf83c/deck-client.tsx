@@ -21,12 +21,101 @@ const SLIDE_TITLES = [
 ]
 const COUNT = SLIDE_TITLES.length
 
-export default function Deck() {
+export default function Deck({
+  token = null,
+  slug = '',
+}: {
+  token?: string | null
+  slug?: string
+}) {
   const scroller = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLElement | null)[]>([])
   const [active, setActive] = useState(0)
   const [progress, setProgress] = useState(0)
   const [showHint, setShowHint] = useState(true)
+
+  // ── analytics ──────────────────────────────────────────────────────────────
+  // Best-effort, fire-and-forget telemetry to /api/deck/track: one session row
+  // (geo/device enriched server-side), a heartbeat for total time, and a dwell
+  // event per slide. Identifies the viewer when a recipient token (?k=) is set.
+  const sid = useRef('')
+  const startedAt = useRef(0)
+  const slideAt = useRef(0)
+  const prevSlide = useRef(0)
+  const maxSlide = useRef(0)
+
+  const sendEvent = useCallback(
+    (extra: Record<string, unknown>, beacon = false) => {
+      if (!sid.current) return
+      const body = JSON.stringify({
+        sessionId: sid.current,
+        token,
+        slug,
+        total: COUNT,
+        durationMs: Date.now() - startedAt.current,
+        maxSlide: maxSlide.current,
+        referrer: typeof document !== 'undefined' ? document.referrer || null : null,
+        ...extra,
+      })
+      try {
+        if (beacon && typeof navigator !== 'undefined' && navigator.sendBeacon) {
+          navigator.sendBeacon('/api/deck/track', new Blob([body], { type: 'application/json' }))
+        } else {
+          fetch('/api/deck/track', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body,
+            keepalive: true,
+          }).catch(() => {})
+        }
+      } catch {
+        /* analytics is best-effort — never break the deck */
+      }
+    },
+    [token, slug],
+  )
+
+  // Session lifecycle: open a session on mount, heartbeat duration, flush on leave.
+  useEffect(() => {
+    sid.current =
+      typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : String(Date.now())
+    startedAt.current = Date.now()
+    slideAt.current = Date.now()
+    sendEvent({})
+    const hb = setInterval(() => sendEvent({}), 15000)
+    const flush = () =>
+      sendEvent(
+        {
+          slideIndex: prevSlide.current,
+          slideTitle: SLIDE_TITLES[prevSlide.current],
+          dwellMs: Date.now() - slideAt.current,
+        },
+        true,
+      )
+    const onVis = () => {
+      if (document.visibilityState === 'hidden') flush()
+    }
+    document.addEventListener('visibilitychange', onVis)
+    window.addEventListener('pagehide', flush)
+    return () => {
+      clearInterval(hb)
+      document.removeEventListener('visibilitychange', onVis)
+      window.removeEventListener('pagehide', flush)
+      flush()
+    }
+  }, [sendEvent])
+
+  // Record dwell on a slide when the viewer moves to another.
+  useEffect(() => {
+    if (!sid.current || active === prevSlide.current) return
+    const now = Date.now()
+    const leaving = prevSlide.current
+    const dwell = now - slideAt.current
+    slideAt.current = now
+    prevSlide.current = active
+    if (active > maxSlide.current) maxSlide.current = active
+    sendEvent({ slideIndex: leaving, slideTitle: SLIDE_TITLES[leaving], dwellMs: dwell })
+  }, [active, sendEvent])
 
   const goto = useCallback((i: number) => {
     const clamped = Math.max(0, Math.min(COUNT - 1, i))

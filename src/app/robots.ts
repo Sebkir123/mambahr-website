@@ -2,7 +2,10 @@ import type { MetadataRoute } from 'next'
 
 const ALLOW_DEFAULT = {
   allow: '/',
-  disallow: ['/api/'],
+  // The admin panel is auth-gated + noindex; also keep crawlers off it. The
+  // investor deck is deliberately NOT listed here — its slug is unguessable and
+  // robots.txt is public, so naming it would defeat the obscurity.
+  disallow: ['/api/', '/admin'],
 }
 
 export default function robots(): MetadataRoute.Robots {
