@@ -43,6 +43,15 @@ export default function Deck({
   const slideAt = useRef(0)
   const prevSlide = useRef(0)
   const maxSlide = useRef(0)
+  // Active (attention) time, distinct from wall-clock duration: only counts
+  // while the tab is visible, focused, and not idle. activeAcc is the banked
+  // total; activeSince marks the open window (null = currently paused).
+  const activeAcc = useRef(0)
+  const activeSince = useRef<number | null>(null)
+  const activeMs = useCallback(
+    () => activeAcc.current + (activeSince.current ? Date.now() - activeSince.current : 0),
+    [],
+  )
 
   const sendEvent = useCallback(
     (extra: Record<string, unknown>, beacon = false) => {
@@ -53,7 +62,9 @@ export default function Deck({
         slug,
         total: COUNT,
         durationMs: Date.now() - startedAt.current,
+        activeMs: activeMs(),
         maxSlide: maxSlide.current,
+        lastSlide: prevSlide.current,
         referrer: typeof document !== 'undefined' ? document.referrer || null : null,
         ...extra,
       })
@@ -72,7 +83,7 @@ export default function Deck({
         /* analytics is best-effort — never break the deck */
       }
     },
-    [token, slug],
+    [token, slug, activeMs],
   )
 
   // Session lifecycle: open a session on mount, heartbeat duration, flush on leave.
@@ -81,6 +92,7 @@ export default function Deck({
       typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : String(Date.now())
     startedAt.current = Date.now()
     slideAt.current = Date.now()
+    activeSince.current = Date.now() // tab is visible + focused on mount
     sendEvent({})
     const hb = setInterval(() => sendEvent({}), 15000)
     const flush = () =>
@@ -116,6 +128,59 @@ export default function Deck({
     if (active > maxSlide.current) maxSlide.current = active
     sendEvent({ slideIndex: leaving, slideTitle: SLIDE_TITLES[leaving], dwellMs: dwell })
   }, [active, sendEvent])
+
+  // Active-time accounting: only count time while the tab is visible, focused,
+  // and not idle (>60s without input). This keeps "time on deck" meaning
+  // attention, not a tab left open — wall-clock duration is tracked separately.
+  useEffect(() => {
+    const IDLE_MS = 60_000
+    let idle: ReturnType<typeof setTimeout> | undefined
+    let lastArm = 0
+    const pause = () => {
+      if (activeSince.current != null) {
+        activeAcc.current += Date.now() - activeSince.current
+        activeSince.current = null
+      }
+    }
+    const resume = () => {
+      if (
+        activeSince.current == null &&
+        document.visibilityState === 'visible' &&
+        document.hasFocus()
+      ) {
+        activeSince.current = Date.now()
+      }
+    }
+    const armIdle = () => {
+      if (idle) clearTimeout(idle)
+      idle = setTimeout(pause, IDLE_MS)
+    }
+    const onActivity = () => {
+      resume()
+      const now = Date.now()
+      if (now - lastArm > 5000) { lastArm = now; armIdle() }
+    }
+    const onVis = () => {
+      if (document.visibilityState === 'hidden') pause()
+      else { resume(); armIdle() }
+    }
+    const onFocus = () => { resume(); armIdle() }
+    const acts = ['scroll', 'keydown', 'pointerdown', 'mousemove', 'touchstart'] as const
+
+    armIdle()
+    document.addEventListener('visibilitychange', onVis)
+    window.addEventListener('focus', onFocus)
+    window.addEventListener('blur', pause)
+    for (const ev of acts) window.addEventListener(ev, onActivity, { passive: true })
+    return () => {
+      if (idle) clearTimeout(idle)
+      document.removeEventListener('visibilitychange', onVis)
+      window.removeEventListener('focus', onFocus)
+      window.removeEventListener('blur', pause)
+      for (const ev of acts) window.removeEventListener(ev, onActivity)
+      pause()
+    }
+  }, [])
 
   const goto = useCallback((i: number) => {
     const clamped = Math.max(0, Math.min(COUNT - 1, i))

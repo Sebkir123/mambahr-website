@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
 import { getDeckAnalytics } from '@/lib/admin-deck'
 import { DECK_SLUG } from '@/lib/deck-links'
@@ -63,11 +64,12 @@ export default async function DeckAdminPage() {
       {a.warnings.length > 0 && <div className={styles.notice}>{a.warnings[0]}</div>}
 
       <div className={styles.totals}>
-        <Stat label="Views" value={a.totals.views} />
+        <Stat label="Opens" value={a.totals.opens} sub="server-side · beacon-proof" />
+        <Stat label="Tracked" value={a.totals.views} sub="sessions with detail" />
         <Stat label="Identified" value={a.totals.identified} sub="via recipient link" />
-        <Stat label="Anonymous" value={a.totals.anonymous} sub="admin preview / no token" />
         <Stat label="Recipients" value={a.totals.recipients} sub="distinct viewers" />
-        <Stat label="Avg time" value={dur(a.totals.avgDurationMs)} sub="per view" />
+        <Stat label="Forwarded" value={a.totals.forwarded} sub="links opened on 2+ networks" />
+        <Stat label="Avg attention" value={dur(a.totals.avgActiveMs)} sub="active time / view" />
         <Stat label="Completed" value={`${a.totals.completionPct}%`} sub="reached last slide" />
       </div>
 
@@ -116,7 +118,7 @@ export default async function DeckAdminPage() {
       <div className={ui.card}>
         <div className={styles.cardHead}>
           <h2 className={styles.cardTitle}>Recent views</h2>
-          <span className={styles.cardHint}>{a.sessions.length} sessions</span>
+          <span className={styles.cardHint}>{a.sessions.length} sessions · click a row for the full timeline</span>
         </div>
         {a.sessions.length === 0 ? (
           <p className={styles.empty}>No views yet.</p>
@@ -127,33 +129,42 @@ export default async function DeckAdminPage() {
                 <tr>
                   <th>Who</th>
                   <th>When</th>
-                  <th>Location</th>
+                  <th>Location · Network</th>
                   <th>Device</th>
-                  <th>Time</th>
+                  <th>Attention</th>
                   <th>Reached</th>
+                  <th>Engagement</th>
                 </tr>
               </thead>
               <tbody>
                 {a.sessions.map((sn) => (
-                  <tr key={sn.id}>
+                  <tr key={sn.id} className={styles.rowLink}>
                     <td>
-                      {sn.recipient ? (
-                        <>
-                          <strong>{sn.recipient}</strong>
-                          {sn.org ? ` · ${sn.org}` : ''}
-                        </>
-                      ) : (
-                        <span className={styles.muted}>Anonymous</span>
-                      )}
+                      <Link href={`/admin/deck/session/${sn.id}`} className={styles.rowAnchor}>
+                        {sn.recipient ? (
+                          <>
+                            <strong>{sn.recipient}</strong>
+                            {sn.org ? ` · ${sn.org}` : ''}
+                          </>
+                        ) : (
+                          <span className={styles.muted}>Anonymous</span>
+                        )}
+                      </Link>
                     </td>
                     <td>{when(sn.startedAt)}</td>
-                    <td>{sn.location}</td>
+                    <td>
+                      {sn.location}
+                      {sn.org_network && <span className={styles.network}>{sn.org_network}</span>}
+                    </td>
                     <td>{[sn.device, sn.browser, sn.os].filter(Boolean).join(' · ') || '—'}</td>
-                    <td>{dur(sn.durationMs)}</td>
+                    <td title={`${dur(sn.durationMs)} on screen`}>{dur(sn.activeMs)}</td>
                     <td>
                       {sn.totalSlides
                         ? `${Math.min(sn.maxSlide + 1, sn.totalSlides)}/${sn.totalSlides}`
                         : sn.maxSlide + 1}
+                    </td>
+                    <td>
+                      <Engagement score={sn.engagement} />
                     </td>
                   </tr>
                 ))}
@@ -163,5 +174,14 @@ export default async function DeckAdminPage() {
         )}
       </div>
     </>
+  )
+}
+
+function Engagement({ score }: { score: number }) {
+  const tier = score >= 70 ? 'high' : score >= 40 ? 'mid' : 'low'
+  return (
+    <span className={`${styles.score} ${styles[`score_${tier}`]}`} title="Composite engagement (0–100)">
+      {score}
+    </span>
   )
 }
