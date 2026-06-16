@@ -1,0 +1,222 @@
+/* Design-system reference page — colors, type, gradients, components.
+   Swatches render the real CSS tokens so this page can never drift from
+   globals.css. Layout only here; chrome comes from admin-ui.module.css. */
+
+.section {
+  margin-bottom: 40px;
+}
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0;
+}
+.sectionHint {
+  font-size: 13px;
+  color: var(--text-faint);
+}
+
+/* Color grid */
+.swatchGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+.swatch {
+  border: 1px solid var(--border-faint);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+}
+.swatchChip {
+  height: 76px;
+  border-bottom: 1px solid var(--border-faint);
+}
+.swatchMeta {
+  padding: 10px 12px;
+}
+.swatchName {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.swatchVar {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  margin-top: 2px;
+}
+.swatchValue {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 1px;
+  text-transform: uppercase;
+}
+
+/* checkerboard so semi-transparent border tokens read true */
+.alpha {
+  background-image:
+    linear-gradient(45deg, var(--bg-cream) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--bg-cream) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--bg-cream) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--bg-cream) 75%);
+  background-size: 14px 14px;
+  background-position: 0 0, 0 7px, 7px -7px, -7px 0;
+}
+
+/* Gradients */
+.gradGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+.gradBox {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-faint);
+}
+.gradFill {
+  height: 96px;
+}
+.gradMeta {
+  padding: 10px 12px;
+  background: var(--bg);
+  border-top: 1px solid var(--border-faint);
+}
+
+/* Typography */
+.typeStack {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 22px;
+}
+.typeRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.typeLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+}
+.fontGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  padding: 22px;
+}
+.fontCard {
+  border: 1px solid var(--border-faint);
+  border-radius: 12px;
+  padding: 18px;
+  background: var(--bg-surface);
+}
+.fontSample {
+  font-size: 34px;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.fontSerif { font-family: var(--font-serif); font-weight: 400; }
+.fontSans { font-family: var(--font-sans); font-weight: 500; }
+.fontMono { font-family: var(--font-mono); font-weight: 500; font-variant-numeric: tabular-nums; }
+.fontName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.fontUse {
+  display: block;
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-top: 2px;
+}
+
+/* Elevation */
+.shadowGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  padding: 28px 22px;
+}
+.shadowCard {
+  height: 96px;
+  border-radius: 12px;
+  background: var(--bg);
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+.shadowSm { box-shadow: var(--shadow-sm); }
+.shadowMd { box-shadow: var(--shadow-md); }
+.shadowFloat { box-shadow: var(--shadow-float); }
+
+/* Component showcase */
+.compArea {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 22px;
+}
+.compArea.spread {
+  gap: 24px;
+}
+.compGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.compGroupLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+}
+.compRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* agent ring demo cards */
+.agentCard {
+  width: 220px;
+  border: 1px solid var(--border-faint);
+  border-radius: 14px;
+  background: var(--bg);
+  padding: 16px;
+}
+.agentCardTitle {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--text);
+  margin: 8px 0 4px;
+}
+.agentCardBody {
+  font-size: 13px;
+  color: var(--text-faint);
+  line-height: 1.5;
+}

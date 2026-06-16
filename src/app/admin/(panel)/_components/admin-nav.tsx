@@ -11,6 +11,7 @@ const LINKS = [
   { href: '/admin/leads', label: 'Leads' },
   { href: '/admin/deck', label: 'Deck' },
   { href: '/admin/seo', label: 'SEO' },
+  { href: '/admin/design', label: 'Design' },
 ]
 
 export default function AdminNav({ email }: { email: string }) {
