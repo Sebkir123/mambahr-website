@@ -46,9 +46,20 @@ export function DeckLinks({ links, slug }: { links: DeckLinkRow[]; slug: string 
               <span className={styles.linkName}>{l.recipient_name}</span>
               {l.recipient_org && <span className={styles.linkOrg}>{l.recipient_org}</span>}
               {revoked && <span className={styles.revokedTag}>Revoked</span>}
+              {l.forwarded && (
+                <span
+                  className={styles.forwardedTag}
+                  title={`Opened from ${l.distinctViewers} different networks — this link was likely forwarded`}
+                >
+                  Forwarded · {l.distinctViewers}
+                </span>
+              )}
             </div>
             <div className={styles.linkStats}>
-              <span title="Views">{l.views} view{l.views === 1 ? '' : 's'}</span>
+              <span title="Server-side opens (counted even if tracking is blocked)">
+                {l.opens} open{l.opens === 1 ? '' : 's'}
+              </span>
+              <span title="Tracked sessions with engagement detail">· {l.views} tracked</span>
               <span title="Last opened">· {ago(l.lastViewedAt)}</span>
             </div>
             <div className={styles.linkActions}>
