@@ -1,0 +1,263 @@
+.notice {
+  background: var(--violet-soft);
+  border: 1px solid rgba(106, 93, 166, 0.25);
+  color: var(--text-muted);
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Totals */
+.totals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.total {
+  background: var(--bg);
+  border: 1px solid var(--border-faint);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.totalValue {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.1;
+}
+.totalLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.totalSub {
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+/* Card heads */
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border-faint);
+}
+.cardTitle {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--text);
+  margin: 0;
+}
+.cardHint {
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.empty {
+  padding: 18px;
+  font-size: 14px;
+  color: var(--text-faint);
+}
+
+/* Create-link form */
+.createForm {
+  display: flex;
+  gap: 10px;
+  padding: 16px 18px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border-faint);
+}
+.input {
+  flex: 1 1 180px;
+  min-width: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--border-mid);
+  border-radius: 9px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--text-muted);
+}
+.createBtn {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 9px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.createBtn:hover {
+  opacity: 0.9;
+}
+
+/* Recipient links */
+.linkList {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+}
+.linkRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  flex-wrap: wrap;
+}
+.linkRow + .linkRow {
+  border-top: 1px solid var(--border-faint);
+}
+.linkRevoked {
+  opacity: 0.55;
+}
+.linkWho {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 220px;
+  min-width: 0;
+}
+.linkName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.linkOrg {
+  font-size: 13px;
+  color: var(--text-faint);
+}
+.revokedTag {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  border: 1px solid var(--border-mid);
+  border-radius: 6px;
+  padding: 1px 6px;
+}
+.linkStats {
+  display: flex;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.linkActions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+.copyBtn,
+.revokeBtn {
+  padding: 7px 12px;
+  border: 1px solid var(--border-mid);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.copyBtn:hover {
+  background: var(--bg-surface);
+}
+.revokeBtn {
+  color: #b4392f;
+  border-color: rgba(180, 57, 47, 0.35);
+}
+.revokeBtn:hover {
+  background: rgba(180, 57, 47, 0.08);
+}
+
+/* Slide funnel */
+.funnel {
+  list-style: none;
+  margin: 0;
+  padding: 10px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.funnelRow {
+  display: grid;
+  grid-template-columns: minmax(140px, 220px) 1fr 44px 56px;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+.funnelLabel {
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.funnelBarTrack {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border-faint);
+  overflow: hidden;
+}
+.funnelBar {
+  display: block;
+  height: 100%;
+  background: var(--text);
+  border-radius: 999px;
+}
+.funnelPct {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  font-weight: 600;
+}
+.funnelDwell {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-faint);
+}
+
+/* Sessions table */
+.tableWrap {
+  overflow-x: auto;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.table th {
+  text-align: left;
+  padding: 10px 18px;
+  color: var(--text-faint);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid var(--border-faint);
+  white-space: nowrap;
+}
+.table td {
+  padding: 11px 18px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border-faint);
+  vertical-align: top;
+}
+.table tr:last-child td {
+  border-bottom: none;
+}
+.muted {
+  color: var(--text-faint);
+}
