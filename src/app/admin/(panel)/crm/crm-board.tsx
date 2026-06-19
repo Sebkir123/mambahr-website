@@ -109,16 +109,20 @@ export default function CrmBoard({
           >
             <div className={styles.columnHead}>
               <span className={styles.columnTitle}>{st.label}</span>
-              <span className={styles.columnMeta}>
-                {value > 0 && <span>{formatMoney(value)}</span>}
-                <span className={styles.columnCount} style={{ marginLeft: 8 }}>
-                  {inStage.length}
-                </span>
-              </span>
+              {value > 0 && <span className={styles.columnValue}>{formatMoney(value)}</span>}
+              <span className={styles.columnCount}>{inStage.length}</span>
             </div>
-            {inStage.map((c) => (
-              <BoardCard key={c.id} contact={c} dragging={dragId === c.id} onDragStart={() => setDragId(c.id)} onDragEnd={() => setDragId(null)} />
-            ))}
+            {inStage.length === 0 ? (
+              <div className={`${styles.columnEmpty} ${overCol === st.key ? styles.columnEmptyOver : ''}`}>
+                {overCol === st.key ? 'Drop here' : ''}
+              </div>
+            ) : (
+              <div className={styles.columnCards}>
+                {inStage.map((c) => (
+                  <BoardCard key={c.id} contact={c} dragging={dragId === c.id} onDragStart={() => setDragId(c.id)} onDragEnd={() => setDragId(null)} />
+                ))}
+              </div>
+            )}
           </div>
         )
       })}
@@ -164,12 +168,14 @@ function BoardCard({
           <div className={styles.kcardName}>{c.name}</div>
           {c.company && <div className={styles.kcardCompany}>{c.company}</div>}
         </div>
-        <span className={`${styles.dot} ${c.priority === 'high' ? styles.dotHigh : c.priority === 'low' ? styles.dotLow : styles.dotMedium}`} title={`${c.priority} priority`} />
+        {c.priority === 'high' && <span className={styles.dot} title="High priority" />}
       </div>
-      <div className={styles.kcardFoot}>
-        <span className={styles.kcardValue}>{formatMoney(c.value)}</span>
-        {c.source && <span className={`${styles.pill} ${styles.pillSource}`}>{c.source.replace('_', ' ')}</span>}
-      </div>
+      {(c.value != null || c.source) && (
+        <div className={styles.kcardFoot}>
+          <span className={styles.kcardValue}>{c.value != null ? formatMoney(c.value) : ''}</span>
+          {c.source && <span className={`${styles.pill} ${styles.pillSource}`}>{c.source.replace(/_/g, ' ')}</span>}
+        </div>
+      )}
     </Link>
   )
 }
