@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { JsonLd } from '@/components/json-ld'
+import { FAQS } from './faqs'
 
 export const metadata: Metadata = {
   title: 'Pricing — MambaHR | Your first AI HR department',
@@ -14,13 +15,13 @@ export const metadata: Metadata = {
     url: 'https://mambahr.com/pricing',
     siteName: 'MambaHR',
     type: 'website',
-    images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/og?title=Pricing%20for%20your%20AI%20HR%20department&eyebrow=Pricing', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing — MambaHR',
     description: 'Your whole AI HR department, priced per employee. From $10k a year.',
-    images: ['/mambahr_og_sharing.jpg'],
+    images: ['/og?title=Pricing%20for%20your%20AI%20HR%20department&eyebrow=Pricing'],
   },
 }
 
@@ -52,10 +53,22 @@ const pricingJsonLd = {
   },
 }
 
+// FAQ rich results — mirrors the visible FAQ section on the page (same FAQS).
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+}
+
 export default function PricingLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <JsonLd data={pricingJsonLd} />
+      <JsonLd data={faqJsonLd} />
       {children}
     </>
   )
