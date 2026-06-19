@@ -1,16 +1,65 @@
 import type { Metadata } from 'next'
 import { Fragment } from 'react'
+import { notFound } from 'next/navigation'
+import { headers } from 'next/headers'
 import { MambaMark } from '@/components/mamba-mark'
+import { getAdminUser } from '@/lib/auth'
+import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { clientIp, geoFromHeaders, hashIp, parseUA } from '@/lib/deck-tracking'
 import { PrintButton } from './print-button'
 import s from './rif-playbook.module.css'
 
+// Gated lead magnet: reached only via a per-recipient ?k= token emailed after
+// the form capture. Never indexed, never in the sitemap.
 export const metadata: Metadata = {
   title: 'The Ultimate RIF Playbook — MambaHR',
-  description:
-    'How to run layoffs the right way — legally, humanely, and efficiently. The complete RIF playbook, powered by MambaHR.',
+  description: 'A people leader’s field guide to running a defensible reduction in force.',
+  robots: { index: false, follow: false, noarchive: true, googleBot: { index: false, follow: false } },
 }
 
+export const dynamic = 'force-dynamic'
+
+const GUIDE_SLUG = 'rif-playbook'
 const FOOTER = 'The Ultimate RIF Playbook'
+
+// Validate the field-guide token → its lead, or null. Only this guide's tokens.
+async function resolveGuide(token: string | undefined) {
+  if (!token) return null
+  const supabase = await createSupabaseServerClient()
+  const { data, error } = await supabase.rpc('resolve_field_guide', { p_token: token })
+  if (error || !data) return null
+  const row = Array.isArray(data) ? data[0] : data
+  return row?.guide === GUIDE_SLUG ? row : null
+}
+
+// Server-side open log — fires before any client JS, enriched with firm/ASN.
+// Raw IP is never stored (salted hash + resolved org only).
+async function logView(token: string, h: Awaited<ReturnType<typeof headers>>) {
+  try {
+    const ua = h.get('user-agent') || ''
+    const { device, browser, browserVersion, os, osVersion } = parseUA(ua)
+    const geo = geoFromHeaders(h)
+    const ip = clientIp(h)
+    const supabase = await createSupabaseServerClient()
+    await supabase.rpc('log_field_guide_view', {
+      p_token: token,
+      p_ip: ip || null,
+      p_payload: {
+        ...geo,
+        ipHash: ip ? hashIp(ip) : null,
+        ua: ua.slice(0, 400),
+        device,
+        browser,
+        browserVersion,
+        os,
+        osVersion,
+        referrer: h.get('referer')?.slice(0, 500) ?? null,
+      },
+    })
+  } catch {
+    /* analytics must never break the gate */
+  }
+}
 
 function Chrome({ page }: { page: number }) {
   return (
@@ -47,7 +96,22 @@ function Rail({ children, photo }: { children: React.ReactNode; photo?: string }
   )
 }
 
-export default function RifPlaybookPage() {
+export default async function RifPlaybookPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ k?: string }>
+}) {
+  const { k } = await searchParams
+  const lead = await resolveGuide(k)
+  // Valid token → a real recipient. Otherwise allow a signed-in admin to
+  // preview; everyone else 404s (unguessable + gated, not just obscure).
+  if (!lead) {
+    const admin = await getAdminUser()
+    if (!admin) notFound()
+  } else {
+    await logView(k as string, await headers())
+  }
+
   return (
     <div className={s.deck}>
       <div className={s.toolbar}>

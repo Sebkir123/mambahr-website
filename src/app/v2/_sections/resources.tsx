@@ -1,5 +1,11 @@
 'use client'
 
+import { useCallback, useState } from 'react'
+import TurnstileWidget from '@/components/turnstile-widget'
+
+const GUIDE_SLUG = 'rif-playbook'
+const GUIDE_TITLE = 'The Defensible Layoff Playbook'
+
 const BULLETS = [
   'State-by-state notice & severance rules',
   'WARN Act thresholds and timing',
@@ -13,6 +19,36 @@ const MORE = [
 ]
 
 export default function Resources() {
+  const [email, setEmail] = useState('')
+  const [token, setToken] = useState<string | null>(null)
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [errMsg, setErrMsg] = useState('')
+
+  const onTurnstile = useCallback((t: string) => setToken(t), [])
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!email.includes('@') || !token || status === 'loading') return
+    setStatus('loading')
+    try {
+      const res = await fetch('/api/field-guide', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email, guide: GUIDE_SLUG, turnstileToken: token }),
+      })
+      if (!res.ok) {
+        const d = (await res.json().catch(() => ({}))) as { error?: string }
+        setErrMsg(d.error ?? 'Something went wrong.')
+        setStatus('error')
+        return
+      }
+      setStatus('success')
+    } catch {
+      setErrMsg('Network error. Please try again.')
+      setStatus('error')
+    }
+  }
+
   return (
     <section className="rs">
       <div className="wrap">
@@ -45,11 +81,34 @@ export default function Resources() {
                 <li key={b}><span className="tick" aria-hidden="true" />{b}</li>
               ))}
             </ul>
-            <form className="grab" onSubmit={(e) => e.preventDefault()}>
-              <input className="email" type="email" placeholder="you@company.com" aria-label="Work email" />
-              <button className="btn" type="submit">Send me the playbook</button>
-            </form>
-            <span className="note">Free · no sales call · unsubscribe anytime</span>
+            {status === 'success' ? (
+              <p className="success" role="status">
+                Check your inbox — <strong>{GUIDE_TITLE}</strong> is on its way to {email}.
+              </p>
+            ) : (
+              <>
+                <form className="grab" onSubmit={handleSubmit}>
+                  <input
+                    className="email"
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@company.com"
+                    aria-label="Work email"
+                  />
+                  <button className="btn" type="submit" disabled={status === 'loading' || !token}>
+                    {status === 'loading' ? 'Sending…' : 'Send me the playbook'}
+                  </button>
+                </form>
+                <TurnstileWidget onSuccess={onTurnstile} theme="light" />
+                {status === 'error' ? (
+                  <span className="note err">{errMsg}</span>
+                ) : (
+                  <span className="note">Free · no sales call · unsubscribe anytime</span>
+                )}
+              </>
+            )}
           </div>
         </div>
 
@@ -131,6 +190,9 @@ export default function Resources() {
         .email:focus { border-color: var(--gold); }
         .btn { background: #1A1A19; color: #fff; font-weight: 600; font-size: 14.5px; border: none; border-radius: 999px; padding: 13px 24px; cursor: pointer; }
         .note { font-size: 12px; color: var(--text-faint); margin-top: 12px; }
+        .note.err { color: #b4392f; }
+        .success { font-size: 15px; line-height: 1.6; color: var(--text); margin: 4px 0 0; }
+        .success strong { color: var(--gold-dark); }
 
         .more { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
         .more-l { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); }
