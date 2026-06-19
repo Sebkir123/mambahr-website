@@ -5,7 +5,7 @@
 // network entirely inside Postgres — no third-party API, no per-call billing.
 //
 // Re-run whenever you want to refresh (the dataset shifts slowly; monthly is
-// plenty). It TRUNCATEs and reloads, so it's idempotent.
+// plenty). It clears the table and reloads, so it's idempotent.
 //
 // Usage:
 //   SUPABASE_URL=https://xxxx.supabase.co \
@@ -14,11 +14,14 @@
 //
 // The service-role key is required (writes bypass RLS on the locked table); it
 // lives in AWS Secrets Manager / the Supabase dashboard — never commit it.
+//
+// Talks to PostgREST directly via fetch — deliberately NO @supabase/supabase-js,
+// which drags in a Realtime WebSocket client that crashes on Node < 22. This
+// script only needs plain REST, so it stays dependency-free and Node-proof.
 
 import { gunzipSync } from 'node:zlib'
-import { createClient } from '@supabase/supabase-js'
 
-const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL
+const SUPABASE_URL = (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/$/, '')
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
 
 if (!SUPABASE_URL || !SERVICE_KEY) {
@@ -31,10 +34,11 @@ const SOURCES = [
   'https://iptoasn.com/data/ip2asn-v6.tsv.gz',
 ]
 const BATCH = 5000
-
-const supabase = createClient(SUPABASE_URL, SERVICE_KEY, {
-  auth: { persistSession: false },
-})
+const REST = `${SUPABASE_URL}/rest/v1/deck_ip_asn`
+const AUTH = {
+  apikey: SERVICE_KEY,
+  authorization: `Bearer ${SERVICE_KEY}`,
+}
 
 async function fetchRows(url) {
   process.stdout.write(`Fetching ${url} … `)
@@ -62,25 +66,31 @@ async function fetchRows(url) {
 }
 
 async function main() {
-  const all = []
-  for (const url of SOURCES) all.push(...(await fetchRows(url)))
+  // concat, not push(...rows): spreading ~450k elements as call arguments
+  // overflows the stack.
+  let all = []
+  for (const url of SOURCES) all = all.concat(await fetchRows(url))
   console.log(`Total ${all.length.toLocaleString()} ranges. Reloading deck_ip_asn …`)
 
-  const { error: delErr } = await supabase
-    .from('deck_ip_asn')
-    .delete()
-    .gte('range_start', '0.0.0.0') // delete-all guard (PostgREST requires a filter)
-  if (delErr) {
-    // Fall back to a raw truncate via RPC isn't available; surface and continue
-    // only if the table was already empty.
-    console.warn(`Could not clear existing rows: ${delErr.message}`)
+  // Clear existing rows. PostgREST requires a filter on bulk delete; asn is
+  // NOT NULL on every row, so `asn=not.is.null` matches the whole table.
+  const del = await fetch(`${REST}?asn=not.is.null`, {
+    method: 'DELETE',
+    headers: { ...AUTH, prefer: 'return=minimal' },
+  })
+  if (!del.ok && del.status !== 404) {
+    console.warn(`Could not clear existing rows (HTTP ${del.status}): ${await del.text()}`)
   }
 
   let done = 0
   for (let i = 0; i < all.length; i += BATCH) {
     const chunk = all.slice(i, i + BATCH)
-    const { error } = await supabase.from('deck_ip_asn').insert(chunk)
-    if (error) throw new Error(`Insert batch at ${i}: ${error.message}`)
+    const res = await fetch(REST, {
+      method: 'POST',
+      headers: { ...AUTH, 'content-type': 'application/json', prefer: 'return=minimal' },
+      body: JSON.stringify(chunk),
+    })
+    if (!res.ok) throw new Error(`Insert batch at ${i} (HTTP ${res.status}): ${await res.text()}`)
     done += chunk.length
     process.stdout.write(`\r  loaded ${done.toLocaleString()} / ${all.length.toLocaleString()}`)
   }
