@@ -2,6 +2,7 @@ import { requireAdmin } from '@/lib/auth'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { linkedinConfigured } from '@/lib/social'
 import { Composer } from './composer'
+import { ConfirmSubmit } from './confirm-submit'
 import { publishPost, deletePost, disconnectAccount } from './actions'
 import ui from '../admin-ui.module.css'
 import styles from './social.module.css'
@@ -89,9 +90,12 @@ export default async function SocialPage() {
                 </div>
                 <form action={disconnectAccount} className={styles.accountActions}>
                   <input type="hidden" name="id" value={a.id} />
-                  <button type="submit" className={styles.disconnect}>
+                  <ConfirmSubmit
+                    className={styles.disconnect}
+                    confirm={`Disconnect ${a.account_name}? You'll need to reconnect it via LinkedIn to post again.`}
+                  >
                     Disconnect
-                  </button>
+                  </ConfirmSubmit>
                 </form>
               </li>
             ))}
@@ -140,9 +144,9 @@ export default async function SocialPage() {
                   )}
                   <form action={deletePost}>
                     <input type="hidden" name="id" value={p.id} />
-                    <button type="submit" className={styles.postDelete}>
+                    <ConfirmSubmit className={styles.postDelete} confirm="Delete this post record?">
                       Delete
-                    </button>
+                    </ConfirmSubmit>
                   </form>
                 </div>
               </li>

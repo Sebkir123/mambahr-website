@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
 import { getFieldGuideAnalytics } from '@/lib/admin-field-guides'
 import ui from '../admin-ui.module.css'
@@ -72,9 +73,11 @@ export default async function FieldGuidesPage() {
               </thead>
               <tbody>
                 {a.rows.map((r) => (
-                  <tr key={r.id}>
+                  <tr key={r.id} className={styles.rowLink}>
                     <td>
-                      <strong>{r.email}</strong>
+                      <Link href={`/admin/field-guides/${r.id}`} className={styles.rowAnchor}>
+                        <strong>{r.email}</strong>
+                      </Link>
                       {r.company ? ` · ${r.company}` : ''}
                     </td>
                     <td>{r.guideTitle}</td>

@@ -112,6 +112,10 @@ export async function getFieldGuideAnalytics(): Promise<FieldGuideAnalytics> {
     }
   })
 
+  return finalize(rows, views.length, warnings)
+}
+
+function finalize(rows: FieldGuideRow[], totalOpens: number, warnings: string[]): FieldGuideAnalytics {
   const now = Date.now()
   const DAY = 86_400_000
   const opened = rows.filter((r) => r.opens > 0).length
@@ -120,8 +124,61 @@ export async function getFieldGuideAnalytics(): Promise<FieldGuideAnalytics> {
     opened,
     openRatePct: rows.length ? Math.round((opened / rows.length) * 100) : 0,
     last7d: rows.filter((r) => now - new Date(r.requestedAt).getTime() <= 7 * DAY).length,
-    opens: views.length,
+    opens: totalOpens,
   }
 
   return { warnings, rows, totals }
+}
+
+export type FieldGuideOpen = {
+  viewedAt: string
+  network: string | null
+  location: string
+  device: string | null
+  browser: string | null
+  os: string | null
+}
+export type FieldGuideLeadDetail = {
+  email: string
+  company: string | null
+  guideTitle: string
+  requestedAt: string
+  sentAt: string | null
+  opens: FieldGuideOpen[]
+}
+
+export async function getFieldGuideLead(id: string): Promise<FieldGuideLeadDetail | null> {
+  const supabase = await createSupabaseServerClient()
+  const { data: lead } = await supabase
+    .from('field_guide_leads')
+    .select('id, guide, email, company, requested_at, sent_at')
+    .eq('id', id)
+    .maybeSingle()
+  if (!lead) return null
+
+  const { data: views } = await supabase
+    .from('field_guide_views')
+    .select('viewed_at, asn_org, city, region, country, device, browser, os')
+    .eq('lead_id', id)
+    .order('viewed_at', { ascending: false })
+    .limit(500)
+
+  const rows = (views as Record<string, unknown>[] | null) ?? []
+  const opens: FieldGuideOpen[] = rows.map((v) => ({
+    viewedAt: v.viewed_at as string,
+    network: (v.asn_org as string) ?? null,
+    location: loc(v.city, v.region, v.country),
+    device: (v.device as string) ?? null,
+    browser: (v.browser as string) ?? null,
+    os: (v.os as string) ?? null,
+  }))
+
+  return {
+    email: lead.email as string,
+    company: (lead.company as string) ?? null,
+    guideTitle: guideTitle(lead.guide as string),
+    requestedAt: lead.requested_at as string,
+    sentAt: (lead.sent_at as string) ?? null,
+    opens,
+  }
 }

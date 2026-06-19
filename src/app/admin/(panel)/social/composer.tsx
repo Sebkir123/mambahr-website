@@ -8,11 +8,21 @@ export type AccountOption = { id: string; name: string }
 
 const MAX = 3000 // LinkedIn post limit
 
+// datetime-local value for "now" in the browser's timezone, for the min attr.
+function localNow(): string {
+  const d = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+  return d.toISOString().slice(0, 16)
+}
+
+const TZ = Intl.DateTimeFormat().resolvedOptions().timeZone
+
 export function Composer({ accounts }: { accounts: AccountOption[] }) {
   const [body, setBody] = useState('')
   const [selected, setSelected] = useState<string[]>(accounts.map((a) => a.id))
   const [when, setWhen] = useState('')
   const [pending, setPending] = useState<null | 'draft' | 'schedule' | 'now'>(null)
+  const [feedback, setFeedback] = useState<{ ok: boolean; msg: string } | null>(null)
+  const [showPreview, setShowPreview] = useState(false)
 
   const toggle = (id: string) =>
     setSelected((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]))
@@ -31,20 +41,37 @@ export function Composer({ accounts }: { accounts: AccountOption[] }) {
     const fd = new FormData()
     fd.set('body', body)
     fd.set('mode', mode)
-    if (mode === 'schedule') fd.set('scheduledAt', when)
+    // Convert the local wall-clock value to an absolute UTC instant so the
+    // post fires at the time the manager actually meant, not in server TZ.
+    if (mode === 'schedule') fd.set('scheduledAt', new Date(when).toISOString())
     selected.forEach((id) => fd.append('accountIds', id))
     setPending(mode)
+    setFeedback(null)
     try {
-      await composePost(fd)
-      setBody('')
-      setWhen('')
+      const res = await composePost(fd)
+      setFeedback({ ok: res.ok, msg: res.message })
+      if (res.ok) {
+        setBody('')
+        setWhen('')
+        setShowPreview(false)
+      }
+    } catch {
+      setFeedback({ ok: false, msg: 'Something went wrong. Try again.' })
     } finally {
       setPending(null)
     }
   }
 
+  const selectedAccounts = accounts.filter((a) => selected.includes(a.id))
+
   return (
     <div className={styles.composer}>
+      {feedback && (
+        <div className={feedback.ok ? `${styles.feedback} ${styles.feedbackOk}` : `${styles.feedback} ${styles.feedbackErr}`}>
+          {feedback.msg}
+        </div>
+      )}
+
       <textarea
         className={styles.textarea}
         value={body}
@@ -54,10 +81,35 @@ export function Composer({ accounts }: { accounts: AccountOption[] }) {
         rows={6}
       />
       <div className={styles.composerFoot}>
+        <button
+          type="button"
+          className={styles.previewToggle}
+          onClick={() => setShowPreview((v) => !v)}
+          disabled={!body.trim()}
+        >
+          {showPreview ? 'Hide preview' : 'Preview'}
+        </button>
         <span className={styles.count}>
           {body.length}/{MAX}
         </span>
       </div>
+
+      {showPreview && body.trim() && (
+        <div className={styles.previews}>
+          {selectedAccounts.map((a) => (
+            <div key={a.id} className={styles.previewCard}>
+              <div className={styles.previewHead}>
+                <span className={styles.previewAvatar}>{a.name.charAt(0)}</span>
+                <div>
+                  <span className={styles.previewName}>{a.name}</span>
+                  <span className={styles.previewSub}>now · LinkedIn</span>
+                </div>
+              </div>
+              <p className={styles.previewBody}>{body}</p>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className={styles.accountPick}>
         <span className={styles.pickLabel}>Post as</span>
@@ -66,6 +118,7 @@ export function Composer({ accounts }: { accounts: AccountOption[] }) {
             <button
               key={a.id}
               type="button"
+              aria-pressed={selected.includes(a.id)}
               className={selected.includes(a.id) ? `${styles.chip} ${styles.chipOn}` : styles.chip}
               onClick={() => toggle(a.id)}
             >
@@ -76,13 +129,16 @@ export function Composer({ accounts }: { accounts: AccountOption[] }) {
       </div>
 
       <div className={styles.actions}>
-        <input
-          type="datetime-local"
-          className={styles.when}
-          value={when}
-          onChange={(e) => setWhen(e.target.value)}
-          aria-label="Schedule time"
-        />
+        <label className={styles.scheduleField}>
+          <span className={styles.scheduleLabel}>Schedule for <span className={styles.tz}>({TZ})</span></span>
+          <input
+            type="datetime-local"
+            className={styles.when}
+            value={when}
+            min={localNow()}
+            onChange={(e) => setWhen(e.target.value)}
+          />
+        </label>
         <div className={styles.btns}>
           <button
             type="button"
