@@ -50,7 +50,9 @@ export type SiteAnalytics = {
     avgScroll: number
     returningPct: number
     pageviews: number
+    trendPct: number | null // visitors vs the previous equal window (null if no prior data)
   }
+  spark: number[] // per-bucket real-visit counts, for the hero sparklines
   scrollDist: { gt25: number; gt50: number; gt75: number; full: number } // % of real sessions
   topCountry: { name: string; count: number; pct: number } | null
   topSource: { name: string; count: number; pct: number } | null
@@ -62,7 +64,7 @@ export type SiteAnalytics = {
   topPages: { path: string; title: string | null; views: number; avgDwellMs: number; avgScroll: number }[]
   events: { widget: number; conversation: number; signup: number }
   funnel: { label: string; count: number; pct: number }[]
-  timeline: { label: string; visits: number; events: number }[]
+  timeline: { label: string; visits: number; widget: number; conversation: number; signup: number }[]
   heatmap: number[][] // [weekday 0=Mon..6=Sun][hour 0..23] = real session count
   sessions: SiteSessionRow[]
 }
@@ -231,13 +233,15 @@ async function computeSiteAnalytics(
   const rangeMs = hours * 3_600_000
   const bucketCount = Math.max(1, Math.round(rangeMs / bucketMs))
   const start = now - bucketCount * bucketMs
-  const tl: { label: string; visits: number; events: number }[] = []
+  const tl: { label: string; visits: number; widget: number; conversation: number; signup: number }[] = []
   for (let i = 0; i < bucketCount; i++) {
     const parts = tzParts(new Date(start + (i + 1) * bucketMs), tz)
     tl.push({
       label: hourly ? `${String(parts.hour).padStart(2, '0')}:00` : parts.dateLabel,
       visits: 0,
-      events: 0,
+      widget: 0,
+      conversation: 0,
+      signup: 0,
     })
   }
   const bucketOf = (iso: string) => {
@@ -250,10 +254,27 @@ async function computeSiteAnalytics(
   }
   for (const e of evs) {
     const sess = rowById.get(e.session_id)
-    if (sess && !sess.isBot) {
-      const b = bucketOf(sess.startedAt)
-      if (b >= 0) tl[b].events++
-    }
+    if (!sess || sess.isBot) continue
+    const b = bucketOf(sess.startedAt)
+    if (b < 0) continue
+    if (e.kind === 'widget_open') tl[b].widget++
+    else if (e.kind === 'conversation') tl[b].conversation++
+    else if (e.kind === 'signup') tl[b].signup++
+  }
+  const spark = tl.map((x) => x.visits)
+
+  // Visitors vs the previous equal window → trend %.
+  let trendPct: number | null = null
+  {
+    const prevStart = new Date(now - 2 * rangeMs).toISOString()
+    const { count: prevReal } = await supabase
+      .from('site_sessions')
+      .select('id', { count: 'exact', head: true })
+      .eq('property', property)
+      .eq('is_bot', false)
+      .gte('started_at', prevStart)
+      .lt('started_at', cutoffIso)
+    if (prevReal && prevReal > 0) trendPct = Math.round(((real.length - prevReal) / prevReal) * 100)
   }
 
   // Weekday (Mon=0) × hour heatmap of real sessions, in the chosen display tz.
@@ -287,7 +308,9 @@ async function computeSiteAnalytics(
       avgScroll: real.length ? Math.round(real.reduce((n, r) => n + r.maxScroll, 0) / real.length) : 0,
       returningPct: real.length ? Math.round((real.filter((r) => r.isReturning).length / real.length) * 100) : 0,
       pageviews: realPv,
+      trendPct,
     },
+    spark,
     scrollDist: { gt25: pctOfReal(dist.gt25), gt50: pctOfReal(dist.gt50), gt75: pctOfReal(dist.gt75), full: pctOfReal(dist.full) },
     topCountry: byCountry[0] ? { name: byCountry[0].key, count: byCountry[0].n, pct: pctOfReal(byCountry[0].n) } : null,
     topSource: bySource[0] ? { name: bySource[0].key, count: bySource[0].n, pct: pctOfReal(bySource[0].n) } : null,
