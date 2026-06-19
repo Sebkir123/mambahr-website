@@ -21,11 +21,10 @@ export default async function LeadsPage({
 }: {
   searchParams: Promise<{ source?: string }>
 }) {
-  await requireAdmin()
   const { source } = await searchParams
   const active = (SOURCES.includes(source as Lead['source']) ? source : 'all') as Lead['source'] | 'all'
 
-  const { leads, warnings } = await getAllLeads()
+  const [, { leads, warnings }] = await Promise.all([requireAdmin(), getAllLeads()])
   const filtered = active === 'all' ? leads : leads.filter((l) => l.source === active)
 
   const exportHref = `/admin/leads/export${active === 'all' ? '' : `?source=${active}`}`
