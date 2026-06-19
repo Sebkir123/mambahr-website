@@ -31,6 +31,7 @@ const GROUPS: Group[] = [
   {
     title: 'Customers',
     items: [
+      { href: '/admin/customers', label: 'Overview', path: '/admin/customers' },
       { href: '/admin/crm?kind=customer', label: 'Pipeline', path: '/admin/crm', kind: 'customer' },
       { href: '/admin/leads', label: 'Leads', path: '/admin/leads' },
       { href: '/admin/field-guides', label: 'Field guides', path: '/admin/field-guides' },
