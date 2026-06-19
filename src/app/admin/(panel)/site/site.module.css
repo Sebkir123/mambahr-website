@@ -22,11 +22,16 @@
   box-shadow: var(--shadow-sm); padding: 18px 20px; display: flex; flex-direction: column; gap: 4px; min-height: 104px;
 }
 .statHero { background: linear-gradient(135deg, rgba(138,101,53,0.10), rgba(106,93,166,0.08)); border-color: var(--gold-light); }
-.statTop { display: flex; align-items: baseline; gap: 10px; }
-.statValue { font-family: var(--font-serif); font-weight: 500; font-size: 32px; letter-spacing: -0.02em; color: var(--text); line-height: 1; }
+.statHead { display: flex; align-items: center; gap: 8px; }
+.statHead .statLabel { flex: 1; }
+.statIcon { display: inline-flex; align-items: center; color: var(--gold-dark); }
+.statValue { font-family: var(--font-serif); font-weight: 500; font-size: 34px; letter-spacing: -0.02em; color: var(--text); line-height: 1.05; }
 .statLabel { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-faint); }
 .statSub { font-size: 12.5px; color: var(--text-faint); }
-.trend { font-size: 12px; font-weight: 700; color: var(--color-green); }
+.statFoot { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin-top: auto; }
+.spark { display: block; }
+.trendUp { font-size: 12px; font-weight: 700; color: var(--color-green); white-space: nowrap; }
+.trendDown { font-size: 12px; font-weight: 700; color: #c0392b; white-space: nowrap; }
 
 .banner {
   display: flex; align-items: center; gap: 10px; background: var(--gold-tint);
@@ -52,9 +57,21 @@
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legendDot { width: 8px; height: 8px; border-radius: 999px; }
 
-/* timeline svg */
-.chart { width: 100%; height: 220px; display: block; }
+/* timeline chart */
+.chartLegendWrap { position: relative; }
+.chartLegendWrap .legend { justify-content: flex-end; margin-bottom: 10px; }
+.chartBox { position: relative; }
+.chart { width: 100%; height: 240px; display: block; cursor: crosshair; }
 .axis { font-size: 10px; fill: var(--text-faint); }
+.tooltip {
+  position: absolute; top: 6px;
+  background: var(--bg); border: 1px solid var(--border-faint); border-radius: 10px;
+  box-shadow: var(--shadow-md); padding: 9px 11px; pointer-events: none; min-width: 150px; z-index: 5;
+}
+.tooltipHead { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 7px; }
+.tooltipRow { display: flex; align-items: center; gap: 8px; font-size: 12.5px; padding: 2px 0; }
+.tooltipLabel { color: var(--text-muted); flex: 1; }
+.tooltipVal { color: var(--text); font-weight: 700; font-variant-numeric: tabular-nums; }
 
 /* sessions table */
 .tableWrap { overflow-x: auto; }

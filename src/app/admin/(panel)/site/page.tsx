@@ -3,12 +3,29 @@ import { requireAdmin } from '@/lib/auth'
 import { getSiteAnalytics, fmtDur, type SiteProperty, type Range, type Tz } from '@/lib/site-analytics'
 import { SessionsTable } from './sessions-table'
 import { SiteControls } from './site-controls'
+import { TrafficChart } from './traffic-chart'
 import ui from '../admin-ui.module.css'
 import styles from './site.module.css'
 
 export const dynamic = 'force-dynamic'
 
 type View = 'real' | 'all' | 'bots'
+
+// Inline stroke icons for the hero cards (no icon dep).
+const ICON = {
+  pulse: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4" /></svg>
+  ),
+  user: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" /></svg>
+  ),
+  clock: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+  ),
+  scroll: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 4v14M6 13l6 6 6-6" /></svg>
+  ),
+}
 
 let regionNames: Intl.DisplayNames | null = null
 function countryName(cc: string | null): string {
@@ -26,35 +43,25 @@ function flag(cc: string | null): string {
   return String.fromCodePoint(A + (cc.toUpperCase().charCodeAt(0) - 65), A + (cc.toUpperCase().charCodeAt(1) - 65))
 }
 
-function Timeline({ data }: { data: { label: string; visits: number; events: number }[] }) {
-  const w = 1000
-  const h = 200
-  const pad = 24
-  const max = Math.max(1, ...data.map((d) => d.visits))
+// Tiny inline sparkline for the hero cards.
+function Spark({ data, color = 'var(--gold)' }: { data: number[]; color?: string }) {
+  const w = 120
+  const h = 32
+  const max = Math.max(1, ...data)
   const n = data.length
-  const x = (i: number) => pad + (n > 1 ? (i * (w - pad * 2)) / (n - 1) : 0)
-  const y = (v: number) => h - pad - (v / max) * (h - pad * 2)
-  const line = data.map((d, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(d.visits).toFixed(1)}`).join(' ')
-  const area = `${line} L${x(n - 1).toFixed(1)},${h - pad} L${x(0).toFixed(1)},${h - pad} Z`
-  const labelEvery = Math.ceil(n / 12)
+  if (n < 2) return null
+  const pts = data.map((v, i) => `${i === 0 ? 'M' : 'L'}${((i / (n - 1)) * w).toFixed(1)},${(h - (v / max) * (h - 4) - 2).toFixed(1)}`).join(' ')
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className={styles.chart} preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="tlFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="var(--gold)" stopOpacity="0.18" />
-          <stop offset="100%" stopColor="var(--gold)" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <line x1={pad} y1={h - pad} x2={w - pad} y2={h - pad} stroke="var(--border-faint)" />
-      <path d={area} fill="url(#tlFill)" />
-      <path d={line} fill="none" stroke="var(--gold)" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
-      {data.map((d, i) =>
-        i % labelEvery === 0 ? (
-          <text key={i} x={x(i)} y={h - 6} textAnchor="middle" className={styles.axis}>{d.label}</text>
-        ) : null,
-      )}
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" className={styles.spark}>
+      <path d={pts} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" opacity="0.85" />
     </svg>
   )
+}
+
+function Trend({ pct }: { pct: number | null }) {
+  if (pct == null || pct === 0) return null
+  const up = pct > 0
+  return <span className={up ? styles.trendUp : styles.trendDown}>{up ? '▲' : '▼'} {Math.abs(pct)}%</span>
 }
 
 function Heatmap({ grid }: { grid: number[][] }) {
@@ -124,25 +131,43 @@ export default async function SiteTrackingPage({
 
       <div className={styles.stats}>
         <div className={`${styles.stat} ${styles.statHero}`}>
-          <div className={styles.statTop}>
-            <span className={styles.statValue}>{t.engagementPct}%</span>
+          <div className={styles.statHead}>
+            <span className={styles.statIcon}>{ICON.pulse}</span>
             <span className={styles.statLabel}>Engagement</span>
+            <Trend pct={t.trendPct} />
           </div>
-          <span className={styles.statSub}>{t.real} real visitor{t.real === 1 ? '' : 's'} · {t.pageviews} views</span>
+          <span className={styles.statValue}>{t.engagementPct}%</span>
+          <div className={styles.statFoot}>
+            <span className={styles.statSub}>{t.real} real · {t.pageviews} views</span>
+            <Spark data={a.spark} />
+          </div>
         </div>
         <div className={styles.stat}>
+          <div className={styles.statHead}>
+            <span className={styles.statIcon}>{ICON.user}</span>
+            <span className={styles.statLabel}>Visitors</span>
+            <Trend pct={t.trendPct} />
+          </div>
           <span className={styles.statValue}>{t.real}</span>
-          <span className={styles.statLabel}>Visitors</span>
-          <span className={styles.statSub}>of {t.all} sessions</span>
+          <div className={styles.statFoot}>
+            <span className={styles.statSub}>of {t.all} sessions</span>
+            <Spark data={a.spark} color="var(--violet)" />
+          </div>
         </div>
         <div className={styles.stat}>
+          <div className={styles.statHead}>
+            <span className={styles.statIcon}>{ICON.clock}</span>
+            <span className={styles.statLabel}>Avg time</span>
+          </div>
           <span className={styles.statValue}>{fmtDur(t.avgActiveMs)}</span>
-          <span className={styles.statLabel}>Avg time</span>
           <span className={styles.statSub}>active / focused</span>
         </div>
         <div className={styles.stat}>
+          <div className={styles.statHead}>
+            <span className={styles.statIcon}>{ICON.scroll}</span>
+            <span className={styles.statLabel}>Avg scroll</span>
+          </div>
           <span className={styles.statValue}>{t.avgScroll}%</span>
-          <span className={styles.statLabel}>Avg scroll</span>
           <span className={styles.statSub}>depth reached</span>
         </div>
       </div>
@@ -182,14 +207,8 @@ export default async function SiteTrackingPage({
       <section className={styles.panel}>
         <div className={styles.panelHead}>
           <h2 className={styles.panelTitle}>Traffic <span className={styles.statSub}>· {tz}</span></h2>
-          <div className={styles.legend}>
-            <span><span className={styles.legendDot} style={{ background: 'var(--gold)' }} /> Visits {t.real}</span>
-            <span><span className={styles.legendDot} style={{ background: 'var(--violet)' }} /> Widget {a.events.widget}</span>
-            <span><span className={styles.legendDot} style={{ background: 'var(--color-green)' }} /> Conversations {a.events.conversation}</span>
-            <span><span className={styles.legendDot} style={{ background: '#d98a2b' }} /> Signups {a.events.signup}</span>
-          </div>
         </div>
-        <Timeline data={a.timeline} />
+        <TrafficChart data={a.timeline} tz={tz} />
       </section>
 
       <section className={styles.panel}>
