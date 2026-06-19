@@ -62,44 +62,53 @@ const paperSvg = await tracedSvg(PAPER)
 await writeFile('public/brand/mamba-mark-light.svg', inkSvg)
 await writeFile('public/brand/mamba-mark-dark.svg', paperSvg)
 
-// ── Brand LOCKUP ───────────────────────────────────────────────────────────
-// The real logo as used on the deck + site: the M inside a hairline gold
-// double-rule frame with the gold→violet signature dash beneath. Composed here
-// to match mamba-mark.module.css (.lockup) exactly, at a 248² viewBox (2× the
-// deck's 124px) so the fixed-px frame/dash proportions carry over.
-const GOLD_LIGHT = '#C49A6C'
-// --grad: linear-gradient(100deg, #B98A4E 0%, #8A6535 48%, #6A5DA6 100%)
+// ── Brand LOCKUP (the real logo: gold M + "MambaHR" wordmark) ───────────────
+// Horizontal lockup as used on the deck + site. The wordmark is traced to a
+// vector path once via a headless render of Fraunces 600 (see the note below)
+// and cached in scripts/wordmark-path.json, so regeneration needs no browser.
+import { readFileSync } from 'node:fs'
+const GOLD = '#8A6535'
 const markPath = inkSvg.match(/<path d="([^"]+)"/)?.[1] ?? ''
-const MARK_SCALE = 144 / 1665 // .lockupMark is 58% of 248 ≈ 144
+const { path: wmPath, ww, wh } = JSON.parse(readFileSync('scripts/wordmark-path.json', 'utf8'))
 
-function lockupSvg(markHex) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="248" height="248" viewBox="0 0 248 248" fill="none">
-  <defs>
-    <linearGradient id="mambaDash" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#B98A4E"/>
-      <stop offset="48%" stop-color="#8A6535"/>
-      <stop offset="100%" stop-color="#6A5DA6"/>
-    </linearGradient>
-  </defs>
-  <rect x="1" y="1" width="246" height="246" fill="none" stroke="${GOLD_LIGHT}" stroke-width="2"/>
-  <rect x="14" y="14" width="220" height="220" fill="none" stroke="${GOLD_LIGHT}" stroke-opacity="0.55" stroke-width="2"/>
-  <g transform="translate(52 37) scale(${MARK_SCALE})"><path d="${markPath}" fill="${markHex}"/></g>
-  <rect x="96.7" y="204" width="54.6" height="4" rx="2" fill="url(#mambaDash)"/>
+// Measure the M glyph's tight box inside its 1665 frame so we can cap-align it
+// to the wordmark.
+const markRaster = await sharp(
+  Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1665 1665" width="1665" height="1665"><path d="${markPath}" fill="#000"/></svg>`),
+).png().toBuffer()
+const mTrim = await sharp(markRaster).trim({ threshold: 10 }).toBuffer({ resolveWithObject: true })
+const mw = mTrim.info.width
+const mh = mTrim.info.height
+const mox = -(mTrim.info.trimOffsetLeft ?? 0)
+const moy = -(mTrim.info.trimOffsetTop ?? 0)
+
+const H = 1000 // wordmark cap height (units)
+const sw = H / wh
+const wordW = ww * sw
+const markH = 1.22 * H // mark reads slightly taller than the wordmark
+const sm = markH / mh
+const markW = mw * sm
+const gap = 0.36 * H
+const W = Math.round(markW + gap + wordW)
+const Hc = Math.round(markH)
+const wy = (markH - H) / 2
+
+function lockupSvg(wordFill) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hc}" viewBox="0 0 ${W} ${Hc}" fill="none">
+  <g transform="translate(${(-mox * sm).toFixed(2)} ${(-moy * sm).toFixed(2)}) scale(${sm.toFixed(5)})"><path d="${markPath}" fill="${GOLD}"/></g>
+  <g transform="translate(${markW.toFixed(2)} ${wy.toFixed(2)})"><g transform="translate(${gap.toFixed(2)} 0) scale(${sw.toFixed(5)})"><path d="${wmPath}" fill="${wordFill}"/></g></g>
 </svg>
 `
 }
 
-const lockupInk = lockupSvg(INK)
-const lockupPaper = lockupSvg(PAPER)
-await writeFile('public/brand/mamba-logo-light.svg', lockupInk)
-await writeFile('public/brand/mamba-logo-dark.svg', lockupPaper)
-await writeFile(
-  'public/brand/mamba-logo-light.png',
-  await sharp(Buffer.from(lockupInk), { density: 384 }).resize(744, 744).png().toBuffer(),
-)
-await writeFile(
-  'public/brand/mamba-logo-dark.png',
-  await sharp(Buffer.from(lockupPaper), { density: 384 }).resize(744, 744).png().toBuffer(),
-)
+const lockupLight = lockupSvg(INK)
+const lockupDark = lockupSvg(PAPER)
+await writeFile('public/brand/mamba-logo-light.svg', lockupLight)
+await writeFile('public/brand/mamba-logo-dark.svg', lockupDark)
+await writeFile('public/brand/mamba-logo-light.png', await sharp(Buffer.from(lockupLight), { density: 110 }).resize(1600).png().toBuffer())
+await writeFile('public/brand/mamba-logo-dark.png', await sharp(Buffer.from(lockupDark), { density: 110 }).resize(1600).png().toBuffer())
 
 console.log('Wrote mamba-mark-{light,dark}.{png,svg} + mamba-logo-{light,dark}.{png,svg} to public/brand/')
+// To re-trace the wordmark (e.g. font/weight change): render "MambaHR" in
+// Fraunces 600 black-on-white, potrace it, and overwrite scripts/wordmark-path.json
+// with { path, ww, wh }. See scripts/_compose-lockup.mjs history.

@@ -279,14 +279,19 @@ export default function RifPlaybookPage() {
             </h2>
             <p className={s.sub}>See the downstream effect before you commit.</p>
             <div className={s.tiles}>
-              {['Payroll reduction', 'WARN triggers', 'Impact analysis', 'OWBPA tracking'].map((t) => (
-                <div key={t} className={s.tile}>
+              {[
+                { t: 'Payroll reduction', d: 'M12 5v13M6 12l6 6 6-6' },
+                { t: 'WARN triggers', d: 'M12 4l9 16H3zM12 10v4M12 17h.01' },
+                { t: 'Impact analysis', d: 'M4 19V5M4 19h16M8 16l3.5-4 3 2.5L20 8' },
+                { t: 'OWBPA tracking', d: 'M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6zM9 12l2 2 4-4' },
+              ].map((tile) => (
+                <div key={tile.t} className={s.tile}>
                   <span className={s.tileIcon}>
                     <svg width="48%" height="48%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M4 19V5M4 19h16M8 16l3.5-4 3 2.5L20 8" />
+                      <path d={tile.d} />
                     </svg>
                   </span>
-                  <span className={s.tileLabel}>{t}</span>
+                  <span className={s.tileLabel}>{tile.t}</span>
                 </div>
               ))}
             </div>
