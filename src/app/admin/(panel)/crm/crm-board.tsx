@@ -89,7 +89,7 @@ export default function CrmBoard({
   }
 
   return (
-    <div className={styles.board}>
+    <div className={`${styles.board} ${dragId ? styles.boardDragging : ''}`}>
       {stages.map((st) => {
         const inStage = items.filter((c) => c.stage === st.key)
         const value = inStage.reduce((s, c) => s + (c.value ?? 0), 0)
@@ -141,25 +141,37 @@ function BoardCard({
   onDragStart: () => void
   onDragEnd: () => void
 }) {
-  const ref = useRef<HTMLAnchorElement>(null)
-  // Suppress click-through navigation right after a drag.
+  const router = useRouter()
+  // A draggable DIV (not an <a>): anchors get native browser link-dragging,
+  // which produces the URL ghost / janky drag visuals. A div drags as a clean
+  // element snapshot; we navigate on click instead, suppressed right after a drag.
   const dragged = useRef(false)
+  const go = () => {
+    if (!dragged.current) router.push(`/admin/crm/${c.id}`)
+  }
   return (
-    <Link
-      ref={ref}
-      href={`/admin/crm/${c.id}`}
+    <div
+      role="button"
+      tabIndex={0}
+      aria-label={`${c.name} — open`}
       draggable
       onDragStart={(e) => {
         dragged.current = true
         e.dataTransfer.effectAllowed = 'move'
+        e.dataTransfer.setData('text/plain', c.id)
         onDragStart()
       }}
       onDragEnd={() => {
         onDragEnd()
-        setTimeout(() => (dragged.current = false), 50)
+        // Keep the flag briefly so the trailing click after a drop doesn't navigate.
+        setTimeout(() => (dragged.current = false), 60)
       }}
-      onClick={(e) => {
-        if (dragged.current) e.preventDefault()
+      onClick={go}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          router.push(`/admin/crm/${c.id}`)
+        }
       }}
       className={`${styles.kcard} ${dragging ? styles.kcardDragging : ''}`}
     >
@@ -176,6 +188,6 @@ function BoardCard({
           {c.source && <span className={`${styles.pill} ${styles.pillSource}`}>{c.source.replace(/_/g, ' ')}</span>}
         </div>
       )}
-    </Link>
+    </div>
   )
 }
