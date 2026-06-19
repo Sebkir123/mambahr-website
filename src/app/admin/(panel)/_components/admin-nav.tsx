@@ -10,6 +10,7 @@ const LINKS = [
   { href: '/admin/blog', label: 'Blog' },
   { href: '/admin/leads', label: 'Leads' },
   { href: '/admin/field-guides', label: 'Field guides' },
+  { href: '/admin/social', label: 'Posts' },
   { href: '/admin/deck', label: 'Deck' },
   { href: '/admin/seo', label: 'SEO' },
   { href: '/admin/design', label: 'Design' },
