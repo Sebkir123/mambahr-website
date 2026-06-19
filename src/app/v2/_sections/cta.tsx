@@ -14,7 +14,7 @@ export default function Cta() {
         </p>
         <form className="form" onSubmit={(e) => e.preventDefault()}>
           <input className="input" type="email" placeholder="you@company.com" aria-label="Work email" />
-          <button className="btn" type="submit">Book a demo</button>
+          <button className="btn" type="submit" data-track="signup" data-track-label="access-form">Book a demo</button>
         </form>
         <div className="trust">
           <span>Switch in a day</span><i /><span>Your data stays in the US</span><i /><span>A human on the big calls</span>

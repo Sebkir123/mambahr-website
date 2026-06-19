@@ -1,6 +1,23 @@
 import 'server-only'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
-import type { SiteProperty, Range, SessionClass, SiteSessionRow, SitePageview, SiteSessionDetail } from '@/lib/site-analytics-types'
+import type { SiteProperty, Range, Tz, SessionClass, SiteSessionRow, SitePageview, SiteSessionDetail } from '@/lib/site-analytics-types'
+
+const TZMAP: Record<Tz, string> = { UTC: 'UTC', ET: 'America/New_York', CET: 'Europe/Zurich' }
+const WD: Record<string, number> = { Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6 }
+// Extract hour (0–23), weekday (0=Mon) and a short date label for a timestamp in
+// a chosen display timezone — so the timeline/heatmap aren't silently UTC.
+function tzParts(d: Date, tz: Tz): { hour: number; weekday: number; dateLabel: string } {
+  const p = new Intl.DateTimeFormat('en-US', {
+    timeZone: TZMAP[tz],
+    hourCycle: 'h23',
+    hour: '2-digit',
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+  }).formatToParts(d)
+  const g = (t: string) => p.find((x) => x.type === t)?.value ?? ''
+  return { hour: parseInt(g('hour'), 10) % 24, weekday: WD[g('weekday')] ?? 0, dateLabel: `${g('month')} ${g('day')}` }
+}
 
 // Read-side analytics for the first-party tracker. Reads site_sessions /
 // site_pageviews / site_events AS THE LOGGED-IN ADMIN (RLS). Per-session metrics
@@ -36,6 +53,7 @@ export type SiteAnalytics = {
   }
   topPages: { path: string; title: string | null; views: number; avgDwellMs: number; avgScroll: number }[]
   events: { widget: number; conversation: number; signup: number }
+  funnel: { label: string; count: number; pct: number }[]
   timeline: { label: string; visits: number; events: number }[]
   heatmap: number[][] // [weekday 0=Mon..6=Sun][hour 0..23] = real session count
   sessions: SiteSessionRow[]
@@ -49,7 +67,7 @@ function classify(pv: number, dwellMs: number, scroll: number): SessionClass {
   return 'visit'
 }
 
-export async function getSiteAnalytics(property: SiteProperty, range: Range): Promise<SiteAnalytics> {
+export async function getSiteAnalytics(property: SiteProperty, range: Range, tz: Tz = 'UTC'): Promise<SiteAnalytics> {
   const supabase = await createSupabaseServerClient()
   const warnings: string[] = []
   const now = Date.now()
@@ -186,11 +204,9 @@ export async function getSiteAnalytics(property: SiteProperty, range: Range): Pr
   const start = now - bucketCount * bucketMs
   const tl: { label: string; visits: number; events: number }[] = []
   for (let i = 0; i < bucketCount; i++) {
-    const t = new Date(start + (i + 1) * bucketMs)
+    const parts = tzParts(new Date(start + (i + 1) * bucketMs), tz)
     tl.push({
-      label: hourly
-        ? `${String(t.getUTCHours()).padStart(2, '0')}:00`
-        : t.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }),
+      label: hourly ? `${String(parts.hour).padStart(2, '0')}:00` : parts.dateLabel,
       visits: 0,
       events: 0,
     })
@@ -211,14 +227,22 @@ export async function getSiteAnalytics(property: SiteProperty, range: Range): Pr
     }
   }
 
-  // Weekday (Mon=0) × hour heatmap of real sessions — bucketed in UTC to match
-  // the timeline labels (server runs in UTC; the UI labels this "UTC").
+  // Weekday (Mon=0) × hour heatmap of real sessions, in the chosen display tz.
   const heatmap: number[][] = Array.from({ length: 7 }, () => new Array(24).fill(0))
   for (const r of real) {
-    const d = new Date(r.startedAt)
-    const wd = (d.getUTCDay() + 6) % 7
-    heatmap[wd][d.getUTCHours()]++
+    const { weekday, hour } = tzParts(new Date(r.startedAt), tz)
+    heatmap[weekday][hour]++
   }
+
+  // Conversion funnel — distinct real sessions reaching each step.
+  const reach = (kind: string) => real.filter((r) => r.events.includes(kind)).length
+  const funnelRaw = [
+    { label: 'Visits', count: real.length },
+    { label: 'Widget', count: reach('widget_open') },
+    { label: 'Conversation', count: reach('conversation') },
+    { label: 'Signup', count: reach('signup') },
+  ]
+  const funnel = funnelRaw.map((f) => ({ ...f, pct: real.length ? Math.round((f.count / real.length) * 100) : 0 }))
 
   return {
     warnings,
@@ -245,6 +269,7 @@ export async function getSiteAnalytics(property: SiteProperty, range: Range): Pr
     },
     topPages,
     events: evCount,
+    funnel,
     timeline: tl,
     heatmap,
     sessions: rows.slice(0, 200),

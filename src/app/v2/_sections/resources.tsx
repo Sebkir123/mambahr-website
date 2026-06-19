@@ -97,7 +97,7 @@ export default function Resources() {
                     placeholder="you@company.com"
                     aria-label="Work email"
                   />
-                  <button className="btn" type="submit" disabled={status === 'loading' || !token}>
+                  <button className="btn" type="submit" data-track="signup" data-track-label="field-guide" disabled={status === 'loading' || !token}>
                     {status === 'loading' ? 'Sending…' : 'Send me the playbook'}
                   </button>
                 </form>

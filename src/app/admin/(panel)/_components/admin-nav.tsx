@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
@@ -55,7 +55,7 @@ const GROUPS: Group[] = [
   },
 ]
 
-function NavLinks() {
+function NavLinks({ onNavigate }: { onNavigate: () => void }) {
   const pathname = usePathname()
   const params = useSearchParams()
   // On any /admin/crm* page, treat a missing kind as "customer" (the default).
@@ -73,7 +73,7 @@ function NavLinks() {
         <div key={g.title ?? `g${i}`} className={styles.group}>
           {g.title && <span className={styles.groupTitle}>{g.title}</span>}
           {g.items.map((item) => (
-            <Link key={item.href} href={item.href} className={isActive(item) ? styles.linkActive : styles.link}>
+            <Link key={item.href} href={item.href} className={isActive(item) ? styles.linkActive : styles.link} onClick={onNavigate}>
               {item.label}
             </Link>
           ))}
@@ -85,6 +85,7 @@ function NavLinks() {
 
 export default function AdminNav({ email }: { email: string }) {
   const router = useRouter()
+  const [open, setOpen] = useState(false)
 
   async function signOut() {
     const supabase = createSupabaseBrowserClient()
@@ -93,14 +94,17 @@ export default function AdminNav({ email }: { email: string }) {
   }
 
   return (
-    <aside className={styles.nav}>
+    <>
+      <button className={styles.burger} aria-label="Open menu" onClick={() => setOpen(true)}>☰</button>
+      {open && <div className={styles.backdrop} onClick={() => setOpen(false)} />}
+      <aside className={`${styles.nav} ${open ? styles.navOpen : ''}`}>
       <div className={styles.brand}>
         <span className={styles.mark}>M</span>
         <span className={styles.brandText}>Admin</span>
       </div>
       <nav className={styles.links}>
         <Suspense fallback={null}>
-          <NavLinks />
+          <NavLinks onNavigate={() => setOpen(false)} />
         </Suspense>
       </nav>
       <div className={styles.footer}>
@@ -111,6 +115,7 @@ export default function AdminNav({ email }: { email: string }) {
           Sign out
         </button>
       </div>
-    </aside>
+      </aside>
+    </>
   )
 }

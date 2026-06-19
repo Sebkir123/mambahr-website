@@ -3,6 +3,10 @@
     {
       "path": "/api/social/cron",
       "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/site/retention",
+      "schedule": "0 4 * * *"
     }
   ]
 }
