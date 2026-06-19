@@ -57,8 +57,14 @@ export default async function DeckAdminPage() {
       <div className={ui.header}>
         <div>
           <h1 className={ui.h1}>Deck</h1>
-          <p className={ui.subtitle}>Per-recipient links + who opened the investor deck</p>
+          <p className={ui.subtitle}>
+            Per-recipient links + who opened the investor deck ·{' '}
+            <code className={styles.deckPath}>/{DECK_SLUG}</code>
+          </p>
         </div>
+        <a href={`/${DECK_SLUG}`} target="_blank" rel="noopener noreferrer" className={ui.btnPrimary}>
+          Preview deck ↗
+        </a>
       </div>
 
       {a.warnings.length > 0 && <div className={styles.notice}>{a.warnings[0]}</div>}

@@ -58,13 +58,18 @@ export default async function DeckPage({
 }) {
   const { k } = await searchParams
   const link = await resolveDeckLink(k)
-  if (!link) {
-    // No valid recipient token — allow a signed-in admin to preview, else 404.
-    const admin = await getAdminUser()
-    if (!admin) notFound()
-  } else {
-    // Real recipient open — record it server-side regardless of client JS.
+  const admin = await getAdminUser()
+
+  // No valid recipient token AND not a signed-in admin → 404 (real gate).
+  if (!link && !admin) notFound()
+
+  // A signed-in admin is always previewing — even when opening a recipient's
+  // exact link to test it. Previews never touch analytics: no server-side open
+  // log here, and the client telemetry is suppressed via the `preview` prop.
+  // Only a genuine recipient open (valid token, not an admin) is recorded.
+  if (link && !admin) {
     await logOpen(k as string, await headers())
   }
-  return <Deck token={k ?? null} slug={DECK_SLUG} />
+
+  return <Deck token={k ?? null} slug={DECK_SLUG} preview={!!admin} />
 }

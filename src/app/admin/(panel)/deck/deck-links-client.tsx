@@ -64,6 +64,17 @@ export function DeckLinks({ links, slug }: { links: DeckLinkRow[]; slug: string 
             </div>
             <div className={styles.linkActions}>
               {!revoked && (
+                <a
+                  href={urlFor(l.token)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.copyBtn}
+                  title="Open this recipient's exact view — admin preview, not tracked"
+                >
+                  Open ↗
+                </a>
+              )}
+              {!revoked && (
                 <button
                   type="button"
                   className={styles.copyBtn}
