@@ -36,24 +36,18 @@ export default async function CrmPage({ searchParams }: { searchParams: Promise<
     <>
       <div className={ui.header}>
         <div>
-          <h1 className={ui.h1}>CRM</h1>
-          <p className={ui.subtitle}>Pipeline for customers and investors · live &amp; collaborative</p>
+          <h1 className={ui.h1}>{isInvestor ? 'Investor pipeline' : 'Customer pipeline'}</h1>
+          <p className={ui.subtitle}>
+            {isInvestor
+              ? 'Fundraise pipeline — drag to move stages · live & collaborative'
+              : 'Sales pipeline — drag to move stages · live & collaborative'}
+          </p>
         </div>
-        <Link href={`/admin/crm/new?kind=${kind}`} className={ui.btnPrimary}>+ Add {kind}</Link>
-      </div>
-
-      <div className={styles.toolbar}>
-        <div className={styles.tabs}>
-          <Link href="/admin/crm?kind=customer" className={kind === 'customer' ? styles.tabActive : styles.tab}>
-            Customers
-          </Link>
-          <Link href="/admin/crm?kind=investor" className={kind === 'investor' ? styles.tabActive : styles.tab}>
-            Investors
-          </Link>
+        <div className={styles.headerActions}>
+          <Link href="/admin/crm/contacts" className={ui.btnGhost}>List view</Link>
+          <ImportButton action={ingestLeads} />
+          <Link href={`/admin/crm/new?kind=${kind}`} className={ui.btnPrimary}>+ Add {kind}</Link>
         </div>
-        <div className={styles.spacer} />
-        <Link href="/admin/crm/contacts" className={ui.btnGhost}>List view</Link>
-        <ImportButton action={ingestLeads} />
       </div>
 
       {warnings.length > 0 && <div className={styles.notice}>{warnings[0]}</div>}

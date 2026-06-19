@@ -23,6 +23,7 @@ const GROUPS: Group[] = [
   {
     title: 'Investors',
     items: [
+      { href: '/admin/investors', label: 'Overview', path: '/admin/investors' },
       { href: '/admin/crm?kind=investor', label: 'Pipeline', path: '/admin/crm', kind: 'investor' },
       { href: '/admin/deck', label: 'Deck analytics', path: '/admin/deck' },
     ],
