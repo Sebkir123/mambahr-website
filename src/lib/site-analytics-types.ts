@@ -3,7 +3,7 @@
 
 export type SiteProperty = 'website' | 'deck' | 'lp'
 export type Range = '1h' | '24h' | '7d' | '30d'
-export type Tz = 'UTC' | 'ET' | 'CET'
+export type Tz = 'ET' | 'CT' | 'MT' | 'PT'
 export type SessionClass = 'engaged' | 'bounce' | 'visit'
 
 export type SiteSessionRow = {

@@ -6,7 +6,7 @@ import type { SiteProperty, Range } from '@/lib/site-analytics-types'
 import styles from './site.module.css'
 
 type View = 'real' | 'all' | 'bots'
-type Tz = 'UTC' | 'ET' | 'CET'
+type Tz = 'ET' | 'CT' | 'MT' | 'PT'
 
 // Switching property/view/range/tz used to be <Link> navigations that scrolled
 // to top and flashed (felt like a full reload). These navigate via router.replace
@@ -50,7 +50,7 @@ export function SiteControls({
       </div>
       <div className={styles.spacer} />
       <div className={styles.seg}>
-        {(['UTC', 'ET', 'CET'] as Tz[]).map((z) => (
+        {(['ET', 'CT', 'MT', 'PT'] as Tz[]).map((z) => (
           <Seg key={z} active={tz === z} onClick={() => go({ tz: z })}>{z}</Seg>
         ))}
       </div>

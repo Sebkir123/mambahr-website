@@ -2,7 +2,12 @@ import 'server-only'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import type { SiteProperty, Range, Tz, SessionClass, SiteSessionRow, SitePageview, SiteSessionDetail } from '@/lib/site-analytics-types'
 
-const TZMAP: Record<Tz, string> = { UTC: 'UTC', ET: 'America/New_York', CET: 'Europe/Zurich' }
+const TZMAP: Record<Tz, string> = {
+  ET: 'America/New_York',
+  CT: 'America/Chicago',
+  MT: 'America/Denver',
+  PT: 'America/Los_Angeles',
+}
 const WD: Record<string, number> = { Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6 }
 // Extract hour (0–23), weekday (0=Mon) and a short date label for a timestamp in
 // a chosen display timezone — so the timeline/heatmap aren't silently UTC.
@@ -67,7 +72,7 @@ function classify(pv: number, dwellMs: number, scroll: number): SessionClass {
   return 'visit'
 }
 
-export async function getSiteAnalytics(property: SiteProperty, range: Range, tz: Tz = 'UTC'): Promise<SiteAnalytics> {
+export async function getSiteAnalytics(property: SiteProperty, range: Range, tz: Tz = 'ET'): Promise<SiteAnalytics> {
   const supabase = await createSupabaseServerClient()
   const warnings: string[] = []
   const now = Date.now()

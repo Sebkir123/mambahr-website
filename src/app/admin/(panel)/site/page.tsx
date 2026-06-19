@@ -97,7 +97,7 @@ export default async function SiteTrackingPage({
   const property: SiteProperty = sp.property === 'deck' ? 'deck' : sp.property === 'lp' ? 'lp' : 'website'
   const range: Range = (['1h', '24h', '7d', '30d'] as const).includes(sp.range as Range) ? (sp.range as Range) : '24h'
   const view: View = sp.view === 'all' ? 'all' : sp.view === 'bots' ? 'bots' : 'real'
-  const tz: Tz = (['UTC', 'ET', 'CET'] as const).includes(sp.tz as Tz) ? (sp.tz as Tz) : 'UTC'
+  const tz: Tz = (['ET', 'CT', 'MT', 'PT'] as const).includes(sp.tz as Tz) ? (sp.tz as Tz) : 'ET'
 
   const [, a] = await Promise.all([requireAdmin(), getSiteAnalytics(property, range, tz)])
   const t = a.totals
