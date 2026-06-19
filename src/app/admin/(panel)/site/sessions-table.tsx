@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { loadSiteSession } from './actions'
 import { fmtDur, type SiteSessionRow, type SiteSessionDetail } from '@/lib/site-analytics-types'
 import styles from './site.module.css'
@@ -65,8 +65,20 @@ export function SessionsTable({ sessions }: { sessions: SiteSessionRow[] }) {
             const isOpen = open === s.id
             const durCn = `${styles.dur} ${s.cls === 'bounce' && !s.isBot ? styles.durBounce : s.cls === 'engaged' ? styles.durEngaged : ''}`
             return (
-              <RowGroup key={s.id} isOpen={isOpen}>
-                <tr className={`${styles.row} ${isOpen ? styles.rowOpen : ''}`} onClick={() => toggle(s.id)}>
+              <Fragment key={s.id}>
+                <tr
+                  className={`${styles.row} ${isOpen ? styles.rowOpen : ''}`}
+                  onClick={() => toggle(s.id)}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isOpen}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      toggle(s.id)
+                    }
+                  }}
+                >
                   <td><span className={`${styles.caret} ${isOpen ? styles.caretOpen : ''}`}>›</span></td>
                   <td className={styles.mono}>{when(s.startedAt)}</td>
                   <td>
@@ -84,11 +96,11 @@ export function SessionsTable({ sessions }: { sessions: SiteSessionRow[] }) {
                 {isOpen && (
                   <tr>
                     <td colSpan={9} style={{ padding: 0 }}>
-                      <Detail id={s.id} row={s} detail={detail[s.id]} loading={loading === s.id} />
+                      <Detail row={s} detail={detail[s.id]} loading={loading === s.id} />
                     </td>
                   </tr>
                 )}
-              </RowGroup>
+              </Fragment>
             )
           })}
         </tbody>
@@ -97,17 +109,11 @@ export function SessionsTable({ sessions }: { sessions: SiteSessionRow[] }) {
   )
 }
 
-function RowGroup({ children }: { children: React.ReactNode; isOpen: boolean }) {
-  return <>{children}</>
-}
-
 function Detail({
-  id,
   row,
   detail,
   loading,
 }: {
-  id: string
   row: SiteSessionRow
   detail: SiteSessionDetail | null | undefined
   loading: boolean
