@@ -80,6 +80,10 @@ export function NewContactForm({ kind, stages }: { kind: ContactKind; stages: St
           <input name="website" className={styles.input} placeholder="https://…" />
         </div>
         <div className={`${styles.field} ${styles.full}`}>
+          <label className={styles.label}>Tags (comma-separated)</label>
+          <input name="tags" className={styles.input} placeholder={isInvestor ? 'seed, lead, warm-intro' : 'enterprise, inbound, champion'} />
+        </div>
+        <div className={`${styles.field} ${styles.full}`}>
           <label className={styles.label}>Next step</label>
           <input name="next_step" className={styles.input} placeholder="Send follow-up deck / schedule intro call" />
         </div>

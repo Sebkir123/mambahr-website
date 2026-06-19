@@ -95,9 +95,9 @@ export default async function ContactDetailPage({ params }: { params: Promise<{ 
             <div className={styles.panelHead}>
               <h2 className={styles.panelTitle}>Key facts</h2>
             </div>
-            <Fact k="Type" v={contact.kind} />
+            <Fact k="Type" v={<span style={{ textTransform: 'capitalize' }}>{contact.kind}</span>} />
             <Fact k="Owner" v={contact.owner ?? '—'} />
-            <Fact k="Source" v={contact.source ?? '—'} />
+            <Fact k="Source" v={contact.source ? <span style={{ textTransform: 'capitalize' }}>{contact.source.replace(/_/g, ' ')}</span> : '—'} />
             <Fact k="Email" v={contact.email ? <a href={`mailto:${contact.email}`}>{contact.email}</a> : '—'} />
             <Fact k="LinkedIn" v={contact.linkedin_url ? <a href={contact.linkedin_url} target="_blank" rel="noreferrer">Profile ↗</a> : '—'} />
             <Fact k="Website" v={contact.website ? <a href={contact.website} target="_blank" rel="noreferrer">Site ↗</a> : '—'} />

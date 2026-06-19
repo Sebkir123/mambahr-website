@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { moveStage } from './actions'
+import ui from '../admin-ui.module.css'
 import { formatMoney, type Contact, type ContactKind } from '@/lib/crm-types'
 import styles from './crm.module.css'
 
@@ -27,9 +28,20 @@ export default function CrmBoard({
   const [items, setItems] = useState<Contact[]>(contacts)
   const [dragId, setDragId] = useState<string | null>(null)
   const [overCol, setOverCol] = useState<string | null>(null)
+  // Optimistic stage overrides {id → stage}. Survive a server/realtime refresh
+  // until the server props actually reflect the move, so a card never flickers
+  // back to its old column mid-flight.
+  const pending = useRef<Map<string, string>>(new Map())
 
-  // Re-sync from the server whenever it sends fresh props (router.refresh()).
-  useEffect(() => setItems(contacts), [contacts])
+  // Re-sync from the server, but keep any optimistic move the server hasn't
+  // confirmed yet; drop overrides once props catch up.
+  useEffect(() => {
+    for (const [id, stage] of pending.current) {
+      const c = contacts.find((x) => x.id === id)
+      if (c && c.stage === stage) pending.current.delete(id)
+    }
+    setItems(contacts.map((c) => (pending.current.has(c.id) ? { ...c, stage: pending.current.get(c.id)! } : c)))
+  }, [contacts])
 
   // Live collaboration: refresh when any contact of this kind changes elsewhere.
   useEffect(() => {
@@ -52,13 +64,28 @@ export default function CrmBoard({
     if (!id) return
     const card = items.find((c) => c.id === id)
     if (!card || card.stage === stage) return
-    // Optimistic move; the server action + realtime reconcile.
+    pending.current.set(id, stage)
     setItems((prev) => prev.map((c) => (c.id === id ? { ...c, stage } : c)))
     const fd = new FormData()
     fd.set('id', id)
     fd.set('stage', stage)
     await moveStage(fd)
     router.refresh()
+  }
+
+  if (items.length === 0) {
+    return (
+      <div className={ui.card}>
+        <div className={ui.empty}>
+          <h3>No {kind === 'investor' ? 'investors' : 'customers'} yet</h3>
+          <p>
+            Add one manually, or <strong>Import leads</strong> above to pull in your existing{' '}
+            {kind === 'investor' ? 'deck recipients' : 'waitlist, demo & field-guide signups'}.
+          </p>
+          <Link href={`/admin/crm/new?kind=${kind}`} className={ui.btnPrimary}>+ Add {kind}</Link>
+        </div>
+      </div>
+    )
   }
 
   return (

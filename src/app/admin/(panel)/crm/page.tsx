@@ -63,7 +63,7 @@ export default async function CrmPage({ searchParams }: { searchParams: Promise<
         <Stat label={isInvestor ? 'Pipeline (open)' : 'Open value'} value={formatMoney(k.openValue)} sub="weighted pipeline" />
         <Stat label={isInvestor ? 'Committed' : 'Won'} value={k.won} sub={formatMoney(k.wonValue)} />
         <Stat label="Win rate" value={`${k.winRatePct}%`} sub={`${k.won} of ${k.won + k.lost} closed`} />
-        <Stat label="Open tasks" value={dash.upcomingTasks.length} sub="across all contacts" />
+        <Stat label="Open tasks" value={dash.openTaskCount} sub="across all contacts" />
       </div>
 
       <CrmBoard kind={kind} stages={STAGES[kind]} contacts={contacts} />
