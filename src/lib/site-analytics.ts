@@ -29,6 +29,12 @@ export type SiteAnalytics = {
   scrollDist: { gt25: number; gt50: number; gt75: number; full: number } // % of real sessions
   topCountry: { name: string; count: number; pct: number } | null
   topSource: { name: string; count: number; pct: number } | null
+  breakdown: {
+    countries: { key: string; n: number }[]
+    devices: { key: string; n: number }[]
+    sources: { key: string; n: number }[]
+  }
+  topPages: { path: string; title: string | null; views: number; avgDwellMs: number; avgScroll: number }[]
   events: { widget: number; conversation: number; signup: number }
   timeline: { label: string; visits: number; events: number }[]
   heatmap: number[][] // [weekday 0=Mon..6=Sun][hour 0..23] = real session count
@@ -59,7 +65,7 @@ export async function getSiteAnalytics(property: SiteProperty, range: Range): Pr
       .limit(10000),
     supabase
       .from('site_pageviews')
-      .select('session_id, dwell_ms, max_scroll')
+      .select('session_id, path, title, dwell_ms, max_scroll')
       .eq('property', property)
       .gte('viewed_at', cutoffIso)
       .limit(50000),
@@ -75,7 +81,7 @@ export async function getSiteAnalytics(property: SiteProperty, range: Range): Pr
   if (evRes.error) warnings.push(`events: ${evRes.error.message}`)
 
   const sessions = (sessRes.data as SessRow[] | null) ?? []
-  const pvs = (pvRes.data as { session_id: string; dwell_ms: number; max_scroll: number }[] | null) ?? []
+  const pvs = (pvRes.data as { session_id: string; path: string; title: string | null; dwell_ms: number; max_scroll: number }[] | null) ?? []
   const evs = (evRes.data as { session_id: string; kind: string }[] | null) ?? []
 
   const agg = new Map<string, { pv: number; dwell: number; scroll: number }>()
@@ -143,20 +149,48 @@ export async function getSiteAnalytics(property: SiteProperty, range: Range): Pr
 
   const byCountry = tally(real.map((r) => r.country))
   const bySource = tally(real.map((r) => r.source))
+  const byDevice = tally(real.map((r) => r.device))
 
-  // Timeline buckets — hourly for ≤24h, daily otherwise.
+  // Top pages — over page-views belonging to REAL sessions only.
+  const realIds = new Set(real.map((r) => r.id))
+  const pageAgg = new Map<string, { title: string | null; views: number; dwell: number; scroll: number }>()
+  for (const p of pvs) {
+    if (!realIds.has(p.session_id)) continue
+    const cur = pageAgg.get(p.path) ?? { title: p.title ?? null, views: 0, dwell: 0, scroll: 0 }
+    cur.views += 1
+    cur.dwell += Number(p.dwell_ms) || 0
+    cur.scroll += Number(p.max_scroll) || 0
+    if (!cur.title && p.title) cur.title = p.title
+    pageAgg.set(p.path, cur)
+  }
+  const topPages = Array.from(pageAgg, ([path, v]) => ({
+    path,
+    title: v.title,
+    views: v.views,
+    avgDwellMs: v.views ? Math.round(v.dwell / v.views) : 0,
+    avgScroll: v.views ? Math.round(v.scroll / v.views) : 0,
+  }))
+    .sort((a, b) => b.views - a.views)
+    .slice(0, 12)
+
+  // Session lookup map — used for O(1) event→session resolution (was O(n·m)).
+  const rowById = new Map(rows.map((r) => [r.id, r]))
+
+  // Timeline buckets aligned to the FULL query window so the chart can't
+  // undercount vs the headline.
   const hours = RANGE_HOURS[range]
   const hourly = hours <= 24
   const bucketMs = hourly ? 3_600_000 : 86_400_000
-  const bucketCount = hourly ? hours : Math.round(hours / 24)
-  const start = now - (bucketCount - 1) * bucketMs
+  const rangeMs = hours * 3_600_000
+  const bucketCount = Math.max(1, Math.round(rangeMs / bucketMs))
+  const start = now - bucketCount * bucketMs
   const tl: { label: string; visits: number; events: number }[] = []
   for (let i = 0; i < bucketCount; i++) {
-    const t = new Date(start + i * bucketMs)
+    const t = new Date(start + (i + 1) * bucketMs)
     tl.push({
       label: hourly
-        ? `${String(t.getHours()).padStart(2, '0')}:00`
-        : t.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        ? `${String(t.getUTCHours()).padStart(2, '0')}:00`
+        : t.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }),
       visits: 0,
       events: 0,
     })
@@ -170,20 +204,20 @@ export async function getSiteAnalytics(property: SiteProperty, range: Range): Pr
     if (b >= 0) tl[b].visits++
   }
   for (const e of evs) {
-    // events tied to a real session only
-    const sess = rows.find((r) => r.id === e.session_id)
+    const sess = rowById.get(e.session_id)
     if (sess && !sess.isBot) {
       const b = bucketOf(sess.startedAt)
       if (b >= 0) tl[b].events++
     }
   }
 
-  // Weekday (Mon=0) × hour heatmap of real sessions.
+  // Weekday (Mon=0) × hour heatmap of real sessions — bucketed in UTC to match
+  // the timeline labels (server runs in UTC; the UI labels this "UTC").
   const heatmap: number[][] = Array.from({ length: 7 }, () => new Array(24).fill(0))
   for (const r of real) {
     const d = new Date(r.startedAt)
-    const wd = (d.getDay() + 6) % 7
-    heatmap[wd][d.getHours()]++
+    const wd = (d.getUTCDay() + 6) % 7
+    heatmap[wd][d.getUTCHours()]++
   }
 
   return {
@@ -204,6 +238,12 @@ export async function getSiteAnalytics(property: SiteProperty, range: Range): Pr
     scrollDist: { gt25: pctOfReal(dist.gt25), gt50: pctOfReal(dist.gt50), gt75: pctOfReal(dist.gt75), full: pctOfReal(dist.full) },
     topCountry: byCountry[0] ? { name: byCountry[0].key, count: byCountry[0].n, pct: pctOfReal(byCountry[0].n) } : null,
     topSource: bySource[0] ? { name: bySource[0].key, count: bySource[0].n, pct: pctOfReal(bySource[0].n) } : null,
+    breakdown: {
+      countries: byCountry.slice(0, 6),
+      devices: byDevice.slice(0, 4),
+      sources: bySource.slice(0, 6),
+    },
+    topPages,
     events: evCount,
     timeline: tl,
     heatmap,

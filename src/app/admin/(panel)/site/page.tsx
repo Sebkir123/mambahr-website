@@ -208,7 +208,7 @@ export default async function SiteTrackingPage({
 
       <section className={styles.panel}>
         <div className={styles.panelHead}>
-          <h2 className={styles.panelTitle}>Traffic</h2>
+          <h2 className={styles.panelTitle}>Traffic <span className={styles.statSub}>· UTC</span></h2>
           <div className={styles.legend}>
             <span><span className={styles.legendDot} style={{ background: 'var(--gold)' }} /> Visits {t.real}</span>
             <span><span className={styles.legendDot} style={{ background: 'var(--violet)' }} /> Widget {a.events.widget}</span>
@@ -219,22 +219,73 @@ export default async function SiteTrackingPage({
         <Timeline data={a.timeline} />
       </section>
 
+      {a.topPages.length > 0 && (
+        <section className={styles.panel}>
+          <div className={styles.panelHead}>
+            <h2 className={styles.panelTitle}>Top pages</h2>
+            <span className={styles.statSub}>real visitors</span>
+          </div>
+          <div className={styles.tableWrap}>
+            <table className={styles.table}>
+              <thead>
+                <tr><th>Path</th><th>Views</th><th>Avg time</th><th>Avg scroll</th></tr>
+              </thead>
+              <tbody>
+                {a.topPages.map((p) => (
+                  <tr key={p.path}>
+                    <td>
+                      <span className={styles.loc}>{p.path}</span>
+                      {p.title && <div className={styles.locSub}>{p.title}</div>}
+                    </td>
+                    <td className={styles.mono}>{p.views}</td>
+                    <td className={styles.mono}>{fmtDur(p.avgDwellMs)}</td>
+                    <td className={styles.mono}>{p.avgScroll}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
       <section className={styles.panel}>
         <div className={styles.panelHead}>
           <h2 className={styles.panelTitle}>
             {view === 'bots' ? 'Bot sessions' : view === 'all' ? 'All sessions' : 'Visitors'} ({shown.length})
           </h2>
         </div>
+        {(a.breakdown.countries.length > 0 || a.breakdown.devices.length > 0 || a.breakdown.sources.length > 0) && (
+          <div className={styles.bd}>
+            <Chips label="Country" items={a.breakdown.countries.map((c) => ({ label: `${flag(c.key)} ${countryName(c.key)}`, n: c.n }))} />
+            <Chips label="Device" items={a.breakdown.devices.map((d) => ({ label: d.key, n: d.n }))} />
+            <Chips label="Source" items={a.breakdown.sources.map((s) => ({ label: s.key, n: s.n }))} />
+          </div>
+        )}
         <SessionsTable sessions={shown} />
       </section>
 
       <section className={styles.panel}>
         <div className={styles.panelHead}>
           <h2 className={styles.panelTitle}>Weekday × hour</h2>
-          <span className={styles.statSub}>When real visitors come (local time)</span>
+          <span className={styles.statSub}>When real visitors come (UTC)</span>
         </div>
         <Heatmap grid={a.heatmap} />
       </section>
     </>
+  )
+}
+
+function Chips({ label, items }: { label: string; items: { label: string; n: number }[] }) {
+  if (items.length === 0) return null
+  return (
+    <div className={styles.bdRow}>
+      <span className={styles.bdLabel}>{label}</span>
+      {items.map((it, i) => (
+        <span key={i} className={styles.bdChip}>
+          <span style={{ textTransform: label === 'Source' || label === 'Device' ? 'capitalize' : 'none' }}>{it.label}</span>
+          <strong>{it.n}</strong>
+        </span>
+      ))}
+    </div>
   )
 }

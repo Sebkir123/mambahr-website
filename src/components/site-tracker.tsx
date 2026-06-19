@@ -61,10 +61,10 @@ export default function SiteTracker() {
     const scrollPct = () => {
       const el = document.documentElement
       const denom = el.scrollHeight - el.clientHeight
-      if (denom <= 0) return 100
+      if (denom <= 0) return 0 // page fits the viewport — not scrollable; don't inflate scroll depth
       return Math.max(0, Math.min(100, Math.round(((el.scrollTop || window.scrollY) / denom) * 100)))
     }
-    let maxScroll = scrollPct()
+    let maxScroll = 0
 
     const sp = new URLSearchParams(window.location.search)
     const utm = { source: sp.get('utm_source'), medium: sp.get('utm_medium'), campaign: sp.get('utm_campaign') }
@@ -141,7 +141,11 @@ export default function SiteTracker() {
     document.addEventListener('visibilitychange', onVis)
     window.addEventListener('pagehide', onHide)
     document.addEventListener('click', onClick, true)
-    const hb = setInterval(() => flush(), HEARTBEAT_MS)
+    // Heartbeat for long reads — but only while the tab is actually visible, so
+    // a backgrounded tab doesn't keep beaconing.
+    const hb = setInterval(() => {
+      if (document.visibilityState === 'visible') flush()
+    }, HEARTBEAT_MS)
 
     return () => {
       onHide() // route change ends this page-view

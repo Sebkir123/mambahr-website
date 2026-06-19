@@ -19,6 +19,29 @@ export const dynamic = 'force-dynamic'
 
 const SELF_HOSTS = ['mambahr.com', 'mambahr-website-one.vercel.app', 'localhost']
 const PROPERTIES = new Set(['website', 'deck', 'lp'])
+const EVENT_KINDS = new Set(['widget_open', 'conversation', 'signup', 'cta_click', 'custom'])
+const MAX_PAGEVIEWS_PER_SESSION = 300
+
+// Coarse per-IP rate limit on the public write endpoint — blocks a tight POST
+// loop bloating the table, while staying generous enough for real browsing
+// (a page-view + 15s heartbeats + unload across many pages). Per serverless
+// instance (not global), which is fine as a spam backstop.
+const RL_WINDOW_MS = 60_000
+const RL_MAX = 600
+const rlBuckets = new Map<string, number[]>()
+function rateLimited(ip: string): boolean {
+  if (!ip) return false
+  const now = Date.now()
+  const cutoff = now - RL_WINDOW_MS
+  const ts = (rlBuckets.get(ip) ?? []).filter((t) => t > cutoff)
+  if (ts.length >= RL_MAX) {
+    rlBuckets.set(ip, ts)
+    return true
+  }
+  ts.push(now)
+  rlBuckets.set(ip, ts)
+  return false
+}
 
 let admin: SupabaseClient | null = null
 function db(): SupabaseClient | null {
@@ -49,6 +72,9 @@ export async function POST(req: NextRequest) {
   // Never break the page: always 204 even if analytics can't write.
   if (!supabase) return new NextResponse(null, { status: 204 })
 
+  const reqIp = clientIp(req.headers)
+  if (rateLimited(reqIp)) return new NextResponse(null, { status: 204 })
+
   let body: Record<string, unknown>
   try {
     const raw = await req.text()
@@ -65,12 +91,17 @@ export async function POST(req: NextRequest) {
   try {
     if (body.t === 'up') {
       // Engagement update for an existing pageview + optional conversion event.
+      // Bind to the originating IP: a session_key is client-supplied, so without
+      // this an attacker who scrapes one could poison another visitor's metrics.
       const { data: sess } = await supabase
         .from('site_sessions')
-        .select('id')
+        .select('id, ip_hash')
         .eq('session_key', sessionKey)
         .maybeSingle()
       if (!sess) return new NextResponse(null, { status: 204 })
+      if (sess.ip_hash && reqIp && sess.ip_hash !== hashIp(reqIp)) {
+        return new NextResponse(null, { status: 204 })
+      }
 
       await supabase.from('site_sessions').update({ last_seen_at: new Date().toISOString() }).eq('id', sess.id)
 
@@ -79,6 +110,7 @@ export async function POST(req: NextRequest) {
           .from('site_pageviews')
           .select('dwell_ms, max_scroll')
           .eq('id', pageviewId)
+          .eq('session_id', sess.id)
           .maybeSingle()
         if (pv) {
           await supabase
@@ -92,13 +124,16 @@ export async function POST(req: NextRequest) {
       }
 
       const event = body.event as { kind?: string; label?: string; meta?: unknown } | undefined
-      if (event?.kind) {
+      const kind = str(event?.kind, 40)
+      // Allow-list conversion kinds so a client can't inflate the funnel with
+      // forged 'signup'/'conversation' events the board sees.
+      if (kind && EVENT_KINDS.has(kind)) {
         await supabase.from('site_events').insert({
           session_id: sess.id,
           property: str(body.property) ?? 'website',
-          kind: str(event.kind, 40),
-          label: str(event.label, 120),
-          meta: event.meta && typeof event.meta === 'object' ? event.meta : {},
+          kind,
+          label: str(event?.label, 120),
+          meta: event?.meta && typeof event.meta === 'object' ? event.meta : {},
         })
       }
       return new NextResponse(null, { status: 204 })
@@ -119,8 +154,7 @@ export async function POST(req: NextRequest) {
     const utmSource = str((body.utm as Record<string, unknown>)?.source, 120)
     const { source } = deriveSource(referrer, utmSource, SELF_HOSTS)
 
-    // Find-or-create the session (concurrent first beacons resolve via the
-    // (property, session_key) unique index → onConflict do-nothing, then re-read).
+    // Find-or-create the session.
     let { data: sess } = await supabase
       .from('site_sessions')
       .select('id')
@@ -150,7 +184,9 @@ export async function POST(req: NextRequest) {
         }
       }
       const utm = (body.utm as Record<string, unknown>) ?? {}
-      await supabase
+      // upsert with DO UPDATE (ignoreDuplicates:false) + select returns the row
+      // in ONE statement — no second round-trip that could race and drop the view.
+      const { data: created } = await supabase
         .from('site_sessions')
         .upsert(
           {
@@ -181,32 +217,36 @@ export async function POST(req: NextRequest) {
             bot_reason: reason,
             is_returning: isReturning,
           },
-          { onConflict: 'property,session_key', ignoreDuplicates: true },
+          { onConflict: 'property,session_key' },
         )
-      const re = await supabase
-        .from('site_sessions')
         .select('id')
-        .eq('property', property)
-        .eq('session_key', sessionKey)
         .maybeSingle()
-      sess = re.data
+      sess = created
     } else {
       await supabase.from('site_sessions').update({ last_seen_at: new Date().toISOString() }).eq('id', sess.id)
     }
     if (!sess) return new NextResponse(null, { status: 204 })
 
     if (pageviewId) {
-      await supabase.from('site_pageviews').upsert(
-        {
-          id: pageviewId,
-          session_id: sess.id,
-          property,
-          path,
-          title: str(body.title, 200),
-          referrer,
-        },
-        { onConflict: 'id', ignoreDuplicates: true },
-      )
+      // Cap page-views per session so one (mis)behaving client can't bloat the
+      // table unbounded.
+      const { count } = await supabase
+        .from('site_pageviews')
+        .select('id', { count: 'exact', head: true })
+        .eq('session_id', sess.id)
+      if ((count ?? 0) < MAX_PAGEVIEWS_PER_SESSION) {
+        await supabase.from('site_pageviews').upsert(
+          {
+            id: pageviewId,
+            session_id: sess.id,
+            property,
+            path,
+            title: str(body.title, 200),
+            referrer,
+          },
+          { onConflict: 'id', ignoreDuplicates: true },
+        )
+      }
     }
     return new NextResponse(null, { status: 204 })
   } catch {
