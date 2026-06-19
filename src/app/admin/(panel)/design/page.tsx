@@ -1,9 +1,40 @@
 import { requireAdmin } from '@/lib/auth'
-import { MambaMark } from '@/components/mamba-mark'
 import ui from '../admin-ui.module.css'
 import styles from './design.module.css'
 
 export const dynamic = 'force-dynamic'
+
+type LogoAsset = { file: string; label: string; note: string; dark: boolean }
+
+const LOGO_ASSETS: LogoAsset[] = [
+  { file: 'mamba-logo-light', label: 'Light mode', note: 'Framed lockup · on light backgrounds', dark: false },
+  { file: 'mamba-logo-dark', label: 'Dark mode', note: 'Framed lockup · on dark backgrounds', dark: true },
+]
+const ICON_ASSETS: LogoAsset[] = [
+  { file: 'mamba-mark-light', label: 'Light mode', note: 'Ink mark · on light backgrounds', dark: false },
+  { file: 'mamba-mark-dark', label: 'Dark mode', note: 'Paper mark · on dark backgrounds', dark: true },
+]
+
+function AssetCard({ a }: { a: LogoAsset }) {
+  return (
+    <div className={styles.logoCard}>
+      <div
+        className={`${styles.logoPreview} ${a.dark ? styles.logoDark : styles.logoLight}`}
+        style={{ backgroundImage: `url(/brand/${a.file}.svg)` }}
+      />
+      <div className={styles.logoMeta}>
+        <div>
+          <span className={styles.swatchName}>{a.label}</span>
+          <span className={styles.logoNote}>{a.note}</span>
+        </div>
+        <div className={styles.logoActions}>
+          <a href={`/brand/${a.file}.svg`} download className={styles.dlBtn}>SVG</a>
+          <a href={`/brand/${a.file}.png`} download className={styles.dlBtn}>PNG</a>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 type Color = { name: string; token: string; value: string; alpha?: boolean; onDark?: boolean }
 
@@ -96,43 +127,29 @@ export default async function DesignAdminPage() {
         </div>
       </div>
 
-      {/* Logo downloads */}
+      {/* Logo — the framed lockup, as used on the deck + site */}
       <div className={styles.section}>
         <div className={styles.sectionHead}>
           <h2 className={styles.sectionTitle}>Logo</h2>
-          <span className={styles.sectionHint}>The brand mark — SVG (vector) + PNG, transparent background</span>
+          <span className={styles.sectionHint}>The brand lockup — SVG (vector) + PNG, transparent</span>
         </div>
         <div className={styles.logoGrid}>
-          <div className={styles.logoCard}>
-            <div className={`${styles.logoPreview} ${styles.logoLight}`}>
-              <MambaMark size={76} color="var(--text)" title="MambaHR mark" />
-            </div>
-            <div className={styles.logoMeta}>
-              <div>
-                <span className={styles.swatchName}>Light mode</span>
-                <span className={styles.logoNote}>Ink mark · use on light backgrounds</span>
-              </div>
-              <div className={styles.logoActions}>
-                <a href="/brand/mamba-mark-light.svg" download className={styles.dlBtn}>SVG</a>
-                <a href="/brand/mamba-mark-light.png" download className={styles.dlBtn}>PNG</a>
-              </div>
-            </div>
-          </div>
-          <div className={styles.logoCard}>
-            <div className={`${styles.logoPreview} ${styles.logoDark}`}>
-              <MambaMark size={76} color="var(--bg)" title="MambaHR mark" />
-            </div>
-            <div className={styles.logoMeta}>
-              <div>
-                <span className={styles.swatchName}>Dark mode</span>
-                <span className={styles.logoNote}>Paper mark · use on dark backgrounds</span>
-              </div>
-              <div className={styles.logoActions}>
-                <a href="/brand/mamba-mark-dark.svg" download className={styles.dlBtn}>SVG</a>
-                <a href="/brand/mamba-mark-dark.png" download className={styles.dlBtn}>PNG</a>
-              </div>
-            </div>
-          </div>
+          {LOGO_ASSETS.map((a) => (
+            <AssetCard key={a.file} a={a} />
+          ))}
+        </div>
+      </div>
+
+      {/* Icon — mark only, no frame */}
+      <div className={styles.section}>
+        <div className={styles.sectionHead}>
+          <h2 className={styles.sectionTitle}>Icon</h2>
+          <span className={styles.sectionHint}>Mark only, no frame — for favicons, avatars, tight spaces</span>
+        </div>
+        <div className={styles.logoGrid}>
+          {ICON_ASSETS.map((a) => (
+            <AssetCard key={a.file} a={a} />
+          ))}
         </div>
       </div>
 
