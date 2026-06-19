@@ -1,5 +1,8 @@
 import 'server-only'
+import { unstable_cache } from 'next/cache'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { serviceDb } from '@/lib/supabase/service'
 import { DECK_SLIDE_COUNT } from '@/lib/deck-slides'
 
 // Deck analytics for the admin panel. Reads deck_links / deck_sessions /
@@ -94,8 +97,14 @@ function engagementScore(opts: {
   return Math.round(completion * 40 + attention * 30 + curiosity * 15 + reachedAsk * 15)
 }
 
+const cachedDeckAnalytics = unstable_cache(async () => computeDeckAnalytics(serviceDb()!), ['deck-analytics-v1'], { revalidate: 30 })
+
 export async function getDeckAnalytics(): Promise<DeckAnalytics> {
-  const supabase = await createSupabaseServerClient()
+  if (serviceDb()) return cachedDeckAnalytics()
+  return computeDeckAnalytics(await createSupabaseServerClient())
+}
+
+async function computeDeckAnalytics(supabase: SupabaseClient): Promise<DeckAnalytics> {
   const warnings: string[] = []
 
   const [linksRes, sessionsRes, eventsRes, pageviewsRes] = await Promise.all([
@@ -387,8 +396,14 @@ export type DeckSummary = {
 // Lightweight deck rollup for the Overview dashboard — two cheap reads, no
 // per-session aggregation. Reads as the logged-in admin (RLS), degrades to
 // zeros if a table is missing.
+const cachedDeckSummary = unstable_cache(async () => computeDeckSummary(serviceDb()!), ['deck-summary-v1'], { revalidate: 20 })
+
 export async function getDeckSummary(): Promise<DeckSummary> {
-  const supabase = await createSupabaseServerClient()
+  if (serviceDb()) return cachedDeckSummary()
+  return computeDeckSummary(await createSupabaseServerClient())
+}
+
+async function computeDeckSummary(supabase: SupabaseClient): Promise<DeckSummary> {
   const warnings: string[] = []
   let opens = 0
   let lastOpenedAt: string | null = null

@@ -1,5 +1,8 @@
 import 'server-only'
+import { unstable_cache } from 'next/cache'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { serviceDb } from '@/lib/supabase/service'
 
 // Analytics for the email-gated field guides. Reads field_guide_leads +
 // field_guide_views AS THE LOGGED-IN ADMIN (RLS: is_admin() = @mambahr.com).
@@ -57,8 +60,14 @@ type ViewRow = {
   device: string | null
 }
 
+const cachedFieldGuides = unstable_cache(async () => computeFieldGuideAnalytics(serviceDb()!), ['field-guide-analytics-v1'], { revalidate: 20 })
+
 export async function getFieldGuideAnalytics(): Promise<FieldGuideAnalytics> {
-  const supabase = await createSupabaseServerClient()
+  if (serviceDb()) return cachedFieldGuides()
+  return computeFieldGuideAnalytics(await createSupabaseServerClient())
+}
+
+async function computeFieldGuideAnalytics(supabase: SupabaseClient): Promise<FieldGuideAnalytics> {
   const warnings: string[] = []
 
   const [leadsRes, viewsRes] = await Promise.all([

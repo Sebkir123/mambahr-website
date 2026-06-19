@@ -166,10 +166,16 @@ async function computeOverview(supabase: SupabaseClient): Promise<Overview> {
   }
 }
 
-// Full lead list for the leads page + CSV export. Reads as the logged-in admin
-// (RLS-governed) — no service-role key. The 10k limit keeps the export bounded.
+// Full lead list for the leads page + CSV export. Cached 20s (service-role,
+// admin-gated at the page) so the leads page + export don't re-scan every table.
+const cachedAllLeads = unstable_cache(async () => computeAllLeads(serviceDb()!), ['admin-all-leads-v1'], { revalidate: 20 })
+
 export async function getAllLeads(): Promise<{ leads: Lead[]; warnings: string[] }> {
-  const supabase = await createSupabaseServerClient()
+  if (serviceDb()) return cachedAllLeads()
+  return computeAllLeads(await createSupabaseServerClient())
+}
+
+async function computeAllLeads(supabase: SupabaseClient): Promise<{ leads: Lead[]; warnings: string[] }> {
   const warnings: string[] = []
 
   async function fetchLeads(table: string, source: LeadSource, detailKeys: string[]): Promise<Lead[]> {
