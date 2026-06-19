@@ -1,34 +1,45 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
+import TurnstileWidget from '@/components/turnstile-widget'
 import styles from './login.module.css'
 
 export default function LoginForm() {
   const params = useSearchParams()
   const next = params.get('next') || '/admin'
   const [email, setEmail] = useState('')
+  const [token, setToken] = useState<string | null>(null)
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [message, setMessage] = useState('')
 
+  const onTurnstile = useCallback((t: string) => setToken(t), [])
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!email.trim()) return
+    if (!email.trim() || !token) return
     setStatus('sending')
     setMessage('')
-    const supabase = createSupabaseBrowserClient()
-    const redirectTo = `${window.location.origin}/admin/auth/callback?next=${encodeURIComponent(next)}`
-    const { error } = await supabase.auth.signInWithOtp({
-      email: email.trim().toLowerCase(),
-      options: { emailRedirectTo: redirectTo },
-    })
-    if (error) {
+    try {
+      // Goes through our server route so Turnstile + rate limiting are enforced
+      // before any email is sent. That route uses the cookie-backed Supabase
+      // client so PKCE's code_verifier survives to the callback exchange.
+      const res = await fetch('/api/admin/otp', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email: email.trim().toLowerCase(), turnstileToken: token, next }),
+      })
+      if (!res.ok) {
+        const d = (await res.json().catch(() => ({}))) as { error?: string }
+        setMessage(d.error ?? 'Something went wrong.')
+        setStatus('error')
+        return
+      }
+      setStatus('sent')
+    } catch {
+      setMessage('Network error. Please try again.')
       setStatus('error')
-      setMessage(error.message)
-      return
     }
-    setStatus('sent')
   }
 
   return (
@@ -60,7 +71,8 @@ export default function LoginForm() {
               placeholder="you@mambahr.com"
               className={styles.input}
             />
-            <button type="submit" className={styles.button} disabled={status === 'sending'}>
+            <TurnstileWidget onSuccess={onTurnstile} theme="light" />
+            <button type="submit" className={styles.button} disabled={status === 'sending' || !token}>
               {status === 'sending' ? 'Sending…' : 'Send sign-in link'}
             </button>
             {status === 'error' && <p className={styles.error}>{message || 'Something went wrong.'}</p>}

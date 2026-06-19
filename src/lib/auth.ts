@@ -1,19 +1,15 @@
 import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { isAdminEmail } from '@/lib/admin-domain'
 
 export type AdminUser = { id: string; email: string }
 
-// The single source of truth for who is an admin: the @mambahr.com email
-// domain. We own the mambahr.com Google Workspace, so only people we issue a
-// mailbox to can receive a magic link — the domain is the allowlist. This must
-// stay in lockstep with the SQL is_admin() function (RLS) and the auth.users
-// signup trigger; all three check the exact email domain.
-export const ADMIN_EMAIL_DOMAIN = 'mambahr.com'
-
-export function isAdminEmail(email: string | null | undefined): boolean {
-  if (!email) return false
-  return email.toLowerCase().split('@')[1] === ADMIN_EMAIL_DOMAIN
-}
+// Who is an admin: the @mambahr.com email domain. We own the mambahr.com Google
+// Workspace, so only people we issue a mailbox to can receive a magic link — the
+// domain is the allowlist. The check itself lives in the pure ./admin-domain
+// module so Edge middleware can share it; re-exported here for existing callers.
+// Stays in lockstep with the SQL is_admin() function (RLS) and the signup trigger.
+export { ADMIN_EMAIL_DOMAIN, isAdminEmail } from '@/lib/admin-domain'
 
 // Returns the signed-in admin, or null. An authenticated Supabase user is only
 // an admin if their email domain is mambahr.com — enforced here (defense in

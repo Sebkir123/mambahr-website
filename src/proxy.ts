@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
+import { isAdminEmail } from '@/lib/admin-domain'
 
 // Next.js 16 renamed `middleware` → `proxy`. This single edge entrypoint handles
 // two unrelated gates, dispatched by path:
@@ -29,10 +30,12 @@ function deckGate(req: NextRequest): NextResponse {
 }
 
 // --- Admin auth gate --------------------------------------------------------
-// Refreshes the Supabase session on every /admin request and bounces
-// unauthenticated visitors to the login screen. The allowlist (is_admin) is
-// enforced again in the layout/server code — this is the coarse gate so no
-// admin page renders for an anonymous user.
+// Refreshes the Supabase session on every /admin request and bounces anyone who
+// isn't a signed-in @mambahr.com admin to the login screen. The domain check
+// (not just "is there a user") is the real gate: an authenticated non-admin
+// session must not pass. is_admin() RLS + per-page requireAdmin() enforce it
+// again in depth — this is the coarse edge gate so no admin page renders for a
+// stranger, even one a future page forgets to guard.
 async function adminGate(req: NextRequest): Promise<NextResponse> {
   let response = NextResponse.next({ request: req })
 
@@ -55,22 +58,27 @@ async function adminGate(req: NextRequest): Promise<NextResponse> {
     },
   )
 
+  // getUser() validates the JWT with the auth server — a forged/expired cookie
+  // can't pass — and the domain check makes "authenticated" insufficient on its
+  // own; only @mambahr.com is an admin.
   const {
     data: { user },
   } = await supabase.auth.getUser()
+  const isAdmin = isAdminEmail(user?.email)
 
   const path = req.nextUrl.pathname
   const isLogin = path === '/admin/login' || path.startsWith('/admin/auth')
 
-  if (!user && !isLogin) {
+  if (!isAdmin && !isLogin) {
     const url = req.nextUrl.clone()
     url.pathname = '/admin/login'
     url.searchParams.set('next', path)
     return NextResponse.redirect(url)
   }
 
-  // Already signed in and hitting the login page → send to dashboard.
-  if (user && isLogin && path === '/admin/login') {
+  // Already a signed-in admin hitting the login page → send to dashboard. (Only
+  // for admins; a non-admin session on /admin/login stays put, no bounce loop.)
+  if (isAdmin && path === '/admin/login') {
     const url = req.nextUrl.clone()
     url.pathname = '/admin'
     url.search = ''
