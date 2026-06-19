@@ -30,11 +30,19 @@ function Chrome({ page }: { page: number }) {
   )
 }
 
-function Rail({ children }: { children: React.ReactNode }) {
+function Rail({ children, photo }: { children: React.ReactNode; photo?: string }) {
   return (
-    <aside className={s.rail}>
-      <span className={s.railQuoteMark}>&ldquo;</span>
-      <p className={s.railQuote}>{children}</p>
+    <aside
+      className={photo ? `${s.rail} ${s.railPhoto}` : s.rail}
+      style={photo ? { backgroundImage: `url(${photo})` } : undefined}
+    >
+      <div className={s.railInner}>
+        <span className={s.railQuoteMark}>&ldquo;</span>
+        <p className={s.railQuote}>{children}</p>
+      </div>
+      <span className={s.railMark}>
+        <MambaMark size={40} color="var(--bg)" />
+      </span>
     </aside>
   )
 }
@@ -50,21 +58,24 @@ export default function RifPlaybookPage() {
       {/* 1 — COVER */}
       <section className={s.slide}>
         <div className={s.cover}>
-          <div className={s.logo}>
-            <MambaMark size={34} color="var(--gold)" title="MambaHR" />
-            <span className={s.logoWord}>MambaHR</span>
+          <div className={s.coverText}>
+            <div className={s.logo}>
+              <MambaMark size={34} color="var(--gold)" title="MambaHR" />
+              <span className={s.logoWord}>MambaHR</span>
+            </div>
+            <div className={s.coverMain}>
+              <div className={s.coverKicker}>The Ultimate</div>
+              <h1 className={s.coverTitle}>
+                RIF<span className={s.accent}>Playbook</span>
+              </h1>
+              <div className={s.coverRule} />
+              <p className={s.coverSub}>
+                How to run layoffs the right way — legally, humanely, and efficiently.
+              </p>
+            </div>
+            <div className={s.coverPowered}>Powered by MambaHR</div>
           </div>
-          <div className={s.coverMain}>
-            <div className={s.coverKicker}>The Ultimate</div>
-            <h1 className={s.coverTitle}>
-              RIF<span className={s.accent}>Playbook</span>
-            </h1>
-            <div className={s.coverRule} />
-            <p className={s.coverSub}>
-              How to run layoffs the right way — legally, humanely, and efficiently.
-            </p>
-          </div>
-          <div className={s.coverPowered}>Powered by MambaHR</div>
+          <div className={s.coverPhoto} style={{ backgroundImage: 'url(/v2-people/team.jpg)' }} />
         </div>
       </section>
 
@@ -91,7 +102,7 @@ export default function RifPlaybookPage() {
               <li className={s.takeaway}>Legal-ready agreement language and post-RIF checklists</li>
             </ul>
           </div>
-          <Rail>
+          <Rail photo="/v2-people/team2.jpg">
             Built by HR and legal leaders — so you only need to run this process <em>once</em>.
           </Rail>
         </div>
@@ -280,7 +291,7 @@ export default function RifPlaybookPage() {
               ))}
             </div>
           </div>
-          <Rail>
+          <Rail photo="/v2-people/feat.jpg">
             Real-time dashboards power confident, <em>data-backed decisions</em>.
           </Rail>
         </div>
@@ -362,7 +373,7 @@ export default function RifPlaybookPage() {
               ))}
             </div>
           </div>
-          <Rail>
+          <Rail photo="/v2-people/team2.jpg">
             Our dashboard tracks all of this <em>automatically</em>.
           </Rail>
         </div>
@@ -406,26 +417,28 @@ export default function RifPlaybookPage() {
       {/* 13 — CTA */}
       <section className={s.slide}>
         <div className={s.cta}>
-          <div className={s.logo}>
-            <MambaMark size={30} color="var(--gold)" title="MambaHR" />
-            <span className={s.logoWord}>MambaHR</span>
+          <div className={s.ctaText}>
+            <div className={s.logo}>
+              <MambaMark size={30} color="var(--gold)" title="MambaHR" />
+              <span className={s.logoWord}>MambaHR</span>
+            </div>
+            <h2 className={s.ctaLede} style={{ marginTop: '3cqw' }}>
+              Ready to lead with <span style={{ color: 'var(--gold)' }}>clarity and confidence</span>?
+            </h2>
+            <p className={s.p}>
+              MambaHR runs a compliant, defensible, people-first layoff — without spreadsheets, scattered
+              inputs, or last-minute legal panic. From structured manager rationale to OWBPA-ready severance
+              agreements, it automates every step and shows the business impact in real time.
+            </p>
+            <p className={s.p}>
+              Teams using MambaHR have cut RIF prep time by up to <strong>70%</strong>, closed documentation
+              gaps, and delivered a more thoughtful experience for everyone involved.
+            </p>
+            <a className={s.ctaBtn} href="https://mambahr.com">
+              Get started at mambahr.com →
+            </a>
           </div>
-          <h2 className={s.ctaLede} style={{ marginTop: '4cqw' }}>
-            Ready to lead with <span style={{ color: 'var(--gold)' }}>clarity and confidence</span>?
-          </h2>
-          <p className={s.p} style={{ maxWidth: '64cqw' }}>
-            MambaHR gives you the tools to run a compliant, defensible, people-first layoff — without
-            spreadsheets, scattered inputs, or last-minute legal panic. From structured manager rationale to
-            OWBPA-ready severance agreements, it automates every step and shows the business impact in real time.
-          </p>
-          <p className={s.p} style={{ maxWidth: '64cqw' }}>
-            Teams using MambaHR have cut RIF prep time by up to <strong>70%</strong>, closed documentation gaps,
-            and delivered a more thoughtful experience for everyone involved. Go from weeks of prep down to
-            minutes.
-          </p>
-          <a className={s.ctaBtn} href="https://mambahr.com">
-            Get started at mambahr.com →
-          </a>
+          <div className={s.ctaPhoto} style={{ backgroundImage: 'url(/v2-people/team.jpg)' }} />
         </div>
         <Chrome page={13} />
       </section>
