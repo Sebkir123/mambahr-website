@@ -57,7 +57,49 @@ async function tracedSvg(hex) {
 
 await writeFile('public/brand/mamba-mark-light.png', await tintedPng(INK))
 await writeFile('public/brand/mamba-mark-dark.png', await tintedPng(PAPER))
-await writeFile('public/brand/mamba-mark-light.svg', await tracedSvg(INK))
-await writeFile('public/brand/mamba-mark-dark.svg', await tracedSvg(PAPER))
+const inkSvg = await tracedSvg(INK)
+const paperSvg = await tracedSvg(PAPER)
+await writeFile('public/brand/mamba-mark-light.svg', inkSvg)
+await writeFile('public/brand/mamba-mark-dark.svg', paperSvg)
 
-console.log('Wrote mamba-mark-{light,dark}.{png,svg} to public/brand/')
+// ── Brand LOCKUP ───────────────────────────────────────────────────────────
+// The real logo as used on the deck + site: the M inside a hairline gold
+// double-rule frame with the gold→violet signature dash beneath. Composed here
+// to match mamba-mark.module.css (.lockup) exactly, at a 248² viewBox (2× the
+// deck's 124px) so the fixed-px frame/dash proportions carry over.
+const GOLD_LIGHT = '#C49A6C'
+// --grad: linear-gradient(100deg, #B98A4E 0%, #8A6535 48%, #6A5DA6 100%)
+const markPath = inkSvg.match(/<path d="([^"]+)"/)?.[1] ?? ''
+const MARK_SCALE = 144 / 1665 // .lockupMark is 58% of 248 ≈ 144
+
+function lockupSvg(markHex) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="248" height="248" viewBox="0 0 248 248" fill="none">
+  <defs>
+    <linearGradient id="mambaDash" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#B98A4E"/>
+      <stop offset="48%" stop-color="#8A6535"/>
+      <stop offset="100%" stop-color="#6A5DA6"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="246" height="246" fill="none" stroke="${GOLD_LIGHT}" stroke-width="2"/>
+  <rect x="14" y="14" width="220" height="220" fill="none" stroke="${GOLD_LIGHT}" stroke-opacity="0.55" stroke-width="2"/>
+  <g transform="translate(52 37) scale(${MARK_SCALE})"><path d="${markPath}" fill="${markHex}"/></g>
+  <rect x="96.7" y="204" width="54.6" height="4" rx="2" fill="url(#mambaDash)"/>
+</svg>
+`
+}
+
+const lockupInk = lockupSvg(INK)
+const lockupPaper = lockupSvg(PAPER)
+await writeFile('public/brand/mamba-logo-light.svg', lockupInk)
+await writeFile('public/brand/mamba-logo-dark.svg', lockupPaper)
+await writeFile(
+  'public/brand/mamba-logo-light.png',
+  await sharp(Buffer.from(lockupInk), { density: 384 }).resize(744, 744).png().toBuffer(),
+)
+await writeFile(
+  'public/brand/mamba-logo-dark.png',
+  await sharp(Buffer.from(lockupPaper), { density: 384 }).resize(744, 744).png().toBuffer(),
+)
+
+console.log('Wrote mamba-mark-{light,dark}.{png,svg} + mamba-logo-{light,dark}.{png,svg} to public/brand/')

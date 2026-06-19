@@ -38,10 +38,13 @@
   box-shadow: var(--shadow-sm);
 }
 .logoPreview {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 140px;
+  height: 150px;
+  box-sizing: border-box;
+  padding: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-origin: content-box;
 }
 .logoLight { background: var(--bg-cream); }
 .logoDark { background: var(--text); }
