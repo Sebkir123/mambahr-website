@@ -24,6 +24,60 @@
   color: var(--text-faint);
 }
 
+/* Logo downloads */
+.logoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+.logoCard {
+  border: 1px solid var(--border-faint);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+}
+.logoPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+}
+.logoLight { background: var(--bg-cream); }
+.logoDark { background: var(--text); }
+.logoMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border-faint);
+}
+.logoNote {
+  display: block;
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-top: 2px;
+}
+.logoActions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.dlBtn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--border-mid);
+  border-radius: 8px;
+  padding: 5px 12px;
+}
+.dlBtn:hover { background: var(--bg-surface); border-color: var(--text-muted); }
+
 /* Color grid */
 .swatchGrid {
   display: grid;
