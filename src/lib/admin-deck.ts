@@ -1,5 +1,6 @@
 import 'server-only'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { DECK_SLIDE_COUNT } from '@/lib/deck-slides'
 
 // Deck analytics for the admin panel. Reads deck_links / deck_sessions /
 // deck_slide_events / deck_pageviews AS THE LOGGED-IN ADMIN (RLS: is_admin() =
@@ -198,9 +199,12 @@ export async function getDeckAnalytics(): Promise<DeckAnalytics> {
     }
   })
 
+  // Floor at the canonical deck length so the funnel shows every slide even
+  // before anyone has opened the deck (sessions can push it higher if the deck
+  // grows before this constant is updated).
   const totalSlides = rawSessions.reduce(
     (m, s) => Math.max(m, Number((s as { total_slides: number }).total_slides) || 0),
-    0,
+    DECK_SLIDE_COUNT,
   )
 
   const sessions: DeckSessionRow[] = rawSessions.map((s) => {

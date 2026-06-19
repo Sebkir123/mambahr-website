@@ -279,6 +279,10 @@
 
 .counter { position: fixed; bottom: clamp(20px, 3vw, 36px); right: clamp(24px, 4vw, 56px); font-family: var(--font-mono); font-size: 0.78rem; font-variant-numeric: tabular-nums; letter-spacing: 0.05em; color: var(--text-faint); z-index: var(--z-nav, 210); }
 
+/* Admin-only "you're previewing" marker — only renders when preview=true, so
+   investors never see it. Top-right (brand is top-left, counter bottom-right). */
+.previewBadge { position: fixed; top: clamp(20px, 3vw, 36px); right: clamp(24px, 4vw, 56px); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); background: var(--gold-tint); border: 1px solid var(--gold-light); border-radius: var(--radius-full, 999px); padding: 0.3rem 0.7rem; z-index: var(--z-nav, 210); pointer-events: none; }
+
 .hint { position: fixed; bottom: clamp(20px, 3vw, 36px); left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-faint); z-index: var(--z-nav, 210); transition: opacity 0.4s; pointer-events: none; }
 .hintKey { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 0.3rem; border-radius: 6px; border: 1px solid var(--bg-cream); background: var(--bg-surface); }
 
