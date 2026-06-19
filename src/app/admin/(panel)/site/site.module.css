@@ -105,6 +105,15 @@
 .heatDayLabel { font-size: 11px; color: var(--text-faint); display: flex; align-items: center; }
 .heatCell { aspect-ratio: 1; border-radius: 4px; background: var(--bg-elevated); }
 
+/* funnel */
+.funnel { display: flex; flex-direction: column; gap: 12px; }
+.funnelStep { display: flex; flex-direction: column; gap: 5px; }
+.funnelBarTrack { height: 26px; background: var(--bg-elevated); border-radius: 8px; overflow: hidden; }
+.funnelBar { height: 100%; background: var(--grad); border-radius: 8px; min-width: 2px; transition: width 0.3s ease; }
+.funnelMeta { display: flex; align-items: baseline; justify-content: space-between; }
+.funnelLabel { font-size: 13px; font-weight: 600; color: var(--text); }
+.funnelVal { font-size: 12.5px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+
 /* breakdown chips (Country / Device / Source) above the sessions table */
 .bd { display: flex; flex-direction: column; gap: 8px; padding: 0 0 16px; margin-bottom: 8px; border-bottom: 1px solid var(--border-faint); }
 .bdRow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }

@@ -1,22 +1,13 @@
 import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
-import { getSiteAnalytics, fmtDur, type SiteProperty, type Range } from '@/lib/site-analytics'
+import { getSiteAnalytics, fmtDur, type SiteProperty, type Range, type Tz } from '@/lib/site-analytics'
 import { SessionsTable } from './sessions-table'
+import { SiteControls } from './site-controls'
 import ui from '../admin-ui.module.css'
 import styles from './site.module.css'
 
 export const dynamic = 'force-dynamic'
 
-const PROPS: { key: SiteProperty; label: string }[] = [
-  { key: 'website', label: 'Website' },
-  { key: 'deck', label: 'Pitch deck' },
-]
-const RANGES: { key: Range; label: string }[] = [
-  { key: '1h', label: '1h' },
-  { key: '24h', label: '24h' },
-  { key: '7d', label: '7d' },
-  { key: '30d', label: '30d' },
-]
 type View = 'real' | 'all' | 'bots'
 
 let regionNames: Intl.DisplayNames | null = null
@@ -100,20 +91,16 @@ function Row({ label, row, max }: { label: string; row: number[]; max: number })
 export default async function SiteTrackingPage({
   searchParams,
 }: {
-  searchParams: Promise<{ property?: string; range?: string; view?: string }>
+  searchParams: Promise<{ property?: string; range?: string; view?: string; tz?: string }>
 }) {
   const sp = await searchParams
   const property: SiteProperty = sp.property === 'deck' ? 'deck' : sp.property === 'lp' ? 'lp' : 'website'
   const range: Range = (['1h', '24h', '7d', '30d'] as const).includes(sp.range as Range) ? (sp.range as Range) : '24h'
   const view: View = sp.view === 'all' ? 'all' : sp.view === 'bots' ? 'bots' : 'real'
+  const tz: Tz = (['UTC', 'ET', 'CET'] as const).includes(sp.tz as Tz) ? (sp.tz as Tz) : 'UTC'
 
-  const [, a] = await Promise.all([requireAdmin(), getSiteAnalytics(property, range)])
+  const [, a] = await Promise.all([requireAdmin(), getSiteAnalytics(property, range, tz)])
   const t = a.totals
-
-  const qs = (over: Partial<{ property: string; range: string; view: string }>) => {
-    const merged = { property, range, view, ...over }
-    return `/admin/site?property=${merged.property}&range=${merged.range}&view=${merged.view}`
-  }
 
   const shown = a.sessions.filter((s) => (view === 'real' ? !s.isBot : view === 'bots' ? s.isBot : true))
 
@@ -126,26 +113,12 @@ export default async function SiteTrackingPage({
             {property === 'deck' ? 'Pitch deck' : 'Website'} · first-party, server-recorded · last {range}
           </p>
         </div>
+        {property === 'deck' && (
+          <Link href="/admin/deck" className={ui.btnGhost}>Slide-level analytics →</Link>
+        )}
       </div>
 
-      <div className={styles.controls}>
-        <div className={styles.seg}>
-          {PROPS.map((p) => (
-            <Link key={p.key} href={qs({ property: p.key })} className={property === p.key ? styles.segActive : styles.segBtn}>{p.label}</Link>
-          ))}
-        </div>
-        <div className={styles.seg}>
-          <Link href={qs({ view: 'real' })} className={view === 'real' ? styles.segReal : styles.segBtn}>Real {t.real}</Link>
-          <Link href={qs({ view: 'all' })} className={view === 'all' ? styles.segActive : styles.segBtn}>All {t.all}</Link>
-          <Link href={qs({ view: 'bots' })} className={view === 'bots' ? styles.segActive : styles.segBtn}>Bots {t.bots}</Link>
-        </div>
-        <div className={styles.spacer} />
-        <div className={styles.seg}>
-          {RANGES.map((r) => (
-            <Link key={r.key} href={qs({ range: r.key })} className={range === r.key ? styles.segActive : styles.segBtn}>{r.label}</Link>
-          ))}
-        </div>
-      </div>
+      <SiteControls property={property} view={view} range={range} tz={tz} totals={{ all: t.all, real: t.real, bots: t.bots }} />
 
       {a.warnings.length > 0 && <div className={styles.notice}>{a.warnings[0]}</div>}
 
@@ -208,7 +181,7 @@ export default async function SiteTrackingPage({
 
       <section className={styles.panel}>
         <div className={styles.panelHead}>
-          <h2 className={styles.panelTitle}>Traffic <span className={styles.statSub}>· UTC</span></h2>
+          <h2 className={styles.panelTitle}>Traffic <span className={styles.statSub}>· {tz}</span></h2>
           <div className={styles.legend}>
             <span><span className={styles.legendDot} style={{ background: 'var(--gold)' }} /> Visits {t.real}</span>
             <span><span className={styles.legendDot} style={{ background: 'var(--violet)' }} /> Widget {a.events.widget}</span>
@@ -217,6 +190,26 @@ export default async function SiteTrackingPage({
           </div>
         </div>
         <Timeline data={a.timeline} />
+      </section>
+
+      <section className={styles.panel}>
+        <div className={styles.panelHead}>
+          <h2 className={styles.panelTitle}>Funnel</h2>
+          <span className={styles.statSub}>real visitors · % of visits</span>
+        </div>
+        <div className={styles.funnel}>
+          {a.funnel.map((f) => (
+            <div key={f.label} className={styles.funnelStep}>
+              <div className={styles.funnelBarTrack}>
+                <div className={styles.funnelBar} style={{ width: `${f.pct}%` }} />
+              </div>
+              <div className={styles.funnelMeta}>
+                <span className={styles.funnelLabel}>{f.label}</span>
+                <span className={styles.funnelVal}>{f.count} · {f.pct}%</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
       {a.topPages.length > 0 && (
@@ -267,7 +260,7 @@ export default async function SiteTrackingPage({
       <section className={styles.panel}>
         <div className={styles.panelHead}>
           <h2 className={styles.panelTitle}>Weekday × hour</h2>
-          <span className={styles.statSub}>When real visitors come (UTC)</span>
+          <span className={styles.statSub}>When real visitors come ({tz})</span>
         </div>
         <Heatmap grid={a.heatmap} />
       </section>

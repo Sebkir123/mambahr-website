@@ -133,8 +133,19 @@ export default function SiteTracker() {
       }
     }
     const onClick = (e: MouseEvent) => {
-      const el = (e.target as HTMLElement | null)?.closest('[data-track]') as HTMLElement | null
-      if (el) flush({ kind: el.dataset.track || 'custom', label: el.dataset.trackLabel || el.textContent?.trim().slice(0, 80) })
+      const target = e.target as HTMLElement | null
+      // 1) explicit declarative conversions: data-track="kind"
+      const tagged = target?.closest('[data-track]') as HTMLElement | null
+      if (tagged) {
+        flush({ kind: tagged.dataset.track || 'custom', label: tagged.dataset.trackLabel || tagged.textContent?.trim().slice(0, 80) })
+        return
+      }
+      // 2) auto-detect demo CTAs by href so we don't have to tag every button
+      const link = target?.closest('a[href]') as HTMLAnchorElement | null
+      const href = link?.getAttribute('href') || ''
+      if (/(^|\/)demo(\/|$|\?|#)/.test(href) || href.includes('#access')) {
+        flush({ kind: 'cta_click', label: link?.textContent?.trim().slice(0, 80) })
+      }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
