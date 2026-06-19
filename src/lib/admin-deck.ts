@@ -371,3 +371,49 @@ export async function getDeckSession(id: string): Promise<DeckSessionDetail | nu
     mostRevisited,
   }
 }
+
+export type DeckSummary = {
+  opens: number // server-side page-views (reliable, beacon-proof)
+  recipients: number // distinct identified viewers who opened
+  links: number // active (non-revoked) recipient links
+  lastOpenedAt: string | null
+  warnings: string[]
+}
+
+// Lightweight deck rollup for the Overview dashboard — two cheap reads, no
+// per-session aggregation. Reads as the logged-in admin (RLS), degrades to
+// zeros if a table is missing.
+export async function getDeckSummary(): Promise<DeckSummary> {
+  const supabase = await createSupabaseServerClient()
+  const warnings: string[] = []
+  let opens = 0
+  let lastOpenedAt: string | null = null
+  const recipients = new Set<string>()
+
+  const { data: pv, error: pvErr } = await supabase
+    .from('deck_pageviews')
+    .select('recipient_name, viewed_at')
+    .order('viewed_at', { ascending: false })
+    .limit(10000)
+  if (pvErr) {
+    warnings.push(`Could not read deck_pageviews: ${pvErr.message}`)
+  } else {
+    const rows = (pv as { recipient_name: string | null; viewed_at: string | null }[] | null) ?? []
+    opens = rows.length
+    if (rows.length) lastOpenedAt = rows[0].viewed_at ?? null
+    for (const r of rows) if (r.recipient_name) recipients.add(r.recipient_name)
+  }
+
+  let links = 0
+  const { data: lk, error: lkErr } = await supabase
+    .from('deck_links')
+    .select('id')
+    .is('revoked_at', null)
+  if (lkErr) {
+    warnings.push(`Could not read deck_links: ${lkErr.message}`)
+  } else {
+    links = ((lk as unknown[] | null) ?? []).length
+  }
+
+  return { opens, recipients: recipients.size, links, lastOpenedAt, warnings }
+}
