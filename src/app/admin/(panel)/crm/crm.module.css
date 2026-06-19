@@ -154,9 +154,8 @@
 .kcard:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); border-color: var(--gold-light); }
 .kcard:active { cursor: grabbing; transform: none; }
 .kcardDragging { opacity: 0.45; box-shadow: none; transform: none; }
-/* While a drag is in flight, drop events should land on the columns, not on
-   cards — this kills hover-lift jitter and dragleave flicker between cards. */
-.boardDragging .kcard { pointer-events: none; }
+/* Neutralize hover-lift while a drag is in flight (don't touch pointer-events on
+   the dragged source — that aborts the drag in Chrome). */
 .boardDragging .kcard:hover { transform: none; box-shadow: var(--shadow-sm); border-color: var(--border-faint); }
 .kcardTop { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .kcardName { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; letter-spacing: -0.005em; }

@@ -18,7 +18,7 @@ export const STAGES: Record<ContactKind, { key: string; label: string }[]> = {
   ],
   investor: [
     { key: 'prospect', label: 'Prospect' },
-    { key: 'intro', label: 'Intro’d' },
+    { key: 'intro', label: 'Introduced' },
     { key: 'pitched', label: 'Pitched' },
     { key: 'diligence', label: 'Diligence' },
     { key: 'committed', label: 'Committed' },
