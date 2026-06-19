@@ -16,29 +16,34 @@ type AccountRow = {
 //   draft    → saved, not sent
 //   schedule → status=scheduled, scheduled_at set (cron sends it)
 //   now      → created then published immediately
-export async function composePost(formData: FormData) {
+export type ComposeResult = { ok: boolean; message: string }
+
+export async function composePost(formData: FormData): Promise<ComposeResult> {
   const admin = await requireAdmin()
   const db = socialDb()
-  if (!db) return
+  if (!db) return { ok: false, message: 'LinkedIn isn’t configured yet — drafts can’t be saved.' }
 
   const body = String(formData.get('body') || '').trim()
   const mode = String(formData.get('mode') || 'draft') // draft | schedule | now
+  // scheduledAt arrives as an absolute ISO string computed in the browser's
+  // timezone, so the stored instant is unambiguous regardless of server TZ.
   const scheduledAt = String(formData.get('scheduledAt') || '').trim()
   const accountIds = formData.getAll('accountIds').map(String).filter(Boolean)
-  if (!body || accountIds.length === 0) return
+  if (!body || accountIds.length === 0) return { ok: false, message: 'Add some text and pick at least one account.' }
 
-  const status = mode === 'schedule' ? 'scheduled' : mode === 'now' ? 'published' : 'draft'
-
-  for (const accountId of accountIds) {
-    if (mode === 'now') {
+  if (mode === 'now') {
+    let posted = 0
+    let failed = 0
+    for (const accountId of accountIds) {
       const { data: acct } = await db
         .from('social_accounts')
         .select('id, author_urn, access_token, refresh_token, expires_at')
         .eq('id', accountId)
-        .single()
+        .maybeSingle()
       let externalId: string | null = null
       let error: string | null = null
       try {
+        if (!acct) throw new Error('account not found')
         externalId = await publishForAccount(acct as AccountRow, body)
       } catch (e) {
         error = e instanceof Error ? e.message : 'publish failed'
@@ -52,17 +57,29 @@ export async function composePost(formData: FormData) {
         error,
         created_by: admin.email,
       })
-    } else {
-      await db.from('social_posts').insert({
-        account_id: accountId,
-        body,
-        status,
-        scheduled_at: mode === 'schedule' && scheduledAt ? new Date(scheduledAt).toISOString() : null,
-        created_by: admin.email,
-      })
+      error ? failed++ : posted++
     }
+    revalidatePath('/admin/social')
+    if (failed === 0) return { ok: true, message: `Posted to ${posted} account${posted === 1 ? '' : 's'}.` }
+    if (posted === 0) return { ok: false, message: `Publish failed — see the queue below for the reason.` }
+    return { ok: false, message: `Posted to ${posted}, ${failed} failed — see the queue below.` }
+  }
+
+  const status = mode === 'schedule' ? 'scheduled' : 'draft'
+  for (const accountId of accountIds) {
+    await db.from('social_posts').insert({
+      account_id: accountId,
+      body,
+      status,
+      scheduled_at: mode === 'schedule' && scheduledAt ? scheduledAt : null,
+      created_by: admin.email,
+    })
   }
   revalidatePath('/admin/social')
+  return {
+    ok: true,
+    message: mode === 'schedule' ? `Scheduled for ${accountIds.length} account${accountIds.length === 1 ? '' : 's'}.` : 'Saved as draft.',
+  }
 }
 
 // Publish a saved draft / retry a failed or scheduled post immediately.

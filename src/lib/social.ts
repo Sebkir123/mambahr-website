@@ -15,9 +15,13 @@ export const LINKEDIN_REDIRECT_PATH = '/api/social/linkedin/callback'
 function key(): Buffer {
   const k = env.socialTokenKey
   if (k && /^[0-9a-fA-F]{64}$/.test(k)) return Buffer.from(k, 'hex')
-  // Dev fallback: derive a stable 32-byte key so connect/publish work locally.
-  const seed = env.socialTokenKey || env.supabaseServiceRoleKey || 'mamba-social-dev'
-  return createHash('sha256').update(seed).digest()
+  // Tokens at rest must be protected by a key separate from the DB credentials.
+  // Refuse to fall back to a derived/constant key in production.
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('SOCIAL_TOKEN_KEY (64 hex chars) is required in production')
+  }
+  // Dev only: stable constant so local connect/publish flows work without setup.
+  return createHash('sha256').update('mamba-social-dev-only').digest()
 }
 export function encryptToken(plain: string): string {
   const iv = randomBytes(12)
@@ -149,7 +153,10 @@ export async function publishForAccount(account: {
   const expired = account.expires_at ? new Date(account.expires_at).getTime() < Date.now() + 60_000 : false
   if (expired) {
     const refresh = decryptToken(account.refresh_token)
-    if (refresh) {
+    if (!refresh) {
+      throw new Error('This LinkedIn connection has expired — reconnect the account to keep posting')
+    }
+    {
       const r = await refreshAccessToken(refresh)
       token = r.access_token
       await db

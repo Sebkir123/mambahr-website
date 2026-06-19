@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
 import { getOverview, type Lead } from '@/lib/admin-analytics'
 import { getDeckSummary } from '@/lib/admin-deck'
+import { getFieldGuideAnalytics } from '@/lib/admin-field-guides'
 import ui from './admin-ui.module.css'
 import styles from './overview.module.css'
 
@@ -43,7 +44,12 @@ function Sparkline({ data }: { data: { day: string; count: number }[] }) {
 export default async function AdminOverview() {
   // Run the auth check concurrently with the data fetch so the getUser()
   // round-trip overlaps the queries instead of blocking them.
-  const [admin, o, deck] = await Promise.all([requireAdmin(), getOverview(), getDeckSummary()])
+  const [admin, o, deck, guides] = await Promise.all([
+    requireAdmin(),
+    getOverview(),
+    getDeckSummary(),
+    getFieldGuideAnalytics(),
+  ])
 
   return (
     <>
@@ -101,6 +107,20 @@ export default async function AdminOverview() {
           <DeckMini label="Recipients reached" value={deck.recipients.toLocaleString()} />
           <DeckMini label="Active links" value={deck.links.toLocaleString()} />
           <DeckMini label="Last open" value={deck.lastOpenedAt ? fmtDateTime(deck.lastOpenedAt) : '—'} />
+        </div>
+      </section>
+
+      {/* Field-guide lead magnet activity */}
+      <section className={`${ui.card} ${styles.deckCard}`}>
+        <div className={styles.cardHead}>
+          <h2 className={styles.cardTitle}>Field guides</h2>
+          <Link href="/admin/field-guides" className={styles.cardLink}>View analytics →</Link>
+        </div>
+        <div className={styles.deckRow}>
+          <DeckMini label="Requests" value={guides.totals.requests.toLocaleString()} />
+          <DeckMini label="Opened" value={guides.totals.opened.toLocaleString()} />
+          <DeckMini label="Open rate" value={`${guides.totals.openRatePct}%`} />
+          <DeckMini label="This week" value={guides.totals.last7d.toLocaleString()} />
         </div>
       </section>
 

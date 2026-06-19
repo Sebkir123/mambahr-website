@@ -128,12 +128,111 @@
 }
 .composerFoot {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 6px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
 }
 .count {
   font-family: var(--font-mono);
   font-size: 12px;
+  color: var(--text-faint);
+}
+.previewToggle {
+  border: none;
+  background: none;
+  color: var(--gold-dark);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+.previewToggle:disabled {
+  color: var(--text-faint);
+  cursor: default;
+}
+
+/* feedback banner */
+.feedback {
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+.feedbackOk {
+  background: rgba(74, 138, 90, 0.12);
+  color: #2f6b3a;
+  border: 1px solid rgba(74, 138, 90, 0.3);
+}
+.feedbackErr {
+  background: rgba(180, 57, 47, 0.08);
+  color: #b4392f;
+  border: 1px solid rgba(180, 57, 47, 0.3);
+}
+
+/* preview cards */
+.previews {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 14px 0;
+}
+.previewCard {
+  border: 1px solid var(--border-faint);
+  border-radius: 12px;
+  background: var(--bg-surface);
+  padding: 14px 16px;
+}
+.previewHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.previewAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full, 999px);
+  background: var(--grad);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.previewName {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.previewSub {
+  display: block;
+  font-size: 12px;
+  color: var(--text-faint);
+}
+.previewBody {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* schedule field */
+.scheduleField {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.scheduleLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-faint);
+}
+.tz {
+  font-weight: 500;
   color: var(--text-faint);
 }
 .accountPick {

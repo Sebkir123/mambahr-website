@@ -37,7 +37,9 @@ const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/sit
 async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
-  if (!secret || !siteKey) return token === 'dev-mode-bypass'
+  // Only accept the dev bypass outside production. In prod with missing keys,
+  // fail closed rather than let a misconfig open an unauthenticated spam vector.
+  if (!secret || !siteKey) return process.env.NODE_ENV !== 'production' && token === 'dev-mode-bypass'
   if (!token) return false
   try {
     const form = new URLSearchParams({ secret, response: token, remoteip: ip })

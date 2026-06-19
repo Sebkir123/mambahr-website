@@ -4,12 +4,13 @@ import { socialDb, publishForAccount } from '@/lib/social'
 
 export const dynamic = 'force-dynamic'
 
-// Publishes due scheduled posts. Triggered by Vercel Cron (sends a
-// x-vercel-cron header) or any caller presenting CRON_SECRET.
+// Publishes due scheduled posts. Authenticated by CRON_SECRET only — Vercel Cron
+// sends `Authorization: Bearer <CRON_SECRET>` automatically when the env var is
+// set. We do NOT trust the x-vercel-cron header (a client can forge it, which
+// would let anyone force-publish to the founders' real feeds). Fail closed.
 export async function GET(req: Request) {
   const auth = req.headers.get('authorization')
-  const isVercelCron = req.headers.get('x-vercel-cron') !== null
-  const ok = isVercelCron || (env.cronSecret && auth === `Bearer ${env.cronSecret}`)
+  const ok = Boolean(env.cronSecret) && auth === `Bearer ${env.cronSecret}`
   if (!ok) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
   const db = socialDb()
@@ -29,8 +30,9 @@ export async function GET(req: Request) {
       .from('social_accounts')
       .select('id, author_urn, access_token, refresh_token, expires_at')
       .eq('id', post.account_id)
-      .single()
+      .maybeSingle()
     try {
+      if (!acct) throw new Error('Connected account no longer exists')
       const externalId = await publishForAccount(acct as never, post.body as string)
       await db
         .from('social_posts')

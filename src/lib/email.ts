@@ -186,7 +186,7 @@ export async function sendFieldGuide(opts: { email: string; guideTitle: string; 
     <p style="font-size:15px;line-height:1.7;color:#57534e;margin:0 0 24px 0;">
       Here&rsquo;s <strong style="color:#1a1611;">${escapeHtml(opts.guideTitle)}</strong> — a practical, compliance-first walkthrough you can use the next time you have to make the hard calls.
     </p>
-    <a href="${opts.url}" style="display:inline-block;background:#1a1611;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;padding:14px 28px;border-radius:999px;">
+    <a href="${escapeHtml(opts.url)}" style="display:inline-block;background:#1a1611;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;padding:14px 28px;border-radius:999px;">
       Open the playbook &rarr;
     </a>
     <div style="border-top:1px solid #e7e5e4;padding-top:24px;margin-top:32px;">

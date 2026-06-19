@@ -115,14 +115,14 @@ export default function Resources() {
         <div className="more" data-reveal data-delay="2">
           <span className="more-l">More guides</span>
           {MORE.map((m) => (
-            <a key={m.title} className="more-item">
+            <div key={m.title} className="more-item" aria-disabled="true">
               <span className="mini-cover" aria-hidden="true">
                 <span className="mini-m">M</span>
                 <span className="mini-k">{m.kicker}</span>
               </span>
               <span className="more-t">{m.title}</span>
-              <span className="arr" aria-hidden="true">→</span>
-            </a>
+              <span className="soon">Coming soon</span>
+            </div>
           ))}
         </div>
       </div>
@@ -206,12 +206,20 @@ export default function Resources() {
           border: 1px solid var(--border);
           border-radius: 12px;
           padding: 8px 16px 8px 8px;
-          cursor: pointer;
           background: var(--bg);
           box-shadow: var(--shadow-sm);
-          transition: transform 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
+          opacity: 0.78;
         }
-        .more-item:hover { color: var(--text); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .soon {
+          font-family: var(--font-mono);
+          font-size: 10.5px;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: var(--text-faint);
+          border: 1px solid var(--border);
+          border-radius: 999px;
+          padding: 2px 8px;
+        }
         .mini-cover {
           width: 38px;
           height: 48px;
