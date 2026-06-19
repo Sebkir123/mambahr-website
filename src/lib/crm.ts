@@ -1,5 +1,8 @@
 import 'server-only'
+import { unstable_cache } from 'next/cache'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { serviceDb } from '@/lib/supabase/service'
 import {
   STAGES,
   WON_STAGES,
@@ -42,8 +45,16 @@ function num(v: unknown): number {
   return Number.isFinite(n) ? n : 0
 }
 
+// Dashboard stats are cached 20s (service-role read, admin-gated at the page) so
+// the Overview / Investors / Customers pages don't re-query on every visit.
+const cachedDashboard = unstable_cache(async () => computeCrmDashboard(serviceDb()!), ['crm-dashboard-v1'], { revalidate: 20 })
+
 export async function getCrmDashboard(): Promise<Dashboard> {
-  const supabase = await createSupabaseServerClient()
+  if (serviceDb()) return cachedDashboard()
+  return computeCrmDashboard(await createSupabaseServerClient())
+}
+
+async function computeCrmDashboard(supabase: SupabaseClient): Promise<Dashboard> {
   const warnings: string[] = []
 
   const { data: cRows, error: cErr } = await supabase
