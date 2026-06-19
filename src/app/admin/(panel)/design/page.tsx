@@ -1,4 +1,5 @@
 import { requireAdmin } from '@/lib/auth'
+import { MambaMark } from '@/components/mamba-mark'
 import ui from '../admin-ui.module.css'
 import styles from './design.module.css'
 
@@ -92,6 +93,46 @@ export default async function DesignAdminPage() {
           <p className={ui.subtitle}>
             The MambaHR brand system — Warm Editorial Premium. Colors, type, and components, live from the tokens.
           </p>
+        </div>
+      </div>
+
+      {/* Logo downloads */}
+      <div className={styles.section}>
+        <div className={styles.sectionHead}>
+          <h2 className={styles.sectionTitle}>Logo</h2>
+          <span className={styles.sectionHint}>The brand mark — SVG (vector) + PNG, transparent background</span>
+        </div>
+        <div className={styles.logoGrid}>
+          <div className={styles.logoCard}>
+            <div className={`${styles.logoPreview} ${styles.logoLight}`}>
+              <MambaMark size={76} color="var(--text)" title="MambaHR mark" />
+            </div>
+            <div className={styles.logoMeta}>
+              <div>
+                <span className={styles.swatchName}>Light mode</span>
+                <span className={styles.logoNote}>Ink mark · use on light backgrounds</span>
+              </div>
+              <div className={styles.logoActions}>
+                <a href="/brand/mamba-mark-light.svg" download className={styles.dlBtn}>SVG</a>
+                <a href="/brand/mamba-mark-light.png" download className={styles.dlBtn}>PNG</a>
+              </div>
+            </div>
+          </div>
+          <div className={styles.logoCard}>
+            <div className={`${styles.logoPreview} ${styles.logoDark}`}>
+              <MambaMark size={76} color="var(--bg)" title="MambaHR mark" />
+            </div>
+            <div className={styles.logoMeta}>
+              <div>
+                <span className={styles.swatchName}>Dark mode</span>
+                <span className={styles.logoNote}>Paper mark · use on dark backgrounds</span>
+              </div>
+              <div className={styles.logoActions}>
+                <a href="/brand/mamba-mark-dark.svg" download className={styles.dlBtn}>SVG</a>
+                <a href="/brand/mamba-mark-dark.png" download className={styles.dlBtn}>PNG</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
