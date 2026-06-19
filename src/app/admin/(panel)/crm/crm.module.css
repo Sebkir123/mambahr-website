@@ -31,6 +31,8 @@
 .tabActive { composes: tab; background: var(--bg); color: var(--text); box-shadow: var(--shadow-sm); }
 .spacer { flex: 1; }
 
+.headerActions { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+
 /* ── Stat strip ──────────────────────────────────────────────────────────── */
 .stats {
   display: grid;
