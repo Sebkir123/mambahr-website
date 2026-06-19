@@ -40,10 +40,32 @@ export function isValidStage(kind: ContactKind, stage: string): boolean {
 }
 
 export function formatMoney(v: number | null | undefined): string {
-  if (!v) return '—'
+  if (v == null) return '—' // a legitimate $0 (free pilot) is distinct from "no value"
   if (v >= 1_000_000) return `$${(v / 1_000_000).toFixed(v % 1_000_000 === 0 ? 0 : 1)}M`
   if (v >= 1_000) return `$${Math.round(v / 1_000)}k`
   return `$${v}`
+}
+
+// Parse human deal/check-size input: "50000", "$50,000", "50k", "1.5M", "2m".
+export function parseMoney(raw: string): number | null {
+  const t = raw.trim().toLowerCase().replace(/[$,\s]/g, '')
+  if (!t) return null
+  const m = t.match(/^(\d+(?:\.\d+)?)(k|m)?$/)
+  if (!m) return null
+  let n = parseFloat(m[1])
+  if (m[2] === 'k') n *= 1_000
+  else if (m[2] === 'm') n *= 1_000_000
+  return Number.isFinite(n) ? n : null
+}
+
+export const ACTIVITY_KINDS: ActivityKind[] = ['note', 'call', 'email', 'meeting', 'stage_change', 'created', 'task']
+
+// Validate a YYYY-MM-DD date string; returns it if valid, else null.
+export function isoDateOrNull(raw: string): string | null {
+  const t = raw.trim()
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(t)) return null
+  const d = new Date(t + 'T00:00:00Z')
+  return Number.isNaN(d.getTime()) ? null : t
 }
 
 export type Contact = {

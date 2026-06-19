@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { requireAdmin } from '@/lib/auth'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
-import { defaultStage, isValidStage, stageLabel, type ContactKind } from '@/lib/crm'
+import { defaultStage, isValidStage, stageLabel, parseMoney, isoDateOrNull, ACTIVITY_KINDS, type ContactKind } from '@/lib/crm'
 
 // All CRM mutations. Each runs AS the logged-in admin (RLS: is_admin()), so the
 // @mambahr.com gate is enforced at the row level — no service-role key. Server
@@ -15,10 +15,12 @@ function s(v: FormDataEntryValue | null): string {
 function orNull(v: string): string | null {
   return v ? v : null
 }
+// Accepts "50000", "$50,000", "50k", "1.5M" — never silently truncates "50k" to 50.
 function moneyOrNull(v: string): number | null {
-  if (!v) return null
-  const n = parseFloat(v.replace(/[$,\s]/g, ''))
-  return Number.isFinite(n) ? n : null
+  return parseMoney(v)
+}
+function tagsOf(raw: string): string[] {
+  return raw ? raw.split(',').map((t) => t.trim()).filter(Boolean).slice(0, 24) : []
 }
 
 export type ActionResult = { ok: boolean; message: string; id?: string }
@@ -51,9 +53,10 @@ export async function createContact(fd: FormData): Promise<ActionResult> {
       linkedin_url: orNull(s(fd.get('linkedin_url'))),
       website: orNull(s(fd.get('website'))),
       location: orNull(s(fd.get('location'))),
+      tags: tagsOf(s(fd.get('tags'))),
       notes: orNull(s(fd.get('notes'))),
       next_step: orNull(s(fd.get('next_step'))),
-      next_step_due: orNull(s(fd.get('next_step_due'))),
+      next_step_due: isoDateOrNull(s(fd.get('next_step_due'))),
       created_by: admin.email,
     })
     .select('id')
@@ -79,15 +82,26 @@ export async function updateContact(fd: FormData): Promise<ActionResult> {
   const id = s(fd.get('id'))
   if (!id) return { ok: false, message: 'Missing id.' }
 
-  const { data: prev } = await supabase.from('crm_contacts').select('kind, stage').eq('id', id).maybeSingle()
+  const { data: prev } = await supabase
+    .from('crm_contacts')
+    .select('kind, stage, owner, updated_at')
+    .eq('id', id)
+    .maybeSingle()
   if (!prev) return { ok: false, message: 'Contact not found.' }
   const kind = prev.kind as ContactKind
+
+  // Optimistic concurrency: if the row changed since this editor loaded it,
+  // reject rather than silently overwriting a teammate's just-saved edit. The
+  // presence lock prevents most of this; this closes the tiny race window.
+  const expected = s(fd.get('expected_updated_at'))
+  if (expected && prev.updated_at && expected !== prev.updated_at) {
+    return { ok: false, message: 'This contact changed since you opened it — refresh and re-apply your edit.' }
+  }
 
   let stage = s(fd.get('stage')) || prev.stage
   if (!isValidStage(kind, stage)) stage = prev.stage
 
-  const tagsRaw = s(fd.get('tags'))
-  const tags = tagsRaw ? tagsRaw.split(',').map((t) => t.trim()).filter(Boolean) : []
+  const ownerInput = s(fd.get('owner'))
 
   const { error } = await supabase
     .from('crm_contacts')
@@ -97,16 +111,17 @@ export async function updateContact(fd: FormData): Promise<ActionResult> {
       company: orNull(s(fd.get('company'))),
       title: orNull(s(fd.get('title'))),
       stage,
-      owner: orNull(s(fd.get('owner'))),
+      // Don't wipe ownership if the field is left blank — keep the prior owner.
+      owner: ownerInput || prev.owner,
       value: moneyOrNull(s(fd.get('value'))),
       priority: s(fd.get('priority')) || 'medium',
       linkedin_url: orNull(s(fd.get('linkedin_url'))),
       website: orNull(s(fd.get('website'))),
       location: orNull(s(fd.get('location'))),
-      tags,
+      tags: tagsOf(s(fd.get('tags'))),
       notes: orNull(s(fd.get('notes'))),
       next_step: orNull(s(fd.get('next_step'))),
-      next_step_due: orNull(s(fd.get('next_step_due'))),
+      next_step_due: isoDateOrNull(s(fd.get('next_step_due'))),
     })
     .eq('id', id)
 
@@ -171,7 +186,9 @@ export async function logActivity(fd: FormData): Promise<ActionResult> {
   const admin = await requireAdmin()
   const supabase = await createSupabaseServerClient()
   const contact_id = s(fd.get('contact_id'))
-  const kind = s(fd.get('kind')) || 'note'
+  let kind = s(fd.get('kind')) || 'note'
+  // Action is independently invokable — guard against a kind the CHECK rejects.
+  if (!ACTIVITY_KINDS.includes(kind as (typeof ACTIVITY_KINDS)[number])) kind = 'note'
   const body = s(fd.get('body'))
   if (!contact_id) return { ok: false, message: 'Missing contact.' }
   if (!body) return { ok: false, message: 'Write something first.' }
@@ -252,6 +269,7 @@ export async function ingestLeads(): Promise<ActionResult> {
   const str = (v: unknown) => (typeof v === 'string' && v.trim() ? v.trim() : null)
 
   const inserts: Record<string, unknown>[] = []
+  const warnings: string[] = []
 
   // Customers — one contact per email (warmest source wins the stage).
   const customerByEmail = new Map<string, Record<string, unknown>>()
@@ -259,7 +277,13 @@ export async function ingestLeads(): Promise<ActionResult> {
   const stageForSource: Record<string, string> = { demo: 'qualified', field_guide: 'lead', magnet: 'lead', waitlist: 'lead' }
 
   async function pull(table: string, source: string) {
-    const { data } = await supabase.from(table).select('*').limit(5000)
+    // select('*') tolerates the differing shapes of the four source tables;
+    // surface (not swallow) a read error so a missing/renamed table is visible.
+    const { data, error } = await supabase.from(table).select('*').limit(5000)
+    if (error) {
+      warnings.push(`${table}: ${error.message}`)
+      return
+    }
     for (const r of (data as Row[] | null) ?? []) {
       const email = str(r.email)?.toLowerCase()
       if (!email) continue
@@ -294,10 +318,11 @@ export async function ingestLeads(): Promise<ActionResult> {
   }
 
   // Investors — one per deck link.
-  const { data: deck } = await supabase
+  const { data: deck, error: deckErr } = await supabase
     .from('deck_links')
     .select('id, recipient_name, recipient_org, created_at')
     .limit(5000)
+  if (deckErr) warnings.push(`deck_links: ${deckErr.message}`)
   for (const d of (deck as Row[] | null) ?? []) {
     const ref = `deck:${d.id}`
     if (have.has(`investor:${ref}`)) continue
@@ -312,14 +337,20 @@ export async function ingestLeads(): Promise<ActionResult> {
     })
   }
 
+  const warnSuffix = warnings.length ? ` (skipped: ${warnings.join('; ')})` : ''
+
   if (inserts.length === 0) {
-    return { ok: true, message: 'Already up to date — no new contacts to import.' }
+    return { ok: warnings.length === 0, message: `Already up to date — no new contacts to import.${warnSuffix}` }
   }
 
-  const { error } = await supabase.from('crm_contacts').insert(inserts)
+  // upsert + ignoreDuplicates so a concurrent import or a pre-existing
+  // (kind, external_ref) never hard-fails the whole batch.
+  const { error } = await supabase
+    .from('crm_contacts')
+    .upsert(inserts, { onConflict: 'kind,external_ref', ignoreDuplicates: true })
   if (error) return { ok: false, message: error.message }
 
   revalidatePath('/admin/crm')
   revalidatePath('/admin/crm/contacts')
-  return { ok: true, message: `Imported ${inserts.length} contact${inserts.length === 1 ? '' : 's'}.` }
+  return { ok: true, message: `Imported ${inserts.length} contact${inserts.length === 1 ? '' : 's'}.${warnSuffix}` }
 }

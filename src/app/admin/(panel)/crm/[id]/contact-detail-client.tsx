@@ -9,13 +9,17 @@ import ui from '../../admin-ui.module.css'
 import styles from '../crm.module.css'
 
 type Stage = { key: string; label: string }
-type Peer = { email: string; name: string; editing: boolean }
+type Peer = { id: string; name: string; editing: boolean }
 
 // The editable contact form with REAL-TIME collaboration via Supabase Realtime
 // presence. Everyone viewing this contact shows up as an avatar; when one person
 // enters edit mode, the others' "Edit" button locks with a banner — so two people
 // can't clobber each other's edits. Presence auto-clears on disconnect (closed
 // tab, navigation), so a lock can never get permanently stuck.
+//
+// Privacy: the presence channel is public (Realtime presence isn't RLS-gated),
+// so we broadcast only a first-name display label + a random per-session id —
+// never the admin's email. The session id (not email) distinguishes self vs peers.
 export function ContactDetailClient({
   contact,
   stages,
@@ -27,36 +31,43 @@ export function ContactDetailClient({
 }) {
   const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
+  const sessionId = useRef<string>('')
+  if (!sessionId.current) {
+    sessionId.current =
+      typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `s_${Date.now()}_${Math.floor(Math.random() * 1e9)}`
+  }
   const [editing, setEditing] = useState(false)
   const [saving, setSaving] = useState(false)
   const [err, setErr] = useState('')
   const [peers, setPeers] = useState<Peer[]>([])
+  const [connected, setConnected] = useState(false)
   const channelRef = useRef<ReturnType<ReturnType<typeof createSupabaseBrowserClient>['channel']> | null>(null)
 
   const meName = meEmail.split('@')[0]
+  const meId = sessionId.current
 
   useEffect(() => {
     const supabase = createSupabaseBrowserClient()
     const channel = supabase.channel(`crm:contact:${contact.id}`, {
-      config: { presence: { key: meEmail } },
+      config: { presence: { key: meId } },
     })
     channelRef.current = channel
 
     channel
       .on('presence', { event: 'sync' }, () => {
-        const state = channel.presenceState() as Record<string, { email: string; name: string; editing: boolean }[]>
+        const state = channel.presenceState() as Record<string, { id: string; name: string; editing: boolean }[]>
         const flat: Peer[] = []
-        for (const entries of Object.values(state)) {
-          // Multiple tabs of the same user collapse to one peer (editing if any tab is).
+        for (const [key, entries] of Object.entries(state)) {
           const e = entries[0]
           if (!e) continue
-          flat.push({ email: e.email, name: e.name, editing: entries.some((x) => x.editing) })
+          flat.push({ id: key, name: e.name, editing: entries.some((x) => x.editing) })
         }
         setPeers(flat)
       })
       .subscribe(async (status) => {
+        setConnected(status === 'SUBSCRIBED')
         if (status === 'SUBSCRIBED') {
-          await channel.track({ email: meEmail, name: meName, editing: false })
+          await channel.track({ id: meId, name: meName, editing: false })
         }
       })
 
@@ -64,13 +75,13 @@ export function ContactDetailClient({
       supabase.removeChannel(channel)
       channelRef.current = null
     }
-  }, [contact.id, meEmail, meName])
+  }, [contact.id, meId, meName])
 
   async function setEditingFlag(flag: boolean) {
-    await channelRef.current?.track({ email: meEmail, name: meName, editing: flag })
+    await channelRef.current?.track({ id: meId, name: meName, editing: flag })
   }
 
-  const others = peers.filter((p) => p.email !== meEmail)
+  const others = peers.filter((p) => p.id !== meId)
   const lockedBy = others.find((p) => p.editing)
   const lockedByOther = Boolean(lockedBy) && !editing
 
@@ -114,16 +125,19 @@ export function ContactDetailClient({
             <span className={styles.presence} title={peers.map((p) => p.name).join(', ')}>
               {peers.slice(0, 5).map((p) => (
                 <span
-                  key={p.email}
+                  key={p.id}
                   className={`${styles.avatar} ${p.editing ? styles.avatarEditing : ''}`}
-                  title={`${p.name}${p.editing ? ' (editing)' : ''}${p.email === meEmail ? ' — you' : ''}`}
+                  title={`${p.name}${p.editing ? ' (editing)' : ''}${p.id === meId ? ' — you' : ''}`}
                 >
                   {p.name.charAt(0)}
                 </span>
               ))}
             </span>
           )}
-          <span className={styles.livePill}><span className={styles.liveDot} /> live</span>
+          <span className={styles.livePill} title={connected ? 'Connected — changes sync in real time' : 'Connecting…'}>
+            <span className={styles.liveDot} style={connected ? undefined : { background: 'var(--text-faint)', boxShadow: 'none' }} />
+            {connected ? 'live' : 'connecting…'}
+          </span>
         </div>
       </div>
 
@@ -134,6 +148,7 @@ export function ContactDetailClient({
       )}
 
       <form ref={formRef} onSubmit={onSubmit}>
+        <input type="hidden" name="expected_updated_at" value={contact.updated_at} />
         <div className={styles.formGrid}>
           <div className={styles.field}>
             <label className={styles.label}>Name</label>

@@ -33,6 +33,7 @@ export type Dashboard = {
     byStage: { key: string; label: string; count: number; value: number }[]
   }>
   upcomingTasks: (Task & { contactName: string; contactKind: ContactKind })[]
+  openTaskCount: number
   recent: Contact[]
 }
 
@@ -53,9 +54,9 @@ export async function getCrmDashboard(): Promise<Dashboard> {
   if (cErr) warnings.push(`Could not read crm_contacts: ${cErr.message}`)
   const contacts = ((cRows as Contact[] | null) ?? []).map((c) => ({ ...c, value: c.value == null ? null : num(c.value) }))
 
-  const { data: tRows, error: tErr } = await supabase
+  const { data: tRows, error: tErr, count: openTaskCount } = await supabase
     .from('crm_tasks')
-    .select('id, contact_id, title, due_date, done, done_at, assignee, created_at')
+    .select('id, contact_id, title, due_date, done, done_at, assignee, created_at', { count: 'exact' })
     .eq('done', false)
     .order('due_date', { ascending: true, nullsFirst: false })
     .limit(50)
@@ -95,6 +96,7 @@ export async function getCrmDashboard(): Promise<Dashboard> {
     warnings,
     byKind: { customer: summarize('customer'), investor: summarize('investor') },
     upcomingTasks,
+    openTaskCount: openTaskCount ?? openTasks.length,
     recent: contacts.slice(0, 6),
   }
 }

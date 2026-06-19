@@ -136,7 +136,7 @@ export default async function AdminOverview() {
           <DeckMini label="Customers (open)" value={crm.byKind.customer.open.toLocaleString()} />
           <DeckMini label="Customer pipeline" value={formatMoney(crm.byKind.customer.openValue)} />
           <DeckMini label="Investors (open)" value={crm.byKind.investor.open.toLocaleString()} />
-          <DeckMini label="Open follow-ups" value={crm.upcomingTasks.length.toLocaleString()} />
+          <DeckMini label="Open follow-ups" value={crm.openTaskCount.toLocaleString()} />
         </div>
       </section>
 
