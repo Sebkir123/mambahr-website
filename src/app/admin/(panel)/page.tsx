@@ -41,8 +41,9 @@ function Sparkline({ data }: { data: { day: string; count: number }[] }) {
 }
 
 export default async function AdminOverview() {
-  const admin = await requireAdmin()
-  const [o, deck] = await Promise.all([getOverview(), getDeckSummary()])
+  // Run the auth check concurrently with the data fetch so the getUser()
+  // round-trip overlaps the queries instead of blocking them.
+  const [admin, o, deck] = await Promise.all([requireAdmin(), getOverview(), getDeckSummary()])
 
   return (
     <>

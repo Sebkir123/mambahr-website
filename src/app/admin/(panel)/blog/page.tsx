@@ -29,12 +29,14 @@ function fmt(date: string | null): string {
 }
 
 export default async function BlogListPage() {
-  await requireAdmin()
   const supabase = await createSupabaseServerClient()
-  const { data } = await supabase
-    .from('posts')
-    .select('id, title, slug, status, published_at, updated_at, tags')
-    .order('updated_at', { ascending: false })
+  const [, { data }] = await Promise.all([
+    requireAdmin(),
+    supabase
+      .from('posts')
+      .select('id, title, slug, status, published_at, updated_at, tags')
+      .order('updated_at', { ascending: false }),
+  ])
   const posts = (data || []) as Row[]
 
   return (

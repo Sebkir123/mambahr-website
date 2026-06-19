@@ -35,8 +35,7 @@ function Stat({ label, value, sub }: { label: string; value: string | number; su
 }
 
 export default async function DeckAdminPage() {
-  await requireAdmin()
-  const a = await getDeckAnalytics()
+  const [, a] = await Promise.all([requireAdmin(), getDeckAnalytics()])
 
   return (
     <>
