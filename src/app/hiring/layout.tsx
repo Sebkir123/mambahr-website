@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 const ogImage =
-  '/mambahr_og_sharing.jpg'
+  '/og?title=Hiring%20and%20ATS%2C%20from%20req%20to%20offer&eyebrow=Hiring'
 
 export const metadata: Metadata = {
   title: 'Hiring & ATS — MambaHR',
