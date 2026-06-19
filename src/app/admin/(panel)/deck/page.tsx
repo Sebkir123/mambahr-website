@@ -2,27 +2,13 @@ import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
 import { getDeckAnalytics } from '@/lib/admin-deck'
 import { DECK_SLUG } from '@/lib/deck-links'
+import { DECK_SLIDE_TITLES as SLIDE_TITLES } from '@/lib/deck-slides'
 import { createDeckLink } from './actions'
 import { DeckLinks } from './deck-links-client'
 import ui from '../admin-ui.module.css'
 import styles from './deck.module.css'
 
 export const dynamic = 'force-dynamic'
-
-const SLIDE_TITLES = [
-  'Title',
-  'The problem',
-  'Why now',
-  'The paradigm shift',
-  'The product',
-  'How it works',
-  'The moat',
-  'Traction',
-  'Business model',
-  'Market',
-  'Team',
-  'The ask',
-]
 
 function dur(ms: number): string {
   const s = Math.round(ms / 1000)
@@ -68,6 +54,16 @@ export default async function DeckAdminPage() {
       </div>
 
       {a.warnings.length > 0 && <div className={styles.notice}>{a.warnings[0]}</div>}
+
+      {a.totals.opens === 0 && (
+        <div className={styles.hint}>
+          <strong>Nothing tracked yet — and that&rsquo;s expected.</strong> Your own previews
+          while signed in here are never counted. Tracking starts when someone opens a{' '}
+          <em>recipient link</em> from outside this admin (a real investor, or you in a logged-out /
+          incognito window). Create a link below, share it, and opens, attention, and the slide
+          funnel will fill in here.
+        </div>
+      )}
 
       <div className={styles.totals}>
         <Stat label="Opens" value={a.totals.opens} sub="server-side · beacon-proof" />

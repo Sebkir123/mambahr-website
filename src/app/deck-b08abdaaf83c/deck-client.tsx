@@ -3,23 +3,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { MambaMark, MambaLockup } from '@/components/mamba-mark'
+import { DECK_SLIDE_TITLES, DECK_SLIDE_COUNT } from '@/lib/deck-slides'
 import s from './deck.module.css'
 
-const SLIDE_TITLES = [
-  'Title',
-  'The problem',
-  'Why now',
-  'The paradigm shift',
-  'The product',
-  'How it works',
-  'The moat',
-  'Traction',
-  'Business model',
-  'Market',
-  'Team',
-  'The ask',
-]
-const COUNT = SLIDE_TITLES.length
+const SLIDE_TITLES = DECK_SLIDE_TITLES
+const COUNT = DECK_SLIDE_COUNT
 
 export default function Deck({
   token = null,
@@ -246,6 +234,12 @@ export default function Deck({
 
   return (
     <>
+      {preview && (
+        <div className={s.previewBadge} aria-hidden="true">
+          Admin preview · not tracked
+        </div>
+      )}
+
       <div className={s.progress} aria-hidden="true">
         <div className={s.progressFill} style={{ transform: `scaleX(${progress})` }} />
       </div>

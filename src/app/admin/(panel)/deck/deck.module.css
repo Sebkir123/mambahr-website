@@ -8,6 +8,20 @@
   margin-bottom: 20px;
 }
 
+/* Informational hint (e.g. why everything is zero before any real open) */
+.hint {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-faint);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.hint strong { color: var(--text); font-weight: 600; }
+.hint em { font-style: normal; color: var(--gold-dark); font-weight: 600; }
+
 /* Deck path chip in the subtitle */
 .deckPath {
   font-family: var(--font-mono);
@@ -19,12 +33,19 @@
   padding: 1px 6px;
 }
 
-/* Totals */
+/* Totals — 7 KPIs. Explicit column counts so the row stays balanced instead
+   of auto-fit orphaning the 7th card on its own line. */
 .totals {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 14px;
   margin-bottom: 28px;
+}
+@media (max-width: 1280px) {
+  .totals { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .totals { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .total {
   background: var(--bg);
