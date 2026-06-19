@@ -24,9 +24,13 @@ const COUNT = SLIDE_TITLES.length
 export default function Deck({
   token = null,
   slug = '',
+  preview = false,
 }: {
   token?: string | null
   slug?: string
+  // Admin preview — render the deck but record no analytics (no session, no
+  // dwell, no heartbeat). Keeps the dashboard clean of internal opens.
+  preview?: boolean
 }) {
   const scroller = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLElement | null)[]>([])
@@ -55,7 +59,7 @@ export default function Deck({
 
   const sendEvent = useCallback(
     (extra: Record<string, unknown>, beacon = false) => {
-      if (!sid.current) return
+      if (preview || !sid.current) return
       const body = JSON.stringify({
         sessionId: sid.current,
         token,
@@ -83,7 +87,7 @@ export default function Deck({
         /* analytics is best-effort — never break the deck */
       }
     },
-    [token, slug, activeMs],
+    [token, slug, activeMs, preview],
   )
 
   // Session lifecycle: open a session on mount, heartbeat duration, flush on leave.
