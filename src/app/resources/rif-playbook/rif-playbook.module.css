@@ -1,0 +1,544 @@
+/* The Ultimate RIF Playbook — rebuilt on the Warm Editorial Premium system.
+   Each .slide is a 16:9 container; all type/space is in cqw (1cqw = 1% of the
+   slide width) so the deck self-scales on screen and prints clean. Custom
+   @page size matches the slide for a borderless PDF export. */
+
+.deck {
+  background: var(--bg-cream);
+  min-height: 100vh;
+  padding: 36px 16px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.toolbar {
+  width: min(100%, 1180px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.toolbarTitle {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--text);
+}
+.printBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  background: var(--grad);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  text-decoration: none;
+}
+
+.slide {
+  container-type: inline-size;
+  position: relative;
+  width: min(100%, 1180px);
+  aspect-ratio: 16 / 9;
+  background: var(--bg);
+  border: 1px solid var(--border-faint);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  color: var(--text);
+}
+
+/* ── shared chrome ───────────────────────────────────────── */
+.watermark {
+  position: absolute;
+  top: 4cqw;
+  right: 4.5cqw;
+  color: var(--text);
+  opacity: 0.9;
+}
+.footerBar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.4cqw;
+  background: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 4.5cqw;
+}
+.footerLabel {
+  font-family: var(--font-sans);
+  font-size: 1.05cqw;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+.footerWedge {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 13cqw;
+  height: 3.4cqw;
+  background: var(--grad);
+  clip-path: polygon(0 0, 70% 0, 100% 100%, 0 100%);
+}
+
+/* split section title: ink + gold accent */
+.head {
+  padding: 5cqw 5cqw 0;
+}
+.title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 3.6cqw;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--text);
+  margin: 0;
+}
+.title .accent {
+  color: var(--gold);
+}
+.sub {
+  font-size: 1.45cqw;
+  line-height: 1.5;
+  color: var(--text-faint);
+  margin: 1.4cqw 0 0;
+  font-style: italic;
+}
+
+/* content + right rail layout */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 30cqw;
+  height: 100%;
+}
+.body {
+  padding: 5cqw;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.rail {
+  background: var(--text);
+  color: var(--bg);
+  padding: 5cqw 3.4cqw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.railQuoteMark {
+  font-family: var(--font-serif);
+  font-size: 7cqw;
+  line-height: 0.6;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1.5cqw;
+}
+.railQuote {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 2.6cqw;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.railQuote em {
+  font-style: normal;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── COVER ───────────────────────────────────────────────── */
+.cover {
+  padding: 5.5cqw;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1.1cqw;
+}
+.logoWord {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 2.2cqw;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.coverMain {
+  margin-top: auto;
+}
+.coverKicker {
+  font-family: var(--font-sans);
+  font-size: 1.3cqw;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.6cqw;
+}
+.coverTitle {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 7.4cqw;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin: 0;
+}
+.coverTitle .accent {
+  display: block;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.coverRule {
+  width: 16cqw;
+  height: 0.4cqw;
+  border-radius: var(--radius-full, 999px);
+  background: var(--grad);
+  margin: 2.6cqw 0;
+}
+.coverSub {
+  font-size: 2cqw;
+  line-height: 1.45;
+  color: var(--text-muted);
+  max-width: 60cqw;
+  margin: 0;
+}
+.coverPowered {
+  margin-top: auto;
+  font-family: var(--font-sans);
+  font-size: 1.25cqw;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+}
+
+/* ── paragraphs / leads / lists ──────────────────────────── */
+.p {
+  font-size: 1.5cqw;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin: 0 0 1.4cqw;
+}
+.p strong { color: var(--text); font-weight: 600; }
+.leadLabel {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.9cqw;
+  color: var(--text);
+  margin: 1.2cqw 0 1.4cqw;
+}
+.takeaways {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3cqw;
+}
+.takeaway {
+  display: flex;
+  gap: 1.4cqw;
+  align-items: baseline;
+  font-size: 1.5cqw;
+  line-height: 1.4;
+  color: var(--text);
+}
+.takeaway::before {
+  content: '';
+  flex-shrink: 0;
+  width: 1cqw;
+  height: 1cqw;
+  border-radius: var(--radius-full, 999px);
+  background: var(--grad);
+  transform: translateY(0.2cqw);
+}
+.bullets {
+  list-style: none;
+  margin: 1.6cqw 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9cqw;
+}
+.bullet {
+  position: relative;
+  padding-left: 2cqw;
+  font-size: 1.4cqw;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+.bullet::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6cqw;
+  width: 0.7cqw;
+  height: 0.7cqw;
+  border-radius: var(--radius-full, 999px);
+  background: var(--gold-light);
+}
+
+/* ── workflow steps (slide 3) ────────────────────────────── */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6cqw;
+  margin-top: 1cqw;
+}
+.step {
+  display: flex;
+  align-items: center;
+  gap: 1cqw;
+  background: var(--gold-tint);
+  border: 1px solid rgba(176, 141, 87, 0.25);
+  border-radius: 1cqw;
+  padding: 1.1cqw 1.6cqw;
+}
+.stepNum {
+  font-family: var(--font-mono);
+  font-size: 1.1cqw;
+  color: var(--gold-dark);
+}
+.stepLabel {
+  font-size: 1.5cqw;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── table (rationale / scoring / comp) ──────────────────── */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.4cqw;
+  font-size: 1.3cqw;
+}
+.table th {
+  text-align: left;
+  background: var(--grad);
+  color: var(--bg);
+  font-weight: 600;
+  padding: 1cqw 1.4cqw;
+  font-size: 1.25cqw;
+}
+.table th:first-child { border-top-left-radius: 0.8cqw; }
+.table th:last-child { border-top-right-radius: 0.8cqw; }
+.table td {
+  padding: 0.85cqw 1.4cqw;
+  border-bottom: 1px solid var(--border-faint);
+  color: var(--text-muted);
+  vertical-align: middle;
+}
+.table td:first-child { color: var(--text); font-weight: 600; }
+.tableEmpty td { height: 2.6cqw; }
+
+/* ── checklist (slide 4, 11) ─────────────────────────────── */
+.checklist {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8cqw 2cqw;
+  margin-top: 1cqw;
+}
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 1.1cqw;
+  font-size: 1.6cqw;
+  color: var(--text);
+}
+.checkbox {
+  flex-shrink: 0;
+  width: 1.9cqw;
+  height: 1.9cqw;
+  border-radius: 0.4cqw;
+  border: 0.18cqw solid var(--violet);
+  background: var(--violet-soft);
+}
+
+/* ── impact tiles (slide 8) ──────────────────────────────── */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.6cqw;
+  margin-top: 1cqw;
+}
+.tile {
+  display: flex;
+  align-items: center;
+  gap: 1.4cqw;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-faint);
+  border-radius: 1cqw;
+  padding: 1.6cqw;
+}
+.tileIcon {
+  flex-shrink: 0;
+  width: 3.6cqw;
+  height: 3.6cqw;
+  border-radius: var(--radius-full, 999px);
+  background: var(--grad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg);
+}
+.tileLabel {
+  font-size: 1.55cqw;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── clause chips (slide 9) ──────────────────────────────── */
+.clauses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4cqw;
+  margin-top: 1.4cqw;
+}
+.clauseChip {
+  background: var(--gold-tint);
+  border: 1px solid rgba(176, 141, 87, 0.3);
+  border-radius: var(--radius-full, 999px);
+  padding: 1cqw 2.2cqw;
+  font-size: 1.6cqw;
+  font-weight: 600;
+  color: var(--gold-dark);
+}
+
+/* ── do / don't matrix (slide 10) ────────────────────────── */
+.matrix {
+  display: grid;
+  grid-template-columns: 12cqw 1fr 1fr;
+  gap: 1cqw;
+  margin-top: 1.4cqw;
+}
+.matrixHead {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.5cqw;
+  color: var(--bg);
+  background: var(--text);
+  border-radius: 0.6cqw;
+  padding: 0.9cqw 1.4cqw;
+  text-align: center;
+}
+.matrixRowLabel {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.5cqw;
+  color: var(--bg);
+  background: var(--grad);
+  border-radius: 0.6cqw;
+  padding: 0.9cqw 1.4cqw;
+}
+.matrixCell {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-faint);
+  border-radius: 0.6cqw;
+  min-height: 4.5cqw;
+}
+
+/* ── before / after (slide 12) ───────────────────────────── */
+.beforeAfter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2cqw;
+  padding: 0 5cqw;
+}
+.baCol {
+  border-radius: 1.2cqw;
+  padding: 2.2cqw;
+  border: 1px solid var(--border-faint);
+}
+.baBefore { background: rgba(180, 57, 47, 0.06); border-color: rgba(180, 57, 47, 0.22); }
+.baAfter { background: var(--gold-tint); border-color: rgba(176, 141, 87, 0.3); }
+.baTitle {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.9cqw;
+  color: var(--text);
+  margin: 0 0 0.4cqw;
+}
+.baTag { font-size: 1.2cqw; color: var(--text-faint); margin: 0 0 1.4cqw; }
+.baList { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9cqw; }
+.baItem {
+  position: relative;
+  padding-left: 2cqw;
+  font-size: 1.3cqw;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+.baItem::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+.baBefore .baItem::before { color: #b4392f; }
+
+/* ── CTA (slide 13) ──────────────────────────────────────── */
+.cta {
+  padding: 5.5cqw;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.ctaLede {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 2.6cqw;
+  line-height: 1.15;
+  color: var(--text);
+  margin: 1.4cqw 0 2cqw;
+  max-width: 70cqw;
+}
+.ctaBtn {
+  align-self: flex-start;
+  margin-top: 1cqw;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8cqw;
+  background: var(--grad);
+  color: var(--bg);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.7cqw;
+  padding: 1.2cqw 2.6cqw;
+  border-radius: var(--radius-full, 999px);
+}
+
+/* ── print → clean borderless PDF, one slide per page ────── */
+@media print {
+  @page { size: 1280px 720px; margin: 0; }
+  .deck { background: #fff; padding: 0; gap: 0; }
+  .toolbar { display: none; }
+  .slide {
+    width: 1280px;
+    height: 720px;
+    aspect-ratio: auto;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    break-after: page;
+    page-break-after: always;
+  }
+  .slide:last-child { break-after: auto; page-break-after: auto; }
+}
