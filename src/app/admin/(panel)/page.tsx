@@ -3,6 +3,7 @@ import { requireAdmin } from '@/lib/auth'
 import { getOverview, type Lead } from '@/lib/admin-analytics'
 import { getDeckSummary } from '@/lib/admin-deck'
 import { getFieldGuideAnalytics } from '@/lib/admin-field-guides'
+import { getCrmDashboard, formatMoney } from '@/lib/crm'
 import ui from './admin-ui.module.css'
 import styles from './overview.module.css'
 
@@ -44,11 +45,12 @@ function Sparkline({ data }: { data: { day: string; count: number }[] }) {
 export default async function AdminOverview() {
   // Run the auth check concurrently with the data fetch so the getUser()
   // round-trip overlaps the queries instead of blocking them.
-  const [admin, o, deck, guides] = await Promise.all([
+  const [admin, o, deck, guides, crm] = await Promise.all([
     requireAdmin(),
     getOverview(),
     getDeckSummary(),
     getFieldGuideAnalytics(),
+    getCrmDashboard(),
   ])
 
   return (
@@ -121,6 +123,20 @@ export default async function AdminOverview() {
           <DeckMini label="Opened" value={guides.totals.opened.toLocaleString()} />
           <DeckMini label="Open rate" value={`${guides.totals.openRatePct}%`} />
           <DeckMini label="This week" value={guides.totals.last7d.toLocaleString()} />
+        </div>
+      </section>
+
+      {/* CRM pipeline */}
+      <section className={`${ui.card} ${styles.deckCard}`}>
+        <div className={styles.cardHead}>
+          <h2 className={styles.cardTitle}>CRM pipeline</h2>
+          <Link href="/admin/crm" className={styles.cardLink}>Open CRM →</Link>
+        </div>
+        <div className={styles.deckRow}>
+          <DeckMini label="Customers (open)" value={crm.byKind.customer.open.toLocaleString()} />
+          <DeckMini label="Customer pipeline" value={formatMoney(crm.byKind.customer.openValue)} />
+          <DeckMini label="Investors (open)" value={crm.byKind.investor.open.toLocaleString()} />
+          <DeckMini label="Open follow-ups" value={crm.upcomingTasks.length.toLocaleString()} />
         </div>
       </section>
 

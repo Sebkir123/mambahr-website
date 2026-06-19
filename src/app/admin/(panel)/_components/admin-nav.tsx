@@ -7,6 +7,7 @@ import styles from './admin-nav.module.css'
 
 const LINKS = [
   { href: '/admin', label: 'Overview', exact: true },
+  { href: '/admin/crm', label: 'CRM' },
   { href: '/admin/blog', label: 'Blog' },
   { href: '/admin/leads', label: 'Leads' },
   { href: '/admin/field-guides', label: 'Field guides' },
