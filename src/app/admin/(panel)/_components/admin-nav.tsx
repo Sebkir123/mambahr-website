@@ -21,6 +21,10 @@ type Group = { title?: string; items: Item[] }
 const GROUPS: Group[] = [
   { items: [{ href: '/admin', label: 'Overview', path: '/admin', exact: true }] },
   {
+    title: 'Analytics',
+    items: [{ href: '/admin/site', label: 'Site Tracking', path: '/admin/site' }],
+  },
+  {
     title: 'Investors',
     items: [
       { href: '/admin/investors', label: 'Overview', path: '/admin/investors' },
