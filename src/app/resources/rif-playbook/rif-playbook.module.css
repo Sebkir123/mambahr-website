@@ -107,6 +107,16 @@
 .title .accent {
   color: var(--gold);
 }
+/* signature gold→violet rule under every section title */
+.title::after {
+  content: '';
+  display: block;
+  width: 7cqw;
+  height: 0.34cqw;
+  margin-top: 1.6cqw;
+  border-radius: var(--radius-full, 999px);
+  background: var(--grad);
+}
 .sub {
   font-size: 1.45cqw;
   line-height: 1.5;
@@ -409,35 +419,55 @@
 .table th:first-child { border-top-left-radius: 0.8cqw; }
 .table th:last-child { border-top-right-radius: 0.8cqw; }
 .table td {
-  padding: 0.85cqw 1.4cqw;
+  padding: 0.95cqw 1.4cqw;
   border-bottom: 1px solid var(--border-faint);
   color: var(--text-muted);
   vertical-align: middle;
 }
+.table tbody tr:nth-child(even) td { background: var(--bg-surface); }
+.table tbody tr:last-child td { border-bottom: none; }
 .table td:first-child { color: var(--text); font-weight: 600; }
-.tableEmpty td { height: 2.6cqw; }
+.tableEmpty td { height: 2.7cqw; }
 
 /* ── checklist (slide 4, 11) ─────────────────────────────── */
 .checklist {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.8cqw 2cqw;
-  margin-top: 1cqw;
+  gap: 1.3cqw;
+  margin-top: 1.6cqw;
 }
 .checkItem {
   display: flex;
   align-items: center;
   gap: 1.1cqw;
-  font-size: 1.6cqw;
+  font-size: 1.55cqw;
+  font-weight: 600;
   color: var(--text);
+  padding: 1.2cqw 1.4cqw;
+  border: 1px solid var(--border-faint);
+  border-radius: 0.9cqw;
+  background: var(--bg-surface);
 }
 .checkbox {
+  position: relative;
   flex-shrink: 0;
-  width: 1.9cqw;
-  height: 1.9cqw;
-  border-radius: 0.4cqw;
-  border: 0.18cqw solid var(--violet);
-  background: var(--violet-soft);
+  width: 2cqw;
+  height: 2cqw;
+  border-radius: 0.45cqw;
+  border: 0.16cqw solid var(--gold-light);
+  background: var(--gold-tint);
+}
+/* gold check inside each box — reads as "MambaHR covers this" */
+.checkbox::after {
+  content: '';
+  position: absolute;
+  left: 36%;
+  top: 16%;
+  width: 26%;
+  height: 50%;
+  border: solid var(--gold-dark);
+  border-width: 0 0.3cqw 0.3cqw 0;
+  transform: rotate(45deg);
 }
 
 /* ── impact tiles (slide 8) ──────────────────────────────── */
