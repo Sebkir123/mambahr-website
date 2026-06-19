@@ -1,5 +1,8 @@
 import 'server-only'
+import { unstable_cache } from 'next/cache'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { serviceDb } from '@/lib/supabase/service'
 import type { SiteProperty, Range, Tz, SessionClass, SiteSessionRow, SitePageview, SiteSessionDetail } from '@/lib/site-analytics-types'
 
 const TZMAP: Record<Tz, string> = {
@@ -72,8 +75,29 @@ function classify(pv: number, dwellMs: number, scroll: number): SessionClass {
   return 'visit'
 }
 
+// Public entry. Callers MUST be behind requireAdmin(). In production we read via
+// the service-role client and cache the result for 30s keyed by (property,range,
+// tz) — so loading and tab-switching are instant instead of re-querying Supabase
+// every click. Locally (no service key) we fall back to the uncached cookie client.
+const cachedAnalytics = unstable_cache(
+  async (property: SiteProperty, range: Range, tz: Tz): Promise<SiteAnalytics> => {
+    return computeSiteAnalytics(serviceDb()!, property, range, tz)
+  },
+  ['site-analytics-v1'],
+  { revalidate: 30 },
+)
+
 export async function getSiteAnalytics(property: SiteProperty, range: Range, tz: Tz = 'ET'): Promise<SiteAnalytics> {
-  const supabase = await createSupabaseServerClient()
+  if (serviceDb()) return cachedAnalytics(property, range, tz)
+  return computeSiteAnalytics(await createSupabaseServerClient(), property, range, tz)
+}
+
+async function computeSiteAnalytics(
+  supabase: SupabaseClient,
+  property: SiteProperty,
+  range: Range,
+  tz: Tz,
+): Promise<SiteAnalytics> {
   const warnings: string[] = []
   const now = Date.now()
   const cutoffIso = new Date(now - RANGE_HOURS[range] * 3_600_000).toISOString()

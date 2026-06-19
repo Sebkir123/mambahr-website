@@ -1,5 +1,8 @@
 import 'server-only'
+import { unstable_cache } from 'next/cache'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { serviceDb } from '@/lib/supabase/service'
 
 // First-party analytics for the admin panel. Reads lead tables + post_views AS
 // THE LOGGED-IN ADMIN — the magic-link session, governed by RLS (is_admin() is
@@ -41,8 +44,16 @@ function str(v: unknown): string | null {
 
 type RawRow = Record<string, unknown>
 
+// Cached 20s (service-role, admin-gated at the page) so the Overview dashboard
+// loads instantly on repeat visits instead of re-querying every lead table.
+const cachedOverview = unstable_cache(async () => computeOverview(serviceDb()!), ['admin-overview-v1'], { revalidate: 20 })
+
 export async function getOverview(): Promise<Overview> {
-  const supabase = await createSupabaseServerClient()
+  if (serviceDb()) return cachedOverview()
+  return computeOverview(await createSupabaseServerClient())
+}
+
+async function computeOverview(supabase: SupabaseClient): Promise<Overview> {
   const warnings: string[] = []
 
   async function fetchLeads(table: string, source: LeadSource, detailKeys: string[]): Promise<Lead[]> {
