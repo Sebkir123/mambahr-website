@@ -1,5 +1,8 @@
 import 'server-only'
+import { unstable_cache } from 'next/cache'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { serviceDb } from '@/lib/supabase/service'
 
 // SEO health for the admin panel. Reads every post (any status) as the
 // logged-in admin (RLS via is_admin(), no service-role key) and scores its
@@ -88,14 +91,20 @@ function scorePost(p: RawPost): PostSeo {
   }
 }
 
+const cachedSeo = unstable_cache(async () => computeSeoOverview(serviceDb()!), ['seo-overview-v1'], { revalidate: 20 })
+
 export async function getSeoOverview(): Promise<SeoOverview> {
+  if (serviceDb()) return cachedSeo()
+  return computeSeoOverview(await createSupabaseServerClient())
+}
+
+async function computeSeoOverview(supabase: SupabaseClient): Promise<SeoOverview> {
   const empty: SeoOverview = {
     warnings: [],
     totals: { posts: 0, published: 0, indexable: 0, noindex: 0, avgScore: 0 },
     posts: [],
   }
 
-  const supabase = await createSupabaseServerClient()
   const { data, error } = await supabase
     .from('posts')
     .select('id, slug, title, status, excerpt, cover_image_url, meta_title, meta_description, canonical_url, og_image_url, noindex')

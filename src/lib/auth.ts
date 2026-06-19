@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { isAdminEmail } from '@/lib/admin-domain'
@@ -14,14 +15,16 @@ export { ADMIN_EMAIL_DOMAIN, isAdminEmail } from '@/lib/admin-domain'
 // Returns the signed-in admin, or null. An authenticated Supabase user is only
 // an admin if their email domain is mambahr.com — enforced here (defense in
 // depth) and by RLS via the is_admin() SQL function.
-export async function getAdminUser(): Promise<AdminUser | null> {
+// Wrapped in React cache() so the layout + page (which both call requireAdmin
+// in the same request) share ONE getUser() round-trip instead of two.
+export const getAdminUser = cache(async (): Promise<AdminUser | null> => {
   const supabase = await createSupabaseServerClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()
   if (!isAdminEmail(user?.email)) return null
   return { id: user!.id, email: user!.email! }
-}
+})
 
 // Use at the top of every /admin Server Component / action that needs auth.
 export async function requireAdmin(): Promise<AdminUser> {
