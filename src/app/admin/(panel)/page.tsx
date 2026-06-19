@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
 import { getOverview, type Lead } from '@/lib/admin-analytics'
+import { getDeckSummary } from '@/lib/admin-deck'
 import ui from './admin-ui.module.css'
 import styles from './overview.module.css'
 
@@ -41,7 +42,7 @@ function Sparkline({ data }: { data: { day: string; count: number }[] }) {
 
 export default async function AdminOverview() {
   const admin = await requireAdmin()
-  const o = await getOverview()
+  const [o, deck] = await Promise.all([getOverview(), getDeckSummary()])
 
   return (
     <>
@@ -87,6 +88,20 @@ export default async function AdminOverview() {
         <SourceChip label="Demo requests" value={o.leads.demo} total={o.leads.total} />
         <SourceChip label="Resource downloads" value={o.leads.magnet} total={o.leads.total} />
       </div>
+
+      {/* Investor deck activity */}
+      <section className={`${ui.card} ${styles.deckCard}`}>
+        <div className={styles.cardHead}>
+          <h2 className={styles.cardTitle}>Investor deck</h2>
+          <Link href="/admin/deck" className={styles.cardLink}>View analytics →</Link>
+        </div>
+        <div className={styles.deckRow}>
+          <DeckMini label="Opens" value={deck.opens.toLocaleString()} />
+          <DeckMini label="Recipients reached" value={deck.recipients.toLocaleString()} />
+          <DeckMini label="Active links" value={deck.links.toLocaleString()} />
+          <DeckMini label="Last open" value={deck.lastOpenedAt ? fmtDateTime(deck.lastOpenedAt) : '—'} />
+        </div>
+      </section>
 
       <div className={styles.cols}>
         {/* Recent leads */}
@@ -137,6 +152,15 @@ export default async function AdminOverview() {
         </section>
       </div>
     </>
+  )
+}
+
+function DeckMini({ label, value }: { label: string; value: string }) {
+  return (
+    <div className={styles.deckMini}>
+      <span className={styles.deckMiniValue}>{value}</span>
+      <span className={styles.deckMiniLabel}>{label}</span>
+    </div>
   )
 }
 

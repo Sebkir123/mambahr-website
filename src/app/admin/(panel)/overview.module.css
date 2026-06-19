@@ -75,6 +75,29 @@
 .srcBar { height: 6px; border-radius: 999px; background: var(--bg-elevated); overflow: hidden; }
 .srcBarFill { height: 100%; background: var(--grad); border-radius: 999px; }
 
+/* Deck activity strip */
+.deckCard { margin-bottom: 28px; }
+.deckRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 18px;
+}
+.deckMini {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.deckMiniValue {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.1;
+}
+.deckMiniLabel { font-size: 13px; color: var(--text-faint); font-weight: 600; }
+
 /* Two-column layout */
 .cols {
   display: grid;
@@ -126,8 +149,9 @@
 
 @media (max-width: 1100px) {
   .stats { grid-template-columns: repeat(2, 1fr); }
+  .deckRow { grid-template-columns: repeat(2, 1fr); }
   .cols { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .stats, .breakdown { grid-template-columns: 1fr; }
+  .stats, .breakdown, .deckRow { grid-template-columns: 1fr; }
 }
