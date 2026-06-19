@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
 import { getOverview, type Lead } from '@/lib/admin-analytics'
 import { getDeckSummary } from '@/lib/admin-deck'
-import { getFieldGuideAnalytics } from '@/lib/admin-field-guides'
 import { getCrmDashboard, formatMoney } from '@/lib/crm'
 import ui from './admin-ui.module.css'
 import styles from './overview.module.css'
@@ -45,11 +44,10 @@ function Sparkline({ data }: { data: { day: string; count: number }[] }) {
 export default async function AdminOverview() {
   // Run the auth check concurrently with the data fetch so the getUser()
   // round-trip overlaps the queries instead of blocking them.
-  const [admin, o, deck, guides, crm] = await Promise.all([
+  const [admin, o, deck, crm] = await Promise.all([
     requireAdmin(),
     getOverview(),
     getDeckSummary(),
-    getFieldGuideAnalytics(),
     getCrmDashboard(),
   ])
 
@@ -91,54 +89,41 @@ export default async function AdminOverview() {
         </div>
       </div>
 
-      {/* Source breakdown */}
-      <div className={styles.breakdown}>
-        <SourceChip label="Waitlist" value={o.leads.waitlist} total={o.leads.total} />
-        <SourceChip label="Demo requests" value={o.leads.demo} total={o.leads.total} />
-        <SourceChip label="Resource downloads" value={o.leads.magnet} total={o.leads.total} />
+      {/* Section pulse — a compact launcher into each area, no detail duplicated */}
+      <div className={styles.sectionGrid}>
+        <SectionTile
+          title="Customers"
+          href="/admin/customers"
+          metrics={[
+            { label: 'Open', value: crm.byKind.customer.open.toLocaleString() },
+            { label: 'Pipeline', value: formatMoney(crm.byKind.customer.openValue) },
+          ]}
+        />
+        <SectionTile
+          title="Investors"
+          href="/admin/investors"
+          metrics={[
+            { label: 'Open', value: crm.byKind.investor.open.toLocaleString() },
+            { label: 'Committed', value: formatMoney(crm.byKind.investor.wonValue) },
+          ]}
+        />
+        <SectionTile
+          title="Deck"
+          href="/admin/deck"
+          metrics={[
+            { label: 'Opens', value: deck.opens.toLocaleString() },
+            { label: 'Reached', value: deck.recipients.toLocaleString() },
+          ]}
+        />
+        <SectionTile
+          title="Content"
+          href="/admin/blog"
+          metrics={[
+            { label: 'Published', value: o.posts.published.toLocaleString() },
+            { label: 'Views', value: o.views.total.toLocaleString() },
+          ]}
+        />
       </div>
-
-      {/* Investor deck activity */}
-      <section className={`${ui.card} ${styles.deckCard}`}>
-        <div className={styles.cardHead}>
-          <h2 className={styles.cardTitle}>Investor deck</h2>
-          <Link href="/admin/deck" className={styles.cardLink}>View analytics →</Link>
-        </div>
-        <div className={styles.deckRow}>
-          <DeckMini label="Opens" value={deck.opens.toLocaleString()} />
-          <DeckMini label="Recipients reached" value={deck.recipients.toLocaleString()} />
-          <DeckMini label="Active links" value={deck.links.toLocaleString()} />
-          <DeckMini label="Last open" value={deck.lastOpenedAt ? fmtDateTime(deck.lastOpenedAt) : '—'} />
-        </div>
-      </section>
-
-      {/* Field-guide lead magnet activity */}
-      <section className={`${ui.card} ${styles.deckCard}`}>
-        <div className={styles.cardHead}>
-          <h2 className={styles.cardTitle}>Field guides</h2>
-          <Link href="/admin/field-guides" className={styles.cardLink}>View analytics →</Link>
-        </div>
-        <div className={styles.deckRow}>
-          <DeckMini label="Requests" value={guides.totals.requests.toLocaleString()} />
-          <DeckMini label="Opened" value={guides.totals.opened.toLocaleString()} />
-          <DeckMini label="Open rate" value={`${guides.totals.openRatePct}%`} />
-          <DeckMini label="This week" value={guides.totals.last7d.toLocaleString()} />
-        </div>
-      </section>
-
-      {/* CRM pipeline */}
-      <section className={`${ui.card} ${styles.deckCard}`}>
-        <div className={styles.cardHead}>
-          <h2 className={styles.cardTitle}>CRM pipeline</h2>
-          <Link href="/admin/crm" className={styles.cardLink}>Open CRM →</Link>
-        </div>
-        <div className={styles.deckRow}>
-          <DeckMini label="Customers (open)" value={crm.byKind.customer.open.toLocaleString()} />
-          <DeckMini label="Customer pipeline" value={formatMoney(crm.byKind.customer.openValue)} />
-          <DeckMini label="Investors (open)" value={crm.byKind.investor.open.toLocaleString()} />
-          <DeckMini label="Open follow-ups" value={crm.openTaskCount.toLocaleString()} />
-        </div>
-      </section>
 
       <div className={styles.cols}>
         {/* Recent leads */}
@@ -192,26 +177,29 @@ export default async function AdminOverview() {
   )
 }
 
-function DeckMini({ label, value }: { label: string; value: string }) {
+function SectionTile({
+  title,
+  href,
+  metrics,
+}: {
+  title: string
+  href: string
+  metrics: { label: string; value: string }[]
+}) {
   return (
-    <div className={styles.deckMini}>
-      <span className={styles.deckMiniValue}>{value}</span>
-      <span className={styles.deckMiniLabel}>{label}</span>
-    </div>
-  )
-}
-
-function SourceChip({ label, value, total }: { label: string; value: number; total: number }) {
-  const pct = total > 0 ? Math.round((value / total) * 100) : 0
-  return (
-    <div className={styles.srcChip}>
-      <div className={styles.srcChipHead}>
-        <span>{label}</span>
-        <strong>{value.toLocaleString()}</strong>
+    <Link href={href} className={`${ui.card} ${styles.sectionTile}`}>
+      <div className={styles.sectionTileHead}>
+        <span className={styles.sectionTileTitle}>{title}</span>
+        <span className={styles.sectionTileArrow} aria-hidden="true">→</span>
       </div>
-      <div className={styles.srcBar}>
-        <div className={styles.srcBarFill} style={{ width: `${pct}%` }} />
+      <div className={styles.sectionTileMetrics}>
+        {metrics.map((m) => (
+          <div key={m.label} className={styles.deckMini}>
+            <span className={styles.deckMiniValue}>{m.value}</span>
+            <span className={styles.deckMiniLabel}>{m.label}</span>
+          </div>
+        ))}
       </div>
-    </div>
+    </Link>
   )
 }
