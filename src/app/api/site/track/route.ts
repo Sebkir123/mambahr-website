@@ -19,7 +19,7 @@ export const dynamic = 'force-dynamic'
 
 const SELF_HOSTS = ['mambahr.com', 'mambahr-website-one.vercel.app', 'localhost']
 const PROPERTIES = new Set(['website', 'deck', 'lp'])
-const EVENT_KINDS = new Set(['widget_open', 'conversation', 'signup', 'cta_click', 'custom'])
+const EVENT_KINDS = new Set(['widget_open', 'conversation', 'signup', 'cta_click', 'download', 'custom'])
 const MAX_PAGEVIEWS_PER_SESSION = 300
 
 // Coarse per-IP rate limit on the public write endpoint — blocks a tight POST

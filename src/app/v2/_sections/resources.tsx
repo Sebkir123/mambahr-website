@@ -18,7 +18,11 @@ const MORE = [
   { title: 'The First-90-Days Onboarding Kit', kicker: 'Kit' },
 ]
 
-export default function Resources() {
+// Published playbooks managed in the admin (Marketing → Resources). Each links to
+// its own trackable /resources/<slug> landing page.
+export type PlaybookCard = { slug: string; title: string; kicker: string }
+
+export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard[] }) {
   const [email, setEmail] = useState('')
   const [token, setToken] = useState<string | null>(null)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -114,16 +118,27 @@ export default function Resources() {
 
         <div className="more" data-reveal data-delay="2">
           <span className="more-l">More guides</span>
-          {MORE.map((m) => (
-            <div key={m.title} className="more-item" aria-disabled="true">
-              <span className="mini-cover" aria-hidden="true">
-                <span className="mini-m">M</span>
-                <span className="mini-k">{m.kicker}</span>
-              </span>
-              <span className="more-t">{m.title}</span>
-              <span className="soon">Coming soon</span>
-            </div>
-          ))}
+          {playbooks.length > 0
+            ? playbooks.map((p) => (
+                <a key={p.slug} href={`/resources/${p.slug}`} className="more-item" data-track="cta_click" data-track-label={`resource:${p.slug}`}>
+                  <span className="mini-cover" aria-hidden="true">
+                    <span className="mini-m">M</span>
+                    <span className="mini-k">{p.kicker}</span>
+                  </span>
+                  <span className="more-t">{p.title}</span>
+                  <span className="get">Download →</span>
+                </a>
+              ))
+            : MORE.map((m) => (
+                <div key={m.title} className="more-item" aria-disabled="true">
+                  <span className="mini-cover" aria-hidden="true">
+                    <span className="mini-m">M</span>
+                    <span className="mini-k">{m.kicker}</span>
+                  </span>
+                  <span className="more-t">{m.title}</span>
+                  <span className="soon">Coming soon</span>
+                </div>
+              ))}
         </div>
       </div>
 
@@ -220,6 +235,13 @@ export default function Resources() {
           border-radius: 999px;
           padding: 2px 8px;
         }
+        a.more-item {
+          opacity: 1;
+          text-decoration: none;
+          transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+        a.more-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md, 0 12px 24px -12px rgba(0,0,0,0.18)); }
+        .get { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--gold-dark); white-space: nowrap; }
         .mini-cover {
           width: 38px;
           height: 48px;
