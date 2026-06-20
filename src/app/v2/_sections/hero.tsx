@@ -324,7 +324,7 @@ export default function Hero() {
           padding: 3px 16px;
         }
         .me { width: 24px; height: 24px; border-radius: 999px; object-fit: cover; }
-        .app-body { display: grid; grid-template-columns: 196px 1fr; }
+        .app-body { display: grid; grid-template-columns: 196px minmax(0, 1fr); }
         .side {
           background: #F8F6F1;
           border-right: 1px solid var(--border);
@@ -405,7 +405,7 @@ export default function Hero() {
         .greet h3 { font-family: var(--font-serif); font-weight: 400; font-size: 25px; color: var(--text); margin: 0; letter-spacing: -0.01em; }
         .date { font-size: 13px; color: var(--text-faint); }
         .seg { font-size: 12.5px; color: var(--text-muted); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; }
-        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+        .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
         .stat {
           position: relative;
           border: 1px solid var(--border-faint);
@@ -470,8 +470,11 @@ export default function Hero() {
         @media (max-width: 720px) {
           .stage { perspective: none; }
           .app { transform: none; border-radius: 16px; }
-          /* Stack to a single mobile-app column: compact header, then content. */
-          .app-body { grid-template-columns: 1fr; }
+          /* Stack to a single mobile-app column: compact header, then content.
+             minmax(0,…) + min-width:0 stop the grid track blowing out to its
+             content's min-content (which clipped the mockup at desktop width). */
+          .app-body { grid-template-columns: minmax(0, 1fr); }
+          .side, .main { min-width: 0; }
           .side {
             flex-direction: column;
             gap: 12px;
@@ -516,7 +519,7 @@ export default function Hero() {
           .ap-btns .ap-no { display: inline-block; }
         }
         @media (max-width: 460px) {
-          .stats { grid-template-columns: 1fr 1fr; gap: 9px; }
+          .stats { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 9px; }
           .stat.goldt { grid-column: 1 / -1; }
           .stat { min-height: 0; padding: 12px; }
           .s-l { font-size: 9.5px; }
