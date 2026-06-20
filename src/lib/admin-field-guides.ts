@@ -1,28 +1,45 @@
 import 'server-only'
+import { randomBytes } from 'node:crypto'
 import { unstable_cache } from 'next/cache'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { serviceDb } from '@/lib/supabase/service'
 
-// Analytics for the email-gated field guides. Reads field_guide_leads +
+// Analytics for the gated field guides. Reads field_guide_leads +
 // field_guide_views AS THE LOGGED-IN ADMIN (RLS: is_admin() = @mambahr.com).
 // Each view row is one open of the gated page, enriched server-side with the
 // owning network (ASN/firm) — so you see which prospect read which guide.
+// Leads come from the public email form (source=form) OR an admin-created
+// tracked share link (source=manual).
 
-const GUIDE_TITLES: Record<string, string> = {
-  'rif-playbook': 'The Defensible Layoff Playbook',
+// Guide catalog — slug → public title + gated route path. The token-gated page
+// lives at <path>?k=<token>.
+export const GUIDES: Record<string, { title: string; path: string }> = {
+  'rif-playbook': { title: 'The Defensible Layoff Playbook', path: '/resources/rif-playbook' },
 }
 export function guideTitle(slug: string): string {
-  return GUIDE_TITLES[slug] ?? slug
+  return GUIDES[slug]?.title ?? slug
+}
+export function guidePath(slug: string): string {
+  return GUIDES[slug]?.path ?? `/resources/${slug}`
+}
+export function newFieldGuideToken(): string {
+  return randomBytes(12).toString('base64url') // ~16 unguessable url-safe chars
 }
 
 export type FieldGuideRow = {
   id: string
   guide: string
   guideTitle: string
-  email: string
+  path: string
+  token: string
+  source: 'form' | 'manual'
+  who: string // recipient name (manual link) or email (form)
+  email: string | null
   company: string | null
   requestedAt: string
+  sentAt: string | null
+  revokedAt: string | null
   opens: number
   lastOpenedAt: string | null
   network: string | null // owning ASN org (firm/ISP)
@@ -49,7 +66,18 @@ function loc(city: unknown, region: unknown, country: unknown): string {
   return parts.length ? Array.from(new Set(parts)).join(', ') : 'Unknown'
 }
 
-type LeadRow = { id: string; guide: string; email: string; company: string | null; requested_at: string }
+type LeadRow = {
+  id: string
+  guide: string
+  email: string | null
+  company: string | null
+  recipient_name: string | null
+  source: string | null
+  token: string
+  requested_at: string
+  sent_at: string | null
+  revoked_at: string | null
+}
 type ViewRow = {
   lead_id: string
   viewed_at: string
@@ -73,7 +101,7 @@ async function computeFieldGuideAnalytics(supabase: SupabaseClient): Promise<Fie
   const [leadsRes, viewsRes] = await Promise.all([
     supabase
       .from('field_guide_leads')
-      .select('id, guide, email, company, requested_at')
+      .select('id, guide, email, company, recipient_name, source, token, requested_at, sent_at, revoked_at')
       .order('requested_at', { ascending: false })
       .limit(5000),
     supabase
@@ -106,13 +134,20 @@ async function computeFieldGuideAnalytics(supabase: SupabaseClient): Promise<Fie
 
   const rows: FieldGuideRow[] = leads.map((l) => {
     const g = byLead.get(l.id)
+    const source: 'form' | 'manual' = l.source === 'manual' ? 'manual' : 'form'
     return {
       id: l.id,
       guide: l.guide,
       guideTitle: guideTitle(l.guide),
+      path: guidePath(l.guide),
+      token: l.token,
+      source,
+      who: l.recipient_name || l.email || 'Unknown',
       email: l.email,
       company: l.company,
       requestedAt: l.requested_at,
+      sentAt: l.sent_at,
+      revokedAt: l.revoked_at,
       opens: g?.opens ?? 0,
       lastOpenedAt: g?.last ?? null,
       network: g?.net ?? null,
@@ -148,7 +183,9 @@ export type FieldGuideOpen = {
   os: string | null
 }
 export type FieldGuideLeadDetail = {
-  email: string
+  who: string
+  source: 'form' | 'manual'
+  email: string | null
   company: string | null
   guideTitle: string
   requestedAt: string
@@ -160,7 +197,7 @@ export async function getFieldGuideLead(id: string): Promise<FieldGuideLeadDetai
   const supabase = await createSupabaseServerClient()
   const { data: lead } = await supabase
     .from('field_guide_leads')
-    .select('id, guide, email, company, requested_at, sent_at')
+    .select('id, guide, email, company, recipient_name, source, requested_at, sent_at')
     .eq('id', id)
     .maybeSingle()
   if (!lead) return null
@@ -183,7 +220,9 @@ export async function getFieldGuideLead(id: string): Promise<FieldGuideLeadDetai
   }))
 
   return {
-    email: lead.email as string,
+    who: (lead.recipient_name as string) || (lead.email as string) || 'Unknown',
+    source: lead.source === 'manual' ? 'manual' : 'form',
+    email: (lead.email as string) ?? null,
     company: (lead.company as string) ?? null,
     guideTitle: guideTitle(lead.guide as string),
     requestedAt: lead.requested_at as string,
