@@ -18,10 +18,12 @@ const ICON_ASSETS: LogoAsset[] = [
 function AssetCard({ a }: { a: LogoAsset }) {
   return (
     <div className={styles.logoCard}>
-      <div
-        className={`${styles.logoPreview} ${a.dark ? styles.logoDark : styles.logoLight}`}
-        style={{ backgroundImage: `url(/brand/${a.file}.svg)` }}
-      />
+      <div className={`${styles.logoPreview} ${a.dark ? styles.logoDark : styles.logoLight}`}>
+        {/* Render the PNG (pixel-identical everywhere). Browsers miscompute the
+            intrinsic size of these wide-viewBox SVGs as CSS background-images,
+            which cropped the preview to just the mark. eslint-disable-next-line @next/next/no-img-element */}
+        <img src={`/brand/${a.file}.png`} alt={`MambaHR ${a.note}`} className={styles.logoImg} />
+      </div>
       <div className={styles.logoMeta}>
         <div>
           <span className={styles.swatchName}>{a.label}</span>
