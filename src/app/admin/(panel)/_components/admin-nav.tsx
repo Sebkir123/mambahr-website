@@ -48,6 +48,7 @@ const GROUPS: Group[] = [
     items: [
       { href: '/admin/blog', label: 'Blog', path: '/admin/blog' },
       { href: '/admin/social', label: 'Social', path: '/admin/social' },
+      { href: '/admin/resources', label: 'Resources', path: '/admin/resources' },
       { href: '/admin/seo', label: 'SEO', path: '/admin/seo' },
     ],
   },

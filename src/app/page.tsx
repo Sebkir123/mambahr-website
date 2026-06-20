@@ -1,5 +1,6 @@
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
+import { listPublishedResources } from '@/lib/resources'
 
 import Hero from './v2/_sections/hero'
 import { QA } from './v2/_sections/faq-data'
@@ -38,7 +39,10 @@ const faqJsonLd = JSON.stringify({
   .replace(/>/g, '\\u003e')
   .replace(/&/g, '\\u0026')
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Published playbooks for the Resources section (cookieless read → page stays
+  // statically renderable; the admin revalidates '/' when resources change).
+  const playbooks = await listPublishedResources()
   return (
     <>
       <script
@@ -64,7 +68,7 @@ export default function HomePage() {
         <Testimonials />
         <Pricing />
         <Faq />
-        <Resources />
+        <Resources playbooks={playbooks} />
         <Cta />
       </main>
       <Footer />
