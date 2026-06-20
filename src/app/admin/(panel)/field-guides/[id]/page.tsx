@@ -42,9 +42,9 @@ export default async function FieldGuideLeadPage({ params }: { params: Promise<{
           <Link href="/admin/field-guides" className={styles.backLink}>
             ← Field guides
           </Link>
-          <h1 className={ui.h1}>{lead.email}</h1>
+          <h1 className={ui.h1}>{lead.who}</h1>
           <p className={ui.subtitle}>
-            {[lead.company, lead.guideTitle].filter(Boolean).join(' · ')}
+            {[lead.source === 'manual' ? 'Tracked link' : lead.email, lead.company, lead.guideTitle].filter(Boolean).join(' · ')}
           </p>
         </div>
         <span
@@ -56,8 +56,8 @@ export default async function FieldGuideLeadPage({ params }: { params: Promise<{
       </div>
 
       <div className={styles.totals}>
-        <Stat label="Requested" value={when(lead.requestedAt)} sub="email captured" />
-        <Stat label="Delivered" value={lead.sentAt ? when(lead.sentAt) : 'Pending'} sub="link emailed" />
+        <Stat label="Created" value={when(lead.requestedAt)} sub={lead.source === 'manual' ? 'tracked link' : 'email captured'} />
+        <Stat label="Delivered" value={lead.sentAt ? when(lead.sentAt) : 'Pending'} sub="link sent" />
         <Stat label="Opens" value={lead.opens.length} sub="times the link was opened" />
         <Stat
           label="First open"

@@ -108,6 +108,21 @@
   flex-wrap: wrap;
   border-bottom: 1px solid var(--border-faint);
 }
+/* Freshly-created tracked link — shown immediately with a copy button. */
+.freshLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 0 18px 16px;
+  padding: 12px 14px;
+  background: var(--gold-tint);
+  border: 1px solid var(--gold-light);
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+.freshLink strong { font-size: 13px; color: var(--gold-dark); display: block; margin-bottom: 4px; }
+.freshUrl { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); word-break: break-all; }
 .input {
   flex: 1 1 180px;
   min-width: 0;
