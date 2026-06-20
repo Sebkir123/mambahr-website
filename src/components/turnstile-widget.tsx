@@ -1,7 +1,14 @@
 'use client'
 
 import { useEffect } from 'react'
-import { Turnstile } from '@marsidev/react-turnstile'
+import dynamic from 'next/dynamic'
+
+// Load the Turnstile lib only when a form that needs it actually mounts, as its
+// own chunk — keeps it out of the homepage's initial JS (the Resources section
+// renders this widget). Client-only, so ssr:false is fine.
+const Turnstile = dynamic(() => import('@marsidev/react-turnstile').then((m) => m.Turnstile), {
+  ssr: false,
+})
 
 interface Props {
   onSuccess: (token: string) => void

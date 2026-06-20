@@ -1,14 +1,22 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState, useTransition } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { type Post, slugify, TAG_OPTIONS } from '@/lib/blog'
 import { savePost, setPostStatus, deletePost, listRevisions, restoreRevision, type SavePayload, type Revision } from '../actions'
 import { uploadImage } from './upload'
-import RichText from './rich-text'
 import PostAnalytics from './post-analytics'
 import type { BlogPostAnalytics } from '@/lib/blog-analytics-types'
 import styles from './editor.module.css'
+
+// TipTap + ProseMirror is ~440 KB — by far the heaviest chunk in the app. It's
+// only needed inside this editor, so load it lazily (client-only) behind a
+// placeholder rather than shipping it in the editor route's initial JS.
+const RichText = dynamic(() => import('./rich-text'), {
+  ssr: false,
+  loading: () => <div className={styles.editorLoading}>Loading editor…</div>,
+})
 
 const SITE = 'https://mambahr.com'
 
