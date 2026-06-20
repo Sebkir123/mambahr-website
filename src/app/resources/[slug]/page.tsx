@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
-import { getPublishedResource, resourceDownloadUrl } from '@/lib/resources'
+import { getPublishedResource } from '@/lib/resources'
+import ResourceGate from './gate'
 import styles from './landing.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -27,8 +28,6 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
   const { slug } = await params
   const r = await getPublishedResource(slug)
   if (!r) notFound()
-
-  const fileUrl = r.file_path ? resourceDownloadUrl(r.file_path, r.file_name) : null
 
   return (
     <>
@@ -56,19 +55,11 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
               </ul>
             )}
 
-            {fileUrl ? (
-              <a
-                className={styles.download}
-                href={fileUrl}
-                data-track="download"
-                data-track-label={r.slug}
-              >
-                Download the {r.kicker.toLowerCase()}
-              </a>
+            {r.file_path ? (
+              <ResourceGate slug={r.slug} kicker={r.kicker} />
             ) : (
               <p className={styles.unavailable}>This resource isn’t available for download yet.</p>
             )}
-            <p className={styles.note}>Free · no sign-up · no sales call</p>
           </div>
         </div>
       </main>

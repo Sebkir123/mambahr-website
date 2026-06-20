@@ -126,7 +126,7 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
                     <span className="mini-k">{p.kicker}</span>
                   </span>
                   <span className="more-t">{p.title}</span>
-                  <span className="get">Download →</span>
+                  <span className="get">Get it →</span>
                 </a>
               ))
             : MORE.map((m) => (
