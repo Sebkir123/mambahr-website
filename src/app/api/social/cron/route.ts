@@ -18,7 +18,7 @@ export async function GET(req: Request) {
 
   const { data: due } = await db
     .from('social_posts')
-    .select('id, body, account_id')
+    .select('id, body, image_url, account_id')
     .eq('status', 'scheduled')
     .lte('scheduled_at', new Date().toISOString())
     .limit(50)
@@ -33,7 +33,7 @@ export async function GET(req: Request) {
       .maybeSingle()
     try {
       if (!acct) throw new Error('Connected account no longer exists')
-      const externalId = await publishForAccount(acct as never, post.body as string)
+      const externalId = await publishForAccount(acct as never, post.body as string, post.image_url as string | null)
       await db
         .from('social_posts')
         .update({ status: 'published', published_at: new Date().toISOString(), external_post_id: externalId, error: null, updated_at: new Date().toISOString() })

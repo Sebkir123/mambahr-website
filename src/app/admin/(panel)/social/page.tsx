@@ -1,7 +1,9 @@
 import { requireAdmin } from '@/lib/auth'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { linkedinConfigured } from '@/lib/social'
+import { env } from '@/lib/env'
 import { Composer } from './composer'
+import { Calendar, type CalEvent } from './calendar'
 import { ConfirmSubmit } from './confirm-submit'
 import { publishPost, deletePost, disconnectAccount } from './actions'
 import ui from '../admin-ui.module.css'
@@ -13,6 +15,7 @@ type AccountRow = { id: string; account_name: string; avatar_url: string | null;
 type PostRow = {
   id: string
   body: string
+  image_url: string | null
   status: 'draft' | 'scheduled' | 'published' | 'failed'
   scheduled_at: string | null
   published_at: string | null
@@ -36,7 +39,7 @@ export default async function SocialPage() {
       .order('created_at', { ascending: true }),
     supabase
       .from('social_posts')
-      .select('id, body, status, scheduled_at, published_at, error, created_at, account:social_accounts(account_name)')
+      .select('id, body, image_url, status, scheduled_at, published_at, error, created_at, account:social_accounts(account_name)')
       .order('created_at', { ascending: false })
       .limit(100),
   ])
@@ -44,6 +47,18 @@ export default async function SocialPage() {
   const accounts = (accountsRes.data as AccountRow[] | null) ?? []
   const posts = (postsRes.data as unknown as PostRow[] | null) ?? []
   const configured = linkedinConfigured()
+
+  // Calendar shows the cadence: scheduled posts on their target day, published
+  // posts on the day they went out.
+  const calEvents: CalEvent[] = posts
+    .filter((p) => (p.status === 'scheduled' && p.scheduled_at) || (p.status === 'published' && p.published_at))
+    .map((p) => ({
+      id: p.id,
+      body: p.body,
+      status: p.status,
+      at: p.status === 'scheduled' ? p.scheduled_at : p.published_at,
+      account: p.account?.account_name ?? 'Unknown',
+    }))
 
   return (
     <>
@@ -108,7 +123,18 @@ export default async function SocialPage() {
         <div className={styles.cardHead}>
           <h2 className={styles.cardTitle}>Compose</h2>
         </div>
-        <Composer accounts={accounts.map((a) => ({ id: a.id, name: a.account_name }))} />
+        <Composer accounts={accounts.map((a) => ({ id: a.id, name: a.account_name }))} aiEnabled={Boolean(env.anthropicKey)} />
+      </div>
+
+      {/* Content calendar */}
+      <div className={ui.card}>
+        <div className={styles.cardHead}>
+          <h2 className={styles.cardTitle}>Calendar</h2>
+          <span className={styles.cardHint}>{calEvents.filter((e) => e.status === 'scheduled').length} scheduled</span>
+        </div>
+        <div className={styles.calWrap}>
+          <Calendar events={calEvents} />
+        </div>
       </div>
 
       {/* Queue + history */}
@@ -126,6 +152,10 @@ export default async function SocialPage() {
                 <div className={styles.postMain}>
                   <span className={`${styles.status} ${styles[`st_${p.status}`]}`}>{p.status}</span>
                   <p className={styles.postBody}>{p.body}</p>
+                  {p.image_url && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={p.image_url} alt="" className={styles.postThumb} />
+                  )}
                   <span className={styles.postMeta}>
                     {p.account?.account_name ?? 'Unknown'}
                     {p.status === 'scheduled' && ` · scheduled ${when(p.scheduled_at)}`}

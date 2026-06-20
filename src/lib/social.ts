@@ -113,21 +113,68 @@ export async function fetchLinkedInProfile(accessToken: string): Promise<{ sub: 
 }
 
 // ── publishing ───────────────────────────────────────────────────────────────
-// Posts a text share to the member's own feed via the Posts API.
-export async function publishLinkedInText(accessToken: string, authorUrn: string, text: string): Promise<string> {
+const LINKEDIN_VERSION = '202401'
+
+// Upload an image to LinkedIn's Images API and return its `urn:li:image:xxx`.
+// Three steps: initialize the upload (get a one-time URL + URN), PUT the bytes,
+// then the URN is referenceable in a post. The bytes come from the public
+// Supabase Storage URL we stored at compose time.
+async function uploadLinkedInImage(accessToken: string, authorUrn: string, imageUrl: string): Promise<string> {
+  const imgRes = await fetch(imageUrl)
+  if (!imgRes.ok) throw new Error(`Could not fetch attached image (${imgRes.status})`)
+  const bytes = Buffer.from(await imgRes.arrayBuffer())
+  const contentType = imgRes.headers.get('content-type') || 'image/png'
+
+  const initRes = await fetch('https://api.linkedin.com/rest/images?action=initializeUpload', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+      'X-Restli-Protocol-Version': '2.0.0',
+      'LinkedIn-Version': LINKEDIN_VERSION,
+    },
+    body: JSON.stringify({ initializeUploadRequest: { owner: authorUrn } }),
+  })
+  if (!initRes.ok) throw new Error(`LinkedIn image init failed: ${initRes.status} ${await initRes.text()}`)
+  const init = (await initRes.json()) as { value?: { uploadUrl?: string; image?: string } }
+  const uploadUrl = init.value?.uploadUrl
+  const imageUrn = init.value?.image
+  if (!uploadUrl || !imageUrn) throw new Error('LinkedIn image init returned no upload target')
+
+  const putRes = await fetch(uploadUrl, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': contentType },
+    body: bytes,
+  })
+  if (!putRes.ok) throw new Error(`LinkedIn image upload failed: ${putRes.status}`)
+  return imageUrn
+}
+
+// Posts a share to the member's own feed via the Posts API. With imageUrl set,
+// the image is uploaded first and attached as post media.
+export async function publishLinkedInText(
+  accessToken: string,
+  authorUrn: string,
+  text: string,
+  imageUrl?: string | null,
+): Promise<string> {
+  const content = imageUrl
+    ? { content: { media: { id: await uploadLinkedInImage(accessToken, authorUrn, imageUrl) } } }
+    : {}
   const res = await fetch('https://api.linkedin.com/rest/posts', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
       'X-Restli-Protocol-Version': '2.0.0',
-      'LinkedIn-Version': '202401',
+      'LinkedIn-Version': LINKEDIN_VERSION,
     },
     body: JSON.stringify({
       author: authorUrn,
       commentary: text,
       visibility: 'PUBLIC',
       distribution: { feedDistribution: 'MAIN_FEED', targetEntities: [], thirdPartyDistributionChannels: [] },
+      ...content,
       lifecycleState: 'PUBLISHED',
       isReshareDisabledByAuthor: false,
     }),
@@ -145,7 +192,7 @@ export async function publishForAccount(account: {
   access_token: string | null
   refresh_token: string | null
   expires_at: string | null
-}, text: string): Promise<string> {
+}, text: string, imageUrl?: string | null): Promise<string> {
   const db = socialDb()
   if (!db) throw new Error('Service role not configured')
   let token = decryptToken(account.access_token)
@@ -171,5 +218,5 @@ export async function publishForAccount(account: {
     }
   }
   if (!account.author_urn) throw new Error('Account has no author URN')
-  return publishLinkedInText(token, account.author_urn, text)
+  return publishLinkedInText(token, account.author_urn, text, imageUrl)
 }
