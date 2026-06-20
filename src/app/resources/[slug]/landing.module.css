@@ -34,8 +34,25 @@
   border: none; border-radius: 999px; padding: 14px 28px; cursor: pointer; text-decoration: none;
 }
 .download:hover { background: #000; }
+.download:disabled { opacity: 0.55; cursor: default; }
 .unavailable { font-size: 14px; color: var(--text-faint); }
-.note { font-size: 13px; color: var(--text-faint); margin: 14px 0 0; }
+.note { font-size: 13px; color: var(--text-faint); margin: 14px 0 0; display: block; }
+
+/* Email gate */
+.gate { display: flex; flex-direction: column; gap: 12px; max-width: 460px; }
+.gateRow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.gateInput {
+  border: 1px solid var(--border-mid); border-radius: 10px; background: var(--bg); color: var(--text);
+  font-size: 15px; padding: 12px 14px; outline: none; font-family: var(--font-sans); min-width: 0;
+}
+.gateInput:focus { border-color: var(--gold); }
+.success { font-size: 15px; color: var(--text); line-height: 1.5; }
+.retryLink { background: none; border: none; padding: 0; color: var(--gold-dark); text-decoration: underline; cursor: pointer; font-size: 15px; }
+.errNote { font-size: 13px; color: #b4392f; }
+
+@media (max-width: 560px) {
+  .gateRow { grid-template-columns: 1fr; }
+}
 
 @media (max-width: 860px) {
   .wrap { grid-template-columns: 1fr; }
