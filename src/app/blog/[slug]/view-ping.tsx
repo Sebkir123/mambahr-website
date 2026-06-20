@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect } from 'react'
-import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 
-// Fire-and-forget first-party view counter. Calls the SECURITY DEFINER RPC that
-// only ever +1's a published post; no PII, no cookies. Guarded per-slug per tab
-// so a re-render or back/forward doesn't double-count within a session.
+// Fire-and-forget first-party view counter. POSTs to a tiny API route that runs
+// the SECURITY DEFINER increment_post_view RPC server-side — so public blog
+// pages never load supabase-js (~240 KB) just to count a read. No PII, no
+// cookies. Guarded per-slug per tab so a re-render / back-forward can't double
+// count within a session.
 export default function ViewPing({ slug }: { slug: string }) {
   useEffect(() => {
     const key = `mamba_pv_${slug}`
@@ -15,8 +16,12 @@ export default function ViewPing({ slug }: { slug: string }) {
     } catch {
       // private mode / storage disabled — still count once per mount
     }
-    const supabase = createSupabaseBrowserClient()
-    void supabase.rpc('increment_post_view', { p_slug: slug })
+    void fetch('/api/blog/view', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ slug }),
+      keepalive: true,
+    }).catch(() => {})
   }, [slug])
 
   return null

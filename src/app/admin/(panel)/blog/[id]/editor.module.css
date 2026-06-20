@@ -106,6 +106,18 @@
 .panel { background: var(--bg); border: 1px solid var(--border-faint); border-radius: 14px; padding: 18px; box-shadow: var(--shadow-sm); }
 .panelTitle { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 14px; }
 
+.editorLoading {
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-faint);
+  font-size: 14px;
+  border: 1px solid var(--border-faint);
+  border-radius: 12px;
+  background: var(--bg-surface);
+}
+
 /* Read analytics panel */
 .analyticsEmpty { font-size: 13px; color: var(--text-faint); line-height: 1.5; margin: 0; }
 .metricGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }

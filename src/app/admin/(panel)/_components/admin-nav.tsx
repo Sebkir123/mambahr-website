@@ -84,22 +84,41 @@ function NavLinks({ onNavigate }: { onNavigate: () => void }) {
     }
   }, [])
 
+  const persist = (set: Set<string>) => {
+    try {
+      localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...set]))
+    } catch {
+      /* ignore */
+    }
+  }
+
+  // Auto-expand the group of the page you navigate to — but only when the active
+  // group actually changes, so a manual collapse afterward isn't re-opened.
+  useEffect(() => {
+    if (!activeGroup) return
+    setCollapsed((prev) => {
+      if (!prev.has(activeGroup)) return prev
+      const next = new Set(prev)
+      next.delete(activeGroup)
+      persist(next)
+      return next
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeGroup])
+
   function toggle(title: string) {
     setCollapsed((prev) => {
       const next = new Set(prev)
       if (next.has(title)) next.delete(title)
       else next.add(title)
-      try {
-        localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...next]))
-      } catch {
-        /* ignore */
-      }
+      persist(next)
       return next
     })
   }
 
-  // The active section is always shown so the current page can't be hidden.
-  const isOpen = (title: string) => title === activeGroup || !collapsed.has(title)
+  // Respect the user's choice for every group, including the active one — so any
+  // section can be collapsed. Navigating to a section re-opens it (effect above).
+  const isOpen = (title: string) => !collapsed.has(title)
 
   return (
     <>
