@@ -468,12 +468,60 @@ export default function Hero() {
           .btn-primary:hover { transform: none; }
         }
         @media (max-width: 720px) {
-          .app { transform: none; }
+          .stage { perspective: none; }
+          .app { transform: none; border-radius: 16px; }
+          /* Stack to a single mobile-app column: compact header, then content. */
           .app-body { grid-template-columns: 1fr; }
-          .side { flex-direction: row; flex-wrap: wrap; gap: 6px; border-right: none; border-bottom: 1px solid var(--border); }
-          .side nav { display: flex; flex-wrap: wrap; gap: 4px; }
+          .side {
+            flex-direction: column;
+            gap: 12px;
+            border-right: none;
+            border-bottom: 1px solid var(--border);
+            padding: 14px 14px 12px;
+          }
+          .side .brand { padding: 0 2px; font-size: 15px; }
+          /* Nav becomes a horizontal scrolling pill strip — no cramped wrap grid. */
+          .side nav {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 7px;
+            overflow-x: auto;
+            margin: 0 -14px;
+            padding: 2px 14px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+          }
+          .side nav::-webkit-scrollbar { display: none; }
+          .nav {
+            flex: 0 0 auto;
+            white-space: nowrap;
+            padding: 8px 13px;
+            border-radius: 999px;
+            border: 1px solid var(--border-faint);
+            background: var(--bg);
+          }
+          .nav-b { margin-left: 7px; }
+          .agentline { margin-top: 0; }
           .status { display: none; }
-          .ap-btns .ap-no { display: none; }
+          /* Greeting: keep on one line, pill never breaks. */
+          .greet { align-items: center; gap: 12px; }
+          .greet h3 { font-size: 22px; }
+          .seg { flex: none; white-space: nowrap; }
+          .main { padding: 18px 16px 22px; }
+          /* Approval row: avatar + text on line 1, actions wrap below (indented). */
+          .ap { flex-wrap: wrap; }
+          .ap-main { flex: 1 1 0; min-width: 0; }
+          .ap-btns { flex-basis: 100%; margin-left: 46px; margin-top: 6px; }
+          .ap-btns .ap-no { display: inline-block; }
+        }
+        @media (max-width: 460px) {
+          .stats { grid-template-columns: 1fr 1fr; gap: 9px; }
+          .stat.goldt { grid-column: 1 / -1; }
+          .stat { min-height: 0; padding: 12px; }
+          .s-l { font-size: 9.5px; }
+          .s-n { font-size: 27px; }
+          .f-what { flex-basis: 100%; order: 3; padding-left: 26px; }
         }
       `}</style>
     </section>
