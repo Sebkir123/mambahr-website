@@ -6,13 +6,15 @@ import { type Post, slugify, TAG_OPTIONS } from '@/lib/blog'
 import { savePost, setPostStatus, deletePost, listRevisions, restoreRevision, type SavePayload, type Revision } from '../actions'
 import { uploadImage } from './upload'
 import RichText from './rich-text'
+import PostAnalytics from './post-analytics'
+import type { BlogPostAnalytics } from '@/lib/blog-analytics-types'
 import styles from './editor.module.css'
 
 const SITE = 'https://mambahr.com'
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 
-export default function Editor({ post }: { post: Post }) {
+export default function Editor({ post, analytics }: { post: Post; analytics: BlogPostAnalytics }) {
   const [title, setTitle] = useState(post.title)
   const [slug, setSlug] = useState(post.slug)
   const [slugTouched, setSlugTouched] = useState(!post.slug.startsWith('untitled-'))
@@ -226,6 +228,9 @@ export default function Editor({ post }: { post: Post }) {
 
         {/* Sidebar */}
         <aside className={styles.sidebar}>
+          {/* Reads */}
+          <PostAnalytics a={analytics} published={status === 'published'} />
+
           {/* Publish */}
           <section className={styles.panel}>
             <h3 className={styles.panelTitle}>Publish</h3>
