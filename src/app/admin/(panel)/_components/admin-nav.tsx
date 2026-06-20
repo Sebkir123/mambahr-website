@@ -1,10 +1,12 @@
 'use client'
 
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import styles from './admin-nav.module.css'
+
+const COLLAPSE_KEY = 'admin-nav-collapsed'
 
 type Item = {
   href: string
@@ -55,6 +57,8 @@ const GROUPS: Group[] = [
   },
 ]
 
+const TITLED = GROUPS.filter((g) => g.title).map((g) => g.title as string)
+
 function NavLinks({ onNavigate }: { onNavigate: () => void }) {
   const pathname = usePathname()
   const params = useSearchParams()
@@ -66,19 +70,74 @@ function NavLinks({ onNavigate }: { onNavigate: () => void }) {
     if (item.kind) return pathname.startsWith('/admin/crm') && crmKind === item.kind
     return pathname.startsWith(item.path)
   }
+  const activeGroup = GROUPS.find((g) => g.title && g.items.some(isActive))?.title
+
+  // Collapsed by default (compact); load saved prefs after mount. Same initial
+  // value on server + first client render → no hydration mismatch.
+  const [collapsed, setCollapsed] = useState<Set<string>>(() => new Set(TITLED))
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(COLLAPSE_KEY)
+      if (raw) setCollapsed(new Set(JSON.parse(raw) as string[]))
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
+  function toggle(title: string) {
+    setCollapsed((prev) => {
+      const next = new Set(prev)
+      if (next.has(title)) next.delete(title)
+      else next.add(title)
+      try {
+        localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...next]))
+      } catch {
+        /* ignore */
+      }
+      return next
+    })
+  }
+
+  // The active section is always shown so the current page can't be hidden.
+  const isOpen = (title: string) => title === activeGroup || !collapsed.has(title)
 
   return (
     <>
-      {GROUPS.map((g, i) => (
-        <div key={g.title ?? `g${i}`} className={styles.group}>
-          {g.title && <span className={styles.groupTitle}>{g.title}</span>}
-          {g.items.map((item) => (
-            <Link key={item.href} href={item.href} className={isActive(item) ? styles.linkActive : styles.link} onClick={onNavigate}>
-              {item.label}
-            </Link>
-          ))}
-        </div>
-      ))}
+      {GROUPS.map((g, i) => {
+        if (!g.title) {
+          return (
+            <div key={`g${i}`} className={styles.group}>
+              {g.items.map((item) => (
+                <Link key={item.href} href={item.href} className={isActive(item) ? styles.linkActive : styles.link} onClick={onNavigate}>
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          )
+        }
+        const open = isOpen(g.title)
+        return (
+          <div key={g.title} className={styles.group}>
+            <button
+              type="button"
+              className={styles.groupTitle}
+              onClick={() => toggle(g.title!)}
+              aria-expanded={open}
+            >
+              <span>{g.title}</span>
+              <svg className={`${styles.caret} ${open ? styles.caretOpen : ''}`} width="11" height="11" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            {open &&
+              g.items.map((item) => (
+                <Link key={item.href} href={item.href} className={isActive(item) ? styles.linkActive : styles.link} onClick={onNavigate}>
+                  {item.label}
+                </Link>
+              ))}
+          </div>
+        )
+      })}
     </>
   )
 }

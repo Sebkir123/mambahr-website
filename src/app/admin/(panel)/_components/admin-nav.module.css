@@ -45,14 +45,27 @@
   gap: 2px;
 }
 .groupTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-faint);
-  padding: 4px 12px 4px;
+  padding: 6px 12px 4px;
+  margin-bottom: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
   opacity: 0.72;
+  transition: opacity 0.15s, color 0.15s;
 }
+.groupTitle:hover { opacity: 1; color: var(--text-muted); }
+.caret { color: var(--text-faint); transition: transform 0.18s ease; flex: none; }
+.caretOpen { transform: rotate(90deg); }
 
 .link,
 .linkActive {
