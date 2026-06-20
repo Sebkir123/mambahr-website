@@ -55,6 +55,7 @@ export const env = {
   linkedinClientSecret: process.env.LINKEDIN_CLIENT_SECRET,
   socialTokenKey: process.env.SOCIAL_TOKEN_KEY, // 64 hex chars (32 bytes) → AES-256-GCM
   cronSecret: process.env.CRON_SECRET,
+  anthropicKey: process.env.ANTHROPIC_API_KEY, // AI post drafting (Claude)
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://mambahr.com',
 } as const
 
