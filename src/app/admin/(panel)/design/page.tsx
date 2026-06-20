@@ -7,8 +7,8 @@ export const dynamic = 'force-dynamic'
 type LogoAsset = { file: string; label: string; note: string; dark: boolean }
 
 const LOGO_ASSETS: LogoAsset[] = [
-  { file: 'mamba-logo-light', label: 'Light mode', note: 'Mark + wordmark · on light backgrounds', dark: false },
-  { file: 'mamba-logo-dark', label: 'Dark mode', note: 'Mark + wordmark · on dark backgrounds', dark: true },
+  { file: 'mamba-lockup-light', label: 'Light mode', note: 'Framed lockup · on light backgrounds', dark: false },
+  { file: 'mamba-lockup-dark', label: 'Dark mode', note: 'Framed lockup · on dark backgrounds', dark: true },
 ]
 const ICON_ASSETS: LogoAsset[] = [
   { file: 'mamba-mark-light', label: 'Light mode', note: 'Ink mark · on light backgrounds', dark: false },
