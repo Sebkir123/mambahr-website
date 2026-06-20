@@ -32,7 +32,7 @@ export default function Statement() {
           <blockquote>&ldquo;I was hired to build a great place to work. Instead I spend my days on paperwork.&rdquo;</blockquote>
           <figcaption>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/avatars/head-of-people.jpg" alt="" width={38} height={38} />
+            <img src="/avatars/head-of-people.jpg" alt="" width={38} height={38} loading="lazy" decoding="async" />
             <span>Head of People · 240 employees</span>
           </figcaption>
         </figure>

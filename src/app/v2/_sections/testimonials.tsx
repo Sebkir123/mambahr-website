@@ -40,7 +40,7 @@ export default function Testimonials() {
 
         <article className="feat" data-reveal data-delay="1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="feat-photo" src={FEAT.photo} alt={FEAT.name} />
+          <img className="feat-photo" src={FEAT.photo} alt={FEAT.name} loading="lazy" decoding="async" />
           <div className="feat-body">
             <span className="stars" aria-hidden="true">★★★★★</span>
             <blockquote className="feat-q">&ldquo;{FEAT.quote}&rdquo;</blockquote>
@@ -66,7 +66,7 @@ export default function Testimonials() {
               <p className="q">&ldquo;{c.quote}&rdquo;</p>
               <div className="who small">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="av" src={c.photo} alt={c.name} />
+                <img className="av" src={c.photo} alt={c.name} loading="lazy" decoding="async" />
                 <div>
                   <div className="who-n">{c.name}</div>
                   <div className="who-r">{c.role}</div>

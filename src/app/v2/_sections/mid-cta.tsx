@@ -8,7 +8,7 @@ export default function MidCta() {
         <div className="faces" aria-hidden="true">
           {['priya', 'anna', 'maya', 'dave', 'brian'].map((p) => (
             // eslint-disable-next-line @next/next/no-img-element
-            <img key={p} src={`/avatars/${p}.jpg`} alt="" width={40} height={40} />
+            <img key={p} src={`/avatars/${p}.jpg`} alt="" width={40} height={40} loading="lazy" decoding="async" />
           ))}
         </div>
         <h3 className="line">Stop paying people to <span className="em">push buttons.</span></h3>

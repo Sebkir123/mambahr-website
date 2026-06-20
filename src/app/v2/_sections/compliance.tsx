@@ -7,7 +7,7 @@ export default function Compliance() {
         <div className="card agent-edge agent-done agent-lg" data-reveal>
           <div className="msg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="av" src="/avatars/violet.jpg" alt="" width={42} height={42} />
+            <img className="av" src="/avatars/violet.jpg" alt="" width={42} height={42} loading="lazy" decoding="async" />
             <div className="m-body">
               <div className="m-who">Violet · California</div>
               <div className="q">&ldquo;I&rsquo;m having a baby in June. How much leave can I take?&rdquo;</div>

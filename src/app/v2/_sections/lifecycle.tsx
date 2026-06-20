@@ -193,7 +193,7 @@ export default function Lifecycle() {
           <div className="spot-log" key={`l${active}`}>
             <div className="log-person">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="lp-av" src={s.person.img} alt="" width={38} height={38} />
+              <img className="lp-av" src={s.person.img} alt="" width={38} height={38} loading="lazy" decoding="async" />
               <div>
                 <div className="lp-n">{s.person.name}</div>
                 <div className="lp-r">{s.person.role}</div>

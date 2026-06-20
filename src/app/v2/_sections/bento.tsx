@@ -52,7 +52,7 @@ export default function Bento() {
               {APPROVALS.map((a) => (
                 <div key={a.title} className="row">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="av" src={a.img} alt="" width={34} height={34} />
+                  <img className="av" src={a.img} alt="" width={34} height={34} loading="lazy" decoding="async" />
                   <div className="r-main">
                     <div className="r-t">{a.title}<span className={`tag ${a.tone}`}>{a.tag}</span></div>
                     <div className="r-m">{a.meta}</div>
@@ -94,7 +94,7 @@ export default function Bento() {
                 <div key={p.name} className="trow">
                   <span className="t-name">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img className="av sm" src={p.img} alt="" width={28} height={28} />
+                    <img className="av sm" src={p.img} alt="" width={28} height={28} loading="lazy" decoding="async" />
                     {p.name}
                   </span>
                   <span className="t-role">{p.role}</span>

@@ -78,7 +78,7 @@ export default function Channels() {
                 <div className="sw-feed">
                   <div className="m">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img className="av" src="/avatars/maya.jpg" alt="Maya Chen" width={38} height={38} />
+                    <img className="av" src="/avatars/maya.jpg" alt="Maya Chen" width={38} height={38} loading="lazy" decoding="async" />
                     <div className="m-body">
                       <div className="m-h"><b>Maya Chen</b><time>9:14 AM</time></div>
                       <div className="m-t">
