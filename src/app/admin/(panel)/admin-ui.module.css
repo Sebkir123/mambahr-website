@@ -60,7 +60,10 @@
   border: 1px solid var(--border-faint);
   border-radius: 14px;
   box-shadow: var(--shadow-sm);
+  /* Vertical rhythm so stacked cards never butt up against each other. */
+  margin-bottom: 20px;
 }
+.card:last-child { margin-bottom: 0; }
 
 .table {
   width: 100%;
