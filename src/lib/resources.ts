@@ -27,7 +27,7 @@ export type Resource = {
   updated_at: string
 }
 
-export type ResourceStat = { views: number; visitors: number; downloads: number; lastView: string | null }
+export type ResourceStat = { views: number; visitors: number; downloads: number; topSource: string | null; lastView: string | null }
 
 // Public download URL for a resource's PDF (bucket is public).
 export function resourceFileUrl(filePath: string): string {
@@ -87,24 +87,22 @@ export async function getResourceStats(): Promise<Map<string, ResourceStat>> {
   const { data, error } = await db.rpc('resource_stats')
   const map = new Map<string, ResourceStat>()
   if (error || !data) return map
-  for (const r of data as { slug: string; views: number; visitors: number; downloads: number; last_view: string | null }[]) {
+  for (const r of data as { slug: string; views: number; visitors: number; downloads: number; top_source: string | null; last_view: string | null }[]) {
     if (!r.slug) continue
     map.set(r.slug, {
       views: Number(r.views) || 0,
       visitors: Number(r.visitors) || 0,
       downloads: Number(r.downloads) || 0,
+      topSource: r.top_source,
       lastView: r.last_view,
     })
   }
   return map
 }
 
-// Top referral sources for one resource's landing page.
-export async function getResourceSources(slug: string): Promise<{ source: string; views: number }[]> {
-  const db = await adminDb()
-  const { data } = await db.rpc('resource_sources', { p_slug: slug })
-  return ((data as { source: string; views: number }[] | null) ?? []).map((s) => ({
-    source: s.source,
-    views: Number(s.views) || 0,
-  }))
+// Force-download URL for a resource's PDF — Supabase Storage honours ?download
+// to set Content-Disposition: attachment (the bare public URL opens inline).
+export function resourceDownloadUrl(filePath: string, fileName?: string | null): string {
+  const name = (fileName && fileName.trim()) || filePath.split('/').pop() || 'mambahr-playbook.pdf'
+  return `${resourceFileUrl(filePath)}?download=${encodeURIComponent(name)}`
 }
