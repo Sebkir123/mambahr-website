@@ -11,6 +11,8 @@
 }
 .kicker { display: block; font-size: 12px; color: var(--text-faint); margin-top: 2px; }
 
+.source { text-transform: capitalize; color: var(--text-muted); font-size: 13px; }
+
 .copyRow { display: flex; gap: 6px; }
 .copyBtn {
   border: 1px solid var(--border-mid); background: var(--bg); color: var(--text-muted);

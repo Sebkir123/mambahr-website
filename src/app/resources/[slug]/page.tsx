@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
-import { getPublishedResource, resourceFileUrl } from '@/lib/resources'
+import { getPublishedResource, resourceDownloadUrl } from '@/lib/resources'
 import styles from './landing.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -28,7 +28,7 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
   const r = await getPublishedResource(slug)
   if (!r) notFound()
 
-  const fileUrl = r.file_path ? resourceFileUrl(r.file_path) : null
+  const fileUrl = r.file_path ? resourceDownloadUrl(r.file_path, r.file_name) : null
 
   return (
     <>
@@ -60,8 +60,6 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
               <a
                 className={styles.download}
                 href={fileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
                 data-track="download"
                 data-track-label={r.slug}
               >

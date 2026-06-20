@@ -18,6 +18,10 @@ function slugify(s: string): string {
     .slice(0, 80)
 }
 
+// Slugs that collide with existing static routes under /resources/ — a CMS row
+// with one of these would be permanently shadowed by the static page.
+const RESERVED_SLUGS = new Set(['rif-playbook'])
+
 export type SaveResult = { ok: boolean; message: string; slug?: string }
 
 // Upload a playbook PDF to the public resources bucket. Returns the public URL +
@@ -51,6 +55,12 @@ export async function saveResource(formData: FormData): Promise<SaveResult> {
   if (!title) return { ok: false, message: 'Title is required.' }
   const slug = slugify(String(formData.get('slug') || '') || title)
   if (!slug) return { ok: false, message: 'Could not derive a slug from the title.' }
+  if (RESERVED_SLUGS.has(slug)) return { ok: false, message: `“${slug}” is reserved — pick a different slug.` }
+
+  const status = String(formData.get('status') || 'draft') === 'published' ? 'published' : 'draft'
+  const filePath = String(formData.get('file_path') || '').trim() || null
+  // A published resource with no PDF would render a dead "Download" button.
+  if (status === 'published' && !filePath) return { ok: false, message: 'Attach a PDF before publishing.' }
 
   const bullets = String(formData.get('bullets') || '')
     .split('\n')
@@ -65,11 +75,11 @@ export async function saveResource(formData: FormData): Promise<SaveResult> {
     cover_no: String(formData.get('cover_no') || '').trim().slice(0, 8) || null,
     description: String(formData.get('description') || '').trim().slice(0, 2000),
     bullets,
-    file_path: String(formData.get('file_path') || '').trim() || null,
+    file_path: filePath,
     file_name: String(formData.get('file_name') || '').trim() || null,
     file_size: Number(formData.get('file_size')) || null,
     featured: formData.get('featured') === 'on' || formData.get('featured') === 'true',
-    status: String(formData.get('status') || 'draft') === 'published' ? 'published' : 'draft',
+    status,
     sort_order: Number(formData.get('sort_order')) || 0,
     updated_at: new Date().toISOString(),
   }
@@ -95,6 +105,11 @@ export async function setResourceStatus(formData: FormData): Promise<void> {
   const id = String(formData.get('id') || '')
   const status = String(formData.get('status') || '') === 'published' ? 'published' : 'draft'
   if (!id) return
+  // Don't publish a resource with no PDF (dead download button on the site).
+  if (status === 'published') {
+    const { data } = await db.from('resources').select('file_path').eq('id', id).maybeSingle()
+    if (!data?.file_path) return
+  }
   await db.from('resources').update({ status, updated_at: new Date().toISOString() }).eq('id', id)
   revalidatePath('/admin/resources')
   revalidatePath('/')

@@ -22,7 +22,7 @@ export type Row = {
   status: 'draft' | 'published'
   sort_order: number
 }
-type Stat = { views: number; visitors: number; downloads: number }
+type Stat = { views: number; visitors: number; downloads: number; topSource: string | null }
 
 const BLANK: Row = {
   id: '', slug: '', title: '', kicker: 'Playbook', cover_no: '', description: '',
@@ -64,6 +64,7 @@ export default function ResourcesManager({ resources, stats }: { resources: Row[
                 <th>Status</th>
                 <th style={{ textAlign: 'right' }}>Views</th>
                 <th style={{ textAlign: 'right' }}>Downloads</th>
+                <th>Top source</th>
                 <th>Share link</th>
                 <th></th>
               </tr>
@@ -86,6 +87,7 @@ export default function ResourcesManager({ resources, stats }: { resources: Row[
                     </td>
                     <td style={{ textAlign: 'right' }}>{s?.views ? s.views : '—'}</td>
                     <td style={{ textAlign: 'right', fontWeight: s?.downloads ? 600 : 400 }}>{s?.downloads ? s.downloads : '—'}</td>
+                    <td>{s?.topSource ? <span className={styles.source}>{s.topSource}</span> : '—'}</td>
                     <td><CopyLinks url={url} /></td>
                     <td className={styles.rowActions}>
                       <form action={setResourceStatus}>
@@ -225,7 +227,7 @@ function Editor({ row, onClose }: { row: Row; onClose: () => void }) {
         <div className={styles.row2}>
           <label className={styles.checkField}>
             <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} />
-            <span>Featured (hero card on the site)</span>
+            <span>Featured (listed first on the site)</span>
           </label>
           <label className={styles.field}>
             <span className={styles.label}>Status</span>
