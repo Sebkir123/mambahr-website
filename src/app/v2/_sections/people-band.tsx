@@ -22,7 +22,7 @@ export default function PeopleBand() {
         <div className="visual" data-reveal data-delay="1">
           <div className="photo-card">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="photo" src="/v2-people/team2.jpg" alt="A people team working together" />
+            <img className="photo" src="/v2-people/team2.jpg" alt="A people team working together" loading="lazy" decoding="async" />
           </div>
           <div className="float-card">
             <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>

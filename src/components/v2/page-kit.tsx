@@ -76,7 +76,7 @@ export function PageHero({
           <div className="faces">
             {FACES.map((p) => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={p} src={`/avatars/${p}.jpg`} alt="" width={34} height={34} />
+              <img key={p} src={`/avatars/${p}.jpg`} alt="" width={34} height={34} loading="lazy" decoding="async" />
             ))}
           </div>
           <span className="proof-t">{proof}</span>
@@ -289,7 +289,7 @@ export function AgentLoop({
               <span className="num">{s.n}</span>
               {s.img ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img className="rowav" src={s.img} alt="" width={26} height={26} />
+                <img className="rowav" src={s.img} alt="" width={26} height={26} loading="lazy" decoding="async" />
               ) : (
                 <span className={`mark${s.who === 'you' ? ' gold' : ''}`} aria-hidden="true" />
               )}
@@ -519,7 +519,7 @@ export function QuoteBand({
       <div className="card agent-edge agent-done" data-reveal>
         <div className="photo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img} alt={name} />
+          <img src={img} alt={name} loading="lazy" decoding="async" />
           {metric && <span className="badge">{metric}</span>}
         </div>
         <div className="body">
@@ -612,7 +612,7 @@ export function PageCta({
           <div className="faces" aria-hidden="true">
             {FACES.map((p) => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={p} src={`/avatars/${p}.jpg`} alt="" width={30} height={30} />
+              <img key={p} src={`/avatars/${p}.jpg`} alt="" width={30} height={30} loading="lazy" decoding="async" />
             ))}
           </div>
           <p className="trust">No setup project · Your data imported in a day · You approve the big calls</p>
