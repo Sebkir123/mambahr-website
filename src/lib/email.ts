@@ -134,15 +134,13 @@ export async function sendWaitlistWelcome(opts: { email: string; company: string
   const subject = 'We got your application — MambaHR'
   const html = emailShell(
     subject,
-    kicker('Application received') +
-    serif('Good to have you.') +
-    body(`For every $1 a company spends on HR software, they spend $6 on the humans clicking buttons inside it. MambaHR is built to change that — the AI that runs the full HR stack end to end, not just assists the person doing it.`) +
-    body(`We&rsquo;ll reach out personally, usually within 24 hours. It won&rsquo;t be a demo sequence or a sales rep — Brian or Sebastian will be in touch directly to talk through whether this is a fit for <strong style="color:#1A1611;">${escapeHtml(opts.company)}</strong>.`) +
+    serif('We got your application.') +
+    body(`Thanks for reaching out${opts.company ? ` from <strong style="color:#1A1611;">${escapeHtml(opts.company)}</strong>` : ''}. We go through every application personally and we&rsquo;ll be in touch within 24 hours — no SDR, no automated sequence. Brian or Sebastian will reply directly.`) +
+    body(`MambaHR handles the full HR administrative layer — onboarding, offboarding, hiring, leave, compliance — autonomously, end to end. One human in the loop for the decisions that actually need judgment. That&rsquo;s what you applied for.`) +
     divider() +
-    `<p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.01em;color:#1A1611;margin:0 0 10px 0;">In the meantime</p>` +
-    `<p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.65;color:#5C5046;margin:0 0 20px 0;">Follow us on LinkedIn — we share what we&rsquo;re building, the thinking behind it, and the occasional compliance deep dive that&rsquo;ll make your HR team feel seen.</p>` +
-    `<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;"><tr><td style="border:1.5px solid #1A1611;border-radius:999px;"><a href="https://www.linkedin.com/company/mambahr" style="display:inline-block;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13.5px;font-weight:600;color:#1A1611;text-decoration:none;padding:11px 26px;border-radius:999px;letter-spacing:0.01em;">Follow on LinkedIn &rarr;</a></td></tr></table>` +
-    finePrint('Questions? Just reply to this email — it goes straight to the founders.'),
+    body(`While you wait, follow us on LinkedIn &mdash; it&rsquo;s where we build in public.`) +
+    ctaButton('https://www.linkedin.com/company/mambahr', 'Follow on LinkedIn →') +
+    finePrint('Questions? Just reply &mdash; this goes straight to us.<br/>Brian &amp; Sebastian, MambaHR'),
   )
 
   if (!client) { console.log('[email:waitlist-welcome] sent successfully'); return }
