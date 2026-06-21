@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
 import { resourceDownloadUrl } from '@/lib/resources'
+import { sendResourceDownload } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
@@ -116,13 +117,17 @@ export async function POST(req: NextRequest) {
     ip,
   })
 
-  // Best-effort Slack ping (same channel as the waitlist).
-  const hook = process.env.SLACK_WEBHOOK_WAITLIST
-  if (hook) {
-    try {
-      await fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: `📥 Playbook lead: ${name ? `${name}, ` : ''}${email}${company ? ` · ${company}` : ''}${companyStage ? ` · ${companyStage}` : ''} → ${r.title}` }) })
-    } catch { /* best-effort */ }
-  }
+  const dlUrl = resourceDownloadUrl(r.file_path as string, r.file_name as string | null)
 
-  return NextResponse.json({ ok: true, downloadUrl: resourceDownloadUrl(r.file_path as string, r.file_name as string | null) })
+  // Best-effort: email + Slack in parallel.
+  await Promise.allSettled([
+    sendResourceDownload({ email, name: name || '', title: r.title, kicker: 'Playbook', downloadUrl: dlUrl }),
+    (async () => {
+      const hook = process.env.SLACK_WEBHOOK_WAITLIST
+      if (!hook) return
+      await fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: `📥 Playbook lead: ${name ? `${name}, ` : ''}${email}${company ? ` · ${company}` : ''}${companyStage ? ` · ${companyStage}` : ''} → ${r.title}` }) })
+    })(),
+  ])
+
+  return NextResponse.json({ ok: true, downloadUrl: dlUrl })
 }
