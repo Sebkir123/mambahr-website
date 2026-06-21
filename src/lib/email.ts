@@ -225,6 +225,32 @@ export async function sendFieldGuide(opts: { email: string; guideTitle: string; 
 }
 
 /* ════════════════════════════════════════════
+   DEMO REQUEST CONFIRMATION
+   ════════════════════════════════════════════ */
+export async function sendDemoConfirmation(opts: { email: string; name: string; company: string }): Promise<void> {
+  const client = getClient()
+  const firstName = opts.name ? escapeHtml(opts.name.split(' ')[0]) : null
+  const subject = 'Your MambaHR demo — we’ll be in touch today'
+  const html = emailShell(
+    subject,
+    kicker('Demo request') +
+    serif(firstName ? `Thanks, ${firstName}.` : 'We got your demo request.') +
+    body(`A founder will reach out today — from a real address, not a no-reply — to set up 30 minutes for <strong style="color:#1A1611;">${escapeHtml(opts.company || 'your team')}</strong>.`) +
+    body('On the call we&rsquo;ll run the AI HR department on your scenarios and price it against your headcount — no deck, just the product.') +
+    ctaButton('https://mambahr.com/product', 'See it run →') +
+    divider() +
+    finePrint('Questions? Just reply &mdash; this goes straight to us.<br/>Brian &amp; Sebastian, MambaHR'),
+  )
+
+  if (!client) { console.log('[email:demo-confirmation] (dev) →', opts.email); return }
+  try {
+    await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+  } catch (err) {
+    console.error('[email:demo-confirmation] failed:', err)
+  }
+}
+
+/* ════════════════════════════════════════════
    RESOURCE DOWNLOAD — deliver the PDF link
    ════════════════════════════════════════════ */
 export async function sendResourceDownload(opts: { email: string; name: string; title: string; kicker: string; downloadUrl: string }): Promise<void> {
