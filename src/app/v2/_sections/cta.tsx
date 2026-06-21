@@ -12,10 +12,9 @@ export default function Cta() {
         <p className="sub">
           A live demo in 30 minutes. Live the next morning.
         </p>
-        <form className="form" onSubmit={(e) => e.preventDefault()}>
-          <input className="input" type="email" placeholder="you@company.com" aria-label="Work email" />
-          <button className="btn" type="submit" data-track="signup" data-track-label="access-form">Book a demo</button>
-        </form>
+        <div className="form">
+          <a className="btn" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
+        </div>
         <div className="trust">
           <span>Switch in a day</span><i /><span>Your data stays in the US</span><i /><span>A human on the big calls</span>
         </div>

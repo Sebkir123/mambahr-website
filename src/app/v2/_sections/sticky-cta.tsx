@@ -32,7 +32,7 @@ export default function StickyCta() {
 
   return (
     <div className={`fcta${show ? ' show' : ''}`} aria-hidden={!show}>
-      <a href="#access" className="pill">
+      <a href="/demo" className="pill">
         <span className="m" aria-hidden="true">M</span>
         Book a demo
       </a>
