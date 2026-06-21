@@ -53,18 +53,6 @@ export default function DemoPage() {
                   <li key={s}><span className="tick" aria-hidden="true" />{s}</li>
                 ))}
               </ul>
-              <div className="founders">
-                <div className="f-faces">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/brian_bell.jpeg" alt="Brian Bell" width={44} height={44} />
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/sebastian_kirsch.jpg" alt="Sebastian Kirsch" width={44} height={44} />
-                </div>
-                <div className="f-copy">
-                  <span className="f-t">With a founder, not a sales rep.</span>
-                  <span className="f-s">Brian or Sebastian runs every demo — the people who built it.</span>
-                </div>
-              </div>
             </div>
 
             {/* ── Form card ── */}
@@ -133,13 +121,6 @@ export default function DemoPage() {
             .see li { display: flex; align-items: flex-start; gap: 11px; font-size: 15px; line-height: 1.5; color: var(--text-muted); }
             .tick { flex: none; width: 18px; height: 18px; margin-top: 2px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
             .tick::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 3.5px; height: 7.5px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
-            .founders { display: flex; align-items: center; gap: 14px; margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--border-faint); }
-            .f-faces { display: flex; flex: none; }
-            .f-faces img { width: 44px; height: 44px; border-radius: 999px; object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); margin-left: -10px; background: var(--bg-elevated); }
-            .f-faces img:first-child { margin-left: 0; }
-            .f-copy { display: flex; flex-direction: column; gap: 2px; }
-            .f-t { font-size: 14.5px; font-weight: 700; color: var(--text); }
-            .f-s { font-size: 13px; color: var(--text-muted); }
 
             .card {
               background: var(--bg);
