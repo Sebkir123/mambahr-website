@@ -194,8 +194,8 @@ export async function restoreRevision(postId: string, revisionId: string): Promi
 export async function deletePost(id: string) {
   await requireAdmin()
   const supabase = await createSupabaseServerClient()
-  const { data } = await supabase.from('posts').select('slug').eq('id', id).single()
-  await supabase.from('posts').delete().eq('id', id)
+  // One round trip: delete and return the slug (was a separate SELECT + DELETE).
+  const { data } = await supabase.from('posts').delete().eq('id', id).select('slug').maybeSingle()
   revalidatePath('/admin/blog')
   revalidatePath('/blog')
   if (data?.slug) revalidatePath(`/blog/${data.slug}`)
