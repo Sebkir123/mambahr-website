@@ -25,6 +25,16 @@ const cols = [
     ],
   },
   {
+    title: 'Solutions',
+    links: [
+      { label: 'AI HR software', href: '/ai-hr-software' },
+      { label: 'Best HRIS for startups', href: '/best-hris-for-startups' },
+      { label: 'HR software for small business', href: '/hr-software-small-business' },
+      { label: 'Compliance engine', href: '/compliance' },
+      { label: 'Payroll-ready exports', href: '/payroll' },
+    ],
+  },
+  {
     title: 'Compare',
     twoCol: true,
     links: [
@@ -32,10 +42,12 @@ const cols = [
       { label: 'vs Gusto', href: '/compare/gusto' },
       { label: 'vs Deel', href: '/compare/deel' },
       { label: 'vs BambooHR', href: '/compare/bamboohr' },
-      { label: 'vs Namely', href: '/compare/namely' },
-      { label: 'vs HiBob', href: '/compare/hibob' },
-      { label: 'vs ADP', href: '/compare/adp' },
       { label: 'vs Workday', href: '/compare/workday' },
+      { label: 'vs ADP', href: '/compare/adp' },
+      { label: 'vs Justworks', href: '/compare/justworks' },
+      { label: 'vs TriNet', href: '/compare/trinet' },
+      { label: 'vs Paychex', href: '/compare/paychex' },
+      { label: 'All comparisons', href: '/compare' },
     ],
   },
 ]
