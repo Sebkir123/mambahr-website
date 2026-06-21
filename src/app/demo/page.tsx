@@ -62,9 +62,9 @@ export default function DemoPage() {
                 {status === 'success' ? (
                   <div className="done">
                     <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Request received</span>
-                    <h2 className="d-t">You&rsquo;ll hear from a founder today.</h2>
+                    <h2 className="d-t">You&rsquo;ll hear from us today.</h2>
                     <p className="d-s">
-                      A real reply from a real founder email — not a no-reply, not a sequence.
+                      A real reply from a real email — not a no-reply, not a sequence.
                       We&rsquo;ll send times for this week.
                     </p>
                   </div>
