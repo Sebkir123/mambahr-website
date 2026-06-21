@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
 import { sendDemoConfirmation } from '@/lib/email'
-import { getLeadSlackWebhook } from '@/lib/secrets'
+import { notifyLeadSlack } from '@/lib/slack'
 
 export const dynamic = 'force-dynamic'
 
@@ -109,15 +109,16 @@ export async function POST(req: NextRequest) {
   // Best-effort: confirmation email + founders' Slack, in parallel.
   await Promise.allSettled([
     sendDemoConfirmation({ email, name, company }),
-    (async () => {
-      const hook = await getLeadSlackWebhook()
-      if (!hook) return
-      await fetch(hook, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: `🎯 New demo request: ${name ? `${name}, ` : ''}${email}${company ? ` · ${company}` : ''}${companySize ? ` · ${companySize}` : ''}` }),
-      })
-    })(),
+    notifyLeadSlack({
+      title: 'New demo request',
+      fields: [
+        { label: 'Name', value: name },
+        { label: 'Email', value: email },
+        { label: 'Company', value: company },
+        { label: 'Company size', value: companySize },
+      ],
+      context: 'Demo form · mambahr.com/demo',
+    }),
   ])
 
   return NextResponse.json({ ok: true })

@@ -3,7 +3,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
 import { getSupabase } from '@/lib/supabase'
 import { sendWaitlistWelcome } from '@/lib/email'
-import { getLeadSlackWebhook } from '@/lib/secrets'
+import { notifyLeadSlack } from '@/lib/slack'
 
 // Service-role client used only for the rate-limit RPC (which is locked down to service_role).
 // Typed as SupabaseClient (no generated DB types) so the untyped rpc() call type-checks.
@@ -32,10 +32,6 @@ async function checkSupabaseRateLimit(ip: string): Promise<boolean> {
   return data === true
 }
 
-function escapeSlack(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-}
-
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
 
 async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
@@ -61,20 +57,6 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
     return data.success === true
   } catch {
     return false
-  }
-}
-
-async function notifySlack(text: string) {
-  const url = await getLeadSlackWebhook()
-  if (!url) return
-  try {
-    await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text }),
-    })
-  } catch {
-    // best-effort
   }
 }
 
@@ -165,7 +147,14 @@ export async function POST(req: NextRequest) {
 
   if (!error) {
     await Promise.all([
-      notifySlack(`New waitlist signup:\n• *Email:* ${escapeSlack(email)}\n• *Company:* ${escapeSlack(company) || '(not provided)'}`),
+      notifyLeadSlack({
+        title: 'New waitlist application',
+        fields: [
+          { label: 'Email', value: email },
+          { label: 'Company', value: company },
+        ],
+        context: 'Waitlist · mambahr.com',
+      }),
       sendWaitlistWelcome({ email, company }),
     ])
   }
