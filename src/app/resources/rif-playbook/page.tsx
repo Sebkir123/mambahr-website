@@ -6,7 +6,7 @@ import { MambaMark } from '@/components/mamba-mark'
 import { getAdminUser } from '@/lib/auth'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { clientIp, geoFromHeaders, hashIp, parseUA } from '@/lib/deck-tracking'
-import { PrintButton } from './print-button'
+import { DownloadButton } from './download-button'
 import s from './rif-playbook.module.css'
 
 // Gated lead magnet: reached only via a per-recipient ?k= token emailed after
@@ -116,7 +116,7 @@ export default async function RifPlaybookPage({
     <div className={s.deck}>
       <div className={s.toolbar}>
         <span className={s.toolbarTitle}>The Ultimate RIF Playbook</span>
-        <PrintButton />
+        <DownloadButton />
       </div>
 
       {/* 1 — COVER */}

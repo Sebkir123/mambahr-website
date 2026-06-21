@@ -217,6 +217,8 @@ export async function sendFieldGuide(opts: { email: string; guideTitle: string; 
     body(`<strong style="color:#1A1611;">${escapeHtml(opts.guideTitle)}</strong> — a practical, compliance-first walkthrough for when you have to make the hard calls.`) +
     ctaButton(opts.url, 'Open the playbook →') +
     divider() +
+    body('Follow us on LinkedIn — it&rsquo;s where we build in public. And if a colleague is facing the same call, send this their way.') +
+    ctaButton('https://www.linkedin.com/company/mamba-hr', 'Follow on LinkedIn →') +
     finePrint('This link is personal — please don&rsquo;t share it publicly. Questions? Just reply to this email.'),
   )
 
@@ -240,10 +242,11 @@ export async function sendDemoConfirmation(opts: { email: string; name: string; 
     subject,
     kicker('Demo request') +
     serif(firstName ? `Thanks, ${firstName}.` : 'We got your demo request.') +
-    body(`A founder will reach out today — from a real address, not a no-reply — to set up 30 minutes for <strong style="color:#1A1611;">${escapeHtml(opts.company || 'your team')}</strong>.`) +
-    body('On the call we&rsquo;ll run the AI HR department on your scenarios and price it against your headcount — no deck, just the product.') +
-    ctaButton('https://mambahr.com/product', 'See it run →') +
+    body(`Someone from our team will write you today — a real person, not a no-reply — to find 30 minutes for <strong style="color:#1A1611;">${escapeHtml(opts.company || 'your team')}</strong>.`) +
+    body('On the call we&rsquo;ll run the AI HR department on your own scenarios and price it against your headcount — no deck, just the product.') +
     divider() +
+    body('While you wait, follow along on LinkedIn — it&rsquo;s where we build in public. And if you know someone buried in HR admin, send them our way.') +
+    ctaButton('https://www.linkedin.com/company/mamba-hr', 'Follow on LinkedIn →') +
     finePrint('Questions? Just reply &mdash; this goes straight to us.<br/>Brian &amp; Sebastian, MambaHR'),
   )
 
