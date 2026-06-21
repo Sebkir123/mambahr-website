@@ -54,6 +54,8 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
   const bodyRef = useRef<{ html: string; json: unknown }>({ html: post.body_html, json: post.body_json })
   const coverRef = useRef<HTMLInputElement>(null)
   const ogRef = useRef<HTMLInputElement>(null)
+  const [deleting, setDeleting] = useState(false)
+  const deletingRef = useRef(false)
 
   const buildPayload = useCallback(
     (): SavePayload => ({
@@ -80,6 +82,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
   )
 
   const doSave = useCallback(async () => {
+    if (deletingRef.current) return // don't resurrect a post mid-delete
     setSaveState('saving')
     setError('')
     const res = await savePost(buildPayload())
@@ -386,8 +389,20 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
             )}
           </section>
 
-          <button className={styles.deleteBtn} onClick={() => { if (confirm('Delete this post permanently?')) startTransition(() => deletePost(post.id)) }}>
-            Delete post
+          <button
+            className={styles.deleteBtn}
+            disabled={deleting}
+            onClick={() => {
+              if (deleting || !confirm('Delete this post permanently?')) return
+              // Stop autosave from firing (and resurrecting the row) mid-delete,
+              // and show progress so it doesn't look frozen during the redirect.
+              deletingRef.current = true
+              setDeleting(true)
+              if (bodyTimer.current) clearTimeout(bodyTimer.current)
+              startTransition(() => deletePost(post.id))
+            }}
+          >
+            {deleting ? 'Deleting…' : 'Delete post'}
           </button>
         </aside>
       </div>
