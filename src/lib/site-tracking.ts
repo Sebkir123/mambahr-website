@@ -36,11 +36,20 @@ export function deriveSource(
   if (/google\./.test(host)) return { source: 'google' }
   if (/bing\./.test(host)) return { source: 'bing' }
   if (/duckduckgo\./.test(host)) return { source: 'duckduckgo' }
-  if (/(facebook|fb)\./.test(host)) return { source: 'facebook' }
-  if (/(twitter|t\.co|x\.com)/.test(host)) return { source: 'twitter' }
-  if (/linkedin\./.test(host)) return { source: 'linkedin' }
-  if (/reddit\./.test(host)) return { source: 'reddit' }
+  if (/linkedin\.|lnkd\.in/.test(host)) return { source: 'linkedin' }
+  if (/(twitter|t\.co|x\.com)/.test(host)) return { source: 'x' }
+  if (/threads\.(net|com)/.test(host)) return { source: 'threads' }
+  if (/instagram\.|ig\.me|l\.instagram/.test(host)) return { source: 'instagram' }
+  if (/tiktok\./.test(host)) return { source: 'tiktok' }
+  if (/(facebook|fb)\.|l\.facebook|lm\.facebook/.test(host)) return { source: 'facebook' }
   if (/(youtube|youtu\.be)/.test(host)) return { source: 'youtube' }
+  if (/reddit\.|redd\.it/.test(host)) return { source: 'reddit' }
+  if (/bsky\.|bluesky/.test(host)) return { source: 'bluesky' }
+  if (/(mastodon|mstdn|fosstodon|hachyderm)\./.test(host)) return { source: 'mastodon' }
+  if (/(t\.me|telegram)/.test(host)) return { source: 'telegram' }
+  if (/(wa\.me|whatsapp)/.test(host)) return { source: 'whatsapp' }
+  if (/pinterest\.|pin\.it/.test(host)) return { source: 'pinterest' }
+  if (/(substack|beehiiv)\./.test(host)) return { source: 'newsletter' }
   if (/news\.ycombinator|ycombinator/.test(host)) return { source: 'hackernews' }
   return { source: host }
 }

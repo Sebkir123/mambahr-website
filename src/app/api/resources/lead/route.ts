@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
   const ip = getClientIp(req)
   if (!rateLimit(ip)) return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 })
 
-  let slug: string, email: string, company: string, turnstileToken: string
+  let slug: string, email: string, company: string, name: string, companyStage: string, turnstileToken: string
   try {
     const raw = await req.text()
     if (raw.length > 4096) return NextResponse.json({ error: 'Payload too large.' }, { status: 413 })
@@ -78,6 +78,8 @@ export async function POST(req: NextRequest) {
     slug = String(body.slug ?? '').trim().slice(0, 80)
     email = String(body.email ?? '').trim().slice(0, 200)
     company = String(body.company ?? '').trim().slice(0, 200)
+    name = String(body.name ?? '').trim().slice(0, 120)
+    companyStage = String(body.companyStage ?? '').trim().slice(0, 40)
     turnstileToken = String(body.turnstileToken ?? '').trim()
   } catch {
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 })
@@ -106,7 +108,9 @@ export async function POST(req: NextRequest) {
   // Capture the lead → flows into the unified Leads admin (source 'magnet').
   await client.from('magnet_requests').insert({
     email,
+    name: name || null,
     company: company || null,
+    company_stage: companyStage || null,
     magnet_id: slug,
     source_url: `/resources/${slug}`,
     ip,
@@ -116,7 +120,7 @@ export async function POST(req: NextRequest) {
   const hook = process.env.SLACK_WEBHOOK_WAITLIST
   if (hook) {
     try {
-      await fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: `📥 Playbook lead: ${email}${company ? ` (${company})` : ''} → ${r.title}` }) })
+      await fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: `📥 Playbook lead: ${name ? `${name}, ` : ''}${email}${company ? ` · ${company}` : ''}${companyStage ? ` · ${companyStage}` : ''} → ${r.title}` }) })
     } catch { /* best-effort */ }
   }
 

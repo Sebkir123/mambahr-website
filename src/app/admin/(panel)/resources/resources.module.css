@@ -13,6 +13,24 @@
 
 .source { text-transform: capitalize; color: var(--text-muted); font-size: 13px; }
 
+/* Per-resource analytics + sharing panel (in the editor) */
+.analytics { padding: 4px 18px 18px; border-bottom: 1px solid var(--border-faint); margin-bottom: 4px; }
+.statRow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.metric { padding: 12px 14px; border: 1px solid var(--border-faint); border-radius: 10px; background: var(--bg-surface); display: flex; flex-direction: column; gap: 2px; }
+.metricValue { font-size: 22px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.metricLabel { font-size: 12px; color: var(--text-muted); }
+.srcBlock { margin-top: 16px; }
+.srcTitle { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 10px; }
+.srcBars { display: flex; flex-direction: column; gap: 8px; }
+.srcRow { display: grid; grid-template-columns: 92px 1fr 36px; align-items: center; gap: 10px; }
+.srcName { font-size: 13px; color: var(--text-muted); text-transform: capitalize; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.srcTrack { height: 8px; border-radius: 999px; background: var(--bg-elevated); overflow: hidden; }
+.srcFill { display: block; height: 100%; border-radius: 999px; background: var(--grad); }
+.srcCount { font-size: 13px; color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
+.shareLinks { display: flex; flex-wrap: wrap; gap: 7px; }
+.shareLinks .copyBtn { text-transform: capitalize; }
+.shareHint { font-size: 12px; color: var(--text-faint); line-height: 1.5; margin: 10px 0 0; }
+
 .copyRow { display: flex; gap: 6px; }
 .copyBtn {
   border: 1px solid var(--border-mid); background: var(--bg); color: var(--text-muted);

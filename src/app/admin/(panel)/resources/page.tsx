@@ -1,16 +1,23 @@
 import { requireAdmin } from '@/lib/auth'
-import { listAllResources, getResourceStats } from '@/lib/resources'
+import { listAllResources, getResourceStats, getResourceSourceBreakdown } from '@/lib/resources'
 import ui from '../admin-ui.module.css'
 import ResourcesManager from './manager'
 
 export const dynamic = 'force-dynamic'
 
 export default async function ResourcesPage() {
-  const [, resources, stats] = await Promise.all([requireAdmin(), listAllResources(), getResourceStats()])
+  const [, resources, stats, breakdown] = await Promise.all([
+    requireAdmin(),
+    listAllResources(),
+    getResourceStats(),
+    getResourceSourceBreakdown(),
+  ])
 
   // Flatten stats into a plain object keyed by slug for the client component.
   const statsBySlug: Record<string, { views: number; visitors: number; downloads: number; topSource: string | null }> = {}
   for (const [slug, s] of stats) statsBySlug[slug] = { views: s.views, visitors: s.visitors, downloads: s.downloads, topSource: s.topSource }
+  const sourcesBySlug: Record<string, { source: string; views: number }[]> = {}
+  for (const [slug, list] of breakdown) sourcesBySlug[slug] = list
 
   const totalDownloads = Object.values(statsBySlug).reduce((n, s) => n + s.downloads, 0)
 
@@ -42,6 +49,7 @@ export default async function ResourcesPage() {
           sort_order: r.sort_order,
         }))}
         stats={statsBySlug}
+        sources={sourcesBySlug}
       />
     </>
   )

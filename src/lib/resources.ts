@@ -81,6 +81,22 @@ export async function getResource(id: string): Promise<Resource | null> {
   return (data as Resource | null) ?? null
 }
 
+// Referral-source breakdown per resource, keyed by slug. One unified link
+// auto-attributes via the tracker; this is the resulting mix (linkedin, x, …).
+export async function getResourceSourceBreakdown(): Promise<Map<string, { source: string; views: number }[]>> {
+  const db = await adminDb()
+  const { data, error } = await db.rpc('resource_source_breakdown')
+  const map = new Map<string, { source: string; views: number }[]>()
+  if (error || !data) return map
+  for (const r of data as { slug: string; source: string; views: number }[]) {
+    if (!r.slug) continue
+    const list = map.get(r.slug) ?? []
+    list.push({ source: r.source, views: Number(r.views) || 0 })
+    map.set(r.slug, list)
+  }
+  return map
+}
+
 // Per-slug view/download stats keyed by slug, from the site tracker (bot-excluded).
 export async function getResourceStats(): Promise<Map<string, ResourceStat>> {
   const db = await adminDb()
