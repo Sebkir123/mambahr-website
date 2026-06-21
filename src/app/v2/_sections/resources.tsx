@@ -5,6 +5,7 @@ import TurnstileWidget from '@/components/turnstile-widget'
 
 const GUIDE_SLUG = 'rif-playbook'
 const GUIDE_TITLE = 'The Defensible Layoff Playbook'
+const STAGES = ['Pre-seed', 'Seed', 'Series A', 'Series B', 'Series C+', 'Public / Established']
 
 const BULLETS = [
   'State-by-state notice & severance rules',
@@ -23,7 +24,10 @@ const MORE = [
 export type PlaybookCard = { slug: string; title: string; kicker: string }
 
 export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard[] }) {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [company, setCompany] = useState('')
+  const [stage, setStage] = useState('')
   const [token, setToken] = useState<string | null>(null)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errMsg, setErrMsg] = useState('')
@@ -32,13 +36,13 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!email.includes('@') || !token || status === 'loading') return
+    if (!name.trim() || !email.includes('@') || !token || status === 'loading') return
     setStatus('loading')
     try {
       const res = await fetch('/api/field-guide', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email, guide: GUIDE_SLUG, turnstileToken: token }),
+        body: JSON.stringify({ name, email, company, companyStage: stage, guide: GUIDE_SLUG, turnstileToken: token }),
       })
       if (!res.ok) {
         const d = (await res.json().catch(() => ({}))) as { error?: string }
@@ -92,16 +96,18 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
             ) : (
               <>
                 <form className="grab" onSubmit={handleSubmit}>
-                  <input
-                    className="email"
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@company.com"
-                    aria-label="Work email"
-                  />
-                  <button className="btn" type="submit" data-track="signup" data-track-label="field-guide" disabled={status === 'loading' || !token}>
+                  <div className="grab-row">
+                    <input className="finput" type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" autoComplete="name" aria-label="Full name" />
+                    <input className="finput" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" autoComplete="email" aria-label="Work email" />
+                  </div>
+                  <div className="grab-row">
+                    <input className="finput" type="text" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Company" autoComplete="organization" aria-label="Company" />
+                    <select className="finput fselect" value={stage} onChange={(e) => setStage(e.target.value)} aria-label="Company stage">
+                      <option value="">Company stage…</option>
+                      {STAGES.map((s) => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                  </div>
+                  <button className="btn" type="submit" data-track="signup" data-track-label="field-guide" disabled={status === 'loading' || !token || !name.trim()}>
                     {status === 'loading' ? 'Sending…' : 'Send me the playbook'}
                   </button>
                 </form>
@@ -200,10 +206,13 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
         .bullets li { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; color: var(--text-muted); line-height: 1.4; }
         .tick { flex: none; width: 16px; height: 16px; margin-top: 1px; border-radius: 999px; background: var(--gold-tint); border: 1px solid var(--gold-light); position: relative; }
         .tick::after { content: ''; position: absolute; left: 5px; top: 3px; width: 3px; height: 6px; border: solid var(--gold-dark); border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .grab { display: flex; gap: 9px; margin-top: auto; flex-wrap: wrap; }
-        .email { flex: 1; min-width: 200px; border: 1px solid var(--border-mid); border-radius: 999px; padding: 13px 18px; font-size: 14.5px; color: var(--text); background: var(--bg); outline: none; }
-        .email:focus { border-color: var(--gold); }
-        .btn { background: #1A1A19; color: #fff; font-weight: 600; font-size: 14.5px; border: none; border-radius: 999px; padding: 13px 24px; cursor: pointer; }
+        .grab { display: flex; flex-direction: column; gap: 9px; margin-top: auto; }
+        .grab-row { display: flex; gap: 9px; }
+        .finput { flex: 1; min-width: 0; border: 1px solid var(--border-mid); border-radius: 10px; padding: 12px 16px; font-size: 14.5px; color: var(--text); background: var(--bg); outline: none; font-family: inherit; }
+        .finput:focus { border-color: var(--gold); }
+        .fselect { appearance: none; cursor: pointer; color: var(--text-muted); }
+        .fselect:focus { color: var(--text); }
+        .btn { background: #1A1A19; color: #fff; font-weight: 600; font-size: 14.5px; border: none; border-radius: 999px; padding: 13px 24px; cursor: pointer; width: 100%; margin-top: 2px; }
         .note { font-size: 12px; color: var(--text-faint); margin-top: 12px; }
         .note.err { color: #b4392f; }
         .success { font-size: 15px; line-height: 1.6; color: var(--text); margin: 4px 0 0; }
