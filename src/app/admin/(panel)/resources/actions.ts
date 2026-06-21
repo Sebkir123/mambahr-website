@@ -4,7 +4,6 @@ import { randomBytes } from 'node:crypto'
 import { revalidatePath } from 'next/cache'
 import { requireAdmin } from '@/lib/auth'
 import { serviceDb } from '@/lib/supabase/service'
-import { resourceFileUrl } from '@/lib/resources'
 
 const BUCKET = 'resources'
 const MAX_PDF_BYTES = 50 * 1024 * 1024
@@ -24,24 +23,27 @@ const RESERVED_SLUGS = new Set(['rif-playbook'])
 
 export type SaveResult = { ok: boolean; message: string; slug?: string }
 
-// Upload a playbook PDF to the public resources bucket. Returns the public URL +
-// the storage path the form persists. Admin-gated; service role bypasses RLS.
-export type UploadResult = { ok: boolean; url?: string; path?: string; name?: string; size?: number; message?: string }
-export async function uploadResourceFile(formData: FormData): Promise<UploadResult> {
+// Mint a signed upload URL for a playbook PDF. The browser then uploads the
+// bytes DIRECTLY to Supabase Storage with this token — bypassing the Next/Vercel
+// request-body limits (1 MB server action, ~4.5 MB function) so PDFs up to the
+// bucket's 50 MB cap work. Admin-gated; only metadata crosses the function.
+export type UploadTicket = { ok: boolean; path?: string; token?: string; name?: string; message?: string }
+export async function createResourceUploadUrl(formData: FormData): Promise<UploadTicket> {
   await requireAdmin()
   const db = serviceDb()
   if (!db) return { ok: false, message: 'Storage isn’t configured yet.' }
 
-  const file = formData.get('file')
-  if (!(file instanceof File) || file.size === 0) return { ok: false, message: 'No file selected.' }
-  if (file.type !== 'application/pdf') return { ok: false, message: 'Upload a PDF.' }
-  if (file.size > MAX_PDF_BYTES) return { ok: false, message: 'PDF must be under 50 MB.' }
+  const name = String(formData.get('name') || '').trim()
+  const type = String(formData.get('type') || '').trim()
+  const size = Number(formData.get('size')) || 0
+  if (type !== 'application/pdf') return { ok: false, message: 'Upload a PDF.' }
+  if (size <= 0) return { ok: false, message: 'Empty file.' }
+  if (size > MAX_PDF_BYTES) return { ok: false, message: 'PDF must be under 50 MB.' }
 
   const path = `pdf/${randomBytes(10).toString('hex')}.pdf`
-  const bytes = Buffer.from(await file.arrayBuffer())
-  const { error } = await db.storage.from(BUCKET).upload(path, bytes, { contentType: 'application/pdf', upsert: false })
-  if (error) return { ok: false, message: 'Upload failed — try again.' }
-  return { ok: true, url: resourceFileUrl(path), path, name: file.name.slice(0, 200), size: file.size }
+  const { data, error } = await db.storage.from(BUCKET).createSignedUploadUrl(path)
+  if (error || !data) return { ok: false, message: 'Could not start the upload — try again.' }
+  return { ok: true, path: data.path, token: data.token, name: name.slice(0, 200) }
 }
 
 // Create or update a resource. id present → update.

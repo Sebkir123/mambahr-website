@@ -1,9 +1,12 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { saveResource, uploadResourceFile, setResourceStatus, deleteResource } from './actions'
+import { saveResource, createResourceUploadUrl, setResourceStatus, deleteResource } from './actions'
+import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import ui from '../admin-ui.module.css'
 import styles from './resources.module.css'
+
+const MAX_PDF_BYTES = 50 * 1024 * 1024
 
 const SITE = 'https://mambahr.com'
 
@@ -147,12 +150,22 @@ function Editor({ row, onClose }: { row: Row; onClose: () => void }) {
   const effectiveSlug = slug || slugify(title)
 
   async function onPickFile(file: File) {
+    if (file.type !== 'application/pdf') { setMsg({ ok: false, text: 'Upload a PDF.' }); return }
+    if (file.size > MAX_PDF_BYTES) { setMsg({ ok: false, text: 'PDF must be under 50 MB.' }); return }
     setUploading(true); setMsg(null)
     try {
-      const fd = new FormData(); fd.set('file', file)
-      const res = await uploadResourceFile(fd)
-      if (res.ok && res.path) { setFilePath(res.path); setFileName(res.name ?? file.name); setFileSize(res.size ?? file.size) }
-      else setMsg({ ok: false, text: res.message ?? 'Upload failed.' })
+      // 1) mint a signed upload URL (tiny request — just metadata)
+      const fd = new FormData()
+      fd.set('name', file.name); fd.set('type', file.type); fd.set('size', String(file.size))
+      const ticket = await createResourceUploadUrl(fd)
+      if (!ticket.ok || !ticket.path || !ticket.token) { setMsg({ ok: false, text: ticket.message ?? 'Upload failed.' }); return }
+      // 2) upload the bytes DIRECTLY to storage (bypasses Vercel's body limit)
+      const supabase = createSupabaseBrowserClient()
+      const { error } = await supabase.storage.from('resources').uploadToSignedUrl(ticket.path, ticket.token, file, {
+        contentType: 'application/pdf',
+      })
+      if (error) { setMsg({ ok: false, text: 'Upload failed — try again.' }); return }
+      setFilePath(ticket.path); setFileName(ticket.name ?? file.name); setFileSize(file.size)
     } catch { setMsg({ ok: false, text: 'Upload failed.' }) }
     finally { setUploading(false); if (fileRef.current) fileRef.current.value = '' }
   }
