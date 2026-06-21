@@ -7,9 +7,6 @@ import RevealInit from '@/app/v2/_sections/reveal-init'
 import { Em } from '@/components/v2/page-kit'
 import { LeadForm, type LeadFormFields } from '@/components/lead-form'
 
-const EDGE_FN_URL =
-  'https://dqoqnlecylqlwsahudjn.supabase.co/functions/v1/handle-demo-request'
-
 const SEE = [
   'Your real questions, answered live with the law cited',
   'An onboarding run end to end — offer to day-one ready',
@@ -23,12 +20,16 @@ export default function DemoPage() {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   async function handleSubmit({ name, email, company, companyStage, turnstileToken }: LeadFormFields) {
-    const res = await fetch(EDGE_FN_URL, {
+    const res = await fetch('/api/demo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, company, companySize: companyStage, turnstileToken }),
     })
-    setStatus(res.ok ? 'success' : 'error')
+    if (!res.ok) {
+      setStatus('error')
+      throw new Error('api-error')
+    }
+    setStatus('success')
   }
 
   return (
