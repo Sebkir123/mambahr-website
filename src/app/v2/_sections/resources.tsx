@@ -87,7 +87,6 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
                 stageOptions={COMPANY_SIZES.map((s) => `${s} employees`)}
                 stageLabel="Company size"
                 error={status === 'error' ? errMsg : undefined}
-                note="Free · no sales call · unsubscribe anytime"
               />
             )}
           </div>
