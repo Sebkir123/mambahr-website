@@ -3,7 +3,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
 import { resourceDownloadUrl } from '@/lib/resources'
 import { sendResourceDownload } from '@/lib/email'
-import { getLeadSlackWebhook } from '@/lib/secrets'
+import { notifyLeadSlack } from '@/lib/slack'
 
 export const dynamic = 'force-dynamic'
 
@@ -123,11 +123,17 @@ export async function POST(req: NextRequest) {
   // Best-effort: email + Slack in parallel.
   await Promise.allSettled([
     sendResourceDownload({ email, name: name || '', title: r.title, kicker: 'Playbook', downloadUrl: dlUrl }),
-    (async () => {
-      const hook = await getLeadSlackWebhook()
-      if (!hook) return
-      await fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: `📥 Playbook lead: ${name ? `${name}, ` : ''}${email}${company ? ` · ${company}` : ''}${companyStage ? ` · ${companyStage}` : ''} → ${r.title}` }) })
-    })(),
+    notifyLeadSlack({
+      title: 'New playbook lead',
+      fields: [
+        { label: 'Name', value: name },
+        { label: 'Email', value: email },
+        { label: 'Company', value: company },
+        { label: 'Company size', value: companyStage },
+        { label: 'Resource', value: r.title as string },
+      ],
+      context: 'Resource gate · mambahr.com/resources',
+    }),
   ])
 
   return NextResponse.json({ ok: true, downloadUrl: dlUrl })

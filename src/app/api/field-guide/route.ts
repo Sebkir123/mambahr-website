@@ -4,7 +4,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
 import { sendFieldGuide } from '@/lib/email'
 import { hashIp } from '@/lib/deck-tracking'
-import { getLeadSlackWebhook } from '@/lib/secrets'
+import { notifyLeadSlack } from '@/lib/slack'
 
 // Lead-magnet capture: email wall → per-request unguessable token → emailed
 // link to the gated guide page (/resources/<path>?k=<token>). Mirrors the
@@ -78,16 +78,6 @@ function getClientIp(req: NextRequest): string {
   return req.headers.get('x-real-ip') ?? 'unknown'
 }
 
-async function notifySlack(text: string) {
-  const url = await getLeadSlackWebhook()
-  if (!url) return
-  try {
-    await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) })
-  } catch {
-    /* best-effort */
-  }
-}
-
 export async function POST(req: NextRequest) {
   if (!(req.headers.get('content-type') ?? '').includes('application/json')) {
     return NextResponse.json({ error: 'Unsupported content type.' }, { status: 415 })
@@ -148,10 +138,18 @@ export async function POST(req: NextRequest) {
   }
 
   const url = `${SITE_URL}${meta.path}?k=${encodeURIComponent(token)}`
-  const slackLine = `New field-guide lead:\n• *Guide:* ${meta.title}\n• *Name:* ${name || '(none)'}\n• *Email:* ${email}\n• *Company:* ${company || '(none)'}`
   await Promise.all([
     sendFieldGuide({ email, guideTitle: meta.title, url }),
-    notifySlack(slackLine),
+    notifyLeadSlack({
+      title: 'New field-guide lead',
+      fields: [
+        { label: 'Guide', value: meta.title },
+        { label: 'Name', value: name },
+        { label: 'Email', value: email },
+        { label: 'Company', value: company },
+      ],
+      context: 'Field guide · mambahr.com',
+    }),
   ])
 
   return NextResponse.json({ success: true })
