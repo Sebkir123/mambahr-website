@@ -5,6 +5,7 @@ import { LeadForm, type LeadFormFields } from '@/components/lead-form'
 
 const GUIDE_SLUG = 'rif-playbook'
 const GUIDE_TITLE = 'The Defensible Layoff Playbook'
+const COMPANY_SIZES = ['1–10', '11–50', '51–200', '201–500', '501–1,000', '1,000+']
 
 const BULLETS = [
   'State-by-state notice & severance rules',
@@ -83,6 +84,8 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
               <LeadForm
                 onSubmit={handleSubmit}
                 submitLabel="Send me the playbook"
+                stageOptions={COMPANY_SIZES.map((s) => `${s} employees`)}
+                stageLabel="Company size"
                 error={status === 'error' ? errMsg : undefined}
                 note="Free · no sales call · unsubscribe anytime"
               />

@@ -139,7 +139,7 @@ export async function sendWaitlistWelcome(opts: { email: string; company: string
     body(`MambaHR handles the full HR administrative layer — onboarding, offboarding, hiring, leave, compliance — autonomously, end to end. One human in the loop for the decisions that actually need judgment. That&rsquo;s what you applied for.`) +
     divider() +
     body(`While you wait, follow us on LinkedIn &mdash; it&rsquo;s where we build in public.`) +
-    ctaButton('https://www.linkedin.com/company/mambahr', 'Follow on LinkedIn →') +
+    ctaButton('https://www.linkedin.com/company/mamba-hr', 'Follow on LinkedIn →') +
     finePrint('Questions? Just reply &mdash; this goes straight to us.<br/>Brian &amp; Sebastian, MambaHR'),
   )
 
