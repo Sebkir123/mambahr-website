@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import { MambaMark } from '@/components/mamba-mark'
-import { getPublishedResource } from '@/lib/resources'
+import { getAnyResource } from '@/lib/resources'
 import ResourceGate from './gate'
 import ShareButton from './share-button'
 import styles from './landing.module.css'
@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const r = await getPublishedResource(slug)
+  const r = await getAnyResource(slug)
   if (!r) return { title: 'Resource — MambaHR' }
   const title = `${r.title} — MambaHR`
   const description = r.description || `Download ${r.title}, a free playbook from MambaHR.`
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ResourceLanding({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const r = await getPublishedResource(slug)
+  const r = await getAnyResource(slug)
   if (!r) notFound()
 
   const shareUrl = `https://mambahr.com/resources/${r.slug}`
@@ -36,6 +36,11 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
   return (
     <>
       <MegaNav />
+      {r.status === 'draft' && (
+        <div style={{ background: '#1A1A19', color: '#F5C872', textAlign: 'center', padding: '10px 16px', fontSize: '13px', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>
+          DRAFT PREVIEW — not visible to the public until published
+        </div>
+      )}
       <main className={styles.main}>
         <div className={styles.aurora} aria-hidden="true"><span className={styles.blob} /><span className={styles.blob2} /></div>
         <div className={styles.wrap}>
