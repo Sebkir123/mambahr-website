@@ -61,13 +61,15 @@ Deno.serve(async (req: Request) => {
   if (req.method !== 'POST') return json({ error: 'Method not allowed.' }, 405)
 
   // Parse with a hard size cap to bound abuse.
-  let email: string, company: string, turnstileToken: string
+  let email: string, company: string, name: string, companySize: string, turnstileToken: string
   try {
     const raw = await req.text()
     if (raw.length > 4096) return json({ error: 'Payload too large.' }, 413)
     const body = JSON.parse(raw)
     email = String(body.email ?? '').trim().toLowerCase().slice(0, 254)
     company = String(body.company ?? '').trim().slice(0, 200)
+    name = String(body.name ?? '').trim().slice(0, 120)
+    companySize = String(body.companySize ?? '').trim().slice(0, 40)
     turnstileToken = String(body.turnstileToken ?? '').trim()
   } catch {
     return json({ error: 'Invalid request.' }, 400)
@@ -110,7 +112,7 @@ Deno.serve(async (req: Request) => {
   // Persist the lead (service role bypasses RLS).
   const { error: dbError } = await supabase
     .from('demo_requests')
-    .insert({ email, company, source: 'demo' })
+    .insert({ email, company, name: name || null, company_size: companySize || null, source: 'demo' })
   if (dbError) {
     console.error('[handle-demo-request] db error:', dbError.message)
     return json({ error: 'Something went wrong.' }, 500)
@@ -134,8 +136,10 @@ Deno.serve(async (req: Request) => {
           {
             type: 'section',
             fields: [
+              { type: 'mrkdwn', text: `*Name:*\n${escapeSlack(name) || '—'}` },
               { type: 'mrkdwn', text: `*Email:*\n${escapeSlack(email)}` },
               { type: 'mrkdwn', text: `*Company:*\n${escapeSlack(company) || '—'}` },
+              { type: 'mrkdwn', text: `*Company size:*\n${escapeSlack(companySize) || '—'}` },
             ],
             accessory: {
               type: 'button',
@@ -163,7 +167,7 @@ Deno.serve(async (req: Request) => {
           eyebrow: 'Demo request',
           heading: 'We got your demo request.',
           bodyHtml:
-            `<p style="margin:0 0 16px;">Thanks for your interest in MambaHR. A founder will reach out today &mdash; from a real address, not a no-reply &mdash; to set up 30 minutes for <strong style="color:#1A1A19;">${esc(company || 'your team')}</strong>.</p>` +
+            `<p style="margin:0 0 16px;">${name ? `Hi ${esc(name.split(' ')[0])}, t` : 'T'}hanks for your interest in MambaHR. A founder will reach out today &mdash; from a real address, not a no-reply &mdash; to set up 30 minutes for <strong style="color:#1A1A19;">${esc(company || 'your team')}</strong>.</p>` +
             `<p style="margin:0;">On the call we&rsquo;ll run the AI HR department on your scenarios and price it against your headcount &mdash; no deck, just the product.</p>`,
           button: { label: 'See it run', url: 'https://mambahr.com/product' },
         }),

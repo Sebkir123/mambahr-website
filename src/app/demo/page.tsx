@@ -17,9 +17,13 @@ const SEE = [
   'Your headcount priced on the call — no follow-up quote dance',
 ]
 
+const COMPANY_SIZES = ['1–10', '11–50', '51–200', '201–500', '501–1,000', '1,000+']
+
 export default function DemoPage() {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [company, setCompany] = useState('')
+  const [companySize, setCompanySize] = useState('')
   const [token, setToken] = useState<string | null>(null)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
@@ -31,7 +35,7 @@ export default function DemoPage() {
       const res = await fetch(EDGE_FN_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, company, turnstileToken: token }),
+        body: JSON.stringify({ name, email, company, companySize, turnstileToken: token }),
       })
       setStatus(res.ok ? 'success' : 'error')
     } catch {
@@ -94,6 +98,17 @@ export default function DemoPage() {
                       <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Replies same day</span>
                     </div>
                     <form onSubmit={handleSubmit}>
+                      <label htmlFor="name" className="lbl">Full name</label>
+                      <input
+                        id="name"
+                        type="text"
+                        required
+                        className="inp"
+                        placeholder="Jane Doe"
+                        autoComplete="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
                       <label htmlFor="email" className="lbl">Work email</label>
                       <input
                         id="email"
@@ -101,18 +116,38 @@ export default function DemoPage() {
                         required
                         className="inp"
                         placeholder="you@company.com"
+                        autoComplete="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
-                      <label htmlFor="company" className="lbl">Company</label>
-                      <input
-                        id="company"
-                        type="text"
-                        className="inp"
-                        placeholder="Acme Inc."
-                        value={company}
-                        onChange={(e) => setCompany(e.target.value)}
-                      />
+                      <div className="grid2">
+                        <div>
+                          <label htmlFor="company" className="lbl">Company</label>
+                          <input
+                            id="company"
+                            type="text"
+                            className="inp"
+                            placeholder="Acme Inc."
+                            autoComplete="organization"
+                            value={company}
+                            onChange={(e) => setCompany(e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="companySize" className="lbl">Company size</label>
+                          <select
+                            id="companySize"
+                            className="inp"
+                            value={companySize}
+                            onChange={(e) => setCompanySize(e.target.value)}
+                          >
+                            <option value="">Select…</option>
+                            {COMPANY_SIZES.map((s) => (
+                              <option key={s} value={s}>{s} employees</option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
                       <div className="ts">
                         <TurnstileWidget onSuccess={setToken} theme="light" />
                       </div>
@@ -200,6 +235,9 @@ export default function DemoPage() {
             }
             .inp:focus { border-color: var(--gold-dark); box-shadow: 0 0 0 3px var(--gold-tint); }
             .inp::placeholder { color: var(--text-faint); }
+            select.inp { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4' fill='none' stroke='%237A7A75' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; cursor: pointer; }
+            .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+            @media (max-width: 480px) { .grid2 { grid-template-columns: 1fr; } }
             .inp:-webkit-autofill,
             .inp:-webkit-autofill:hover,
             .inp:-webkit-autofill:focus {
