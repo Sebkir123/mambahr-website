@@ -15,6 +15,16 @@ const CARDS = [
   { slug: 'hibob', name: 'HiBob', sub: 'HiBob made HR look modern. MambaHR makes it run itself.', tag: null },
   { slug: 'adp', name: 'ADP', sub: 'ADP is the back office. MambaHR is the front line.', tag: null },
   { slug: 'workday', name: 'Workday', sub: 'Workday is a project. MambaHR is a product.', tag: null },
+  { slug: 'justworks', name: 'Justworks', sub: 'Justworks rents you HR staff. MambaHR is the HR staff.', tag: null },
+  { slug: 'trinet', name: 'TriNet', sub: 'TriNet is a PEO with a rep. MambaHR is the department.', tag: null },
+  { slug: 'paychex', name: 'Paychex', sub: 'Paychex sells you services. MambaHR does the work.', tag: null },
+  { slug: 'zenefits', name: 'Zenefits', sub: 'Zenefits gave you a dashboard. MambaHR does the work behind it.', tag: null },
+  { slug: 'paylocity', name: 'Paylocity', sub: 'Paylocity is a suite to operate. MambaHR operates itself.', tag: null },
+  { slug: 'ukg', name: 'UKG', sub: 'UKG is software you implement. MambaHR you turn on.', tag: null },
+  { slug: 'greenhouse', name: 'Greenhouse', sub: 'Greenhouse is an ATS. MambaHR hires, then runs the rest.', tag: null },
+  { slug: 'lever', name: 'Lever', sub: 'Lever is recruiting software. MambaHR is the whole department.', tag: null },
+  { slug: 'remote', name: 'Remote', sub: 'Remote pays across borders. MambaHR runs the team you employ.', tag: null },
+  { slug: 'oyster', name: 'Oyster', sub: 'Oyster hires across borders. MambaHR runs the team at home.', tag: null },
 ]
 
 /* The choices teams actually weigh when HR gets messy — not just vendors. */
@@ -153,7 +163,7 @@ export default function CompareHub() {
             <div className="head" data-reveal>
               <p className="eyebrow">Head to head</p>
               <h2 className="title">Pick your <Em>incumbent.</Em></h2>
-              <p className="lead">Eight honest comparisons — feature tables included, the rows we lose included.</p>
+              <p className="lead">Honest comparisons against every major HRIS, PEO, payroll, and ATS — feature tables included, the rows we lose included.</p>
             </div>
             <div className="grid">
               {CARDS.map((c, i) => (
