@@ -3,6 +3,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
 import { resourceDownloadUrl } from '@/lib/resources'
 import { sendResourceDownload } from '@/lib/email'
+import { getLeadSlackWebhook } from '@/lib/secrets'
 
 export const dynamic = 'force-dynamic'
 
@@ -123,7 +124,7 @@ export async function POST(req: NextRequest) {
   await Promise.allSettled([
     sendResourceDownload({ email, name: name || '', title: r.title, kicker: 'Playbook', downloadUrl: dlUrl }),
     (async () => {
-      const hook = process.env.SLACK_WEBHOOK_WAITLIST
+      const hook = await getLeadSlackWebhook()
       if (!hook) return
       await fetch(hook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: `📥 Playbook lead: ${name ? `${name}, ` : ''}${email}${company ? ` · ${company}` : ''}${companyStage ? ` · ${companyStage}` : ''} → ${r.title}` }) })
     })(),

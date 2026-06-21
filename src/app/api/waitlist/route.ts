@@ -3,6 +3,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
 import { getSupabase } from '@/lib/supabase'
 import { sendWaitlistWelcome } from '@/lib/email'
+import { getLeadSlackWebhook } from '@/lib/secrets'
 
 // Service-role client used only for the rate-limit RPC (which is locked down to service_role).
 // Typed as SupabaseClient (no generated DB types) so the untyped rpc() call type-checks.
@@ -64,7 +65,7 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
 }
 
 async function notifySlack(text: string) {
-  const url = process.env.SLACK_WEBHOOK_WAITLIST
+  const url = await getLeadSlackWebhook()
   if (!url) return
   try {
     await fetch(url, {
