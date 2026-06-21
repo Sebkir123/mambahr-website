@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429, headers: { 'Retry-After': '3600' } })
   }
 
-  let email: string, name: string, company: string, companyStage: string, guide: string, turnstileToken: string
+  let email: string, name: string, company: string, guide: string, turnstileToken: string
   try {
     const raw = await req.text()
     if (raw.length > 4096) return NextResponse.json({ error: 'Payload too large.' }, { status: 413 })
@@ -112,7 +112,6 @@ export async function POST(req: NextRequest) {
     email = String(body.email ?? '').trim()
     name = String(body.name ?? '').trim().slice(0, 120)
     company = String(body.company ?? '').trim().slice(0, 200)
-    companyStage = String(body.companyStage ?? '').trim().slice(0, 40)
     guide = String(body.guide ?? '').trim()
     turnstileToken = String(body.turnstileToken ?? '').trim()
   } catch {
@@ -148,7 +147,7 @@ export async function POST(req: NextRequest) {
   }
 
   const url = `${SITE_URL}${meta.path}?k=${encodeURIComponent(token)}`
-  const slackLine = `New field-guide lead:\n• *Guide:* ${meta.title}\n• *Name:* ${name || '(none)'}\n• *Email:* ${email}\n• *Company:* ${company || '(none)'}${companyStage ? `\n• *Stage:* ${companyStage}` : ''}`
+  const slackLine = `New field-guide lead:\n• *Guide:* ${meta.title}\n• *Name:* ${name || '(none)'}\n• *Email:* ${email}\n• *Company:* ${company || '(none)'}`
   await Promise.all([
     sendFieldGuide({ email, guideTitle: meta.title, url }),
     notifySlack(slackLine),

@@ -77,7 +77,7 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
             </ul>
             {status === 'success' ? (
               <p className="success" role="status">
-                Check your inbox — <strong>{GUIDE_TITLE}</strong> is on its way to {email}.
+                Check your inbox — <strong>{GUIDE_TITLE}</strong> is on its way to {submittedEmail}.
               </p>
             ) : (
               <LeadForm

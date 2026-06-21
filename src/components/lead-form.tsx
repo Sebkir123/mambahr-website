@@ -21,16 +21,14 @@ interface Props {
   stageLabel?: string
 }
 
-const DEFAULT_STAGES = ['Pre-seed', 'Seed', 'Series A', 'Series B', 'Series C+', 'Public / Established']
-
 export function LeadForm({
   onSubmit,
   submitLabel = 'Submit',
   pendingLabel = 'Sending…',
   note,
   error,
-  stageOptions = DEFAULT_STAGES,
-  stageLabel = 'Company stage',
+  stageOptions,
+  stageLabel = 'Company size',
 }: Props) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -75,8 +73,37 @@ export function LeadForm({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <div className="grid2">
-          <div>
+        {stageOptions && stageOptions.length > 0 ? (
+          <div className="grid2">
+            <div>
+              <label htmlFor="lf-company" className="lbl">Company</label>
+              <input
+                id="lf-company"
+                type="text"
+                className="inp"
+                placeholder="Acme Inc."
+                autoComplete="organization"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="lf-stage" className="lbl">{stageLabel}</label>
+              <select
+                id="lf-stage"
+                className="inp"
+                value={stage}
+                onChange={(e) => setStage(e.target.value)}
+              >
+                <option value="">Select…</option>
+                {stageOptions.map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        ) : (
+          <>
             <label htmlFor="lf-company" className="lbl">Company</label>
             <input
               id="lf-company"
@@ -87,22 +114,8 @@ export function LeadForm({
               value={company}
               onChange={(e) => setCompany(e.target.value)}
             />
-          </div>
-          <div>
-            <label htmlFor="lf-stage" className="lbl">{stageLabel}</label>
-            <select
-              id="lf-stage"
-              className="inp"
-              value={stage}
-              onChange={(e) => setStage(e.target.value)}
-            >
-              <option value="">Select…</option>
-              {stageOptions.map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
-          </div>
-        </div>
+          </>
+        )}
         <div className="ts">
           <TurnstileWidget onSuccess={setToken} theme="light" />
         </div>
