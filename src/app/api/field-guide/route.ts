@@ -104,13 +104,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429, headers: { 'Retry-After': '3600' } })
   }
 
-  let email: string, company: string, guide: string, turnstileToken: string
+  let email: string, name: string, company: string, companyStage: string, guide: string, turnstileToken: string
   try {
     const raw = await req.text()
     if (raw.length > 4096) return NextResponse.json({ error: 'Payload too large.' }, { status: 413 })
     const body = JSON.parse(raw)
     email = String(body.email ?? '').trim()
-    company = String(body.company ?? '').trim()
+    name = String(body.name ?? '').trim().slice(0, 120)
+    company = String(body.company ?? '').trim().slice(0, 200)
+    companyStage = String(body.companyStage ?? '').trim().slice(0, 40)
     guide = String(body.guide ?? '').trim()
     turnstileToken = String(body.turnstileToken ?? '').trim()
   } catch {
@@ -134,19 +136,23 @@ export async function POST(req: NextRequest) {
   const { error } = await client.from('field_guide_leads').insert({
     guide,
     email: email.slice(0, 200),
-    company: company ? company.slice(0, 200) : null,
+    recipient_name: name || null,
+    company: company || null,
+    company_stage: companyStage || null,
     token,
     ip_hash: ip && ip !== 'unknown' ? hashIp(ip) : null,
     sent_at: new Date().toISOString(),
   })
   if (error) {
+    console.error('[field-guide] insert failed:', error.message)
     return NextResponse.json({ error: 'Something went wrong.' }, { status: 500 })
   }
 
   const url = `${SITE_URL}${meta.path}?k=${encodeURIComponent(token)}`
+  const slackLine = `New field-guide lead:\n• *Guide:* ${meta.title}\n• *Name:* ${name || '(none)'}\n• *Email:* ${email}\n• *Company:* ${company || '(none)'}${companyStage ? `\n• *Stage:* ${companyStage}` : ''}`
   await Promise.all([
     sendFieldGuide({ email, guideTitle: meta.title, url }),
-    notifySlack(`New field-guide request:\n• *Guide:* ${meta.title}\n• *Email:* ${email}\n• *Company:* ${company || '(none)'}`),
+    notifySlack(slackLine),
   ])
 
   return NextResponse.json({ success: true })
