@@ -85,6 +85,7 @@ async function adminGate(req: NextRequest): Promise<NextResponse> {
     return NextResponse.redirect(url)
   }
 
+  response.headers.set('X-Robots-Tag', 'noindex, nofollow')
   return response
 }
 
