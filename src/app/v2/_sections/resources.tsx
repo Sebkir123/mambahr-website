@@ -137,37 +137,75 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
           padding: clamp(20px, 2.4vw, 28px);
           box-shadow: var(--shadow-md);
         }
-        .cover-stage { perspective: 1200px; display: flex; }
+        .cover-stage { display: flex; animation: coverFloat 7s ease-in-out infinite; }
+        @keyframes coverFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-9px); }
+        }
         .cover {
           flex: 1;
-          background:
-            radial-gradient(80% 50% at 18% 0%, rgba(185, 138, 78, 0.35), transparent 60%),
-            radial-gradient(70% 60% at 95% 100%, rgba(106, 93, 166, 0.3), transparent 60%),
-            linear-gradient(165deg, #1A1A19, #241B12);
-          border-radius: 6px 14px 14px 6px;
-          border-left: 4px solid rgba(255, 255, 255, 0.12); /* book spine */
-          padding: 26px 24px;
-          min-height: 320px;
+          background: linear-gradient(168deg, #20201E 0%, #1A1A19 46%, #241B12 100%);
+          border-radius: 4px 13px 13px 4px;
+          border-left: 4px solid rgba(255, 255, 255, 0.14); /* book spine */
+          padding: 28px 26px;
+          min-height: 340px;
           display: flex;
           flex-direction: column;
           color: #fff;
           position: relative;
           overflow: hidden;
-          transform: rotateY(7deg) rotateZ(-1deg);
-          transform-origin: left center;
-          box-shadow: 14px 22px 44px rgba(20, 18, 14, 0.28);
-          transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+          box-shadow:
+            0 26px 56px -18px rgba(20, 18, 14, 0.55),
+            inset 0 1px 0 rgba(255, 255, 255, 0.06);
+          transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease;
         }
-        .cover-stage:hover .cover { transform: rotateY(2deg) rotateZ(0deg); }
+        /* drifting aurora glow inside the cover */
+        .cover::before {
+          content: '';
+          position: absolute;
+          inset: -35%;
+          z-index: 0;
+          background:
+            radial-gradient(38% 38% at 28% 22%, rgba(206, 154, 88, 0.55), transparent 62%),
+            radial-gradient(44% 44% at 76% 82%, rgba(118, 102, 184, 0.5), transparent 62%);
+          animation: coverDrift 17s ease-in-out infinite;
+          pointer-events: none;
+        }
+        @keyframes coverDrift {
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          33% { transform: translate3d(6%, -5%, 0) scale(1.08); }
+          66% { transform: translate3d(-5%, 5%, 0) scale(1.04); }
+        }
+        /* gloss sheen sweeping across */
+        .cover::after {
+          content: '';
+          position: absolute;
+          top: -20%;
+          left: -75%;
+          width: 55%;
+          height: 140%;
+          z-index: 3;
+          background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.14) 50%, transparent 100%);
+          transform: skewX(-16deg);
+          animation: coverSheen 7s ease-in-out infinite;
+          pointer-events: none;
+        }
+        @keyframes coverSheen {
+          0%, 62%, 100% { left: -75%; }
+          80% { left: 130%; }
+        }
+        .cover :global(.v2-grain) { z-index: 1; }
+        .cover-stage:hover .cover { transform: scale(1.025); box-shadow: 0 34px 68px -20px rgba(20, 18, 14, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08); }
         @media (prefers-reduced-motion: reduce) {
-          .cover { transform: none; transition: none; }
+          .cover-stage, .cover::before, .cover::after { animation: none; }
+          .cover { transition: none; }
           .cover-stage:hover .cover { transform: none; }
         }
-        .cover-brand { position: relative; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; }
+        .cover-brand { position: relative; z-index: 2; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; }
         .cover-brand .m { width: 22px; height: 22px; border-radius: 6px; background: #fff; color: #1A1A19; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 14px; }
-        .cover-kicker { position: relative; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.55); margin-top: auto; }
-        .cover-title { position: relative; font-family: var(--font-serif); font-size: 30px; line-height: 1.1; margin-top: 10px; letter-spacing: -0.01em; }
-        .cover-foot { position: relative; font-size: 12.5px; color: rgba(255, 255, 255, 0.5); margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+        .cover-kicker { position: relative; z-index: 2; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.55); margin-top: auto; }
+        .cover-title { position: relative; z-index: 2; font-family: var(--font-serif); font-size: 30px; line-height: 1.1; margin-top: 10px; letter-spacing: -0.01em; }
+        .cover-foot { position: relative; z-index: 2; font-size: 12.5px; color: rgba(255, 255, 255, 0.5); margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.14); }
 
         .content { display: flex; flex-direction: column; padding: 6px 4px; }
         .content h3 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(24px, 2.6vw, 30px); color: var(--text); margin: 0; letter-spacing: -0.01em; }
