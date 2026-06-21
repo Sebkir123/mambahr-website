@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
 import { sendDemoConfirmation } from '@/lib/email'
+import { getLeadSlackWebhook } from '@/lib/secrets'
 
 export const dynamic = 'force-dynamic'
 
@@ -109,7 +110,7 @@ export async function POST(req: NextRequest) {
   await Promise.allSettled([
     sendDemoConfirmation({ email, name, company }),
     (async () => {
-      const hook = process.env.SLACK_WEBHOOK_WAITLIST
+      const hook = await getLeadSlackWebhook()
       if (!hook) return
       await fetch(hook, {
         method: 'POST',

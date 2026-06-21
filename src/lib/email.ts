@@ -4,6 +4,7 @@
  */
 
 import { Resend } from 'resend'
+import { getSecret } from '@/lib/secrets'
 
 function escapeHtml(s: string): string {
   return s
@@ -15,11 +16,11 @@ function escapeHtml(s: string): string {
 
 const FROM_EMAIL = 'MambaHR <team@mambahr.com>'
 
-function getClient(): Resend | null {
-  const key = process.env.RESEND_API_KEY
+async function getClient(): Promise<Resend | null> {
+  const key = await getSecret('RESEND_API_KEY')
   if (!key) {
     if (process.env.NODE_ENV === 'production') {
-      console.warn('RESEND_API_KEY not set in production — emails disabled')
+      console.warn('RESEND_API_KEY not set (env or Vault) — emails disabled')
     }
     return null
   }
@@ -130,7 +131,7 @@ function finePrint(text: string): string {
    WAITLIST WELCOME EMAIL
    ════════════════════════════════════════════ */
 export async function sendWaitlistWelcome(opts: { email: string; company: string }) {
-  const client = getClient()
+  const client = await getClient()
   const subject = 'We got your application — MambaHR'
   const html = emailShell(
     subject,
@@ -155,7 +156,7 @@ export async function sendWaitlistWelcome(opts: { email: string; company: string
    INVESTOR INQUIRY CONFIRMATION
    ════════════════════════════════════════════ */
 export async function sendInvestorAck(opts: { email: string; name: string }) {
-  const client = getClient()
+  const client = await getClient()
   const subject = 'Thanks for reaching out — MambaHR'
   const firstName = escapeHtml(opts.name.split(' ')[0])
   const html = emailShell(
@@ -180,7 +181,7 @@ export async function sendInvestorAck(opts: { email: string; name: string }) {
    HR-BENCH NOTIFY CONFIRMATION
    ════════════════════════════════════════════ */
 export async function sendHRBenchAck(opts: { email: string }) {
-  const client = getClient()
+  const client = await getClient()
   const subject = 'You\'re on the HR-Bench list'
   const html = emailShell(
     subject,
@@ -204,7 +205,7 @@ export async function sendHRBenchAck(opts: { email: string }) {
    FIELD GUIDE — deliver the gated playbook link
    ════════════════════════════════════════════ */
 export async function sendFieldGuide(opts: { email: string; guideTitle: string; url: string }): Promise<void> {
-  const client = getClient()
+  const client = await getClient()
   const subject = `Your field guide: ${opts.guideTitle}`
   const html = emailShell(
     subject,
@@ -228,7 +229,7 @@ export async function sendFieldGuide(opts: { email: string; guideTitle: string; 
    DEMO REQUEST CONFIRMATION
    ════════════════════════════════════════════ */
 export async function sendDemoConfirmation(opts: { email: string; name: string; company: string }): Promise<void> {
-  const client = getClient()
+  const client = await getClient()
   const firstName = opts.name ? escapeHtml(opts.name.split(' ')[0]) : null
   const subject = 'Your MambaHR demo — we’ll be in touch today'
   const html = emailShell(
@@ -254,7 +255,7 @@ export async function sendDemoConfirmation(opts: { email: string; name: string; 
    RESOURCE DOWNLOAD — deliver the PDF link
    ════════════════════════════════════════════ */
 export async function sendResourceDownload(opts: { email: string; name: string; title: string; kicker: string; downloadUrl: string }): Promise<void> {
-  const client = getClient()
+  const client = await getClient()
   const firstName = opts.name ? escapeHtml(opts.name.split(' ')[0]) : null
   const subject = `Your download: ${opts.title}`
   const greeting = firstName ? `Here you go, ${firstName}.` : 'Your download is ready.'

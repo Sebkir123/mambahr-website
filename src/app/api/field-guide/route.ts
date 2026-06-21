@@ -4,6 +4,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
 import { sendFieldGuide } from '@/lib/email'
 import { hashIp } from '@/lib/deck-tracking'
+import { getLeadSlackWebhook } from '@/lib/secrets'
 
 // Lead-magnet capture: email wall → per-request unguessable token → emailed
 // link to the gated guide page (/resources/<path>?k=<token>). Mirrors the
@@ -78,7 +79,7 @@ function getClientIp(req: NextRequest): string {
 }
 
 async function notifySlack(text: string) {
-  const url = process.env.SLACK_WEBHOOK_WAITLIST
+  const url = await getLeadSlackWebhook()
   if (!url) return
   try {
     await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) })
