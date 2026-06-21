@@ -38,8 +38,7 @@ export default function Hero() {
           you compliant in all 50 states — and only brings you the calls that need a person.
         </p>
         <div className="ctas" data-reveal data-delay="3">
-          <a href="#access" className="btn-primary">Book a demo</a>
-          <a href="#run" className="btn-ghost">See it in action</a>
+          <a href="/demo" className="btn-primary">Book a demo</a>
         </div>
         <div className="proof" data-reveal data-delay="3">
           <div className="faces">
@@ -57,7 +56,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="stage" data-reveal data-delay="4">
+      <div className="stage stage-load">
         <div className="app agent-edge agent-working">
           <div className="app-bar">
             <span className="dots"><b /><b /><b /></span>
@@ -284,6 +283,16 @@ export default function Hero() {
         .trust i { width: 4px; height: 4px; border-radius: 999px; background: var(--border-mid); }
 
         /* ---- app dashboard ---- */
+        .stage-load {
+          animation: stageIn 0.8s cubic-bezier(0.2, 0.6, 0.2, 1) 0.32s both;
+        }
+        @keyframes stageIn {
+          from { opacity: 0; transform: translateY(24px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .stage-load { animation: none; }
+        }
         .stage {
           position: relative;
           max-width: 1080px;
