@@ -4,6 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import { getPublishedResource } from '@/lib/resources'
 import ResourceGate from './gate'
+import ShareButton from './share-button'
 import styles from './landing.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -29,37 +30,64 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
   const r = await getPublishedResource(slug)
   if (!r) notFound()
 
+  const shareUrl = `https://mambahr.com/resources/${r.slug}`
+
   return (
     <>
       <MegaNav />
       <main className={styles.main}>
+        <div className={styles.aurora} aria-hidden="true"><span className={styles.blob} /><span className={styles.blob2} /></div>
         <div className={styles.wrap}>
-          <div className={styles.cover} aria-hidden="true">
-            <span className={styles.grain} />
-            <div className={styles.coverBrand}><span className={styles.m}>M</span>MambaHR</div>
-            {r.cover_no && <div className={styles.coverKicker}>{r.kicker} № {r.cover_no}</div>}
-            <div className={styles.coverTitle}>{r.title}</div>
-            <div className={styles.coverFoot}>A people leader&rsquo;s field guide</div>
+          {/* ── Cover ── */}
+          <div className={styles.coverCol}>
+            <div className={styles.coverStage}>
+              <div className={styles.cover}>
+                <span className={styles.grain} aria-hidden="true" />
+                <div className={styles.coverTop}>
+                  <span className={styles.coverBrand}><span className={styles.m}>M</span>MambaHR</span>
+                  <span className={styles.coverRule} aria-hidden="true" />
+                </div>
+                <div className={styles.coverBody}>
+                  <span className={styles.coverKicker}>{r.kicker}{r.cover_no ? ` № ${r.cover_no}` : ''}</span>
+                  <h2 className={styles.coverTitle}>{r.title}</h2>
+                </div>
+                <div className={styles.coverFoot}>
+                  <span className={styles.coverFootText}>A people leader’s field guide</span>
+                  <span className={styles.coverDash} aria-hidden="true" />
+                </div>
+              </div>
+            </div>
+            <p className={styles.coverMeta}>PDF · free · no sales call</p>
           </div>
 
+          {/* ── Content + gate ── */}
           <div className={styles.content}>
             <p className={styles.eyebrow}>{r.kicker}</p>
             <h1 className={styles.title}>{r.title}</h1>
             {r.description && <p className={styles.desc}>{r.description}</p>}
 
             {r.bullets.length > 0 && (
-              <ul className={styles.bullets}>
-                {r.bullets.map((b) => (
-                  <li key={b}><span className={styles.tick} aria-hidden="true" />{b}</li>
-                ))}
-              </ul>
+              <>
+                <p className={styles.whatsIn}>What’s inside</p>
+                <ul className={styles.bullets}>
+                  {r.bullets.map((b) => (
+                    <li key={b}><span className={styles.tick} aria-hidden="true" />{b}</li>
+                  ))}
+                </ul>
+              </>
             )}
 
-            {r.file_path ? (
-              <ResourceGate slug={r.slug} kicker={r.kicker} />
-            ) : (
-              <p className={styles.unavailable}>This resource isn’t available for download yet.</p>
-            )}
+            <div className={styles.gateCard}>
+              <div className={styles.gateHead}>
+                <span className={styles.gateTitle}>Get your copy</span>
+                <ShareButton url={shareUrl} title={r.title} />
+              </div>
+              {r.file_path ? (
+                <ResourceGate slug={r.slug} kicker={r.kicker} />
+              ) : (
+                <p className={styles.unavailable}>This resource isn’t available for download yet.</p>
+              )}
+            </div>
           </div>
         </div>
       </main>

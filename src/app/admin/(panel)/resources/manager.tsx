@@ -26,6 +26,12 @@ export type Row = {
   sort_order: number
 }
 type Stat = { views: number; visitors: number; downloads: number; topSource: string | null }
+type Src = { source: string; views: number }
+
+// Pre-tagged share links for platforms whose in-app browsers strip the referrer
+// (so they'd otherwise land as "direct"). The unified link auto-attributes the
+// rest. Each appends ?utm_source so the tracker records it explicitly.
+const SHARE_PLATFORMS = ['linkedin', 'x', 'instagram', 'threads', 'facebook', 'tiktok', 'newsletter'] as const
 
 const BLANK: Row = {
   id: '', slug: '', title: '', kicker: 'Playbook', cover_no: '', description: '',
@@ -36,7 +42,7 @@ function slugify(s: string): string {
   return s.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80)
 }
 
-export default function ResourcesManager({ resources, stats }: { resources: Row[]; stats: Record<string, Stat> }) {
+export default function ResourcesManager({ resources, stats, sources }: { resources: Row[]; stats: Record<string, Stat>; sources: Record<string, Src[]> }) {
   const [editing, setEditing] = useState<Row | null>(null)
   const [open, setOpen] = useState(false)
 
@@ -50,7 +56,7 @@ export default function ResourcesManager({ resources, stats }: { resources: Row[
       </div>
 
       {open && editing && (
-        <Editor row={editing} onClose={() => setOpen(false)} />
+        <Editor row={editing} stat={stats[editing.slug]} srcs={sources[editing.slug] ?? []} onClose={() => setOpen(false)} />
       )}
 
       <div className={ui.card}>
@@ -68,7 +74,7 @@ export default function ResourcesManager({ resources, stats }: { resources: Row[
                 <th style={{ textAlign: 'right' }}>Views</th>
                 <th style={{ textAlign: 'right' }}>Downloads</th>
                 <th>Top source</th>
-                <th>Share link</th>
+                <th></th>
                 <th></th>
               </tr>
             </thead>
@@ -91,7 +97,7 @@ export default function ResourcesManager({ resources, stats }: { resources: Row[
                     <td style={{ textAlign: 'right' }}>{s?.views ? s.views : '—'}</td>
                     <td style={{ textAlign: 'right', fontWeight: s?.downloads ? 600 : 400 }}>{s?.downloads ? s.downloads : '—'}</td>
                     <td>{s?.topSource ? <span className={styles.source}>{s.topSource}</span> : '—'}</td>
-                    <td><CopyLinks url={url} /></td>
+                    <td><CopyOne url={url} label="Copy link" /></td>
                     <td className={styles.rowActions}>
                       <form action={setResourceStatus}>
                         <input type="hidden" name="id" value={r.id} />
@@ -116,20 +122,15 @@ export default function ResourcesManager({ resources, stats }: { resources: Row[
   )
 }
 
-function CopyLinks({ url }: { url: string }) {
-  const [copied, setCopied] = useState<'' | 'plain' | 'li'>('')
-  const copy = async (u: string, which: 'plain' | 'li') => {
-    try { await navigator.clipboard.writeText(u); setCopied(which); setTimeout(() => setCopied(''), 1500) } catch { /* ignore */ }
+function CopyOne({ url, label }: { url: string; label: string }) {
+  const [copied, setCopied] = useState(false)
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(url); setCopied(true); setTimeout(() => setCopied(false), 1500) } catch { /* ignore */ }
   }
-  return (
-    <div className={styles.copyRow}>
-      <button type="button" className={styles.copyBtn} onClick={() => copy(url, 'plain')}>{copied === 'plain' ? 'Copied' : 'Copy link'}</button>
-      <button type="button" className={styles.copyBtn} onClick={() => copy(`${url}?utm_source=linkedin`, 'li')}>{copied === 'li' ? 'Copied' : 'LinkedIn'}</button>
-    </div>
-  )
+  return <button type="button" className={styles.copyBtn} onClick={copy}>{copied ? 'Copied' : label}</button>
 }
 
-function Editor({ row, onClose }: { row: Row; onClose: () => void }) {
+function Editor({ row, stat, srcs, onClose }: { row: Row; stat?: Stat; srcs: Src[]; onClose: () => void }) {
   const [title, setTitle] = useState(row.title)
   const [slug, setSlug] = useState(row.slug)
   const [slugTouched, setSlugTouched] = useState(Boolean(row.slug))
@@ -197,6 +198,7 @@ function Editor({ row, onClose }: { row: Row; onClose: () => void }) {
         <h2 className={styles.editorTitle}>{row.id ? 'Edit resource' : 'New resource'}</h2>
         <button type="button" className={styles.miniBtn} onClick={onClose}>Close</button>
       </div>
+      {row.id && row.status === 'published' && <AnalyticsPanel slug={effectiveSlug} stat={stat} srcs={srcs} />}
       <div className={styles.form}>
         <label className={styles.field}>
           <span className={styles.label}>Title</span>
@@ -259,6 +261,60 @@ function Editor({ row, onClose }: { row: Row; onClose: () => void }) {
           </button>
         </div>
       </div>
+    </div>
+  )
+}
+
+// Per-resource traffic + sharing. One unified link; the page tracker attributes
+// most sources automatically. The pre-tagged links exist only for in-app
+// browsers (Instagram/TikTok/Threads) that strip the referrer.
+function AnalyticsPanel({ slug, stat, srcs }: { slug: string; stat?: Stat; srcs: Src[] }) {
+  const url = `${SITE}/resources/${slug}`
+  const totalSrc = srcs.reduce((n, s) => n + s.views, 0)
+  const conv = stat && stat.views ? Math.round((stat.downloads / stat.views) * 100) : 0
+  return (
+    <div className={styles.analytics}>
+      <div className={styles.statRow}>
+        <Metric label="Views" value={stat?.views ?? 0} />
+        <Metric label="Visitors" value={stat?.visitors ?? 0} />
+        <Metric label="Downloads" value={stat?.downloads ?? 0} />
+        <Metric label="Conversion" value={`${conv}%`} />
+      </div>
+
+      {srcs.length > 0 && (
+        <div className={styles.srcBlock}>
+          <span className={styles.srcTitle}>Where traffic came from</span>
+          <div className={styles.srcBars}>
+            {srcs.map((s) => (
+              <div key={s.source} className={styles.srcRow}>
+                <span className={styles.srcName}>{s.source}</span>
+                <span className={styles.srcTrack}><span className={styles.srcFill} style={{ width: `${totalSrc ? Math.max(6, (s.views / totalSrc) * 100) : 0}%` }} /></span>
+                <span className={styles.srcCount}>{s.views}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className={styles.srcBlock}>
+        <span className={styles.srcTitle}>Share — one link, auto-tracked</span>
+        <div className={styles.shareLinks}>
+          <CopyOne url={url} label="Copy unified link" />
+          {SHARE_PLATFORMS.map((p) => (
+            <CopyOne key={p} url={`${url}?utm_source=${p}`} label={p} />
+          ))}
+        </div>
+        <p className={styles.shareHint}>Share the unified link anywhere — LinkedIn, X, Reddit, etc. are detected automatically. Use a tagged link only for Instagram / TikTok / Threads, whose apps hide the referrer.</p>
+      </div>
+    </div>
+  )
+}
+
+function Metric({ label, value }: { label: string; value: string | number }) {
+  return (
+    <div className={styles.metric}>
+      <span className={styles.metricValue}>{value}</span>
+      <span className={styles.metricLabel}>{label}</span>
     </div>
   )
 }
