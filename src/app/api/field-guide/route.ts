@@ -138,7 +138,6 @@ export async function POST(req: NextRequest) {
     email: email.slice(0, 200),
     recipient_name: name || null,
     company: company || null,
-    company_stage: companyStage || null,
     token,
     ip_hash: ip && ip !== 'unknown' ? hashIp(ip) : null,
     sent_at: new Date().toISOString(),
