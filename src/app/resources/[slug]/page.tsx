@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
+import { MambaMark } from '@/components/mamba-mark'
 import { getPublishedResource } from '@/lib/resources'
 import ResourceGate from './gate'
 import ShareButton from './share-button'
@@ -43,6 +44,7 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
             <div className={styles.coverStage}>
               <div className={styles.cover}>
                 <span className={styles.grain} aria-hidden="true" />
+                <MambaMark size={230} color="rgba(196,154,108,0.13)" className={styles.coverEmblem} />
                 <div className={styles.coverTop}>
                   <span className={styles.coverBrand}><span className={styles.m}>M</span>MambaHR</span>
                   <span className={styles.coverRule} aria-hidden="true" />
@@ -50,10 +52,10 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
                 <div className={styles.coverBody}>
                   <span className={styles.coverKicker}>{r.kicker}{r.cover_no ? ` № ${r.cover_no}` : ''}</span>
                   <h2 className={styles.coverTitle}>{r.title}</h2>
-                </div>
-                <div className={styles.coverFoot}>
-                  <span className={styles.coverFootText}>A people leader’s field guide</span>
-                  <span className={styles.coverDash} aria-hidden="true" />
+                  <div className={styles.coverFoot}>
+                    <span className={styles.coverFootText}>A people leader’s field guide</span>
+                    <span className={styles.coverDash} aria-hidden="true" />
+                  </div>
                 </div>
               </div>
             </div>
