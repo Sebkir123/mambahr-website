@@ -63,6 +63,13 @@ export async function getPublishedResource(slug: string): Promise<Resource | nul
   return (data as Resource | null) ?? null
 }
 
+// Any resource by slug — draft or published — for admin preview.
+export async function getAnyResource(slug: string): Promise<Resource | null> {
+  const db = await adminDb()
+  const { data } = await db.from('resources').select('*').eq('slug', slug).maybeSingle()
+  return (data as Resource | null) ?? null
+}
+
 // All resources (incl. drafts) for the admin list.
 export async function listAllResources(): Promise<Resource[]> {
   const db = await adminDb()
