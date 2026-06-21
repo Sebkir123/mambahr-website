@@ -85,7 +85,7 @@ async function computeOverview(supabase: SupabaseClient): Promise<Overview> {
 
   const [waitlist, demo, magnet] = await Promise.all([
     fetchLeads('waitlist', 'waitlist', ['referral_code', 'referred_by']),
-    fetchLeads('demo_requests', 'demo', ['source']),
+    fetchLeads('demo_requests', 'demo', ['company_size', 'source']),
     fetchLeads('magnet_requests', 'magnet', ['magnet_id', 'magnetId', 'asset', 'source_url']),
   ])
 
@@ -201,7 +201,7 @@ async function computeAllLeads(supabase: SupabaseClient): Promise<{ leads: Lead[
 
   const [waitlist, demo, magnet] = await Promise.all([
     fetchLeads('waitlist', 'waitlist', ['referral_code', 'referred_by']),
-    fetchLeads('demo_requests', 'demo', ['source']),
+    fetchLeads('demo_requests', 'demo', ['company_size', 'source']),
     fetchLeads('magnet_requests', 'magnet', ['magnet_id', 'magnetId', 'asset', 'source_url']),
   ])
   const leads = [...waitlist, ...demo, ...magnet].sort(
