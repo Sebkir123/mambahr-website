@@ -146,7 +146,8 @@ export async function sendWaitlistWelcome(opts: { email: string; company: string
 
   if (!client) { console.log('[email:waitlist-welcome] sent successfully'); return }
   try {
-    await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    const { error } = await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
   } catch (err) {
     console.error('[email:waitlist-welcome] failed:', err)
   }
@@ -171,7 +172,8 @@ export async function sendInvestorAck(opts: { email: string; name: string }) {
 
   if (!client) { console.log('[email:investor-ack] sent successfully'); return }
   try {
-    await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    const { error } = await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
   } catch (err) {
     console.error('[email:investor-ack] failed:', err)
   }
@@ -195,7 +197,8 @@ export async function sendHRBenchAck(opts: { email: string }) {
 
   if (!client) { console.log('[email:hrbench-ack] sent successfully'); return }
   try {
-    await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    const { error } = await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
   } catch (err) {
     console.error('[email:hrbench-ack] failed:', err)
   }
@@ -219,7 +222,8 @@ export async function sendFieldGuide(opts: { email: string; guideTitle: string; 
 
   if (!client) { console.log('[email:field-guide] (dev) →', opts.email, opts.url); return }
   try {
-    await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    const { error } = await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
   } catch (err) {
     console.error('[email:field-guide] failed:', err)
   }
@@ -245,7 +249,8 @@ export async function sendDemoConfirmation(opts: { email: string; name: string; 
 
   if (!client) { console.log('[email:demo-confirmation] (dev) →', opts.email); return }
   try {
-    await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    const { error } = await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
   } catch (err) {
     console.error('[email:demo-confirmation] failed:', err)
   }
@@ -271,7 +276,8 @@ export async function sendResourceDownload(opts: { email: string; name: string; 
 
   if (!client) { console.log('[email:resource-download] (dev) →', opts.email, opts.downloadUrl); return }
   try {
-    await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    const { error } = await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
   } catch (err) {
     console.error('[email:resource-download] failed:', err)
   }
