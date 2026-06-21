@@ -7,6 +7,7 @@ import { type Post, slugify, TAG_OPTIONS } from '@/lib/blog'
 import { savePost, setPostStatus, deletePost, listRevisions, restoreRevision, type SavePayload, type Revision } from '../actions'
 import { uploadImage } from './upload'
 import PostAnalytics from './post-analytics'
+import { ConfirmButton } from '../../_components/confirm-button'
 import type { BlogPostAnalytics } from '@/lib/blog-analytics-types'
 import styles from './editor.module.css'
 
@@ -123,7 +124,6 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
   }, [saveState, loadRevisions])
 
   const onRestore = useCallback(async (rev: Revision) => {
-    if (!confirm('Restore this version? The current content is replaced (and kept in history, so this is reversible).')) return
     const res = await restoreRevision(post.id, rev.id)
     if (!res.ok) { setError(res.error); return }
     setTitle(res.title)
@@ -380,30 +380,32 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
                       <span className={styles.historyWhen}>{fmtWhen(rev.saved_at)}</span>
                       <span className={styles.historyTitle}>{rev.title?.trim() || 'Untitled post'}</span>
                     </div>
-                    <button type="button" className={styles.smallBtnGhost} onClick={() => onRestore(rev)}>
+                    <ConfirmButton
+                      onConfirm={() => onRestore(rev)}
+                      confirmLabel="Restore"
+                      className={styles.smallBtnGhost}
+                    >
                       Restore
-                    </button>
+                    </ConfirmButton>
                   </li>
                 ))}
               </ul>
             )}
           </section>
 
-          <button
-            className={styles.deleteBtn}
-            disabled={deleting}
-            onClick={() => {
-              if (deleting || !confirm('Delete this post permanently?')) return
-              // Stop autosave from firing (and resurrecting the row) mid-delete,
-              // and show progress so it doesn't look frozen during the redirect.
+          <ConfirmButton
+            onConfirm={() => {
               deletingRef.current = true
               setDeleting(true)
               if (bodyTimer.current) clearTimeout(bodyTimer.current)
               startTransition(() => deletePost(post.id))
             }}
+            confirmLabel="Delete post"
+            pending={deleting}
+            className={styles.deleteBtn}
           >
-            {deleting ? 'Deleting…' : 'Delete post'}
-          </button>
+            Delete post
+          </ConfirmButton>
         </aside>
       </div>
     </div>

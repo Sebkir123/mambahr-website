@@ -103,15 +103,16 @@ export default async function SocialPage() {
                   <span className={styles.accountName}>{a.account_name}</span>
                   <span className={styles.accountSub}>Connected by {a.connected_by ?? '—'}</span>
                 </div>
-                <form action={disconnectAccount} className={styles.accountActions}>
-                  <input type="hidden" name="id" value={a.id} />
+                <div className={styles.accountActions}>
                   <ConfirmSubmit
+                    action={disconnectAccount}
+                    buildFormData={() => { const fd = new FormData(); fd.set('id', a.id); return fd }}
+                    confirmLabel="Disconnect"
                     className={styles.disconnect}
-                    confirm={`Disconnect ${a.account_name}? You'll need to reconnect it via LinkedIn to post again.`}
                   >
                     Disconnect
                   </ConfirmSubmit>
-                </form>
+                </div>
               </li>
             ))}
           </ul>
@@ -172,12 +173,14 @@ export default async function SocialPage() {
                       </button>
                     </form>
                   )}
-                  <form action={deletePost}>
-                    <input type="hidden" name="id" value={p.id} />
-                    <ConfirmSubmit className={styles.postDelete} confirm="Delete this post record?">
-                      Delete
-                    </ConfirmSubmit>
-                  </form>
+                  <ConfirmSubmit
+                    action={deletePost}
+                    buildFormData={() => { const fd = new FormData(); fd.set('id', p.id); return fd }}
+                    confirmLabel="Delete post"
+                    className={styles.postDelete}
+                  >
+                    Delete
+                  </ConfirmSubmit>
                 </div>
               </li>
             ))}

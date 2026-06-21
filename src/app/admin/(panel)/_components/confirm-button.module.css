@@ -1,0 +1,39 @@
+.armed {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  animation: fade-in 0.12s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateX(-4px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.cancel {
+  border: 1px solid var(--border-mid);
+  background: var(--bg);
+  color: var(--text-muted);
+  border-radius: 8px;
+  font-size: inherit;
+  font-family: var(--font-sans);
+  padding: 5px 11px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cancel:hover { background: var(--bg-surface); color: var(--text); }
+
+.confirm {
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--color-red);
+  border-radius: 8px;
+  font-size: inherit;
+  font-family: var(--font-sans);
+  font-weight: bold;
+  padding: 5px 11px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.confirm:hover { background: rgba(220, 38, 38, 0.15); }
+.confirm:disabled { opacity: 0.5; cursor: default; }

@@ -1,26 +1,42 @@
 'use client'
 
-// Submit button that asks for confirmation before letting its <form> (a server
-// action) fire — used for destructive admin actions (disconnect / delete) so a
-// non-technical manager can't wipe a connection or post in one misclick.
+import { useTransition } from 'react'
+import { ConfirmButton } from '../_components/confirm-button'
+
+// Wraps a server action in the inline two-step confirm pattern. Pass the
+// action + formData builder instead of a <form> so we keep a single client
+// component with no hidden inputs leaking into the DOM.
 export function ConfirmSubmit({
-  children,
+  action,
+  buildFormData,
+  label,
+  confirmLabel,
   className,
-  confirm,
+  children,
 }: {
-  children: React.ReactNode
+  action: (fd: FormData) => Promise<unknown>
+  buildFormData: () => FormData
+  label?: string
+  confirmLabel?: string
   className?: string
-  confirm: string
+  children?: React.ReactNode
 }) {
+  const [pending, start] = useTransition()
+
+  function doAction() {
+    start(async () => {
+      await action(buildFormData())
+    })
+  }
+
   return (
-    <button
-      type="submit"
+    <ConfirmButton
+      onConfirm={doAction}
+      confirmLabel={confirmLabel}
+      pending={pending}
       className={className}
-      onClick={(e) => {
-        if (!window.confirm(confirm)) e.preventDefault()
-      }}
     >
-      {children}
-    </button>
+      {children ?? label}
+    </ConfirmButton>
   )
 }

@@ -1,8 +1,9 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useTransition } from 'react'
 import { saveResource, createResourceUploadUrl, setResourceStatus, deleteResource } from './actions'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
+import { ConfirmButton } from '../_components/confirm-button'
 import ui from '../admin-ui.module.css'
 import styles from './resources.module.css'
 
@@ -106,10 +107,7 @@ export default function ResourcesManager({ resources, stats, sources }: { resour
                           {r.status === 'published' ? 'Unpublish' : 'Publish'}
                         </button>
                       </form>
-                      <form action={deleteResource} onSubmit={(e) => { if (!confirm('Delete this resource and its file?')) e.preventDefault() }}>
-                        <input type="hidden" name="id" value={r.id} />
-                        <button type="submit" className={styles.miniDanger}>Delete</button>
-                      </form>
+                      <DeleteResourceBtn id={r.id} />
                     </td>
                   </tr>
                 )
@@ -119,6 +117,20 @@ export default function ResourcesManager({ resources, stats, sources }: { resour
         )}
       </div>
     </>
+  )
+}
+
+function DeleteResourceBtn({ id }: { id: string }) {
+  const [pending, start] = useTransition()
+  return (
+    <ConfirmButton
+      onConfirm={() => start(async () => { const fd = new FormData(); fd.set('id', id); await deleteResource(fd) })}
+      confirmLabel="Delete"
+      pending={pending}
+      className={styles.miniDanger}
+    >
+      Delete
+    </ConfirmButton>
   )
 }
 
