@@ -45,7 +45,7 @@ const STAGES: Stage[] = [
   {
     label: 'Payroll & benefits',
     headline: 'Payday runs itself.',
-    sub: 'Every raise, new hire, and change is ready for payday, checked twice. Benefits enroll themselves when life happens.',
+    sub: 'Every raise, new hire, and change is ready for payday, checked twice. Benefits enrollment automated when life happens.',
     person: { img: '/avatars/priya.jpg', name: 'Priya Shah', role: 'new 401(k) enrollment' },
     log: [
       { t: 'Mon', text: 'Every change ready for payday' },
