@@ -35,7 +35,7 @@ export default function Bento() {
           <p className="eyebrow">One place for everything</p>
           <h2 className="title">Everything your HR team does, <span className="em">handled.</span></h2>
           <p className="lead">
-            Six tools&rsquo; worth of work in one system that does it for you: hiring, onboarding,
+            Six tools worth of work in one system that does it for you: hiring, onboarding,
             payroll, time off, performance, compliance. Your day shrinks to the decisions only
             you can make.
           </p>
