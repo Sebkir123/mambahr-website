@@ -38,9 +38,9 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mambahr.com'),
-  title: 'MambaHR — The AI HR department. Before you hire HR.',
+  title: 'MambaHR: The AI HR department. Before you hire HR.',
   description:
-    'MambaHR is the AI HR department for startups and growing companies. It runs hiring, onboarding, payroll-ready exports, time off, performance, and compliance end to end — for a fraction of the cost of your next HR hire. You approve the calls that matter.',
+    'MambaHR is the AI HR department for startups and growing companies. It runs hiring, onboarding, payroll-ready exports, time off, performance, and compliance end to end, for a fraction of the cost of your next HR hire. You approve the calls that matter.',
   keywords: [
     'AI HR department',
     'AI HR software',
@@ -54,8 +54,8 @@ export const metadata: Metadata = {
     'replace HR hire',
   ],
   openGraph: {
-    title: 'MambaHR — The AI HR department.',
-    description: 'Before you hire HR, hire MambaHR. Hiring, onboarding, payroll-ready exports, time off, performance, and compliance — done end to end, for a fraction of an HR hire.',
+    title: 'MambaHR: The AI HR department.',
+    description: 'Before you hire HR, hire MambaHR. Hiring, onboarding, payroll-ready exports, time off, performance, and compliance, done end to end, for a fraction of an HR hire.',
     url: 'https://mambahr.com',
     siteName: 'MambaHR',
     type: 'website',
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MambaHR — The AI HR department.',
+    title: 'MambaHR: The AI HR department.',
     description: 'Before you hire HR, hire MambaHR. The whole department, done end to end.',
     images: ['/mambahr_og_sharing.jpg'],
   },
@@ -90,7 +90,7 @@ const jsonLd = [
     name: 'MambaHR',
     url: 'https://mambahr.com',
     applicationCategory: 'BusinessApplication',
-    description: 'The AI HR department — hiring, onboarding, payroll-ready exports, time off, performance, and compliance, run end to end.',
+    description: 'The AI HR department: hiring, onboarding, payroll-ready exports, time off, performance, and compliance, run end to end.',
     offers: {
       '@type': 'Offer',
       price: '14',

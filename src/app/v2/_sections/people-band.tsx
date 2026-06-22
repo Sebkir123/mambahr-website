@@ -10,7 +10,7 @@ export default function PeopleBand() {
             We do the <span className="em">paperwork part.</span>
           </h2>
           <p className="lead">
-            HR is a people job. Mamba takes the admin so your team can do the work only humans can — the coaching, the culture, the hard conversations.
+            HR is a people job. Mamba takes the admin so your team can do the work only humans can: the coaching, the culture, the hard conversations.
           </p>
           <ul className="points">
             <li><span className="tick" aria-hidden="true" />The agent handles the filings, approvals, and follow-ups</li>

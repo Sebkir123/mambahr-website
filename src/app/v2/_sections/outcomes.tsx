@@ -10,7 +10,7 @@ export default function Outcomes() {
           <p className="eyebrow">What you get back</p>
           <h2 className="title">Give your people team <span className="em">their week back.</span></h2>
           <p className="lead">
-            MambaHR hands the average people team 27 hours back, every single week — time
+            MambaHR hands the average people team 27 hours back, every single week. Time
             that goes to the people, not the paperwork.
           </p>
         </div>
@@ -20,7 +20,7 @@ export default function Outcomes() {
           <article className="card dark" data-reveal data-delay="1">
             <span className="lbl muted">Hours back, every week</span>
             <div className="num big"><span data-count="27">27</span><em>hrs</em></div>
-            <p className="cap ondark">Payroll, onboarding, leave, and compliance — on autopilot.</p>
+            <p className="cap ondark">Payroll, onboarding, leave, and compliance, on autopilot.</p>
             <div className="spark">
               {SPARK.map((h, i) => (
                 <span key={i} style={{ height: `${h}%` }} />
@@ -34,7 +34,7 @@ export default function Outcomes() {
               <span className="ring-n"><span data-count="70">70</span>%</span>
             </div>
             <span className="lbl">of HR admin, gone</span>
-            <p className="cap">The chasing, filing, and updating that filled your week — handled.</p>
+            <p className="cap">The chasing, filing, and updating that filled your week, handled.</p>
           </article>
 
           {/* onboarding before/after */}
@@ -52,7 +52,7 @@ export default function Outcomes() {
                 <span className="cmp-v new-v">4 min</span>
               </div>
             </div>
-            <p className="cap">Paperwork, logins, and first week — ready before they arrive.</p>
+            <p className="cap">Paperwork, logins, and first week, ready before they arrive.</p>
           </article>
 
           {/* deferred hire — money card */}

@@ -22,7 +22,7 @@ const STAGES: Stage[] = [
     log: [
       { t: '9:02', text: 'Job posted, candidates screened' },
       { t: '9:38', text: 'Offer drafted at the right salary' },
-      { t: '11:15', text: 'Signed — same morning' },
+      { t: '11:15', text: 'Signed, same morning' },
     ],
     chips: ['EEO-1', 'DocuSign'],
     state: 'done',
@@ -45,7 +45,7 @@ const STAGES: Stage[] = [
   {
     label: 'Payroll & benefits',
     headline: 'Payday runs itself.',
-    sub: 'Every raise, new hire, and change is ready for payday — checked twice. Benefits enroll themselves when life happens.',
+    sub: 'Every raise, new hire, and change is ready for payday, checked twice. Benefits enroll themselves when life happens.',
     person: { img: '/avatars/priya.jpg', name: 'Priya Shah', role: 'new 401(k) enrollment' },
     log: [
       { t: 'Mon', text: 'Every change ready for payday' },
@@ -58,7 +58,7 @@ const STAGES: Stage[] = [
   },
   {
     label: 'Perform & grow',
-    headline: 'Reviews that write themselves — with receipts.',
+    headline: 'Reviews that write themselves, with receipts.',
     sub: 'Review season starts itself and chases the stragglers. First drafts come from real work, and managers walk in prepared.',
     person: { img: '/avatars/anna.jpg', name: 'Anna Wilson', role: 'mid-year review' },
     log: [
@@ -77,7 +77,7 @@ const STAGES: Stage[] = [
     person: { img: '/avatars/tom.jpg', name: 'Tom Harrison', role: 'merit raise' },
     log: [
       { t: '2:10', text: 'Raise checked against your pay ranges' },
-      { t: '2:11', text: 'A big one — sent to you first' },
+      { t: '2:11', text: 'A big one, flagged first' },
       { t: '2:40', text: 'Letter sent, signed, and filed' },
     ],
     chips: ['Pay transparency'],
@@ -101,12 +101,12 @@ const STAGES: Stage[] = [
   {
     label: 'Offboard / RIF',
     headline: 'Clean exits. Zero loose ends.',
-    sub: 'Notices on time, severance done right, final paycheck correct for their state — and a human signs off on every exit.',
+    sub: 'Notices on time, severance done right, final paycheck correct for their state, and a human signs off on every exit.',
     person: { img: '/avatars/marcus.jpg', name: 'Marcus Webb', role: 'departing · final week' },
     log: [
       { t: 'Day 1', text: 'Notices and severance calculated' },
       { t: 'Day 2', text: 'Final paycheck right for their state' },
-      { t: 'Exit', text: 'Logins switched off — after you approve' },
+      { t: 'Exit', text: 'Logins switched off after your sign-off' },
     ],
     chips: ['WARN', 'COBRA'],
     state: 'working',
@@ -141,7 +141,7 @@ export default function Lifecycle() {
             From the offer letter <span className="em">to the exit interview.</span>
           </h2>
           <p className="lead">
-            One agent runs the entire employee journey. Pick a stage — everything in it is
+            One agent runs the entire employee journey. Pick a stage; everything in it is
             handled, cited, and logged.
           </p>
         </div>

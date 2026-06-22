@@ -11,7 +11,7 @@ export default function Channels() {
           </h2>
           <p className="lead">
             No new tool to learn. No portal to log into. Your team messages
-            <b> @MambaHR</b> like a coworker — it reads the thread, checks your policy,
+            <b> @MambaHR</b> like a coworker. It reads the thread, checks your policy,
             does the work, and logs it.
           </p>
           <div className="chans">
