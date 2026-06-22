@@ -89,7 +89,7 @@ export const competitors: Record<string, CompetitorData> = {
     name: 'Deel',
     tagline: 'MambaHR vs Deel',
     heroHeadline: 'Deel is built for contractors.\nMambaHR is built for your team.',
-    heroSub: "Deel cracked global contractor payments and employer-of-record. For the people you actually employ, leave, hires, onboarding, performance, compliance | MambaHR is the AI HR department, in one product.",
+    heroSub: "Deel cracked global contractor payments and employer-of-record. For the people you actually employ, leave, hires, onboarding, performance, and compliance, MambaHR is the AI HR department, in one product.",
     switchReasons: [
       {
         title: "Contractors aren't employees.",
@@ -190,7 +190,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Audit log on every action', mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Namely is HRIS at its cleanest. MambaHR is the next category, an HR department that runs itself.',
-    costLine: "No modules, no implementation retainer | MambaHR is $14–$30 per employee with everything included, live in a day.",
+    costLine: "No modules, no implementation retainer. MambaHR is $14–$30 per employee with everything included, live in a day.",
   },
 
   hibob: {
@@ -601,7 +601,7 @@ export const competitors: Record<string, CompetitorData> = {
     name: 'Remote',
     tagline: 'MambaHR vs Remote',
     heroHeadline: 'Remote pays people across borders.\nMambaHR runs the team you employ.',
-    heroSub: "Remote is built for global employer-of-record and contractor payments, paying anyone, anywhere. For the US team you actually employ, leave, hiring, onboarding, performance, compliance | MambaHR is the AI HR department, in one product.",
+    heroSub: "Remote is built for global employer-of-record and contractor payments, paying anyone, anywhere. For the US team you actually employ, leave, hiring, onboarding, performance, and compliance, MambaHR is the AI HR department, in one product.",
     switchReasons: [
       {
         title: "EOR payments aren't an HR department.",
@@ -638,7 +638,7 @@ export const competitors: Record<string, CompetitorData> = {
     name: 'Oyster',
     tagline: 'MambaHR vs Oyster',
     heroHeadline: 'Oyster hires across borders.\nMambaHR runs the team at home.',
-    heroSub: "Oyster is a global employment platform for hiring and paying people in other countries through EOR. For the US team you actually employ, leave, hiring, onboarding, performance, compliance | MambaHR is the AI HR department, in one product.",
+    heroSub: "Oyster is a global employment platform for hiring and paying people in other countries through EOR. For the US team you actually employ, leave, hiring, onboarding, performance, and compliance, MambaHR is the AI HR department, in one product.",
     switchReasons: [
       {
         title: 'Global EOR is a different job than US HR.',

@@ -64,11 +64,12 @@ function MenuItem({ item, onNavigate }: { item: NavItem; onNavigate: () => void 
 const colLabel = { fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', color: 'var(--text-faint)', textTransform: 'uppercase' as const, margin: '0 0 14px 12px' }
 
 const topLinks = [
-  { label: 'Pricing',  href: '/pricing'  },
-  { label: 'Compare',  href: '/compare'  },
-  { label: 'Security', href: '/security' },
-  { label: 'Blog',     href: '/blog'     },
-  { label: 'About',    href: '/about'    },
+  { label: 'Pricing',   href: '/pricing'   },
+  { label: 'Compare',   href: '/compare'   },
+  { label: 'Solutions', href: '/ai-hr-software' },
+  { label: 'Security',  href: '/security'  },
+  { label: 'Blog',      href: '/blog'      },
+  { label: 'About',     href: '/about'     },
 ]
 
 export default function MegaNav() {
