@@ -145,7 +145,7 @@ export default function Footer() {
               <div
                 style={
                   col.twoCol
-                    ? { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px 18px' }
+                    ? { display: 'grid', gridTemplateColumns: 'max-content max-content', gap: '10px 24px' }
                     : { display: 'flex', flexDirection: 'column', gap: 10 }
                 }
               >
