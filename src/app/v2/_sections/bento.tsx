@@ -8,7 +8,7 @@ const APPROVALS = [
 
 const PEOPLE = [
   { img: '/avatars/anna.jpg', name: 'Anna Wilson', role: 'Sales Associate', status: 'Active', tone: 'ok' },
-  { img: '/avatars/priya.jpg', name: 'Priya Shah', role: 'Data Engineer', status: 'Active', tone: 'ok' },
+  { img: '/avatars/priya.jpg', name: 'Jordan Lee', role: 'Data Engineer', status: 'Active', tone: 'ok' },
   { img: '/avatars/maya.jpg', name: 'Maya Chen', role: 'Senior Engineer', status: 'On leave', tone: 'off' },
   { img: '/avatars/dave.jpg', name: 'Dave Buchanan', role: 'Marketing', status: 'New hire', tone: 'new' },
 ]

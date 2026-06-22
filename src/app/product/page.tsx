@@ -11,7 +11,7 @@ import {
 
 const STEPS: LoopStep[] = [
   { n: '01', img: '/avatars/maya.jpg',   label: 'Offer letter sent, Maya Chen',   desc: 'Senior Engineer · $195k · above band 8%',     who: 'agent', time: '2 min' },
-  { n: '02', img: '/avatars/priya.jpg',  label: 'Leave approved, Priya Patel',    desc: 'FMLA + CA CFRA stacked · 14 weeks',           who: 'agent', time: '4 min' },
+  { n: '02', img: '/avatars/priya.jpg',  label: 'Leave approved, Jordan Lee',    desc: 'FMLA + CA CFRA stacked · 14 weeks',           who: 'agent', time: '4 min' },
   { n: '03', img: '/avatars/marcus.jpg', label: 'PIP drafted, Marcus Webb',       desc: '90-day evidence cited · L3 sign-off queued',  who: 'you',   time: 'Pending' },
   { n: '04', img: '/avatars/sarah.jpg',  label: 'Separation docs, Sarah Lin',     desc: 'State-aware final pay · DocuSign chain ready', who: 'you',   time: 'Review' },
 ]

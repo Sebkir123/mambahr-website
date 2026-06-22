@@ -96,7 +96,7 @@ function InflowCard() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/avatars/priya.jpg" alt="" width={38} height={38} />
         <div className="c-main">
-          <div className="c-n">Priya Shah</div>
+          <div className="c-n">Jordan Lee</div>
           <div className="c-m">Staff Engineer · 9 yrs · NYC</div>
         </div>
         <span className="score">Strong match</span>
