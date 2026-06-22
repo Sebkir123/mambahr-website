@@ -9,7 +9,7 @@ import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } f
 /* ── Hero fragment: people table inside an app window ── */
 const PEOPLE = [
   { img: '/avatars/anna.jpg', name: 'Anna Wilson', role: 'Sales', status: 'Active', tone: 'ok' },
-  { img: '/avatars/priya.jpg', name: 'Priya Shah', role: 'Data Eng', status: 'Active', tone: 'ok' },
+  { img: '/avatars/priya.jpg', name: 'Jordan Lee', role: 'Data Eng', status: 'Active', tone: 'ok' },
   { img: '/avatars/maya.jpg', name: 'Maya Chen', role: 'Senior Eng', status: 'On leave', tone: 'warm' },
   { img: '/avatars/dave.jpg', name: 'Dave Buchanan', role: 'Marketing', status: 'New hire', tone: 'vio' },
 ]
@@ -197,7 +197,7 @@ export default function PeoplePage() {
           steps={[
             { n: '01', label: 'Someone’s hired', desc: 'The record creates itself from the signed offer, name, role, comp, start date.', who: 'agent', time: 'instant', img: '/avatars/dave.jpg' },
             { n: '02', label: 'A raise is approved', desc: 'Comp updated everywhere it lives, the record, the band, the payroll file.', who: 'agent', time: 'same minute' },
-            { n: '03', label: 'An address changes in Slack', desc: 'Priya mentions she moved; it’s filed in seconds, taxes rechecked.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
+            { n: '03', label: 'An address changes in Slack', desc: 'Jordan mentions she moved; it’s filed in seconds, taxes rechecked.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
             { n: '04', label: 'Leave is approved', desc: 'The calendar and payday reflect it before anyone has to ask.', who: 'agent', time: 'same minute' },
             { n: '05', label: 'Every change is logged', desc: 'Who changed what, when, and why, kept with the record forever.', who: 'agent', time: 'always' },
             { n: '06', label: 'You just look things up', desc: 'Headcount, tenure, who reports to whom, they’re right, every time.', who: 'you', img: '/avatars/anna.jpg' },

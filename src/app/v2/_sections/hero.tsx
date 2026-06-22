@@ -18,7 +18,7 @@ const APPROVALS = [
 const HANDLED = [
   { who: 'Emma Rodriguez', what: 'Time off approved · 3 days', time: '9:02 AM' },
   { who: 'Alex Park', what: 'Onboarding complete · Day 1 ready', time: '9:07 AM' },
-  { who: 'Priya Shah', what: 'Address + tax details updated', time: '8:41 AM' },
+  { who: 'Jordan Lee', what: 'Address + tax details updated', time: '8:41 AM' },
 ]
 
 export default function Hero() {

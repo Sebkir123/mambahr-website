@@ -66,9 +66,9 @@ function SlackWindow() {
 
             <div className="m">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="av" src="/avatars/priya.jpg" alt="Priya Shah" width={36} height={36} />
+              <img className="av" src="/avatars/priya.jpg" alt="Jordan Lee" width={36} height={36} />
               <div className="m-body">
-                <div className="m-h"><b>Priya Shah</b><time>9:11 AM</time></div>
+                <div className="m-h"><b>Jordan Lee</b><time>9:11 AM</time></div>
                 <div className="m-t"><span className="mention">@MambaHR</span> I need an employment verification letter for my mortgage</div>
               </div>
             </div>
@@ -80,7 +80,7 @@ function SlackWindow() {
                 <div className="m-t">Done &mdash; sent to her email, filed.</div>
                 <div className="attach">
                   <div className="a-row"><span className="a-k">Letter</span><span className="a-v">Employment verification, signed</span></div>
-                  <div className="a-row"><span className="a-k">Sent to</span><span className="a-v">priya@company.com</span></div>
+                  <div className="a-row"><span className="a-k">Sent to</span><span className="a-v">jordan@company.com</span></div>
                   <div className="a-foot"><span className="ok-dot" />Logged &middot; filed to her record &middot; ref <span className="mono">doc_2b94f7</span></div>
                 </div>
               </div>

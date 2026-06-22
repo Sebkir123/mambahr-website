@@ -12,7 +12,7 @@ function PayCycleCard() {
     { img: '/avatars/maya.jpg', name: 'Maya Chen', what: 'Merit raise +12%', note: 'priced against band' },
     { img: '/avatars/anna.jpg', name: 'Alex Park', what: 'New hire added', note: 'first check prorated' },
     { img: '/avatars/marcus.jpg', name: 'Marcus Webb', what: 'Final pay', note: 'state-correct timing' },
-    { img: '/avatars/priya.jpg', name: 'Priya Shah', what: '401(k) enrolled', note: 'deduction set' },
+    { img: '/avatars/priya.jpg', name: 'Jordan Lee', what: '401(k) enrolled', note: 'deduction set' },
   ]
   return (
     <div className="pcc agent-edge agent-working agent-lg">
@@ -100,7 +100,7 @@ function EnrollCard() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="av" src="/avatars/priya.jpg" alt="" width={42} height={42} />
         <div className="id">
-          <div className="who">Priya Shah</div>
+          <div className="who">Jordan Lee</div>
           <div className="ev">Life event · Marriage · reported Tue 2:14 PM</div>
         </div>
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
@@ -111,7 +111,7 @@ function EnrollCard() {
         <div className="r"><span className="k">Dependents</span><span className="v">+1 added · verified</span></div>
         <div className="r"><span className="k">Next paycheck</span><span className="v">Deductions updated · June 15</span></div>
       </div>
-      <div className="foot"><span className="dot" aria-hidden="true" />Confirmation sent to Priya · Wed 9:02 AM</div>
+      <div className="foot"><span className="dot" aria-hidden="true" />Confirmation sent to Jordan · Wed 9:02 AM</div>
       <style jsx>{`
         .ec {
           background: linear-gradient(165deg, #FFFFFF, #FAF6EF);

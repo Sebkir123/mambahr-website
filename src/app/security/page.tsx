@@ -168,7 +168,7 @@ function ApprovalGateCard() {
       {[
         { img: '/avatars/maya.jpg', t: 'Offer · Maya Chen', m: '$195k · above band 8%', hold: true },
         { img: '/avatars/tom.jpg', t: 'Comp change · Tom Harrison', m: '+12% merit · within band', hold: true },
-        { img: '/avatars/priya.jpg', t: 'Address update · Priya Shah', m: 'Filed automatically · logged', hold: false },
+        { img: '/avatars/priya.jpg', t: 'Address update · Jordan Lee', m: 'Filed automatically · logged', hold: false },
       ].map((r) => (
         <div className="row" key={r.t}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
