@@ -27,7 +27,7 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
 })
 
-// Design-system display face — Warm Editorial Premium uses Fraunces.
+// Design-system display face, Warm Editorial Premium uses Fraunces.
 const fraunces = Fraunces({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
@@ -76,13 +76,13 @@ export const metadata: Metadata = {
   },
 }
 
-// Browser/OS chrome color — matches the oat background of the Warm Editorial
+// Browser/OS chrome color, matches the oat background of the Warm Editorial
 // Premium system so the address bar blends into the page on mobile Safari/Chrome.
 export const viewport: Viewport = {
   themeColor: '#F4F2EC',
 }
 
-// Static JSON-LD — hardcoded constants, not user input
+// Static JSON-LD, hardcoded constants, not user input
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -108,7 +108,7 @@ const jsonLd = [
     logo: 'https://mambahr.com/MambaHR_logo.png',
     image: 'https://mambahr.com/mambahr_og_sharing.jpg',
     description:
-      'The AI HR department for US companies — the system of record (HRIS, ATS, LMS) with specialist agents that run hiring, onboarding, leave, performance, compensation, and compliance end to end. A human approves the calls that matter.',
+      'The AI HR department for US companies, the system of record (HRIS, ATS, LMS) with specialist agents that run hiring, onboarding, leave, performance, compensation, and compliance end to end. A human approves the calls that matter.',
     foundingDate: '2026',
     slogan: 'Before you hire HR, hire MambaHR.',
     areaServed: { '@type': 'Country', name: 'United States' },

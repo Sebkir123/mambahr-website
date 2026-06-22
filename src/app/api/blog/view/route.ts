@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     })
     await supabase.rpc('increment_post_view', { p_slug: slug })
   } catch {
-    /* ignore — a dropped view increment isn't worth surfacing */
+    /* ignore, a dropped view increment isn't worth surfacing */
   }
   return NextResponse.json({ ok: true })
 }

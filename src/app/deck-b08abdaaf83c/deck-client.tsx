@@ -16,7 +16,7 @@ export default function Deck({
 }: {
   token?: string | null
   slug?: string
-  // Admin preview — render the deck but record no analytics (no session, no
+  // Admin preview, render the deck but record no analytics (no session, no
   // dwell, no heartbeat). Keeps the dashboard clean of internal opens.
   preview?: boolean
 }) {
@@ -72,7 +72,7 @@ export default function Deck({
           }).catch(() => {})
         }
       } catch {
-        /* analytics is best-effort — never break the deck */
+        /* analytics is best-effort, never break the deck */
       }
     },
     [token, slug, activeMs, preview],
@@ -123,7 +123,7 @@ export default function Deck({
 
   // Active-time accounting: only count time while the tab is visible, focused,
   // and not idle (>60s without input). This keeps "time on deck" meaning
-  // attention, not a tab left open — wall-clock duration is tracked separately.
+  // attention, not a tab left open, wall-clock duration is tracked separately.
   useEffect(() => {
     const IDLE_MS = 60_000
     let idle: ReturnType<typeof setTimeout> | undefined
@@ -206,7 +206,7 @@ export default function Deck({
     return () => { el.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf) }
   }, [])
 
-  // Keyboard navigation — arrows / space / page keys / home / end.
+  // Keyboard navigation, arrows / space / page keys / home / end.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement
@@ -254,7 +254,7 @@ export default function Deck({
           <button
             key={i}
             className={`${s.dot}${i === active ? ' ' + s.dotActive : ''}`}
-            aria-label={`${pad(i)} — ${title}`}
+            aria-label={`${pad(i)}, ${title}`}
             aria-current={i === active}
             onClick={() => goto(i)}
           />
@@ -276,7 +276,7 @@ export default function Deck({
             <h1 className={s.wordmark}>Mamba<span className={s.gold}>HR</span></h1>
             <p className={s.titleLead}>The AI HR Department.</p>
             <p className={s.titleSub}>We don&rsquo;t sell software seats.<br />We sell digital headcount.</p>
-            <span className={s.pill}>Seed Round — $3M</span>
+            <span className={s.pill}>Seed Round, $3M</span>
             <span className={s.scrollCue} aria-hidden="true">↓</span>
           </div>
         </section>
@@ -335,7 +335,7 @@ export default function Deck({
                 <span className={s.statFig}>1.22</span>
                 <span className={s.statKicker}>HR per 100</span>
                 <h3 className={s.cardTitle}>Labor costs broke HR</h3>
-                <p className={s.cardBody}>Every 100 hires forces another admin at $75K+ — a tax on growth.</p>
+                <p className={s.cardBody}>Every 100 hires forces another admin at $75K+, a tax on growth.</p>
               </div>
               <div className={s.statCard}>
                 <span className={s.statFig}>$11B</span>
@@ -396,7 +396,7 @@ export default function Deck({
               </div>
               <div className={s.flowCard}>
                 <span className={s.flowKey}>Manage</span>
-                <p className={s.cardBody}>Leave, comp, reviews, policy — all in one record.</p>
+                <p className={s.cardBody}>Leave, comp, reviews, policy, all in one record.</p>
               </div>
               <div className={s.flowCard}>
                 <span className={s.flowKey}>Offboard</span>
@@ -452,9 +452,9 @@ export default function Deck({
                 <p className={`${s.colHead} ${s.colOld}`}>Rippling · Gusto · BambooHR · Workday</p>
                 <ul className={s.rowList}>
                   <li><span className={s.cross}>✕</span> Revenue = seats. Automating work cannibalizes their own P&amp;L</li>
-                  <li><span className={s.cross}>✕</span> Built as databases — can&rsquo;t become autonomous agents</li>
+                  <li><span className={s.cross}>✕</span> Built as databases, can&rsquo;t become autonomous agents</li>
                   <li><span className={s.cross}>✕</span> Compliance is an afterthought, not the architecture</li>
-                  <li><span className={s.cross}>✕</span> Priced as SaaS — can&rsquo;t re-price as services</li>
+                  <li><span className={s.cross}>✕</span> Priced as SaaS, can&rsquo;t re-price as services</li>
                 </ul>
               </div>
               <div className={`${s.panel} ${s.panelNew}`}>
@@ -462,7 +462,7 @@ export default function Deck({
                 <ul className={s.rowList}>
                   <li><span className={s.tick}>✓</span> System of record + autonomous agents in one platform</li>
                   <li><span className={s.tick}>✓</span> Revenue = outcomes. More automation = more revenue</li>
-                  <li><span className={s.tick}>✓</span> Compliance-first architecture — every action cited</li>
+                  <li><span className={s.tick}>✓</span> Compliance-first architecture, every action cited</li>
                   <li><span className={s.tick}>✓</span> Services TAM at software margins</li>
                 </ul>
               </div>
@@ -538,22 +538,22 @@ export default function Deck({
               <div className={`${s.layer} ${s.layerStruck}`}>
                 <span className={s.layerTier}>Crossed out</span>
                 <span className={s.layerFig}>$18B</span>
-                <span className={s.layerName}>HR software TAM — the old game incumbents fight over. <em>iMARC Group, 2026</em></span>
+                <span className={s.layerName}>HR software TAM, the old game incumbents fight over. <em>iMARC Group, 2026</em></span>
               </div>
               <div className={`${s.layer} ${s.layer2}`}>
                 <span className={s.layerTier}>SAM</span>
                 <span className={s.layerFig}>$42B</span>
-                <span className={s.layerName}>HR services &amp; outsourcing — growing to $73B by 2032. <em>Research &amp; Markets, 2026</em></span>
+                <span className={s.layerName}>HR services &amp; outsourcing, growing to $73B by 2032. <em>Research &amp; Markets, 2026</em></span>
               </div>
               <div className={`${s.layer} ${s.layer3}`}>
                 <span className={s.layerTier}>TAM</span>
                 <span className={`${s.layerFig} ${s.gold}`}>$315B+</span>
-                <span className={s.layerName}>Total US HR labor spend — the real prize when you sell outcomes. <em>BLS OOH + Payscale, 2025</em></span>
+                <span className={s.layerName}>Total US HR labor spend, the real prize when you sell outcomes. <em>BLS OOH + Payscale, 2025</em></span>
               </div>
             </div>
             <div className={s.noteRow}>
               <div className={s.note}><span className={s.noteHead}>Wedge</span> Series A–B (50–500 headcount). Replace the 2nd HR admin req at $18K/yr vs $160K/yr, then expand into onboarding, comp, and workforce intelligence.</div>
-              <div className={s.note}><span className={s.noteHead}>Global upside</span> HR labor spend globally clears $1T. EU, UK, and APAC are the same trap — same capture.</div>
+              <div className={s.note}><span className={s.noteHead}>Global upside</span> HR labor spend globally clears $1T. EU, UK, and APAC are the same trap, same capture.</div>
             </div>
           </div>
         </section>
@@ -570,7 +570,7 @@ export default function Deck({
                 <div>
                   <h3 className={s.personName}>Brian Bell</h3>
                   <p className={s.personRole}>CEO &amp; Co-Founder</p>
-                  <p className={s.personBio}>Scaled People Ops through Snowflake&rsquo;s record-breaking $3.4B IPO — the largest software IPO in history. 15+ years leading HR at DocuSign, Asana, and Snowflake. Built and ran the exact function MambaHR now automates.</p>
+                  <p className={s.personBio}>Scaled People Ops through Snowflake&rsquo;s record-breaking $3.4B IPO, the largest software IPO in history. 15+ years leading HR at DocuSign, Asana, and Snowflake. Built and ran the exact function MambaHR now automates.</p>
                 </div>
               </div>
               <div className={s.person}>

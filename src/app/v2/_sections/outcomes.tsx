@@ -16,7 +16,7 @@ export default function Outcomes() {
         </div>
 
         <div className="grid">
-          {/* hours back — dark hero metric */}
+          {/* hours back, dark hero metric */}
           <article className="card dark" data-reveal data-delay="1">
             <span className="lbl muted">Hours back, every week</span>
             <div className="num big"><span data-count="27">27</span><em>hrs</em></div>
@@ -28,7 +28,7 @@ export default function Outcomes() {
             </div>
           </article>
 
-          {/* admin gone — gradient ring */}
+          {/* admin gone, gradient ring */}
           <article className="card light" data-reveal data-delay="2">
             <div className="ring">
               <span className="ring-n"><span data-count="70">70</span>%</span>
@@ -55,7 +55,7 @@ export default function Outcomes() {
             <p className="cap">Paperwork, logins, and first week, ready before they arrive.</p>
           </article>
 
-          {/* deferred hire — money card */}
+          {/* deferred hire, money card */}
           <article className="card tint" data-reveal data-delay="4">
             <div className="num money">$<span data-count="95">95</span>k+</div>
             <span className="lbl">The HR hire you don&rsquo;t need yet</span>

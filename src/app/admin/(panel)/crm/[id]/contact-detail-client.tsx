@@ -13,7 +13,7 @@ type Peer = { id: string; name: string; editing: boolean }
 
 // The editable contact form with REAL-TIME collaboration via Supabase Realtime
 // presence. Everyone viewing this contact shows up as an avatar; when one person
-// enters edit mode, the others' "Edit" button locks with a banner — so two people
+// enters edit mode, the others' "Edit" button locks with a banner, so two people
 // can't clobber each other's edits. Presence auto-clears on disconnect (closed
 // tab, navigation), so a lock can never get permanently stuck.
 //
@@ -127,14 +127,14 @@ export function ContactDetailClient({
                 <span
                   key={p.id}
                   className={`${styles.avatar} ${p.editing ? styles.avatarEditing : ''}`}
-                  title={`${p.name}${p.editing ? ' (editing)' : ''}${p.id === meId ? ' — you' : ''}`}
+                  title={`${p.name}${p.editing ? ' (editing)' : ''}${p.id === meId ? ', you' : ''}`}
                 >
                   {p.name.charAt(0)}
                 </span>
               ))}
             </span>
           )}
-          <span className={styles.livePill} title={connected ? 'Connected — changes sync in real time' : 'Connecting…'}>
+          <span className={styles.livePill} title={connected ? 'Connected, changes sync in real time' : 'Connecting…'}>
             <span className={styles.liveDot} style={connected ? undefined : { background: 'var(--text-faint)', boxShadow: 'none' }} />
             {connected ? 'live' : 'connecting…'}
           </span>
@@ -143,7 +143,7 @@ export function ContactDetailClient({
 
       {lockedByOther && (
         <div className={styles.lockBanner}>
-          🔒 {lockedBy?.name} is editing this contact — you can’t make changes until they’re done.
+          🔒 {lockedBy?.name} is editing this contact, you can’t make changes until they’re done.
         </div>
       )}
 
@@ -232,7 +232,7 @@ export function ContactDetailClient({
             </>
           ) : (
             <button type="button" className={ui.btnPrimary} onClick={startEdit} disabled={lockedByOther}>
-              {lockedByOther ? `Locked — ${lockedBy?.name} editing` : 'Edit'}
+              {lockedByOther ? `Locked, ${lockedBy?.name} editing` : 'Edit'}
             </button>
           )}
           {err && <span className={`${styles.feedback} ${styles.feedbackErr}`}>{err}</span>}

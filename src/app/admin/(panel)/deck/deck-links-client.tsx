@@ -28,7 +28,7 @@ export function DeckLinks({ links, slug }: { links: DeckLinkRow[]; slug: string 
       setCopied(token)
       setTimeout(() => setCopied((c) => (c === token ? null : c)), 1500)
     } catch {
-      /* clipboard blocked — the URL is still visible on hover via title */
+      /* clipboard blocked, the URL is still visible on hover via title */
     }
   }
 
@@ -49,7 +49,7 @@ export function DeckLinks({ links, slug }: { links: DeckLinkRow[]; slug: string 
               {l.forwarded && (
                 <span
                   className={styles.forwardedTag}
-                  title={`Opened from ${l.distinctViewers} different networks — this link was likely forwarded`}
+                  title={`Opened from ${l.distinctViewers} different networks, this link was likely forwarded`}
                 >
                   Forwarded · {l.distinctViewers}
                 </span>
@@ -69,7 +69,7 @@ export function DeckLinks({ links, slug }: { links: DeckLinkRow[]; slug: string 
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.copyBtn}
-                  title="Open this recipient's exact view — admin preview, not tracked"
+                  title="Open this recipient's exact view, admin preview, not tracked"
                 >
                   Open ↗
                 </a>

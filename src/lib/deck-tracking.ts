@@ -1,17 +1,17 @@
 import 'server-only'
 import { createHash } from 'node:crypto'
 
-// Structural header type — satisfied by both the route's request Headers and
+// Structural header type, satisfied by both the route's request Headers and
 // next/headers' ReadonlyHeaders, without coupling to either concrete type.
 type HeaderBag = { get(name: string): string | null }
 
-// Shared server-side enrichment for deck analytics — used by both the
+// Shared server-side enrichment for deck analytics, used by both the
 // JS-independent page-view log (deck server component) and the /api/deck/track
 // beacon endpoint, so the two paths parse UA/geo/IP identically.
 
 // Salt the IP hash so the stored value isn't a plain rainbow-table-able sha256
 // of an IP. Not secret-grade (analytics), just basic hygiene. The raw IP is
-// never persisted — only this hash + the resolved ASN org.
+// never persisted, only this hash + the resolved ASN org.
 const IP_SALT = 'mambahr-deck-v1'
 
 export function hashIp(ip: string): string {

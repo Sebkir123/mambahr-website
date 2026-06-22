@@ -5,7 +5,7 @@ import { isAdminEmail } from '@/lib/admin-domain'
 
 // Server-mediated magic-link request for the admin panel. The browser used to
 // call supabase.auth.signInWithOtp directly; routing it through here lets us
-// verify Turnstile + rate-limit BEFORE Supabase sends a single email — so nobody
+// verify Turnstile + rate-limit BEFORE Supabase sends a single email, so nobody
 // can bomb a founder's inbox with sign-in links. The link itself is still
 // single-use and short-lived.
 //
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Valid email required.' }, { status: 400 })
   }
 
-  // Verify the human FIRST — but only when Turnstile is actually configured.
+  // Verify the human FIRST, but only when Turnstile is actually configured.
   // We deliberately DON'T fail closed when it isn't set up: that would brick
   // admin login entirely. The per-IP rate limit above is the baseline anti-abuse
   // floor; adding the Turnstile keys upgrades it to real bot protection.
@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Only send for admin-domain addresses. For anything else, return a generic
-  // success WITHOUT sending — both to avoid being an open relay to arbitrary
+  // success WITHOUT sending, both to avoid being an open relay to arbitrary
   // inboxes and to not leak which domains are privileged. (The DB trigger blocks
   // account creation regardless; this is the friendly, safe front door.)
   if (!isAdminEmail(email)) {

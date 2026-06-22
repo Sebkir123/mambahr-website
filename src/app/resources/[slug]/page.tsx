@@ -13,8 +13,8 @@ export const dynamic = 'force-dynamic'
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const r = await getAnyResource(slug)
-  if (!r) return { title: 'Resource — MambaHR' }
-  const title = `${r.title} — MambaHR`
+  if (!r) return { title: 'Resource | MambaHR' }
+  const title = `${r.title} | MambaHR`
   const description = r.description || `Download ${r.title}, a free playbook from MambaHR.`
   const url = `https://mambahr.com/resources/${r.slug}`
   return {
@@ -38,7 +38,7 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
       <MegaNav />
       {r.status === 'draft' && (
         <div style={{ background: '#1A1A19', color: '#F5C872', textAlign: 'center', padding: '10px 16px', fontSize: '13px', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>
-          DRAFT PREVIEW — not visible to the public until published
+          DRAFT PREVIEW, not visible to the public until published
         </div>
       )}
       <main className={styles.main}>

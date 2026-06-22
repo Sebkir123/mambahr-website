@@ -145,7 +145,7 @@ export default async function SocialPage() {
           <span className={styles.cardHint}>{posts.length} posts</span>
         </div>
         {posts.length === 0 ? (
-          <p className={styles.empty}>Nothing yet — your drafts, scheduled posts, and published history land here.</p>
+          <p className={styles.empty}>Nothing yet, your drafts, scheduled posts, and published history land here.</p>
         ) : (
           <ul className={styles.posts}>
             {posts.map((p) => (

@@ -64,7 +64,7 @@ export default function ResourcesManager({ resources, stats, sources }: { resour
         {resources.length === 0 ? (
           <div className={ui.empty}>
             <h3>No resources yet</h3>
-            <p>Upload your first playbook — it’ll appear on the site with a trackable share page.</p>
+            <p>Upload your first playbook, it’ll appear on the site with a trackable share page.</p>
           </div>
         ) : (
           <table className={ui.table}>
@@ -167,7 +167,7 @@ function Editor({ row, stat, srcs, onClose }: { row: Row; stat?: Stat; srcs: Src
     if (file.size > MAX_PDF_BYTES) { setMsg({ ok: false, text: 'PDF must be under 50 MB.' }); return }
     setUploading(true); setMsg(null)
     try {
-      // 1) mint a signed upload URL (tiny request — just metadata)
+      // 1) mint a signed upload URL (tiny request, just metadata)
       const fd = new FormData()
       fd.set('name', file.name); fd.set('type', file.type); fd.set('size', String(file.size))
       const ticket = await createResourceUploadUrl(fd)
@@ -177,7 +177,7 @@ function Editor({ row, stat, srcs, onClose }: { row: Row; stat?: Stat; srcs: Src
       const { error } = await supabase.storage.from('resources').uploadToSignedUrl(ticket.path, ticket.token, file, {
         contentType: 'application/pdf',
       })
-      if (error) { setMsg({ ok: false, text: 'Upload failed — try again.' }); return }
+      if (error) { setMsg({ ok: false, text: 'Upload failed, try again.' }); return }
       setFilePath(ticket.path); setFileName(ticket.name ?? file.name); setFileSize(file.size)
     } catch { setMsg({ ok: false, text: 'Upload failed.' }) }
     finally { setUploading(false); if (fileRef.current) fileRef.current.value = '' }
@@ -309,14 +309,14 @@ function AnalyticsPanel({ slug, stat, srcs }: { slug: string; stat?: Stat; srcs:
       )}
 
       <div className={styles.srcBlock}>
-        <span className={styles.srcTitle}>Share — one link, auto-tracked</span>
+        <span className={styles.srcTitle}>Share, one link, auto-tracked</span>
         <div className={styles.shareLinks}>
           <CopyOne url={url} label="Copy unified link" />
           {SHARE_PLATFORMS.map((p) => (
             <CopyOne key={p} url={`${url}?utm_source=${p}`} label={p} />
           ))}
         </div>
-        <p className={styles.shareHint}>Share the unified link anywhere — LinkedIn, X, Reddit, etc. are detected automatically. Use a tagged link only for Instagram / TikTok / Threads, whose apps hide the referrer.</p>
+        <p className={styles.shareHint}>Share the unified link anywhere, LinkedIn, X, Reddit, etc. are detected automatically. Use a tagged link only for Instagram / TikTok / Threads, whose apps hide the referrer.</p>
       </div>
     </div>
   )

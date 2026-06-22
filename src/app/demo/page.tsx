@@ -9,9 +9,9 @@ import { LeadForm, type LeadFormFields } from '@/components/lead-form'
 
 const SEE = [
   'Your real questions, answered live with the law cited',
-  'An onboarding run end to end — offer to day-one ready',
+  'An onboarding run end to end, offer to day-one ready',
   'The approval queue: what waits for you, what just gets done',
-  'Your headcount priced on the call — no follow-up quote dance',
+  'Your headcount priced on the call, no follow-up quote dance',
 ]
 
 const COMPANY_SIZES = ['1–10', '11–50', '51–200', '201–500', '501–1,000', '1,000+']
@@ -47,7 +47,7 @@ export default function DemoPage() {
               <h1 className="title">See it run, <Em>live.</Em></h1>
               <p className="lead">
                 Thirty minutes, on your calendar this week. We&rsquo;ll run the department in front of
-                you — on scenarios from your company, not a canned script.
+                you, on scenarios from your company, not a canned script.
               </p>
               <ul className="see">
                 {SEE.map((s) => (
@@ -64,7 +64,7 @@ export default function DemoPage() {
                     <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Request received</span>
                     <h2 className="d-t">You&rsquo;ll hear from us today.</h2>
                     <p className="d-s">
-                      A real reply from a real email — not a no-reply, not a sequence.
+                      A real reply from a real email, not a no-reply, not a sequence.
                       We&rsquo;ll send times for this week.
                     </p>
                   </div>

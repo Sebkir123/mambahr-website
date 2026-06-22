@@ -4,14 +4,14 @@ import { JsonLd } from '@/components/json-ld'
 import { FAQS } from './faqs'
 
 export const metadata: Metadata = {
-  title: 'Pricing — MambaHR | Your first AI HR department',
+  title: 'Pricing | MambaHR | Your first AI HR department',
   description:
     'Simple per-employee pricing for hiring, onboarding, time off, performance, compliance, and payroll-ready exports. Your whole HR department from $10k a year.',
   alternates: { canonical: 'https://mambahr.com/pricing' },
   openGraph: {
-    title: 'Pricing — MambaHR',
+    title: 'Pricing | MambaHR',
     description:
-      'Simple per-employee pricing for your whole AI HR department — hiring, onboarding, time off, performance, compliance, and payroll-ready exports. From $10k a year.',
+      'Simple per-employee pricing for your whole AI HR department, hiring, onboarding, time off, performance, compliance, and payroll-ready exports. From $10k a year.',
     url: 'https://mambahr.com/pricing',
     siteName: 'MambaHR',
     type: 'website',
@@ -19,22 +19,22 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pricing — MambaHR',
+    title: 'Pricing | MambaHR',
     description: 'Your whole AI HR department, priced per employee. From $10k a year.',
     images: ['/og?title=Pricing%20for%20your%20AI%20HR%20department&eyebrow=Pricing'],
   },
 }
 
-// Pricing structured data — lets answer engines and Google's price rich results
+// Pricing structured data, lets answer engines and Google's price rich results
 // read the published per-employee tiers. Numbers are the literal published rates
 // on the page (no user input). Custom/Enterprise carries no numeric price, so it
 // is excluded from lowPrice/highPrice but listed as an offer.
 const pricingJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: 'MambaHR — AI HR Department',
+  name: 'MambaHR, AI HR Department',
   description:
-    'The AI HR department — hiring, onboarding, time off, performance, compensation, compliance, and payroll-ready exports, run end to end. A human approves the calls that matter.',
+    'The AI HR department, hiring, onboarding, time off, performance, compensation, compliance, and payroll-ready exports, run end to end. A human approves the calls that matter.',
   brand: { '@type': 'Brand', name: 'MambaHR' },
   url: 'https://mambahr.com/pricing',
   offers: {
@@ -53,7 +53,7 @@ const pricingJsonLd = {
   },
 }
 
-// FAQ rich results — mirrors the visible FAQ section on the page (same FAQS).
+// FAQ rich results, mirrors the visible FAQ section on the page (same FAQS).
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',

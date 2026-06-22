@@ -15,7 +15,7 @@ import {
 
 // CRM data access for the admin panel. Reads crm_contacts / crm_activities /
 // crm_tasks AS THE LOGGED-IN ADMIN (RLS: is_admin() = @mambahr.com). Every
-// caller is behind requireAdmin(). No service-role key — RLS is the gate.
+// caller is behind requireAdmin(). No service-role key, RLS is the gate.
 // Pure types + helpers live in ./crm-types (client-safe); re-exported here so
 // server callers can keep importing everything from '@/lib/crm'.
 export * from '@/lib/crm-types'

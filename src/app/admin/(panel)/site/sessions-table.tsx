@@ -146,7 +146,7 @@ function Detail({
       </div>
 
       {row.botReason && (
-        <div className={styles.suspect}>⚠ Bot / automated suspected — {row.botReason}</div>
+        <div className={styles.suspect}>⚠ Bot / automated suspected, {row.botReason}</div>
       )}
 
       {pages.length > 0 && (

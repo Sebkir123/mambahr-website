@@ -1,5 +1,5 @@
 /**
- * Email helpers for MambaHR — uses Resend API.
+ * Email helpers for MambaHR, uses Resend API.
  * Sends from team@mambahr.com (domain already verified in Resend).
  */
 
@@ -20,7 +20,7 @@ async function getClient(): Promise<Resend | null> {
   const key = await getSecret('RESEND_API_KEY')
   if (!key) {
     if (process.env.NODE_ENV === 'production') {
-      console.warn('RESEND_API_KEY not set (env or Vault) — emails disabled')
+      console.warn('RESEND_API_KEY not set (env or Vault), emails disabled')
     }
     return null
   }
@@ -132,12 +132,12 @@ function finePrint(text: string): string {
    ════════════════════════════════════════════ */
 export async function sendWaitlistWelcome(opts: { email: string; company: string }) {
   const client = await getClient()
-  const subject = 'We got your application — MambaHR'
+  const subject = 'We got your application | MambaHR'
   const html = emailShell(
     subject,
     serif('We got your application.') +
-    body(`Thanks for reaching out${opts.company ? ` from <strong style="color:#1A1611;">${escapeHtml(opts.company)}</strong>` : ''}. We go through every application personally and we&rsquo;ll be in touch within 24 hours — no SDR, no automated sequence. Brian or Sebastian will reply directly.`) +
-    body(`MambaHR handles the full HR administrative layer — onboarding, offboarding, hiring, leave, compliance — autonomously, end to end. One human in the loop for the decisions that actually need judgment. That&rsquo;s what you applied for.`) +
+    body(`Thanks for reaching out${opts.company ? ` from <strong style="color:#1A1611;">${escapeHtml(opts.company)}</strong>` : ''}. We go through every application personally and we&rsquo;ll be in touch within 24 hours, no SDR, no automated sequence. Brian or Sebastian will reply directly.`) +
+    body(`MambaHR handles the full HR administrative layer, onboarding, offboarding, hiring, leave, compliance, autonomously, end to end. One human in the loop for the decisions that actually need judgment. That&rsquo;s what you applied for.`) +
     divider() +
     body(`While you wait, follow us on LinkedIn &mdash; it&rsquo;s where we build in public.`) +
     ctaButton('https://www.linkedin.com/company/mamba-hr', 'Follow on LinkedIn →') +
@@ -158,7 +158,7 @@ export async function sendWaitlistWelcome(opts: { email: string; company: string
    ════════════════════════════════════════════ */
 export async function sendInvestorAck(opts: { email: string; name: string }) {
   const client = await getClient()
-  const subject = 'Thanks for reaching out — MambaHR'
+  const subject = 'Thanks for reaching out | MambaHR'
   const firstName = escapeHtml(opts.name.split(' ')[0])
   const html = emailShell(
     subject,
@@ -189,7 +189,7 @@ export async function sendHRBenchAck(opts: { email: string }) {
     subject,
     kicker('HR-Bench') +
     serif('You&rsquo;re on the list.') +
-    body('We&rsquo;ll let you know the moment HR-Bench ships — including the full dataset, methodology, and benchmark results across leading AI models.') +
+    body('We&rsquo;ll let you know the moment HR-Bench ships, including the full dataset, methodology, and benchmark results across leading AI models.') +
     body('HR-Bench is the first open benchmark for evaluating AI on HR decision-making. 500+ scenarios across federal and state regulations, validated by domain experts.') +
     divider() +
     finePrint('Read more about our research: <a href="https://mambahr.com/research" style="color:#B08D57;font-weight:600;text-decoration:none;">mambahr.com/research &rarr;</a>'),
@@ -205,7 +205,7 @@ export async function sendHRBenchAck(opts: { email: string }) {
 }
 
 /* ════════════════════════════════════════════
-   FIELD GUIDE — deliver the gated playbook link
+   FIELD GUIDE, deliver the gated playbook link
    ════════════════════════════════════════════ */
 export async function sendFieldGuide(opts: { email: string; guideTitle: string; url: string }): Promise<void> {
   const client = await getClient()
@@ -214,12 +214,12 @@ export async function sendFieldGuide(opts: { email: string; guideTitle: string; 
     subject,
     kicker('Field guide') +
     serif('Your playbook is ready.') +
-    body(`<strong style="color:#1A1611;">${escapeHtml(opts.guideTitle)}</strong> — a practical, compliance-first walkthrough for when you have to make the hard calls.`) +
+    body(`<strong style="color:#1A1611;">${escapeHtml(opts.guideTitle)}</strong>, a practical, compliance-first walkthrough for when you have to make the hard calls.`) +
     ctaButton(opts.url, 'Open the playbook →') +
     divider() +
-    body('Follow us on LinkedIn — it&rsquo;s where we build in public. And if a colleague is facing the same call, send this their way.') +
+    body('Follow us on LinkedIn, it&rsquo;s where we build in public. And if a colleague is facing the same call, send this their way.') +
     ctaButton('https://www.linkedin.com/company/mamba-hr', 'Follow on LinkedIn →') +
-    finePrint('This link is personal — please don&rsquo;t share it publicly. Questions? Just reply to this email.'),
+    finePrint('This link is personal, please don&rsquo;t share it publicly. Questions? Just reply to this email.'),
   )
 
   if (!client) { console.log('[email:field-guide] (dev) →', opts.email, opts.url); return }
@@ -237,15 +237,15 @@ export async function sendFieldGuide(opts: { email: string; guideTitle: string; 
 export async function sendDemoConfirmation(opts: { email: string; name: string; company: string }): Promise<void> {
   const client = await getClient()
   const firstName = opts.name ? escapeHtml(opts.name.split(' ')[0]) : null
-  const subject = 'Your MambaHR demo — we’ll be in touch today'
+  const subject = 'Your MambaHR demo, we’ll be in touch today'
   const html = emailShell(
     subject,
     kicker('Demo request') +
     serif(firstName ? `Thanks, ${firstName}.` : 'We got your demo request.') +
-    body(`Someone from our team will write you today — a real person, not a no-reply — to find 30 minutes for <strong style="color:#1A1611;">${escapeHtml(opts.company || 'your team')}</strong>.`) +
-    body('On the call we&rsquo;ll run the AI HR department on your own scenarios and price it against your headcount — no deck, just the product.') +
+    body(`Someone from our team will write you today, a real person, not a no-reply, to find 30 minutes for <strong style="color:#1A1611;">${escapeHtml(opts.company || 'your team')}</strong>.`) +
+    body('On the call we&rsquo;ll run the AI HR department on your own scenarios and price it against your headcount, no deck, just the product.') +
     divider() +
-    body('While you wait, follow along on LinkedIn — it&rsquo;s where we build in public. And if you know someone buried in HR admin, send them our way.') +
+    body('While you wait, follow along on LinkedIn, it&rsquo;s where we build in public. And if you know someone buried in HR admin, send them our way.') +
     ctaButton('https://www.linkedin.com/company/mamba-hr', 'Follow on LinkedIn →') +
     finePrint('Questions? Just reply &mdash; this goes straight to us.<br/>Brian &amp; Sebastian, MambaHR'),
   )
@@ -260,7 +260,7 @@ export async function sendDemoConfirmation(opts: { email: string; name: string; 
 }
 
 /* ════════════════════════════════════════════
-   RESOURCE DOWNLOAD — deliver the PDF link
+   RESOURCE DOWNLOAD, deliver the PDF link
    ════════════════════════════════════════════ */
 export async function sendResourceDownload(opts: { email: string; name: string; title: string; kicker: string; downloadUrl: string }): Promise<void> {
   const client = await getClient()
@@ -271,7 +271,7 @@ export async function sendResourceDownload(opts: { email: string; name: string; 
     subject,
     kicker(opts.kicker) +
     serif(greeting) +
-    body(`<strong style="color:#1A1611;">${escapeHtml(opts.title)}</strong> is ready. Click below — the PDF opens directly in your browser.`) +
+    body(`<strong style="color:#1A1611;">${escapeHtml(opts.title)}</strong> is ready. Click below, the PDF opens directly in your browser.`) +
     ctaButton(opts.downloadUrl, 'Download now →') +
     divider() +
     finePrint(`Button not working? <a href="${escapeHtml(opts.downloadUrl)}" style="color:#B08D57;font-weight:600;text-decoration:none;">Click here</a> to open the PDF directly.`),

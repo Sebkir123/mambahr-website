@@ -11,7 +11,7 @@ import { ConfirmButton } from '../../_components/confirm-button'
 import type { BlogPostAnalytics } from '@/lib/blog-analytics-types'
 import styles from './editor.module.css'
 
-// TipTap + ProseMirror is ~440 KB — by far the heaviest chunk in the app. It's
+// TipTap + ProseMirror is ~440 KB, by far the heaviest chunk in the app. It's
 // only needed inside this editor, so load it lazily (client-only) behind a
 // placeholder rather than shipping it in the editor route's initial JS.
 const RichText = dynamic(() => import('./rich-text'), {
@@ -89,7 +89,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
     const res = await savePost(buildPayload())
     if (res.ok) {
       setSaveState('saved')
-      // Reflect the slug the server actually persisted — it may have been
+      // Reflect the slug the server actually persisted, it may have been
       // auto-deduped (untitled-post → untitled-post-2) to avoid a collision.
       if (res.slug !== slug) setSlug(res.slug)
     } else {

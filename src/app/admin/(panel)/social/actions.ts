@@ -34,7 +34,7 @@ export async function uploadPostImage(formData: FormData): Promise<UploadResult>
     contentType: file.type,
     upsert: false,
   })
-  if (error) return { ok: false, message: 'Upload failed — try again.' }
+  if (error) return { ok: false, message: 'Upload failed, try again.' }
   const { data } = db.storage.from(IMAGE_BUCKET).getPublicUrl(path)
   return { ok: true, url: data.publicUrl }
 }
@@ -56,7 +56,7 @@ export type ComposeResult = { ok: boolean; message: string }
 export async function composePost(formData: FormData): Promise<ComposeResult> {
   const admin = await requireAdmin()
   const db = socialDb()
-  if (!db) return { ok: false, message: 'LinkedIn isn’t configured yet — drafts can’t be saved.' }
+  if (!db) return { ok: false, message: 'LinkedIn isn’t configured yet, drafts can’t be saved.' }
 
   const body = String(formData.get('body') || '').trim()
   const mode = String(formData.get('mode') || 'draft') // draft | schedule | now
@@ -98,8 +98,8 @@ export async function composePost(formData: FormData): Promise<ComposeResult> {
     }
     revalidatePath('/admin/social')
     if (failed === 0) return { ok: true, message: `Posted to ${posted} account${posted === 1 ? '' : 's'}.` }
-    if (posted === 0) return { ok: false, message: `Publish failed — see the queue below for the reason.` }
-    return { ok: false, message: `Posted to ${posted}, ${failed} failed — see the queue below.` }
+    if (posted === 0) return { ok: false, message: `Publish failed, see the queue below for the reason.` }
+    return { ok: false, message: `Posted to ${posted}, ${failed} failed, see the queue below.` }
   }
 
   const status = mode === 'schedule' ? 'scheduled' : 'draft'

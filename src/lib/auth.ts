@@ -6,14 +6,14 @@ import { isAdminEmail } from '@/lib/admin-domain'
 export type AdminUser = { id: string; email: string }
 
 // Who is an admin: the @mambahr.com email domain. We own the mambahr.com Google
-// Workspace, so only people we issue a mailbox to can receive a magic link — the
+// Workspace, so only people we issue a mailbox to can receive a magic link, the
 // domain is the allowlist. The check itself lives in the pure ./admin-domain
 // module so Edge middleware can share it; re-exported here for existing callers.
 // Stays in lockstep with the SQL is_admin() function (RLS) and the signup trigger.
 export { ADMIN_EMAIL_DOMAIN, isAdminEmail } from '@/lib/admin-domain'
 
 // Returns the signed-in admin, or null. An authenticated Supabase user is only
-// an admin if their email domain is mambahr.com — enforced here (defense in
+// an admin if their email domain is mambahr.com, enforced here (defense in
 // depth) and by RLS via the is_admin() SQL function.
 // Wrapped in React cache() so the layout + page (which both call requireAdmin
 // in the same request) share ONE getUser() round-trip instead of two.

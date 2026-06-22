@@ -1,6 +1,6 @@
 // Canonical slide list for the investor deck. Single source of truth shared by
 // the deck itself (deck-client), the admin funnel labels, and the analytics
-// rollup — so the funnel always knows there are 12 slides even before anyone
+// rollup, so the funnel always knows there are 12 slides even before anyone
 // has opened the deck (otherwise it collapses to a single row). Keep in sync
 // with the actual slides rendered in deck-client.tsx.
 export const DECK_SLIDE_TITLES = [

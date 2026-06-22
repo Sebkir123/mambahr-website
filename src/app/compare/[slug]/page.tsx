@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!c) return {}
   const ogUrl = '/mambahr_og_sharing.jpg'
   return {
-    title: `MambaHR vs ${c.name} — ${c.tagline}`,
+    title: `MambaHR vs ${c.name}, ${c.tagline}`,
     description: c.heroSub,
     openGraph: {
       title: `MambaHR vs ${c.name}`,
@@ -41,7 +41,7 @@ export default async function ComparePage({ params }: Props) {
 
   // Comparison-aware structured data: helps search engines surface this page for
   // "MambaHR vs <competitor>" queries. Content is drawn entirely from the hardcoded
-  // competitor record — no user input.
+  // competitor record, no user input.
   const comparisonJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',

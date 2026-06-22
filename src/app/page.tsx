@@ -23,7 +23,7 @@ import RevealInit from './v2/_sections/reveal-init'
 import CountUp from './v2/_sections/count-up'
 import StickyCta from './v2/_sections/sticky-cta'
 
-// FAQPage structured data — built from the same QA list the page renders, so
+// FAQPage structured data, built from the same QA list the page renders, so
 // answer engines (Google rich results, ChatGPT, Perplexity) can extract the
 // Q&A verbatim. Escaped the same way as the root layout's JSON-LD.
 const faqJsonLd = JSON.stringify({

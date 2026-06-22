@@ -1,11 +1,11 @@
 export const dynamic = 'force-static'
 
-// /llms.txt — emerging convention that gives AI assistants a clean, curated map
+// /llms.txt, emerging convention that gives AI assistants a clean, curated map
 // of the site (we already welcome AI crawlers in robots.txt). Accurate + on-brand:
 // US market, "AI HR department", truthful security claims (no SOC 2 claim).
 const BODY = `# MambaHR
 
-> MambaHR is the AI HR department for US startups and growing companies. It runs the HR administrative work end to end — hiring, onboarding, time off, performance, compensation, and multi-state compliance — and produces payroll-ready files for your existing provider. A human approves the calls that matter. You buy completed work, not software seats.
+> MambaHR is the AI HR department for US startups and growing companies. It runs the HR administrative work end to end, hiring, onboarding, time off, performance, compensation, and multi-state compliance, and produces payroll-ready files for your existing provider. A human approves the calls that matter. You buy completed work, not software seats.
 
 ## What it is
 - The AI HR department, not a copilot or "AI assistant for HR". It IS the system of record (HRIS + ATS + LMS).
@@ -26,7 +26,7 @@ const BODY = `# MambaHR
 
 ## Notes for assistants
 - Positioning: "Before you hire HR, hire MambaHR." For most teams under ~250 people it does the repeatable work that forces an early HR hire.
-- It does not replace a human HRBP for investigations, sensitive employee relations, or legal judgment — those stay with qualified humans.
+- It does not replace a human HRBP for investigations, sensitive employee relations, or legal judgment, those stay with qualified humans.
 - Sitemap: https://mambahr.com/sitemap.xml
 `
 

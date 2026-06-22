@@ -29,7 +29,7 @@ function HeroAnswerCard() {
           <div className="m-who">Mamba <span className="m-time">4 seconds later</span></div>
           <div className="a">
             In 8 of your states, no.
-            <span className="a-sub">State-by-state guidance attached — interview kits already updated.</span>
+            <span className="a-sub">State-by-state guidance attached, interview kits already updated.</span>
           </div>
           <div className="chips">
             <span className="chip">Pay transparency</span>
@@ -289,7 +289,7 @@ export default function CompliancePage() {
         <PageHero
           eyebrow="Compliance"
           title={<>Always <Em>compliant.</Em></>}
-          lead="Employment law changes almost every week, and one miss costs more than a year of HR salaries. Mamba keeps up — federal plus your states — cites the law behind every answer, and sends the risky calls to a human first."
+          lead="Employment law changes almost every week, and one miss costs more than a year of HR salaries. Mamba keeps up, federal plus your states, cites the law behind every answer, and sends the risky calls to a human first."
           proof="Trusted across all 50 states"
           photo="/v2-people/feat.jpg"
           photoChip="Mamba · answered"
@@ -301,22 +301,22 @@ export default function CompliancePage() {
         <AgentLoop
           eyebrow="The loop"
           title={<>How an answer <Em>happens.</Em></>}
-          lead="From a question in Slack to a cited, logged answer — with a human in the path whenever the law isn’t crystal clear."
+          lead="From a question in Slack to a cited, logged answer, with a human in the path whenever the law isn’t crystal clear."
           steps={[
-            { n: '01', label: 'A question arrives', desc: 'In Slack, Teams, or the MambaHR app — anyone on the team can ask.', who: 'agent', time: '0s', img: '/avatars/tom.jpg' },
+            { n: '01', label: 'A question arrives', desc: 'In Slack, Teams, or the MambaHR app, anyone on the team can ask.', who: 'agent', time: '0s', img: '/avatars/tom.jpg' },
             { n: '02', label: 'The current law is checked', desc: 'Federal employment law plus the specific rules for every state you employ in, kept current.', who: 'agent', time: '2s' },
-            { n: '03', label: 'The answer comes back — with the citation', desc: 'Plain English up top, the exact rule it relied on attached underneath. Every time.', who: 'agent', time: '4s' },
+            { n: '03', label: 'The answer comes back, with the citation', desc: 'Plain English up top, the exact rule it relied on attached underneath. Every time.', who: 'agent', time: '4s' },
             { n: '04', label: 'Anything ambiguous comes to you first', desc: 'If the law is unclear or the stakes are high, a human reviews before anything happens.', who: 'you', img: '/avatars/priya.jpg' },
-            { n: '05', label: 'Everything is logged', desc: 'Who asked, what was answered, and the rule it followed — written to the audit trail.', who: 'agent', time: 'always' },
+            { n: '05', label: 'Everything is logged', desc: 'Who asked, what was answered, and the rule it followed, written to the audit trail.', who: 'agent', time: 'always' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="On the record"
           title={<>A record your lawyer <Em>loves.</Em></>}
-          lead="Every action MambaHR takes is logged with who, when, and the rule it followed. Nothing happens off the record — so when counsel or an auditor asks for proof, it’s already written down."
+          lead="Every action MambaHR takes is logged with who, when, and the rule it followed. Nothing happens off the record, so when counsel or an auditor asks for proof, it’s already written down."
           bullets={[
-            'Append-only — entries can be added, never edited away',
+            'Append-only, entries can be added, never edited away',
             'Every answer linked to the law it cited',
             'Human approvals recorded alongside the agent’s work',
           ]}
@@ -329,11 +329,11 @@ export default function CompliancePage() {
           warm
           eyebrow="Always current"
           title={<>Sleep through <Em>law changes.</Em></>}
-          lead="New state rules land all year long. Mamba tracks them, your policies update, and you find out it was handled — instead of finding out the hard way."
+          lead="New state rules land all year long. Mamba tracks them, your policies update, and you find out it was handled, instead of finding out the hard way."
           bullets={[
             'Federal baseline plus state-specific rules, all 50 states',
             'Policy updates applied as the law moves',
-            'You’re told what changed and why — in plain English',
+            'You’re told what changed and why, in plain English',
           ]}
         >
           <SleepPhoto />

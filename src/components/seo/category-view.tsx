@@ -8,7 +8,7 @@ import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import type { CategoryData } from './category-data'
 
-/* Small Slack-style exchange shown in the hero stage — the product, as a
+/* Small Slack-style exchange shown in the hero stage, the product, as a
    hardcoded CSS fragment (not a screenshot), per the marketing display rule. */
 function SlackFragment() {
   return (

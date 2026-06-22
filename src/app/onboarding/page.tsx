@@ -207,7 +207,7 @@ export default function OnboardingPage() {
         <PageHero
           eyebrow="Onboarding & offboarding"
           title={<>Day one, <Em>ready.</Em></>}
-          lead="Paperwork filed and verified, logins working, first week planned — before your new hire walks in. And when someone leaves, a clean exit with nothing forgotten."
+          lead="Paperwork filed and verified, logins working, first week planned, before your new hire walks in. And when someone leaves, a clean exit with nothing forgotten."
           proof="Loved by new hires and HR alike"
           photo="/v2-people/marcus.jpg"
           photoChip="Mamba · done in 4m"
@@ -222,21 +222,21 @@ export default function OnboardingPage() {
           lead="The moment the offer is accepted, everything starts moving. By Monday morning there&rsquo;s nothing left on your list but the welcome."
           steps={[
             { n: '01', label: 'Offer signature', desc: 'The accepted offer is countersigned through DocuSign and filed where you can always find it.', who: 'agent', time: 'minutes' },
-            { n: '02', label: 'I-9 & E-Verify', desc: 'Work-eligibility paperwork collected, verified, and filed — correctly, the first time.', who: 'agent', time: 'day 1' },
-            { n: '03', label: 'Logins ready', desc: 'Email, Slack, and every tool they need — live through Okta, Entra, or Google before they sit down.', who: 'agent', time: 'before 9 AM' },
+            { n: '02', label: 'I-9 & E-Verify', desc: 'Work-eligibility paperwork collected, verified, and filed, correctly, the first time.', who: 'agent', time: 'day 1' },
+            { n: '03', label: 'Logins ready', desc: 'Email, Slack, and every tool they need, live through Okta, Entra, or Google before they sit down.', who: 'agent', time: 'before 9 AM' },
             { n: '04', label: 'Equipment & buddy', desc: 'Laptop ordered and shipped to their door; an onboarding buddy picked and briefed.', who: 'agent', img: '/avatars/priya.jpg' },
-            { n: '05', label: 'First-week schedule', desc: 'Intros, team lunches, and training sessions on everyone&rsquo;s calendar — no one has to remember.', who: 'agent' },
-            { n: '06', label: '30-day check-in', desc: 'A quiet pulse at day 30: how it&rsquo;s going, what&rsquo;s missing — flagged to you only if something&rsquo;s off.', who: 'agent', time: 'day 30', img: '/avatars/dave.jpg' },
-            { n: '07', label: 'The welcome', desc: 'You give the welcome. The handshake, the story, the why-we-hired-you — that&rsquo;s yours.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '05', label: 'First-week schedule', desc: 'Intros, team lunches, and training sessions on everyone&rsquo;s calendar, no one has to remember.', who: 'agent' },
+            { n: '06', label: '30-day check-in', desc: 'A quiet pulse at day 30: how it&rsquo;s going, what&rsquo;s missing, flagged to you only if something&rsquo;s off.', who: 'agent', time: 'day 30', img: '/avatars/dave.jpg' },
+            { n: '07', label: 'The welcome', desc: 'You give the welcome. The handshake, the story, the why-we-hired-you, that&rsquo;s yours.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Offboarding"
           title={<>Exits with <Em>zero loose ends.</Em></>}
-          lead="Exits are where details get expensive. Mamba gets the final paycheck right for their state, prepares the COBRA notices, collects the handover — and switches off every login only after your sign-off."
+          lead="Exits are where details get expensive. Mamba gets the final paycheck right for their state, prepares the COBRA notices, collects the handover, and switches off every login only after your sign-off."
           bullets={[
-            'Final pay timed to each state&rsquo;s rules — California&rsquo;s last-day deadline included',
+            'Final pay timed to each state&rsquo;s rules, California&rsquo;s last-day deadline included',
             'Benefits notices prepared and sent on schedule, automatically',
             'Nothing gets switched off until you say so',
           ]}
@@ -249,11 +249,11 @@ export default function OnboardingPage() {
           warm
           eyebrow="The first impression"
           title={<>Day one, like <Em>the brochure.</Em></>}
-          lead="Nobody remembers a smooth start — they remember a broken one. When the laptop works, the calendar is full, and the buddy says hi at 9:05, your new hire spends day one meeting people instead of waiting on logins."
+          lead="Nobody remembers a smooth start, they remember a broken one. When the laptop works, the calendar is full, and the buddy says hi at 9:05, your new hire spends day one meeting people instead of waiting on logins."
           bullets={[
             'A first week that says we were ready for you',
             'Managers get a nudge list, not a to-do list',
-            'New hires answer one short form — Mamba does the rest',
+            'New hires answer one short form, Mamba does the rest',
           ]}
         >
           <FirstDay />
@@ -263,12 +263,12 @@ export default function OnboardingPage() {
           stats={[
             { n: 4, suffix: ' min', label: 'from signed offer to day-one setup complete' },
             { n: 11, label: 'first-week invites sent automatically per new hire' },
-            { n: 0, label: 'forgotten logins on exit — every account accounted for' },
+            { n: 0, label: 'forgotten logins on exit, every account accounted for' },
           ]}
         />
 
         <QuoteBand
-          quote="We switched on a Thursday and onboarded two people the following Monday. Offer signed, paperwork verified, logins live, calendars full — and I never opened a checklist. I just showed up to say welcome."
+          quote="We switched on a Thursday and onboarded two people the following Monday. Offer signed, paperwork verified, logins live, calendars full, and I never opened a checklist. I just showed up to say welcome."
           name="Sofia Reyes"
           role="Director of HR"
           img="/v2-people/sofia.jpg"

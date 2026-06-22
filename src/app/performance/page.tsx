@@ -104,7 +104,7 @@ function PipCard() {
       <div className="rows">
         {[
           { lbl: 'Milestone 1 · weeks 1–2', desc: 'Clear, written expectations agreed with the manager' },
-          { lbl: 'Milestone 2 · weeks 3–6', desc: 'Weekly check-ins on the calendar — both sides prepared' },
+          { lbl: 'Milestone 2 · weeks 3–6', desc: 'Weekly check-ins on the calendar, both sides prepared' },
           { lbl: 'Milestone 3 · weeks 7–8', desc: 'Outcome review with documented, fair criteria' },
         ].map((r) => (
           <div key={r.lbl} className="row">
@@ -118,7 +118,7 @@ function PipCard() {
       </div>
       <div className="approve">
         <span className="ad" aria-hidden="true" />
-        <span className="at">Awaiting your approval — nothing reaches the employee until you say so</span>
+        <span className="at">Awaiting your approval, nothing reaches the employee until you say so</span>
         <span className="btn">Review plan</span>
       </div>
       <style jsx>{`
@@ -209,7 +209,7 @@ export default function PerformancePage() {
         <PageHero
           eyebrow="Performance"
           title={<>Reviews, <Em>written.</Em></>}
-          lead="Review season eats three weeks of every manager's life. Mamba launches the cycle, chases the stragglers, and drafts every review from real, cited work — your managers just edit, rate, and sign."
+          lead="Review season eats three weeks of every manager's life. Mamba launches the cycle, chases the stragglers, and drafts every review from real, cited work, your managers just edit, rate, and sign."
           proof="Loved by managers at review time"
           photo="/v2-people/sofia.jpg"
           photoChip="Mamba · done"
@@ -223,9 +223,9 @@ export default function PerformancePage() {
           title={<>Review season, <Em>handled.</Em></>}
           lead="Mamba runs the machinery of review season. Your managers keep the judgment."
           steps={[
-            { n: '01', label: 'Launches the cycle', desc: 'Schedules, reviewer pairings, and reminders go out — no spreadsheet of who owes what.', who: 'agent', time: 'day 1' },
+            { n: '01', label: 'Launches the cycle', desc: 'Schedules, reviewer pairings, and reminders go out, no spreadsheet of who owes what.', who: 'agent', time: 'day 1' },
             { n: '02', label: 'Chases reviewers so you don’t', desc: 'Polite, persistent nudges until every review is in. You never send the awkward follow-up.', who: 'agent', time: 'ongoing', img: '/avatars/maya.jpg' },
-            { n: '03', label: 'Drafts from real work, with citations', desc: 'First drafts built from real work evidence — every claim cites its source, nothing invented.', who: 'agent', time: 'min' },
+            { n: '03', label: 'Drafts from real work, with citations', desc: 'First drafts built from real work evidence, every claim cites its source, nothing invented.', who: 'agent', time: 'min' },
             { n: '04', label: 'Flags gaps and bias risks', desc: 'Thin evidence, recency bias, and inconsistent language get surfaced before calibration, not after.', who: 'agent' },
             { n: '05', label: 'Builds calibration packets', desc: 'Side-by-side summaries for every manager in the room, prepared the same way every time.', who: 'agent', time: 'hrs', img: '/avatars/priya.jpg' },
             { n: '06', label: 'Managers own the words and the rating', desc: 'They edit the draft, set the rating, and sign the final review. Every final word is theirs.', who: 'you', img: '/avatars/dave.jpg' },
@@ -235,9 +235,9 @@ export default function PerformancePage() {
         <FeatureSplit
           eyebrow="Improvement plans"
           title={<>PIPs without <Em>the dread.</Em></>}
-          lead="When someone&rsquo;s struggling, the hardest part is starting. Mamba drafts a fair, structured plan with clear milestones and check-ins already on the calendar — and you approve it before anything reaches the employee."
+          lead="When someone&rsquo;s struggling, the hardest part is starting. Mamba drafts a fair, structured plan with clear milestones and check-ins already on the calendar, and you approve it before anything reaches the employee."
           bullets={[
-            'A structured, consistent plan — not a blank page at 9 PM',
+            'A structured, consistent plan, not a blank page at 9 PM',
             'Check-ins scheduled for both sides from day one',
             'You review and approve before the employee sees a word',
           ]}
@@ -269,7 +269,7 @@ export default function PerformancePage() {
         />
 
         <QuoteBand
-          quote="Review season used to swallow three weeks of my life. Now the drafts are waiting, sourced, the day the cycle opens — and my managers walk into calibration actually prepared."
+          quote="Review season used to swallow three weeks of my life. Now the drafts are waiting, sourced, the day the cycle opens, and my managers walk into calibration actually prepared."
           name="Dana Whitfield"
           role="Head of People · Lumen Robotics"
           img="/v2-people/feat.jpg"

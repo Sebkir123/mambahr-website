@@ -153,7 +153,7 @@ function BoardCard({
     <div
       role="button"
       tabIndex={0}
-      aria-label={`${c.name} — open`}
+      aria-label={`${c.name}, open`}
       draggable
       onDragStart={(e) => {
         dragged.current = true

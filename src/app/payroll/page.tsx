@@ -188,7 +188,7 @@ export default function PayrollPage() {
         <PageHero
           eyebrow="Payroll & benefits"
           title={<>Payday, <Em>perfect.</Em></>}
-          lead={'Every raise, new hire, exit, and life event lands in your provider’s file before payday — double-checked, reconciled, and ready to upload.'}
+          lead={'Every raise, new hire, exit, and life event lands in your provider’s file before payday, double-checked, reconciled, and ready to upload.'}
           proof="Trusted with payday by lean teams"
           photo="/v2-people/team2.jpg"
           photoChip="Mamba · ready"
@@ -202,10 +202,10 @@ export default function PayrollPage() {
           title={<>The pay cycle, <Em>done early.</Em></>}
           lead={'Mamba tracks every change all month, then turns them into one clean, payroll-ready file in your provider’s format. You upload it. That’s the whole job.'}
           steps={[
-            { n: '01', label: 'Collects every change', desc: 'Raises, new hires, exits, address moves, deduction updates — gathered the moment they happen, not the night before.', who: 'agent', time: 'all month' },
+            { n: '01', label: 'Collects every change', desc: 'Raises, new hires, exits, address moves, deduction updates, gathered the moment they happen, not the night before.', who: 'agent', time: 'all month' },
             { n: '02', label: 'Prices raises against bands', desc: 'Every merit change checked against your comp bands before it touches the file.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
-            { n: '03', label: 'Computes final pay by state rules', desc: 'Exits get state-correct final pay — timing, accrued PTO payout, the lot.', who: 'agent', time: 'instant', img: '/avatars/tom.jpg' },
-            { n: '04', label: 'Builds the file in your provider format', desc: 'ADP, Workday, Gusto, Rippling — the change file arrives in the exact format your provider expects.', who: 'agent', time: '2 days early' },
+            { n: '03', label: 'Computes final pay by state rules', desc: 'Exits get state-correct final pay, timing, accrued PTO payout, the lot.', who: 'agent', time: 'instant', img: '/avatars/tom.jpg' },
+            { n: '04', label: 'Builds the file in your provider format', desc: 'ADP, Workday, Gusto, Rippling, the change file arrives in the exact format your provider expects.', who: 'agent', time: '2 days early' },
             { n: '05', label: 'Reconciles twice', desc: 'Every line checked against the record, then checked again. Discrepancies get caught before you ever see the file.', who: 'agent', time: 'twice' },
             { n: '06', label: 'You upload. Done.', desc: 'One clean file, ready for your payroll provider. Payday runs without a scramble.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
@@ -214,11 +214,11 @@ export default function PayrollPage() {
         <FeatureSplit
           eyebrow="Benefits"
           title={<>Life events, <Em>enrolled.</Em></>}
-          lead="A birth, a marriage, a move — Mamba spots the qualifying life event, opens the window, and walks the enrollment through. 401(k) runs on Guideline, end to end."
+          lead="A birth, a marriage, a move, Mamba spots the qualifying life event, opens the window, and walks the enrollment through. 401(k) runs on Guideline, end to end."
           bullets={[
             'Qualifying life events caught the day they happen',
             '401(k) enrollment and deduction changes via Guideline',
-            'Enrollment windows tracked — never missed, never expired',
+            'Enrollment windows tracked, never missed, never expired',
             'Every change lands in the next pay file automatically',
           ]}
         >
@@ -230,7 +230,7 @@ export default function PayrollPage() {
           warm
           eyebrow="The feeling"
           title={<>No more Sunday-night <Em>sweeps.</Em></>}
-          lead={'No more Sunday-night spreadsheet sweeps. No more “did the raise make it in?” The file is built, reconciled, and waiting for you — days before anyone gets paid.'}
+          lead={'No more Sunday-night spreadsheet sweeps. No more “did the raise make it in?” The file is built, reconciled, and waiting for you, days before anyone gets paid.'}
           bullets={[
             'Every change accounted for, with the receipt to prove it',
             'Discrepancies caught and fixed before the file reaches you',
@@ -249,7 +249,7 @@ export default function PayrollPage() {
         />
 
         <QuoteBand
-          quote="We switched on a Friday and ran payday Monday without a hiccup. Every change was already in the file — I just uploaded it."
+          quote="We switched on a Friday and ran payday Monday without a hiccup. Every change was already in the file, I just uploaded it."
           name="Sofia Reyes"
           role="Head of People, 140-person company"
           img="/v2-people/sofia.jpg"

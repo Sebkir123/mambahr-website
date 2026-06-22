@@ -2,7 +2,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 import type { Post } from '@/lib/blog'
 
 // Public-facing reads. These run under the anonymous Postgres role, so RLS
-// (posts_public_read) is the real gate — only live posts ever come back, even
+// (posts_public_read) is the real gate, only live posts ever come back, even
 // though the query itself asks for everything. Never trust the query alone.
 
 // A post's effective publish date is published_at, or scheduled_for for a

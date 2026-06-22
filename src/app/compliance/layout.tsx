@@ -4,11 +4,11 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'Multi-State HR Compliance — MambaHR',
+  title: 'Multi-State HR Compliance | MambaHR',
   description:
     'All 50 states kept current. Every answer cites the law. Federal baseline plus state overlays, EEO-1, and edge cases routed to a human.',
   openGraph: {
-    title: 'Multi-State HR Compliance — MambaHR',
+    title: 'Multi-State HR Compliance | MambaHR',
     description:
       'All 50 states kept current. Every answer cites the law. Federal baseline plus state overlays, EEO-1, edge cases to a human.',
     url: 'https://mambahr.com/compliance',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Multi-State HR Compliance — MambaHR',
+    title: 'Multi-State HR Compliance | MambaHR',
     description:
       'All 50 states kept current. Every answer cites the law. Federal baseline plus state overlays, EEO-1, edge cases to a human.',
     images: [ogImage],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Multi-State HR Compliance — MambaHR',
+  name: 'Multi-State HR Compliance | MambaHR',
   url: 'https://mambahr.com/compliance',
   description:
     'MambaHR compliance: all 50 states kept current with the federal baseline plus state overlays. Every answer cites the law, EEO-1 is handled, and edge cases route to a human.',

@@ -10,21 +10,21 @@ import {
 } from '@/components/v2/page-kit'
 
 const STEPS: LoopStep[] = [
-  { n: '01', img: '/avatars/maya.jpg',   label: 'Offer letter sent — Maya Chen',   desc: 'Senior Engineer · $195k · above band 8%',     who: 'agent', time: '2 min' },
-  { n: '02', img: '/avatars/priya.jpg',  label: 'Leave approved — Priya Patel',    desc: 'FMLA + CA CFRA stacked · 14 weeks',           who: 'agent', time: '4 min' },
-  { n: '03', img: '/avatars/marcus.jpg', label: 'PIP drafted — Marcus Webb',       desc: '90-day evidence cited · L3 sign-off queued',  who: 'you',   time: 'Pending' },
-  { n: '04', img: '/avatars/sarah.jpg',  label: 'Separation docs — Sarah Lin',     desc: 'State-aware final pay · DocuSign chain ready', who: 'you',   time: 'Review' },
+  { n: '01', img: '/avatars/maya.jpg',   label: 'Offer letter sent, Maya Chen',   desc: 'Senior Engineer · $195k · above band 8%',     who: 'agent', time: '2 min' },
+  { n: '02', img: '/avatars/priya.jpg',  label: 'Leave approved, Priya Patel',    desc: 'FMLA + CA CFRA stacked · 14 weeks',           who: 'agent', time: '4 min' },
+  { n: '03', img: '/avatars/marcus.jpg', label: 'PIP drafted, Marcus Webb',       desc: '90-day evidence cited · L3 sign-off queued',  who: 'you',   time: 'Pending' },
+  { n: '04', img: '/avatars/sarah.jpg',  label: 'Separation docs, Sarah Lin',     desc: 'State-aware final pay · DocuSign chain ready', who: 'you',   time: 'Review' },
 ]
 
 const CAPABILITIES = [
   {
     eyebrow: 'Onboarding & offboarding',
     title: <>Day one to last day, <Em>one workflow.</Em></>,
-    lead: 'A signed offer kicks off the whole fanout — provisioning, I-9, device, first-week calendar. An exit runs the reverse, always with a human on final pay.',
+    lead: 'A signed offer kicks off the whole fanout, provisioning, I-9, device, first-week calendar. An exit runs the reverse, always with a human on final pay.',
     bullets: [
       'Offer generated + countersigned (DocuSign)',
       'I-9 verified, E-Verify cleared',
-      'Accounts provisioned — Okta, Entra, Google, Slack',
+      'Accounts provisioned, Okta, Entra, Google, Slack',
       'Device set up (Jamf), buddy + first-week calendar',
       'Offboarding: WARN / COBRA / OWBPA, state-aware final pay',
     ],
@@ -53,7 +53,7 @@ const CAPABILITIES = [
       'Annual, quarterly, probationary, promotion, and PIP cycles',
       'AI-drafted review narratives with cited evidence',
       '9-box calibration + fairness intelligence',
-      'Comp-change recommendations — human-approved',
+      'Comp-change recommendations, human-approved',
       'Disputes, appeals, and signed close artifacts',
     ],
     flip: false,
@@ -62,13 +62,13 @@ const CAPABILITIES = [
   {
     eyebrow: 'Compensation',
     title: <>Raises that <Em>stay fair.</Em></>,
-    lead: 'Market bands and a real pay-equity model behind every comp change — with a fairness gate before anything is final.',
+    lead: 'Market bands and a real pay-equity model behind every comp change, with a fairness gate before anything is final.',
     bullets: [
       'Market bands on every role',
-      'Pay-equity regression — p-values, outliers flagged',
+      'Pay-equity regression, p-values, outliers flagged',
       'Promotions and raises with risk-based approval routing',
       'Fairness gate on all sensitive changes',
-      'Comp-change draft — human-approved before anything sends',
+      'Comp-change draft, human-approved before anything sends',
     ],
     flip: true,
     warm: true,
@@ -90,13 +90,13 @@ const CAPABILITIES = [
   {
     eyebrow: 'Headcount & RIF',
     title: <>Reductions, <Em>done defensibly.</Em></>,
-    lead: 'Plan a reduction, model severance, and run the legal steps — heavily gated, always human-approved.',
+    lead: 'Plan a reduction, model severance, and run the legal steps, heavily gated, always human-approved.',
     bullets: [
       'Scenario planning + severance and final-pay math',
       'WARN notices and batch legal hold',
       'Internal-redeployment scan before anyone is cut',
       '18-point preflight safety check that hard-blocks',
-      'Three-role approval — humans sign off',
+      'Three-role approval, humans sign off',
     ],
     flip: true,
     warm: true,
@@ -104,7 +104,7 @@ const CAPABILITIES = [
   {
     eyebrow: 'Documents & e-sign',
     title: <>Generated, signed, <Em>filed, retained.</Em></>,
-    lead: 'Offers, separation agreements, NDAs, and policies — versioned, jurisdiction-scoped, and sent for signature without leaving the agent.',
+    lead: 'Offers, separation agreements, NDAs, and policies, versioned, jurisdiction-scoped, and sent for signature without leaving the agent.',
     bullets: [
       'Templates for offer / separation / NDA / policy',
       'DocuSign signer chains, e-sign end to end',
@@ -152,7 +152,7 @@ export default function ProductPage() {
         <PageHero
           eyebrow="The product"
           title={<>See the agent <Em>run the work.</Em></>}
-          lead="Hiring, onboarding, leave, performance, compensation, compliance — handled end to end, with a human on the calls that matter."
+          lead="Hiring, onboarding, leave, performance, compensation, compliance, handled end to end, with a human on the calls that matter."
         >
           <div style={{
             background: 'var(--bg)',

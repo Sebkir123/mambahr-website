@@ -48,7 +48,7 @@ type DbClient = Awaited<ReturnType<typeof createSupabaseServerClient>>
 
 // Returns `base` if free, else the next open `base-2`, `base-3`, … Two "Untitled
 // post" drafts both slugify to `untitled-post`; rather than hard-fail the second
-// on the unique index, we suffix it — standard CMS behaviour. Excludes the post
+// on the unique index, we suffix it, standard CMS behaviour. Excludes the post
 // being saved so re-saving an unchanged slug never trips over itself.
 async function uniqueSlug(supabase: DbClient, base: string, selfId: string): Promise<string> {
   const { data } = await supabase
@@ -105,7 +105,7 @@ export async function savePost(payload: SavePayload): Promise<SaveResult> {
     return { ok: false, error: error.message }
   }
 
-  // best-effort revision snapshot — full editorial content so it can be restored.
+  // best-effort revision snapshot, full editorial content so it can be restored.
   await supabase.from('post_revisions').insert({
     post_id: payload.id,
     body_json: payload.bodyJson,
@@ -155,7 +155,7 @@ export async function setPostStatus(
 
 export type Revision = { id: string; title: string | null; excerpt: string | null; saved_at: string }
 
-// Most recent content snapshots for a post, newest first. Capped at 30 — older
+// Most recent content snapshots for a post, newest first. Capped at 30, older
 // history is rarely useful and the list stays scannable.
 export async function listRevisions(postId: string): Promise<Revision[]> {
   await requireAdmin()

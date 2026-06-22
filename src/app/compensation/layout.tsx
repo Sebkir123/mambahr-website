@@ -4,11 +4,11 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'Compensation Management — MambaHR',
+  title: 'Compensation Management | MambaHR',
   description:
     'Every raise priced against your bands. Above-band routes to a human. Pay equity watched continuously, comp letters e-signed and filed.',
   openGraph: {
-    title: 'Compensation Management — MambaHR',
+    title: 'Compensation Management | MambaHR',
     description:
       'Every raise priced against your bands. Above-band routes to a human. Pay equity watched, comp letters e-signed and filed.',
     url: 'https://mambahr.com/compensation',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Compensation Management — MambaHR',
+    title: 'Compensation Management | MambaHR',
     description:
       'Every raise priced against your bands. Above-band routes to a human. Pay equity watched, comp letters e-signed and filed.',
     images: [ogImage],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Compensation Management — MambaHR',
+  name: 'Compensation Management | MambaHR',
   url: 'https://mambahr.com/compensation',
   description:
     'MambaHR compensation: every raise priced against your bands, with above-band requests routed to a human. The agent monitors pay equity and generates comp letters that are e-signed and filed.',

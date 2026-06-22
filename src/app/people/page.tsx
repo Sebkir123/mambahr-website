@@ -95,7 +95,7 @@ function OrgChartCard() {
     <div className="org agent-edge agent-done">
       <div className="o-head">
         <span className="o-t">Org chart</span>
-        <span className="o-sub">Always current — drawn from the record</span>
+        <span className="o-sub">Always current, drawn from the record</span>
       </div>
       <div className="ceo">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -181,7 +181,7 @@ export default function PeoplePage() {
         <PageHero
           eyebrow="Employee records"
           title={<>One record, <Em>current.</Em></>}
-          lead="Stop paying someone to retype what already happened. The agent that does the work keeps the record — every person, every detail, right by itself."
+          lead="Stop paying someone to retype what already happened. The agent that does the work keeps the record, every person, every detail, right by itself."
           proof="The system of record for lean people teams"
           photo="/v2-people/team2.jpg"
           photoChip="Mamba · done"
@@ -195,12 +195,12 @@ export default function PeoplePage() {
           title="Why it never goes stale"
           lead="Old systems go stale because a person has to remember to type. Here, the work and the record are the same thing."
           steps={[
-            { n: '01', label: 'Someone’s hired', desc: 'The record creates itself from the signed offer — name, role, comp, start date.', who: 'agent', time: 'instant', img: '/avatars/dave.jpg' },
-            { n: '02', label: 'A raise is approved', desc: 'Comp updated everywhere it lives — the record, the band, the payroll file.', who: 'agent', time: 'same minute' },
+            { n: '01', label: 'Someone’s hired', desc: 'The record creates itself from the signed offer, name, role, comp, start date.', who: 'agent', time: 'instant', img: '/avatars/dave.jpg' },
+            { n: '02', label: 'A raise is approved', desc: 'Comp updated everywhere it lives, the record, the band, the payroll file.', who: 'agent', time: 'same minute' },
             { n: '03', label: 'An address changes in Slack', desc: 'Priya mentions she moved; it’s filed in seconds, taxes rechecked.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
             { n: '04', label: 'Leave is approved', desc: 'The calendar and payday reflect it before anyone has to ask.', who: 'agent', time: 'same minute' },
-            { n: '05', label: 'Every change is logged', desc: 'Who changed what, when, and why — kept with the record forever.', who: 'agent', time: 'always' },
-            { n: '06', label: 'You just look things up', desc: 'Headcount, tenure, who reports to whom — they’re right, every time.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '05', label: 'Every change is logged', desc: 'Who changed what, when, and why, kept with the record forever.', who: 'agent', time: 'always' },
+            { n: '06', label: 'You just look things up', desc: 'Headcount, tenure, who reports to whom, they’re right, every time.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
 
@@ -210,7 +210,7 @@ export default function PeoplePage() {
           lead="Your CEO asks for headcount by team and you answer in the meeting, not after a weekend of spreadsheet archaeology. Reporting lines are always true because they come straight from the record."
           bullets={[
             'Reporting lines update the moment a transfer happens',
-            'Headcount by team, location, or manager — instantly',
+            'Headcount by team, location, or manager, instantly',
             'New hires appear on day one, leavers come off the same day',
           ]}
         >
@@ -222,7 +222,7 @@ export default function PeoplePage() {
           warm
           eyebrow="Switching"
           title={<>Switch in a day, <Em>keep it all</Em></>}
-          lead="The migration project you’ve been dreading is one import. Gusto, Workday, Rippling, BambooHR, Namely, or ADP — one-time, done in a day, every history and balance carried over. Then your old system retires."
+          lead="The migration project you’ve been dreading is one import. Gusto, Workday, Rippling, BambooHR, Namely, or ADP, one-time, done in a day, every history and balance carried over. Then your old system retires."
           bullets={[
             'Every record, every history, every balance carried over',
             'We check the import line by line before you go live',

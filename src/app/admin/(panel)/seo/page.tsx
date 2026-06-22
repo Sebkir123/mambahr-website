@@ -10,7 +10,7 @@ const SITE = 'https://mambahr.com'
 
 const SITEMAPS = [
   { label: 'Sitemap', href: `${SITE}/sitemap.xml`, note: 'All static + published blog URLs' },
-  { label: 'Robots', href: `${SITE}/robots.txt`, note: 'Crawl rules — AI crawlers welcomed, archives blocked' },
+  { label: 'Robots', href: `${SITE}/robots.txt`, note: 'Crawl rules, AI crawlers welcomed, archives blocked' },
   { label: 'RSS feed', href: `${SITE}/blog/rss.xml`, note: 'Latest 30 published posts' },
   { label: 'Blog index', href: `${SITE}/blog`, note: 'Public blog landing page' },
 ]

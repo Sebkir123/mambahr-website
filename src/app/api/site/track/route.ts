@@ -22,7 +22,7 @@ const PROPERTIES = new Set(['website', 'deck', 'lp'])
 const EVENT_KINDS = new Set(['widget_open', 'conversation', 'signup', 'cta_click', 'download', 'custom'])
 const MAX_PAGEVIEWS_PER_SESSION = 300
 
-// Coarse per-IP rate limit on the public write endpoint — blocks a tight POST
+// Coarse per-IP rate limit on the public write endpoint, blocks a tight POST
 // loop bloating the table, while staying generous enough for real browsing
 // (a page-view + 15s heartbeats + unload across many pages). Per serverless
 // instance (not global), which is fine as a spam backstop.
@@ -185,7 +185,7 @@ export async function POST(req: NextRequest) {
       }
       const utm = (body.utm as Record<string, unknown>) ?? {}
       // upsert with DO UPDATE (ignoreDuplicates:false) + select returns the row
-      // in ONE statement — no second round-trip that could race and drop the view.
+      // in ONE statement, no second round-trip that could race and drop the view.
       const { data: created } = await supabase
         .from('site_sessions')
         .upsert(

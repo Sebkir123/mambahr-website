@@ -27,33 +27,33 @@ const CARDS = [
   { slug: 'oyster', name: 'Oyster', sub: 'Oyster hires across borders. MambaHR runs the team at home.', tag: null },
 ]
 
-/* The choices teams actually weigh when HR gets messy — not just vendors. */
+/* The choices teams actually weigh when HR gets messy, not just vendors. */
 const OPTIONS = [
   {
     title: 'Hire someone',
     good: 'Judgment, presence, a person who owns it.',
-    breaks: '$70k–$150k a year for one person on business hours — who still needs systems to work in.',
+    breaks: '$70k–$150k a year for one person on business hours, who still needs systems to work in.',
     mamba: 'MambaHR does the repeatable work for a fraction of the cost, and your eventual hire starts with a running department.',
   },
   {
     title: 'Buy more software',
     good: 'Cleaner records, better forms, nicer dashboards.',
-    breaks: 'A system of record stores the work. Someone on your team still does it — in every module you bought.',
+    breaks: 'A system of record stores the work. Someone on your team still does it, in every module you bought.',
     mamba: 'MambaHR is the system of record and the worker in one. The data lives there, and the work gets done there.',
   },
   {
     title: 'Spreadsheets & Slack',
     good: 'Free, flexible, starts today.',
     breaks: 'Breaks fast. No audit trail, inconsistent process, and the payroll change someone forgot becomes a real problem.',
-    mamba: 'MambaHR gives you structure, workflows, and an audit trail from day one — still in Slack, where your team already is.',
+    mamba: 'MambaHR gives you structure, workflows, and an audit trail from day one, still in Slack, where your team already is.',
   },
 ]
 
 const DIFFS = [
-  { num: '01', title: 'It does the work.', desc: 'Leave approved. Offer drafted. Candidate screened. MambaHR handles the request end-to-end — not just surfaces the information for someone else to act on.' },
+  { num: '01', title: 'It does the work.', desc: 'Leave approved. Offer drafted. Candidate screened. MambaHR handles the request end-to-end, not just surfaces the information for someone else to act on.' },
   { num: '02', title: 'It lives in Slack.', desc: 'No new software to learn. Employees mention @mamba in any channel and get answers in seconds. Managers approve in a thread.' },
-  { num: '03', title: 'Human in the loop.', desc: 'Every high-stakes decision — offers above band, terminations, PIPs — routes to you for approval before anything happens. The agent handles the routine, you handle the judgment.' },
-  { num: '04', title: 'Built for the long tail.', desc: 'The compliance engine, the audit trail, the specialist agents — all of it built for the HR lead doing the work of ten.' },
+  { num: '03', title: 'Human in the loop.', desc: 'Every high-stakes decision, offers above band, terminations, PIPs, routes to you for approval before anything happens. The agent handles the routine, you handle the judgment.' },
+  { num: '04', title: 'Built for the long tail.', desc: 'The compliance engine, the audit trail, the specialist agents, all of it built for the HR lead doing the work of ten.' },
 ]
 
 export default function CompareHub() {
@@ -163,7 +163,7 @@ export default function CompareHub() {
             <div className="head" data-reveal>
               <p className="eyebrow">Head to head</p>
               <h2 className="title">Pick your <Em>incumbent.</Em></h2>
-              <p className="lead">Honest comparisons against every major HRIS, PEO, payroll, and ATS — feature tables included, the rows we lose included.</p>
+              <p className="lead">Honest comparisons against every major HRIS, PEO, payroll, and ATS, feature tables included, the rows we lose included.</p>
             </div>
             <div className="grid">
               {CARDS.map((c, i) => (

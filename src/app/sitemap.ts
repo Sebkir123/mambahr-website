@@ -33,11 +33,11 @@ const STATIC_ROUTES: StaticRoute[] = [
   { path: '/pricing',      file: 'src/app/pricing/page.tsx',         changeFrequency: 'weekly',  priority: 0.95 },
   { path: '/product',      file: 'src/app/product/page.tsx',         changeFrequency: 'weekly',  priority: 0.9 },
   { path: '/compare',      file: 'src/app/compare/page.tsx',         changeFrequency: 'monthly', priority: 0.9 },
-  // Category / intent pages — the high-volume search + answer-engine surface.
+  // Category / intent pages, the high-volume search + answer-engine surface.
   { path: '/ai-hr-software',            file: 'src/app/ai-hr-software/page.tsx',            changeFrequency: 'weekly', priority: 0.9 },
   { path: '/best-hris-for-startups',    file: 'src/app/best-hris-for-startups/page.tsx',    changeFrequency: 'weekly', priority: 0.9 },
   { path: '/hr-software-small-business', file: 'src/app/hr-software-small-business/page.tsx', changeFrequency: 'weekly', priority: 0.9 },
-  // Function pages — the procurement-keyword surface buyers search for.
+  // Function pages, the procurement-keyword surface buyers search for.
   { path: '/hiring',       file: 'src/app/hiring/page.tsx',          changeFrequency: 'monthly', priority: 0.85 },
   { path: '/job-portal',   file: 'src/app/job-portal/page.tsx',      changeFrequency: 'monthly', priority: 0.85 },
   { path: '/onboarding',   file: 'src/app/onboarding/page.tsx',      changeFrequency: 'monthly', priority: 0.85 },

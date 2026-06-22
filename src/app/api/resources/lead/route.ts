@@ -8,7 +8,7 @@ import { notifyLeadSlack } from '@/lib/slack'
 export const dynamic = 'force-dynamic'
 
 // Email-gated resource download. Captures a lead (email + which playbook) into
-// magnet_requests — so it flows into the unified Leads admin + CSV export — then
+// magnet_requests, so it flows into the unified Leads admin + CSV export, then
 // returns the PDF download URL. Mirrors the field-guide route's defenses
 // (Turnstile + in-memory + durable rate-limit). The PDF URL is never in the page
 // source, so the email wall can't be bypassed by reading the HTML.

@@ -35,7 +35,7 @@ const PRINCIPLES = [
   },
 ]
 
-/* The platform — everything the department runs, each a real page. */
+/* The platform, everything the department runs, each a real page. */
 const PLATFORM = [
   { label: 'Hiring & ATS', desc: 'Req to signed offer', href: '/hiring' },
   { label: 'Job portal', desc: 'Your careers page, hosted', href: '/job-portal' },
@@ -81,7 +81,7 @@ export default function AboutPage() {
             <p className="eyebrow" data-reveal>About MambaHR</p>
             <h1 className="title" data-reveal data-delay="1">The AI HR <Em>department.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
-              For thirty years, HR software was a database with a UI — and companies paid people to click
+              For thirty years, HR software was a database with a UI, and companies paid people to click
               through it. MambaHR is the company building what comes next: an AI department that <b>does</b> the
               work end to end, with a human on the calls that matter.
             </p>
@@ -124,9 +124,9 @@ export default function AboutPage() {
 
         <StatTrio
           stats={[
-            { n: 50, label: 'states covered — every compliance answer cites the law' },
+            { n: 50, label: 'states covered, every compliance answer cites the law' },
             { n: 24, suffix: '/7', label: 'the department works around the clock, not business hours' },
-            { n: 1, suffix: ' day', label: 'from signed to live — data imported, no setup project' },
+            { n: 1, suffix: ' day', label: 'from signed to live, data imported, no setup project' },
           ]}
         />
 
@@ -140,7 +140,7 @@ export default function AboutPage() {
               and never came back.
             </p>
             <p className="body" data-reveal data-delay="2">
-              The tools got better — better dashboards, better forms, better databases. The work
+              The tools got better, better dashboards, better forms, better databases. The work
               didn&rsquo;t go anywhere. It just got prettier wrappers.
             </p>
             <p className="body" data-reveal data-delay="2">
@@ -173,7 +173,7 @@ export default function AboutPage() {
               <p className="eyebrow">What we build</p>
               <h2 className="title">One department, <Em>every job.</Em></h2>
               <p className="lead">
-                MambaHR is the system of record and the worker in one — the ATS and the recruiter, the
+                MambaHR is the system of record and the worker in one, the ATS and the recruiter, the
                 careers page and the coordinator, the HRIS and the ops manager. Twelve functions, one agent,
                 every action logged.
               </p>
@@ -271,7 +271,7 @@ export default function AboutPage() {
               <p className="eyebrow">Leadership</p>
               <h2 className="title">Founder-led, <Em>by design.</Em></h2>
               <p className="lead">
-                MambaHR is built and run by its founders — which means the people who designed the product
+                MambaHR is built and run by its founders, which means the people who designed the product
                 are the same people on your demo, your implementation, and your security review.
               </p>
             </div>
@@ -297,7 +297,7 @@ export default function AboutPage() {
               <span className="fact"><i aria-hidden="true" />Headquartered in San Francisco</span>
               <span className="fact"><i aria-hidden="true" />US data residency</span>
               <span className="fact"><i aria-hidden="true" />All 50 states covered</span>
-              <span className="fact"><i aria-hidden="true" />We&rsquo;re hiring — <a href="mailto:jobs@mambahr.com">jobs@mambahr.com</a></span>
+              <span className="fact"><i aria-hidden="true" />We&rsquo;re hiring, <a href="mailto:jobs@mambahr.com">jobs@mambahr.com</a></span>
             </div>
           </div>
           <style jsx>{`
@@ -330,7 +330,7 @@ export default function AboutPage() {
 
         <PageCta
           title={<>Come see what <Em>we built.</Em></>}
-          sub="A live demo with a founder — not a sales rep. 30 minutes."
+          sub="A live demo with a founder, not a sales rep. 30 minutes."
         />
       </main>
       <Footer />

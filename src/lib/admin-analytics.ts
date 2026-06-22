@@ -5,7 +5,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { serviceDb } from '@/lib/supabase/service'
 
 // First-party analytics for the admin panel. Reads lead tables + post_views AS
-// THE LOGGED-IN ADMIN — the magic-link session, governed by RLS (is_admin() is
+// THE LOGGED-IN ADMIN, the magic-link session, governed by RLS (is_admin() is
 // true only for @mambahr.com). No RLS-bypassing service-role key. Every caller
 // is behind requireAdmin(). Each table is queried defensively so a missing
 // column/table degrades to empty rather than crashing the dashboard.

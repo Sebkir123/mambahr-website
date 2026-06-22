@@ -139,7 +139,7 @@ function ParentalLeaveCard() {
           <div className="m-who">Mamba <span className="m-time">6 seconds later</span></div>
           <div className="a">
             Up to 24 weeks, job protected.
-            <span className="a-sub">Federal and state stacked correctly — calendar blocked, payday updated.</span>
+            <span className="a-sub">Federal and state stacked correctly, calendar blocked, payday updated.</span>
             <span className="laws">
               <span className="law">FMLA</span>
               <span className="law">CA CFRA</span>
@@ -276,7 +276,7 @@ export default function LeavePage() {
         <PageHero
           eyebrow="Time off & leave"
           title={<>Time off, <Em>approved.</Em></>}
-          lead={'Normal time off approves itself in seconds. Family and medical leave gets handled the legally-safe way — calendar blocked, payday updated, the law attached.'}
+          lead={'Normal time off approves itself in seconds. Family and medical leave gets handled the legally-safe way, calendar blocked, payday updated, the law attached.'}
           proof="Loved by teams in 11+ states"
           photo="/v2-people/sofia.jpg"
           photoChip="Mamba · done"
@@ -290,22 +290,22 @@ export default function LeavePage() {
           title={<>When someone <Em>asks.</Em></>}
           lead={'Every request runs the same path: the easy ones finish in seconds, the regulated ones get the statute check, and only the genuinely ambiguous ones reach you.'}
           steps={[
-            { n: '01', label: 'Reads the request', desc: 'Slack, Teams, or the MambaHR app — Mamba understands the dates, the reason, and who is asking.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
-            { n: '02', label: 'Checks balance and policy', desc: 'Accrued days, blackout dates, notice rules — checked against your actual policy, not a guess.', who: 'agent', time: 'seconds' },
-            { n: '03', label: 'Checks FMLA and state leave when it applies', desc: 'Parental or medical leave triggers the eligibility check — federal and state, stacked correctly.', who: 'agent', time: 'seconds' },
+            { n: '01', label: 'Reads the request', desc: 'Slack, Teams, or the MambaHR app, Mamba understands the dates, the reason, and who is asking.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
+            { n: '02', label: 'Checks balance and policy', desc: 'Accrued days, blackout dates, notice rules, checked against your actual policy, not a guess.', who: 'agent', time: 'seconds' },
+            { n: '03', label: 'Checks FMLA and state leave when it applies', desc: 'Parental or medical leave triggers the eligibility check, federal and state, stacked correctly.', who: 'agent', time: 'seconds' },
             { n: '04', label: 'Books calendar and updates payday', desc: 'OOO set, coverage visible, and the pay record adjusted so payday is right without anyone touching it.', who: 'agent', time: 'same minute' },
-            { n: '05', label: 'Notifies the manager', desc: 'A clean note with dates and coverage — no approval ping-pong for in-policy requests.', who: 'agent', time: 'same minute', img: '/avatars/anna.jpg' },
-            { n: '06', label: 'The edge cases', desc: 'Anything ambiguous comes to you — with the balance, the policy, and the relevant law already laid out.', who: 'you', img: '/avatars/tom.jpg' },
+            { n: '05', label: 'Notifies the manager', desc: 'A clean note with dates and coverage, no approval ping-pong for in-policy requests.', who: 'agent', time: 'same minute', img: '/avatars/anna.jpg' },
+            { n: '06', label: 'The edge cases', desc: 'Anything ambiguous comes to you, with the balance, the policy, and the relevant law already laid out.', who: 'you', img: '/avatars/tom.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Family & medical leave"
           title={<>The hard leave, <Em>handled.</Em></>}
-          lead={'Parental and medical leave is where mistakes get expensive. Mamba checks eligibility, stacks federal and state entitlements correctly, and attaches the statute to every answer — so Legal never gets a panicked call.'}
+          lead={'Parental and medical leave is where mistakes get expensive. Mamba checks eligibility, stacks federal and state entitlements correctly, and attaches the statute to every answer, so Legal never gets a panicked call.'}
           bullets={[
             'FMLA eligibility checked before anything is promised',
-            'State paid leave — CA CFRA, NY, MA, CO — stacked correctly with federal',
+            'State paid leave, CA CFRA, NY, MA, CO, stacked correctly with federal',
             'Every answer cites the law it followed',
             'The risky calls route to a human, with the homework done',
           ]}
@@ -318,9 +318,9 @@ export default function LeavePage() {
           warm
           eyebrow="The culture part"
           title={<>Vacations, actually <Em>taken.</Em></>}
-          lead={'No guilt-tripping forms, no week-long approval limbo. Balances are always current, coverage is visible to everyone, and asking for time off feels like asking a colleague — because that’s what it is.'}
+          lead={'No guilt-tripping forms, no week-long approval limbo. Balances are always current, coverage is visible to everyone, and asking for time off feels like asking a colleague, because that’s what it is.'}
           bullets={[
-            'Balances always current — no “let me check the spreadsheet”',
+            'Balances always current, no “let me check the spreadsheet”',
             'Team coverage visible before anyone says yes',
             'Approvals in seconds, so people actually book the trip',
           ]}
@@ -337,7 +337,7 @@ export default function LeavePage() {
         />
 
         <QuoteBand
-          quote="We have people in eleven states and I used to dread every leave question. Now the answer comes back in seconds — with the law attached."
+          quote="We have people in eleven states and I used to dread every leave question. Now the answer comes back in seconds, with the law attached."
           name="Marcus Lee"
           role="People Operations Lead, multi-state team"
           img="/v2-people/marcus.jpg"

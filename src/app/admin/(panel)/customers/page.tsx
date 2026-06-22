@@ -136,7 +136,7 @@ export default async function CustomersOverview() {
                 <span className={styles.taskTitle}>
                   <Link href={`/admin/crm/${c.id}`} className={ui.rowLink}>{c.name}</Link>
                   {c.company ? <span className={styles.muted}> · {c.company}</span> : ''}
-                  <span className={styles.muted}> — {c.next_step}</span>
+                  <span className={styles.muted}>, {c.next_step}</span>
                   <span className={`${styles.pill} ${styles.pillTag}`} style={{ marginLeft: 8 }}>{stageLabel('customer', c.stage)}</span>
                 </span>
                 <span className={styles.taskDue}>{c.next_step_due ? when(c.next_step_due) : 'no date'}</span>

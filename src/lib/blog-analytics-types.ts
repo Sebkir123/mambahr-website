@@ -27,7 +27,7 @@ export const EMPTY_STAT: Omit<BlogStat, 'slug' | 'path'> = {
   lastView: null,
 }
 
-// "3m 20s", "45s", "1h 2m" — compact human read time.
+// "3m 20s", "45s", "1h 2m", compact human read time.
 export function formatReadTime(ms: number): string {
   if (!ms || ms < 1000) return '0s'
   const s = Math.round(ms / 1000)
@@ -38,7 +38,7 @@ export function formatReadTime(ms: number): string {
   return `${h}h ${m % 60}m`
 }
 
-// "2.3k", "812" — compact counts for tight columns.
+// "2.3k", "812", compact counts for tight columns.
 export function compact(n: number): string {
   if (n < 1000) return String(n)
   if (n < 10000) return `${(n / 1000).toFixed(1)}k`

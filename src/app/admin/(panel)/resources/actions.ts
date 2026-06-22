@@ -17,14 +17,14 @@ function slugify(s: string): string {
     .slice(0, 80)
 }
 
-// Slugs that collide with existing static routes under /resources/ — a CMS row
+// Slugs that collide with existing static routes under /resources/, a CMS row
 // with one of these would be permanently shadowed by the static page.
 const RESERVED_SLUGS = new Set(['rif-playbook'])
 
 export type SaveResult = { ok: boolean; message: string; slug?: string }
 
 // Mint a signed upload URL for a playbook PDF. The browser then uploads the
-// bytes DIRECTLY to Supabase Storage with this token — bypassing the Next/Vercel
+// bytes DIRECTLY to Supabase Storage with this token, bypassing the Next/Vercel
 // request-body limits (1 MB server action, ~4.5 MB function) so PDFs up to the
 // bucket's 50 MB cap work. Admin-gated; only metadata crosses the function.
 export type UploadTicket = { ok: boolean; path?: string; token?: string; name?: string; message?: string }
@@ -42,7 +42,7 @@ export async function createResourceUploadUrl(formData: FormData): Promise<Uploa
 
   const path = `pdf/${randomBytes(10).toString('hex')}.pdf`
   const { data, error } = await db.storage.from(BUCKET).createSignedUploadUrl(path)
-  if (error || !data) return { ok: false, message: 'Could not start the upload — try again.' }
+  if (error || !data) return { ok: false, message: 'Could not start the upload, try again.' }
   return { ok: true, path: data.path, token: data.token, name: name.slice(0, 200) }
 }
 
@@ -57,7 +57,7 @@ export async function saveResource(formData: FormData): Promise<SaveResult> {
   if (!title) return { ok: false, message: 'Title is required.' }
   const slug = slugify(String(formData.get('slug') || '') || title)
   if (!slug) return { ok: false, message: 'Could not derive a slug from the title.' }
-  if (RESERVED_SLUGS.has(slug)) return { ok: false, message: `“${slug}” is reserved — pick a different slug.` }
+  if (RESERVED_SLUGS.has(slug)) return { ok: false, message: `“${slug}” is reserved, pick a different slug.` }
 
   const status = String(formData.get('status') || 'draft') === 'published' ? 'published' : 'draft'
   const filePath = String(formData.get('file_path') || '').trim() || null

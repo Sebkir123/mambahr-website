@@ -56,7 +56,7 @@ export default async function DeckAdminPage() {
 
       {a.totals.opens === 0 && (
         <div className={styles.hint}>
-          <strong>Nothing tracked yet — and that&rsquo;s expected.</strong> Your own previews
+          <strong>Nothing tracked yet, and that&rsquo;s expected.</strong> Your own previews
           while signed in here are never counted. Tracking starts when someone opens a{' '}
           <em>recipient link</em> from outside this admin (a real investor, or you in a logged-out /
           incognito window). Create a link below, share it, and opens, attention, and the slide

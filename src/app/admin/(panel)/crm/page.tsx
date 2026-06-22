@@ -39,8 +39,8 @@ export default async function CrmPage({ searchParams }: { searchParams: Promise<
           <h1 className={ui.h1}>{isInvestor ? 'Investor pipeline' : 'Customer pipeline'}</h1>
           <p className={ui.subtitle}>
             {isInvestor
-              ? 'Fundraise pipeline — drag to move stages · live & collaborative'
-              : 'Sales pipeline — drag to move stages · live & collaborative'}
+              ? 'Fundraise pipeline, drag to move stages · live & collaborative'
+              : 'Sales pipeline, drag to move stages · live & collaborative'}
           </p>
         </div>
         <div className={styles.headerActions}>

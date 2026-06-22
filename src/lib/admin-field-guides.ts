@@ -8,11 +8,11 @@ import { serviceDb } from '@/lib/supabase/service'
 // Analytics for the gated field guides. Reads field_guide_leads +
 // field_guide_views AS THE LOGGED-IN ADMIN (RLS: is_admin() = @mambahr.com).
 // Each view row is one open of the gated page, enriched server-side with the
-// owning network (ASN/firm) — so you see which prospect read which guide.
+// owning network (ASN/firm), so you see which prospect read which guide.
 // Leads come from the public email form (source=form) OR an admin-created
 // tracked share link (source=manual).
 
-// Guide catalog — slug → public title + gated route path. The token-gated page
+// Guide catalog, slug → public title + gated route path. The token-gated page
 // lives at <path>?k=<token>.
 export const GUIDES: Record<string, { title: string; path: string }> = {
   'rif-playbook': { title: 'The Defensible Layoff Playbook', path: '/resources/rif-playbook' },

@@ -113,7 +113,7 @@ export default function MegaNav() {
           boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.03)' : 'none',
         }}
       >
-        {/* gradient hairline — fades in on scroll */}
+        {/* gradient hairline, fades in on scroll */}
         <div
           aria-hidden="true"
           style={{
@@ -165,7 +165,7 @@ export default function MegaNav() {
             ))}
           </div>
 
-          {/* Right CTA — single conversion action */}
+          {/* Right CTA, single conversion action */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
             <Link href="/demo" className="btn-dark">
               Book a demo
@@ -187,7 +187,7 @@ export default function MegaNav() {
           </div>
         </div>
 
-        {/* Desktop dropdown — floating card, two buyer-vocabulary columns */}
+        {/* Desktop dropdown, floating card, two buyer-vocabulary columns */}
         {productOpen && (
           <div
             onMouseEnter={openProduct}
@@ -213,7 +213,7 @@ export default function MegaNav() {
                 style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, #B98A4E, #6A5DA6)', opacity: 0.7 }}
               />
               <div style={{ padding: '28px 32px 24px', display: 'grid', gridTemplateColumns: '1.9fr 0.85fr', gap: 32 }}>
-                {/* Everything HR — the procurement checklist, two compact columns */}
+                {/* Everything HR, the procurement checklist, two compact columns */}
                 <div>
                   <p style={colLabel}>Everything HR, handled</p>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px 16px' }}>
@@ -221,7 +221,7 @@ export default function MegaNav() {
                   </div>
                 </div>
 
-                {/* The platform rail — label-only links, no competing panel */}
+                {/* The platform rail, label-only links, no competing panel */}
                 <div style={{ borderLeft: '1px solid var(--border-faint)', paddingLeft: 28 }}>
                   <p style={{ ...colLabel, marginLeft: 10 }}>The platform</p>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -269,7 +269,7 @@ export default function MegaNav() {
                   </Link>
                 </div>
               </div>
-              {/* The procurement checklist — exact keywords buyers scan for */}
+              {/* The procurement checklist, exact keywords buyers scan for */}
               <div style={{ padding: '0 32px 20px' }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: 8, paddingTop: 18, borderTop: '1px solid var(--border-faint)' }}>
                   <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-faint)', marginRight: 4 }}>
