@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import { getAdminUser } from '@/lib/auth'
 import { exchangeCode, fetchLinkedInProfile, encryptToken, socialDb } from '@/lib/social'
 
-// LinkedIn OAuth callback — verifies state, exchanges the code, stores the
+// LinkedIn OAuth callback, verifies state, exchanges the code, stores the
 // connected account (tokens encrypted) via the service role.
 export async function GET(req: Request) {
   const admin = await getAdminUser()

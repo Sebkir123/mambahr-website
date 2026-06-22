@@ -1,5 +1,5 @@
 // Single source of truth for the admin email allowlist. Deliberately
-// PURE — no next/* imports — so it can be used from Edge middleware AND from
+// PURE, no next/* imports, so it can be used from Edge middleware AND from
 // server code without dragging in next/headers.
 const ADMIN_EMAILS = new Set([
   'seb.kirsch@mambahr.com',

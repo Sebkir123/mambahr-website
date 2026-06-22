@@ -142,7 +142,7 @@ function RedeployCard() {
       ))}
       <div className="rd-foot">
         <span className="f-chip">for your review</span>
-        <span className="f-txt">Suggestions only — people decide.</span>
+        <span className="f-txt">Suggestions only, people decide.</span>
       </div>
       <style jsx>{`
         .rd {
@@ -275,7 +275,7 @@ export default function RIFPage() {
         <PageHero
           eyebrow="Headcount & RIF"
           title={<>Hard days, <Em>done right.</Em></>}
-          lead="When a reduction has to happen, every notice is on time, severance is correct, final pay follows each state’s rules — and a human signs off on every single exit."
+          lead="When a reduction has to happen, every notice is on time, severance is correct, final pay follows each state’s rules, and a human signs off on every single exit."
           proof="Built with employment counsel"
           photo="/v2-people/marcus.jpg"
           photoCaption="Every exit · human-approved"
@@ -286,13 +286,13 @@ export default function RIFPage() {
         <AgentLoop
           eyebrow="The process"
           title={<>When it&rsquo;s <Em>unavoidable</Em></>}
-          lead="Mamba prepares everything — the math, the timing, the paperwork. Nothing happens to anyone until you approve it."
+          lead="Mamba prepares everything, the math, the timing, the paperwork. Nothing happens to anyone until you approve it."
           steps={[
-            { n: '01', label: 'The plan is modeled', desc: 'Headcount scenarios with full cost — severance, benefits, final pay — before anyone is named.', who: 'agent' },
+            { n: '01', label: 'The plan is modeled', desc: 'Headcount scenarios with full cost, severance, benefits, final pay, before anyone is named.', who: 'agent' },
             { n: '02', label: 'Notice timing checked per state', desc: 'WARN thresholds and notice windows, federal and state, verified before the plan can move.', who: 'agent' },
             { n: '03', label: 'Severance and final pay computed', desc: 'Per your policy, with each state’s final-pay deadline and rules applied to each person.', who: 'agent' },
-            { n: '04', label: 'Internal moves suggested', desc: 'Open roles a person could move into, surfaced before the exit list is final. Suggestions only — people decide.', who: 'agent', img: '/avatars/tom.jpg' },
-            { n: '05', label: 'Every letter and script drafted', desc: 'Notices, separation paperwork, and manager talking points — ready for review, not sent.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '04', label: 'Internal moves suggested', desc: 'Open roles a person could move into, surfaced before the exit list is final. Suggestions only, people decide.', who: 'agent', img: '/avatars/tom.jpg' },
+            { n: '05', label: 'Every letter and script drafted', desc: 'Notices, separation paperwork, and manager talking points, ready for review, not sent.', who: 'agent', img: '/avatars/priya.jpg' },
             { n: '06', label: 'You approve every single exit', desc: 'A human signs off on every termination before anything happens. Non-negotiable.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
@@ -300,11 +300,11 @@ export default function RIFPage() {
         <FeatureSplit
           eyebrow="Before the list is final"
           title={<>Some jobs can be <Em>saved</Em></>}
-          lead="Before anyone is let go, Mamba surfaces open internal roles a person could move into — with the team and why it fits. The suggestions are advisory. Humans decide."
+          lead="Before anyone is let go, Mamba surfaces open internal roles a person could move into, with the team and why it fits. The suggestions are advisory. Humans decide."
           bullets={[
             'Open roles matched to each affected person',
             'Surfaced before the exit list is final, not after',
-            'Always a human decision — never an automatic move',
+            'Always a human decision, never an automatic move',
           ]}
         >
           <RedeployCard />
@@ -315,7 +315,7 @@ export default function RIFPage() {
           warm
           eyebrow="Done properly"
           title={<>Dignity is in the <Em>details</Em></>}
-          lead="The right documents, the right timing, the right final paycheck. When the process is correct down to the day and the dollar, people leave treated properly — and your team can look them in the eye."
+          lead="The right documents, the right timing, the right final paycheck. When the process is correct down to the day and the dollar, people leave treated properly, and your team can look them in the eye."
           bullets={[
             'Final pay on each state’s deadline, to the day',
             'COBRA and benefits paperwork ready at exit',

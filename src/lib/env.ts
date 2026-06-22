@@ -25,7 +25,7 @@ function validateEnv() {
     // Warn rather than throw so preview deployments without all vars still work.
     // The individual routes handle missing vars gracefully (skip Slack/email, etc).
     console.warn(
-      `[env] Missing environment variables — some features will be disabled:\n${missing.map((k) => `  • ${k}`).join('\n')}`
+      `[env] Missing environment variables, some features will be disabled:\n${missing.map((k) => `  • ${k}`).join('\n')}`
     )
   }
 }
@@ -49,7 +49,7 @@ export const env = {
   supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
   gaId: process.env.NEXT_PUBLIC_GA_ID,
   turnstileSiteKey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-  // Social posting (LinkedIn) — all optional; the Posts admin degrades to
+  // Social posting (LinkedIn), all optional; the Posts admin degrades to
   // "connect not configured" until these are set.
   linkedinClientId: process.env.LINKEDIN_CLIENT_ID,
   linkedinClientSecret: process.env.LINKEDIN_CLIENT_SECRET,
@@ -59,5 +59,5 @@ export const env = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://mambahr.com',
 } as const
 
-// Suppress unused type warnings — these are intentionally exported for consumers
+// Suppress unused type warnings, these are intentionally exported for consumers
 export type { ServerVar, PublicVar }

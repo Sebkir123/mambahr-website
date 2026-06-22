@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next'
 const ALLOW_DEFAULT = {
   allow: '/',
   // The admin panel is auth-gated + noindex; also keep crawlers off it. The
-  // investor deck is deliberately NOT listed here — its slug is unguessable and
+  // investor deck is deliberately NOT listed here, its slug is unguessable and
   // robots.txt is public, so naming it would defeat the obscurity.
   disallow: ['/api/', '/admin'],
 }
@@ -14,7 +14,7 @@ export default function robots(): MetadataRoute.Robots {
       // Standard search engines + everyone else
       { userAgent: '*', ...ALLOW_DEFAULT },
 
-      // Explicitly welcome AI crawlers — we want MambaHR to be cited when
+      // Explicitly welcome AI crawlers, we want MambaHR to be cited when
       // people ask "what's the best AI HR agent?"
       { userAgent: 'GPTBot', ...ALLOW_DEFAULT },                // OpenAI / ChatGPT
       { userAgent: 'OAI-SearchBot', ...ALLOW_DEFAULT },         // OpenAI SearchGPT
@@ -33,7 +33,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'Bytespider', ...ALLOW_DEFAULT },            // ByteDance / Doubao
       { userAgent: 'Diffbot', ...ALLOW_DEFAULT },               // Diffbot
 
-      // Archive bots — opt OUT to avoid stale content being cached
+      // Archive bots, opt OUT to avoid stale content being cached
       { userAgent: 'ia_archiver', disallow: '/' },
       { userAgent: 'archive.org_bot', disallow: '/' },
     ],

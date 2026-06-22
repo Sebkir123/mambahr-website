@@ -6,7 +6,7 @@ import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
 
-/* ── Hero fragment: a realistic Slack window — policy answer + letter receipt ── */
+/* ── Hero fragment: a realistic Slack window, policy answer + letter receipt ── */
 function SlackWindow() {
   return (
     <div className="sw agent-edge agent-working agent-lg">
@@ -486,7 +486,7 @@ export default function MambaPage() {
       <PageHero
         eyebrow="The AI agent"
         title={<>Not a tool. <Em>A hire.</Em></>}
-        lead="Your team messages @MambaHR like a person. It reads the thread, checks your policy, does the work, and logs it — in Slack, Microsoft Teams, or the MambaHR app."
+        lead="Your team messages @MambaHR like a person. It reads the thread, checks your policy, does the work, and logs it, in Slack, Microsoft Teams, or the MambaHR app."
         photo="/v2-people/sofia.jpg"
         photoChip="Mamba · done"
         photoCaption="Letter sent · filed · 9:11 AM"
@@ -497,13 +497,13 @@ export default function MambaPage() {
       <AgentLoop
         eyebrow="Behind every reply"
         title={<>What happens to <Em>every message</Em></>}
-        lead="Each request runs the same loop — whether it’s a quick policy question or a new hire’s first day."
+        lead="Each request runs the same loop, whether it’s a quick policy question or a new hire’s first day."
         steps={[
-          { n: '01', label: 'Reads the thread — and the person', desc: 'It knows who’s asking, their role, their manager, and what was already said.', who: 'agent', time: '< 1s', img: '/avatars/dave.jpg' },
+          { n: '01', label: 'Reads the thread, and the person', desc: 'It knows who’s asking, their role, their manager, and what was already said.', who: 'agent', time: '< 1s', img: '/avatars/dave.jpg' },
           { n: '02', label: 'Checks your policy and the law', desc: 'Your handbook first, then the rules for the state the person works in.', who: 'agent', time: '2s' },
           { n: '03', label: 'Does the work', desc: 'Books the time off, files the letter, updates the record, schedules what needs scheduling.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
-          { n: '04', label: 'Answers with the receipt attached', desc: 'Not just “done” — what changed, which rule applied, and where it’s filed.', who: 'agent' },
-          { n: '05', label: 'The big calls come to you first', desc: 'Offers above band, terminations, comp above your threshold — always a human decision.', who: 'you', img: '/avatars/anna.jpg' },
+          { n: '04', label: 'Answers with the receipt attached', desc: 'Not just “done”, what changed, which rule applied, and where it’s filed.', who: 'agent' },
+          { n: '05', label: 'The big calls come to you first', desc: 'Offers above band, terminations, comp above your threshold, always a human decision.', who: 'you', img: '/avatars/anna.jpg' },
           { n: '06', label: 'Logs it all', desc: 'Every action lands in one record, so there’s never a question about what happened.', who: 'agent' },
         ]}
       />
@@ -511,10 +511,10 @@ export default function MambaPage() {
       <FeatureSplit
         eyebrow="Every channel"
         title={<>Same brain, <Em>every door</Em></>}
-        lead="Slack, Microsoft Teams, and the MambaHR app — one agent, one memory, one record. Ask in Slack, approve in the app, and nothing gets lost in between."
+        lead="Slack, Microsoft Teams, and the MambaHR app, one agent, one memory, one record. Ask in Slack, approve in the app, and nothing gets lost in between."
         bullets={[
-          'Mention it in any channel or DM — it picks up the whole thread',
-          'Start in Teams, finish in the app — the context follows',
+          'Mention it in any channel or DM, it picks up the whole thread',
+          'Start in Teams, finish in the app, the context follows',
           'One record of everything, no matter where it was asked',
         ]}
       >
@@ -526,7 +526,7 @@ export default function MambaPage() {
         warm
         eyebrow="Zero rollout"
         title={<>Zero training. <Em>Zero logins.</Em></>}
-        lead="No training. No new logins. No portal your employees will forget the password to. They message the way they already message — and the work gets done."
+        lead="No training. No new logins. No portal your employees will forget the password to. They message the way they already message, and the work gets done."
         bullets={[
           'Employees never log into anything new',
           'Managers approve from wherever they already are',

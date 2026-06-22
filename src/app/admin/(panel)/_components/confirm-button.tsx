@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react'
 import styles from './confirm-button.module.css'
 
-// Inline two-step confirm — replaces window.confirm() across all destructive
+// Inline two-step confirm, replaces window.confirm() across all destructive
 // admin actions. First click arms the button (shows Cancel + Confirm); second
 // click fires the action. Auto-disarms after 4s if ignored.
 export function ConfirmButton({

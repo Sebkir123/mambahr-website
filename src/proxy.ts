@@ -5,8 +5,8 @@ import { isAdminEmail } from '@/lib/admin-domain'
 
 // Next.js 16 renamed `middleware` → `proxy`. This single edge entrypoint handles
 // two unrelated gates, dispatched by path:
-//   1. /admin/*            — Supabase auth session refresh + sign-in redirect
-//   2. internal deck URLs  — HTTP Basic password protection
+//   1. /admin/*           , Supabase auth session refresh + sign-in redirect
+//   2. internal deck URLs , HTTP Basic password protection
 // Each gate only runs on its own matched prefixes (see `config.matcher`).
 
 const DECK_PREFIXES = ['/d/', '/investors', '/og-preview']
@@ -34,7 +34,7 @@ function deckGate(req: NextRequest): NextResponse {
 // isn't a signed-in @mambahr.com admin to the login screen. The domain check
 // (not just "is there a user") is the real gate: an authenticated non-admin
 // session must not pass. is_admin() RLS + per-page requireAdmin() enforce it
-// again in depth — this is the coarse edge gate so no admin page renders for a
+// again in depth, this is the coarse edge gate so no admin page renders for a
 // stranger, even one a future page forgets to guard.
 async function adminGate(req: NextRequest): Promise<NextResponse> {
   let response = NextResponse.next({ request: req })
@@ -58,8 +58,8 @@ async function adminGate(req: NextRequest): Promise<NextResponse> {
     },
   )
 
-  // getUser() validates the JWT with the auth server — a forged/expired cookie
-  // can't pass — and the domain check makes "authenticated" insufficient on its
+  // getUser() validates the JWT with the auth server, a forged/expired cookie
+  // can't pass, and the domain check makes "authenticated" insufficient on its
   // own; only @mambahr.com is an admin.
   const {
     data: { user },

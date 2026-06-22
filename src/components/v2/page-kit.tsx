@@ -8,7 +8,7 @@
 // <StatTrio> → <QuoteBand> → <PageCta>. Global classes used: agent-edge/
 // agent-working/agent-done/agent-lg, mamba-chip, v2-grain (from globals.css).
 //
-// NOTE: button classes use :global() — styled-jsx does NOT scope classNames
+// NOTE: button classes use :global(), styled-jsx does NOT scope classNames
 // passed to <Link/> components, only native elements in the same file.
 
 import { type ReactNode } from 'react'
@@ -500,7 +500,7 @@ export function StatTrio({
   )
 }
 
-/* ── Quote band: designed card — big photo left, quote right ── */
+/* ── Quote band: designed card, big photo left, quote right ── */
 export function QuoteBand({
   quote,
   name,
@@ -644,7 +644,7 @@ export function PageCta({
           margin: 0;
           text-shadow: 0 2px 18px rgba(20, 18, 14, 0.18);
         }
-        /* The shared <Em> gradient is unreadable on the gradient panel — force white. */
+        /* The shared <Em> gradient is unreadable on the gradient panel, force white. */
         .t :global(span) {
           background: none !important;
           color: #fff !important;

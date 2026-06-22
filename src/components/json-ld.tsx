@@ -7,7 +7,7 @@
 //
 // Safety contract: callers MUST pass plain serialisable data with NO user-controlled fields.
 // JSON-LD renders as text inside <script>, so the only escape vector is the closing
-// `</script>` sequence — which the `<` replacement handles.
+// `</script>` sequence, which the `<` replacement handles.
 
 import { createElement, type ReactElement } from 'react'
 

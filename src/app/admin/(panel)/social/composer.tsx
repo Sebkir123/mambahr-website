@@ -7,15 +7,15 @@ import styles from './social.module.css'
 export type AccountOption = { id: string; name: string }
 
 const MAX = 3000 // LinkedIn post limit
-const FOLD = 1300 // LinkedIn "see more" cutoff — keep the hook above this
+const FOLD = 1300 // LinkedIn "see more" cutoff, keep the hook above this
 type AiMode = 'draft' | 'improve' | 'shorter' | 'punchier'
 
-// Starter angles — prefill the AI topic so a click → draft. They double as a
+// Starter angles, prefill the AI topic so a click → draft. They double as a
 // blank-page cure even when AI drafting isn't configured (the label seeds intent).
 const TEMPLATES: { label: string; topic: string }[] = [
   { label: 'Lesson learned', topic: 'a hard lesson we learned building MambaHR and what changed because of it' },
   { label: 'Hot take', topic: 'a contrarian take on how HR teams actually spend their time vs. what software sells them' },
-  { label: 'Customer win', topic: 'a concrete outcome a customer got — work completed, hours saved — told as a short story' },
+  { label: 'Customer win', topic: 'a concrete outcome a customer got, work completed, hours saved, told as a short story' },
   { label: "We're hiring", topic: 'who we are looking to hire next and why this is a rare moment to join' },
   { label: 'Product update', topic: 'a new capability we shipped and the specific manual work it now removes' },
   { label: 'Industry shift', topic: 'a shift happening in HR/AI right now and what it means for operators this year' },
@@ -108,7 +108,7 @@ export function Composer({ accounts, aiEnabled }: { accounts: AccountOption[]; a
   if (accounts.length === 0) {
     return (
       <p className={styles.empty}>
-        Connect a LinkedIn account first — then you can compose, schedule, and post from here.
+        Connect a LinkedIn account first, then you can compose, schedule, and post from here.
       </p>
     )
   }
@@ -176,7 +176,7 @@ export function Composer({ accounts, aiEnabled }: { accounts: AccountOption[]; a
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && aiEnabled && aiDraft('draft')}
-          placeholder={aiEnabled ? 'Topic for AI — e.g. “why early teams shouldn’t hire HR yet”' : 'AI drafting needs ANTHROPIC_API_KEY'}
+          placeholder={aiEnabled ? 'Topic for AI, e.g. “why early teams shouldn’t hire HR yet”' : 'AI drafting needs ANTHROPIC_API_KEY'}
           disabled={!aiEnabled || aiPending !== null}
         />
         <button
@@ -195,7 +195,7 @@ export function Composer({ accounts, aiEnabled }: { accounts: AccountOption[]; a
         value={body}
         maxLength={MAX}
         onChange={(e) => setBody(e.target.value)}
-        placeholder="Share something — a take, a lesson, a link to the new playbook…"
+        placeholder="Share something, a take, a lesson, a link to the new playbook…"
         rows={6}
       />
       <div className={styles.composerFoot}>

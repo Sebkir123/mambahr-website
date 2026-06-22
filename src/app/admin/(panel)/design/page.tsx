@@ -124,16 +124,16 @@ export default async function DesignAdminPage() {
         <div>
           <h1 className={ui.h1}>Design</h1>
           <p className={ui.subtitle}>
-            The MambaHR brand system — Warm Editorial Premium. Colors, type, and components, live from the tokens.
+            The MambaHR brand system, Warm Editorial Premium. Colors, type, and components, live from the tokens.
           </p>
         </div>
       </div>
 
-      {/* Logo — the framed lockup, as used on the deck + site */}
+      {/* Logo, the framed lockup, as used on the deck + site */}
       <div className={styles.section}>
         <div className={styles.sectionHead}>
           <h2 className={styles.sectionTitle}>Logo</h2>
-          <span className={styles.sectionHint}>The brand lockup — SVG (vector) + PNG, transparent</span>
+          <span className={styles.sectionHint}>The brand lockup, SVG (vector) + PNG, transparent</span>
         </div>
         <div className={styles.logoGrid}>
           {LOGO_ASSETS.map((a) => (
@@ -142,11 +142,11 @@ export default async function DesignAdminPage() {
         </div>
       </div>
 
-      {/* Icon — mark only, no frame */}
+      {/* Icon, mark only, no frame */}
       <div className={styles.section}>
         <div className={styles.sectionHead}>
           <h2 className={styles.sectionTitle}>Icon</h2>
-          <span className={styles.sectionHint}>Mark only, no frame — for favicons, avatars, tight spaces</span>
+          <span className={styles.sectionHint}>Mark only, no frame, for favicons, avatars, tight spaces</span>
         </div>
         <div className={styles.logoGrid}>
           {ICON_ASSETS.map((a) => (
@@ -156,7 +156,7 @@ export default async function DesignAdminPage() {
       </div>
 
       <ColorSection title="Surfaces" hint="Page & panel backgrounds, light to warm" colors={SURFACES} />
-      <ColorSection title="Text" hint="Three tones — primary, muted, faint" colors={TEXT} />
+      <ColorSection title="Text" hint="Three tones, primary, muted, faint" colors={TEXT} />
       <ColorSection title="Brand" hint="Gold accent + iris-violet AI secondary + peach warmth" colors={BRAND} />
       <ColorSection title="Borders" hint="Low-alpha hairlines over warm surfaces" colors={BORDERS} />
       <ColorSection title="Status" hint="Reserved for success / error only" colors={STATUS} />
@@ -194,17 +194,17 @@ export default async function DesignAdminPage() {
             <div className={styles.fontCard}>
               <div className={`${styles.fontSample} ${styles.fontSerif}`}>Aa</div>
               <span className={styles.fontName}>Fraunces</span>
-              <span className={styles.fontUse}>Serif · headlines & display — var(--font-serif)</span>
+              <span className={styles.fontUse}>Serif · headlines & display, var(--font-serif)</span>
             </div>
             <div className={styles.fontCard}>
               <div className={`${styles.fontSample} ${styles.fontSans}`}>Aa</div>
               <span className={styles.fontName}>Inter</span>
-              <span className={styles.fontUse}>Sans · body & UI — var(--font-sans)</span>
+              <span className={styles.fontUse}>Sans · body & UI, var(--font-sans)</span>
             </div>
             <div className={styles.fontCard}>
               <div className={`${styles.fontSample} ${styles.fontMono}`}>123</div>
               <span className={styles.fontName}>JetBrains Mono</span>
-              <span className={styles.fontUse}>Mono · numbers & labels — var(--font-mono)</span>
+              <span className={styles.fontUse}>Mono · numbers & labels, var(--font-mono)</span>
             </div>
           </div>
         </div>
@@ -251,7 +251,7 @@ export default async function DesignAdminPage() {
       <div className={styles.section}>
         <div className={styles.sectionHead}>
           <h2 className={styles.sectionTitle}>Elevation</h2>
-          <span className={styles.sectionHint}>Warm, low-alpha shadows — never neutral gray</span>
+          <span className={styles.sectionHint}>Warm, low-alpha shadows, never neutral gray</span>
         </div>
         <div className={ui.card}>
           <div className={styles.shadowGrid}>

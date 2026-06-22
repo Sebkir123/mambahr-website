@@ -6,7 +6,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { defaultStage, isValidStage, stageLabel, parseMoney, isoDateOrNull, ACTIVITY_KINDS, type ContactKind } from '@/lib/crm'
 
 // All CRM mutations. Each runs AS the logged-in admin (RLS: is_admin()), so the
-// @mambahr.com gate is enforced at the row level — no service-role key. Server
+// @mambahr.com gate is enforced at the row level, no service-role key. Server
 // actions are independently invokable, so requireAdmin() is called in every one.
 
 function s(v: FormDataEntryValue | null): string {
@@ -15,7 +15,7 @@ function s(v: FormDataEntryValue | null): string {
 function orNull(v: string): string | null {
   return v ? v : null
 }
-// Accepts "50000", "$50,000", "50k", "1.5M" — never silently truncates "50k" to 50.
+// Accepts "50000", "$50,000", "50k", "1.5M", never silently truncates "50k" to 50.
 function moneyOrNull(v: string): number | null {
   return parseMoney(v)
 }
@@ -95,7 +95,7 @@ export async function updateContact(fd: FormData): Promise<ActionResult> {
   // presence lock prevents most of this; this closes the tiny race window.
   const expected = s(fd.get('expected_updated_at'))
   if (expected && prev.updated_at && expected !== prev.updated_at) {
-    return { ok: false, message: 'This contact changed since you opened it — refresh and re-apply your edit.' }
+    return { ok: false, message: 'This contact changed since you opened it, refresh and re-apply your edit.' }
   }
 
   let stage = s(fd.get('stage')) || prev.stage
@@ -111,7 +111,7 @@ export async function updateContact(fd: FormData): Promise<ActionResult> {
       company: orNull(s(fd.get('company'))),
       title: orNull(s(fd.get('title'))),
       stage,
-      // Don't wipe ownership if the field is left blank — keep the prior owner.
+      // Don't wipe ownership if the field is left blank, keep the prior owner.
       owner: ownerInput || prev.owner,
       value: moneyOrNull(s(fd.get('value'))),
       priority: s(fd.get('priority')) || 'medium',
@@ -187,7 +187,7 @@ export async function logActivity(fd: FormData): Promise<ActionResult> {
   const supabase = await createSupabaseServerClient()
   const contact_id = s(fd.get('contact_id'))
   let kind = s(fd.get('kind')) || 'note'
-  // Action is independently invokable — guard against a kind the CHECK rejects.
+  // Action is independently invokable, guard against a kind the CHECK rejects.
   if (!ACTIVITY_KINDS.includes(kind as (typeof ACTIVITY_KINDS)[number])) kind = 'note'
   const body = s(fd.get('body'))
   if (!contact_id) return { ok: false, message: 'Missing contact.' }
@@ -196,7 +196,7 @@ export async function logActivity(fd: FormData): Promise<ActionResult> {
   const { error } = await supabase.from('crm_activities').insert({ contact_id, kind, body, author: admin.email })
   if (error) return { ok: false, message: error.message }
 
-  // Logging a call/email/meeting counts as outreach — bump last_contacted_at.
+  // Logging a call/email/meeting counts as outreach, bump last_contacted_at.
   if (kind === 'call' || kind === 'email' || kind === 'meeting') {
     await supabase.from('crm_contacts').update({ last_contacted_at: new Date().toISOString() }).eq('id', contact_id)
   }
@@ -271,7 +271,7 @@ export async function ingestLeads(): Promise<ActionResult> {
   const inserts: Record<string, unknown>[] = []
   const warnings: string[] = []
 
-  // Customers — one contact per email (warmest source wins the stage).
+  // Customers, one contact per email (warmest source wins the stage).
   const customerByEmail = new Map<string, Record<string, unknown>>()
   const sourceRank: Record<string, number> = { demo: 4, field_guide: 3, magnet: 2, waitlist: 1 }
   const stageForSource: Record<string, string> = { demo: 'qualified', field_guide: 'lead', magnet: 'lead', waitlist: 'lead' }
@@ -317,7 +317,7 @@ export async function ingestLeads(): Promise<ActionResult> {
     inserts.push(row)
   }
 
-  // Investors — one per deck link.
+  // Investors, one per deck link.
   const { data: deck, error: deckErr } = await supabase
     .from('deck_links')
     .select('id, recipient_name, recipient_org, created_at')
@@ -340,7 +340,7 @@ export async function ingestLeads(): Promise<ActionResult> {
   const warnSuffix = warnings.length ? ` (skipped: ${warnings.join('; ')})` : ''
 
   if (inserts.length === 0) {
-    return { ok: warnings.length === 0, message: `Already up to date — no new contacts to import.${warnSuffix}` }
+    return { ok: warnings.length === 0, message: `Already up to date, no new contacts to import.${warnSuffix}` }
   }
 
   // upsert + ignoreDuplicates so a concurrent import or a pre-existing

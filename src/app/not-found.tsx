@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
-  title: 'Page not found — MambaHR',
+  title: 'Page not found | MambaHR',
   description: "That page doesn't exist. Try the homepage or the product overview.",
   robots: { index: false, follow: false },
 }

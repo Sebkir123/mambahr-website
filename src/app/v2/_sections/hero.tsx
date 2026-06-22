@@ -492,7 +492,7 @@ export default function Hero() {
             padding: 14px 14px 12px;
           }
           .side .brand { padding: 0 2px; font-size: 15px; }
-          /* Nav becomes a horizontal scrolling pill strip — no cramped wrap grid. */
+          /* Nav becomes a horizontal scrolling pill strip, no cramped wrap grid. */
           .side nav {
             display: flex;
             flex-direction: row;

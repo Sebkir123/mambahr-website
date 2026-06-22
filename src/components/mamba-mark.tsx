@@ -1,4 +1,4 @@
-// MambaHR brand mark — the official serif-M silhouette (alpha-only PNG at
+// MambaHR brand mark, the official serif-M silhouette (alpha-only PNG at
 // /brand/mamba-mark.png), painted as a CSS mask filled with `currentColor`.
 // One asset tints to any context (ink on cream, paper on ink) and never
 // carries a box. <MambaLockup> wraps it in the brand lockup: a thin gold
@@ -11,7 +11,7 @@ const SRC = '/brand/mamba-mark.png'
 type MarkProps = {
   /** Square box size in px. */
   size?: number
-  /** Mask fill — any CSS color or var(). Defaults to currentColor. */
+  /** Mask fill, any CSS color or var(). Defaults to currentColor. */
   color?: string
   className?: string
   title?: string

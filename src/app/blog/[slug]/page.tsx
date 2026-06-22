@@ -24,7 +24,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params
   const post = await getPostBySlug(slug)
-  if (!post) return { title: 'Post not found — MambaHR', robots: { index: false, follow: false } }
+  if (!post) return { title: 'Post not found | MambaHR', robots: { index: false, follow: false } }
 
   const title = post.meta_title || post.title
   const description = post.meta_description || post.excerpt || undefined
@@ -33,7 +33,7 @@ export async function generateMetadata({
   const ogImg = post.og_image_url || post.cover_image_url || `${url}/og`
 
   return {
-    title: `${title} — MambaHR`,
+    title: `${title} | MambaHR`,
     description,
     alternates: { canonical: post.canonical_url || url },
     robots: post.noindex
@@ -141,7 +141,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <div className={styles.cta}>
           <div>
             <p className={styles.ctaKicker}>Before you hire HR, hire MambaHR.</p>
-            <p className={styles.ctaSub}>The whole department — hiring to compliance — run end to end.</p>
+            <p className={styles.ctaSub}>The whole department, hiring to compliance, run end to end.</p>
           </div>
           <Link href="/demo" className="btn-gold">Book a demo</Link>
         </div>

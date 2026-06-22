@@ -12,7 +12,7 @@ const STAGES: { name: string; count: number; state: string; note: string; imgs?:
   { name: 'Screening', count: 12, state: 'done', note: 'Ranked overnight, notes attached', imgs: ['/avatars/tom.jpg', '/avatars/priya.jpg', '/avatars/dave.jpg'] },
   { name: 'Interviews', count: 8, state: 'done', note: 'All panels scheduled, kits sent', imgs: ['/avatars/anna.jpg', '/avatars/marcus.jpg'] },
   { name: 'References', count: 2, state: 'done', note: '4 of 4 calls complete' },
-  { name: 'Offer · Maya Chen', count: 1, state: 'you', note: 'Draft ready — awaiting you', imgs: ['/avatars/maya.jpg'] },
+  { name: 'Offer · Maya Chen', count: 1, state: 'you', note: 'Draft ready, awaiting you', imgs: ['/avatars/maya.jpg'] },
 ]
 
 function PipelineCard() {
@@ -139,7 +139,7 @@ function CareersSite() {
             <span className="j-apply">Apply</span>
           </div>
         ))}
-        <div className="foot">Equal-opportunity questions handled at apply — nothing for you to set up.</div>
+        <div className="foot">Equal-opportunity questions handled at apply, nothing for you to set up.</div>
       </div>
       <style jsx>{`
         .cs {
@@ -275,11 +275,11 @@ export default function HiringPage() {
         <AgentLoop
           eyebrow="How it runs"
           title="The hiring loop"
-          lead="Every step that used to mean chasing calendars and inboxes — handled. The judgment calls stay with you, clearly marked."
+          lead="Every step that used to mean chasing calendars and inboxes, handled. The judgment calls stay with you, clearly marked."
           steps={[
-            { n: '01', label: 'Req intake', desc: 'Tell Mamba the role, the team, and the budget — in Slack, Teams, or the app. The req is ready in minutes.', who: 'agent', time: '4 min' },
+            { n: '01', label: 'Req intake', desc: 'Tell Mamba the role, the team, and the budget, in Slack, Teams, or the app. The req is ready in minutes.', who: 'agent', time: '4 min' },
             { n: '02', label: 'Posted everywhere', desc: 'The role goes live on your careers page and the major job boards, written in your voice.', who: 'agent', time: 'same day' },
-            { n: '03', label: 'Screening & ranking', desc: 'Every applicant read, ranked, and recommended with reasons — you make every advance-or-pass call.', who: 'you', img: '/avatars/tom.jpg' },
+            { n: '03', label: 'Screening & ranking', desc: 'Every applicant read, ranked, and recommended with reasons, you make every advance-or-pass call.', who: 'you', img: '/avatars/tom.jpg' },
             { n: '04', label: 'Scheduling', desc: 'Panels, rooms, and reschedules handled across every calendar. No back-and-forth.', who: 'agent', time: 'instant' },
             { n: '05', label: 'Interview kits & feedback', desc: 'Each interviewer gets a tailored kit; feedback is gathered and summarized the same day.', who: 'agent' },
             { n: '06', label: 'References', desc: 'Calls arranged, notes captured, themes pulled out for you to read in two minutes.', who: 'agent', img: '/avatars/dave.jpg' },
@@ -291,9 +291,9 @@ export default function HiringPage() {
         <FeatureSplit
           eyebrow="The job portal"
           title={<>Your job site, <Em>live in a day.</Em></>}
-          lead="A branded job board on your own address — no agency, no setup project. Candidates apply, applications land in your pipeline already read, and the questions hiring law requires are collected quietly."
+          lead="A branded job board on your own address, no agency, no setup project. Candidates apply, applications land in your pipeline already read, and the questions hiring law requires are collected quietly."
           bullets={[
-            'Your logo, your colors, your domain — looks like you built it',
+            'Your logo, your colors, your domain, looks like you built it',
             'Every application lands in the pipeline already read and ranked',
             'Required hiring-law questions asked once, stored properly, never your problem',
           ]}
@@ -306,7 +306,7 @@ export default function HiringPage() {
           warm
           eyebrow="The human part"
           title={<>The final call stays <Em>human.</Em></>}
-          lead="Interviews, culture, and who gets the offer stay yours — the part only you can do. Mamba clears the admin so the people you meet are worth meeting, and the week you save goes into meeting them."
+          lead="Interviews, culture, and who gets the offer stay yours, the part only you can do. Mamba clears the admin so the people you meet are worth meeting, and the week you save goes into meeting them."
           bullets={[
             'Mamba recommends; it never advances or rejects anyone on its own',
             'Every shortlist comes with the why, in plain English',

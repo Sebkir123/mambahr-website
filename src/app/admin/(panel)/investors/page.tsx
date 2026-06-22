@@ -38,7 +38,7 @@ export default async function InvestorsOverview() {
   const inv = dash.byKind.investor
   const diligence = inv.byStage.find((s) => s.key === 'diligence')?.count ?? 0
 
-  // Deck engagement leaderboard — recipients who actually opened, busiest first.
+  // Deck engagement leaderboard, recipients who actually opened, busiest first.
   const leaderboard = [...deck.links]
     .filter((l) => l.opens > 0)
     .sort((a, b) => b.opens - a.opens || b.totalMs - a.totalMs)
@@ -148,7 +148,7 @@ export default async function InvestorsOverview() {
                 <span className={styles.taskTitle}>
                   <Link href={`/admin/crm/${c.id}`} className={ui.rowLink}>{c.name}</Link>
                   {c.company ? <span className={styles.muted}> · {c.company}</span> : ''}
-                  <span className={styles.muted}> — {c.next_step}</span>
+                  <span className={styles.muted}>, {c.next_step}</span>
                   <span className={`${styles.pill} ${styles.pillTag}`} style={{ marginLeft: 8 }}>{stageLabel('investor', c.stage)}</span>
                 </span>
                 <span className={styles.taskDue}>{c.next_step_due ? when(c.next_step_due) : 'no date'}</span>

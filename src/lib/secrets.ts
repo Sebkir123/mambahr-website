@@ -2,7 +2,7 @@ import 'server-only'
 import { serviceDb } from '@/lib/supabase/service'
 
 // Secret resolution mirroring the Supabase edge functions: env var first (local
-// dev / any Vercel-set vars), then Supabase Vault via the get_secret RPC — where
+// dev / any Vercel-set vars), then Supabase Vault via the get_secret RPC, where
 // the landing project's delivery secrets (RESEND_API_KEY, SLACK_WEBHOOK_URL)
 // actually live. The Next.js routes can't see Vault through process.env, so
 // without this fallback email + Slack silently no-op in production.

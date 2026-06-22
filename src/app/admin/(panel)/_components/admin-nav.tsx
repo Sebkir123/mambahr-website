@@ -93,7 +93,7 @@ function NavLinks({ onNavigate }: { onNavigate: () => void }) {
     }
   }
 
-  // Auto-expand the group of the page you navigate to — but only when the active
+  // Auto-expand the group of the page you navigate to, but only when the active
   // group actually changes, so a manual collapse afterward isn't re-opened.
   useEffect(() => {
     if (!activeGroup) return
@@ -117,7 +117,7 @@ function NavLinks({ onNavigate }: { onNavigate: () => void }) {
     })
   }
 
-  // Respect the user's choice for every group, including the active one — so any
+  // Respect the user's choice for every group, including the active one, so any
   // section can be collapsed. Navigating to a section re-opens it (effect above).
   const isOpen = (title: string) => !collapsed.has(title)
 

@@ -4,11 +4,11 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'HR Documents & E-Signature — MambaHR',
+  title: 'HR Documents & E-Signature | MambaHR',
   description:
-    'Offers, agreements, and acknowledgments generated, e-signed via DocuSign, filed, and retained per policy — with a full audit trail on every document.',
+    'Offers, agreements, and acknowledgments generated, e-signed via DocuSign, filed, and retained per policy, with a full audit trail on every document.',
   openGraph: {
-    title: 'HR Documents & E-Signature — MambaHR',
+    title: 'HR Documents & E-Signature | MambaHR',
     description:
       'Offers, agreements, acknowledgments generated, e-signed via DocuSign, filed, and retained per policy. Full audit trail.',
     url: 'https://mambahr.com/documents',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HR Documents & E-Signature — MambaHR',
+    title: 'HR Documents & E-Signature | MambaHR',
     description:
       'Offers, agreements, acknowledgments generated, e-signed via DocuSign, filed, and retained per policy. Full audit trail.',
     images: [ogImage],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'HR Documents & E-Signature — MambaHR',
+  name: 'HR Documents & E-Signature | MambaHR',
   url: 'https://mambahr.com/documents',
   description:
     'MambaHR documents: offers, agreements, and acknowledgments generated, e-signed via DocuSign, filed, and retained per policy, with a full audit trail on every document.',
@@ -36,7 +36,7 @@ const jsonLd = {
     '@type': 'SoftwareFeature',
     name: 'Documents agent',
     description:
-      'Generates HR documents — offers, agreements, policy acknowledgments — and routes them for e-signature through DocuSign. Files every signed document to the employee record and enforces retention by policy, keeping a full audit trail of who signed what and when.',
+      'Generates HR documents, offers, agreements, policy acknowledgments, and routes them for e-signature through DocuSign. Files every signed document to the employee record and enforces retention by policy, keeping a full audit trail of who signed what and when.',
   },
 }
 

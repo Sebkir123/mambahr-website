@@ -1,6 +1,6 @@
 import ui from './admin-ui.module.css'
 
-// Instant skeleton shown the moment you click a nav item — the sidebar (in the
+// Instant skeleton shown the moment you click a nav item, the sidebar (in the
 // layout) stays put while the destination's server data loads. Without this,
 // navigation appears frozen because every admin page is force-dynamic and runs
 // an auth check + queries before its first paint.

@@ -56,7 +56,7 @@ function scorePost(p: RawPost): PostSeo {
   const hasCover = !!p.cover_image_url?.trim()
   // Every post is guaranteed a 1200×630 share image: an uploaded og/cover, or the
   // dynamic branded /blog/[slug]/og route. Social sharing is never actually broken,
-  // so this signal is always satisfied — don't penalize posts for it.
+  // so this signal is always satisfied, don't penalize posts for it.
   const hasOgImage = true
   const hasCanonical = !!p.canonical_url?.trim()
 
@@ -72,7 +72,7 @@ function scorePost(p: RawPost): PostSeo {
   if (!p.meta_title?.trim()) issues.push('No custom meta title (falling back to post title)')
   if (!p.meta_description?.trim() && !p.excerpt?.trim()) issues.push('No meta description or excerpt')
   if (!hasCover) issues.push('No custom cover image (branded fallback in use)')
-  if (p.noindex) issues.push('Set to noindex — hidden from search engines')
+  if (p.noindex) issues.push('Set to noindex, hidden from search engines')
 
   return {
     id: p.id,

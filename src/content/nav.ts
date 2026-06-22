@@ -19,7 +19,7 @@ export type NavSection = {
  * Every href resolves to a real page or an in-page anchor we create.
  */
 export const byFunction: NavItem[] = [
-  // Descriptions are ONE line in the mega menu — keep ≤ 28 chars so they never wrap.
+  // Descriptions are ONE line in the mega menu, keep ≤ 28 chars so they never wrap.
   { label: 'Hiring & ATS',          href: '/hiring',       description: 'Req to signed offer, fast',   live: true, icon: 'hiring' },
   { label: 'Onboarding',            href: '/onboarding',   description: 'Ready before they arrive',    live: true, icon: 'onboarding' },
   { label: 'Payroll & benefits',    href: '/payroll',      description: 'Payday, on autopilot',        live: true, icon: 'payroll' },
@@ -32,7 +32,7 @@ export const byFunction: NavItem[] = [
 
 /**
  * The procurement-checklist keywords buyers scan for. Rendered as small
- * tag-chips in the dropdown — exact search phrases, each pointing at the
+ * tag-chips in the dropdown, exact search phrases, each pointing at the
  * closest existing page. Keyword coverage without new pages.
  */
 export const alsoHandled: { label: string; href: string }[] = [
@@ -56,7 +56,7 @@ export const howItWorks: NavItem[] = [
   { label: 'The AI agent',        href: '/mamba',      description: 'Works in Slack, Teams, and the web', live: true, icon: 'agent' },
   { label: 'Job portal',          href: '/job-portal', description: 'Your careers page, hosted',          live: true, icon: 'hiring' },
   { label: 'Approvals',           href: '/today',      description: 'Your day in three taps',             live: true, icon: 'today' },
-  { label: 'Employee records',    href: '/people',     description: 'HRIS, org chart — always current',   live: true, icon: 'people' },
+  { label: 'Employee records',    href: '/people',     description: 'HRIS, org chart, always current',   live: true, icon: 'people' },
   { label: 'Documents & e-sign',  href: '/documents',  description: 'Generated, signed, filed',           live: true, icon: 'documents' },
   { label: 'Security',            href: '/security',   description: 'Encrypted, logged, US-resident',     live: true, icon: 'security' },
 ]
@@ -70,27 +70,27 @@ export const companyItems: NavItem[] = [
 export const comingSoonContent: Record<string, { title: string; body: string }> = {
   performance: {
     title: 'Performance & Growth',
-    body: 'Review cycles, continuous feedback, PIPs, calibration sessions, and promotion recommendations — all drafted and tracked by the Performance agent. You set the policy; the agent does the work.',
+    body: 'Review cycles, continuous feedback, PIPs, calibration sessions, and promotion recommendations, all drafted and tracked by the Performance agent. You set the policy; the agent does the work.',
   },
   'time-off': {
     title: 'Time Off & Leave',
-    body: 'Policy-aware PTO approvals in seconds. FMLA eligibility, intermittent leave tracking, state paid-leave stacking, bereavement, USERRA, and ADA accommodations — the Leave agent handles every case.',
+    body: 'Policy-aware PTO approvals in seconds. FMLA eligibility, intermittent leave tracking, state paid-leave stacking, bereavement, USERRA, and ADA accommodations, the Leave agent handles every case.',
   },
   payroll: {
     title: 'Payroll-ready exports',
-    body: 'MambaHR generates the per-cycle change file in your provider’s format — new hires, terminations, comp changes, leave — ready to upload to ADP, Workday, Gusto, or Rippling. No rip-and-replace.',
+    body: 'MambaHR generates the per-cycle change file in your provider’s format, new hires, terminations, comp changes, leave, ready to upload to ADP, Workday, Gusto, or Rippling. No rip-and-replace.',
   },
   onboarding: {
     title: 'Onboarding',
-    body: 'From signed offer to day-one ready — I-9 and E-Verify, accounts provisioned, device set up, buddy assigned, first-week calendar invites. Automated, with you in the loop for the budget calls.',
+    body: 'From signed offer to day-one ready, I-9 and E-Verify, accounts provisioned, device set up, buddy assigned, first-week calendar invites. Automated, with you in the loop for the budget calls.',
   },
   vault: {
     title: 'Document management & e-sign',
-    body: 'Every HR document — offer letters, separation agreements, handbook acknowledgments, compliance filings — generated, sent for e-signature, filed, and retained per your policy.',
+    body: 'Every HR document, offer letters, separation agreements, handbook acknowledgments, compliance filings, generated, sent for e-signature, filed, and retained per your policy.',
   },
   workspaces: {
     title: 'Workforce planning',
-    body: 'One agent across multiple legal entities. Headcount planning, org design, RIF modeling with severance math and WARN notices — each entity with its own access rules, audit trail, and sign-off policy.',
+    body: 'One agent across multiple legal entities. Headcount planning, org design, RIF modeling with severance math and WARN notices, each entity with its own access rules, audit trail, and sign-off policy.',
   },
   settings: {
     title: 'Settings',
@@ -98,15 +98,15 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
   },
   channels: {
     title: 'Slack, Teams & email',
-    body: 'MambaHR meets your team where they already work. Slack mentions, Teams cards, email threads, or the web app — same agent, every surface, every action recorded.',
+    body: 'MambaHR meets your team where they already work. Slack mentions, Teams cards, email threads, or the web app, same agent, every surface, every action recorded.',
   },
   integrations: {
     title: 'Integrations',
-    body: 'Connect the systems you already use. Gusto, Workday, Rippling, BambooHR, Okta, Microsoft Entra, Google Workspace, Carta, DocuSign, Greenhouse, Lever — the agent works inside your tools, not instead of them.',
+    body: 'Connect the systems you already use. Gusto, Workday, Rippling, BambooHR, Okta, Microsoft Entra, Google Workspace, Carta, DocuSign, Greenhouse, Lever, the agent works inside your tools, not instead of them.',
   },
   hil: {
     title: 'Human sign-off',
-    body: 'Every high-stakes action is gated. The agent surfaces a decision card — rationale, evidence, who decides — and you approve or decline. Terminations are always you. Always.',
+    body: 'Every high-stakes action is gated. The agent surfaces a decision card, rationale, evidence, who decides, and you approve or decline. Terminations are always you. Always.',
   },
   'compliance-engine': {
     title: 'Compliance',
@@ -114,11 +114,11 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
   },
   customers: {
     title: 'Customers',
-    body: 'How HR teams are running their entire department on MambaHR. Customer stories coming soon — for now, talk to the founders for references.',
+    body: 'How HR teams are running their entire department on MambaHR. Customer stories coming soon, for now, talk to the founders for references.',
   },
   changelog: {
     title: 'Changelog',
-    body: 'We ship constantly. A public changelog is coming — for now, customers get weekly product updates directly.',
+    body: 'We ship constantly. A public changelog is coming, for now, customers get weekly product updates directly.',
   },
   careers: {
     title: 'Careers',

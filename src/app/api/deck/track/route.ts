@@ -6,12 +6,12 @@ import { clientIp, geoFromHeaders, hashIp, parseUA } from '@/lib/deck-tracking'
 // token + progress (duration, active/focused time, furthest + current slide,
 // per-slide dwell). We enrich server-side with Vercel's edge geo, a parsed UA
 // (browser/OS family + version), a salted IP hash (never the raw IP), and the
-// owning network via lookup_asn — then write via the SECURITY DEFINER
+// owning network via lookup_asn, then write via the SECURITY DEFINER
 // track_deck RPC. Best-effort: any failure returns 200 so the deck never errors.
 //
 // This is the ENRICHMENT path. Integrity (capturing the open even when this
 // beacon is blocked) is handled separately by the server-side page-view log in
-// the deck's server component — see app/<deck>/page.tsx::logOpen.
+// the deck's server component, see app/<deck>/page.tsx::logOpen.
 
 export const runtime = 'nodejs'
 
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
       p_ip: ipRaw || null,
     })
   } catch {
-    /* swallow — analytics must never break the viewer */
+    /* swallow, analytics must never break the viewer */
   }
   return NextResponse.json({ ok: true })
 }

@@ -44,7 +44,7 @@ export default function Difference() {
             </div>
           </div>
 
-          {/* The same Monday, on MambaHR — dark agent surface */}
+          {/* The same Monday, on MambaHR, dark agent surface */}
           <div className="col us agent-edge agent-working agent-lg">
             <div className="u-head">
               <span className="u-title"><span className="logo">M</span>MambaHR</span>

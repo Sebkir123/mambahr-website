@@ -7,7 +7,7 @@ import 'server-only'
 const BOT_UA =
   /(bot|crawl|spider|slurp|bingpreview|headless|phantom|puppeteer|playwright|lighthouse|prerender|prefetch|facebookexternalhit|whatsapp|telegram|discord|slackbot|twitterbot|linkedinbot|embedly|monitor|uptime|pingdom|datadog|curl|wget|python-requests|axios|go-http|node-fetch|java\/|okhttp|semrush|ahrefs|mj12|dotbot|petalbot|gptbot|claudebot|ccbot|amazonbot|bytespider|applebot)/i
 
-// UA-based bot classification — authoritative (a declared bot/crawler/headless
+// UA-based bot classification, authoritative (a declared bot/crawler/headless
 // agent). Heuristic "looks automated" detection (many views, zero engagement)
 // is applied at READ time so it can use the full session.
 export function classifyBot(ua: string): { isBot: boolean; reason: string | null } {

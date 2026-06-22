@@ -1,4 +1,4 @@
-// Pure CRM types + helpers — NO 'server-only', NO db imports — so both server
+// Pure CRM types + helpers, NO 'server-only', NO db imports, so both server
 // queries (lib/crm.ts) and client components can import them. Keep all data
 // access in lib/crm.ts; keep only types + pure functions here.
 
@@ -6,7 +6,7 @@ export type ContactKind = 'customer' | 'investor'
 export type Priority = 'low' | 'medium' | 'high'
 export type ActivityKind = 'note' | 'call' | 'email' | 'meeting' | 'stage_change' | 'created' | 'task'
 
-// Pipeline stages per kind. Ordered — the board renders columns in this order.
+// Pipeline stages per kind. Ordered, the board renders columns in this order.
 export const STAGES: Record<ContactKind, { key: string; label: string }[]> = {
   customer: [
     { key: 'lead', label: 'Lead' },

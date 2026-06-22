@@ -14,14 +14,14 @@ export async function createSupabaseServerClient() {
         return cookieStore.getAll()
       },
       setAll(cookiesToSet) {
-        // In Server Components cookie writes throw; that's expected — the
+        // In Server Components cookie writes throw; that's expected, the
         // middleware refreshes the session, so we swallow the error here.
         try {
           cookiesToSet.forEach(({ name, value, options }) =>
             cookieStore.set(name, value, options),
           )
         } catch {
-          /* called from a Server Component — middleware handles refresh */
+          /* called from a Server Component, middleware handles refresh */
         }
       },
     },

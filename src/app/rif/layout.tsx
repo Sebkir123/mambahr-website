@@ -4,11 +4,11 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'Layoffs & RIF Planning — MambaHR',
+  title: 'Layoffs & RIF Planning | MambaHR',
   description:
     'The hardest day done right: WARN timing, severance math, redeployment options (advisory only), and every exit human-approved before it happens.',
   openGraph: {
-    title: 'Layoffs & RIF Planning — MambaHR',
+    title: 'Layoffs & RIF Planning | MambaHR',
     description:
       'The hardest day done right: WARN timing, severance math, redeployment (advisory only), every exit human-approved.',
     url: 'https://mambahr.com/rif',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Layoffs & RIF Planning — MambaHR',
+    title: 'Layoffs & RIF Planning | MambaHR',
     description:
       'The hardest day done right: WARN timing, severance math, redeployment (advisory only), every exit human-approved.',
     images: [ogImage],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Layoffs & RIF Planning — MambaHR',
+  name: 'Layoffs & RIF Planning | MambaHR',
   url: 'https://mambahr.com/rif',
   description:
     'MambaHR RIF planning: the hardest day done right. The agent models WARN timing, runs severance math, surfaces redeployment options as advisory only, and holds every exit for human approval.',

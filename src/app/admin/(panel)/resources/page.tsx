@@ -27,7 +27,7 @@ export default async function ResourcesPage() {
         <div>
           <h1 className={ui.h1}>Resources</h1>
           <p className={ui.subtitle}>
-            Upload playbooks &amp; guides — they appear on the site and get a trackable share page
+            Upload playbooks &amp; guides, they appear on the site and get a trackable share page
             {totalDownloads > 0 && ` · ${totalDownloads} download${totalDownloads === 1 ? '' : 's'} all-time`}
           </p>
         </div>

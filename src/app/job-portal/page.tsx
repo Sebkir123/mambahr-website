@@ -48,7 +48,7 @@ function PortalCard() {
             <span className="j-apply">Apply</span>
           </div>
         ))}
-        <div className="foot">Equal-opportunity questions handled at apply — nothing for you to set up.</div>
+        <div className="foot">Equal-opportunity questions handled at apply, nothing for you to set up.</div>
       </div>
       <style jsx>{`
         .cs { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
@@ -108,7 +108,7 @@ function InflowCard() {
       </div>
       <div className="foot">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · ranked &amp; filed</span>
-        <span className="f-t">Recommendation only — you make the call</span>
+        <span className="f-t">Recommendation only, you make the call</span>
       </div>
       <style jsx>{`
         .if { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
@@ -177,23 +177,23 @@ export default function JobPortalPage() {
         <AgentLoop
           eyebrow="How it runs"
           title="Posted to pipeline"
-          lead="From the moment a role opens to the moment a candidate is ranked in front of you — no job-board logins, no copy-pasting resumes, no missing EEO data."
+          lead="From the moment a role opens to the moment a candidate is ranked in front of you, no job-board logins, no copy-pasting resumes, no missing EEO data."
           steps={[
-            { n: '01', label: 'Site stood up', desc: 'Your logo, colors, and domain — the portal looks like you built it, because your brand did.', who: 'agent', time: 'day 1' },
+            { n: '01', label: 'Site stood up', desc: 'Your logo, colors, and domain, the portal looks like you built it, because your brand did.', who: 'agent', time: 'day 1' },
             { n: '02', label: 'Roles published', desc: 'Open reqs go live on your portal and the major job boards at once, written in your voice with pay bands shown.', who: 'agent', time: 'same day' },
-            { n: '03', label: 'Candidates apply', desc: 'A two-minute apply flow — no account creation, no resume re-typing. Candidates actually finish it.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '03', label: 'Candidates apply', desc: 'A two-minute apply flow, no account creation, no resume re-typing. Candidates actually finish it.', who: 'agent', img: '/avatars/priya.jpg' },
             { n: '04', label: 'Hiring-law questions', desc: 'The equal-opportunity questions the law requires are asked once, stored properly, and kept out of screening.', who: 'agent' },
             { n: '05', label: 'Read and ranked', desc: 'Every application is read, ranked, and recommended with reasons by the time you open the pipeline.', who: 'agent', time: 'overnight' },
-            { n: '06', label: 'You pick who advances', desc: 'Recommendations only — every advance-or-pass call is yours, with the why in plain English.', who: 'you', img: '/avatars/tom.jpg' },
+            { n: '06', label: 'You pick who advances', desc: 'Recommendations only, every advance-or-pass call is yours, with the why in plain English.', who: 'you', img: '/avatars/tom.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Your brand, your address"
           title={<>Looks like you <Em>built it.</Em></>}
-          lead="No more sending candidates to a vendor page with someone else's logo. The portal lives at jobs.yourcompany.com with your brand on every pixel — set up from your existing site in a day, with nothing for your engineers to do."
+          lead="No more sending candidates to a vendor page with someone else's logo. The portal lives at jobs.yourcompany.com with your brand on every pixel, set up from your existing site in a day, with nothing for your engineers to do."
           bullets={[
-            'Your domain, logo, colors, and voice — imported, not configured',
+            'Your domain, logo, colors, and voice, imported, not configured',
             'Pay bands shown on every role, the way state law increasingly requires',
             'Updates itself: open a req and it appears, close it and it disappears',
           ]}
@@ -206,11 +206,11 @@ export default function JobPortalPage() {
           warm
           eyebrow="Straight into the pipeline"
           title={<>Applications arrive <Em>read.</Em></>}
-          lead="Every application is read, ranked, and explained before you ever see it. You open the pipeline to a shortlist with reasons — not a pile of two hundred resumes on a Sunday night."
+          lead="Every application is read, ranked, and explained before you ever see it. You open the pipeline to a shortlist with reasons, not a pile of two hundred resumes on a Sunday night."
           bullets={[
             'Ranked overnight with the why spelled out in plain English',
             'Mamba recommends; it never advances or rejects anyone on its own',
-            'Every candidate gets an answer — no application black hole under your brand',
+            'Every candidate gets an answer, no application black hole under your brand',
           ]}
         >
           <InflowCard />
@@ -225,7 +225,7 @@ export default function JobPortalPage() {
         />
 
         <QuoteBand
-          quote="We sent candidates to a clunky vendor page for years. Now they apply on our site, and by morning I have a ranked shortlist with reasons. Candidates compliment the experience — that never happened before."
+          quote="We sent candidates to a clunky vendor page for years. Now they apply on our site, and by morning I have a ranked shortlist with reasons. Candidates compliment the experience, that never happened before."
           name="Sofia Reyes"
           role="Head of Talent · 140-person company"
           img="/v2-people/feat.jpg"

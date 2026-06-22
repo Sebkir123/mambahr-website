@@ -27,7 +27,7 @@ const TIERS = [
     price: '$22',
     unit: '/employee/mo',
     min: '$24k/yr minimum · billed annually',
-    blurb: 'Your next HR Ops hire — for a tenth of one.',
+    blurb: 'Your next HR Ops hire, for a tenth of one.',
     replaces: ['HR coordinator', 'People ops generalist', 'Manual on/offboarding'],
     feats: ['Everything in Starter', 'Onboarding & offboarding, done', 'Offers sent, approvals routed', 'Time off, leave & reviews handled'],
     cta: 'Hire your Ops Manager',
@@ -61,7 +61,7 @@ const TIERS = [
 /* Plan matrix: tier index = first column where the feature is included. */
 const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
   {
-    group: 'Core — every plan',
+    group: 'Core, every plan',
     rows: [
       { f: 'Employee records', from: 0 },
       { f: 'Org chart & team visibility', from: 0 },
@@ -165,7 +165,7 @@ function MathCard() {
       </div>
       <div className="foot">
         <span className="f-big">$84k</span>
-        <span className="f-t">back in your budget — before counting the hours your managers get back</span>
+        <span className="f-t">back in your budget, before counting the hours your managers get back</span>
       </div>
       <style jsx>{`
         .mc { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
@@ -206,7 +206,7 @@ export default function PricingPage() {
             <h1 className="title" data-reveal data-delay="1">Before you hire HR, <Em>hire MambaHR.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
               The first AI HR department for startups and growing companies. It runs onboarding, offboarding,
-              employee changes, documents, compliance, and payroll-ready exports — from a fraction of the cost
+              employee changes, documents, compliance, and payroll-ready exports, from a fraction of the cost
               of your next HR hire. Priced per employee, the way the work actually scales.
             </p>
             <div className="ctas" data-reveal data-delay="3">
@@ -339,7 +339,7 @@ export default function PricingPage() {
                 </div>
               ))}
             </div>
-            <p className="note" data-reveal>Annual billing. Every employee on the platform counts once — contractors and board members don&rsquo;t.</p>
+            <p className="note" data-reveal>Annual billing. Every employee on the platform counts once, contractors and board members don&rsquo;t.</p>
 
             {/* Collapsible full matrix */}
             <details className="matrix" data-reveal>
@@ -428,7 +428,7 @@ export default function PricingPage() {
             <div className="head" data-reveal>
               <p className="eyebrow">Compare the cost</p>
               <h2 className="title">Cheaper than the <Em>hire.</Em></h2>
-              <p className="lead">Real HR execution for a fraction of the cost of one full-time HR hire — and you can still make that hire later, into a running department.</p>
+              <p className="lead">Real HR execution for a fraction of the cost of one full-time HR hire, and you can still make that hire later, into a running department.</p>
             </div>
             <div className="cost-table" data-reveal data-delay="1">
               <div className="row hd">
@@ -497,7 +497,7 @@ export default function PricingPage() {
               <p className="eyebrow">No rip-and-replace</p>
               <h2 className="title">Keep your payroll. <Em>We feed it.</Em></h2>
               <p className="lead">
-                MambaHR doesn&rsquo;t process payroll or administer benefits today — and we say that plainly.
+                MambaHR doesn&rsquo;t process payroll or administer benefits today, and we say that plainly.
                 What it does is keep all the work around them clean: every hire, change, and exit lands in a
                 ready-to-load file for your payroll provider, benefits broker, or PEO. Nothing missed, nothing re-keyed.
               </p>
@@ -523,8 +523,8 @@ export default function PricingPage() {
         <StatTrio
           stats={[
             { n: 84, prefix: '$', suffix: 'k', label: 'back in the budget vs. a first HR hire, at 100 employees' },
-            { n: 27, label: 'hours of HR admin handled in a typical week — nights included' },
-            { n: 30, suffix: ' days', label: 'to useful HR work, guaranteed — or your first year extends free' },
+            { n: 27, label: 'hours of HR admin handled in a typical week, nights included' },
+            { n: 30, suffix: ' days', label: 'to useful HR work, guaranteed, or your first year extends free' },
           ]}
         />
 
@@ -559,7 +559,7 @@ export default function PricingPage() {
         </section>
 
         <QuoteBand
-          quote="I budgeted for an HR coordinator this year. Instead we turned on MambaHR — the admin work disappeared, and the salary went to a second engineer. Easiest line item I've ever defended."
+          quote="I budgeted for an HR coordinator this year. Instead we turned on MambaHR, the admin work disappeared, and the salary went to a second engineer. Easiest line item I've ever defended."
           name="Marcus Lee"
           role="COO · 120-person company"
           img="/v2-people/marcus.jpg"
@@ -568,7 +568,7 @@ export default function PricingPage() {
 
         <PageCta
           title={<>Before you hire HR, <Em>hire MambaHR.</Em></>}
-          sub="Built to do the work. A 30-minute demo with your real headcount — we'll quote it on the call."
+          sub="Built to do the work. A 30-minute demo with your real headcount, we'll quote it on the call."
         />
       </main>
       <Footer />

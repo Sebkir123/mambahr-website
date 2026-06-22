@@ -10,7 +10,7 @@ type Tz = 'ET' | 'CT' | 'MT' | 'PT'
 
 // Switching property/view/range/tz used to be <Link> navigations that scrolled
 // to top and flashed (felt like a full reload). These navigate via router.replace
-// with scroll:false inside a transition — a soft re-render that keeps scroll
+// with scroll:false inside a transition, a soft re-render that keeps scroll
 // position and shows the previous data until the new data is ready.
 export function SiteControls({
   property,

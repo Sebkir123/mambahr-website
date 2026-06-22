@@ -9,7 +9,7 @@ export type LinkResult = { ok: boolean; message: string; path?: string; token?: 
 
 const SITE = 'https://mambahr.com'
 
-// Create an admin-owned TRACKED share link for a guide (no email — identified by
+// Create an admin-owned TRACKED share link for a guide (no email, identified by
 // recipient name). field_guide_leads only allows admin READ via RLS, so writes
 // go through the service role behind requireAdmin(). Returns the link so the UI
 // can show + copy it immediately (the cached list catches up within ~20s).
@@ -40,7 +40,7 @@ export async function createFieldGuideLink(fd: FormData): Promise<LinkResult> {
   return { ok: true, message: `Tracked link created for ${name}.`, path: guidePath(guide), token }
 }
 
-// Revoke a link — the gated page immediately 404s for that token; opens are kept.
+// Revoke a link, the gated page immediately 404s for that token; opens are kept.
 export async function revokeFieldGuideLink(fd: FormData): Promise<void> {
   await requireAdmin()
   const db = serviceDb()

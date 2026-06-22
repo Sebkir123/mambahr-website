@@ -23,7 +23,7 @@ function SignedDocCard() {
             </svg>
           </span>
           <div>
-            <div className="d-name">Offer — Maya Chen.pdf</div>
+            <div className="d-name">Offer, Maya Chen.pdf</div>
             <div className="d-meta">Senior Engineer · generated from your template</div>
           </div>
           <span className="chip">Signed · 11:15 AM</span>
@@ -44,7 +44,7 @@ function SignedDocCard() {
         </div>
         <div className="foot">
           <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · signed &amp; filed</span>
-          <span className="foot-t">Drafted, sent, signed, and filed — 41 minutes end to end</span>
+          <span className="foot-t">Drafted, sent, signed, and filed, 41 minutes end to end</span>
         </div>
       </div>
       <style jsx>{`
@@ -152,7 +152,7 @@ function RetrievalStage() {
         <span className="f-check" aria-hidden="true" />
         <div>
           <div className="f-t">Every version · every signature · kept</div>
-          <div className="f-s">Ask for any document — it&rsquo;s back in seconds, with its history</div>
+          <div className="f-s">Ask for any document, it&rsquo;s back in seconds, with its history</div>
         </div>
       </div>
       <style jsx>{`
@@ -178,11 +178,11 @@ export default function DocumentsPage() {
         <PageHero
           eyebrow="Documents & e-sign"
           title={<>Signed and <Em>filed.</Em></>}
-          lead="Stop chasing signatures on Friday afternoons. Offers, agreements, acknowledgements — drafted in seconds, e-signed, chased, and filed where you’ll find them in three years."
+          lead="Stop chasing signatures on Friday afternoons. Offers, agreements, acknowledgements, drafted in seconds, e-signed, chased, and filed where you’ll find them in three years."
           proof="Loved by lean people teams"
           photo="/v2-people/team.jpg"
           photoChip="Mamba · signed & filed"
-          photoCaption="Maya’s offer — out, signed, filed in 41 min"
+          photoCaption="Maya’s offer, out, signed, filed in 41 min"
         >
           <SignedDocCard />
         </PageHero>
@@ -192,12 +192,12 @@ export default function DocumentsPage() {
           title={<>A document&rsquo;s life</>}
           lead="No template hunting, no chasing, no “where did that go?” Every document moves itself from draft to filed."
           steps={[
-            { n: '01', label: 'Drafted from your template', desc: 'The right template, the right details — name, role, comp, dates — filled in correctly.', who: 'agent', time: 'seconds' },
+            { n: '01', label: 'Drafted from your template', desc: 'The right template, the right details, name, role, comp, dates, filled in correctly.', who: 'agent', time: 'seconds' },
             { n: '02', label: 'Sent for e-signature', desc: 'Delivered for e-sign through DocuSign, to the right people in the right order.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
-            { n: '03', label: 'You sign what matters', desc: 'Offers, agreements, anything with your name on it — a person signs, always.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '03', label: 'You sign what matters', desc: 'Offers, agreements, anything with your name on it, a person signs, always.', who: 'you', img: '/avatars/anna.jpg' },
             { n: '04', label: 'Chased politely until signed', desc: 'Gentle reminders go out on their own. Nobody on your team plays follow-up.', who: 'agent', time: 'as needed', img: '/avatars/tom.jpg' },
             { n: '05', label: 'Filed with the audit trail', desc: 'Into the right folder, under the right person, with who signed what and when.', who: 'agent', time: 'instant' },
-            { n: '06', label: 'Back the second you ask', desc: 'Three years later, in an audit or a dispute — it’s one question away.', who: 'agent', time: 'seconds' },
+            { n: '06', label: 'Back the second you ask', desc: 'Three years later, in an audit or a dispute, it’s one question away.', who: 'agent', time: 'seconds' },
           ]}
         />
 
@@ -207,7 +207,7 @@ export default function DocumentsPage() {
           lead="A handbook update used to mean weeks of awkward chase messages and a spreadsheet of who hasn’t. Now it goes out to everyone, every acknowledgement is tracked, and the stragglers get chased for you. You see one number: done."
           bullets={[
             'Every acknowledgement tracked, with date and signature',
-            'Reminders sent for you — no awkward chase emails',
+            'Reminders sent for you, no awkward chase emails',
             'A clean record for the day an auditor asks',
           ]}
         >
@@ -219,10 +219,10 @@ export default function DocumentsPage() {
           warm
           eyebrow="Retrieval"
           title={<>Found in seconds, <Em>years later</Em></>}
-          lead="The day a dispute lands, the document you need is one question away — not buried in someone’s old shared drive. Every offer, agreement, and acknowledgement is filed under the right person with every version and every signature."
+          lead="The day a dispute lands, the document you need is one question away, not buried in someone’s old shared drive. Every offer, agreement, and acknowledgement is filed under the right person with every version and every signature."
           bullets={[
             'Filed by person, not buried in a shared drive',
-            'Full trail on every document — who signed, when, what changed',
+            'Full trail on every document, who signed, when, what changed',
             'Audits and disputes answered in minutes, not weekends',
           ]}
         >

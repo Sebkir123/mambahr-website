@@ -1,4 +1,4 @@
-// FAQ question/answer pairs — kept in a plain (non-'use client') module so both
+// FAQ question/answer pairs, kept in a plain (non-'use client') module so both
 // the client <Faq> section and the server home page (FAQPage JSON-LD) can import
 // the same source of truth. Importing a named export from a 'use client' module
 // into a server component turns it into a client reference, not the array.

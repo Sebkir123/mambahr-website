@@ -144,7 +144,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
             <div className="head" data-reveal>
               <p className="eyebrow">Side by side</p>
               <h2 className="title">The honest <Em>table.</Em></h2>
-              <p className="lead">Including the rows where {data.name} wins — you&rsquo;ll check anyway.</p>
+              <p className="lead">Including the rows where {data.name} wins, you&rsquo;ll check anyway.</p>
             </div>
             <div className="card agent-edge agent-done" data-reveal data-delay="1">
               <div className="row hd">
@@ -249,7 +249,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
               <div className="step" data-reveal data-delay="1">
                 <span className="d">Day 1</span>
                 <h3 className="t">Your data imports</h3>
-                <p className="b">People, history, documents, time-off balances — pulled from {data.name} in one pass. Nothing re-keyed, nothing lost.</p>
+                <p className="b">People, history, documents, time-off balances, pulled from {data.name} in one pass. Nothing re-keyed, nothing lost.</p>
               </div>
               <div className="step" data-reveal data-delay="2">
                 <span className="d">Day 2</span>

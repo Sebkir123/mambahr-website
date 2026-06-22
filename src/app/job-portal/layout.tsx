@@ -4,11 +4,11 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'Job Portal & Careers Page — MambaHR',
+  title: 'Job Portal & Careers Page | MambaHR',
   description:
     'A branded careers page on your domain, hosted job board, and applicant tracking. Applications land in your pipeline already read, ranked, with EEO data collected.',
   openGraph: {
-    title: 'Job Portal & Careers Page — MambaHR',
+    title: 'Job Portal & Careers Page | MambaHR',
     description:
       'Branded careers page on your domain. Applications land read, ranked, and EEO-tracked in your pipeline.',
     url: 'https://mambahr.com/job-portal',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Job Portal & Careers Page — MambaHR',
+    title: 'Job Portal & Careers Page | MambaHR',
     description:
       'Branded careers page on your domain. Applications land read, ranked, and EEO-tracked in your pipeline.',
     images: [ogImage],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Job Portal & Careers Page — MambaHR',
+  name: 'Job Portal & Careers Page | MambaHR',
   url: 'https://mambahr.com/job-portal',
   description:
     'MambaHR job portal: a branded careers page hosted on your domain, a hosted job board, and applicant tracking. Applications arrive pre-read, ranked, and with EEO data collected.',

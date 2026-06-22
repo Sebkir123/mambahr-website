@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import styles from './landing.module.css'
 
-// Share the playbook — native share sheet on mobile, copy-link fallback on
+// Share the playbook, native share sheet on mobile, copy-link fallback on
 // desktop. One link for everywhere; the site tracker attributes the source.
 export default function ShareButton({ url, title }: { url: string; title: string }) {
   const [copied, setCopied] = useState(false)
@@ -11,10 +11,10 @@ export default function ShareButton({ url, title }: { url: string; title: string
   async function share() {
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {
-        await navigator.share({ title: `${title} — MambaHR`, url })
+        await navigator.share({ title: `${title} | MambaHR`, url })
         return
       } catch {
-        /* user cancelled — fall through to copy */
+        /* user cancelled, fall through to copy */
       }
     }
     try {

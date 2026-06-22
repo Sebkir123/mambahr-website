@@ -33,7 +33,7 @@ function SecurityLogCard() {
         ))}
       </div>
       <div className="s-foot">
-        <span>Kept forever · cannot be edited — not even by us</span>
+        <span>Kept forever · cannot be edited, not even by us</span>
         <span className="mono">4 of 247 today</span>
       </div>
       <style jsx>{`
@@ -61,10 +61,10 @@ function SecurityLogCard() {
 /* ── Commitments section (page-local, styled like AgentLoop's card) ── */
 const COMMITMENTS = [
   { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption at rest, TLS 1.2+ in transit. Your records are protected while stored and while moving between systems.', tag: 'Always on' },
-  { n: '02', label: 'Access by role — least privilege', desc: 'Each person sees only what their role allows. Managers see their team; employees see their own record.', tag: 'Always on' },
-  { n: '03', label: 'Every change logged with who and why', desc: 'Every action — by a person or by Mamba — is written to a record nobody can edit, with the reason attached.', tag: 'Always on' },
+  { n: '02', label: 'Access by role, least privilege', desc: 'Each person sees only what their role allows. Managers see their team; employees see their own record.', tag: 'Always on' },
+  { n: '03', label: 'Every change logged with who and why', desc: 'Every action, by a person or by Mamba, is written to a record nobody can edit, with the reason attached.', tag: 'Always on' },
   { n: '04', label: 'Your data stays in the US', desc: 'Stored on enterprise US cloud infrastructure. It never leaves the country.', tag: 'In your contract' },
-  { n: '05', label: 'Never used to train AI', desc: 'Names, salaries, reviews, health information — none of it trains any AI model. Not ours, not anyone else’s.', tag: 'In your contract' },
+  { n: '05', label: 'Never used to train AI', desc: 'Names, salaries, reviews, health information, none of it trains any AI model. Not ours, not anyone else’s.', tag: 'In your contract' },
 ]
 
 function Commitments() {
@@ -215,11 +215,11 @@ const REVIEW = [
   },
   {
     q: 'How is it encrypted?',
-    a: 'AES-256 at rest, TLS 1.2 or higher in transit — for the database, documents, and every backup.',
+    a: 'AES-256 at rest, TLS 1.2 or higher in transit, for the database, documents, and every backup.',
   },
   {
     q: 'Who at MambaHR can see it?',
-    a: 'Access is role-based and least-privilege on our side too. Production access is restricted, logged, and reviewed — and every access lands in the same immutable audit trail you can read.',
+    a: 'Access is role-based and least-privilege on our side too. Production access is restricted, logged, and reviewed, and every access lands in the same immutable audit trail you can read.',
   },
   {
     q: 'What about backups and recovery?',
@@ -227,7 +227,7 @@ const REVIEW = [
   },
   {
     q: 'What if we leave?',
-    a: 'Your data is yours. Full export in standard formats whenever you ask — including on the way out — then verified deletion within 30 days of contract end.',
+    a: 'Your data is yours. Full export in standard formats whenever you ask, including on the way out, then verified deletion within 30 days of contract end.',
   },
   {
     q: 'Who are your subprocessors?',
@@ -239,7 +239,7 @@ const REVIEW = [
   },
   {
     q: 'Does any of it train AI?',
-    a: 'No. Names, salaries, reviews, health information — none of it trains any model, ours or anyone else’s. Contractual, not configurable.',
+    a: 'No. Names, salaries, reviews, health information, none of it trains any model, ours or anyone else’s. Contractual, not configurable.',
   },
 ]
 
@@ -250,7 +250,7 @@ function SecurityReview() {
         <div className="head" data-reveal>
           <p className="eyebrow">For your security review</p>
           <h2 className="title">The questionnaire, <Em>answered.</Em></h2>
-          <p className="lead">The questions your IT and legal reviewers will ask, answered before they ask them. Forward this page — or bring them to the demo.</p>
+          <p className="lead">The questions your IT and legal reviewers will ask, answered before they ask them. Forward this page, or bring them to the demo.</p>
         </div>
         <div className="grid">
           {REVIEW.map((r, i) => (
@@ -294,7 +294,7 @@ export default function SecurityPage() {
         <PageHero
           eyebrow="Security"
           title={<>Locked down, <Em>logged.</Em></>}
-          lead="Salaries, reviews, health information — the most sensitive data your company holds. Encrypted everywhere, access by role, every change on the record, and never used to train AI. In writing."
+          lead="Salaries, reviews, health information, the most sensitive data your company holds. Encrypted everywhere, access by role, every change on the record, and never used to train AI. In writing."
           proof="Security teams welcome on the demo"
           photo="/v2-people/sofia.jpg"
           photoChip="Mamba · done"
@@ -308,11 +308,11 @@ export default function SecurityPage() {
         <FeatureSplit
           eyebrow="Access"
           title={<>You control <Em>the keys</Em></>}
-          lead="Orphaned accounts are how breaches start. Sign-on and user provisioning run through WorkOS, Okta, or Microsoft Entra, access follows your org chart — and when someone is offboarded, they’re locked out the same minute."
+          lead="Orphaned accounts are how breaches start. Sign-on and user provisioning run through WorkOS, Okta, or Microsoft Entra, access follows your org chart, and when someone is offboarded, they’re locked out the same minute."
           bullets={[
             'Your team signs in with the accounts they already use',
             'Permissions follow each person’s role, automatically',
-            'Offboarded means locked out — no orphaned accounts',
+            'Offboarded means locked out, no orphaned accounts',
           ]}
         >
           <SsoCard />
@@ -323,11 +323,11 @@ export default function SecurityPage() {
           warm
           eyebrow="Human oversight"
           title={<>A human on <Em>the big calls</Em></>}
-          lead="The agent acts within the policy you set. Offers above band, terminations, big comp changes — those always stop and wait for a person to sign off. Every time, with the reasoning attached."
+          lead="The agent acts within the policy you set. Offers above band, terminations, big comp changes, those always stop and wait for a person to sign off. Every time, with the reasoning attached."
           bullets={[
             'You decide which actions need a person',
             'Nothing high-stakes happens without a named approver',
-            'Every approval — and every decline — is on the record',
+            'Every approval, and every decline, is on the record',
           ]}
         >
           <ApprovalGateCard />
@@ -336,7 +336,7 @@ export default function SecurityPage() {
         <StatTrio
           stats={[
             { n: 100, suffix: '%', label: 'of changes logged with who and why' },
-            { n: 0, label: 'AI training on your data — contractual' },
+            { n: 0, label: 'AI training on your data, contractual' },
             { n: 1, label: 'human required on every high-stakes action' },
           ]}
         />
@@ -344,7 +344,7 @@ export default function SecurityPage() {
         <SecurityReview />
 
         <QuoteBand
-          quote="I asked the hard questions before we signed — who sees what, where the data lives, what trains their AI. The answers were in the contract, not a slide deck."
+          quote="I asked the hard questions before we signed, who sees what, where the data lives, what trains their AI. The answers were in the contract, not a slide deck."
           name="Dana Whitfield"
           role="Head of People"
           img="/v2-people/feat.jpg"

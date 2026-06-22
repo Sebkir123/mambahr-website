@@ -250,7 +250,7 @@ export default function CompensationPage() {
         <PageHero
           eyebrow="Compensation"
           title={<>Every raise, <Em>right.</Em></>}
-          lead="No more six weeks of spreadsheets and second-guessing. Every number is checked against your bands and screened for pay equity before anyone sees it — and anything above band comes to you first."
+          lead="No more six weeks of spreadsheets and second-guessing. Every number is checked against your bands and screened for pay equity before anyone sees it, and anything above band comes to you first."
           proof="Trusted with the whole comp cycle"
           photo="/v2-people/team2.jpg"
           photoChip="Mamba · done"
@@ -262,9 +262,9 @@ export default function CompensationPage() {
         <AgentLoop
           eyebrow="The loop"
           title={<>How a raise <Em>happens.</Em></>}
-          lead="From a manager&rsquo;s Slack message to an updated payroll file — with you on every call that matters."
+          lead="From a manager&rsquo;s Slack message to an updated payroll file, with you on every call that matters."
           steps={[
-            { n: '01', label: 'A manager asks in Slack', desc: '“Can we get Tom to $185k?” That message is the whole request — no form, no ticket.', who: 'agent', time: 'sec', img: '/avatars/dave.jpg' },
+            { n: '01', label: 'A manager asks in Slack', desc: '“Can we get Tom to $185k?” That message is the whole request, no form, no ticket.', who: 'agent', time: 'sec', img: '/avatars/dave.jpg' },
             { n: '02', label: 'Checked against bands and pay equity', desc: 'The number is held up against your salary bands and screened for equity issues before it moves.', who: 'agent', time: 'min' },
             { n: '03', label: 'The big calls come to you first', desc: 'Within policy proceeds. Anything above your threshold routes to a human before it goes anywhere.', who: 'you', img: '/avatars/priya.jpg' },
             { n: '04', label: 'The letter writes and signs itself', desc: 'Comp letter generated, sent for e-signature, and filed to the employee record automatically.', who: 'agent', time: 'min', img: '/avatars/tom.jpg' },
@@ -275,11 +275,11 @@ export default function CompensationPage() {
         <FeatureSplit
           eyebrow="Pay equity"
           title={<>Equity checked, <Em>every time.</Em></>}
-          lead="Every comp change is screened for equity issues before it happens — not discovered in a year-end audit panic. Clear changes proceed; anything that looks off comes to a person with the context attached."
+          lead="Every comp change is screened for equity issues before it happens, not discovered in a year-end audit panic. Clear changes proceed; anything that looks off comes to a person with the context attached."
           bullets={[
             'Screened on every change, against real peers in the same band',
             'Flags arrive with context, not just a red number',
-            'No annual scramble — the audit is continuous',
+            'No annual scramble, the audit is continuous',
           ]}
         >
           <EquityCard />
@@ -290,7 +290,7 @@ export default function CompensationPage() {
           warm
           eyebrow="What changes"
           title={<>Comp talks without <Em>the fear.</Em></>}
-          lead="When the number is already checked against bands and equity, the manager walks in confident the offer is fair — and spends the conversation on the person, not defending the math."
+          lead="When the number is already checked against bands and equity, the manager walks in confident the offer is fair, and spends the conversation on the person, not defending the math."
           bullets={[
             'Managers know the number is defensible before they say it',
             'Employees hear a consistent story about how pay works',

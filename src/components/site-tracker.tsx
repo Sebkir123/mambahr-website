@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation'
 // scroll depth and ACTIVE time (only while the tab is visible), flushing on tab-
 // hide / unload / route-change via sendBeacon so the data survives navigation.
 // Declarative conversions: any element with data-track="kind" (optional
-// data-track-label) fires an event on click — e.g. <a data-track="cta_click">.
+// data-track-label) fires an event on click, e.g. <a data-track="cta_click">.
 const ENDPOINT = '/api/site/track'
 const HEARTBEAT_MS = 15_000
 
@@ -61,7 +61,7 @@ export default function SiteTracker() {
     const scrollPct = () => {
       const el = document.documentElement
       const denom = el.scrollHeight - el.clientHeight
-      if (denom <= 0) return 0 // page fits the viewport — not scrollable; don't inflate scroll depth
+      if (denom <= 0) return 0 // page fits the viewport, not scrollable; don't inflate scroll depth
       return Math.max(0, Math.min(100, Math.round(((el.scrollTop || window.scrollY) / denom) * 100)))
     }
     let maxScroll = 0
@@ -152,7 +152,7 @@ export default function SiteTracker() {
     document.addEventListener('visibilitychange', onVis)
     window.addEventListener('pagehide', onHide)
     document.addEventListener('click', onClick, true)
-    // Heartbeat for long reads — but only while the tab is actually visible, so
+    // Heartbeat for long reads, but only while the tab is actually visible, so
     // a backgrounded tab doesn't keep beaconing.
     const hb = setInterval(() => {
       if (document.visibilityState === 'visible') flush()

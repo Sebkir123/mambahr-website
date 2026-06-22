@@ -87,7 +87,7 @@ function Row({ label, row, max }: { label: string; row: number[]; max: number })
         <span
           key={hh}
           className={styles.heatCell}
-          title={`${label} ${String(hh).padStart(2, '0')}:00 — ${v} visit${v === 1 ? '' : 's'}`}
+          title={`${label} ${String(hh).padStart(2, '0')}:00, ${v} visit${v === 1 ? '' : 's'}`}
           style={v > 0 ? { background: `color-mix(in srgb, var(--gold) ${Math.round((v / max) * 100)}%, var(--bg-elevated))` } : undefined}
         />
       ))}

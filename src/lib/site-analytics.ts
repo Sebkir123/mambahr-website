@@ -13,7 +13,7 @@ const TZMAP: Record<Tz, string> = {
 }
 const WD: Record<string, number> = { Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6 }
 // Extract hour (0–23), weekday (0=Mon) and a short date label for a timestamp in
-// a chosen display timezone — so the timeline/heatmap aren't silently UTC.
+// a chosen display timezone, so the timeline/heatmap aren't silently UTC.
 function tzParts(d: Date, tz: Tz): { hour: number; weekday: number; dateLabel: string } {
   const p = new Intl.DateTimeFormat('en-US', {
     timeZone: TZMAP[tz],
@@ -79,7 +79,7 @@ function classify(pv: number, dwellMs: number, scroll: number): SessionClass {
 
 // Public entry. Callers MUST be behind requireAdmin(). In production we read via
 // the service-role client and cache the result for 30s keyed by (property,range,
-// tz) — so loading and tab-switching are instant instead of re-querying Supabase
+// tz), so loading and tab-switching are instant instead of re-querying Supabase
 // every click. Locally (no service key) we fall back to the uncached cookie client.
 const cachedAnalytics = unstable_cache(
   async (property: SiteProperty, range: Range, tz: Tz): Promise<SiteAnalytics> => {
@@ -200,7 +200,7 @@ async function computeSiteAnalytics(
   const bySource = tally(real.map((r) => r.source))
   const byDevice = tally(real.map((r) => r.device))
 
-  // Top pages — over page-views belonging to REAL sessions only.
+  // Top pages, over page-views belonging to REAL sessions only.
   const realIds = new Set(real.map((r) => r.id))
   const pageAgg = new Map<string, { title: string | null; views: number; dwell: number; scroll: number }>()
   for (const p of pvs) {
@@ -222,7 +222,7 @@ async function computeSiteAnalytics(
     .sort((a, b) => b.views - a.views)
     .slice(0, 12)
 
-  // Session lookup map — used for O(1) event→session resolution (was O(n·m)).
+  // Session lookup map, used for O(1) event→session resolution (was O(n·m)).
   const rowById = new Map(rows.map((r) => [r.id, r]))
 
   // Timeline buckets aligned to the FULL query window so the chart can't
@@ -284,7 +284,7 @@ async function computeSiteAnalytics(
     heatmap[weekday][hour]++
   }
 
-  // Conversion funnel — distinct real sessions reaching each step.
+  // Conversion funnel, distinct real sessions reaching each step.
   const reach = (kind: string) => real.filter((r) => r.events.includes(kind)).length
   const funnelRaw = [
     { label: 'Visits', count: real.length },

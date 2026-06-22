@@ -40,7 +40,7 @@ async function adminDb(): Promise<SupabaseClient> {
 
 // Published resources for the public site, hero (featured) first then sort order.
 // Uses a cookieless anon client so callers (e.g. the static homepage) stay
-// statically renderable — RLS still restricts to published rows. Pages that
+// statically renderable, RLS still restricts to published rows. Pages that
 // mutate resources call revalidatePath('/') to regenerate.
 export async function listPublishedResources(): Promise<Resource[]> {
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
@@ -63,7 +63,7 @@ export async function getPublishedResource(slug: string): Promise<Resource | nul
   return (data as Resource | null) ?? null
 }
 
-// Any resource by slug — draft or published — for admin preview.
+// Any resource by slug, draft or published, for admin preview.
 export async function getAnyResource(slug: string): Promise<Resource | null> {
   const db = await adminDb()
   const { data } = await db.from('resources').select('*').eq('slug', slug).maybeSingle()
@@ -123,7 +123,7 @@ export async function getResourceStats(): Promise<Map<string, ResourceStat>> {
   return map
 }
 
-// Force-download URL for a resource's PDF — Supabase Storage honours ?download
+// Force-download URL for a resource's PDF, Supabase Storage honours ?download
 // to set Content-Disposition: attachment (the bare public URL opens inline).
 export function resourceDownloadUrl(filePath: string, fileName?: string | null): string {
   const name = (fileName && fileName.trim()) || filePath.split('/').pop() || 'mambahr-playbook.pdf'

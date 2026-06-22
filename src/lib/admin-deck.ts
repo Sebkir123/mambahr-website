@@ -11,9 +11,9 @@ import { DECK_SLIDE_COUNT } from '@/lib/deck-slides'
 // each query degrades to empty rather than throwing if a table is missing.
 //
 // Two sources of truth, by design:
-//   deck_pageviews  — server-side opens, captured even if the client beacon is
+//   deck_pageviews , server-side opens, captured even if the client beacon is
 //                     blocked. The reliable "was it opened, by whom, from where".
-//   deck_sessions   — client telemetry: dwell, active time, furthest slide.
+//   deck_sessions  , client telemetry: dwell, active time, furthest slide.
 //                     Richer, but absent when JS/beacon is blocked.
 // A link with opens but no sessions = someone read it with the beacon blocked.
 
@@ -26,7 +26,7 @@ export type DeckLinkRow = {
   revoked_at: string | null
   opens: number // server-side page-views (reliable)
   views: number // client sessions (enriched)
-  distinctViewers: number // distinct IPs — >1 means the link was forwarded
+  distinctViewers: number // distinct IPs, >1 means the link was forwarded
   forwarded: boolean
   lastViewedAt: string | null
   totalMs: number
@@ -38,7 +38,7 @@ export type DeckSessionRow = {
   org: string | null
   startedAt: string
   location: string
-  org_network: string | null // ASN org — the owning network
+  org_network: string | null // ASN org, the owning network
   device: string | null
   browser: string | null
   os: string | null
@@ -127,10 +127,10 @@ async function computeDeckAnalytics(supabase: SupabaseClient): Promise<DeckAnaly
       .limit(2000),
   ])
 
-  if (linksRes.error) warnings.push('Could not read deck_links — run the deck_analytics migration.')
+  if (linksRes.error) warnings.push('Could not read deck_links, run the deck_analytics migration.')
   if (sessionsRes.error) warnings.push('Could not read deck_sessions.')
   if (pageviewsRes.error)
-    warnings.push('Could not read deck_pageviews — run the deck_analytics_v2 migration.')
+    warnings.push('Could not read deck_pageviews, run the deck_analytics_v2 migration.')
 
   const rawLinks = linksRes.data ?? []
   const rawSessions = sessionsRes.data ?? []
@@ -393,7 +393,7 @@ export type DeckSummary = {
   warnings: string[]
 }
 
-// Lightweight deck rollup for the Overview dashboard — two cheap reads, no
+// Lightweight deck rollup for the Overview dashboard, two cheap reads, no
 // per-session aggregation. Reads as the logged-in admin (RLS), degrades to
 // zeros if a table is missing.
 const cachedDeckSummary = unstable_cache(async () => computeDeckSummary(serviceDb()!), ['deck-summary-v1'], { revalidate: 20 })

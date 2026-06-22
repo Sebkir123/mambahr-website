@@ -22,7 +22,7 @@ export async function createDeckLink(formData: FormData) {
   revalidatePath('/admin/deck')
 }
 
-// Revoke a link — the deck immediately 404s for that token; analytics are kept.
+// Revoke a link, the deck immediately 404s for that token; analytics are kept.
 export async function revokeDeckLink(formData: FormData) {
   await requireAdmin()
   const id = String(formData.get('id') || '')

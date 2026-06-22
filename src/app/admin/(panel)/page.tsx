@@ -18,7 +18,7 @@ function fmtDateTime(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
 }
 
-// Pure-SVG sparkline — no client JS. Points are the 14-day lead trend.
+// Pure-SVG sparkline, no client JS. Points are the 14-day lead trend.
 function Sparkline({ data }: { data: { day: string; count: number }[] }) {
   const w = 280
   const h = 56
@@ -89,7 +89,7 @@ export default async function AdminOverview() {
         </div>
       </div>
 
-      {/* Section pulse — a compact launcher into each area, no detail duplicated */}
+      {/* Section pulse, a compact launcher into each area, no detail duplicated */}
       <div className={styles.sectionGrid}>
         <SectionTile
           title="Customers"

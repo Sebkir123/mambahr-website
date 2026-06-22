@@ -4,7 +4,7 @@ import { socialDb, publishForAccount } from '@/lib/social'
 
 export const dynamic = 'force-dynamic'
 
-// Publishes due scheduled posts. Authenticated by CRON_SECRET only — Vercel Cron
+// Publishes due scheduled posts. Authenticated by CRON_SECRET only, Vercel Cron
 // sends `Authorization: Bearer <CRON_SECRET>` automatically when the env var is
 // set. We do NOT trust the x-vercel-cron header (a client can forge it, which
 // would let anyone force-publish to the founders' real feeds). Fail closed.

@@ -201,7 +201,7 @@ export async function publishForAccount(account: {
   if (expired) {
     const refresh = decryptToken(account.refresh_token)
     if (!refresh) {
-      throw new Error('This LinkedIn connection has expired — reconnect the account to keep posting')
+      throw new Error('This LinkedIn connection has expired, reconnect the account to keep posting')
     }
     {
       const r = await refreshAccessToken(refresh)

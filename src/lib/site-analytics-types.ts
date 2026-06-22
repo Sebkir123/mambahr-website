@@ -1,4 +1,4 @@
-// Client-safe types + helpers for site analytics — NO 'server-only', NO db.
+// Client-safe types + helpers for site analytics, NO 'server-only', NO db.
 // Imported by both the server lib (site-analytics.ts) and client components.
 
 export type SiteProperty = 'website' | 'deck' | 'lp'

@@ -44,7 +44,7 @@ function toStat(r: StatRow): BlogStat {
 }
 
 // All posts' read stats, keyed by slug. For the blog list. Posts with no reads
-// simply won't appear in the map — callers default to zeroes.
+// simply won't appear in the map, callers default to zeroes.
 export async function getBlogStatsBySlug(): Promise<Map<string, BlogStat>> {
   const client = await db()
   const { data, error } = await client.rpc('blog_stats')

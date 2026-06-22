@@ -4,7 +4,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 
 // The investor-deck route slug. Random + unguessable so the deck can't be found
 // by guessing /deck; the route folder (src/app/<DECK_SLUG>) matches this exactly.
-// Access is further gated by a per-recipient token (?k=) — see resolveDeckLink.
+// Access is further gated by a per-recipient token (?k=), see resolveDeckLink.
 export const DECK_SLUG = 'deck-b08abdaaf83c'
 
 export type DeckLink = {

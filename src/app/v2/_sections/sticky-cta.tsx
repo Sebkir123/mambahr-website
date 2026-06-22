@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-// Compact floating CTA — bottom-right pill instead of a full-width bar.
+// Compact floating CTA, bottom-right pill instead of a full-width bar.
 // Appears once the hero scrolls away, hides again near the final CTA band
 // (no point doubling it), and can be dismissed for the session.
 export default function StickyCta() {

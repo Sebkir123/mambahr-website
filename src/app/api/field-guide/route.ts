@@ -10,7 +10,7 @@ import { notifyLeadSlack } from '@/lib/slack'
 // link to the gated guide page (/resources/<path>?k=<token>). Mirrors the
 // waitlist route's defenses (Turnstile + in-memory + durable rate-limit).
 
-// Guide catalog — slug → public title + gated route path.
+// Guide catalog, slug → public title + gated route path.
 const GUIDES: Record<string, { title: string; path: string }> = {
   'rif-playbook': { title: 'The Defensible Layoff Playbook', path: '/resources/rif-playbook' },
 }

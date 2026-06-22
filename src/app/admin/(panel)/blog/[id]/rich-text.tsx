@@ -55,7 +55,7 @@ function Toolbar({ editor }: { editor: TipTapEditor }) {
       // "Screenshot 2026-06-15.png" is worse than nothing. Prompt, defaulting to
       // a humanised filename.
       const guess = file.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim()
-      const alt = (window.prompt('Describe this image (alt text — helps SEO & screen readers)', guess) ?? guess).trim()
+      const alt = (window.prompt('Describe this image (alt text, helps SEO & screen readers)', guess) ?? guess).trim()
       editor.chain().focus().setImage({ src: url, alt: alt || guess }).run()
     },
     [editor],

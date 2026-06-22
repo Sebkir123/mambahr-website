@@ -327,7 +327,7 @@ export default function TodayPage() {
       <PageHero
         eyebrow="Approvals"
         title={<>Your day, <Em>three taps.</Em></>}
-        lead="Everything that truly needs you, in one queue — the rest is already done and logged. Most mornings it’s three decisions and a coffee."
+        lead="Everything that truly needs you, in one queue, the rest is already done and logged. Most mornings it’s three decisions and a coffee."
         photo="/v2-people/team2.jpg"
         photoChip="Mamba · done"
         photoCaption="18 handled · 3 for you"
@@ -340,10 +340,10 @@ export default function TodayPage() {
         title={<>How the queue <Em>stays short</Em></>}
         lead="Mamba does the work all day. Only the calls that deserve a human ever reach your queue."
         steps={[
-          { n: '01', label: 'Within-policy work auto-completes', desc: 'Time off, letters, record updates, day-one setup — done and logged before you look.', who: 'agent', time: 'all day' },
-          { n: '02', label: 'Edge cases get a card', desc: 'Offers above band, terminations, comp above your threshold — the big calls always come to you, with full context.', who: 'agent', img: '/avatars/maya.jpg' },
+          { n: '01', label: 'Within-policy work auto-completes', desc: 'Time off, letters, record updates, day-one setup, done and logged before you look.', who: 'agent', time: 'all day' },
+          { n: '02', label: 'Edge cases get a card', desc: 'Offers above band, terminations, comp above your threshold, the big calls always come to you, with full context.', who: 'agent', img: '/avatars/maya.jpg' },
           { n: '03', label: 'You decide. That’s the job now.', desc: 'Read the card, weigh the call, tap once. No chasing context across five tabs.', who: 'you', img: '/avatars/anna.jpg' },
-          { n: '04', label: 'Urgent floats up — with a clock', desc: 'A competing offer or a start date this week sits at the top, not page three.', who: 'agent', img: '/avatars/tom.jpg' },
+          { n: '04', label: 'Urgent floats up, with a clock', desc: 'A competing offer or a start date this week sits at the top, not page three.', who: 'agent', img: '/avatars/tom.jpg' },
           { n: '05', label: 'One tap, reasoning attached', desc: 'Your decision is logged like everything else, with the policy and numbers it was based on.', who: 'agent' },
         ]}
       />
@@ -355,7 +355,7 @@ export default function TodayPage() {
         bullets={[
           'The offer next to the band, on one line',
           'The policy that applies, quoted on the card',
-          'The history — how long the search ran, what else is in play',
+          'The history, how long the search ran, what else is in play',
         ]}
       >
         <DecisionCard />
@@ -370,7 +370,7 @@ export default function TodayPage() {
         bullets={[
           'The queue is short because the work is already done',
           'Decisions, not data entry',
-          'Everything you approved — and everything Mamba did — in one record',
+          'Everything you approved, and everything Mamba did, in one record',
         ]}
       >
         <MorningPhoto />

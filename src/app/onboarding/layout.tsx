@@ -4,11 +4,11 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'Onboarding Software — MambaHR',
+  title: 'Onboarding Software | MambaHR',
   description:
     'Day-one ready before they arrive: I-9 & E-Verify, accounts provisioned, devices shipped, first-week plan set. Humans stay in the loop for the budget calls.',
   openGraph: {
-    title: 'Onboarding Software — MambaHR',
+    title: 'Onboarding Software | MambaHR',
     description:
       'Day-one ready before they arrive: I-9 & E-Verify, accounts, devices, first-week plan. Humans approve the budget calls.',
     url: 'https://mambahr.com/onboarding',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Onboarding Software — MambaHR',
+    title: 'Onboarding Software | MambaHR',
     description:
       'Day-one ready before they arrive: I-9 & E-Verify, accounts, devices, first-week plan. Humans approve the budget calls.',
     images: [ogImage],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Onboarding Software — MambaHR',
+  name: 'Onboarding Software | MambaHR',
   url: 'https://mambahr.com/onboarding',
   description:
     'MambaHR onboarding: new hires are day-one ready before they arrive. The agent runs I-9 and E-Verify, provisions accounts, ships devices, and builds the first-week plan. Humans approve the budget calls.',

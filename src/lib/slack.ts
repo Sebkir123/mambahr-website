@@ -34,7 +34,7 @@ export async function notifyLeadSlack(opts: {
   }
 
   // Plain-text fallback for notifications / no-block clients.
-  const fallback = `${opts.title} — ${opts.fields.map((f) => f.value).filter(Boolean).join(' · ')}`
+  const fallback = `${opts.title}, ${opts.fields.map((f) => f.value).filter(Boolean).join(' · ')}`
 
   try {
     await fetch(webhook, {
