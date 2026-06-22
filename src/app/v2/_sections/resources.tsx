@@ -67,7 +67,7 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
           <div className="content">
             <h3>The Defensible Layoff Playbook</h3>
             <p className="desc">
-              A step-by-step guide for running a reduction in force that holds up in court —
+              A step-by-step guide for running a reduction in force that holds up in court:
               notice and severance by state, WARN thresholds, selection criteria, and the
               scripts for every conversation.
             </p>
@@ -78,7 +78,7 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
             </ul>
             {status === 'success' ? (
               <p className="success" role="status">
-                Check your inbox — <strong>{GUIDE_TITLE}</strong> is on its way to {submittedEmail}.
+                Check your inbox. <strong>{GUIDE_TITLE}</strong> is on its way to {submittedEmail}.
               </p>
             ) : (
               <LeadForm

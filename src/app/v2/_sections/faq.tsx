@@ -12,7 +12,7 @@ export default function Faq() {
           <p className="lead">Straight answers. No sales-call required.</p>
           <div className="ask">
             <div className="ask-t">Still have one?</div>
-            <p className="ask-b">Ask the founders directly — they answer fast.</p>
+            <p className="ask-b">Ask the founders directly. They answer fast.</p>
             <a className="ask-cta" href="mailto:hello@mambahr.com">hello@mambahr.com</a>
           </div>
         </div>

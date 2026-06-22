@@ -22,7 +22,7 @@ function SlackFragment() {
         <span className="sf-av sf-av-h" aria-hidden="true">A</span>
         <div className="sf-body">
           <div className="sf-meta"><b>Anna</b><span>9:24 AM</span></div>
-          <p className="sf-text">@MambaHR I’m taking parental leave starting June 3 — what am I eligible for in California?</p>
+          <p className="sf-text">@MambaHR I’m taking parental leave starting June 3. What am I eligible for in California?</p>
         </div>
       </div>
       <div className="sf-msg sf-mamba">

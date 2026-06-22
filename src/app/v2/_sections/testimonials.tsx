@@ -4,7 +4,7 @@ const FEAT = {
   photo: '/v2-people/feat.jpg',
   quote: 'By week two, Mamba had taken leave and onboarding off my desk completely. I finally spend my week on people, not paperwork.',
   name: 'Dana Whitfield',
-  role: 'Head of People · Lumen Robotics',
+  role: 'Head of People · Startup, 240 people',
   results: [
     { n: '12 hrs', l: 'back, every week' },
     { n: '1 day', l: 'to switch over' },
@@ -16,16 +16,16 @@ const CARDS = [
   {
     photo: '/v2-people/marcus.jpg',
     badge: 'Saved 9 hrs / week',
-    quote: 'Multi-state leave used to mean a week of emails with Legal. Now the answer comes back in seconds — with the law attached.',
+    quote: 'Multi-state leave used to mean a week of emails with Legal. Now the answer comes back in seconds, with the law attached.',
     name: 'Marcus Lee',
-    role: 'People Ops Lead · Fathom Health',
+    role: 'People Ops Lead · SaaS company, 180 people',
   },
   {
     photo: '/v2-people/sofia.jpg',
     badge: 'Live in a day',
     quote: 'We switched on a Friday and ran payday Monday without a hiccup. Nothing fell through.',
     name: 'Sofia Reyes',
-    role: 'Director of HR · Northwind',
+    role: 'Director of HR · Tech startup, 300 people',
   },
 ]
 

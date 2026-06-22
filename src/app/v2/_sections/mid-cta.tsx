@@ -12,7 +12,7 @@ export default function MidCta() {
           ))}
         </div>
         <h3 className="line">Stop paying people to <span className="em">push buttons.</span></h3>
-        <p className="sub">See what your team gets back — in a 30-minute walkthrough with the founders.</p>
+        <p className="sub">See what your team gets back, in a 30-minute walkthrough with the founders.</p>
         <a href="/demo" className="btn">Book a demo</a>
         <span className="note">Live the next morning · no setup project</span>
       </div>

@@ -16,7 +16,7 @@ export default function Logos() {
         <span className="mamba"><span className="m">M</span>MambaHR</span>
       </div>
       <p className="sub" data-reveal data-delay="2">
-        One-click import — people, pay history, time-off balances, documents. Nothing left behind.
+        One-click import: people, pay history, time-off balances, documents. Nothing left behind.
       </p>
 
       <style jsx>{`

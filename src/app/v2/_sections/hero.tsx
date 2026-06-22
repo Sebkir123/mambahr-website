@@ -35,7 +35,7 @@ export default function Hero() {
         <h1 className="title" data-reveal data-delay="1">HR that runs itself.</h1>
         <p className="sub" data-reveal data-delay="2">
           MambaHR onboards your hires, runs payroll, handles time off and leave, and keeps
-          you compliant in all 50 states — and only brings you the calls that need a person.
+          you compliant in all 50 states, and only brings you the calls that need a person.
         </p>
         <div className="ctas" data-reveal data-delay="3">
           <a href="/demo" className="btn-primary">Book a demo</a>
