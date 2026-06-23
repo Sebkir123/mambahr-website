@@ -39,7 +39,7 @@ export function PageHero({
   eyebrow,
   title,
   lead,
-  proof = 'Loved by lean people teams',
+  proof = 'Loved by lean HR teams',
   photo,
   photoChip,
   photoCaption,

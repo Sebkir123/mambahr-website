@@ -34,7 +34,7 @@ export default function Testimonials() {
     <section className="ts">
       <div className="wrap">
         <div className="head" data-reveal>
-          <p className="eyebrow">Loved by people teams</p>
+          <p className="eyebrow">Loved by HR teams</p>
           <h2 className="title">Don&rsquo;t take our word <span className="em">for it.</span></h2>
         </div>
 

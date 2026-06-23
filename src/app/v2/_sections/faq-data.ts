@@ -26,6 +26,6 @@ export const QA = [
   },
   {
     q: 'Who is MambaHR built for?',
-    a: 'Lean people teams at growing companies: two or three humans supporting hundreds of employees, buried in admin. If your HR team spends more time filing than talking to people, this was built for you.',
+    a: 'Lean HR teams at growing companies: two or three humans supporting hundreds of employees, buried in admin. If your HR team spends more time filing than talking to people, this was built for you.',
   },
 ]

@@ -34,8 +34,9 @@ export default function Hero() {
         <span className="eyebrow" data-reveal>The AI HR department</span>
         <h1 className="title" data-reveal data-delay="1">HR that runs itself.</h1>
         <p className="sub" data-reveal data-delay="2">
-          MambaHR onboards your hires, runs payroll, handles time off and leave, and keeps
-          you compliant in all 50 states, and only brings you the calls that need a person.
+          MambaHR is an AI HR department that does the work: onboarding, payroll, time off,
+          leave, and compliance in all 50 states. You get only the calls that need a person.
+          A full HR transformation, live in a day.
         </p>
         <div className="ctas" data-reveal data-delay="3">
           <a href="/demo" className="btn-primary">Book a demo</a>
@@ -47,12 +48,12 @@ export default function Hero() {
               <img key={p} src={`/avatars/${p}.jpg`} alt="" width={36} height={36} />
             ))}
           </div>
-          <span className="proof-t">Loved by lean people teams</span>
+          <span className="proof-t">Loved by lean HR teams</span>
         </div>
         <div className="trust" data-reveal data-delay="3">
           <span>Works 24/7</span><i />
           <span>Live in a day</span><i />
-          <span>Built by people-team operators</span>
+          <span>Built by HR operators</span>
         </div>
       </div>
 

@@ -5,7 +5,7 @@ export default function PeopleBand() {
     <section className="pb">
       <div className="wrap">
         <div className="copy" data-reveal>
-          <p className="eyebrow">Built for people teams</p>
+          <p className="eyebrow">Built for HR teams</p>
           <h2 className="title">
             We do the <span className="em">paperwork part.</span>
           </h2>
@@ -22,7 +22,7 @@ export default function PeopleBand() {
         <div className="visual" data-reveal data-delay="1">
           <div className="photo-card">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="photo" src="/v2-people/team2.jpg" alt="A people team working together" loading="lazy" decoding="async" />
+            <img className="photo" src="/v2-people/team2.jpg" alt="An HR team working together" loading="lazy" decoding="async" />
           </div>
           <div className="float-card">
             <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
