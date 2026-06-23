@@ -1,9 +1,9 @@
 'use client'
 
 const STATS = [
-  { n: 67, prefix: '', suffix: '%', l: 'of HR teams miss compliance deadlines' },
-  { n: 4700, prefix: '$', suffix: '', l: 'average cost per hire, mostly admin' },
-  { n: 40, prefix: '', suffix: '%', l: 'of HR time spent on admin, not strategy' },
+  { n: 53, prefix: '', suffix: '%', l: 'of companies penalized for payroll noncompliance in five years' },
+  { n: 4700, prefix: '$', suffix: '', l: 'average cost to hire one employee' },
+  { n: 57, prefix: '', suffix: '%', l: 'of HR time goes to admin duties, not strategy' },
 ]
 
 export default function Statement() {
@@ -28,8 +28,12 @@ export default function Statement() {
           ))}
         </div>
 
+        <p className="cite" data-reveal data-delay="2">
+          Sources: Alight payroll compliance study, SHRM cost-per-hire benchmark, and Eddy HR operations report.
+        </p>
+
         <figure className="quote" data-reveal data-delay="3">
-          <blockquote>&ldquo;I was hired to build a great place to work. Instead I spend my days on paperwork.&rdquo;</blockquote>
+          <blockquote>&ldquo;I was hired to build a great place to work. Instead, I spend my days buried in paperwork.&rdquo;</blockquote>
           <figcaption>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/avatars/head-of-people.jpg" alt="" width={38} height={38} loading="lazy" decoding="async" />
@@ -104,6 +108,13 @@ export default function Statement() {
           font-size: 14px;
           line-height: 1.45;
           margin-top: 14px;
+        }
+        .cite {
+          font-size: 12px;
+          line-height: 1.5;
+          color: rgba(255, 255, 255, 0.38);
+          margin: 28px auto 0;
+          max-width: 560px;
         }
         .quote {
           max-width: 620px;

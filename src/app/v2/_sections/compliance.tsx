@@ -20,7 +20,7 @@ export default function Compliance() {
               <div className="m-who">Mamba <span className="m-time">6 seconds later</span></div>
               <div className="a">
                 Up to 24 weeks, job protected.
-                <span className="a-sub">Booked, filed, done. Backed by FMLA &amp; CA CFRA.</span>
+                <span className="a-sub">Booked, filed, done. Cites FMLA &amp; CA CFRA.</span>
               </div>
             </div>
           </div>
@@ -29,7 +29,7 @@ export default function Compliance() {
         <div className="copy" data-reveal data-delay="1">
           <p className="eyebrow">Stay compliant</p>
           <h2 className="title">
-            Right answer. <span className="em">Law attached.</span>
+            Right answer. <span className="em">Backed by law.</span>
           </h2>
           <p className="lead">
             Employment law changes almost every week. Mamba keeps up. A human signs

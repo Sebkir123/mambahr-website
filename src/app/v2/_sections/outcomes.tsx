@@ -8,9 +8,9 @@ export default function Outcomes() {
       <div className="wrap">
         <div className="head" data-reveal>
           <p className="eyebrow">What you get back</p>
-          <h2 className="title">Give your people team <span className="em">their week back.</span></h2>
+          <h2 className="title">Give your HR team <span className="em">their week back.</span></h2>
           <p className="lead">
-            MambaHR hands the average people team 27 hours back, every single week. Time
+            MambaHR hands the average HR team 27 hours back, every single week. Time
             that goes to the people, not the paperwork.
           </p>
         </div>
@@ -58,7 +58,7 @@ export default function Outcomes() {
           {/* deferred hire, money card */}
           <article className="card tint" data-reveal data-delay="4">
             <div className="num money">$<span data-count="95">95</span>k+</div>
-            <span className="lbl">The HR hire you don&rsquo;t need yet</span>
+            <span className="lbl">The HR hire you can skip</span>
             <p className="cap">A full generalist&rsquo;s workload, from $24k a year. Spend the difference on your people.</p>
           </article>
         </div>
