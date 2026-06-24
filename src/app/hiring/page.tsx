@@ -283,8 +283,8 @@ export default function HiringPage() {
             { n: '04', label: 'Scheduling', desc: 'Panels, rooms, and reschedules handled across every calendar. No back-and-forth.', who: 'agent', time: 'instant' },
             { n: '05', label: 'Interview kits & feedback', desc: 'Each interviewer gets a tailored kit; feedback is gathered and summarized the same day.', who: 'agent' },
             { n: '06', label: 'References', desc: 'Calls arranged, notes captured, themes pulled out for you to read in two minutes.', who: 'agent', img: '/avatars/dave.jpg' },
-            { n: '07', label: 'Background check', desc: 'Run through Checkr the moment you give the nod, with status tracked to the finish.', who: 'agent' },
-            { n: '08', label: 'Offer out the door', desc: 'Offer drafted in band and prepared for signature through DocuSign. You approve and the offer goes out.', who: 'you', img: '/avatars/maya.jpg' },
+            { n: '07', label: 'Background check', desc: 'Ordered the moment you give the nod, with status tracked to the finish.', who: 'agent' },
+            { n: '08', label: 'Offer out the door', desc: 'Offer drafted in band and prepared for e-signature. You approve and the offer goes out.', who: 'you', img: '/avatars/maya.jpg' },
           ]}
         />
 

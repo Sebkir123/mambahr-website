@@ -205,9 +205,9 @@ export default function PricingPage() {
             <p className="eyebrow" data-reveal>Pricing</p>
             <h1 className="title" data-reveal data-delay="1">Before you hire HR, <Em>hire MambaHR.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
-              The first AI HR department for startups and growing companies. It runs onboarding, offboarding,
-              employee changes, documents, compliance, and payroll-ready exports, from a fraction of the cost
-              of your next HR hire. Priced per employee, the way the work actually scales.
+              Most HR software stores your people data. MambaHR does the work: onboarding, leave and
+              compliance, approvals, and offboarding, run end to end, with payroll-ready exports kept clean,
+              for a fraction of the cost of your next HR hire. Priced per employee, the way the work actually scales.
             </p>
             <div className="ctas" data-reveal data-delay="3">
               <Link href="/demo" className="btn-p">Book a demo</Link>

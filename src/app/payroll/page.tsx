@@ -107,7 +107,7 @@ function EnrollCard() {
       </div>
       <div className="rows">
         <div className="r"><span className="k">Enrollment window</span><span className="v">Opened same day · 30 days</span></div>
-        <div className="r"><span className="k">401(k)</span><span className="v">Enrolled via Guideline · 6%</span></div>
+        <div className="r"><span className="k">401(k)</span><span className="v">Enrolled · 6%</span></div>
         <div className="r"><span className="k">Dependents</span><span className="v">+1 added · verified</span></div>
         <div className="r"><span className="k">Next paycheck</span><span className="v">Deductions updated · June 15</span></div>
       </div>
@@ -214,10 +214,10 @@ export default function PayrollPage() {
         <FeatureSplit
           eyebrow="Benefits"
           title={<>Life events, <Em>enrolled.</Em></>}
-          lead="A birth, a marriage, a move, Mamba spots the qualifying life event, opens the window, and walks the enrollment through. 401(k) runs on Guideline, end to end."
+          lead="A birth, a marriage, a move, Mamba spots the qualifying life event, opens the window, and walks the enrollment through, end to end."
           bullets={[
             'Qualifying life events caught the day they happen',
-            '401(k) enrollment and deduction changes via Guideline',
+            '401(k) enrollment and deduction changes',
             'Enrollment windows tracked, never missed, never expired',
             'Every change lands in the next pay file automatically',
           ]}

@@ -102,7 +102,7 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
   },
   integrations: {
     title: 'Integrations',
-    body: 'Connect the systems you already use. Gusto, Workday, Rippling, BambooHR, Okta, Microsoft Entra, Google Workspace, Carta, DocuSign, Greenhouse, Lever, the agent works inside your tools, not instead of them.',
+    body: 'Migrate your history in, then MambaHR runs the show. Imports from Gusto, BambooHR, Rippling, Workday, Greenhouse, and Lever at day one. Payroll change files for your provider. Provisions into Okta, Microsoft Entra, and Google Workspace.',
   },
   hil: {
     title: 'Human sign-off',

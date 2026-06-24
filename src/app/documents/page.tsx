@@ -34,7 +34,7 @@ function SignedDocCard() {
             <div className="sig-block">
               <span className="sig-name">Maya Chen</span>
               <span className="sig-rule" />
-              <span className="sig-lbl">Employee · e-signed via DocuSign</span>
+              <span className="sig-lbl">Employee · e-signed</span>
             </div>
             <span className="sig-ok" aria-hidden="true" />
           </div>
@@ -193,7 +193,7 @@ export default function DocumentsPage() {
           lead="No template hunting, no chasing, no “where did that go?” Every document moves itself from draft to filed."
           steps={[
             { n: '01', label: 'Drafted from your template', desc: 'The right template, the right details, name, role, comp, dates, filled in correctly.', who: 'agent', time: 'seconds' },
-            { n: '02', label: 'Sent for e-signature', desc: 'Delivered for e-sign through DocuSign, to the right people in the right order.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
+            { n: '02', label: 'Sent for e-signature', desc: 'Delivered for e-signature, to the right people in the right order.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
             { n: '03', label: 'You sign what matters', desc: 'Offers, agreements, anything with your name on it, a person signs, always.', who: 'you', img: '/avatars/anna.jpg' },
             { n: '04', label: 'Chased politely until signed', desc: 'Gentle reminders go out on their own. Nobody on your team plays follow-up.', who: 'agent', time: 'as needed', img: '/avatars/tom.jpg' },
             { n: '05', label: 'Filed with the audit trail', desc: 'Into the right folder, under the right person, with who signed what and when.', who: 'agent', time: 'instant' },

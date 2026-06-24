@@ -36,7 +36,7 @@ const jsonLd = {
     '@type': 'SoftwareFeature',
     name: 'Hiring agent',
     description:
-      'End-to-end hiring agent: drafts the JD with comp band, posts to ATS and job boards, ranks resumes, schedules panels across calendars, requests references, runs background checks via Checkr, and drafts offers. You approve the JD and any offer above band; everything else runs without you.',
+      'End-to-end hiring agent: drafts the JD with comp band, posts to ATS and job boards, ranks resumes, schedules panels across calendars, requests references, runs background checks, and drafts offers. You approve the JD and any offer above band; everything else runs without you.',
   },
 }
 
