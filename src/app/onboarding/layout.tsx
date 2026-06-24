@@ -36,7 +36,7 @@ const jsonLd = {
     '@type': 'SoftwareFeature',
     name: 'Onboarding agent',
     description:
-      'Gets new hires day-one ready before they walk in: completes I-9 and E-Verify, provisions Okta and app accounts, orders and ships devices, and assembles the first-week plan. Humans stay in the loop on the budget calls; everything else runs without you.',
+      'Gets new hires day-one ready before they walk in: completes I-9 and E-Verify, provisions accounts, orders and ships devices, and assembles the first-week plan. Humans stay in the loop on the budget calls; everything else runs without you.',
   },
 }
 

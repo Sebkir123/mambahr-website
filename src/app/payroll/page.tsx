@@ -142,7 +142,7 @@ function PaydayPhoto() {
   return (
     <div className="pp">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="photo" src="/v2-people/team.jpg" alt="A people team on payday, relaxed" />
+      <img className="photo" src="/v2-people/team.jpg" alt="An HR team on payday, relaxed" />
       <div className="mini">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
         <div className="mini-t">Pay file reconciled twice</div>

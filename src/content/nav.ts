@@ -78,7 +78,7 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
   },
   payroll: {
     title: 'Payroll-ready exports',
-    body: 'MambaHR generates the per-cycle change file in your provider’s format, new hires, terminations, comp changes, leave, ready to upload to ADP, Workday, Gusto, or Rippling. No rip-and-replace.',
+    body: "MambaHR generates the per-cycle change file in your provider’s format, new hires, terminations, comp changes, leave, ready to upload to ADP, Workday, Gusto, or Rippling. You upload. Done.",
   },
   onboarding: {
     title: 'Onboarding',
@@ -94,11 +94,11 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
   },
   settings: {
     title: 'Settings',
-    body: 'Roles and access, integration credentials, sign-off policy, audit-trail configuration, and the compliance rules. The control room for your AI HR department.',
+    body: 'Roles and access, sign-off thresholds, autonomy levels, and compliance rules. Configure exactly how the agent behaves and who approves what.',
   },
   channels: {
     title: 'Slack, Teams & email',
-    body: 'MambaHR meets your team where they already work. Slack mentions, Teams cards, email threads, or the web app, same agent, every surface, every action recorded.',
+    body: 'MambaHR meets your team where they already work. Slack mentions, Teams cards, or the web app, same agent, every surface, every action recorded.',
   },
   integrations: {
     title: 'Integrations',
@@ -110,7 +110,7 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
   },
   'compliance-engine': {
     title: 'Compliance',
-    body: 'Federal employment law plus all 50 states, kept current: a federal baseline everywhere and state-specific rules where states differ. Every compliance call cites its source; edge cases route to a human.',
+    body: 'Federal baseline everywhere, state-specific rules where states differ, kept current. Every compliance call cites its statute; edge cases route to a human.',
   },
   customers: {
     title: 'Customers',
