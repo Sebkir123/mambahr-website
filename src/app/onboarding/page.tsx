@@ -8,9 +8,9 @@ import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } f
 
 /* ── Hero fragment: day-one timeline card ── */
 const DAY1 = [
-  { time: '9:02 AM', label: 'Offer countersigned', meta: 'DocuSign' },
+  { time: '9:02 AM', label: 'Offer countersigned', meta: 'E-signed' },
   { time: '9:03 AM', label: 'I-9 filed, E-Verify cleared', meta: 'Federal' },
-  { time: '9:05 AM', label: 'Email, Slack, laptop logins live', meta: 'Okta · Google · Slack' },
+  { time: '9:05 AM', label: 'Email, Slack, laptop logins live', meta: 'Accounts live' },
   { time: '9:07 AM', label: 'First-week calendar sent', meta: '11 invites' },
 ]
 
@@ -221,9 +221,9 @@ export default function OnboardingPage() {
           title="From yes to day one"
           lead="The moment the offer is accepted, everything starts moving. By Monday morning there&rsquo;s nothing left on your list but the welcome."
           steps={[
-            { n: '01', label: 'Offer signature', desc: 'The accepted offer is countersigned through DocuSign and filed where you can always find it.', who: 'agent', time: 'minutes' },
+            { n: '01', label: 'Offer signature', desc: 'The accepted offer is countersigned and filed where you can always find it.', who: 'agent', time: 'minutes' },
             { n: '02', label: 'I-9 & E-Verify', desc: 'Work-eligibility paperwork collected, verified, and filed, correctly, the first time.', who: 'agent', time: 'day 1' },
-            { n: '03', label: 'Logins ready', desc: 'Email, Slack, and every tool they need, live through Okta, Entra, or Google before they sit down.', who: 'agent', time: 'before 9 AM' },
+            { n: '03', label: 'Logins ready', desc: 'Email, Slack, and every tool they need, live before they sit down.', who: 'agent', time: 'before 9 AM' },
             { n: '04', label: 'Equipment & buddy', desc: 'Laptop ordered and shipped to their door; an onboarding buddy picked and briefed.', who: 'agent', img: '/avatars/priya.jpg' },
             { n: '05', label: 'First-week schedule', desc: 'Intros, team lunches, and training sessions on everyone&rsquo;s calendar, no one has to remember.', who: 'agent' },
             { n: '06', label: '30-day check-in', desc: 'A quiet pulse at day 30: how it&rsquo;s going, what&rsquo;s missing, flagged to you only if something&rsquo;s off.', who: 'agent', time: 'day 30', img: '/avatars/dave.jpg' },

@@ -13,7 +13,7 @@ const STEPS: LoopStep[] = [
   { n: '01', img: '/avatars/maya.jpg',   label: 'Offer letter sent, Maya Chen',   desc: 'Senior Engineer · $195k · above band 8%',     who: 'agent', time: '2 min' },
   { n: '02', img: '/avatars/priya.jpg',  label: 'Leave approved, Jordan Lee',    desc: 'FMLA + CA CFRA stacked · 14 weeks',           who: 'agent', time: '4 min' },
   { n: '03', img: '/avatars/marcus.jpg', label: 'PIP drafted, Marcus Webb',       desc: '90-day evidence cited · L3 sign-off queued',  who: 'you',   time: 'Pending' },
-  { n: '04', img: '/avatars/sarah.jpg',  label: 'Separation docs, Sarah Lin',     desc: 'State-aware final pay · DocuSign chain ready', who: 'you',   time: 'Review' },
+  { n: '04', img: '/avatars/sarah.jpg',  label: 'Separation docs, Sarah Lin',     desc: 'State-aware final pay · signature chain ready', who: 'you',   time: 'Review' },
 ]
 
 const CAPABILITIES = [
@@ -22,10 +22,10 @@ const CAPABILITIES = [
     title: <>Day one to last day, <Em>one workflow.</Em></>,
     lead: 'A signed offer kicks off the whole fanout, provisioning, I-9, device, first-week calendar. An exit runs the reverse, always with a human on final pay.',
     bullets: [
-      'Offer generated + countersigned (DocuSign)',
+      'Offer generated + countersigned (e-signed)',
       'I-9 verified, E-Verify cleared',
-      'Accounts provisioned, Okta, Entra, Google, Slack',
-      'Device set up (Jamf), buddy + first-week calendar',
+      'Accounts provisioned (IdP, Slack, app suite)',
+      'Device set up (MDM), buddy + first-week calendar',
       'Offboarding: WARN / COBRA / OWBPA, state-aware final pay',
     ],
     flip: false,
@@ -107,7 +107,7 @@ const CAPABILITIES = [
     lead: 'Offers, separation agreements, NDAs, and policies, versioned, jurisdiction-scoped, and sent for signature without leaving the agent.',
     bullets: [
       'Templates for offer / separation / NDA / policy',
-      'DocuSign signer chains, e-sign end to end',
+      'Signer chains, e-sign end to end',
       'Versioned and jurisdiction-scoped',
       'Filed and retained per your policy',
       'Indexed for retrieval, PII-redacted on export',
