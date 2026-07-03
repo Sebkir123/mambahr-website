@@ -14,7 +14,7 @@ const csp = [
   "default-src 'self'",
   isDev ? scriptSrcDev : scriptSrcProd,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://*.googletagmanager.com",
+  "img-src 'self' data: blob: https://*.supabase.co https://www.googletagmanager.com https://*.google-analytics.com https://*.googletagmanager.com",
   "font-src 'self' https://fonts.gstatic.com",
   "connect-src 'self' https://challenges.cloudflare.com https://*.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
   "frame-src https://challenges.cloudflare.com",

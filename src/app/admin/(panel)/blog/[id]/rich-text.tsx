@@ -1,12 +1,14 @@
 'use client'
 
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useEditor, EditorContent, type Editor as TipTapEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
 import { uploadImage } from './upload'
+import { unwrapGoogleRedirect } from '@/lib/link-utils'
+import ImageCropModal from './image-crop-modal'
 import styles from './editor.module.css'
 
 type Props = {
@@ -43,13 +45,21 @@ function ToolbarButton({
 
 function Toolbar({ editor }: { editor: TipTapEditor }) {
   const fileRef = useRef<HTMLInputElement>(null)
+  const [cropFile, setCropFile] = useState<File | null>(null)
 
-  const onPickImage = useCallback(
-    async (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0]
-      e.target.value = ''
+  const onPickImage = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    e.target.value = ''
+    if (file) setCropFile(file)
+  }, [])
+
+  const onCropConfirm = useCallback(
+    async (blob: Blob) => {
+      const file = cropFile
+      setCropFile(null)
       if (!file) return
-      const url = await uploadImage(file)
+      const cropped = new File([blob], file.name, { type: blob.type })
+      const url = await uploadImage(cropped)
       if (!url) return
       // Alt text is a real ranking + accessibility signal; a raw filename like
       // "Screenshot 2026-06-15.png" is worse than nothing. Prompt, defaulting to
@@ -58,7 +68,7 @@ function Toolbar({ editor }: { editor: TipTapEditor }) {
       const alt = (window.prompt('Describe this image (alt text, helps SEO & screen readers)', guess) ?? guess).trim()
       editor.chain().focus().setImage({ src: url, alt: alt || guess }).run()
     },
-    [editor],
+    [cropFile, editor],
   )
 
   const setLink = useCallback(() => {
@@ -69,7 +79,7 @@ function Toolbar({ editor }: { editor: TipTapEditor }) {
       editor.chain().focus().extendMarkRange('link').unsetLink().run()
       return
     }
-    editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
+    editor.chain().focus().extendMarkRange('link').setLink({ href: unwrapGoogleRedirect(url) }).run()
   }, [editor])
 
   return (
@@ -90,6 +100,14 @@ function Toolbar({ editor }: { editor: TipTapEditor }) {
       <ToolbarButton title="Link" label="Link" active={editor.isActive('link')} onClick={setLink} />
       <ToolbarButton title="Insert image" label="Image" onClick={() => fileRef.current?.click()} />
       <input ref={fileRef} type="file" accept="image/*" hidden onChange={onPickImage} />
+      {cropFile && (
+        <ImageCropModal
+          file={cropFile}
+          defaultAspect={null}
+          onCancel={() => setCropFile(null)}
+          onConfirm={onCropConfirm}
+        />
+      )}
     </div>
   )
 }
@@ -98,13 +116,31 @@ export default function RichText({ initialContent, onChange, restore }: Props) {
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
-      StarterKit.configure({ heading: { levels: [2, 3, 4] } }),
+      // StarterKit bundles its own Link extension; disable it so ours below
+      // (openOnClick: false) is the only one registered under that name —
+      // otherwise tiptap logs a duplicate-extension warning.
+      StarterKit.configure({ heading: { levels: [2, 3, 4] }, link: false }),
       Link.configure({ openOnClick: false, autolink: true }),
       Image.configure({ inline: false }),
       Placeholder.configure({ placeholder: 'Write your post…' }),
     ],
     content: (initialContent as object) ?? '',
     onUpdate: ({ editor }) => onChange(editor.getHTML(), editor.getJSON()),
+    editorProps: {
+      // Google Docs paste HTML carries real <a href> marks, but through
+      // Google's own /url?q= click-tracking redirect. Unwrap before ProseMirror
+      // parses the paste so the editor (and autosave) store the real link.
+      // DOMParser (not a live element's innerHTML) parses inertly, no image
+      // fetches or script execution, since pasted HTML is untrusted input.
+      transformPastedHTML(html) {
+        const parsed = new DOMParser().parseFromString(html, 'text/html')
+        parsed.querySelectorAll('a[href]').forEach((a) => {
+          const href = a.getAttribute('href')
+          if (href) a.setAttribute('href', unwrapGoogleRedirect(href))
+        })
+        return parsed.body.innerHTML
+      },
+    },
   })
 
   // Apply a restored revision: replace content and emit it so autosave persists.

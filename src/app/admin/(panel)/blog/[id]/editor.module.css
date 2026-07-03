@@ -50,11 +50,18 @@
 }
 .coverActions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
 
-/* ── Rich text ── */
-.richText { border: 1px solid var(--border-faint); border-radius: 14px; background: var(--bg); overflow: hidden; }
+/* ── Rich text ──
+   No `overflow: hidden` here: it clips the toolbar's own rounded top corners
+   (handled below instead), but more importantly it turns this box into the
+   scroll-containment ancestor for `.toolbar`'s `position: sticky`, and since
+   this box itself never scrolls (the page does), that silently neutralises
+   the sticky positioning, the toolbar just scrolls away with the rest of
+   the content instead of following you down the page. */
+.richText { border: 1px solid var(--border-faint); border-radius: 14px; background: var(--bg); }
 .toolbar {
   display: flex; align-items: center; gap: 2px; flex-wrap: wrap;
   padding: 8px 10px; border-bottom: 1px solid var(--border-faint); background: var(--bg-surface);
+  border-radius: 14px 14px 0 0;
   position: sticky; top: 0; z-index: 2;
 }
 .tbBtn, .tbBtnActive {

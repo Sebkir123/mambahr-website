@@ -1,4 +1,5 @@
 import sanitizeHtml from 'sanitize-html'
+import { unwrapGoogleRedirect } from '@/lib/link-utils'
 
 export type PostStatus = 'draft' | 'scheduled' | 'published'
 
@@ -62,10 +63,16 @@ export function sanitizePostHtml(dirty: string): string {
     },
     allowedSchemes: ['http', 'https', 'mailto'],
     transformTags: {
-      // Every outbound link gets safe rel + opens in a new tab.
+      // Every outbound link gets safe rel + opens in a new tab, and a Google
+      // Docs paste's click-tracking redirect unwraps to the real destination.
       a: (tagName, attribs) => ({
         tagName,
-        attribs: { ...attribs, rel: 'noopener noreferrer nofollow', target: '_blank' },
+        attribs: {
+          ...attribs,
+          href: unwrapGoogleRedirect(attribs.href || ''),
+          rel: 'noopener noreferrer nofollow',
+          target: '_blank',
+        },
       }),
     },
     // Drop empty <span> wrappers TipTap sometimes emits.
