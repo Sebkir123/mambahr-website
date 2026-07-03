@@ -304,3 +304,32 @@
   .scrollCue { animation: none; }
   .progressFill { transition: none; }
 }
+
+/* ── Print ──
+   `.deck` is a fixed-height (100dvh), internally-scrolling box holding all 12
+   slides. Printing doesn't expand overflow-clipped containers, it just prints
+   whatever fits in that one box, so only slide 1 ever made it onto paper.
+   Let the deck grow to its natural (full) height and paginate one slide per
+   printed page instead. */
+@media print {
+  .deck {
+    height: auto;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  .slide {
+    min-height: 0;
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .slide:not(:last-child) {
+    break-after: page;
+  }
+  /* On-screen HUD (progress bar, slide dots, counter, scroll hint, admin
+     preview badge) doesn't belong on paper, and position:fixed elements only
+     ever land on the first printed page anyway. */
+  .progress, .brand, .dots, .counter, .hint, .previewBadge {
+    display: none;
+  }
+}
