@@ -535,11 +535,6 @@ export default function Deck({
               Incumbents fight over the $18B software dollar. We&rsquo;re priced against the $315B+ labor bill.
             </p>
             <div className={s.layers}>
-              <div className={`${s.layer} ${s.layerStruck}`}>
-                <span className={s.layerTier}>Crossed out</span>
-                <span className={s.layerFig}>$18B</span>
-                <span className={s.layerName}>HR software TAM, the old game incumbents fight over. <em>iMARC Group, 2026</em></span>
-              </div>
               <div className={`${s.layer} ${s.layer2}`}>
                 <span className={s.layerTier}>SAM</span>
                 <span className={s.layerFig}>$42B</span>

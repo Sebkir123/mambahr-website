@@ -224,8 +224,6 @@
 .layer { display: grid; grid-template-columns: 110px 160px 1fr; gap: 1.4rem; align-items: center; padding: 1.2rem 1.6rem; border-radius: var(--radius-md, 14px); border: 1px solid var(--bg-cream); background: var(--bg-surface); }
 .layer2 { background: var(--bg-warm); }
 .layer3 { border-color: var(--gold-light); background: var(--gold-tint); }
-.layerStruck { opacity: 0.6; }
-.layerStruck .layerFig { text-decoration: line-through; color: var(--text-faint); }
 .layerTier { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); }
 .layerFig { font-family: var(--font-serif); font-optical-sizing: auto; font-size: clamp(2rem, 3.4vw, 3rem); font-weight: 440; letter-spacing: -0.01em; color: var(--text); line-height: 1; }
 .layerName { font-size: 0.92rem; line-height: 1.45; color: var(--text-muted); }
