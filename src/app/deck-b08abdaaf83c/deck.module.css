@@ -326,6 +326,23 @@
   .slide:not(:last-child) {
     break-after: page;
   }
+  /* Denser slides run taller than one physical page, so `.slide`'s own
+     break-inside: avoid can't always hold, the browser is still forced to
+     split it somewhere. Force every multi-column grid/row to a single
+     column so that split only ever happens BETWEEN cards, never through the
+     middle of one (each grid/flex still keeps its own `gap` for spacing). */
+  .grid3, .grid4, .compare, .priceRow, .roadmap, .comps, .team, .noteRow {
+    grid-template-columns: 1fr;
+  }
+  .strip {
+    flex-direction: column;
+  }
+  /* Every atomic card/box must stay in one piece even when the slide around
+     it has to flow across a page boundary. */
+  .statCard, .flowCard, .stepCard, .panel, .priceCard, .layer, .person,
+  .milestone, .comp, .quote, .statBlock, .barTrack {
+    break-inside: avoid;
+  }
   /* On-screen HUD (progress bar, slide dots, counter, scroll hint, admin
      preview badge) doesn't belong on paper, and position:fixed elements only
      ever land on the first printed page anyway. */
