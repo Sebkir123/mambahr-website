@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { type Post, slugify, TAG_OPTIONS } from '@/lib/blog'
 import { savePost, setPostStatus, deletePost, listRevisions, restoreRevision, type SavePayload, type Revision } from '../actions'
 import { uploadImage } from './upload'
+import ImageCropModal from './image-crop-modal'
 import PostAnalytics from './post-analytics'
 import { ConfirmButton } from '../../_components/confirm-button'
 import type { BlogPostAnalytics } from '@/lib/blog-analytics-types'
@@ -149,19 +150,30 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
     })
   }
 
-  async function onCover(e: React.ChangeEvent<HTMLInputElement>) {
+  // Cover and OG images render at a fixed 1200×630 (1.91:1) card everywhere
+  // they're shown (blog index cards, social previews), so both route through
+  // the same crop-to-that-aspect step before upload.
+  const [cropTarget, setCropTarget] = useState<{ file: File; kind: 'cover' | 'og' } | null>(null)
+
+  function onCover(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     e.target.value = ''
-    if (!file) return
-    const url = await uploadImage(file)
-    if (url) setCoverImageUrl(url)
+    if (file) setCropTarget({ file, kind: 'cover' })
   }
-  async function onOg(e: React.ChangeEvent<HTMLInputElement>) {
+  function onOg(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     e.target.value = ''
-    if (!file) return
-    const url = await uploadImage(file)
-    if (url) setOgImageUrl(url)
+    if (file) setCropTarget({ file, kind: 'og' })
+  }
+  async function onCropConfirm(blob: Blob) {
+    const target = cropTarget
+    setCropTarget(null)
+    if (!target) return
+    const cropped = new File([blob], target.file.name, { type: blob.type })
+    const url = await uploadImage(cropped)
+    if (!url) return
+    if (target.kind === 'cover') setCoverImageUrl(url)
+    else setOgImageUrl(url)
   }
 
   const effTitle = (metaTitle || title || 'Untitled post').trim()
@@ -408,6 +420,15 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
           </ConfirmButton>
         </aside>
       </div>
+
+      {cropTarget && (
+        <ImageCropModal
+          file={cropTarget.file}
+          defaultAspect={1200 / 630}
+          onCancel={() => setCropTarget(null)}
+          onConfirm={onCropConfirm}
+        />
+      )}
     </div>
   )
 }
