@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState, useTransition } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { type Post, slugify, TAG_OPTIONS } from '@/lib/blog'
-import { savePost, setPostStatus, deletePost, listRevisions, restoreRevision, type SavePayload, type Revision } from '../actions'
+import { savePost, setPostStatus, deletePost, listRevisions, restoreRevision, type SavePayload, type SaveResult, type Revision } from '../actions'
 import { uploadImage } from './upload'
 import ImageCropModal from './image-crop-modal'
 import PostAnalytics from './post-analytics'
@@ -83,21 +83,41 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
     [post.id, title, slug, slugTouched, excerpt, coverImageUrl, authorName, tags, metaTitle, metaDescription, canonicalUrl, ogTitle, ogDescription, ogImageUrl, noindex, scheduledFor, publishedAt],
   )
 
-  const doSave = useCallback(async () => {
-    if (deletingRef.current) return // don't resurrect a post mid-delete
-    setSaveState('saving')
-    setError('')
-    const res = await savePost(buildPayload())
-    if (res.ok) {
-      setSaveState('saved')
-      // Reflect the slug the server actually persisted, it may have been
-      // auto-deduped (untitled-post → untitled-post-2) to avoid a collision.
-      if (res.slug !== slug) setSlug(res.slug)
-    } else {
-      setSaveState('error')
-      setError(res.error)
+  // buildPayload is recreated on every keystroke; doSave reads it through a
+  // ref so doSave itself can stay referentially stable (needed for the save
+  // chain below) while always picking up the latest field values.
+  const buildPayloadRef = useRef(buildPayload)
+  useEffect(() => { buildPayloadRef.current = buildPayload }, [buildPayload])
+
+  // Autosave requests must never overlap. Supabase responses can arrive out
+  // of order, and an older save landing after a newer one silently
+  // overwrites it, in-body images, links, and heading levels reported as
+  // "disappearing after a while" were exactly this: older content
+  // clobbering newer edits whenever two autosaves' responses crossed in
+  // flight. Chain every save onto whatever save is already in flight so
+  // they run, and land, strictly in the order they were requested.
+  const saveChainRef = useRef<Promise<SaveResult | void>>(Promise.resolve())
+  const doSave = useCallback((): Promise<SaveResult | void> => {
+    const run = async (): Promise<SaveResult | void> => {
+      if (deletingRef.current) return // don't resurrect a post mid-delete
+      setSaveState('saving')
+      setError('')
+      const res = await savePost(buildPayloadRef.current())
+      if (res.ok) {
+        setSaveState('saved')
+        // Reflect the slug the server actually persisted, it may have been
+        // auto-deduped (untitled-post → untitled-post-2) to avoid a collision.
+        setSlug((prev) => (res.slug !== prev ? res.slug : prev))
+      } else {
+        setSaveState('error')
+        setError(res.error)
+      }
+      return res
     }
-  }, [buildPayload, slug])
+    const next = saveChainRef.current.then(run, run)
+    saveChainRef.current = next
+    return next
+  }, [])
 
   // Debounced autosave whenever a tracked field changes.
   const dirtyRef = useRef(false)
@@ -142,8 +162,9 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
 
   function changeStatus(next: 'published' | 'draft' | 'scheduled') {
     startTransition(async () => {
-      // Persist current edits first so publish reflects them.
-      await savePost(buildPayload())
+      // Persist current edits first so publish reflects them, chained
+      // through the same save queue so it can't race a pending autosave.
+      await doSave()
       const res = await setPostStatus(post.id, next, scheduledFor || null)
       if (res.ok) setStatus(next)
       else setError(res.error)
