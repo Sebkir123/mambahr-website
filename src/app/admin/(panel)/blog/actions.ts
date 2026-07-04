@@ -5,6 +5,12 @@ import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { requireAdmin } from '@/lib/auth'
 import { slugify, readingTimeMinutes, sanitizePostHtml, type PostStatus } from '@/lib/blog'
+import { postImagePaths } from '@/lib/blog-images'
+
+// Keep the newest N revisions per post. Every autosave (every ~1.2s while
+// typing) appends a snapshot, so without a cap the table grows without bound.
+// The history panel only surfaces 30, this leaves headroom above that.
+const REVISION_KEEP = 50
 
 // All writes act as the signed-in admin so RLS (is_admin) is the real gate.
 
@@ -114,6 +120,17 @@ export async function savePost(payload: SavePayload): Promise<SaveResult> {
     title: payload.title,
   })
 
+  // Prune anything past the newest REVISION_KEEP for this post (best-effort).
+  const { data: excess } = await supabase
+    .from('post_revisions')
+    .select('id')
+    .eq('post_id', payload.id)
+    .order('saved_at', { ascending: false })
+    .range(REVISION_KEEP, REVISION_KEEP + 1000)
+  if (excess && excess.length) {
+    await supabase.from('post_revisions').delete().in('id', excess.map((r) => r.id as string))
+  }
+
   revalidatePath('/admin/blog')
   revalidatePath(`/blog/${slug}`)
   return { ok: true, slug }
@@ -194,8 +211,21 @@ export async function restoreRevision(postId: string, revisionId: string): Promi
 export async function deletePost(id: string) {
   await requireAdmin()
   const supabase = await createSupabaseServerClient()
-  // One round trip: delete and return the slug (was a separate SELECT + DELETE).
-  const { data } = await supabase.from('posts').delete().eq('id', id).select('slug').maybeSingle()
+  // Delete the row and return the fields we need to clean up its images.
+  const { data } = await supabase
+    .from('posts')
+    .delete()
+    .eq('id', id)
+    .select('slug, cover_image_url, og_image_url, body_html')
+    .maybeSingle()
+
+  // Remove this post's cover/OG/in-body images from storage (best-effort). The
+  // post_revisions rows cascade-delete with the post via the FK.
+  if (data) {
+    const paths = postImagePaths(data)
+    if (paths.length) await supabase.storage.from('blog-media').remove(paths)
+  }
+
   revalidatePath('/admin/blog')
   revalidatePath('/blog')
   if (data?.slug) revalidatePath(`/blog/${data.slug}`)

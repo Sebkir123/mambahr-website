@@ -1,4 +1,5 @@
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
+import { blogStoragePath } from '@/lib/blog-images'
 
 const MAX_BYTES = 8 * 1024 * 1024 // 8 MB
 const ALLOWED = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif']
@@ -31,4 +32,21 @@ export async function uploadImage(file: File): Promise<string | null> {
   }
   const { data } = supabase.storage.from('blog-media').getPublicUrl(path)
   return data.publicUrl
+}
+
+// Best-effort delete of blog-media images by their public URL. Non-blog-media
+// URLs (external, data:) are skipped. RLS only lets an allowlisted admin
+// delete, so this is safe from the browser. Never throws, a failed cleanup
+// leaves an orphan for the daily sweep, it must never break the edit.
+export async function deleteImages(urls: (string | null | undefined)[]): Promise<void> {
+  const paths = Array.from(
+    new Set(urls.map(blogStoragePath).filter((p): p is string => !!p)),
+  )
+  if (!paths.length) return
+  try {
+    const supabase = createSupabaseBrowserClient()
+    await supabase.storage.from('blog-media').remove(paths)
+  } catch {
+    /* orphan gets caught by the retention sweep */
+  }
 }

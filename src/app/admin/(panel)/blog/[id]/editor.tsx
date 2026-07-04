@@ -5,7 +5,8 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { type Post, slugify, TAG_OPTIONS } from '@/lib/blog'
 import { savePost, setPostStatus, deletePost, listRevisions, restoreRevision, type SavePayload, type SaveResult, type Revision } from '../actions'
-import { uploadImage } from './upload'
+import { uploadImage, deleteImages } from './upload'
+import { bodyImageUrls } from '@/lib/blog-images'
 import ImageCropModal from './image-crop-modal'
 import PostAnalytics from './post-analytics'
 import { ConfirmButton } from '../../_components/confirm-button'
@@ -58,6 +59,19 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
   const ogRef = useRef<HTMLInputElement>(null)
   const [deleting, setDeleting] = useState(false)
   const deletingRef = useRef(false)
+
+  // Debounce timers + a "there is an unsaved change" flag, all in refs so the
+  // flush-on-leave handler can reach them without re-subscribing every render.
+  const fieldTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const bodyTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const pendingSaveRef = useRef(false)
+  // Current cover/OG URLs mirrored into refs so the stable onBodyChange (which
+  // must not change identity, TipTap captures it once) can read the latest
+  // values when garbage-collecting removed in-body images.
+  const coverUrlRef = useRef(coverImageUrl)
+  coverUrlRef.current = coverImageUrl
+  const ogUrlRef = useRef(ogImageUrl)
+  ogUrlRef.current = ogImageUrl
 
   const buildPayload = useCallback(
     (): SavePayload => ({
@@ -127,12 +141,38 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
       return // skip the mount pass
     }
     setSaveState('saving')
-    const t = setTimeout(() => {
-      void doSave()
-    }, 1200)
-    return () => clearTimeout(t)
+    pendingSaveRef.current = true
+    if (fieldTimer.current) clearTimeout(fieldTimer.current)
+    fieldTimer.current = setTimeout(() => { pendingSaveRef.current = false; void doSave() }, 1200)
+    return () => { if (fieldTimer.current) clearTimeout(fieldTimer.current) }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title, slug, excerpt, authorName, tags, coverImageUrl, metaTitle, metaDescription, canonicalUrl, ogTitle, ogDescription, ogImageUrl, noindex, scheduledFor, publishedAt])
+
+  // Flush any pending debounced save immediately. Without this, an edit made
+  // inside the debounce window (~1.2-1.4s) is silently lost when you leave the
+  // editor or close the tab before the timer fires.
+  const flushSave = useCallback(() => {
+    if (deletingRef.current || !pendingSaveRef.current) return
+    pendingSaveRef.current = false
+    if (fieldTimer.current) clearTimeout(fieldTimer.current)
+    if (bodyTimer.current) clearTimeout(bodyTimer.current)
+    void doSave()
+  }, [doSave])
+
+  // Flush on tab-hide (switching away / closing) and on unmount (navigating
+  // back to the blog list). visibilitychange fires before the page tears down,
+  // giving the request a head start; the unmount flush covers SPA navigation,
+  // where the fetch reliably completes because the page stays alive.
+  useEffect(() => {
+    const onHide = () => { if (document.visibilityState === 'hidden') flushSave() }
+    document.addEventListener('visibilitychange', onHide)
+    window.addEventListener('pagehide', flushSave)
+    return () => {
+      document.removeEventListener('visibilitychange', onHide)
+      window.removeEventListener('pagehide', flushSave)
+      flushSave()
+    }
+  }, [flushSave])
 
   // Load revision history on mount and refresh it whenever a save lands (each
   // autosave appends a new snapshot, so the list should follow).
@@ -153,12 +193,17 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
   }, [post.id])
 
   const onBodyChange = useCallback((html: string, json: unknown) => {
+    // An in-body image that was removed from the body is a cleanup candidate,
+    // but only once it's no longer referenced anywhere in the post (cover, OG,
+    // or elsewhere in the body). We deliberately do NOT delete it here, an
+    // undo would resurrect the <img> pointing at a now-deleted file, so the
+    // daily sweep collects unreferenced, aged-out objects instead.
     bodyRef.current = { html, json }
     setSaveState('saving')
+    pendingSaveRef.current = true
     if (bodyTimer.current) clearTimeout(bodyTimer.current)
-    bodyTimer.current = setTimeout(() => void doSave(), 1400)
+    bodyTimer.current = setTimeout(() => { pendingSaveRef.current = false; void doSave() }, 1400)
   }, [doSave])
-  const bodyTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   function changeStatus(next: 'published' | 'draft' | 'scheduled') {
     startTransition(async () => {
@@ -186,6 +231,20 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
     e.target.value = ''
     if (file) setCropTarget({ file, kind: 'og' })
   }
+
+  // Delete an image we're dropping (replaced/removed cover or OG) from storage,
+  // but only if nothing else in the post still points at it. `next` carries the
+  // values AFTER the change (state updates are async, so we can't read them back
+  // yet). The cover/OG pickers have no undo stack, so eager deletion is safe here.
+  function gcCoverOg(removed: string | null, next: { cover: string | null; og: string | null }) {
+    if (!removed) return
+    const stillUsed =
+      removed === next.cover ||
+      removed === next.og ||
+      bodyImageUrls(bodyRef.current.html).includes(removed)
+    if (!stillUsed) void deleteImages([removed])
+  }
+
   async function onCropConfirm(blob: Blob) {
     const target = cropTarget
     setCropTarget(null)
@@ -193,8 +252,26 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
     const cropped = new File([blob], target.file.name, { type: blob.type })
     const url = await uploadImage(cropped)
     if (!url) return
-    if (target.kind === 'cover') setCoverImageUrl(url)
-    else setOgImageUrl(url)
+    if (target.kind === 'cover') {
+      const old = coverImageUrl
+      setCoverImageUrl(url)
+      gcCoverOg(old, { cover: url, og: ogImageUrl })
+    } else {
+      const old = ogImageUrl
+      setOgImageUrl(url)
+      gcCoverOg(old, { cover: coverImageUrl, og: url })
+    }
+  }
+
+  function removeCover() {
+    const old = coverImageUrl
+    setCoverImageUrl(null)
+    gcCoverOg(old, { cover: null, og: ogImageUrl })
+  }
+  function useCoverForOg() {
+    const old = ogImageUrl
+    setOgImageUrl(null)
+    gcCoverOg(old, { cover: coverImageUrl, og: null })
   }
 
   const effTitle = (metaTitle || title || 'Untitled post').trim()
@@ -261,7 +338,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
                 {coverImageUrl ? 'Replace cover' : 'Add cover'}
               </button>
               {coverImageUrl && (
-                <button type="button" className={styles.smallBtnGhost} onClick={() => setCoverImageUrl(null)}>Remove</button>
+                <button type="button" className={styles.smallBtnGhost} onClick={removeCover}>Remove</button>
               )}
               <input ref={coverRef} type="file" accept="image/*" hidden onChange={onCover} />
             </div>
@@ -371,7 +448,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
               <button type="button" className={styles.smallBtn} onClick={() => ogRef.current?.click()}>
                 {ogImageUrl ? 'Replace OG image' : 'Custom OG image'}
               </button>
-              {ogImageUrl && <button type="button" className={styles.smallBtnGhost} onClick={() => setOgImageUrl(null)}>Use cover</button>}
+              {ogImageUrl && <button type="button" className={styles.smallBtnGhost} onClick={useCoverForOg}>Use cover</button>}
               <input ref={ogRef} type="file" accept="image/*" hidden onChange={onOg} />
             </div>
           </section>
