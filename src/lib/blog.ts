@@ -56,7 +56,11 @@ export function sanitizePostHtml(dirty: string): string {
       'hr', 'br', 'span',
     ],
     allowedAttributes: {
-      a: ['href', 'title'],
+      // target + rel must be allow-listed here or sanitize-html strips them
+      // AFTER the transformTags below adds them — which is why in-post links
+      // never opened in a new tab. The transform always overwrites both to
+      // safe values, so allow-listing them can't leak attacker-controlled ones.
+      a: ['href', 'title', 'target', 'rel'],
       img: ['src', 'alt', 'title', 'width', 'height'],
       span: ['class'],
       code: ['class'],
