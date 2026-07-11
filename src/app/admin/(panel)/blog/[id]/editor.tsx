@@ -50,7 +50,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
   const [pending, startTransition] = useTransition()
   // revision history + restore signal pushed into the rich-text editor
   const [revisions, setRevisions] = useState<Revision[]>([])
-  const [restore, setRestore] = useState<{ json: unknown; nonce: number } | null>(null)
+  const [restore, setRestore] = useState<{ html: string | null; json: unknown; nonce: number } | null>(null)
 
   // latest body, written by the editor's onChange (kept in a ref to avoid
   // re-rendering the whole screen on every keystroke).
@@ -189,7 +189,9 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
     if (!res.ok) { setError(res.error); return }
     setTitle(res.title)
     if (res.excerpt !== null) setExcerpt(res.excerpt)
-    setRestore({ json: res.bodyJson, nonce: Date.now() })
+    // Prefer the revision's body_html (carries hrefs) and fall back to body_json
+    // for revisions saved before the body_html column existed.
+    setRestore({ html: res.bodyHtml, json: res.bodyJson, nonce: Date.now() })
   }, [post.id])
 
   const onBodyChange = useCallback((html: string, json: unknown) => {
@@ -344,7 +346,13 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
             </div>
           </div>
 
-          <RichText initialContent={post.body_json ?? post.body_html} onChange={onBodyChange} restore={restore} />
+          {/* Load from body_html (the sanitized, rendered source of truth), NOT
+              body_json. An older editor build persisted <a> link marks WITHOUT
+              their href into body_json; preferring body_json therefore loaded
+              href-less links and the next autosave rewrote body_html with dead
+              anchors — every external link silently died a while after publish.
+              body_html round-trips losslessly for this editor's feature set. */}
+          <RichText initialContent={post.body_html || post.body_json} onChange={onBodyChange} restore={restore} />
         </div>
 
         {/* Sidebar */}
