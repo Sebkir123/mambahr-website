@@ -14,9 +14,10 @@ import styles from './editor.module.css'
 type Props = {
   initialContent: unknown | null
   onChange: (html: string, json: unknown) => void
-  // Bumping `restore.nonce` replaces the editor content with `restore.json`
-  // (used when restoring a revision). null on first render.
-  restore?: { json: unknown; nonce: number } | null
+  // Bumping `restore.nonce` replaces the editor content (used when restoring a
+  // revision). Prefer restored HTML (carries link hrefs) over JSON. null on
+  // first render.
+  restore?: { html: string | null; json: unknown; nonce: number } | null
 }
 
 function ToolbarButton({
@@ -147,7 +148,9 @@ export default function RichText({ initialContent, onChange, restore }: Props) {
   const nonce = restore?.nonce ?? 0
   useEffect(() => {
     if (!editor || !restore || nonce === 0) return
-    editor.commands.setContent((restore.json as object) ?? '')
+    // Prefer restored HTML (parsed with link hrefs); fall back to JSON for
+    // legacy revisions that predate the body_html column.
+    editor.commands.setContent((restore.html || restore.json || '') as string | object)
     onChange(editor.getHTML(), editor.getJSON())
     // Only react to a new restore signal, not to editor/onChange identity.
     // eslint-disable-next-line react-hooks/exhaustive-deps

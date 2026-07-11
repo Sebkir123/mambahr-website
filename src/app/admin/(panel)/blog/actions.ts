@@ -187,25 +187,30 @@ export async function listRevisions(postId: string): Promise<Revision[]> {
 }
 
 export type RestoreResult =
-  | { ok: true; title: string; excerpt: string | null; bodyJson: unknown }
+  | { ok: true; title: string; excerpt: string | null; bodyHtml: string | null; bodyJson: unknown }
   | { ok: false; error: string }
 
 // Returns a revision's content for the editor to apply. Read-only by design: the
-// editor pushes body_json into TipTap (which re-renders + re-sanitizes the HTML
+// editor pushes the content into TipTap (which re-renders + re-sanitizes the HTML
 // client-side) and the existing autosave persists the restored state. That keeps
-// a single write path and stays lossless even for revisions saved before the
-// body_html column existed.
+// a single write path.
+//
+// We return BOTH body_html and body_json and let the editor prefer body_html:
+// an older editor build serialized <a> link marks into body_json WITHOUT their
+// href, so restoring from body_json silently dropped every link. body_html
+// carries the hrefs; body_json is the fallback only for legacy revisions saved
+// before the body_html column existed.
 export async function restoreRevision(postId: string, revisionId: string): Promise<RestoreResult> {
   await requireAdmin()
   const supabase = await createSupabaseServerClient()
   const { data: rev, error } = await supabase
     .from('post_revisions')
-    .select('title, excerpt, body_json')
+    .select('title, excerpt, body_html, body_json')
     .eq('id', revisionId)
     .eq('post_id', postId)
     .single()
   if (error || !rev) return { ok: false, error: 'Revision not found.' }
-  return { ok: true, title: rev.title ?? 'Untitled post', excerpt: rev.excerpt, bodyJson: rev.body_json }
+  return { ok: true, title: rev.title ?? 'Untitled post', excerpt: rev.excerpt, bodyHtml: rev.body_html ?? null, bodyJson: rev.body_json }
 }
 
 export async function deletePost(id: string) {
