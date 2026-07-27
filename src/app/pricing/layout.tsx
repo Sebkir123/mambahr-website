@@ -45,9 +45,9 @@ const pricingJsonLd = {
     offerCount: '4',
     unitText: 'per employee per month, billed annually',
     offers: [
-      { '@type': 'Offer', name: 'HR Starter', price: '14', priceCurrency: 'USD', description: 'Per employee / month · $10k/yr minimum · teams of 10–50.' },
-      { '@type': 'Offer', name: 'HR Ops Manager', price: '22', priceCurrency: 'USD', description: 'Per employee / month · $24k/yr minimum · teams of 50–250.' },
-      { '@type': 'Offer', name: 'AI HR Department', price: '30', priceCurrency: 'USD', description: 'Per employee / month · $45k/yr minimum · teams of 250–1,000.' },
+      { '@type': 'Offer', name: 'HR Starter', price: '14', priceCurrency: 'USD', description: 'Per employee / month · $9k/yr minimum · teams of 50–150.' },
+      { '@type': 'Offer', name: 'HR Ops Manager', price: '22', priceCurrency: 'USD', description: 'Per employee / month · $24k/yr minimum · teams of 75–400.' },
+      { '@type': 'Offer', name: 'AI HR Department', price: '30', priceCurrency: 'USD', description: 'Per employee / month · $48k/yr minimum · teams of 150+.' },
       { '@type': 'Offer', name: 'Enterprise', priceCurrency: 'USD', description: 'Custom pricing from $100k/yr · 1,000+ and multi-entity.' },
     ],
   },

@@ -20,11 +20,11 @@ export const FAQS = [
   },
   {
     q: 'Why a per-employee price?',
-    a: 'Because that’s how the work scales. Every employee brings questions, time off, reviews, and paperwork. One price per person, everything handled, no modules, no add-ons, no surprise invoices.',
+    a: 'Because that’s how the work scales. Every employee brings questions, time off, reviews, and paperwork. Every plan is one simple per-employee price, and your price grows only as your team grows. Payroll and global hiring are optional add-ons. Each plan includes an annual allowance of completed HR work, sized well above what teams typically use — and if you go past it, nothing stops.',
   },
   {
     q: 'What does the minimum mean?',
-    a: 'Each plan has an annual minimum so we can put real depth behind every account. If the per-employee math comes in under it, the minimum applies. Most teams clear it quickly as they grow.',
+    a: 'Each plan has an annual minimum so we can put real depth behind every account. If the per-employee math comes in under it, the minimum applies. Most teams clear it quickly as they grow. Headcount is reviewed quarterly against your average — so if your team grows mid-year, the difference is billed for the remaining months and your included allowance grows with it.',
   },
   {
     q: 'Which plan should we choose?',
