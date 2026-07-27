@@ -15,7 +15,7 @@ const BODY = `# MambaHR
 
 ## Key pages
 - [Product](https://mambahr.com/product): how the agent runs the work end to end.
-- [Pricing](https://mambahr.com/pricing): per-employee pricing; plans from a $10k/yr minimum.
+- [Pricing](https://mambahr.com/pricing): per-employee pricing; plans from a $9k/yr minimum.
 - [Hiring & ATS](https://mambahr.com/hiring): req to offer without the loop.
 - [Onboarding](https://mambahr.com/onboarding), [Time off & leave](https://mambahr.com/leave), [Performance](https://mambahr.com/performance), [Compensation](https://mambahr.com/compensation).
 - [Multi-state compliance](https://mambahr.com/compliance): all 50 states, federal baseline plus state overlays, every answer cited.
