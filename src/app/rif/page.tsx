@@ -18,7 +18,7 @@ function HeroPlanCard() {
     <div className="pc agent-edge agent-working agent-lg">
       <div className="pc-top">
         <span className="pc-title">Reduction plan · Q3</span>
-        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · awaiting your sign-off</span>
+        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · awaiting your sign-off</span>
       </div>
       {rows.map((r) => (
         <div key={r.what} className="row">
@@ -286,7 +286,7 @@ export default function RIFPage() {
         <AgentLoop
           eyebrow="The process"
           title={<>When it&rsquo;s <Em>unavoidable</Em></>}
-          lead="Mamba prepares everything, the math, the timing, the paperwork. Nothing happens to anyone until you approve it."
+          lead="MambaHR prepares everything, the math, the timing, the paperwork. Nothing happens to anyone until you approve it."
           steps={[
             { n: '01', label: 'The plan is modeled', desc: 'Headcount scenarios with full cost, severance, benefits, final pay, before anyone is named.', who: 'agent' },
             { n: '02', label: 'Notice timing checked per state', desc: 'WARN thresholds and notice windows, federal and state, verified before the plan can move.', who: 'agent' },
@@ -300,7 +300,7 @@ export default function RIFPage() {
         <FeatureSplit
           eyebrow="Before the list is final"
           title={<>Some jobs can be <Em>saved</Em></>}
-          lead="Before anyone is let go, Mamba surfaces open internal roles a person could move into, with the team and why it fits. The suggestions are advisory. Humans decide."
+          lead="Before anyone is let go, MambaHR surfaces open internal roles a person could move into, with the team and why it fits. The suggestions are advisory. Humans decide."
           bullets={[
             'Open roles matched to each affected person',
             'Surfaced before the exit list is final, not after',
@@ -335,8 +335,7 @@ export default function RIFPage() {
 
         <QuoteBand
           quote="A reduction is the one thing you cannot get wrong. Every notice was on time, every check was right, and I personally approved every exit. That’s the only way I’d run one."
-          name="Head of People"
-          role="900-person company"
+          role="Manufacturing company, 900 people"
           img="/v2-people/team.jpg"
         />
 

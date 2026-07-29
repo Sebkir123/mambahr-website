@@ -58,12 +58,12 @@ export default function Channels() {
                   <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" /></svg>
                 </div>
                 <div className="sw-sec">Channels</div>
-                <a className="sw-ch on"><span className="hash">#</span>people-ops</a>
-                <a className="sw-ch"><span className="hash">#</span>hiring</a>
-                <a className="sw-ch"><span className="hash">#</span>onboarding</a>
+                <span className="sw-ch on"><span className="hash">#</span>people-ops</span>
+                <span className="sw-ch"><span className="hash">#</span>hiring</span>
+                <span className="sw-ch"><span className="hash">#</span>onboarding</span>
                 <div className="sw-sec">Direct messages</div>
-                <a className="sw-dm"><span className="seg green" />MambaHR<span className="badge">2</span></a>
-                <a className="sw-dm"><span className="seg" />Brian Bell</a>
+                <span className="sw-dm"><span className="seg green" />MambaHR<span className="badge">2</span></span>
+                <span className="sw-dm"><span className="seg" />Brian Bell</span>
               </aside>
 
               <main className="sw-main">
@@ -91,7 +91,7 @@ export default function Channels() {
                     <div className="av app">M</div>
                     <div className="m-body">
                       <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:14 AM</time></div>
-                      <div className="m-t">Approved &mdash; enjoy the wedding.</div>
+                      <div className="m-t">Approved. Enjoy the wedding.</div>
                       <div className="attach">
                         <div className="a-row"><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
                         <div className="a-row"><span className="a-k">Calendar</span><span className="a-v">Apr 7&ndash;9 blocked, OOO set</span></div>
@@ -103,7 +103,7 @@ export default function Channels() {
 
                   <div className="typing">
                     <span className="typing-dot" /><span className="typing-dot" /><span className="typing-dot" />
-                    <span className="typing-t"><b>Mamba</b> is updating the payroll record&hellip;</span>
+                    <span className="typing-t"><b>MambaHR</b> is updating the payroll record&hellip;</span>
                   </div>
                 </div>
 

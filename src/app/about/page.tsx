@@ -91,7 +91,7 @@ export default function AboutPage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/v2-people/team.jpg" alt="A team at work" />
               <div className="float agent-edge agent-working">
-                <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · working</span>
+                <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
                 <div className="f-t">The AI HR department</div>
                 <div className="f-m">Made in San Francisco</div>
               </div>
@@ -125,7 +125,7 @@ export default function AboutPage() {
         <StatTrio
           stats={[
             { n: 50, label: 'states covered, every compliance answer cites the law' },
-            { n: 24, suffix: '/7', label: 'the department works around the clock, not business hours' },
+            { n: 24, suffix: '/7', label: 'the work keeps moving after your team logs off' },
             { n: 1, suffix: ' day', label: 'from signed to live, data imported, no setup project' },
           ]}
         />
@@ -144,9 +144,9 @@ export default function AboutPage() {
               didn&rsquo;t go anywhere. It just got prettier wrappers.
             </p>
             <p className="body" data-reveal data-delay="2">
-              Then AI got good enough to do the reasoning underneath the work. Not summarize a policy —
-              work through whether FMLA stacks with California CFRA for an employee in their second
-              trimester, cite the statute, and send the hard calls to a human. Not generate a draft —
+              Then AI got good enough to do the reasoning underneath the work. Not summarize a policy,
+              but work through whether FMLA stacks with California CFRA for an employee in their second
+              trimester, cite the statute, and send the hard calls to a human. Not generate a draft, but
               run the offer cycle, check the band, route for approval, send the signature link.
             </p>
             <p className="body" data-reveal data-delay="3">

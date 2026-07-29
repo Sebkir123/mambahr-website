@@ -22,7 +22,7 @@ function ReviewDraftCard() {
           <div className="hname">Anna Wilson · mid-year review</div>
           <div className="hmeta">Product Design · cycle closes Fri, Jun 26</div>
         </div>
-        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · drafting</span>
+        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · drafting</span>
       </div>
       <div className="body">
         {lines.map((l) => (
@@ -99,7 +99,7 @@ function PipCard() {
           <div className="hname">Improvement plan · drafted for review</div>
           <div className="hmeta">60-day plan · 3 milestones · check-ins scheduled</div>
         </div>
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
       </div>
       <div className="rows">
         {[
@@ -165,7 +165,7 @@ function PhotoCard() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="ph" src="/v2-people/team.jpg" alt="A manager and her report in a one-on-one" width={640} height={460} />
       <div className="float agent-edge agent-done">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="ft">Calibration packets delivered</div>
         <div className="fm">14 managers · every claim sourced · 9:02 AM</div>
       </div>
@@ -209,10 +209,10 @@ export default function PerformancePage() {
         <PageHero
           eyebrow="Performance"
           title={<>Reviews, <Em>written.</Em></>}
-          lead="Review season eats three weeks of every manager's life. Mamba launches the cycle, chases the stragglers, and drafts every review from real, cited work, your managers just edit, rate, and sign."
-          proof="Loved by managers at review time"
+          lead="Review season eats three weeks of every manager's life. MambaHR launches the cycle, chases the stragglers, and drafts every review from real, cited work, your managers just edit, rate, and sign."
+          proof="Built for managers at review time"
           photo="/v2-people/sofia.jpg"
-          photoChip="Mamba · done"
+          photoChip="MambaHR · done"
           photoCaption="Anna’s review · delivered on time"
         >
           <ReviewDraftCard />
@@ -221,7 +221,7 @@ export default function PerformancePage() {
         <AgentLoop
           eyebrow="The loop"
           title={<>Review season, <Em>handled.</Em></>}
-          lead="Mamba runs the machinery of review season. Your managers keep the judgment."
+          lead="MambaHR runs the machinery of review season. Your managers keep the judgment."
           steps={[
             { n: '01', label: 'Launches the cycle', desc: 'Schedules, reviewer pairings, and reminders go out, no spreadsheet of who owes what.', who: 'agent', time: 'day 1' },
             { n: '02', label: 'Chases reviewers so you don’t', desc: 'Polite, persistent nudges until every review is in. You never send the awkward follow-up.', who: 'agent', time: 'ongoing', img: '/avatars/maya.jpg' },
@@ -235,7 +235,7 @@ export default function PerformancePage() {
         <FeatureSplit
           eyebrow="Improvement plans"
           title={<>PIPs without <Em>the dread.</Em></>}
-          lead="When someone&rsquo;s struggling, the hardest part is starting. Mamba drafts a fair, structured plan with clear milestones and check-ins already on the calendar, and you approve it before anything reaches the employee."
+          lead="When someone&rsquo;s struggling, the hardest part is starting. MambaHR drafts a fair, structured plan with clear milestones and check-ins already on the calendar, and you approve it before anything reaches the employee."
           bullets={[
             'A structured, consistent plan, not a blank page at 9 PM',
             'Check-ins scheduled for both sides from day one',
@@ -270,8 +270,7 @@ export default function PerformancePage() {
 
         <QuoteBand
           quote="Review season used to swallow three weeks of my life. Now the drafts are waiting, sourced, the day the cycle opens, and my managers walk into calibration actually prepared."
-          name="Dana Whitfield"
-          role="Head of People · Lumen Robotics"
+          role="Head of People · Robotics startup, 240 people"
           img="/v2-people/feat.jpg"
           metric="Saved 12 hrs / week"
         />

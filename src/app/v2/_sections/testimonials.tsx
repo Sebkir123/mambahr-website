@@ -2,11 +2,10 @@
 
 const FEAT = {
   photo: '/v2-people/feat.jpg',
-  quote: 'By week two, Mamba had taken leave and onboarding off my desk completely. I finally spend my week on people, not paperwork.',
-  name: 'Dana Whitfield',
-  role: 'Head of People · Startup, 240 people',
+  quote: 'By week two, MambaHR has taken leave and onboarding off the desk completely. The week goes to people, not paperwork.',
+  role: 'Head of People · Robotics startup, 240 people',
   results: [
-    { n: '12 hrs', l: 'back, every week' },
+    { n: '12 hrs', l: 'of admin, handled weekly' },
     { n: '1 day', l: 'to switch over' },
     { n: '240', l: 'employees · 2 in HR' },
   ],
@@ -15,17 +14,15 @@ const FEAT = {
 const CARDS = [
   {
     photo: '/v2-people/marcus.jpg',
-    badge: 'Saved 9 hrs / week',
-    quote: 'Multi-state leave used to mean a week of emails with Legal. Now the answer comes back in seconds, with the law attached.',
-    name: 'Marcus Lee',
-    role: 'People Ops Lead · SaaS company, 180 people',
+    badge: '9 hrs / week',
+    quote: 'Multi-state leave used to mean a week of emails with Legal. The answer comes back in seconds, with the law attached.',
+    role: 'People Operations Lead · AI startup, 180 people',
   },
   {
     photo: '/v2-people/sofia.jpg',
     badge: 'Live in a day',
-    quote: 'We switched on a Friday and ran payday Monday without a hiccup. Nothing fell through.',
-    name: 'Sofia Reyes',
-    role: 'Director of HR · Tech startup, 300 people',
+    quote: 'Switch on a Friday, run payday Monday. Every change is already in the file.',
+    role: 'Head of People · Fintech startup, 140 people',
   },
 ]
 
@@ -34,18 +31,18 @@ export default function Testimonials() {
     <section className="ts">
       <div className="wrap">
         <div className="head" data-reveal>
-          <p className="eyebrow">Loved by HR teams</p>
-          <h2 className="title">Don&rsquo;t take our word <span className="em">for it.</span></h2>
+          <p className="eyebrow">What it looks like</p>
+          <h2 className="title">A week on MambaHR, <span className="em">start to finish.</span></h2>
+          <p className="lead">MambaHR is onboarding its first customers now, so these are written illustrations of the workflow rather than customer quotes. We will publish real ones the moment we have them.</p>
         </div>
 
         <article className="feat" data-reveal data-delay="1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="feat-photo" src={FEAT.photo} alt={FEAT.name} loading="lazy" decoding="async" />
+          <img className="feat-photo" src={FEAT.photo} alt="" loading="lazy" decoding="async" />
           <div className="feat-body">
-            <span className="stars" aria-hidden="true">★★★★★</span>
+            <span className="tag">Illustrative scenario</span>
             <blockquote className="feat-q">&ldquo;{FEAT.quote}&rdquo;</blockquote>
             <div className="who">
-              <div className="who-n">{FEAT.name}</div>
               <div className="who-r">{FEAT.role}</div>
             </div>
             <div className="results">
@@ -61,14 +58,13 @@ export default function Testimonials() {
 
         <div className="row">
           {CARDS.map((c) => (
-            <article key={c.name} className="card" data-reveal data-delay="2">
+            <article key={c.role} className="card" data-reveal data-delay="2">
               <span className="badge">{c.badge}</span>
               <p className="q">&ldquo;{c.quote}&rdquo;</p>
               <div className="who small">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="av" src={c.photo} alt={c.name} loading="lazy" decoding="async" />
+                <img className="av" src={c.photo} alt="" loading="lazy" decoding="async" />
                 <div>
-                  <div className="who-n">{c.name}</div>
                   <div className="who-r">{c.role}</div>
                 </div>
               </div>
@@ -109,6 +105,24 @@ export default function Testimonials() {
           padding: clamp(16px, 2.2vw, 30px) clamp(14px, 2vw, 28px) clamp(16px, 2.2vw, 26px) 6px;
           display: flex;
           flex-direction: column;
+        }
+        .tag {
+          display: inline-block;
+          font-family: var(--font-mono);
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: var(--text-faint);
+          border: 1px solid var(--border-faint);
+          border-radius: 999px;
+          padding: 3px 10px;
+        }
+        .lead {
+          font-size: 16px;
+          line-height: 1.6;
+          color: var(--text-muted);
+          max-width: 620px;
+          margin: 16px auto 0;
         }
         .stars {
           color: #B98A4E;

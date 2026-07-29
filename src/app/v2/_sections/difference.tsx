@@ -48,7 +48,7 @@ export default function Difference() {
           <div className="col us agent-edge agent-working agent-lg">
             <div className="u-head">
               <span className="u-title"><span className="logo">M</span>MambaHR</span>
-              <span className="mamba-chip working ondark"><span className="mc-i" aria-hidden="true" />Mamba · working</span>
+              <span className="mamba-chip working ondark"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
             </div>
             <div className="u-sub">Monday, with the AI HR department</div>
             {ROWS.map((r) => (
@@ -59,7 +59,7 @@ export default function Difference() {
               </div>
             ))}
             <div className="u-foot">
-              Still yours to do <b>one tap: Approve</b>
+              Still yours <b>the judgment call</b>
             </div>
           </div>
         </div>

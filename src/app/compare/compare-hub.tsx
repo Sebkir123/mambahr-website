@@ -12,14 +12,14 @@ const CARDS = [
   { slug: 'deel', name: 'Deel', sub: 'Deel pays global contractors. MambaHR runs your domestic HR.', tag: null },
   { slug: 'bamboohr', name: 'BambooHR', sub: 'BambooHR stores your data. MambaHR acts on it.', tag: null },
   { slug: 'namely', name: 'Namely', sub: 'Namely made the HRIS prettier. MambaHR makes it unnecessary.', tag: null },
-  { slug: 'hibob', name: 'HiBob', sub: 'HiBob made HR look modern. MambaHR makes it run itself.', tag: null },
+  { slug: 'hibob', name: 'HiBob', sub: 'HiBob made HR look modern. MambaHR makes it do the work.', tag: null },
   { slug: 'adp', name: 'ADP', sub: 'ADP is the back office. MambaHR is the front line.', tag: null },
   { slug: 'workday', name: 'Workday', sub: 'Workday is a project. MambaHR is a product.', tag: null },
-  { slug: 'justworks', name: 'Justworks', sub: 'Justworks rents you HR staff. MambaHR is the HR staff.', tag: null },
+  { slug: 'justworks', name: 'Justworks', sub: 'Justworks gives you a support queue. MambaHR gives you the answer.', tag: null },
   { slug: 'trinet', name: 'TriNet', sub: 'TriNet is a PEO with a rep. MambaHR is the department.', tag: null },
   { slug: 'paychex', name: 'Paychex', sub: 'Paychex sells you services. MambaHR does the work.', tag: null },
   { slug: 'zenefits', name: 'Zenefits', sub: 'Zenefits gave you a dashboard. MambaHR does the work behind it.', tag: null },
-  { slug: 'paylocity', name: 'Paylocity', sub: 'Paylocity is a suite to operate. MambaHR operates itself.', tag: null },
+  { slug: 'paylocity', name: 'Paylocity', sub: 'Paylocity is a suite to operate. MambaHR does the operating.', tag: null },
   { slug: 'ukg', name: 'UKG', sub: 'UKG is software you implement. MambaHR you turn on.', tag: null },
   { slug: 'greenhouse', name: 'Greenhouse', sub: 'Greenhouse is an ATS. MambaHR hires, then runs the rest.', tag: null },
   { slug: 'lever', name: 'Lever', sub: 'Lever is recruiting software. MambaHR is the whole department.', tag: null },
@@ -31,9 +31,9 @@ const CARDS = [
 const OPTIONS = [
   {
     title: 'Hire someone',
-    good: 'Judgment, presence, a person who owns it.',
-    breaks: '$70k–$150k a year for one person on business hours, who still needs systems to work in.',
-    mamba: 'MambaHR does the repeatable work for a fraction of the cost, and your eventual hire starts with a running department.',
+    good: 'Judgment, presence, a person who owns it. Nothing replaces that.',
+    breaks: 'They arrive to a backlog. Most of year one goes on filing and chasing instead of the work you hired them for.',
+    mamba: 'MambaHR does the repeatable work, so the person you hire spends their time on judgment from day one, not on cleanup.',
   },
   {
     title: 'Buy more software',
@@ -51,7 +51,7 @@ const OPTIONS = [
 
 const DIFFS = [
   { num: '01', title: 'It does the work.', desc: 'Leave approved. Offer drafted. Candidate screened. MambaHR handles the request end-to-end, not just surfaces the information for someone else to act on.' },
-  { num: '02', title: 'It lives in Slack.', desc: 'No new software to learn. Employees mention @mamba in any channel and get answers in seconds. Managers approve in a thread.' },
+  { num: '02', title: 'It lives in Slack.', desc: 'No new software to learn. Employees mention @MambaHR in any channel and get answers in seconds. Managers approve in a thread.' },
   { num: '03', title: 'Human in the loop.', desc: 'Every high-stakes decision, offers above band, terminations, PIPs, routes to you for approval before anything happens. The agent handles the routine, you handle the judgment.' },
   { num: '04', title: 'Built for the long tail.', desc: 'The compliance engine, the audit trail, the specialist agents, all of it built for the HR lead doing the work of ten.' },
 ]
@@ -71,7 +71,7 @@ export default function CompareHub() {
             <h1 className="title" data-reveal data-delay="1">Weigh your <Em>options.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
               When HR work gets messy, you have a few choices: hire someone, buy another system, or keep
-              stitching it together yourself. Here&rsquo;s the honest comparison against all of them —
+              stitching it together yourself. Here&rsquo;s the honest comparison against all of them,
               including the rows we lose.
             </p>
             <div className="ctas" data-reveal data-delay="3">

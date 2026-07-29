@@ -6,12 +6,12 @@ import { FAQS } from './faqs'
 export const metadata: Metadata = {
   title: 'Pricing | MambaHR | Your first AI HR department',
   description:
-    'Simple per-employee pricing for hiring, onboarding, time off, performance, compliance, and payroll-ready exports. Your whole HR department from $10k a year.',
+    'Simple per-employee pricing for hiring, onboarding, time off, performance, compliance, and payroll-ready exports. Your whole HR department from $9k a year.',
   alternates: { canonical: 'https://mambahr.com/pricing' },
   openGraph: {
     title: 'Pricing | MambaHR',
     description:
-      'Simple per-employee pricing for your whole AI HR department, hiring, onboarding, time off, performance, compliance, and payroll-ready exports. From $10k a year.',
+      'Simple per-employee pricing for your whole AI HR department, hiring, onboarding, time off, performance, compliance, and payroll-ready exports. From $9k a year.',
     url: 'https://mambahr.com/pricing',
     siteName: 'MambaHR',
     type: 'website',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing | MambaHR',
-    description: 'Your whole AI HR department, priced per employee. From $10k a year.',
+    description: 'Your whole AI HR department, priced per employee. From $9k a year.',
     images: ['/og?title=Pricing%20for%20your%20AI%20HR%20department&eyebrow=Pricing'],
   },
 }

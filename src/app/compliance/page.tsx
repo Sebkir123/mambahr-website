@@ -11,7 +11,7 @@ function HeroAnswerCard() {
   return (
     <div className="hc agent-edge agent-done agent-lg">
       <div className="hc-top">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · answered</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · answered</span>
       </div>
 
       <div className="msg">
@@ -26,7 +26,7 @@ function HeroAnswerCard() {
       <div className="msg">
         <div className="m-logo" aria-hidden="true">M</div>
         <div className="m-body">
-          <div className="m-who">Mamba <span className="m-time">4 seconds later</span></div>
+          <div className="m-who">MambaHR <span className="m-time">4 seconds later</span></div>
           <div className="a">
             In 8 of your states, no.
             <span className="a-sub">State-by-state guidance attached, interview kits already updated.</span>
@@ -289,10 +289,10 @@ export default function CompliancePage() {
         <PageHero
           eyebrow="Compliance"
           title={<>Always <Em>compliant.</Em></>}
-          lead="Employment law changes almost every week, and one miss costs more than a year of HR salaries. Mamba keeps up, federal plus your states, cites the law behind every answer, and sends the risky calls to a human first."
-          proof="Trusted across all 50 states"
+          lead="Employment law changes almost every week, and one miss costs more than a year of HR salaries. MambaHR keeps up, federal plus your states, cites the law behind every answer, and sends the risky calls to a human first."
+          proof="Federal plus all 50 states"
           photo="/v2-people/feat.jpg"
-          photoChip="Mamba · answered"
+          photoChip="MambaHR · answered"
           photoCaption="Tom’s question · cited in 4 seconds"
         >
           <HeroAnswerCard />
@@ -329,7 +329,7 @@ export default function CompliancePage() {
           warm
           eyebrow="Always current"
           title={<>Sleep through <Em>law changes.</Em></>}
-          lead="New state rules land all year long. Mamba tracks them, your policies update, and you find out it was handled, instead of finding out the hard way."
+          lead="New state rules land all year long. MambaHR tracks them, your policies update, and you find out it was handled, instead of finding out the hard way."
           bullets={[
             'Federal baseline plus state-specific rules, all 50 states',
             'Policy updates applied as the law moves',
@@ -349,8 +349,7 @@ export default function CompliancePage() {
 
         <QuoteBand
           quote="I stopped second-guessing the answers the day I saw the law attached to every single one. My counsel reads the citations; I read the plain English."
-          name="Marcus Lee"
-          role="VP of People, 480 employees"
+          role="People Operations Lead · AI startup, 180 people"
           img="/v2-people/marcus.jpg"
           metric="Saved 9 hrs / week"
         />

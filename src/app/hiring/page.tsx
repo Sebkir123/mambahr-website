@@ -23,7 +23,7 @@ function PipelineCard() {
           <div className="role">Senior Engineer</div>
           <div className="meta">NYC hybrid · $180–205k · day 6</div>
         </div>
-        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · working</span>
+        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
       </div>
       <div className="prog" aria-hidden="true">
         <span className="prog-bar"><i /></span>
@@ -121,9 +121,9 @@ function CareersSite() {
       </div>
       <div className="body">
         <div className="co">
-          <span className="logo">A</span>
+          <span className="logo">Y</span>
           <div>
-            <div className="co-n">Arcadia Labs</div>
+            <div className="co-n">Your Company</div>
             <div className="co-t">We&rsquo;re hiring across three teams</div>
           </div>
         </div>
@@ -218,7 +218,7 @@ function HumanCall() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="ph" src="/v2-people/team2.jpg" alt="A hiring panel meeting a candidate" />
       <div className="float agent-edge agent-done">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="f-t">Offer signed · Maya Chen</div>
         <div className="f-m">Senior Engineer · starts June 22</div>
       </div>
@@ -263,10 +263,10 @@ export default function HiringPage() {
         <PageHero
           eyebrow="Hiring & ATS"
           title={<>Hiring, <Em>handled.</Em></>}
-          lead="Mamba posts the role, screens and ranks every applicant, schedules every interview, checks references, and drafts the offer. You make one decision: who joins."
-          proof="Trusted by lean people teams"
+          lead="MambaHR posts the role, screens and ranks every applicant, schedules every interview, checks references, and drafts the offer. You make one decision: who joins."
+          proof="Built for lean people teams"
           photo="/v2-people/feat.jpg"
-          photoChip="Mamba · done"
+          photoChip="MambaHR · done"
           photoCaption="Maya signed · starts June 22"
         >
           <PipelineCard />
@@ -277,7 +277,7 @@ export default function HiringPage() {
           title="The hiring loop"
           lead="Every step that used to mean chasing calendars and inboxes, handled. The judgment calls stay with you, clearly marked."
           steps={[
-            { n: '01', label: 'Req intake', desc: 'Tell Mamba the role, the team, and the budget, in Slack, Teams, or the app. The req is ready in minutes.', who: 'agent', time: '4 min' },
+            { n: '01', label: 'Req intake', desc: 'Tell MambaHR the role, the team, and the budget, in Slack, Teams, or the app. The req is ready in minutes.', who: 'agent', time: '4 min' },
             { n: '02', label: 'Posted everywhere', desc: 'The role goes live on your careers page and the major job boards, written in your voice.', who: 'agent', time: 'same day' },
             { n: '03', label: 'Screening & ranking', desc: 'Every applicant read, ranked, and recommended with reasons, you make every advance-or-pass call.', who: 'you', img: '/avatars/tom.jpg' },
             { n: '04', label: 'Scheduling', desc: 'Panels, rooms, and reschedules handled across every calendar. No back-and-forth.', who: 'agent', time: 'instant' },
@@ -306,9 +306,9 @@ export default function HiringPage() {
           warm
           eyebrow="The human part"
           title={<>The final call stays <Em>human.</Em></>}
-          lead="Interviews, culture, and who gets the offer stay yours, the part only you can do. Mamba clears the admin so the people you meet are worth meeting, and the week you save goes into meeting them."
+          lead="Interviews, culture, and who gets the offer stay yours, the part only you can do. MambaHR clears the admin so the people you meet are worth meeting, and the week you save goes into meeting them."
           bullets={[
-            'Mamba recommends; it never advances or rejects anyone on its own',
+            'MambaHR recommends; it never advances or rejects anyone on its own',
             'Every shortlist comes with the why, in plain English',
             'The offer waits for your signature, every single time',
           ]}
@@ -318,7 +318,7 @@ export default function HiringPage() {
 
         <StatTrio
           stats={[
-            { n: 6, suffix: ' days', label: 'median req-to-offer with Mamba running the loop' },
+            { n: 6, suffix: ' days', label: 'median req-to-offer with MambaHR running the loop' },
             { n: 47, label: 'candidates sourced for one role, screened overnight' },
             { n: 1, label: 'decision that stays yours: who joins' },
           ]}
@@ -326,8 +326,7 @@ export default function HiringPage() {
 
         <QuoteBand
           quote="The chase is gone. No more calendar Tetris, no more resume piles on a Sunday night. I open the pipeline, read three ranked candidates, and make the call. Hiring finally feels like judgment, not admin."
-          name="Marcus Lee"
-          role="People Ops Lead"
+          role="People Operations Lead · AI startup, 180 people"
           img="/v2-people/marcus.jpg"
           metric="Saved 9 hrs / week"
         />

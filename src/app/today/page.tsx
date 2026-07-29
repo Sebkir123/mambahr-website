@@ -33,7 +33,7 @@ function QueueWindow() {
             <h3 className="greet">Good morning, Brian</h3>
             <span className="date">Wednesday, June 10</span>
           </div>
-          <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba &middot; waiting on you</span>
+          <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR &middot; waiting on you</span>
         </div>
 
         <div className="panel">
@@ -324,12 +324,14 @@ export default function TodayPage() {
       <RevealInit />
       <CountUp />
 
+      <main>
+
       <PageHero
         eyebrow="Approvals"
         title={<>Your day, <Em>three taps.</Em></>}
         lead="Everything that truly needs you, in one queue, the rest is already done and logged. Most mornings it’s three decisions and a coffee."
         photo="/v2-people/team2.jpg"
-        photoChip="Mamba · done"
+        photoChip="MambaHR · done"
         photoCaption="18 handled · 3 for you"
       >
         <QueueWindow />
@@ -338,11 +340,11 @@ export default function TodayPage() {
       <AgentLoop
         eyebrow="The daily rhythm"
         title={<>How the queue <Em>stays short</Em></>}
-        lead="Mamba does the work all day. Only the calls that deserve a human ever reach your queue."
+        lead="MambaHR does the work all day. Only the calls that deserve a human ever reach your queue."
         steps={[
           { n: '01', label: 'Within-policy work auto-completes', desc: 'Time off, letters, record updates, day-one setup, done and logged before you look.', who: 'agent', time: 'all day' },
           { n: '02', label: 'Edge cases get a card', desc: 'Offers above band, terminations, comp above your threshold, the big calls always come to you, with full context.', who: 'agent', img: '/avatars/maya.jpg' },
-          { n: '03', label: 'You decide. That’s the job now.', desc: 'Read the card, weigh the call, tap once. No chasing context across five tabs.', who: 'you', img: '/avatars/anna.jpg' },
+          { n: '03', label: 'You decide, with the whole picture', desc: 'Read the card, weigh the call, tap once. No chasing context across five tabs before you can think.', who: 'you', img: '/avatars/anna.jpg' },
           { n: '04', label: 'Urgent floats up, with a clock', desc: 'A competing offer or a start date this week sits at the top, not page three.', who: 'agent', img: '/avatars/tom.jpg' },
           { n: '05', label: 'One tap, reasoning attached', desc: 'Your decision is logged like everything else, with the policy and numbers it was based on.', who: 'agent' },
         ]}
@@ -366,11 +368,11 @@ export default function TodayPage() {
         warm
         eyebrow="Your new morning"
         title={<>Your mornings, <Em>given back</Em></>}
-        lead="Open the queue with your coffee, make the calls only you can make, and get back to the work that actually needs a person. Mamba keeps going after you close the tab."
+        lead="Open the queue with your coffee, make the calls only you can make, and get back to the work that actually needs a person. MambaHR keeps going after you close the tab."
         bullets={[
           'The queue is short because the work is already done',
           'Decisions, not data entry',
-          'Everything you approved, and everything Mamba did, in one record',
+          'Everything you approved, and everything MambaHR did, in one record',
         ]}
       >
         <MorningPhoto />
@@ -380,19 +382,19 @@ export default function TodayPage() {
         stats={[
           { n: 3, label: 'decisions in a typical morning' },
           { n: 18, label: 'handled automatically while you slept' },
-          { n: 30, suffix: ' min', label: 'a day to run all of HR' },
+          { n: 30, suffix: ' min', label: 'a day on the calls only you can make' },
         ]}
       />
 
       <QuoteBand
         quote="My mornings used to be a hundred open tabs. Now it’s one queue, three decisions, and I’m done before my coffee’s cold."
-        name="Sarah Okafor"
-        role="Head of People"
+        role="Head of People · Climate tech startup, 90 people"
         img="/v2-people/feat.jpg"
-        metric="30 min a day"
+        metric="Mornings back"
       />
 
       <PageCta title={<>Run HR from <Em>one short queue.</Em></>} />
+      </main>
 
       <Footer />
     </>

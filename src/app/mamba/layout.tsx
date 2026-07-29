@@ -6,7 +6,7 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'The AI HR Agent | MambaHR',
   description:
-    'Not a chatbot, a coworker. Mamba works in Slack, Microsoft Teams, and the MambaHR app, does the HR work end to end, and brings the big calls to you first.',
+    'Not a chatbot, a coworker. MambaHR works in Slack, Microsoft Teams, and the MambaHR app, does the HR work end to end, and brings the big calls to you first.',
   openGraph: {
     title: 'The AI HR Agent | MambaHR',
     description:
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'The AI HR Agent | MambaHR',
   url: 'https://mambahr.com/mamba',
   description:
-    'Mamba is the AI HR agent, a coworker, not a chatbot. It works in Slack, Microsoft Teams, and the MambaHR app, runs HR work end to end, and brings the big calls to you first.',
+    'MambaHR is the AI HR agent, a coworker, not a chatbot. It works in Slack, Microsoft Teams, and the MambaHR app, runs HR work end to end, and brings the big calls to you first.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
-    name: 'Mamba HR agent',
+    name: 'MambaHR agent',
     description:
-      'A coworker that does the HR work, not a chatbot you query. Mamba takes intent from Slack, Microsoft Teams, and the MambaHR app, runs the workflow end to end, drafting, provisioning, compliance, and routes the high-stakes decisions to you for approval first.',
+      'A coworker that does the HR work, not a chatbot you query. MambaHR takes intent from Slack, Microsoft Teams, and the MambaHR app, runs the workflow end to end, drafting, provisioning, compliance, and routes the high-stakes decisions to you for approval first.',
   },
 }
 

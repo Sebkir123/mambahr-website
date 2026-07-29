@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mambahr.com'),
   title: 'MambaHR: The AI HR department. Before you hire HR.',
   description:
-    'MambaHR is the AI HR department for startups and growing companies. It runs hiring, onboarding, payroll-ready exports, time off, performance, and compliance end to end, for a fraction of the cost of your next HR hire. You approve the calls that matter.',
+    'MambaHR is the AI HR department for startups and growing companies. It runs hiring, onboarding, payroll-ready exports, time off, performance, and compliance end to end, for a fraction of what running it by hand costs. You approve the calls that matter.',
   keywords: [
     'AI HR department',
     'AI HR software',
@@ -51,11 +51,11 @@ export const metadata: Metadata = {
     'ATS',
     'performance reviews software',
     'multi-state HR compliance',
-    'replace HR hire',
+    'HR without an HR hire',
   ],
   openGraph: {
     title: 'MambaHR: The AI HR department.',
-    description: 'Before you hire HR, hire MambaHR. Hiring, onboarding, payroll-ready exports, time off, performance, and compliance, done end to end, for a fraction of an HR hire.',
+    description: 'Before you hire HR, hire MambaHR. Hiring, onboarding, payroll-ready exports, time off, performance, and compliance, done end to end, so your team spends its week on people.',
     url: 'https://mambahr.com',
     siteName: 'MambaHR',
     type: 'website',

@@ -35,7 +35,7 @@ function PayCycleCard() {
         </div>
       ))}
       <div className="foot">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · ready for upload</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · ready for upload</span>
         <span className="zero">0 discrepancies</span>
       </div>
       <style jsx>{`
@@ -103,7 +103,7 @@ function EnrollCard() {
           <div className="who">Jordan Lee</div>
           <div className="ev">Life event · Marriage · reported Tue 2:14 PM</div>
         </div>
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
       </div>
       <div className="rows">
         <div className="r"><span className="k">Enrollment window</span><span className="v">Opened same day · 30 days</span></div>
@@ -144,7 +144,7 @@ function PaydayPhoto() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="photo" src="/v2-people/team.jpg" alt="An HR team on payday, relaxed" />
       <div className="mini">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="mini-t">Pay file reconciled twice</div>
         <div className="mini-s">0 discrepancies · ready to upload</div>
       </div>
@@ -189,9 +189,9 @@ export default function PayrollPage() {
           eyebrow="Payroll & benefits"
           title={<>Payday, <Em>perfect.</Em></>}
           lead={'Every raise, new hire, exit, and life event lands in your provider’s file before payday, double-checked, reconciled, and ready to upload.'}
-          proof="Trusted with payday by lean teams"
+          proof="Built for the teams who run payday"
           photo="/v2-people/team2.jpg"
-          photoChip="Mamba · ready"
+          photoChip="MambaHR · ready"
           photoCaption="42 paid right · 0 discrepancies"
         >
           <PayCycleCard />
@@ -200,7 +200,7 @@ export default function PayrollPage() {
         <AgentLoop
           eyebrow="The pay cycle"
           title={<>The pay cycle, <Em>done early.</Em></>}
-          lead={'Mamba tracks every change all month, then turns them into one clean, payroll-ready file in your provider’s format. You upload it. That’s the whole job.'}
+          lead={'MambaHR tracks every change all month, then turns them into one clean, payroll-ready file in your provider’s format. You upload it. That’s the whole job.'}
           steps={[
             { n: '01', label: 'Collects every change', desc: 'Raises, new hires, exits, address moves, deduction updates, gathered the moment they happen, not the night before.', who: 'agent', time: 'all month' },
             { n: '02', label: 'Prices raises against bands', desc: 'Every merit change checked against your comp bands before it touches the file.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
@@ -214,7 +214,7 @@ export default function PayrollPage() {
         <FeatureSplit
           eyebrow="Benefits"
           title={<>Life events, <Em>enrolled.</Em></>}
-          lead="A birth, a marriage, a move, Mamba spots the qualifying life event, opens the window, and walks the enrollment through, end to end."
+          lead="A birth, a marriage, a move, MambaHR spots the qualifying life event, opens the window, and walks the enrollment through, end to end."
           bullets={[
             'Qualifying life events caught the day they happen',
             '401(k) enrollment and deduction changes',
@@ -250,8 +250,7 @@ export default function PayrollPage() {
 
         <QuoteBand
           quote="We switched on a Friday and ran payday Monday without a hiccup. Every change was already in the file, I just uploaded it."
-          name="Sofia Reyes"
-          role="Head of People, 140-person company"
+          role="Head of People · Fintech startup, 140 people"
           img="/v2-people/sofia.jpg"
           metric="Live in a day"
         />

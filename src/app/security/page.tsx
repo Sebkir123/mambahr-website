@@ -9,7 +9,7 @@ import { PageHero, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/comp
 /* ── Hero fragment: dark security log ── */
 const LOG = [
   { time: '09:31:08', text: 'Access granted · role: HR admin', tag: 'logged' },
-  { time: '09:31:42', text: 'Record changed · comp · by Mamba', tag: 'rule cited' },
+  { time: '09:31:42', text: 'Record changed · comp · by MambaHR', tag: 'rule cited' },
   { time: '09:32:15', text: 'Export requested · approved by B. Bell', tag: 'logged' },
   { time: '09:33:01', text: 'Document viewed · offer · by HR admin', tag: 'logged' },
 ]
@@ -62,7 +62,7 @@ function SecurityLogCard() {
 const COMMITMENTS = [
   { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption at rest, TLS 1.2+ in transit. Your records are protected while stored and while moving between systems.', tag: 'Always on' },
   { n: '02', label: 'Access by role, least privilege', desc: 'Each person sees only what their role allows. Managers see their team; employees see their own record.', tag: 'Always on' },
-  { n: '03', label: 'Every change logged with who and why', desc: 'Every action, by a person or by Mamba, is written to a record nobody can edit, with the reason attached.', tag: 'Always on' },
+  { n: '03', label: 'Every change logged with who and why', desc: 'Every action, by a person or by MambaHR, is written to a record nobody can edit, with the reason attached.', tag: 'Always on' },
   { n: '04', label: 'Your data stays in the US', desc: 'Stored on enterprise US cloud infrastructure. It never leaves the country.', tag: 'In your contract' },
   { n: '05', label: 'Never used to train AI', desc: 'Names, salaries, reviews, health information, none of it trains any AI model. Not ours, not anyone else’s.', tag: 'In your contract' },
 ]
@@ -183,7 +183,7 @@ function ApprovalGateCard() {
         </div>
       ))}
       <div className="g-foot">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <span className="g-note">Routine work runs; the big calls wait for you</span>
       </div>
       <style jsx>{`
@@ -297,7 +297,7 @@ export default function SecurityPage() {
           lead="Salaries, reviews, health information, the most sensitive data your company holds. Encrypted everywhere, access by role, every change on the record, and never used to train AI. In writing."
           proof="Security teams welcome on the demo"
           photo="/v2-people/sofia.jpg"
-          photoChip="Mamba · done"
+          photoChip="MambaHR · done"
           photoCaption="Audit question answered the same morning"
         >
           <SecurityLogCard />
@@ -345,8 +345,7 @@ export default function SecurityPage() {
 
         <QuoteBand
           quote="I asked the hard questions before we signed, who sees what, where the data lives, what trains their AI. The answers were in the contract, not a slide deck."
-          name="Dana Whitfield"
-          role="Head of People"
+          role="Head of People · Robotics startup, 240 people"
           img="/v2-people/feat.jpg"
         />
 

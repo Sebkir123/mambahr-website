@@ -12,7 +12,7 @@ function CompReviewCard() {
     <div className="cr agent-edge agent-working agent-lg">
       <div className="bar">
         <span className="bt">Merit cycle · comp review</span>
-        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · working</span>
+        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
       </div>
 
       <div className="row">
@@ -142,7 +142,7 @@ function EquityCard() {
     <div className="eq agent-edge agent-done">
       <div className="head">
         <span className="ht">Pay-equity check · before the change lands</span>
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
       </div>
       {rows.map((r) => (
         <div key={r.t} className="row">
@@ -206,7 +206,7 @@ function PhotoCard() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="ph" src="/v2-people/marcus.jpg" alt="A manager walking into a comp conversation prepared" width={640} height={460} />
       <div className="float agent-edge agent-done">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="ft">Comp letter signed and filed</div>
         <div className="fm">Tom Harrison · payroll updated · 2:14 PM</div>
       </div>
@@ -251,9 +251,9 @@ export default function CompensationPage() {
           eyebrow="Compensation"
           title={<>Every raise, <Em>right.</Em></>}
           lead="No more six weeks of spreadsheets and second-guessing. Every number is checked against your bands and screened for pay equity before anyone sees it, and anything above band comes to you first."
-          proof="Trusted with the whole comp cycle"
+          proof="Built for the whole comp cycle"
           photo="/v2-people/team2.jpg"
-          photoChip="Mamba · done"
+          photoChip="MambaHR · done"
           photoCaption="Maya’s raise · approved, letter signed"
         >
           <CompReviewCard />
@@ -310,8 +310,7 @@ export default function CompensationPage() {
 
         <QuoteBand
           quote="Our comp cycle used to be six weeks of spreadsheets and second-guessing. Now every recommendation arrives pre-checked against our bands, the exceptions come straight to me, and the letters just go out."
-          name="Rachel Donovan"
-          role="Head of People"
+          role="Head of People · Healthtech company, 320 people"
           img="/v2-people/sofia.jpg"
           metric="Comp cycle in days, not weeks"
         />

@@ -11,7 +11,7 @@ import {
 
 const STEPS: LoopStep[] = [
   { n: '01', img: '/avatars/maya.jpg',   label: 'Offer letter sent, Maya Chen',   desc: 'Senior Engineer · $195k · above band 8%',     who: 'agent', time: '2 min' },
-  { n: '02', img: '/avatars/priya.jpg',  label: 'Leave approved, Jordan Lee',    desc: 'FMLA + CA CFRA stacked · 14 weeks',           who: 'agent', time: '4 min' },
+  { n: '02', img: '/avatars/priya.jpg',  label: 'Leave approved, Jordan Lee',    desc: 'CA PDL, CFRA and FMLA sequenced · job protected', who: 'agent', time: '4 min' },
   { n: '03', img: '/avatars/marcus.jpg', label: 'PIP drafted, Marcus Webb',       desc: '90-day evidence cited · L3 sign-off queued',  who: 'you',   time: 'Pending' },
   { n: '04', img: '/avatars/sarah.jpg',  label: 'Separation docs, Sarah Lin',     desc: 'State-aware final pay · signature chain ready', who: 'you',   time: 'Review' },
 ]
@@ -163,7 +163,7 @@ export default function ProductPage() {
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
               <span className="mamba-chip working" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600, color: 'var(--gold-dark)', background: 'var(--gold-tint)', borderRadius: 999, padding: '4px 10px' }}>
-                Mamba · working
+                MambaHR · working
               </span>
               <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>4 workflows in flight</span>
             </div>
@@ -173,7 +173,7 @@ export default function ProductPage() {
                 {s.img && <img src={s.img} alt="" width={24} height={24} style={{ borderRadius: 999, objectFit: 'cover' }} />}
                 <span style={{ flex: 1, fontSize: 13.5, color: 'var(--text)', fontWeight: 500 }}>{s.label}</span>
                 <span style={{ fontSize: 11, color: s.who === 'you' ? 'var(--gold-dark)' : 'var(--text-faint)' }}>
-                  {s.who === 'you' ? 'You decide' : 'Mamba'}
+                  {s.who === 'you' ? 'You decide' : 'MambaHR'}
                 </span>
               </div>
             ))}
@@ -183,17 +183,18 @@ export default function ProductPage() {
         <AgentLoop
           eyebrow="Live today"
           title={<>Four workflows. <Em>One morning.</Em></>}
-          lead="A sample of what Mamba handles while you focus on what requires you."
+          lead="A sample of what MambaHR handles while you focus on what requires you."
           steps={STEPS}
         />
 
+        {/* Bullets live in the CapCard visual only. Passing them to FeatureSplit
+            too would print the same list twice in one section. */}
         {CAPABILITIES.map((cap) => (
           <FeatureSplit
             key={cap.eyebrow}
             eyebrow={cap.eyebrow}
             title={cap.title}
             lead={cap.lead}
-            bullets={cap.bullets}
             flip={cap.flip}
             warm={cap.warm}
           >

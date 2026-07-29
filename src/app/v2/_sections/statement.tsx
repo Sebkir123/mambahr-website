@@ -16,7 +16,8 @@ export default function Statement() {
         </h2>
         <p className="body" data-reveal data-delay="1">
           Every HRIS needs people clicking the buttons. For every dollar spent on the
-          system, companies spend six on the humans operating it. MambaHR is the operator.
+          system, companies spend six on the humans operating it. MambaHR does the
+          clicking, so your people get that six back.
         </p>
 
         <div className="stats" data-reveal data-delay="2">
@@ -37,7 +38,7 @@ export default function Statement() {
           <figcaption>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/avatars/head-of-people.jpg" alt="" width={38} height={38} loading="lazy" decoding="async" />
-            <span>Head of People · 240 employees</span>
+            <span>Head of People · SaaS company, 300 people</span>
           </figcaption>
         </figure>
       </div>
