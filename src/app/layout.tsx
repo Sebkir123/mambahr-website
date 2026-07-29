@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono, Instrument_Serif, Fraunces } from 'next/font/google'
-import { GoogleAnalytics } from '@next/third-parties/google'
+import AnalyticsGate from '@/components/analytics-gate'
 import StyledJsxRegistry from './styled-jsx-registry'
 import SiteTracker from '@/components/site-tracker'
 import './globals.css'
@@ -170,7 +170,7 @@ export default function RootLayout({
       <body style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
         <StyledJsxRegistry>{children}</StyledJsxRegistry>
         <SiteTracker />
-        {gaId && <GoogleAnalytics gaId={gaId} />}
+        {gaId && <AnalyticsGate gaId={gaId} />}
       </body>
     </html>
   )

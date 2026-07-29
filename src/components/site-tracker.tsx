@@ -21,6 +21,23 @@ function uuid(): string {
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`
 }
 
+/**
+ * Global Privacy Control (and legacy Do Not Track) opt-out.
+ *
+ * Our privacy policy states that we honour GPC. That statement has to be true:
+ * a privacy policy that overstates practice is itself the violation (see the
+ * California AG's 2022 Sephora action, brought partly over an unhonoured GPC
+ * signal). If the browser opts out, we record nothing at all, no identifiers
+ * are minted and no beacon is sent.
+ */
+function optedOut(): boolean {
+  if (typeof navigator === 'undefined') return false
+  const nav = navigator as Navigator & { globalPrivacyControl?: boolean; msDoNotTrack?: string }
+  if (nav.globalPrivacyControl === true) return true
+  const dnt = nav.doNotTrack ?? nav.msDoNotTrack ?? (typeof window !== 'undefined' ? (window as Window & { doNotTrack?: string }).doNotTrack : undefined)
+  return dnt === '1' || dnt === 'yes'
+}
+
 export default function SiteTracker() {
   const pathname = usePathname()
   const idRef = useRef<{ visitor: string; session: string } | null>(null)
@@ -28,6 +45,7 @@ export default function SiteTracker() {
   useEffect(() => {
     if (!pathname || pathname.startsWith('/admin') || pathname.startsWith('/api')) return
     if (typeof window === 'undefined') return
+    if (optedOut()) return
 
     // Identity: visitor persists (returning detection); session is per tab session.
     if (!idRef.current) {
