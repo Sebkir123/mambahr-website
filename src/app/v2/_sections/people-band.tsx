@@ -10,7 +10,7 @@ export default function PeopleBand() {
             We do the <span className="em">paperwork part.</span>
           </h2>
           <p className="lead">
-            HR is a people job. Mamba takes the admin duties so your team does the work only humans can; the coaching, the culture, the hard conversations.
+            HR is a people job. MambaHR takes the admin duties so your team does the work only humans can; the coaching, the culture, the hard conversations.
           </p>
           <ul className="points">
             <li><span className="tick" aria-hidden="true" />The agent handles the filings, approvals, and follow-ups</li>
@@ -25,7 +25,7 @@ export default function PeopleBand() {
             <img className="photo" src="/v2-people/team2.jpg" alt="An HR team working together" loading="lazy" decoding="async" />
           </div>
           <div className="float-card">
-            <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+            <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
             <div className="fc-t">Leave approved · Maya Chen</div>
             <div className="fc-m">Calendar blocked · manager notified · logged</div>
           </div>

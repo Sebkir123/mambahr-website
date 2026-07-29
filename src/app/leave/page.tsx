@@ -13,7 +13,7 @@ function SlackApprovalCard() {
       <div className="bar">
         <span className="dots"><i /><i /><i /></span>
         <span className="chn"><span className="hash">#</span>people-ops</span>
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done in seconds</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done in seconds</span>
       </div>
       <div className="feed">
         <div className="m">
@@ -30,7 +30,7 @@ function SlackApprovalCard() {
           <div className="av app" aria-hidden="true">M</div>
           <div className="m-body">
             <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:14 AM</time></div>
-            <div className="m-t">Approved &mdash; enjoy the wedding.</div>
+            <div className="m-t">Approved. Enjoy the wedding.</div>
             <div className="attach">
               <div className="a-row"><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
               <div className="a-row"><span className="a-k">Calendar</span><span className="a-v">Mon&ndash;Wed blocked, OOO set</span></div>
@@ -136,13 +136,14 @@ function ParentalLeaveCard() {
       <div className="msg reply">
         <div className="m-logo" aria-hidden="true">M</div>
         <div className="m-body">
-          <div className="m-who">Mamba <span className="m-time">6 seconds later</span></div>
+          <div className="m-who">MambaHR <span className="m-time">6 seconds later</span></div>
           <div className="a">
-            Up to 24 weeks, job protected.
-            <span className="a-sub">Federal and state stacked correctly, calendar blocked, payday updated.</span>
+            Up to 4 months disability, then 12 weeks bonding.
+            <span className="a-sub">Sequenced in the right order, job protected, calendar blocked, payday updated.</span>
             <span className="laws">
-              <span className="law">FMLA</span>
+              <span className="law">CA PDL</span>
               <span className="law">CA CFRA</span>
+              <span className="law">FMLA</span>
             </span>
           </div>
         </div>
@@ -232,7 +233,7 @@ function VacationPhoto() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="photo" src="/v2-people/team2.jpg" alt="A team that actually takes its vacations" />
       <div className="mini">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="mini-t">3 out next week · covered</div>
         <div className="mini-s">Calendars blocked · handoffs noted</div>
       </div>
@@ -277,9 +278,9 @@ export default function LeavePage() {
           eyebrow="Time off & leave"
           title={<>Time off, <Em>approved.</Em></>}
           lead={'Normal time off approves itself in seconds. Family and medical leave gets handled the legally-safe way, calendar blocked, payday updated, the law attached.'}
-          proof="Loved by teams in 11+ states"
+          proof="Built for multi-state teams"
           photo="/v2-people/sofia.jpg"
-          photoChip="Mamba · done"
+          photoChip="MambaHR · done"
           photoCaption="Maya approved · OOO set in 9s"
         >
           <SlackApprovalCard />
@@ -290,7 +291,7 @@ export default function LeavePage() {
           title={<>When someone <Em>asks.</Em></>}
           lead={'Every request runs the same path: the easy ones finish in seconds, the regulated ones get the statute check, and only the genuinely ambiguous ones reach you.'}
           steps={[
-            { n: '01', label: 'Reads the request', desc: 'Slack, Teams, or the MambaHR app, Mamba understands the dates, the reason, and who is asking.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
+            { n: '01', label: 'Reads the request', desc: 'Slack, Teams, or the MambaHR app, MambaHR understands the dates, the reason, and who is asking.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
             { n: '02', label: 'Checks balance and policy', desc: 'Accrued days, blackout dates, notice rules, checked against your actual policy, not a guess.', who: 'agent', time: 'seconds' },
             { n: '03', label: 'Checks FMLA and state leave when it applies', desc: 'Parental or medical leave triggers the eligibility check, federal and state, stacked correctly.', who: 'agent', time: 'seconds' },
             { n: '04', label: 'Books calendar and updates payday', desc: 'OOO set, coverage visible, and the pay record adjusted so payday is right without anyone touching it.', who: 'agent', time: 'same minute' },
@@ -302,7 +303,7 @@ export default function LeavePage() {
         <FeatureSplit
           eyebrow="Family & medical leave"
           title={<>The hard leave, <Em>handled.</Em></>}
-          lead={'Parental and medical leave is where mistakes get expensive. Mamba checks eligibility, stacks federal and state entitlements correctly, and attaches the statute to every answer, so Legal never gets a panicked call.'}
+          lead={'Parental and medical leave is where mistakes get expensive. MambaHR checks eligibility, stacks federal and state entitlements correctly, and attaches the statute to every answer, so Legal never gets a panicked call.'}
           bullets={[
             'FMLA eligibility checked before anything is promised',
             'State paid leave, CA CFRA, NY, MA, CO, stacked correctly with federal',
@@ -338,8 +339,7 @@ export default function LeavePage() {
 
         <QuoteBand
           quote="We have people in eleven states and I used to dread every leave question. Now the answer comes back in seconds, with the law attached."
-          name="Marcus Lee"
-          role="People Operations Lead, multi-state team"
+          role="People Operations Lead · AI startup, 180 people"
           img="/v2-people/marcus.jpg"
           metric="Saved 9 hrs / week"
         />

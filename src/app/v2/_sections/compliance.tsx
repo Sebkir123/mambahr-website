@@ -17,10 +17,10 @@ export default function Compliance() {
           <div className="msg reply">
             <div className="m-logo" aria-hidden="true">M</div>
             <div className="m-body">
-              <div className="m-who">Mamba <span className="m-time">6 seconds later</span></div>
+              <div className="m-who">MambaHR <span className="m-time">6 seconds later</span></div>
               <div className="a">
-                Up to 24 weeks, job protected.
-                <span className="a-sub">Booked, filed, done. Cites FMLA &amp; CA CFRA.</span>
+                Up to 4 months disability, then 12 weeks bonding.
+                <span className="a-sub">Booked, filed, done. Cites CA PDL, CFRA, and FMLA.</span>
               </div>
             </div>
           </div>
@@ -32,7 +32,7 @@ export default function Compliance() {
             Right answer. <span className="em">Backed by law.</span>
           </h2>
           <p className="lead">
-            Employment law changes almost every week. Mamba keeps up. A human signs
+            Employment law changes almost every week. MambaHR keeps up. A human signs
             off on the big calls.
           </p>
           <div className="trust">

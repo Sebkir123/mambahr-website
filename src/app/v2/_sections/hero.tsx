@@ -32,11 +32,11 @@ export default function Hero() {
       <span className="v2-grain" />
       <div className="top">
         <span className="eyebrow" data-reveal>The AI HR department</span>
-        <h1 className="title" data-reveal data-delay="1">HR that runs itself.</h1>
+        <h1 className="title" data-reveal data-delay="1">Run HR like you have a team of ten.</h1>
         <p className="sub" data-reveal data-delay="2">
-          MambaHR is an AI HR department that does the work: onboarding, payroll, time off,
-          leave, and compliance in all 50 states. You get only the calls that need a person.
-          A full HR transformation, live in a day.
+          MambaHR takes the admin: onboarding, time off, leave, payroll-ready exports, and
+          compliance in all 50 states. You keep the judgment calls, the coaching, and the
+          hours you never had. Live in a day.
         </p>
         <div className="ctas" data-reveal data-delay="3">
           <a href="/demo" className="btn-primary">Book a demo</a>
@@ -48,7 +48,7 @@ export default function Hero() {
               <img key={p} src={`/avatars/${p}.jpg`} alt="" width={36} height={36} />
             ))}
           </div>
-          <span className="proof-t">Loved by lean HR teams</span>
+          <span className="proof-t">Built for lean HR teams</span>
         </div>
         <div className="trust" data-reveal data-delay="3">
           <span>Works 24/7</span><i />
@@ -70,18 +70,18 @@ export default function Hero() {
               <div className="brand"><span className="logo">M</span>MambaHR</div>
               <nav>
                 {NAV.map((n) => (
-                  <a key={n.label} className={`nav${n.active ? ' on' : ''}`}>
+                  <span key={n.label} className={`nav${n.active ? ' on' : ''}`}>
                     <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
                       <path d={n.icon} fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     {n.label}
                     {n.badge && <span className="nav-b">{n.badge}</span>}
-                  </a>
+                  </span>
                 ))}
               </nav>
               <div className="agentline">
                 <span className="al-dot" />
-                <span className="al-t"><b>Mamba</b> is working<span className="al-ell"><i>.</i><i>.</i><i>.</i></span></span>
+                <span className="al-t"><b>MambaHR</b> is working<span className="al-ell"><i>.</i><i>.</i><i>.</i></span></span>
               </div>
               <div className="status"><span className="d" />All systems handled</div>
             </aside>

@@ -262,10 +262,10 @@ export default function MegaNav() {
                   >
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-mono), monospace', fontSize: 10, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--gold-dark)' }}>
                       <span style={{ width: 7, height: 7, borderRadius: 999, background: '#6A5DA6', display: 'inline-block' }} />
-                      Meet Mamba
+                      Meet MambaHR
                     </span>
                     <span style={{ display: 'block', fontSize: 13, lineHeight: 1.45, color: 'var(--text-muted)', marginTop: 5 }}>
-                      The AI hire behind every page on the left.
+                      The agent doing the work behind every page on the left.
                     </span>
                   </Link>
                 </div>
@@ -312,7 +312,7 @@ export default function MegaNav() {
                 }}
               >
                 <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 14.5, color: 'var(--text-muted)' }}>
-                  One agent. The whole department.
+                  One agent. Every job on this list.
                 </span>
                 <Link
                   href="/product"

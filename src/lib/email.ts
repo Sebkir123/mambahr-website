@@ -137,11 +137,11 @@ export async function sendWaitlistWelcome(opts: { email: string; company: string
     subject,
     serif('We got your application.') +
     body(`Thanks for reaching out${opts.company ? ` from <strong style="color:#1A1611;">${escapeHtml(opts.company)}</strong>` : ''}. We go through every application personally and we&rsquo;ll be in touch within 24 hours, no SDR, no automated sequence. Brian or Sebastian will reply directly.`) +
-    body(`MambaHR handles the full HR administrative layer, onboarding, offboarding, hiring, leave, compliance, autonomously, end to end. One human in the loop for the decisions that actually need judgment. That&rsquo;s what you applied for.`) +
+    body(`MambaHR handles the full HR administrative layer, onboarding, offboarding, hiring, leave, compliance, autonomously, end to end. Your people keep the decisions that actually need judgment. That&rsquo;s what you applied for.`) +
     divider() +
-    body(`While you wait, follow us on LinkedIn &mdash; it&rsquo;s where we build in public.`) +
+    body(`While you wait, follow us on LinkedIn, it&rsquo;s where we build in public.`) +
     ctaButton('https://www.linkedin.com/company/mamba-hr', 'Follow on LinkedIn →') +
-    finePrint('Questions? Just reply &mdash; this goes straight to us.<br/>Brian &amp; Sebastian, MambaHR'),
+    finePrint('Questions? Just reply, this goes straight to us.<br/>Brian &amp; Sebastian, MambaHR'),
   )
 
   if (!client) { console.log('[email:waitlist-welcome] sent successfully'); return }
@@ -247,7 +247,7 @@ export async function sendDemoConfirmation(opts: { email: string; name: string; 
     divider() +
     body('While you wait, follow along on LinkedIn, it&rsquo;s where we build in public. And if you know someone buried in HR admin, send them our way.') +
     ctaButton('https://www.linkedin.com/company/mamba-hr', 'Follow on LinkedIn →') +
-    finePrint('Questions? Just reply &mdash; this goes straight to us.<br/>Brian &amp; Sebastian, MambaHR'),
+    finePrint('Questions? Just reply, this goes straight to us.<br/>Brian &amp; Sebastian, MambaHR'),
   )
 
   if (!client) { console.log('[email:demo-confirmation] (dev) →', opts.email); return }

@@ -7,28 +7,28 @@ export const FAQS = [
     a: 'It’s your HR department. There’s a system underneath, records, documents, audit trails, but you’re not buying screens to click. You’re buying the work: onboarding done, changes processed, questions answered, exports ready. You approve the big calls.',
   },
   {
-    q: 'Can it replace our first HR hire?',
-    a: 'For most teams under 250 people, yes, that’s the job it was built for. It does the repeatable work that forces an early HR hire: records, onboarding, offboarding, changes, documents, manager questions. When you do hire HR, they start with a running department instead of a backlog.',
+    q: 'Can it do the work of our first HR hire?',
+    a: 'For most teams under 250 people, yes, that’s the job it was built for. It does the repeatable work that forces an early HR hire: records, onboarding, offboarding, changes, documents, manager questions. When you do hire HR, they start with a running department instead of a backlog, and they spend their first month on people rather than cleanup.',
   },
   {
     q: 'Does it replace a human HRBP?',
-    a: 'No, and we won’t pretend otherwise. Mamba runs the repeatable HRBP-level work, performance cycles, compliance checks, documentation, manager support. Investigations, sensitive employee relations, and legal judgment stay with qualified humans. The big calls are always yours.',
+    a: 'No, and we won’t pretend otherwise. MambaHR runs the repeatable HRBP-level work, performance cycles, compliance checks, documentation, manager support. Investigations, sensitive employee relations, and legal judgment stay with qualified humans. The big calls are always yours.',
   },
   {
     q: 'Does it process payroll or run our benefits?',
-    a: 'Not today, and we say that plainly. Mamba keeps the work around payroll and benefits clean and delivers ready-to-load files to your existing provider, broker, or PEO. No rip-and-replace, no missed changes.',
+    a: 'Not today, and we say that plainly. MambaHR keeps the work around payroll and benefits clean and delivers ready-to-load files to your existing provider, broker, or PEO. No rip-and-replace, no missed changes.',
   },
   {
     q: 'Why a per-employee price?',
-    a: 'Because that’s how the work scales. Every employee brings questions, time off, reviews, and paperwork. Every plan is one simple per-employee price, and your price grows only as your team grows. Payroll and global hiring are optional add-ons. Each plan includes an annual allowance of completed HR work, sized well above what teams typically use — and if you go past it, nothing stops.',
+    a: 'Because that’s how the work scales. Every employee brings questions, time off, reviews, and paperwork. Every plan is one simple per-employee price, and your price grows only as your team grows. Payroll and global hiring are optional add-ons. Each plan includes an annual allowance of completed HR work, sized well above what teams typically use, and if you go past it, nothing stops.',
   },
   {
     q: 'What does the minimum mean?',
-    a: 'Each plan has an annual minimum so we can put real depth behind every account. If the per-employee math comes in under it, the minimum applies. Most teams clear it quickly as they grow. Headcount is reviewed quarterly against your average — so if your team grows mid-year, the difference is billed for the remaining months and your included allowance grows with it.',
+    a: 'Each plan has an annual minimum so we can put real depth behind every account. If the per-employee math comes in under it, the minimum applies. Most teams clear it quickly as they grow. Headcount is reviewed quarterly against your average, so if your team grows mid-year, the difference is billed for the remaining months and your included allowance grows with it.',
   },
   {
     q: 'Which plan should we choose?',
-    a: 'Most growing companies start with HR Ops Manager, it replaces the hire they were about to make. Choose Starter if you mainly need records, answers, and clean exports. Choose AI HR Department when compliance, performance, and workforce changes need to run themselves too.',
+    a: 'Most growing companies start with HR Ops Manager, it covers the workload they were about to staff. Choose Starter if you mainly need records, answers, and clean exports. Choose AI HR Department when compliance, performance, and workforce changes need to run themselves too.',
   },
   {
     q: 'Is founding customer pricing real?',

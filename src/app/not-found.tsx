@@ -47,7 +47,7 @@ export default function NotFound() {
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <Link href="/" className="btn-gold">Back to homepage →</Link>
-              <Link href="/mamba" className="btn-secondary">See how Mamba works</Link>
+              <Link href="/mamba" className="btn-secondary">See how MambaHR works</Link>
             </div>
           </div>
         </section>

@@ -17,7 +17,7 @@ const TIERS = [
     unit: '/employee/mo',
     min: '$9k/yr minimum · billed annually',
     blurb: 'HR structure before your first HR hire.',
-    replaces: ['HR admin support', 'Records & org-chart cleanup', 'Payroll-change spreadsheets'],
+    replaces: ['The HR admin backlog', 'Records & org-chart cleanup', 'Payroll-change spreadsheets'],
     feats: ['Employee records & org chart', 'Onboarding & offboarding, done', 'Every employee question, answered', 'Time off & leave handled', 'Payroll & benefits-ready exports'],
     cta: 'Hire MambaHR',
   },
@@ -27,12 +27,12 @@ const TIERS = [
     price: '$22',
     unit: '/employee/mo',
     min: '$24k/yr minimum · billed annually',
-    blurb: 'Your next HR Ops hire, for a tenth of one.',
-    replaces: ['HR coordinator', 'People ops generalist', 'Recruiting coordinator'],
+    blurb: 'A full HR ops workload, for a tenth of the cost.',
+    replaces: ['Onboarding & offboarding runs', 'Offer and approval chasing', 'Interview coordination'],
     feats: ['Everything in Starter', 'Hiring: reqs, candidates & interviews', 'Offers sent, approvals routed', 'Payroll runs & change reports'],
-    cta: 'Hire your Ops Manager',
+    cta: 'Take ops off your plate',
     popular: true,
-    badge: 'Replaces your next HR Ops hire',
+    badge: 'Where most teams start',
   },
   {
     name: 'AI HR Department',
@@ -40,8 +40,8 @@ const TIERS = [
     price: '$30',
     unit: '/employee/mo',
     min: '$48k/yr minimum · billed annually',
-    blurb: 'Ops plus junior-HRBP work, run for you.',
-    replaces: ['HR Ops Manager', 'HR generalist', 'Junior HRBP workflows'],
+    blurb: 'The whole admin load, run for you.',
+    replaces: ['Performance cycle machinery', 'Compliance research & citations', 'Workforce change planning'],
     feats: ['Everything in Ops Manager', 'RIF & change planning, done right', 'Deep compliance + full audit trail', 'SSO, custom workflows & security review'],
     cta: 'Build your department',
   },
@@ -52,7 +52,7 @@ const TIERS = [
     unit: '',
     min: 'from $100k/yr',
     blurb: 'For complex orgs with procurement to satisfy.',
-    replaces: ['High-volume HR ops teams', 'Custom approval chains', 'Manual audit prep'],
+    replaces: ['High-volume HR ops queues', 'Custom approval chains', 'Manual audit prep'],
     feats: ['Everything in AI HR Dept', 'Custom implementation & approval logic', 'Procurement & security review', 'Enterprise integrations & success support'],
     cta: 'Talk to founders',
   },
@@ -118,10 +118,10 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
 ]
 
 const COST_ROWS = [
-  { hire: 'HR Coordinator', cost: '$70k–$95k', alt: 'HR Starter or Ops Manager' },
-  { hire: 'HR Generalist', cost: '$85k–$120k', alt: 'HR Ops Manager' },
-  { hire: 'HR Ops Manager', cost: '$110k–$150k', alt: 'Ops Manager or AI HR Dept' },
-  { hire: 'Junior HRBP', cost: '$100k–$140k', alt: 'AI HR Department' },
+  { hire: 'Records, onboarding & document admin', cost: '$70k–$95k', alt: 'HR Starter or Ops Manager' },
+  { hire: 'Plus leave, policy & the question queue', cost: '$85k–$120k', alt: 'HR Ops Manager' },
+  { hire: 'Plus hiring ops & payroll changes', cost: '$110k–$150k', alt: 'Ops Manager or AI HR Dept' },
+  { hire: 'Plus performance cycles & compliance', cost: '$100k–$140k', alt: 'AI HR Department' },
 ]
 
 const EXPORTS = [
@@ -137,37 +137,48 @@ const EXPORTS = [
   'Audit-ready change history',
 ]
 
-/* ── Hero: the salary math, made visual ── */
+/* ── Hero: the cost of the admin workload, made visual ── */
 function MathCard() {
   return (
     <div className="mc agent-edge agent-working agent-lg">
       <div className="head">
-        <span className="t">The math your CFO will do anyway</span>
+        <span className="t">What the admin costs to run</span>
         <span className="at">at 100 employees</span>
       </div>
       <div className="rows">
         <div className="r">
           <div className="r-top">
-            <span className="r-l">HR generalist, salary + benefits</span>
+            <span className="r-l">Staffed by hand, fully loaded</span>
             <span className="r-v">~$110k<em>/yr</em></span>
           </div>
           <span className="bar gray"><i style={{ width: '100%' }} /></span>
-          <span className="r-note">One person · business hours · two weeks of vacation</span>
+          <span className="r-note">A full-time role&rsquo;s worth of filing, chasing, and re-keying</span>
         </div>
         <div className="r">
           <div className="r-top">
-            <span className="r-l">MambaHR, 100-person team</span>
+            <span className="r-l">Run by MambaHR</span>
             <span className="r-v grad">$26k<em>/yr</em></span>
           </div>
           <span className="bar"><i style={{ width: '24%' }} /></span>
-          <span className="r-note">The whole department · 24/7 · never calls in sick</span>
+          <span className="r-note">The same workload · handled overnight · logged end to end</span>
         </div>
       </div>
       <div className="foot">
         <span className="f-big">$84k</span>
-        <span className="f-t">back in your budget, before counting the hours your managers get back</span>
+        <span className="f-t">back in your people budget, before counting the hours your team gets back</span>
       </div>
+      <p className="disclosure">
+        Illustrative at 100 employees, using published US salary ranges for the same admin
+        workload. Your numbers will differ; we will price yours on the call.
+      </p>
       <style jsx>{`
+        .disclosure {
+          margin: 0;
+          padding: 0 22px 16px;
+          font-size: 11.5px;
+          line-height: 1.5;
+          color: var(--text-faint);
+        }
         .mc { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
         .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 22px; border-bottom: 1px solid var(--border-faint); }
         .t { font-size: 13.5px; font-weight: 700; color: var(--text); }
@@ -207,7 +218,7 @@ export default function PricingPage() {
             <p className="lead" data-reveal data-delay="2">
               Most HR software stores your people data. MambaHR does the work: onboarding, leave and
               compliance, approvals, and offboarding, run end to end, with payroll-ready exports kept clean,
-              for a fraction of the cost of your next HR hire. Priced per employee, the way the work actually scales.
+              for a fraction of what running it by hand costs. Priced per employee, the way the work actually scales.
             </p>
             <div className="ctas" data-reveal data-delay="3">
               <Link href="/demo" className="btn-p">Book a demo</Link>
@@ -220,7 +231,7 @@ export default function PricingPage() {
                   <img key={p} src={`/avatars/${p}.jpg`} alt="" width={34} height={34} />
                 ))}
               </div>
-              <span className="proof-t">Replacing HR admin work at lean teams</span>
+              <span className="proof-t">Built for lean HR teams</span>
             </div>
           </div>
           <div className="stage" data-reveal data-delay="4">
@@ -325,7 +336,7 @@ export default function PricingPage() {
                   <div className="c-min">{t.min}</div>
                   <p className="c-blurb">{t.blurb}</p>
                   <div className="c-rep">
-                    <span className="c-rep-l">Replaces or delays</span>
+                    <span className="c-rep-l">Takes off your plate</span>
                     <ul>
                       {t.replaces.map((r) => <li key={r}>{r}</li>)}
                     </ul>
@@ -427,14 +438,14 @@ export default function PricingPage() {
           <div className="wrap">
             <div className="head" data-reveal>
               <p className="eyebrow">Compare the cost</p>
-              <h2 className="title">Cheaper than the <Em>hire.</Em></h2>
-              <p className="lead">Real HR execution for a fraction of the cost of one full-time HR hire, and you can still make that hire later, into a running department.</p>
+              <h2 className="title">Cheaper than doing it <Em>by hand.</Em></h2>
+              <p className="lead">Real HR execution for a fraction of what it costs to staff the same work. And when you do hire, they inherit a running department instead of a backlog.</p>
             </div>
             <div className="cost-table" data-reveal data-delay="1">
               <div className="row hd">
-                <span>Traditional hire</span>
-                <span>Estimated annual cost</span>
-                <span>The MambaHR alternative</span>
+                <span>The workload</span>
+                <span>Cost to staff it</span>
+                <span>The MambaHR plan</span>
               </div>
               {COST_ROWS.map((r) => (
                 <div key={r.hire} className="row">
@@ -445,7 +456,7 @@ export default function PricingPage() {
               ))}
             </div>
             <p className="compare-line" data-reveal data-delay="2">
-              Simpler than Rippling. Faster than Workday. More execution than BambooHR. Cheaper than the hire.{' '}
+              Simpler than Rippling. Faster than Workday. More execution than BambooHR. Cheaper than doing it by hand.{' '}
               <Link href="/compare">See the comparisons →</Link>
             </p>
           </div>
@@ -522,7 +533,7 @@ export default function PricingPage() {
 
         <StatTrio
           stats={[
-            { n: 84, prefix: '$', suffix: 'k', label: 'back in the budget vs. a first HR hire, at 100 employees' },
+            { n: 84, prefix: '$', suffix: 'k', label: 'back in the budget vs. staffing the same admin, at 100 employees' },
             { n: 27, label: 'hours of HR admin handled in a typical week, nights included' },
             { n: 30, suffix: ' days', label: 'to useful HR work, guaranteed, or your first year extends free' },
           ]}
@@ -559,11 +570,10 @@ export default function PricingPage() {
         </section>
 
         <QuoteBand
-          quote="I budgeted for an HR coordinator this year. Instead we turned on MambaHR, the admin work disappeared, and the salary went to a second engineer. Easiest line item I've ever defended."
-          name="Marcus Lee"
-          role="COO · 120-person company"
-          img="/v2-people/marcus.jpg"
-          metric="$84k redeployed"
+          quote="My whole budget was about to go on admin coverage. MambaHR took the admin instead, and I finally got to build the programs I was hired to build. Easiest line item I've ever defended."
+          role="Head of People · Robotics startup, 240 people"
+          img="/v2-people/feat.jpg"
+          metric="12 hrs back / week"
         />
 
         <PageCta

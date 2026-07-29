@@ -43,7 +43,7 @@ function SignedDocCard() {
           <span className="mono">Filed → Maya Chen / Employment · audit trail attached</span>
         </div>
         <div className="foot">
-          <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · signed &amp; filed</span>
+          <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · signed &amp; filed</span>
           <span className="foot-t">Drafted, sent, signed, and filed, 41 minutes end to end</span>
         </div>
       </div>
@@ -179,9 +179,9 @@ export default function DocumentsPage() {
           eyebrow="Documents & e-sign"
           title={<>Signed and <Em>filed.</Em></>}
           lead="Stop chasing signatures on Friday afternoons. Offers, agreements, acknowledgements, drafted in seconds, e-signed, chased, and filed where you’ll find them in three years."
-          proof="Loved by lean people teams"
+          proof="Built for lean people teams"
           photo="/v2-people/team.jpg"
-          photoChip="Mamba · signed & filed"
+          photoChip="MambaHR · signed & filed"
           photoCaption="Maya’s offer, out, signed, filed in 41 min"
         >
           <SignedDocCard />
@@ -239,8 +239,7 @@ export default function DocumentsPage() {
 
         <QuoteBand
           quote="I used to spend Friday afternoons chasing signatures and refiling PDFs. Now an offer goes out in seconds, signs itself through, and lands in the right folder before I've finished my coffee."
-          name="Marcus Lee"
-          role="People Operations Lead"
+          role="People Operations Lead · AI startup, 180 people"
           img="/v2-people/marcus.jpg"
           metric="Saved 9 hrs / week"
         />

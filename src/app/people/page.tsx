@@ -42,7 +42,7 @@ function PeopleWindow() {
           ))}
         </div>
         <div className="foot">
-          <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+          <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
           <span className="foot-t">Dave&rsquo;s record created from his signed offer · nothing typed</span>
         </div>
       </div>
@@ -86,7 +86,7 @@ function PeopleWindow() {
 /* ── Org chart fragment ── */
 const MANAGERS = [
   { img: '/avatars/anna.jpg', name: 'Anna Wilson', team: 'Sales', n: 14 },
-  { img: '/avatars/marcus.jpg', name: 'Marcus Lee', team: 'Engineering', n: 31 },
+  { img: '/avatars/marcus.jpg', name: 'Daniel Osei', team: 'Engineering', n: 31 },
   { img: '/avatars/violet.jpg', name: 'Violet Kim', team: 'Marketing', n: 9 },
 ]
 
@@ -181,10 +181,10 @@ export default function PeoplePage() {
         <PageHero
           eyebrow="Employee records"
           title={<>One record, <Em>current.</Em></>}
-          lead="Stop paying someone to retype what already happened. The agent that does the work keeps the record, every person, every detail, right by itself."
-          proof="The system of record for lean people teams"
+          lead="Nobody should spend their week retyping what already happened. The agent that does the work keeps the record, every person, every detail, right without anyone touching it."
+          proof="Built to be your system of record"
           photo="/v2-people/team2.jpg"
-          photoChip="Mamba · done"
+          photoChip="MambaHR · done"
           photoCaption="Dave on the books before his first coffee"
         >
           <PeopleWindow />
@@ -242,8 +242,7 @@ export default function PeoplePage() {
 
         <QuoteBand
           quote="We switched on a Tuesday. By Wednesday morning every record was in, every balance was right, and I deleted the spreadsheet I’d been babysitting for three years."
-          name="Sofia Reyes"
-          role="Head of People, 210-person company"
+          role="Head of People · Fintech startup, 140 people"
           img="/v2-people/sofia.jpg"
           metric="Live in a day"
         />

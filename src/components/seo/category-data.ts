@@ -123,7 +123,7 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         q: 'Does AI HR software replace my HR team?',
-        a: 'It replaces the administrative work: the leave filing, onboarding tasks, policy answers, and compliance checks. One human stays in the loop to approve the delicate calls. Most teams redeploy people from clicking buttons to higher-judgment work.',
+        a: 'No. It takes over the administrative work: the leave filing, onboarding tasks, policy answers, and compliance checks. Your people stay in the loop on the delicate calls, and most teams move them off clicking buttons and onto the higher-judgment work they were hired for.',
       },
       {
         q: 'How is MambaHR different from an HR chatbot or copilot?',
@@ -142,7 +142,7 @@ export const categories: Record<string, CategoryData> = {
     slug: 'best-hris-for-startups',
     metaTitle: 'Best HRIS for Startups (2026) | MambaHR',
     metaDescription:
-      'The best HRIS for startups in 2026 does the HR work, not just stores it. MambaHR is the AI HR department for lean teams: hiring, onboarding, leave, payroll-ready exports, and 50-state compliance, live in a day, from $14/employee. No HR hire required.',
+      'The best HRIS for startups in 2026 does the HR work, not just stores it. MambaHR is the AI HR department for lean teams: hiring, onboarding, leave, payroll-ready exports, and 50-state compliance, live in a day, from $14/employee. Run HR like you have a team of ten.',
     h1: 'The best HRIS for startups does the work, not just stores it',
     eyebrow: 'Best HRIS for startups · 2026',
     hero: { lead: 'The best HRIS for startups', em: 'before you hire HR.', tail: '' },
@@ -164,7 +164,7 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         title: 'Priced and deployed for a startup.',
-        desc: "No implementation project, no module tree, no annual minimum. Connect Slack and your stack; it’s handling requests the next morning, from $14 per employee.",
+        desc: "No implementation project, no module tree, no setup fee. Connect Slack and your stack; it’s handling requests the next morning, from $14 per employee with a $9k annual minimum.",
       },
     ],
     checklist: {
@@ -172,7 +172,7 @@ export const categories: Record<string, CategoryData> = {
       title: 'What a startup HRIS actually needs',
       lead: "Skip the enterprise checklist. These are the things that matter when you’re 10–200 people.",
       items: [
-        { t: 'Runs without an HR hire', d: "The system does the admin work, so you don’t staff a role you can’t justify yet." },
+        { t: 'Runs before you have HR', d: "The system does the admin work, so HR isn’t a role you have to staff before you’re ready." },
         { t: '50-state compliance built in', d: 'Remote team across state lines? Leave, pay transparency, and classification handled.' },
         { t: 'Hiring + onboarding included', d: 'ATS, offers, and onboarding in the same product, no second tool, no handoff.' },
         { t: 'Payroll-ready', d: "Generates the change file in your provider’s format; you upload, payday runs." },
@@ -181,9 +181,9 @@ export const categories: Record<string, CategoryData> = {
       ],
     },
     stats: [
-      { n: 14, prefix: '$', label: 'per employee to start, no implementation fee, no minimum' },
+      { n: 14, prefix: '$', label: 'per employee to start, no implementation fee, $9k annual minimum' },
       { n: 1, suffix: ' day', label: 'from signing to a working HR department' },
-      { n: 0, label: 'HR admins you need to hire to run it' },
+      { n: 0, label: 'admin backlog waiting for someone to get to it' },
     ],
     faq: [
       {
@@ -196,14 +196,14 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         q: 'Is it affordable for an early-stage startup?',
-        a: "Yes, it’s a flat $14–$30 per employee per month, everything included, with no implementation fee or annual minimum. For most startups that’s less than the fully-loaded cost of the part-time admin work it replaces.",
+        a: "Yes, it’s a flat $14–$30 per employee per month, everything included, with no implementation fee. Plans carry an annual minimum starting at $9k. For most startups that’s less than the fully-loaded cost of the part-time admin work it takes over.",
       },
       {
         q: 'Can it grow with us?',
         a: "It’s built for the full company lifecycle: the same product runs HR from 20 people through enterprise scale, with the compliance and audit depth larger teams require. No re-platforming as you grow.",
       },
     ],
-    cta: { title: 'The HR department your startup', em: "doesn’t have to hire.", sub: "A live demo on your team’s scenarios in 30 minutes. Live the next morning." },
+    cta: { title: 'Run HR like you have', em: 'a team of ten.', sub: "A live demo on your team’s scenarios in 30 minutes. Live the next morning." },
     related: [
       { label: 'MambaHR vs Gusto', href: '/compare/gusto' },
       { label: 'MambaHR vs Rippling', href: '/compare/rippling' },
@@ -266,7 +266,7 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         q: 'How much does small-business HR software cost?',
-        a: "MambaHR is a flat $14–$30 per employee per month with everything included: HRIS, hiring, onboarding, compliance, and the agent. There’s no implementation fee and no annual minimum, so it scales down cleanly for small teams.",
+        a: "MambaHR is a flat $14–$30 per employee per month with everything included: HRIS, hiring, onboarding, compliance, and the agent. There’s no implementation fee, and plans carry an annual minimum starting at $9k.",
       },
       {
         q: 'Do I still need a payroll provider?',

@@ -54,7 +54,7 @@ function SlackWindow() {
               <div className="av app">M</div>
               <div className="m-body">
                 <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:02 AM</time></div>
-                <div className="m-t">16 weeks, fully paid, for every new parent &mdash; birth, adoption, or foster.</div>
+                <div className="m-t">16 weeks, fully paid, for every new parent, birth, adoption, or foster.</div>
                 <div className="attach">
                   <div className="a-row"><span className="a-k">Paid leave</span><span className="a-v">16 weeks at 100%</span></div>
                   <div className="a-row"><span className="a-k">Eligibility</span><span className="a-v">Day one, all employees</span></div>
@@ -77,7 +77,7 @@ function SlackWindow() {
               <div className="av app">M</div>
               <div className="m-body">
                 <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:11 AM</time></div>
-                <div className="m-t">Done &mdash; sent to her email, filed.</div>
+                <div className="m-t">Done. Sent to her email and filed.</div>
                 <div className="attach">
                   <div className="a-row"><span className="a-k">Letter</span><span className="a-v">Employment verification, signed</span></div>
                   <div className="a-row"><span className="a-k">Sent to</span><span className="a-v">jordan@company.com</span></div>
@@ -88,7 +88,7 @@ function SlackWindow() {
 
             <div className="typing">
               <span className="typing-dot" /><span className="typing-dot" /><span className="typing-dot" />
-              <span className="typing-t"><b>Mamba</b> is filing the letter&hellip;</span>
+              <span className="typing-t"><b>MambaHR</b> is filing the letter&hellip;</span>
             </div>
           </div>
 
@@ -433,7 +433,7 @@ function TeamPhoto() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="photo" src="/v2-people/team.jpg" alt="A team at work, no HR portal in sight" />
       <div className="float">
-        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba &middot; working</span>
+        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR &middot; working</span>
         <div className="f-n"><span data-count="847">847</span></div>
         <div className="f-l">questions answered this quarter</div>
       </div>
@@ -483,12 +483,14 @@ export default function MambaPage() {
       <RevealInit />
       <CountUp />
 
+      <main>
+
       <PageHero
         eyebrow="The AI agent"
         title={<>Not a tool. <Em>A hire.</Em></>}
         lead="Your team messages @MambaHR like a person. It reads the thread, checks your policy, does the work, and logs it, in Slack, Microsoft Teams, or the MambaHR app."
         photo="/v2-people/sofia.jpg"
-        photoChip="Mamba · done"
+        photoChip="MambaHR · done"
         photoCaption="Letter sent · filed · 9:11 AM"
       >
         <SlackWindow />
@@ -539,20 +541,20 @@ export default function MambaPage() {
       <StatTrio
         stats={[
           { n: 9, suffix: 's', label: 'median answer, with receipt' },
-          { n: 24, suffix: '/7', label: 'never sick, never on vacation' },
+          { n: 24, suffix: '/7', label: 'answering while your team is off the clock' },
           { n: 100, suffix: '%', label: 'of actions logged with the rule followed' },
         ]}
       />
 
       <QuoteBand
-        quote="By week two, Mamba had taken leave and onboarding off my desk completely."
-        name="Dana Whitfield"
-        role="People lead, 220-person company"
+        quote="By week two, MambaHR had taken leave and onboarding off my desk completely."
+        role="Head of People · Robotics startup, 240 people"
         img="/v2-people/feat.jpg"
         metric="Saved 12 hrs / week"
       />
 
       <PageCta title={<>Meet your next <Em>team member.</Em></>} />
+      </main>
 
       <Footer />
     </>

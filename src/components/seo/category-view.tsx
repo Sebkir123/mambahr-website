@@ -16,7 +16,7 @@ function SlackFragment() {
       <div className="sf-top">
         <span className="sf-hash">#</span>
         <span className="sf-ch">people-help</span>
-        <span className="sf-chip">Mamba · done</span>
+        <span className="sf-chip">MambaHR · done</span>
       </div>
       <div className="sf-msg">
         <span className="sf-av sf-av-h" aria-hidden="true">A</span>
@@ -29,7 +29,7 @@ function SlackFragment() {
         <span className="sf-av sf-av-m" aria-hidden="true" />
         <div className="sf-body">
           <div className="sf-meta"><b>MambaHR</b><span className="sf-bot">agent</span><span>9:24 AM</span></div>
-          <p className="sf-text">You’re eligible for 12 weeks under FMLA, stacked with up to 8 weeks of California PFL wage replacement. I’ve drafted the leave plan and routed it to Dave for approval.</p>
+          <p className="sf-text">You’re eligible for 12 weeks of job-protected bonding leave. FMLA and CFRA run together, not back to back, with up to 8 weeks of California PFL wage replacement during it. I’ve drafted the leave plan and routed it to Dave for approval.</p>
           <div className="sf-pills">
             <span className="sf-pill">FMLA · CFRA · CA PFL</span>
             <span className="sf-pill sf-pill-g">Approval routed</span>
@@ -74,7 +74,7 @@ export default function CategoryView({ data }: { data: CategoryData }) {
           eyebrow={data.eyebrow}
           title={<>{data.hero.lead} <Em>{data.hero.em}</Em>{data.hero.tail}</>}
           lead={data.heroSub}
-          proof="Trusted by lean US teams"
+          proof="Built for lean US teams"
         >
           <SlackFragment />
         </PageHero>

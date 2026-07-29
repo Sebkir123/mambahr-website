@@ -25,7 +25,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
       {
         title: 'One product. One bill. No upsell tree.',
-        desc: 'HR Cloud, IT Cloud, Finance Cloud, Spend, Rippling prices each module separately, and the per-employee number adds up. MambaHR includes HRIS, hiring, payroll-ready exports, and 14 specialist agents in a single product.',
+        desc: 'HR Cloud, IT Cloud, Finance Cloud, Spend, Rippling prices each module separately, and the per-employee number adds up. MambaHR includes HRIS, hiring, payroll-ready exports, and the full set of specialist agents in a single product.',
       },
       {
         title: 'Live the day you sign.',
@@ -93,7 +93,7 @@ export const competitors: Record<string, CompetitorData> = {
     switchReasons: [
       {
         title: "Contractors aren't employees.",
-        desc: "Deel optimized for global contractors and EOR. Your full-time team needs something different, performance cycles, US leave management, multi-state compliance, onboarding that runs itself. That's MambaHR.",
+        desc: "Deel optimized for global contractors and EOR. Your full-time team needs something different, performance cycles, US leave management, multi-state compliance, onboarding that runs without chasing. That's MambaHR.",
       },
       {
         title: "Forms aren't automation.",
@@ -189,7 +189,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Self-managing once deployed', mamba: true, them: 'Requires HR ops to operate' },
       { feature: 'Audit log on every action', mamba: true, them: 'Partial' },
     ],
-    bottomLine: 'Namely is HRIS at its cleanest. MambaHR is the next category, an HR department that runs itself.',
+    bottomLine: 'Namely is HRIS at its cleanest. MambaHR is the next category, an HR department that does the work.',
     costLine: "No modules, no implementation retainer. MambaHR is $14–$30 per employee with everything included, live in a day.",
   },
 
@@ -197,7 +197,7 @@ export const competitors: Record<string, CompetitorData> = {
     slug: 'hibob',
     name: 'HiBob',
     tagline: 'MambaHR vs HiBob',
-    heroHeadline: 'HiBob made HR look modern.\nMambaHR makes it run itself.',
+    heroHeadline: 'HiBob made HR look modern.\nMambaHR makes it do the work.',
     heroSub: "HiBob nailed the modern HRIS, clean interface, strong engagement features, employees actually like using it. Underneath, it's still software your HR org operates. MambaHR is the agent that does the work, not a UI that surfaces it.",
     switchReasons: [
       {
@@ -227,7 +227,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Audit log on every action', mamba: true, them: 'Partial' },
     ],
     bottomLine: 'HiBob is a great HRIS for the modern workplace. MambaHR is the next thing after the HRIS, the agent department that runs it.',
-    costLine: "HiBob prices like an HRIS. MambaHR prices like a department you don't have to hire, $14–$30 per employee, all in.",
+    costLine: "HiBob prices like an HRIS. MambaHR prices like the work, not the seat, $14–$30 per employee, all in.",
   },
 
   adp: {
@@ -299,7 +299,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Multi-country global payroll', mamba: 'US-first', them: true },
       { feature: 'Audit log on every action', mamba: true, them: true },
     ],
-    bottomLine: "Workday is the right answer when you need finance, HCM, and global ERP under one configurable platform. MambaHR is the right answer when you want HR to run itself.",
+    bottomLine: "Workday is the right answer when you need finance, HCM, and global ERP under one configurable platform. MambaHR is the right answer when you want the HR work done, not hosted.",
     costLine: "A Workday implementation can cost more than a decade of MambaHR. We're $14–$30 per employee and live in a day.",
   },
 
@@ -307,7 +307,7 @@ export const competitors: Record<string, CompetitorData> = {
     slug: 'justworks',
     name: 'Justworks',
     tagline: 'MambaHR vs Justworks',
-    heroHeadline: 'Justworks rents you HR staff.\nMambaHR is the HR staff.',
+    heroHeadline: 'Justworks gives you a support queue.\nMambaHR gives you the answer.',
     heroSub: "Justworks is a PEO, you co-employ your team through them and lean on their support reps for the hard questions. MambaHR is the AI HR department: the work gets done in Slack, no co-employment, no shared liability, no waiting on a ticket queue.",
     switchReasons: [
       {
@@ -336,7 +336,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Typical setup time', mamba: '1 day', them: '2–4 weeks' },
       { feature: 'Audit log on every action', mamba: true, them: 'Partial' },
     ],
-    bottomLine: "Justworks is a good PEO if you want to rent benefits and a support team. MambaHR is what you hire when you want the HR work itself done, without handing over your employment relationship.",
+    bottomLine: "Justworks is a good PEO if you want bundled benefits and a support team to call. MambaHR is what you turn on when you want the HR work itself done, without handing over your employment relationship.",
     costLine: "PEOs bundle their margin into your benefits. MambaHR is a flat $14–$30 per employee, no co-employment, no markup on coverage.",
   },
 
@@ -386,7 +386,7 @@ export const competitors: Record<string, CompetitorData> = {
     switchReasons: [
       {
         title: 'One product, not a menu of add-ons.',
-        desc: "Paychex prices HR services, time tracking, and compliance help as separate lines, each with its own fee. MambaHR includes HRIS, hiring, onboarding, compliance, and 14 specialist agents in a single flat price.",
+        desc: "Paychex prices HR services, time tracking, and compliance help as separate lines, each with its own fee. MambaHR includes HRIS, hiring, onboarding, compliance, and the full set of specialist agents in a single flat price.",
       },
       {
         title: 'Self-service that actually serves itself.',
@@ -455,7 +455,7 @@ export const competitors: Record<string, CompetitorData> = {
     slug: 'paylocity',
     name: 'Paylocity',
     tagline: 'MambaHR vs Paylocity',
-    heroHeadline: 'Paylocity is an HCM suite to operate.\nMambaHR is a department that operates itself.',
+    heroHeadline: 'Paylocity is an HCM suite to operate.\nMambaHR does the operating.',
     heroSub: "Paylocity is a capable mid-market HCM, payroll, benefits, talent, and workforce management your HR org runs. MambaHR is a different shape: an agent department that handles the requests, the compliance, and the hiring without an admin behind every screen.",
     switchReasons: [
       {
@@ -484,7 +484,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Human approval on high-risk decisions', mamba: true, them: 'Configurable workflows' },
       { feature: 'Audit log on every action', mamba: true, them: true },
     ],
-    bottomLine: "Paylocity is a solid HCM suite for an HR team to run. MambaHR is the department that runs itself, live the day you sign.",
+    bottomLine: "Paylocity is a solid HCM suite for an HR team to run. MambaHR is the department that does the running, live the day you sign.",
     costLine: "Paylocity prices per module with an implementation fee. MambaHR is flat, $14–$30 per employee, live in a day.",
   },
 
@@ -605,7 +605,7 @@ export const competitors: Record<string, CompetitorData> = {
     switchReasons: [
       {
         title: "EOR payments aren't an HR department.",
-        desc: "Remote optimized for paying people across countries. Your US team still needs performance cycles, FMLA and state leave management, multi-state compliance, and onboarding that runs itself. That's MambaHR.",
+        desc: "Remote optimized for paying people across countries. Your US team still needs performance cycles, FMLA and state leave management, multi-state compliance, and onboarding that runs without chasing. That's MambaHR.",
       },
       {
         title: "Forms and dashboards aren't automation.",
@@ -642,7 +642,7 @@ export const competitors: Record<string, CompetitorData> = {
     switchReasons: [
       {
         title: 'Global EOR is a different job than US HR.',
-        desc: "Oyster optimized for compliant hiring across borders. Your US team needs FMLA and state leave reasoning, multi-state compliance, performance cycles, and onboarding that runs itself. MambaHR is built for exactly that.",
+        desc: "Oyster optimized for compliant hiring across borders. Your US team needs FMLA and state leave reasoning, multi-state compliance, performance cycles, and onboarding that runs without chasing. MambaHR is built for exactly that.",
       },
       {
         title: 'An agent, not another dashboard.',

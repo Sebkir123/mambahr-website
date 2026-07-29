@@ -47,7 +47,7 @@ export default function Outcomes() {
                 <span className="cmp-v old-v">half a day</span>
               </div>
               <div className="cmp-row">
-                <span className="cmp-l">With Mamba</span>
+                <span className="cmp-l">With MambaHR</span>
                 <span className="cmp-bar new"><i style={{ width: '9%' }} /></span>
                 <span className="cmp-v new-v">4 min</span>
               </div>
@@ -58,13 +58,26 @@ export default function Outcomes() {
           {/* deferred hire, money card */}
           <article className="card tint" data-reveal data-delay="4">
             <div className="num money">$<span data-count="95">95</span>k+</div>
-            <span className="lbl">The HR hire you can skip</span>
-            <p className="cap">A full generalist&rsquo;s workload, from $24k a year. Spend the difference on your people.</p>
+            <span className="lbl">Back into your people budget</span>
+            <p className="cap">A full generalist&rsquo;s workload of admin, from $24k a year. The rest funds the work only people can do.</p>
           </article>
         </div>
+
+        <p className="note" data-reveal>
+          Modeled from the admin hours these workflows take a lean team today, not measured
+          customer averages. We will publish real numbers once our first customers are live.
+        </p>
       </div>
 
       <style jsx>{`
+        .note {
+          margin: 26px auto 0;
+          max-width: 640px;
+          text-align: center;
+          font-size: 12px;
+          line-height: 1.55;
+          color: var(--text-faint);
+        }
         .oc { background: var(--bg); padding-block: clamp(96px, 13vw, 168px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { max-width: none; margin-bottom: clamp(40px, 5vw, 60px); }

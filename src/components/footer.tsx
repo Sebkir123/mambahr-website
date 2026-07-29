@@ -87,7 +87,7 @@ export default function Footer() {
               margin: 0,
             }}
           >
-            HR that runs itself.{' '}
+            Run HR like you have{' '}
             <span
               style={{
                 fontStyle: 'italic',
@@ -97,7 +97,7 @@ export default function Footer() {
                 color: 'transparent',
               }}
             >
-              Yours can too.
+              a team of ten.
             </span>
           </p>
         </div>
@@ -118,7 +118,7 @@ export default function Footer() {
               <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 17, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
             </Link>
             <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.55, maxWidth: 210, margin: 0 }}>
-              The AI HR department. One human in the loop.
+              The AI HR department. You keep the judgment.
             </p>
             <p style={{ display: 'inline-flex', alignItems: 'center', gap: 7, marginTop: 18, fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--text-faint)' }}>
               <span style={{ width: 7, height: 7, borderRadius: 999, background: 'var(--color-green)', display: 'inline-block' }} />
@@ -179,9 +179,17 @@ export default function Footer() {
           <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
             © {new Date().getFullYear()} MambaHR, Inc. All rights reserved.
           </p>
-          <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-            Made in San Francisco
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
+            <Link href="/privacy" prefetch={false} style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
+              Privacy
+            </Link>
+            <Link href="/terms" prefetch={false} style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
+              Terms
+            </Link>
+            <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
+              Made in San Francisco
+            </p>
+          </div>
         </div>
       </div>
     </footer>

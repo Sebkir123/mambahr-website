@@ -17,7 +17,7 @@ const TIERS = [
     price: '$22',
     unit: '/employee/mo',
     min: '$24k/yr minimum',
-    blurb: 'A full HR ops hire, for a tenth of one.',
+    blurb: 'A full HR ops workload, for a tenth of the cost.',
     feats: ['Everything in Starter', 'Hiring: reqs, candidates & interviews', 'Offers sent, approvals routed', 'Payroll runs & change reports'],
     cta: 'Most teams start here',
     popular: true,
@@ -50,10 +50,10 @@ export default function Pricing() {
       <div className="wrap">
         <div className="head" data-reveal>
           <p className="eyebrow">Pricing</p>
-          <h2 className="title">A fraction of a <span className="em">full HR team.</span></h2>
+          <h2 className="title">Priced like software. <span className="em">Works like a team.</span></h2>
           <p className="lead">
-            An HR generalist runs $85k&ndash;$120k a year. MambaHR does the same work from
-            $24k, and never calls in sick.
+            The admin workload that eats a full-time generalist&rsquo;s week runs from $24k a
+            year here. Your team spends that week on people instead.
           </p>
         </div>
 

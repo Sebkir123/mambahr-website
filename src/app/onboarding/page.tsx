@@ -26,7 +26,7 @@ function DayOneCard() {
             <div className="meta">Product Designer · starts Monday</div>
           </div>
         </div>
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done in 4m 12s</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done in 4m 12s</span>
       </div>
       {DAY1.map((r) => (
         <div key={r.label} className="row">
@@ -95,7 +95,7 @@ function ExitChecklist() {
           <div className="t">Exit · Jordan Mills</div>
           <div className="m">Last day Friday, June 19</div>
         </div>
-        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · working</span>
+        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
       </div>
       {EXIT.map((r) => (
         <div key={r.label} className={`row${r.state === 'you' ? ' yours' : ''}`}>
@@ -162,7 +162,7 @@ function FirstDay() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="ph" src="/v2-people/team.jpg" alt="A new hire being welcomed by the team" />
       <div className="float agent-edge agent-done">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="f-t">Day 1 ready · Alex Park</div>
         <div className="f-m">Logins live · buddy assigned · week planned</div>
       </div>
@@ -208,9 +208,9 @@ export default function OnboardingPage() {
           eyebrow="Onboarding & offboarding"
           title={<>Day one, <Em>ready.</Em></>}
           lead="Paperwork filed and verified, logins working, first week planned, before your new hire walks in. And when someone leaves, a clean exit with nothing forgotten."
-          proof="Loved by new hires and HR alike"
+          proof="Built for new hires and HR alike"
           photo="/v2-people/marcus.jpg"
-          photoChip="Mamba · done in 4m"
+          photoChip="MambaHR · done in 4m"
           photoCaption="Alex set up · logins live by 9 AM"
         >
           <DayOneCard />
@@ -224,7 +224,7 @@ export default function OnboardingPage() {
             { n: '01', label: 'Offer signature', desc: 'The accepted offer is countersigned and filed where you can always find it.', who: 'agent', time: 'minutes' },
             { n: '02', label: 'I-9 & E-Verify', desc: 'Work-eligibility paperwork collected, verified, and filed, correctly, the first time.', who: 'agent', time: 'day 1' },
             { n: '03', label: 'Logins ready', desc: 'Email, Slack, and every tool they need, live before they sit down.', who: 'agent', time: 'before 9 AM' },
-            { n: '04', label: 'Equipment & buddy', desc: 'Laptop ordered and shipped to their door; an onboarding buddy picked and briefed.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '04', label: 'Equipment & buddy', desc: 'Their laptop enrolled and configured through your device management, and an onboarding buddy picked and briefed.', who: 'agent', img: '/avatars/priya.jpg' },
             { n: '05', label: 'First-week schedule', desc: 'Intros, team lunches, and training sessions on everyone&rsquo;s calendar, no one has to remember.', who: 'agent' },
             { n: '06', label: '30-day check-in', desc: 'A quiet pulse at day 30: how it&rsquo;s going, what&rsquo;s missing, flagged to you only if something&rsquo;s off.', who: 'agent', time: 'day 30', img: '/avatars/dave.jpg' },
             { n: '07', label: 'The welcome', desc: 'You give the welcome. The handshake, the story, the why-we-hired-you, that&rsquo;s yours.', who: 'you', img: '/avatars/anna.jpg' },
@@ -234,7 +234,7 @@ export default function OnboardingPage() {
         <FeatureSplit
           eyebrow="Offboarding"
           title={<>Exits with <Em>zero loose ends.</Em></>}
-          lead="Exits are where details get expensive. Mamba gets the final paycheck right for their state, prepares the COBRA notices, collects the handover, and switches off every login only after your sign-off."
+          lead="Exits are where details get expensive. MambaHR gets the final paycheck right for their state, prepares the COBRA notices, collects the handover, and switches off every login only after your sign-off."
           bullets={[
             'Final pay timed to each state&rsquo;s rules, California&rsquo;s last-day deadline included',
             'Benefits notices prepared and sent on schedule, automatically',
@@ -253,7 +253,7 @@ export default function OnboardingPage() {
           bullets={[
             'A first week that says we were ready for you',
             'Managers get a nudge list, not a to-do list',
-            'New hires answer one short form, Mamba does the rest',
+            'New hires answer one short form, MambaHR does the rest',
           ]}
         >
           <FirstDay />
@@ -269,8 +269,7 @@ export default function OnboardingPage() {
 
         <QuoteBand
           quote="We switched on a Thursday and onboarded two people the following Monday. Offer signed, paperwork verified, logins live, calendars full, and I never opened a checklist. I just showed up to say welcome."
-          name="Sofia Reyes"
-          role="Director of HR"
+          role="Head of People · Fintech startup, 140 people"
           img="/v2-people/sofia.jpg"
           metric="Live in a day"
         />

@@ -39,7 +39,7 @@ export function PageHero({
   eyebrow,
   title,
   lead,
-  proof = 'Loved by lean HR teams',
+  proof = 'Built for lean HR teams',
   photo,
   photoChip,
   photoCaption,
@@ -51,7 +51,7 @@ export function PageHero({
   proof?: string
   /** Local people photo (e.g. /v2-people/team.jpg) shown as a tilted card overlapping the stage. */
   photo?: string
-  /** Mamba-chip text on the photo card, e.g. 'Mamba · done'. */
+  /** MambaHR-chip text on the photo card, e.g. 'MambaHR · done'. */
   photoChip?: string
   /** Small caption under the chip, e.g. 'Offer signed · starts June 22'. */
   photoCaption?: string
@@ -281,7 +281,7 @@ export function AgentLoop({
         </div>
         <div className="card agent-edge agent-working agent-lg" data-reveal data-delay="1">
           <div className="card-top">
-            <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · working</span>
+            <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
             <span className="card-top-t">Live run · today</span>
           </div>
           {steps.map((s) => (
@@ -299,7 +299,7 @@ export function AgentLoop({
               </div>
               {s.time && <span className="time">{s.time}</span>}
               <span className={`who${s.who === 'you' ? ' you' : ''}`}>
-                {s.who === 'you' ? 'You decide' : 'Mamba handles'}
+                {s.who === 'you' ? 'You decide' : 'MambaHR handles'}
               </span>
             </div>
           ))}
@@ -450,8 +450,11 @@ export function FeatureSplit({
 /* ── Stat trio: tinted gradient cards with count-ups ── */
 export function StatTrio({
   stats,
+  note = 'Modeled from the workflows MambaHR runs, not measured customer averages.',
 }: {
   stats: { n: number; prefix?: string; suffix?: string; label: string }[]
+  /** Provenance line under the stats. Pass null only if the stats are cited in-place. */
+  note?: string | null
 }) {
   const tones = ['warm', 'vio', 'goldt']
   return (
@@ -464,7 +467,17 @@ export function StatTrio({
           </div>
         ))}
       </div>
+      {note && <p className="note">{note}</p>}
       <style jsx>{`
+        .note {
+          max-width: var(--page-max);
+          margin: 18px auto 0;
+          padding: 0 var(--page-pad);
+          font-size: 12px;
+          line-height: 1.5;
+          color: var(--text-faint);
+          text-align: center;
+        }
         .st3 { background: var(--bg); padding-block: clamp(48px, 6vw, 80px); }
         .wrap {
           max-width: var(--page-max);
@@ -500,16 +513,19 @@ export function StatTrio({
   )
 }
 
-/* ── Quote band: designed card, big photo left, quote right ── */
+/* ── Scenario band: designed card, big photo left, scenario right ──
+   MambaHR is pre-launch. These are written illustrations of the workflow, NOT
+   customer testimonials, so they carry an explicit "Illustrative" label and no
+   personal name. Do not reintroduce named quotes until there are real customers
+   who have agreed to be quoted. */
 export function QuoteBand({
   quote,
-  name,
   role,
   img,
   metric,
 }: {
   quote: string
-  name: string
+  /** Role archetype the scenario is written from, e.g. "Head of People · Robotics startup, 240 people". */
   role: string
   img: string
   metric?: string
@@ -519,13 +535,14 @@ export function QuoteBand({
       <div className="card agent-edge agent-done" data-reveal>
         <div className="photo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img} alt={name} loading="lazy" decoding="async" />
+          <img src={img} alt="" loading="lazy" decoding="async" />
           {metric && <span className="badge">{metric}</span>}
         </div>
         <div className="body">
+          <span className="tag">Illustrative scenario</span>
           <span className="qmark" aria-hidden="true">&ldquo;</span>
           <blockquote className="q">{quote}</blockquote>
-          <div className="who"><b>{name}</b><span>{role}</span></div>
+          <div className="who"><span>{role}</span></div>
         </div>
       </div>
       <style jsx>{`
@@ -580,7 +597,18 @@ export function QuoteBand({
           position: relative;
         }
         .who { margin-top: 22px; font-size: 14px; color: var(--text-muted); display: flex; flex-direction: column; gap: 2px; }
-        .who b { color: var(--text); font-size: 15px; }
+        .tag {
+          display: inline-block;
+          font-family: var(--font-mono);
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: var(--text-faint);
+          border: 1px solid var(--border-faint);
+          border-radius: 999px;
+          padding: 3px 10px;
+          margin-bottom: 16px;
+        }
         @media (max-width: 720px) {
           .card { grid-template-columns: 1fr; }
           .photo { min-height: 220px; }

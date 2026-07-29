@@ -23,12 +23,12 @@ function PortalCard() {
       </div>
       <div className="body">
         <div className="co">
-          <span className="logo">A</span>
+          <span className="logo">Y</span>
           <div>
-            <div className="co-n">Arcadia Labs</div>
+            <div className="co-n">Your Company</div>
             <div className="co-t">We&rsquo;re hiring across three teams</div>
           </div>
-          <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Mamba · screening</span>
+          <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · screening</span>
         </div>
         {ROLES.map((r) => (
           <div key={r.title} className="job">
@@ -107,7 +107,7 @@ function InflowCard() {
         <div className="w-row"><span className="tick" aria-hidden="true" />References available from prior manager</div>
       </div>
       <div className="foot">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · ranked &amp; filed</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · ranked &amp; filed</span>
         <span className="f-t">Recommendation only, you make the call</span>
       </div>
       <style jsx>{`
@@ -139,8 +139,8 @@ function BrandCard() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="ph" src="/v2-people/team.jpg" alt="A team reviewing their new careers page" />
       <div className="float agent-edge agent-done">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Mamba · done</span>
-        <div className="f-t">jobs.arcadialabs.com · live</div>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
+        <div className="f-t">jobs.yourcompany.com · live</div>
         <div className="f-m">Brand, roles, and pay bands imported</div>
       </div>
       <style jsx>{`
@@ -166,9 +166,9 @@ export default function JobPortalPage() {
           eyebrow="The job portal"
           title={<>Your jobs, <Em>live.</Em></>}
           lead="A branded careers site on your own address, stood up in a day. Candidates apply there, every application lands in your pipeline already read and ranked, and the questions hiring law requires are collected quietly."
-          proof="Careers pages live at lean teams everywhere"
+          proof="Built for lean talent teams"
           photo="/v2-people/sofia.jpg"
-          photoChip="Mamba · done"
+          photoChip="MambaHR · done"
           photoCaption="Careers page live · before lunch"
         >
           <PortalCard />
@@ -209,7 +209,7 @@ export default function JobPortalPage() {
           lead="Every application is read, ranked, and explained before you ever see it. You open the pipeline to a shortlist with reasons, not a pile of two hundred resumes on a Sunday night."
           bullets={[
             'Ranked overnight with the why spelled out in plain English',
-            'Mamba recommends; it never advances or rejects anyone on its own',
+            'MambaHR recommends; it never advances or rejects anyone on its own',
             'Every candidate gets an answer, no application black hole under your brand',
           ]}
         >
@@ -226,8 +226,7 @@ export default function JobPortalPage() {
 
         <QuoteBand
           quote="We sent candidates to a clunky vendor page for years. Now they apply on our site, and by morning I have a ranked shortlist with reasons. Candidates compliment the experience, that never happened before."
-          name="Sofia Reyes"
-          role="Head of Talent · 140-person company"
+          role="Head of People · Fintech startup, 140 people"
           img="/v2-people/feat.jpg"
           metric="Live in 1 day"
         />

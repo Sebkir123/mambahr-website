@@ -26,7 +26,7 @@ const STAGES: Stage[] = [
     ],
     chips: ['EEO-1', 'E-signed'],
     state: 'done',
-    stateText: 'Mamba · offer signed',
+    stateText: 'MambaHR · offer signed',
   },
   {
     label: 'Onboard',
@@ -40,11 +40,11 @@ const STAGES: Stage[] = [
     ],
     chips: ['I-9 / E-Verify', 'Accounts live'],
     state: 'done',
-    stateText: 'Mamba · done in 4m 12s',
+    stateText: 'MambaHR · done in 4m 12s',
   },
   {
     label: 'Payroll & benefits',
-    headline: 'Payday runs itself.',
+    headline: 'Payday, prepped and checked twice.',
     sub: 'Every raise, new hire, and change is ready for payday, checked twice. Benefits enrollment automated when life happens.',
     person: { img: '/avatars/priya.jpg', name: 'Jordan Lee', role: 'new 401(k) enrollment' },
     log: [
@@ -54,7 +54,7 @@ const STAGES: Stage[] = [
     ],
     chips: ['Payroll-ready', '401(k) enrolled'],
     state: 'working',
-    stateText: 'Mamba · prepping payday',
+    stateText: 'MambaHR · prepping payday',
   },
   {
     label: 'Perform & grow',
@@ -68,7 +68,7 @@ const STAGES: Stage[] = [
     ],
     chips: ['Calibration'],
     state: 'working',
-    stateText: 'Mamba · drafting reviews',
+    stateText: 'MambaHR · drafting reviews',
   },
   {
     label: 'Comp & promotion',
@@ -82,7 +82,7 @@ const STAGES: Stage[] = [
     ],
     chips: ['Pay transparency'],
     state: 'done',
-    stateText: 'Mamba · sent to you',
+    stateText: 'MambaHR · sent to you',
   },
   {
     label: 'Time off & leave',
@@ -96,7 +96,7 @@ const STAGES: Stage[] = [
     ],
     chips: ['FMLA', 'State leave'],
     state: 'done',
-    stateText: 'Mamba · done in seconds',
+    stateText: 'MambaHR · done in seconds',
   },
   {
     label: 'Offboard / RIF',
@@ -110,7 +110,7 @@ const STAGES: Stage[] = [
     ],
     chips: ['WARN', 'COBRA'],
     state: 'working',
-    stateText: 'Mamba · awaiting your sign-off',
+    stateText: 'MambaHR · awaiting your sign-off',
   },
 ]
 
@@ -198,7 +198,7 @@ export default function Lifecycle() {
                 <div className="lp-n">{s.person.name}</div>
                 <div className="lp-r">{s.person.role}</div>
               </div>
-              <span className="lp-tag">Mamba&rsquo;s log</span>
+              <span className="lp-tag">MambaHR&rsquo;s log</span>
             </div>
             {s.log.map((l, i) => (
               <div key={l.text} className="log-row" style={{ animationDelay: `${0.12 + i * 0.1}s` }}>
