@@ -301,9 +301,10 @@ const sections: LegalSection[] = [
         </p>
         <p>
           To exercise any of these, email{' '}
-          <a href="mailto:privacy@mambahr.com">privacy@mambahr.com</a> from the address you gave us,
-          or tell us which address to look up. We will respond within 45 days. You may use an
-          authorised agent; we will ask for proof of their authority.
+          <a href="mailto:hello@mambahr.com?subject=Privacy%20request">hello@mambahr.com</a> with{' '}
+          <strong>&ldquo;Privacy request&rdquo;</strong> in the subject line, from the address you
+          gave us or telling us which address to look up. We will respond within 45 days. You may
+          use an authorised agent; we will ask for proof of their authority.
         </p>
       </>
     ),
@@ -315,7 +316,7 @@ const sections: LegalSection[] = [
         Data is encrypted in transit and at rest, access on our side is restricted to the people who
         need it, and administrative access is logged. No system is perfect, and we will not claim
         otherwise. If you believe you have found a vulnerability in this website, email{' '}
-        <a href="mailto:security@mambahr.com">security@mambahr.com</a> and we will get back to you
+        <a href="mailto:hello@mambahr.com">hello@mambahr.com</a> and we will get back to you
         quickly.
       </p>
     ),
@@ -346,9 +347,10 @@ const sections: LegalSection[] = [
       <p>
         MambaHR, Inc., San Francisco, California.
         <br />
-        Privacy questions: <a href="mailto:privacy@mambahr.com">privacy@mambahr.com</a>
-        <br />
-        Anything else: <a href="mailto:hello@mambahr.com">hello@mambahr.com</a>
+        Everything reaches the founders at{' '}
+        <a href="mailto:hello@mambahr.com">hello@mambahr.com</a>. For a privacy or deletion
+        request, put &ldquo;Privacy request&rdquo; in the subject so we can start the clock on it
+        properly.
       </p>
     ),
   },
