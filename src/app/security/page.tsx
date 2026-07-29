@@ -261,7 +261,7 @@ function SecurityReview() {
           ))}
         </div>
         <p className="contact" data-reveal>
-          Something we didn&rsquo;t cover? <a href="mailto:founders@mambahr.com">security questions go straight to the founders</a>.
+          Something we didn&rsquo;t cover? <a href="mailto:hello@mambahr.com">security questions go straight to the founders</a>.
         </p>
       </div>
       <style jsx>{`

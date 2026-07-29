@@ -20,7 +20,7 @@ const cols = [
       { label: 'About', href: '/about' },
       { label: 'Blog', href: '/blog' },
       { label: 'Security', href: '/security' },
-      { label: 'Careers', href: 'mailto:jobs@mambahr.com' },
+      { label: 'Careers', href: 'mailto:hello@mambahr.com' },
       { label: 'Contact', href: 'mailto:hello@mambahr.com' },
     ],
   },

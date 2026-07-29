@@ -171,9 +171,8 @@ const sections: LegalSection[] = [
       <p>
         MambaHR, Inc., San Francisco, California.
         <br />
-        Questions about these terms: <a href="mailto:legal@mambahr.com">legal@mambahr.com</a>
-        <br />
-        Anything else: <a href="mailto:hello@mambahr.com">hello@mambahr.com</a>
+        Questions about these terms, or anything else, reach the founders directly at{' '}
+        <a href="mailto:hello@mambahr.com">hello@mambahr.com</a>.
       </p>
     ),
   },

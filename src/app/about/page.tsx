@@ -297,7 +297,7 @@ export default function AboutPage() {
               <span className="fact"><i aria-hidden="true" />Headquartered in San Francisco</span>
               <span className="fact"><i aria-hidden="true" />US data residency</span>
               <span className="fact"><i aria-hidden="true" />All 50 states covered</span>
-              <span className="fact"><i aria-hidden="true" />We&rsquo;re hiring, <a href="mailto:jobs@mambahr.com">jobs@mambahr.com</a></span>
+              <span className="fact"><i aria-hidden="true" />We&rsquo;re hiring, <a href="mailto:hello@mambahr.com">hello@mambahr.com</a></span>
             </div>
           </div>
           <style jsx>{`
