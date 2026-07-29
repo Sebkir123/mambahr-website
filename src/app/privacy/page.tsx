@@ -147,6 +147,61 @@ const sections: LegalSection[] = [
     ),
   },
   {
+    heading: 'The same information, in the statutory categories',
+    body: (
+      <>
+        <p>
+          California law describes personal information in fixed categories. Mapping ours onto them,
+          so a reviewer can tick the boxes without reading between the lines:
+        </p>
+        <div className="scroller">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>What we hold</th>
+                <th>Source</th>
+                <th>Kept for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Identifiers</td>
+                <td>Name, work email, salted IP hash, opaque visitor and session ids</td>
+                <td>You, and your browser</td>
+                <td>Leads: until deleted. Analytics: 180 days</td>
+              </tr>
+              <tr>
+                <td>Commercial information</td>
+                <td>Company name, company size band, what you asked us for</td>
+                <td>You</td>
+                <td>Until deleted</td>
+              </tr>
+              <tr>
+                <td>Internet or network activity</td>
+                <td>Pages, referrer, UTM, dwell, scroll depth, clicks, device and browser</td>
+                <td>Your browser</td>
+                <td>180 days, or 30 days if classed as a bot</td>
+              </tr>
+              <tr>
+                <td>Geolocation (coarse)</td>
+                <td>Country, region, city, and network operator, derived from IP</td>
+                <td>Derived, IP itself discarded</td>
+                <td>180 days</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          We do not collect the categories the law treats as sensitive: no government identifiers,
+          no financial account details, no precise geolocation, no biometric or health data, and
+          nothing about race, religion, union membership, sexual orientation, or the contents of
+          your communications. We do not infer characteristics about you or build a profile.
+        </p>
+      </>
+    ),
+  },
+  {
     heading: 'Why we use it',
     body: (
       <>
@@ -232,11 +287,17 @@ const sections: LegalSection[] = [
           <li>Clear your browser&rsquo;s site data to reset the analytics identifiers above</li>
         </ul>
         <p>
-          If you are a California resident, the CCPA as amended by the CPRA gives you rights to
-          know, delete, and correct your personal information, to opt out of sale or sharing, and
-          not to be discriminated against for exercising them. As above, we do not sell or share
-          your personal information, so there is nothing to opt out of. We honour Global Privacy
-          Control signals where your browser sends them.
+          California residents have rights under the CCPA, as amended by the CPRA, to know, delete,
+          and correct personal information, to opt out of its sale or sharing, and not to be
+          treated differently for exercising them. We honour all of these{' '}
+          <strong>whether or not we currently meet the statute&rsquo;s business thresholds</strong>,
+          because they are the right default. As set out above, we do not sell or share personal
+          information, so there is nothing to opt out of.
+        </p>
+        <p>
+          We honour <strong>Global Privacy Control</strong> and Do Not Track signals. If your
+          browser or extension sends either, we record nothing: no identifier is created, no
+          analytics beacon is sent, and no third-party analytics script is loaded for your visit.
         </p>
         <p>
           To exercise any of these, email{' '}
