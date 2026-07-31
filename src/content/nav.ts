@@ -53,7 +53,7 @@ export const alsoHandled: { label: string; href: string }[] = [
 ]
 
 export const howItWorks: NavItem[] = [
-  { label: 'The AI agent',        href: '/mamba',      description: 'Works in Slack, Teams, and the web', live: true, icon: 'agent' },
+  { label: 'The AI agent',        href: '/mamba',      description: 'Works in Slack and the web', live: true, icon: 'agent' },
   { label: 'Job portal',          href: '/job-portal', description: 'Your careers page, hosted',          live: true, icon: 'hiring' },
   { label: 'Approvals',           href: '/today',      description: 'Your day in three taps',             live: true, icon: 'today' },
   { label: 'Employee records',    href: '/people',     description: 'HRIS, org chart, always current',   live: true, icon: 'people' },
@@ -97,7 +97,7 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
     body: 'Roles and access, sign-off thresholds, autonomy levels, and compliance rules. Configure exactly how the agent behaves and who approves what.',
   },
   channels: {
-    title: 'Slack, Teams & email',
+    title: 'Slack & the MambaHR app',
     body: 'MambaHR meets your team where they already work. Slack mentions, Teams cards, or the web app, same agent, every surface, every action recorded.',
   },
   integrations: {

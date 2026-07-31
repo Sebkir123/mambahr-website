@@ -10,7 +10,7 @@ const BODY = `# MambaHR
 ## What it is
 - The AI HR department, not a copilot or "AI assistant for HR". It IS the system of record (HRIS + ATS + LMS).
 - Built for US employers; kept current across all 50 states. Every compliance answer cites the governing law.
-- Intent comes in via Slack, Microsoft Teams, or a web request form; the agent does the work and a human signs off on the sensitive parts.
+- Intent comes in via Slack or a web request form; the agent does the work and a human signs off on the sensitive parts.
 - Payroll/benefits: generates ready-to-load change files for your existing provider, broker, or PEO. It does not run payroll itself.
 
 ## Key pages

@@ -73,7 +73,7 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
       { f: 'Compliance guidance', from: 0 },
       { f: 'Payroll-ready exports', from: 0 },
       { f: 'Benefits-ready exports', from: 0 },
-      { f: 'Slack, Teams & the MambaHR app', from: 0 },
+      { f: 'Slack & the MambaHR app', from: 0 },
     ],
   },
   {

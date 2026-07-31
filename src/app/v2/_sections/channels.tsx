@@ -7,7 +7,7 @@ export default function Channels() {
         <div className="copy" data-reveal>
           <p className="eyebrow">Where your team already works</p>
           <h2 className="title">
-            Lives in <span className="em">Slack and Teams.</span>
+            Lives in <span className="em">Slack.</span>
           </h2>
           <p className="lead">
             No new tool to learn. No portal to log into. Your team messages
@@ -21,15 +21,6 @@ export default function Channels() {
               <div>
                 <div className="ch-n">Slack</div>
                 <div className="ch-d">Mention it in any channel or DM</div>
-              </div>
-            </div>
-            <div className="chan">
-              <span className="ch-logo teams" aria-hidden="true">
-                <svg width="13" height="13" viewBox="0 0 16 16" fill="#fff"><path d="M2 4.5h7v2.3H6.7V12H4.3V6.8H2zM10 6h4v4.6a2.4 2.4 0 01-2.4 2.4H10z" /><circle cx="12" cy="3.6" r="1.7" /></svg>
-              </span>
-              <div>
-                <div className="ch-n">Microsoft Teams</div>
-                <div className="ch-d">Same agent, same memory</div>
               </div>
             </div>
             <div className="chan">
@@ -189,7 +180,6 @@ export default function Channels() {
           padding: 4px;
           box-sizing: border-box;
         }
-        .ch-logo.teams { background: #464EB8; border-color: #464EB8; }
         .ch-logo.mamba {
           background: #1A1A19;
           border-color: #1A1A19;

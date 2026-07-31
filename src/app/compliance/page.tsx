@@ -303,7 +303,7 @@ export default function CompliancePage() {
           title={<>How an answer <Em>happens.</Em></>}
           lead="From a question in Slack to a cited, logged answer, with a human in the path whenever the law isn’t crystal clear."
           steps={[
-            { n: '01', label: 'A question arrives', desc: 'In Slack, Teams, or the MambaHR app, anyone on the team can ask.', who: 'agent', time: '0s', img: '/avatars/tom.jpg' },
+            { n: '01', label: 'A question arrives', desc: 'In Slack or the MambaHR app, anyone on the team can ask.', who: 'agent', time: '0s', img: '/avatars/tom.jpg' },
             { n: '02', label: 'The current law is checked', desc: 'Federal employment law plus the specific rules for every state you employ in, kept current.', who: 'agent', time: '2s' },
             { n: '03', label: 'The answer comes back, with the citation', desc: 'Plain English up top, the exact rule it relied on attached underneath. Every time.', who: 'agent', time: '4s' },
             { n: '04', label: 'Anything ambiguous comes to you first', desc: 'If the law is unclear or the stakes are high, a human reviews before anything happens.', who: 'you', img: '/avatars/priya.jpg' },

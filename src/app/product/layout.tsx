@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Product | MambaHR',
     description:
-      'Watch the agent run hiring, onboarding, leave, performance, compensation, and compliance, across Slack, Teams, and the web.',
+      'Watch the agent run hiring, onboarding, leave, performance, compensation, and compliance, across Slack and the web.',
     url: 'https://mambahr.com/product',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },

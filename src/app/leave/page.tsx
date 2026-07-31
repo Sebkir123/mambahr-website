@@ -291,7 +291,7 @@ export default function LeavePage() {
           title={<>When someone <Em>asks.</Em></>}
           lead={'Every request runs the same path: the easy ones finish in seconds, the regulated ones get the statute check, and only the genuinely ambiguous ones reach you.'}
           steps={[
-            { n: '01', label: 'Reads the request', desc: 'Slack, Teams, or the MambaHR app, MambaHR understands the dates, the reason, and who is asking.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
+            { n: '01', label: 'Reads the request', desc: 'Slack or the MambaHR app, MambaHR understands the dates, the reason, and who is asking.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
             { n: '02', label: 'Checks balance and policy', desc: 'Accrued days, blackout dates, notice rules, checked against your actual policy, not a guess.', who: 'agent', time: 'seconds' },
             { n: '03', label: 'Checks FMLA and state leave when it applies', desc: 'Parental or medical leave triggers the eligibility check, federal and state, stacked correctly.', who: 'agent', time: 'seconds' },
             { n: '04', label: 'Books calendar and updates payday', desc: 'OOO set, coverage visible, and the pay record adjusted so payday is right without anyone touching it.', who: 'agent', time: 'same minute' },

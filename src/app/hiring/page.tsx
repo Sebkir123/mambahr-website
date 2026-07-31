@@ -277,7 +277,7 @@ export default function HiringPage() {
           title="The hiring loop"
           lead="Every step that used to mean chasing calendars and inboxes, handled. The judgment calls stay with you, clearly marked."
           steps={[
-            { n: '01', label: 'Req intake', desc: 'Tell MambaHR the role, the team, and the budget, in Slack, Teams, or the app. The req is ready in minutes.', who: 'agent', time: '4 min' },
+            { n: '01', label: 'Req intake', desc: 'Tell MambaHR the role, the team, and the budget, in Slack or the app. The req is ready in minutes.', who: 'agent', time: '4 min' },
             { n: '02', label: 'Posted everywhere', desc: 'The role goes live on your careers page and the major job boards, written in your voice.', who: 'agent', time: 'same day' },
             { n: '03', label: 'Screening & ranking', desc: 'Every applicant read, ranked, and recommended with reasons, you make every advance-or-pass call.', who: 'you', img: '/avatars/tom.jpg' },
             { n: '04', label: 'Scheduling', desc: 'Panels, rooms, and reschedules handled across every calendar. No back-and-forth.', who: 'agent', time: 'instant' },
