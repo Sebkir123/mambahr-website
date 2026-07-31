@@ -274,8 +274,8 @@ function SlackWindow() {
   )
 }
 
-/* ── Triple-surface fragment: the same request in Slack, Teams, and the app ── */
-function TripleSurface() {
+/* ── Dual-surface fragment: the same request in Slack and in the app ── */
+function DualSurface() {
   return (
     <div className="tri">
       <div className="card slack agent-edge agent-done">
@@ -293,24 +293,6 @@ function TripleSurface() {
           </div>
         </div>
         <div className="c-foot"><span className="ok" />Approved &middot; calendar blocked</div>
-      </div>
-
-      <div className="card teams">
-        <div className="c-head teams-h">
-          <span className="teams-logo" aria-hidden="true">
-            <svg width="11" height="11" viewBox="0 0 16 16" fill="#fff"><path d="M2 4.5h7v2.3H6.7V12H4.3V6.8H2zM10 6h4v4.6a2.4 2.4 0 01-2.4 2.4H10z" /><circle cx="12" cy="3.6" r="1.7" /></svg>
-          </span>
-          <span>Microsoft Teams &middot; People chat</span>
-        </div>
-        <div className="c-msg">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="c-av" src="/avatars/maya.jpg" alt="Maya Chen" width={28} height={28} />
-          <div>
-            <div className="c-who"><b>Maya Chen</b><time>9:14 AM</time></div>
-            <div className="c-bubble">Maya &middot; 3 days off</div>
-          </div>
-        </div>
-        <div className="c-foot"><span className="ok" />Same agent &middot; same memory</div>
       </div>
 
       <div className="card app">
@@ -341,8 +323,7 @@ function TripleSurface() {
           font-size: 13px;
         }
         .card.slack { transform: translateX(-18px); z-index: 3; position: relative; }
-        .card.teams { transform: translateX(22px); margin-top: -10px; z-index: 2; position: relative; }
-        .card.app { transform: translateX(-6px); margin-top: -10px; z-index: 1; position: relative; box-shadow: var(--shadow-float); }
+        .card.app { transform: translateX(18px); margin-top: -10px; z-index: 1; position: relative; box-shadow: var(--shadow-float); }
         .c-head {
           display: flex;
           align-items: center;
@@ -353,16 +334,6 @@ function TripleSurface() {
           color: var(--text-muted);
           background: #F8F6F1;
           border-bottom: 1px solid var(--border);
-        }
-        .c-head.teams-h { background: #464EB8; color: #fff; border-bottom-color: #464EB8; }
-        .teams-logo {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 18px;
-          height: 18px;
-          border-radius: 5px;
-          background: rgba(255, 255, 255, 0.18);
         }
         .c-head.app-h { gap: 10px; }
         .dots3 { display: flex; gap: 5px; }
@@ -419,7 +390,7 @@ function TripleSurface() {
         .ok { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); flex: none; }
         .mono { font-family: var(--font-mono); font-size: 10.5px; }
         @media (max-width: 560px) {
-          .card.slack, .card.teams, .card.app { transform: none; }
+          .card.slack, .card.app { transform: none; }
         }
       `}</style>
     </div>
@@ -488,7 +459,7 @@ export default function MambaPage() {
       <PageHero
         eyebrow="The AI agent"
         title={<>Not a tool. <Em>A hire.</Em></>}
-        lead="Your team messages @MambaHR like a person. It reads the thread, checks your policy, does the work, and logs it, in Slack, Microsoft Teams, or the MambaHR app."
+        lead="Your team messages @MambaHR like a person. It reads the thread, checks your policy, does the work, and logs it, in Slack or the MambaHR app."
         photo="/v2-people/sofia.jpg"
         photoChip="MambaHR · done"
         photoCaption="Letter sent · filed · 9:11 AM"
@@ -513,14 +484,14 @@ export default function MambaPage() {
       <FeatureSplit
         eyebrow="Every channel"
         title={<>Same brain, <Em>every door</Em></>}
-        lead="Slack, Microsoft Teams, and the MambaHR app, one agent, one memory, one record. Ask in Slack, approve in the app, and nothing gets lost in between."
+        lead="Slack and the MambaHR app, one agent, one memory, one record. Ask in Slack, approve in the app, and nothing gets lost in between."
         bullets={[
           'Mention it in any channel or DM, it picks up the whole thread',
-          'Start in Teams, finish in the app, the context follows',
+          'Start in Slack, finish in the app, the context follows',
           'One record of everything, no matter where it was asked',
         ]}
       >
-        <TripleSurface />
+        <DualSurface />
       </FeatureSplit>
 
       <FeatureSplit

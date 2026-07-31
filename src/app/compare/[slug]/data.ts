@@ -288,7 +288,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
     ],
     tableRows: [
-      { feature: 'Works inside Slack and Teams', mamba: true, them: 'Limited integrations' },
+      { feature: 'Works inside Slack', mamba: true, them: 'Limited integrations' },
       { feature: 'AI agent resolves HR requests end-to-end', mamba: true, them: 'AI assistant features' },
       { feature: 'Typical time to first value', mamba: '1 day', them: 'Months' },
       { feature: 'Designed to be self-managing', mamba: true, them: 'Requires HR & IT operators' },
@@ -509,7 +509,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
     ],
     tableRows: [
-      { feature: 'Works inside Slack and Teams', mamba: true, them: 'Limited integrations' },
+      { feature: 'Works inside Slack', mamba: true, them: 'Limited integrations' },
       { feature: 'AI agent resolves HR requests end-to-end', mamba: true, them: 'AI assistant features' },
       { feature: 'Compliance engine (federal + 50 states)', mamba: true, them: true },
       { feature: 'Payroll', mamba: 'Export-ready files', them: true, note: 'MambaHR builds the change file; your provider runs it' },
