@@ -87,7 +87,7 @@ export default function Footer() {
               margin: 0,
             }}
           >
-            Run HR like you have{' '}
+            HR that runs itself.{' '}
             <span
               style={{
                 fontStyle: 'italic',
@@ -97,7 +97,7 @@ export default function Footer() {
                 color: 'transparent',
               }}
             >
-              a team of ten.
+              Yours can too.
             </span>
           </p>
         </div>

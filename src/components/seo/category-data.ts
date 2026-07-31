@@ -142,7 +142,7 @@ export const categories: Record<string, CategoryData> = {
     slug: 'best-hris-for-startups',
     metaTitle: 'Best HRIS for Startups (2026) | MambaHR',
     metaDescription:
-      'The best HRIS for startups in 2026 does the HR work, not just stores it. MambaHR is the AI HR department for lean teams: hiring, onboarding, leave, payroll-ready exports, and 50-state compliance, live in a day, from $14/employee. Run HR like you have a team of ten.',
+      'The best HRIS for startups in 2026 does the HR work, not just stores it. MambaHR is the AI HR department for lean teams: hiring, onboarding, leave, payroll-ready exports, and 50-state compliance, live in a day, from $14/employee. HR that runs itself.',
     h1: 'The best HRIS for startups does the work, not just stores it',
     eyebrow: 'Best HRIS for startups · 2026',
     hero: { lead: 'The best HRIS for startups', em: 'before you hire HR.', tail: '' },
@@ -203,7 +203,7 @@ export const categories: Record<string, CategoryData> = {
         a: "It’s built for the full company lifecycle: the same product runs HR from 20 people through enterprise scale, with the compliance and audit depth larger teams require. No re-platforming as you grow.",
       },
     ],
-    cta: { title: 'Run HR like you have', em: 'a team of ten.', sub: "A live demo on your team’s scenarios in 30 minutes. Live the next morning." },
+    cta: { title: 'HR that', em: 'runs itself.', sub: "A live demo on your team’s scenarios in 30 minutes. Live the next morning." },
     related: [
       { label: 'MambaHR vs Gusto', href: '/compare/gusto' },
       { label: 'MambaHR vs Rippling', href: '/compare/rippling' },

@@ -32,7 +32,7 @@ export default function Hero() {
       <span className="v2-grain" />
       <div className="top">
         <span className="eyebrow" data-reveal>The AI HR department</span>
-        <h1 className="title" data-reveal data-delay="1">Run HR like you have a team of ten.</h1>
+        <h1 className="title" data-reveal data-delay="1">HR that runs itself.</h1>
         <p className="sub" data-reveal data-delay="2">
           MambaHR takes the admin: onboarding, time off, leave, payroll-ready exports, and
           compliance in all 50 states. You keep the judgment calls, the coaching, and the
