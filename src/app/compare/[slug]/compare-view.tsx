@@ -253,7 +253,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
               <div className="step" data-reveal data-delay="2">
                 <span className="d">Day 2</span>
                 <h3 className="t">The department is live</h3>
-                <p className="b">Slack and Teams connected, policies loaded, approvals routed to the right people. Your team just starts asking.</p>
+                <p className="b">Slack connected, policies loaded, approvals routed to the right people. Your team just starts asking.</p>
               </div>
               <div className="step" data-reveal data-delay="3">
                 <span className="d">Week 1</span>

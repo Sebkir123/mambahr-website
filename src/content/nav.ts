@@ -98,7 +98,7 @@ export const comingSoonContent: Record<string, { title: string; body: string }> 
   },
   channels: {
     title: 'Slack & the MambaHR app',
-    body: 'MambaHR meets your team where they already work. Slack mentions, Teams cards, or the web app, same agent, every surface, every action recorded.',
+    body: 'MambaHR meets your team where they already work. Slack mentions or the web app, same agent, every surface, every action recorded.',
   },
   integrations: {
     title: 'Integrations',
