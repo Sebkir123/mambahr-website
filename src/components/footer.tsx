@@ -186,9 +186,6 @@ export default function Footer() {
             <Link href="/terms" prefetch={false} style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
               Terms
             </Link>
-            <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-              Made in San Francisco
-            </p>
           </div>
         </div>
       </div>
