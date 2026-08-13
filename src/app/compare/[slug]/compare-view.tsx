@@ -56,7 +56,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
             @media (prefers-reduced-motion: reduce) { .blob { animation: none; } }
             .top { position: relative; max-width: 1000px; margin: 0 auto; text-align: center; }
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(34px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -0.028em; color: var(--text); margin: 18px 0 0; white-space: nowrap; }
+            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(34px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -0.028em; color: var(--text); margin: 18px 0 0; text-wrap: balance; }
             .title2 {
               font-family: var(--font-serif);
               font-style: italic;
@@ -64,7 +64,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
               line-height: 1.04;
               letter-spacing: -0.028em;
               margin: 6px 0 0;
-              white-space: nowrap;
+              text-wrap: balance;
               background: linear-gradient(100deg, #B98A4E, #6A5DA6);
               -webkit-background-clip: text;
               background-clip: text;
@@ -94,7 +94,6 @@ export default function CompareView({ data }: { data: CompetitorData }) {
             }
             .faces img:first-child { margin-left: 0; }
             .proof-t { font-size: 14px; font-weight: 600; color: var(--text); }
-            @media (max-width: 880px) { .title, .title2 { white-space: normal; } }
           `}</style>
         </section>
 

@@ -249,7 +249,7 @@ export default function PricingPage() {
             @media (prefers-reduced-motion: reduce) { .blob { animation: none; } }
             .top { position: relative; max-width: 1040px; margin: 0 auto; text-align: center; }
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 4vw, 54px); line-height: 1.04; letter-spacing: -0.028em; color: var(--text); margin: 18px 0 0; white-space: nowrap; }
+            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 4vw, 54px); line-height: 1.04; letter-spacing: -0.028em; color: var(--text); margin: 18px 0 0; text-wrap: balance; }
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 690px; margin: 22px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
             :global(.ph .btn-p) {
@@ -275,7 +275,6 @@ export default function PricingPage() {
             .faces img:first-child { margin-left: 0; }
             .proof-t { font-size: 14px; font-weight: 600; color: var(--text); }
             .stage { position: relative; max-width: 720px; margin: clamp(44px, 5.4vw, 64px) auto 0; }
-            @media (max-width: 940px) { .title { white-space: normal; } }
           `}</style>
         </section>
 

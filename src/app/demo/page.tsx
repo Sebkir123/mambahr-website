@@ -116,7 +116,7 @@ export default function DemoPage() {
               align-items: center;
             }
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(40px, 5vw, 64px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 16px 0 0; white-space: nowrap; }
+            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(40px, 5vw, 64px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 16px 0 0; text-wrap: balance; }
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.6; color: var(--text-muted); margin: 18px 0 0; max-width: 480px; }
             .see { list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-direction: column; gap: 13px; }
             .see li { display: flex; align-items: flex-start; gap: 11px; font-size: 15px; line-height: 1.5; color: var(--text-muted); }
@@ -139,7 +139,6 @@ export default function DemoPage() {
 
             @media (max-width: 880px) {
               .wrap { grid-template-columns: 1fr; }
-              .title { white-space: normal; }
               .dm { align-items: flex-start; }
             }
           `}</style>
