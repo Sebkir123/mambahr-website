@@ -93,7 +93,6 @@ export default function AboutPage() {
               <div className="float agent-edge agent-working">
                 <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
                 <div className="f-t">The AI HR department</div>
-                <div className="f-m">Made in San Francisco</div>
               </div>
             </div>
           </div>
@@ -117,7 +116,6 @@ export default function AboutPage() {
             .photo-wrap img { display: block; width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-radius: 18px; box-shadow: 0 30px 60px rgba(20, 18, 14, 0.18); }
             .float { position: absolute; left: 24px; bottom: -26px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-float); padding: 14px 18px; }
             .f-t { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 10px; }
-            .f-m { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
             @media (max-width: 880px) { .photo-wrap img { aspect-ratio: 4 / 3; } }
           `}</style>
         </section>
