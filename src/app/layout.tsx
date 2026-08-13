@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono, Instrument_Serif, Fraunces } from 'next/font/goo
 import AnalyticsGate from '@/components/analytics-gate'
 import StyledJsxRegistry from './styled-jsx-registry'
 import SiteTracker from '@/components/site-tracker'
+import { LAST_VERIFIED } from '@/lib/llms-content'
 import './globals.css'
 
 const inter = Inter({
@@ -98,6 +99,9 @@ const jsonLd = [
       description: 'Per employee / month, billed annually. Book a demo.',
     },
     operatingSystem: 'Web',
+    // Freshness signal. Answer engines discount undated facts, and this is the
+    // same constant the /llms.txt dateline renders, so the two cannot disagree.
+    dateModified: LAST_VERIFIED,
   },
   {
     '@context': 'https://schema.org',
@@ -141,6 +145,8 @@ const jsonLd = [
     name: 'MambaHR',
     url: 'https://mambahr.com',
     publisher: { '@type': 'Organization', name: 'MambaHR' },
+    dateModified: LAST_VERIFIED,
+    inLanguage: 'en-US',
   },
 ]
 const jsonLdString = JSON.stringify(jsonLd)
