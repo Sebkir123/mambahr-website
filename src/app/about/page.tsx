@@ -109,7 +109,7 @@ export default function AboutPage() {
             @media (prefers-reduced-motion: reduce) { .blob { animation: none; } }
             .top { position: relative; max-width: 980px; margin: 0 auto; text-align: center; }
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(42px, 5.8vw, 76px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 18px 0 0; white-space: nowrap; }
+            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(42px, 5.8vw, 76px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 18px 0 0; text-wrap: balance; }
             .lead { font-size: clamp(17px, 2vw, 20px); line-height: 1.58; color: var(--text-muted); max-width: 660px; margin: 22px auto 0; }
             .lead b { color: var(--text); font-weight: 600; }
             .stage { position: relative; max-width: 880px; margin: clamp(44px, 5.4vw, 64px) auto 0; }
@@ -118,7 +118,7 @@ export default function AboutPage() {
             .float { position: absolute; left: 24px; bottom: -26px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-float); padding: 14px 18px; }
             .f-t { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 10px; }
             .f-m { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-            @media (max-width: 880px) { .title { white-space: normal; } .photo-wrap img { aspect-ratio: 4 / 3; } }
+            @media (max-width: 880px) { .photo-wrap img { aspect-ratio: 4 / 3; } }
           `}</style>
         </section>
 

@@ -91,7 +91,7 @@ export default function CompareHub() {
             @media (prefers-reduced-motion: reduce) { .blob { animation: none; } }
             .top { position: relative; max-width: 980px; margin: 0 auto; text-align: center; }
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(42px, 5.8vw, 76px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 18px 0 0; white-space: nowrap; }
+            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(42px, 5.8vw, 76px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 18px 0 0; text-wrap: balance; }
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 660px; margin: 22px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
             :global(.ch .btn-p) {
@@ -107,7 +107,6 @@ export default function CompareHub() {
             }
             :global(.ch .btn-g:hover) { background: #fff; }
             @media (prefers-reduced-motion: reduce) { :global(.ch .btn-p:hover) { transform: none; } }
-            @media (max-width: 880px) { .title { white-space: normal; } }
           `}</style>
         </section>
 

@@ -149,7 +149,9 @@ export function PageHero({
           letter-spacing: -0.03em;
           color: var(--text);
           margin: 18px 0 0;
-          white-space: nowrap;
+          /* Short headlines still land on one line; long ones (the SEO category
+             pages) wrap into balanced lines instead of running off the page. */
+          text-wrap: balance;
         }
         .lead {
           font-size: clamp(17px, 2vw, 20px);
@@ -240,7 +242,6 @@ export function PageHero({
           border-top: 1px solid var(--border-faint);
         }
         @media (max-width: 880px) {
-          .title { white-space: normal; }
           .duo.has-photo { grid-template-columns: 1fr; }
           .p-img { min-height: 220px; }
         }
