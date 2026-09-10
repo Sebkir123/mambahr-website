@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import TurnstileWidget from './turnstile-widget'
 
 export interface LeadFormFields {
@@ -36,6 +36,31 @@ export function LeadForm({
   const [stage, setStage] = useState('')
   const [token, setToken] = useState<string | null>(null)
   const [pending, setPending] = useState(false)
+  // Turnstile (about 500 KB across five requests) loads on intent: the first
+  // focus on any field, or the form scrolling into view. Never on mount.
+  const [armed, setArmed] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
+
+  useEffect(() => {
+    if (armed) return
+    const el = formRef.current
+    if (!el) return
+    if (!('IntersectionObserver' in window)) {
+      setArmed(true)
+      return
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((en) => en.isIntersecting)) {
+          setArmed(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: '0px 0px 200px 0px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [armed])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -50,7 +75,7 @@ export function LeadForm({
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form ref={formRef} onSubmit={handleSubmit} onFocusCapture={() => setArmed(true)}>
         <label htmlFor="lf-name" className="lbl">Full name</label>
         <input
           id="lf-name"
@@ -117,7 +142,7 @@ export function LeadForm({
           </>
         )}
         <div className="ts">
-          <TurnstileWidget onSuccess={setToken} theme="light" />
+          {armed && <TurnstileWidget onSuccess={setToken} theme="light" />}
         </div>
         <button
           type="submit"
@@ -138,7 +163,7 @@ export function LeadForm({
         select.inp { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4' fill='none' stroke='%237A7A75' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; cursor: pointer; }
         .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
         @media (max-width: 480px) { .grid2 { grid-template-columns: 1fr; } }
-        .ts { margin-bottom: 16px; }
+        .ts { min-height: 65px; margin-bottom: 16px; }
         .btn { width: 100%; padding: 15px 24px; background: #1A1A19; color: #fff; font-weight: 600; font-size: 15.5px; border: none; border-radius: 999px; cursor: pointer; box-shadow: 0 12px 26px rgba(20,18,14,0.2); transition: transform 0.15s ease, background 0.15s ease; }
         .btn:hover:not(:disabled) { transform: translateY(-2px); background: #2A2A28; }
         .btn:active:not(:disabled) { transform: translateY(0); }
