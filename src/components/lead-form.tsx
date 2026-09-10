@@ -56,8 +56,8 @@ export function LeadForm({
     const el = formRef.current
     if (!el) return
     if (!('IntersectionObserver' in window)) {
-      setArmed(true)
-      return
+      const t = setTimeout(() => setArmed(true), 0)
+      return () => clearTimeout(t)
     }
     const io = new IntersectionObserver(
       (entries) => {

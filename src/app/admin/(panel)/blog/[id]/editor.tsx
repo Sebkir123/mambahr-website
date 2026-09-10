@@ -69,9 +69,11 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
   // must not change identity, TipTap captures it once) can read the latest
   // values when garbage-collecting removed in-body images.
   const coverUrlRef = useRef(coverImageUrl)
-  coverUrlRef.current = coverImageUrl
   const ogUrlRef = useRef(ogImageUrl)
-  ogUrlRef.current = ogImageUrl
+  useEffect(() => {
+    coverUrlRef.current = coverImageUrl
+    ogUrlRef.current = ogImageUrl
+  }, [coverImageUrl, ogImageUrl])
 
   const buildPayload = useCallback(
     (): SavePayload => ({

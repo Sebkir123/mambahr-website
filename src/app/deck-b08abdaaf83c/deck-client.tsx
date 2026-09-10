@@ -229,7 +229,7 @@ export default function Deck({
     return () => window.removeEventListener('keydown', onKey)
   }, [active, goto])
 
-  const setRef = (i: number) => (n: HTMLElement | null) => { slideRefs.current[i] = n }
+  const setRef = useCallback((i: number) => (n: HTMLElement | null) => { slideRefs.current[i] = n }, [])
   const pad = (n: number) => String(n + 1).padStart(2, '0')
 
   return (
