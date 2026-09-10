@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Compensation Management | MambaHR',
   description:
-    'Every raise priced against your bands. Above-band routes to a human. Pay equity watched continuously, comp letters e-signed and filed.',
+    'Every raise priced against your bands. Above-band routes to a human. Pay equity screened on every change, filed to the record.',
   openGraph: {
     title: 'Compensation Management | MambaHR',
     description:
-      'Every raise priced against your bands. Above-band routes to a human. Pay equity watched, comp letters e-signed and filed.',
+      'Every raise priced against your bands. Above-band routes to a human. Pay equity screened on every change.',
     url: 'https://mambahr.com/compensation',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Compensation Management | MambaHR',
     description:
-      'Every raise priced against your bands. Above-band routes to a human. Pay equity watched, comp letters e-signed and filed.',
+      'Every raise priced against your bands. Above-band routes to a human. Pay equity screened on every change.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://mambahr.com/compensation' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'Compensation Management | MambaHR',
   url: 'https://mambahr.com/compensation',
   description:
-    'MambaHR compensation: every raise priced against your bands, with above-band requests routed to a human. The agent monitors pay equity and generates comp letters that are e-signed and filed.',
+    'MambaHR compensation: every raise priced against your bands, with above-band requests routed to a human. Pay equity is screened on every change and the approved change is filed to the record.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Compensation agent',
     description:
-      'Prices every raise against your comp bands and routes anything above band to a human for approval. Continuously checks pay equity to surface drift, then drafts comp change letters that are e-signed and filed to the employee record.',
+      'Prices every raise against your comp bands and routes anything above band to a human for approval. Screens pay equity on every change, then files the approved, effective-dated change to the employee record.',
   },
 }
 

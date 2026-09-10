@@ -28,8 +28,8 @@ function HeroAnswerCard() {
         <div className="m-body">
           <div className="m-who">MambaHR <span className="m-time">4 seconds later</span></div>
           <div className="a">
-            In 8 of your states, no.
-            <span className="a-sub">State-by-state guidance attached, interview kits already updated.</span>
+            Depends on the state.
+            <span className="a-sub">Here is the rule for each state you hire in, cited.</span>
           </div>
           <div className="chips">
             <span className="chip">Pay transparency</span>
@@ -122,7 +122,7 @@ function AuditLogCard() {
   const rows = [
     { t: '09:02:14', what: 'Leave approved', note: 'within policy · FMLA cited' },
     { t: '10:31:48', what: 'Offer routed', note: 'above band · sent to you first' },
-    { t: '11:07:02', what: 'Policy updated', note: 'all 50 states current' },
+    { t: '11:07:02', what: 'Rule reviewed', note: 'source checked · review date set' },
     { t: '13:46:55', what: 'Question answered', note: 'pay transparency · statute attached' },
     { t: '15:12:30', what: 'Termination drafted', note: 'held for human sign-off' },
   ]
@@ -225,8 +225,8 @@ function SleepPhoto() {
       <div className="mini agent-edge agent-done">
         <span className="m-check" aria-hidden="true" />
         <div>
-          <div className="m-t">3 state updates applied</div>
-          <div className="m-s">this month · policies current</div>
+          <div className="m-t">Every rule carries a review date</div>
+          <div className="m-s">and the statute it relied on</div>
         </div>
       </div>
       <style jsx>{`
@@ -288,9 +288,9 @@ export default function CompliancePage() {
       <main>
         <PageHero
           eyebrow="Compliance"
-          title={<>Always <Em>compliant.</Em></>}
-          lead="Employment law changes almost every week, and one miss costs more than a year of HR salaries. MambaHR keeps up, federal plus your states, cites the law behind every answer, and sends the risky calls to a human first."
-          proof="Federal plus all 50 states"
+          title={<>Cited, <Em>every time.</Em></>}
+          lead="Employment law changes almost every week, and one miss costs more than a year of HR salaries. MambaHR applies federal law plus the rules for your states, cites the law behind every answer with the date it was last checked, and sends the risky calls to a human first."
+          proof="Federal plus the states you employ in"
           photo="/v2-people/feat.jpg"
           photoChip="MambaHR · answered"
           photoCaption="Tom’s question · cited in 4 seconds"
@@ -304,7 +304,7 @@ export default function CompliancePage() {
           lead="From a question in Slack to a cited, logged answer, with a human in the path whenever the law isn’t crystal clear."
           steps={[
             { n: '01', label: 'A question arrives', desc: 'In Slack or the MambaHR app, anyone on the team can ask.', who: 'agent', time: '0s', img: '/avatars/tom.jpg' },
-            { n: '02', label: 'The current law is checked', desc: 'Federal employment law plus the specific rules for every state you employ in, kept current.', who: 'agent', time: '2s' },
+            { n: '02', label: 'The current law is checked', desc: 'Federal employment law plus the specific rules for every state you employ in, each with a review date.', who: 'agent', time: '2s' },
             { n: '03', label: 'The answer comes back, with the citation', desc: 'Plain English up top, the exact rule it relied on attached underneath. Every time.', who: 'agent', time: '4s' },
             { n: '04', label: 'Anything ambiguous comes to you first', desc: 'If the law is unclear or the stakes are high, a human reviews before anything happens.', who: 'you', img: '/avatars/priya.jpg' },
             { n: '05', label: 'Everything is logged', desc: 'Who asked, what was answered, and the rule it followed, written to the audit trail.', who: 'agent', time: 'always' },
@@ -327,12 +327,12 @@ export default function CompliancePage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="Always current"
-          title={<>Sleep through <Em>law changes.</Em></>}
-          lead="New state rules land all year long. MambaHR tracks them, your policies update, and you find out it was handled, instead of finding out the hard way."
+          eyebrow="Dated and cited"
+          title={<>Know when a rule was <Em>last checked.</Em></>}
+          lead="New state rules land all year long. Every MambaHR rule is reviewed and dated, and every answer shows the source it relied on and when that source was last checked."
           bullets={[
-            'Federal baseline plus state-specific rules, all 50 states',
-            'Policy updates applied as the law moves',
+            'Federal baseline plus state-specific rules for the states where you employ people',
+            'Every rule carries a review date and its source',
             'You’re told what changed and why, in plain English',
           ]}
         >
@@ -341,7 +341,7 @@ export default function CompliancePage() {
 
         <StatTrio
           stats={[
-            { n: 50, label: 'states + federal, kept current' },
+            { n: 1, label: 'review date on every rule, so you know when it was last checked' },
             { n: 100, suffix: '%', label: 'of answers cite the law' },
             { n: 1, label: 'human on every ambiguous call' },
           ]}
@@ -354,7 +354,7 @@ export default function CompliancePage() {
           metric="Saved 9 hrs / week"
         />
 
-        <PageCta title={<>Compliant by default. <Em>Cited every time.</Em></>} />
+        <PageCta title={<>Cited every time. <Em>Reviewed by a person when it matters.</Em></>} />
       </main>
       <Footer />
     </>

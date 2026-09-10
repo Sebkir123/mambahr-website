@@ -10,13 +10,13 @@ export default function Cta() {
           Hire the agent. <span className="em">Promote the human.</span>
         </h2>
         <p className="sub">
-          A live demo in 30 minutes. Live the next morning.
+          A 30-minute demo. Then we import your data and switch you over.
         </p>
         <div className="form">
           <a className="btn" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
         </div>
         <div className="trust">
-          <span>Switch in a day</span><i /><span>Your data stays in the US</span><i /><span>A human on the big calls</span>
+          <span>Your data imports in a day</span><i /><span>Your data stays in the US</span><i /><span>A human on the big calls</span>
         </div>
       </div>
 

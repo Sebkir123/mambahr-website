@@ -27,7 +27,7 @@ export default function PeopleBand() {
           <div className="float-card">
             <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
             <div className="fc-t">Leave approved · Maya Chen</div>
-            <div className="fc-m">Calendar blocked · manager notified · logged</div>
+            <div className="fc-m">Record updated · manager notified · logged</div>
           </div>
         </div>
       </div>

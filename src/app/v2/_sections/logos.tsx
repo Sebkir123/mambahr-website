@@ -5,7 +5,7 @@ const LOGOS = ['Gusto', 'Workday', 'Rippling', 'BambooHR', 'Namely', 'ADP']
 export default function Logos() {
   return (
     <section className="logos">
-      <p className="kicker" data-reveal>Switch from your current HRIS in a day</p>
+      <p className="kicker" data-reveal>Your data imports from your current HRIS in a day</p>
       <div className="row" data-reveal data-delay="1">
         {LOGOS.map((l) => (
           <span key={l} className="logo">{l}</span>
@@ -16,7 +16,7 @@ export default function Logos() {
         <span className="mamba"><span className="m">M</span>MambaHR</span>
       </div>
       <p className="sub" data-reveal data-delay="2">
-        One-click import: people, pay history, time-off balances, documents. Nothing left behind.
+        One import: people, comp, balances, and reporting lines. We check it line by line before you go live.
       </p>
 
       <style jsx>{`

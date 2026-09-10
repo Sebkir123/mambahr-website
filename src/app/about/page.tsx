@@ -40,11 +40,10 @@ const PLATFORM = [
   { label: 'Hiring & ATS', desc: 'Req to signed offer', href: '/hiring' },
   { label: 'Job portal', desc: 'Your careers page, hosted', href: '/job-portal' },
   { label: 'Onboarding', desc: 'Day-one ready', href: '/onboarding' },
-  { label: 'Payroll & benefits', desc: 'Export-ready, every cycle', href: '/payroll' },
+  { label: 'Payroll changes', desc: 'Every change in before payday', href: '/payroll' },
   { label: 'Time off & leave', desc: 'PTO to FMLA', href: '/leave' },
-  { label: 'Performance', desc: 'Reviews, written', href: '/performance' },
   { label: 'Compensation', desc: 'Priced to your bands', href: '/compensation' },
-  { label: 'Compliance', desc: 'All 50 states, cited', href: '/compliance' },
+  { label: 'Compliance', desc: 'Every answer cites the law', href: '/compliance' },
   { label: 'Headcount & RIF', desc: 'Hard days, done right', href: '/rif' },
   { label: 'Employee records', desc: 'The system of record', href: '/people' },
   { label: 'Documents & e-sign', desc: 'Signed and filed', href: '/documents' },
@@ -122,9 +121,9 @@ export default function AboutPage() {
 
         <StatTrio
           stats={[
-            { n: 50, label: 'states covered, every compliance answer cites the law' },
+            { n: 100, suffix: '%', label: 'of compliance answers cite the law they relied on' },
             { n: 24, suffix: '/7', label: 'the work keeps moving after your team logs off' },
-            { n: 1, suffix: ' day', label: 'from signed to live, data imported, no setup project' },
+            { n: 1, suffix: ' day', label: 'to import your data, no setup project' },
           ]}
         />
 
@@ -143,8 +142,8 @@ export default function AboutPage() {
             </p>
             <p className="body" data-reveal data-delay="2">
               Then AI got good enough to do the reasoning underneath the work. Not summarize a policy,
-              but work through whether FMLA stacks with California CFRA for an employee in their second
-              trimester, cite the statute, and send the hard calls to a human. Not generate a draft, but
+              but work through whether an employee in her second trimester is eligible for FMLA, cite the
+              statute, and send the hard calls to a human. Not generate a draft, but
               run the offer cycle, check the band, route for approval, send the signature link.
             </p>
             <p className="body" data-reveal data-delay="3">
@@ -172,7 +171,7 @@ export default function AboutPage() {
               <h2 className="title">One department, <Em>every job.</Em></h2>
               <p className="lead">
                 MambaHR is the system of record and the worker in one, the ATS and the recruiter, the
-                careers page and the coordinator, the HRIS and the ops manager. Twelve functions, one agent,
+                careers page and the coordinator, the HRIS and the ops manager. Eleven functions, one agent,
                 every action logged.
               </p>
             </div>
@@ -294,7 +293,7 @@ export default function AboutPage() {
             <div className="facts" data-reveal>
               <span className="fact"><i aria-hidden="true" />Headquartered in San Francisco</span>
               <span className="fact"><i aria-hidden="true" />US data residency</span>
-              <span className="fact"><i aria-hidden="true" />All 50 states covered</span>
+              <span className="fact"><i aria-hidden="true" />Statute cited on every answer</span>
               <span className="fact"><i aria-hidden="true" />We&rsquo;re hiring, <a href="mailto:hello@mambahr.com">hello@mambahr.com</a></span>
             </div>
           </div>

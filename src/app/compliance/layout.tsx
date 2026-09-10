@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Multi-State HR Compliance | MambaHR',
   description:
-    'All 50 states kept current. Every answer cites the law. Federal baseline plus state overlays, EEO-1, and edge cases routed to a human.',
+    'Every answer cites the law. Federal baseline plus state rules for the states where you employ people, EEO data collected at apply, and edge cases routed to a human.',
   openGraph: {
     title: 'Multi-State HR Compliance | MambaHR',
     description:
-      'All 50 states kept current. Every answer cites the law. Federal baseline plus state overlays, EEO-1, edge cases to a human.',
+      'Every answer cites the law. Federal baseline plus state rules where you employ people, EEO data collected at apply, edge cases to a human.',
     url: 'https://mambahr.com/compliance',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Multi-State HR Compliance | MambaHR',
     description:
-      'All 50 states kept current. Every answer cites the law. Federal baseline plus state overlays, EEO-1, edge cases to a human.',
+      'Every answer cites the law. Federal baseline plus state rules where you employ people, EEO data collected at apply, edge cases to a human.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://mambahr.com/compliance' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'Multi-State HR Compliance | MambaHR',
   url: 'https://mambahr.com/compliance',
   description:
-    'MambaHR compliance: all 50 states kept current with the federal baseline plus state overlays. Every answer cites the law, EEO-1 is handled, and edge cases route to a human.',
+    'MambaHR compliance: the federal baseline plus state rules for the states where you employ people. Every answer cites the law and its review date, EEO data is collected at apply, and edge cases route to a human.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Compliance agent',
     description:
-      'Keeps all 50 states current and applies the federal baseline plus each state overlay to every decision. Cites the governing statute or regulation on every answer, prepares EEO-1 reporting, and routes genuine edge cases to a human for sign-off.',
+      'Applies the federal baseline plus each state rule to every decision. Cites the governing statute or regulation on every answer with its review date, collects EEO self-identification at apply, and routes genuine edge cases to a human for sign-off.',
   },
 }
 

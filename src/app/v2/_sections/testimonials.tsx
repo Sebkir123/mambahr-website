@@ -6,7 +6,7 @@ const FEAT = {
   role: 'Head of People · Robotics startup, 240 people',
   results: [
     { n: '12 hrs', l: 'of admin, handled weekly' },
-    { n: '1 day', l: 'to switch over' },
+    { n: '1 day', l: 'to import the data' },
     { n: '240', l: 'employees · 2 in HR' },
   ],
 }
@@ -15,13 +15,13 @@ const CARDS = [
   {
     photo: '/v2-people/marcus.jpg',
     badge: '9 hrs / week',
-    quote: 'Multi-state leave used to mean a week of emails with Legal. The answer comes back in seconds, with the law attached.',
+    quote: 'FMLA questions used to mean a week of emails with Legal. The answer comes back in seconds, with the law attached.',
     role: 'People Operations Lead · AI startup, 180 people',
   },
   {
     photo: '/v2-people/sofia.jpg',
-    badge: 'Live in a day',
-    quote: 'Switch on a Friday, run payday Monday. Every change is already in the file.',
+    badge: 'Imported in a day',
+    quote: 'Import on a Friday, run payday Monday. Every change is already in the file.',
     role: 'Head of People · Fintech startup, 140 people',
   },
 ]

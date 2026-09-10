@@ -276,7 +276,7 @@ export default function RIFPage() {
           eyebrow="Headcount & RIF"
           title={<>Hard days, <Em>done right.</Em></>}
           lead="When a reduction has to happen, every notice is on time, severance is correct, final pay follows each state’s rules, and a human signs off on every single exit."
-          proof="Built with employment counsel"
+          proof="Built for the hardest day"
           photo="/v2-people/marcus.jpg"
           photoCaption="Every exit · human-approved"
         >
@@ -288,11 +288,11 @@ export default function RIFPage() {
           title={<>When it&rsquo;s <Em>unavoidable</Em></>}
           lead="MambaHR prepares everything, the math, the timing, the paperwork. Nothing happens to anyone until you approve it."
           steps={[
-            { n: '01', label: 'The plan is modeled', desc: 'Headcount scenarios with full cost, severance, benefits, final pay, before anyone is named.', who: 'agent' },
+            { n: '01', label: 'The plan is modeled', desc: 'Headcount scenarios with full cost, severance, final pay, before anyone is named.', who: 'agent' },
             { n: '02', label: 'Notice timing checked per state', desc: 'WARN thresholds and notice windows, federal and state, verified before the plan can move.', who: 'agent' },
             { n: '03', label: 'Severance and final pay computed', desc: 'Per your policy, with each state’s final-pay deadline and rules applied to each person.', who: 'agent' },
             { n: '04', label: 'Internal moves suggested', desc: 'Open roles a person could move into, surfaced before the exit list is final. Suggestions only, people decide.', who: 'agent', img: '/avatars/tom.jpg' },
-            { n: '05', label: 'Every letter and script drafted', desc: 'Notices, separation paperwork, and manager talking points, ready for review, not sent.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '05', label: 'Every letter and script drafted', desc: 'Notices, separation paperwork, and manager talking points, ready for review. You send them.', who: 'agent', img: '/avatars/priya.jpg' },
             { n: '06', label: 'You approve every single exit', desc: 'A human signs off on every termination before anything happens. Non-negotiable.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
@@ -318,7 +318,7 @@ export default function RIFPage() {
           lead="The right documents, the right timing, the right final paycheck. When the process is correct down to the day and the dollar, people leave treated properly, and your team can look them in the eye."
           bullets={[
             'Final pay on each state’s deadline, to the day',
-            'COBRA and benefits paperwork ready at exit',
+            'COBRA notices ready at exit',
             'Manager scripts drafted so no one improvises the hardest conversation',
           ]}
         >
@@ -328,8 +328,8 @@ export default function RIFPage() {
         <StatTrio
           stats={[
             { n: 100, suffix: '%', label: 'of exits signed off by a human' },
-            { n: 50, label: 'states of final-pay rules, applied correctly' },
-            { n: 0, label: 'notices sent late' },
+            { n: 1, label: 'final-pay computation per state rule, held for your approval' },
+            { n: 100, suffix: '%', label: 'of notices drafted with WARN timing checked' },
           ]}
         />
 

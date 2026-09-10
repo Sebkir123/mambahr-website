@@ -33,7 +33,7 @@ function SlackApprovalCard() {
             <div className="m-t">Approved. Enjoy the wedding.</div>
             <div className="attach">
               <div className="a-row"><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
-              <div className="a-row"><span className="a-k">Calendar</span><span className="a-v">Mon&ndash;Wed blocked, OOO set</span></div>
+              <div className="a-row"><span className="a-k">Record</span><span className="a-v">Mon&ndash;Wed booked, payday updated</span></div>
               <div className="a-row"><span className="a-k">Manager</span><span className="a-v">B. Bell notified</span></div>
               <div className="a-foot"><span className="ok-dot" aria-hidden="true" />Within policy &middot; logged &middot; ref <span className="mono">leave_4f81a2</span></div>
             </div>
@@ -138,8 +138,8 @@ function ParentalLeaveCard() {
         <div className="m-body">
           <div className="m-who">MambaHR <span className="m-time">6 seconds later</span></div>
           <div className="a">
-            Up to 4 months disability, then 12 weeks bonding.
-            <span className="a-sub">Sequenced in the right order, job protected, calendar blocked, payday updated.</span>
+            12 weeks of FMLA bonding leave, job protected.
+            <span className="a-sub">California CFRA and PDL cited and routed to your HR lead to confirm the stack.</span>
             <span className="laws">
               <span className="law">CA PDL</span>
               <span className="law">CA CFRA</span>
@@ -277,11 +277,11 @@ export default function LeavePage() {
         <PageHero
           eyebrow="Time off & leave"
           title={<>Time off, <Em>approved.</Em></>}
-          lead={'Normal time off approves itself in seconds. Family and medical leave gets handled the legally-safe way, calendar blocked, payday updated, the law attached.'}
-          proof="Built for multi-state teams"
+          lead={'Normal time off approves itself in seconds. Family and medical leave gets the eligibility check and the statute attached, with payday updated.'}
+          proof="Built for lean people teams"
           photo="/v2-people/sofia.jpg"
           photoChip="MambaHR · done"
-          photoCaption="Maya approved · OOO set in 9s"
+          photoCaption="Maya approved · booked in 9s"
         >
           <SlackApprovalCard />
         </PageHero>
@@ -293,8 +293,8 @@ export default function LeavePage() {
           steps={[
             { n: '01', label: 'Reads the request', desc: 'Slack or the MambaHR app, MambaHR understands the dates, the reason, and who is asking.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
             { n: '02', label: 'Checks balance and policy', desc: 'Accrued days, blackout dates, notice rules, checked against your actual policy, not a guess.', who: 'agent', time: 'seconds' },
-            { n: '03', label: 'Checks FMLA and state leave when it applies', desc: 'Parental or medical leave triggers the eligibility check, federal and state, stacked correctly.', who: 'agent', time: 'seconds' },
-            { n: '04', label: 'Books calendar and updates payday', desc: 'OOO set, coverage visible, and the pay record adjusted so payday is right without anyone touching it.', who: 'agent', time: 'same minute' },
+            { n: '03', label: 'Checks FMLA when it applies', desc: 'Parental or medical leave triggers the FMLA eligibility check. State paid-leave programs are cited and routed to a person for the stacking decision.', who: 'agent', time: 'seconds' },
+            { n: '04', label: 'Updates the record and payday', desc: 'Coverage visible, and the pay record adjusted so payday is right without anyone touching it. Calendar blocked when Google or Microsoft 365 is connected.', who: 'agent', time: 'same minute' },
             { n: '05', label: 'Notifies the manager', desc: 'A clean note with dates and coverage, no approval ping-pong for in-policy requests.', who: 'agent', time: 'same minute', img: '/avatars/anna.jpg' },
             { n: '06', label: 'The edge cases', desc: 'Anything ambiguous comes to you, with the balance, the policy, and the relevant law already laid out.', who: 'you', img: '/avatars/tom.jpg' },
           ]}
@@ -303,10 +303,10 @@ export default function LeavePage() {
         <FeatureSplit
           eyebrow="Family & medical leave"
           title={<>The hard leave, <Em>handled.</Em></>}
-          lead={'Parental and medical leave is where mistakes get expensive. MambaHR checks eligibility, stacks federal and state entitlements correctly, and attaches the statute to every answer, so Legal never gets a panicked call.'}
+          lead={'Parental and medical leave is where mistakes get expensive. MambaHR checks FMLA eligibility, cites the state program that applies, and attaches the statute to every answer, so Legal gets the homework instead of a panicked call.'}
           bullets={[
             'FMLA eligibility checked before anything is promised',
-            'State paid leave, CA CFRA, NY, MA, CO, stacked correctly with federal',
+            'State paid leave cited and routed to a person for the stacking decision; state stacking coming',
             'Every answer cites the law it followed',
             'The risky calls route to a human, with the homework done',
           ]}
@@ -331,14 +331,14 @@ export default function LeavePage() {
 
         <StatTrio
           stats={[
-            { n: 9, suffix: 's', label: 'median time-off approval' },
-            { n: 50, label: 'states of leave law, kept current' },
-            { n: 0, label: 'leave letters your lawyer had to write' },
+            { n: 9, suffix: 's', label: 'to a time-off approval in the modeled run' },
+            { n: 1, label: 'statute cited on every leave answer' },
+            { n: 0, label: 'leave letters you had to draft from scratch, ready for review' },
           ]}
         />
 
         <QuoteBand
-          quote="We have people in eleven states and I used to dread every leave question. Now the answer comes back in seconds, with the law attached."
+          quote="I used to dread every FMLA question. Now the answer comes back in seconds, with the law attached."
           role="People Operations Lead · AI startup, 180 people"
           img="/v2-people/marcus.jpg"
           metric="Saved 9 hrs / week"

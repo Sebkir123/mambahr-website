@@ -34,9 +34,9 @@ export default function Hero() {
         <span className="eyebrow" data-reveal>The AI HR department</span>
         <h1 className="title" data-reveal data-delay="1">HR that runs itself.</h1>
         <p className="sub" data-reveal data-delay="2">
-          MambaHR takes the admin: onboarding, time off, leave, payroll-ready exports, and
-          compliance in all 50 states. You keep the judgment calls, the coaching, and the
-          hours you never had. Live in a day.
+          MambaHR takes the admin: onboarding, time off, leave, payroll changes, and
+          compliance with the statute cited. You keep the judgment calls, the coaching, and the
+          hours you never had. Most teams are live within a day of importing.
         </p>
         <div className="ctas" data-reveal data-delay="3">
           <a href="/demo" className="btn-primary">Book a demo</a>
@@ -52,7 +52,7 @@ export default function Hero() {
         </div>
         <div className="trust" data-reveal data-delay="3">
           <span>Works 24/7</span><i />
-          <span>Live in a day</span><i />
+          <span>Your data imports in a day</span><i />
           <span>Built by HR operators</span>
         </div>
       </div>

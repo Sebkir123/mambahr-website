@@ -180,7 +180,7 @@ export default function JobPortalPage() {
           lead="From the moment a role opens to the moment a candidate is ranked in front of you, no job-board logins, no copy-pasting resumes, no missing EEO data."
           steps={[
             { n: '01', label: 'Site stood up', desc: 'Your logo, colors, and domain, the portal looks like you built it, because your brand did.', who: 'agent', time: 'day 1' },
-            { n: '02', label: 'Roles published', desc: 'Open reqs go live on your portal and the major job boards at once, written in your voice with pay bands shown.', who: 'agent', time: 'same day' },
+            { n: '02', label: 'Roles published', desc: 'Open reqs go live on your portal and your job-board feeds, written in your voice with pay bands shown.', who: 'agent', time: 'same day' },
             { n: '03', label: 'Candidates apply', desc: 'A two-minute apply flow, no account creation, no resume re-typing. Candidates actually finish it.', who: 'agent', img: '/avatars/priya.jpg' },
             { n: '04', label: 'Hiring-law questions', desc: 'The equal-opportunity questions the law requires are asked once, stored properly, and kept out of screening.', who: 'agent' },
             { n: '05', label: 'Read and ranked', desc: 'Every application is read, ranked, and recommended with reasons by the time you open the pipeline.', who: 'agent', time: 'overnight' },
@@ -191,9 +191,9 @@ export default function JobPortalPage() {
         <FeatureSplit
           eyebrow="Your brand, your address"
           title={<>Looks like you <Em>built it.</Em></>}
-          lead="No more sending candidates to a vendor page with someone else's logo. The portal lives at jobs.yourcompany.com with your brand on every pixel, set up from your existing site in a day, with nothing for your engineers to do."
+          lead="No more sending candidates to a vendor page with someone else's logo. The portal lives at jobs.yourcompany.com with your brand on every pixel, set up with one DNS record."
           bullets={[
-            'Your domain, logo, colors, and voice, imported, not configured',
+            'Your logo, colors, and domain, set up with one DNS record',
             'Pay bands shown on every role, the way state law increasingly requires',
             'Updates itself: open a req and it appears, close it and it disappears',
           ]}
@@ -231,7 +231,7 @@ export default function JobPortalPage() {
           metric="Live in 1 day"
         />
 
-        <PageCta title={<>Your careers page, <Em>by tomorrow.</Em></>} sub="A live demo in 30 minutes. Your portal live the next morning." />
+        <PageCta title={<>Your careers page, <Em>by tomorrow.</Em></>} sub="A 30-minute demo. Then we stand up your portal with one DNS record." />
       </main>
       <Footer />
     </>

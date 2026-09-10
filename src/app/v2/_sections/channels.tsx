@@ -5,9 +5,9 @@ export default function Channels() {
     <section className="ch" id="run">
       <div className="wrap">
         <div className="copy" data-reveal>
-          <p className="eyebrow">Where your team already works</p>
+          <p className="eyebrow">No new tool to learn</p>
           <h2 className="title">
-            Lives in <span className="em">Slack.</span>
+            Ask it in Slack. It does the work <span className="em">in MambaHR.</span>
           </h2>
           <p className="lead">
             No new tool to learn. No portal to log into. Your team messages
@@ -85,7 +85,7 @@ export default function Channels() {
                       <div className="m-t">Approved. Enjoy the wedding.</div>
                       <div className="attach">
                         <div className="a-row"><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
-                        <div className="a-row"><span className="a-k">Calendar</span><span className="a-v">Apr 7&ndash;9 blocked, OOO set</span></div>
+                        <div className="a-row"><span className="a-k">Record</span><span className="a-v">Apr 7&ndash;9 booked, payday updated</span></div>
                         <div className="a-row"><span className="a-k">Manager</span><span className="a-v">B. Bell notified</span></div>
                         <div className="a-foot"><span className="ok-dot" />Logged &middot; within policy &middot; ref <span className="mono">leave_4f81a2</span></div>
                       </div>

@@ -19,8 +19,8 @@ export default function Compliance() {
             <div className="m-body">
               <div className="m-who">MambaHR <span className="m-time">6 seconds later</span></div>
               <div className="a">
-                Up to 4 months disability, then 12 weeks bonding.
-                <span className="a-sub">Booked, filed, done. Cites CA PDL, CFRA, and FMLA.</span>
+                12 weeks of FMLA bonding leave, job protected.
+                <span className="a-sub">California CFRA and PDL cited and routed to you to confirm the stack.</span>
               </div>
             </div>
           </div>
@@ -32,11 +32,11 @@ export default function Compliance() {
             Right answer. <span className="em">Backed by law.</span>
           </h2>
           <p className="lead">
-            Employment law changes almost every week. MambaHR keeps up. A human signs
-            off on the big calls.
+            Employment law changes almost every week. Every MambaHR answer carries the statute
+            it relied on and a review date. A human signs off on the big calls.
           </p>
           <div className="trust">
-            <span>All 50 states</span><i /><span>Every answer cites the law</span><i /><span>Zero guesswork</span>
+            <span>Statute cited on every answer</span><i /><span>Ambiguous calls go to a person</span>
           </div>
         </div>
       </div>

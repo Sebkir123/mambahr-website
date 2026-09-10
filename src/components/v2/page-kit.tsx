@@ -639,7 +639,7 @@ export function QuoteBand({
 /* ── Page CTA: gradient panel with grain, faces, real buttons ── */
 export function PageCta({
   title,
-  sub = 'A live demo in 30 minutes. Live the next morning.',
+  sub = 'A 30-minute demo. Then we import your data and switch you over.',
 }: {
   title: ReactNode
   sub?: string

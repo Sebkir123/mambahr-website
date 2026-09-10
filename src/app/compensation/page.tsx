@@ -267,7 +267,7 @@ export default function CompensationPage() {
             { n: '01', label: 'A manager asks in Slack', desc: '“Can we get Tom to $185k?” That message is the whole request, no form, no ticket.', who: 'agent', time: 'sec', img: '/avatars/dave.jpg' },
             { n: '02', label: 'Checked against bands and pay equity', desc: 'The number is held up against your salary bands and screened for equity issues before it moves.', who: 'agent', time: 'min' },
             { n: '03', label: 'The big calls come to you first', desc: 'Within policy proceeds. Anything above your threshold routes to a human before it goes anywhere.', who: 'you', img: '/avatars/priya.jpg' },
-            { n: '04', label: 'The letter writes and signs itself', desc: 'Comp letter generated, sent for e-signature, and filed to the employee record automatically.', who: 'agent', time: 'min', img: '/avatars/tom.jpg' },
+            { n: '04', label: 'Approved, dated, filed', desc: 'Comp change approved, effective-dated, and filed to the employee record.', who: 'agent', time: 'min', img: '/avatars/tom.jpg' },
             { n: '05', label: 'Payroll file updated', desc: 'The change lands in the next payroll file, effective-dated correctly. Nothing to re-key.', who: 'agent', time: 'same day' },
           ]}
         />

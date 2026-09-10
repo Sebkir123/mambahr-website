@@ -38,7 +38,7 @@ export default function Statement() {
           <figcaption>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/avatars/head-of-people.jpg" alt="" width={38} height={38} loading="lazy" decoding="async" />
-            <span>Head of People · SaaS company, 300 people</span>
+            <span>Head of People · SaaS company, 300 people · illustrative</span>
           </figcaption>
         </figure>
       </div>

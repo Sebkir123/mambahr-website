@@ -8,10 +8,10 @@ import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } f
 
 /* ── Hero fragment: live pipeline card ── */
 const STAGES: { name: string; count: number; state: string; note: string; imgs?: string[] }[] = [
-  { name: 'Sourcing', count: 47, state: 'done', note: 'Posted to 9 job boards' },
+  { name: 'Sourcing', count: 47, state: 'done', note: 'Posted to your careers page and job-board feeds' },
   { name: 'Screening', count: 12, state: 'done', note: 'Ranked overnight, notes attached', imgs: ['/avatars/tom.jpg', '/avatars/priya.jpg', '/avatars/dave.jpg'] },
-  { name: 'Interviews', count: 8, state: 'done', note: 'All panels scheduled, kits sent', imgs: ['/avatars/anna.jpg', '/avatars/marcus.jpg'] },
-  { name: 'References', count: 2, state: 'done', note: '4 of 4 calls complete' },
+  { name: 'Interviews', count: 8, state: 'done', note: 'Feedback captured on the scorecard', imgs: ['/avatars/anna.jpg', '/avatars/marcus.jpg'] },
+  { name: 'Background check', count: 2, state: 'done', note: 'Ordered through Checkr, 2 of 2 clear' },
   { name: 'Offer · Maya Chen', count: 1, state: 'you', note: 'Draft ready, awaiting you', imgs: ['/avatars/maya.jpg'] },
 ]
 
@@ -263,7 +263,7 @@ export default function HiringPage() {
         <PageHero
           eyebrow="Hiring & ATS"
           title={<>Hiring, <Em>handled.</Em></>}
-          lead="MambaHR posts the role, screens and ranks every applicant, schedules every interview, checks references, and drafts the offer. You make one decision: who joins."
+          lead="MambaHR posts the role, screens and ranks every applicant, orders the background check, and drafts the offer in band. You make one decision: who joins."
           proof="Built for lean people teams"
           photo="/v2-people/feat.jpg"
           photoChip="MambaHR · done"
@@ -275,14 +275,14 @@ export default function HiringPage() {
         <AgentLoop
           eyebrow="How it runs"
           title="The hiring loop"
-          lead="Every step that used to mean chasing calendars and inboxes, handled. The judgment calls stay with you, clearly marked."
+          lead="Every step that used to mean chasing inboxes, handled. The judgment calls stay with you, clearly marked."
           steps={[
             { n: '01', label: 'Req intake', desc: 'Tell MambaHR the role, the team, and the budget, in Slack or the app. The req is ready in minutes.', who: 'agent', time: '4 min' },
-            { n: '02', label: 'Posted everywhere', desc: 'The role goes live on your careers page and the major job boards, written in your voice.', who: 'agent', time: 'same day' },
+            { n: '02', label: 'Posted everywhere', desc: 'The role goes live on your careers page and your job-board feeds, written in your voice.', who: 'agent', time: 'same day' },
             { n: '03', label: 'Screening & ranking', desc: 'Every applicant read, ranked, and recommended with reasons, you make every advance-or-pass call.', who: 'you', img: '/avatars/tom.jpg' },
-            { n: '04', label: 'Scheduling', desc: 'Panels, rooms, and reschedules handled across every calendar. No back-and-forth.', who: 'agent', time: 'instant' },
-            { n: '05', label: 'Interview kits & feedback', desc: 'Each interviewer gets a tailored kit; feedback is gathered and summarized the same day.', who: 'agent' },
-            { n: '06', label: 'References', desc: 'Calls arranged, notes captured, themes pulled out for you to read in two minutes.', who: 'agent', img: '/avatars/dave.jpg' },
+            { n: '04', label: 'Interview scheduling (coming)', desc: 'Interview slots proposed from the interviewers\u2019 calendars once you connect Google or Microsoft 365. You confirm the panel.', who: 'you', time: 'coming' },
+            { n: '05', label: 'Interview feedback', desc: 'Every interviewer records feedback on one scorecard, so the decision is made on the same evidence.', who: 'agent' },
+            { n: '06', label: 'Reference check', desc: 'Ordered through Checkr, status tracked to the finish.', who: 'agent', img: '/avatars/dave.jpg' },
             { n: '07', label: 'Background check', desc: 'Ordered the moment you give the nod, with status tracked to the finish.', who: 'agent' },
             { n: '08', label: 'Offer out the door', desc: 'Offer drafted in band and prepared for e-signature. You approve and the offer goes out.', who: 'you', img: '/avatars/maya.jpg' },
           ]}
@@ -290,12 +290,12 @@ export default function HiringPage() {
 
         <FeatureSplit
           eyebrow="The job portal"
-          title={<>Your job site, <Em>live in a day.</Em></>}
+          title={<>Your job site, <Em>on your domain.</Em></>}
           lead="A branded job board on your own address, no agency, no setup project. Candidates apply, applications land in your pipeline already read, and the questions hiring law requires are collected quietly."
           bullets={[
             'Your logo, your colors, your domain, looks like you built it',
             'Every application lands in the pipeline already read and ranked',
-            'Required hiring-law questions asked once, stored properly, never your problem',
+            'Required hiring-law questions asked once, stored separately from screening, ready for your EEO-1',
           ]}
         >
           <CareersSite />
@@ -318,14 +318,14 @@ export default function HiringPage() {
 
         <StatTrio
           stats={[
-            { n: 6, suffix: ' days', label: 'median req-to-offer with MambaHR running the loop' },
+            { n: 6, suffix: ' days', label: 'req-to-offer in the modeled run, with MambaHR running the loop' },
             { n: 47, label: 'candidates sourced for one role, screened overnight' },
             { n: 1, label: 'decision that stays yours: who joins' },
           ]}
         />
 
         <QuoteBand
-          quote="The chase is gone. No more calendar Tetris, no more resume piles on a Sunday night. I open the pipeline, read three ranked candidates, and make the call. Hiring finally feels like judgment, not admin."
+          quote="The chase is gone. No more resume piles on a Sunday night. I open the pipeline, read three ranked candidates, and make the call. Hiring finally feels like judgment, not admin."
           role="People Operations Lead · AI startup, 180 people"
           img="/v2-people/marcus.jpg"
           metric="Saved 9 hrs / week"

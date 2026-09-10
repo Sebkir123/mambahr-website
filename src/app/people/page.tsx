@@ -197,8 +197,8 @@ export default function PeoplePage() {
           steps={[
             { n: '01', label: 'Someone’s hired', desc: 'The record creates itself from the signed offer, name, role, comp, start date.', who: 'agent', time: 'instant', img: '/avatars/dave.jpg' },
             { n: '02', label: 'A raise is approved', desc: 'Comp updated everywhere it lives, the record, the band, the payroll file.', who: 'agent', time: 'same minute' },
-            { n: '03', label: 'An address changes in Slack', desc: 'Jordan mentions she moved; it’s filed in seconds, taxes rechecked.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
-            { n: '04', label: 'Leave is approved', desc: 'The calendar and payday reflect it before anyone has to ask.', who: 'agent', time: 'same minute' },
+            { n: '03', label: 'An address changes in Slack', desc: 'Jordan mentions she moved; it’s filed in seconds and flagged for the next pay file.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
+            { n: '04', label: 'Leave is approved', desc: 'The record and payday reflect it before anyone has to ask.', who: 'agent', time: 'same minute' },
             { n: '05', label: 'Every change is logged', desc: 'Who changed what, when, and why, kept with the record forever.', who: 'agent', time: 'always' },
             { n: '06', label: 'You just look things up', desc: 'Headcount, tenure, who reports to whom, they’re right, every time.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
@@ -221,8 +221,8 @@ export default function PeoplePage() {
           flip
           warm
           eyebrow="Switching"
-          title={<>Switch in a day, <Em>keep it all</Em></>}
-          lead="The migration project you’ve been dreading is one import. Gusto, Workday, Rippling, BambooHR, Namely, or ADP, one-time, done in a day, every history and balance carried over. Then your old system retires."
+          title={<>Import in a day, <Em>keep it all</Em></>}
+          lead="The migration project you’ve been dreading is one import. Gusto, Workday, Rippling, BambooHR, Namely, or ADP, one-time, your data imported in a day, every history and balance carried over. Then your old system retires."
           bullets={[
             'Every record, every history, every balance carried over',
             'We check the import line by line before you go live',
@@ -235,16 +235,16 @@ export default function PeoplePage() {
         <StatTrio
           stats={[
             { n: 1247, label: 'records, current to the minute' },
-            { n: 1, suffix: ' day', label: 'to switch from your old system' },
+            { n: 1, suffix: ' day', label: 'to import your data from your old system' },
             { n: 0, label: 'stale spreadsheets' },
           ]}
         />
 
         <QuoteBand
-          quote="We switched on a Tuesday. By Wednesday morning every record was in, every balance was right, and I deleted the spreadsheet I’d been babysitting for three years."
+          quote="We imported on a Tuesday. By Wednesday morning every record was in, every balance was right, and I deleted the spreadsheet I’d been babysitting for three years."
           role="Head of People · Fintech startup, 140 people"
           img="/v2-people/sofia.jpg"
-          metric="Live in a day"
+          metric="Imported in a day"
         />
 
         <PageCta title={<>Your people, <Em>on the record.</Em></>} />

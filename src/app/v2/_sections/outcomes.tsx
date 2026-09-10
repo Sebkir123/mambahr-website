@@ -10,8 +10,8 @@ export default function Outcomes() {
           <p className="eyebrow">What you get back</p>
           <h2 className="title">Give your HR team <span className="em">their week back.</span></h2>
           <p className="lead">
-            MambaHR hands the average HR team 27 hours back, every single week. Time
-            that goes to the people, not the paperwork.
+            We estimate MambaHR takes about 27 hours of admin a week off a lean HR team. That
+            is our model, not a customer average, and we will publish real numbers as soon as we have them.
           </p>
         </div>
 
@@ -20,7 +20,7 @@ export default function Outcomes() {
           <article className="card dark" data-reveal data-delay="1">
             <span className="lbl muted">Hours back, every week</span>
             <div className="num big"><span data-count="27">27</span><em>hrs</em></div>
-            <p className="cap ondark">Payroll, onboarding, leave, and compliance, on autopilot.</p>
+            <p className="cap ondark">Payroll prep, onboarding, leave, and compliance, handled, with you on the approvals.</p>
             <div className="spark">
               {SPARK.map((h, i) => (
                 <span key={i} style={{ height: `${h}%` }} />
@@ -57,9 +57,9 @@ export default function Outcomes() {
 
           {/* deferred hire, money card */}
           <article className="card tint" data-reveal data-delay="4">
-            <div className="num money">$<span data-count="95">95</span>k+</div>
+            <div className="num money">$<span data-count="84">84</span>k</div>
             <span className="lbl">Back into your people budget</span>
-            <p className="cap">A full generalist&rsquo;s workload of admin, from $24k a year. The rest funds the work only people can do.</p>
+            <p className="cap">A full generalist&rsquo;s workload of admin, from $26k a year at 100 employees. The rest funds the work only people can do.</p>
           </article>
         </div>
 

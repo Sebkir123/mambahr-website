@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Hiring & ATS | MambaHR',
   description:
-    'From req to offer. Without the loop. The agent screens, schedules, references, and drafts the offer. You decide who joins.',
+    'From req to offer. Without the loop. MambaHR screens, ranks, orders the background check, and drafts the offer. You decide who joins.',
   openGraph: {
     title: 'Hiring & ATS | MambaHR',
     description:
-      'From req to offer without the loop. Agent runs sourcing, screening, scheduling, references, and offer drafting.',
+      'From req to offer without the loop. MambaHR runs posting, screening, background checks, and offer drafting.',
     url: 'https://mambahr.com/hiring',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Hiring & ATS | MambaHR',
     description:
-      'From req to offer without the loop. Agent runs sourcing, screening, scheduling, references, and offer drafting.',
+      'From req to offer without the loop. MambaHR runs posting, screening, background checks, and offer drafting.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://mambahr.com/hiring' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'Hiring & ATS | MambaHR',
   url: 'https://mambahr.com/hiring',
   description:
-    'MambaHR hiring surface: agent-driven req intake, sourcing, screening, scheduling, references, background check, and offer drafting. Humans approve hires and offers above band.',
+    'MambaHR hiring surface: req intake, careers-page posting, screening and ranking, background check, and offer drafting. Humans approve hires and offers above band.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Hiring agent',
     description:
-      'End-to-end hiring agent: drafts the JD with comp band, posts to ATS and job boards, ranks resumes, schedules panels across calendars, requests references, runs background checks, and drafts offers. You approve the JD and any offer above band; everything else runs without you.',
+      'End-to-end hiring agent: drafts the JD with comp band, posts to your careers page and job boards, ranks resumes (advisory), runs background checks through Checkr, and drafts offers. You approve the JD, every advance-or-pass call, and any offer above band. Interview scheduling is coming.',
   },
 }
 

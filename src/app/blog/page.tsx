@@ -107,8 +107,8 @@ export default async function BlogIndex() {
           <p className="eyebrow">The MambaHR blog</p>
           <h1 className={styles.title}>Notes from the AI HR department.</h1>
           <p className={styles.lede}>
-            What we&rsquo;re learning building the system that runs hiring, onboarding, payroll-ready exports,
-            leave, performance, and 50-state compliance end to end.
+            What we&rsquo;re learning building the system that runs hiring, onboarding, payroll changes,
+            leave, and compliance end to end.
           </p>
         </header>
 

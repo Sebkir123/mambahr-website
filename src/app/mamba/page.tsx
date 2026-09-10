@@ -25,7 +25,7 @@ function SlackWindow() {
           <div className="sw-sec">Channels</div>
           <span className="sw-ch on"><span className="hash">#</span>people-ops</span>
           <span className="sw-ch"><span className="hash">#</span>hiring</span>
-          <span className="sw-ch"><span className="hash">#</span>benefits</span>
+          <span className="sw-ch"><span className="hash">#</span>onboarding</span>
           <div className="sw-sec">Direct messages</div>
           <span className="sw-dm first"><span className="seg green" />MambaHR<span className="badge">1</span></span>
           <span className="sw-dm"><span className="seg" />Brian Bell</span>
@@ -69,7 +69,7 @@ function SlackWindow() {
               <img className="av" src="/avatars/priya.jpg" alt="Jordan Lee" width={36} height={36} />
               <div className="m-body">
                 <div className="m-h"><b>Jordan Lee</b><time>9:11 AM</time></div>
-                <div className="m-t"><span className="mention">@MambaHR</span> I need an employment verification letter for my mortgage</div>
+                <div className="m-t"><span className="mention">@MambaHR</span> How many unused vacation days do I have, and does our policy let me carry them over?</div>
               </div>
             </div>
 
@@ -77,11 +77,11 @@ function SlackWindow() {
               <div className="av app">M</div>
               <div className="m-body">
                 <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:11 AM</time></div>
-                <div className="m-t">Done. Sent to her email and filed.</div>
+                <div className="m-t">You have 9 days left, and up to 5 carry over. Policy attached.</div>
                 <div className="attach">
-                  <div className="a-row"><span className="a-k">Letter</span><span className="a-v">Employment verification, signed</span></div>
-                  <div className="a-row"><span className="a-k">Sent to</span><span className="a-v">jordan@company.com</span></div>
-                  <div className="a-foot"><span className="ok-dot" />Logged &middot; filed to her record &middot; ref <span className="mono">doc_2b94f7</span></div>
+                  <div className="a-row"><span className="a-k">Policy</span><span className="a-v">PTO carryover, section 4.2, cited</span></div>
+                  <div className="a-row"><span className="a-k">Balance</span><span className="a-v">9 days · accrual current</span></div>
+                  <div className="a-foot"><span className="ok-dot" />Logged &middot; answered from your handbook &middot; ref <span className="mono">ask_2b94f7</span></div>
                 </div>
               </div>
             </div>
@@ -462,7 +462,7 @@ export default function MambaPage() {
         lead="Your team messages @MambaHR like a person. It reads the thread, checks your policy, does the work, and logs it, in Slack or the MambaHR app."
         photo="/v2-people/sofia.jpg"
         photoChip="MambaHR · done"
-        photoCaption="Letter sent · filed · 9:11 AM"
+        photoCaption="Answered · policy cited · 9:11 AM"
       >
         <SlackWindow />
       </PageHero>
@@ -474,7 +474,7 @@ export default function MambaPage() {
         steps={[
           { n: '01', label: 'Reads the thread, and the person', desc: 'It knows who’s asking, their role, their manager, and what was already said.', who: 'agent', time: '< 1s', img: '/avatars/dave.jpg' },
           { n: '02', label: 'Checks your policy and the law', desc: 'Your handbook first, then the rules for the state the person works in.', who: 'agent', time: '2s' },
-          { n: '03', label: 'Does the work', desc: 'Books the time off, files the letter, updates the record, schedules what needs scheduling.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
+          { n: '03', label: 'Does the work', desc: 'Books the time off, files the letter, updates the record.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
           { n: '04', label: 'Answers with the receipt attached', desc: 'Not just “done”, what changed, which rule applied, and where it’s filed.', who: 'agent' },
           { n: '05', label: 'The big calls come to you first', desc: 'Offers above band, terminations, comp above your threshold, always a human decision.', who: 'you', img: '/avatars/anna.jpg' },
           { n: '06', label: 'Logs it all', desc: 'Every action lands in one record, so there’s never a question about what happened.', who: 'agent' },
@@ -503,7 +503,7 @@ export default function MambaPage() {
         bullets={[
           'Employees never log into anything new',
           'Managers approve from wherever they already are',
-          'Live in a day, not a quarter',
+          'Your data imports in a day, not a quarter',
         ]}
       >
         <TeamPhoto />
@@ -511,7 +511,7 @@ export default function MambaPage() {
 
       <StatTrio
         stats={[
-          { n: 9, suffix: 's', label: 'median answer, with receipt' },
+          { n: 9, suffix: 's', label: 'to an answer in the modeled run, with the receipt attached' },
           { n: 24, suffix: '/7', label: 'answering while your team is off the clock' },
           { n: 100, suffix: '%', label: 'of actions logged with the rule followed' },
         ]}

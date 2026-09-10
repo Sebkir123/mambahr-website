@@ -87,7 +87,7 @@ function AckTracker() {
     <div className="ack agent-edge agent-done">
       <div className="a-head">
         <span className="a-t">Policy acknowledgements</span>
-        <span className="a-live"><i />Tracking</span>
+        <span className="a-live"><i />Collected by e-signature</span>
       </div>
       <div className="pol">
         <div className="pol-top">
@@ -97,13 +97,13 @@ function AckTracker() {
         <div className="bar-track" aria-hidden="true"><span className="bar-fill" /></div>
         <div className="pol-meta">
           <span>1,172 of 1,247 acknowledged</span>
-          <span className="mono">3 reminders sent · last 9:30 AM</span>
+          <span className="mono">Sent for e-signature · status tracked</span>
         </div>
       </div>
       <div className="rows">
         {[
           { img: '/avatars/tom.jpg', name: 'Tom Harrison', s: 'Acknowledged', ok: true, t: '8:12 AM' },
-          { img: '/avatars/dave.jpg', name: 'Dave Buchanan', s: 'Reminded today', ok: false, t: '9:30 AM' },
+          { img: '/avatars/dave.jpg', name: 'Dave Buchanan', s: 'Awaiting signature', ok: false, t: '9:30 AM' },
           { img: '/avatars/anna.jpg', name: 'Anna Wilson', s: 'Acknowledged', ok: true, t: 'Yesterday' },
         ].map((r) => (
           <div className="row" key={r.name}>
@@ -195,7 +195,7 @@ export default function DocumentsPage() {
             { n: '01', label: 'Drafted from your template', desc: 'The right template, the right details, name, role, comp, dates, filled in correctly.', who: 'agent', time: 'seconds' },
             { n: '02', label: 'Sent for e-signature', desc: 'Delivered for e-signature, to the right people in the right order.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
             { n: '03', label: 'You sign what matters', desc: 'Offers, agreements, anything with your name on it, a person signs, always.', who: 'you', img: '/avatars/anna.jpg' },
-            { n: '04', label: 'Chased politely until signed', desc: 'Gentle reminders go out on their own. Nobody on your team plays follow-up.', who: 'agent', time: 'as needed', img: '/avatars/tom.jpg' },
+            { n: '04', label: 'Status tracked until signed', desc: 'Sent for e-signature, status tracked. You see who has signed and who has not.', who: 'agent', time: 'as needed', img: '/avatars/tom.jpg' },
             { n: '05', label: 'Filed with the audit trail', desc: 'Into the right folder, under the right person, with who signed what and when.', who: 'agent', time: 'instant' },
             { n: '06', label: 'Back the second you ask', desc: 'Three years later, in an audit or a dispute, it’s one question away.', who: 'agent', time: 'seconds' },
           ]}
@@ -204,10 +204,10 @@ export default function DocumentsPage() {
         <FeatureSplit
           eyebrow="Policy rollouts"
           title={<>Acknowledged, <Em>every last one</Em></>}
-          lead="A handbook update used to mean weeks of awkward chase messages and a spreadsheet of who hasn’t. Now it goes out to everyone, every acknowledgement is tracked, and the stragglers get chased for you. You see one number: done."
+          lead="A handbook update used to mean a spreadsheet of who hasn’t. Now policies are filed with version history and acknowledgements are collected by e-signature, so you see one number: done."
           bullets={[
-            'Every acknowledgement tracked, with date and signature',
-            'Reminders sent for you, no awkward chase emails',
+            'Every acknowledgement collected by e-signature, with date',
+            'Policies filed with version history',
             'A clean record for the day an auditor asks',
           ]}
         >
@@ -219,10 +219,10 @@ export default function DocumentsPage() {
           warm
           eyebrow="Retrieval"
           title={<>Found in seconds, <Em>years later</Em></>}
-          lead="The day a dispute lands, the document you need is one question away, not buried in someone’s old shared drive. Every offer, agreement, and acknowledgement is filed under the right person with every version and every signature."
+          lead="The day a dispute lands, the document you need is one question away, not buried in someone’s old shared drive. Every offer, agreement, and acknowledgement is filed under the right person with the signature record attached."
           bullets={[
             'Filed by person, not buried in a shared drive',
-            'Full trail on every document, who signed, when, what changed',
+            'Signature record attached, who signed and when',
             'Audits and disputes answered in minutes, not weekends',
           ]}
         >
@@ -232,7 +232,7 @@ export default function DocumentsPage() {
         <StatTrio
           stats={[
             { n: 30, suffix: 's', label: 'from approved offer to sent for signature' },
-            { n: 100, suffix: '%', label: 'of documents filed with a full trail' },
+            { n: 100, suffix: '%', label: 'of documents filed under the right person, signature record attached' },
             { n: 0, label: 'lost agreements' },
           ]}
         />
