@@ -2,10 +2,10 @@
 
 import { ReactNode, useEffect, useState, useRef, useCallback } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { byFunction, howItWorks, alsoHandled, type NavItem } from '@/content/nav'
+import { byFunction, howItWorks, forWhom, type NavItem } from '@/content/nav'
 import { MambaMark } from '@/components/mamba-mark'
+import s from './mega-nav.module.css'
 
 // Single-stroke icons, keyed to NavItem.icon. Icons are JSX so they live here,
 // not in nav.ts. 20×20, currentColor, gold inside the dropdown chip.
@@ -25,67 +25,27 @@ const iconMap: Record<string, ReactNode> = {
   today: (<svg {...stroke}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>),
   people: (<svg {...stroke}><circle cx="9" cy="9" r="3" /><path d="M3 19c0-3 2.7-5 6-5s4.5 1.3 5.5 3" /><circle cx="17" cy="11" r="2.5" /><path d="M14 19c.5-2 2-3 4-3s2.5 1 3 3" /></svg>),
   documents: (<svg {...stroke}><path d="M7 3h7l4 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" /><path d="M13 3v4h4M9 12h6M9 16h6" /></svg>),
-  security: (<svg {...stroke}><rect x="5" y="10" width="14" height="10" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /><circle cx="12" cy="15" r="1.2" /></svg>),
 }
 
 function MenuItem({ item, onNavigate }: { item: NavItem; onNavigate: () => void }) {
   return (
-    <Link
-      href={item.href}
-      onClick={onNavigate}
-      style={{
-        display: 'flex', gap: 12, alignItems: 'flex-start', padding: '10px 12px',
-        borderRadius: 10, textDecoration: 'none', background: 'transparent',
-        transition: 'background 0.15s', color: 'var(--text)',
-      }}
-      onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--bg-warm)' }}
-      onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
-    >
-      <span
-        style={{
-          width: 34, height: 34, borderRadius: 9,
-          background: 'linear-gradient(135deg, var(--gold-tint) 0%, #E8DDC8 100%)',
-          border: '1px solid rgba(176,141,87,0.25)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          color: 'var(--gold-dark)', flexShrink: 0,
-        }}
-      >
-        {item.icon ? iconMap[item.icon] : null}
-      </span>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 15, fontWeight: 600, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em', whiteSpace: 'nowrap' }}>
+    <Link href={item.href} onClick={onNavigate} className={s.item}>
+      <span className={s.itemIcon}>{item.icon ? iconMap[item.icon] : null}</span>
+      <div className={s.itemBody}>
+        <p className={s.itemLabel}>
           {item.label}
-          {item.pill && <span style={navPill}>{item.pill}</span>}
+          {item.pill && <span className={s.pill}>{item.pill}</span>}
         </p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '2px 0 0', lineHeight: 1.4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.description}</p>
+        <p className={s.itemDesc}>{item.description}</p>
       </div>
     </Link>
   )
 }
 
-const navPill = {
-  fontFamily: 'var(--font-mono)',
-  fontSize: 12,
-  fontWeight: 500,
-  textTransform: 'uppercase' as const,
-  letterSpacing: '0.05em',
-  color: 'var(--gold-dark)',
-  background: 'var(--gold-tint)',
-  border: '1px solid rgba(138, 101, 53, 0.25)',
-  borderRadius: 999,
-  padding: '2px 7px',
-  whiteSpace: 'nowrap' as const,
-}
-
-const colLabel = { fontSize: 12, fontWeight: 700, letterSpacing: '0.16em', color: 'var(--text-faint)', textTransform: 'uppercase' as const, margin: '0 0 14px 12px' }
-
 const topLinks = [
-  { label: 'Pricing',   href: '/pricing'   },
-  { label: 'Compare',   href: '/compare'   },
-  { label: 'Solutions', href: '/ai-hr-software' },
-  { label: 'Security',  href: '/security'  },
-  { label: 'Blog',      href: '/blog'      },
-  { label: 'About',     href: '/about'     },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Compare', href: '/compare' },
+  { label: 'About',   href: '/about'   },
 ]
 
 export default function MegaNav() {
@@ -170,46 +130,27 @@ export default function MegaNav() {
   function scheduleClose() {
     closeTimeout.current = setTimeout(() => setProductOpen(false), 180)
   }
+  const closeAll = () => setProductOpen(false)
+  const closeMobile = () => setMobileOpen(false)
 
   return (
     <>
       <nav
         ref={navRef}
         aria-label="Main navigation"
-        style={{
-          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-          backgroundColor: scrolled || productOpen ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.75)',
-          backdropFilter: 'blur(16px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-          borderBottom: scrolled || productOpen ? '1px solid var(--border)' : '1px solid rgba(0,0,0,0.04)',
-          boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.03)' : 'none',
-        }}
+        className={`${s.nav}${scrolled ? ` ${s.scrolled}` : ''}${scrolled || productOpen ? ` ${s.raised}` : ''}`}
       >
         {/* gradient hairline, fades in on scroll */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: -1,
-            height: 1,
-            background: 'linear-gradient(90deg, transparent, #B98A4E 30%, #6A5DA6 70%, transparent)',
-            opacity: scrolled ? 0.5 : 0,
-            transition: 'opacity 0.3s ease',
-            pointerEvents: 'none',
-          }}
-        />
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32 }}>
+        <div aria-hidden="true" className={s.hairline} />
+        <div className={s.bar}>
           {/* Logo */}
-          <Link href="/" prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }} onClick={() => setProductOpen(false)}>
+          <Link href="/" prefetch={false} className={s.logo} onClick={closeAll}>
             <MambaMark size={22} color="var(--gold)" title="MambaHR" />
-            <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 18, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
+            <span className={s.wordmark}>MambaHR</span>
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden md:flex" style={{ alignItems: 'center', gap: 4, flex: 1, justifyContent: 'center' }}>
+          <div className={s.links}>
             <button
               ref={productBtnRef}
               type="button"
@@ -218,14 +159,14 @@ export default function MegaNav() {
               onMouseEnter={openProduct}
               onMouseLeave={scheduleClose}
               onClick={() => setProductOpen(!productOpen)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px 12px', fontSize: 14, fontWeight: 500, color: productOpen ? 'var(--text)' : 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 4, transition: 'color 0.15s', borderRadius: 6 }}
+              className={`${s.trigger}${productOpen ? ` ${s.open}` : ''}`}
             >
               Product
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ transition: 'transform 0.2s', transform: productOpen ? 'rotate(180deg)' : 'none', opacity: 0.5 }}>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={s.chev}>
                 <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            {/* Desktop dropdown, floating card, two buyer-vocabulary columns */}
+            {/* Desktop dropdown: seven function cards, the four "how it works" rows, the three "for" pages */}
             {productOpen && (
               <div
                 id="product-menu"
@@ -233,134 +174,37 @@ export default function MegaNav() {
                 onMouseEnter={openProduct}
                 onMouseLeave={scheduleClose}
                 onBlur={onPanelBlur}
-                style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 40, padding: '10px 24px 0', pointerEvents: 'none' }}
+                className={s.panelWrap}
               >
-                <div
-                  className="nav-dropdown"
-                  style={{
-                    pointerEvents: 'auto',
-                    maxWidth: 1020,
-                    margin: '0 auto',
-                    background: '#FFFFFF',
-                    border: '1px solid var(--border)',
-                    borderRadius: 18,
-                    boxShadow: '0 24px 64px rgba(20,18,14,0.14), 0 4px 16px rgba(20,18,14,0.06)',
-                    overflow: 'hidden',
-                    position: 'relative',
-                  }}
-                >
-                  <div
-                    aria-hidden="true"
-                    style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, #B98A4E, #6A5DA6)', opacity: 0.7 }}
-                  />
-                  <div style={{ padding: '28px 32px 24px', display: 'grid', gridTemplateColumns: '1.9fr 0.85fr', gap: 32 }}>
-                    {/* Everything HR, the procurement checklist, two compact columns */}
+                <div className={`nav-dropdown ${s.panel}`}>
+                  <div aria-hidden="true" className={s.panelRule} />
+                  <div className={s.panelGrid}>
                     <div>
-                      <p style={colLabel}>Everything HR, handled</p>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px 16px' }}>
-                        {byFunction.map((item) => <MenuItem key={item.label} item={item} onNavigate={() => setProductOpen(false)} />)}
+                      <p className={s.colLabel}>By function</p>
+                      <div className={s.cards}>
+                        {byFunction.map((item) => <MenuItem key={item.label} item={item} onNavigate={closeAll} />)}
                       </div>
                     </div>
 
-                    {/* The platform rail, label-only links, no competing panel */}
-                    <div style={{ borderLeft: '1px solid var(--border-faint)', paddingLeft: 28 }}>
-                      <p style={{ ...colLabel, marginLeft: 10 }}>The platform</p>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <div className={s.rail}>
+                      <p className={s.colLabel}>How it works</p>
+                      <div className={s.railList}>
                         {howItWorks.map((item) => (
-                          <Link
-                            key={item.label}
-                            href={item.href}
-                            onClick={() => setProductOpen(false)}
-                            className="nav-rail-link"
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'space-between',
-                              gap: 12,
-                              padding: '9px 10px',
-                              borderRadius: 8,
-                              textDecoration: 'none',
-                            }}
-                          >
-                            <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', whiteSpace: 'nowrap' }}>{item.label}</span>
-                            <span aria-hidden="true" style={{ fontSize: 13, color: 'var(--text-faint)' }}>→</span>
+                          <Link key={item.label} href={item.href} onClick={closeAll} className={s.railLink}>
+                            <span className={s.railLabel}>{item.label}</span>
+                            <span aria-hidden="true" className={s.railArrow}>→</span>
                           </Link>
                         ))}
                       </div>
-                      <Link
-                        href="/mamba"
-                        onClick={() => setProductOpen(false)}
-                        style={{
-                          display: 'block',
-                          marginTop: 14,
-                          padding: '12px 14px',
-                          borderRadius: 12,
-                          textDecoration: 'none',
-                          background: 'var(--bg-warm)',
-                          border: '1px solid var(--border-faint)',
-                        }}
-                      >
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-mono), monospace', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--gold-dark)' }}>
-                          <span style={{ width: 7, height: 7, borderRadius: 999, background: '#6A5DA6', display: 'inline-block' }} />
-                          Meet MambaHR
-                        </span>
-                        <span style={{ display: 'block', fontSize: 13, lineHeight: 1.45, color: 'var(--text-muted)', marginTop: 5 }}>
-                          The agent doing the work behind every page on the left.
-                        </span>
-                      </Link>
+                      <div className={s.forRow}>
+                        <p className={s.colLabel}>For</p>
+                        <div className={s.forLinks}>
+                          {forWhom.map((item) => (
+                            <Link key={item.label} href={item.href} onClick={closeAll} className={s.forLink}>{item.label}</Link>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  {/* The procurement checklist, exact keywords buyers scan for */}
-                  <div style={{ padding: '0 32px 20px' }}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: 8, paddingTop: 18, borderTop: '1px solid var(--border-faint)' }}>
-                      <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-faint)', marginRight: 4 }}>
-                        Also handled
-                      </span>
-                      {alsoHandled.map((k) => (
-                        <Link
-                          key={k.label}
-                          href={k.href}
-                          onClick={() => setProductOpen(false)}
-                          className="nav-kw"
-                          style={{
-                            fontSize: 12,
-                            fontWeight: 500,
-                            color: 'var(--text-muted)',
-                            textDecoration: 'none',
-                            border: '1px solid var(--border-faint)',
-                            background: 'var(--bg-surface)',
-                            borderRadius: 999,
-                            padding: '3px 10px',
-                            whiteSpace: 'nowrap',
-                          }}
-                        >
-                          {k.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: 16,
-                      padding: '14px 32px',
-                      background: 'var(--bg-surface)',
-                      borderTop: '1px solid var(--border-faint)',
-                    }}
-                  >
-                    <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 15, color: 'var(--text-muted)' }}>
-                      One agent. Every job on this list.
-                    </span>
-                    <Link
-                      href="/product"
-                      onClick={() => setProductOpen(false)}
-                      style={{ fontSize: 14, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none', whiteSpace: 'nowrap' }}
-                    >
-                      See it run →
-                    </Link>
                   </div>
                 </div>
               </div>
@@ -371,8 +215,7 @@ export default function MegaNav() {
                 key={item.label}
                 href={item.href}
                 onMouseEnter={scheduleClose}
-                className={`nav-top-link${pathname?.startsWith(item.href) ? ' nav-active' : ''}`}
-                style={{ padding: '8px 12px', fontSize: 14, fontWeight: 500, color: 'var(--text-muted)', textDecoration: 'none', borderRadius: 6 }}
+                className={`nav-top-link ${s.topLink}${pathname?.startsWith(item.href) ? ' nav-active' : ''}`}
               >
                 {item.label}
               </Link>
@@ -380,19 +223,18 @@ export default function MegaNav() {
           </div>
 
           {/* Right CTA, single conversion action */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
-            <Link href="/demo" className="btn-dark">
+          <div className={s.right}>
+            <Link href="/demo" className="btn btn-dark">
               Book a demo
             </Link>
             <button
               ref={burgerRef}
               type="button"
-              className="nav-burger"
+              className={`nav-burger ${s.burger}`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 12, minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center', color: 'var(--text)', borderRadius: 8 }}
             >
               {mobileOpen ? (
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
@@ -402,40 +244,45 @@ export default function MegaNav() {
             </button>
           </div>
         </div>
-
       </nav>
 
       {/* Mobile menu overlay */}
       {mobileOpen && (
-        <div id="mobile-menu" ref={mobilePanelRef} style={{ position: 'fixed', inset: 0, zIndex: 40, background: '#FFFFFF', overflowY: 'auto', paddingTop: 64 }}>
-          <div style={{ padding: '24px 24px 40px' }}>
-            <div style={{ marginBottom: 8 }}>
+        <div id="mobile-menu" ref={mobilePanelRef} className={s.mobile}>
+          <div className={s.mobileInner}>
+            <div>
               <button
                 type="button"
                 aria-expanded={mobileProductExpanded}
                 onClick={() => setMobileProductExpanded(!mobileProductExpanded)}
-                style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 0', minHeight: 44, fontSize: 16, fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border-faint)' }}
+                className={`${s.mobileTrigger}${mobileProductExpanded ? ` ${s.open}` : ''}`}
               >
                 Product
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ transform: mobileProductExpanded ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M3 6l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
               {mobileProductExpanded && (
-                <div style={{ paddingTop: 8, paddingBottom: 8 }}>
-                  <p style={{ ...colLabel, margin: '8px 0 8px' }}>By function</p>
+                <div className={s.mobileGroup}>
+                  <p className={s.colLabel}>By function</p>
                   {byFunction.map((item) => (
-                    <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: 'block', padding: '10px 0', minHeight: 44, boxSizing: 'border-box', fontSize: 15, fontWeight: 500, color: 'var(--text)', textDecoration: 'none' }}>
+                    <Link key={item.label} href={item.href} onClick={closeMobile} className={s.mobileItem}>
                       {item.label}
-                      {item.pill && <span style={{ ...navPill, marginLeft: 8 }}>{item.pill}</span>}
-                      <span style={{ display: 'block', fontSize: 13, color: 'var(--text-muted)', marginTop: 2 }}>{item.description}</span>
+                      {item.pill && <span className={s.pill}>{item.pill}</span>}
+                      <span className={s.mobileDesc}>{item.description}</span>
                     </Link>
                   ))}
-                  <p style={{ ...colLabel, margin: '16px 0 8px' }}>How it works</p>
+                  <p className={s.colLabel} style={{ marginTop: 16 }}>How it works</p>
                   {howItWorks.map((item) => (
-                    <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: 'block', padding: '10px 0', minHeight: 44, boxSizing: 'border-box', fontSize: 15, fontWeight: 500, color: 'var(--text)', textDecoration: 'none' }}>
+                    <Link key={item.label} href={item.href} onClick={closeMobile} className={s.mobileItem}>
                       {item.label}
-                      <span style={{ display: 'block', fontSize: 13, color: 'var(--text-muted)', marginTop: 2 }}>{item.description}</span>
+                      <span className={s.mobileDesc}>{item.description}</span>
+                    </Link>
+                  ))}
+                  <p className={s.colLabel} style={{ marginTop: 16 }}>For</p>
+                  {forWhom.map((item) => (
+                    <Link key={item.label} href={item.href} onClick={closeMobile} className={s.mobileItem}>
+                      {item.label}
                     </Link>
                   ))}
                 </div>
@@ -443,13 +290,13 @@ export default function MegaNav() {
             </div>
 
             {topLinks.map((item) => (
-              <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: 'flex', alignItems: 'center', padding: '14px 0', minHeight: 44, boxSizing: 'border-box', fontSize: 16, fontWeight: 500, color: 'var(--text)', textDecoration: 'none', borderBottom: '1px solid var(--border-faint)' }}>
+              <Link key={item.label} href={item.href} onClick={closeMobile} className={s.mobileLink}>
                 {item.label}
               </Link>
             ))}
 
-            <div style={{ marginTop: 32 }}>
-              <Link href="/demo" className="btn-dark" onClick={() => setMobileOpen(false)} style={{ width: '100%', justifyContent: 'center', padding: '13px 20px', fontSize: 15 }}>
+            <div className={s.mobileCta}>
+              <Link href="/demo" className="btn btn-dark btn-block" onClick={closeMobile}>
                 Book a demo
               </Link>
             </div>

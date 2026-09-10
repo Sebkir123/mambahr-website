@@ -15,49 +15,34 @@ export type NavSection = {
 }
 
 /**
- * Buyer-vocabulary product menu. Two columns:
- *  - "By function": the category terms HR buyers procure against.
- *  - "How it works": the surfaces, translated out of internal nouns.
- * Every href resolves to a real page or an in-page anchor we create.
+ * The Product menu, 14 links in three groups:
+ *  - "By function": the seven workflows, one card each.
+ *  - "How it works": the agent, the desk, the record, the documents.
+ *  - "For": the three buyer-category pages.
+ * Every href resolves to a real page.
  */
 export const byFunction: NavItem[] = [
-  // Descriptions are ONE line in the mega menu, keep ≤ 28 chars so they never wrap.
-  { label: 'Hiring & ATS',          href: '/hiring',       description: 'Req to signed offer, fast',   live: true, icon: 'hiring' },
-  { label: 'Onboarding',            href: '/onboarding',   description: 'Ready before they arrive',    live: true, icon: 'onboarding' },
-  { label: 'Payroll changes',       href: '/payroll',      description: 'Every change in before payday', live: true, icon: 'payroll', pill: 'Deel managed payroll' },
-  { label: 'Time off & leave',      href: '/leave',        description: 'PTO to FMLA, in seconds',     live: true, icon: 'timeoff' },
-  { label: 'Compensation',          href: '/compensation', description: 'Raises priced to your bands', live: true, icon: 'comp' },
-  { label: 'Compliance',            href: '/compliance',   description: 'Every answer cites the law',  live: true, icon: 'compliance' },
-  { label: 'Headcount & RIF',       href: '/rif',          description: 'The hard days, done right',   live: true, icon: 'rif' },
-]
-
-/**
- * The procurement-checklist keywords buyers scan for. Rendered as small
- * tag-chips in the dropdown, exact search phrases, each pointing at the
- * closest existing page. Keyword coverage without new pages.
- */
-export const alsoHandled: { label: string; href: string }[] = [
-  { label: 'Careers page', href: '/job-portal' },
-  { label: 'Job board', href: '/job-portal' },
-  { label: 'Org chart', href: '/people' },
-  { label: 'PTO tracking', href: '/leave' },
-  { label: 'Offer letters', href: '/hiring' },
-  { label: 'E-signatures', href: '/documents' },
-  { label: 'Form I-9 collection', href: '/onboarding' },
-  { label: 'Pay equity', href: '/compensation' },
-  { label: 'EEO self-identification', href: '/compliance' },
-  { label: 'Severance & COBRA', href: '/rif' },
-  { label: 'Employee database', href: '/people' },
-  { label: 'Audit trail', href: '/security' },
+  // Descriptions are ONE line in the mega menu, keep them short so they never wrap.
+  { label: 'Hiring',              href: '/hiring',       description: 'Req to signed offer',         live: true, icon: 'hiring' },
+  { label: 'Onboarding',          href: '/onboarding',   description: 'Ready before they arrive',    live: true, icon: 'onboarding' },
+  { label: 'Payroll',             href: '/payroll',      description: 'Every change in before payday', live: true, icon: 'payroll', pill: 'Deel' },
+  { label: 'Time off & leave',    href: '/leave',        description: 'PTO to FMLA, in seconds',     live: true, icon: 'timeoff' },
+  { label: 'Compensation',        href: '/compensation', description: 'Raises priced to your bands', live: true, icon: 'comp' },
+  { label: 'Compliance',          href: '/compliance',   description: 'Every answer cites the law',  live: true, icon: 'compliance' },
+  { label: 'Headcount & layoffs', href: '/rif',          description: 'The hard days, done right',   live: true, icon: 'rif' },
 ]
 
 export const howItWorks: NavItem[] = [
-  { label: 'The AI agent',        href: '/mamba',      description: 'Works in Slack and the web', live: true, icon: 'agent' },
-  { label: 'Job portal',          href: '/job-portal', description: 'Your careers page, hosted',          live: true, icon: 'hiring' },
-  { label: 'Approvals',           href: '/today',      description: 'Your day in three taps',             live: true, icon: 'today' },
-  { label: 'Employee records',    href: '/people',     description: 'HRIS, org chart, always current',   live: true, icon: 'people' },
-  { label: 'Documents & e-sign',  href: '/documents',  description: 'Generated, signed, filed',           live: true, icon: 'documents' },
-  { label: 'Security',            href: '/security',   description: 'Encrypted, logged, US-resident',     live: true, icon: 'security' },
+  { label: 'How MambaHR works',  href: '/mamba',     description: 'The agent, in Slack and the app', live: true, icon: 'agent' },
+  { label: 'To do',              href: '/today',     description: 'The decisions that need you',     live: true, icon: 'today' },
+  { label: 'Employee records',   href: '/people',    description: 'The system of record',            live: true, icon: 'people' },
+  { label: 'Documents & e-sign', href: '/documents', description: 'Generated, signed, filed',        live: true, icon: 'documents' },
+]
+
+export const forWhom: NavItem[] = [
+  { label: 'For startups',       href: '/best-hris-for-startups',   description: '', live: true },
+  { label: 'For small business', href: '/hr-software-small-business', description: '', live: true },
+  { label: 'AI HR software',     href: '/ai-hr-software',           description: '', live: true },
 ]
 
 export const companyItems: NavItem[] = [
