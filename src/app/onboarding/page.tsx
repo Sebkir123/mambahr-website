@@ -82,7 +82,7 @@ function DayOneCard() {
 /* ── Feature visual: exit checklist fragment ── */
 const EXIT = [
   { label: 'Final paycheck calculated for California rules', meta: 'Due last day', state: 'done' },
-  { label: 'COBRA notice prepared and queued', meta: 'Benefits', state: 'done' },
+  { label: 'COBRA notice prepared and queued', meta: 'Exit', state: 'done' },
   { label: 'Handover doc collected from manager', meta: 'Knowledge', state: 'done' },
   { label: 'Switch off all logins at 5:00 PM Friday', meta: 'Email · Slack · laptop', state: 'you' },
 ]
