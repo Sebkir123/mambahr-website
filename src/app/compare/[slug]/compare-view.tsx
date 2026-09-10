@@ -23,7 +23,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
     <>
       <MegaNav />
       <RevealInit />
-      <main>
+      <main id="main">
         {/* ── Hero ── */}
         <section className="ch">
           <div className="aurora" aria-hidden="true"><span className="blob b1" /><span className="blob b2" /></div>
@@ -76,13 +76,13 @@ export default function CompareView({ data }: { data: CompetitorData }) {
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 680px; margin: 24px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
             :global(.ch .btn-p) {
-              display: inline-block; background: var(--text); color: #fff; font-weight: 600; font-size: 15.5px;
+              display: inline-block; background: var(--text); color: #fff; font-weight: 600; font-size: 16px;
               padding: 14px 28px; border-radius: 999px; text-decoration: none;
               box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22); transition: transform 0.15s ease;
             }
             :global(.ch .btn-p:hover) { transform: translateY(-2px); }
             :global(.ch .btn-g) {
-              display: inline-block; color: var(--text); font-weight: 600; font-size: 15.5px;
+              display: inline-block; color: var(--text); font-weight: 600; font-size: 16px;
               padding: 14px 24px; border-radius: 999px; border: 1px solid var(--border-mid);
               background: rgba(255, 255, 255, 0.6); text-decoration: none;
             }
@@ -216,7 +216,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
                 var(--bg);
             }
             .money-t { font-family: var(--font-serif); font-size: clamp(16.5px, 1.9vw, 19.5px); line-height: 1.45; color: var(--text); margin: 0; max-width: 620px; letter-spacing: -0.01em; }
-            :global(.tb .money-a) { flex: none; font-size: 13.5px; font-weight: 700; color: var(--gold-dark); text-decoration: none; white-space: nowrap; }
+            :global(.tb .money-a) { flex: none; font-size: 14px; font-weight: 700; color: var(--gold-dark); text-decoration: none; white-space: nowrap; }
             :global(.tb .money-a:hover) { text-decoration: underline; }
           `}</style>
         </section>
@@ -276,7 +276,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
             .d {
               display: inline-block;
               font-family: var(--font-mono);
-              font-size: 10.5px;
+              font-size: 12px;
               font-weight: 600;
               text-transform: uppercase;
               letter-spacing: 0.06em;

@@ -28,7 +28,7 @@ export default function Logos() {
         }
         .kicker {
           font-family: var(--font-mono);
-          font-size: 11.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.14em;
           color: var(--text-faint);
@@ -49,7 +49,7 @@ export default function Logos() {
           font-size: clamp(15px, 1.6vw, 18px);
           color: var(--text-faint);
           letter-spacing: -0.01em;
-          opacity: 0.72;
+          opacity: 0.92;
           filter: saturate(0);
           transition: opacity 0.2s ease, color 0.2s ease;
         }
@@ -87,7 +87,7 @@ export default function Logos() {
           font-size: 16px;
         }
         .sub {
-          font-size: 13.5px;
+          font-size: 14px;
           color: var(--text-faint);
           margin: 22px 0 0;
         }

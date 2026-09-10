@@ -31,7 +31,7 @@
 }
 .sectionLabel {
   font-family: var(--font-mono), monospace;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -130,7 +130,7 @@
 }
 .plateTag {
   font-family: var(--font-mono), monospace;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;

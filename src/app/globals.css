@@ -11,10 +11,10 @@
   /* Text */
   --color-text:         #1A1A19;
   --color-text-muted:   #3D3D3A;
-  --color-text-faint:   #7A7A75;
+  --color-text-faint:   #66665F;
 
   /* Brand — gold accent + iris-violet AI secondary */
-  --color-gold:         #8A6535;
+  --color-gold:         #7A5A2E;
   --color-gold-dark:    #6B4E26;
   --color-gold-light:   #C49A6C;
   --color-gold-tint:    #F2ECE0;
@@ -28,8 +28,8 @@
   --color-border-faint: rgba(0,0,0,0.07);
 
   /* Status */
-  --color-green:        #16A34A;
-  --color-red:          #DC2626;
+  --color-green:        #1A7A3E;
+  --color-red:          #C42020;
 }
 
 :root {
@@ -42,9 +42,9 @@
   --text:         #1A1A19;
   --ink:          #14110C;   /* dark panel ground */
   --text-muted:   #3D3D3A;
-  --text-faint:   #7A7A75;
+  --text-faint:   #66665F;
 
-  --gold:         #8A6535;
+  --gold:         #7A5A2E;
   --gold-dark:    #6B4E26;
   --gold-light:   #C49A6C;
   --gold-tint:    #F2ECE0;
@@ -115,7 +115,7 @@ html {
   color: var(--text-muted);
 }
 .t-body {
-  font-size: 16.5px;
+  font-size: 17px;
   line-height: 1.6;
   color: var(--text-muted);
 }
@@ -144,6 +144,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
+
+/* Skip link: first tab stop on every page, visible only while focused */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 10000;
+  padding: 12px 18px;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transform: translateY(-200%);
+  opacity: 0;
+}
+.skip-link:focus-visible {
+  transform: none;
+  opacity: 1;
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
 
 /* Typography */
 h1, h2, h3 {
@@ -621,6 +645,8 @@ h4, h5, h6 {
   to { opacity: 1; transform: none; }
 }
 .nav-dropdown { animation: navDropIn 0.22s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.nav-burger { display: inline-flex; }
+@media (min-width: 768px) { .nav-burger { display: none; } }
 .nav-rail-link { transition: background 0.15s ease; }
 .nav-rail-link:hover { background: var(--bg-warm); }
 .nav-kw { transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease; }
@@ -640,7 +666,7 @@ h4, h5, h6 {
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -680,3 +706,20 @@ h4, h5, h6 {
   .mamba-chip.working .mc-i { animation: none; }
 }
 
+/* Reduced motion: every looping or decorative keyframe stands still */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track,
+  .typing-dot,
+  .gold-pulse,
+  .shimmer,
+  .caret,
+  .status-flash,
+  .progress-fill,
+  .live-arrive,
+  .nav-dropdown {
+    animation: none;
+  }
+  .progress-fill { width: var(--progress, 50%); }
+  .fcta, .fcta .pill { transition: none; }
+}

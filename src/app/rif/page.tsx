@@ -60,7 +60,7 @@ function HeroPlanCard() {
           align-items: center;
           gap: 12px;
           padding: 14px 0;
-          font-size: 14.5px;
+          font-size: 15px;
         }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .check {
@@ -83,7 +83,7 @@ function HeroPlanCard() {
           transform: rotate(45deg);
         }
         .what { flex: none; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .note { flex: 1; min-width: 0; text-align: right; color: var(--text-muted); font-size: 13.5px; }
+        .note { flex: 1; min-width: 0; text-align: right; color: var(--text-muted); font-size: 14px; }
         .row.gold {
           margin-top: 6px;
           background: linear-gradient(90deg, var(--gold-tint), rgba(255, 246, 236, 0));
@@ -101,7 +101,7 @@ function HeroPlanCard() {
         }
         .g-note {
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--gold-dark);
@@ -164,10 +164,10 @@ function RedeployCard() {
         .person { display: flex; align-items: center; gap: 12px; }
         .av { width: 42px; height: 42px; border-radius: 999px; object-fit: cover; flex: none; }
         .p-name { font-size: 15px; font-weight: 700; color: var(--text); }
-        .p-sub { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); margin-top: 2px; }
+        .p-sub { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 2px; }
         .match {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--violet);
@@ -184,9 +184,9 @@ function RedeployCard() {
         }
         .r-row + .r-row { border-top: 1px solid var(--border-faint); }
         .r-main { min-width: 0; }
-        .r-role { display: block; font-size: 14.5px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .r-team { display: block; font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
-        .r-note { flex: none; font-family: var(--font-mono); font-size: 11px; color: var(--color-green); white-space: nowrap; }
+        .r-role { display: block; font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+        .r-team { display: block; font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+        .r-note { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--color-green); white-space: nowrap; }
         .rd-foot {
           margin-top: 12px;
           padding: 12px 14px;
@@ -200,7 +200,7 @@ function RedeployCard() {
         }
         .f-chip {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: #fff;
@@ -257,8 +257,8 @@ function DignityPhoto() {
           border-radius: 999px;
           background: linear-gradient(135deg, var(--gold-pale), var(--gold));
         }
-        .m-t { font-size: 13.5px; font-weight: 700; color: var(--text); }
-        .m-s { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); margin-top: 2px; }
+        .m-t { font-size: 14px; font-weight: 700; color: var(--text); }
+        .m-s { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 2px; }
         @media (max-width: 880px) { .mini { left: 12px; } }
       `}</style>
     </div>
@@ -271,7 +271,7 @@ export default function RIFPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Headcount & RIF"
           title={<>Hard days, <Em>done right.</Em></>}

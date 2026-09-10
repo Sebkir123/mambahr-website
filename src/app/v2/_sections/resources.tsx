@@ -122,7 +122,7 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
         .rs { background: var(--bg); padding-block: clamp(96px, 13vw, 168px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { max-width: none; margin-bottom: clamp(36px, 4vw, 52px); }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 18px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.06; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
         .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 18px 0 0; }
@@ -203,27 +203,27 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
         }
         .cover-brand { position: relative; z-index: 2; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; }
         .cover-brand .m { width: 22px; height: 22px; border-radius: 6px; background: #fff; color: #1A1A19; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 14px; }
-        .cover-kicker { position: relative; z-index: 2; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.55); margin-top: auto; }
+        .cover-kicker { position: relative; z-index: 2; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.55); margin-top: auto; }
         .cover-title { position: relative; z-index: 2; font-family: var(--font-serif); font-size: 30px; line-height: 1.1; margin-top: 10px; letter-spacing: -0.01em; }
-        .cover-foot { position: relative; z-index: 2; font-size: 12.5px; color: rgba(255, 255, 255, 0.5); margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+        .cover-foot { position: relative; z-index: 2; font-size: 13px; color: rgba(255, 255, 255, 0.5); margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.14); }
 
         .content { display: flex; flex-direction: column; padding: 6px 4px; }
         .content h3 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(24px, 2.6vw, 30px); color: var(--text); margin: 0; letter-spacing: -0.01em; }
         .desc { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 14px 0 18px; max-width: 460px; }
         .bullets { list-style: none; padding: 0; margin: 0 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 11px 18px; }
-        .bullets li { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; color: var(--text-muted); line-height: 1.4; }
+        .bullets li { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; color: var(--text-muted); line-height: 1.4; }
         .tick { flex: none; width: 16px; height: 16px; margin-top: 1px; border-radius: 999px; background: var(--gold-tint); border: 1px solid var(--gold-light); position: relative; }
         .tick::after { content: ''; position: absolute; left: 5px; top: 3px; width: 3px; height: 6px; border: solid var(--gold-dark); border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .success { font-size: 15px; line-height: 1.6; color: var(--text); margin: 4px 0 0; }
         .success strong { color: var(--gold-dark); }
 
         .more { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
-        .more-l { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); }
+        .more-l { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); }
         .more-item {
           display: inline-flex;
           align-items: center;
           gap: 12px;
-          font-size: 13.5px;
+          font-size: 14px;
           font-weight: 600;
           color: var(--text-muted);
           border: 1px solid var(--border);
@@ -235,7 +235,7 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
         }
         .soon {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: var(--text-faint);
@@ -249,7 +249,7 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
           transition: transform 0.18s ease, box-shadow 0.18s ease;
         }
         a.more-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md, 0 12px 24px -12px rgba(0,0,0,0.18)); }
-        .get { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--gold-dark); white-space: nowrap; }
+        .get { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--gold-dark); white-space: nowrap; }
         .mini-cover {
           width: 38px;
           height: 48px;
@@ -261,10 +261,11 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 5px 6px;
+          padding: 4px 5px;
+          overflow: hidden;
         }
-        .mini-m { font-family: var(--font-serif); font-size: 11px; color: #fff; }
-        .mini-k { font-family: var(--font-mono); font-size: 6.5px; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255, 255, 255, 0.55); }
+        .mini-m { font-family: var(--font-serif); font-size: 12px; color: #fff; }
+        .mini-k { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; color: rgba(255, 255, 255, 0.55); white-space: nowrap; overflow: hidden; }
         .more-t { max-width: 220px; line-height: 1.3; }
         .arr { color: var(--gold-dark); }
         @media (prefers-reduced-motion: reduce) {

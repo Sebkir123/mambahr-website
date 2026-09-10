@@ -13,7 +13,7 @@ export default function NotFound() {
   return (
     <>
       <MegaNav />
-      <main style={{ paddingTop: 64 }}>
+      <main id="main" style={{ paddingTop: 64 }}>
         <section style={{ background: 'var(--bg-warm)', minHeight: 'calc(100vh - 64px)', display: 'flex', alignItems: 'center', padding: '120px 24px' }}>
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
             <p

@@ -36,7 +36,7 @@ export default function DemoPage() {
     <>
       <MegaNav />
       <RevealInit />
-      <main>
+      <main id="main">
         <section className="dm">
           <div className="aurora" aria-hidden="true"><span className="blob b1" /><span className="blob b2" /></div>
           <span className="v2-grain" />
@@ -67,6 +67,7 @@ export default function DemoPage() {
                       A real reply from a real email, not a no-reply, not a sequence.
                       We&rsquo;ll send times for this week.
                     </p>
+                    <p className="d-s">Check your inbox: we reply from hello@mambahr.com within one business day.</p>
                   </div>
                 ) : (
                   <>
@@ -135,7 +136,7 @@ export default function DemoPage() {
 
             .done { text-align: center; padding: clamp(16px, 2vw, 24px) 0; }
             .d-t { font-family: var(--font-serif); font-weight: 400; font-size: clamp(24px, 2.8vw, 32px); line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin: 18px 0 0; }
-            .d-s { font-size: 14.5px; line-height: 1.6; color: var(--text-muted); margin: 12px auto 0; max-width: 340px; }
+            .d-s { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 12px auto 0; max-width: 340px; }
 
             @media (max-width: 880px) {
               .wrap { grid-template-columns: 1fr; }

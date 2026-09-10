@@ -51,7 +51,7 @@ export default function PeopleBand() {
           font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #8A6535;
+          color: #7A5A2E;
           margin: 0 0 18px;
         }
         .title {

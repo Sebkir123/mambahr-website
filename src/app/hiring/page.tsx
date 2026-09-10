@@ -69,11 +69,11 @@ function PipelineCard() {
           border-bottom: 1px solid var(--border-faint);
         }
         .role { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .meta { font-size: 12.5px; color: var(--text-faint); margin-top: 3px; }
+        .meta { font-size: 13px; color: var(--text-faint); margin-top: 3px; }
         .prog { display: flex; align-items: center; gap: 12px; padding: 11px 20px; border-bottom: 1px solid var(--border-faint); }
         .prog-bar { flex: 1; height: 5px; border-radius: 999px; background: var(--border-faint); overflow: hidden; }
         .prog-bar i { display: block; height: 100%; width: 80%; border-radius: 999px; background: linear-gradient(90deg, var(--gold-mid), var(--violet)); }
-        .prog-t { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); white-space: nowrap; }
+        .prog-t { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); white-space: nowrap; }
         .avs { display: flex; flex: none; }
         .avs img { width: 24px; height: 24px; border-radius: 999px; object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); margin-left: -7px; background: var(--bg-elevated); }
         .avs img:first-child { margin-left: 0; }
@@ -91,7 +91,7 @@ function PipelineCard() {
         .tag {
           flex: none;
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--color-green);
@@ -181,21 +181,21 @@ function CareersSite() {
           display: flex; align-items: center; justify-content: center;
         }
         .co-n { font-size: 15px; font-weight: 700; color: var(--text); }
-        .co-t { font-size: 12.5px; color: var(--text-muted); margin-top: 1px; }
+        .co-t { font-size: 13px; color: var(--text-muted); margin-top: 1px; }
         .job { display: flex; align-items: center; gap: 12px; padding: 14px 4px; }
         .job + .job { border-top: 1px solid var(--border-faint); }
         .j-main { flex: 1; min-width: 0; }
-        .j-t { font-size: 14.5px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+        .j-t { font-size: 15px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
         .j-hot {
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           color: var(--gold);
           background: var(--gold-tint);
           border: 1px solid rgba(138, 101, 53, 0.22);
           border-radius: 999px;
           padding: 2px 8px;
         }
-        .j-m { font-size: 12.5px; color: var(--text-muted); margin-top: 3px; }
+        .j-m { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
         .j-apply {
           flex: none;
           font-size: 13px;
@@ -205,7 +205,7 @@ function CareersSite() {
           border-radius: 999px;
           padding: 8px 18px;
         }
-        .foot { font-size: 11.5px; color: var(--text-faint); padding-top: 14px; border-top: 1px solid var(--border-faint); margin-top: 2px; }
+        .foot { font-size: 12px; color: var(--text-faint); padding-top: 14px; border-top: 1px solid var(--border-faint); margin-top: 2px; }
       `}</style>
     </div>
   )
@@ -259,7 +259,7 @@ export default function HiringPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Hiring & ATS"
           title={<>Hiring, <Em>handled.</Em></>}

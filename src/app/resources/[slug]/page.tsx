@@ -41,7 +41,7 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
           DRAFT PREVIEW, not visible to the public until published
         </div>
       )}
-      <main className={styles.main}>
+      <main id="main" className={styles.main}>
         <div className={styles.aurora} aria-hidden="true"><span className={styles.blob} /><span className={styles.blob2} /></div>
         <div className={styles.wrap}>
           {/* ── Cover ── */}

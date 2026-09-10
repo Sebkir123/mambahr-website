@@ -31,12 +31,12 @@ export default function StickyCta() {
   const show = past && !nearEnd && !dismissed
 
   return (
-    <div className={`fcta${show ? ' show' : ''}`} aria-hidden={!show}>
-      <a href="/demo" className="pill">
+    <div className={`fcta${show ? ' show' : ''}`} aria-hidden={!show} inert={!show}>
+      <a href="/demo" className="pill" tabIndex={show ? 0 : -1}>
         <span className="m" aria-hidden="true">M</span>
         Book a demo
       </a>
-      <button className="x" type="button" aria-label="Dismiss" onClick={() => setDismissed(true)}>
+      <button className="x" type="button" aria-label="Dismiss" tabIndex={show ? 0 : -1} onClick={() => setDismissed(true)}>
         <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 1.5l7 7m0-7l-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
       </button>
 
@@ -66,7 +66,7 @@ export default function StickyCta() {
           background: #1a1a19;
           color: #fff;
           font-weight: 600;
-          font-size: 14.5px;
+          font-size: 15px;
           padding: 12px 20px 12px 12px;
           border-radius: 999px;
           box-shadow: 0 10px 30px rgba(20, 18, 14, 0.28);

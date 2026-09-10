@@ -167,6 +167,7 @@ export default function RootLayout({
         />
       </head>
       <body style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
+        <a href="#main" className="skip-link">Skip to content</a>
         <StyledJsxRegistry>{children}</StyledJsxRegistry>
         <SiteTracker />
         {gaId && <AnalyticsGate gaId={gaId} />}

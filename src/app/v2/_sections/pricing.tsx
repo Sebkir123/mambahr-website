@@ -58,7 +58,7 @@ export default function Pricing() {
           font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #8A6535;
+          color: #7A5A2E;
           margin: 0 0 18px;
         }
         .title {
@@ -85,7 +85,7 @@ export default function Pricing() {
         }
         .size {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--text-faint);
@@ -127,7 +127,7 @@ export default function Pricing() {
           top: -11px;
           left: 22px;
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: #fff;
@@ -157,7 +157,7 @@ export default function Pricing() {
           color: var(--text-faint);
         }
         .min {
-          font-size: 12.5px;
+          font-size: 13px;
           color: var(--text-faint);
           margin-top: 8px;
         }
@@ -180,7 +180,7 @@ export default function Pricing() {
           display: flex;
           align-items: flex-start;
           gap: 9px;
-          font-size: 13.5px;
+          font-size: 14px;
           color: var(--text-muted);
           line-height: 1.4;
         }
@@ -201,7 +201,7 @@ export default function Pricing() {
           top: 2.5px;
           width: 3px;
           height: 6px;
-          border: solid #8A6535;
+          border: solid #7A5A2E;
           border-width: 0 2px 2px 0;
           transform: rotate(45deg);
         }

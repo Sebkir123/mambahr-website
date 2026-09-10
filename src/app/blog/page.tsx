@@ -110,7 +110,7 @@ export default async function BlogIndex() {
     <>
       <JsonLd data={itemListSchema} />
       <MegaNav />
-      <main className={styles.page}>
+      <main id="main" className={styles.page}>
         <header className={styles.head}>
           <p className="eyebrow">The MambaHR blog</p>
           <h1 className={styles.title}>Notes from the AI HR department.</h1>

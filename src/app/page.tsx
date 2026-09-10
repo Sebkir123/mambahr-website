@@ -51,7 +51,7 @@ export default async function HomePage() {
       <RevealInit />
       <CountUp />
       <StickyCta />
-      <main>
+      <main id="main">
         <Hero />
         <Logos />
         <Statement />

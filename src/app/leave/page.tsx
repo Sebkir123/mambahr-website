@@ -61,7 +61,7 @@ function SlackApprovalCard() {
         .dots i:first-child { background: #f0a59a; }
         .dots i:nth-child(2) { background: #f4ce8e; }
         .dots i:nth-child(3) { background: #a9cfa6; }
-        .chn { font-weight: 700; font-size: 13.5px; color: var(--text); }
+        .chn { font-weight: 700; font-size: 14px; color: var(--text); }
         .hash { color: var(--text-faint); margin-right: 1px; }
         .bar :global(.mamba-chip) { margin-left: auto; }
         .feed { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 20px; }
@@ -79,10 +79,10 @@ function SlackApprovalCard() {
         .m-body { min-width: 0; }
         .m-h { display: flex; align-items: baseline; gap: 8px; }
         .m-h b { font-size: 14px; color: var(--text); font-weight: 700; }
-        .m-h time { font-size: 11.5px; color: var(--text-faint); }
+        .m-h time { font-size: 12px; color: var(--text-faint); }
         .apptag {
           font-family: var(--font-mono);
-          font-size: 9px;
+          font-size: 12px;
           font-weight: 600;
           letter-spacing: 0.04em;
           color: var(--text-muted);
@@ -101,8 +101,8 @@ function SlackApprovalCard() {
           max-width: 360px;
         }
         .a-row { display: flex; justify-content: space-between; gap: 16px; padding: 3px 0; }
-        .a-k { font-size: 12.5px; color: var(--text-faint); }
-        .a-v { font-size: 12.5px; color: var(--text); font-weight: 600; }
+        .a-k { font-size: 13px; color: var(--text-faint); }
+        .a-v { font-size: 13px; color: var(--text); font-weight: 600; }
         .a-foot {
           display: flex;
           align-items: center;
@@ -110,11 +110,11 @@ function SlackApprovalCard() {
           margin-top: 9px;
           padding-top: 9px;
           border-top: 1px solid var(--border);
-          font-size: 11.5px;
+          font-size: 12px;
           color: var(--text-faint);
         }
         .ok-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
-        .mono { font-family: var(--font-mono); font-size: 11px; }
+        .mono { font-family: var(--font-mono); font-size: 12px; }
         @media (max-width: 520px) { .bar :global(.mamba-chip) { display: none; } }
       `}</style>
     </div>
@@ -177,7 +177,7 @@ function ParentalLeaveCard() {
         .m-body { min-width: 0; }
         .m-who {
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: var(--text-faint);
@@ -205,14 +205,14 @@ function ParentalLeaveCard() {
         .a-sub {
           display: block;
           margin-top: 6px;
-          font-size: 13.5px;
+          font-size: 14px;
           font-weight: 400;
           color: var(--text-muted);
         }
         .laws { display: flex; gap: 8px; margin-top: 12px; }
         .law {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           font-weight: 600;
           letter-spacing: 0.04em;
           color: var(--gold-dark);
@@ -259,7 +259,7 @@ function VacationPhoto() {
           box-shadow: var(--shadow-float);
           max-width: 250px;
         }
-        .mini-t { font-size: 13.5px; font-weight: 700; color: var(--text); margin-top: 10px; }
+        .mini-t { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 10px; }
         .mini-s { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
         @media (max-width: 880px) { .mini { left: 12px; } }
       `}</style>
@@ -273,7 +273,7 @@ export default function LeavePage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Time off & leave"
           title={<>Time off, <Em>approved.</Em></>}

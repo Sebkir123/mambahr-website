@@ -56,10 +56,10 @@ function PayCycleCard() {
           background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
         }
         .t { font-weight: 700; font-size: 15px; color: var(--text); letter-spacing: -0.01em; }
-        .s { font-size: 12.5px; color: var(--text-faint); margin-top: 2px; }
+        .s { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
         .fmt {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--gold-dark);
@@ -73,8 +73,8 @@ function PayCycleCard() {
         .row + .row { border-top: 1px solid var(--border-faint); }
         .av { width: 32px; height: 32px; border-radius: 999px; object-fit: cover; flex: none; }
         .main { flex: 1; min-width: 0; }
-        .who { font-size: 13.5px; font-weight: 600; color: var(--text); }
-        .what { font-size: 12.5px; color: var(--text-muted); margin-top: 1px; }
+        .who { font-size: 14px; font-weight: 600; color: var(--text); }
+        .what { font-size: 13px; color: var(--text-muted); margin-top: 1px; }
         .check { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
         .check::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .foot {
@@ -86,7 +86,7 @@ function PayCycleCard() {
           border-top: 1px solid var(--border-faint);
           background: #FAF6EF;
         }
-        .zero { font-family: var(--font-mono); font-size: 11.5px; color: var(--color-green); font-weight: 600; }
+        .zero { font-family: var(--font-mono); font-size: 12px; color: var(--color-green); font-weight: 600; }
       `}</style>
     </div>
   )
@@ -124,12 +124,12 @@ function DeelRunCard() {
         .av { width: 42px; height: 42px; border-radius: 999px; object-fit: cover; flex: none; }
         .id { flex: 1; min-width: 0; }
         .who { font-size: 15px; font-weight: 700; color: var(--text); }
-        .ev { font-size: 12.5px; color: var(--text-faint); margin-top: 2px; }
+        .ev { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
         .rows { margin-top: 18px; border: 1px solid var(--border-faint); border-radius: 12px; overflow: hidden; background: var(--bg); }
         .r { display: flex; justify-content: space-between; gap: 16px; padding: 10px 14px; }
         .r + .r { border-top: 1px solid var(--border-faint); }
-        .k { font-size: 12.5px; color: var(--text-faint); }
-        .v { font-size: 12.5px; font-weight: 600; color: var(--text); text-align: right; }
+        .k { font-size: 13px; color: var(--text-faint); }
+        .v { font-size: 13px; font-weight: 600; color: var(--text); text-align: right; }
         .foot { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 12px; color: var(--text-muted); }
         .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
       `}</style>
@@ -170,7 +170,7 @@ function PaydayPhoto() {
           box-shadow: var(--shadow-float);
           max-width: 240px;
         }
-        .mini-t { font-size: 13.5px; font-weight: 700; color: var(--text); margin-top: 10px; }
+        .mini-t { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 10px; }
         .mini-s { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
         @media (max-width: 880px) { .mini { left: 12px; } }
       `}</style>
@@ -184,7 +184,7 @@ export default function PayrollPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Payroll changes"
           pill="Deel managed payroll"

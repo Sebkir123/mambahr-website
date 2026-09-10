@@ -29,7 +29,7 @@ export default function DraftNotice({ children }: { children?: React.ReactNode }
         }
         .d-l {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           color: var(--gold-dark);

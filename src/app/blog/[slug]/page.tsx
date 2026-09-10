@@ -108,7 +108,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <JsonLd data={[articleSchema, breadcrumbSchema]} />
       <ViewPing slug={post.slug} />
       <MegaNav />
-      <main className={styles.page}>
+      <main id="main" className={styles.page}>
         <nav className={styles.crumbs} aria-label="Breadcrumb">
           <Link href="/blog" className={styles.crumbLink}>Blog</Link>
           {post.tags?.[0] && <><span className={styles.crumbSep}>/</span><span>{post.tags[0]}</span></>}

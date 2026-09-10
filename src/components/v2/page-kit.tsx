@@ -149,7 +149,7 @@ export function PageHero({
         .hero-pill span {
           display: inline-block;
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--gold-dark);
@@ -183,7 +183,7 @@ export function PageHero({
           background: #1A1A19;
           color: #fff;
           font-weight: 600;
-          font-size: 15.5px;
+          font-size: 16px;
           padding: 14px 28px;
           border-radius: 999px;
           text-decoration: none;
@@ -195,7 +195,7 @@ export function PageHero({
           display: inline-block;
           color: var(--text);
           font-weight: 600;
-          font-size: 15.5px;
+          font-size: 16px;
           padding: 14px 24px;
           border-radius: 999px;
           border: 1px solid var(--border-mid);
@@ -245,7 +245,7 @@ export function PageHero({
           right: 16px;
           bottom: 14px;
           color: #fff;
-          font-size: 14.5px;
+          font-size: 15px;
           font-weight: 600;
           line-height: 1.35;
           letter-spacing: -0.01em;
@@ -327,7 +327,7 @@ export function AgentLoop({
         .al { background: var(--bg); padding-block: clamp(88px, 11vw, 144px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { margin-bottom: clamp(36px, 4vw, 52px); text-align: center; }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
         .card {
@@ -348,7 +348,7 @@ export function AgentLoop({
           background: linear-gradient(90deg, #FBF7EE, #F4F1F9);
           border-bottom: 1px solid var(--border-faint);
         }
-        .card-top-t { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); }
+        .card-top-t { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
         .row {
           display: flex;
           align-items: center;
@@ -357,19 +357,19 @@ export function AgentLoop({
         }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
-        .num { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); width: 22px; flex: none; }
+        .num { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 22px; flex: none; }
         .rowav { flex: none; width: 26px; height: 26px; border-radius: 999px; object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); }
         .mark { flex: none; width: 18px; height: 18px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #8A6535); }
+        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #7A5A2E); }
         .main { flex: 1; min-width: 0; }
         .lbl { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .desc { font-size: 13.5px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
-        .time { flex: none; font-family: var(--font-mono); font-size: 11px; color: var(--color-green); white-space: nowrap; }
+        .desc { font-size: 14px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
+        .time { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--color-green); white-space: nowrap; }
         .who {
           flex: none;
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: #6A5DA6;
@@ -378,7 +378,7 @@ export function AgentLoop({
           padding: 4px 10px;
           white-space: nowrap;
         }
-        .who.you { color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+        .who.you { color: #7A5A2E; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
         @media (max-width: 640px) {
           .time { display: none; }
           .row { flex-wrap: wrap; }
@@ -439,17 +439,17 @@ export function FeatureSplit({
         .wrap.flip { grid-template-columns: 1.05fr 0.95fr; }
         .wrap.flip .copy { order: 2; }
         .wrap.flip .stage { order: 1; }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 18px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(27px, 3vw, 38px); line-height: 1.08; letter-spacing: -0.02em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 18px 0 0; max-width: 460px; }
         .points { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-direction: column; gap: 12px; }
-        .points li { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; line-height: 1.5; color: var(--text-muted); }
+        .points li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 1.5; color: var(--text-muted); }
         .tick { flex: none; width: 17px; height: 17px; margin-top: 2px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
         .tick::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3px; height: 7px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
         :global(.fs .more) {
           display: inline-block;
           margin-top: 24px;
-          font-size: 14.5px;
+          font-size: 15px;
           font-weight: 700;
           color: var(--gold-dark);
           text-decoration: none;
@@ -519,12 +519,12 @@ export function StatTrio({
           font-size: clamp(38px, 4.2vw, 56px);
           line-height: 1;
           letter-spacing: -0.02em;
-          background: linear-gradient(110deg, #8A6535, #6A5DA6);
+          background: linear-gradient(110deg, #7A5A2E, #6A5DA6);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
         }
-        .lbl { font-size: 13.5px; color: var(--text-muted); margin-top: 12px; line-height: 1.45; font-weight: 500; }
+        .lbl { font-size: 14px; color: var(--text-muted); margin-top: 12px; line-height: 1.45; font-weight: 500; }
         @media (max-width: 640px) { .wrap { grid-template-columns: 1fr; } }
       `}</style>
     </section>
@@ -583,7 +583,7 @@ export function QuoteBand({
           left: 14px;
           bottom: 14px;
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           color: #fff;
           background: linear-gradient(120deg, #B98A4E, #6A5DA6);
           border-radius: 999px;
@@ -618,7 +618,7 @@ export function QuoteBand({
         .tag {
           display: inline-block;
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           color: var(--text-faint);
@@ -696,14 +696,14 @@ export function PageCta({
           color: #fff !important;
           -webkit-text-fill-color: #fff;
         }
-        .s { position: relative; color: rgba(255, 255, 255, 0.92); font-size: 16.5px; margin: 16px 0 28px; }
+        .s { position: relative; color: rgba(255, 255, 255, 0.92); font-size: 17px; margin: 16px 0 28px; }
         .btns { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
         :global(.pc .b) {
           display: inline-block;
           background: #1A1A19;
           color: #fff;
           font-weight: 600;
-          font-size: 15.5px;
+          font-size: 16px;
           padding: 14px 28px;
           border-radius: 999px;
           text-decoration: none;
@@ -716,7 +716,7 @@ export function PageCta({
           background: rgba(255, 255, 255, 0.92);
           color: #1A1A19;
           font-weight: 600;
-          font-size: 15.5px;
+          font-size: 16px;
           padding: 14px 24px;
           border-radius: 999px;
           text-decoration: none;

@@ -55,13 +55,13 @@ function SignedDocCard() {
         .dots b:first-child { background: #f0a59a; }
         .dots b:nth-child(2) { background: #f4ce8e; }
         .dots b:nth-child(3) { background: #a9cfa6; }
-        .addr { margin: 0 auto; font-size: 11.5px; color: var(--text-faint); background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 2px 16px; }
+        .addr { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 2px 16px; }
         .body { padding: 16px 18px 18px; }
         .d-head { display: flex; align-items: center; gap: 11px; }
         .d-ic { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--gold-tint); color: var(--gold-dark); display: flex; align-items: center; justify-content: center; }
         .d-name { font-size: 14px; font-weight: 700; color: var(--text); }
         .d-meta { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-        .chip { margin-left: auto; flex: none; font-size: 11px; font-weight: 600; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
+        .chip { margin-left: auto; flex: none; font-size: 12px; font-weight: 600; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
         .preview { margin-top: 14px; border: 1px solid var(--border); border-radius: 11px; background: #FDFCF9; padding: 16px 18px 14px; }
         .p-line { height: 7px; border-radius: 999px; background: var(--border-faint); margin-bottom: 8px; }
         .w80 { width: 80%; } .w95 { width: 95%; } .w70 { width: 70%; }
@@ -69,11 +69,11 @@ function SignedDocCard() {
         .sig-block { display: flex; flex-direction: column; }
         .sig-name { font-family: var(--font-serif); font-style: italic; font-size: 19px; color: var(--text); }
         .sig-rule { width: 180px; height: 1px; background: var(--text-faint); margin: 4px 0 5px; }
-        .sig-lbl { font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); }
+        .sig-lbl { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
         .sig-ok { width: 20px; height: 20px; border-radius: 999px; background: var(--color-green); position: relative; }
         .sig-ok::after { content: ''; position: absolute; left: 7px; top: 4px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .filed { margin-top: 11px; border: 1px solid var(--border-faint); border-radius: 9px; background: var(--bg-warm); padding: 8px 13px; }
-        .mono { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+        .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
         .foot { display: flex; align-items: center; gap: 10px; margin-top: 13px; flex-wrap: wrap; }
         .foot-t { font-size: 12px; color: var(--text-muted); }
       `}</style>
@@ -119,24 +119,24 @@ function AckTracker() {
         .ack { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 20px 20px 16px; box-shadow: var(--shadow-float); }
         .a-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
         .a-t { font-family: var(--font-serif); font-size: 18px; color: var(--text); }
-        .a-live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 999px; padding: 3px 9px; }
+        .a-live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 999px; padding: 3px 9px; }
         .a-live i { width: 6px; height: 6px; border-radius: 999px; background: var(--violet); }
         .pol { border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; background: var(--bg-warm); }
         .pol-top { display: flex; align-items: baseline; justify-content: space-between; }
-        .pol-name { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .pol-name { font-size: 14px; font-weight: 700; color: var(--text); }
         .pol-pct { font-family: var(--font-serif); font-size: 21px; color: var(--gold-dark); }
         .bar-track { height: 7px; border-radius: 999px; background: #E6D3BC; margin-top: 10px; overflow: hidden; }
         .bar-fill { display: block; width: 94%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--gold-mid), var(--gold)); }
-        .pol-meta { display: flex; justify-content: space-between; gap: 10px; margin-top: 9px; font-size: 11.5px; color: var(--text-muted); flex-wrap: wrap; }
-        .mono { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); }
+        .pol-meta { display: flex; justify-content: space-between; gap: 10px; margin-top: 9px; font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
+        .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
         .rows { margin-top: 12px; }
-        .row { display: flex; align-items: center; gap: 9px; padding: 8px 4px; font-size: 12.5px; }
+        .row { display: flex; align-items: center; gap: 9px; padding: 8px 4px; font-size: 13px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .row img { width: 24px; height: 24px; border-radius: 999px; object-fit: cover; }
         .r-name { font-weight: 600; color: var(--text); }
         .r-s { color: var(--gold-dark); flex: 1; text-align: right; }
         .r-s.ok { color: var(--color-green); }
-        .r-t { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); width: 64px; text-align: right; }
+        .r-t { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 64px; text-align: right; }
       `}</style>
     </div>
   )
@@ -161,8 +161,8 @@ function RetrievalStage() {
         .float { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 13px; padding: 12px 18px 12px 14px; box-shadow: var(--shadow-md); max-width: calc(100% - 36px); }
         .f-check { flex: none; width: 20px; height: 20px; border-radius: 999px; background: var(--color-green); position: relative; }
         .f-check::after { content: ''; position: absolute; left: 7px; top: 4px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .f-t { font-size: 13.5px; font-weight: 700; color: var(--text); }
-        .f-s { font-size: 11.5px; color: var(--text-muted); margin-top: 1px; }
+        .f-t { font-size: 14px; font-weight: 700; color: var(--text); }
+        .f-s { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
       `}</style>
     </div>
   )
@@ -174,7 +174,7 @@ export default function DocumentsPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Documents & e-sign"
           title={<>Signed and <Em>filed.</Em></>}
