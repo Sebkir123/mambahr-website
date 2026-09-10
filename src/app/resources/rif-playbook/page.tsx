@@ -12,7 +12,7 @@ import s from './rif-playbook.module.css'
 // Gated lead magnet: reached only via a per-recipient ?k= token emailed after
 // the form capture. Never indexed, never in the sitemap.
 export const metadata: Metadata = {
-  title: 'The Ultimate RIF Playbook | MambaHR',
+  title: 'The layoff playbook | MambaHR',
   description: 'A people leader’s field guide to running a defensible reduction in force.',
   robots: { index: false, follow: false, noarchive: true, googleBot: { index: false, follow: false } },
 }
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic'
 
 const GUIDE_SLUG = 'rif-playbook'
-const FOOTER = 'The Ultimate RIF Playbook'
+const FOOTER = 'The layoff playbook'
 
 // Validate the field-guide token → its lead, or null. Only this guide's tokens.
 async function resolveGuide(token: string | undefined) {
@@ -115,7 +115,7 @@ export default async function RifPlaybookPage({
   return (
     <div className={s.deck}>
       <div className={s.toolbar}>
-        <span className={s.toolbarTitle}>The Ultimate RIF Playbook</span>
+        <span className={s.toolbarTitle}>The layoff playbook</span>
         <DownloadButton />
       </div>
 
@@ -128,9 +128,9 @@ export default async function RifPlaybookPage({
               <span className={s.logoWord}>MambaHR</span>
             </div>
             <div className={s.coverMain}>
-              <div className={s.coverKicker}>The Ultimate</div>
+              <div className={s.coverKicker}>The</div>
               <h1 className={s.coverTitle}>
-                RIF<span className={s.accent}>Playbook</span>
+                Layoff<span className={s.accent}>Playbook</span>
               </h1>
               <div className={s.coverRule} />
               <p className={s.coverSub}>
@@ -153,17 +153,17 @@ export default async function RifPlaybookPage({
               </h2>
             </div>
             <p className={s.p} style={{ marginTop: '2cqw' }}>
-              Let&rsquo;s be real, <strong>layoffs are brutal</strong>. No one wants to do them, and when
+              <strong>Layoffs are brutal.</strong> No one wants to do them, and when
               they&rsquo;re done wrong the damage isn&rsquo;t just legal, it&rsquo;s personal. Yet most teams still
-              run RIFs on spreadsheets that go out of sync, manager inputs buried in Slack, last-minute legal
-              redlines, and no audit trail for why decisions were made.
+              run layoffs on spreadsheets that go out of sync. Manager inputs sit buried in Slack, legal
+              redlines arrive the night before, and nobody can say why a decision was made.
             </p>
             <div className={s.leadLabel}>Here&rsquo;s what you&rsquo;ll take away</div>
             <ul className={s.takeaways}>
               <li className={s.takeaway}>A compliance-first process that removes guesswork</li>
-              <li className={s.takeaway}>Structured rationale + scoring frameworks to reduce bias</li>
+              <li className={s.takeaway}>Structured reasons and scoring frameworks to reduce bias</li>
               <li className={s.takeaway}>Templates for role selection, manager messaging, and documentation</li>
-              <li className={s.takeaway}>Legal-ready agreement language and post-RIF checklists</li>
+              <li className={s.takeaway}>Legal-ready agreement language and post-layoff checklists</li>
             </ul>
           </div>
           <Rail photo="/v2-people/team2.jpg">
@@ -178,7 +178,7 @@ export default async function RifPlaybookPage({
         <div className={s.content}>
           <div className={s.body}>
             <h2 className={s.title}>
-              Our proven <span className={s.accent}>RIF workflow</span>
+              Our proven <span className={s.accent}>layoff process</span>
             </h2>
             <p className={s.sub}>Seven steps, one system of record, start to finish.</p>
             <div className={s.flow}>
@@ -193,7 +193,7 @@ export default async function RifPlaybookPage({
             </div>
           </div>
           <Rail>
-            This entire workflow runs <em>inside MambaHR</em>.
+            This entire process runs <em>inside MambaHR</em>.
           </Rail>
         </div>
         <Chrome page={3} />
@@ -208,7 +208,7 @@ export default async function RifPlaybookPage({
             </h2>
             <p className={s.sub}>The federal floor for any reduction in force.</p>
             <div className={s.checklist}>
-              {['WARN Act', 'OWBPA (age 40+)', 'ADEA', 'Final pay', 'COBRA', 'Return of property'].map((c) => (
+              {['WARN Act notice', 'OWBPA age-waiver rules (40+)', 'ADEA', 'Final pay', 'COBRA notice', 'Return of property'].map((c) => (
                 <div key={c} className={s.checkItem}>
                   <span className={s.checkbox} />
                   {c}
@@ -217,7 +217,7 @@ export default async function RifPlaybookPage({
             </div>
           </div>
           <Rail>
-            MambaHR&rsquo;s separation template starts from these clauses; <em>your counsel finalises it</em>.
+            MambaHR&rsquo;s separation template starts from these clauses; <em>your counsel finalizes it</em>.
           </Rail>
         </div>
         <Chrome page={4} />
@@ -228,13 +228,13 @@ export default async function RifPlaybookPage({
         <div className={s.content}>
           <div className={s.body}>
             <h2 className={s.title}>
-              Rationale types <span className={s.accent}>you can use</span>
+              Business reasons <span className={s.accent}>you can use</span>
             </h2>
-            <p className={s.sub}>Document the business rationale for each impacted role, clearly and consistently.</p>
+            <p className={s.sub}>Document the business reason for each impacted role, clearly and consistently.</p>
             <table className={s.table}>
               <thead>
                 <tr>
-                  <th>Rationale</th>
+                  <th>Reason</th>
                   <th>Example</th>
                 </tr>
               </thead>
@@ -269,11 +269,11 @@ export default async function RifPlaybookPage({
             <h2 className={s.title}>
               Score selection <span className={s.accent}>without bias</span>
             </h2>
-            <p className={s.sub}>Managers rate each role on the same scale | record the scores in the RIF room.</p>
+            <p className={s.sub}>Managers rate each role on the same scale, and MambaHR records the scores.</p>
             <table className={s.table}>
               <thead>
                 <tr>
-                  <th>KPI rating (1–5)</th>
+                  <th>Results rating (1–5)</th>
                   <th>Soft skills (1–5)</th>
                   <th>Selection score (avg)</th>
                 </tr>
@@ -290,7 +290,7 @@ export default async function RifPlaybookPage({
             </table>
           </div>
           <Rail>
-            Managers input rationale &amp; ratings | the RIF room <em>keeps the record</em>.
+            Managers enter reasons and ratings, and MambaHR <em>keeps the record</em>.
           </Rail>
         </div>
         <Chrome page={6} />
@@ -382,7 +382,7 @@ export default async function RifPlaybookPage({
             </div>
           </div>
           <Rail>
-            MambaHR&rsquo;s separation template starts from every clause shown here; <em>your counsel finalises it</em>.
+            MambaHR&rsquo;s separation template starts from every clause shown here; <em>your counsel finalizes it</em>.
           </Rail>
         </div>
         <Chrome page={9} />
@@ -410,7 +410,7 @@ export default async function RifPlaybookPage({
             </div>
           </div>
           <Rail>
-            Pre-written templates guide <em>every RIF conversation</em>.
+            Pre-written templates guide <em>every layoff conversation</em>.
           </Rail>
         </div>
         <Chrome page={10} />
@@ -421,9 +421,9 @@ export default async function RifPlaybookPage({
         <div className={s.content}>
           <div className={s.body}>
             <h2 className={s.title}>
-              Final steps for a <span className={s.accent}>compliant RIF</span>
+              Final steps for a <span className={s.accent}>compliant layoff</span>
             </h2>
-            <p className={s.sub}>The items HR must confirm | MambaHR tracks them automatically.</p>
+            <p className={s.sub}>The items HR must confirm. MambaHR tracks them automatically.</p>
             <div className={s.checklist}>
               {[
                 'Final pay',
@@ -431,7 +431,7 @@ export default async function RifPlaybookPage({
                 'COBRA',
                 'OWBPA',
                 'State-specific requirements',
-                'HRIS + payroll updates',
+                'Records and payroll updates',
               ].map((c) => (
                 <div key={c} className={s.checkItem}>
                   <span className={s.checkbox} />
@@ -441,7 +441,7 @@ export default async function RifPlaybookPage({
             </div>
           </div>
           <Rail photo="/v2-people/team2.jpg">
-            The RIF room tracks <em>every item on this list</em>.
+            MambaHR tracks <em>every item on this list</em>.
           </Rail>
         </div>
         <Chrome page={11} />
@@ -462,7 +462,7 @@ export default async function RifPlaybookPage({
               <li className={s.baItem}>Manager inputs sent over Slack, often incomplete</li>
               <li className={s.baItem}>Spreadsheets passed between HR, Legal, and Finance</li>
               <li className={s.baItem}>Legal reviewing documents the night before</li>
-              <li className={s.baItem}>No audit trail or consistency in rationale or pay</li>
+              <li className={s.baItem}>No audit trail or consistency in reasons or pay</li>
               <li className={s.baItem}>HR left chasing answers and updates manually</li>
             </ul>
           </div>
@@ -470,8 +470,8 @@ export default async function RifPlaybookPage({
             <h3 className={s.baTitle}>After MambaHR</h3>
             <p className={s.baTag}>Structure, clear options, generated PDFs, tracking</p>
             <ul className={s.baList}>
-              <li className={s.baItem}>Managers select rationale and input ratings in one place</li>
-              <li className={s.baItem}>Department sheets sync to the RIF room</li>
+              <li className={s.baItem}>Managers select the reason and enter ratings in one place</li>
+              <li className={s.baItem}>Department sheets sync into MambaHR</li>
               <li className={s.baItem}>Agreements + OWBPA disclosures generated automatically</li>
               <li className={s.baItem}>Cost, notice dates, and impact tracked in one place</li>
               <li className={s.baItem}>Everything documented, stored, and audit-ready</li>
@@ -494,11 +494,11 @@ export default async function RifPlaybookPage({
             </h2>
             <p className={s.p}>
               MambaHR runs a compliant, defensible, people-first layoff, without spreadsheets, scattered
-              inputs, or last-minute legal panic. From structured manager rationale to OWBPA-ready severance
+              inputs, or last-minute legal panic. From structured manager reasons to age-waiver-ready (OWBPA) severance
               agreements, it prepares every step for your approval and shows the cost before you commit.
             </p>
             <a className={s.ctaBtn} href="https://mambahr.com">
-              Get started at mambahr.com →
+              Get started at mambahr.com
             </a>
           </div>
           <div className={s.ctaPhoto} style={{ backgroundImage: 'url(/v2-people/team.jpg)' }} />

@@ -14,7 +14,7 @@ import { createMemoryLimiter, durableRateLimit, getClientIp } from '@/lib/rate-l
 
 // Guide catalog, slug → public title + gated route path.
 const GUIDES: Record<string, { title: string; path: string }> = {
-  'rif-playbook': { title: 'The Defensible Layoff Playbook', path: '/resources/rif-playbook' },
+  'rif-playbook': { title: 'The layoff playbook', path: '/resources/rif-playbook' },
 }
 const SITE_URL = 'https://mambahr.com'
 

@@ -84,7 +84,7 @@ const sections: LegalSection[] = [
         <p>
           <strong>We do not store your IP address.</strong> It is used in the moment to derive the
           approximate location and network above, and to rate-limit abuse, then discarded. What we
-          keep is a salted, truncated one-way hash of it, which lets us recognise repeat requests
+          keep is a salted, truncated one-way hash of it, which lets us recognize repeat requests
           in a session without holding the address itself.
         </p>
         <p>
@@ -289,13 +289,13 @@ const sections: LegalSection[] = [
         <p>
           California residents have rights under the CCPA, as amended by the CPRA, to know, delete,
           and correct personal information, to opt out of its sale or sharing, and not to be
-          treated differently for exercising them. We honour all of these{' '}
+          treated differently for exercising them. We honor all of these{' '}
           <strong>whether or not we currently meet the statute&rsquo;s business thresholds</strong>,
           because they are the right default. As set out above, we do not sell or share personal
           information, so there is nothing to opt out of.
         </p>
         <p>
-          We honour <strong>Global Privacy Control</strong> and Do Not Track signals. If your
+          We honor <strong>Global Privacy Control</strong> and Do Not Track signals. If your
           browser or extension sends either, we record nothing: no identifier is created, no
           analytics beacon is sent, and no third-party analytics script is loaded for your visit.
         </p>
@@ -304,7 +304,7 @@ const sections: LegalSection[] = [
           <a href="mailto:hello@mambahr.com?subject=Privacy%20request">hello@mambahr.com</a> with{' '}
           <strong>&ldquo;Privacy request&rdquo;</strong> in the subject line, from the address you
           gave us or telling us which address to look up. We will respond within 45 days. You may
-          use an authorised agent; we will ask for proof of their authority.
+          use an authorized agent; we will ask for proof of their authority.
         </p>
       </>
     ),

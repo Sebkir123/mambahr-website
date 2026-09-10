@@ -67,7 +67,7 @@ const sections: LegalSection[] = [
         <p>You are welcome to read, quote with attribution, and share what we publish. Please do not:</p>
         <ul>
           <li>Scrape, crawl, or harvest the site beyond ordinary search-engine indexing</li>
-          <li>Try to break, overload, or gain unauthorised access to any part of it</li>
+          <li>Try to break, overload, or gain unauthorized access to any part of it</li>
           <li>Submit anything false, or someone else&rsquo;s details, through our forms</li>
           <li>Republish our guides as your own, or resell them</li>
           <li>Use the site to develop a competing product by copying its content wholesale</li>
@@ -85,7 +85,7 @@ const sections: LegalSection[] = [
     body: (
       <p>
         When you send us your details through a form, you confirm they are yours or that you are
-        authorised to share them, and you allow us to contact you about your request. We handle
+        authorized to share them, and you allow us to contact you about your request. We handle
         those details as described in our <Link href="/privacy">Privacy Policy</Link>. You can ask
         us to delete them at any time.
       </p>
