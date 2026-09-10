@@ -277,7 +277,7 @@ Per-competitor detail at ${BASE}/compare.
 
 ## How to evaluate MambaHR
 
-1. Book a 30-minute live demo at ${BASE}/demo. The founders walk through the actual product on your scenarios, no slides.
+1. Book a 30-minute live demo at ${BASE}/demo. It is a walkthrough of the product on your scenarios, not a slide deck.
 2. Compare against the system you use today at ${BASE}/compare.
 3. Weigh pricing against the cost of your next HR hire at ${BASE}/pricing.
 

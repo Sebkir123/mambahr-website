@@ -153,21 +153,19 @@ export default async function RifPlaybookPage({
               </h2>
             </div>
             <p className={s.p} style={{ marginTop: '2cqw' }}>
-              <strong>Layoffs are brutal.</strong> No one wants to do them, and when
-              they&rsquo;re done wrong the damage isn&rsquo;t just legal, it&rsquo;s personal. Yet most teams still
-              run layoffs on spreadsheets that go out of sync. Manager inputs sit buried in Slack, legal
+              <strong>Most teams still run layoffs on spreadsheets that go out of sync.</strong> Manager inputs sit buried in Slack, legal
               redlines arrive the night before, and nobody can say why a decision was made.
             </p>
             <div className={s.leadLabel}>Here&rsquo;s what you&rsquo;ll take away</div>
             <ul className={s.takeaways}>
-              <li className={s.takeaway}>A compliance-first process that removes guesswork</li>
+              <li className={s.takeaway}>A compliance-first process, step by step</li>
               <li className={s.takeaway}>Structured reasons and scoring frameworks to reduce bias</li>
               <li className={s.takeaway}>Templates for role selection, manager messaging, and documentation</li>
               <li className={s.takeaway}>Legal-ready agreement language and post-layoff checklists</li>
             </ul>
           </div>
           <Rail photo="/v2-people/team2.jpg">
-            Built for the hardest day, so you only need to run this process <em>once</em>.
+            Seven steps, from defining scope through offboarding.
           </Rail>
         </div>
         <Chrome page={2} />
@@ -178,7 +176,7 @@ export default async function RifPlaybookPage({
         <div className={s.content}>
           <div className={s.body}>
             <h2 className={s.title}>
-              Our proven <span className={s.accent}>layoff process</span>
+              The <span className={s.accent}>layoff process</span>
             </h2>
             <p className={s.sub}>Seven steps, one system of record, start to finish.</p>
             <div className={s.flow}>
