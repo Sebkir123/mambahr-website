@@ -51,7 +51,7 @@
   width: min(900px, calc(100% + 180px));
   margin-left: calc((min(900px, 100% + 180px) - 100%) / -2);
 }
-.coverImg { width: 100%; display: block; }
+.coverImg { width: 100%; height: auto; display: block; }
 
 /* ── Prose ── */
 .prose {

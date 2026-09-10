@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
@@ -25,12 +26,19 @@ function hueFor(slug: string): number {
 // resolve against the same hashed class names.
 function Cover({ post, variant }: { post: Post; variant: 'lead' | 'card' }) {
   if (post.cover_image_url) {
+    // Covers are 16:10 boxes; width/height give the intrinsic ratio and
+    // `sizes` keeps the grid at roughly 336px wide on desktop. The lead is
+    // above the fold (it is the page's LCP), the grid loads lazily.
+    const lead = variant === 'lead'
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
+      <Image
         src={post.cover_image_url}
         alt={post.title}
-        className={variant === 'lead' ? styles.leadImg : styles.cardImg}
+        width={880}
+        height={550}
+        sizes={lead ? '(max-width: 900px) calc(100vw - 48px), 560px' : '(max-width: 900px) calc(100vw - 48px), 336px'}
+        priority={lead}
+        className={lead ? styles.leadImg : styles.cardImg}
       />
     )
   }

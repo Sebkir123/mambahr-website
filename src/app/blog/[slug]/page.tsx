@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
@@ -131,8 +132,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {post.cover_image_url && (
           <div className={styles.cover}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={post.cover_image_url} alt={post.title} className={styles.coverImg} />
+            <Image
+              src={post.cover_image_url}
+              alt={post.title}
+              width={880}
+              height={495}
+              sizes="(max-width: 800px) calc(100vw - 40px), 760px"
+              priority
+              className={styles.coverImg}
+            />
           </div>
         )}
 
