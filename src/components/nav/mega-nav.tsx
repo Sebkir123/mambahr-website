@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useEffect, useState, useRef } from 'react'
+import { ReactNode, useEffect, useState, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -95,6 +95,12 @@ export default function MegaNav() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileProductExpanded, setMobileProductExpanded] = useState(false)
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const navRef = useRef<HTMLElement>(null)
+  const productBtnRef = useRef<HTMLButtonElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const burgerRef = useRef<HTMLButtonElement>(null)
+  const mobilePanelRef = useRef<HTMLDivElement>(null)
+  const wasMobileOpen = useRef(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -109,6 +115,55 @@ export default function MegaNav() {
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
+  // Mobile menu: focus moves into the panel on open and back to the
+  // hamburger on close, so keyboard and screen-reader users never lose
+  // their place behind a full-screen overlay.
+  useEffect(() => {
+    if (mobileOpen) {
+      wasMobileOpen.current = true
+      const first = mobilePanelRef.current?.querySelector<HTMLElement>('a, button')
+      first?.focus()
+    } else if (wasMobileOpen.current) {
+      wasMobileOpen.current = false
+      burgerRef.current?.focus()
+    }
+  }, [mobileOpen])
+
+  const closeProduct = useCallback((returnFocus: boolean) => {
+    if (closeTimeout.current) clearTimeout(closeTimeout.current)
+    setProductOpen(false)
+    if (returnFocus) productBtnRef.current?.focus()
+  }, [])
+
+  // Escape closes whichever disclosure is open and returns focus to its
+  // trigger; a click outside the nav closes the Product panel.
+  useEffect(() => {
+    if (!productOpen && !mobileOpen) return
+    function onKey(e: KeyboardEvent) {
+      if (e.key !== 'Escape') return
+      if (mobileOpen) { setMobileOpen(false); return }
+      const inside = panelRef.current?.contains(document.activeElement) || document.activeElement === productBtnRef.current
+      closeProduct(!!inside)
+    }
+    function onPointer(e: MouseEvent) {
+      if (productOpen && navRef.current && !navRef.current.contains(e.target as Node)) closeProduct(false)
+    }
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('mousedown', onPointer)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('mousedown', onPointer)
+    }
+  }, [productOpen, mobileOpen, closeProduct])
+
+  // Focus leaving the panel (Tab past its last link) closes it without
+  // moving focus, so the tab order continues into the top links.
+  function onPanelBlur(e: React.FocusEvent<HTMLDivElement>) {
+    const next = e.relatedTarget as Node | null
+    if (next && (panelRef.current?.contains(next) || next === productBtnRef.current)) return
+    if (next) setProductOpen(false)
+  }
+
   function openProduct() {
     if (closeTimeout.current) clearTimeout(closeTimeout.current)
     setProductOpen(true)
@@ -120,6 +175,7 @@ export default function MegaNav() {
   return (
     <>
       <nav
+        ref={navRef}
         aria-label="Main navigation"
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
@@ -156,9 +212,10 @@ export default function MegaNav() {
           {/* Desktop links */}
           <div className="hidden md:flex" style={{ alignItems: 'center', gap: 4, flex: 1, justifyContent: 'center' }}>
             <button
+              ref={productBtnRef}
               type="button"
               aria-expanded={productOpen}
-              aria-haspopup="menu"
+              aria-controls="product-menu"
               onMouseEnter={openProduct}
               onMouseLeave={scheduleClose}
               onClick={() => setProductOpen(!productOpen)}
@@ -169,6 +226,146 @@ export default function MegaNav() {
                 <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
+            {/* Desktop dropdown, floating card, two buyer-vocabulary columns */}
+            {productOpen && (
+              <div
+                id="product-menu"
+                ref={panelRef}
+                onMouseEnter={openProduct}
+                onMouseLeave={scheduleClose}
+                onBlur={onPanelBlur}
+                style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 40, padding: '10px 24px 0', pointerEvents: 'none' }}
+              >
+                <div
+                  className="nav-dropdown"
+                  style={{
+                    pointerEvents: 'auto',
+                    maxWidth: 1020,
+                    margin: '0 auto',
+                    background: '#FFFFFF',
+                    border: '1px solid var(--border)',
+                    borderRadius: 18,
+                    boxShadow: '0 24px 64px rgba(20,18,14,0.14), 0 4px 16px rgba(20,18,14,0.06)',
+                    overflow: 'hidden',
+                    position: 'relative',
+                  }}
+                >
+                  <div
+                    aria-hidden="true"
+                    style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, #B98A4E, #6A5DA6)', opacity: 0.7 }}
+                  />
+                  <div style={{ padding: '28px 32px 24px', display: 'grid', gridTemplateColumns: '1.9fr 0.85fr', gap: 32 }}>
+                    {/* Everything HR, the procurement checklist, two compact columns */}
+                    <div>
+                      <p style={colLabel}>Everything HR, handled</p>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px 16px' }}>
+                        {byFunction.map((item) => <MenuItem key={item.label} item={item} onNavigate={() => setProductOpen(false)} />)}
+                      </div>
+                    </div>
+
+                    {/* The platform rail, label-only links, no competing panel */}
+                    <div style={{ borderLeft: '1px solid var(--border-faint)', paddingLeft: 28 }}>
+                      <p style={{ ...colLabel, marginLeft: 10 }}>The platform</p>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        {howItWorks.map((item) => (
+                          <Link
+                            key={item.label}
+                            href={item.href}
+                            onClick={() => setProductOpen(false)}
+                            className="nav-rail-link"
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              gap: 12,
+                              padding: '9px 10px',
+                              borderRadius: 8,
+                              textDecoration: 'none',
+                            }}
+                          >
+                            <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', whiteSpace: 'nowrap' }}>{item.label}</span>
+                            <span aria-hidden="true" style={{ fontSize: 13, color: 'var(--text-faint)' }}>→</span>
+                          </Link>
+                        ))}
+                      </div>
+                      <Link
+                        href="/mamba"
+                        onClick={() => setProductOpen(false)}
+                        style={{
+                          display: 'block',
+                          marginTop: 14,
+                          padding: '12px 14px',
+                          borderRadius: 12,
+                          textDecoration: 'none',
+                          background: 'var(--bg-warm)',
+                          border: '1px solid var(--border-faint)',
+                        }}
+                      >
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-mono), monospace', fontSize: 10, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--gold-dark)' }}>
+                          <span style={{ width: 7, height: 7, borderRadius: 999, background: '#6A5DA6', display: 'inline-block' }} />
+                          Meet MambaHR
+                        </span>
+                        <span style={{ display: 'block', fontSize: 13, lineHeight: 1.45, color: 'var(--text-muted)', marginTop: 5 }}>
+                          The agent doing the work behind every page on the left.
+                        </span>
+                      </Link>
+                    </div>
+                  </div>
+                  {/* The procurement checklist, exact keywords buyers scan for */}
+                  <div style={{ padding: '0 32px 20px' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: 8, paddingTop: 18, borderTop: '1px solid var(--border-faint)' }}>
+                      <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-faint)', marginRight: 4 }}>
+                        Also handled
+                      </span>
+                      {alsoHandled.map((k) => (
+                        <Link
+                          key={k.label}
+                          href={k.href}
+                          onClick={() => setProductOpen(false)}
+                          className="nav-kw"
+                          style={{
+                            fontSize: 11.5,
+                            fontWeight: 500,
+                            color: 'var(--text-muted)',
+                            textDecoration: 'none',
+                            border: '1px solid var(--border-faint)',
+                            background: 'var(--bg-surface)',
+                            borderRadius: 999,
+                            padding: '3px 10px',
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
+                          {k.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: 16,
+                      padding: '14px 32px',
+                      background: 'var(--bg-surface)',
+                      borderTop: '1px solid var(--border-faint)',
+                    }}
+                  >
+                    <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 14.5, color: 'var(--text-muted)' }}>
+                      One agent. Every job on this list.
+                    </span>
+                    <Link
+                      href="/product"
+                      onClick={() => setProductOpen(false)}
+                      style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none', whiteSpace: 'nowrap' }}
+                    >
+                      See it run →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {topLinks.map((item) => (
               <Link
@@ -189,12 +386,14 @@ export default function MegaNav() {
               Book a demo
             </Link>
             <button
+              ref={burgerRef}
               type="button"
               className="md:hidden"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, color: 'var(--text)' }}
+              aria-controls="mobile-menu"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 12, minWidth: 44, minHeight: 44, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text)', borderRadius: 8 }}
             >
               {mobileOpen ? (
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
@@ -205,155 +404,18 @@ export default function MegaNav() {
           </div>
         </div>
 
-        {/* Desktop dropdown, floating card, two buyer-vocabulary columns */}
-        {productOpen && (
-          <div
-            onMouseEnter={openProduct}
-            onMouseLeave={scheduleClose}
-            style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 40, padding: '10px 24px 0', pointerEvents: 'none' }}
-          >
-            <div
-              className="nav-dropdown"
-              style={{
-                pointerEvents: 'auto',
-                maxWidth: 1020,
-                margin: '0 auto',
-                background: '#FFFFFF',
-                border: '1px solid var(--border)',
-                borderRadius: 18,
-                boxShadow: '0 24px 64px rgba(20,18,14,0.14), 0 4px 16px rgba(20,18,14,0.06)',
-                overflow: 'hidden',
-                position: 'relative',
-              }}
-            >
-              <div
-                aria-hidden="true"
-                style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, #B98A4E, #6A5DA6)', opacity: 0.7 }}
-              />
-              <div style={{ padding: '28px 32px 24px', display: 'grid', gridTemplateColumns: '1.9fr 0.85fr', gap: 32 }}>
-                {/* Everything HR, the procurement checklist, two compact columns */}
-                <div>
-                  <p style={colLabel}>Everything HR, handled</p>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px 16px' }}>
-                    {byFunction.map((item) => <MenuItem key={item.label} item={item} onNavigate={() => setProductOpen(false)} />)}
-                  </div>
-                </div>
-
-                {/* The platform rail, label-only links, no competing panel */}
-                <div style={{ borderLeft: '1px solid var(--border-faint)', paddingLeft: 28 }}>
-                  <p style={{ ...colLabel, marginLeft: 10 }}>The platform</p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    {howItWorks.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        onClick={() => setProductOpen(false)}
-                        className="nav-rail-link"
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          gap: 12,
-                          padding: '9px 10px',
-                          borderRadius: 8,
-                          textDecoration: 'none',
-                        }}
-                      >
-                        <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', whiteSpace: 'nowrap' }}>{item.label}</span>
-                        <span aria-hidden="true" style={{ fontSize: 13, color: 'var(--text-faint)' }}>→</span>
-                      </Link>
-                    ))}
-                  </div>
-                  <Link
-                    href="/mamba"
-                    onClick={() => setProductOpen(false)}
-                    style={{
-                      display: 'block',
-                      marginTop: 14,
-                      padding: '12px 14px',
-                      borderRadius: 12,
-                      textDecoration: 'none',
-                      background: 'var(--bg-warm)',
-                      border: '1px solid var(--border-faint)',
-                    }}
-                  >
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-mono), monospace', fontSize: 10, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--gold-dark)' }}>
-                      <span style={{ width: 7, height: 7, borderRadius: 999, background: '#6A5DA6', display: 'inline-block' }} />
-                      Meet MambaHR
-                    </span>
-                    <span style={{ display: 'block', fontSize: 13, lineHeight: 1.45, color: 'var(--text-muted)', marginTop: 5 }}>
-                      The agent doing the work behind every page on the left.
-                    </span>
-                  </Link>
-                </div>
-              </div>
-              {/* The procurement checklist, exact keywords buyers scan for */}
-              <div style={{ padding: '0 32px 20px' }}>
-                <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: 8, paddingTop: 18, borderTop: '1px solid var(--border-faint)' }}>
-                  <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-faint)', marginRight: 4 }}>
-                    Also handled
-                  </span>
-                  {alsoHandled.map((k) => (
-                    <Link
-                      key={k.label}
-                      href={k.href}
-                      onClick={() => setProductOpen(false)}
-                      className="nav-kw"
-                      style={{
-                        fontSize: 11.5,
-                        fontWeight: 500,
-                        color: 'var(--text-muted)',
-                        textDecoration: 'none',
-                        border: '1px solid var(--border-faint)',
-                        background: 'var(--bg-surface)',
-                        borderRadius: 999,
-                        padding: '3px 10px',
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      {k.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: 16,
-                  padding: '14px 32px',
-                  background: 'var(--bg-surface)',
-                  borderTop: '1px solid var(--border-faint)',
-                }}
-              >
-                <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 14.5, color: 'var(--text-muted)' }}>
-                  One agent. Every job on this list.
-                </span>
-                <Link
-                  href="/product"
-                  onClick={() => setProductOpen(false)}
-                  style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none', whiteSpace: 'nowrap' }}
-                >
-                  See it run →
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
       </nav>
 
       {/* Mobile menu overlay */}
       {mobileOpen && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 40, background: '#FFFFFF', overflowY: 'auto', paddingTop: 64 }}>
+        <div id="mobile-menu" ref={mobilePanelRef} style={{ position: 'fixed', inset: 0, zIndex: 40, background: '#FFFFFF', overflowY: 'auto', paddingTop: 64 }}>
           <div style={{ padding: '24px 24px 40px' }}>
             <div style={{ marginBottom: 8 }}>
               <button
                 type="button"
                 aria-expanded={mobileProductExpanded}
                 onClick={() => setMobileProductExpanded(!mobileProductExpanded)}
-                style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 0', fontSize: 16, fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border-faint)' }}
+                style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 0', minHeight: 44, fontSize: 16, fontWeight: 600, color: 'var(--text)', borderBottom: '1px solid var(--border-faint)' }}
               >
                 Product
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ transform: mobileProductExpanded ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
@@ -364,7 +426,7 @@ export default function MegaNav() {
                 <div style={{ paddingTop: 8, paddingBottom: 8 }}>
                   <p style={{ ...colLabel, margin: '8px 0 8px' }}>By function</p>
                   {byFunction.map((item) => (
-                    <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: 'block', padding: '10px 0', fontSize: 15, fontWeight: 500, color: 'var(--text)', textDecoration: 'none' }}>
+                    <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: 'block', padding: '10px 0', minHeight: 44, boxSizing: 'border-box', fontSize: 15, fontWeight: 500, color: 'var(--text)', textDecoration: 'none' }}>
                       {item.label}
                       {item.pill && <span style={{ ...navPill, marginLeft: 8 }}>{item.pill}</span>}
                       <span style={{ display: 'block', fontSize: 13, color: 'var(--text-muted)', marginTop: 2 }}>{item.description}</span>
@@ -372,7 +434,7 @@ export default function MegaNav() {
                   ))}
                   <p style={{ ...colLabel, margin: '16px 0 8px' }}>How it works</p>
                   {howItWorks.map((item) => (
-                    <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: 'block', padding: '10px 0', fontSize: 15, fontWeight: 500, color: 'var(--text)', textDecoration: 'none' }}>
+                    <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: 'block', padding: '10px 0', minHeight: 44, boxSizing: 'border-box', fontSize: 15, fontWeight: 500, color: 'var(--text)', textDecoration: 'none' }}>
                       {item.label}
                       <span style={{ display: 'block', fontSize: 13, color: 'var(--text-muted)', marginTop: 2 }}>{item.description}</span>
                     </Link>
@@ -382,7 +444,7 @@ export default function MegaNav() {
             </div>
 
             {topLinks.map((item) => (
-              <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: 'block', padding: '14px 0', fontSize: 16, fontWeight: 500, color: 'var(--text)', textDecoration: 'none', borderBottom: '1px solid var(--border-faint)' }}>
+              <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: 'flex', alignItems: 'center', padding: '14px 0', minHeight: 44, boxSizing: 'border-box', fontSize: 16, fontWeight: 500, color: 'var(--text)', textDecoration: 'none', borderBottom: '1px solid var(--border-faint)' }}>
                 {item.label}
               </Link>
             ))}
