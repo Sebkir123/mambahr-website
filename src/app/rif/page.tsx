@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 
 /* ── Hero fragment: a RIF plan awaiting human sign-off ── */
 function HeroPlanCard() {
@@ -332,11 +332,6 @@ export default function RIFPage() {
           ]}
         />
 
-        <QuoteBand
-          quote="A reduction is the one thing you cannot get wrong. Every notice was on time, every check was right, and I personally approved every exit. That’s the only way I’d run one."
-          role="Manufacturing company, 900 people"
-          img="/v2-people/team.jpg"
-        />
 
         <PageCta title={<>A layoff plan, <Em>ready before you need it.</Em></>} sub="A 30-minute demo of a layoff plan, with the notices and the math. Then we import your data and keep it ready." />
       </main>

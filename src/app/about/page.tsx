@@ -5,7 +5,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { StatTrio, PageCta, Em } from '@/components/v2/page-kit'
+import { PageCta, Em } from '@/components/v2/page-kit'
 /* The platform, everything the department runs, each a real page. */
 const PLATFORM = [
   { label: 'Hiring', desc: 'Job post to signed offer', href: '/hiring' },
@@ -90,13 +90,6 @@ export default function AboutPage() {
           `}</style>
         </section>
 
-        <StatTrio
-          stats={[
-            { n: 100, suffix: '%', label: 'of compliance answers cite the law they relied on' },
-            { n: 24, suffix: '/7', label: 'the work keeps moving after your team logs off' },
-            { n: 1, suffix: ' day', label: 'to import your data, no setup project' },
-          ]}
-        />
 
         {/* ── The platform ── */}
         <section className="pf">

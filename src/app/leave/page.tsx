@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 
 /* ── Hero fragment: the Slack exchange, done in seconds ── */
 function SlackApprovalCard() {
@@ -336,12 +336,6 @@ export default function LeavePage() {
           ]}
         />
 
-        <QuoteBand
-          quote="I used to dread every FMLA question. Now the answer comes back in seconds, with the law attached."
-          role="People Operations Lead · AI startup, 180 people"
-          img="/v2-people/marcus.jpg"
-          metric="Saved 9 hrs / week"
-        />
 
         <PageCta title={<>Time off that takes <Em>none of yours.</Em></>} sub="A 30-minute demo on your own leave policy. Then we import your balances and switch you over." />
       </main>

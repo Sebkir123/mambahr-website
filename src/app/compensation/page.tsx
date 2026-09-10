@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 
 /* ── Hero fragment: comp review with band gauge + above-band routing ── */
 function CompReviewCard() {
@@ -307,12 +307,6 @@ export default function CompensationPage() {
           ]}
         />
 
-        <QuoteBand
-          quote="Our comp cycle used to be six weeks of spreadsheets and second-guessing. Now every recommendation arrives pre-checked against our bands, the exceptions come straight to me, and the letters just go out."
-          role="Head of People · Healthtech company, 320 people"
-          img="/v2-people/sofia.jpg"
-          metric="Comp cycle in days, not weeks"
-        />
 
         <PageCta title={<>Pay people right. <Em>Prove it.</Em></>} sub="A 30-minute demo on one raise against your own bands. Then we import your data and switch you over." />
       </main>

@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import { REVIEW } from './review'
 
 /* ── Hero fragment: dark security log ── */
@@ -308,11 +308,6 @@ export default function SecurityPage() {
 
         <SecurityReview />
 
-        <QuoteBand
-          quote="I asked the hard questions before we signed, who sees what, where the data lives, what trains their AI. The answers were in the Data Processing Addendum, not a slide deck."
-          role="Head of People · Robotics startup, 240 people"
-          img="/v2-people/feat.jpg"
-        />
 
         <PageCta
           title={<>Encrypted, logged, <Em>never used to train AI.</Em></>}

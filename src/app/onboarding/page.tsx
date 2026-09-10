@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 
 /* ── Hero fragment: day-one timeline card ── */
 const DAY1 = [
@@ -265,12 +265,6 @@ export default function OnboardingPage() {
           ]}
         />
 
-        <QuoteBand
-          quote="We imported on a Thursday and onboarded two people the following Monday. Offer signed, paperwork filed, logins live, first week planned, and I never opened a checklist. I just showed up to say welcome."
-          role="Head of People · Fintech startup, 140 people"
-          img="/v2-people/sofia.jpg"
-          metric="Imported in a day"
-        />
 
         <PageCta title={<>Day one, ready. <Em>Every day after, too.</Em></>} sub="A 30-minute demo of one onboarding, offer to logins live. Then we import your data and switch you over." />
       </main>

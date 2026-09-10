@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 
 /* ── Hero fragment: the pay cycle, prepped ── */
 function PayCycleCard() {
@@ -248,12 +248,6 @@ export default function PayrollPage() {
           ]}
         />
 
-        <QuoteBand
-          quote="We imported on a Friday and ran payday Monday without a hiccup. Every change was already in the file, I just uploaded it."
-          role="Head of People · Fintech startup, 140 people"
-          img="/v2-people/sofia.jpg"
-          metric="Every change in the file"
-        />
 
         <PageCta title={<>Make payday a non-event.</>} sub="A 30-minute demo with one of your real pay cycles. Then we import your data and switch you over." />
       </main>

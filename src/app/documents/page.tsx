@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 
 /* ── Hero fragment: signed offer letter, filed ── */
 function SignedDocCard() {
@@ -236,12 +236,6 @@ export default function DocumentsPage() {
           ]}
         />
 
-        <QuoteBand
-          quote="I used to spend Friday afternoons chasing signatures and refiling PDFs. Now an offer goes out in seconds, signs itself through, and lands in the right folder before I've finished my coffee."
-          role="People Operations Lead · AI startup, 180 people"
-          img="/v2-people/marcus.jpg"
-          metric="Saved 9 hrs / week"
-        />
 
         <PageCta title={<>Paperwork that <Em>does itself.</Em></>} sub="A 30-minute demo of one offer, drafted to filed. Then we import your documents and switch you over." />
       </main>

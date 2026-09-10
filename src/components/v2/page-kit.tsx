@@ -5,7 +5,7 @@
 // so every page matches the v2 landing bar: Fraunces + gold→violet system,
 // real-UI fragments, real people, mamba chips, scroll reveals, ONE-line
 // headlines. Pages compose: <PageHero> → <AgentLoop> → feature splits →
-// <StatTrio> → <QuoteBand> → <PageCta>. Global classes used: agent-edge/
+// <StatTrio> → <PageCta>. Global classes used: agent-edge/
 // agent-working/agent-done/agent-lg, mamba-chip, v2-grain (from globals.css).
 //
 // NOTE: button classes use :global(), styled-jsx does NOT scope classNames
@@ -490,106 +490,6 @@ export function StatTrio({
    customer testimonials, so they carry an explicit "Illustrative" label and no
    personal name. Do not reintroduce named quotes until there are real customers
    who have agreed to be quoted. */
-export function QuoteBand({
-  quote,
-  role,
-  img,
-  metric,
-}: {
-  quote: string
-  /** Role archetype the scenario is written from, e.g. "Head of People · Robotics startup, 240 people". */
-  role: string
-  img: string
-  metric?: string
-}) {
-  return (
-    <section className="qb">
-      <div className="card agent-edge agent-done" data-reveal>
-        <div className="photo">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img} alt="" loading="lazy" decoding="async" />
-          {metric && <span className="badge">{metric}</span>}
-        </div>
-        <div className="body">
-          <span className="tag">Illustrative scenario</span>
-          <span className="qmark" aria-hidden="true">&ldquo;</span>
-          <blockquote className="q">{quote}</blockquote>
-          <div className="who"><span>{role}</span></div>
-        </div>
-      </div>
-      <style jsx>{`
-        .qb { background: var(--bg-warm); padding: clamp(72px, 9vw, 120px) var(--page-pad); }
-        .card {
-          max-width: 920px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: 280px 1fr;
-          background: var(--bg);
-          border: 1px solid var(--border);
-          border-radius: 18px;
-          overflow: hidden;
-          box-shadow: var(--shadow-float);
-        }
-        .photo { position: relative; min-height: 280px; }
-        .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-        .badge {
-          position: absolute;
-          left: 14px;
-          bottom: 14px;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          color: #fff;
-          background: linear-gradient(120deg, #B98A4E, #6A5DA6);
-          border-radius: 999px;
-          padding: 6px 13px;
-          box-shadow: 0 8px 18px rgba(20, 18, 14, 0.25);
-        }
-        .body { position: relative; padding: clamp(30px, 4vw, 48px) clamp(28px, 4vw, 52px); }
-        .qmark {
-          position: absolute;
-          top: 6px;
-          left: clamp(20px, 3vw, 38px);
-          font-family: var(--font-serif);
-          font-size: 110px;
-          line-height: 1;
-          background: linear-gradient(120deg, #B98A4E, #6A5DA6);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          opacity: 0.3;
-          pointer-events: none;
-        }
-        .q {
-          font-family: var(--font-serif);
-          font-size: clamp(19px, 2.2vw, 25px);
-          line-height: 1.45;
-          letter-spacing: -0.01em;
-          color: var(--text);
-          margin: 0;
-          position: relative;
-        }
-        .who { margin-top: 22px; font-size: 14px; color: var(--text-muted); display: flex; flex-direction: column; gap: 2px; }
-        .tag {
-          display: inline-block;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: var(--text-faint);
-          border: 1px solid var(--border-faint);
-          border-radius: 999px;
-          padding: 3px 10px;
-          margin-bottom: 16px;
-        }
-        @media (max-width: 720px) {
-          .card { grid-template-columns: 1fr; }
-          .photo { min-height: 220px; }
-        }
-      `}</style>
-    </section>
-  )
-}
-
 /* ── Page CTA: gradient panel with grain, faces, real buttons ── */
 export function PageCta({
   title,

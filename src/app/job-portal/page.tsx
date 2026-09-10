@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 
 /* ── Hero fragment: the hosted careers site, live ── */
 const ROLES = [
@@ -223,12 +223,6 @@ export default function JobPortalPage() {
           ]}
         />
 
-        <QuoteBand
-          quote="We sent candidates to a clunky vendor page for years. Now they apply on our site, and by morning I have a ranked shortlist with reasons. Candidates compliment the experience, that never happened before."
-          role="Head of People · Fintech startup, 140 people"
-          img="/v2-people/feat.jpg"
-          metric="Live in 1 day"
-        />
 
         <PageCta title={<>Your careers page, <Em>by tomorrow.</Em></>} sub="A 30-minute demo. Then we put your careers page live with one DNS record." />
       </main>

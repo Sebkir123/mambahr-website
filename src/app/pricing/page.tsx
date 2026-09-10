@@ -6,7 +6,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import { FAQS } from './faqs'
 import { TIERS } from '@/content/pricing-tiers'
 
@@ -445,12 +445,6 @@ export default function PricingPage() {
           `}</style>
         </section>
 
-        <QuoteBand
-          quote="My whole budget was about to go on admin coverage. MambaHR took the admin instead, and I finally got to build the programs I was hired to build. Easiest line item I've ever defended."
-          role="Head of People · Robotics startup, 240 people"
-          img="/v2-people/feat.jpg"
-          metric="12 hrs back / week"
-        />
 
         <PageCta
           title={<>Before you hire HR, <Em>hire MambaHR.</Em></>}

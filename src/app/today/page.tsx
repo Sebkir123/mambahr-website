@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import { TodoDesk } from '@/components/mockups'
 
 function DecisionCard() {
@@ -244,12 +244,6 @@ export default function TodayPage() {
         ]}
       />
 
-      <QuoteBand
-        quote="My mornings used to be a hundred open tabs. Now it’s one To do list, three decisions, and I’m done before my coffee’s cold."
-        role="Head of People · Climate tech startup, 90 people"
-        img="/v2-people/feat.jpg"
-        metric="Mornings back"
-      />
 
       <PageCta title={<>Run HR from one short <Em>To do list.</Em></>} sub="A 30-minute demo of To do on your own approvals. Then we import your data and switch you over." />
       </main>
