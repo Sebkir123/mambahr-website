@@ -86,18 +86,7 @@ export default function Footer() {
               margin: 0,
             }}
           >
-            HR that runs itself.{' '}
-            <span
-              style={{
-                fontStyle: 'italic',
-                background: 'linear-gradient(100deg, #B98A4E, #6A5DA6)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                color: 'transparent',
-              }}
-            >
-              Yours can too.
-            </span>
+            HR that runs itself.
           </p>
         </div>
 
@@ -118,10 +107,6 @@ export default function Footer() {
             </Link>
             <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.55, maxWidth: 210, margin: 0 }}>
               The AI HR department. You keep the judgment.
-            </p>
-            <p style={{ display: 'inline-flex', alignItems: 'center', gap: 7, marginTop: 18, fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--text-faint)' }}>
-              <span style={{ width: 7, height: 7, borderRadius: 999, background: 'var(--color-green)', display: 'inline-block' }} />
-              All systems handled
             </p>
             <div>
               <a

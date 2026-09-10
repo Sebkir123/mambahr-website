@@ -31,39 +31,6 @@ export function Em({ children }: { children: ReactNode }) {
   )
 }
 
-/* ── The proof line under every hero: the two founders, who take the demo
-      call themselves. Real names, real photos (the same ones /about uses),
-      no stock avatars anywhere on the site. ── */
-const FOUNDERS = [
-  { name: 'Brian Bell', photo: '/brian_bell.jpeg' },
-  { name: 'Sebastian Kirsch', photo: '/sebastian_kirsch.jpg' },
-]
-
-export function FoundersProof({ text = 'Built by the founders, who answer the demo call' }: { text?: string }) {
-  return (
-    <div className="fp">
-      <div className="fp-faces">
-        {FOUNDERS.map((f) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img key={f.name} src={f.photo} alt={f.name} width={34} height={34} loading="lazy" decoding="async" />
-        ))}
-      </div>
-      <span className="fp-t">{text}</span>
-      <style jsx>{`
-        .fp { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
-        .fp-faces { display: flex; }
-        .fp-faces img {
-          width: 34px; height: 34px; border-radius: 999px; object-fit: cover; object-position: center 20%;
-          border: 2px solid #fff; box-shadow: var(--shadow-sm);
-          margin-left: -9px; background: var(--bg-elevated);
-        }
-        .fp-faces img:first-child { margin-left: 0; }
-        .fp-t { font-size: 14px; font-weight: 600; color: var(--text); }
-      `}</style>
-    </div>
-  )
-}
-
 /* ── Page hero: centered copy (one-line title) + fragment stage below,
       aurora blobs + grain + face cluster + optional human photo card ── */
 export function PageHero({
@@ -71,7 +38,6 @@ export function PageHero({
   pill,
   title,
   lead,
-  proof = 'Built by the founders, who answer the demo call',
   photo,
   photoPosition = 'center 20%',
   photoChip,
@@ -83,7 +49,6 @@ export function PageHero({
   pill?: ReactNode
   title: ReactNode
   lead: string
-  proof?: string
   /** Local people photo (e.g. /v2-people/team.jpg) shown as a tilted card overlapping the stage. */
   photo?: string
   /** CSS object-position for the photo, so faces are never cropped through the eyes. */
@@ -109,9 +74,6 @@ export function PageHero({
         <div className="ctas" data-reveal="eager">
           <Link href="/demo" className="btn btn-primary">Book a demo</Link>
           <Link href="/product" className="btn btn-secondary">See how it works</Link>
-        </div>
-        <div data-reveal="eager">
-          <FoundersProof text={proof} />
         </div>
       </div>
       <div className="stage" data-reveal="eager">
@@ -646,9 +608,6 @@ export function PageCta({
           <Link href="/demo" className="btn btn-primary">Book a demo</Link>
           <Link href="/product" className="btn btn-ghost">See how it works</Link>
         </div>
-        <div className="proofline">
-          <p className="trust">Built by the founders, who answer the demo call · Your data imported in a day · A person signs off on the sensitive calls</p>
-        </div>
       </div>
       <style jsx>{`
         .pc { padding: clamp(32px, 5vw, 64px) var(--page-pad) clamp(72px, 9vw, 104px); background: var(--bg); }
@@ -684,8 +643,6 @@ export function PageCta({
         }
         .s { position: relative; color: rgba(255, 255, 255, 0.92); font-size: 17px; margin: 16px 0 28px; }
         .btns { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .proofline { position: relative; display: flex; align-items: center; justify-content: center; margin-top: 24px; }
-        .trust { color: rgba(255, 255, 255, 0.86); font-size: 13px; margin: 0; }
         .btns :global(.btn-ghost) { color: #fff; }
       `}</style>
     </section>

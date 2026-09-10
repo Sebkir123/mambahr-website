@@ -12,7 +12,6 @@ const HERO_FOCUS = {
   position: '',
   read: 'Above band for level 4 by 8%. Peers sit at $152k and $158k. Recommend $160k, or hold for the cycle.',
 }
-import { FoundersProof } from '@/components/v2/page-kit'
 
 export default function Hero() {
   return (
@@ -33,14 +32,6 @@ export default function Hero() {
         </p>
         <div className="ctas" data-reveal="eager">
           <a href="/demo" className="btn btn-primary">Book a demo</a>
-        </div>
-        <div data-reveal="eager">
-          <FoundersProof />
-        </div>
-        <div className="trust" data-reveal="eager">
-          <span>Works 24/7</span><i />
-          <span>Your data imports in a day</span><i />
-          <span>Built by HR operators</span>
         </div>
       </div>
 
@@ -134,17 +125,6 @@ export default function Hero() {
           margin: 24px auto 0;
         }
         .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 34px; flex-wrap: wrap; }
-        .trust {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          justify-content: center;
-          margin-top: 16px;
-          color: var(--text-muted);
-          font-size: 14px;
-          flex-wrap: wrap;
-        }
-        .trust i { width: 4px; height: 4px; border-radius: 999px; background: var(--border-mid); }
 
         /* ---- the app window ---- */
         .stage-load {
