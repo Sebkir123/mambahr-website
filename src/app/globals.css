@@ -11,10 +11,10 @@
   /* Text */
   --color-text:         #1A1A19;
   --color-text-muted:   #3D3D3A;
-  --color-text-faint:   #7A7A75;
+  --color-text-faint:   #66665F;
 
   /* Brand — gold accent + iris-violet AI secondary */
-  --color-gold:         #8A6535;
+  --color-gold:         #7A5A2E;
   --color-gold-dark:    #6B4E26;
   --color-gold-light:   #C49A6C;
   --color-gold-tint:    #F2ECE0;
@@ -28,8 +28,8 @@
   --color-border-faint: rgba(0,0,0,0.07);
 
   /* Status */
-  --color-green:        #16A34A;
-  --color-red:          #DC2626;
+  --color-green:        #1A7A3E;
+  --color-red:          #C42020;
 }
 
 :root {
@@ -40,13 +40,16 @@
   --bg-elevated:  #ECE9E2;
 
   --text:         #1A1A19;
+  --ink:          #14110C;   /* dark panel ground */
   --text-muted:   #3D3D3A;
-  --text-faint:   #7A7A75;
+  --text-faint:   #66665F;
 
-  --gold:         #8A6535;
+  --gold:         #7A5A2E;
   --gold-dark:    #6B4E26;
   --gold-light:   #C49A6C;
   --gold-tint:    #F2ECE0;
+  --gold-mid:     #B98A4E;   /* gradient start, gold → violet */
+  --gold-pale:    #D4AA7C;   /* gradient start on dark panels */
   --violet:       #6A5DA6;
   --violet-soft:  rgba(106,93,166,0.12);
   --peach:        #FFE8D6;
@@ -57,9 +60,15 @@
   --border-faint: rgba(0,0,0,0.07);
 
   /* Brand gradients — gold → iris-violet accent + warm washes */
-  --grad:       linear-gradient(100deg, #B98A4E 0%, #8A6535 48%, #6A5DA6 100%);
+  --grad:       linear-gradient(100deg, var(--gold-mid) 0%, var(--gold) 48%, var(--violet) 100%);
   --grad-warm:  linear-gradient(135deg, #F6EAD6, #FBDFC9 55%, #EBD3DE);
-  --grad-gold:  linear-gradient(100deg, #D4AA7C, #8A6535);
+  --grad-gold:  linear-gradient(100deg, var(--gold-pale), var(--gold));
+
+  /* Radius scale. --radius-full was referenced but never defined. */
+  --radius-sm:   7px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+  --radius-full: 999px;
 
   /* Design-system light-mode elevation — warm, low-alpha. */
   --shadow-sm:      0 2px 4px rgba(20,18,14,0.06), 0 1px 2px rgba(20,18,14,0.04);
@@ -106,7 +115,7 @@ html {
   color: var(--text-muted);
 }
 .t-body {
-  font-size: 16.5px;
+  font-size: 17px;
   line-height: 1.6;
   color: var(--text-muted);
 }
@@ -135,6 +144,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
+
+/* Skip link: first tab stop on every page, visible only while focused */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 10000;
+  padding: 12px 18px;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transform: translateY(-200%);
+  opacity: 0;
+}
+.skip-link:focus-visible {
+  transform: none;
+  opacity: 1;
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
 
 /* Typography */
 h1, h2, h3 {
@@ -190,27 +223,64 @@ h4, h5, h6 {
   animation-play-state: paused;
 }
 
-/* Buttons */
-.btn-primary {
+/* ── Buttons: ONE definition, ONE radius (the 999px pill the app's decision
+   pills use). Base class .btn + a variant: primary (ink fill), secondary
+   (outlined on an elevated surface), ghost (transparent, inherits colour, so
+   it reads white on the gradient CTA panel and ink on light pages), dark
+   (the compact nav pill). .btn-sm for the nav. Do not add a second .btn-*
+   family in a styled-jsx block; extend this one. The variants carry the base
+   too so a lone .btn-secondary (404 page, admin gallery) still renders. */
+.btn, .btn-primary, .btn-secondary, .btn-ghost, .btn-dark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  background-color: #1C1917;
-  color: #FFFFFF;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
   text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+.btn-primary {
+  background: var(--text);
+  color: #FFFFFF;
+  border-color: var(--text);
+  box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22);
 }
+.btn-primary:hover { transform: translateY(-2px); background: #2A2A28; }
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text);
+  border-color: var(--border-mid);
+}
+.btn-secondary:hover { background: #FFFFFF; border-color: var(--text); }
+.btn-ghost {
+  background: transparent;
+  color: inherit;
+  border-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+.btn-ghost:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
+.btn-dark {
+  background: var(--text);
+  color: #FFFFFF;
+  border-color: var(--text);
+  padding: 9px 20px;
+  font-size: 13px;
+  box-shadow: 0 4px 14px rgba(20, 18, 14, 0.18);
+}
+.btn-dark:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(20, 18, 14, 0.24); }
+.btn-sm { padding: 11px 18px; font-size: 14px; }
+.btn-block { width: 100%; }
+.btn:focus-visible { outline: 2px solid var(--gold-dark); outline-offset: 3px; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
+/* Legacy gold pill, still used on the blog and the 404. */
 .btn-gold {
   display: inline-flex;
   align-items: center;
@@ -219,7 +289,7 @@ h4, h5, h6 {
   background-color: var(--gold);
   color: #FFFFFF;
   padding: 12px 28px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
@@ -232,33 +302,6 @@ h4, h5, h6 {
   box-shadow: 0 4px 16px rgba(176, 141, 87, 0.3);
 }
 .btn-gold:focus-visible {
-  outline: 2px solid var(--gold-dark);
-  outline-offset: 3px;
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background-color: var(--bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-}
-.btn-secondary:hover {
-  background-color: var(--bg-surface);
-  border-color: var(--border-mid);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-.btn-secondary:focus-visible {
   outline: 2px solid var(--gold-dark);
   outline-offset: 3px;
 }
@@ -565,27 +608,7 @@ h4, h5, h6 {
   .agent-working::after { animation: none; opacity: 0; }
 }
 
-/* ── Nav polish — dark CTA pill, link hovers, dropdown entrance ── */
-.btn-dark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background: #1A1A19;
-  color: #FFFFFF;
-  padding: 9px 20px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(20, 18, 14, 0.18);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.btn-dark:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(20, 18, 14, 0.24);
-}
+/* ── Nav polish — link hovers, dropdown entrance ── */
 .nav-top-link {
   position: relative;
   transition: color 0.15s ease;
@@ -612,16 +635,29 @@ h4, h5, h6 {
   to { opacity: 1; transform: none; }
 }
 .nav-dropdown { animation: navDropIn 0.22s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.nav-burger { display: inline-flex; }
+@media (min-width: 768px) { .nav-burger { display: none; } }
 .nav-rail-link { transition: background 0.15s ease; }
 .nav-rail-link:hover { background: var(--bg-warm); }
 .nav-kw { transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease; }
 .nav-kw:hover { color: var(--gold-dark); border-color: var(--gold-light); background: var(--gold-tint); }
 @media (prefers-reduced-motion: reduce) {
-  .btn-dark { transition: none; }
-  .btn-dark:hover { transform: none; }
+  .btn { transition: none; }
+  .btn:hover { transform: none; }
   .nav-top-link::after { transition: none; }
   .nav-dropdown { animation: none; }
 }
+
+/* ── Product mockup card: the frame every hand-built app fragment sits in.
+   Pair with agent-edge agent-working|agent-done for the gold-violet ring. */
+.mock-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-float);
+  background: var(--bg-warm);
+}
+.mock-card.slack { max-width: 520px; margin: 0 auto; box-shadow: var(--shadow-md); }
 
 /* ── Mamba status chip — pairs with .agent-edge surfaces.
    "MAMBA · WORKING" (violet, pulsing dot) / "MAMBA · DONE" (gold check).
@@ -631,7 +667,7 @@ h4, h5, h6 {
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -671,3 +707,20 @@ h4, h5, h6 {
   .mamba-chip.working .mc-i { animation: none; }
 }
 
+/* Reduced motion: every looping or decorative keyframe stands still */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track,
+  .typing-dot,
+  .gold-pulse,
+  .shimmer,
+  .caret,
+  .status-flash,
+  .progress-fill,
+  .live-arrive,
+  .nav-dropdown {
+    animation: none;
+  }
+  .progress-fill { width: var(--progress, 50%); }
+  .fcta, .fcta .pill { transition: none; }
+}

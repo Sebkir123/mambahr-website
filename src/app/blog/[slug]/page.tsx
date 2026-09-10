@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
@@ -107,7 +108,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <JsonLd data={[articleSchema, breadcrumbSchema]} />
       <ViewPing slug={post.slug} />
       <MegaNav />
-      <main className={styles.page}>
+      <main id="main" className={styles.page}>
         <nav className={styles.crumbs} aria-label="Breadcrumb">
           <Link href="/blog" className={styles.crumbLink}>Blog</Link>
           {post.tags?.[0] && <><span className={styles.crumbSep}>/</span><span>{post.tags[0]}</span></>}
@@ -131,8 +132,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {post.cover_image_url && (
           <div className={styles.cover}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={post.cover_image_url} alt={post.title} className={styles.coverImg} />
+            <Image
+              src={post.cover_image_url}
+              alt={post.title}
+              width={880}
+              height={495}
+              sizes="(max-width: 800px) calc(100vw - 40px), 760px"
+              priority
+              className={styles.coverImg}
+            />
           </div>
         )}
 
@@ -141,7 +149,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <div className={styles.cta}>
           <div>
             <p className={styles.ctaKicker}>Before you hire HR, hire MambaHR.</p>
-            <p className={styles.ctaSub}>The whole department, hiring to compliance, run end to end.</p>
+            <p className={styles.ctaSub}>The whole department, hiring to compliance, done for you.</p>
           </div>
           <Link href="/demo" className="btn-gold">Book a demo</Link>
         </div>

@@ -3,31 +3,11 @@ import type { NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { isAdminEmail } from '@/lib/admin-domain'
 
-// Next.js 16 renamed `middleware` → `proxy`. This single edge entrypoint handles
-// two unrelated gates, dispatched by path:
-//   1. /admin/*           , Supabase auth session refresh + sign-in redirect
-//   2. internal deck URLs , HTTP Basic password protection
-// Each gate only runs on its own matched prefixes (see `config.matcher`).
-
-const DECK_PREFIXES = ['/d/', '/investors', '/og-preview']
-
-// --- Internal deck password gate -------------------------------------------
-function deckGate(req: NextRequest): NextResponse {
-  const password = process.env.DECK_PASSWORD
-  if (!password) return NextResponse.next() // no password set → skip (dev mode)
-
-  const authHeader = req.headers.get('authorization')
-  const expected = 'Basic ' + btoa(unescape(encodeURIComponent(`mambahr:${password}`)))
-  if (authHeader === expected) return NextResponse.next()
-
-  return new NextResponse('Unauthorized', {
-    status: 401,
-    headers: {
-      'WWW-Authenticate': 'Basic realm="MambaHR Internal", charset="UTF-8"',
-      'Cache-Control': 'no-store',
-    },
-  })
-}
+// Next.js 16 renamed `middleware` → `proxy`. This edge entrypoint guards
+// /admin/* only: Supabase auth session refresh + sign-in redirect. (The old
+// HTTP Basic deck gate for /d/, /investors and /og-preview guarded routes that
+// no longer exist; the investor deck lives at its unguessable slug and is
+// tracked, not password-walled.)
 
 // --- Admin auth gate --------------------------------------------------------
 // Refreshes the Supabase session on every /admin request and bounces anyone who
@@ -95,12 +75,9 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
   if (pathname.startsWith('/admin')) {
     return adminGate(req)
   }
-  if (DECK_PREFIXES.some((p) => pathname.startsWith(p))) {
-    return deckGate(req)
-  }
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/d/:path*', '/investors/:path*', '/og-preview/:path*'],
+  matcher: ['/admin/:path*'],
 }

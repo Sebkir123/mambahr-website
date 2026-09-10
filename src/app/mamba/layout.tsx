@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'The AI HR Agent | MambaHR',
   description:
-    'Not a chatbot, a coworker. MambaHR works in Slack and the MambaHR app, does the HR work end to end, and brings the big calls to you first.',
+    'Not a chatbot, a coworker. Message MambaHR in Slack or the app. It does the HR work and brings the big calls to you first.',
   openGraph: {
     title: 'The AI HR Agent | MambaHR',
     description:
-      'Not a chatbot, a coworker. Works in Slack and the MambaHR app. The big calls come to you first.',
+      'Not a chatbot, a coworker. Message it in Slack or the app. It does the work.',
     url: 'https://mambahr.com/mamba',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The AI HR Agent | MambaHR',
     description:
-      'Not a chatbot, a coworker. Works in Slack and the MambaHR app. The big calls come to you first.',
+      'Not a chatbot, a coworker. Message it in Slack or the app. It does the work.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://mambahr.com/mamba' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'The AI HR Agent | MambaHR',
   url: 'https://mambahr.com/mamba',
   description:
-    'MambaHR is the AI HR agent, a coworker, not a chatbot. It works in Slack and the MambaHR app, runs HR work end to end, and brings the big calls to you first.',
+    'MambaHR is the AI HR department, a coworker, not a chatbot. Message it in Slack or the app. It does the HR work and brings the big calls to you first.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'MambaHR agent',
     description:
-      'A coworker that does the HR work, not a chatbot you query. MambaHR takes intent from Slack and the MambaHR app, runs the workflow end to end, drafting, provisioning, compliance, and routes the high-stakes decisions to you for approval first.',
+      'A coworker that does the HR work, not a chatbot you query. MambaHR takes requests from Slack and the MambaHR app and does the work: drafting, logins, compliance. High-stakes decisions come to you for approval first.',
   },
 }
 

@@ -4,11 +4,11 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'Layoffs & RIF Planning | MambaHR',
+  title: 'Layoffs & headcount | MambaHR',
   description:
     'The hardest day done right: WARN timing, severance math, redeployment options (advisory only), and every exit human-approved before it happens.',
   openGraph: {
-    title: 'Layoffs & RIF Planning | MambaHR',
+    title: 'Layoffs & headcount | MambaHR',
     description:
       'The hardest day done right: WARN timing, severance math, redeployment (advisory only), every exit human-approved.',
     url: 'https://mambahr.com/rif',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Layoffs & RIF Planning | MambaHR',
+    title: 'Layoffs & headcount | MambaHR',
     description:
       'The hardest day done right: WARN timing, severance math, redeployment (advisory only), every exit human-approved.',
     images: [ogImage],
@@ -27,16 +27,16 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Layoffs & RIF Planning | MambaHR',
+  name: 'Layoffs & headcount | MambaHR',
   url: 'https://mambahr.com/rif',
   description:
-    'MambaHR RIF planning: the hardest day done right. The agent models WARN timing, runs severance math, surfaces redeployment options as advisory only, and holds every exit for human approval.',
+    'MambaHR layoff planning: the hardest day done right. MambaHR checks federal layoff-notice (WARN Act) timing, runs the severance math, shows internal roles as suggestions only, and holds every exit for a person to approve.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
-    name: 'RIF planning agent',
+    name: 'Layoff planning',
     description:
-      'Plans a reduction in force end to end: calculates federal and state WARN notice timing, models severance cost at P10/P50/P90, and surfaces redeployment options as advisory only. Every individual exit is held for human approval before anything is executed.',
+      'Plans a layoff (reduction in force): calculates federal and state notice timing under the WARN Act, models the severance cost range, and shows internal roles as suggestions only. A person approves every individual exit before anything happens.',
   },
 }
 

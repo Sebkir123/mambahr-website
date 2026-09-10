@@ -1,48 +1,7 @@
 'use client'
 
-const TIERS = [
-  {
-    name: 'HR Starter',
-    size: 'For teams of 50–150',
-    price: '$14',
-    unit: '/employee/mo',
-    min: '$9k/yr minimum',
-    blurb: 'Run HR properly before you hire HR.',
-    feats: ['Employee records & org chart', 'Onboarding & offboarding, done', 'Every employee question, answered', 'Time off & leave handled', 'Payroll-ready exports'],
-    cta: 'Start here',
-  },
-  {
-    name: 'HR Ops Manager',
-    size: 'For teams of 75–400',
-    price: '$22',
-    unit: '/employee/mo',
-    min: '$24k/yr minimum',
-    blurb: 'A full HR ops workload, for a tenth of the cost.',
-    feats: ['Everything in Starter', 'Hiring: reqs, candidates & interviews', 'Offers sent, approvals routed', 'Payroll runs & change reports'],
-    cta: 'Most teams start here',
-    popular: true,
-  },
-  {
-    name: 'AI HR Department',
-    size: 'For teams of 150+',
-    price: '$30',
-    unit: '/employee/mo',
-    min: '$48k/yr minimum',
-    blurb: 'Your whole HR department, run for you.',
-    feats: ['Everything in Ops Manager', 'Layoffs & reorgs, done right', 'Deep compliance + full audit trail', 'SSO & custom workflows'],
-    cta: 'Scale up',
-  },
-  {
-    name: 'Enterprise',
-    size: 'For 1,000+ and multi-entity',
-    price: 'Custom',
-    unit: '',
-    min: 'from $100k/yr',
-    blurb: 'For complex orgs with procurement to satisfy.',
-    feats: ['Everything in AI HR Dept', 'Custom implementation', 'Procurement & security review', 'Enterprise integrations'],
-    cta: 'Talk to founders',
-  },
-]
+import Link from 'next/link'
+import { TIERS } from '@/content/pricing-tiers'
 
 export default function Pricing() {
   return (
@@ -60,7 +19,7 @@ export default function Pricing() {
         <div className="grid">
           {TIERS.map((t, i) => (
             <div key={t.name} className={`card${t.popular ? ' pop' : ''}`} data-reveal data-delay={String(i + 1)}>
-              {t.popular && <span className="ribbon">Most popular</span>}
+              {t.badge && <span className="ribbon">{t.badge}</span>}
               <div className="name">{t.name}</div>
               <div className="size">{t.size}</div>
               <div className="price">
@@ -74,7 +33,7 @@ export default function Pricing() {
                   <li key={f}><span className="tick" aria-hidden="true" />{f}</li>
                 ))}
               </ul>
-              <a href="#access" className={`btn${t.popular ? ' btn-pop' : ''}`}>{t.cta}</a>
+              <Link href="/pricing" className={`btn btn-sm btn-block ${t.popular ? 'btn-primary' : 'btn-secondary'}`}>{t.cta}</Link>
             </div>
           ))}
         </div>
@@ -99,7 +58,7 @@ export default function Pricing() {
           font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #8A6535;
+          color: #7A5A2E;
           margin: 0 0 18px;
         }
         .title {
@@ -126,7 +85,7 @@ export default function Pricing() {
         }
         .size {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--text-faint);
@@ -168,7 +127,7 @@ export default function Pricing() {
           top: -11px;
           left: 22px;
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: #fff;
@@ -198,7 +157,7 @@ export default function Pricing() {
           color: var(--text-faint);
         }
         .min {
-          font-size: 12.5px;
+          font-size: 13px;
           color: var(--text-faint);
           margin-top: 8px;
         }
@@ -221,7 +180,7 @@ export default function Pricing() {
           display: flex;
           align-items: flex-start;
           gap: 9px;
-          font-size: 13.5px;
+          font-size: 14px;
           color: var(--text-muted);
           line-height: 1.4;
         }
@@ -242,25 +201,9 @@ export default function Pricing() {
           top: 2.5px;
           width: 3px;
           height: 6px;
-          border: solid #8A6535;
+          border: solid #7A5A2E;
           border-width: 0 2px 2px 0;
           transform: rotate(45deg);
-        }
-        .btn {
-          margin-top: auto;
-          text-align: center;
-          font-weight: 600;
-          font-size: 14px;
-          padding: 12px;
-          border-radius: 999px;
-          border: 1px solid var(--border-mid);
-          color: var(--text);
-        }
-        .btn:hover { border-color: var(--text); }
-        .btn-pop {
-          border: none;
-          color: #fff;
-          background: linear-gradient(120deg, #B98A4E, #6A5DA6);
         }
         @media (max-width: 980px) {
           .grid { grid-template-columns: repeat(2, 1fr); }

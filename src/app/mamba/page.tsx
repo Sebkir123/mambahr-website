@@ -5,6 +5,7 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { ChatThread } from '@/components/mockups'
 
 /* ── Hero fragment: a realistic Slack window, policy answer + letter receipt ── */
 function SlackWindow() {
@@ -17,21 +18,21 @@ function SlackWindow() {
         <span className="sw-find">Search MambaHR</span>
       </div>
       <div className="sw-body">
-        <aside className="sw-side">
-          <div className="sw-ws">
+        <div className="sw-side" role="presentation">
+          <div className="sw-ws" aria-hidden="true">
             MambaHR
             <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" /></svg>
           </div>
           <div className="sw-sec">Channels</div>
           <span className="sw-ch on"><span className="hash">#</span>people-ops</span>
           <span className="sw-ch"><span className="hash">#</span>hiring</span>
-          <span className="sw-ch"><span className="hash">#</span>benefits</span>
+          <span className="sw-ch"><span className="hash">#</span>onboarding</span>
           <div className="sw-sec">Direct messages</div>
           <span className="sw-dm first"><span className="seg green" />MambaHR<span className="badge">1</span></span>
           <span className="sw-dm"><span className="seg" />Brian Bell</span>
-        </aside>
+        </div>
 
-        <main className="sw-main">
+        <div className="sw-main" role="presentation">
           <div className="sw-head">
             <span className="h-ch"><span className="hash">#</span>people-ops</span>
             <span className="h-mem">
@@ -69,7 +70,7 @@ function SlackWindow() {
               <img className="av" src="/avatars/priya.jpg" alt="Jordan Lee" width={36} height={36} />
               <div className="m-body">
                 <div className="m-h"><b>Jordan Lee</b><time>9:11 AM</time></div>
-                <div className="m-t"><span className="mention">@MambaHR</span> I need an employment verification letter for my mortgage</div>
+                <div className="m-t"><span className="mention">@MambaHR</span> How many unused vacation days do I have, and does our policy let me carry them over?</div>
               </div>
             </div>
 
@@ -77,11 +78,11 @@ function SlackWindow() {
               <div className="av app">M</div>
               <div className="m-body">
                 <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:11 AM</time></div>
-                <div className="m-t">Done. Sent to her email and filed.</div>
+                <div className="m-t">You have 9 days left, and up to 5 carry over. Policy attached.</div>
                 <div className="attach">
-                  <div className="a-row"><span className="a-k">Letter</span><span className="a-v">Employment verification, signed</span></div>
-                  <div className="a-row"><span className="a-k">Sent to</span><span className="a-v">jordan@company.com</span></div>
-                  <div className="a-foot"><span className="ok-dot" />Logged &middot; filed to her record &middot; ref <span className="mono">doc_2b94f7</span></div>
+                  <div className="a-row"><span className="a-k">Policy</span><span className="a-v">Time-off carryover, section 4.2, cited</span></div>
+                  <div className="a-row"><span className="a-k">Balance</span><span className="a-v">9 days · accrual current</span></div>
+                  <div className="a-foot"><span className="ok-dot" />Logged &middot; answered from your handbook &middot; ref <span className="mono">ask_2b94f7</span></div>
                 </div>
               </div>
             </div>
@@ -98,7 +99,7 @@ function SlackWindow() {
               <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 8l12-5-5 12-2-5-5-2z" fill="currentColor" /></svg>
             </span>
           </div>
-        </main>
+        </div>
       </div>
 
       <style jsx>{`
@@ -136,7 +137,7 @@ function SlackWindow() {
           min-width: 200px;
           text-align: center;
         }
-        .sw-body { display: grid; grid-template-columns: 178px 1fr; }
+        .sw-body { display: grid; grid-template-columns: 178px 1fr; position: relative; z-index: 0; }
         .sw-side { background: #3F0E40; padding: 14px 10px; }
         .sw-ws {
           display: flex;
@@ -150,7 +151,7 @@ function SlackWindow() {
           margin-bottom: 10px;
         }
         .sw-ws svg { color: rgba(255, 255, 255, 0.6); }
-        .sw-sec { font-size: 11px; color: rgba(255, 255, 255, 0.55); padding: 10px 8px 5px; letter-spacing: 0.02em; }
+        .sw-sec { font-size: 12px; color: rgba(255, 255, 255, 0.55); padding: 10px 8px 5px; letter-spacing: 0.02em; }
         .sw-ch,
         .sw-dm {
           display: flex;
@@ -159,7 +160,7 @@ function SlackWindow() {
           padding: 5px 8px;
           border-radius: 6px;
           color: rgba(255, 255, 255, 0.72);
-          font-size: 13.5px;
+          font-size: 14px;
         }
         .hash { color: rgba(255, 255, 255, 0.5); font-weight: 600; }
         .sw-ch.on { background: #1164A3; color: #fff; font-weight: 600; }
@@ -171,7 +172,7 @@ function SlackWindow() {
           margin-left: auto;
           background: #E01E5A;
           color: #fff;
-          font-size: 10.5px;
+          font-size: 12px;
           font-weight: 700;
           border-radius: 999px;
           padding: 1px 7px;
@@ -194,7 +195,7 @@ function SlackWindow() {
         .m { display: flex; gap: 11px; }
         .av { width: 36px; height: 36px; border-radius: 9px; object-fit: cover; flex: none; }
         .av.app {
-          background: #1A1A19;
+          background: var(--text);
           color: #fff;
           display: flex;
           align-items: center;
@@ -204,11 +205,11 @@ function SlackWindow() {
         }
         .m-body { min-width: 0; }
         .m-h { display: flex; align-items: baseline; gap: 8px; }
-        .m-h b { font-size: 13.5px; color: var(--text); font-weight: 700; }
-        .m-h time { font-size: 11px; color: var(--text-faint); }
+        .m-h b { font-size: 14px; color: var(--text); font-weight: 700; }
+        .m-h time { font-size: 12px; color: var(--text-faint); }
         .apptag {
           font-family: var(--font-mono);
-          font-size: 9px;
+          font-size: 12px;
           font-weight: 600;
           letter-spacing: 0.04em;
           color: var(--text-muted);
@@ -216,8 +217,8 @@ function SlackWindow() {
           border-radius: 4px;
           padding: 1px 5px;
         }
-        .m-t { font-size: 13.5px; line-height: 1.45; color: var(--text); margin-top: 2px; }
-        .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+        .m-t { font-size: 14px; line-height: 1.45; color: var(--text); margin-top: 2px; }
+        .mention { color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
         .attach {
           margin-top: 8px;
           border-left: 3px solid var(--gold);
@@ -236,11 +237,11 @@ function SlackWindow() {
           margin-top: 8px;
           padding-top: 8px;
           border-top: 1px solid var(--border);
-          font-size: 11px;
+          font-size: 12px;
           color: var(--text-faint);
         }
         .ok-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); flex: none; }
-        .mono { font-family: var(--font-mono); font-size: 10.5px; }
+        .mono { font-family: var(--font-mono); font-size: 12px; }
         .typing { display: flex; align-items: center; gap: 4px; padding: 2px 0 0; }
         .typing-t { font-size: 12px; color: var(--text-faint); margin-left: 7px; }
         .typing-t b { color: var(--violet); font-weight: 600; }
@@ -253,7 +254,7 @@ function SlackWindow() {
           border-radius: 10px;
           padding: 10px 14px;
           color: var(--text-faint);
-          font-size: 13.5px;
+          font-size: 14px;
         }
         .send {
           display: inline-flex;
@@ -268,129 +269,6 @@ function SlackWindow() {
         @media (max-width: 520px) {
           .sw-side { display: none; }
           .sw-body { grid-template-columns: 1fr; }
-        }
-      `}</style>
-    </div>
-  )
-}
-
-/* ── Dual-surface fragment: the same request in Slack and in the app ── */
-function DualSurface() {
-  return (
-    <div className="tri">
-      <div className="card slack agent-edge agent-done">
-        <div className="c-head">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/slack-new-logo.svg" alt="Slack" width={14} height={14} />
-          <span>Slack &middot; #people-ops</span>
-        </div>
-        <div className="c-msg">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="c-av" src="/avatars/maya.jpg" alt="Maya Chen" width={28} height={28} />
-          <div>
-            <div className="c-who"><b>Maya Chen</b><time>9:14 AM</time></div>
-            <div className="c-t"><span className="mention">@MambaHR</span> Maya &middot; 3 days off</div>
-          </div>
-        </div>
-        <div className="c-foot"><span className="ok" />Approved &middot; calendar blocked</div>
-      </div>
-
-      <div className="card app">
-        <div className="c-head app-h">
-          <span className="dots3"><i /><i /><i /></span>
-          <span className="addr">app.mambahr.com</span>
-        </div>
-        <div className="c-row">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="c-av round" src="/avatars/maya.jpg" alt="Maya Chen" width={28} height={28} />
-          <div className="c-main">
-            <div className="c-t"><b>Maya &middot; 3 days off</b></div>
-            <div className="c-sub">Time off &middot; Apr 7&ndash;9 &middot; within policy</div>
-          </div>
-          <span className="pill">Approved</span>
-        </div>
-        <div className="c-foot"><span className="ok" />One record &middot; ref <span className="mono">leave_4f81a2</span></div>
-      </div>
-
-      <style jsx>{`
-        .tri { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; }
-        .card {
-          background: var(--bg);
-          border: 1px solid var(--border);
-          border-radius: 14px;
-          box-shadow: var(--shadow-md);
-          overflow: hidden;
-          font-size: 13px;
-        }
-        .card.slack { transform: translateX(-18px); z-index: 3; position: relative; }
-        .card.app { transform: translateX(18px); margin-top: -10px; z-index: 1; position: relative; box-shadow: var(--shadow-float); }
-        .c-head {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 9px 14px;
-          font-size: 11.5px;
-          font-weight: 600;
-          color: var(--text-muted);
-          background: #F8F6F1;
-          border-bottom: 1px solid var(--border);
-        }
-        .c-head.app-h { gap: 10px; }
-        .dots3 { display: flex; gap: 5px; }
-        .dots3 i { width: 8px; height: 8px; border-radius: 999px; background: #e3ddd6; display: block; }
-        .dots3 i:first-child { background: #f0a59a; }
-        .dots3 i:nth-child(2) { background: #f4ce8e; }
-        .dots3 i:nth-child(3) { background: #a9cfa6; }
-        .addr {
-          margin: 0 auto;
-          font-size: 11px;
-          color: var(--text-faint);
-          background: var(--bg);
-          border: 1px solid var(--border);
-          border-radius: 6px;
-          padding: 2px 12px;
-        }
-        .c-msg { display: flex; gap: 10px; padding: 12px 14px 4px; }
-        .c-av { width: 28px; height: 28px; border-radius: 7px; object-fit: cover; flex: none; }
-        .c-av.round { border-radius: 999px; }
-        .c-who { display: flex; align-items: baseline; gap: 7px; }
-        .c-who b { font-size: 12.5px; color: var(--text); }
-        .c-who time { font-size: 10.5px; color: var(--text-faint); }
-        .c-t { font-size: 13px; color: var(--text); margin-top: 2px; }
-        .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
-        .c-bubble {
-          margin-top: 4px;
-          display: inline-block;
-          background: #F1F0FA;
-          border-radius: 4px 12px 12px 12px;
-          padding: 6px 11px;
-          font-size: 12.5px;
-          color: var(--text);
-        }
-        .c-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px 4px; }
-        .c-main { flex: 1; min-width: 0; }
-        .c-sub { font-size: 11.5px; color: var(--text-faint); margin-top: 2px; }
-        .pill {
-          flex: none;
-          font-size: 11.5px;
-          font-weight: 600;
-          color: var(--color-green);
-          background: rgba(22, 130, 80, 0.08);
-          border-radius: 999px;
-          padding: 4px 11px;
-        }
-        .c-foot {
-          display: flex;
-          align-items: center;
-          gap: 7px;
-          padding: 8px 14px 11px;
-          font-size: 11px;
-          color: var(--text-faint);
-        }
-        .ok { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); flex: none; }
-        .mono { font-family: var(--font-mono); font-size: 10.5px; }
-        @media (max-width: 560px) {
-          .card.slack, .card.app { transform: none; }
         }
       `}</style>
     </div>
@@ -433,7 +311,7 @@ function TeamPhoto() {
           font-size: 34px;
           line-height: 1;
           margin-top: 10px;
-          background: linear-gradient(110deg, #8A6535, #6A5DA6);
+          background: linear-gradient(110deg, var(--gold), var(--violet));
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
@@ -454,56 +332,53 @@ export default function MambaPage() {
       <RevealInit />
       <CountUp />
 
-      <main>
+      <main id="main">
 
       <PageHero
-        eyebrow="The AI agent"
-        title={<>Not a tool. <Em>A hire.</Em></>}
-        lead="Your team messages @MambaHR like a person. It reads the thread, checks your policy, does the work, and logs it, in Slack or the MambaHR app."
-        photo="/v2-people/sofia.jpg"
-        photoChip="MambaHR · done"
-        photoCaption="Letter sent · filed · 9:11 AM"
+        eyebrow="How it works"
+        title={<>Message it like a coworker. <Em>It does the work.</Em></>}
+        lead="Your team writes @MambaHR in Slack or the app. It reads the thread, checks your policy and the law, does the work, and shows you the receipt."
       >
         <SlackWindow />
       </PageHero>
 
       <AgentLoop
         eyebrow="Behind every reply"
-        title={<>What happens to <Em>every message</Em></>}
+        title={<>What happens to every message</>}
         lead="Each request runs the same loop, whether it’s a quick policy question or a new hire’s first day."
         steps={[
           { n: '01', label: 'Reads the thread, and the person', desc: 'It knows who’s asking, their role, their manager, and what was already said.', who: 'agent', time: '< 1s', img: '/avatars/dave.jpg' },
           { n: '02', label: 'Checks your policy and the law', desc: 'Your handbook first, then the rules for the state the person works in.', who: 'agent', time: '2s' },
-          { n: '03', label: 'Does the work', desc: 'Books the time off, files the letter, updates the record, schedules what needs scheduling.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
+          { n: '03', label: 'Does the work', desc: 'Books the time off, files the letter, updates the record.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
           { n: '04', label: 'Answers with the receipt attached', desc: 'Not just “done”, what changed, which rule applied, and where it’s filed.', who: 'agent' },
-          { n: '05', label: 'The big calls come to you first', desc: 'Offers above band, terminations, comp above your threshold, always a human decision.', who: 'you', img: '/avatars/anna.jpg' },
+          { n: '05', label: 'The big calls come to you first', desc: 'Offers above your pay range, terminations, and raises above your threshold are always a human decision.', who: 'you', img: '/avatars/anna.jpg' },
           { n: '06', label: 'Logs it all', desc: 'Every action lands in one record, so there’s never a question about what happened.', who: 'agent' },
         ]}
       />
 
       <FeatureSplit
-        eyebrow="Every channel"
-        title={<>Same brain, <Em>every door</Em></>}
-        lead="Slack and the MambaHR app, one agent, one memory, one record. Ask in Slack, approve in the app, and nothing gets lost in between."
+        eyebrow="Slack and the app"
+        title={<>One MambaHR, one record, wherever you ask</>}
+        lead="Ask in Slack or in the MambaHR app. It is one system with one memory and one record. Start in Slack, approve in the app, and nothing gets lost in between."
         bullets={[
           'Mention it in any channel or DM, it picks up the whole thread',
           'Start in Slack, finish in the app, the context follows',
           'One record of everything, no matter where it was asked',
         ]}
       >
-        <DualSurface />
+        <div className="mock-card agent-edge agent-working"><ChatThread /></div>
       </FeatureSplit>
 
       <FeatureSplit
         flip
         warm
-        eyebrow="Zero rollout"
-        title={<>Zero training. <Em>Zero logins.</Em></>}
-        lead="No training. No new logins. No portal your employees will forget the password to. They message the way they already message, and the work gets done."
+        eyebrow="Nothing to roll out"
+        title={<>No training. No new logins.</>}
+        lead="No portal your employees will forget the password to. They message the way they already message, and the work gets done."
         bullets={[
           'Employees never log into anything new',
           'Managers approve from wherever they already are',
-          'Live in a day, not a quarter',
+          'Your data imports in a day, not a quarter',
         ]}
       >
         <TeamPhoto />
@@ -511,7 +386,7 @@ export default function MambaPage() {
 
       <StatTrio
         stats={[
-          { n: 9, suffix: 's', label: 'median answer, with receipt' },
+          { n: 9, suffix: 's', label: 'to an answer in the modeled run, with the receipt attached' },
           { n: 24, suffix: '/7', label: 'answering while your team is off the clock' },
           { n: 100, suffix: '%', label: 'of actions logged with the rule followed' },
         ]}
@@ -524,7 +399,7 @@ export default function MambaPage() {
         metric="Saved 12 hrs / week"
       />
 
-      <PageCta title={<>Meet your next <Em>team member.</Em></>} />
+      <PageCta title={<>See it do the work, <Em>live.</Em></>} sub="A 30-minute demo on your own Slack questions. Then we import your data and switch you over." />
       </main>
 
       <Footer />

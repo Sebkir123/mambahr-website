@@ -15,7 +15,7 @@ export default function Statement() {
           You bought the software. You still <span className="em">do the work.</span>
         </h2>
         <p className="body" data-reveal data-delay="1">
-          Every HRIS needs people clicking the buttons. For every dollar spent on the
+          Every HR system needs people clicking the buttons. For every dollar spent on the
           system, companies spend six on the humans operating it. MambaHR does the
           clicking, so your people get that six back.
         </p>
@@ -38,7 +38,7 @@ export default function Statement() {
           <figcaption>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/avatars/head-of-people.jpg" alt="" width={38} height={38} loading="lazy" decoding="async" />
-            <span>Head of People · SaaS company, 300 people</span>
+            <span>Head of People · SaaS company, 300 people · illustrative</span>
           </figcaption>
         </figure>
       </div>
@@ -52,7 +52,7 @@ export default function Statement() {
             radial-gradient(64% 50% at 86% 8%, rgba(106, 93, 166, 0.2), transparent 60%),
             radial-gradient(80% 60% at 50% 110%, rgba(106, 93, 166, 0.1), transparent 60%),
             #14110C;
-          padding: clamp(96px, 13vw, 168px) var(--page-pad);
+          padding: clamp(80px, 10vw, 128px) var(--page-pad);
         }
         .inner {
           position: relative;
@@ -146,7 +146,7 @@ export default function Statement() {
           object-fit: cover;
         }
         .quote figcaption span {
-          font-size: 13.5px;
+          font-size: 14px;
           color: rgba(255, 255, 255, 0.62);
         }
         @media (max-width: 760px) {

@@ -7,16 +7,16 @@ export default function Cta() {
         <span className="v2-grain" />
         <p className="eyebrow">Get started</p>
         <h2 className="title">
-          Hire the agent. <span className="em">Promote the human.</span>
+          See MambaHR do a week of HR work <span className="em">in 30 minutes.</span>
         </h2>
         <p className="sub">
-          A live demo in 30 minutes. Live the next morning.
+          Book a demo this week. We import your data the day you sign, and most teams are live the next morning.
         </p>
         <div className="form">
-          <a className="btn" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
+          <a className="btn btn-primary" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
         </div>
         <div className="trust">
-          <span>Switch in a day</span><i /><span>Your data stays in the US</span><i /><span>A human on the big calls</span>
+          <span>Your data imports in a day</span><i /><span>Your data stays in the US</span><i /><span>A person signs off on every termination</span>
         </div>
       </div>
 
@@ -113,16 +113,6 @@ export default function Cta() {
           width: min(320px, 100%);
           color: var(--text);
           outline: none;
-        }
-        .btn {
-          background: #1A1A19;
-          color: #fff;
-          font-weight: 600;
-          font-size: 15px;
-          padding: 15px 28px;
-          border-radius: 999px;
-          border: none;
-          cursor: pointer;
         }
       `}</style>
     </section>

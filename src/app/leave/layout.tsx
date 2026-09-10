@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Time Off & Leave Management | MambaHR',
   description:
-    'PTO to FMLA approved in seconds. Multi-state PFML stacking, ADA, USERRA, and bereavement, every request handled policy-aware and to the letter.',
+    'Vacation days to family leave approved in seconds. State leave cited, military and bereavement leave handled, every request checked against policy with the statute attached.',
   openGraph: {
     title: 'Time Off & Leave Management | MambaHR',
     description:
-      'PTO to FMLA approved in seconds. Multi-state PFML stacking, ADA, USERRA, and bereavement, all policy-aware.',
+      'Vacation days to family leave approved in seconds. State leave cited, military and bereavement leave handled.',
     url: 'https://mambahr.com/leave',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Time Off & Leave Management | MambaHR',
     description:
-      'PTO to FMLA approved in seconds. Multi-state PFML stacking, ADA, USERRA, and bereavement, all policy-aware.',
+      'Vacation days to family leave approved in seconds. State leave cited, military and bereavement leave handled.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://mambahr.com/leave' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'Time Off & Leave Management | MambaHR',
   url: 'https://mambahr.com/leave',
   description:
-    'MambaHR leave management: PTO through FMLA approved in seconds. The agent handles multi-state PFML stacking, ADA accommodations, USERRA, and bereavement, every request resolved policy-aware.',
+    'MambaHR time off and leave: vacation days through federal family and medical leave (FMLA) approved in seconds. State paid-leave programs are cited and sent to a person; military leave (USERRA) and bereavement handled, every request checked against policy.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Leave agent',
     description:
-      'Approves time off from PTO to FMLA in seconds, applying the right policy every time: multi-state PFML stacking, ADA accommodation interactive process, USERRA, and bereavement. Tracks balances, eligibility, and statutory clocks across every state you operate in.',
+      'Approves time off from vacation days to FMLA in seconds, applying the right policy every time. Cites state paid-leave programs and sends a person the decision on how they combine; handles USERRA and bereavement. Tracks balances and FMLA eligibility.',
   },
 }
 

@@ -20,7 +20,7 @@ function CompReviewCard() {
         <img className="av" src="/avatars/tom.jpg" alt="Tom Harrison" width={36} height={36} />
         <div className="main">
           <div className="name">Tom Harrison · merit raise <b className="up">+12%</b></div>
-          <div className="meta">Senior Engineer · L4 band</div>
+          <div className="meta">Senior Engineer · band</div>
           <div className="gauge" aria-hidden="true">
             <span className="track" />
             <span className="seg" />
@@ -38,7 +38,7 @@ function CompReviewCard() {
         <img className="av" src="/avatars/maya.jpg" alt="Maya Chen" width={36} height={36} />
         <div className="main">
           <div className="name">Maya Chen · <b className="up">+18%</b> · above band 8%</div>
-          <div className="meta">Staff Engineer · L5 band · 9:41 AM</div>
+          <div className="meta">Staff Engineer · band · 9:41 AM</div>
         </div>
         <span className="chip route">Routes to you</span>
         <div className="btns">
@@ -49,7 +49,7 @@ function CompReviewCard() {
 
       <div className="foot">
         <span className="fd" aria-hidden="true" />
-        Every recommendation checked against your bands before anyone sees it
+        MambaHR checks every recommendation against your bands before anyone sees it
       </div>
       <style jsx>{`
         .cr {
@@ -68,7 +68,7 @@ function CompReviewCard() {
           border-bottom: 1px solid var(--border-faint);
           background: var(--bg-warm);
         }
-        .bt { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .bt { font-size: 14px; font-weight: 700; color: var(--text); }
         .row { display: flex; align-items: center; gap: 13px; padding: 16px 20px; flex-wrap: wrap; }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .row.hot { background: linear-gradient(90deg, rgba(220, 38, 38, 0.04), rgba(220, 38, 38, 0)); }
@@ -79,7 +79,7 @@ function CompReviewCard() {
         .meta { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
         .gauge { position: relative; margin: 14px 0 16px; height: 6px; max-width: 320px; }
         .track { position: absolute; inset: 0; border-radius: 999px; background: var(--border-faint); }
-        .seg { position: absolute; top: 0; bottom: 0; left: 18%; right: 18%; border-radius: 999px; background: linear-gradient(90deg, #E6D3BC, #D4AA7C); }
+        .seg { position: absolute; top: 0; bottom: 0; left: 18%; right: 18%; border-radius: 999px; background: linear-gradient(90deg, #E6D3BC, var(--gold-pale)); }
         .dot {
           position: absolute;
           top: 50%;
@@ -96,7 +96,7 @@ function CompReviewCard() {
           top: 11px;
           transform: translateX(-50%);
           font-family: var(--font-mono);
-          font-size: 9.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: var(--text-faint);
@@ -105,7 +105,7 @@ function CompReviewCard() {
         .chip {
           flex: none;
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           border-radius: 999px;
@@ -114,15 +114,15 @@ function CompReviewCard() {
         .chip.ok { color: var(--color-green); background: rgba(22, 130, 70, 0.09); border: 1px solid rgba(22, 130, 70, 0.22); }
         .chip.route { color: var(--color-red); background: rgba(220, 38, 38, 0.07); border: 1px solid rgba(220, 38, 38, 0.2); }
         .btns { display: flex; gap: 7px; flex: none; }
-        .ok-b { font-size: 12.5px; font-weight: 600; color: #fff; background: #14110C; border-radius: 999px; padding: 7px 15px; }
-        .no-b { font-size: 12.5px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
+        .ok-b { font-size: 13px; font-weight: 600; color: #fff; background: var(--ink); border-radius: 999px; padding: 7px 15px; }
+        .no-b { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
         .foot {
           display: flex;
           align-items: center;
           gap: 8px;
           padding: 12px 20px;
           border-top: 1px solid var(--border-faint);
-          font-size: 12.5px;
+          font-size: 13px;
           color: var(--text-muted);
         }
         .fd { width: 8px; height: 8px; border-radius: 999px; background: var(--gold); flex: none; }
@@ -134,9 +134,9 @@ function CompReviewCard() {
 /* ── Pay-equity check fragment ── */
 function EquityCard() {
   const rows = [
-    { t: 'Similar roles, similar pay', m: 'L4 Engineering · 11 peers compared', state: 'ok' as const },
+    { t: 'Similar roles, similar pay', m: 'Senior Engineering · 11 peers compared', state: 'ok' as const },
     { t: 'No gap by gender or ethnicity', m: 'Screened on every change, not once a year', state: 'ok' as const },
-    { t: '2 flags surfaced for review', m: 'Both routed to your Head of People with context', state: 'review' as const },
+    { t: '2 flags raised for your review', m: 'Both routed to your Head of People with context', state: 'review' as const },
   ]
   return (
     <div className="eq agent-edge agent-done">
@@ -172,21 +172,21 @@ function EquityCard() {
           background: var(--bg-warm);
           flex-wrap: wrap;
         }
-        .ht { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .ht { font-size: 14px; font-weight: 700; color: var(--text); }
         .row { display: flex; align-items: center; gap: 12px; padding: 14px 18px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; position: relative; }
         .mark.ok { background: var(--color-green); }
         .mark.ok::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.review { background: linear-gradient(135deg, #D4AA7C, #8A6535); }
+        .mark.review { background: linear-gradient(135deg, var(--gold-pale), var(--gold)); }
         .mark.review::after { content: ''; position: absolute; left: 7.5px; top: 4px; width: 2px; height: 6px; background: #fff; border-radius: 2px; }
         .main { flex: 1; min-width: 0; }
-        .rt { font-size: 13.5px; font-weight: 600; color: var(--text); }
-        .rm { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
+        .rt { font-size: 14px; font-weight: 600; color: var(--text); }
+        .rm { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
         .tag {
           flex: none;
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           border-radius: 999px;
@@ -232,7 +232,7 @@ function PhotoCard() {
           padding: 13px 16px;
           max-width: 290px;
         }
-        .ft { font-size: 13.5px; font-weight: 700; color: var(--text); margin-top: 9px; }
+        .ft { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 9px; }
         .fm { font-size: 12px; color: var(--text-faint); margin-top: 3px; }
         @media (max-width: 880px) { .float { left: 12px; } }
       `}</style>
@@ -246,12 +246,11 @@ export default function CompensationPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Compensation"
           title={<>Every raise, <Em>right.</Em></>}
-          lead="No more six weeks of spreadsheets and second-guessing. Every number is checked against your bands and screened for pay equity before anyone sees it, and anything above band comes to you first."
-          proof="Built for the whole comp cycle"
+          lead="No more six weeks of spreadsheets and second-guessing. MambaHR checks every number against your pay ranges (your bands) and screens it for pay equity before anyone sees it. Anything above the band comes to you first."
           photo="/v2-people/team2.jpg"
           photoChip="MambaHR · done"
           photoCaption="Maya’s raise · approved, letter signed"
@@ -265,9 +264,9 @@ export default function CompensationPage() {
           lead="From a manager&rsquo;s Slack message to an updated payroll file, with you on every call that matters."
           steps={[
             { n: '01', label: 'A manager asks in Slack', desc: '“Can we get Tom to $185k?” That message is the whole request, no form, no ticket.', who: 'agent', time: 'sec', img: '/avatars/dave.jpg' },
-            { n: '02', label: 'Checked against bands and pay equity', desc: 'The number is held up against your salary bands and screened for equity issues before it moves.', who: 'agent', time: 'min' },
+            { n: '02', label: 'Checked against bands and pay equity', desc: 'MambaHR holds the number up against your salary bands and screens it for equity issues before it moves.', who: 'agent', time: 'min' },
             { n: '03', label: 'The big calls come to you first', desc: 'Within policy proceeds. Anything above your threshold routes to a human before it goes anywhere.', who: 'you', img: '/avatars/priya.jpg' },
-            { n: '04', label: 'The letter writes and signs itself', desc: 'Comp letter generated, sent for e-signature, and filed to the employee record automatically.', who: 'agent', time: 'min', img: '/avatars/tom.jpg' },
+            { n: '04', label: 'Approved, dated, filed', desc: 'Comp change approved, effective-dated, and filed to the employee record.', who: 'agent', time: 'min', img: '/avatars/tom.jpg' },
             { n: '05', label: 'Payroll file updated', desc: 'The change lands in the next payroll file, effective-dated correctly. Nothing to re-key.', who: 'agent', time: 'same day' },
           ]}
         />
@@ -275,7 +274,7 @@ export default function CompensationPage() {
         <FeatureSplit
           eyebrow="Pay equity"
           title={<>Equity checked, <Em>every time.</Em></>}
-          lead="Every comp change is screened for equity issues before it happens, not discovered in a year-end audit panic. Clear changes proceed; anything that looks off comes to a person with the context attached."
+          lead="MambaHR screens every pay change for equity issues before it happens, not in a year-end audit panic. Clear changes proceed. Anything that looks off comes to a person with the context attached."
           bullets={[
             'Screened on every change, against real peers in the same band',
             'Flags arrive with context, not just a red number',
@@ -290,7 +289,7 @@ export default function CompensationPage() {
           warm
           eyebrow="What changes"
           title={<>Comp talks without <Em>the fear.</Em></>}
-          lead="When the number is already checked against bands and equity, the manager walks in confident the offer is fair, and spends the conversation on the person, not defending the math."
+          lead="When the number is already checked against bands and equity, the manager walks in confident the offer is fair. The conversation goes to the person, not to defending the math."
           bullets={[
             'Managers know the number is defensible before they say it',
             'Employees hear a consistent story about how pay works',
@@ -315,7 +314,7 @@ export default function CompensationPage() {
           metric="Comp cycle in days, not weeks"
         />
 
-        <PageCta title={<>Pay people right. <Em>Prove it.</Em></>} />
+        <PageCta title={<>Pay people right. <Em>Prove it.</Em></>} sub="A 30-minute demo on one raise against your own bands. Then we import your data and switch you over." />
       </main>
       <Footer />
     </>

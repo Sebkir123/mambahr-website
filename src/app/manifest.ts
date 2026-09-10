@@ -8,11 +8,11 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'MambaHR, The AI HR Department',
     short_name: 'MambaHR',
     description:
-      'The AI HR department for US companies, hiring, onboarding, time off, performance, compliance, and payroll-ready exports, run end to end.',
+      'The AI HR department for US companies: hiring, onboarding, time off, compliance, and payroll changes, done for you.',
     start_url: '/',
     display: 'standalone',
     background_color: '#F4F2EC',
-    theme_color: '#8A6535',
+    theme_color: '#7A5A2E',
     icons: [
       { src: '/MambaHR_logo.png', sizes: '2000x2000', type: 'image/png', purpose: 'any' },
       { src: '/MambaHR_logo.png', sizes: '512x512', type: 'image/png', purpose: 'any' },

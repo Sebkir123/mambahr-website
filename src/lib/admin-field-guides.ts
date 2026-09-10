@@ -15,7 +15,7 @@ import { serviceDb } from '@/lib/supabase/service'
 // Guide catalog, slug → public title + gated route path. The token-gated page
 // lives at <path>?k=<token>.
 export const GUIDES: Record<string, { title: string; path: string }> = {
-  'rif-playbook': { title: 'The Defensible Layoff Playbook', path: '/resources/rif-playbook' },
+  'rif-playbook': { title: 'The layoff playbook', path: '/resources/rif-playbook' },
 }
 export function guideTitle(slug: string): string {
   return GUIDES[slug]?.title ?? slug

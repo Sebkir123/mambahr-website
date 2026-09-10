@@ -2,16 +2,17 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { JsonLd } from '@/components/json-ld'
 import { FAQS } from './faqs'
+import { TIERS } from '@/content/pricing-tiers'
 
 export const metadata: Metadata = {
   title: 'Pricing | MambaHR | Your first AI HR department',
   description:
-    'Simple per-employee pricing for hiring, onboarding, time off, performance, compliance, and payroll-ready exports. Your whole HR department from $9k a year.',
+    'Simple per-employee pricing for hiring, onboarding, time off, compliance, and payroll changes. Your whole HR department from $9k a year.',
   alternates: { canonical: 'https://mambahr.com/pricing' },
   openGraph: {
     title: 'Pricing | MambaHR',
     description:
-      'Simple per-employee pricing for your whole AI HR department, hiring, onboarding, time off, performance, compliance, and payroll-ready exports. From $9k a year.',
+      'Simple per-employee pricing for your whole AI HR department, hiring, onboarding, time off, compliance, and payroll changes. From $9k a year.',
     url: 'https://mambahr.com/pricing',
     siteName: 'MambaHR',
     type: 'website',
@@ -27,14 +28,15 @@ export const metadata: Metadata = {
 
 // Pricing structured data, lets answer engines and Google's price rich results
 // read the published per-employee tiers. Numbers are the literal published rates
-// on the page (no user input). Custom/Enterprise carries no numeric price, so it
-// is excluded from lowPrice/highPrice but listed as an offer.
+// on the page (no user input), read from the shared TIERS so the schema cannot
+// drift from the cards. Custom/Enterprise carries no numeric price, so it is
+// excluded from lowPrice/highPrice but listed as an offer.
 const pricingJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: 'MambaHR, AI HR Department',
   description:
-    'The AI HR department, hiring, onboarding, time off, performance, compensation, compliance, and payroll-ready exports, run end to end. A human approves the calls that matter.',
+    'The AI HR department: hiring, onboarding, time off, compensation, compliance, and payroll changes, done for you. A person approves the calls that matter.',
   brand: { '@type': 'Brand', name: 'MambaHR' },
   url: 'https://mambahr.com/pricing',
   offers: {
@@ -44,12 +46,15 @@ const pricingJsonLd = {
     highPrice: '30',
     offerCount: '4',
     unitText: 'per employee per month, billed annually',
-    offers: [
-      { '@type': 'Offer', name: 'HR Starter', price: '14', priceCurrency: 'USD', description: 'Per employee / month · $9k/yr minimum · teams of 50–150.' },
-      { '@type': 'Offer', name: 'HR Ops Manager', price: '22', priceCurrency: 'USD', description: 'Per employee / month · $24k/yr minimum · teams of 75–400.' },
-      { '@type': 'Offer', name: 'AI HR Department', price: '30', priceCurrency: 'USD', description: 'Per employee / month · $48k/yr minimum · teams of 150+.' },
-      { '@type': 'Offer', name: 'Enterprise', priceCurrency: 'USD', description: 'Custom pricing from $100k/yr · 1,000+ and multi-entity.' },
-    ],
+    offers: TIERS.map((t) => ({
+      '@type': 'Offer',
+      name: t.name,
+      ...(t.price.startsWith('$') ? { price: t.price.slice(1) } : {}),
+      priceCurrency: 'USD',
+      description: t.price.startsWith('$')
+        ? `Per employee / month · ${t.min.replace(' · billed annually', '')} · ${t.size.replace('For ', '')}.`
+        : `Custom pricing ${t.min} · ${t.size.replace('For ', '')}.`,
+    })),
   },
 }
 

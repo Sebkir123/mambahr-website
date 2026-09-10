@@ -94,7 +94,8 @@ export async function composePost(formData: FormData): Promise<ComposeResult> {
         error,
         created_by: admin.email,
       })
-      error ? failed++ : posted++
+      if (error) failed++
+      else posted++
     }
     revalidatePath('/admin/social')
     if (failed === 0) return { ok: true, message: `Posted to ${posted} account${posted === 1 ? '' : 's'}.` }
