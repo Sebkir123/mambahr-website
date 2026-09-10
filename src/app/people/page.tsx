@@ -105,7 +105,7 @@ export default function PeoplePage() {
         <PageHero
           eyebrow="Employee records"
           title={<>One record, <Em>current.</Em></>}
-          lead="Nobody should spend their week retyping what already happened. MambaHR does the work and keeps the record: every person, every detail, right without anyone touching it."
+          lead="MambaHR does the work and keeps the record: every person, every detail, right without anyone touching it."
         >
           <div className="mock-card agent-edge agent-done"><PeopleDirectory /></div>
         </PageHero>

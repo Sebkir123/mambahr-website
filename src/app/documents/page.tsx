@@ -178,7 +178,7 @@ export default function DocumentsPage() {
         <PageHero
           eyebrow="Documents & e-sign"
           title={<>Signed and <Em>filed.</Em></>}
-          lead="Stop chasing signatures on Friday afternoons. MambaHR drafts offers, agreements, and acknowledgments in seconds, sends them for e-signature, chases them, and files them where you’ll find them in three years."
+          lead="MambaHR drafts offers, agreements, and acknowledgments in seconds, sends them for e-signature, chases them, and files them where you’ll find them in three years."
           photo="/v2-people/team.jpg"
           photoChip="MambaHR · signed & filed"
           photoCaption="Maya’s offer, out, signed, filed in 41 min"

@@ -188,7 +188,7 @@ export default function PayrollPage() {
         <PageHero
           eyebrow="Payroll changes"
           pill="Powered by Deel"
-          title={<>Payday, <Em>perfect.</Em></>}
+          title={<>Payday, <Em>prepared.</Em></>}
           lead={'MambaHR prepares every payroll change. You choose per company: a change file for your current provider, or Deel-managed payroll. On Deel, MambaHR sends the changes and a person approves every run.'}
           photo="/v2-people/team.jpg"
           photoChip="MambaHR · ready"
@@ -228,9 +228,9 @@ export default function PayrollPage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="The feeling"
-          title={<>No more Sunday-night sweeps.</>}
-          lead={'No more Sunday-night spreadsheet sweeps. No more “did the raise make it in?” The file is built, reconciled, and waiting for you, days before anyone gets paid.'}
+          eyebrow="Before payday"
+          title={<>The file is ready days early.</>}
+          lead={'Every change is collected as it happens, reconciled twice against the record, and waiting for you days before anyone gets paid.'}
           bullets={[
             'Every change accounted for, with the receipt to prove it',
             'Discrepancies caught and fixed before the file reaches you',

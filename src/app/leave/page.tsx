@@ -316,9 +316,9 @@ export default function LeavePage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="The culture part"
+          eyebrow="Balances and coverage"
           title={<>Vacations, <Em>taken.</Em></>}
-          lead={'No guilt-tripping forms, no week-long approval limbo. Balances are always current, coverage is visible to everyone, and asking for time off feels like asking a colleague, because that’s what it is.'}
+          lead={'Balances are always current, in-policy requests approve in seconds, and who is away when is visible to the whole team.'}
           bullets={[
             'Balances always current, no “let me check the spreadsheet”',
             'Team coverage visible before anyone says yes',

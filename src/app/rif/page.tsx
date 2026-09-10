@@ -219,7 +219,7 @@ function DignityPhoto() {
   return (
     <div className="dp">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="ph" src="/v2-people/team2.jpg" alt="A team treated properly, even on the hardest day" />
+      <img className="ph" src="/v2-people/team2.jpg" alt="" />
       <div className="mini agent-edge agent-done">
         <span className="g-mark" aria-hidden="true" />
         <div>
@@ -274,7 +274,7 @@ export default function RIFPage() {
       <main id="main">
         <PageHero
           eyebrow="Headcount & layoffs"
-          title={<>Hard days, <Em>done right.</Em></>}
+          title={<>Notices, severance, <Em>final pay.</Em></>}
           lead="When a layoff has to happen, MambaHR gets every notice out on time and computes severance and final pay by each state’s rules. A person signs off on every single exit."
           photo="/v2-people/team2.jpg"
           photoCaption="Every exit · human-approved"
@@ -312,9 +312,9 @@ export default function RIFPage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="Done properly"
-          title={<>Dignity is in the details</>}
-          lead="The right documents, the right timing, the right final paycheck. When the process is correct down to the day and the dollar, people leave treated properly, and your team can look them in the eye."
+          eyebrow="The details"
+          title={<>The documents, the timing, the final paycheck</>}
+          lead="Final pay lands on each state's deadline, the health-coverage continuation notices go out at exit, and every manager has a script drafted before the conversation."
           bullets={[
             'Final pay on each state’s deadline, to the day',
             'Health-coverage continuation notices (COBRA) ready at exit',
@@ -338,7 +338,7 @@ export default function RIFPage() {
           img="/v2-people/team.jpg"
         />
 
-        <PageCta title={<>Hope you never need it. Ready if you do.</>} sub="A 30-minute demo of a layoff plan, with the notices and the math. Then we import your data and keep it ready." />
+        <PageCta title={<>A layoff plan, <Em>ready before you need it.</Em></>} sub="A 30-minute demo of a layoff plan, with the notices and the math. Then we import your data and keep it ready." />
       </main>
       <Footer />
     </>

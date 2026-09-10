@@ -112,7 +112,7 @@ export default function HiringPage() {
           warm
           eyebrow="Human sign-off"
           title={<>The final call stays human.</>}
-          lead="Interviews, culture, and who gets the offer stay yours. MambaHR clears the admin, so the people you meet are worth meeting and the week you save goes into meeting them."
+          lead="Interviews, culture, and who gets the offer stay yours. MambaHR clears the admin, so the week you save goes into meeting candidates."
           bullets={[
             'MambaHR recommends; it never advances or rejects anyone on its own',
             'Every shortlist comes with the why, in plain English',
@@ -137,7 +137,7 @@ export default function HiringPage() {
           metric="Saved 9 hrs / week"
         />
 
-        <PageCta title={<>Hire faster. Decide better.</>} sub="A 30-minute demo on one of your open roles. Then we import your pipeline and switch you over." />
+        <PageCta title={<>Post to signed offer, <Em>in one place.</Em></>} sub="A 30-minute demo on one of your open roles. Then we import your pipeline and switch you over." />
       </main>
       <Footer />
     </>

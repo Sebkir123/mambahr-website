@@ -288,8 +288,8 @@ export default function CompensationPage() {
           flip
           warm
           eyebrow="What changes"
-          title={<>Comp talks without <Em>the fear.</Em></>}
-          lead="When the number is already checked against bands and equity, the manager walks in confident the offer is fair. The conversation goes to the person, not to defending the math."
+          title={<>The number is checked <Em>before the conversation.</Em></>}
+          lead="The band check and the equity screen both run before the manager makes the offer, so the conversation is about the person rather than the math."
           bullets={[
             'Managers know the number is defensible before they say it',
             'Employees hear a consistent story about how pay works',

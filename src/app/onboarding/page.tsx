@@ -225,7 +225,7 @@ export default function OnboardingPage() {
             { n: '03', label: 'Logins ready', desc: 'Email, Slack, and every tool they need, live before they sit down.', who: 'agent', time: 'before 9 AM' },
             { n: '04', label: 'Equipment & buddy', desc: 'Device setup requested from your IT team, and an onboarding buddy picked and briefed.', who: 'agent', img: '/avatars/priya.jpg' },
             { n: '05', label: 'First-week plan', desc: 'Intros, team lunches, and sessions planned for the manager, and on the calendar once Google or Microsoft 365 is connected.', who: 'agent' },
-            { n: '06', label: 'The welcome', desc: 'You give the welcome. The handshake, the story, the why-we-hired-you, that&rsquo;s yours.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '06', label: 'The welcome', desc: 'You give the welcome. The handshake, the story, the why-we-hired-you, that’s yours.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
 
@@ -234,7 +234,7 @@ export default function OnboardingPage() {
           title={<>Exits with <Em>zero loose ends.</Em></>}
           lead="Exits are where details get expensive. MambaHR gets the final paycheck right for their state and prepares the health-coverage continuation notices (COBRA). It collects the handover and switches off every login, but only after your sign-off."
           bullets={[
-            'Final pay timed to each state&rsquo;s rules, California&rsquo;s last-day deadline included',
+            'Final pay timed to each state’s rules, California’s last-day deadline included',
             'COBRA notices prepared on schedule, ready to send',
             'Nothing gets switched off until you say so',
           ]}
@@ -245,9 +245,9 @@ export default function OnboardingPage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="The first impression"
-          title={<>Day one, like <Em>the brochure.</Em></>}
-          lead="Nobody remembers a smooth start, they remember a broken one. When the logins work and the buddy says hi at 9:05, day one is about meeting people, not waiting on access."
+          eyebrow="Day one"
+          title={<>Working logins, <Em>a buddy at 9:05.</Em></>}
+          lead="Accounts are live before the new hire sits down and the onboarding buddy has already been briefed, so day one is about meeting people rather than waiting on access."
           bullets={[
             'A first week that says we were ready for you',
             'Managers get a nudge list, not a to-do list',

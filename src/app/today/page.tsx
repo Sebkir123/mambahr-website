@@ -189,8 +189,8 @@ export default function TodayPage() {
 
       <PageHero
         eyebrow="To do"
-        title={<>Your To do. <Em>Three decisions, then coffee.</Em></>}
-        lead="Everything that needs you is on one list called To do. The rest is already done and logged. Most mornings it is three decisions and a coffee."
+        title={<>Only the calls <Em>that need you.</Em></>}
+        lead="Everything that needs you is on one list called To do. The rest is already done and logged."
       >
         <div className="mock-card agent-edge agent-working"><TodoDesk /></div>
       </PageHero>
@@ -224,9 +224,9 @@ export default function TodayPage() {
       <FeatureSplit
         flip
         warm
-        eyebrow="Your new morning"
-        title={<>MambaHR gives you your mornings back</>}
-        lead="Open To do with your coffee, make the calls only you can make, and get back to the work that needs a person. MambaHR keeps going after you close the tab."
+        eyebrow="After you close the tab"
+        title={<>MambaHR keeps working when you are done</>}
+        lead="You make the calls only you can make and close the tab. MambaHR carries on with the within-policy work and logs every action it takes."
         bullets={[
           'The list is short because the work is already done',
           'Decisions, not data entry',
