@@ -51,9 +51,11 @@ export default function RevealInit() {
         transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1),
           transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
       }
+      /* Content is never hidden: the reveal is a small lift only, so
+         thumbnails, link previews and mid-page landings show the page. */
       html.js-reveal [data-reveal]:not([data-reveal='eager']):not(.in) {
-        opacity: 0;
-        transform: translateY(18px);
+        opacity: 0.92;
+        transform: translateY(14px);
       }
       html.js-reveal [data-reveal][data-delay='1'] { transition-delay: 0.07s; }
       html.js-reveal [data-reveal][data-delay='2'] { transition-delay: 0.14s; }
