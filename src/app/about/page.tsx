@@ -5,36 +5,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { StatTrio, PageCta, Em } from '@/components/v2/page-kit'
-
-const PRINCIPLES = [
-  {
-    letter: 'M',
-    title: 'Make our customers unstoppable.',
-    body: "We build for outcomes, not features. Every feature, every decision, every release should give our customers more speed, clarity, and control. If it doesn't help them win in real moments, it doesn't ship.",
-  },
-  {
-    letter: 'A',
-    title: 'All in on the details.',
-    body: "We're obsessed with the craft. The small things matter because they compound into big outcomes. We simplify relentlessly, remove friction, and sweat the details so the product feels fast, clear, and easy to use.",
-  },
-  {
-    letter: 'M',
-    title: 'Move with urgency.',
-    body: "Speed is a feature. We don't let things sit, we don't overthink, and we don't wait for perfect. We ship, learn, and improve quickly because progress beats perfection every time.",
-  },
-  {
-    letter: 'B',
-    title: 'Be real.',
-    body: "No fluff. No hiding. We say what needs to be said, even when it's uncomfortable. We communicate directly, solve problems faster, and operate with honesty inside and outside the company.",
-  },
-  {
-    letter: 'A',
-    title: 'Act as one.',
-    body: 'No silos. No passengers. We step in, back each other up, and take shared ownership of outcomes. We win together and we lose together.',
-  },
-]
-
+import { PageCta, Em } from '@/components/v2/page-kit'
 /* The platform, everything the department runs, each a real page. */
 const PLATFORM = [
   { label: 'Hiring', desc: 'Job post to signed offer', href: '/hiring' },
@@ -119,49 +90,6 @@ export default function AboutPage() {
           `}</style>
         </section>
 
-        <StatTrio
-          stats={[
-            { n: 100, suffix: '%', label: 'of compliance answers cite the law they relied on' },
-            { n: 24, suffix: '/7', label: 'the work keeps moving after your team logs off' },
-            { n: 1, suffix: ' day', label: 'to import your data, no setup project' },
-          ]}
-        />
-
-        {/* ── Manifesto ── */}
-        <section className="man">
-          <div className="wrap">
-            <p className="eyebrow" data-reveal>Why we exist</p>
-            <p className="lede" data-reveal data-delay="1">
-              Most HR teams are drowning. One person doing the work of ten. Compliance gaps caught by
-              auditors, not by the team. Good people lost because their leave request fell into a queue
-              and never came back.
-            </p>
-            <p className="body" data-reveal data-delay="2">
-              The tools got better, better dashboards, better forms, better databases. The work
-              didn&rsquo;t go anywhere. It just got prettier wrappers.
-            </p>
-            <p className="body" data-reveal data-delay="2">
-              Then AI got good enough to do the reasoning underneath the work. Not summarize a policy,
-              but work out whether an employee in her second trimester qualifies for federal family leave
-              (FMLA). Cite the statute. Send the hard calls to a person. Not generate a draft, but run the
-              offer cycle, check the pay range, route for approval, and send the signature link.
-            </p>
-            <p className="body" data-reveal data-delay="3">
-              That changed what HR software can be. Not a system of record. A system of work. A
-              department where MambaHR does the job, the person sets the policy, and every action is
-              logged for accountability.
-            </p>
-            <p className="close" data-reveal data-delay="3">That&rsquo;s what we&rsquo;re building.</p>
-          </div>
-          <style jsx>{`
-            .man { background: var(--bg); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
-            .wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 26px; }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin: 0; }
-            .lede { font-family: var(--font-serif); font-size: clamp(22px, 2.5vw, 30px); line-height: 1.42; letter-spacing: -0.01em; color: var(--text); margin: 0; }
-            .body { font-size: 17px; line-height: 1.75; color: var(--text-muted); margin: 0; }
-            .close { font-family: var(--font-serif); font-size: clamp(20px, 2.2vw, 26px); line-height: 1.4; color: var(--text); margin: 6px 0 0; padding-left: 24px; border-left: 3px solid transparent; border-image: linear-gradient(180deg, var(--gold-mid), var(--violet)) 1; }
-          `}</style>
-        </section>
 
         {/* ── The platform ── */}
         <section className="pf">
@@ -217,60 +145,12 @@ export default function AboutPage() {
           `}</style>
         </section>
 
-        {/* ── Principles ── */}
-        <section className="pr">
-          <div className="wrap">
-            <div className="head" data-reveal>
-              <p className="eyebrow">How we operate · M·A·M·B·A</p>
-              <h2 className="title">Five things we <Em>don&rsquo;t bend.</Em></h2>
-            </div>
-            <div className="list">
-              {PRINCIPLES.map((p, i) => (
-                <div key={`${p.letter}-${i}`} className="row" data-reveal data-delay={String(Math.min(i + 1, 4))}>
-                  <span className="ltr" aria-hidden="true">{p.letter}</span>
-                  <div className="main">
-                    <h3 className="t">{p.title}</h3>
-                    <p className="b">{p.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <style jsx>{`
-            .pr { background: var(--bg); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
-            .wrap { max-width: var(--page-max); margin: 0 auto; }
-            .head { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-            .list { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; }
-            .row { display: grid; grid-template-columns: minmax(96px, 140px) 1fr; column-gap: clamp(24px, 4vw, 48px); padding: clamp(28px, 3.4vw, 40px) 0; border-top: 1px solid var(--border); align-items: start; }
-            .row:last-child { border-bottom: 1px solid var(--border); }
-            .ltr {
-              font-family: var(--font-serif);
-              font-size: clamp(72px, 8vw, 120px);
-              line-height: 0.85;
-              letter-spacing: -0.04em;
-              background: linear-gradient(135deg, var(--gold-mid), var(--violet));
-              -webkit-background-clip: text;
-              background-clip: text;
-              color: transparent;
-            }
-            .t { font-family: var(--font-serif); font-weight: 500; font-size: clamp(21px, 2.4vw, 28px); letter-spacing: -0.015em; color: var(--text); margin: 6px 0 12px; line-height: 1.2; }
-            .b { font-size: 16px; color: var(--text-muted); line-height: 1.65; margin: 0; max-width: 620px; }
-            @media (max-width: 640px) { .row { grid-template-columns: 1fr; row-gap: 10px; } }
-          `}</style>
-        </section>
-
         {/* ── Leadership ── */}
         <section className="fd">
           <div className="wrap">
             <div className="head" data-reveal>
               <p className="eyebrow">Leadership</p>
-              <h2 className="title">Founder-led, <Em>by design.</Em></h2>
-              <p className="lead">
-                MambaHR is built and run by its founders. The people who designed the product are the
-                same people on your demo, your implementation, and your security review.
-              </p>
+              <h2 className="title">The <Em>founders.</Em></h2>
             </div>
             <div className="grid">
               {LEADERSHIP.map((p, i) => (
@@ -303,7 +183,6 @@ export default function AboutPage() {
             .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 52px); }
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-            .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 600px; }
             .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
             :global(.fd .card) { display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; background: var(--bg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); text-decoration: none; transition: transform 0.18s ease, box-shadow 0.18s ease; }
             :global(.fd .card:hover) { transform: translateY(-4px); box-shadow: var(--shadow-float); }
@@ -326,8 +205,8 @@ export default function AboutPage() {
         </section>
 
         <PageCta
-          title={<>Come see what <Em>we built.</Em></>}
-          sub="A live demo with a founder, not a sales rep. 30 minutes."
+          title={<>See MambaHR <Em>do the work.</Em></>}
+          sub="A 30-minute demo on your own scenarios. Then we import your data and switch you over."
         />
       </main>
       <Footer />

@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Layoffs & headcount | MambaHR',
   description:
-    'The hardest day done right: WARN timing, severance math, redeployment options (advisory only), and every exit human-approved before it happens.',
+    'WARN timing checked, severance and final pay computed per state, redeployment options shown as suggestions only, and every exit approved by a person before it happens.',
   openGraph: {
     title: 'Layoffs & headcount | MambaHR',
     description:
-      'The hardest day done right: WARN timing, severance math, redeployment (advisory only), every exit human-approved.',
+      'WARN timing, severance math, redeployment (advisory only), every exit human-approved.',
     url: 'https://mambahr.com/rif',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Layoffs & headcount | MambaHR',
     description:
-      'The hardest day done right: WARN timing, severance math, redeployment (advisory only), every exit human-approved.',
+      'WARN timing, severance math, redeployment (advisory only), every exit human-approved.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://mambahr.com/rif' },
@@ -30,7 +30,7 @@ const jsonLd = {
   name: 'Layoffs & headcount | MambaHR',
   url: 'https://mambahr.com/rif',
   description:
-    'MambaHR layoff planning: the hardest day done right. MambaHR checks federal layoff-notice (WARN Act) timing, runs the severance math, shows internal roles as suggestions only, and holds every exit for a person to approve.',
+    'MambaHR layoff planning. MambaHR checks federal layoff-notice (WARN Act) timing, runs the severance math, shows internal roles as suggestions only, and holds every exit for a person to approve.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',

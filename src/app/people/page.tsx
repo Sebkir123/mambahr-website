@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import { PeopleDirectory } from '@/components/mockups'
 
 /* ── Hero fragment: people table inside an app window ── */
@@ -105,7 +105,7 @@ export default function PeoplePage() {
         <PageHero
           eyebrow="Employee records"
           title={<>One record, <Em>current.</Em></>}
-          lead="Nobody should spend their week retyping what already happened. MambaHR does the work and keeps the record: every person, every detail, right without anyone touching it."
+          lead="MambaHR does the work and keeps the record: every person, every detail, right without anyone touching it."
         >
           <div className="mock-card agent-edge agent-done"><PeopleDirectory /></div>
         </PageHero>
@@ -160,12 +160,6 @@ export default function PeoplePage() {
           ]}
         />
 
-        <QuoteBand
-          quote="We imported on a Tuesday. By Wednesday morning every record was in, every balance was right, and I deleted the spreadsheet I’d been babysitting for three years."
-          role="Head of People · Fintech startup, 140 people"
-          img="/v2-people/sofia.jpg"
-          metric="Imported in a day"
-        />
 
         <PageCta title={<>Your people, on the record.</>} sub="A 30-minute demo with your own org chart. Then we import your records and switch you over." />
       </main>

@@ -49,12 +49,6 @@ const OPTIONS = [
   },
 ]
 
-const DIFFS = [
-  { num: '01', title: 'It does the work.', desc: 'Leave approved. Offer drafted. Candidate screened. MambaHR does the request, start to finish, instead of showing it to someone else to act on.' },
-  { num: '02', title: 'Ask in Slack. The work happens in MambaHR.', desc: 'No new software to learn. Employees mention @MambaHR in any channel and get answers in seconds. Managers approve in a thread.' },
-  { num: '03', title: 'A person signs off on the big calls.', desc: 'Offers above your pay range, terminations, and large raises wait for your approval. Nothing happens first. MambaHR handles the routine, you handle the judgment.' },
-  { num: '04', title: 'Built for the HR lead doing the work of ten.', desc: 'Employment law for all your states, a log of every action, and one system that does the work instead of filing it.' },
-]
 
 export default function CompareHub() {
   return (
@@ -71,7 +65,7 @@ export default function CompareHub() {
             <h1 className="title" data-reveal data-delay="1">Weigh your <Em>options.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
               When HR work gets messy, you have a few choices: hire someone, buy another system, or keep
-              stitching it together yourself. Here&rsquo;s the honest comparison against all of them,
+              stitching it together yourself. Here&rsquo;s the comparison against all of them,
               including the rows we lose.
             </p>
             <div className="ctas" data-reveal data-delay="3">
@@ -115,7 +109,7 @@ export default function CompareHub() {
           <div className="wrap">
             <div className="head" data-reveal>
               <p className="eyebrow">Before the vendors</p>
-              <h2 className="title">Your three real <Em>options.</Em></h2>
+              <h2 className="title">Your three <Em>options.</Em></h2>
             </div>
             <div className="grid">
               {OPTIONS.map((o, i) => (
@@ -162,7 +156,7 @@ export default function CompareHub() {
             <div className="head" data-reveal>
               <p className="eyebrow">Head to head</p>
               <h2 className="title">Pick the system <Em>you use today.</Em></h2>
-              <p className="lead">Honest comparisons against every major HR records system (HRIS), co-employer (PEO), payroll, and applicant tracking system (ATS). Feature tables included, the rows we lose included.</p>
+              <p className="lead">Comparisons against every major HR records system (HRIS), co-employer (PEO), payroll, and applicant tracking system (ATS). Feature tables included, the rows we lose included.</p>
             </div>
             <div className="grid">
               {CARDS.map((c, i) => (
@@ -223,49 +217,9 @@ export default function CompareHub() {
           `}</style>
         </section>
 
-        {/* ── What makes it different ── */}
-        <section className="df">
-          <div className="wrap">
-            <div className="head" data-reveal>
-              <p className="eyebrow">Whoever you compare us to</p>
-              <h2 className="title">Four things only <Em>we do.</Em></h2>
-            </div>
-            <div className="grid">
-              {DIFFS.map((d, i) => (
-                <div key={d.num} className="card" data-reveal data-delay={String(i + 1)}>
-                  <span className="num">{d.num}</span>
-                  <h3 className="t">{d.title}</h3>
-                  <p className="b">{d.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <style jsx>{`
-            .df { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
-            .wrap { max-width: var(--page-max); margin: 0 auto; }
-            .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-            .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 1.8vw, 22px); }
-            .card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
-            .num {
-              font-family: var(--font-serif);
-              font-size: 34px;
-              line-height: 1;
-              background: linear-gradient(120deg, var(--gold-mid), var(--violet));
-              -webkit-background-clip: text;
-              background-clip: text;
-              color: transparent;
-            }
-            .t { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 12px 0 8px; }
-            .b { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin: 0; }
-            @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
-          `}</style>
-        </section>
-
         <PageCta
           title={<>Compare it <Em>live.</Em></>}
-          sub="Bring your current bill to the demo. We'll do the math together."
+          sub="A 30-minute demo. Bring your current bill."
         />
       </main>
       <Footer />

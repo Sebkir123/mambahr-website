@@ -9,10 +9,9 @@ export default function Faq() {
         <div className="side" data-reveal>
           <p className="eyebrow">Before you ask</p>
           <h2 className="title">The questions every <span className="em">people leader has.</span></h2>
-          <p className="lead">Straight answers. No sales call required.</p>
+          <p className="lead">No sales call required.</p>
           <div className="ask">
             <div className="ask-t">Still have a question?</div>
-            <p className="ask-b">Ask the founders directly. We answer fast.</p>
             <a className="ask-cta" href="mailto:hello@mambahr.com">hello@mambahr.com</a>
           </div>
         </div>
@@ -54,8 +53,7 @@ export default function Faq() {
           padding: 20px;
           box-shadow: var(--shadow-sm);
         }
-        .ask-t { font-size: 15px; font-weight: 700; color: var(--text); }
-        .ask-b { font-size: 14px; color: var(--text-muted); margin: 6px 0 12px; }
+        .ask-t { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
         .ask-cta {
           display: inline-block;
           font-family: var(--font-mono);

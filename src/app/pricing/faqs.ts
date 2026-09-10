@@ -31,7 +31,7 @@ export const FAQS = [
     a: 'Most growing companies start with HR Ops Manager. It covers the workload they were about to staff. Choose Starter if you mainly need records, answers, and clean payroll changes. Choose Whole department when compliance, compensation, and layoffs need to run themselves too.',
   },
   {
-    q: 'Is founding customer pricing real?',
-    a: 'Yes, for our first cohort. Founding customers get discounted annual pricing, onboarding directly with the founders, and priority input into the roadmap.',
+    q: 'What is founding customer pricing?',
+    a: 'Discounted annual pricing for our first cohort, billed annually.',
   },
 ]

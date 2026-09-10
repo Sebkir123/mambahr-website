@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 
 /* ── Hero fragment: the Slack exchange, done in seconds ── */
 function SlackApprovalCard() {
@@ -316,9 +316,9 @@ export default function LeavePage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="The culture part"
+          eyebrow="Balances and coverage"
           title={<>Vacations, <Em>taken.</Em></>}
-          lead={'No guilt-tripping forms, no week-long approval limbo. Balances are always current, coverage is visible to everyone, and asking for time off feels like asking a colleague, because that’s what it is.'}
+          lead={'Balances are always current, in-policy requests approve in seconds, and who is away when is visible to the whole team.'}
           bullets={[
             'Balances always current, no “let me check the spreadsheet”',
             'Team coverage visible before anyone says yes',
@@ -336,12 +336,6 @@ export default function LeavePage() {
           ]}
         />
 
-        <QuoteBand
-          quote="I used to dread every FMLA question. Now the answer comes back in seconds, with the law attached."
-          role="People Operations Lead · AI startup, 180 people"
-          img="/v2-people/marcus.jpg"
-          metric="Saved 9 hrs / week"
-        />
 
         <PageCta title={<>Time off that takes <Em>none of yours.</Em></>} sub="A 30-minute demo on your own leave policy. Then we import your balances and switch you over." />
       </main>

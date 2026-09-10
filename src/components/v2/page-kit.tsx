@@ -5,7 +5,7 @@
 // so every page matches the v2 landing bar: Fraunces + gold→violet system,
 // real-UI fragments, real people, mamba chips, scroll reveals, ONE-line
 // headlines. Pages compose: <PageHero> → <AgentLoop> → feature splits →
-// <StatTrio> → <QuoteBand> → <PageCta>. Global classes used: agent-edge/
+// <StatTrio> → <PageCta>. Global classes used: agent-edge/
 // agent-working/agent-done/agent-lg, mamba-chip, v2-grain (from globals.css).
 //
 // NOTE: button classes use :global(), styled-jsx does NOT scope classNames
@@ -31,39 +31,6 @@ export function Em({ children }: { children: ReactNode }) {
   )
 }
 
-/* ── The proof line under every hero: the two founders, who take the demo
-      call themselves. Real names, real photos (the same ones /about uses),
-      no stock avatars anywhere on the site. ── */
-const FOUNDERS = [
-  { name: 'Brian Bell', photo: '/brian_bell.jpeg' },
-  { name: 'Sebastian Kirsch', photo: '/sebastian_kirsch.jpg' },
-]
-
-export function FoundersProof({ text = 'Built by the founders, who answer the demo call' }: { text?: string }) {
-  return (
-    <div className="fp">
-      <div className="fp-faces">
-        {FOUNDERS.map((f) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img key={f.name} src={f.photo} alt={f.name} width={34} height={34} loading="lazy" decoding="async" />
-        ))}
-      </div>
-      <span className="fp-t">{text}</span>
-      <style jsx>{`
-        .fp { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
-        .fp-faces { display: flex; }
-        .fp-faces img {
-          width: 34px; height: 34px; border-radius: 999px; object-fit: cover; object-position: center 20%;
-          border: 2px solid #fff; box-shadow: var(--shadow-sm);
-          margin-left: -9px; background: var(--bg-elevated);
-        }
-        .fp-faces img:first-child { margin-left: 0; }
-        .fp-t { font-size: 14px; font-weight: 600; color: var(--text); }
-      `}</style>
-    </div>
-  )
-}
-
 /* ── Page hero: centered copy (one-line title) + fragment stage below,
       aurora blobs + grain + face cluster + optional human photo card ── */
 export function PageHero({
@@ -71,7 +38,6 @@ export function PageHero({
   pill,
   title,
   lead,
-  proof = 'Built by the founders, who answer the demo call',
   photo,
   photoPosition = 'center 20%',
   photoChip,
@@ -83,7 +49,6 @@ export function PageHero({
   pill?: ReactNode
   title: ReactNode
   lead: string
-  proof?: string
   /** Local people photo (e.g. /v2-people/team.jpg) shown as a tilted card overlapping the stage. */
   photo?: string
   /** CSS object-position for the photo, so faces are never cropped through the eyes. */
@@ -109,9 +74,6 @@ export function PageHero({
         <div className="ctas" data-reveal="eager">
           <Link href="/demo" className="btn btn-primary">Book a demo</Link>
           <Link href="/product" className="btn btn-secondary">See how it works</Link>
-        </div>
-        <div data-reveal="eager">
-          <FoundersProof text={proof} />
         </div>
       </div>
       <div className="stage" data-reveal="eager">
@@ -528,106 +490,6 @@ export function StatTrio({
    customer testimonials, so they carry an explicit "Illustrative" label and no
    personal name. Do not reintroduce named quotes until there are real customers
    who have agreed to be quoted. */
-export function QuoteBand({
-  quote,
-  role,
-  img,
-  metric,
-}: {
-  quote: string
-  /** Role archetype the scenario is written from, e.g. "Head of People · Robotics startup, 240 people". */
-  role: string
-  img: string
-  metric?: string
-}) {
-  return (
-    <section className="qb">
-      <div className="card agent-edge agent-done" data-reveal>
-        <div className="photo">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img} alt="" loading="lazy" decoding="async" />
-          {metric && <span className="badge">{metric}</span>}
-        </div>
-        <div className="body">
-          <span className="tag">Illustrative scenario</span>
-          <span className="qmark" aria-hidden="true">&ldquo;</span>
-          <blockquote className="q">{quote}</blockquote>
-          <div className="who"><span>{role}</span></div>
-        </div>
-      </div>
-      <style jsx>{`
-        .qb { background: var(--bg-warm); padding: clamp(72px, 9vw, 120px) var(--page-pad); }
-        .card {
-          max-width: 920px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: 280px 1fr;
-          background: var(--bg);
-          border: 1px solid var(--border);
-          border-radius: 18px;
-          overflow: hidden;
-          box-shadow: var(--shadow-float);
-        }
-        .photo { position: relative; min-height: 280px; }
-        .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-        .badge {
-          position: absolute;
-          left: 14px;
-          bottom: 14px;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          color: #fff;
-          background: linear-gradient(120deg, #B98A4E, #6A5DA6);
-          border-radius: 999px;
-          padding: 6px 13px;
-          box-shadow: 0 8px 18px rgba(20, 18, 14, 0.25);
-        }
-        .body { position: relative; padding: clamp(30px, 4vw, 48px) clamp(28px, 4vw, 52px); }
-        .qmark {
-          position: absolute;
-          top: 6px;
-          left: clamp(20px, 3vw, 38px);
-          font-family: var(--font-serif);
-          font-size: 110px;
-          line-height: 1;
-          background: linear-gradient(120deg, #B98A4E, #6A5DA6);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          opacity: 0.3;
-          pointer-events: none;
-        }
-        .q {
-          font-family: var(--font-serif);
-          font-size: clamp(19px, 2.2vw, 25px);
-          line-height: 1.45;
-          letter-spacing: -0.01em;
-          color: var(--text);
-          margin: 0;
-          position: relative;
-        }
-        .who { margin-top: 22px; font-size: 14px; color: var(--text-muted); display: flex; flex-direction: column; gap: 2px; }
-        .tag {
-          display: inline-block;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: var(--text-faint);
-          border: 1px solid var(--border-faint);
-          border-radius: 999px;
-          padding: 3px 10px;
-          margin-bottom: 16px;
-        }
-        @media (max-width: 720px) {
-          .card { grid-template-columns: 1fr; }
-          .photo { min-height: 220px; }
-        }
-      `}</style>
-    </section>
-  )
-}
-
 /* ── Page CTA: gradient panel with grain, faces, real buttons ── */
 export function PageCta({
   title,
@@ -645,9 +507,6 @@ export function PageCta({
         <div className="btns">
           <Link href="/demo" className="btn btn-primary">Book a demo</Link>
           <Link href="/product" className="btn btn-ghost">See how it works</Link>
-        </div>
-        <div className="proofline">
-          <p className="trust">Built by the founders, who answer the demo call · Your data imported in a day · A person signs off on the sensitive calls</p>
         </div>
       </div>
       <style jsx>{`
@@ -684,8 +543,6 @@ export function PageCta({
         }
         .s { position: relative; color: rgba(255, 255, 255, 0.92); font-size: 17px; margin: 16px 0 28px; }
         .btns { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .proofline { position: relative; display: flex; align-items: center; justify-content: center; margin-top: 24px; }
-        .trust { color: rgba(255, 255, 255, 0.86); font-size: 13px; margin: 0; }
         .btns :global(.btn-ghost) { color: #fff; }
       `}</style>
     </section>

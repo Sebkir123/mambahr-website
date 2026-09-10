@@ -45,8 +45,7 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
       <div className="wrap">
         <div className="head" data-reveal>
           <p className="eyebrow">Field guides</p>
-          <h2 className="title">Hard-won HR playbooks. <span className="em">Free.</span></h2>
-          <p className="lead">Practical guides for the parts of the job no one warns you about.</p>
+          <h2 className="title">HR playbooks. <span className="em">Free.</span></h2>
         </div>
 
         <div className="feature" data-reveal data-delay="1">
@@ -112,7 +111,6 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
         .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.06; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
-        .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 18px 0 0; }
 
         .feature {
           display: grid;

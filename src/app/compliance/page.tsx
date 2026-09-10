@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 
 /* ── Hero fragment: a real compliance question, answered with the law ── */
 function HeroAnswerCard() {
@@ -346,12 +346,6 @@ export default function CompliancePage() {
           ]}
         />
 
-        <QuoteBand
-          quote="I stopped second-guessing the answers the day I saw the law attached to every single one. My counsel reads the citations; I read the plain English."
-          role="People Operations Lead · AI startup, 180 people"
-          img="/v2-people/marcus.jpg"
-          metric="Saved 9 hrs / week"
-        />
 
         <PageCta title={<>Cited every time. Reviewed by a person when it matters.</>} sub="A 30-minute demo on your own compliance questions, with the law cited. Then we import your data and switch you over." />
       </main>

@@ -104,7 +104,7 @@ export const categories: Record<string, CategoryData> = {
     ],
     checklist: {
       eyebrow: 'How to evaluate it',
-      title: 'What real AI HR software should do',
+      title: 'What AI HR software should do',
       lead: 'Most tools claim “AI.” Hold them to the list that shrinks the work.',
       items: [
         { t: 'Do the whole job', d: 'Not “suggest a draft” but file the leave, send the offer, update the record.' },
@@ -151,7 +151,7 @@ export const categories: Record<string, CategoryData> = {
     eyebrow: `Best HRIS for startups · ${CURRENT_YEAR}`,
     hero: { lead: 'The best HRIS for startups', em: 'before you hire HR.', tail: '' },
     heroSub:
-      "Most startup HRIS (HR records system) picks are a database your founders still operate. MambaHR is the AI HR department. It runs hiring, onboarding, leave, and compliance for you, so a 50-person team gets real HR without the first HR hire.",
+      "Most startup HRIS (HR records system) picks are a database your founders still operate. MambaHR is the AI HR department. It runs hiring, onboarding, leave, and compliance for you, so a 50-person team gets HR without the first HR hire.",
     answer: {
       question: 'What is the best HRIS for startups?',
       answer:
@@ -248,7 +248,7 @@ export const categories: Record<string, CategoryData> = {
     checklist: {
       eyebrow: 'How to evaluate it',
       title: 'What small-business HR software should cover',
-      lead: 'You wear a lot of hats. The right tool takes the HR hat off entirely.',
+      lead: 'What to require before you buy.',
       items: [
         { t: 'Does the work, not the dashboard', d: "Resolves requests for you. You’re not learning a new admin system to click through." },
         { t: 'Hiring to onboarding in one place', d: 'Post the role, send the offer, run onboarding, without stitching tools together.' },
