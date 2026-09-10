@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
@@ -8,6 +9,7 @@ import {
   PageHero, AgentLoop, FeatureSplit, PageCta, Em,
   type LoopStep,
 } from '@/components/v2/page-kit'
+import { PipelineBoard, TodoDesk, SlackApproval, ChatThread, type TodoFocus } from '@/components/mockups'
 
 const STEPS: LoopStep[] = [
   { n: '01', img: '/avatars/maya.jpg',   label: 'Offer letter sent, Maya Chen',   desc: 'Senior Engineer · $195k · above band 8%',     who: 'agent', time: '2 min' },
@@ -16,117 +18,52 @@ const STEPS: LoopStep[] = [
   { n: '04', img: '/avatars/anna.jpg',  label: 'Separation docs, Sarah Lin',     desc: 'State-aware final pay · signature chain ready', who: 'you',   time: 'Review' },
 ]
 
-const CAPABILITIES = [
-  {
-    eyebrow: 'Onboarding & offboarding',
-    title: <>Day one to last day, <Em>one workflow.</Em></>,
-    lead: 'A signed offer starts everything: the Form I-9 and E-Verify check, logins and device setup requested, the first-week plan. An exit runs the reverse, always with a human on final pay.',
-    bullets: [
-      'Offer generated + countersigned (e-signed)',
-      'Form I-9 and E-Verify check started',
-      'Accounts provisioned (IdP, Slack, app suite)',
-      'Logins and device setup requested, buddy assigned',
-      'Offboarding: WARN / COBRA / OWBPA, state-aware final pay',
-    ],
-    flip: false,
-    warm: false,
-  },
-  {
-    eyebrow: 'Time off & leave',
-    title: <>Leave that reads <Em>the statute for you.</Em></>,
-    lead: 'Requests come in as plain text. MambaHR checks eligibility, cites the statute, and auto-approves within policy or routes to a human.',
-    bullets: [
-      'PTO accrual and balances, tracked automatically',
-      'FMLA eligibility checked; state paid leave cited and routed to a person for the stacking decision',
-      'Auto-approve within policy, or route to a person',
-      'Anything medical or ambiguous escalates',
-      'Leave letters drafted, ready for your review',
-    ],
-    flip: true,
-    warm: true,
-  },
-  {
-    eyebrow: 'Compensation',
-    title: <>Raises that <Em>stay fair.</Em></>,
-    lead: 'Market bands and a real pay-equity model behind every comp change, with a fairness gate before anything is final.',
-    bullets: [
-      'Market bands on every role',
-      'Pay-equity regression, p-values, outliers flagged',
-      'Promotions and raises with risk-based approval routing',
-      'Fairness gate on all sensitive changes',
-      'Comp-change draft, human-approved before anything sends',
-    ],
-    flip: true,
-    warm: true,
-  },
-  {
-    eyebrow: 'Compliance',
-    title: <>Every decision, <Em>cited to the rule.</Em></>,
-    lead: 'Federal baseline everywhere, plus state-specific rules where states differ. Confidence-scored, and edge cases route to a human.',
-    bullets: [
-      'Federal employment law plus state rules for the states where you employ people',
-      'Statute citation on every decision',
-      'Confidence scoring + freshness tracking',
-      'Append-only audit log on every action',
-      'Ambiguous calls route to your legal team',
-    ],
-    flip: false,
-    warm: false,
-  },
-  {
-    eyebrow: 'Headcount & RIF',
-    title: <>Reductions, <Em>done defensibly.</Em></>,
-    lead: 'Plan a reduction, model severance, and run the legal steps, heavily gated, always human-approved.',
-    bullets: [
-      'Scenario planning + severance and final-pay math',
-      'WARN notices and batch legal hold',
-      'Internal-redeployment scan before anyone is cut',
-      '18-point preflight safety check that hard-blocks',
-      'Three-role approval, humans sign off',
-    ],
-    flip: true,
-    warm: true,
-  },
-  {
-    eyebrow: 'Documents & e-sign',
-    title: <>Generated, signed, <Em>filed, retained.</Em></>,
-    lead: 'Offers, separation agreements, NDAs, and policies, versioned, jurisdiction-scoped, and sent for signature without leaving the agent.',
-    bullets: [
-      'Templates for offer / separation / NDA / policy',
-      'Signer chains, e-sign end to end',
-      'Versioned and jurisdiction-scoped',
-      'Filed and retained per your policy',
-      'Indexed for retrieval, PII redacted before indexing',
-    ],
-    flip: false,
-    warm: false,
-  },
+/* The onboarding item in focus on the To do desk. */
+const ONBOARDING: TodoFocus = {
+  ref: 'TO-1851',
+  due: 'starts Monday',
+  position: '1 of 4 · next',
+  title: 'Day one · Maya Chen',
+  person: 'Maya Chen, Senior Engineer, signed Thursday. Yours.',
+  facts: 'Offer countersigned. Form I-9 started, E-Verify pending. Okta, Slack and Google accounts requested. Laptop ordered to Berlin.',
+  finding: '6 of 7 steps done, one needs you',
+  read: 'Everything is in place for Monday except the buddy. Priya Nair is on the same team and has had two new starters this year. Recommend assigning Priya.',
+  decisions: [
+    { label: 'Assign Priya', primary: true, consequence: 'Priya is told today, day-one plan sent to Maya' },
+    { label: 'Pick someone else', consequence: 'Nothing is sent until you choose' },
+  ],
+  history: [
+    { what: 'Offer signed', when: 'Thu 16:20' },
+    { what: 'Accounts requested', when: 'Thu 16:21' },
+    { what: 'Form I-9 started', when: 'Fri 9:02' },
+    { what: 'Came to a person', when: 'Fri 9:05' },
+  ],
+}
+
+const ONBOARDING_QUEUE = [
+  { name: 'Maya Chen', kind: 'Day one', date: 'Mon' },
+  { name: 'Jackson Bauer', kind: 'Compensation change', date: 'Today' },
+  { name: 'Leo Schulz', kind: 'Leave request', date: 'Tomorrow' },
+  { name: 'Marcus Webb', kind: 'Separation', date: 'Fri' },
 ]
 
-function CapCard({ bullets }: { bullets: string[] }) {
-  return (
-    <div style={{
-      background: 'var(--bg)',
-      border: '1px solid var(--border)',
-      borderRadius: 16,
-      padding: '22px 24px',
-      boxShadow: 'var(--shadow-float)',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 12,
-    }}>
-      {bullets.map((b) => (
-        <div key={b} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-            <circle cx="8" cy="8" r="8" fill="var(--gold-tint)" />
-            <path d="M4.5 8.2l2.3 2.3 4.7-5" stroke="var(--gold-dark)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span style={{ fontSize: 15, color: 'var(--text)', lineHeight: 1.45 }}>{b}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
+/* The capability lists that used to be four more splits, as short chips. */
+const ALSO: { label: string; href: string }[] = [
+  { label: 'Market bands on every role', href: '/compensation' },
+  { label: 'Pay-equity check before a raise is final', href: '/compensation' },
+  { label: 'Statute cited on every decision', href: '/compliance' },
+  { label: 'Append-only audit log', href: '/compliance' },
+  { label: 'WARN notices and severance math', href: '/rif' },
+  { label: 'Internal roles surfaced before a cut', href: '/rif' },
+  { label: 'Offers, NDAs and policies, e-signed', href: '/documents' },
+  { label: 'Documents filed and retained per policy', href: '/documents' },
+  { label: 'Careers page on your domain', href: '/job-portal' },
+  { label: 'Org chart that draws itself', href: '/people' },
+  { label: 'PTO balances, tracked', href: '/leave' },
+  { label: 'Form I-9 collection', href: '/onboarding' },
+  { label: 'Payroll change files for Deel', href: '/payroll' },
+  { label: 'Ask anything in Slack', href: '/mamba' },
+]
 
 export default function ProductPage() {
   return (
@@ -156,6 +93,7 @@ export default function ProductPage() {
             {STEPS.slice(0, 3).map((s) => (
               <div key={s.n} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 0', borderTop: '1px solid var(--border-faint)' }}>
                 <span style={{ fontSize: 12, color: 'var(--text-faint)', fontVariantNumeric: 'tabular-nums', width: 20 }}>{s.n}</span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 {s.img && <img src={s.img} alt="" width={24} height={24} style={{ borderRadius: 999, objectFit: 'cover' }} />}
                 <span style={{ flex: 1, fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>{s.label}</span>
                 <span style={{ fontSize: 12, color: s.who === 'you' ? 'var(--gold-dark)' : 'var(--text-faint)' }}>
@@ -168,32 +106,133 @@ export default function ProductPage() {
 
         <AgentLoop
           eyebrow="Live today"
-          title={<>Four workflows. <Em>One morning.</Em></>}
+          title="Four workflows. One morning."
           lead="A sample of what MambaHR handles while you focus on what requires you."
           steps={STEPS}
         />
 
-        {/* Bullets live in the CapCard visual only. Passing them to FeatureSplit
-            too would print the same list twice in one section. */}
-        {CAPABILITIES.map((cap) => (
-          <FeatureSplit
-            key={cap.eyebrow}
-            eyebrow={cap.eyebrow}
-            title={cap.title}
-            lead={cap.lead}
-            flip={cap.flip}
-            warm={cap.warm}
-          >
-            <CapCard bullets={cap.bullets} />
-          </FeatureSplit>
-        ))}
+        <FeatureSplit
+          eyebrow="Hire"
+          title="Req to signed offer, on one board."
+          lead="The role is posted, every applicant is read and ranked with reasons, interviews get a scorecard, the background check runs, and the offer waits for you in band."
+          bullets={[
+            'Careers page and job-board feeds, posted the same day',
+            'Every applicant ranked with the why, you make every advance-or-pass call',
+            'Offer drafted in band, e-signed after your nod',
+          ]}
+        >
+          <div className="mock-card"><PipelineBoard /></div>
+        </FeatureSplit>
+
+        <FeatureSplit
+          flip
+          warm
+          eyebrow="Onboard"
+          title="Day one, ready before they arrive."
+          lead="A signed offer starts everything: the Form I-9, the account requests, the laptop, the first-week plan. What needs a person lands on your To do with the read already done."
+          bullets={[
+            'Form I-9 and E-Verify started from the signed offer',
+            'IdP, Slack and app accounts requested; devices ordered',
+            'The one call that needs you, with the recommendation attached',
+          ]}
+        >
+          <div className="mock-card"><TodoDesk show="pane" queue={ONBOARDING_QUEUE} focus={ONBOARDING} summary="4 need you today" /></div>
+        </FeatureSplit>
+
+        <FeatureSplit
+          eyebrow="Leave"
+          title="Leave that reads the statute for you."
+          lead="Requests come in as plain text. MambaHR checks eligibility, cites the rule, auto-approves within policy, and sends the rest to you where you already are."
+          bullets={[
+            'PTO accrual and balances, tracked automatically',
+            'FMLA eligibility checked; state leave cited and routed to a person for the stacking call',
+            'Anything medical or ambiguous escalates',
+          ]}
+        >
+          <div className="mock-card slack">
+            <SlackApproval
+              subject="Leo Schulz"
+              kind="Leave request"
+              why="Leo asked for 12 weeks of bonding leave from Nov 3. He is FMLA-eligible and the dates fit the policy, but it overlaps the release."
+              fields={[
+                { label: 'Dates', value: 'Nov 3 to Jan 23, 12 weeks' },
+                { label: 'Balance after', value: '0 weeks FMLA · 14 days PTO' },
+              ]}
+              context="Yours · due tomorrow · also on your To do"
+              reference="TO-1847"
+              time="8:52 AM"
+            />
+          </div>
+        </FeatureSplit>
+
+        <FeatureSplit
+          flip
+          warm
+          eyebrow="Exit"
+          title="Every exit, prepared and human-approved."
+          lead="Ask for a separation and the paperwork, the final-pay math for that state, and the account shutdowns are lined up. Nothing happens to anyone until you approve it."
+          bullets={[
+            'Separation agreement and final pay per the state rule',
+            'Accounts revoked and devices recovered on the last day, not after',
+            'A person signs off on every single exit',
+          ]}
+        >
+          <div className="mock-card">
+            <ChatThread
+              greeting="Good morning, Sam."
+              needs="4 things need you today"
+              context="Discussing Marcus Webb"
+              user="Prepare a separation for Marcus Webb, last day Friday. Standard severance."
+              tool={{ title: 'Prepared', status: 'Done', body: 'Separation agreement draft · Colorado final-pay rule · Severance at 6 weeks · Okta, Slack, GitHub revocations queued for Fri 18:00' }}
+              assistant={[
+                'Colorado requires final pay immediately on an involuntary separation, so payroll is set to run Friday. Severance is 6 weeks at his current base, $17,300.',
+                'The agreement is drafted with the OWBPA language since Marcus is over 40. Nothing is sent until you approve.',
+              ]}
+              approval={{ detail: 'Send the separation agreement to Marcus Webb for signature and schedule the Friday shutdowns.', approve: 'Approve', decline: 'Hold' }}
+            />
+          </div>
+        </FeatureSplit>
+
+        <section className="also">
+          <div className="wrap">
+            <p className="eyebrow">Also handled</p>
+            <h2 className="title">The rest of the job, without another page each.</h2>
+            <ul className="chips">
+              {ALSO.map((a) => (
+                <li key={a.label}><Link href={a.href}>{a.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
         <PageCta
-          title={<>One AI department.<br /><Em>Every HR function.</Em></>}
+          title={<>One AI department.<br />Every HR function.</>}
           sub="Replace the admin work, keep the humans where they matter."
         />
       </main>
       <Footer />
+      <style jsx>{`
+        .also { background: var(--bg); padding-block: clamp(64px, 8vw, 104px); }
+        .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
+        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(26px, 3vw, 36px); line-height: 1.1; letter-spacing: -0.02em; color: var(--text); margin: 0 0 24px; }
+        .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+        .chips :global(a) {
+          display: inline-flex;
+          align-items: center;
+          min-height: 40px;
+          padding: 8px 16px;
+          border-radius: 999px;
+          border: 1px solid var(--border);
+          background: var(--bg);
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--text-muted);
+          text-decoration: none;
+          transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+        }
+        .chips :global(a:hover) { color: var(--gold-dark); border-color: var(--gold-light); background: var(--gold-tint); }
+      `}</style>
     </>
   )
 }
