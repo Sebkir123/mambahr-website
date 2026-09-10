@@ -187,7 +187,7 @@ export default function PayrollPage() {
       <main id="main">
         <PageHero
           eyebrow="Payroll changes"
-          pill="Deel managed payroll"
+          pill="Powered by Deel"
           title={<>Payday, <Em>perfect.</Em></>}
           lead={'MambaHR prepares every payroll change. You choose per company: a change file for your current provider, or Deel-managed payroll. On Deel, MambaHR sends the changes and a person approves every run.'}
           photo="/v2-people/team.jpg"
