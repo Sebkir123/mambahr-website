@@ -38,11 +38,11 @@ function SecurityLogCard() {
         <span className="mono">4 of 247 today</span>
       </div>
       <style jsx>{`
-        .sec { position: relative; overflow: hidden; background: #14110C; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 20px 0 0; box-shadow: var(--shadow-float); }
+        .sec { position: relative; overflow: hidden; background: var(--ink); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 20px 0 0; box-shadow: var(--shadow-float); }
         .s-head { display: flex; align-items: center; justify-content: space-between; padding: 0 22px 16px; }
         .s-t { font-family: var(--font-serif); font-size: 19px; color: #FFF2E6; letter-spacing: -0.01em; }
-        .s-chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: #D4AA7C; background: rgba(212, 170, 124, 0.12); border: 1px solid rgba(212, 170, 124, 0.25); border-radius: 999px; padding: 4px 10px; }
-        .s-chip i { width: 6px; height: 6px; border-radius: 999px; background: #D4AA7C; }
+        .s-chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-pale); background: rgba(212, 170, 124, 0.12); border: 1px solid rgba(212, 170, 124, 0.25); border-radius: 999px; padding: 4px 10px; }
+        .s-chip i { width: 6px; height: 6px; border-radius: 999px; background: var(--gold-pale); }
         .rows { border-top: 1px solid rgba(255, 255, 255, 0.07); }
         .row { display: flex; align-items: center; gap: 12px; padding: 13px 22px; font-family: var(--font-mono); font-size: 12px; }
         .row + .row { border-top: 1px solid rgba(255, 255, 255, 0.06); }
@@ -95,7 +95,7 @@ function Commitments() {
         .cm { background: var(--bg); padding-block: clamp(88px, 11vw, 144px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { margin-bottom: clamp(36px, 4vw, 52px); text-align: center; }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
         .card { background: var(--bg); border: 1px solid var(--border); border-radius: 18px; padding: 8px 0; box-shadow: var(--shadow-float); max-width: 920px; margin: 0 auto; }
@@ -107,7 +107,7 @@ function Commitments() {
         .lbl { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
         .desc { font-size: 13.5px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
         .main { flex: 1; min-width: 0; }
-        .tag { flex: none; font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+        .tag { flex: none; font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
         @media (max-width: 640px) { .row { flex-wrap: wrap; } }
       `}</style>
     </section>
@@ -197,7 +197,7 @@ function ApprovalGateCard() {
         .main { flex: 1; min-width: 0; }
         .t { font-size: 13.5px; font-weight: 700; color: var(--text); }
         .m { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-        .hold { flex: none; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+        .hold { flex: none; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
         .done-c { flex: none; display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
         .done-c i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
         .g-foot { display: flex; align-items: center; gap: 10px; padding: 13px 20px; border-top: 1px solid var(--border-faint); flex-wrap: wrap; }
@@ -234,7 +234,7 @@ function SecurityReview() {
         .sr { background: var(--bg-warm); padding: clamp(72px, 9vw, 120px) var(--page-pad); }
         .wrap { max-width: var(--page-max); margin: 0 auto; }
         .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 56px); }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }

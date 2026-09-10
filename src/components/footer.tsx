@@ -186,6 +186,12 @@ export default function Footer() {
             <Link href="/terms" prefetch={false} style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
               Terms
             </Link>
+            <Link href="/dpa" prefetch={false} style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
+              DPA
+            </Link>
+            <Link href="/subscription-terms" prefetch={false} style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
+              Subscription terms
+            </Link>
           </div>
         </div>
       </div>

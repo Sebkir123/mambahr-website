@@ -7,8 +7,6 @@ import { GUIDES, guidePath, newFieldGuideToken } from '@/lib/admin-field-guides'
 
 export type LinkResult = { ok: boolean; message: string; path?: string; token?: string }
 
-const SITE = 'https://mambahr.com'
-
 // Create an admin-owned TRACKED share link for a guide (no email, identified by
 // recipient name). field_guide_leads only allows admin READ via RLS, so writes
 // go through the service role behind requireAdmin(). Returns the link so the UI

@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mambahr.com'),
   title: 'MambaHR: The AI HR department. Before you hire HR.',
   description:
-    'MambaHR is the AI HR department for startups and growing companies. It runs hiring, onboarding, payroll-ready exports, time off, and compliance end to end, for a fraction of what running it by hand costs. You approve the calls that matter.',
+    'MambaHR is the AI HR department for startups. It runs hiring, onboarding, payroll changes, time off and compliance end to end. You approve what matters.',
   keywords: [
     'AI HR department',
     'AI HR software',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'MambaHR: The AI HR department.',
-    description: 'Before you hire HR, hire MambaHR. Hiring, onboarding, payroll-ready exports, time off, and compliance, done end to end, so your team spends its week on people.',
+    description: 'Before you hire HR, hire MambaHR. Hiring, onboarding, payroll changes, time off and compliance, done end to end, so your team spends its week on people.',
     url: 'https://mambahr.com',
     siteName: 'MambaHR',
     type: 'website',
@@ -59,7 +59,10 @@ export const metadata: Metadata = {
     description: 'Before you hire HR, hire MambaHR. The whole department, done end to end.',
     images: ['/mambahr_og_sharing.jpg'],
   },
-  alternates: { canonical: 'https://mambahr.com' },
+  alternates: {
+    canonical: 'https://mambahr.com',
+    types: { 'application/rss+xml': [{ url: '/blog/rss.xml', title: 'MambaHR blog' }] },
+  },
   robots: {
     index: true,
     follow: true,

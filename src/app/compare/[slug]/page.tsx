@@ -17,17 +17,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ogUrl = '/mambahr_og_sharing.jpg'
   return {
     title: `MambaHR vs ${c.name} | MambaHR`,
-    description: `${c.tagline}. ${c.heroSub}`,
+    description: c.description,
     openGraph: {
       title: `MambaHR vs ${c.name}`,
-      description: c.heroSub,
+      description: c.description,
       url: `https://mambahr.com/compare/${slug}`,
       images: [{ url: ogUrl, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title: `MambaHR vs ${c.name}`,
-      description: c.heroSub,
+      description: c.description,
       images: [ogUrl],
     },
     alternates: { canonical: `https://mambahr.com/compare/${slug}` },

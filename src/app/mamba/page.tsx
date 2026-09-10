@@ -194,7 +194,7 @@ function SlackWindow() {
         .m { display: flex; gap: 11px; }
         .av { width: 36px; height: 36px; border-radius: 9px; object-fit: cover; flex: none; }
         .av.app {
-          background: #1A1A19;
+          background: var(--text);
           color: #fff;
           display: flex;
           align-items: center;
@@ -217,7 +217,7 @@ function SlackWindow() {
           padding: 1px 5px;
         }
         .m-t { font-size: 13.5px; line-height: 1.45; color: var(--text); margin-top: 2px; }
-        .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+        .mention { color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
         .attach {
           margin-top: 8px;
           border-left: 3px solid var(--gold);
@@ -357,7 +357,7 @@ function DualSurface() {
         .c-who b { font-size: 12.5px; color: var(--text); }
         .c-who time { font-size: 10.5px; color: var(--text-faint); }
         .c-t { font-size: 13px; color: var(--text); margin-top: 2px; }
-        .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+        .mention { color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
         .c-bubble {
           margin-top: 4px;
           display: inline-block;
@@ -433,7 +433,7 @@ function TeamPhoto() {
           font-size: 34px;
           line-height: 1;
           margin-top: 10px;
-          background: linear-gradient(110deg, #8A6535, #6A5DA6);
+          background: linear-gradient(110deg, var(--gold), var(--violet));
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;

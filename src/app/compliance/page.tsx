@@ -57,7 +57,7 @@ function HeroAnswerCard() {
           width: 42px;
           height: 42px;
           border-radius: 12px;
-          background: #14110C;
+          background: var(--ink);
           color: #fff;
           display: flex;
           align-items: center;
@@ -146,7 +146,7 @@ function AuditLogCard() {
           background:
             radial-gradient(80% 60% at 12% 0%, rgba(185, 138, 78, 0.22), transparent 58%),
             radial-gradient(70% 55% at 95% 10%, rgba(106, 93, 166, 0.26), transparent 60%),
-            #14110C;
+            var(--ink);
           border-radius: 18px;
           padding: 26px 26px 22px;
           box-shadow: var(--shadow-float);
@@ -165,7 +165,7 @@ function AuditLogCard() {
           height: 24px;
           border-radius: 7px;
           background: #fff;
-          color: #14110C;
+          color: var(--ink);
           display: flex;
           align-items: center;
           justify-content: center;

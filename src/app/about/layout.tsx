@@ -3,10 +3,10 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'About | MambaHR',
   description:
-    "The HR department is changing shape. We're building the AI HR department, the work, done end to end, with a human in the loop only when it matters. Meet the team behind the company.",
+    'The HR department is changing shape. We are building the AI HR department: the work done end to end, a human in the loop only when it matters. Meet the team.',
   openGraph: {
     title: 'About | MambaHR',
-    description: "The HR department is changing shape. We're building the AI HR department, the work, done end to end, with a human in the loop only when it matters. Meet the team behind the company.",
+    description: 'The HR department is changing shape. We are building the AI HR department: the work done end to end, a human in the loop only when it matters. Meet the team.',
     url: 'https://mambahr.com/about',
     images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
   },

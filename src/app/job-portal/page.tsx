@@ -64,19 +64,19 @@ function PortalCard() {
         .body { padding: 18px 22px 16px; }
         .co { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--border-faint); }
         .co > div { flex: 1; min-width: 0; }
-        .logo { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #B98A4E, #6A5DA6); color: #fff; font-family: var(--font-serif); font-size: 19px; display: flex; align-items: center; justify-content: center; }
+        .logo { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--gold-mid), var(--violet)); color: #fff; font-family: var(--font-serif); font-size: 19px; display: flex; align-items: center; justify-content: center; }
         .co-n { font-size: 15px; font-weight: 700; color: var(--text); }
         .co-t { font-size: 12.5px; color: var(--text-muted); margin-top: 1px; }
         .job { display: flex; align-items: center; gap: 12px; padding: 13px 4px; }
         .job + .job { border-top: 1px solid var(--border-faint); }
         .j-main { flex: 1; min-width: 0; }
         .j-t { font-size: 14.5px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
-        .j-hot { font-family: var(--font-mono); font-size: 10px; color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.22); border-radius: 999px; padding: 2px 8px; }
+        .j-hot { font-family: var(--font-mono); font-size: 10px; color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.22); border-radius: 999px; padding: 2px 8px; }
         .j-m { font-size: 12.5px; color: var(--text-muted); margin-top: 3px; }
         .avs { display: flex; flex: none; }
         .avs img { width: 24px; height: 24px; border-radius: 999px; object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); margin-left: -7px; background: var(--bg-elevated); }
         .avs img:first-child { margin-left: 0; }
-        .j-apply { flex: none; font-size: 13px; font-weight: 600; color: #fff; background: #1A1A19; border-radius: 999px; padding: 8px 18px; }
+        .j-apply { flex: none; font-size: 13px; font-weight: 600; color: #fff; background: var(--text); border-radius: 999px; padding: 8px 18px; }
         .foot { font-size: 11.5px; color: var(--text-faint); padding-top: 12px; border-top: 1px solid var(--border-faint); margin-top: 2px; }
         @media (max-width: 640px) { .avs { display: none; } }
       `}</style>

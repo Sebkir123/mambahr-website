@@ -6,7 +6,6 @@
 
 import styles from './mamba-mark.module.css'
 
-
 type MarkProps = {
   /** Square box size in px. */
   size?: number

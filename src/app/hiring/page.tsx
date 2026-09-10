@@ -72,7 +72,7 @@ function PipelineCard() {
         .meta { font-size: 12.5px; color: var(--text-faint); margin-top: 3px; }
         .prog { display: flex; align-items: center; gap: 12px; padding: 11px 20px; border-bottom: 1px solid var(--border-faint); }
         .prog-bar { flex: 1; height: 5px; border-radius: 999px; background: var(--border-faint); overflow: hidden; }
-        .prog-bar i { display: block; height: 100%; width: 80%; border-radius: 999px; background: linear-gradient(90deg, #B98A4E, #6A5DA6); }
+        .prog-bar i { display: block; height: 100%; width: 80%; border-radius: 999px; background: linear-gradient(90deg, var(--gold-mid), var(--violet)); }
         .prog-t { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); white-space: nowrap; }
         .avs { display: flex; flex: none; }
         .avs img { width: 24px; height: 24px; border-radius: 999px; object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); margin-left: -7px; background: var(--bg-elevated); }
@@ -82,7 +82,7 @@ function PipelineCard() {
         .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
         .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #8A6535); }
+        .mark.gold { background: linear-gradient(135deg, var(--gold-pale), var(--gold)); }
         .main { flex: 1; min-width: 0; }
         .top { display: flex; align-items: baseline; gap: 8px; }
         .nm { font-size: 14px; font-weight: 600; color: var(--text); }
@@ -99,7 +99,7 @@ function PipelineCard() {
           border-radius: 999px;
           padding: 3px 9px;
         }
-        .tag.gold { color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+        .tag.gold { color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
       `}</style>
     </div>
   )
@@ -176,7 +176,7 @@ function CareersSite() {
         .co { display: flex; align-items: center; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--border-faint); }
         .logo {
           width: 36px; height: 36px; border-radius: 10px;
-          background: linear-gradient(135deg, #B98A4E, #6A5DA6);
+          background: linear-gradient(135deg, var(--gold-mid), var(--violet));
           color: #fff; font-family: var(--font-serif); font-size: 19px;
           display: flex; align-items: center; justify-content: center;
         }
@@ -189,7 +189,7 @@ function CareersSite() {
         .j-hot {
           font-family: var(--font-mono);
           font-size: 10px;
-          color: #8A6535;
+          color: var(--gold);
           background: var(--gold-tint);
           border: 1px solid rgba(138, 101, 53, 0.22);
           border-radius: 999px;
@@ -201,7 +201,7 @@ function CareersSite() {
           font-size: 13px;
           font-weight: 600;
           color: #fff;
-          background: #1A1A19;
+          background: var(--text);
           border-radius: 999px;
           padding: 8px 18px;
         }

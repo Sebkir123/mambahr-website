@@ -1,15 +1,16 @@
-name: Dependency audit
+name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, feat/admin-panel-blog]
   pull_request:
-    branches: [main]
+    branches: [main, feat/admin-panel-blog]
   schedule:
-    - cron: "0 8 * * 1"   # Monday 8AM UTC
+    - cron: "0 8 * * 1"   # Monday 8AM UTC (dependency audit)
 
 jobs:
   audit:
+    name: Dependency audit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
@@ -19,3 +20,28 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm audit --audit-level=high
+
+  check:
+    name: Lint, typecheck, build
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    env:
+      # Build-time placeholders only. `next build` prerenders pages that
+      # instantiate the Supabase client from NEXT_PUBLIC_* at module load, so
+      # the values must be syntactically valid; nothing is fetched during the
+      # build. Runtime checks in src/lib/env.ts are unchanged (they skip the
+      # build phase anyway and warn at boot).
+      NEXT_PUBLIC_SUPABASE_URL: https://ci-placeholder.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-anon-key
+      NEXT_PUBLIC_SITE_URL: https://mambahr.com
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run lint
+      - run: npx tsc --noEmit
+      - run: npm run build

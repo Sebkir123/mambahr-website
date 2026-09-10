@@ -68,7 +68,7 @@ function SlackApprovalCard() {
         .m { display: flex; gap: 11px; }
         .av { width: 38px; height: 38px; border-radius: 9px; object-fit: cover; flex: none; }
         .av.app {
-          background: #14110C;
+          background: var(--ink);
           color: #fff;
           display: flex;
           align-items: center;
@@ -91,7 +91,7 @@ function SlackApprovalCard() {
           padding: 1px 5px;
         }
         .m-t { font-size: 14px; line-height: 1.5; color: var(--text); margin-top: 3px; }
-        .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+        .mention { color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
         .attach {
           margin-top: 9px;
           border-left: 3px solid var(--gold);
@@ -166,7 +166,7 @@ function ParentalLeaveCard() {
           width: 42px;
           height: 42px;
           border-radius: 12px;
-          background: #14110C;
+          background: var(--ink);
           color: #fff;
           display: flex;
           align-items: center;

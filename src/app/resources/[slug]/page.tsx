@@ -37,7 +37,7 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
     <>
       <MegaNav />
       {r.status === 'draft' && (
-        <div style={{ background: '#1A1A19', color: '#F5C872', textAlign: 'center', padding: '10px 16px', fontSize: '13px', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>
+        <div style={{ background: 'var(--text)', color: '#F5C872', textAlign: 'center', padding: '10px 16px', fontSize: '13px', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em' }}>
           DRAFT PREVIEW, not visible to the public until published
         </div>
       )}

@@ -134,13 +134,13 @@ function MathCard() {
         .r-l { font-size: 13.5px; font-weight: 600; color: var(--text); }
         .r-v { font-family: var(--font-serif); font-size: 22px; color: var(--text); }
         .r-v em { font-style: normal; font-family: var(--font-sans); font-size: 12px; color: var(--text-faint); }
-        .r-v.grad { background: linear-gradient(110deg, #8A6535, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .r-v.grad { background: linear-gradient(110deg, var(--gold), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .bar { display: block; height: 9px; border-radius: 999px; background: var(--border-faint); overflow: hidden; margin-top: 8px; }
-        .bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #B98A4E, #6A5DA6); }
+        .bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--gold-mid), var(--violet)); }
         .bar.gray i { background: #C9C2B6; }
         .r-note { display: block; font-size: 11.5px; color: var(--text-faint); margin-top: 6px; }
         .foot { display: flex; align-items: baseline; gap: 12px; padding: 14px 22px 18px; margin-top: 10px; background: var(--bg-warm); border-top: 1px solid var(--border-faint); }
-        .f-big { font-family: var(--font-serif); font-size: 30px; line-height: 1; background: linear-gradient(110deg, #8A6535, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .f-big { font-family: var(--font-serif); font-size: 30px; line-height: 1; background: linear-gradient(110deg, var(--gold), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .f-t { font-size: 12.5px; color: var(--text-muted); line-height: 1.45; }
       `}</style>
     </div>
@@ -199,7 +199,7 @@ export default function PricingPage() {
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 690px; margin: 22px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
             :global(.ph .btn-p) {
-              display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 15.5px;
+              display: inline-block; background: var(--text); color: #fff; font-weight: 600; font-size: 15.5px;
               padding: 14px 28px; border-radius: 999px; text-decoration: none;
               box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22); transition: transform 0.15s ease;
             }
@@ -253,11 +253,11 @@ export default function PricingPage() {
                 var(--bg);
               box-shadow: var(--shadow-sm);
             }
-            .f-tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 4px 11px; }
+            .f-tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #fff; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); border-radius: 999px; padding: 4px 11px; }
             .f-t { font-family: var(--font-serif); font-size: clamp(19px, 2.2vw, 24px); color: var(--text); margin: 10px 0 0; letter-spacing: -0.01em; }
             .f-s { font-size: 14px; color: var(--text-muted); margin: 6px 0 0; line-height: 1.5; }
             :global(.found .f-cta) {
-              flex: none; display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 14.5px;
+              flex: none; display: inline-block; background: var(--text); color: #fff; font-weight: 600; font-size: 14.5px;
               padding: 13px 24px; border-radius: 999px; text-decoration: none;
               box-shadow: 0 10px 22px rgba(20, 18, 14, 0.18);
             }
@@ -337,7 +337,7 @@ export default function PricingPage() {
             .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-float); }
             @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
             .card.pop { background: linear-gradient(180deg, #FFFDF8, var(--bg)); box-shadow: var(--shadow-float); }
-            .pop-tag { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); z-index: 3; font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 5px 12px; white-space: nowrap; box-shadow: 0 0 0 4px var(--bg), 0 6px 14px rgba(20, 18, 14, 0.16); }
+            .pop-tag { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); z-index: 3; font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); border-radius: 999px; padding: 5px 12px; white-space: nowrap; box-shadow: 0 0 0 4px var(--bg), 0 6px 14px rgba(20, 18, 14, 0.16); }
             .c-name { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
             .c-size { font-family: var(--font-mono); font-size: 11px; color: var(--gold-dark); margin-top: 4px; }
             .c-price { display: flex; align-items: baseline; gap: 6px; margin-top: 18px; }
@@ -349,14 +349,14 @@ export default function PricingPage() {
             .c-rep-l { font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); }
             .c-rep ul { list-style: none; margin: 7px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
             .c-rep li { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; padding-left: 14px; position: relative; }
-            .c-rep li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, #B98A4E, #6A5DA6); }
+            .c-rep li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); }
             .c-feats { list-style: none; padding: 0; margin: 14px 0 20px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
             .c-feats li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.45; color: var(--text-muted); }
             .tick { flex: none; width: 16px; height: 16px; margin-top: 1px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
             .tick::after { content: ''; position: absolute; left: 5px; top: 2.5px; width: 3px; height: 7px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
             :global(.tiers .c-cta) { display: block; text-align: center; font-size: 14px; font-weight: 600; color: var(--text); border: 1px solid var(--border-mid); background: var(--bg); border-radius: 999px; padding: 11px 16px; text-decoration: none; transition: background 0.15s ease; }
             :global(.tiers .c-cta:hover) { background: var(--bg-warm); }
-            :global(.tiers .c-cta.dark) { color: #fff; background: #1A1A19; border-color: #1A1A19; box-shadow: 0 10px 22px rgba(20, 18, 14, 0.18); }
+            :global(.tiers .c-cta.dark) { color: #fff; background: var(--text); border-color: var(--text); box-shadow: 0 10px 22px rgba(20, 18, 14, 0.18); }
             :global(.tiers .c-cta.dark:hover) { background: #2A2A28; }
             .note { text-align: center; font-size: 13px; color: var(--text-faint); margin: 26px 0 0; }
             .matrix { margin-top: clamp(28px, 3.4vw, 40px); border: 1px solid var(--border); border-radius: 16px; background: var(--bg); overflow: hidden; }
@@ -409,7 +409,7 @@ export default function PricingPage() {
             .cost { background: var(--bg-warm); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: 920px; margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(30px, 3.6vw, 44px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 600px; }
             .cost-table { display: block; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-float); }
@@ -418,7 +418,7 @@ export default function PricingPage() {
             .row.hd { background: var(--bg-surface); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); }
             .h { font-size: 14.5px; font-weight: 700; color: var(--text); }
             .c { font-family: var(--font-serif); font-size: 17px; color: var(--text); }
-            .a { font-size: 13.5px; font-weight: 600; background: linear-gradient(110deg, #8A6535, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+            .a { font-size: 13.5px; font-weight: 600; background: linear-gradient(110deg, var(--gold), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
             .compare-line { text-align: center; font-size: 14px; color: var(--text-muted); margin: 24px 0 0; }
             :global(.cost .compare-line a) { color: var(--gold-dark); font-weight: 700; text-decoration: none; }
             :global(.cost .compare-line a:hover) { text-decoration: underline; }
@@ -448,12 +448,12 @@ export default function PricingPage() {
           <style jsx>{`
             .pb { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: 920px; margin: 0 auto; text-align: center; }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.65; color: var(--text-muted); margin: 18px auto 0; max-width: 640px; }
             .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin-top: 28px; }
             .chip { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: var(--text-muted); background: var(--bg-surface); border: 1px solid var(--border-faint); border-radius: 999px; padding: 6px 13px; white-space: nowrap; }
-            .dot { width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, #B98A4E, #6A5DA6); }
+            .dot { width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); }
           `}</style>
         </section>
 
@@ -485,7 +485,7 @@ export default function PricingPage() {
             .faq { background: var(--bg-warm); padding: clamp(72px, 9vw, 120px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 56px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
             .item { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(20px, 2.4vw, 28px); box-shadow: var(--shadow-sm); }

@@ -28,7 +28,7 @@
   display: flex; flex-direction: column;
   background:
     radial-gradient(130% 90% at 0% 0%, rgba(196,154,108,0.16), transparent 58%),
-    linear-gradient(165deg, #261E15 0%, #1A1A19 60%, #131312 100%);
+    linear-gradient(165deg, #261E15 0%, var(--text) 60%, #131312 100%);
   color: #fff;
   border: 1px solid rgba(196,154,108,0.45);
   box-shadow: 0 24px 56px -24px rgba(20,16,10,0.45), inset 0 0 0 1px rgba(196,154,108,0.14);
@@ -38,7 +38,7 @@
 .coverEmblem { position: absolute; top: 44%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
 .coverTop { position: relative; display: flex; flex-direction: column; gap: 14px; }
 .coverBrand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; letter-spacing: -0.01em; }
-.m { width: 24px; height: 24px; border-radius: 7px; background: #fff; color: #1A1A19; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 15px; }
+.m { width: 24px; height: 24px; border-radius: 7px; background: #fff; color: var(--text); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 15px; }
 .coverRule { height: 1px; width: 100%; background: var(--grad); opacity: 0.9; }
 .coverBody { position: relative; margin-top: auto; }
 .coverKicker { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-light); }
@@ -85,7 +85,7 @@ select.gateInput { appearance: none; -webkit-appearance: none; cursor: pointer; 
 
 .download {
   display: inline-block; width: 100%; box-sizing: border-box; text-align: center;
-  background: #1A1A19; color: #fff; font-weight: 600; font-size: 15.5px;
+  background: var(--text); color: #fff; font-weight: 600; font-size: 15.5px;
   border: none; border-radius: 12px; padding: 15px 24px; cursor: pointer; text-decoration: none;
   box-shadow: 0 12px 26px rgba(20,18,14,0.2); transition: transform 0.15s ease, background 0.15s ease;
 }
