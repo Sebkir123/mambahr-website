@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, JetBrains_Mono, Instrument_Serif, Fraunces } from 'next/font/google'
+import { Inter, JetBrains_Mono, Fraunces } from 'next/font/google'
 import AnalyticsGate from '@/components/analytics-gate'
 import StyledJsxRegistry from './styled-jsx-registry'
 import SiteTracker from '@/components/site-tracker'
@@ -17,14 +17,6 @@ const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-jetbrains',
-  display: 'swap',
-})
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
-  variable: '--font-instrument',
   display: 'swap',
 })
 
@@ -162,7 +154,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID
 
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${instrumentSerif.variable} ${fraunces.variable}`}>
+    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${fraunces.variable}`}>
       <head>
         <link rel="preconnect" href="https://dqoqnlecylqlwsahudjn.supabase.co" />
         <link rel="dns-prefetch" href="https://dqoqnlecylqlwsahudjn.supabase.co" />
