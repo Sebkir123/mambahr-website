@@ -49,10 +49,13 @@ export function AppFrame({
   pageLabel,
   user = 'AR',
   height,
+  minimal = false,
   children,
   className,
 }: {
   active?: NavKey
+  /** Fewer nav rows: no Brain, no Org chart child, no Operations block. Calmer for a hero. */
+  minimal?: boolean
   org?: string
   /** Left slot of the top bar, e.g. "To do". Defaults to the active nav label. */
   pageLabel?: string
@@ -74,23 +77,32 @@ export function AppFrame({
         </div>
         <div className={s.navBody}>
           <div className={s.navSection}>
-            {TOP.map((i) => <Row key={i.key} item={i} active={active} />)}
+            {TOP.filter((i) => !minimal || i.key !== 'brain').map((i) => <Row key={i.key} item={i} active={active} />)}
           </div>
           <div className={s.navHead}>Workforce</div>
           <div className={s.navSection}>
             {WORKFORCE.map((i) => (
               <Fragment key={i.key}>
                 <Row item={i} active={active} />
-                {i.key === 'people' && (
+                {i.key === 'people' && !minimal && (
                   <span className={s.navChild}><Icon name="git-branch" size={13} />Org chart</span>
                 )}
               </Fragment>
             ))}
           </div>
-          <div className={s.navHead}>Operations</div>
-          <div className={s.navSection}>
-            {OPERATIONS.map((i) => <Row key={i.key} item={i} active={active} />)}
-          </div>
+          {!minimal && (
+            <>
+              <div className={s.navHead}>Operations</div>
+              <div className={s.navSection}>
+                {OPERATIONS.map((i) => <Row key={i.key} item={i} active={active} />)}
+              </div>
+            </>
+          )}
+          {minimal && (
+            <div className={s.navSection}>
+              <Row item={{ key: 'documents', label: 'Documents', icon: 'files' }} active={active} />
+            </div>
+          )}
           <div className={s.navSpacer} />
           <div className={s.navSection}>
             <Row item={{ key: 'settings', label: 'Settings', icon: 'settings' }} active={active} />
