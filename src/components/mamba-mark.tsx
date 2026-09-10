@@ -6,8 +6,6 @@
 
 import styles from './mamba-mark.module.css'
 
-const SRC = '/brand/mamba-mark.png'
-
 type MarkProps = {
   /** Square box size in px. */
   size?: number

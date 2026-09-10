@@ -21,7 +21,9 @@ function AssetCard({ a }: { a: LogoAsset }) {
       <div className={`${styles.logoPreview} ${a.dark ? styles.logoDark : styles.logoLight}`}>
         {/* Render the PNG (pixel-identical everywhere). Browsers miscompute the
             intrinsic size of these wide-viewBox SVGs as CSS background-images,
-            which cropped the preview to just the mark. eslint-disable-next-line @next/next/no-img-element */}
+            which cropped the preview to just the mark. next/image would re-encode
+            the brand PNG, which is exactly what this preview must not do. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={`/brand/${a.file}.png`} alt={`MambaHR ${a.note}`} className={styles.logoImg} />
       </div>
       <div className={styles.logoMeta}>

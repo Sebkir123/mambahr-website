@@ -12,6 +12,12 @@ type Tz = 'ET' | 'CT' | 'MT' | 'PT'
 // to top and flashed (felt like a full reload). These navigate via router.replace
 // with scroll:false inside a transition, a soft re-render that keeps scroll
 // position and shows the previous data until the new data is ready.
+function Seg({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button type="button" className={active ? styles.segActive : styles.segBtn} onClick={onClick}>{children}</button>
+  )
+}
+
 export function SiteControls({
   property,
   view,
@@ -32,10 +38,6 @@ export function SiteControls({
     const m = { property, view, range, tz, ...over }
     start(() => router.replace(`/admin/site?property=${m.property}&view=${m.view}&range=${m.range}&tz=${m.tz}`, { scroll: false }))
   }
-
-  const Seg = ({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) => (
-    <button type="button" className={active ? styles.segActive : styles.segBtn} onClick={onClick}>{children}</button>
-  )
 
   return (
     <div className={styles.controls} style={pending ? { opacity: 0.6 } : undefined}>

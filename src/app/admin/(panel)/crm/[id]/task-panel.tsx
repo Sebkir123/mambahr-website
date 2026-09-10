@@ -48,7 +48,9 @@ export function TaskPanel({ contactId, tasks }: { contactId: string; tasks: Task
     })
   }
 
-  const now = Date.now()
+  // Captured once per mount: "overdue" is decided against the time the panel
+  // opened, not re-evaluated on every render (Date.now() in render is impure).
+  const [now] = useState(() => Date.now())
   return (
     <div>
       {tasks.length > 0 && (
