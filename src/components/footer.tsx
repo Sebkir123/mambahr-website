@@ -120,7 +120,7 @@ export default function Footer() {
             <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.55, maxWidth: 210, margin: 0 }}>
               The AI HR department. You keep the judgment.
             </p>
-            <p style={{ display: 'inline-flex', alignItems: 'center', gap: 7, marginTop: 18, fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--text-faint)' }}>
+            <p style={{ display: 'inline-flex', alignItems: 'center', gap: 7, marginTop: 18, fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--text-faint)' }}>
               <span style={{ width: 7, height: 7, borderRadius: 999, background: 'var(--color-green)', display: 'inline-block' }} />
               All systems handled
             </p>
@@ -129,7 +129,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/company/mamba-hr/"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'inline-flex', marginTop: 16, color: 'var(--text-faint)' }}
+                style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 44, height: 44, marginTop: 4, marginLeft: -13, borderRadius: 8, color: 'var(--text-faint)' }}
                 aria-label="MambaHR on LinkedIn"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
@@ -139,14 +139,14 @@ export default function Footer() {
 
           {cols.map((col) => (
             <div key={col.title}>
-              <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--text-faint)', marginBottom: 16 }}>
+              <p style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--text-faint)', marginBottom: 16 }}>
                 {col.title}
               </p>
               <div
                 style={
                   col.twoCol
-                    ? { display: 'grid', gridTemplateColumns: 'max-content max-content', gap: '10px 24px' }
-                    : { display: 'flex', flexDirection: 'column', gap: 10 }
+                    ? { display: 'grid', gridTemplateColumns: 'max-content max-content', gap: '0 24px' }
+                    : { display: 'flex', flexDirection: 'column', gap: 0 }
                 }
               >
                 {col.links.map((link) => (
@@ -154,7 +154,7 @@ export default function Footer() {
                     key={link.label}
                     href={link.href}
                     prefetch={false}
-                    style={{ fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.15s' }}
+                    style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44, alignSelf: 'flex-start', fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.15s' }}
                   >
                     {link.label}
                   </Link>
@@ -180,10 +180,10 @@ export default function Footer() {
             © {new Date().getFullYear()} MambaHR, Inc. All rights reserved.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
-            <Link href="/privacy" prefetch={false} style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
+            <Link href="/privacy" prefetch={false} style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44, fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
               Privacy
             </Link>
-            <Link href="/terms" prefetch={false} style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
+            <Link href="/terms" prefetch={false} style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44, fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
               Terms
             </Link>
           </div>

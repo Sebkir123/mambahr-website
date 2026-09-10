@@ -66,9 +66,9 @@ export default function Hero() {
             <img className="me" src="/avatars/brian.jpg" alt="Brian Bell" width={24} height={24} />
           </div>
           <div className="app-body">
-            <aside className="side">
+            <div className="side" role="presentation">
               <div className="brand"><span className="logo">M</span>MambaHR</div>
-              <nav>
+              <div className="side-nav" role="group" tabIndex={0} aria-label="Product areas in the sample dashboard">
                 {NAV.map((n) => (
                   <span key={n.label} className={`nav${n.active ? ' on' : ''}`}>
                     <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
@@ -78,18 +78,18 @@ export default function Hero() {
                     {n.badge && <span className="nav-b">{n.badge}</span>}
                   </span>
                 ))}
-              </nav>
+              </div>
               <div className="agentline">
                 <span className="al-dot" />
                 <span className="al-t"><b>MambaHR</b> is working<span className="al-ell"><i>.</i><i>.</i><i>.</i></span></span>
               </div>
               <div className="status"><span className="d" />All systems handled</div>
-            </aside>
+            </div>
 
-            <main className="main">
+            <div className="main" role="presentation">
               <div className="greet">
                 <div>
-                  <h3>Good morning, Brian</h3>
+                  <p className="greet-t">Good morning, Brian</p>
                   <span className="date">Monday, June 10</span>
                 </div>
                 <span className="seg">This week</span>
@@ -146,7 +146,7 @@ export default function Hero() {
                   </div>
                 ))}
               </div>
-            </main>
+            </div>
           </div>
         </div>
       </div>
@@ -278,7 +278,7 @@ export default function Hero() {
           justify-content: center;
           margin-top: 16px;
           color: var(--text-muted);
-          font-size: 13.5px;
+          font-size: 14px;
           flex-wrap: wrap;
         }
         .trust i { width: 4px; height: 4px; border-radius: 999px; background: var(--border-mid); }
@@ -353,7 +353,7 @@ export default function Hero() {
         .nav {
           display: flex; align-items: center; gap: 10px;
           padding: 8px 10px; border-radius: 8px;
-          color: var(--text-muted); font-size: 13.5px; font-weight: 500;
+          color: var(--text-muted); font-size: 14px; font-weight: 500;
         }
         .nav svg { color: var(--text-faint); }
         .nav.on { background: var(--gold-tint); color: var(--text); font-weight: 600; }
@@ -361,7 +361,7 @@ export default function Hero() {
         .nav-b {
           margin-left: auto;
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           font-weight: 600;
           color: var(--gold-dark);
           background: var(--gold-tint);
@@ -374,14 +374,14 @@ export default function Hero() {
           display: flex;
           align-items: center;
           gap: 8px;
-          font-size: 12.5px;
+          font-size: 13px;
           color: var(--text-muted);
           background: var(--violet-soft);
           border: 1px solid rgba(106, 93, 166, 0.22);
           border-radius: 9px;
           padding: 8px 10px;
         }
-        .agentline b { color: var(--violet); font-weight: 700; }
+        .agentline b { color: #5A4D96; font-weight: 700; }
         .al-dot {
           flex: none;
           width: 8px;
@@ -412,9 +412,9 @@ export default function Hero() {
 
         .main { padding: 22px 24px 26px; }
         .greet { display: flex; align-items: flex-start; justify-content: space-between; }
-        .greet h3 { font-family: var(--font-serif); font-weight: 400; font-size: 25px; color: var(--text); margin: 0; letter-spacing: -0.01em; }
+        .greet-t { font-family: var(--font-serif); font-weight: 400; font-size: 25px; color: var(--text); margin: 0; letter-spacing: -0.01em; }
         .date { font-size: 13px; color: var(--text-faint); }
-        .seg { font-size: 12.5px; color: var(--text-muted); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; }
+        .seg { font-size: 13px; color: var(--text-muted); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; }
         .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
         .stat {
           position: relative;
@@ -429,11 +429,11 @@ export default function Hero() {
         .stat.warm { background: linear-gradient(165deg, #FFF6EC, #FBE9DA); border-color: #EFD9C2; }
         .stat.vio { background: linear-gradient(165deg, #F4F2FA, #ECE8F6); border-color: #DDD7EC; }
         .stat.goldt { background: linear-gradient(165deg, #FAF5EA, #F2EADA); border-color: #E6D9C0; }
-        .s-l { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-faint); display: block; }
+        .s-l { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-faint); display: block; }
         .s-n { font-family: var(--font-serif); font-size: 32px; color: var(--text); display: flex; align-items: baseline; gap: 6px; margin-top: 5px; line-height: 1; }
-        .s-n em { font-style: normal; font-family: var(--font-sans); font-size: 11px; color: var(--text-faint); }
+        .s-n em { font-style: normal; font-family: var(--font-sans); font-size: 12px; color: var(--text-faint); }
         .s-n .warn { width: 8px; height: 8px; border-radius: 999px; background: var(--color-red); align-self: center; animation: alPulse 2.4s ease-in-out infinite; }
-        .s-sub { font-size: 11px; color: var(--text-faint); margin-top: auto; padding-top: 8px; }
+        .s-sub { font-size: 12px; color: var(--text-faint); margin-top: auto; padding-top: 8px; }
         .s-sub.up { color: var(--color-green); font-weight: 600; }
         .s-bars {
           margin-top: auto;
@@ -451,28 +451,28 @@ export default function Hero() {
         }
         .panel { margin-top: 18px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
         .p-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 13px; font-weight: 600; color: var(--text); }
-        .p-count { font-family: var(--font-mono); font-size: 11px; color: #8A6535; background: #F2ECE0; border-radius: 999px; padding: 2px 8px; }
+        .p-count { font-family: var(--font-mono); font-size: 12px; color: #7A5A2E; background: #F2ECE0; border-radius: 999px; padding: 2px 8px; }
         .ap { display: flex; align-items: center; gap: 12px; padding: 13px 16px; }
         .ap + .ap { border-top: 1px solid var(--border-faint); }
         .ap-av { width: 34px; height: 34px; border-radius: 999px; object-fit: cover; flex: none; }
         .ap-main { flex: 1; min-width: 0; }
-        .ap-t { font-size: 13.5px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
-        .ap-tag { font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 999px; }
+        .ap-t { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+        .ap-tag { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 999px; }
         .ap-tag.urgent { color: var(--color-red); background: rgba(220, 38, 38, 0.08); }
-        .ap-tag.warn { color: #8A6535; background: #F2ECE0; }
-        .ap-m { font-size: 12.5px; color: var(--text-muted); margin-top: 3px; }
+        .ap-tag.warn { color: #7A5A2E; background: #F2ECE0; }
+        .ap-m { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
         .ap-btns { display: flex; gap: 7px; flex: none; }
-        .ap-ok { font-size: 12.5px; font-weight: 600; color: #fff; background: #1A1A19; border-radius: 999px; padding: 7px 15px; }
-        .ap-no { font-size: 12.5px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
+        .ap-ok { font-size: 13px; font-weight: 600; color: #fff; background: #1A1A19; border-radius: 999px; padding: 7px 15px; }
+        .ap-no { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
         .feed { margin-top: 16px; }
-        .f-head { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-faint); margin-bottom: 10px; }
+        .f-head { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-faint); margin-bottom: 10px; }
         .f-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; font-size: 13px; }
         .f-row + .f-row { border-top: 1px solid var(--border-faint); }
         .f-check { flex: none; width: 16px; height: 16px; border-radius: 999px; background: var(--color-green); position: relative; }
         .f-check::after { content: ''; position: absolute; left: 5px; top: 3px; width: 3px; height: 7px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .f-who { font-weight: 600; color: var(--text); }
         .f-what { color: var(--text-muted); flex: 1; min-width: 0; }
-        .f-time { color: var(--text-faint); font-size: 11.5px; }
+        .f-time { color: var(--text-faint); font-size: 12px; }
 
         @media (prefers-reduced-motion: reduce) {
           .btn-primary:hover { transform: none; }
@@ -494,7 +494,7 @@ export default function Hero() {
           }
           .side .brand { padding: 0 2px; font-size: 15px; }
           /* Nav becomes a horizontal scrolling pill strip, no cramped wrap grid. */
-          .side nav {
+          .side .side-nav {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
@@ -505,7 +505,7 @@ export default function Hero() {
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
           }
-          .side nav::-webkit-scrollbar { display: none; }
+          .side .side-nav::-webkit-scrollbar { display: none; }
           .nav {
             flex: 0 0 auto;
             white-space: nowrap;
@@ -519,7 +519,7 @@ export default function Hero() {
           .status { display: none; }
           /* Greeting: keep on one line, pill never breaks. */
           .greet { align-items: center; gap: 12px; }
-          .greet h3 { font-size: 22px; }
+          .greet-t { font-size: 22px; }
           .seg { flex: none; white-space: nowrap; }
           .main { padding: 18px 16px 22px; }
           /* Approval row: avatar + text on line 1, actions wrap below (indented). */
@@ -532,7 +532,7 @@ export default function Hero() {
           .stats { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 9px; }
           .stat.goldt { grid-column: 1 / -1; }
           .stat { min-height: 0; padding: 12px; }
-          .s-l { font-size: 9.5px; }
+          .s-l { font-size: 12px; }
           .s-n { font-size: 27px; }
           .f-what { flex-basis: 100%; order: 3; padding-left: 26px; }
         }

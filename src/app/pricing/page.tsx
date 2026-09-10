@@ -175,27 +175,27 @@ function MathCard() {
         .disclosure {
           margin: 0;
           padding: 0 22px 16px;
-          font-size: 11.5px;
+          font-size: 12px;
           line-height: 1.5;
           color: var(--text-faint);
         }
         .mc { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
         .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 22px; border-bottom: 1px solid var(--border-faint); }
-        .t { font-size: 13.5px; font-weight: 700; color: var(--text); }
-        .at { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); white-space: nowrap; }
+        .t { font-size: 14px; font-weight: 700; color: var(--text); }
+        .at { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); white-space: nowrap; }
         .rows { padding: 18px 22px 6px; display: flex; flex-direction: column; gap: 18px; }
         .r-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-        .r-l { font-size: 13.5px; font-weight: 600; color: var(--text); }
+        .r-l { font-size: 14px; font-weight: 600; color: var(--text); }
         .r-v { font-family: var(--font-serif); font-size: 22px; color: var(--text); }
         .r-v em { font-style: normal; font-family: var(--font-sans); font-size: 12px; color: var(--text-faint); }
-        .r-v.grad { background: linear-gradient(110deg, #8A6535, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .r-v.grad { background: linear-gradient(110deg, #7A5A2E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .bar { display: block; height: 9px; border-radius: 999px; background: var(--border-faint); overflow: hidden; margin-top: 8px; }
         .bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #B98A4E, #6A5DA6); }
         .bar.gray i { background: #C9C2B6; }
-        .r-note { display: block; font-size: 11.5px; color: var(--text-faint); margin-top: 6px; }
+        .r-note { display: block; font-size: 12px; color: var(--text-faint); margin-top: 6px; }
         .foot { display: flex; align-items: baseline; gap: 12px; padding: 14px 22px 18px; margin-top: 10px; background: var(--bg-warm); border-top: 1px solid var(--border-faint); }
-        .f-big { font-family: var(--font-serif); font-size: 30px; line-height: 1; background: linear-gradient(110deg, #8A6535, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .f-t { font-size: 12.5px; color: var(--text-muted); line-height: 1.45; }
+        .f-big { font-family: var(--font-serif); font-size: 30px; line-height: 1; background: linear-gradient(110deg, #7A5A2E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .f-t { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
       `}</style>
     </div>
   )
@@ -207,7 +207,7 @@ export default function PricingPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         {/* ── Hero ── */}
         <section className="ph">
           <div className="aurora" aria-hidden="true"><span className="blob b1" /><span className="blob b2" /></div>
@@ -253,13 +253,13 @@ export default function PricingPage() {
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 690px; margin: 22px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
             :global(.ph .btn-p) {
-              display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 15.5px;
+              display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 16px;
               padding: 14px 28px; border-radius: 999px; text-decoration: none;
               box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22); transition: transform 0.15s ease;
             }
             :global(.ph .btn-p:hover) { transform: translateY(-2px); }
             :global(.ph .btn-g) {
-              display: inline-block; color: var(--text); font-weight: 600; font-size: 15.5px;
+              display: inline-block; color: var(--text); font-weight: 600; font-size: 16px;
               padding: 14px 24px; border-radius: 999px; border: 1px solid var(--border-mid);
               background: rgba(255, 255, 255, 0.6); text-decoration: none;
             }
@@ -307,11 +307,11 @@ export default function PricingPage() {
                 var(--bg);
               box-shadow: var(--shadow-sm);
             }
-            .f-tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 4px 11px; }
+            .f-tag { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 4px 11px; }
             .f-t { font-family: var(--font-serif); font-size: clamp(19px, 2.2vw, 24px); color: var(--text); margin: 10px 0 0; letter-spacing: -0.01em; }
             .f-s { font-size: 14px; color: var(--text-muted); margin: 6px 0 0; line-height: 1.5; }
             :global(.found .f-cta) {
-              flex: none; display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 14.5px;
+              flex: none; display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 15px;
               padding: 13px 24px; border-radius: 999px; text-decoration: none;
               box-shadow: 0 10px 22px rgba(20, 18, 14, 0.18);
             }
@@ -354,7 +354,7 @@ export default function PricingPage() {
             {/* Collapsible full matrix */}
             <details className="matrix" data-reveal>
               <summary>Compare all plans in detail</summary>
-              <div className="m-scroll">
+              <div className="m-scroll" role="group" tabIndex={0} aria-label="Plan comparison table">
                 <table>
                   <thead>
                     <tr>
@@ -391,18 +391,18 @@ export default function PricingPage() {
             .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-float); }
             @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
             .card.pop { background: linear-gradient(180deg, #FFFDF8, var(--bg)); box-shadow: var(--shadow-float); }
-            .pop-tag { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); z-index: 3; font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 5px 12px; white-space: nowrap; box-shadow: 0 0 0 4px var(--bg), 0 6px 14px rgba(20, 18, 14, 0.16); }
+            .pop-tag { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); z-index: 3; font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 5px 12px; white-space: nowrap; box-shadow: 0 0 0 4px var(--bg), 0 6px 14px rgba(20, 18, 14, 0.16); }
             .c-name { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-            .c-size { font-family: var(--font-mono); font-size: 11px; color: var(--gold-dark); margin-top: 4px; }
+            .c-size { font-family: var(--font-mono); font-size: 12px; color: var(--gold-dark); margin-top: 4px; }
             .c-price { display: flex; align-items: baseline; gap: 6px; margin-top: 18px; }
             .c-n { font-family: var(--font-serif); font-size: clamp(32px, 2.8vw, 40px); line-height: 1; color: var(--text); letter-spacing: -0.02em; }
             .c-u { font-size: 13px; color: var(--text-faint); }
-            .c-min { font-size: 11.5px; color: var(--text-faint); margin-top: 6px; }
-            .c-blurb { font-size: 13.5px; line-height: 1.5; color: var(--text-muted); margin: 13px 0 0; min-height: 40px; }
+            .c-min { font-size: 12px; color: var(--text-faint); margin-top: 6px; }
+            .c-blurb { font-size: 14px; line-height: 1.5; color: var(--text-muted); margin: 13px 0 0; min-height: 40px; }
             .c-rep { margin-top: 13px; border: 1px solid var(--border-faint); background: var(--bg-warm); border-radius: 12px; padding: 11px 13px; }
-            .c-rep-l { font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); }
+            .c-rep-l { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); }
             .c-rep ul { list-style: none; margin: 7px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-            .c-rep li { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; padding-left: 14px; position: relative; }
+            .c-rep li { font-size: 13px; color: var(--text-muted); line-height: 1.4; padding-left: 14px; position: relative; }
             .c-rep li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, #B98A4E, #6A5DA6); }
             .c-feats { list-style: none; padding: 0; margin: 14px 0 20px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
             .c-feats li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.45; color: var(--text-muted); }
@@ -414,7 +414,7 @@ export default function PricingPage() {
             :global(.tiers .c-cta.dark:hover) { background: #2A2A28; }
             .note { text-align: center; font-size: 13px; color: var(--text-faint); margin: 26px 0 0; }
             .matrix { margin-top: clamp(28px, 3.4vw, 40px); border: 1px solid var(--border); border-radius: 16px; background: var(--bg); overflow: hidden; }
-            .matrix summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 20px; font-size: 14.5px; font-weight: 700; color: var(--text); }
+            .matrix summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 20px; font-size: 15px; font-weight: 700; color: var(--text); }
             .matrix summary::-webkit-details-marker { display: none; }
             .matrix summary::after { content: '+'; font-family: var(--font-mono); font-size: 16px; color: var(--gold-dark); }
             .matrix[open] summary::after { content: '–'; }
@@ -424,7 +424,7 @@ export default function PricingPage() {
             th { text-align: left; font-size: 12px; font-weight: 700; color: var(--text); padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-surface); white-space: nowrap; }
             th + th, td.c { text-align: center; }
             td { padding: 9px 16px; color: var(--text-muted); border-bottom: 1px solid var(--border-faint); }
-            .g-row td { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); background: var(--bg-warm); padding: 8px 16px; }
+            .g-row td { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); background: var(--bg-warm); padding: 8px 16px; }
             .yes { color: var(--color-green); font-weight: 700; }
             .no { color: var(--border-mid); }
             @media (max-width: 1080px) { .grid { grid-template-columns: repeat(2, 1fr); } }
@@ -463,16 +463,16 @@ export default function PricingPage() {
             .cost { background: var(--bg-warm); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: 920px; margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(30px, 3.6vw, 44px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 600px; }
             .cost-table { display: block; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-float); }
             .row { display: grid; grid-template-columns: 1.1fr 1fr 1.3fr; gap: 12px; padding: 14px 22px; align-items: baseline; }
             .row + .row { border-top: 1px solid var(--border-faint); }
-            .row.hd { background: var(--bg-surface); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); }
-            .h { font-size: 14.5px; font-weight: 700; color: var(--text); }
+            .row.hd { background: var(--bg-surface); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); }
+            .h { font-size: 15px; font-weight: 700; color: var(--text); }
             .c { font-family: var(--font-serif); font-size: 17px; color: var(--text); }
-            .a { font-size: 13.5px; font-weight: 600; background: linear-gradient(110deg, #8A6535, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+            .a { font-size: 14px; font-weight: 600; background: linear-gradient(110deg, #7A5A2E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; }
             .compare-line { text-align: center; font-size: 14px; color: var(--text-muted); margin: 24px 0 0; }
             :global(.cost .compare-line a) { color: var(--gold-dark); font-weight: 700; text-decoration: none; }
             :global(.cost .compare-line a:hover) { text-decoration: underline; }
@@ -521,7 +521,7 @@ export default function PricingPage() {
           <style jsx>{`
             .pb { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: 920px; margin: 0 auto; text-align: center; }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.65; color: var(--text-muted); margin: 18px auto 0; max-width: 640px; }
             .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin-top: 28px; }
@@ -558,7 +558,7 @@ export default function PricingPage() {
             .faq { background: var(--bg-warm); padding: clamp(72px, 9vw, 120px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 56px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
             .item { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(20px, 2.4vw, 28px); box-shadow: var(--shadow-sm); }

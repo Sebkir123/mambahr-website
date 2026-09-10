@@ -17,8 +17,8 @@ function SlackWindow() {
         <span className="sw-find">Search MambaHR</span>
       </div>
       <div className="sw-body">
-        <aside className="sw-side">
-          <div className="sw-ws">
+        <div className="sw-side" role="presentation">
+          <div className="sw-ws" aria-hidden="true">
             MambaHR
             <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" /></svg>
           </div>
@@ -29,9 +29,9 @@ function SlackWindow() {
           <div className="sw-sec">Direct messages</div>
           <span className="sw-dm first"><span className="seg green" />MambaHR<span className="badge">1</span></span>
           <span className="sw-dm"><span className="seg" />Brian Bell</span>
-        </aside>
+        </div>
 
-        <main className="sw-main">
+        <div className="sw-main" role="presentation">
           <div className="sw-head">
             <span className="h-ch"><span className="hash">#</span>people-ops</span>
             <span className="h-mem">
@@ -98,7 +98,7 @@ function SlackWindow() {
               <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 8l12-5-5 12-2-5-5-2z" fill="currentColor" /></svg>
             </span>
           </div>
-        </main>
+        </div>
       </div>
 
       <style jsx>{`
@@ -150,7 +150,7 @@ function SlackWindow() {
           margin-bottom: 10px;
         }
         .sw-ws svg { color: rgba(255, 255, 255, 0.6); }
-        .sw-sec { font-size: 11px; color: rgba(255, 255, 255, 0.55); padding: 10px 8px 5px; letter-spacing: 0.02em; }
+        .sw-sec { font-size: 12px; color: rgba(255, 255, 255, 0.55); padding: 10px 8px 5px; letter-spacing: 0.02em; }
         .sw-ch,
         .sw-dm {
           display: flex;
@@ -159,7 +159,7 @@ function SlackWindow() {
           padding: 5px 8px;
           border-radius: 6px;
           color: rgba(255, 255, 255, 0.72);
-          font-size: 13.5px;
+          font-size: 14px;
         }
         .hash { color: rgba(255, 255, 255, 0.5); font-weight: 600; }
         .sw-ch.on { background: #1164A3; color: #fff; font-weight: 600; }
@@ -171,7 +171,7 @@ function SlackWindow() {
           margin-left: auto;
           background: #E01E5A;
           color: #fff;
-          font-size: 10.5px;
+          font-size: 12px;
           font-weight: 700;
           border-radius: 999px;
           padding: 1px 7px;
@@ -204,11 +204,11 @@ function SlackWindow() {
         }
         .m-body { min-width: 0; }
         .m-h { display: flex; align-items: baseline; gap: 8px; }
-        .m-h b { font-size: 13.5px; color: var(--text); font-weight: 700; }
-        .m-h time { font-size: 11px; color: var(--text-faint); }
+        .m-h b { font-size: 14px; color: var(--text); font-weight: 700; }
+        .m-h time { font-size: 12px; color: var(--text-faint); }
         .apptag {
           font-family: var(--font-mono);
-          font-size: 9px;
+          font-size: 12px;
           font-weight: 600;
           letter-spacing: 0.04em;
           color: var(--text-muted);
@@ -216,7 +216,7 @@ function SlackWindow() {
           border-radius: 4px;
           padding: 1px 5px;
         }
-        .m-t { font-size: 13.5px; line-height: 1.45; color: var(--text); margin-top: 2px; }
+        .m-t { font-size: 14px; line-height: 1.45; color: var(--text); margin-top: 2px; }
         .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
         .attach {
           margin-top: 8px;
@@ -236,11 +236,11 @@ function SlackWindow() {
           margin-top: 8px;
           padding-top: 8px;
           border-top: 1px solid var(--border);
-          font-size: 11px;
+          font-size: 12px;
           color: var(--text-faint);
         }
         .ok-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); flex: none; }
-        .mono { font-family: var(--font-mono); font-size: 10.5px; }
+        .mono { font-family: var(--font-mono); font-size: 12px; }
         .typing { display: flex; align-items: center; gap: 4px; padding: 2px 0 0; }
         .typing-t { font-size: 12px; color: var(--text-faint); margin-left: 7px; }
         .typing-t b { color: var(--violet); font-weight: 600; }
@@ -253,7 +253,7 @@ function SlackWindow() {
           border-radius: 10px;
           padding: 10px 14px;
           color: var(--text-faint);
-          font-size: 13.5px;
+          font-size: 14px;
         }
         .send {
           display: inline-flex;
@@ -329,7 +329,7 @@ function DualSurface() {
           align-items: center;
           gap: 8px;
           padding: 9px 14px;
-          font-size: 11.5px;
+          font-size: 12px;
           font-weight: 600;
           color: var(--text-muted);
           background: #F8F6F1;
@@ -343,7 +343,7 @@ function DualSurface() {
         .dots3 i:nth-child(3) { background: #a9cfa6; }
         .addr {
           margin: 0 auto;
-          font-size: 11px;
+          font-size: 12px;
           color: var(--text-faint);
           background: var(--bg);
           border: 1px solid var(--border);
@@ -354,8 +354,8 @@ function DualSurface() {
         .c-av { width: 28px; height: 28px; border-radius: 7px; object-fit: cover; flex: none; }
         .c-av.round { border-radius: 999px; }
         .c-who { display: flex; align-items: baseline; gap: 7px; }
-        .c-who b { font-size: 12.5px; color: var(--text); }
-        .c-who time { font-size: 10.5px; color: var(--text-faint); }
+        .c-who b { font-size: 13px; color: var(--text); }
+        .c-who time { font-size: 12px; color: var(--text-faint); }
         .c-t { font-size: 13px; color: var(--text); margin-top: 2px; }
         .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
         .c-bubble {
@@ -364,15 +364,15 @@ function DualSurface() {
           background: #F1F0FA;
           border-radius: 4px 12px 12px 12px;
           padding: 6px 11px;
-          font-size: 12.5px;
+          font-size: 13px;
           color: var(--text);
         }
         .c-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px 4px; }
         .c-main { flex: 1; min-width: 0; }
-        .c-sub { font-size: 11.5px; color: var(--text-faint); margin-top: 2px; }
+        .c-sub { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
         .pill {
           flex: none;
-          font-size: 11.5px;
+          font-size: 12px;
           font-weight: 600;
           color: var(--color-green);
           background: rgba(22, 130, 80, 0.08);
@@ -384,11 +384,11 @@ function DualSurface() {
           align-items: center;
           gap: 7px;
           padding: 8px 14px 11px;
-          font-size: 11px;
+          font-size: 12px;
           color: var(--text-faint);
         }
         .ok { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); flex: none; }
-        .mono { font-family: var(--font-mono); font-size: 10.5px; }
+        .mono { font-family: var(--font-mono); font-size: 12px; }
         @media (max-width: 560px) {
           .card.slack, .card.app { transform: none; }
         }
@@ -433,7 +433,7 @@ function TeamPhoto() {
           font-size: 34px;
           line-height: 1;
           margin-top: 10px;
-          background: linear-gradient(110deg, #8A6535, #6A5DA6);
+          background: linear-gradient(110deg, #7A5A2E, #6A5DA6);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
@@ -454,7 +454,7 @@ export default function MambaPage() {
       <RevealInit />
       <CountUp />
 
-      <main>
+      <main id="main">
 
       <PageHero
         eyebrow="The AI agent"
