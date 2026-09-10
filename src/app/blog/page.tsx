@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import { JsonLd } from '@/components/json-ld'
@@ -25,12 +26,19 @@ function hueFor(slug: string): number {
 // resolve against the same hashed class names.
 function Cover({ post, variant }: { post: Post; variant: 'lead' | 'card' }) {
   if (post.cover_image_url) {
+    // Covers are 16:10 boxes; width/height give the intrinsic ratio and
+    // `sizes` keeps the grid at roughly 336px wide on desktop. The lead is
+    // above the fold (it is the page's LCP), the grid loads lazily.
+    const lead = variant === 'lead'
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
+      <Image
         src={post.cover_image_url}
         alt={post.title}
-        className={variant === 'lead' ? styles.leadImg : styles.cardImg}
+        width={880}
+        height={550}
+        sizes={lead ? '(max-width: 900px) calc(100vw - 48px), 560px' : '(max-width: 900px) calc(100vw - 48px), 336px'}
+        priority={lead}
+        className={lead ? styles.leadImg : styles.cardImg}
       />
     )
   }
@@ -56,10 +64,10 @@ function Cover({ post, variant }: { post: Post; variant: 'lead' | 'card' }) {
 export const metadata: Metadata = {
   title: 'Blog | MambaHR',
   description:
-    'Field notes on AI in HR, multi-state compliance, hiring, onboarding, and what it takes to run a people function end to end. From the team building the AI HR department.',
+    'Field notes on AI in HR, multi-state compliance, hiring, onboarding and running a people function end to end, from the team building the AI HR department.',
   openGraph: {
     title: 'Blog | MambaHR',
-    description: 'Field notes on AI in HR, compliance, hiring, and running a people function end to end.',
+    description: 'Field notes on AI in HR, compliance, hiring, and running a people function.',
     url: `${SITE}/blog`,
     type: 'website',
     images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
@@ -67,7 +75,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Blog | MambaHR',
-    description: 'Field notes on AI in HR, compliance, hiring, and running a people function end to end.',
+    description: 'Field notes on AI in HR, compliance, hiring, and running a people function.',
     images: ['/mambahr_og_sharing.jpg'],
   },
   alternates: {
@@ -102,13 +110,13 @@ export default async function BlogIndex() {
     <>
       <JsonLd data={itemListSchema} />
       <MegaNav />
-      <main className={styles.page}>
+      <main id="main" className={styles.page}>
         <header className={styles.head}>
           <p className="eyebrow">The MambaHR blog</p>
           <h1 className={styles.title}>Notes from the AI HR department.</h1>
           <p className={styles.lede}>
-            What we&rsquo;re learning building the system that runs hiring, onboarding, payroll-ready exports,
-            leave, performance, and 50-state compliance end to end.
+            What we&rsquo;re learning building the system that runs hiring, onboarding, payroll changes,
+            leave, and compliance for you.
           </p>
         </header>
 
@@ -139,7 +147,7 @@ export default async function BlogIndex() {
                   </div>
                   <h2 className={styles.leadTitle}>{lead.title}</h2>
                   {lead.excerpt && <p className={styles.leadExcerpt}>{lead.excerpt}</p>}
-                  <span className={styles.readMore}>Read the post →</span>
+                  <span className={styles.readMore}>Read the post</span>
                 </div>
               </Link>
               </>

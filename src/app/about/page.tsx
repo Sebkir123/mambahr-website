@@ -11,12 +11,12 @@ const PRINCIPLES = [
   {
     letter: 'M',
     title: 'Make our customers unstoppable.',
-    body: "We build for outcomes, not features. Every workflow, every decision, every release should give our customers more speed, clarity, and control. If it doesn't help them win in real moments, it doesn't ship.",
+    body: "We build for outcomes, not features. Every feature, every decision, every release should give our customers more speed, clarity, and control. If it doesn't help them win in real moments, it doesn't ship.",
   },
   {
     letter: 'A',
     title: 'All in on the details.',
-    body: "We're obsessed with the craft. The small things matter because they compound into big outcomes. We simplify relentlessly, remove friction, and sweat the details so the product feels fast, clear, and effortless to use.",
+    body: "We're obsessed with the craft. The small things matter because they compound into big outcomes. We simplify relentlessly, remove friction, and sweat the details so the product feels fast, clear, and easy to use.",
   },
   {
     letter: 'M',
@@ -37,16 +37,15 @@ const PRINCIPLES = [
 
 /* The platform, everything the department runs, each a real page. */
 const PLATFORM = [
-  { label: 'Hiring & ATS', desc: 'Req to signed offer', href: '/hiring' },
-  { label: 'Job portal', desc: 'Your careers page, hosted', href: '/job-portal' },
+  { label: 'Hiring', desc: 'Job post to signed offer', href: '/hiring' },
+  { label: 'Careers page', desc: 'Hosted on your domain', href: '/job-portal' },
   { label: 'Onboarding', desc: 'Day-one ready', href: '/onboarding' },
-  { label: 'Payroll & benefits', desc: 'Export-ready, every cycle', href: '/payroll' },
-  { label: 'Time off & leave', desc: 'PTO to FMLA', href: '/leave' },
-  { label: 'Performance', desc: 'Reviews, written', href: '/performance' },
-  { label: 'Compensation', desc: 'Priced to your bands', href: '/compensation' },
-  { label: 'Compliance', desc: 'All 50 states, cited', href: '/compliance' },
-  { label: 'Headcount & RIF', desc: 'Hard days, done right', href: '/rif' },
-  { label: 'Employee records', desc: 'The system of record', href: '/people' },
+  { label: 'Payroll changes', desc: 'Every change in before payday', href: '/payroll' },
+  { label: 'Time off & leave', desc: 'Vacation days to family leave', href: '/leave' },
+  { label: 'Compensation', desc: 'Priced to your pay ranges', href: '/compensation' },
+  { label: 'Compliance', desc: 'Every answer cites the law', href: '/compliance' },
+  { label: 'Headcount & layoffs', desc: 'Notices, severance, final pay', href: '/rif' },
+  { label: 'Employee records', desc: 'Every record, always current', href: '/people' },
   { label: 'Documents & e-sign', desc: 'Signed and filed', href: '/documents' },
   { label: 'Security', desc: 'Locked down, logged', href: '/security' },
 ]
@@ -72,7 +71,7 @@ export default function AboutPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         {/* ── Hero ── */}
         <section className="ah">
           <div className="aurora" aria-hidden="true"><span className="blob b1" /><span className="blob b2" /></div>
@@ -122,9 +121,9 @@ export default function AboutPage() {
 
         <StatTrio
           stats={[
-            { n: 50, label: 'states covered, every compliance answer cites the law' },
+            { n: 100, suffix: '%', label: 'of compliance answers cite the law they relied on' },
             { n: 24, suffix: '/7', label: 'the work keeps moving after your team logs off' },
-            { n: 1, suffix: ' day', label: 'from signed to live, data imported, no setup project' },
+            { n: 1, suffix: ' day', label: 'to import your data, no setup project' },
           ]}
         />
 
@@ -143,13 +142,13 @@ export default function AboutPage() {
             </p>
             <p className="body" data-reveal data-delay="2">
               Then AI got good enough to do the reasoning underneath the work. Not summarize a policy,
-              but work through whether FMLA stacks with California CFRA for an employee in their second
-              trimester, cite the statute, and send the hard calls to a human. Not generate a draft, but
-              run the offer cycle, check the band, route for approval, send the signature link.
+              but work out whether an employee in her second trimester qualifies for federal family leave
+              (FMLA). Cite the statute. Send the hard calls to a person. Not generate a draft, but run the
+              offer cycle, check the pay range, route for approval, and send the signature link.
             </p>
             <p className="body" data-reveal data-delay="3">
-              That changed what HR software can be. Not a system of record. A system of work. An agent
-              department where the agent does the job, the human sets the policy, and every action is
+              That changed what HR software can be. Not a system of record. A system of work. A
+              department where MambaHR does the job, the person sets the policy, and every action is
               logged for accountability.
             </p>
             <p className="close" data-reveal data-delay="3">That&rsquo;s what we&rsquo;re building.</p>
@@ -157,10 +156,10 @@ export default function AboutPage() {
           <style jsx>{`
             .man { background: var(--bg); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
             .wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 26px; }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: #8A6535; margin: 0; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin: 0; }
             .lede { font-family: var(--font-serif); font-size: clamp(22px, 2.5vw, 30px); line-height: 1.42; letter-spacing: -0.01em; color: var(--text); margin: 0; }
             .body { font-size: 17px; line-height: 1.75; color: var(--text-muted); margin: 0; }
-            .close { font-family: var(--font-serif); font-size: clamp(20px, 2.2vw, 26px); line-height: 1.4; color: var(--text); margin: 6px 0 0; padding-left: 24px; border-left: 3px solid transparent; border-image: linear-gradient(180deg, #B98A4E, #6A5DA6) 1; }
+            .close { font-family: var(--font-serif); font-size: clamp(20px, 2.2vw, 26px); line-height: 1.4; color: var(--text); margin: 6px 0 0; padding-left: 24px; border-left: 3px solid transparent; border-image: linear-gradient(180deg, var(--gold-mid), var(--violet)) 1; }
           `}</style>
         </section>
 
@@ -171,9 +170,9 @@ export default function AboutPage() {
               <p className="eyebrow">What we build</p>
               <h2 className="title">One department, <Em>every job.</Em></h2>
               <p className="lead">
-                MambaHR is the system of record and the worker in one, the ATS and the recruiter, the
-                careers page and the coordinator, the HRIS and the ops manager. Twelve functions, one agent,
-                every action logged.
+                MambaHR is the record and the worker in one. It is the applicant tracking system (ATS) and
+                the recruiter, the careers page and the coordinator, the HR records system (HRIS) and the
+                ops manager. Eleven functions, one system, every action logged.
               </p>
             </div>
             <div className="grid">
@@ -190,7 +189,7 @@ export default function AboutPage() {
             .pf { background: var(--bg-warm); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 52px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 640px; }
             .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.4vw, 18px); }
@@ -209,8 +208,8 @@ export default function AboutPage() {
             }
             :global(.pf .cell:hover) { transform: translateY(-3px); box-shadow: var(--shadow-float); }
             @media (prefers-reduced-motion: reduce) { :global(.pf .cell:hover) { transform: none; } }
-            .c-l { font-size: 14.5px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-            .c-d { font-size: 12.5px; color: var(--text-muted); }
+            .c-l { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+            .c-d { font-size: 13px; color: var(--text-muted); }
             .c-a { position: absolute; top: 16px; right: 16px; font-size: 13px; color: var(--gold-dark); opacity: 0; transition: opacity 0.16s ease; }
             :global(.pf .cell:hover) .c-a { opacity: 1; }
             @media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, 1fr); } }
@@ -241,7 +240,7 @@ export default function AboutPage() {
             .pr { background: var(--bg); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .list { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; }
             .row { display: grid; grid-template-columns: minmax(96px, 140px) 1fr; column-gap: clamp(24px, 4vw, 48px); padding: clamp(28px, 3.4vw, 40px) 0; border-top: 1px solid var(--border); align-items: start; }
@@ -251,7 +250,7 @@ export default function AboutPage() {
               font-size: clamp(72px, 8vw, 120px);
               line-height: 0.85;
               letter-spacing: -0.04em;
-              background: linear-gradient(135deg, #B98A4E, #6A5DA6);
+              background: linear-gradient(135deg, var(--gold-mid), var(--violet));
               -webkit-background-clip: text;
               background-clip: text;
               color: transparent;
@@ -269,8 +268,8 @@ export default function AboutPage() {
               <p className="eyebrow">Leadership</p>
               <h2 className="title">Founder-led, <Em>by design.</Em></h2>
               <p className="lead">
-                MambaHR is built and run by its founders, which means the people who designed the product
-                are the same people on your demo, your implementation, and your security review.
+                MambaHR is built and run by its founders. The people who designed the product are the
+                same people on your demo, your implementation, and your security review.
               </p>
             </div>
             <div className="grid">
@@ -286,7 +285,7 @@ export default function AboutPage() {
                     </div>
                   </div>
                   <div className="foot">
-                    <span className="li">LinkedIn →</span>
+                    <span className="li">LinkedIn</span>
                   </div>
                 </a>
               ))}
@@ -294,7 +293,7 @@ export default function AboutPage() {
             <div className="facts" data-reveal>
               <span className="fact"><i aria-hidden="true" />Headquartered in San Francisco</span>
               <span className="fact"><i aria-hidden="true" />US data residency</span>
-              <span className="fact"><i aria-hidden="true" />All 50 states covered</span>
+              <span className="fact"><i aria-hidden="true" />Statute cited on every answer</span>
               <span className="fact"><i aria-hidden="true" />We&rsquo;re hiring, <a href="mailto:hello@mambahr.com">hello@mambahr.com</a></span>
             </div>
           </div>
@@ -302,7 +301,7 @@ export default function AboutPage() {
             .fd { background: var(--bg-warm); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
             .wrap { max-width: 880px; margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 52px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 600px; }
             .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
@@ -316,10 +315,10 @@ export default function AboutPage() {
             .nm { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; text-shadow: 0 1px 8px rgba(20, 17, 12, 0.4); }
             .rl { color: rgba(255, 255, 255, 0.85); font-size: 13px; }
             .foot { display: flex; align-items: center; justify-content: flex-end; padding: 12px 16px; border-top: 1px solid var(--border-faint); }
-            .li { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold-dark); }
+            .li { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold-dark); }
             .facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin-top: clamp(28px, 3.4vw, 40px); padding-top: clamp(20px, 2.4vw, 28px); border-top: 1px solid var(--border-faint); }
-            .fact { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 500; color: var(--text-muted); }
-            .fact i { width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, #B98A4E, #6A5DA6); }
+            .fact { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); }
+            .fact i { width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); }
             :global(.fd .fact a) { color: var(--gold-dark); font-weight: 700; text-decoration: none; }
             :global(.fd .fact a:hover) { text-decoration: underline; }
             @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }

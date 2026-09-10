@@ -9,9 +9,9 @@ import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } f
 /* ── Hero fragment: day-one timeline card ── */
 const DAY1 = [
   { time: '9:02 AM', label: 'Offer countersigned', meta: 'E-signed' },
-  { time: '9:03 AM', label: 'I-9 filed, E-Verify cleared', meta: 'Federal' },
-  { time: '9:05 AM', label: 'Email, Slack, laptop logins live', meta: 'Accounts live' },
-  { time: '9:07 AM', label: 'First-week calendar sent', meta: '11 invites' },
+  { time: '9:03 AM', label: 'Form I-9 and E-Verify check started', meta: 'Federal' },
+  { time: '9:05 AM', label: 'Email, Slack, and single sign-on live', meta: 'Accounts live' },
+  { time: '9:07 AM', label: 'Device setup requested', meta: 'IT notified' },
 ]
 
 function DayOneCard() {
@@ -26,7 +26,7 @@ function DayOneCard() {
             <div className="meta">Product Designer · starts Monday</div>
           </div>
         </div>
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done in 4m 12s</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · requests out in 4m</span>
       </div>
       {DAY1.map((r) => (
         <div key={r.label} className="row">
@@ -57,14 +57,14 @@ function DayOneCard() {
         .who { display: flex; align-items: center; gap: 11px; }
         .who img { width: 38px; height: 38px; border-radius: 999px; object-fit: cover; }
         .nm { font-size: 15px; font-weight: 700; color: var(--text); }
-        .meta { font-size: 12.5px; color: var(--text-faint); margin-top: 1px; }
+        .meta { font-size: 13px; color: var(--text-faint); margin-top: 1px; }
         .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
-        .time { flex: none; font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); width: 56px; }
+        .time { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 56px; }
         .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .lbl { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; color: var(--text); }
-        .src { flex: none; font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); }
+        .src { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
         .foot {
           font-size: 12px;
           color: var(--text-muted);
@@ -82,7 +82,7 @@ function DayOneCard() {
 /* ── Feature visual: exit checklist fragment ── */
 const EXIT = [
   { label: 'Final paycheck calculated for California rules', meta: 'Due last day', state: 'done' },
-  { label: 'COBRA notice prepared and queued', meta: 'Benefits', state: 'done' },
+  { label: 'COBRA notice prepared and queued', meta: 'Exit', state: 'done' },
   { label: 'Handover doc collected from manager', meta: 'Knowledge', state: 'done' },
   { label: 'Switch off all logins at 5:00 PM Friday', meta: 'Email · Slack · laptop', state: 'you' },
 ]
@@ -127,20 +127,20 @@ function ExitChecklist() {
           border-bottom: 1px solid var(--border-faint);
         }
         .t { font-size: 15px; font-weight: 700; color: var(--text); }
-        .m { font-size: 12.5px; color: var(--text-faint); margin-top: 2px; }
+        .m { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
         .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
         .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #8A6535); }
+        .mark.gold { background: linear-gradient(135deg, var(--gold-pale), var(--gold)); }
         .main { flex: 1; min-width: 0; }
-        .lbl { font-size: 13.5px; font-weight: 600; color: var(--text); }
-        .meta { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+        .lbl { font-size: 14px; font-weight: 600; color: var(--text); }
+        .meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
         .tag {
           flex: none;
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--color-green);
@@ -148,7 +148,7 @@ function ExitChecklist() {
           border-radius: 999px;
           padding: 3px 9px;
         }
-        .tag.gold { color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+        .tag.gold { color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
         @media (max-width: 640px) { .row { flex-wrap: wrap; } }
       `}</style>
     </div>
@@ -203,12 +203,11 @@ export default function OnboardingPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Onboarding & offboarding"
           title={<>Day one, <Em>ready.</Em></>}
-          lead="Paperwork filed and verified, logins working, first week planned, before your new hire walks in. And when someone leaves, a clean exit with nothing forgotten."
-          proof="Built for new hires and HR alike"
+          lead="Form I-9 started, logins working, device setup requested, first week planned, before your new hire walks in. And when someone leaves, a clean exit with nothing forgotten."
           photo="/v2-people/marcus.jpg"
           photoChip="MambaHR · done in 4m"
           photoCaption="Alex set up · logins live by 9 AM"
@@ -222,22 +221,21 @@ export default function OnboardingPage() {
           lead="The moment the offer is accepted, everything starts moving. By Monday morning there&rsquo;s nothing left on your list but the welcome."
           steps={[
             { n: '01', label: 'Offer signature', desc: 'The accepted offer is countersigned and filed where you can always find it.', who: 'agent', time: 'minutes' },
-            { n: '02', label: 'I-9 & E-Verify', desc: 'Work-eligibility paperwork collected, verified, and filed, correctly, the first time.', who: 'agent', time: 'day 1' },
+            { n: '02', label: 'Form I-9', desc: 'Work-eligibility paperwork collected and filed, and the Form I-9 and E-Verify check started.', who: 'agent', time: 'day 1' },
             { n: '03', label: 'Logins ready', desc: 'Email, Slack, and every tool they need, live before they sit down.', who: 'agent', time: 'before 9 AM' },
-            { n: '04', label: 'Equipment & buddy', desc: 'Their laptop enrolled and configured through your device management, and an onboarding buddy picked and briefed.', who: 'agent', img: '/avatars/priya.jpg' },
-            { n: '05', label: 'First-week schedule', desc: 'Intros, team lunches, and training sessions on everyone&rsquo;s calendar, no one has to remember.', who: 'agent' },
-            { n: '06', label: '30-day check-in', desc: 'A quiet pulse at day 30: how it&rsquo;s going, what&rsquo;s missing, flagged to you only if something&rsquo;s off.', who: 'agent', time: 'day 30', img: '/avatars/dave.jpg' },
-            { n: '07', label: 'The welcome', desc: 'You give the welcome. The handshake, the story, the why-we-hired-you, that&rsquo;s yours.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '04', label: 'Equipment & buddy', desc: 'Device setup requested from your IT team, and an onboarding buddy picked and briefed.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '05', label: 'First-week plan', desc: 'Intros, team lunches, and sessions planned for the manager, and on the calendar once Google or Microsoft 365 is connected.', who: 'agent' },
+            { n: '06', label: 'The welcome', desc: 'You give the welcome. The handshake, the story, the why-we-hired-you, that&rsquo;s yours.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Offboarding"
           title={<>Exits with <Em>zero loose ends.</Em></>}
-          lead="Exits are where details get expensive. MambaHR gets the final paycheck right for their state, prepares the COBRA notices, collects the handover, and switches off every login only after your sign-off."
+          lead="Exits are where details get expensive. MambaHR gets the final paycheck right for their state and prepares the health-coverage continuation notices (COBRA). It collects the handover and switches off every login, but only after your sign-off."
           bullets={[
             'Final pay timed to each state&rsquo;s rules, California&rsquo;s last-day deadline included',
-            'Benefits notices prepared and sent on schedule, automatically',
+            'COBRA notices prepared on schedule, ready to send',
             'Nothing gets switched off until you say so',
           ]}
         >
@@ -249,7 +247,7 @@ export default function OnboardingPage() {
           warm
           eyebrow="The first impression"
           title={<>Day one, like <Em>the brochure.</Em></>}
-          lead="Nobody remembers a smooth start, they remember a broken one. When the laptop works, the calendar is full, and the buddy says hi at 9:05, your new hire spends day one meeting people instead of waiting on logins."
+          lead="Nobody remembers a smooth start, they remember a broken one. When the logins work and the buddy says hi at 9:05, day one is about meeting people, not waiting on access."
           bullets={[
             'A first week that says we were ready for you',
             'Managers get a nudge list, not a to-do list',
@@ -261,20 +259,20 @@ export default function OnboardingPage() {
 
         <StatTrio
           stats={[
-            { n: 4, suffix: ' min', label: 'from signed offer to day-one setup complete' },
-            { n: 11, label: 'first-week invites sent automatically per new hire' },
+            { n: 4, suffix: ' min', label: 'from signed offer to accounts and paperwork requests out' },
+            { n: 1, label: 'form the new hire fills in; MambaHR does the rest' },
             { n: 0, label: 'forgotten logins on exit, every account accounted for' },
           ]}
         />
 
         <QuoteBand
-          quote="We switched on a Thursday and onboarded two people the following Monday. Offer signed, paperwork verified, logins live, calendars full, and I never opened a checklist. I just showed up to say welcome."
+          quote="We imported on a Thursday and onboarded two people the following Monday. Offer signed, paperwork filed, logins live, first week planned, and I never opened a checklist. I just showed up to say welcome."
           role="Head of People · Fintech startup, 140 people"
           img="/v2-people/sofia.jpg"
-          metric="Live in a day"
+          metric="Imported in a day"
         />
 
-        <PageCta title={<>Day one, done. <Em>Day 4,000, too.</Em></>} />
+        <PageCta title={<>Day one, ready. <Em>Every day after, too.</Em></>} sub="A 30-minute demo of one onboarding, offer to logins live. Then we import your data and switch you over." />
       </main>
       <Footer />
     </>

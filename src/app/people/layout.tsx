@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Employee records | MambaHR',
   description:
-    'People ops without the ops. Directory, comp, performance, leave, one agent, every record, every change.',
+    'People ops without the ops. Directory, comp, leave, one agent, every record, every change.',
   openGraph: {
     title: 'Employee records | MambaHR',
     description:
-      'Directory, comp, performance, leave, one agent across every record and every change.',
+      'Directory, comp, leave, one agent across every record and every change.',
     url: 'https://mambahr.com/people',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Employee records | MambaHR',
     description:
-      'Directory, comp, performance, leave, one agent across every record and every change.',
+      'Directory, comp, leave, one agent across every record and every change.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://mambahr.com/people' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'Employee records | MambaHR',
   url: 'https://mambahr.com/people',
   description:
-    'MambaHR people-management surface: directory, records, comp, performance, leave, and offboarding handled by one agent.',
+    'MambaHR employee records: the directory, every record, pay, leave, and offboarding, kept current by the system that does the work.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'People agent',
     description:
-      'A single agent that owns the employee record across directory, comp, performance, leave, and offboarding. Migrates from Gusto, Workday, Rippling, BambooHR, or Namely; every change carries a citation and an audit trail.',
+      'A single agent that owns the employee record across directory, comp, leave, and offboarding. Migrates from Gusto, Workday, Rippling, BambooHR, Namely, or ADP; every change carries a citation and an audit trail.',
   },
 }
 

@@ -267,7 +267,7 @@ export default function Deck({
         <span className={s.hintKey}>↓</span> to navigate
       </div>
 
-      <main ref={scroller} className={s.deck} tabIndex={-1} aria-label="MambaHR pitch deck">
+      <main id="main" ref={scroller} className={s.deck} tabIndex={-1} aria-label="MambaHR pitch deck">
 
         {/* 01 · Title */}
         <section ref={setRef(0)} className={`${s.slide} ${s.center}`} aria-label="Title">

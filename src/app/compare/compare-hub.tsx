@@ -7,9 +7,9 @@ import RevealInit from '@/app/v2/_sections/reveal-init'
 import { PageCta, Em } from '@/components/v2/page-kit'
 
 const CARDS = [
-  { slug: 'rippling', name: 'Rippling', sub: 'Rippling is the stack. MambaHR is the department that runs on it.', tag: 'Most requested' },
+  { slug: 'rippling', name: 'Rippling', sub: 'Rippling is the stack. MambaHR is the department, and the stack.', tag: 'Most requested' },
   { slug: 'gusto', name: 'Gusto', sub: 'Gusto handles payday. MambaHR handles every other day.', tag: null },
-  { slug: 'deel', name: 'Deel', sub: 'Deel pays global contractors. MambaHR runs your domestic HR.', tag: null },
+  { slug: 'deel', name: 'Deel', sub: 'Deel is global payroll and employer of record (EOR). MambaHR runs your US HR, on Deel for payroll.', tag: null },
   { slug: 'bamboohr', name: 'BambooHR', sub: 'BambooHR stores your data. MambaHR acts on it.', tag: null },
   { slug: 'namely', name: 'Namely', sub: 'Namely made the HRIS prettier. MambaHR makes it unnecessary.', tag: null },
   { slug: 'hibob', name: 'HiBob', sub: 'HiBob made HR look modern. MambaHR makes it do the work.', tag: null },
@@ -27,7 +27,7 @@ const CARDS = [
   { slug: 'oyster', name: 'Oyster', sub: 'Oyster hires across borders. MambaHR runs the team at home.', tag: null },
 ]
 
-/* The choices teams actually weigh when HR gets messy, not just vendors. */
+/* The choices teams weigh when HR gets messy, not just vendors. */
 const OPTIONS = [
   {
     title: 'Hire someone',
@@ -42,18 +42,18 @@ const OPTIONS = [
     mamba: 'MambaHR is the system of record and the worker in one. The data lives there, and the work gets done there.',
   },
   {
-    title: 'Spreadsheets & Slack',
+    title: 'Spreadsheets and Slack',
     good: 'Free, flexible, starts today.',
     breaks: 'Breaks fast. No audit trail, inconsistent process, and the payroll change someone forgot becomes a real problem.',
-    mamba: 'MambaHR gives you structure, workflows, and an audit trail from day one, still in Slack, where your team already is.',
+    mamba: 'MambaHR gives you structure, approvals, and an audit trail from day one, still in Slack, where your team already is.',
   },
 ]
 
 const DIFFS = [
-  { num: '01', title: 'It does the work.', desc: 'Leave approved. Offer drafted. Candidate screened. MambaHR handles the request end-to-end, not just surfaces the information for someone else to act on.' },
-  { num: '02', title: 'It lives in Slack.', desc: 'No new software to learn. Employees mention @MambaHR in any channel and get answers in seconds. Managers approve in a thread.' },
-  { num: '03', title: 'Human in the loop.', desc: 'Every high-stakes decision, offers above band, terminations, PIPs, routes to you for approval before anything happens. The agent handles the routine, you handle the judgment.' },
-  { num: '04', title: 'Built for the long tail.', desc: 'The compliance engine, the audit trail, the specialist agents, all of it built for the HR lead doing the work of ten.' },
+  { num: '01', title: 'It does the work.', desc: 'Leave approved. Offer drafted. Candidate screened. MambaHR does the request, start to finish, instead of showing it to someone else to act on.' },
+  { num: '02', title: 'Ask in Slack. The work happens in MambaHR.', desc: 'No new software to learn. Employees mention @MambaHR in any channel and get answers in seconds. Managers approve in a thread.' },
+  { num: '03', title: 'A person signs off on the big calls.', desc: 'Offers above your pay range, terminations, and large raises wait for your approval. Nothing happens first. MambaHR handles the routine, you handle the judgment.' },
+  { num: '04', title: 'Built for the HR lead doing the work of ten.', desc: 'Employment law for all your states, a log of every action, and one system that does the work instead of filing it.' },
 ]
 
 export default function CompareHub() {
@@ -61,7 +61,7 @@ export default function CompareHub() {
     <>
       <MegaNav />
       <RevealInit />
-      <main>
+      <main id="main">
         {/* ── Hero ── */}
         <section className="ch">
           <div className="aurora" aria-hidden="true"><span className="blob b1" /><span className="blob b2" /></div>
@@ -95,13 +95,13 @@ export default function CompareHub() {
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 660px; margin: 22px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
             :global(.ch .btn-p) {
-              display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 15.5px;
+              display: inline-block; background: var(--text); color: #fff; font-weight: 600; font-size: 16px;
               padding: 14px 28px; border-radius: 999px; text-decoration: none;
               box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22); transition: transform 0.15s ease;
             }
             :global(.ch .btn-p:hover) { transform: translateY(-2px); }
             :global(.ch .btn-g) {
-              display: inline-block; color: var(--text); font-weight: 600; font-size: 15.5px;
+              display: inline-block; color: var(--text); font-weight: 600; font-size: 16px;
               padding: 14px 24px; border-radius: 999px; border: 1px solid var(--border-mid);
               background: rgba(255, 255, 255, 0.6); text-decoration: none;
             }
@@ -141,14 +141,14 @@ export default function CompareHub() {
             .op { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 22px); align-items: stretch; }
             .card { display: flex; flex-direction: column; gap: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 28px); box-shadow: var(--shadow-sm); }
             .t { font-family: var(--font-serif); font-size: 22px; font-weight: 500; color: var(--text); margin: 0; letter-spacing: -0.01em; }
-            .block p { font-size: 13.5px; line-height: 1.55; color: var(--text-muted); margin: 6px 0 0; }
+            .block p { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 6px 0 0; }
             .block.mamba { margin-top: auto; background: var(--bg-warm); border: 1px solid var(--border-faint); border-radius: 12px; padding: 13px 15px; }
-            .lbl { font-family: var(--font-mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+            .lbl { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
             .lbl.good { color: var(--color-green); }
             .lbl.bad { color: #B0584A; }
             .lbl.gold { color: var(--gold-dark); }
@@ -161,8 +161,8 @@ export default function CompareHub() {
           <div className="wrap">
             <div className="head" data-reveal>
               <p className="eyebrow">Head to head</p>
-              <h2 className="title">Pick your <Em>incumbent.</Em></h2>
-              <p className="lead">Honest comparisons against every major HRIS, PEO, payroll, and ATS, feature tables included, the rows we lose included.</p>
+              <h2 className="title">Pick the system <Em>you use today.</Em></h2>
+              <p className="lead">Honest comparisons against every major HR records system (HRIS), co-employer (PEO), payroll, and applicant tracking system (ATS). Feature tables included, the rows we lose included.</p>
             </div>
             <div className="grid">
               {CARDS.map((c, i) => (
@@ -171,7 +171,7 @@ export default function CompareHub() {
                   <span className="vs-l">MambaHR <em>vs</em></span>
                   <span className="nm">{c.name}</span>
                   <span className="sub">{c.sub}</span>
-                  <span className="go">Read the comparison →</span>
+                  <span className="go">Compare</span>
                 </Link>
               ))}
             </div>
@@ -180,7 +180,7 @@ export default function CompareHub() {
             .vs { background: var(--bg-warm); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15px, 1.7vw, 17px); line-height: 1.6; color: var(--text-muted); margin: 14px auto 0; max-width: 540px; }
             .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.4vw, 18px); }
@@ -203,21 +203,21 @@ export default function CompareHub() {
               top: -10px;
               left: 18px;
               font-family: var(--font-mono);
-              font-size: 9.5px;
+              font-size: 12px;
               font-weight: 600;
               text-transform: uppercase;
               letter-spacing: 0.05em;
               color: #fff;
-              background: linear-gradient(120deg, #B98A4E, #6A5DA6);
+              background: linear-gradient(120deg, var(--gold-mid), var(--violet));
               border-radius: 999px;
               padding: 4px 11px;
               box-shadow: 0 0 0 4px var(--bg);
             }
-            .vs-l { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); }
+            .vs-l { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); }
             .vs-l em { font-style: italic; color: var(--gold-dark); }
             .nm { font-family: var(--font-serif); font-size: clamp(22px, 2.2vw, 28px); color: var(--text); letter-spacing: -0.015em; margin-top: 6px; }
             .sub { font-size: 13px; line-height: 1.5; color: var(--text-muted); margin-top: 10px; flex: 1; }
-            .go { font-size: 12.5px; font-weight: 700; color: var(--gold-dark); margin-top: 16px; }
+            .go { font-size: 13px; font-weight: 700; color: var(--gold-dark); margin-top: 16px; }
             @media (max-width: 1080px) { .grid { grid-template-columns: repeat(2, 1fr); } }
             @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
           `}</style>
@@ -244,7 +244,7 @@ export default function CompareHub() {
             .df { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 1.8vw, 22px); }
             .card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
@@ -252,7 +252,7 @@ export default function CompareHub() {
               font-family: var(--font-serif);
               font-size: 34px;
               line-height: 1;
-              background: linear-gradient(120deg, #B98A4E, #6A5DA6);
+              background: linear-gradient(120deg, var(--gold-mid), var(--violet));
               -webkit-background-clip: text;
               background-clip: text;
               color: transparent;

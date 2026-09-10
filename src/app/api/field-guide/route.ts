@@ -5,6 +5,8 @@ import { env } from '@/lib/env'
 import { sendFieldGuide } from '@/lib/email'
 import { hashIp } from '@/lib/deck-tracking'
 import { notifyLeadSlack } from '@/lib/slack'
+import { verifyTurnstile } from '@/lib/turnstile'
+import { createMemoryLimiter, durableRateLimit, getClientIp } from '@/lib/rate-limit'
 
 // Lead-magnet capture: email wall → per-request unguessable token → emailed
 // link to the gated guide page (/resources/<path>?k=<token>). Mirrors the
@@ -12,7 +14,7 @@ import { notifyLeadSlack } from '@/lib/slack'
 
 // Guide catalog, slug → public title + gated route path.
 const GUIDES: Record<string, { title: string; path: string }> = {
-  'rif-playbook': { title: 'The Defensible Layoff Playbook', path: '/resources/rif-playbook' },
+  'rif-playbook': { title: 'The layoff playbook', path: '/resources/rif-playbook' },
 }
 const SITE_URL = 'https://mambahr.com'
 
@@ -28,55 +30,11 @@ function getAdminClient(): SupabaseClient | null {
 
 async function checkDurableRateLimit(ip: string): Promise<boolean> {
   const client = getAdminClient()
-  if (!client) return true
-  const { data, error } = await client.rpc('check_signup_rate_limit', { p_ip: ip, p_max: 5, p_window_secs: 3600 })
-  if (error) return true // fail open
-  return data === true
+  if (!client) return true // no service-role key: the in-memory limiter + Turnstile stand alone
+  return durableRateLimit(client, { route: '/api/field-guide', ip, max: 5 })
 }
 
-const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
-async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
-  const secret = process.env.TURNSTILE_SECRET_KEY
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
-  // Only accept the dev bypass outside production. In prod with missing keys,
-  // fail closed rather than let a misconfig open an unauthenticated spam vector.
-  if (!secret || !siteKey) return process.env.NODE_ENV !== 'production' && token === 'dev-mode-bypass'
-  if (!token) return false
-  try {
-    const form = new URLSearchParams({ secret, response: token, remoteip: ip })
-    const res = await fetch(TURNSTILE_VERIFY_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: form.toString(),
-    })
-    if (!res.ok) return false
-    const data = (await res.json()) as { success: boolean }
-    return data.success === true
-  } catch {
-    return false
-  }
-}
-
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
-const RATE_LIMIT_MAX = 5
-const ipBuckets = new Map<string, number[]>()
-function rateLimit(ip: string): { ok: boolean; retryAfterSec?: number } {
-  const now = Date.now()
-  const cutoff = now - RATE_LIMIT_WINDOW_MS
-  const ts = (ipBuckets.get(ip) ?? []).filter((t) => t > cutoff)
-  if (ts.length >= RATE_LIMIT_MAX) {
-    return { ok: false, retryAfterSec: Math.ceil((ts[0] + RATE_LIMIT_WINDOW_MS - now) / 1000) }
-  }
-  ts.push(now)
-  ipBuckets.set(ip, ts)
-  return { ok: true }
-}
-
-function getClientIp(req: NextRequest): string {
-  const fwd = req.headers.get('x-forwarded-for')
-  if (fwd) return fwd.split(',')[0].trim()
-  return req.headers.get('x-real-ip') ?? 'unknown'
-}
+const rateLimit = createMemoryLimiter(5, 60 * 60 * 1000)
 
 export async function POST(req: NextRequest) {
   if (!(req.headers.get('content-type') ?? '').includes('application/json')) {

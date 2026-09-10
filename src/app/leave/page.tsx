@@ -33,7 +33,7 @@ function SlackApprovalCard() {
             <div className="m-t">Approved. Enjoy the wedding.</div>
             <div className="attach">
               <div className="a-row"><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
-              <div className="a-row"><span className="a-k">Calendar</span><span className="a-v">Mon&ndash;Wed blocked, OOO set</span></div>
+              <div className="a-row"><span className="a-k">Record</span><span className="a-v">Mon&ndash;Wed booked, payday updated</span></div>
               <div className="a-row"><span className="a-k">Manager</span><span className="a-v">B. Bell notified</span></div>
               <div className="a-foot"><span className="ok-dot" aria-hidden="true" />Within policy &middot; logged &middot; ref <span className="mono">leave_4f81a2</span></div>
             </div>
@@ -61,14 +61,14 @@ function SlackApprovalCard() {
         .dots i:first-child { background: #f0a59a; }
         .dots i:nth-child(2) { background: #f4ce8e; }
         .dots i:nth-child(3) { background: #a9cfa6; }
-        .chn { font-weight: 700; font-size: 13.5px; color: var(--text); }
+        .chn { font-weight: 700; font-size: 14px; color: var(--text); }
         .hash { color: var(--text-faint); margin-right: 1px; }
         .bar :global(.mamba-chip) { margin-left: auto; }
         .feed { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 20px; }
         .m { display: flex; gap: 11px; }
         .av { width: 38px; height: 38px; border-radius: 9px; object-fit: cover; flex: none; }
         .av.app {
-          background: #14110C;
+          background: var(--ink);
           color: #fff;
           display: flex;
           align-items: center;
@@ -79,10 +79,10 @@ function SlackApprovalCard() {
         .m-body { min-width: 0; }
         .m-h { display: flex; align-items: baseline; gap: 8px; }
         .m-h b { font-size: 14px; color: var(--text); font-weight: 700; }
-        .m-h time { font-size: 11.5px; color: var(--text-faint); }
+        .m-h time { font-size: 12px; color: var(--text-faint); }
         .apptag {
           font-family: var(--font-mono);
-          font-size: 9px;
+          font-size: 12px;
           font-weight: 600;
           letter-spacing: 0.04em;
           color: var(--text-muted);
@@ -91,7 +91,7 @@ function SlackApprovalCard() {
           padding: 1px 5px;
         }
         .m-t { font-size: 14px; line-height: 1.5; color: var(--text); margin-top: 3px; }
-        .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+        .mention { color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
         .attach {
           margin-top: 9px;
           border-left: 3px solid var(--gold);
@@ -101,8 +101,8 @@ function SlackApprovalCard() {
           max-width: 360px;
         }
         .a-row { display: flex; justify-content: space-between; gap: 16px; padding: 3px 0; }
-        .a-k { font-size: 12.5px; color: var(--text-faint); }
-        .a-v { font-size: 12.5px; color: var(--text); font-weight: 600; }
+        .a-k { font-size: 13px; color: var(--text-faint); }
+        .a-v { font-size: 13px; color: var(--text); font-weight: 600; }
         .a-foot {
           display: flex;
           align-items: center;
@@ -110,11 +110,11 @@ function SlackApprovalCard() {
           margin-top: 9px;
           padding-top: 9px;
           border-top: 1px solid var(--border);
-          font-size: 11.5px;
+          font-size: 12px;
           color: var(--text-faint);
         }
         .ok-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
-        .mono { font-family: var(--font-mono); font-size: 11px; }
+        .mono { font-family: var(--font-mono); font-size: 12px; }
         @media (max-width: 520px) { .bar :global(.mamba-chip) { display: none; } }
       `}</style>
     </div>
@@ -138,8 +138,8 @@ function ParentalLeaveCard() {
         <div className="m-body">
           <div className="m-who">MambaHR <span className="m-time">6 seconds later</span></div>
           <div className="a">
-            Up to 4 months disability, then 12 weeks bonding.
-            <span className="a-sub">Sequenced in the right order, job protected, calendar blocked, payday updated.</span>
+            12 weeks of FMLA bonding leave, job protected.
+            <span className="a-sub">California&rsquo;s own leave rules (CFRA and PDL) cited and sent to your HR lead to confirm how they combine.</span>
             <span className="laws">
               <span className="law">CA PDL</span>
               <span className="law">CA CFRA</span>
@@ -166,7 +166,7 @@ function ParentalLeaveCard() {
           width: 42px;
           height: 42px;
           border-radius: 12px;
-          background: #14110C;
+          background: var(--ink);
           color: #fff;
           display: flex;
           align-items: center;
@@ -177,7 +177,7 @@ function ParentalLeaveCard() {
         .m-body { min-width: 0; }
         .m-who {
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: var(--text-faint);
@@ -205,14 +205,14 @@ function ParentalLeaveCard() {
         .a-sub {
           display: block;
           margin-top: 6px;
-          font-size: 13.5px;
+          font-size: 14px;
           font-weight: 400;
           color: var(--text-muted);
         }
         .laws { display: flex; gap: 8px; margin-top: 12px; }
         .law {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           font-weight: 600;
           letter-spacing: 0.04em;
           color: var(--gold-dark);
@@ -231,7 +231,7 @@ function VacationPhoto() {
   return (
     <div className="vp">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="photo" src="/v2-people/team2.jpg" alt="A team that actually takes its vacations" />
+      <img className="photo" src="/v2-people/team2.jpg" alt="A team that takes its vacations" />
       <div className="mini">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="mini-t">3 out next week · covered</div>
@@ -259,7 +259,7 @@ function VacationPhoto() {
           box-shadow: var(--shadow-float);
           max-width: 250px;
         }
-        .mini-t { font-size: 13.5px; font-weight: 700; color: var(--text); margin-top: 10px; }
+        .mini-t { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 10px; }
         .mini-s { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
         @media (max-width: 880px) { .mini { left: 12px; } }
       `}</style>
@@ -273,15 +273,14 @@ export default function LeavePage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Time off & leave"
           title={<>Time off, <Em>approved.</Em></>}
-          lead={'Normal time off approves itself in seconds. Family and medical leave gets handled the legally-safe way, calendar blocked, payday updated, the law attached.'}
-          proof="Built for multi-state teams"
+          lead={'Normal time off approves itself in seconds. Family and medical leave gets the eligibility check and the statute attached, with payday updated.'}
           photo="/v2-people/sofia.jpg"
           photoChip="MambaHR · done"
-          photoCaption="Maya approved · OOO set in 9s"
+          photoCaption="Maya approved · booked in 9s"
         >
           <SlackApprovalCard />
         </PageHero>
@@ -289,12 +288,12 @@ export default function LeavePage() {
         <AgentLoop
           eyebrow="The leave loop"
           title={<>When someone <Em>asks.</Em></>}
-          lead={'Every request runs the same path: the easy ones finish in seconds, the regulated ones get the statute check, and only the genuinely ambiguous ones reach you.'}
+          lead={'Every request runs the same path. The easy ones finish in seconds, the regulated ones get the statute check, and only the ambiguous ones reach you.'}
           steps={[
             { n: '01', label: 'Reads the request', desc: 'Slack or the MambaHR app, MambaHR understands the dates, the reason, and who is asking.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
             { n: '02', label: 'Checks balance and policy', desc: 'Accrued days, blackout dates, notice rules, checked against your actual policy, not a guess.', who: 'agent', time: 'seconds' },
-            { n: '03', label: 'Checks FMLA and state leave when it applies', desc: 'Parental or medical leave triggers the eligibility check, federal and state, stacked correctly.', who: 'agent', time: 'seconds' },
-            { n: '04', label: 'Books calendar and updates payday', desc: 'OOO set, coverage visible, and the pay record adjusted so payday is right without anyone touching it.', who: 'agent', time: 'same minute' },
+            { n: '03', label: 'Checks federal family leave when it applies', desc: 'Parental or medical leave triggers the federal family and medical leave (FMLA) eligibility check. MambaHR cites the state paid-leave programs and sends them to a person to decide how they combine.', who: 'agent', time: 'seconds' },
+            { n: '04', label: 'Updates the record and payday', desc: 'Coverage visible, and the pay record adjusted so payday is right without anyone touching it. Calendar blocked when Google or Microsoft 365 is connected.', who: 'agent', time: 'same minute' },
             { n: '05', label: 'Notifies the manager', desc: 'A clean note with dates and coverage, no approval ping-pong for in-policy requests.', who: 'agent', time: 'same minute', img: '/avatars/anna.jpg' },
             { n: '06', label: 'The edge cases', desc: 'Anything ambiguous comes to you, with the balance, the policy, and the relevant law already laid out.', who: 'you', img: '/avatars/tom.jpg' },
           ]}
@@ -303,12 +302,12 @@ export default function LeavePage() {
         <FeatureSplit
           eyebrow="Family & medical leave"
           title={<>The hard leave, <Em>handled.</Em></>}
-          lead={'Parental and medical leave is where mistakes get expensive. MambaHR checks eligibility, stacks federal and state entitlements correctly, and attaches the statute to every answer, so Legal never gets a panicked call.'}
+          lead={'Parental and medical leave is where mistakes get expensive. MambaHR checks FMLA eligibility, cites the state program that applies, and attaches the statute to every answer. Legal gets the homework instead of a panicked call.'}
           bullets={[
             'FMLA eligibility checked before anything is promised',
-            'State paid leave, CA CFRA, NY, MA, CO, stacked correctly with federal',
+            'State paid leave cited and sent to a person to decide how it combines with federal leave',
             'Every answer cites the law it followed',
-            'The risky calls route to a human, with the homework done',
+            'The risky calls go to a person, with the homework done',
           ]}
         >
           <ParentalLeaveCard />
@@ -318,12 +317,12 @@ export default function LeavePage() {
           flip
           warm
           eyebrow="The culture part"
-          title={<>Vacations, actually <Em>taken.</Em></>}
+          title={<>Vacations, <Em>taken.</Em></>}
           lead={'No guilt-tripping forms, no week-long approval limbo. Balances are always current, coverage is visible to everyone, and asking for time off feels like asking a colleague, because that’s what it is.'}
           bullets={[
             'Balances always current, no “let me check the spreadsheet”',
             'Team coverage visible before anyone says yes',
-            'Approvals in seconds, so people actually book the trip',
+            'Approvals in seconds, so people book the trip',
           ]}
         >
           <VacationPhoto />
@@ -331,20 +330,20 @@ export default function LeavePage() {
 
         <StatTrio
           stats={[
-            { n: 9, suffix: 's', label: 'median time-off approval' },
-            { n: 50, label: 'states of leave law, kept current' },
-            { n: 0, label: 'leave letters your lawyer had to write' },
+            { n: 9, suffix: 's', label: 'to a time-off approval in the modeled run' },
+            { n: 1, label: 'statute cited on every leave answer' },
+            { n: 0, label: 'leave letters you had to draft from scratch, ready for review' },
           ]}
         />
 
         <QuoteBand
-          quote="We have people in eleven states and I used to dread every leave question. Now the answer comes back in seconds, with the law attached."
+          quote="I used to dread every FMLA question. Now the answer comes back in seconds, with the law attached."
           role="People Operations Lead · AI startup, 180 people"
           img="/v2-people/marcus.jpg"
           metric="Saved 9 hrs / week"
         />
 
-        <PageCta title={<>Time off that takes <Em>none of yours.</Em></>} />
+        <PageCta title={<>Time off that takes <Em>none of yours.</Em></>} sub="A 30-minute demo on your own leave policy. Then we import your balances and switch you over." />
       </main>
       <Footer />
     </>

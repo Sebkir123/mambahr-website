@@ -60,7 +60,7 @@ function HeroPlanCard() {
           align-items: center;
           gap: 12px;
           padding: 14px 0;
-          font-size: 14.5px;
+          font-size: 15px;
         }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .check {
@@ -83,7 +83,7 @@ function HeroPlanCard() {
           transform: rotate(45deg);
         }
         .what { flex: none; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .note { flex: 1; min-width: 0; text-align: right; color: var(--text-muted); font-size: 13.5px; }
+        .note { flex: 1; min-width: 0; text-align: right; color: var(--text-muted); font-size: 14px; }
         .row.gold {
           margin-top: 6px;
           background: linear-gradient(90deg, var(--gold-tint), rgba(255, 246, 236, 0));
@@ -97,11 +97,11 @@ function HeroPlanCard() {
           width: 18px;
           height: 18px;
           border-radius: 999px;
-          background: linear-gradient(135deg, #D4AA7C, #8A6535);
+          background: linear-gradient(135deg, var(--gold-pale), var(--gold));
         }
         .g-note {
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--gold-dark);
@@ -164,13 +164,13 @@ function RedeployCard() {
         .person { display: flex; align-items: center; gap: 12px; }
         .av { width: 42px; height: 42px; border-radius: 999px; object-fit: cover; flex: none; }
         .p-name { font-size: 15px; font-weight: 700; color: var(--text); }
-        .p-sub { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); margin-top: 2px; }
+        .p-sub { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 2px; }
         .match {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          color: #6A5DA6;
+          color: var(--violet);
           background: rgba(106, 93, 166, 0.1);
           border-radius: 999px;
           padding: 5px 11px;
@@ -184,9 +184,9 @@ function RedeployCard() {
         }
         .r-row + .r-row { border-top: 1px solid var(--border-faint); }
         .r-main { min-width: 0; }
-        .r-role { display: block; font-size: 14.5px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .r-team { display: block; font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
-        .r-note { flex: none; font-family: var(--font-mono); font-size: 11px; color: var(--color-green); white-space: nowrap; }
+        .r-role { display: block; font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+        .r-team { display: block; font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+        .r-note { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--color-green); white-space: nowrap; }
         .rd-foot {
           margin-top: 12px;
           padding: 12px 14px;
@@ -200,11 +200,11 @@ function RedeployCard() {
         }
         .f-chip {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: #fff;
-          background: linear-gradient(135deg, #D4AA7C, #8A6535);
+          background: linear-gradient(135deg, var(--gold-pale), var(--gold));
           border-radius: 999px;
           padding: 4px 10px;
         }
@@ -255,10 +255,10 @@ function DignityPhoto() {
           width: 20px;
           height: 20px;
           border-radius: 999px;
-          background: linear-gradient(135deg, #D4AA7C, #8A6535);
+          background: linear-gradient(135deg, var(--gold-pale), var(--gold));
         }
-        .m-t { font-size: 13.5px; font-weight: 700; color: var(--text); }
-        .m-s { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); margin-top: 2px; }
+        .m-t { font-size: 14px; font-weight: 700; color: var(--text); }
+        .m-s { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 2px; }
         @media (max-width: 880px) { .mini { left: 12px; } }
       `}</style>
     </div>
@@ -271,13 +271,12 @@ export default function RIFPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
-          eyebrow="Headcount & RIF"
+          eyebrow="Headcount & layoffs"
           title={<>Hard days, <Em>done right.</Em></>}
-          lead="When a reduction has to happen, every notice is on time, severance is correct, final pay follows each state’s rules, and a human signs off on every single exit."
-          proof="Built with employment counsel"
-          photo="/v2-people/marcus.jpg"
+          lead="When a layoff has to happen, MambaHR gets every notice out on time and computes severance and final pay by each state’s rules. A person signs off on every single exit."
+          photo="/v2-people/team2.jpg"
           photoCaption="Every exit · human-approved"
         >
           <HeroPlanCard />
@@ -285,25 +284,25 @@ export default function RIFPage() {
 
         <AgentLoop
           eyebrow="The process"
-          title={<>When it&rsquo;s <Em>unavoidable</Em></>}
+          title={<>When it&rsquo;s unavoidable</>}
           lead="MambaHR prepares everything, the math, the timing, the paperwork. Nothing happens to anyone until you approve it."
           steps={[
-            { n: '01', label: 'The plan is modeled', desc: 'Headcount scenarios with full cost, severance, benefits, final pay, before anyone is named.', who: 'agent' },
-            { n: '02', label: 'Notice timing checked per state', desc: 'WARN thresholds and notice windows, federal and state, verified before the plan can move.', who: 'agent' },
+            { n: '01', label: 'MambaHR models the plan', desc: 'Headcount scenarios with full cost, severance, and final pay, before anyone is named.', who: 'agent' },
+            { n: '02', label: 'Notice timing checked per state', desc: 'The federal layoff-notice law (WARN Act) and state notice windows, verified before the plan can move.', who: 'agent' },
             { n: '03', label: 'Severance and final pay computed', desc: 'Per your policy, with each state’s final-pay deadline and rules applied to each person.', who: 'agent' },
-            { n: '04', label: 'Internal moves suggested', desc: 'Open roles a person could move into, surfaced before the exit list is final. Suggestions only, people decide.', who: 'agent', img: '/avatars/tom.jpg' },
-            { n: '05', label: 'Every letter and script drafted', desc: 'Notices, separation paperwork, and manager talking points, ready for review, not sent.', who: 'agent', img: '/avatars/priya.jpg' },
-            { n: '06', label: 'You approve every single exit', desc: 'A human signs off on every termination before anything happens. Non-negotiable.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '04', label: 'Internal moves suggested', desc: 'Open roles a person could move into, shown before the exit list is final. Suggestions only, people decide.', who: 'agent', img: '/avatars/tom.jpg' },
+            { n: '05', label: 'Every letter and script drafted', desc: 'Notices, separation paperwork, and manager talking points, ready for review. You send them.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '06', label: 'You approve every single exit', desc: 'A person signs off on every termination before anything happens. Non-negotiable.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Before the list is final"
-          title={<>Some jobs can be <Em>saved</Em></>}
-          lead="Before anyone is let go, MambaHR surfaces open internal roles a person could move into, with the team and why it fits. The suggestions are advisory. Humans decide."
+          title={<>MambaHR finds open roles before the list is final</>}
+          lead="Before anyone is let go, MambaHR shows you open internal roles a person could move into, with the team and why it fits. The suggestions are advisory. People decide."
           bullets={[
             'Open roles matched to each affected person',
-            'Surfaced before the exit list is final, not after',
+            'Shown before the exit list is final, not after',
             'Always a human decision, never an automatic move',
           ]}
         >
@@ -314,11 +313,11 @@ export default function RIFPage() {
           flip
           warm
           eyebrow="Done properly"
-          title={<>Dignity is in the <Em>details</Em></>}
+          title={<>Dignity is in the details</>}
           lead="The right documents, the right timing, the right final paycheck. When the process is correct down to the day and the dollar, people leave treated properly, and your team can look them in the eye."
           bullets={[
             'Final pay on each state’s deadline, to the day',
-            'COBRA and benefits paperwork ready at exit',
+            'Health-coverage continuation notices (COBRA) ready at exit',
             'Manager scripts drafted so no one improvises the hardest conversation',
           ]}
         >
@@ -327,9 +326,9 @@ export default function RIFPage() {
 
         <StatTrio
           stats={[
-            { n: 100, suffix: '%', label: 'of exits signed off by a human' },
-            { n: 50, label: 'states of final-pay rules, applied correctly' },
-            { n: 0, label: 'notices sent late' },
+            { n: 100, suffix: '%', label: 'of exits signed off by a person' },
+            { n: 1, label: 'final-pay computation per state rule, held for your approval' },
+            { n: 100, suffix: '%', label: 'of notices drafted with WARN timing checked' },
           ]}
         />
 
@@ -339,7 +338,7 @@ export default function RIFPage() {
           img="/v2-people/team.jpg"
         />
 
-        <PageCta title={<>Hope you never need it. <Em>Ready if you do.</Em></>} />
+        <PageCta title={<>Hope you never need it. Ready if you do.</>} sub="A 30-minute demo of a layoff plan, with the notices and the math. Then we import your data and keep it ready." />
       </main>
       <Footer />
     </>

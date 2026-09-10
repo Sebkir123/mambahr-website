@@ -31,7 +31,7 @@
 }
 .sectionLabel {
   font-family: var(--font-mono), monospace;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -103,7 +103,7 @@
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #B98A4E, #6A5DA6);
+  background: linear-gradient(135deg, var(--gold-mid), var(--violet));
   color: #fff;
   font-family: var(--font-serif), Georgia, serif;
   font-size: 22px;
@@ -126,11 +126,11 @@
   height: 2px;
   width: 64px;
   border-radius: 2px;
-  background: linear-gradient(90deg, #B98A4E, #6A5DA6);
+  background: linear-gradient(90deg, var(--gold-mid), var(--violet));
 }
 .plateTag {
   font-family: var(--font-mono), monospace;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;

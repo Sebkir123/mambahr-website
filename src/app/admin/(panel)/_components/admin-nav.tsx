@@ -1,12 +1,59 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import styles from './admin-nav.module.css'
 
 const COLLAPSE_KEY = 'admin-nav-collapsed'
+
+// The collapsed-group set lives in localStorage, so it is read through
+// useSyncExternalStore rather than copied into state after mount: the server
+// snapshot is "everything collapsed" (same first paint on both sides, no
+// hydration mismatch) and the client snapshot is whatever the user last saved.
+// The snapshot is cached by the raw stored string so the same Set instance is
+// returned while nothing changed, which is what useSyncExternalStore requires.
+const collapseListeners = new Set<() => void>()
+let collapseCache: { raw: string | null; set: Set<string> } | null = null
+
+function readCollapsed(defaults: Set<string>): Set<string> {
+  let raw: string | null
+  try {
+    raw = localStorage.getItem(COLLAPSE_KEY)
+  } catch {
+    return collapseCache?.set ?? defaults
+  }
+  if (collapseCache && collapseCache.raw === raw) return collapseCache.set
+  let set = defaults
+  if (raw) {
+    try {
+      set = new Set(JSON.parse(raw) as string[])
+    } catch {
+      /* corrupt value: fall back to defaults */
+    }
+  }
+  collapseCache = { raw, set }
+  return set
+}
+
+function writeCollapsed(next: Set<string>) {
+  const raw = JSON.stringify([...next])
+  collapseCache = { raw, set: next }
+  try {
+    localStorage.setItem(COLLAPSE_KEY, raw)
+  } catch {
+    /* private mode: the in-memory cache still carries the choice for this page */
+  }
+  collapseListeners.forEach((l) => l())
+}
+
+function subscribeCollapsed(listener: () => void) {
+  collapseListeners.add(listener)
+  return () => {
+    collapseListeners.delete(listener)
+  }
+}
 
 type Item = {
   href: string
@@ -59,6 +106,11 @@ const GROUPS: Group[] = [
 ]
 
 const TITLED = GROUPS.filter((g) => g.title).map((g) => g.title as string)
+// Collapsed by default (compact). One shared instance so the server snapshot is
+// referentially stable across renders.
+const ALL_COLLAPSED = new Set(TITLED)
+const getCollapsedSnapshot = () => readCollapsed(ALL_COLLAPSED)
+const getCollapsedServerSnapshot = () => ALL_COLLAPSED
 
 function NavLinks({ onNavigate }: { onNavigate: () => void }) {
   const pathname = usePathname()
@@ -73,48 +125,24 @@ function NavLinks({ onNavigate }: { onNavigate: () => void }) {
   }
   const activeGroup = GROUPS.find((g) => g.title && g.items.some(isActive))?.title
 
-  // Collapsed by default (compact); load saved prefs after mount. Same initial
-  // value on server + first client render → no hydration mismatch.
-  const [collapsed, setCollapsed] = useState<Set<string>>(() => new Set(TITLED))
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(COLLAPSE_KEY)
-      if (raw) setCollapsed(new Set(JSON.parse(raw) as string[]))
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  const persist = (set: Set<string>) => {
-    try {
-      localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...set]))
-    } catch {
-      /* ignore */
-    }
-  }
+  const collapsed = useSyncExternalStore(subscribeCollapsed, getCollapsedSnapshot, getCollapsedServerSnapshot)
 
   // Auto-expand the group of the page you navigate to, but only when the active
   // group actually changes, so a manual collapse afterward isn't re-opened.
   useEffect(() => {
     if (!activeGroup) return
-    setCollapsed((prev) => {
-      if (!prev.has(activeGroup)) return prev
-      const next = new Set(prev)
-      next.delete(activeGroup)
-      persist(next)
-      return next
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const current = getCollapsedSnapshot()
+    if (!current.has(activeGroup)) return
+    const next = new Set(current)
+    next.delete(activeGroup)
+    writeCollapsed(next)
   }, [activeGroup])
 
   function toggle(title: string) {
-    setCollapsed((prev) => {
-      const next = new Set(prev)
-      if (next.has(title)) next.delete(title)
-      else next.add(title)
-      persist(next)
-      return next
-    })
+    const next = new Set(getCollapsedSnapshot())
+    if (next.has(title)) next.delete(title)
+    else next.add(title)
+    writeCollapsed(next)
   }
 
   // Respect the user's choice for every group, including the active one, so any

@@ -5,6 +5,7 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { REVIEW } from './review'
 
 /* ── Hero fragment: dark security log ── */
 const LOG = [
@@ -37,11 +38,11 @@ function SecurityLogCard() {
         <span className="mono">4 of 247 today</span>
       </div>
       <style jsx>{`
-        .sec { position: relative; overflow: hidden; background: #14110C; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 20px 0 0; box-shadow: var(--shadow-float); }
+        .sec { position: relative; overflow: hidden; background: var(--ink); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 20px 0 0; box-shadow: var(--shadow-float); }
         .s-head { display: flex; align-items: center; justify-content: space-between; padding: 0 22px 16px; }
         .s-t { font-family: var(--font-serif); font-size: 19px; color: #FFF2E6; letter-spacing: -0.01em; }
-        .s-chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: #D4AA7C; background: rgba(212, 170, 124, 0.12); border: 1px solid rgba(212, 170, 124, 0.25); border-radius: 999px; padding: 4px 10px; }
-        .s-chip i { width: 6px; height: 6px; border-radius: 999px; background: #D4AA7C; }
+        .s-chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-pale); background: rgba(212, 170, 124, 0.12); border: 1px solid rgba(212, 170, 124, 0.25); border-radius: 999px; padding: 4px 10px; }
+        .s-chip i { width: 6px; height: 6px; border-radius: 999px; background: var(--gold-pale); }
         .rows { border-top: 1px solid rgba(255, 255, 255, 0.07); }
         .row { display: flex; align-items: center; gap: 12px; padding: 13px 22px; font-family: var(--font-mono); font-size: 12px; }
         .row + .row { border-top: 1px solid rgba(255, 255, 255, 0.06); }
@@ -49,9 +50,9 @@ function SecurityLogCard() {
         .ok { flex: none; width: 14px; height: 14px; border-radius: 999px; background: rgba(46, 160, 94, 0.2); border: 1px solid rgba(110, 200, 140, 0.5); position: relative; }
         .ok::after { content: ''; position: absolute; left: 4.5px; top: 2px; width: 3px; height: 7px; border: solid #8FD6A8; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
         .txt { color: rgba(255, 242, 230, 0.88); flex: 1; min-width: 0; }
-        .tag { flex: none; font-size: 10px; color: #AEA2E6; background: rgba(106, 93, 166, 0.22); border-radius: 999px; padding: 3px 9px; }
-        .s-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 22px; border-top: 1px solid rgba(255, 255, 255, 0.07); font-size: 11.5px; color: rgba(255, 242, 230, 0.5); flex-wrap: wrap; }
-        .mono { font-family: var(--font-mono); font-size: 10.5px; color: rgba(255, 242, 230, 0.35); }
+        .tag { flex: none; font-size: 12px; color: #AEA2E6; background: rgba(106, 93, 166, 0.22); border-radius: 999px; padding: 3px 9px; }
+        .s-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 22px; border-top: 1px solid rgba(255, 255, 255, 0.07); font-size: 12px; color: rgba(255, 242, 230, 0.5); flex-wrap: wrap; }
+        .mono { font-family: var(--font-mono); font-size: 12px; color: rgba(255, 242, 230, 0.35); }
         @media (max-width: 520px) { .tag { display: none; } }
       `}</style>
     </div>
@@ -60,11 +61,11 @@ function SecurityLogCard() {
 
 /* ── Commitments section (page-local, styled like AgentLoop's card) ── */
 const COMMITMENTS = [
-  { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption at rest, TLS 1.2+ in transit. Your records are protected while stored and while moving between systems.', tag: 'Always on' },
+  { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption at rest, TLS 1.3 in transit. Your records are protected while stored and while moving between systems.', tag: 'Always on' },
   { n: '02', label: 'Access by role, least privilege', desc: 'Each person sees only what their role allows. Managers see their team; employees see their own record.', tag: 'Always on' },
   { n: '03', label: 'Every change logged with who and why', desc: 'Every action, by a person or by MambaHR, is written to a record nobody can edit, with the reason attached.', tag: 'Always on' },
-  { n: '04', label: 'Your data stays in the US', desc: 'Stored on enterprise US cloud infrastructure. It never leaves the country.', tag: 'In your contract' },
-  { n: '05', label: 'Never used to train AI', desc: 'Names, salaries, reviews, health information, none of it trains any AI model. Not ours, not anyone else’s.', tag: 'In your contract' },
+  { n: '04', label: 'Your data stays in the US', desc: 'Stored on AWS in the United States. It never leaves the country.', tag: 'In our DPA' },
+  { n: '05', label: 'Never used to train AI', desc: 'Names, salaries, leave and health information, none of it trains any AI model. Not ours, not anyone else’s.', tag: 'In our DPA' },
 ]
 
 function Commitments() {
@@ -74,7 +75,7 @@ function Commitments() {
         <div className="head" data-reveal>
           <p className="eyebrow">Our commitments</p>
           <h2 className="title">How we treat your data</h2>
-          <p className="lead">No fine print, no acronyms. The five things that hold, no matter the customer or the contract.</p>
+          <p className="lead">No fine print, no acronyms. The five things that hold for every customer, written into our Data Processing Addendum, available on request.</p>
         </div>
         <div className="card agent-edge agent-done" data-reveal data-delay="1">
           {COMMITMENTS.map((c) => (
@@ -94,19 +95,19 @@ function Commitments() {
         .cm { background: var(--bg); padding-block: clamp(88px, 11vw, 144px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { margin-bottom: clamp(36px, 4vw, 52px); text-align: center; }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
         .card { background: var(--bg); border: 1px solid var(--border); border-radius: 18px; padding: 8px 0; box-shadow: var(--shadow-float); max-width: 920px; margin: 0 auto; }
         .row { display: flex; align-items: center; gap: 16px; padding: 16px clamp(18px, 2.4vw, 28px); }
         .row + .row { border-top: 1px solid var(--border-faint); }
-        .num { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); width: 22px; flex: none; }
+        .num { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 22px; flex: none; }
         .mark { flex: none; width: 18px; height: 18px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .lbl { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .desc { font-size: 13.5px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
+        .desc { font-size: 14px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
         .main { flex: 1; min-width: 0; }
-        .tag { flex: none; font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+        .tag { flex: none; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
         @media (max-width: 640px) { .row { flex-wrap: wrap; } }
       `}</style>
     </section>
@@ -146,12 +147,12 @@ function SsoCard() {
         .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; border-top: 1px solid var(--border-faint); }
         .mark { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--gold-tint); color: var(--gold-dark); font-family: var(--font-serif); font-size: 16px; display: flex; align-items: center; justify-content: center; }
         .main { flex: 1; min-width: 0; }
-        .nm { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .nm { font-size: 14px; font-weight: 700; color: var(--text); }
         .dd { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-        .chip { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
+        .chip { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
         .chip i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
         .s-foot { padding: 12px 20px; border-top: 1px solid var(--border-faint); background: var(--bg-warm); border-radius: 0 0 16px 16px; }
-        .mono { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+        .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
       `}</style>
     </div>
   )
@@ -163,7 +164,7 @@ function ApprovalGateCard() {
     <div className="gate agent-edge agent-done">
       <div className="g-head">
         <span className="g-t">High-stakes actions</span>
-        <span className="g-sub">The agent stops. A person decides.</span>
+        <span className="g-sub">MambaHR stops. A person decides.</span>
       </div>
       {[
         { img: '/avatars/maya.jpg', t: 'Offer · Maya Chen', m: '$195k · above band 8%', hold: true },
@@ -184,7 +185,7 @@ function ApprovalGateCard() {
       ))}
       <div className="g-foot">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
-        <span className="g-note">Routine work runs; the big calls wait for you</span>
+        <span className="g-note">Routine work runs; the sensitive calls wait for you</span>
       </div>
       <style jsx>{`
         .gate { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 18px 0 0; box-shadow: var(--shadow-float); }
@@ -194,10 +195,10 @@ function ApprovalGateCard() {
         .row { display: flex; align-items: center; gap: 12px; padding: 12px 20px; border-top: 1px solid var(--border-faint); }
         .row img { width: 30px; height: 30px; border-radius: 999px; object-fit: cover; flex: none; }
         .main { flex: 1; min-width: 0; }
-        .t { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .t { font-size: 14px; font-weight: 700; color: var(--text); }
         .m { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-        .hold { flex: none; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
-        .done-c { flex: none; display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
+        .hold { flex: none; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+        .done-c { flex: none; display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
         .done-c i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
         .g-foot { display: flex; align-items: center; gap: 10px; padding: 13px 20px; border-top: 1px solid var(--border-faint); flex-wrap: wrap; }
         .g-note { font-size: 12px; color: var(--text-muted); }
@@ -208,41 +209,6 @@ function ApprovalGateCard() {
 }
 
 /* ── The security questionnaire, answered on the page ── */
-const REVIEW = [
-  {
-    q: 'Where does our data live?',
-    a: 'On enterprise AWS infrastructure in the United States. It never leaves the country, and US residency is written into your contract.',
-  },
-  {
-    q: 'How is it encrypted?',
-    a: 'AES-256 at rest, TLS 1.2 or higher in transit, for the database, documents, and every backup.',
-  },
-  {
-    q: 'Who at MambaHR can see it?',
-    a: 'Access is role-based and least-privilege on our side too. Production access is restricted, logged, and reviewed, and every access lands in the same immutable audit trail you can read.',
-  },
-  {
-    q: 'What about backups and recovery?',
-    a: 'Encrypted automated backups with point-in-time recovery, tested restores, and infrastructure that fails over without your data going anywhere.',
-  },
-  {
-    q: 'What if we leave?',
-    a: 'Your data is yours. Full export in standard formats whenever you ask, including on the way out, then verified deletion within 30 days of contract end.',
-  },
-  {
-    q: 'Who are your subprocessors?',
-    a: 'A short list, led by AWS (US) for infrastructure and AI processing and WorkOS for sign-on. The full list comes with your contract, and we notify you before it changes.',
-  },
-  {
-    q: 'What happens if there’s an incident?',
-    a: 'We notify you without undue delay, tell you exactly what was touched, and give you what your own notifications require. That commitment is in the contract, not a blog post.',
-  },
-  {
-    q: 'Does any of it train AI?',
-    a: 'No. Names, salaries, reviews, health information, none of it trains any model, ours or anyone else’s. Contractual, not configurable.',
-  },
-]
-
 function SecurityReview() {
   return (
     <section className="sr">
@@ -268,7 +234,7 @@ function SecurityReview() {
         .sr { background: var(--bg-warm); padding: clamp(72px, 9vw, 120px) var(--page-pad); }
         .wrap { max-width: var(--page-max); margin: 0 auto; }
         .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 56px); }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
@@ -290,12 +256,11 @@ export default function SecurityPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Security"
           title={<>Locked down, <Em>logged.</Em></>}
-          lead="Salaries, reviews, health information, the most sensitive data your company holds. Encrypted everywhere, access by role, every change on the record, and never used to train AI. In writing."
-          proof="Security teams welcome on the demo"
+          lead="Salaries, leave records, health information, the most sensitive data your company holds. Encrypted everywhere, access by role, every change on the record, and never used to train AI. Written into our Data Processing Addendum, available on request."
           photo="/v2-people/sofia.jpg"
           photoChip="MambaHR · done"
           photoCaption="Audit question answered the same morning"
@@ -307,8 +272,8 @@ export default function SecurityPage() {
 
         <FeatureSplit
           eyebrow="Access"
-          title={<>You control <Em>the keys</Em></>}
-          lead="Orphaned accounts are how breaches start. Sign-on and user provisioning run through WorkOS, Okta, or Microsoft Entra, access follows your org chart, and when someone is offboarded, they’re locked out the same minute."
+          title={<>Your logins, <Em>your rules</Em></>}
+          lead="Orphaned accounts are how breaches start. Sign-on and user setup run through WorkOS, Okta, or Microsoft Entra, and access follows your org chart. When someone is offboarded, they are locked out the same minute."
           bullets={[
             'Your team signs in with the accounts they already use',
             'Permissions follow each person’s role, automatically',
@@ -323,7 +288,7 @@ export default function SecurityPage() {
           warm
           eyebrow="Human oversight"
           title={<>A human on <Em>the big calls</Em></>}
-          lead="The agent acts within the policy you set. Offers above band, terminations, big comp changes, those always stop and wait for a person to sign off. Every time, with the reasoning attached."
+          lead="MambaHR acts within the policy you set. Offers above your pay range, terminations, and big pay changes always stop and wait for a person to sign off. Every time, with the reasoning attached."
           bullets={[
             'You decide which actions need a person',
             'Nothing high-stakes happens without a named approver',
@@ -336,7 +301,7 @@ export default function SecurityPage() {
         <StatTrio
           stats={[
             { n: 100, suffix: '%', label: 'of changes logged with who and why' },
-            { n: 0, label: 'AI training on your data, contractual' },
+            { n: 0, label: 'AI training on your data, written into our DPA' },
             { n: 1, label: 'human required on every high-stakes action' },
           ]}
         />
@@ -344,7 +309,7 @@ export default function SecurityPage() {
         <SecurityReview />
 
         <QuoteBand
-          quote="I asked the hard questions before we signed, who sees what, where the data lives, what trains their AI. The answers were in the contract, not a slide deck."
+          quote="I asked the hard questions before we signed, who sees what, where the data lives, what trains their AI. The answers were in the Data Processing Addendum, not a slide deck."
           role="Head of People · Robotics startup, 240 people"
           img="/v2-people/feat.jpg"
         />

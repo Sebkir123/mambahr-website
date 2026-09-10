@@ -1,24 +1,24 @@
 import type { Metadata } from 'next'
 
 const ogImage =
-  '/og?title=Hiring%20and%20ATS%2C%20from%20req%20to%20offer&eyebrow=Hiring'
+  '/og?title=Hiring%2C%20from%20job%20post%20to%20offer&eyebrow=Hiring'
 
 export const metadata: Metadata = {
-  title: 'Hiring & ATS | MambaHR',
+  title: 'Hiring | MambaHR',
   description:
-    'From req to offer. Without the loop. The agent screens, schedules, references, and drafts the offer. You decide who joins.',
+    'From job post to offer, without the loop. MambaHR screens, ranks, orders the background check, and drafts the offer. You decide who joins.',
   openGraph: {
-    title: 'Hiring & ATS | MambaHR',
+    title: 'Hiring | MambaHR',
     description:
-      'From req to offer without the loop. Agent runs sourcing, screening, scheduling, references, and offer drafting.',
+      'From job post to offer, without the loop. MambaHR runs posting, screening, background checks, and offer drafting.',
     url: 'https://mambahr.com/hiring',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hiring & ATS | MambaHR',
+    title: 'Hiring | MambaHR',
     description:
-      'From req to offer without the loop. Agent runs sourcing, screening, scheduling, references, and offer drafting.',
+      'From job post to offer, without the loop. MambaHR runs posting, screening, background checks, and offer drafting.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://mambahr.com/hiring' },
@@ -27,16 +27,16 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Hiring & ATS | MambaHR',
+  name: 'Hiring | MambaHR',
   url: 'https://mambahr.com/hiring',
   description:
-    'MambaHR hiring surface: agent-driven req intake, sourcing, screening, scheduling, references, background check, and offer drafting. Humans approve hires and offers above band.',
+    'MambaHR hiring: the job post, careers-page posting, screening and ranking, the background check, and the offer. People approve every hire and every offer above the pay range.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Hiring agent',
     description:
-      'End-to-end hiring agent: drafts the JD with comp band, posts to ATS and job boards, ranks resumes, schedules panels across calendars, requests references, runs background checks, and drafts offers. You approve the JD and any offer above band; everything else runs without you.',
+      'Hiring, done by MambaHR: drafts the job post with the pay range, posts to your careers page and job boards, ranks resumes (advisory), runs background checks through Checkr, and drafts offers. You approve the job post, every advance-or-pass call, and any offer above the pay range. Interview scheduling is coming.',
   },
 }
 

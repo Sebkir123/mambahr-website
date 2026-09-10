@@ -1,7 +1,7 @@
 'use client'
 
 // ── v2 page kit ───────────────────────────────────────────────────────────
-// Shared primitives for the function pages (/hiring, /leave, /payroll, …)
+// Shared primitives for the function pages (/hiring, /leave, /payroll, and so on)
 // so every page matches the v2 landing bar: Fraunces + gold→violet system,
 // real-UI fragments, real people, mamba chips, scroll reveals, ONE-line
 // headlines. Pages compose: <PageHero> → <AgentLoop> → feature splits →
@@ -31,7 +31,38 @@ export function Em({ children }: { children: ReactNode }) {
   )
 }
 
-const FACES = ['priya', 'anna', 'maya', 'dave', 'brian']
+/* ── The proof line under every hero: the two founders, who take the demo
+      call themselves. Real names, real photos (the same ones /about uses),
+      no stock avatars anywhere on the site. ── */
+const FOUNDERS = [
+  { name: 'Brian Bell', photo: '/brian_bell.jpeg' },
+  { name: 'Sebastian Kirsch', photo: '/sebastian_kirsch.jpg' },
+]
+
+export function FoundersProof({ text = 'Built by the founders, who answer the demo call' }: { text?: string }) {
+  return (
+    <div className="fp">
+      <div className="fp-faces">
+        {FOUNDERS.map((f) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img key={f.name} src={f.photo} alt={f.name} width={34} height={34} loading="lazy" decoding="async" />
+        ))}
+      </div>
+      <span className="fp-t">{text}</span>
+      <style jsx>{`
+        .fp { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+        .fp-faces { display: flex; }
+        .fp-faces img {
+          width: 34px; height: 34px; border-radius: 999px; object-fit: cover; object-position: center 20%;
+          border: 2px solid #fff; box-shadow: var(--shadow-sm);
+          margin-left: -9px; background: var(--bg-elevated);
+        }
+        .fp-faces img:first-child { margin-left: 0; }
+        .fp-t { font-size: 14px; font-weight: 600; color: var(--text); }
+      `}</style>
+    </div>
+  )
+}
 
 /* ── Page hero: centered copy (one-line title) + fragment stage below,
       aurora blobs + grain + face cluster + optional human photo card ── */
@@ -40,8 +71,9 @@ export function PageHero({
   pill,
   title,
   lead,
-  proof = 'Built for lean HR teams',
+  proof = 'Built by the founders, who answer the demo call',
   photo,
+  photoPosition = 'center 20%',
   photoChip,
   photoCaption,
   children,
@@ -54,6 +86,8 @@ export function PageHero({
   proof?: string
   /** Local people photo (e.g. /v2-people/team.jpg) shown as a tilted card overlapping the stage. */
   photo?: string
+  /** CSS object-position for the photo, so faces are never cropped through the eyes. */
+  photoPosition?: string
   /** MambaHR-chip text on the photo card, e.g. 'MambaHR · done'. */
   photoChip?: string
   /** Small caption under the chip, e.g. 'Offer signed · starts June 22'. */
@@ -68,32 +102,26 @@ export function PageHero({
       </div>
       <span className="v2-grain" />
       <div className="top">
-        <p className="eyebrow" data-reveal>{eyebrow}</p>
-        {pill && <p className="hero-pill" data-reveal data-delay="1"><span>{pill}</span></p>}
-        <h1 className="title" data-reveal data-delay="1">{title}</h1>
-        <p className="lead" data-reveal data-delay="2">{lead}</p>
-        <div className="ctas" data-reveal data-delay="3">
-          <Link href="/demo" className="btn-p">Book a demo</Link>
-          <Link href="/product" className="btn-g">See it run</Link>
+        <p className="eyebrow" data-reveal="eager">{eyebrow}</p>
+        {pill && <p className="hero-pill" data-reveal="eager"><span>{pill}</span></p>}
+        <h1 className="title" data-reveal="eager">{title}</h1>
+        <p className="lead" data-reveal="eager">{lead}</p>
+        <div className="ctas" data-reveal="eager">
+          <Link href="/demo" className="btn btn-primary">Book a demo</Link>
+          <Link href="/product" className="btn btn-secondary">See how it works</Link>
         </div>
-        <div className="proof" data-reveal data-delay="3">
-          <div className="faces">
-            {FACES.map((p) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img key={p} src={`/avatars/${p}.jpg`} alt="" width={34} height={34} loading="lazy" decoding="async" />
-            ))}
-          </div>
-          <span className="proof-t">{proof}</span>
+        <div data-reveal="eager">
+          <FoundersProof text={proof} />
         </div>
       </div>
-      <div className="stage" data-reveal data-delay="4">
+      <div className="stage" data-reveal="eager">
         <div className={`duo${photo ? ' has-photo' : ''}`}>
           <div className="frag">{children}</div>
           {photo && (
             <figure className="person">
               <div className="p-img">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={photo} alt="" />
+                <img src={photo} alt="" fetchPriority="high" loading="eager" decoding="async" style={{ objectPosition: photoPosition }} />
                 <span className="p-scrim" aria-hidden="true" />
                 {photoCaption && <span className="p-name">{photoCaption}</span>}
               </div>
@@ -149,7 +177,7 @@ export function PageHero({
         .hero-pill span {
           display: inline-block;
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--gold-dark);
@@ -178,42 +206,6 @@ export function PageHero({
           margin: 22px auto 0;
         }
         .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
-        :global(.btn-p) {
-          display: inline-block;
-          background: #1A1A19;
-          color: #fff;
-          font-weight: 600;
-          font-size: 15.5px;
-          padding: 14px 28px;
-          border-radius: 999px;
-          text-decoration: none;
-          box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22);
-          transition: transform 0.15s ease;
-        }
-        :global(.btn-p:hover) { transform: translateY(-2px); }
-        :global(.btn-g) {
-          display: inline-block;
-          color: var(--text);
-          font-weight: 600;
-          font-size: 15.5px;
-          padding: 14px 24px;
-          border-radius: 999px;
-          border: 1px solid var(--border-mid);
-          background: rgba(255, 255, 255, 0.6);
-          text-decoration: none;
-        }
-        :global(.btn-g:hover) { background: #fff; }
-        @media (prefers-reduced-motion: reduce) { :global(.btn-p:hover) { transform: none; } }
-        .proof { display: flex; align-items: center; gap: 13px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
-        .faces { display: flex; }
-        .faces img {
-          width: 34px; height: 34px; border-radius: 999px; object-fit: cover;
-          border: 2px solid #fff; box-shadow: var(--shadow-sm);
-          margin-left: -9px; background: var(--bg-elevated);
-        }
-        .faces img:first-child { margin-left: 0; }
-        .proof-t { font-size: 14px; font-weight: 600; color: var(--text); }
-
         .stage {
           position: relative;
           max-width: 1020px;
@@ -245,7 +237,7 @@ export function PageHero({
           right: 16px;
           bottom: 14px;
           color: #fff;
-          font-size: 14.5px;
+          font-size: 15px;
           font-weight: 600;
           line-height: 1.35;
           letter-spacing: -0.01em;
@@ -267,7 +259,7 @@ export function PageHero({
   )
 }
 
-/* ── The agent loop: who-does-what, premium rows with people ── */
+/* ── The loop: who-does-what, premium rows with people ── */
 export type LoopStep = {
   n: string
   label: string
@@ -327,7 +319,7 @@ export function AgentLoop({
         .al { background: var(--bg); padding-block: clamp(88px, 11vw, 144px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { margin-bottom: clamp(36px, 4vw, 52px); text-align: center; }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
         .card {
@@ -348,7 +340,7 @@ export function AgentLoop({
           background: linear-gradient(90deg, #FBF7EE, #F4F1F9);
           border-bottom: 1px solid var(--border-faint);
         }
-        .card-top-t { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); }
+        .card-top-t { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
         .row {
           display: flex;
           align-items: center;
@@ -357,19 +349,19 @@ export function AgentLoop({
         }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
-        .num { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); width: 22px; flex: none; }
+        .num { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 22px; flex: none; }
         .rowav { flex: none; width: 26px; height: 26px; border-radius: 999px; object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); }
         .mark { flex: none; width: 18px; height: 18px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #8A6535); }
+        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #7A5A2E); }
         .main { flex: 1; min-width: 0; }
         .lbl { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .desc { font-size: 13.5px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
-        .time { flex: none; font-family: var(--font-mono); font-size: 11px; color: var(--color-green); white-space: nowrap; }
+        .desc { font-size: 14px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
+        .time { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--color-green); white-space: nowrap; }
         .who {
           flex: none;
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: #6A5DA6;
@@ -378,7 +370,7 @@ export function AgentLoop({
           padding: 4px 10px;
           white-space: nowrap;
         }
-        .who.you { color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+        .who.you { color: #7A5A2E; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
         @media (max-width: 640px) {
           .time { display: none; }
           .row { flex-wrap: wrap; }
@@ -420,7 +412,7 @@ export function FeatureSplit({
               ))}
             </ul>
           )}
-          <Link href="/demo" className="more">See it on a live demo →</Link>
+          <Link href="/demo" className="more">Book a demo</Link>
         </div>
         <div className="stage" data-reveal data-delay="1">{children}</div>
       </div>
@@ -439,17 +431,17 @@ export function FeatureSplit({
         .wrap.flip { grid-template-columns: 1.05fr 0.95fr; }
         .wrap.flip .copy { order: 2; }
         .wrap.flip .stage { order: 1; }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 18px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(27px, 3vw, 38px); line-height: 1.08; letter-spacing: -0.02em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 18px 0 0; max-width: 460px; }
         .points { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-direction: column; gap: 12px; }
-        .points li { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; line-height: 1.5; color: var(--text-muted); }
+        .points li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 1.5; color: var(--text-muted); }
         .tick { flex: none; width: 17px; height: 17px; margin-top: 2px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
         .tick::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3px; height: 7px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
         :global(.fs .more) {
           display: inline-block;
           margin-top: 24px;
-          font-size: 14.5px;
+          font-size: 15px;
           font-weight: 700;
           color: var(--gold-dark);
           text-decoration: none;
@@ -468,7 +460,7 @@ export function FeatureSplit({
 /* ── Stat trio: tinted gradient cards with count-ups ── */
 export function StatTrio({
   stats,
-  note = 'Modeled from the workflows MambaHR runs, not measured customer averages.',
+  note = 'Modeled from the tasks MambaHR runs, not measured customer averages.',
 }: {
   stats: { n: number; prefix?: string; suffix?: string; label: string }[]
   /** Provenance line under the stats. Pass null only if the stats are cited in-place. */
@@ -519,12 +511,12 @@ export function StatTrio({
           font-size: clamp(38px, 4.2vw, 56px);
           line-height: 1;
           letter-spacing: -0.02em;
-          background: linear-gradient(110deg, #8A6535, #6A5DA6);
+          background: linear-gradient(110deg, #7A5A2E, #6A5DA6);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
         }
-        .lbl { font-size: 13.5px; color: var(--text-muted); margin-top: 12px; line-height: 1.45; font-weight: 500; }
+        .lbl { font-size: 14px; color: var(--text-muted); margin-top: 12px; line-height: 1.45; font-weight: 500; }
         @media (max-width: 640px) { .wrap { grid-template-columns: 1fr; } }
       `}</style>
     </section>
@@ -532,7 +524,7 @@ export function StatTrio({
 }
 
 /* ── Scenario band: designed card, big photo left, scenario right ──
-   MambaHR is pre-launch. These are written illustrations of the workflow, NOT
+   MambaHR is pre-launch. These are written illustrations of the process, NOT
    customer testimonials, so they carry an explicit "Illustrative" label and no
    personal name. Do not reintroduce named quotes until there are real customers
    who have agreed to be quoted. */
@@ -577,13 +569,13 @@ export function QuoteBand({
           box-shadow: var(--shadow-float);
         }
         .photo { position: relative; min-height: 280px; }
-        .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
         .badge {
           position: absolute;
           left: 14px;
           bottom: 14px;
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           color: #fff;
           background: linear-gradient(120deg, #B98A4E, #6A5DA6);
           border-radius: 999px;
@@ -618,7 +610,7 @@ export function QuoteBand({
         .tag {
           display: inline-block;
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           color: var(--text-faint);
@@ -639,7 +631,7 @@ export function QuoteBand({
 /* ── Page CTA: gradient panel with grain, faces, real buttons ── */
 export function PageCta({
   title,
-  sub = 'A live demo in 30 minutes. Live the next morning.',
+  sub = 'A 30-minute demo. Then we import your data and switch you over.',
 }: {
   title: ReactNode
   sub?: string
@@ -651,17 +643,11 @@ export function PageCta({
         <h2 className="t">{title}</h2>
         <p className="s">{sub}</p>
         <div className="btns">
-          <Link href="/demo" className="b">Book a demo</Link>
-          <Link href="/product" className="b2">See it run</Link>
+          <Link href="/demo" className="btn btn-primary">Book a demo</Link>
+          <Link href="/product" className="btn btn-ghost">See how it works</Link>
         </div>
         <div className="proofline">
-          <div className="faces" aria-hidden="true">
-            {FACES.map((p) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img key={p} src={`/avatars/${p}.jpg`} alt="" width={30} height={30} loading="lazy" decoding="async" />
-            ))}
-          </div>
-          <p className="trust">No setup project · Your data imported in a day · You approve the big calls</p>
+          <p className="trust">Built by the founders, who answer the demo call · Your data imported in a day · A person signs off on the sensitive calls</p>
         </div>
       </div>
       <style jsx>{`
@@ -696,44 +682,11 @@ export function PageCta({
           color: #fff !important;
           -webkit-text-fill-color: #fff;
         }
-        .s { position: relative; color: rgba(255, 255, 255, 0.92); font-size: 16.5px; margin: 16px 0 28px; }
+        .s { position: relative; color: rgba(255, 255, 255, 0.92); font-size: 17px; margin: 16px 0 28px; }
         .btns { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        :global(.pc .b) {
-          display: inline-block;
-          background: #1A1A19;
-          color: #fff;
-          font-weight: 600;
-          font-size: 15.5px;
-          padding: 14px 28px;
-          border-radius: 999px;
-          text-decoration: none;
-          box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
-          transition: transform 0.15s ease;
-        }
-        :global(.pc .b:hover) { transform: translateY(-2px); }
-        :global(.pc .b2) {
-          display: inline-block;
-          background: rgba(255, 255, 255, 0.92);
-          color: #1A1A19;
-          font-weight: 600;
-          font-size: 15.5px;
-          padding: 14px 24px;
-          border-radius: 999px;
-          text-decoration: none;
-        }
-        :global(.pc .b2:hover) { background: #fff; }
-        @media (prefers-reduced-motion: reduce) { :global(.pc .b:hover) { transform: none; } }
-        .proofline { position: relative; display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 26px; flex-wrap: wrap; }
-        .faces { display: flex; }
-        .faces img {
-          width: 30px; height: 30px; border-radius: 999px; object-fit: cover;
-          border: 2px solid rgba(255, 255, 255, 0.85);
-          margin-left: -9px;
-          box-shadow: 0 6px 14px rgba(20, 18, 14, 0.25);
-          background: var(--bg-elevated);
-        }
-        .faces img:first-child { margin-left: 0; }
-        .trust { color: rgba(255, 255, 255, 0.82); font-size: 13px; margin: 0; }
+        .proofline { position: relative; display: flex; align-items: center; justify-content: center; margin-top: 24px; }
+        .trust { color: rgba(255, 255, 255, 0.86); font-size: 13px; margin: 0; }
+        .btns :global(.btn-ghost) { color: #fff; }
       `}</style>
     </section>
   )

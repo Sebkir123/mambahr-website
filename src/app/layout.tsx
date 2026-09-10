@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, JetBrains_Mono, Instrument_Serif, Fraunces } from 'next/font/google'
+import { Inter, JetBrains_Mono, Fraunces } from 'next/font/google'
 import AnalyticsGate from '@/components/analytics-gate'
 import StyledJsxRegistry from './styled-jsx-registry'
 import SiteTracker from '@/components/site-tracker'
@@ -20,14 +20,6 @@ const jetbrains = JetBrains_Mono({
   display: 'swap',
 })
 
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
-  variable: '--font-instrument',
-  display: 'swap',
-})
-
 // Design-system display face, Warm Editorial Premium uses Fraunces.
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -41,7 +33,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mambahr.com'),
   title: 'MambaHR: The AI HR department. Before you hire HR.',
   description:
-    'MambaHR is the AI HR department for startups and growing companies. It runs hiring, onboarding, payroll-ready exports, time off, performance, and compliance end to end, for a fraction of what running it by hand costs. You approve the calls that matter.',
+    'MambaHR is the AI HR department for startups. It runs hiring, onboarding, payroll changes, time off and compliance end to end. You approve what matters.',
   keywords: [
     'AI HR department',
     'AI HR software',
@@ -50,13 +42,12 @@ export const metadata: Metadata = {
     'HR automation',
     'HRIS for startups',
     'ATS',
-    'performance reviews software',
     'multi-state HR compliance',
     'HR without an HR hire',
   ],
   openGraph: {
     title: 'MambaHR: The AI HR department.',
-    description: 'Before you hire HR, hire MambaHR. Hiring, onboarding, payroll-ready exports, time off, performance, and compliance, done end to end, so your team spends its week on people.',
+    description: 'Before you hire HR, hire MambaHR. Hiring, onboarding, payroll changes, time off and compliance, done for you, so your team spends its week on people.',
     url: 'https://mambahr.com',
     siteName: 'MambaHR',
     type: 'website',
@@ -65,10 +56,13 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'MambaHR: The AI HR department.',
-    description: 'Before you hire HR, hire MambaHR. The whole department, done end to end.',
+    description: 'Before you hire HR, hire MambaHR. The whole department, done for you.',
     images: ['/mambahr_og_sharing.jpg'],
   },
-  alternates: { canonical: 'https://mambahr.com' },
+  alternates: {
+    canonical: 'https://mambahr.com',
+    types: { 'application/rss+xml': [{ url: '/blog/rss.xml', title: 'MambaHR blog' }] },
+  },
   robots: {
     index: true,
     follow: true,
@@ -91,7 +85,7 @@ const jsonLd = [
     name: 'MambaHR',
     url: 'https://mambahr.com',
     applicationCategory: 'BusinessApplication',
-    description: 'The AI HR department: hiring, onboarding, payroll-ready exports, time off, performance, and compliance, run end to end.',
+    description: 'The AI HR department: hiring, onboarding, payroll changes, time off, and compliance, done for you.',
     offers: {
       '@type': 'Offer',
       price: '14',
@@ -112,7 +106,7 @@ const jsonLd = [
     logo: 'https://mambahr.com/MambaHR_logo.png',
     image: 'https://mambahr.com/mambahr_og_sharing.jpg',
     description:
-      'The AI HR department for US companies, the system of record (HRIS, ATS, LMS) with specialist agents that run hiring, onboarding, leave, performance, compensation, and compliance end to end. A human approves the calls that matter.',
+      'The AI HR department for US companies. The system of record (employee records and applicant tracking) that runs hiring, onboarding, leave, compensation, and compliance itself. A person approves the calls that matter.',
     foundingDate: '2026',
     slogan: 'Before you hire HR, hire MambaHR.',
     areaServed: { '@type': 'Country', name: 'United States' },
@@ -122,7 +116,6 @@ const jsonLd = [
       'Applicant tracking',
       'Multi-state employment law compliance',
       'FMLA and state paid leave',
-      'Performance reviews',
       'Compensation and pay equity',
     ],
     founder: [
@@ -162,7 +155,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID
 
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${instrumentSerif.variable} ${fraunces.variable}`}>
+    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${fraunces.variable}`}>
       <head>
         <link rel="preconnect" href="https://dqoqnlecylqlwsahudjn.supabase.co" />
         <link rel="dns-prefetch" href="https://dqoqnlecylqlwsahudjn.supabase.co" />
@@ -174,6 +167,7 @@ export default function RootLayout({
         />
       </head>
       <body style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
+        <a href="#main" className="skip-link">Skip to content</a>
         <StyledJsxRegistry>{children}</StyledJsxRegistry>
         <SiteTracker />
         {gaId && <AnalyticsGate gaId={gaId} />}

@@ -5,9 +5,9 @@ export default function Channels() {
     <section className="ch" id="run">
       <div className="wrap">
         <div className="copy" data-reveal>
-          <p className="eyebrow">Where your team already works</p>
+          <p className="eyebrow">No new tool to learn</p>
           <h2 className="title">
-            Lives in <span className="em">Slack.</span>
+            Ask it in Slack. It does the work <span className="em">in MambaHR.</span>
           </h2>
           <p className="lead">
             No new tool to learn. No portal to log into. Your team messages
@@ -43,8 +43,8 @@ export default function Channels() {
               <span className="sw-find">Search MambaHR</span>
             </div>
             <div className="sw-body">
-              <aside className="sw-side">
-                <div className="sw-ws">
+              <div className="sw-side" role="presentation">
+                <div className="sw-ws" aria-hidden="true">
                   MambaHR
                   <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" /></svg>
                 </div>
@@ -55,9 +55,9 @@ export default function Channels() {
                 <div className="sw-sec">Direct messages</div>
                 <span className="sw-dm"><span className="seg green" />MambaHR<span className="badge">2</span></span>
                 <span className="sw-dm"><span className="seg" />Brian Bell</span>
-              </aside>
+              </div>
 
-              <main className="sw-main">
+              <div className="sw-main" role="presentation">
                 <div className="sw-head">
                   <span className="h-ch"><span className="hash">#</span>people-ops</span>
                   <span className="h-mem">
@@ -85,7 +85,7 @@ export default function Channels() {
                       <div className="m-t">Approved. Enjoy the wedding.</div>
                       <div className="attach">
                         <div className="a-row"><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
-                        <div className="a-row"><span className="a-k">Calendar</span><span className="a-v">Apr 7&ndash;9 blocked, OOO set</span></div>
+                        <div className="a-row"><span className="a-k">Record</span><span className="a-v">Apr 7&ndash;9 booked, payday updated</span></div>
                         <div className="a-row"><span className="a-k">Manager</span><span className="a-v">B. Bell notified</span></div>
                         <div className="a-foot"><span className="ok-dot" />Logged &middot; within policy &middot; ref <span className="mono">leave_4f81a2</span></div>
                       </div>
@@ -104,7 +104,7 @@ export default function Channels() {
                     <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 8l12-5-5 12-2-5-5-2z" fill="currentColor" /></svg>
                   </span>
                 </div>
-              </main>
+              </div>
             </div>
           </div>
         </div>
@@ -113,7 +113,7 @@ export default function Channels() {
       <style jsx>{`
         .ch {
           background: var(--bg-warm);
-          padding-block: clamp(96px, 13vw, 168px);
+          padding-block: clamp(80px, 10vw, 128px);
         }
         .wrap {
           max-width: var(--page-max);
@@ -129,7 +129,7 @@ export default function Channels() {
           font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #8A6535;
+          color: #7A5A2E;
           margin: 0 0 18px;
         }
         .title {
@@ -187,15 +187,15 @@ export default function Channels() {
           font-family: var(--font-serif);
           font-size: 17px;
         }
-        .ch-n { font-size: 14.5px; font-weight: 700; color: var(--text); }
-        .ch-d { font-size: 12.5px; color: var(--text-faint); margin-top: 1px; }
+        .ch-n { font-size: 15px; font-weight: 700; color: var(--text); }
+        .ch-d { font-size: 13px; color: var(--text-faint); margin-top: 1px; }
         .audit {
           display: flex;
           align-items: center;
           gap: 9px;
           margin: 22px 0 0;
           padding: 11px 14px;
-          font-size: 12.5px;
+          font-size: 13px;
           color: var(--text-muted);
           background: var(--gold-tint);
           border: 1px solid rgba(138, 101, 53, 0.18);
@@ -258,7 +258,7 @@ export default function Channels() {
         }
         .sw-ws svg { color: rgba(255, 255, 255, 0.6); }
         .sw-sec {
-          font-size: 11px;
+          font-size: 12px;
           color: rgba(255, 255, 255, 0.55);
           padding: 10px 8px 5px;
           letter-spacing: 0.02em;
@@ -271,7 +271,7 @@ export default function Channels() {
           padding: 5px 8px;
           border-radius: 6px;
           color: rgba(255, 255, 255, 0.72);
-          font-size: 13.5px;
+          font-size: 14px;
           cursor: pointer;
         }
         .hash { color: rgba(255, 255, 255, 0.5); font-weight: 600; }
@@ -294,7 +294,7 @@ export default function Channels() {
           margin-left: auto;
           background: #E01E5A;
           color: #fff;
-          font-size: 10.5px;
+          font-size: 12px;
           font-weight: 700;
           border-radius: 999px;
           padding: 1px 7px;
@@ -343,10 +343,10 @@ export default function Channels() {
         .m-body { min-width: 0; }
         .m-h { display: flex; align-items: baseline; gap: 8px; }
         .m-h b { font-size: 14px; color: var(--text); font-weight: 700; }
-        .m-h time { font-size: 11.5px; color: var(--text-faint); }
+        .m-h time { font-size: 12px; color: var(--text-faint); }
         .apptag {
           font-family: var(--font-mono);
-          font-size: 9px;
+          font-size: 12px;
           font-weight: 600;
           letter-spacing: 0.04em;
           color: var(--text-muted);
@@ -365,8 +365,8 @@ export default function Channels() {
           max-width: 380px;
         }
         .a-row { display: flex; justify-content: space-between; gap: 16px; padding: 3px 0; }
-        .a-k { font-size: 12.5px; color: var(--text-faint); }
-        .a-v { font-size: 12.5px; color: var(--text); font-weight: 600; }
+        .a-k { font-size: 13px; color: var(--text-faint); }
+        .a-v { font-size: 13px; color: var(--text); font-weight: 600; }
         .a-foot {
           display: flex;
           align-items: center;
@@ -374,11 +374,11 @@ export default function Channels() {
           margin-top: 9px;
           padding-top: 9px;
           border-top: 1px solid var(--border);
-          font-size: 11.5px;
+          font-size: 12px;
           color: var(--text-faint);
         }
         .ok-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
-        .mono { font-family: var(--font-mono); font-size: 11px; }
+        .mono { font-family: var(--font-mono); font-size: 12px; }
         .acts { display: flex; align-items: center; gap: 9px; margin-top: 11px; }
         .btn-a {
           font-size: 13px;
@@ -400,7 +400,7 @@ export default function Channels() {
           padding: 7px 16px;
           cursor: pointer;
         }
-        .acts-ctx { font-size: 11.5px; color: var(--text-faint); margin-left: 4px; }
+        .acts-ctx { font-size: 12px; color: var(--text-faint); margin-left: 4px; }
         .typing {
           display: flex;
           align-items: center;
@@ -427,7 +427,7 @@ export default function Channels() {
           border-radius: 10px;
           padding: 11px 14px;
           color: var(--text-faint);
-          font-size: 13.5px;
+          font-size: 14px;
         }
         /* Slack's green send button */
         .send {

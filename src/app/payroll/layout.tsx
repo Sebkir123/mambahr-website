@@ -4,21 +4,21 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'Payroll & Benefits | MambaHR',
+  title: 'Payroll changes | MambaHR',
   description:
-    'Payroll-ready change files for ADP, Workday, Gusto, or Rippling, new hires, terms, comp changes, leave, plus 401(k) enrollment and life-event benefits.',
+    'MambaHR prepares every payroll change: new hires, terms, comp changes, leave. A change file for your current provider, or Deel-managed payroll where a person approves every run.',
   openGraph: {
-    title: 'Payroll & Benefits | MambaHR',
+    title: 'Payroll changes | MambaHR',
     description:
-      'Payroll-ready change files for ADP, Workday, Gusto, or Rippling, plus 401(k) enrollment and life-event benefits.',
+      'Every payroll change prepared. A change file for your provider, or Deel-managed payroll with a person approving every run.',
     url: 'https://mambahr.com/payroll',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Payroll & Benefits | MambaHR',
+    title: 'Payroll changes | MambaHR',
     description:
-      'Payroll-ready change files for ADP, Workday, Gusto, or Rippling, plus 401(k) enrollment and life-event benefits.',
+      'Every payroll change prepared. A change file for your provider, or Deel-managed payroll with a person approving every run.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://mambahr.com/payroll' },
@@ -27,16 +27,16 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Payroll & Benefits | MambaHR',
+  name: 'Payroll changes | MambaHR',
   url: 'https://mambahr.com/payroll',
   description:
-    'MambaHR payroll and benefits: generates payroll-ready change files for your provider, ADP, Workday, Gusto, or Rippling, covering new hires, terminations, comp changes, and leave, plus 401(k) enrollment and life-event benefits administration.',
+    'MambaHR payroll changes: prepares every payroll change, new hires, terminations, comp changes, and leave, as a change file in your provider’s format or as a Deel-managed payroll run that a person approves.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Payroll file agent',
     description:
-      'Generates payroll-ready change files for your provider, ADP, Workday, Gusto, or Rippling, capturing new hires, terminations, comp changes, and leave each cycle. Administers 401(k) enrollment and handles life-event benefit changes. You upload the file to your provider.',
+      'Prepares every payroll change each cycle, new hires, terminations, comp changes, and leave. Delivers a change file in your provider’s format, or sends the changes to Deel for a managed run. A person approves every run.',
   },
 }
 

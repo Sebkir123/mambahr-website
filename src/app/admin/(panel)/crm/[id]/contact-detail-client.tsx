@@ -20,6 +20,12 @@ type Peer = { id: string; name: string; editing: boolean }
 // Privacy: the presence channel is public (Realtime presence isn't RLS-gated),
 // so we broadcast only a first-name display label + a random per-session id —
 // never the admin's email. The session id (not email) distinguishes self vs peers.
+function newSessionId(): string {
+  if (typeof crypto.randomUUID === 'function') return crypto.randomUUID()
+  const bytes = crypto.getRandomValues(new Uint8Array(12))
+  return `s_${Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('')}`
+}
+
 export function ContactDetailClient({
   contact,
   stages,
@@ -31,11 +37,9 @@ export function ContactDetailClient({
 }) {
   const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
-  const sessionId = useRef<string>('')
-  if (!sessionId.current) {
-    sessionId.current =
-      typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `s_${Date.now()}_${Math.floor(Math.random() * 1e9)}`
-  }
+  // One presence id per mounted panel. Lazy initialiser: generated once, never
+  // in a re-render.
+  const [meId] = useState(newSessionId)
   const [editing, setEditing] = useState(false)
   const [saving, setSaving] = useState(false)
   const [err, setErr] = useState('')
@@ -44,7 +48,6 @@ export function ContactDetailClient({
   const channelRef = useRef<ReturnType<ReturnType<typeof createSupabaseBrowserClient>['channel']> | null>(null)
 
   const meName = meEmail.split('@')[0]
-  const meId = sessionId.current
 
   useEffect(() => {
     const supabase = createSupabaseBrowserClient()

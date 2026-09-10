@@ -28,11 +28,11 @@ function SlackFragment() {
       <div className="sf-msg sf-mamba">
         <span className="sf-av sf-av-m" aria-hidden="true" />
         <div className="sf-body">
-          <div className="sf-meta"><b>MambaHR</b><span className="sf-bot">agent</span><span>9:24 AM</span></div>
-          <p className="sf-text">You’re eligible for 12 weeks of job-protected bonding leave. FMLA and CFRA run together, not back to back, with up to 8 weeks of California PFL wage replacement during it. I’ve drafted the leave plan and routed it to Dave for approval.</p>
+          <div className="sf-meta"><b>MambaHR</b><span className="sf-bot">app</span><span>9:24 AM</span></div>
+          <p className="sf-text">You’re eligible for 12 weeks of federal family leave (FMLA) for bonding, job protected. I’ve attached California’s own leave rules (CFRA and PFL) and sent the plan to Dave to confirm how they combine.</p>
           <div className="sf-pills">
             <span className="sf-pill">FMLA · CFRA · CA PFL</span>
-            <span className="sf-pill sf-pill-g">Approval routed</span>
+            <span className="sf-pill sf-pill-g">Routed to Dave</span>
           </div>
         </div>
       </div>
@@ -41,22 +41,22 @@ function SlackFragment() {
         .sf-top { display: flex; align-items: center; gap: 7px; padding: 12px 16px; background: linear-gradient(90deg, #FBF7EE, #F4F1F9); border-bottom: 1px solid var(--border-faint); }
         .sf-hash { color: var(--text-faint); font-weight: 700; }
         .sf-ch { font-size: 13px; font-weight: 700; color: var(--text); }
-        .sf-chip { margin-left: auto; font-family: var(--font-mono); font-size: 10.5px; color: #fff; background: linear-gradient(120deg, #B98A4E, #6A5DA6); border-radius: 999px; padding: 4px 11px; }
+        .sf-chip { margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: #fff; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); border-radius: 999px; padding: 4px 11px; }
         .sf-msg { display: flex; gap: 11px; padding: 14px 16px; }
         .sf-msg + .sf-msg { border-top: 1px solid var(--border-faint); }
         .sf-mamba { background: rgba(106, 93, 166, 0.05); }
         .sf-av { flex: none; width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: #fff; }
-        .sf-av-h { background: linear-gradient(135deg, #C99655, #8A6535); }
-        .sf-av-m { background: linear-gradient(135deg, #6A5DA6, #4A3F7A); position: relative; }
+        .sf-av-h { background: linear-gradient(135deg, #C99655, var(--gold)); }
+        .sf-av-m { background: linear-gradient(135deg, var(--violet), #4A3F7A); position: relative; }
         .sf-av-m::after { content: ''; position: absolute; inset: 8px; border-radius: 3px; background: #fff; opacity: 0.92; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
         .sf-body { min-width: 0; }
         .sf-meta { display: flex; align-items: center; gap: 8px; }
-        .sf-meta b { font-size: 13.5px; color: var(--text); }
-        .sf-meta span { font-size: 11px; color: var(--text-faint); }
-        .sf-bot { font-family: var(--font-mono); font-size: 9.5px !important; text-transform: uppercase; letter-spacing: 0.05em; color: #6A5DA6 !important; background: rgba(106, 93, 166, 0.12); border-radius: 4px; padding: 1px 5px; }
-        .sf-text { font-size: 13.5px; line-height: 1.5; color: var(--text-muted); margin: 4px 0 0; }
+        .sf-meta b { font-size: 14px; color: var(--text); }
+        .sf-meta span { font-size: 12px; color: var(--text-faint); }
+        .sf-bot { font-family: var(--font-mono); font-size: 12px !important; text-transform: uppercase; letter-spacing: 0.05em; color: var(--violet) !important; background: rgba(106, 93, 166, 0.12); border-radius: 4px; padding: 1px 5px; }
+        .sf-text { font-size: 14px; line-height: 1.5; color: var(--text-muted); margin: 4px 0 0; }
         .sf-pills { display: flex; gap: 7px; margin-top: 10px; flex-wrap: wrap; }
-        .sf-pill { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-muted); background: var(--bg-surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; }
+        .sf-pill { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); background: var(--bg-surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; }
         .sf-pill-g { color: var(--color-green); border-color: rgba(45, 138, 90, 0.3); background: rgba(45, 138, 90, 0.08); }
       `}</style>
     </div>
@@ -69,12 +69,11 @@ export default function CategoryView({ data }: { data: CategoryData }) {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow={data.eyebrow}
           title={<>{data.hero.lead} <Em>{data.hero.em}</Em>{data.hero.tail}</>}
           lead={data.heroSub}
-          proof="Built for lean US teams"
         >
           <SlackFragment />
         </PageHero>
@@ -114,11 +113,11 @@ export default function CategoryView({ data }: { data: CategoryData }) {
             .why { background: var(--bg); padding: clamp(56px, 7vw, 96px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 22px); }
             .card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
-            .num { font-family: var(--font-serif); font-size: 36px; line-height: 1; background: linear-gradient(120deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+            .num { font-family: var(--font-serif); font-size: 36px; line-height: 1; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
             .t { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 14px 0 10px; line-height: 1.3; }
             .b { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin: 0; }
             @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
@@ -149,7 +148,7 @@ export default function CategoryView({ data }: { data: CategoryData }) {
             .cl { background: var(--bg-warm); padding: clamp(56px, 7vw, 96px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.06; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15px, 1.7vw, 17px); line-height: 1.6; color: var(--text-muted); margin: 14px auto 0; max-width: 560px; }
             .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(12px, 1.6vw, 18px); }
@@ -157,7 +156,7 @@ export default function CategoryView({ data }: { data: CategoryData }) {
             .tick { flex: none; width: 22px; height: 22px; margin-top: 1px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
             .tick::after { content: ''; position: absolute; left: 7.5px; top: 4px; width: 4px; height: 9px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
             .it-t { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 0 0 5px; }
-            .it-d { font-size: 13.5px; line-height: 1.55; color: var(--text-muted); margin: 0; }
+            .it-d { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 0; }
             @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
           `}</style>
         </section>
@@ -184,7 +183,7 @@ export default function CategoryView({ data }: { data: CategoryData }) {
                 <span className="rl-label">Keep comparing</span>
                 <div className="rl-links">
                   {data.related.map((r) => (
-                    <Link key={r.href} href={r.href} className="rl">{r.label} →</Link>
+                    <Link key={r.href} href={r.href} className="rl">{r.label}</Link>
                   ))}
                 </div>
               </div>
@@ -194,14 +193,14 @@ export default function CategoryView({ data }: { data: CategoryData }) {
             .faq { background: var(--bg); padding: clamp(56px, 7vw, 96px) var(--page-pad); }
             .wrap { max-width: 820px; margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .list { display: flex; flex-direction: column; gap: 14px; }
             .qa { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: clamp(20px, 2.4vw, 28px); box-shadow: var(--shadow-sm); }
             .q { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 0 0 9px; }
-            .a { font-size: 14.5px; line-height: 1.62; color: var(--text-muted); margin: 0; }
+            .a { font-size: 15px; line-height: 1.62; color: var(--text-muted); margin: 0; }
             .related { margin-top: clamp(32px, 4vw, 44px); text-align: center; }
-            .rl-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); }
+            .rl-label { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); }
             .rl-links { display: flex; gap: 10px 22px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
             :global(.faq .rl) { font-size: 14px; font-weight: 600; color: var(--gold-dark); text-decoration: none; }
             :global(.faq .rl:hover) { text-decoration: underline; }

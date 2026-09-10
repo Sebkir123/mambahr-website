@@ -43,7 +43,6 @@ const STATIC_ROUTES: StaticRoute[] = [
   { path: '/onboarding',   file: 'src/app/onboarding/page.tsx',      changeFrequency: 'monthly', priority: 0.85 },
   { path: '/payroll',      file: 'src/app/payroll/page.tsx',         changeFrequency: 'monthly', priority: 0.85 },
   { path: '/leave',        file: 'src/app/leave/page.tsx',           changeFrequency: 'monthly', priority: 0.85 },
-  { path: '/performance',  file: 'src/app/performance/page.tsx',     changeFrequency: 'monthly', priority: 0.85 },
   { path: '/compensation', file: 'src/app/compensation/page.tsx',    changeFrequency: 'monthly', priority: 0.85 },
   { path: '/compliance',   file: 'src/app/compliance/page.tsx',      changeFrequency: 'monthly', priority: 0.85 },
   { path: '/rif',          file: 'src/app/rif/page.tsx',             changeFrequency: 'monthly', priority: 0.8 },

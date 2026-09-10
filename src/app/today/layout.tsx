@@ -4,21 +4,21 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'Approvals | MambaHR',
+  title: 'To do | MambaHR',
   description:
-    '30 minutes. Your whole HR day. The agents ran the night shift, this morning, a queue of decisions. Approve, decline, done.',
+    'Your To do list. MambaHR did the work overnight; this morning, three decisions. Approve, decline, done.',
   openGraph: {
-    title: 'Approvals | MambaHR',
+    title: 'To do | MambaHR',
     description:
-      'The daily HR queue. Sign-off items, auto-resolved actions, and policy decisions in one screen.',
+      'To do: the calls that need you, and the work MambaHR already did, on one screen.',
     url: 'https://mambahr.com/today',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Approvals | MambaHR',
+    title: 'To do | MambaHR',
     description:
-      'The daily HR queue. Sign-off items, auto-resolved actions, and policy decisions in one screen.',
+      'To do: the calls that need you, and the work MambaHR already did, on one screen.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://mambahr.com/today' },
@@ -27,16 +27,16 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Approvals | MambaHR',
+  name: 'To do | MambaHR',
   url: 'https://mambahr.com/today',
   description:
-    'The daily HR queue surface for MambaHR. The agents run HR end-to-end; you sign off on the decisions that matter.',
+    'The To do screen in MambaHR. MambaHR does the HR work; you sign off on the decisions that matter.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
-    name: 'Approvals queue',
+    name: 'To do',
     description:
-      'Daily sign-off queue: routine actions auto-resolve, judgment calls route to a human, high-stakes decisions are always-you. Every card shows the action, rationale, status, decision buttons, and full audit trail.',
+      'The daily decision list: MambaHR does routine work itself, judgment calls come to a person, and high-stakes decisions are always yours. Every card shows the action, the reasoning, the status, the decision buttons, and the full audit trail.',
   },
 }
 

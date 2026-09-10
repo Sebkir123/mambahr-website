@@ -3,6 +3,8 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
 import { sendDemoConfirmation } from '@/lib/email'
 import { notifyLeadSlack } from '@/lib/slack'
+import { verifyTurnstile } from '@/lib/turnstile'
+import { createMemoryLimiter, durableRateLimit, getClientIp } from '@/lib/rate-limit'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,54 +25,15 @@ function getAdminClient(): SupabaseClient | null {
   return adminClient
 }
 
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
-const RATE_LIMIT_MAX = 8
-const ipBuckets = new Map<string, number[]>()
-function rateLimit(ip: string): boolean {
-  const now = Date.now()
-  const cutoff = now - RATE_LIMIT_WINDOW_MS
-  const ts = (ipBuckets.get(ip) ?? []).filter((t) => t > cutoff)
-  if (ts.length >= RATE_LIMIT_MAX) return false
-  ts.push(now)
-  ipBuckets.set(ip, ts)
-  return true
-}
-function getClientIp(req: NextRequest): string {
-  const fwd = req.headers.get('x-forwarded-for')
-  if (fwd) return fwd.split(',')[0].trim()
-  return req.headers.get('x-real-ip') ?? 'unknown'
-}
+const rateLimit = createMemoryLimiter(8, 60 * 60 * 1000)
 
-const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
-async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
-  const secret = process.env.TURNSTILE_SECRET_KEY
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
-  // Outside prod with no keys, accept the dev bypass; in prod with missing keys, fail closed.
-  if (!secret || !siteKey) return process.env.NODE_ENV !== 'production' && token === 'dev-mode-bypass'
-  if (!token) return false
-  try {
-    const form = new URLSearchParams({ secret, response: token, remoteip: ip })
-    const res = await fetch(TURNSTILE_VERIFY_URL, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: form.toString() })
-    if (!res.ok) return false
-    const data = (await res.json()) as { success: boolean }
-    return data.success === true
-  } catch {
-    return false
-  }
-}
-
-async function durableRateLimit(client: SupabaseClient, ip: string): Promise<boolean> {
-  const { data, error } = await client.rpc('check_signup_rate_limit', { p_ip: ip, p_max: 8, p_window_secs: 3600 })
-  if (error) return true // fail open
-  return data === true
-}
 
 export async function POST(req: NextRequest) {
   if (!(req.headers.get('content-type') ?? '').includes('application/json')) {
     return NextResponse.json({ error: 'Unsupported content type.' }, { status: 415 })
   }
   const ip = getClientIp(req)
-  if (!rateLimit(ip)) return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 })
+  if (!rateLimit(ip).ok) return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 })
 
   let email: string, company: string, name: string, companySize: string, turnstileToken: string
   try {
@@ -90,9 +53,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Enter a valid work email.' }, { status: 400 })
   }
 
+  // Fail closed on misconfiguration: without SUPABASE_SERVICE_ROLE_KEY there is
+  // no durable limiter and no way to persist the request, so the route refuses
+  // (503) rather than accepting on the per-instance memory limiter alone. An
+  // RPC error at runtime still fails open, logged (see lib/rate-limit.ts).
   const client = getAdminClient()
   if (!client) return NextResponse.json({ error: 'Service unavailable.' }, { status: 503 })
-  if (!(await durableRateLimit(client, ip))) return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 })
+  if (!(await durableRateLimit(client, { route: '/api/demo', ip, max: 8 }))) return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 })
 
   if (!(await verifyTurnstile(turnstileToken, ip))) {
     return NextResponse.json({ error: 'Verification failed. Refresh and try again.' }, { status: 403 })

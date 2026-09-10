@@ -3,17 +3,28 @@
 import { useEffect } from 'react'
 
 // Lightweight scroll-reveal + shared texture for the v2 prototype.
-// IntersectionObserver adds `.in` to any [data-reveal] element when it scrolls
-// into view; respects prefers-reduced-motion. Global CSS (grain + reveal) is
-// injected once via styled-jsx global so sections stay self-contained.
+// The hidden state is gated on `html.js-reveal`, which only this effect adds,
+// so server HTML (and any visitor without JS) renders everything visible.
+// On mount, anything already inside the viewport gets `.in` before the class
+// lands, so the first paint is never blanked; IntersectionObserver then adds
+// `.in` to the rest as they scroll into view. `data-reveal="eager"` opts an
+// element out entirely (used by the heroes, which are the LCP on every page).
+// Respects prefers-reduced-motion.
 export default function RevealInit() {
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll('[data-reveal]'))
+    const root = document.documentElement
+    const els = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]:not([data-reveal="eager"])'))
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce || !('IntersectionObserver' in window)) {
       els.forEach((e) => e.classList.add('in'))
       return
     }
+    const vh = window.innerHeight || root.clientHeight
+    els.forEach((e) => {
+      const r = e.getBoundingClientRect()
+      if (r.top < vh && r.bottom > 0) e.classList.add('in')
+    })
+    root.classList.add('js-reveal')
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((en) => {
@@ -25,26 +36,31 @@ export default function RevealInit() {
       },
       { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
     )
-    els.forEach((e) => io.observe(e))
-    return () => io.disconnect()
+    els.forEach((e) => {
+      if (!e.classList.contains('in')) io.observe(e)
+    })
+    return () => {
+      io.disconnect()
+      root.classList.remove('js-reveal')
+    }
   }, [])
 
   return (
     <style jsx global>{`
-      [data-reveal] {
-        opacity: 0;
-        transform: translateY(18px);
+      html.js-reveal [data-reveal]:not([data-reveal='eager']) {
         transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1),
           transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
       }
-      [data-reveal].in {
-        opacity: 1;
-        transform: none;
+      /* Content is never hidden: the reveal is a small lift only, so
+         thumbnails, link previews and mid-page landings show the page. */
+      html.js-reveal [data-reveal]:not([data-reveal='eager']):not(.in) {
+        opacity: 0.92;
+        transform: translateY(14px);
       }
-      [data-reveal][data-delay='1'] { transition-delay: 0.07s; }
-      [data-reveal][data-delay='2'] { transition-delay: 0.14s; }
-      [data-reveal][data-delay='3'] { transition-delay: 0.21s; }
-      [data-reveal][data-delay='4'] { transition-delay: 0.28s; }
+      html.js-reveal [data-reveal][data-delay='1'] { transition-delay: 0.07s; }
+      html.js-reveal [data-reveal][data-delay='2'] { transition-delay: 0.14s; }
+      html.js-reveal [data-reveal][data-delay='3'] { transition-delay: 0.21s; }
+      html.js-reveal [data-reveal][data-delay='4'] { transition-delay: 0.28s; }
       .v2-grain {
         position: absolute;
         inset: 0;
@@ -55,7 +71,7 @@ export default function RevealInit() {
         mix-blend-mode: overlay;
       }
       @media (prefers-reduced-motion: reduce) {
-        [data-reveal] {
+        html.js-reveal [data-reveal] {
           opacity: 1;
           transform: none;
           transition: none;
