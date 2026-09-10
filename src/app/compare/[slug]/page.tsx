@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!c) return {}
   const ogUrl = '/mambahr_og_sharing.jpg'
   return {
-    title: `MambaHR vs ${c.name}, ${c.tagline}`,
-    description: c.heroSub,
+    title: `MambaHR vs ${c.name} | MambaHR`,
+    description: `${c.tagline}. ${c.heroSub}`,
     openGraph: {
       title: `MambaHR vs ${c.name}`,
       description: c.heroSub,

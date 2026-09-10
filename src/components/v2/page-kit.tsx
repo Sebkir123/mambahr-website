@@ -68,32 +68,32 @@ export function PageHero({
       </div>
       <span className="v2-grain" />
       <div className="top">
-        <p className="eyebrow" data-reveal>{eyebrow}</p>
-        {pill && <p className="hero-pill" data-reveal data-delay="1"><span>{pill}</span></p>}
-        <h1 className="title" data-reveal data-delay="1">{title}</h1>
-        <p className="lead" data-reveal data-delay="2">{lead}</p>
-        <div className="ctas" data-reveal data-delay="3">
+        <p className="eyebrow" data-reveal="eager">{eyebrow}</p>
+        {pill && <p className="hero-pill" data-reveal="eager"><span>{pill}</span></p>}
+        <h1 className="title" data-reveal="eager">{title}</h1>
+        <p className="lead" data-reveal="eager">{lead}</p>
+        <div className="ctas" data-reveal="eager">
           <Link href="/demo" className="btn-p">Book a demo</Link>
           <Link href="/product" className="btn-g">See it run</Link>
         </div>
-        <div className="proof" data-reveal data-delay="3">
+        <div className="proof" data-reveal="eager">
           <div className="faces">
             {FACES.map((p) => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={p} src={`/avatars/${p}.jpg`} alt="" width={34} height={34} loading="lazy" decoding="async" />
+              <img key={p} src={`/avatars/${p}-72.jpg`} alt="" width={34} height={34} loading="lazy" decoding="async" />
             ))}
           </div>
           <span className="proof-t">{proof}</span>
         </div>
       </div>
-      <div className="stage" data-reveal data-delay="4">
+      <div className="stage" data-reveal="eager">
         <div className={`duo${photo ? ' has-photo' : ''}`}>
           <div className="frag">{children}</div>
           {photo && (
             <figure className="person">
               <div className="p-img">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={photo} alt="" />
+                <img src={photo} alt="" fetchPriority="high" loading="eager" decoding="async" />
                 <span className="p-scrim" aria-hidden="true" />
                 {photoCaption && <span className="p-name">{photoCaption}</span>}
               </div>
@@ -658,7 +658,7 @@ export function PageCta({
           <div className="faces" aria-hidden="true">
             {FACES.map((p) => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={p} src={`/avatars/${p}.jpg`} alt="" width={30} height={30} loading="lazy" decoding="async" />
+              <img key={p} src={`/avatars/${p}-72.jpg`} alt="" width={30} height={30} loading="lazy" decoding="async" />
             ))}
           </div>
           <p className="trust">No setup project · Your data imported in a day · You approve the big calls</p>

@@ -29,6 +29,11 @@ const config: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ['image/avif', 'image/webp'],
+    // Blog covers live in the Supabase `blog-media` public bucket; next/image
+    // resizes them (a 750 KB PNG becomes a ~30 KB WebP at grid width).
+    remotePatterns: [
+      { protocol: 'https', hostname: '*.supabase.co', pathname: '/storage/v1/object/public/blog-media/**' },
+    ],
   },
   async redirects() {
     // The Performance module is dark; the page is unmounted until it returns.

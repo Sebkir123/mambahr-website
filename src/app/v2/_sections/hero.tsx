@@ -11,8 +11,8 @@ const NAV: { label: string; icon: string; active?: boolean; badge?: string }[] =
 ]
 
 const APPROVALS = [
-  { img: '/avatars/maya.jpg', title: 'Offer · Maya Chen', meta: 'Senior Engineer · $195k · above band 8%', tag: 'Urgent', tagTone: 'urgent' },
-  { img: '/avatars/tom.jpg', title: 'Comp change · Tom Harrison', meta: '+12% merit raise · within band', tag: 'Review', tagTone: 'warn' },
+  { img: '/avatars/maya-72.jpg', title: 'Offer · Maya Chen', meta: 'Senior Engineer · $195k · above band 8%', tag: 'Urgent', tagTone: 'urgent' },
+  { img: '/avatars/tom-72.jpg', title: 'Comp change · Tom Harrison', meta: '+12% merit raise · within band', tag: 'Review', tagTone: 'warn' },
 ]
 
 const HANDLED = [
@@ -31,26 +31,26 @@ export default function Hero() {
       </div>
       <span className="v2-grain" />
       <div className="top">
-        <span className="eyebrow" data-reveal>The AI HR department</span>
-        <h1 className="title" data-reveal data-delay="1">HR that runs itself.</h1>
-        <p className="sub" data-reveal data-delay="2">
+        <span className="eyebrow" data-reveal="eager">The AI HR department</span>
+        <h1 className="title" data-reveal="eager">HR that runs itself.</h1>
+        <p className="sub" data-reveal="eager">
           MambaHR takes the admin: onboarding, time off, leave, payroll changes, and
           compliance with the statute cited. You keep the judgment calls, the coaching, and the
           hours you never had. Most teams are live within a day of importing.
         </p>
-        <div className="ctas" data-reveal data-delay="3">
+        <div className="ctas" data-reveal="eager">
           <a href="/demo" className="btn-primary">Book a demo</a>
         </div>
-        <div className="proof" data-reveal data-delay="3">
+        <div className="proof" data-reveal="eager">
           <div className="faces">
             {['priya', 'anna', 'maya', 'dave', 'brian'].map((p) => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={p} src={`/avatars/${p}.jpg`} alt="" width={36} height={36} />
+              <img key={p} src={`/avatars/${p}-72.jpg`} alt="" width={36} height={36} />
             ))}
           </div>
           <span className="proof-t">Built for lean HR teams</span>
         </div>
-        <div className="trust" data-reveal data-delay="3">
+        <div className="trust" data-reveal="eager">
           <span>Works 24/7</span><i />
           <span>Your data imports in a day</span><i />
           <span>Built by HR operators</span>
@@ -63,7 +63,7 @@ export default function Hero() {
             <span className="dots"><b /><b /><b /></span>
             <span className="addr">app.mambahr.com</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="me" src="/avatars/brian.jpg" alt="Brian Bell" width={24} height={24} />
+            <img className="me" src="/avatars/brian-72.jpg" alt="Brian Bell" width={24} height={24} />
           </div>
           <div className="app-body">
             <aside className="side">
