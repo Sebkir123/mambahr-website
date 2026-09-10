@@ -10,7 +10,7 @@ import { LeadForm, type LeadFormFields } from '@/components/lead-form'
 const SEE = [
   'Your real questions, answered live with the law cited',
   'An onboarding run, offer to accounts live',
-  'The approval queue: what waits for you, what just gets done',
+  'To do: what waits for you, and what just got done',
   'Your headcount priced on the call, no follow-up quote dance',
 ]
 

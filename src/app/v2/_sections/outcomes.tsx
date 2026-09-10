@@ -23,7 +23,7 @@ export default function Outcomes() {
           <article className="card dark" data-reveal data-delay="1">
             <span className="lbl muted">Hours back, every week</span>
             <div className="num big"><span data-count="27">27</span><em>hrs</em></div>
-            <p className="cap ondark">Payroll prep, onboarding, leave, and compliance, handled, with you on the approvals.</p>
+            <p className="cap ondark">MambaHR handles payroll prep, onboarding, leave, and compliance. You handle the approvals.</p>
             <div className="spark">
               {SPARK.map((h, i) => (
                 <span key={i} style={{ height: `${h}%` }} />
@@ -56,8 +56,8 @@ export default function Outcomes() {
               <p className="q">&ldquo;I&rsquo;m having a baby in June. How much leave can I take?&rdquo;</p>
               <div className="a">
                 <span className="a-who">MambaHR <em>6 seconds later</em></span>
-                12 weeks of FMLA bonding leave, job protected.
-                <span className="a-sub">California CFRA and PDL cited and routed to you to confirm the stack.</span>
+                12 weeks of federal family leave (FMLA) for bonding, job protected.
+                <span className="a-sub">California&rsquo;s own leave rules (CFRA and PDL) cited and sent to you to confirm how they combine.</span>
               </div>
             </div>
             <p className="cap">Every answer carries the statute it relied on and a review date. A person signs off on the big calls.</p>
@@ -65,7 +65,7 @@ export default function Outcomes() {
         </div>
 
         <p className="note" data-reveal>
-          Modeled from the admin hours these workflows take a lean team today, not measured
+          Modeled from the admin hours these tasks take a lean team today, not measured
           customer averages. We will publish real numbers once our first customers are live.
         </p>
       </div>

@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     'Field notes on AI in HR, multi-state compliance, hiring, onboarding and running a people function end to end, from the team building the AI HR department.',
   openGraph: {
     title: 'Blog | MambaHR',
-    description: 'Field notes on AI in HR, compliance, hiring, and running a people function end to end.',
+    description: 'Field notes on AI in HR, compliance, hiring, and running a people function.',
     url: `${SITE}/blog`,
     type: 'website',
     images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Blog | MambaHR',
-    description: 'Field notes on AI in HR, compliance, hiring, and running a people function end to end.',
+    description: 'Field notes on AI in HR, compliance, hiring, and running a people function.',
     images: ['/mambahr_og_sharing.jpg'],
   },
   alternates: {
@@ -116,7 +116,7 @@ export default async function BlogIndex() {
           <h1 className={styles.title}>Notes from the AI HR department.</h1>
           <p className={styles.lede}>
             What we&rsquo;re learning building the system that runs hiring, onboarding, payroll changes,
-            leave, and compliance end to end.
+            leave, and compliance for you.
           </p>
         </header>
 
@@ -147,7 +147,7 @@ export default async function BlogIndex() {
                   </div>
                   <h2 className={styles.leadTitle}>{lead.title}</h2>
                   {lead.excerpt && <p className={styles.leadExcerpt}>{lead.excerpt}</p>}
-                  <span className={styles.readMore}>Read the post →</span>
+                  <span className={styles.readMore}>Read the post</span>
                 </div>
               </Link>
               </>

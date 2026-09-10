@@ -5,7 +5,7 @@
 
 export const QA = [
   {
-    q: 'Do we replace our current HRIS, or run alongside it?',
+    q: 'Do we replace our current HR system, or run alongside it?',
     a: 'We replace it. MambaHR becomes your system of record for people, time off, and compliance, and prepares every payroll change. We import from Gusto, Workday, Rippling, BambooHR, Namely, or ADP, or by CSV, and your data imports in a day.',
   },
   {
@@ -18,7 +18,7 @@ export const QA = [
   },
   {
     q: 'What happens if it gets something wrong?',
-    a: 'Sensitive calls (offers above band, terminations, anything high-stakes) always come to you first. Everything else is logged, reversible, and shows the rule it followed. You can override anything, and nothing happens without a trail.',
+    a: 'Sensitive calls (offers above your pay range, terminations, anything high-stakes) always come to you first. Everything else is logged, reversible, and shows the rule it followed. You can override anything, and nothing happens without a trail.',
   },
   {
     q: 'Are we still compliant, and who is liable?',

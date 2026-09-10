@@ -16,9 +16,9 @@ export default function Hero() {
         <span className="eyebrow" data-reveal="eager">The AI HR department</span>
         <h1 className="title" data-reveal="eager">HR that runs itself.</h1>
         <p className="sub" data-reveal="eager">
-          MambaHR takes the admin: onboarding, time off, leave, payroll changes, and
-          compliance with the statute cited. You keep the judgment calls, the coaching, and the
-          hours you never had. Most teams are live within a day of importing.
+          MambaHR does the HR admin for you: onboarding, time off and leave, payroll changes,
+          and compliance with the law cited. You make the judgment calls. Most teams are live
+          within a day of importing.
         </p>
         <div className="ctas" data-reveal="eager">
           <a href="/demo" className="btn btn-primary">Book a demo</a>

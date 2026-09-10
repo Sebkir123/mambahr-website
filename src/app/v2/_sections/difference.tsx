@@ -3,12 +3,12 @@
 import Link from 'next/link'
 
 const ROWS = [
-  { them: 'File the I-9, chase E-Verify', themCost: '45 min', us: 'Form I-9 and E-Verify check started', usWhen: '9:02 AM' },
+  { them: 'File the Form I-9, chase E-Verify', themCost: '45 min', us: 'Form I-9 and E-Verify check started', usWhen: '9:02 AM' },
   { them: 'Hunt down the right approver', themCost: '3 emails', us: 'Routed and approved in policy', usWhen: '9:04 AM' },
-  { them: 'Google the FMLA eligibility rule', themCost: '1 hr + Legal', us: 'Answered, statute attached', usWhen: '9:06 AM' },
+  { them: 'Google the family-leave (FMLA) eligibility rule', themCost: '1 hr + Legal', us: 'Answered, statute attached', usWhen: '9:06 AM' },
   { them: 'Build the headcount report', themCost: '2 hrs', us: 'Report generated on ask', usWhen: '9:11 AM' },
   { them: 'Onboard the new hire, click by click', themCost: 'half a day', us: 'Day-one ready, accounts and all', usWhen: '9:14 AM' },
-  { them: 'Answer the same PTO question. Again.', themCost: 'daily', us: 'Answered in Slack, instantly', usWhen: 'always' },
+  { them: 'Answer the same time-off question. Again.', themCost: 'daily', us: 'Answered in Slack, instantly', usWhen: 'always' },
 ]
 
 export default function Difference() {
@@ -18,15 +18,15 @@ export default function Difference() {
         <div className="head" data-reveal>
           <p className="eyebrow">Why MambaHR</p>
           <h2 className="title">
-            Your old HRIS stored the work. MambaHR is the HRIS that <span className="em">does it.</span>
+            Your old HR system stored the work. MambaHR is the one that <span className="em">does it.</span>
           </h2>
           <p className="lead">
-            Same employee data, now in the system that does the work. One difference: who actually pushes the buttons.
+            Same employee data, now in the system that does the work. One difference: who pushes the buttons.
           </p>
         </div>
 
         <div className="cols" data-reveal data-delay="1">
-          {/* Your to-do list with any other HRIS */}
+          {/* Your list with any other HR system */}
           <div className="col them">
             <div className="t-head">
               <span className="t-title">Monday, before MambaHR</span>
@@ -65,7 +65,7 @@ export default function Difference() {
         </div>
 
         <div className="compare" data-reveal data-delay="2">
-          <span className="cmp-l">See exactly how we compare</span>
+          <span className="cmp-l">Compare</span>
           <Link href="/compare/rippling">vs Rippling</Link>
           <Link href="/compare/gusto">vs Gusto</Link>
           <Link href="/compare/workday">vs Workday</Link>

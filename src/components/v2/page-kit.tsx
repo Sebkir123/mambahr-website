@@ -1,7 +1,7 @@
 'use client'
 
 // ── v2 page kit ───────────────────────────────────────────────────────────
-// Shared primitives for the function pages (/hiring, /leave, /payroll, …)
+// Shared primitives for the function pages (/hiring, /leave, /payroll, and so on)
 // so every page matches the v2 landing bar: Fraunces + gold→violet system,
 // real-UI fragments, real people, mamba chips, scroll reveals, ONE-line
 // headlines. Pages compose: <PageHero> → <AgentLoop> → feature splits →
@@ -108,7 +108,7 @@ export function PageHero({
         <p className="lead" data-reveal="eager">{lead}</p>
         <div className="ctas" data-reveal="eager">
           <Link href="/demo" className="btn btn-primary">Book a demo</Link>
-          <Link href="/product" className="btn btn-secondary">See it run</Link>
+          <Link href="/product" className="btn btn-secondary">See how it works</Link>
         </div>
         <div data-reveal="eager">
           <FoundersProof text={proof} />
@@ -259,7 +259,7 @@ export function PageHero({
   )
 }
 
-/* ── The agent loop: who-does-what, premium rows with people ── */
+/* ── The loop: who-does-what, premium rows with people ── */
 export type LoopStep = {
   n: string
   label: string
@@ -412,7 +412,7 @@ export function FeatureSplit({
               ))}
             </ul>
           )}
-          <Link href="/demo" className="more">See it on a live demo →</Link>
+          <Link href="/demo" className="more">Book a demo</Link>
         </div>
         <div className="stage" data-reveal data-delay="1">{children}</div>
       </div>
@@ -460,7 +460,7 @@ export function FeatureSplit({
 /* ── Stat trio: tinted gradient cards with count-ups ── */
 export function StatTrio({
   stats,
-  note = 'Modeled from the workflows MambaHR runs, not measured customer averages.',
+  note = 'Modeled from the tasks MambaHR runs, not measured customer averages.',
 }: {
   stats: { n: number; prefix?: string; suffix?: string; label: string }[]
   /** Provenance line under the stats. Pass null only if the stats are cited in-place. */
@@ -524,7 +524,7 @@ export function StatTrio({
 }
 
 /* ── Scenario band: designed card, big photo left, scenario right ──
-   MambaHR is pre-launch. These are written illustrations of the workflow, NOT
+   MambaHR is pre-launch. These are written illustrations of the process, NOT
    customer testimonials, so they carry an explicit "Illustrative" label and no
    personal name. Do not reintroduce named quotes until there are real customers
    who have agreed to be quoted. */
@@ -644,10 +644,10 @@ export function PageCta({
         <p className="s">{sub}</p>
         <div className="btns">
           <Link href="/demo" className="btn btn-primary">Book a demo</Link>
-          <Link href="/product" className="btn btn-ghost">See it run</Link>
+          <Link href="/product" className="btn btn-ghost">See how it works</Link>
         </div>
         <div className="proofline">
-          <p className="trust">Built by the founders, who answer the demo call · Your data imported in a day · You approve the big calls</p>
+          <p className="trust">Built by the founders, who answer the demo call · Your data imported in a day · A person signs off on the sensitive calls</p>
         </div>
       </div>
       <style jsx>{`

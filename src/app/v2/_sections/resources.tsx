@@ -4,12 +4,12 @@ import { useState } from 'react'
 import { LeadForm, type LeadFormFields } from '@/components/lead-form'
 
 const GUIDE_SLUG = 'rif-playbook'
-const GUIDE_TITLE = 'The Defensible Layoff Playbook'
+const GUIDE_TITLE = 'The layoff playbook'
 const COMPANY_SIZES = ['1–10', '11–50', '51–200', '201–500', '501–1,000', '1,000+']
 
 const BULLETS = [
   'State-by-state notice & severance rules',
-  'WARN Act thresholds and timing',
+  'Federal layoff-notice law (WARN Act) thresholds and timing',
   'Defensible selection criteria',
   'Manager, employee, and team scripts',
 ]
@@ -55,17 +55,17 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
               <span className="v2-grain" />
               <div className="cover-brand"><span className="m">M</span>MambaHR</div>
               <div className="cover-kicker">Field guide № 01</div>
-              <div className="cover-title">The Defensible Layoff Playbook</div>
+              <div className="cover-title">The layoff playbook</div>
               <div className="cover-foot">A people leader&rsquo;s field guide</div>
             </div>
           </div>
 
           <div className="content">
-            <h3>The Defensible Layoff Playbook</h3>
+            <h3>The layoff playbook</h3>
             <p className="desc">
-              A step-by-step guide for running a reduction in force that holds up in court:
-              notice and severance by state, WARN thresholds, selection criteria, and the
-              scripts for every conversation.
+              A step-by-step guide for running a layoff that holds up in court. Notice and
+              severance by state, the federal layoff-notice law (WARN Act), selection criteria,
+              and the scripts for every conversation.
             </p>
             <ul className="bullets">
               {BULLETS.map((b) => (
@@ -98,7 +98,7 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
                   <span className="mini-k">{p.kicker}</span>
                 </span>
                 <span className="more-t">{p.title}</span>
-                <span className="get">Get it →</span>
+                <span className="get">Get the guide</span>
               </a>
             ))}
           </div>

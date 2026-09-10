@@ -15,7 +15,7 @@ export default function Statement() {
           You bought the software. You still <span className="em">do the work.</span>
         </h2>
         <p className="body" data-reveal data-delay="1">
-          Every HRIS needs people clicking the buttons. For every dollar spent on the
+          Every HR system needs people clicking the buttons. For every dollar spent on the
           system, companies spend six on the humans operating it. MambaHR does the
           clicking, so your people get that six back.
         </p>
