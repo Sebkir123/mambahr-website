@@ -169,15 +169,6 @@ export default function PricingPage() {
               <Link href="/demo" className="btn btn-primary">Book a demo</Link>
               <Link href="/product" className="btn btn-secondary">See how it works</Link>
             </div>
-            <div className="proof" data-reveal data-delay="3">
-              <div className="faces">
-                {['priya', 'anna', 'maya', 'dave', 'brian'].map((p) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img key={p} src={`/avatars/${p}.jpg`} alt="" width={34} height={34} />
-                ))}
-              </div>
-              <span className="proof-t">Built by the founders, who answer the demo call</span>
-            </div>
           </div>
           <div className="stage" data-reveal data-delay="4">
             <MathCard />
@@ -197,15 +188,6 @@ export default function PricingPage() {
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 4vw, 54px); line-height: 1.04; letter-spacing: -0.028em; color: var(--text); margin: 18px 0 0; text-wrap: balance; }
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 690px; margin: 22px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
-            .proof { display: flex; align-items: center; gap: 13px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
-            .faces { display: flex; }
-            .faces img {
-              width: 34px; height: 34px; border-radius: 999px; object-fit: cover;
-              border: 2px solid #fff; box-shadow: var(--shadow-sm);
-              margin-left: -9px; background: var(--bg-elevated);
-            }
-            .faces img:first-child { margin-left: 0; }
-            .proof-t { font-size: 14px; font-weight: 600; color: var(--text); }
             .stage { position: relative; max-width: 720px; margin: clamp(44px, 5.4vw, 64px) auto 0; }
           `}</style>
         </section>
@@ -216,7 +198,6 @@ export default function PricingPage() {
             <div className="f-copy">
               <span className="f-tag">Founding cohort</span>
               <p className="f-t">Founding customer pricing is open for our first cohort.</p>
-              <p className="f-s">Discounted annual pricing, onboarding directly with the founders, and priority say in the roadmap.</p>
             </div>
             <Link href="/demo" className="f-cta">Book a demo</Link>
           </div>
@@ -241,7 +222,6 @@ export default function PricingPage() {
             }
             .f-tag { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #fff; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); border-radius: 999px; padding: 4px 11px; }
             .f-t { font-family: var(--font-serif); font-size: clamp(19px, 2.2vw, 24px); color: var(--text); margin: 10px 0 0; letter-spacing: -0.01em; }
-            .f-s { font-size: 14px; color: var(--text-muted); margin: 6px 0 0; line-height: 1.5; }
             :global(.found .f-cta) {
               flex: none; display: inline-block; background: var(--text); color: #fff; font-weight: 600; font-size: 15px;
               padding: 13px 24px; border-radius: 999px; text-decoration: none;
@@ -355,7 +335,7 @@ export default function PricingPage() {
             <div className="head" data-reveal>
               <p className="eyebrow">Compare the cost</p>
               <h2 className="title">Cheaper than doing it <Em>by hand.</Em></h2>
-              <p className="lead">Real HR execution for a fraction of what it costs to staff the same work. And when you do hire, they inherit a running department instead of a backlog.</p>
+              <p className="lead">MambaHR runs the same workload for a fraction of what it costs to staff it. And when you do hire, they inherit a running department instead of a backlog.</p>
             </div>
             <div className="cost-table" data-reveal data-delay="1">
               <div className="row hd">
@@ -372,8 +352,7 @@ export default function PricingPage() {
               ))}
             </div>
             <p className="compare-line" data-reveal data-delay="2">
-              Simpler than Rippling. Faster than Workday. More execution than BambooHR. Cheaper than doing it by hand.{' '}
-              <Link href="/compare">Compare</Link>
+              <Link href="/compare">Compare MambaHR with the system you use today</Link>
             </p>
           </div>
           <style jsx>{`
@@ -440,8 +419,8 @@ export default function PricingPage() {
         <section className="faq">
           <div className="wrap">
             <div className="head" data-reveal>
-              <p className="eyebrow">Straight answers</p>
-              <h2 className="title">No fine print <Em>tricks.</Em></h2>
+              <p className="eyebrow">Pricing</p>
+              <h2 className="title">Questions, <Em>answered.</Em></h2>
             </div>
             <div className="grid">
               {FAQS.map((f, i) => (

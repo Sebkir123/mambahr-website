@@ -59,6 +59,6 @@ export const TIERS: PricingTier[] = [
     min: 'from $100k/yr',
     blurb: 'For complex orgs with procurement to satisfy.',
     feats: ['Everything in Whole department', 'High-volume HR ops queues', 'Custom implementation & approval chains', 'Procurement & security review', 'Audit prep, done', 'Enterprise integrations & success support'],
-    cta: 'Talk to the founders',
+    cta: 'Talk to us',
   },
 ]
