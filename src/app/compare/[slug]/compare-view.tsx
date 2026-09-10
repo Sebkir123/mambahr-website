@@ -37,15 +37,6 @@ export default function CompareView({ data }: { data: CompetitorData }) {
               <Link href="/demo" className="btn-p">Book a demo</Link>
               <Link href="/pricing" className="btn-g">See pricing</Link>
             </div>
-            <div className="proof" data-reveal data-delay="3">
-              <div className="faces">
-                {['priya', 'anna', 'maya', 'dave', 'brian'].map((p) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img key={p} src={`/avatars/${p}.jpg`} alt="" width={34} height={34} />
-                ))}
-              </div>
-              <span className="proof-t">Built by the founders, who answer the demo call</span>
-            </div>
           </div>
           <style jsx>{`
             .ch { position: relative; overflow: hidden; padding: clamp(124px, 14vw, 168px) var(--page-pad) clamp(56px, 7vw, 84px); background: linear-gradient(180deg, #F7F3EB 0%, var(--bg-warm) 58%); }
@@ -88,15 +79,6 @@ export default function CompareView({ data }: { data: CompetitorData }) {
             }
             :global(.ch .btn-g:hover) { background: #fff; }
             @media (prefers-reduced-motion: reduce) { :global(.ch .btn-p:hover) { transform: none; } }
-            .proof { display: flex; align-items: center; gap: 13px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
-            .faces { display: flex; }
-            .faces img {
-              width: 34px; height: 34px; border-radius: 999px; object-fit: cover;
-              border: 2px solid #fff; box-shadow: var(--shadow-sm);
-              margin-left: -9px; background: var(--bg-elevated);
-            }
-            .faces img:first-child { margin-left: 0; }
-            .proof-t { font-size: 14px; font-weight: 600; color: var(--text); }
           `}</style>
         </section>
 
@@ -105,12 +87,11 @@ export default function CompareView({ data }: { data: CompetitorData }) {
           <div className="wrap">
             <div className="head" data-reveal>
               <p className="eyebrow">Why teams switch</p>
-              <h2 className="title">Three reasons, <Em>no fluff.</Em></h2>
+              <h2 className="title">Three reasons teams <Em>switch.</Em></h2>
             </div>
             <div className="grid">
               {data.switchReasons.map((r, i) => (
                 <div key={r.title} className="card" data-reveal data-delay={String(i + 1)}>
-                  <span className="num">{String(i + 1).padStart(2, '0')}</span>
                   <h3 className="t">{r.title}</h3>
                   <p className="b">{r.desc}</p>
                 </div>
@@ -125,16 +106,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 22px); }
             .card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
-            .num {
-              font-family: var(--font-serif);
-              font-size: 36px;
-              line-height: 1;
-              background: linear-gradient(120deg, var(--gold-mid), var(--violet));
-              -webkit-background-clip: text;
-              background-clip: text;
-              color: transparent;
-            }
-            .t { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 14px 0 10px; line-height: 1.3; }
+            .t { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 0 0 10px; line-height: 1.3; }
             .b { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin: 0; }
             @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
           `}</style>
@@ -145,7 +117,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
           <div className="wrap">
             <div className="head" data-reveal>
               <p className="eyebrow">Side by side</p>
-              <h2 className="title">The honest <Em>table.</Em></h2>
+              <h2 className="title">MambaHR vs <Em>{data.name}.</Em></h2>
               <p className="lead">Including the rows where {data.name} wins, you&rsquo;ll check anyway.</p>
             </div>
             <div className="card agent-edge agent-done" data-reveal data-delay="1">
@@ -244,7 +216,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
         <section className="sw">
           <div className="wrap">
             <div className="head" data-reveal>
-              <p className="eyebrow">The part everyone dreads</p>
+              <p className="eyebrow">Switching</p>
               <h2 className="title">Switching takes a day, <Em>not a quarter.</Em></h2>
             </div>
             <div className="grid">
@@ -293,7 +265,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
 
         <PageCta
           title={<>See the difference <Em>live.</Em></>}
-          sub={`Bring your ${data.name} bill to the demo. We'll do the math together.`}
+          sub={`A 30-minute demo. Bring your ${data.name} bill.`}
         />
       </main>
       <Footer />
