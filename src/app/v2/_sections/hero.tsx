@@ -1,6 +1,17 @@
 'use client'
 
-import { AppFrame, TodoDesk } from '@/components/mockups'
+import { AppFrame, TodoDesk, COMP_CHANGE } from '@/components/mockups'
+
+const HERO_QUEUE = [
+  { name: 'Jackson Bauer', kind: 'Compensation change', date: 'Today' },
+  { name: 'Leo Schulz', kind: 'Leave request', date: 'Tomorrow' },
+  { name: 'Priya Nair', kind: 'Offer above band', date: 'Thu' },
+]
+const HERO_FOCUS = {
+  ...COMP_CHANGE,
+  position: '',
+  read: 'Above band for level 4 by 8%. Peers sit at $152k and $158k. Recommend $160k, or hold for the cycle.',
+}
 import { FoundersProof } from '@/components/v2/page-kit'
 
 export default function Hero() {
@@ -39,8 +50,8 @@ export default function Hero() {
             <span className="dots"><b /><b /><b /></span>
             <span className="addr">app.mambahr.com</span>
           </div>
-          <AppFrame active="todo" org="Acme" user="AR" height={580}>
-            <TodoDesk />
+          <AppFrame active="todo" org="Acme" user="AR" height={520} minimal>
+            <TodoDesk simple summary="3 need you today" queue={HERO_QUEUE} focus={HERO_FOCUS} />
           </AppFrame>
         </div>
       </div>
