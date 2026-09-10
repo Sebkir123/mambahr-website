@@ -192,7 +192,6 @@ export default function MegaNav() {
                         {howItWorks.map((item) => (
                           <Link key={item.label} href={item.href} onClick={closeAll} className={s.railLink}>
                             <span className={s.railLabel}>{item.label}</span>
-                            <span aria-hidden="true" className={s.railArrow}>→</span>
                           </Link>
                         ))}
                       </div>

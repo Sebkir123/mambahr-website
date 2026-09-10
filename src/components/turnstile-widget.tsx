@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 
 // Load the Turnstile lib only when a form that needs it actually mounts, as its
@@ -23,12 +23,17 @@ interface Props {
 export default function TurnstileWidget({ onSuccess, theme = 'dark' }: Props) {
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
+  // The parent passes a fresh callback each render; keep the latest one in a
+  // ref so the dev-mode auto-pass below runs once, not once per render.
+  const onSuccessRef = useRef(onSuccess)
+  useEffect(() => { onSuccessRef.current = onSuccess }, [onSuccess])
+
   // Dev mode, auto-pass with a dummy token so forms work without Turnstile setup
   useEffect(() => {
     if (!siteKey) {
-      onSuccess('dev-mode-bypass')
+      onSuccessRef.current('dev-mode-bypass')
     }
-  }, [siteKey, onSuccess])
+  }, [siteKey])
 
   if (!siteKey) {
     return null
