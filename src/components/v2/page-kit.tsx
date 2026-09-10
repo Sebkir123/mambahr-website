@@ -31,7 +31,38 @@ export function Em({ children }: { children: ReactNode }) {
   )
 }
 
-const FACES = ['priya', 'anna', 'maya', 'dave', 'brian']
+/* ── The proof line under every hero: the two founders, who take the demo
+      call themselves. Real names, real photos (the same ones /about uses),
+      no stock avatars anywhere on the site. ── */
+const FOUNDERS = [
+  { name: 'Brian Bell', photo: '/brian_bell.jpeg' },
+  { name: 'Sebastian Kirsch', photo: '/sebastian_kirsch.jpg' },
+]
+
+export function FoundersProof({ text = 'Built by the founders, who answer the demo call' }: { text?: string }) {
+  return (
+    <div className="fp">
+      <div className="fp-faces">
+        {FOUNDERS.map((f) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img key={f.name} src={f.photo} alt={f.name} width={34} height={34} loading="lazy" decoding="async" />
+        ))}
+      </div>
+      <span className="fp-t">{text}</span>
+      <style jsx>{`
+        .fp { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+        .fp-faces { display: flex; }
+        .fp-faces img {
+          width: 34px; height: 34px; border-radius: 999px; object-fit: cover; object-position: center 20%;
+          border: 2px solid #fff; box-shadow: var(--shadow-sm);
+          margin-left: -9px; background: var(--bg-elevated);
+        }
+        .fp-faces img:first-child { margin-left: 0; }
+        .fp-t { font-size: 14px; font-weight: 600; color: var(--text); }
+      `}</style>
+    </div>
+  )
+}
 
 /* ── Page hero: centered copy (one-line title) + fragment stage below,
       aurora blobs + grain + face cluster + optional human photo card ── */
@@ -40,8 +71,9 @@ export function PageHero({
   pill,
   title,
   lead,
-  proof = 'Built for lean HR teams',
+  proof = 'Built by the founders, who answer the demo call',
   photo,
+  photoPosition = 'center 20%',
   photoChip,
   photoCaption,
   children,
@@ -54,6 +86,8 @@ export function PageHero({
   proof?: string
   /** Local people photo (e.g. /v2-people/team.jpg) shown as a tilted card overlapping the stage. */
   photo?: string
+  /** CSS object-position for the photo, so faces are never cropped through the eyes. */
+  photoPosition?: string
   /** MambaHR-chip text on the photo card, e.g. 'MambaHR · done'. */
   photoChip?: string
   /** Small caption under the chip, e.g. 'Offer signed · starts June 22'. */
@@ -73,17 +107,11 @@ export function PageHero({
         <h1 className="title" data-reveal="eager">{title}</h1>
         <p className="lead" data-reveal="eager">{lead}</p>
         <div className="ctas" data-reveal="eager">
-          <Link href="/demo" className="btn-p">Book a demo</Link>
-          <Link href="/product" className="btn-g">See it run</Link>
+          <Link href="/demo" className="btn btn-primary">Book a demo</Link>
+          <Link href="/product" className="btn btn-secondary">See it run</Link>
         </div>
-        <div className="proof" data-reveal="eager">
-          <div className="faces">
-            {FACES.map((p) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img key={p} src={`/avatars/${p}-72.jpg`} alt="" width={34} height={34} loading="lazy" decoding="async" />
-            ))}
-          </div>
-          <span className="proof-t">{proof}</span>
+        <div data-reveal="eager">
+          <FoundersProof text={proof} />
         </div>
       </div>
       <div className="stage" data-reveal="eager">
@@ -93,7 +121,7 @@ export function PageHero({
             <figure className="person">
               <div className="p-img">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={photo} alt="" fetchPriority="high" loading="eager" decoding="async" />
+                <img src={photo} alt="" fetchPriority="high" loading="eager" decoding="async" style={{ objectPosition: photoPosition }} />
                 <span className="p-scrim" aria-hidden="true" />
                 {photoCaption && <span className="p-name">{photoCaption}</span>}
               </div>
@@ -178,42 +206,6 @@ export function PageHero({
           margin: 22px auto 0;
         }
         .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
-        :global(.btn-p) {
-          display: inline-block;
-          background: #1A1A19;
-          color: #fff;
-          font-weight: 600;
-          font-size: 16px;
-          padding: 14px 28px;
-          border-radius: 999px;
-          text-decoration: none;
-          box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22);
-          transition: transform 0.15s ease;
-        }
-        :global(.btn-p:hover) { transform: translateY(-2px); }
-        :global(.btn-g) {
-          display: inline-block;
-          color: var(--text);
-          font-weight: 600;
-          font-size: 16px;
-          padding: 14px 24px;
-          border-radius: 999px;
-          border: 1px solid var(--border-mid);
-          background: rgba(255, 255, 255, 0.6);
-          text-decoration: none;
-        }
-        :global(.btn-g:hover) { background: #fff; }
-        @media (prefers-reduced-motion: reduce) { :global(.btn-p:hover) { transform: none; } }
-        .proof { display: flex; align-items: center; gap: 13px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
-        .faces { display: flex; }
-        .faces img {
-          width: 34px; height: 34px; border-radius: 999px; object-fit: cover;
-          border: 2px solid #fff; box-shadow: var(--shadow-sm);
-          margin-left: -9px; background: var(--bg-elevated);
-        }
-        .faces img:first-child { margin-left: 0; }
-        .proof-t { font-size: 14px; font-weight: 600; color: var(--text); }
-
         .stage {
           position: relative;
           max-width: 1020px;
@@ -577,7 +569,7 @@ export function QuoteBand({
           box-shadow: var(--shadow-float);
         }
         .photo { position: relative; min-height: 280px; }
-        .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
         .badge {
           position: absolute;
           left: 14px;
@@ -651,17 +643,11 @@ export function PageCta({
         <h2 className="t">{title}</h2>
         <p className="s">{sub}</p>
         <div className="btns">
-          <Link href="/demo" className="b">Book a demo</Link>
-          <Link href="/product" className="b2">See it run</Link>
+          <Link href="/demo" className="btn btn-primary">Book a demo</Link>
+          <Link href="/product" className="btn btn-ghost">See it run</Link>
         </div>
         <div className="proofline">
-          <div className="faces" aria-hidden="true">
-            {FACES.map((p) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img key={p} src={`/avatars/${p}-72.jpg`} alt="" width={30} height={30} loading="lazy" decoding="async" />
-            ))}
-          </div>
-          <p className="trust">No setup project · Your data imported in a day · You approve the big calls</p>
+          <p className="trust">Built by the founders, who answer the demo call · Your data imported in a day · You approve the big calls</p>
         </div>
       </div>
       <style jsx>{`
@@ -698,42 +684,9 @@ export function PageCta({
         }
         .s { position: relative; color: rgba(255, 255, 255, 0.92); font-size: 17px; margin: 16px 0 28px; }
         .btns { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        :global(.pc .b) {
-          display: inline-block;
-          background: #1A1A19;
-          color: #fff;
-          font-weight: 600;
-          font-size: 16px;
-          padding: 14px 28px;
-          border-radius: 999px;
-          text-decoration: none;
-          box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
-          transition: transform 0.15s ease;
-        }
-        :global(.pc .b:hover) { transform: translateY(-2px); }
-        :global(.pc .b2) {
-          display: inline-block;
-          background: rgba(255, 255, 255, 0.92);
-          color: #1A1A19;
-          font-weight: 600;
-          font-size: 16px;
-          padding: 14px 24px;
-          border-radius: 999px;
-          text-decoration: none;
-        }
-        :global(.pc .b2:hover) { background: #fff; }
-        @media (prefers-reduced-motion: reduce) { :global(.pc .b:hover) { transform: none; } }
-        .proofline { position: relative; display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 26px; flex-wrap: wrap; }
-        .faces { display: flex; }
-        .faces img {
-          width: 30px; height: 30px; border-radius: 999px; object-fit: cover;
-          border: 2px solid rgba(255, 255, 255, 0.85);
-          margin-left: -9px;
-          box-shadow: 0 6px 14px rgba(20, 18, 14, 0.25);
-          background: var(--bg-elevated);
-        }
-        .faces img:first-child { margin-left: 0; }
-        .trust { color: rgba(255, 255, 255, 0.82); font-size: 13px; margin: 0; }
+        .proofline { position: relative; display: flex; align-items: center; justify-content: center; margin-top: 24px; }
+        .trust { color: rgba(255, 255, 255, 0.86); font-size: 13px; margin: 0; }
+        .btns :global(.btn-ghost) { color: #fff; }
       `}</style>
     </section>
   )

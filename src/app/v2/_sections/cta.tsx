@@ -13,7 +13,7 @@ export default function Cta() {
           A 30-minute demo. Then we import your data and switch you over.
         </p>
         <div className="form">
-          <a className="btn" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
+          <a className="btn btn-primary" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
         </div>
         <div className="trust">
           <span>Your data imports in a day</span><i /><span>Your data stays in the US</span><i /><span>A human on the big calls</span>
@@ -113,16 +113,6 @@ export default function Cta() {
           width: min(320px, 100%);
           color: var(--text);
           outline: none;
-        }
-        .btn {
-          background: #1A1A19;
-          color: #fff;
-          font-weight: 600;
-          font-size: 15px;
-          padding: 15px 28px;
-          border-radius: 999px;
-          border: none;
-          cursor: pointer;
         }
       `}</style>
     </section>
