@@ -9,7 +9,7 @@ export default function Pricing() {
       <div className="wrap">
         <div className="head" data-reveal>
           <p className="eyebrow">Pricing</p>
-          <h2 className="title">Priced like software. <span className="em">Works like a team.</span></h2>
+          <h2 className="title">Priced per employee, <span className="em">per month.</span></h2>
           <p className="lead">
             The admin workload that eats a full-time generalist&rsquo;s week runs from $24k a
             year here. Your team spends that week on people instead.

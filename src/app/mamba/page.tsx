@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import { ChatThread } from '@/components/mockups'
 
 /* ── Hero fragment: a realistic Slack window, policy answer + letter receipt ── */
@@ -392,12 +392,6 @@ export default function MambaPage() {
         ]}
       />
 
-      <QuoteBand
-        quote="By week two, MambaHR had taken leave and onboarding off my desk completely."
-        role="Head of People · Robotics startup, 240 people"
-        img="/v2-people/feat.jpg"
-        metric="Saved 12 hrs / week"
-      />
 
       <PageCta title={<>See it do the work, <Em>live.</Em></>} sub="A 30-minute demo on your own Slack questions. Then we import your data and switch you over." />
       </main>

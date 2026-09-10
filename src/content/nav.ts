@@ -46,7 +46,7 @@ export const forWhom: NavItem[] = [
 ]
 
 export const companyItems: NavItem[] = [
-  { label: 'About',    href: '/about',                 description: 'The team and the mission', live: true },
+  { label: 'About',    href: '/about',                 description: 'The team', live: true },
   { label: 'Security', href: '/security',              description: 'How we protect your data', live: true },
-  { label: 'Contact',  href: 'mailto:hello@mambahr.com', description: 'Talk to the founders', live: true },
+  { label: 'Contact',  href: 'mailto:hello@mambahr.com', description: 'hello@mambahr.com', live: true },
 ]

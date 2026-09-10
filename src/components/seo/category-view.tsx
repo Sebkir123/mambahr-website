@@ -97,12 +97,11 @@ export default function CategoryView({ data }: { data: CategoryData }) {
           <div className="wrap">
             <div className="head" data-reveal>
               <p className="eyebrow">Why MambaHR</p>
-              <h2 className="title">Different <Em>by design.</Em></h2>
+              <h2 className="title">Where MambaHR <Em>differs.</Em></h2>
             </div>
             <div className="grid">
               {data.reasons.map((r, i) => (
                 <div key={r.title} className="card" data-reveal data-delay={String(i + 1)}>
-                  <span className="num">{String(i + 1).padStart(2, '0')}</span>
                   <h3 className="t">{r.title}</h3>
                   <p className="b">{r.desc}</p>
                 </div>
@@ -117,8 +116,7 @@ export default function CategoryView({ data }: { data: CategoryData }) {
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 22px); }
             .card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
-            .num { font-family: var(--font-serif); font-size: 36px; line-height: 1; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-            .t { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 14px 0 10px; line-height: 1.3; }
+            .t { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 0 0 10px; line-height: 1.3; }
             .b { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin: 0; }
             @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
           `}</style>
@@ -168,7 +166,7 @@ export default function CategoryView({ data }: { data: CategoryData }) {
           <div className="wrap">
             <div className="head" data-reveal>
               <p className="eyebrow">Questions, answered</p>
-              <h2 className="title">The honest <Em>FAQ.</Em></h2>
+              <h2 className="title">Common <Em>questions.</Em></h2>
             </div>
             <div className="list">
               {data.faq.map((f, i) => (

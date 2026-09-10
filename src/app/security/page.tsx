@@ -4,7 +4,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PageHero, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import { REVIEW } from './review'
 
 /* ── Hero fragment: dark security log ── */
@@ -75,7 +75,7 @@ function Commitments() {
         <div className="head" data-reveal>
           <p className="eyebrow">Our commitments</p>
           <h2 className="title">How we treat your data</h2>
-          <p className="lead">No fine print, no acronyms. The five things that hold for every customer, written into our Data Processing Addendum, available on request.</p>
+          <p className="lead">The five things that hold for every customer, written into our Data Processing Addendum, available on request.</p>
         </div>
         <div className="card agent-edge agent-done" data-reveal data-delay="1">
           {COMMITMENTS.map((c) => (
@@ -227,7 +227,7 @@ function SecurityReview() {
           ))}
         </div>
         <p className="contact" data-reveal>
-          Something we didn&rsquo;t cover? <a href="mailto:hello@mambahr.com">security questions go straight to the founders</a>.
+          Something we didn&rsquo;t cover? <a href="mailto:hello@mambahr.com">hello@mambahr.com</a>.
         </p>
       </div>
       <style jsx>{`
@@ -308,15 +308,10 @@ export default function SecurityPage() {
 
         <SecurityReview />
 
-        <QuoteBand
-          quote="I asked the hard questions before we signed, who sees what, where the data lives, what trains their AI. The answers were in the Data Processing Addendum, not a slide deck."
-          role="Head of People · Robotics startup, 240 people"
-          img="/v2-people/feat.jpg"
-        />
 
         <PageCta
-          title={<>Trust, <Em>verifiable.</Em></>}
-          sub="Bring your security team to the demo. We like those calls."
+          title={<>Encrypted, logged, <Em>never used to train AI.</Em></>}
+          sub="A 30-minute demo. Bring your security team."
         />
       </main>
       <Footer />

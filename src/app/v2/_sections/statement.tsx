@@ -32,15 +32,6 @@ export default function Statement() {
         <p className="cite" data-reveal data-delay="2">
           Sources: Alight payroll compliance study, SHRM cost-per-hire benchmark, and Eddy HR operations report.
         </p>
-
-        <figure className="quote" data-reveal data-delay="3">
-          <blockquote>&ldquo;I was hired to build a great place to work. Instead, I spend my days buried in paperwork.&rdquo;</blockquote>
-          <figcaption>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/avatars/head-of-people.jpg" alt="" width={38} height={38} loading="lazy" decoding="async" />
-            <span>Head of People · SaaS company, 300 people · illustrative</span>
-          </figcaption>
-        </figure>
       </div>
 
       <style jsx>{`
@@ -116,38 +107,6 @@ export default function Statement() {
           color: rgba(255, 255, 255, 0.38);
           margin: 28px auto 0;
           max-width: 560px;
-        }
-        .quote {
-          max-width: 620px;
-          margin: clamp(52px, 6vw, 76px) auto 0;
-          padding-top: clamp(40px, 5vw, 56px);
-          border-top: 1px solid rgba(255, 255, 255, 0.12);
-        }
-        .quote blockquote {
-          font-family: var(--font-serif);
-          font-style: italic;
-          font-size: clamp(20px, 2.4vw, 27px);
-          line-height: 1.4;
-          letter-spacing: -0.01em;
-          color: #fff;
-          margin: 0;
-        }
-        .quote figcaption {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 11px;
-          margin-top: 22px;
-        }
-        .quote figcaption img {
-          width: 38px;
-          height: 38px;
-          border-radius: 999px;
-          object-fit: cover;
-        }
-        .quote figcaption span {
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.62);
         }
         @media (max-width: 760px) {
           .stats { grid-template-columns: 1fr; }
