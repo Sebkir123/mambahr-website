@@ -25,7 +25,7 @@ export const byFunction: NavItem[] = [
   // Descriptions are ONE line in the mega menu, keep them short so they never wrap.
   { label: 'Hiring',              href: '/hiring',       description: 'Job post to signed offer',         live: true, icon: 'hiring' },
   { label: 'Onboarding',          href: '/onboarding',   description: 'Ready before they arrive',    live: true, icon: 'onboarding' },
-  { label: 'Payroll',             href: '/payroll',      description: 'Every change in before payday', live: true, icon: 'payroll', pill: 'Deel' },
+  { label: 'Payroll',             href: '/payroll',      description: 'Every change in before payday', live: true, icon: 'payroll', pill: 'Powered by Deel' },
   { label: 'Time off & leave',    href: '/leave',        description: 'Vacation days to family leave, in seconds',     live: true, icon: 'timeoff' },
   { label: 'Compensation',        href: '/compensation', description: 'Raises priced to your pay ranges', live: true, icon: 'comp' },
   { label: 'Compliance',          href: '/compliance',   description: 'Every answer cites the law',  live: true, icon: 'compliance' },
