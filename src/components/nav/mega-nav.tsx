@@ -388,12 +388,12 @@ export default function MegaNav() {
             <button
               ref={burgerRef}
               type="button"
-              className="md:hidden"
+              className="nav-burger"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 12, minWidth: 44, minHeight: 44, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text)', borderRadius: 8 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 12, minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center', color: 'var(--text)', borderRadius: 8 }}
             >
               {mobileOpen ? (
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>

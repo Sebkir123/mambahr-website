@@ -636,6 +636,8 @@ h4, h5, h6 {
   to { opacity: 1; transform: none; }
 }
 .nav-dropdown { animation: navDropIn 0.22s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.nav-burger { display: inline-flex; }
+@media (min-width: 768px) { .nav-burger { display: none; } }
 .nav-rail-link { transition: background 0.15s ease; }
 .nav-rail-link:hover { background: var(--bg-warm); }
 .nav-kw { transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease; }

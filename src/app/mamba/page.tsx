@@ -136,7 +136,7 @@ function SlackWindow() {
           min-width: 200px;
           text-align: center;
         }
-        .sw-body { display: grid; grid-template-columns: 178px 1fr; }
+        .sw-body { display: grid; grid-template-columns: 178px 1fr; position: relative; z-index: 0; }
         .sw-side { background: #3F0E40; padding: 14px 10px; }
         .sw-ws {
           display: flex;
