@@ -6,7 +6,7 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Job Portal & Careers Page | MambaHR',
   description:
-    'A branded careers page on your domain, hosted job board, and applicant tracking. Applications land in your pipeline already read, ranked, with EEO data collected.',
+    'A branded careers page on your domain, hosted job board and applicant tracking. Applications land in your pipeline already read and ranked, with EEO data.',
   openGraph: {
     title: 'Job Portal & Careers Page | MambaHR',
     description:

@@ -68,12 +68,16 @@ export function categoryJsonLd(data: CategoryData) {
   ]
 }
 
+// The "best HRIS" title carries the year. It is derived at build time (the page
+// is statically prerendered), so a deploy never ships a stale year.
+const CURRENT_YEAR = new Date().getFullYear()
+
 export const categories: Record<string, CategoryData> = {
   'ai-hr-software': {
     slug: 'ai-hr-software',
     metaTitle: 'AI HR Software: The Autonomous HR Department | MambaHR',
     metaDescription:
-      'AI HR software that does the work, not just dashboards it. MambaHR is the autonomous AI HR department: it resolves leave, hiring, onboarding, and compliance requests in Slack, with one human approving the delicate calls. Live in a day, from $14/employee.',
+      'AI HR software that does the work, not just dashboards it. MambaHR resolves leave, hiring, onboarding and compliance requests in Slack. Live in a day, from $14.',
     h1: 'AI HR software that does the work, not just tracks it',
     eyebrow: 'AI HR software',
     hero: { lead: 'AI HR software that', em: 'does the work.', tail: '' },
@@ -140,11 +144,11 @@ export const categories: Record<string, CategoryData> = {
 
   'best-hris-for-startups': {
     slug: 'best-hris-for-startups',
-    metaTitle: 'Best HRIS for Startups (2026) | MambaHR',
+    metaTitle: `Best HRIS for Startups (${CURRENT_YEAR}) | MambaHR`,
     metaDescription:
-      'The best HRIS for startups in 2026 does the HR work, not just stores it. MambaHR is the AI HR department for lean teams: hiring, onboarding, leave, payroll-ready exports, and 50-state compliance, live in a day, from $14/employee. HR that runs itself.',
+      'The best HRIS for startups does the HR work, not just stores it. MambaHR runs hiring, onboarding, leave and 50-state compliance for lean teams, from $14.',
     h1: 'The best HRIS for startups does the work, not just stores it',
-    eyebrow: 'Best HRIS for startups · 2026',
+    eyebrow: `Best HRIS for startups · ${CURRENT_YEAR}`,
     hero: { lead: 'The best HRIS for startups', em: 'before you hire HR.', tail: '' },
     heroSub:
       "Most startup HRIS picks are a database your founders still operate. MambaHR is the AI HR department: it runs hiring, onboarding, leave, and compliance for you, so a 20-person team gets enterprise-grade HR without the first HR hire.",
@@ -216,7 +220,7 @@ export const categories: Record<string, CategoryData> = {
     slug: 'hr-software-small-business',
     metaTitle: 'HR Software for Small Business | MambaHR',
     metaDescription:
-      'HR software for small business that does the work instead of adding another dashboard. MambaHR is the AI HR department: hiring, onboarding, leave, payroll-ready exports, and 50-state compliance, run for you in Slack. Live in a day, from $14/employee.',
+      'HR software for small business that does the work, not another dashboard. MambaHR runs hiring, onboarding, leave and 50-state compliance in Slack, from $14.',
     h1: 'HR software for small business that does the work for you',
     eyebrow: 'HR software for small business',
     hero: { lead: 'HR software that runs', em: 'the HR for you.', tail: '' },

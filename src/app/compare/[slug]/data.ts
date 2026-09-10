@@ -4,6 +4,8 @@ export type CompetitorData = {
   tagline: string
   heroHeadline: string
   heroSub: string
+  /** Meta description, 150 to 160 chars. heroSub is page copy and runs long for a SERP snippet. */
+  description: string
   switchReasons: { title: string; desc: string }[]
   tableRows: { feature: string; mamba: string | boolean; them: string | boolean; note?: string }[]
   bottomLine: string
@@ -14,6 +16,7 @@ export type CompetitorData = {
 export const competitors: Record<string, CompetitorData> = {
   rippling: {
     slug: 'rippling',
+    description: 'Rippling is the stack your HR org operates. MambaHR is the AI HR department that runs hiring, leave, onboarding and compliance itself, end to end, in one place.',
     name: 'Rippling',
     tagline: 'MambaHR vs Rippling',
     heroHeadline: 'Rippling is the stack.\nMambaHR is the department.',
@@ -50,6 +53,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   gusto: {
     slug: 'gusto',
+    description: 'Gusto is clean payroll for small teams. The rest of HR, leave, hires, onboarding, policy and compliance, still hits your inbox. MambaHR clears that inbox.',
     name: 'Gusto',
     tagline: 'MambaHR vs Gusto',
     heroHeadline: 'Gusto handles payday.\nMambaHR handles every other day.',
@@ -86,6 +90,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   deel: {
     slug: 'deel',
+    description: 'Deel cracked global contractor pay and EOR. For the people you employ in the US, MambaHR is the AI HR department: leave, hiring, onboarding and compliance.',
     name: 'Deel',
     tagline: 'MambaHR vs Deel',
     heroHeadline: 'Deel is built for contractors.\nMambaHR is built for your team.',
@@ -123,6 +128,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   bamboohr: {
     slug: 'bamboohr',
+    description: 'BambooHR keeps records clean, but every action still needs a human to open the system and do the work. MambaHR is the AI HR department that does the work.',
     name: 'BambooHR',
     tagline: 'MambaHR vs BambooHR',
     heroHeadline: 'BambooHR is a database.\nMambaHR is the department.',
@@ -159,6 +165,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   namely: {
     slug: 'namely',
+    description: 'Namely bundles HRIS, payroll and benefits into software your HR org operates. MambaHR is an agent department that handles leave, hiring and compliance itself.',
     name: 'Namely',
     tagline: 'MambaHR vs Namely',
     heroHeadline: 'Namely made the HRIS prettier.\nMambaHR makes it unnecessary.',
@@ -195,6 +202,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   hibob: {
     slug: 'hibob',
+    description: 'HiBob is a modern HRIS employees like, still operated by your HR org. MambaHR is the agent that does the HR work: leave, hiring, onboarding and compliance.',
     name: 'HiBob',
     tagline: 'MambaHR vs HiBob',
     heroHeadline: 'HiBob made HR look modern.\nMambaHR makes it do the work.',
@@ -232,6 +240,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   adp: {
     slug: 'adp',
+    description: 'ADP is a comprehensive platform built for HR professionals to operate. MambaHR is an AI HR department that handles requests, compliance and hiring itself.',
     name: 'ADP',
     tagline: 'MambaHR vs ADP',
     heroHeadline: 'ADP is the system of record.\nMambaHR is the system of work.',
@@ -269,6 +278,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   workday: {
     slug: 'workday',
+    description: 'Workday is the enterprise HCM run by a department of admins. MambaHR is an agent department that does the HR work, live the day you sign, with audit depth.',
     name: 'Workday',
     tagline: 'MambaHR vs Workday',
     heroHeadline: 'Workday is software you implement.\nMambaHR is a department you turn on.',
@@ -305,6 +315,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   justworks: {
     slug: 'justworks',
+    description: 'Justworks is a PEO: co-employment plus support reps. MambaHR is the AI HR department that does the work in Slack, with no co-employment and no ticket queue.',
     name: 'Justworks',
     tagline: 'MambaHR vs Justworks',
     heroHeadline: 'Justworks gives you a support queue.\nMambaHR gives you the answer.',
@@ -342,6 +353,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   trinet: {
     slug: 'trinet',
+    description: 'TriNet co-employs your team and assigns an HR service rep. MambaHR is an AI HR department that does the administrative work directly, with no co-employment.',
     name: 'TriNet',
     tagline: 'MambaHR vs TriNet',
     heroHeadline: 'TriNet is a PEO with a service rep.\nMambaHR is the department itself.',
@@ -379,6 +391,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   paychex: {
     slug: 'paychex',
+    description: 'Paychex sells payroll and HR services module by module, with a rep on the phone. MambaHR is one product that resolves requests, runs compliance and preps pay.',
     name: 'Paychex',
     tagline: 'MambaHR vs Paychex',
     heroHeadline: 'Paychex runs payroll and sells you services.\nMambaHR does the HR work.',
@@ -416,6 +429,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   zenefits: {
     slug: 'zenefits',
+    description: 'Zenefits (now part of TriNet) packaged HR, benefits and payroll into software your team clicks through. MambaHR resolves the request before a dashboard opens.',
     name: 'Zenefits',
     tagline: 'MambaHR vs Zenefits',
     heroHeadline: 'Zenefits gave you the dashboard.\nMambaHR does the work behind it.',
@@ -453,6 +467,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   paylocity: {
     slug: 'paylocity',
+    description: 'Paylocity is a mid-market HCM your HR org runs screen by screen. MambaHR is an agent department that handles requests, compliance and hiring without an admin.',
     name: 'Paylocity',
     tagline: 'MambaHR vs Paylocity',
     heroHeadline: 'Paylocity is an HCM suite to operate.\nMambaHR does the operating.',
@@ -490,6 +505,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   ukg: {
     slug: 'ukg',
+    description: 'UKG is deep workforce management for large shift-heavy teams, run by a team. MambaHR is an AI HR department live the day you sign, with audit depth built in.',
     name: 'UKG',
     tagline: 'MambaHR vs UKG',
     heroHeadline: 'UKG is enterprise workforce software.\nMambaHR is the department you turn on.',
@@ -526,6 +542,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   greenhouse: {
     slug: 'greenhouse',
+    description: 'Greenhouse is a strong ATS that stops at the offer. MambaHR screens and schedules candidates, then onboards, pays and manages the person you hired, end to end.',
     name: 'Greenhouse',
     tagline: 'MambaHR vs Greenhouse',
     heroHeadline: 'Greenhouse is an ATS.\nMambaHR hires, then runs the rest.',
@@ -562,6 +579,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   lever: {
     slug: 'lever',
+    description: 'Lever pairs an ATS with candidate-relationship tools and ends at the offer. MambaHR screens and schedules, then onboards, pays and manages the hire, end to end.',
     name: 'Lever',
     tagline: 'MambaHR vs Lever',
     heroHeadline: 'Lever is recruiting software.\nMambaHR is the whole department.',
@@ -598,6 +616,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   remote: {
     slug: 'remote',
+    description: 'Remote is built for global EOR and contractor pay. For the US team you actually employ, MambaHR is the AI HR department: leave, hiring, onboarding, compliance.',
     name: 'Remote',
     tagline: 'MambaHR vs Remote',
     heroHeadline: 'Remote pays people across borders.\nMambaHR runs the team you employ.',
@@ -635,6 +654,7 @@ export const competitors: Record<string, CompetitorData> = {
 
   oyster: {
     slug: 'oyster',
+    description: 'Oyster hires and pays people abroad through EOR. For the US team you actually employ, MambaHR is the AI HR department: leave, hiring, onboarding and compliance.',
     name: 'Oyster',
     tagline: 'MambaHR vs Oyster',
     heroHeadline: 'Oyster hires across borders.\nMambaHR runs the team at home.',

@@ -56,7 +56,7 @@ function Cover({ post, variant }: { post: Post; variant: 'lead' | 'card' }) {
 export const metadata: Metadata = {
   title: 'Blog | MambaHR',
   description:
-    'Field notes on AI in HR, multi-state compliance, hiring, onboarding, and what it takes to run a people function end to end. From the team building the AI HR department.',
+    'Field notes on AI in HR, multi-state compliance, hiring, onboarding and running a people function end to end, from the team building the AI HR department.',
   openGraph: {
     title: 'Blog | MambaHR',
     description: 'Field notes on AI in HR, compliance, hiring, and running a people function end to end.',
