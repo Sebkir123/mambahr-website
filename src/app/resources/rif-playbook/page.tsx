@@ -167,7 +167,7 @@ export default async function RifPlaybookPage({
             </ul>
           </div>
           <Rail photo="/v2-people/team2.jpg">
-            Built by HR and legal leaders, so you only need to run this process <em>once</em>.
+            Built for the hardest day, so you only need to run this process <em>once</em>.
           </Rail>
         </div>
         <Chrome page={2} />
@@ -217,7 +217,7 @@ export default async function RifPlaybookPage({
             </div>
           </div>
           <Rail>
-            MambaHR includes these clauses in <em>every agreement</em>.
+            MambaHR&rsquo;s separation template starts from these clauses; <em>your counsel finalises it</em>.
           </Rail>
         </div>
         <Chrome page={4} />
@@ -244,8 +244,6 @@ export default async function RifPlaybookPage({
                   ['Span / layer', 'Middle layer removed to flatten the org'],
                   ['Redundancy', 'Overlap after a recent acquisition'],
                   ['Performance', 'Documented underperformance over 2 quarters'],
-                  ['Salary', '20%+ above peer group'],
-                  ['Tenure', 'Least tenured in a comparable function'],
                   ['Location', 'In-office requirement, role is remote-only'],
                   ['Business shift', 'Work is now outsourced'],
                 ].map(([r, e]) => (
@@ -271,7 +269,7 @@ export default async function RifPlaybookPage({
             <h2 className={s.title}>
               Score selection <span className={s.accent}>without bias</span>
             </h2>
-            <p className={s.sub}>Managers rate each role on the same scale | MambaHR averages the score.</p>
+            <p className={s.sub}>Managers rate each role on the same scale | record the scores in the RIF room.</p>
             <table className={s.table}>
               <thead>
                 <tr>
@@ -292,7 +290,7 @@ export default async function RifPlaybookPage({
             </table>
           </div>
           <Rail>
-            Managers input rationale &amp; ratings | MambaHR <em>guides selection</em> with ease.
+            Managers input rationale &amp; ratings | the RIF room <em>keeps the record</em>.
           </Rail>
         </div>
         <Chrome page={6} />
@@ -305,7 +303,7 @@ export default async function RifPlaybookPage({
             <h2 className={s.title}>
               Identify <span className={s.accent}>compensation risk</span>
             </h2>
-            <p className={s.sub}>Review pay across similar roles to surface high-cost outliers.</p>
+            <p className={s.sub}>Review pay across similar roles. Salary correlates with age, so use this only with an adverse-impact analysis reviewed by counsel.</p>
             <table className={s.table}>
               <thead>
                 <tr>
@@ -328,7 +326,7 @@ export default async function RifPlaybookPage({
             </table>
           </div>
           <Rail>
-            Compare salaries to spot outliers across roles, instantly, <em>with MambaHR</em>.
+            Compare salaries across roles, <em>with the adverse-impact check attached</em>.
           </Rail>
         </div>
         <Chrome page={7} />
@@ -361,7 +359,7 @@ export default async function RifPlaybookPage({
             </div>
           </div>
           <Rail photo="/v2-people/feat.jpg">
-            Real-time dashboards power confident, <em>data-backed decisions</em>.
+            See the cost, the notice dates, and the risk <em>before you commit</em>.
           </Rail>
         </div>
         <Chrome page={8} />
@@ -384,7 +382,7 @@ export default async function RifPlaybookPage({
             </div>
           </div>
           <Rail>
-            MambaHR agreements include every clause shown here, <em>by default</em>.
+            MambaHR&rsquo;s separation template starts from every clause shown here; <em>your counsel finalises it</em>.
           </Rail>
         </div>
         <Chrome page={9} />
@@ -443,7 +441,7 @@ export default async function RifPlaybookPage({
             </div>
           </div>
           <Rail photo="/v2-people/team2.jpg">
-            Our dashboard tracks all of this <em>automatically</em>.
+            The RIF room tracks <em>every item on this list</em>.
           </Rail>
         </div>
         <Chrome page={11} />
@@ -473,9 +471,9 @@ export default async function RifPlaybookPage({
             <p className={s.baTag}>Structure, clear options, generated PDFs, tracking</p>
             <ul className={s.baList}>
               <li className={s.baItem}>Managers select rationale and input ratings in one place</li>
-              <li className={s.baItem}>Department sheets sync to a centralized dashboard</li>
+              <li className={s.baItem}>Department sheets sync to the RIF room</li>
               <li className={s.baItem}>Agreements + OWBPA disclosures generated automatically</li>
-              <li className={s.baItem}>Salary, tenure, and impact tracked in real time</li>
+              <li className={s.baItem}>Cost, notice dates, and impact tracked in one place</li>
               <li className={s.baItem}>Everything documented, stored, and audit-ready</li>
             </ul>
           </div>
@@ -497,11 +495,7 @@ export default async function RifPlaybookPage({
             <p className={s.p}>
               MambaHR runs a compliant, defensible, people-first layoff, without spreadsheets, scattered
               inputs, or last-minute legal panic. From structured manager rationale to OWBPA-ready severance
-              agreements, it automates every step and shows the business impact in real time.
-            </p>
-            <p className={s.p}>
-              Teams using MambaHR have cut RIF prep time by up to <strong>70%</strong>, closed documentation
-              gaps, and delivered a more thoughtful experience for everyone involved.
+              agreements, it prepares every step for your approval and shows the cost before you commit.
             </p>
             <a className={s.ctaBtn} href="https://mambahr.com">
               Get started at mambahr.com →

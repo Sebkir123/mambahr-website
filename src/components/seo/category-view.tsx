@@ -29,10 +29,10 @@ function SlackFragment() {
         <span className="sf-av sf-av-m" aria-hidden="true" />
         <div className="sf-body">
           <div className="sf-meta"><b>MambaHR</b><span className="sf-bot">agent</span><span>9:24 AM</span></div>
-          <p className="sf-text">You’re eligible for 12 weeks of job-protected bonding leave. FMLA and CFRA run together, not back to back, with up to 8 weeks of California PFL wage replacement during it. I’ve drafted the leave plan and routed it to Dave for approval.</p>
+          <p className="sf-text">You’re eligible for 12 weeks of FMLA bonding leave, job protected. I’ve attached the California CFRA and PFL rules and routed the plan to Dave to confirm the stack.</p>
           <div className="sf-pills">
             <span className="sf-pill">FMLA · CFRA · CA PFL</span>
-            <span className="sf-pill sf-pill-g">Approval routed</span>
+            <span className="sf-pill sf-pill-g">Routed to Dave</span>
           </div>
         </div>
       </div>

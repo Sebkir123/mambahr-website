@@ -73,7 +73,7 @@ export const categories: Record<string, CategoryData> = {
     slug: 'ai-hr-software',
     metaTitle: 'AI HR Software: The Autonomous HR Department | MambaHR',
     metaDescription:
-      'AI HR software that does the work, not just dashboards it. MambaHR is the autonomous AI HR department: it resolves leave, hiring, onboarding, and compliance requests in Slack, with one human approving the delicate calls. Live in a day, from $14/employee.',
+      'AI HR software that does the work, not just dashboards it. MambaHR is the autonomous AI HR department: it resolves leave, hiring, onboarding, and compliance requests asked in Slack, with one human approving the delicate calls. Your data imports in a day, from $14/employee.',
     h1: 'AI HR software that does the work, not just tracks it',
     eyebrow: 'AI HR software',
     hero: { lead: 'AI HR software that', em: 'does the work.', tail: '' },
@@ -90,12 +90,12 @@ export const categories: Record<string, CategoryData> = {
         desc: "Legacy HR software gives a human a queue to work through. MambaHR’s agent reads the request in Slack, pulls the context, applies the policy, drafts the document, and closes it, end to end, in seconds.",
       },
       {
-        title: 'Compliance that reasons across 50 states.',
-        desc: 'It knows when FMLA stacks with state paid leave, when an exempt classification is shaky, when pay-transparency rules differ by state, and acts on the right rule automatically, with a citation.',
+        title: 'Compliance that reasons, with a citation.',
+        desc: 'It checks FMLA eligibility, cites the pay-transparency rule for each state you employ in, cites the FLSA exemption test for a role, and routes the ambiguous calls to a person.',
       },
       {
-        title: 'One human in the loop, not a back office.',
-        desc: 'High-certainty actions auto-complete. Borderline cases (a termination, an accommodation, a comp call) queue for your sign-off. You stay on policy; the agent handles the mechanics.',
+        title: 'You approve the big calls. It does the rest.',
+        desc: 'Routine work gets done and logged. A termination, a comp call, or a raise above your range waits for your sign-off. You set the policy; MambaHR does the work.',
       },
     ],
     checklist: {
@@ -104,17 +104,17 @@ export const categories: Record<string, CategoryData> = {
       lead: 'Most tools claim “AI.” Hold them to the list that actually shrinks the work.',
       items: [
         { t: 'Resolve end to end', d: 'Not “suggest a draft” but actually file the leave, send the offer, update the record.' },
-        { t: 'Reason about employment law', d: 'Federal + 50-state compliance applied automatically, not a static policy library.' },
-        { t: 'Keep a human on the risky calls', d: 'Auto-complete the safe work; escalate terminations, accommodations, and comp.' },
+        { t: 'Reason about employment law', d: 'Federal law plus the rules for your states, applied with a citation, not a static policy library.' },
+        { t: 'Keep a human on the risky calls', d: 'Auto-complete the safe work; escalate terminations and comp.' },
         { t: 'Audit every action', d: 'A traceable log of what the agent did and why, defensible if challenged.' },
         { t: 'Be the system of record', d: 'Own the employee database, ATS, and onboarding. Not a layer that re-keys data.' },
-        { t: 'Go live in a day', d: 'Connect Slack and your stack; handling requests by the next morning, no implementation project.' },
+        { t: 'Import in a day', d: 'Import your data, connect Slack; most teams are live within a day of importing, no implementation project.' },
       ],
     },
     stats: [
-      { n: 90, suffix: '%', label: 'of routine HR requests resolved without a human touching them' },
-      { n: 1, suffix: ' day', label: 'from signing to the agent handling live requests' },
-      { n: 50, label: 'states of employment-law coverage, applied automatically' },
+      { n: 100, suffix: '%', label: 'of within-policy requests resolved without a human touching them; everything else queued for you' },
+      { n: 1, suffix: ' day', label: 'to import your data' },
+      { n: 100, suffix: '%', label: 'of compliance answers cite the law they relied on' },
     ],
     faq: [
       {
@@ -134,7 +134,7 @@ export const categories: Record<string, CategoryData> = {
         a: 'MambaHR is a flat $14–$30 per employee per month with everything included: HRIS, hiring, onboarding, compliance, and the agent. No modules, no implementation fee, no per-seat HR-admin licenses.',
       },
     ],
-    cta: { title: 'See AI HR software that', em: 'actually works.', sub: 'A live demo on your own scenarios in 30 minutes. Live the next morning.' },
+    cta: { title: 'See AI HR software that', em: 'actually works.', sub: 'A live demo on your own scenarios in 30 minutes. Then we import your data and switch you over.' },
     related: COMPARE_RELATED,
   },
 
@@ -142,16 +142,16 @@ export const categories: Record<string, CategoryData> = {
     slug: 'best-hris-for-startups',
     metaTitle: 'Best HRIS for Startups (2026) | MambaHR',
     metaDescription:
-      'The best HRIS for startups in 2026 does the HR work, not just stores it. MambaHR is the AI HR department for lean teams: hiring, onboarding, leave, payroll-ready exports, and 50-state compliance, live in a day, from $14/employee. HR that runs itself.',
+      'The best HRIS for startups in 2026 does the HR work, not just stores it. MambaHR is the AI HR department for lean teams: hiring, onboarding, leave, payroll changes, and compliance with the statute cited, from $14/employee. HR that runs itself.',
     h1: 'The best HRIS for startups does the work, not just stores it',
     eyebrow: 'Best HRIS for startups · 2026',
     hero: { lead: 'The best HRIS for startups', em: 'before you hire HR.', tail: '' },
     heroSub:
-      "Most startup HRIS picks are a database your founders still operate. MambaHR is the AI HR department: it runs hiring, onboarding, leave, and compliance for you, so a 20-person team gets enterprise-grade HR without the first HR hire.",
+      "Most startup HRIS picks are a database your founders still operate. MambaHR is the AI HR department: it runs hiring, onboarding, leave, and compliance for you, so a 50-person team gets enterprise-grade HR without the first HR hire.",
     answer: {
       question: 'What is the best HRIS for startups?',
       answer:
-        'For startups, the best HRIS is one that does the HR work, not just stores records. MambaHR is the AI HR department built for lean teams: it handles hiring, onboarding, leave, payroll-ready exports, and 50-state compliance autonomously in Slack, with one founder or ops lead approving the delicate calls. It is live in a day from $14 per employee.',
+        'For startups, the best HRIS is one that does the HR work, not just stores records. MambaHR is the AI HR department built for lean teams: it handles hiring, onboarding, leave, payroll changes, and compliance with the statute cited, from requests asked in Slack, with one founder or ops lead approving the delicate calls. Your data imports in a day, from $14 per employee.',
     },
     reasons: [
       {
@@ -160,35 +160,35 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         title: "Compliance you can’t afford to get wrong.",
-        desc: 'One bad classification or missed state leave rule is real money for a small team. MambaHR applies federal + 50-state law automatically, with a citation, before it becomes a problem.',
+        desc: 'One bad classification or missed state leave rule is real money for a small team. MambaHR applies federal law plus the rules for your states, with a citation, before it becomes a problem.',
       },
       {
         title: 'Priced and deployed for a startup.',
-        desc: "No implementation project, no module tree, no setup fee. Connect Slack and your stack; it’s handling requests the next morning, from $14 per employee with a $9k annual minimum.",
+        desc: "No implementation project, no module tree, no setup fee. Import your data and connect Slack; most teams are live within a day of importing, from $14 per employee with a $9k annual minimum.",
       },
     ],
     checklist: {
       eyebrow: 'How to choose',
       title: 'What a startup HRIS actually needs',
-      lead: "Skip the enterprise checklist. These are the things that matter when you’re 10–200 people.",
+      lead: "Skip the enterprise checklist. These are the things that matter when you’re 50–200 people.",
       items: [
         { t: 'Runs before you have HR', d: "The system does the admin work, so HR isn’t a role you have to staff before you’re ready." },
-        { t: '50-state compliance built in', d: 'Remote team across state lines? Leave, pay transparency, and classification handled.' },
+        { t: 'State compliance built in', d: 'Remote team across state lines? Pay transparency and final-pay rules cited for each state; FMLA today, state leave stacking coming.' },
         { t: 'Hiring + onboarding included', d: 'ATS, offers, and onboarding in the same product, no second tool, no handoff.' },
-        { t: 'Payroll-ready', d: "Generates the change file in your provider’s format; you upload, payday runs." },
-        { t: 'Live in a day', d: 'No implementation consultant. Import your data, connect Slack, go.' },
-        { t: 'Scales past Series A', d: 'The same system carries you from 20 to 2,000, no painful re-platform later.' },
+        { t: 'Payroll-ready', d: "Generates the change file in your provider’s format, or runs managed payroll on Deel. A person approves every run." },
+        { t: 'Imports in a day', d: 'No implementation consultant. Import your data, connect Slack, go.' },
+        { t: 'Scales past Series A', d: 'The same system carries you from 50 to 2,000, no painful re-platform later.' },
       ],
     },
     stats: [
       { n: 14, prefix: '$', label: 'per employee to start, no implementation fee, $9k annual minimum' },
-      { n: 1, suffix: ' day', label: 'from signing to a working HR department' },
+      { n: 1, suffix: ' day', label: 'to import your data into a working HR department' },
       { n: 0, label: 'admin backlog waiting for someone to get to it' },
     ],
     faq: [
       {
         q: 'Do startups even need an HRIS?',
-        a: "Once you’re past ~10 employees, especially across state lines, yes. You need a system of record, compliant onboarding, leave tracking, and payroll data. MambaHR gives a startup all of that plus the HR work done, without hiring an HR person to run it.",
+        a: "Once you’re past about 50 employees, especially across state lines, yes. You need a system of record, compliant onboarding, leave tracking, and payroll data. MambaHR gives a startup all of that plus the HR work done, without hiring an HR person to run it.",
       },
       {
         q: "What’s the difference between an HRIS and MambaHR?",
@@ -200,10 +200,10 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         q: 'Can it grow with us?',
-        a: "It’s built for the full company lifecycle: the same product runs HR from 20 people through enterprise scale, with the compliance and audit depth larger teams require. No re-platforming as you grow.",
+        a: "It’s built for the full company lifecycle: the same product runs HR from about 50 people through enterprise scale, with the compliance and audit depth larger teams require. No re-platforming as you grow.",
       },
     ],
-    cta: { title: 'HR that', em: 'runs itself.', sub: "A live demo on your team’s scenarios in 30 minutes. Live the next morning." },
+    cta: { title: 'HR that', em: 'runs itself.', sub: "A live demo on your team’s scenarios in 30 minutes. Then we import your data and switch you over." },
     related: [
       { label: 'MambaHR vs Gusto', href: '/compare/gusto' },
       { label: 'MambaHR vs Rippling', href: '/compare/rippling' },
@@ -216,16 +216,16 @@ export const categories: Record<string, CategoryData> = {
     slug: 'hr-software-small-business',
     metaTitle: 'HR Software for Small Business | MambaHR',
     metaDescription:
-      'HR software for small business that does the work instead of adding another dashboard. MambaHR is the AI HR department: hiring, onboarding, leave, payroll-ready exports, and 50-state compliance, run for you in Slack. Live in a day, from $14/employee.',
+      'HR software for small business that does the work instead of adding another dashboard. MambaHR is the AI HR department: hiring, onboarding, leave, payroll changes, and compliance with the statute cited, run for you from requests asked in Slack. Your data imports in a day, from $14/employee.',
     h1: 'HR software for small business that does the work for you',
     eyebrow: 'HR software for small business',
     hero: { lead: 'HR software that runs', em: 'the HR for you.', tail: '' },
     heroSub:
-      "Small businesses don’t have an HR department, they have someone doing HR on the side. MambaHR is that department: it handles hiring, onboarding, leave, and 50-state compliance in Slack, so your team gets the time back.",
+      "Small businesses don’t have an HR department, they have someone doing HR on the side. MambaHR is that department: it handles hiring, onboarding, leave, and compliance from requests asked in Slack, so your team gets the time back.",
     answer: {
       question: 'What is the best HR software for a small business?',
       answer:
-        'The best HR software for a small business does the HR work rather than adding another system to manage. MambaHR is an AI HR department that handles hiring, onboarding, leave, payroll-ready exports, and 50-state compliance autonomously in Slack, with one owner or office manager approving the sensitive decisions. It is live in a day from $14 per employee.',
+        'The best HR software for a small business does the HR work rather than adding another system to manage. MambaHR is an AI HR department that handles hiring, onboarding, leave, payroll changes, and compliance with the statute cited, from requests asked in Slack, with one owner or office manager approving the sensitive decisions. Your data imports in a day, from $14 per employee.',
     },
     reasons: [
       {
@@ -234,11 +234,11 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         title: 'Compliance without a consultant.',
-        desc: 'Small teams get tripped up by overtime rules, state leave, and classification. MambaHR applies federal + 50-state law automatically, so you stay compliant without paying for outside help.',
+        desc: 'Small teams get tripped up by overtime rules, state leave, and classification. MambaHR applies federal law plus the rules for your states, with a citation, so you know the rule without paying for outside help.',
       },
       {
         title: 'No IT project, no big bill.',
-        desc: "Connect Slack and your existing tools. It’s working the next morning. Flat per-employee pricing, everything included, no implementation fee.",
+        desc: "Import your data and connect Slack. Most teams are live within a day of importing. Flat per-employee pricing, everything included, no implementation fee.",
       },
     ],
     checklist: {
@@ -248,21 +248,21 @@ export const categories: Record<string, CategoryData> = {
       items: [
         { t: 'Does the work, not the dashboard', d: "Resolves requests for you. You’re not learning a new admin system to click through." },
         { t: 'Hiring to onboarding in one place', d: 'Post the role, send the offer, run onboarding, without stitching tools together.' },
-        { t: 'Compliance handled automatically', d: 'Overtime, leave, classification, pay transparency, applied for your states.' },
-        { t: 'Payroll-ready files', d: "Generates the change file for your payroll provider; you upload and run payday." },
-        { t: 'A human on the sensitive calls', d: 'Terminations, accommodations, and pay decisions still come to you to approve.' },
-        { t: 'Affordable and fast to start', d: 'Flat per-employee pricing, live in a day, no implementation consultant.' },
+        { t: 'Compliance with a citation', d: 'Overtime, FMLA, pay transparency, and final-pay rules cited for your states.' },
+        { t: 'Payroll-ready files', d: "Generates the change file for your payroll provider, or runs managed payroll on Deel. A person approves every run." },
+        { t: 'A human on the sensitive calls', d: 'Terminations and pay decisions still come to you to approve.' },
+        { t: 'Affordable and fast to start', d: 'Flat per-employee pricing, your data imported in a day, no implementation consultant.' },
       ],
     },
     stats: [
       { n: 6, prefix: '$', suffix: ':1', label: 'spent on HR admin for every $1 of HR software. MambaHR captures it' },
-      { n: 1, suffix: ' day', label: 'to go live, no IT project required' },
-      { n: 50, label: 'states of compliance, applied automatically' },
+      { n: 1, suffix: ' day', label: 'to import your data, no IT project required' },
+      { n: 100, suffix: '%', label: 'of compliance answers cite the law they relied on' },
     ],
     faq: [
       {
         q: 'What HR software is best for a small business?',
-        a: 'The best fit is software that removes the HR work rather than adding admin. MambaHR is an AI HR department that runs hiring, onboarding, leave, and compliance for you in Slack, ideal for small businesses without a dedicated HR person.',
+        a: 'The best fit is software that removes the HR work rather than adding admin. MambaHR is an AI HR department that runs hiring, onboarding, leave, and compliance for you from requests asked in Slack, ideal for small businesses without a dedicated HR person.',
       },
       {
         q: 'How much does small-business HR software cost?',
@@ -270,14 +270,14 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         q: 'Do I still need a payroll provider?',
-        a: "Yes, keep the payroll provider you like. MambaHR builds the per-cycle change file in your provider’s format and you upload it. It handles everything around payroll: records, changes, onboarding, and compliance.",
+        a: "You can. MambaHR prepares every payroll change. You choose between a change file for the provider you already use and Deel-managed payroll, where MambaHR sends the changes to Deel and a person approves every run.",
       },
       {
         q: 'Is it hard to set up for a small team?',
-        a: "No. There’s no implementation project. You import your existing data, connect Slack and your tools, and the agent is handling requests the next morning, typically live within a day.",
+        a: "No. There’s no implementation project. You import your existing data, connect Slack, and most teams are live within a day of importing.",
       },
     ],
-    cta: { title: 'Give your team', em: 'the HR hours back.', sub: 'A live demo on your own scenarios in 30 minutes. Live the next morning.' },
+    cta: { title: 'Give your team', em: 'the HR hours back.', sub: 'A live demo on your own scenarios in 30 minutes. Then we import your data and switch you over.' },
     related: [
       { label: 'MambaHR vs Gusto', href: '/compare/gusto' },
       { label: 'MambaHR vs BambooHR', href: '/compare/bamboohr' },
