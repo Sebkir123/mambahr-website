@@ -300,7 +300,7 @@ export default function CompliancePage() {
 
         <AgentLoop
           eyebrow="The loop"
-          title={<>How an answer <Em>happens.</Em></>}
+          title={<>How an answer happens.</>}
           lead="From a question in Slack to a cited, logged answer, with a human in the path whenever the law isn’t crystal clear."
           steps={[
             { n: '01', label: 'A question arrives', desc: 'In Slack or the MambaHR app, anyone on the team can ask.', who: 'agent', time: '0s', img: '/avatars/tom.jpg' },
@@ -313,7 +313,7 @@ export default function CompliancePage() {
 
         <FeatureSplit
           eyebrow="On the record"
-          title={<>A record your lawyer <Em>loves.</Em></>}
+          title={<>A record your lawyer loves.</>}
           lead="Every action MambaHR takes is logged with who, when, and the rule it followed. Nothing happens off the record, so when counsel or an auditor asks for proof, it’s already written down."
           bullets={[
             'Append-only, entries can be added, never edited away',
@@ -328,7 +328,7 @@ export default function CompliancePage() {
           flip
           warm
           eyebrow="Dated and cited"
-          title={<>Know when a rule was <Em>last checked.</Em></>}
+          title={<>Know when a rule was last checked.</>}
           lead="New state rules land all year long. Every MambaHR rule is reviewed and dated, and every answer shows the source it relied on and when that source was last checked."
           bullets={[
             'Federal baseline plus state-specific rules for the states where you employ people',
@@ -354,7 +354,7 @@ export default function CompliancePage() {
           metric="Saved 9 hrs / week"
         />
 
-        <PageCta title={<>Cited every time. <Em>Reviewed by a person when it matters.</Em></>} />
+        <PageCta title={<>Cited every time. Reviewed by a person when it matters.</>} />
       </main>
       <Footer />
     </>

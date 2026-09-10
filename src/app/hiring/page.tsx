@@ -5,107 +5,8 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PipelineBoard } from '@/components/mockups'
 
-/* ── Hero fragment: live pipeline card ── */
-const STAGES: { name: string; count: number; state: string; note: string; imgs?: string[] }[] = [
-  { name: 'Sourcing', count: 47, state: 'done', note: 'Posted to your careers page and job-board feeds' },
-  { name: 'Screening', count: 12, state: 'done', note: 'Ranked overnight, notes attached', imgs: ['/avatars/tom.jpg', '/avatars/priya.jpg', '/avatars/dave.jpg'] },
-  { name: 'Interviews', count: 8, state: 'done', note: 'Feedback captured on the scorecard', imgs: ['/avatars/anna.jpg', '/avatars/marcus.jpg'] },
-  { name: 'Background check', count: 2, state: 'done', note: 'Ordered through Checkr, 2 of 2 clear' },
-  { name: 'Offer · Maya Chen', count: 1, state: 'you', note: 'Draft ready, awaiting you', imgs: ['/avatars/maya.jpg'] },
-]
-
-function PipelineCard() {
-  return (
-    <div className="pl agent-edge agent-working agent-lg">
-      <div className="head">
-        <div>
-          <div className="role">Senior Engineer</div>
-          <div className="meta">NYC hybrid · $180–205k · day 6</div>
-        </div>
-        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
-      </div>
-      <div className="prog" aria-hidden="true">
-        <span className="prog-bar"><i /></span>
-        <span className="prog-t">4 of 5 stages done · offer drafted day 6</span>
-      </div>
-      {STAGES.map((s) => (
-        <div key={s.name} className={`row${s.state === 'you' ? ' yours' : ''}`}>
-          <span className={`mark${s.state === 'you' ? ' gold' : ''}`} aria-hidden="true" />
-          <div className="main">
-            <div className="top">
-              <span className="nm">{s.name}</span>
-              <span className="ct">{s.count}</span>
-            </div>
-            <div className="note">{s.note}</div>
-          </div>
-          {s.imgs && (
-            <span className="avs" aria-hidden="true">
-              {s.imgs.map((im) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img key={im} src={im} alt="" width={24} height={24} />
-              ))}
-            </span>
-          )}
-          <span className={`tag${s.state === 'you' ? ' gold' : ''}`}>
-            {s.state === 'you' ? 'Awaiting you' : 'Done'}
-          </span>
-        </div>
-      ))}
-      <style jsx>{`
-        .pl {
-          background: var(--bg);
-          border: 1px solid var(--border);
-          border-radius: 16px;
-          box-shadow: var(--shadow-float);
-          padding: 6px 0 8px;
-        }
-        .head {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 12px;
-          padding: 16px 20px 14px;
-          border-bottom: 1px solid var(--border-faint);
-        }
-        .role { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .meta { font-size: 13px; color: var(--text-faint); margin-top: 3px; }
-        .prog { display: flex; align-items: center; gap: 12px; padding: 11px 20px; border-bottom: 1px solid var(--border-faint); }
-        .prog-bar { flex: 1; height: 5px; border-radius: 999px; background: var(--border-faint); overflow: hidden; }
-        .prog-bar i { display: block; height: 100%; width: 80%; border-radius: 999px; background: linear-gradient(90deg, var(--gold-mid), var(--violet)); }
-        .prog-t { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); white-space: nowrap; }
-        .avs { display: flex; flex: none; }
-        .avs img { width: 24px; height: 24px; border-radius: 999px; object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); margin-left: -7px; background: var(--bg-elevated); }
-        .avs img:first-child { margin-left: 0; }
-        .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
-        .row + .row { border-top: 1px solid var(--border-faint); }
-        .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
-        .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
-        .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.gold { background: linear-gradient(135deg, var(--gold-pale), var(--gold)); }
-        .main { flex: 1; min-width: 0; }
-        .top { display: flex; align-items: baseline; gap: 8px; }
-        .nm { font-size: 14px; font-weight: 600; color: var(--text); }
-        .ct { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
-        .note { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-        .tag {
-          flex: none;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--color-green);
-          background: rgba(22, 130, 70, 0.08);
-          border-radius: 999px;
-          padding: 3px 9px;
-        }
-        .tag.gold { color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
-      `}</style>
-    </div>
-  )
-}
-
-/* ── Feature visual: hosted careers page fragment ── */
 const ROLES = [
   { title: 'Senior Engineer', loc: 'New York · Hybrid', pay: '$180k–$205k', hot: true },
   { title: 'Account Executive', loc: 'Remote · US', pay: '$95k–$120k + comm.' },
@@ -265,11 +166,8 @@ export default function HiringPage() {
           title={<>Hiring, <Em>handled.</Em></>}
           lead="MambaHR posts the role, screens and ranks every applicant, orders the background check, and drafts the offer in band. You make one decision: who joins."
           proof="Built for lean people teams"
-          photo="/v2-people/feat.jpg"
-          photoChip="MambaHR · done"
-          photoCaption="Maya signed · starts June 22"
         >
-          <PipelineCard />
+          <div className="mock-card agent-edge agent-working"><PipelineBoard /></div>
         </PageHero>
 
         <AgentLoop
@@ -290,7 +188,7 @@ export default function HiringPage() {
 
         <FeatureSplit
           eyebrow="The job portal"
-          title={<>Your job site, <Em>on your domain.</Em></>}
+          title={<>Your job site, on your domain.</>}
           lead="A branded job board on your own address, no agency, no setup project. Candidates apply, applications land in your pipeline already read, and the questions hiring law requires are collected quietly."
           bullets={[
             'Your logo, your colors, your domain, looks like you built it',
@@ -305,7 +203,7 @@ export default function HiringPage() {
           flip
           warm
           eyebrow="The human part"
-          title={<>The final call stays <Em>human.</Em></>}
+          title={<>The final call stays human.</>}
           lead="Interviews, culture, and who gets the offer stay yours, the part only you can do. MambaHR clears the admin so the people you meet are worth meeting, and the week you save goes into meeting them."
           bullets={[
             'MambaHR recommends; it never advances or rejects anyone on its own',
@@ -331,7 +229,7 @@ export default function HiringPage() {
           metric="Saved 9 hrs / week"
         />
 
-        <PageCta title={<>Hire faster. <Em>Decide better.</Em></>} />
+        <PageCta title={<>Hire faster. Decide better.</>} />
       </main>
       <Footer />
     </>

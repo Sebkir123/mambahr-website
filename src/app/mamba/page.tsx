@@ -5,6 +5,7 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { ChatThread } from '@/components/mockups'
 
 /* ── Hero fragment: a realistic Slack window, policy answer + letter receipt ── */
 function SlackWindow() {
@@ -274,129 +275,6 @@ function SlackWindow() {
   )
 }
 
-/* ── Dual-surface fragment: the same request in Slack and in the app ── */
-function DualSurface() {
-  return (
-    <div className="tri">
-      <div className="card slack agent-edge agent-done">
-        <div className="c-head">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/slack-new-logo.svg" alt="Slack" width={14} height={14} />
-          <span>Slack &middot; #people-ops</span>
-        </div>
-        <div className="c-msg">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="c-av" src="/avatars/maya.jpg" alt="Maya Chen" width={28} height={28} />
-          <div>
-            <div className="c-who"><b>Maya Chen</b><time>9:14 AM</time></div>
-            <div className="c-t"><span className="mention">@MambaHR</span> Maya &middot; 3 days off</div>
-          </div>
-        </div>
-        <div className="c-foot"><span className="ok" />Approved &middot; calendar blocked</div>
-      </div>
-
-      <div className="card app">
-        <div className="c-head app-h">
-          <span className="dots3"><i /><i /><i /></span>
-          <span className="addr">app.mambahr.com</span>
-        </div>
-        <div className="c-row">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="c-av round" src="/avatars/maya.jpg" alt="Maya Chen" width={28} height={28} />
-          <div className="c-main">
-            <div className="c-t"><b>Maya &middot; 3 days off</b></div>
-            <div className="c-sub">Time off &middot; Apr 7&ndash;9 &middot; within policy</div>
-          </div>
-          <span className="pill">Approved</span>
-        </div>
-        <div className="c-foot"><span className="ok" />One record &middot; ref <span className="mono">leave_4f81a2</span></div>
-      </div>
-
-      <style jsx>{`
-        .tri { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; }
-        .card {
-          background: var(--bg);
-          border: 1px solid var(--border);
-          border-radius: 14px;
-          box-shadow: var(--shadow-md);
-          overflow: hidden;
-          font-size: 13px;
-        }
-        .card.slack { transform: translateX(-18px); z-index: 3; position: relative; }
-        .card.app { transform: translateX(18px); margin-top: -10px; z-index: 1; position: relative; box-shadow: var(--shadow-float); }
-        .c-head {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 9px 14px;
-          font-size: 12px;
-          font-weight: 600;
-          color: var(--text-muted);
-          background: #F8F6F1;
-          border-bottom: 1px solid var(--border);
-        }
-        .c-head.app-h { gap: 10px; }
-        .dots3 { display: flex; gap: 5px; }
-        .dots3 i { width: 8px; height: 8px; border-radius: 999px; background: #e3ddd6; display: block; }
-        .dots3 i:first-child { background: #f0a59a; }
-        .dots3 i:nth-child(2) { background: #f4ce8e; }
-        .dots3 i:nth-child(3) { background: #a9cfa6; }
-        .addr {
-          margin: 0 auto;
-          font-size: 12px;
-          color: var(--text-faint);
-          background: var(--bg);
-          border: 1px solid var(--border);
-          border-radius: 6px;
-          padding: 2px 12px;
-        }
-        .c-msg { display: flex; gap: 10px; padding: 12px 14px 4px; }
-        .c-av { width: 28px; height: 28px; border-radius: 7px; object-fit: cover; flex: none; }
-        .c-av.round { border-radius: 999px; }
-        .c-who { display: flex; align-items: baseline; gap: 7px; }
-        .c-who b { font-size: 13px; color: var(--text); }
-        .c-who time { font-size: 12px; color: var(--text-faint); }
-        .c-t { font-size: 13px; color: var(--text); margin-top: 2px; }
-        .mention { color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
-        .c-bubble {
-          margin-top: 4px;
-          display: inline-block;
-          background: #F1F0FA;
-          border-radius: 4px 12px 12px 12px;
-          padding: 6px 11px;
-          font-size: 13px;
-          color: var(--text);
-        }
-        .c-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px 4px; }
-        .c-main { flex: 1; min-width: 0; }
-        .c-sub { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
-        .pill {
-          flex: none;
-          font-size: 12px;
-          font-weight: 600;
-          color: var(--color-green);
-          background: rgba(22, 130, 80, 0.08);
-          border-radius: 999px;
-          padding: 4px 11px;
-        }
-        .c-foot {
-          display: flex;
-          align-items: center;
-          gap: 7px;
-          padding: 8px 14px 11px;
-          font-size: 12px;
-          color: var(--text-faint);
-        }
-        .ok { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); flex: none; }
-        .mono { font-family: var(--font-mono); font-size: 12px; }
-        @media (max-width: 560px) {
-          .card.slack, .card.app { transform: none; }
-        }
-      `}</style>
-    </div>
-  )
-}
-
 /* ── Big photo + floating mini-card ── */
 function TeamPhoto() {
   return (
@@ -460,16 +338,13 @@ export default function MambaPage() {
         eyebrow="The AI agent"
         title={<>Not a tool. <Em>A hire.</Em></>}
         lead="Your team messages @MambaHR like a person. It reads the thread, checks your policy, does the work, and logs it, in Slack or the MambaHR app."
-        photo="/v2-people/sofia.jpg"
-        photoChip="MambaHR · done"
-        photoCaption="Answered · policy cited · 9:11 AM"
       >
         <SlackWindow />
       </PageHero>
 
       <AgentLoop
         eyebrow="Behind every reply"
-        title={<>What happens to <Em>every message</Em></>}
+        title={<>What happens to every message</>}
         lead="Each request runs the same loop, whether it’s a quick policy question or a new hire’s first day."
         steps={[
           { n: '01', label: 'Reads the thread, and the person', desc: 'It knows who’s asking, their role, their manager, and what was already said.', who: 'agent', time: '< 1s', img: '/avatars/dave.jpg' },
@@ -483,7 +358,7 @@ export default function MambaPage() {
 
       <FeatureSplit
         eyebrow="Every channel"
-        title={<>Same brain, <Em>every door</Em></>}
+        title={<>Same brain, every door</>}
         lead="Slack and the MambaHR app, one agent, one memory, one record. Ask in Slack, approve in the app, and nothing gets lost in between."
         bullets={[
           'Mention it in any channel or DM, it picks up the whole thread',
@@ -491,14 +366,14 @@ export default function MambaPage() {
           'One record of everything, no matter where it was asked',
         ]}
       >
-        <DualSurface />
+        <div className="mock-card agent-edge agent-working"><ChatThread /></div>
       </FeatureSplit>
 
       <FeatureSplit
         flip
         warm
         eyebrow="Zero rollout"
-        title={<>Zero training. <Em>Zero logins.</Em></>}
+        title={<>Zero training. Zero logins.</>}
         lead="No training. No new logins. No portal your employees will forget the password to. They message the way they already message, and the work gets done."
         bullets={[
           'Employees never log into anything new',
@@ -524,7 +399,7 @@ export default function MambaPage() {
         metric="Saved 12 hrs / week"
       />
 
-      <PageCta title={<>Meet your next <Em>team member.</Em></>} />
+      <PageCta title={<>Meet your next team member.</>} />
       </main>
 
       <Footer />

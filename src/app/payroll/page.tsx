@@ -191,7 +191,7 @@ export default function PayrollPage() {
           title={<>Payday, <Em>perfect.</Em></>}
           lead={'MambaHR prepares every payroll change. You choose per company: a change file for your current provider, or Deel-managed payroll where MambaHR sends the changes to Deel and a person approves every run.'}
           proof="Built for the teams who run payday"
-          photo="/v2-people/team2.jpg"
+          photo="/v2-people/team.jpg"
           photoChip="MambaHR · ready"
           photoCaption="42 paid right · 0 discrepancies"
         >
@@ -200,7 +200,7 @@ export default function PayrollPage() {
 
         <AgentLoop
           eyebrow="The pay cycle"
-          title={<>The pay cycle, <Em>done early.</Em></>}
+          title={<>The pay cycle, done early.</>}
           lead={'MambaHR tracks every change all month, then turns them into one clean change file in your provider’s format, or sends them to Deel for a managed run. Either way, a person approves before anyone is paid.'}
           steps={[
             { n: '01', label: 'Collects every change', desc: 'Raises, new hires, exits, address moves, gathered the moment they happen, not the night before.', who: 'agent', time: 'all month' },
@@ -214,7 +214,7 @@ export default function PayrollPage() {
 
         <FeatureSplit
           eyebrow="Deel-managed payroll"
-          title={<>Two ways to run <Em>payday.</Em></>}
+          title={<>Two ways to run payday.</>}
           lead="Keep your current provider and load the change file MambaHR builds, or switch to Deel-managed payroll and let MambaHR send every change to Deel. You choose once, per company."
           bullets={[
             'A change file in your provider’s format, checked against the record',
@@ -230,7 +230,7 @@ export default function PayrollPage() {
           flip
           warm
           eyebrow="The feeling"
-          title={<>No more Sunday-night <Em>sweeps.</Em></>}
+          title={<>No more Sunday-night sweeps.</>}
           lead={'No more Sunday-night spreadsheet sweeps. No more “did the raise make it in?” The file is built, reconciled, and waiting for you, days before anyone gets paid.'}
           bullets={[
             'Every change accounted for, with the receipt to prove it',
@@ -256,7 +256,7 @@ export default function PayrollPage() {
           metric="Every change in the file"
         />
 
-        <PageCta title={<>Make payday <Em>a non-event.</Em></>} />
+        <PageCta title={<>Make payday a non-event.</>} />
       </main>
       <Footer />
     </>

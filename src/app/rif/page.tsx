@@ -277,7 +277,7 @@ export default function RIFPage() {
           title={<>Hard days, <Em>done right.</Em></>}
           lead="When a reduction has to happen, every notice is on time, severance is correct, final pay follows each state’s rules, and a human signs off on every single exit."
           proof="Built for the hardest day"
-          photo="/v2-people/marcus.jpg"
+          photo="/v2-people/team2.jpg"
           photoCaption="Every exit · human-approved"
         >
           <HeroPlanCard />
@@ -285,7 +285,7 @@ export default function RIFPage() {
 
         <AgentLoop
           eyebrow="The process"
-          title={<>When it&rsquo;s <Em>unavoidable</Em></>}
+          title={<>When it&rsquo;s unavoidable</>}
           lead="MambaHR prepares everything, the math, the timing, the paperwork. Nothing happens to anyone until you approve it."
           steps={[
             { n: '01', label: 'The plan is modeled', desc: 'Headcount scenarios with full cost, severance, final pay, before anyone is named.', who: 'agent' },
@@ -299,7 +299,7 @@ export default function RIFPage() {
 
         <FeatureSplit
           eyebrow="Before the list is final"
-          title={<>Some jobs can be <Em>saved</Em></>}
+          title={<>Some jobs can be saved</>}
           lead="Before anyone is let go, MambaHR surfaces open internal roles a person could move into, with the team and why it fits. The suggestions are advisory. Humans decide."
           bullets={[
             'Open roles matched to each affected person',
@@ -314,7 +314,7 @@ export default function RIFPage() {
           flip
           warm
           eyebrow="Done properly"
-          title={<>Dignity is in the <Em>details</Em></>}
+          title={<>Dignity is in the details</>}
           lead="The right documents, the right timing, the right final paycheck. When the process is correct down to the day and the dollar, people leave treated properly, and your team can look them in the eye."
           bullets={[
             'Final pay on each state’s deadline, to the day',
@@ -339,7 +339,7 @@ export default function RIFPage() {
           img="/v2-people/team.jpg"
         />
 
-        <PageCta title={<>Hope you never need it. <Em>Ready if you do.</Em></>} />
+        <PageCta title={<>Hope you never need it. Ready if you do.</>} />
       </main>
       <Footer />
     </>

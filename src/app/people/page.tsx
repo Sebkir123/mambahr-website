@@ -5,85 +5,9 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { PeopleDirectory } from '@/components/mockups'
 
 /* ── Hero fragment: people table inside an app window ── */
-const PEOPLE = [
-  { img: '/avatars/anna.jpg', name: 'Anna Wilson', role: 'Sales', status: 'Active', tone: 'ok' },
-  { img: '/avatars/priya.jpg', name: 'Jordan Lee', role: 'Data Eng', status: 'Active', tone: 'ok' },
-  { img: '/avatars/maya.jpg', name: 'Maya Chen', role: 'Senior Eng', status: 'On leave', tone: 'warm' },
-  { img: '/avatars/dave.jpg', name: 'Dave Buchanan', role: 'Marketing', status: 'New hire', tone: 'vio' },
-]
-
-function PeopleWindow() {
-  return (
-    <div className="win agent-edge agent-done">
-      <div className="bar">
-        <span className="dots"><b /><b /><b /></span>
-        <span className="addr">app.mambahr.com</span>
-      </div>
-      <div className="body">
-        <div className="head">
-          <div className="ht">
-            <span className="title">People</span>
-            <span className="live"><i />Live</span>
-          </div>
-          <span className="count">1,247 employees</span>
-        </div>
-        <div className="table">
-          <div className="th"><span>Name</span><span>Team</span><span>Status</span><span className="r">Updated</span></div>
-          {PEOPLE.map((p, i) => (
-            <div className="tr" key={p.name}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <span className="who"><img src={p.img} alt="" width={26} height={26} />{p.name}</span>
-              <span className="team">{p.role}</span>
-              <span><span className={`chip ${p.tone}`}>{p.status}</span></span>
-              <span className="r time">{['9:14 AM', '9:02 AM', '8:47 AM', '8:41 AM'][i]}</span>
-            </div>
-          ))}
-        </div>
-        <div className="foot">
-          <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
-          <span className="foot-t">Dave&rsquo;s record created from his signed offer · nothing typed</span>
-        </div>
-      </div>
-      <style jsx>{`
-        .win { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-float); }
-        .bar { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 14px; background: #F8F6F1; border-bottom: 1px solid var(--border); }
-        .dots { display: flex; gap: 6px; }
-        .dots b { width: 9px; height: 9px; border-radius: 999px; background: #e3ddd6; }
-        .dots b:first-child { background: #f0a59a; }
-        .dots b:nth-child(2) { background: #f4ce8e; }
-        .dots b:nth-child(3) { background: #a9cfa6; }
-        .addr { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 2px 16px; }
-        .body { padding: 16px 18px 18px; }
-        .head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 12px; }
-        .ht { display: flex; align-items: center; gap: 10px; }
-        .title { font-family: var(--font-serif); font-size: 21px; color: var(--text); letter-spacing: -0.01em; }
-        .live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 3px 9px; }
-        .live i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
-        .count { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
-        .table { border: 1px solid var(--border); border-radius: 11px; overflow: hidden; }
-        .th, .tr { display: grid; grid-template-columns: 1.5fr 0.9fr 0.9fr 0.7fr; align-items: center; gap: 10px; padding: 10px 14px; }
-        .th { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); background: #F8F6F1; border-bottom: 1px solid var(--border); padding-block: 8px; }
-        .tr + .tr { border-top: 1px solid var(--border-faint); }
-        .who { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 600; color: var(--text); }
-        .who img { width: 26px; height: 26px; border-radius: 999px; object-fit: cover; }
-        .team { font-size: 13px; color: var(--text-muted); }
-        .chip { font-size: 12px; font-weight: 600; border-radius: 999px; padding: 3px 9px; }
-        .chip.ok { color: var(--color-green); background: rgba(34, 160, 94, 0.09); }
-        .chip.warm { color: var(--gold-dark); background: var(--gold-tint); }
-        .chip.vio { color: var(--violet); background: rgba(106, 93, 166, 0.1); }
-        .r { text-align: right; }
-        .time { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
-        .foot { display: flex; align-items: center; gap: 10px; margin-top: 13px; flex-wrap: wrap; }
-        .foot-t { font-size: 12px; color: var(--text-muted); }
-        @media (max-width: 520px) { .th span:last-child, .tr .time { display: none; } }
-      `}</style>
-    </div>
-  )
-}
-
-/* ── Org chart fragment ── */
 const MANAGERS = [
   { img: '/avatars/anna.jpg', name: 'Anna Wilson', team: 'Sales', n: 14 },
   { img: '/avatars/marcus.jpg', name: 'Daniel Osei', team: 'Engineering', n: 31 },
@@ -183,11 +107,8 @@ export default function PeoplePage() {
           title={<>One record, <Em>current.</Em></>}
           lead="Nobody should spend their week retyping what already happened. The agent that does the work keeps the record, every person, every detail, right without anyone touching it."
           proof="Built to be your system of record"
-          photo="/v2-people/team2.jpg"
-          photoChip="MambaHR · done"
-          photoCaption="Dave on the books before his first coffee"
         >
-          <PeopleWindow />
+          <div className="mock-card agent-edge agent-done"><PeopleDirectory /></div>
         </PageHero>
 
         <AgentLoop
@@ -206,7 +127,7 @@ export default function PeoplePage() {
 
         <FeatureSplit
           eyebrow="Org chart"
-          title={<>The org chart <Em>draws itself</Em></>}
+          title={<>The org chart draws itself</>}
           lead="Your CEO asks for headcount by team and you answer in the meeting, not after a weekend of spreadsheet archaeology. Reporting lines are always true because they come straight from the record."
           bullets={[
             'Reporting lines update the moment a transfer happens',
@@ -221,7 +142,7 @@ export default function PeoplePage() {
           flip
           warm
           eyebrow="Switching"
-          title={<>Import in a day, <Em>keep it all</Em></>}
+          title={<>Import in a day, keep it all</>}
           lead="The migration project you’ve been dreading is one import. Gusto, Workday, Rippling, BambooHR, Namely, or ADP, one-time, your data imported in a day, every history and balance carried over. Then your old system retires."
           bullets={[
             'Every record, every history, every balance carried over',
@@ -247,7 +168,7 @@ export default function PeoplePage() {
           metric="Imported in a day"
         />
 
-        <PageCta title={<>Your people, <Em>on the record.</Em></>} />
+        <PageCta title={<>Your people, on the record.</>} />
       </main>
       <Footer />
     </>
