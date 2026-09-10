@@ -56,8 +56,11 @@ export function TodoDesk({
   summary = '4 need you today',
   focus = COMP_CHANGE,
   show = 'both',
+  simple = false,
   className,
 }: {
+  /** Hero-calm version: no fold rows, no person line, no history, no quiet actions. */
+  simple?: boolean
   queue?: TodoItem[]
   activeIndex?: number
   summary?: string
@@ -82,6 +85,7 @@ export function TodoDesk({
             <span className={s.qKind}>{q.kind}</span>
           </div>
         ))}
+        {!simple && (<>
         <div className={s.fold}>
           <div>
             <div className={s.foldT}>Waiting on others</div>
@@ -96,6 +100,7 @@ export function TodoDesk({
           </div>
           <Icon name="chevron-right" />
         </div>
+        </>)}
       </div>
 
       <article className={s.pane}>
@@ -106,7 +111,7 @@ export function TodoDesk({
             <span className={s.right}>{focus.position}</span>
           </div>
           <h2 className={s.paneTitle}>{focus.title}</h2>
-          <p className={s.person}>{focus.person}</p>
+          {!simple && <p className={s.person}>{focus.person}</p>}
         </div>
         <div className={s.body}>
           <div>
@@ -133,8 +138,9 @@ export function TodoDesk({
                   </div>
                 ))}
               </div>
-              <div className={s.quiet}><span>Reassign</span><span>Snooze</span></div>
+              {!simple && <div className={s.quiet}><span>Reassign</span><span>Snooze</span></div>}
             </div>
+            {!simple && (
             <div className={s.railCard}>
               <div className={s.label}>History</div>
               <div className={s.history}>
@@ -143,6 +149,7 @@ export function TodoDesk({
                 ))}
               </div>
             </div>
+            )}
           </div>
         </div>
       </article>
