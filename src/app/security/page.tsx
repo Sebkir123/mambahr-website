@@ -5,6 +5,7 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
+import { REVIEW } from './review'
 
 /* ── Hero fragment: dark security log ── */
 const LOG = [
@@ -60,11 +61,11 @@ function SecurityLogCard() {
 
 /* ── Commitments section (page-local, styled like AgentLoop's card) ── */
 const COMMITMENTS = [
-  { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption at rest, TLS 1.2+ in transit. Your records are protected while stored and while moving between systems.', tag: 'Always on' },
+  { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption at rest, TLS 1.3 in transit. Your records are protected while stored and while moving between systems.', tag: 'Always on' },
   { n: '02', label: 'Access by role, least privilege', desc: 'Each person sees only what their role allows. Managers see their team; employees see their own record.', tag: 'Always on' },
   { n: '03', label: 'Every change logged with who and why', desc: 'Every action, by a person or by MambaHR, is written to a record nobody can edit, with the reason attached.', tag: 'Always on' },
-  { n: '04', label: 'Your data stays in the US', desc: 'Stored on enterprise US cloud infrastructure. It never leaves the country.', tag: 'In your contract' },
-  { n: '05', label: 'Never used to train AI', desc: 'Names, salaries, reviews, health information, none of it trains any AI model. Not ours, not anyone else’s.', tag: 'In your contract' },
+  { n: '04', label: 'Your data stays in the US', desc: 'Stored on AWS in the United States. It never leaves the country.', tag: 'In our DPA' },
+  { n: '05', label: 'Never used to train AI', desc: 'Names, salaries, leave and health information, none of it trains any AI model. Not ours, not anyone else’s.', tag: 'In our DPA' },
 ]
 
 function Commitments() {
@@ -74,7 +75,7 @@ function Commitments() {
         <div className="head" data-reveal>
           <p className="eyebrow">Our commitments</p>
           <h2 className="title">How we treat your data</h2>
-          <p className="lead">No fine print, no acronyms. The five things that hold, no matter the customer or the contract.</p>
+          <p className="lead">No fine print, no acronyms. The five things that hold for every customer, written into our Data Processing Addendum, available on request.</p>
         </div>
         <div className="card agent-edge agent-done" data-reveal data-delay="1">
           {COMMITMENTS.map((c) => (
@@ -208,41 +209,6 @@ function ApprovalGateCard() {
 }
 
 /* ── The security questionnaire, answered on the page ── */
-const REVIEW = [
-  {
-    q: 'Where does our data live?',
-    a: 'On enterprise AWS infrastructure in the United States. It never leaves the country, and US residency is written into your contract.',
-  },
-  {
-    q: 'How is it encrypted?',
-    a: 'AES-256 at rest, TLS 1.2 or higher in transit, for the database, documents, and every backup.',
-  },
-  {
-    q: 'Who at MambaHR can see it?',
-    a: 'Access is role-based and least-privilege on our side too. Production access is restricted, logged, and reviewed, and every access lands in the same immutable audit trail you can read.',
-  },
-  {
-    q: 'What about backups and recovery?',
-    a: 'Encrypted automated backups with point-in-time recovery, tested restores, and infrastructure that fails over without your data going anywhere.',
-  },
-  {
-    q: 'What if we leave?',
-    a: 'Your data is yours. Full export in standard formats whenever you ask, including on the way out, then verified deletion within 30 days of contract end.',
-  },
-  {
-    q: 'Who are your subprocessors?',
-    a: 'A short list, led by AWS (US) for infrastructure and AI processing and WorkOS for sign-on. The full list comes with your contract, and we notify you before it changes.',
-  },
-  {
-    q: 'What happens if there’s an incident?',
-    a: 'We notify you without undue delay, tell you exactly what was touched, and give you what your own notifications require. That commitment is in the contract, not a blog post.',
-  },
-  {
-    q: 'Does any of it train AI?',
-    a: 'No. Names, salaries, reviews, health information, none of it trains any model, ours or anyone else’s. Contractual, not configurable.',
-  },
-]
-
 function SecurityReview() {
   return (
     <section className="sr">
@@ -294,7 +260,7 @@ export default function SecurityPage() {
         <PageHero
           eyebrow="Security"
           title={<>Locked down, <Em>logged.</Em></>}
-          lead="Salaries, reviews, health information, the most sensitive data your company holds. Encrypted everywhere, access by role, every change on the record, and never used to train AI. In writing."
+          lead="Salaries, leave records, health information, the most sensitive data your company holds. Encrypted everywhere, access by role, every change on the record, and never used to train AI. Written into our Data Processing Addendum, available on request."
           proof="Security teams welcome on the demo"
           photo="/v2-people/sofia.jpg"
           photoChip="MambaHR · done"
@@ -323,7 +289,7 @@ export default function SecurityPage() {
           warm
           eyebrow="Human oversight"
           title={<>A human on <Em>the big calls</Em></>}
-          lead="The agent acts within the policy you set. Offers above band, terminations, big comp changes, those always stop and wait for a person to sign off. Every time, with the reasoning attached."
+          lead="MambaHR acts within the policy you set. Offers above band, terminations, big comp changes, those always stop and wait for a person to sign off. Every time, with the reasoning attached."
           bullets={[
             'You decide which actions need a person',
             'Nothing high-stakes happens without a named approver',
@@ -336,7 +302,7 @@ export default function SecurityPage() {
         <StatTrio
           stats={[
             { n: 100, suffix: '%', label: 'of changes logged with who and why' },
-            { n: 0, label: 'AI training on your data, contractual' },
+            { n: 0, label: 'AI training on your data, written into our DPA' },
             { n: 1, label: 'human required on every high-stakes action' },
           ]}
         />
@@ -344,7 +310,7 @@ export default function SecurityPage() {
         <SecurityReview />
 
         <QuoteBand
-          quote="I asked the hard questions before we signed, who sees what, where the data lives, what trains their AI. The answers were in the contract, not a slide deck."
+          quote="I asked the hard questions before we signed, who sees what, where the data lives, what trains their AI. The answers were in the Data Processing Addendum, not a slide deck."
           role="Head of People · Robotics startup, 240 people"
           img="/v2-people/feat.jpg"
         />
