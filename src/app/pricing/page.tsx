@@ -167,8 +167,8 @@ export default function PricingPage() {
               for a fraction of what running it by hand costs. Priced per employee, the way the work actually scales.
             </p>
             <div className="ctas" data-reveal data-delay="3">
-              <Link href="/demo" className="btn-p">Book a demo</Link>
-              <Link href="/product" className="btn-g">See it run</Link>
+              <Link href="/demo" className="btn btn-primary">Book a demo</Link>
+              <Link href="/product" className="btn btn-secondary">See it run</Link>
             </div>
             <div className="proof" data-reveal data-delay="3">
               <div className="faces">
@@ -198,19 +198,6 @@ export default function PricingPage() {
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 4vw, 54px); line-height: 1.04; letter-spacing: -0.028em; color: var(--text); margin: 18px 0 0; text-wrap: balance; }
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 690px; margin: 22px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
-            :global(.ph .btn-p) {
-              display: inline-block; background: var(--text); color: #fff; font-weight: 600; font-size: 16px;
-              padding: 14px 28px; border-radius: 999px; text-decoration: none;
-              box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22); transition: transform 0.15s ease;
-            }
-            :global(.ph .btn-p:hover) { transform: translateY(-2px); }
-            :global(.ph .btn-g) {
-              display: inline-block; color: var(--text); font-weight: 600; font-size: 16px;
-              padding: 14px 24px; border-radius: 999px; border: 1px solid var(--border-mid);
-              background: rgba(255, 255, 255, 0.6); text-decoration: none;
-            }
-            :global(.ph .btn-g:hover) { background: #fff; }
-            @media (prefers-reduced-motion: reduce) { :global(.ph .btn-p:hover) { transform: none; } }
             .proof { display: flex; align-items: center; gap: 13px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
             .faces { display: flex; }
             .faces img {
@@ -280,18 +267,12 @@ export default function PricingPage() {
                   </div>
                   <div className="c-min">{t.min}</div>
                   <p className="c-blurb">{t.blurb}</p>
-                  <div className="c-rep">
-                    <span className="c-rep-l">Takes off your plate</span>
-                    <ul>
-                      {t.replaces.map((r) => <li key={r}>{r}</li>)}
-                    </ul>
-                  </div>
                   <ul className="c-feats">
                     {t.feats.map((f) => (
                       <li key={f}><span className="tick" aria-hidden="true" />{f}</li>
                     ))}
                   </ul>
-                  <Link href="/demo" className={t.popular ? 'c-cta dark' : 'c-cta'}>{t.cta}</Link>
+                  <Link href="/demo" className={`btn btn-sm btn-block ${t.popular ? 'btn-primary' : 'btn-secondary'}`}>{t.cta}</Link>
                 </div>
               ))}
             </div>
@@ -345,19 +326,10 @@ export default function PricingPage() {
             .c-u { font-size: 13px; color: var(--text-faint); }
             .c-min { font-size: 12px; color: var(--text-faint); margin-top: 6px; }
             .c-blurb { font-size: 14px; line-height: 1.5; color: var(--text-muted); margin: 13px 0 0; min-height: 40px; }
-            .c-rep { margin-top: 13px; border: 1px solid var(--border-faint); background: var(--bg-warm); border-radius: 12px; padding: 11px 13px; }
-            .c-rep-l { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); }
-            .c-rep ul { list-style: none; margin: 7px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-            .c-rep li { font-size: 13px; color: var(--text-muted); line-height: 1.4; padding-left: 14px; position: relative; }
-            .c-rep li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); }
             .c-feats { list-style: none; padding: 0; margin: 14px 0 20px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
             .c-feats li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.45; color: var(--text-muted); }
             .tick { flex: none; width: 16px; height: 16px; margin-top: 1px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
             .tick::after { content: ''; position: absolute; left: 5px; top: 2.5px; width: 3px; height: 7px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
-            :global(.tiers .c-cta) { display: block; text-align: center; font-size: 14px; font-weight: 600; color: var(--text); border: 1px solid var(--border-mid); background: var(--bg); border-radius: 999px; padding: 11px 16px; text-decoration: none; transition: background 0.15s ease; }
-            :global(.tiers .c-cta:hover) { background: var(--bg-warm); }
-            :global(.tiers .c-cta.dark) { color: #fff; background: var(--text); border-color: var(--text); box-shadow: 0 10px 22px rgba(20, 18, 14, 0.18); }
-            :global(.tiers .c-cta.dark:hover) { background: #2A2A28; }
             .note { text-align: center; font-size: 13px; color: var(--text-faint); margin: 26px 0 0; }
             .matrix { margin-top: clamp(28px, 3.4vw, 40px); border: 1px solid var(--border); border-radius: 16px; background: var(--bg); overflow: hidden; }
             .matrix summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 20px; font-size: 15px; font-weight: 700; color: var(--text); }

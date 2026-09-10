@@ -33,7 +33,7 @@ export default function Pricing() {
                   <li key={f}><span className="tick" aria-hidden="true" />{f}</li>
                 ))}
               </ul>
-              <Link href="/pricing" className={`btn${t.popular ? ' btn-pop' : ''}`}>{t.cta}</Link>
+              <Link href="/pricing" className={`btn btn-sm btn-block ${t.popular ? 'btn-primary' : 'btn-secondary'}`}>{t.cta}</Link>
             </div>
           ))}
         </div>
@@ -204,22 +204,6 @@ export default function Pricing() {
           border: solid #7A5A2E;
           border-width: 0 2px 2px 0;
           transform: rotate(45deg);
-        }
-        .btn {
-          margin-top: auto;
-          text-align: center;
-          font-weight: 600;
-          font-size: 14px;
-          padding: 12px;
-          border-radius: 999px;
-          border: 1px solid var(--border-mid);
-          color: var(--text);
-        }
-        .btn:hover { border-color: var(--text); }
-        .btn-pop {
-          border: none;
-          color: #fff;
-          background: linear-gradient(120deg, #B98A4E, #6A5DA6);
         }
         @media (max-width: 980px) {
           .grid { grid-template-columns: repeat(2, 1fr); }
