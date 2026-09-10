@@ -30,6 +30,10 @@ const config: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  async redirects() {
+    // The Performance module is dark; the page is unmounted until it returns.
+    return [{ source: '/performance', destination: '/product', permanent: true }]
+  },
   async headers() {
     return [
       {

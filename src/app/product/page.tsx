@@ -11,8 +11,8 @@ import {
 
 const STEPS: LoopStep[] = [
   { n: '01', img: '/avatars/maya.jpg',   label: 'Offer letter sent, Maya Chen',   desc: 'Senior Engineer · $195k · above band 8%',     who: 'agent', time: '2 min' },
-  { n: '02', img: '/avatars/priya.jpg',  label: 'Leave approved, Jordan Lee',    desc: 'CA PDL, CFRA and FMLA sequenced · job protected', who: 'agent', time: '4 min' },
-  { n: '03', img: '/avatars/marcus.jpg', label: 'PIP drafted, Marcus Webb',       desc: '90-day evidence cited · L3 sign-off queued',  who: 'you',   time: 'Pending' },
+  { n: '02', img: '/avatars/priya.jpg',  label: 'Leave approved, Jordan Lee',    desc: 'FMLA eligibility checked · job protected · statute cited', who: 'agent', time: '4 min' },
+  { n: '03', img: '/avatars/marcus.jpg', label: 'Leave approved, Marcus Webb',    desc: '12 weeks, federal and Colorado stacked · calendar and payday updated', who: 'you',   time: 'Pending' },
   { n: '04', img: '/avatars/sarah.jpg',  label: 'Separation docs, Sarah Lin',     desc: 'State-aware final pay · signature chain ready', who: 'you',   time: 'Review' },
 ]
 
@@ -20,12 +20,12 @@ const CAPABILITIES = [
   {
     eyebrow: 'Onboarding & offboarding',
     title: <>Day one to last day, <Em>one workflow.</Em></>,
-    lead: 'A signed offer kicks off the whole fanout, provisioning, I-9, device, first-week calendar. An exit runs the reverse, always with a human on final pay.',
+    lead: 'A signed offer starts everything: the Form I-9 and E-Verify check, logins and device setup requested, the first-week plan. An exit runs the reverse, always with a human on final pay.',
     bullets: [
       'Offer generated + countersigned (e-signed)',
-      'I-9 verified, E-Verify cleared',
+      'Form I-9 and E-Verify check started',
       'Accounts provisioned (IdP, Slack, app suite)',
-      'Device set up (MDM), buddy + first-week calendar',
+      'Logins and device setup requested, buddy assigned',
       'Offboarding: WARN / COBRA / OWBPA, state-aware final pay',
     ],
     flip: false,
@@ -34,30 +34,16 @@ const CAPABILITIES = [
   {
     eyebrow: 'Time off & leave',
     title: <>Leave that reads <Em>the statute for you.</Em></>,
-    lead: 'Requests come in as plain text. The agent checks eligibility, stacks the right entitlements, and auto-approves within policy or routes to a human.',
+    lead: 'Requests come in as plain text. MambaHR checks eligibility, cites the statute, and auto-approves within policy or routes to a human.',
     bullets: [
       'PTO accrual and balances, tracked automatically',
-      'FMLA eligibility + state paid-leave stacking (CA, NY, MA, CO)',
+      'FMLA eligibility checked; state paid leave cited and routed to a person for the stacking decision',
       'Auto-approve within policy, or route to a person',
       'Anything medical or ambiguous escalates',
-      'Benefits: 401(k) enrollment + qualifying life-event changes',
+      'Leave letters drafted, ready for your review',
     ],
     flip: true,
     warm: true,
-  },
-  {
-    eyebrow: 'Performance management',
-    title: <>Reviews that <Em>actually get written.</Em></>,
-    lead: 'The agent drafts narratives from real evidence and cites every claim. You run calibration and make the calls.',
-    bullets: [
-      'Annual, quarterly, probationary, promotion, and PIP cycles',
-      'AI-drafted review narratives with cited evidence',
-      '9-box calibration + fairness intelligence',
-      'Comp-change recommendations, human-approved',
-      'Disputes, appeals, and signed close artifacts',
-    ],
-    flip: false,
-    warm: false,
   },
   {
     eyebrow: 'Compensation',
@@ -78,7 +64,7 @@ const CAPABILITIES = [
     title: <>Every decision, <Em>cited to the rule.</Em></>,
     lead: 'Federal baseline everywhere, plus state-specific rules where states differ. Confidence-scored, and edge cases route to a human.',
     bullets: [
-      'Federal employment law + all 50 states',
+      'Federal employment law plus state rules for the states where you employ people',
       'Statute citation on every decision',
       'Confidence scoring + freshness tracking',
       'Append-only audit log on every action',
@@ -110,7 +96,7 @@ const CAPABILITIES = [
       'Signer chains, e-sign end to end',
       'Versioned and jurisdiction-scoped',
       'Filed and retained per your policy',
-      'Indexed for retrieval, PII-redacted on export',
+      'Indexed for retrieval, PII redacted before indexing',
     ],
     flip: false,
     warm: false,
@@ -152,7 +138,7 @@ export default function ProductPage() {
         <PageHero
           eyebrow="The product"
           title={<>See the agent <Em>run the work.</Em></>}
-          lead="Hiring, onboarding, leave, performance, compensation, compliance, handled end to end, with a human on the calls that matter."
+          lead="Hiring, onboarding, leave, compensation, compliance, handled end to end, with a human on the calls that matter."
         >
           <div style={{
             background: 'var(--bg)',

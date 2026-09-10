@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mambahr.com'),
   title: 'MambaHR: The AI HR department. Before you hire HR.',
   description:
-    'MambaHR is the AI HR department for startups and growing companies. It runs hiring, onboarding, payroll-ready exports, time off, performance, and compliance end to end, for a fraction of what running it by hand costs. You approve the calls that matter.',
+    'MambaHR is the AI HR department for startups and growing companies. It runs hiring, onboarding, payroll-ready exports, time off, and compliance end to end, for a fraction of what running it by hand costs. You approve the calls that matter.',
   keywords: [
     'AI HR department',
     'AI HR software',
@@ -50,13 +50,12 @@ export const metadata: Metadata = {
     'HR automation',
     'HRIS for startups',
     'ATS',
-    'performance reviews software',
     'multi-state HR compliance',
     'HR without an HR hire',
   ],
   openGraph: {
     title: 'MambaHR: The AI HR department.',
-    description: 'Before you hire HR, hire MambaHR. Hiring, onboarding, payroll-ready exports, time off, performance, and compliance, done end to end, so your team spends its week on people.',
+    description: 'Before you hire HR, hire MambaHR. Hiring, onboarding, payroll-ready exports, time off, and compliance, done end to end, so your team spends its week on people.',
     url: 'https://mambahr.com',
     siteName: 'MambaHR',
     type: 'website',
@@ -91,7 +90,7 @@ const jsonLd = [
     name: 'MambaHR',
     url: 'https://mambahr.com',
     applicationCategory: 'BusinessApplication',
-    description: 'The AI HR department: hiring, onboarding, payroll-ready exports, time off, performance, and compliance, run end to end.',
+    description: 'The AI HR department: hiring, onboarding, payroll-ready exports, time off, and compliance, run end to end.',
     offers: {
       '@type': 'Offer',
       price: '14',
@@ -112,7 +111,7 @@ const jsonLd = [
     logo: 'https://mambahr.com/MambaHR_logo.png',
     image: 'https://mambahr.com/mambahr_og_sharing.jpg',
     description:
-      'The AI HR department for US companies, the system of record (HRIS, ATS, LMS) with specialist agents that run hiring, onboarding, leave, performance, compensation, and compliance end to end. A human approves the calls that matter.',
+      'The AI HR department for US companies, the system of record (HRIS and ATS) with specialist agents that run hiring, onboarding, leave, compensation, and compliance end to end. A human approves the calls that matter.',
     foundingDate: '2026',
     slogan: 'Before you hire HR, hire MambaHR.',
     areaServed: { '@type': 'Country', name: 'United States' },
@@ -122,7 +121,6 @@ const jsonLd = [
       'Applicant tracking',
       'Multi-state employment law compliance',
       'FMLA and state paid leave',
-      'Performance reviews',
       'Compensation and pay equity',
     ],
     founder: [

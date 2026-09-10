@@ -17,7 +17,6 @@ const iconMap: Record<string, ReactNode> = {
   hiring: (<svg {...stroke}><circle cx="9" cy="8" r="3" /><path d="M3 19c0-3 2.7-5 6-5s4.5 1.3 5.5 3" /><path d="M16 9h6m-3 -3v6" /></svg>),
   onboarding: (<svg {...stroke}><rect x="5" y="4" width="14" height="17" rx="2" /><path d="M9 4.5h6V7H9z" /><path d="M8.5 12.5l2 2 4-4" /></svg>),
   timeoff: (<svg {...stroke}><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M4 9h16M8 3v4M16 3v4" /><path d="M9.5 14.5l1.5 1.5 3-3" /></svg>),
-  performance: (<svg {...stroke}><path d="M4 19V5" /><path d="M4 19h16" /><path d="M8 16l3.5-4 3 2.5L20 8" /></svg>),
   comp: (<svg {...stroke}><circle cx="12" cy="12" r="8.5" /><path d="M12 7v10M9.5 9.2c0-1.1 1.1-1.7 2.5-1.7s2.5.7 2.5 1.8-1 1.5-2.5 1.7-2.5.6-2.5 1.7 1.1 1.8 2.5 1.8 2.5-.6 2.5-1.7" /></svg>),
   compliance: (<svg {...stroke}><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" /><path d="M9 12l2 2 4-4" /></svg>),
   rif: (<svg {...stroke}><path d="M4 20V6M4 20h16" /><rect x="7" y="12" width="3" height="5" /><rect x="12" y="9" width="3" height="8" /><path d="M19 7l-2.5 2.5L15 8" /></svg>),

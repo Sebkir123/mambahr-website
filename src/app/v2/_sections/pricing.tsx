@@ -1,48 +1,7 @@
 'use client'
 
-const TIERS = [
-  {
-    name: 'HR Starter',
-    size: 'For teams of 50–150',
-    price: '$14',
-    unit: '/employee/mo',
-    min: '$9k/yr minimum',
-    blurb: 'Run HR properly before you hire HR.',
-    feats: ['Employee records & org chart', 'Onboarding & offboarding, done', 'Every employee question, answered', 'Time off & leave handled', 'Payroll-ready exports'],
-    cta: 'Start here',
-  },
-  {
-    name: 'HR Ops Manager',
-    size: 'For teams of 75–400',
-    price: '$22',
-    unit: '/employee/mo',
-    min: '$24k/yr minimum',
-    blurb: 'A full HR ops workload, for a tenth of the cost.',
-    feats: ['Everything in Starter', 'Hiring: reqs, candidates & interviews', 'Offers sent, approvals routed', 'Payroll runs & change reports'],
-    cta: 'Most teams start here',
-    popular: true,
-  },
-  {
-    name: 'AI HR Department',
-    size: 'For teams of 150+',
-    price: '$30',
-    unit: '/employee/mo',
-    min: '$48k/yr minimum',
-    blurb: 'Your whole HR department, run for you.',
-    feats: ['Everything in Ops Manager', 'Layoffs & reorgs, done right', 'Deep compliance + full audit trail', 'SSO & custom workflows'],
-    cta: 'Scale up',
-  },
-  {
-    name: 'Enterprise',
-    size: 'For 1,000+ and multi-entity',
-    price: 'Custom',
-    unit: '',
-    min: 'from $100k/yr',
-    blurb: 'For complex orgs with procurement to satisfy.',
-    feats: ['Everything in AI HR Dept', 'Custom implementation', 'Procurement & security review', 'Enterprise integrations'],
-    cta: 'Talk to founders',
-  },
-]
+import Link from 'next/link'
+import { TIERS } from '@/content/pricing-tiers'
 
 export default function Pricing() {
   return (
@@ -74,7 +33,7 @@ export default function Pricing() {
                   <li key={f}><span className="tick" aria-hidden="true" />{f}</li>
                 ))}
               </ul>
-              <a href="#access" className={`btn${t.popular ? ' btn-pop' : ''}`}>{t.cta}</a>
+              <Link href="/pricing" className={`btn${t.popular ? ' btn-pop' : ''}`}>{t.cta}</Link>
             </div>
           ))}
         </div>

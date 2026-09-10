@@ -12,26 +12,26 @@ export const FAQS = [
   },
   {
     q: 'Does it replace a human HRBP?',
-    a: 'No, and we won’t pretend otherwise. MambaHR runs the repeatable HRBP-level work, performance cycles, compliance checks, documentation, manager support. Investigations, sensitive employee relations, and legal judgment stay with qualified humans. The big calls are always yours.',
+    a: 'No, and we won’t pretend otherwise. MambaHR runs the repeatable HRBP-level work: compliance checks, documentation, records, manager support. Investigations, sensitive employee relations, and legal judgment stay with qualified humans. The big calls are always yours.',
   },
   {
-    q: 'Does it process payroll or run our benefits?',
-    a: 'Not today, and we say that plainly. MambaHR keeps the work around payroll and benefits clean and delivers ready-to-load files to your existing provider, broker, or PEO. No rip-and-replace, no missed changes.',
+    q: 'Does it run our payroll?',
+    a: 'MambaHR prepares every payroll change. You choose per company: a change file for your current payroll provider, or Deel-managed payroll where MambaHR sends the changes to Deel and a person approves every run. Benefits administration is not part of MambaHR today; COBRA notices at offboarding are.',
   },
   {
     q: 'Why a per-employee price?',
-    a: 'Because that’s how the work scales. Every employee brings questions, time off, reviews, and paperwork. Every plan is one simple per-employee price, and your price grows only as your team grows. Payroll and global hiring are optional add-ons. Each plan includes an annual allowance of completed HR work, sized well above what teams typically use, and if you go past it, nothing stops.',
+    a: 'Because that’s how the work scales. Every employee brings questions, time off, and paperwork. Every plan is one simple per-employee price, and your price grows only as your team grows. Deel-managed payroll is optional; there are no other modules or add-ons.',
   },
   {
     q: 'What does the minimum mean?',
-    a: 'Each plan has an annual minimum so we can put real depth behind every account. If the per-employee math comes in under it, the minimum applies. Most teams clear it quickly as they grow. Headcount is reviewed quarterly against your average, so if your team grows mid-year, the difference is billed for the remaining months and your included allowance grows with it.',
+    a: 'Each plan has an annual minimum so we can put real depth behind every account. If the per-employee math comes in under it, the minimum applies. Most teams clear it quickly as they grow. Headcount is reviewed quarterly against your average, so if your team grows mid-year, the difference is billed for the remaining months.',
   },
   {
     q: 'Which plan should we choose?',
-    a: 'Most growing companies start with HR Ops Manager, it covers the workload they were about to staff. Choose Starter if you mainly need records, answers, and clean exports. Choose AI HR Department when compliance, performance, and workforce changes need to run themselves too.',
+    a: 'Most growing companies start with HR Ops Manager, it covers the workload they were about to staff. Choose Starter if you mainly need records, answers, and clean exports. Choose AI HR Department when compliance, compensation, and workforce changes need to run themselves too.',
   },
   {
     q: 'Is founding customer pricing real?',
-    a: 'Yes, for the first 20 companies. Founding customers get discounted annual pricing, onboarding directly with the founders, and priority input into the roadmap. When the 20 seats are gone, they’re gone.',
+    a: 'Yes, for our first cohort. Founding customers get discounted annual pricing, onboarding directly with the founders, and priority input into the roadmap.',
   },
 ]

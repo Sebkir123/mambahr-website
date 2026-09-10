@@ -8,55 +8,7 @@ import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { StatTrio, QuoteBand, PageCta, Em } from '@/components/v2/page-kit'
 import { FAQS } from './faqs'
-
-const TIERS = [
-  {
-    name: 'HR Starter',
-    size: 'For teams of 50–150',
-    price: '$14',
-    unit: '/employee/mo',
-    min: '$9k/yr minimum · billed annually',
-    blurb: 'HR structure before your first HR hire.',
-    replaces: ['The HR admin backlog', 'Records & org-chart cleanup', 'Payroll-change spreadsheets'],
-    feats: ['Employee records & org chart', 'Onboarding & offboarding, done', 'Every employee question, answered', 'Time off & leave handled', 'Payroll & benefits-ready exports'],
-    cta: 'Hire MambaHR',
-  },
-  {
-    name: 'HR Ops Manager',
-    size: 'For teams of 75–400',
-    price: '$22',
-    unit: '/employee/mo',
-    min: '$24k/yr minimum · billed annually',
-    blurb: 'A full HR ops workload, for a tenth of the cost.',
-    replaces: ['Onboarding & offboarding runs', 'Offer and approval chasing', 'Interview coordination'],
-    feats: ['Everything in Starter', 'Hiring: reqs, candidates & interviews', 'Offers sent, approvals routed', 'Payroll runs & change reports'],
-    cta: 'Take ops off your plate',
-    popular: true,
-    badge: 'Where most teams start',
-  },
-  {
-    name: 'AI HR Department',
-    size: 'For teams of 150+',
-    price: '$30',
-    unit: '/employee/mo',
-    min: '$48k/yr minimum · billed annually',
-    blurb: 'The whole admin load, run for you.',
-    replaces: ['Performance cycle machinery', 'Compliance research & citations', 'Workforce change planning'],
-    feats: ['Everything in Ops Manager', 'RIF & change planning, done right', 'Deep compliance + full audit trail', 'SSO, custom workflows & security review'],
-    cta: 'Build your department',
-  },
-  {
-    name: 'Enterprise',
-    size: 'For 1,000+ and multi-entity',
-    price: 'Custom',
-    unit: '',
-    min: 'from $100k/yr',
-    blurb: 'For complex orgs with procurement to satisfy.',
-    replaces: ['High-volume HR ops queues', 'Custom approval chains', 'Manual audit prep'],
-    feats: ['Everything in AI HR Dept', 'Custom implementation & approval logic', 'Procurement & security review', 'Enterprise integrations & success support'],
-    cta: 'Talk to founders',
-  },
-]
+import { TIERS } from '@/content/pricing-tiers'
 
 /* Plan matrix: tier index = first column where the feature is included. */
 const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
@@ -65,14 +17,12 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
     rows: [
       { f: 'Employee records', from: 0 },
       { f: 'Org chart & team visibility', from: 0 },
-      { f: 'AI HR helpdesk', from: 0 },
-      { f: 'People dashboards', from: 0 },
-      { f: 'Workforce risk signals', from: 0 },
+      { f: 'Every employee question answered in Slack', from: 0 },
+      { f: 'Headcount and org answers on demand', from: 0 },
       { f: 'HR document storage', from: 0 },
       { f: 'Workflows & approvals', from: 0 },
       { f: 'Compliance guidance', from: 0 },
-      { f: 'Payroll-ready exports', from: 0 },
-      { f: 'Benefits-ready exports', from: 0 },
+      { f: 'Payroll change files', from: 0 },
       { f: 'Slack & the MambaHR app', from: 0 },
     ],
   },
@@ -83,10 +33,9 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
       { f: 'Offboarding, run end to end', from: 1 },
       { f: 'Offer & HR document generation', from: 1 },
       { f: 'Approval routing', from: 1 },
-      { f: 'Manager & team insights', from: 1 },
-      { f: 'Performance cycles, run', from: 1 },
+      { f: 'Manager questions answered with the policy cited', from: 1 },
       { f: 'Leave & policy handling', from: 1 },
-      { f: 'Payroll & benefits change reports', from: 1 },
+      { f: 'Payroll change reports', from: 1 },
       { f: 'Audit trails', from: 1 },
       { f: 'Integrations', from: 1 },
       { f: 'Implementation support', from: 1 },
@@ -101,7 +50,7 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
       { f: 'Advanced audit trails', from: 2 },
       { f: 'Custom workflows', from: 2 },
       { f: 'SSO & security review', from: 2 },
-      { f: 'Premium payroll & benefits exports', from: 2 },
+      { f: 'Deel-managed payroll, person-approved', from: 2 },
       { f: 'Priority support', from: 2 },
     ],
   },
@@ -111,7 +60,7 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
       { f: 'Custom implementation', from: 3 },
       { f: 'Advanced security & procurement support', from: 3 },
       { f: 'High-volume workflows & custom approval logic', from: 3 },
-      { f: 'Custom payroll, benefits & reporting requirements', from: 3 },
+      { f: 'Custom payroll file requirements', from: 3 },
       { f: 'Dedicated success support & enterprise integrations', from: 3 },
     ],
   },
@@ -121,7 +70,7 @@ const COST_ROWS = [
   { hire: 'Records, onboarding & document admin', cost: '$70k–$95k', alt: 'HR Starter or Ops Manager' },
   { hire: 'Plus leave, policy & the question queue', cost: '$85k–$120k', alt: 'HR Ops Manager' },
   { hire: 'Plus hiring ops & payroll changes', cost: '$110k–$150k', alt: 'Ops Manager or AI HR Dept' },
-  { hire: 'Plus performance cycles & compliance', cost: '$100k–$140k', alt: 'AI HR Department' },
+  { hire: 'Plus compensation cycles & compliance', cost: '$100k–$140k', alt: 'AI HR Department' },
 ]
 
 const EXPORTS = [
@@ -130,10 +79,7 @@ const EXPORTS = [
   'Compensation changes',
   'Job, manager & location changes',
   'Leave & time-away reports',
-  'Benefits eligibility',
   'COBRA triggers',
-  'Open-enrollment changes',
-  'Deduction changes',
   'Audit-ready change history',
 ]
 
@@ -217,7 +163,7 @@ export default function PricingPage() {
             <h1 className="title" data-reveal data-delay="1">Before you hire HR, <Em>hire MambaHR.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
               Most HR software stores your people data. MambaHR does the work: onboarding, leave and
-              compliance, approvals, and offboarding, run end to end, with payroll-ready exports kept clean,
+              compliance, approvals, and offboarding, run end to end, with every payroll change prepared,
               for a fraction of what running it by hand costs. Priced per employee, the way the work actually scales.
             </p>
             <div className="ctas" data-reveal data-delay="3">
@@ -282,8 +228,8 @@ export default function PricingPage() {
         <section className="found">
           <div className="band" data-reveal>
             <div className="f-copy">
-              <span className="f-tag">First 20 companies</span>
-              <p className="f-t">Founding customer pricing is open.</p>
+              <span className="f-tag">Founding cohort</span>
+              <p className="f-t">Founding customer pricing is open for our first cohort.</p>
               <p className="f-s">Discounted annual pricing, onboarding directly with the founders, and priority say in the roadmap.</p>
             </div>
             <Link href="/demo" className="f-cta">Get founding pricing</Link>
@@ -480,36 +426,17 @@ export default function PricingPage() {
           `}</style>
         </section>
 
-        {/* ── Guarantee ── */}
-        <section className="guar">
-          <div className="band" data-reveal>
-            <div className="g-mark" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" /><path d="M9 12l2 2 4-4" /></svg>
-            </div>
-            <div className="g-copy">
-              <p className="g-t">The implementation confidence guarantee</p>
-              <p className="g-s">If MambaHR isn&rsquo;t set up and doing useful HR work within 30 days, we extend your first year at no additional cost until it is.</p>
-            </div>
-          </div>
-          <style jsx>{`
-            .guar { background: var(--bg-warm); padding: 0 var(--page-pad) clamp(64px, 8vw, 96px); }
-            .band { max-width: 920px; margin: 0 auto; display: flex; align-items: center; gap: 20px; border: 1px solid rgba(138, 101, 53, 0.25); background: linear-gradient(120deg, #FFF6EC, #F4F2FA); border-radius: 16px; padding: clamp(20px, 2.6vw, 28px) clamp(22px, 3vw, 32px); }
-            .g-mark { flex: none; width: 52px; height: 52px; border-radius: 999px; background: linear-gradient(135deg, #B98A4E, #6A5DA6); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 22px rgba(106, 93, 166, 0.25); }
-            .g-t { font-family: var(--font-serif); font-size: clamp(18px, 2vw, 22px); color: var(--text); margin: 0; letter-spacing: -0.01em; }
-            .g-s { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 6px 0 0; }
-          `}</style>
-        </section>
-
-        {/* ── Payroll & benefits honesty ── */}
+        {/* ── Payroll ── */}
         <section className="pb">
           <div className="wrap">
             <div className="copy" data-reveal>
-              <p className="eyebrow">No rip-and-replace</p>
-              <h2 className="title">Keep your payroll. <Em>We feed it.</Em></h2>
+              <p className="eyebrow">Payday</p>
+              <h2 className="title">Two ways to run <Em>payday.</Em></h2>
               <p className="lead">
-                MambaHR doesn&rsquo;t process payroll or administer benefits today, and we say that plainly.
-                What it does is keep all the work around them clean: every hire, change, and exit lands in a
-                ready-to-load file for your payroll provider, benefits broker, or PEO. Nothing missed, nothing re-keyed.
+                MambaHR prepares every payroll change: every hire, raise, leave, and exit. You choose per company
+                between a change file for your current payroll provider and Deel-managed payroll, where MambaHR sends
+                the changes to Deel and a person approves every run. Benefits administration is not part of MambaHR today;
+                COBRA notices at offboarding are.
               </p>
             </div>
             <div className="chips" data-reveal data-delay="1">
@@ -533,8 +460,8 @@ export default function PricingPage() {
         <StatTrio
           stats={[
             { n: 84, prefix: '$', suffix: 'k', label: 'back in the budget vs. staffing the same admin, at 100 employees' },
-            { n: 27, label: 'hours of HR admin handled in a typical week, nights included' },
-            { n: 30, suffix: ' days', label: 'to useful HR work, guaranteed, or your first year extends free' },
+            { n: 27, label: 'hours of HR admin a week, we estimate, taken off a lean team. Our model, not a customer average' },
+            { n: 100, suffix: '%', label: 'of terminations and offers above band wait for a person to approve' },
           ]}
         />
 
