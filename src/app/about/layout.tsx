@@ -3,17 +3,17 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'About | MambaHR',
   description:
-    'The HR department is changing shape. We are building the AI HR department: the work done end to end, a human in the loop only when it matters. Meet the team.',
+    'The HR department is changing shape. We are building the AI HR department: MambaHR does the work, and a person signs off only when it matters. Meet the team.',
   openGraph: {
     title: 'About | MambaHR',
-    description: 'The HR department is changing shape. We are building the AI HR department: the work done end to end, a human in the loop only when it matters. Meet the team.',
+    description: 'The HR department is changing shape. We are building the AI HR department: MambaHR does the work, and a person signs off only when it matters. Meet the team.',
     url: 'https://mambahr.com/about',
     images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About | MambaHR',
-    description: "The HR department is changing shape. We're building the AI HR department, the work, done end to end, with a human in the loop only when it matters.",
+    description: "The HR department is changing shape. We're building the AI HR department: MambaHR does the work, and a person signs off only when it matters.",
     images: ['/mambahr_og_sharing.jpg'],
   },
   alternates: { canonical: 'https://mambahr.com/about' },
@@ -26,7 +26,7 @@ const teamSchema = {
   name: 'MambaHR',
   url: 'https://mambahr.com',
   logo: 'https://mambahr.com/MambaHR_logo.png',
-  description: 'AI HR department for US companies. The agent does the operational work; the human owns the judgment calls.',
+  description: 'AI HR department for US companies. MambaHR does the operational work; the person owns the judgment calls.',
   founders: [
     {
       '@type': 'Person',

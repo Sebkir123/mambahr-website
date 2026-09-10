@@ -273,10 +273,9 @@ export default function RIFPage() {
       <CountUp />
       <main id="main">
         <PageHero
-          eyebrow="Headcount & RIF"
+          eyebrow="Headcount & layoffs"
           title={<>Hard days, <Em>done right.</Em></>}
-          lead="When a reduction has to happen, every notice is on time, severance is correct, final pay follows each state’s rules, and a human signs off on every single exit."
-          proof="Built for the hardest day"
+          lead="When a layoff has to happen, MambaHR gets every notice out on time and computes severance and final pay by each state’s rules. A person signs off on every single exit."
           photo="/v2-people/team2.jpg"
           photoCaption="Every exit · human-approved"
         >
@@ -288,22 +287,22 @@ export default function RIFPage() {
           title={<>When it&rsquo;s unavoidable</>}
           lead="MambaHR prepares everything, the math, the timing, the paperwork. Nothing happens to anyone until you approve it."
           steps={[
-            { n: '01', label: 'The plan is modeled', desc: 'Headcount scenarios with full cost, severance, final pay, before anyone is named.', who: 'agent' },
-            { n: '02', label: 'Notice timing checked per state', desc: 'WARN thresholds and notice windows, federal and state, verified before the plan can move.', who: 'agent' },
+            { n: '01', label: 'MambaHR models the plan', desc: 'Headcount scenarios with full cost, severance, and final pay, before anyone is named.', who: 'agent' },
+            { n: '02', label: 'Notice timing checked per state', desc: 'The federal layoff-notice law (WARN Act) and state notice windows, verified before the plan can move.', who: 'agent' },
             { n: '03', label: 'Severance and final pay computed', desc: 'Per your policy, with each state’s final-pay deadline and rules applied to each person.', who: 'agent' },
-            { n: '04', label: 'Internal moves suggested', desc: 'Open roles a person could move into, surfaced before the exit list is final. Suggestions only, people decide.', who: 'agent', img: '/avatars/tom.jpg' },
+            { n: '04', label: 'Internal moves suggested', desc: 'Open roles a person could move into, shown before the exit list is final. Suggestions only, people decide.', who: 'agent', img: '/avatars/tom.jpg' },
             { n: '05', label: 'Every letter and script drafted', desc: 'Notices, separation paperwork, and manager talking points, ready for review. You send them.', who: 'agent', img: '/avatars/priya.jpg' },
-            { n: '06', label: 'You approve every single exit', desc: 'A human signs off on every termination before anything happens. Non-negotiable.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '06', label: 'You approve every single exit', desc: 'A person signs off on every termination before anything happens. Non-negotiable.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Before the list is final"
-          title={<>Some jobs can be saved</>}
-          lead="Before anyone is let go, MambaHR surfaces open internal roles a person could move into, with the team and why it fits. The suggestions are advisory. Humans decide."
+          title={<>MambaHR finds open roles before the list is final</>}
+          lead="Before anyone is let go, MambaHR shows you open internal roles a person could move into, with the team and why it fits. The suggestions are advisory. People decide."
           bullets={[
             'Open roles matched to each affected person',
-            'Surfaced before the exit list is final, not after',
+            'Shown before the exit list is final, not after',
             'Always a human decision, never an automatic move',
           ]}
         >
@@ -318,7 +317,7 @@ export default function RIFPage() {
           lead="The right documents, the right timing, the right final paycheck. When the process is correct down to the day and the dollar, people leave treated properly, and your team can look them in the eye."
           bullets={[
             'Final pay on each state’s deadline, to the day',
-            'COBRA notices ready at exit',
+            'Health-coverage continuation notices (COBRA) ready at exit',
             'Manager scripts drafted so no one improvises the hardest conversation',
           ]}
         >
@@ -327,7 +326,7 @@ export default function RIFPage() {
 
         <StatTrio
           stats={[
-            { n: 100, suffix: '%', label: 'of exits signed off by a human' },
+            { n: 100, suffix: '%', label: 'of exits signed off by a person' },
             { n: 1, label: 'final-pay computation per state rule, held for your approval' },
             { n: 100, suffix: '%', label: 'of notices drafted with WARN timing checked' },
           ]}
@@ -339,7 +338,7 @@ export default function RIFPage() {
           img="/v2-people/team.jpg"
         />
 
-        <PageCta title={<>Hope you never need it. Ready if you do.</>} />
+        <PageCta title={<>Hope you never need it. Ready if you do.</>} sub="A 30-minute demo of a layoff plan, with the notices and the math. Then we import your data and keep it ready." />
       </main>
       <Footer />
     </>

@@ -105,8 +105,7 @@ export default function PeoplePage() {
         <PageHero
           eyebrow="Employee records"
           title={<>One record, <Em>current.</Em></>}
-          lead="Nobody should spend their week retyping what already happened. The agent that does the work keeps the record, every person, every detail, right without anyone touching it."
-          proof="Built to be your system of record"
+          lead="Nobody should spend their week retyping what already happened. MambaHR does the work and keeps the record: every person, every detail, right without anyone touching it."
         >
           <div className="mock-card agent-edge agent-done"><PeopleDirectory /></div>
         </PageHero>
@@ -117,10 +116,10 @@ export default function PeoplePage() {
           lead="Old systems go stale because a person has to remember to type. Here, the work and the record are the same thing."
           steps={[
             { n: '01', label: 'Someone’s hired', desc: 'The record creates itself from the signed offer, name, role, comp, start date.', who: 'agent', time: 'instant', img: '/avatars/dave.jpg' },
-            { n: '02', label: 'A raise is approved', desc: 'Comp updated everywhere it lives, the record, the band, the payroll file.', who: 'agent', time: 'same minute' },
+            { n: '02', label: 'A raise goes through', desc: 'MambaHR updates the pay everywhere it lives: the record, the band, the payroll file.', who: 'agent', time: 'same minute' },
             { n: '03', label: 'An address changes in Slack', desc: 'Jordan mentions she moved; it’s filed in seconds and flagged for the next pay file.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
-            { n: '04', label: 'Leave is approved', desc: 'The record and payday reflect it before anyone has to ask.', who: 'agent', time: 'same minute' },
-            { n: '05', label: 'Every change is logged', desc: 'Who changed what, when, and why, kept with the record forever.', who: 'agent', time: 'always' },
+            { n: '04', label: 'Leave goes through', desc: 'MambaHR updates the record and payday before anyone has to ask.', who: 'agent', time: 'same minute' },
+            { n: '05', label: 'MambaHR logs every change', desc: 'Who changed what, when, and why, kept with the record forever.', who: 'agent', time: 'always' },
             { n: '06', label: 'You just look things up', desc: 'Headcount, tenure, who reports to whom, they’re right, every time.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
@@ -143,7 +142,7 @@ export default function PeoplePage() {
           warm
           eyebrow="Switching"
           title={<>Import in a day, keep it all</>}
-          lead="The migration project you’ve been dreading is one import. Gusto, Workday, Rippling, BambooHR, Namely, or ADP, one-time, your data imported in a day, every history and balance carried over. Then your old system retires."
+          lead="The migration project you’ve been dreading is one import from Gusto, Workday, Rippling, BambooHR, Namely, or ADP. Your data is in within a day, every history and balance carried over. Then your old system retires."
           bullets={[
             'Every record, every history, every balance carried over',
             'We check the import line by line before you go live',
@@ -168,7 +167,7 @@ export default function PeoplePage() {
           metric="Imported in a day"
         />
 
-        <PageCta title={<>Your people, on the record.</>} />
+        <PageCta title={<>Your people, on the record.</>} sub="A 30-minute demo with your own org chart. Then we import your records and switch you over." />
       </main>
       <Footer />
     </>

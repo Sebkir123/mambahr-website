@@ -5,18 +5,18 @@ const ogImage = '/og?title=See%20the%20AI%20HR%20department%20run%20the%20work&e
 export const metadata: Metadata = {
   title: 'Product | MambaHR',
   description:
-    'See the AI HR department run the work: onboarding, leave, compensation, compliance, and headcount, handled end to end, with a human on the calls that matter.',
+    'See the AI HR department do the work: hiring, onboarding, leave, compensation, and compliance, with a person on the calls that matter.',
   openGraph: {
     title: 'Product | MambaHR',
     description:
-      'Watch the agent run hiring, onboarding, leave, compensation, and compliance, from Slack and the web.',
+      'Watch MambaHR run hiring, onboarding, leave, compensation, and compliance, from Slack and the app.',
     url: 'https://mambahr.com/product',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Product | MambaHR',
-    description: 'See the AI HR department run the work, end to end.',
+    description: 'See the AI HR department do the work.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://mambahr.com/product' },

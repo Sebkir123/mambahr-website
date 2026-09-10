@@ -139,7 +139,7 @@ function MorningPhoto() {
       <div className="float">
         <span className="f-check" aria-hidden="true" />
         <div>
-          <div className="f-t">Queue cleared</div>
+          <div className="f-t">To do cleared</div>
           <div className="f-s">9:21 AM</div>
         </div>
       </div>
@@ -188,20 +188,20 @@ export default function TodayPage() {
       <main id="main">
 
       <PageHero
-        eyebrow="Approvals"
-        title={<>Your day, <Em>three taps.</Em></>}
-        lead="Everything that truly needs you, in one queue, the rest is already done and logged. Most mornings it’s three decisions and a coffee."
+        eyebrow="To do"
+        title={<>Your To do. <Em>Three decisions, then coffee.</Em></>}
+        lead="Everything that needs you is on one list called To do. The rest is already done and logged. Most mornings it is three decisions and a coffee."
       >
         <div className="mock-card agent-edge agent-working"><TodoDesk /></div>
       </PageHero>
 
       <AgentLoop
         eyebrow="The daily rhythm"
-        title={<>How the queue stays short</>}
-        lead="MambaHR does the work all day. Only the calls that deserve a human ever reach your queue."
+        title={<>How To do stays short</>}
+        lead="MambaHR does the work all day. Only the calls that deserve a person ever reach your To do."
         steps={[
-          { n: '01', label: 'Within-policy work auto-completes', desc: 'Time off, letters, record updates, day-one setup, done and logged before you look.', who: 'agent', time: 'all day' },
-          { n: '02', label: 'Edge cases get a card', desc: 'Offers above band, terminations, comp above your threshold, the big calls always come to you, with full context.', who: 'agent', img: '/avatars/maya.jpg' },
+          { n: '01', label: 'Within-policy work gets done', desc: 'Time off, letters, record updates, day-one setup, done and logged before you look.', who: 'agent', time: 'all day' },
+          { n: '02', label: 'Edge cases get a card', desc: 'Offers above your pay range, terminations, and raises above your threshold come to you with the full context.', who: 'agent', img: '/avatars/maya.jpg' },
           { n: '03', label: 'You decide, with the whole picture', desc: 'Read the card, weigh the call, tap once. No chasing context across five tabs before you can think.', who: 'you', img: '/avatars/anna.jpg' },
           { n: '04', label: 'Urgent floats up, with a clock', desc: 'A competing offer or a start date this week sits at the top, not page three.', who: 'agent', img: '/avatars/tom.jpg' },
           { n: '05', label: 'One tap, reasoning attached', desc: 'Your decision is logged like everything else, with the policy and numbers it was based on.', who: 'agent' },
@@ -210,7 +210,7 @@ export default function TodayPage() {
 
       <FeatureSplit
         eyebrow="Built for fast calls"
-        title={<>Context, not homework</>}
+        title={<>The context is on the card</>}
         lead="Every card carries everything you need to decide: the numbers, the policy, the history. No tab-hopping, no asking around, no digging through old threads."
         bullets={[
           'The offer next to the band, on one line',
@@ -225,10 +225,10 @@ export default function TodayPage() {
         flip
         warm
         eyebrow="Your new morning"
-        title={<>Your mornings, given back</>}
-        lead="Open the queue with your coffee, make the calls only you can make, and get back to the work that actually needs a person. MambaHR keeps going after you close the tab."
+        title={<>MambaHR gives you your mornings back</>}
+        lead="Open To do with your coffee, make the calls only you can make, and get back to the work that needs a person. MambaHR keeps going after you close the tab."
         bullets={[
-          'The queue is short because the work is already done',
+          'The list is short because the work is already done',
           'Decisions, not data entry',
           'Everything you approved, and everything MambaHR did, in one record',
         ]}
@@ -245,13 +245,13 @@ export default function TodayPage() {
       />
 
       <QuoteBand
-        quote="My mornings used to be a hundred open tabs. Now it’s one queue, three decisions, and I’m done before my coffee’s cold."
+        quote="My mornings used to be a hundred open tabs. Now it’s one To do list, three decisions, and I’m done before my coffee’s cold."
         role="Head of People · Climate tech startup, 90 people"
         img="/v2-people/feat.jpg"
         metric="Mornings back"
       />
 
-      <PageCta title={<>Run HR from one short queue.</>} />
+      <PageCta title={<>Run HR from one short <Em>To do list.</Em></>} sub="A 30-minute demo of To do on your own approvals. Then we import your data and switch you over." />
       </main>
 
       <Footer />

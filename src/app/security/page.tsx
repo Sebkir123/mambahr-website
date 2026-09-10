@@ -164,7 +164,7 @@ function ApprovalGateCard() {
     <div className="gate agent-edge agent-done">
       <div className="g-head">
         <span className="g-t">High-stakes actions</span>
-        <span className="g-sub">The agent stops. A person decides.</span>
+        <span className="g-sub">MambaHR stops. A person decides.</span>
       </div>
       {[
         { img: '/avatars/maya.jpg', t: 'Offer · Maya Chen', m: '$195k · above band 8%', hold: true },
@@ -185,7 +185,7 @@ function ApprovalGateCard() {
       ))}
       <div className="g-foot">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
-        <span className="g-note">Routine work runs; the big calls wait for you</span>
+        <span className="g-note">Routine work runs; the sensitive calls wait for you</span>
       </div>
       <style jsx>{`
         .gate { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 18px 0 0; box-shadow: var(--shadow-float); }
@@ -261,7 +261,6 @@ export default function SecurityPage() {
           eyebrow="Security"
           title={<>Locked down, <Em>logged.</Em></>}
           lead="Salaries, leave records, health information, the most sensitive data your company holds. Encrypted everywhere, access by role, every change on the record, and never used to train AI. Written into our Data Processing Addendum, available on request."
-          proof="Security teams welcome on the demo"
           photo="/v2-people/sofia.jpg"
           photoChip="MambaHR · done"
           photoCaption="Audit question answered the same morning"
@@ -273,8 +272,8 @@ export default function SecurityPage() {
 
         <FeatureSplit
           eyebrow="Access"
-          title={<>You control <Em>the keys</Em></>}
-          lead="Orphaned accounts are how breaches start. Sign-on and user provisioning run through WorkOS, Okta, or Microsoft Entra, access follows your org chart, and when someone is offboarded, they’re locked out the same minute."
+          title={<>Your logins, <Em>your rules</Em></>}
+          lead="Orphaned accounts are how breaches start. Sign-on and user setup run through WorkOS, Okta, or Microsoft Entra, and access follows your org chart. When someone is offboarded, they are locked out the same minute."
           bullets={[
             'Your team signs in with the accounts they already use',
             'Permissions follow each person’s role, automatically',
@@ -289,7 +288,7 @@ export default function SecurityPage() {
           warm
           eyebrow="Human oversight"
           title={<>A human on <Em>the big calls</Em></>}
-          lead="MambaHR acts within the policy you set. Offers above band, terminations, big comp changes, those always stop and wait for a person to sign off. Every time, with the reasoning attached."
+          lead="MambaHR acts within the policy you set. Offers above your pay range, terminations, and big pay changes always stop and wait for a person to sign off. Every time, with the reasoning attached."
           bullets={[
             'You decide which actions need a person',
             'Nothing high-stakes happens without a named approver',

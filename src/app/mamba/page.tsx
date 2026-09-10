@@ -80,7 +80,7 @@ function SlackWindow() {
                 <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:11 AM</time></div>
                 <div className="m-t">You have 9 days left, and up to 5 carry over. Policy attached.</div>
                 <div className="attach">
-                  <div className="a-row"><span className="a-k">Policy</span><span className="a-v">PTO carryover, section 4.2, cited</span></div>
+                  <div className="a-row"><span className="a-k">Policy</span><span className="a-v">Time-off carryover, section 4.2, cited</span></div>
                   <div className="a-row"><span className="a-k">Balance</span><span className="a-v">9 days · accrual current</span></div>
                   <div className="a-foot"><span className="ok-dot" />Logged &middot; answered from your handbook &middot; ref <span className="mono">ask_2b94f7</span></div>
                 </div>
@@ -335,9 +335,9 @@ export default function MambaPage() {
       <main id="main">
 
       <PageHero
-        eyebrow="The AI agent"
-        title={<>Not a tool. <Em>A hire.</Em></>}
-        lead="Your team messages @MambaHR like a person. It reads the thread, checks your policy, does the work, and logs it, in Slack or the MambaHR app."
+        eyebrow="How it works"
+        title={<>Message it like a coworker. <Em>It does the work.</Em></>}
+        lead="Your team writes @MambaHR in Slack or the app. It reads the thread, checks your policy and the law, does the work, and shows you the receipt."
       >
         <SlackWindow />
       </PageHero>
@@ -351,15 +351,15 @@ export default function MambaPage() {
           { n: '02', label: 'Checks your policy and the law', desc: 'Your handbook first, then the rules for the state the person works in.', who: 'agent', time: '2s' },
           { n: '03', label: 'Does the work', desc: 'Books the time off, files the letter, updates the record.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
           { n: '04', label: 'Answers with the receipt attached', desc: 'Not just “done”, what changed, which rule applied, and where it’s filed.', who: 'agent' },
-          { n: '05', label: 'The big calls come to you first', desc: 'Offers above band, terminations, comp above your threshold, always a human decision.', who: 'you', img: '/avatars/anna.jpg' },
+          { n: '05', label: 'The big calls come to you first', desc: 'Offers above your pay range, terminations, and raises above your threshold are always a human decision.', who: 'you', img: '/avatars/anna.jpg' },
           { n: '06', label: 'Logs it all', desc: 'Every action lands in one record, so there’s never a question about what happened.', who: 'agent' },
         ]}
       />
 
       <FeatureSplit
-        eyebrow="Every channel"
-        title={<>Same brain, every door</>}
-        lead="Slack and the MambaHR app, one agent, one memory, one record. Ask in Slack, approve in the app, and nothing gets lost in between."
+        eyebrow="Slack and the app"
+        title={<>One MambaHR, one record, wherever you ask</>}
+        lead="Ask in Slack or in the MambaHR app. It is one system with one memory and one record. Start in Slack, approve in the app, and nothing gets lost in between."
         bullets={[
           'Mention it in any channel or DM, it picks up the whole thread',
           'Start in Slack, finish in the app, the context follows',
@@ -372,9 +372,9 @@ export default function MambaPage() {
       <FeatureSplit
         flip
         warm
-        eyebrow="Zero rollout"
-        title={<>Zero training. Zero logins.</>}
-        lead="No training. No new logins. No portal your employees will forget the password to. They message the way they already message, and the work gets done."
+        eyebrow="Nothing to roll out"
+        title={<>No training. No new logins.</>}
+        lead="No portal your employees will forget the password to. They message the way they already message, and the work gets done."
         bullets={[
           'Employees never log into anything new',
           'Managers approve from wherever they already are',
@@ -399,7 +399,7 @@ export default function MambaPage() {
         metric="Saved 12 hrs / week"
       />
 
-      <PageCta title={<>Meet your next team member.</>} />
+      <PageCta title={<>See it do the work, <Em>live.</Em></>} sub="A 30-minute demo on your own Slack questions. Then we import your data and switch you over." />
       </main>
 
       <Footer />

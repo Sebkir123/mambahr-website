@@ -163,10 +163,9 @@ export default function JobPortalPage() {
       <CountUp />
       <main id="main">
         <PageHero
-          eyebrow="The job portal"
+          eyebrow="The careers page"
           title={<>Your jobs, <Em>live.</Em></>}
-          lead="A branded careers site on your own address, stood up in a day. Candidates apply there, every application lands in your pipeline already read and ranked, and the questions hiring law requires are collected quietly."
-          proof="Built for lean talent teams"
+          lead="A branded careers page on your own address, live in a day. Candidates apply in two minutes, with no account to create. The questions hiring law requires are collected quietly."
           photo="/v2-people/sofia.jpg"
           photoChip="MambaHR · done"
           photoCaption="Careers page live · before lunch"
@@ -176,26 +175,26 @@ export default function JobPortalPage() {
 
         <AgentLoop
           eyebrow="How it runs"
-          title="Posted to pipeline"
-          lead="From the moment a role opens to the moment a candidate is ranked in front of you, no job-board logins, no copy-pasting resumes, no missing EEO data."
+          title="From job post to applicant"
+          lead="From the moment a role opens to the moment a candidate applies. No job-board logins, no copy-pasting resumes, no missing equal-opportunity data."
           steps={[
-            { n: '01', label: 'Site stood up', desc: 'Your logo, colors, and domain, the portal looks like you built it, because your brand did.', who: 'agent', time: 'day 1' },
-            { n: '02', label: 'Roles published', desc: 'Open reqs go live on your portal and your job-board feeds, written in your voice with pay bands shown.', who: 'agent', time: 'same day' },
-            { n: '03', label: 'Candidates apply', desc: 'A two-minute apply flow, no account creation, no resume re-typing. Candidates actually finish it.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '01', label: 'Careers page live', desc: 'Your logo, colors, and domain. It looks like you built it, because your brand did.', who: 'agent', time: 'day 1' },
+            { n: '02', label: 'Roles published', desc: 'Open roles go live on your careers page and your job-board feeds, written in your voice with pay ranges shown.', who: 'agent', time: 'same day' },
+            { n: '03', label: 'Candidates apply', desc: 'A two-minute apply flow, no account creation, no resume re-typing. Candidates finish it.', who: 'agent', img: '/avatars/priya.jpg' },
             { n: '04', label: 'Hiring-law questions', desc: 'The equal-opportunity questions the law requires are asked once, stored properly, and kept out of screening.', who: 'agent' },
-            { n: '05', label: 'Read and ranked', desc: 'Every application is read, ranked, and recommended with reasons by the time you open the pipeline.', who: 'agent', time: 'overnight' },
-            { n: '06', label: 'You pick who advances', desc: 'Recommendations only, every advance-or-pass call is yours, with the why in plain English.', who: 'you', img: '/avatars/tom.jpg' },
+            { n: '05', label: 'Every applicant hears back', desc: 'MambaHR confirms each application, keeps candidates posted, and closes the loop when the role is filled. No black hole under your brand.', who: 'agent', time: 'same day' },
+            { n: '06', label: 'You pick who advances', desc: 'MambaHR ranks applicants with reasons. Every advance-or-pass call is yours.', who: 'you', img: '/avatars/tom.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Your brand, your address"
           title={<>Looks like you <Em>built it.</Em></>}
-          lead="No more sending candidates to a vendor page with someone else's logo. The portal lives at jobs.yourcompany.com with your brand on every pixel, set up with one DNS record."
+          lead="No more sending candidates to a vendor page with someone else's logo. The careers page lives at jobs.yourcompany.com, with your brand on every pixel. Setup is one DNS record."
           bullets={[
             'Your logo, colors, and domain, set up with one DNS record',
-            'Pay bands shown on every role, the way state law increasingly requires',
-            'Updates itself: open a req and it appears, close it and it disappears',
+            'Written in your voice, from your existing site',
+            'Updates itself: open a role and it appears, close it and it disappears',
           ]}
         >
           <BrandCard />
@@ -204,13 +203,13 @@ export default function JobPortalPage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="Straight into the pipeline"
-          title={<>Applications arrive <Em>read.</Em></>}
-          lead="Every application is read, ranked, and explained before you ever see it. You open the pipeline to a shortlist with reasons, not a pile of two hundred resumes on a Sunday night."
+          eyebrow="The applicant experience"
+          title={<>Two minutes <Em>to apply.</Em></>}
+          lead="Candidates apply from their phone in two minutes, with no account and no resume re-typing. Every one of them hears back, so nobody is left waiting under your brand."
           bullets={[
-            'Ranked overnight with the why spelled out in plain English',
-            'MambaHR recommends; it never advances or rejects anyone on its own',
-            'Every candidate gets an answer, no application black hole under your brand',
+            'No account creation, no re-typing the resume',
+            'Pay range shown on every role, the way state law increasingly requires',
+            'Every candidate gets an answer, and a shortlist with reasons waits for you',
           ]}
         >
           <InflowCard />
@@ -219,8 +218,8 @@ export default function JobPortalPage() {
         <StatTrio
           stats={[
             { n: 1, suffix: ' day', label: 'from kickoff to your careers page live on your own domain' },
-            { n: 47, label: 'applications on one role, every one read and ranked overnight' },
-            { n: 100, suffix: '%', label: 'of advance-or-pass calls made by you, never the software' },
+            { n: 2, suffix: ' min', label: 'to apply, no account needed, from a phone' },
+            { n: 100, suffix: '%', label: 'of applicants hear back, no black hole under your brand' },
           ]}
         />
 
@@ -231,7 +230,7 @@ export default function JobPortalPage() {
           metric="Live in 1 day"
         />
 
-        <PageCta title={<>Your careers page, <Em>by tomorrow.</Em></>} sub="A 30-minute demo. Then we stand up your portal with one DNS record." />
+        <PageCta title={<>Your careers page, <Em>by tomorrow.</Em></>} sub="A 30-minute demo. Then we put your careers page live with one DNS record." />
       </main>
       <Footer />
     </>

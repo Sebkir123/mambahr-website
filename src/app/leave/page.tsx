@@ -139,7 +139,7 @@ function ParentalLeaveCard() {
           <div className="m-who">MambaHR <span className="m-time">6 seconds later</span></div>
           <div className="a">
             12 weeks of FMLA bonding leave, job protected.
-            <span className="a-sub">California CFRA and PDL cited and routed to your HR lead to confirm the stack.</span>
+            <span className="a-sub">California&rsquo;s own leave rules (CFRA and PDL) cited and sent to your HR lead to confirm how they combine.</span>
             <span className="laws">
               <span className="law">CA PDL</span>
               <span className="law">CA CFRA</span>
@@ -231,7 +231,7 @@ function VacationPhoto() {
   return (
     <div className="vp">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="photo" src="/v2-people/team2.jpg" alt="A team that actually takes its vacations" />
+      <img className="photo" src="/v2-people/team2.jpg" alt="A team that takes its vacations" />
       <div className="mini">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="mini-t">3 out next week · covered</div>
@@ -278,7 +278,6 @@ export default function LeavePage() {
           eyebrow="Time off & leave"
           title={<>Time off, <Em>approved.</Em></>}
           lead={'Normal time off approves itself in seconds. Family and medical leave gets the eligibility check and the statute attached, with payday updated.'}
-          proof="Built for lean people teams"
           photo="/v2-people/sofia.jpg"
           photoChip="MambaHR · done"
           photoCaption="Maya approved · booked in 9s"
@@ -289,11 +288,11 @@ export default function LeavePage() {
         <AgentLoop
           eyebrow="The leave loop"
           title={<>When someone <Em>asks.</Em></>}
-          lead={'Every request runs the same path: the easy ones finish in seconds, the regulated ones get the statute check, and only the genuinely ambiguous ones reach you.'}
+          lead={'Every request runs the same path. The easy ones finish in seconds, the regulated ones get the statute check, and only the ambiguous ones reach you.'}
           steps={[
             { n: '01', label: 'Reads the request', desc: 'Slack or the MambaHR app, MambaHR understands the dates, the reason, and who is asking.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
             { n: '02', label: 'Checks balance and policy', desc: 'Accrued days, blackout dates, notice rules, checked against your actual policy, not a guess.', who: 'agent', time: 'seconds' },
-            { n: '03', label: 'Checks FMLA when it applies', desc: 'Parental or medical leave triggers the FMLA eligibility check. State paid-leave programs are cited and routed to a person for the stacking decision.', who: 'agent', time: 'seconds' },
+            { n: '03', label: 'Checks federal family leave when it applies', desc: 'Parental or medical leave triggers the federal family and medical leave (FMLA) eligibility check. MambaHR cites the state paid-leave programs and sends them to a person to decide how they combine.', who: 'agent', time: 'seconds' },
             { n: '04', label: 'Updates the record and payday', desc: 'Coverage visible, and the pay record adjusted so payday is right without anyone touching it. Calendar blocked when Google or Microsoft 365 is connected.', who: 'agent', time: 'same minute' },
             { n: '05', label: 'Notifies the manager', desc: 'A clean note with dates and coverage, no approval ping-pong for in-policy requests.', who: 'agent', time: 'same minute', img: '/avatars/anna.jpg' },
             { n: '06', label: 'The edge cases', desc: 'Anything ambiguous comes to you, with the balance, the policy, and the relevant law already laid out.', who: 'you', img: '/avatars/tom.jpg' },
@@ -303,12 +302,12 @@ export default function LeavePage() {
         <FeatureSplit
           eyebrow="Family & medical leave"
           title={<>The hard leave, <Em>handled.</Em></>}
-          lead={'Parental and medical leave is where mistakes get expensive. MambaHR checks FMLA eligibility, cites the state program that applies, and attaches the statute to every answer, so Legal gets the homework instead of a panicked call.'}
+          lead={'Parental and medical leave is where mistakes get expensive. MambaHR checks FMLA eligibility, cites the state program that applies, and attaches the statute to every answer. Legal gets the homework instead of a panicked call.'}
           bullets={[
             'FMLA eligibility checked before anything is promised',
-            'State paid leave cited and routed to a person for the stacking decision; state stacking coming',
+            'State paid leave cited and sent to a person to decide how it combines with federal leave',
             'Every answer cites the law it followed',
-            'The risky calls route to a human, with the homework done',
+            'The risky calls go to a person, with the homework done',
           ]}
         >
           <ParentalLeaveCard />
@@ -318,12 +317,12 @@ export default function LeavePage() {
           flip
           warm
           eyebrow="The culture part"
-          title={<>Vacations, actually <Em>taken.</Em></>}
+          title={<>Vacations, <Em>taken.</Em></>}
           lead={'No guilt-tripping forms, no week-long approval limbo. Balances are always current, coverage is visible to everyone, and asking for time off feels like asking a colleague, because that’s what it is.'}
           bullets={[
             'Balances always current, no “let me check the spreadsheet”',
             'Team coverage visible before anyone says yes',
-            'Approvals in seconds, so people actually book the trip',
+            'Approvals in seconds, so people book the trip',
           ]}
         >
           <VacationPhoto />
@@ -344,7 +343,7 @@ export default function LeavePage() {
           metric="Saved 9 hrs / week"
         />
 
-        <PageCta title={<>Time off that takes <Em>none of yours.</Em></>} />
+        <PageCta title={<>Time off that takes <Em>none of yours.</Em></>} sub="A 30-minute demo on your own leave policy. Then we import your balances and switch you over." />
       </main>
       <Footer />
     </>

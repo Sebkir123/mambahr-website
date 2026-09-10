@@ -44,7 +44,7 @@ function SignedDocCard() {
         </div>
         <div className="foot">
           <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · signed &amp; filed</span>
-          <span className="foot-t">Drafted, sent, signed, and filed, 41 minutes end to end</span>
+          <span className="foot-t">Drafted, sent, signed, and filed, 41 minutes start to finish</span>
         </div>
       </div>
       <style jsx>{`
@@ -86,7 +86,7 @@ function AckTracker() {
   return (
     <div className="ack agent-edge agent-done">
       <div className="a-head">
-        <span className="a-t">Policy acknowledgements</span>
+        <span className="a-t">Policy acknowledgments</span>
         <span className="a-live"><i />Collected by e-signature</span>
       </div>
       <div className="pol">
@@ -178,8 +178,7 @@ export default function DocumentsPage() {
         <PageHero
           eyebrow="Documents & e-sign"
           title={<>Signed and <Em>filed.</Em></>}
-          lead="Stop chasing signatures on Friday afternoons. Offers, agreements, acknowledgements, drafted in seconds, e-signed, chased, and filed where you’ll find them in three years."
-          proof="Built for lean people teams"
+          lead="Stop chasing signatures on Friday afternoons. MambaHR drafts offers, agreements, and acknowledgments in seconds, sends them for e-signature, chases them, and files them where you’ll find them in three years."
           photo="/v2-people/team.jpg"
           photoChip="MambaHR · signed & filed"
           photoCaption="Maya’s offer, out, signed, filed in 41 min"
@@ -189,8 +188,8 @@ export default function DocumentsPage() {
 
         <AgentLoop
           eyebrow="From draft to filed"
-          title={<>A document&rsquo;s life</>}
-          lead="No template hunting, no chasing, no “where did that go?” Every document moves itself from draft to filed."
+          title={<>MambaHR moves every document from draft to filed</>}
+          lead="No template hunting, no chasing, no “where did that go?” The right template, the right people, the right folder, every time."
           steps={[
             { n: '01', label: 'Drafted from your template', desc: 'The right template, the right details, name, role, comp, dates, filled in correctly.', who: 'agent', time: 'seconds' },
             { n: '02', label: 'Sent for e-signature', desc: 'Delivered for e-signature, to the right people in the right order.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
@@ -204,9 +203,9 @@ export default function DocumentsPage() {
         <FeatureSplit
           eyebrow="Policy rollouts"
           title={<>Acknowledged, <Em>every last one</Em></>}
-          lead="A handbook update used to mean a spreadsheet of who hasn’t. Now policies are filed with version history and acknowledgements are collected by e-signature, so you see one number: done."
+          lead="A handbook update used to mean a spreadsheet of who hasn’t. Now MambaHR files policies with version history and collects acknowledgments by e-signature, so you see one number: done."
           bullets={[
-            'Every acknowledgement collected by e-signature, with date',
+            'Every acknowledgment collected by e-signature, with date',
             'Policies filed with version history',
             'A clean record for the day an auditor asks',
           ]}
@@ -219,7 +218,7 @@ export default function DocumentsPage() {
           warm
           eyebrow="Retrieval"
           title={<>Found in seconds, <Em>years later</Em></>}
-          lead="The day a dispute lands, the document you need is one question away, not buried in someone’s old shared drive. Every offer, agreement, and acknowledgement is filed under the right person with the signature record attached."
+          lead="The day a dispute lands, the document you need is one question away, not buried in someone’s old shared drive. MambaHR files every offer, agreement, and acknowledgment under the right person, with the signature record attached."
           bullets={[
             'Filed by person, not buried in a shared drive',
             'Signature record attached, who signed and when',
@@ -244,7 +243,7 @@ export default function DocumentsPage() {
           metric="Saved 9 hrs / week"
         />
 
-        <PageCta title={<>Paperwork that <Em>does itself.</Em></>} />
+        <PageCta title={<>Paperwork that <Em>does itself.</Em></>} sub="A 30-minute demo of one offer, drafted to filed. Then we import your documents and switch you over." />
       </main>
       <Footer />
     </>

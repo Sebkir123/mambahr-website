@@ -120,7 +120,7 @@ function HeroAnswerCard() {
 /* ── Dark audit-log fragment ── */
 function AuditLogCard() {
   const rows = [
-    { t: '09:02:14', what: 'Leave approved', note: 'within policy · FMLA cited' },
+    { t: '09:02:14', what: 'Leave approved', note: 'within policy · family leave (FMLA) cited' },
     { t: '10:31:48', what: 'Offer routed', note: 'above band · sent to you first' },
     { t: '11:07:02', what: 'Rule reviewed', note: 'source checked · review date set' },
     { t: '13:46:55', what: 'Question answered', note: 'pay transparency · statute attached' },
@@ -289,8 +289,7 @@ export default function CompliancePage() {
         <PageHero
           eyebrow="Compliance"
           title={<>Cited, <Em>every time.</Em></>}
-          lead="Employment law changes almost every week, and one miss costs more than a year of HR salaries. MambaHR applies federal law plus the rules for your states, cites the law behind every answer with the date it was last checked, and sends the risky calls to a human first."
-          proof="Federal plus the states you employ in"
+          lead="Employment law changes almost every week, and one miss costs more than a year of HR salaries. MambaHR applies federal law plus the rules for your states. It cites the law behind every answer, with the date it was last checked, and sends the risky calls to a person first."
           photo="/v2-people/feat.jpg"
           photoChip="MambaHR · answered"
           photoCaption="Tom’s question · cited in 4 seconds"
@@ -301,13 +300,13 @@ export default function CompliancePage() {
         <AgentLoop
           eyebrow="The loop"
           title={<>How an answer happens.</>}
-          lead="From a question in Slack to a cited, logged answer, with a human in the path whenever the law isn’t crystal clear."
+          lead="From a question in Slack to a cited, logged answer, with a person in the path whenever the law isn’t crystal clear."
           steps={[
             { n: '01', label: 'A question arrives', desc: 'In Slack or the MambaHR app, anyone on the team can ask.', who: 'agent', time: '0s', img: '/avatars/tom.jpg' },
-            { n: '02', label: 'The current law is checked', desc: 'Federal employment law plus the specific rules for every state you employ in, each with a review date.', who: 'agent', time: '2s' },
+            { n: '02', label: 'MambaHR checks the current law', desc: 'Federal employment law plus the specific rules for every state you employ in, each with a review date.', who: 'agent', time: '2s' },
             { n: '03', label: 'The answer comes back, with the citation', desc: 'Plain English up top, the exact rule it relied on attached underneath. Every time.', who: 'agent', time: '4s' },
-            { n: '04', label: 'Anything ambiguous comes to you first', desc: 'If the law is unclear or the stakes are high, a human reviews before anything happens.', who: 'you', img: '/avatars/priya.jpg' },
-            { n: '05', label: 'Everything is logged', desc: 'Who asked, what was answered, and the rule it followed, written to the audit trail.', who: 'agent', time: 'always' },
+            { n: '04', label: 'Anything ambiguous comes to you first', desc: 'If the law is unclear or the stakes are high, a person reviews before anything happens.', who: 'you', img: '/avatars/priya.jpg' },
+            { n: '05', label: 'MambaHR logs everything', desc: 'Who asked, what was answered, and the rule it followed, written to the audit trail.', who: 'agent', time: 'always' },
           ]}
         />
 
@@ -318,7 +317,7 @@ export default function CompliancePage() {
           bullets={[
             'Append-only, entries can be added, never edited away',
             'Every answer linked to the law it cited',
-            'Human approvals recorded alongside the agent’s work',
+            'Human approvals recorded alongside MambaHR’s work',
           ]}
         >
           <AuditLogCard />
@@ -354,7 +353,7 @@ export default function CompliancePage() {
           metric="Saved 9 hrs / week"
         />
 
-        <PageCta title={<>Cited every time. Reviewed by a person when it matters.</>} />
+        <PageCta title={<>Cited every time. Reviewed by a person when it matters.</>} sub="A 30-minute demo on your own compliance questions, with the law cited. Then we import your data and switch you over." />
       </main>
       <Footer />
     </>

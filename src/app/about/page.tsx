@@ -11,12 +11,12 @@ const PRINCIPLES = [
   {
     letter: 'M',
     title: 'Make our customers unstoppable.',
-    body: "We build for outcomes, not features. Every workflow, every decision, every release should give our customers more speed, clarity, and control. If it doesn't help them win in real moments, it doesn't ship.",
+    body: "We build for outcomes, not features. Every feature, every decision, every release should give our customers more speed, clarity, and control. If it doesn't help them win in real moments, it doesn't ship.",
   },
   {
     letter: 'A',
     title: 'All in on the details.',
-    body: "We're obsessed with the craft. The small things matter because they compound into big outcomes. We simplify relentlessly, remove friction, and sweat the details so the product feels fast, clear, and effortless to use.",
+    body: "We're obsessed with the craft. The small things matter because they compound into big outcomes. We simplify relentlessly, remove friction, and sweat the details so the product feels fast, clear, and easy to use.",
   },
   {
     letter: 'M',
@@ -37,15 +37,15 @@ const PRINCIPLES = [
 
 /* The platform, everything the department runs, each a real page. */
 const PLATFORM = [
-  { label: 'Hiring & ATS', desc: 'Req to signed offer', href: '/hiring' },
-  { label: 'Job portal', desc: 'Your careers page, hosted', href: '/job-portal' },
+  { label: 'Hiring', desc: 'Job post to signed offer', href: '/hiring' },
+  { label: 'Careers page', desc: 'Hosted on your domain', href: '/job-portal' },
   { label: 'Onboarding', desc: 'Day-one ready', href: '/onboarding' },
   { label: 'Payroll changes', desc: 'Every change in before payday', href: '/payroll' },
-  { label: 'Time off & leave', desc: 'PTO to FMLA', href: '/leave' },
-  { label: 'Compensation', desc: 'Priced to your bands', href: '/compensation' },
+  { label: 'Time off & leave', desc: 'Vacation days to family leave', href: '/leave' },
+  { label: 'Compensation', desc: 'Priced to your pay ranges', href: '/compensation' },
   { label: 'Compliance', desc: 'Every answer cites the law', href: '/compliance' },
-  { label: 'Headcount & RIF', desc: 'Hard days, done right', href: '/rif' },
-  { label: 'Employee records', desc: 'The system of record', href: '/people' },
+  { label: 'Headcount & layoffs', desc: 'Notices, severance, final pay', href: '/rif' },
+  { label: 'Employee records', desc: 'Every record, always current', href: '/people' },
   { label: 'Documents & e-sign', desc: 'Signed and filed', href: '/documents' },
   { label: 'Security', desc: 'Locked down, logged', href: '/security' },
 ]
@@ -142,13 +142,13 @@ export default function AboutPage() {
             </p>
             <p className="body" data-reveal data-delay="2">
               Then AI got good enough to do the reasoning underneath the work. Not summarize a policy,
-              but work through whether an employee in her second trimester is eligible for FMLA, cite the
-              statute, and send the hard calls to a human. Not generate a draft, but
-              run the offer cycle, check the band, route for approval, send the signature link.
+              but work out whether an employee in her second trimester qualifies for federal family leave
+              (FMLA). Cite the statute. Send the hard calls to a person. Not generate a draft, but run the
+              offer cycle, check the pay range, route for approval, and send the signature link.
             </p>
             <p className="body" data-reveal data-delay="3">
-              That changed what HR software can be. Not a system of record. A system of work. An agent
-              department where the agent does the job, the human sets the policy, and every action is
+              That changed what HR software can be. Not a system of record. A system of work. A
+              department where MambaHR does the job, the person sets the policy, and every action is
               logged for accountability.
             </p>
             <p className="close" data-reveal data-delay="3">That&rsquo;s what we&rsquo;re building.</p>
@@ -170,9 +170,9 @@ export default function AboutPage() {
               <p className="eyebrow">What we build</p>
               <h2 className="title">One department, <Em>every job.</Em></h2>
               <p className="lead">
-                MambaHR is the system of record and the worker in one, the ATS and the recruiter, the
-                careers page and the coordinator, the HRIS and the ops manager. Eleven functions, one agent,
-                every action logged.
+                MambaHR is the record and the worker in one. It is the applicant tracking system (ATS) and
+                the recruiter, the careers page and the coordinator, the HR records system (HRIS) and the
+                ops manager. Eleven functions, one system, every action logged.
               </p>
             </div>
             <div className="grid">
@@ -268,8 +268,8 @@ export default function AboutPage() {
               <p className="eyebrow">Leadership</p>
               <h2 className="title">Founder-led, <Em>by design.</Em></h2>
               <p className="lead">
-                MambaHR is built and run by its founders, which means the people who designed the product
-                are the same people on your demo, your implementation, and your security review.
+                MambaHR is built and run by its founders. The people who designed the product are the
+                same people on your demo, your implementation, and your security review.
               </p>
             </div>
             <div className="grid">
@@ -285,7 +285,7 @@ export default function AboutPage() {
                     </div>
                   </div>
                   <div className="foot">
-                    <span className="li">LinkedIn →</span>
+                    <span className="li">LinkedIn</span>
                   </div>
                 </a>
               ))}

@@ -30,7 +30,7 @@ const jsonLd = {
   name: 'Employee records | MambaHR',
   url: 'https://mambahr.com/people',
   description:
-    'MambaHR people-management surface: directory, records, comp, leave, and offboarding handled by one agent.',
+    'MambaHR employee records: the directory, every record, pay, leave, and offboarding, kept current by the system that does the work.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',

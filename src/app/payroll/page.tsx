@@ -189,8 +189,7 @@ export default function PayrollPage() {
           eyebrow="Payroll changes"
           pill="Deel managed payroll"
           title={<>Payday, <Em>perfect.</Em></>}
-          lead={'MambaHR prepares every payroll change. You choose per company: a change file for your current provider, or Deel-managed payroll where MambaHR sends the changes to Deel and a person approves every run.'}
-          proof="Built for the teams who run payday"
+          lead={'MambaHR prepares every payroll change. You choose per company: a change file for your current provider, or Deel-managed payroll. On Deel, MambaHR sends the changes and a person approves every run.'}
           photo="/v2-people/team.jpg"
           photoChip="MambaHR · ready"
           photoCaption="42 paid right · 0 discrepancies"
@@ -201,11 +200,11 @@ export default function PayrollPage() {
         <AgentLoop
           eyebrow="The pay cycle"
           title={<>The pay cycle, done early.</>}
-          lead={'MambaHR tracks every change all month, then turns them into one clean change file in your provider’s format, or sends them to Deel for a managed run. Either way, a person approves before anyone is paid.'}
+          lead={'MambaHR tracks every change all month. Then it builds one clean change file in your provider’s format, or sends the changes to Deel for a managed run. Either way, a person approves before anyone is paid.'}
           steps={[
             { n: '01', label: 'Collects every change', desc: 'Raises, new hires, exits, address moves, gathered the moment they happen, not the night before.', who: 'agent', time: 'all month' },
-            { n: '02', label: 'Prices raises against bands', desc: 'Every merit change checked against your comp bands before it touches the file.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
-            { n: '03', label: 'Computes final pay by state rules', desc: 'Final pay computed by state rule, held for your approval.', who: 'agent', time: 'instant', img: '/avatars/tom.jpg' },
+            { n: '02', label: 'Prices raises against your pay ranges', desc: 'MambaHR checks every merit change against your pay ranges before it touches the file.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
+            { n: '03', label: 'Computes final pay by state rules', desc: 'MambaHR computes final pay by state rule and holds it for your approval.', who: 'agent', time: 'instant', img: '/avatars/tom.jpg' },
             { n: '04', label: 'Builds the change file, or sends it to Deel', desc: 'A change file in your provider’s format, checked against the record. Or, on Deel-managed payroll, the changes go straight to Deel. Ask us about your provider.', who: 'agent', time: '2 days early' },
             { n: '05', label: 'Reconciles twice', desc: 'Every line checked against the record, then checked again. Discrepancies get caught before you ever see the file.', who: 'agent', time: 'twice' },
             { n: '06', label: 'You approve. Done.', desc: 'Upload the file to your provider, or approve the Deel run. Payday runs without a scramble.', who: 'you', img: '/avatars/anna.jpg' },
@@ -220,7 +219,7 @@ export default function PayrollPage() {
             'A change file in your provider’s format, checked against the record',
             'Or Deel-managed payroll, with the changes sent to Deel for you',
             'A person approves every run before anyone is paid',
-            'Benefits administration is not part of MambaHR today; COBRA notices at offboarding are',
+            'Benefits administration is not part of MambaHR today; the health-coverage continuation notices (COBRA) at offboarding are',
           ]}
         >
           <DeelRunCard />
@@ -243,7 +242,7 @@ export default function PayrollPage() {
 
         <StatTrio
           stats={[
-            { n: 24, suffix: 'h', label: 'of payroll prep, gone each month' },
+            { n: 24, suffix: 'h', label: 'of payroll prep gone each month, by our estimate' },
             { n: 0, label: 'pay runs released without a person approving' },
             { n: 2, suffix: '×', label: 'every file reconciled before you see it' },
           ]}
@@ -256,7 +255,7 @@ export default function PayrollPage() {
           metric="Every change in the file"
         />
 
-        <PageCta title={<>Make payday a non-event.</>} />
+        <PageCta title={<>Make payday a non-event.</>} sub="A 30-minute demo with one of your real pay cycles. Then we import your data and switch you over." />
       </main>
       <Footer />
     </>

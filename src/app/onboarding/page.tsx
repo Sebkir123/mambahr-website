@@ -10,7 +10,7 @@ import { PageHero, AgentLoop, FeatureSplit, StatTrio, QuoteBand, PageCta, Em } f
 const DAY1 = [
   { time: '9:02 AM', label: 'Offer countersigned', meta: 'E-signed' },
   { time: '9:03 AM', label: 'Form I-9 and E-Verify check started', meta: 'Federal' },
-  { time: '9:05 AM', label: 'Email, Slack, and SSO logins live', meta: 'Accounts live' },
+  { time: '9:05 AM', label: 'Email, Slack, and single sign-on live', meta: 'Accounts live' },
   { time: '9:07 AM', label: 'Device setup requested', meta: 'IT notified' },
 ]
 
@@ -208,7 +208,6 @@ export default function OnboardingPage() {
           eyebrow="Onboarding & offboarding"
           title={<>Day one, <Em>ready.</Em></>}
           lead="Form I-9 started, logins working, device setup requested, first week planned, before your new hire walks in. And when someone leaves, a clean exit with nothing forgotten."
-          proof="Built for new hires and HR alike"
           photo="/v2-people/marcus.jpg"
           photoChip="MambaHR · done in 4m"
           photoCaption="Alex set up · logins live by 9 AM"
@@ -233,7 +232,7 @@ export default function OnboardingPage() {
         <FeatureSplit
           eyebrow="Offboarding"
           title={<>Exits with <Em>zero loose ends.</Em></>}
-          lead="Exits are where details get expensive. MambaHR gets the final paycheck right for their state, prepares the COBRA notices, collects the handover, and switches off every login only after your sign-off."
+          lead="Exits are where details get expensive. MambaHR gets the final paycheck right for their state and prepares the health-coverage continuation notices (COBRA). It collects the handover and switches off every login, but only after your sign-off."
           bullets={[
             'Final pay timed to each state&rsquo;s rules, California&rsquo;s last-day deadline included',
             'COBRA notices prepared on schedule, ready to send',
@@ -248,7 +247,7 @@ export default function OnboardingPage() {
           warm
           eyebrow="The first impression"
           title={<>Day one, like <Em>the brochure.</Em></>}
-          lead="Nobody remembers a smooth start, they remember a broken one. When the logins work, the first week is planned, and the buddy says hi at 9:05, your new hire spends day one meeting people instead of waiting on access."
+          lead="Nobody remembers a smooth start, they remember a broken one. When the logins work and the buddy says hi at 9:05, day one is about meeting people, not waiting on access."
           bullets={[
             'A first week that says we were ready for you',
             'Managers get a nudge list, not a to-do list',
@@ -273,7 +272,7 @@ export default function OnboardingPage() {
           metric="Imported in a day"
         />
 
-        <PageCta title={<>Day one, done. <Em>Day 4,000, too.</Em></>} />
+        <PageCta title={<>Day one, ready. <Em>Every day after, too.</Em></>} sub="A 30-minute demo of one onboarding, offer to logins live. Then we import your data and switch you over." />
       </main>
       <Footer />
     </>
