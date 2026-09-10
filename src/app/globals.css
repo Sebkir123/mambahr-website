@@ -223,27 +223,64 @@ h4, h5, h6 {
   animation-play-state: paused;
 }
 
-/* Buttons */
-.btn-primary {
+/* ── Buttons: ONE definition, ONE radius (the 999px pill the app's decision
+   pills use). Base class .btn + a variant: primary (ink fill), secondary
+   (outlined on an elevated surface), ghost (transparent, inherits colour, so
+   it reads white on the gradient CTA panel and ink on light pages), dark
+   (the compact nav pill). .btn-sm for the nav. Do not add a second .btn-*
+   family in a styled-jsx block; extend this one. The variants carry the base
+   too so a lone .btn-secondary (404 page, admin gallery) still renders. */
+.btn, .btn-primary, .btn-secondary, .btn-ghost, .btn-dark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  background-color: #1C1917;
-  color: #FFFFFF;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
   text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+.btn-primary {
+  background: var(--text);
+  color: #FFFFFF;
+  border-color: var(--text);
+  box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22);
 }
+.btn-primary:hover { transform: translateY(-2px); background: #2A2A28; }
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text);
+  border-color: var(--border-mid);
+}
+.btn-secondary:hover { background: #FFFFFF; border-color: var(--text); }
+.btn-ghost {
+  background: transparent;
+  color: inherit;
+  border-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+.btn-ghost:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
+.btn-dark {
+  background: var(--text);
+  color: #FFFFFF;
+  border-color: var(--text);
+  padding: 9px 20px;
+  font-size: 13px;
+  box-shadow: 0 4px 14px rgba(20, 18, 14, 0.18);
+}
+.btn-dark:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(20, 18, 14, 0.24); }
+.btn-sm { padding: 11px 18px; font-size: 14px; }
+.btn-block { width: 100%; }
+.btn:focus-visible { outline: 2px solid var(--gold-dark); outline-offset: 3px; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
+/* Legacy gold pill, still used on the blog and the 404. */
 .btn-gold {
   display: inline-flex;
   align-items: center;
@@ -252,7 +289,7 @@ h4, h5, h6 {
   background-color: var(--gold);
   color: #FFFFFF;
   padding: 12px 28px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
@@ -265,33 +302,6 @@ h4, h5, h6 {
   box-shadow: 0 4px 16px rgba(176, 141, 87, 0.3);
 }
 .btn-gold:focus-visible {
-  outline: 2px solid var(--gold-dark);
-  outline-offset: 3px;
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background-color: var(--bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-}
-.btn-secondary:hover {
-  background-color: var(--bg-surface);
-  border-color: var(--border-mid);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-.btn-secondary:focus-visible {
   outline: 2px solid var(--gold-dark);
   outline-offset: 3px;
 }
@@ -598,27 +608,7 @@ h4, h5, h6 {
   .agent-working::after { animation: none; opacity: 0; }
 }
 
-/* ── Nav polish — dark CTA pill, link hovers, dropdown entrance ── */
-.btn-dark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background: #1A1A19;
-  color: #FFFFFF;
-  padding: 9px 20px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(20, 18, 14, 0.18);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.btn-dark:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(20, 18, 14, 0.24);
-}
+/* ── Nav polish — link hovers, dropdown entrance ── */
 .nav-top-link {
   position: relative;
   transition: color 0.15s ease;
@@ -652,11 +642,22 @@ h4, h5, h6 {
 .nav-kw { transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease; }
 .nav-kw:hover { color: var(--gold-dark); border-color: var(--gold-light); background: var(--gold-tint); }
 @media (prefers-reduced-motion: reduce) {
-  .btn-dark { transition: none; }
-  .btn-dark:hover { transform: none; }
+  .btn { transition: none; }
+  .btn:hover { transform: none; }
   .nav-top-link::after { transition: none; }
   .nav-dropdown { animation: none; }
 }
+
+/* ── Product mockup card: the frame every hand-built app fragment sits in.
+   Pair with agent-edge agent-working|agent-done for the gold-violet ring. */
+.mock-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-float);
+  background: var(--bg-warm);
+}
+.mock-card.slack { max-width: 520px; margin: 0 auto; box-shadow: var(--shadow-md); }
 
 /* ── Mamba status chip — pairs with .agent-edge surfaces.
    "MAMBA · WORKING" (violet, pulsing dot) / "MAMBA · DONE" (gold check).
