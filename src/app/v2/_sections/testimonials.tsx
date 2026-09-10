@@ -77,7 +77,7 @@ export default function Testimonials() {
         .ts { background: var(--bg-warm); padding-block: clamp(96px, 13vw, 168px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { max-width: none; margin-bottom: clamp(36px, 4vw, 52px); }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 18px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
 
@@ -109,7 +109,7 @@ export default function Testimonials() {
         .tag {
           display: inline-block;
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           color: var(--text-faint);
@@ -139,7 +139,7 @@ export default function Testimonials() {
           margin: 16px 0 0;
         }
         .who { margin-top: 20px; }
-        .who-n { font-size: 14.5px; font-weight: 700; color: var(--text); }
+        .who-n { font-size: 15px; font-weight: 700; color: var(--text); }
         .who-r { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
         .results {
           margin-top: auto;
@@ -153,7 +153,7 @@ export default function Testimonials() {
           font-family: var(--font-serif);
           font-size: clamp(22px, 2.2vw, 28px);
           line-height: 1;
-          background: linear-gradient(110deg, #8A6535, #6A5DA6);
+          background: linear-gradient(110deg, #7A5A2E, #6A5DA6);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
@@ -176,7 +176,7 @@ export default function Testimonials() {
         .badge {
           align-self: flex-start;
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           color: #fff;
           background: linear-gradient(120deg, #B98A4E, #6A5DA6);
           padding: 5px 12px;
@@ -184,7 +184,7 @@ export default function Testimonials() {
         }
         .q {
           font-family: var(--font-serif);
-          font-size: 18.5px;
+          font-size: 19px;
           line-height: 1.42;
           letter-spacing: -0.01em;
           color: var(--text);

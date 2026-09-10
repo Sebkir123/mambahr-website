@@ -68,7 +68,7 @@ function HeroAnswerCard() {
         .m-body { min-width: 0; }
         .m-who {
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: var(--text-faint);
@@ -96,14 +96,14 @@ function HeroAnswerCard() {
         .a-sub {
           display: block;
           margin-top: 6px;
-          font-size: 13.5px;
+          font-size: 14px;
           font-weight: 400;
           color: var(--text-muted);
         }
         .chips { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
         .chip {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--gold-dark);
@@ -174,7 +174,7 @@ function AuditLogCard() {
         }
         .l-sub {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: rgba(255, 255, 255, 0.5);
@@ -187,14 +187,14 @@ function AuditLogCard() {
           font-size: 14px;
         }
         .l-row + .l-row { border-top: 1px solid rgba(255, 255, 255, 0.07); }
-        .ts { flex: none; font-family: var(--font-mono); font-size: 11px; color: #AEA2E6; }
+        .ts { flex: none; font-family: var(--font-mono); font-size: 12px; color: #AEA2E6; }
         .dot { flex: none; width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
         .what { flex: none; color: rgba(255, 255, 255, 0.94); font-weight: 600; }
         .note {
           flex: 1;
           min-width: 0;
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           color: rgba(255, 255, 255, 0.55);
           text-align: right;
           white-space: nowrap;
@@ -207,7 +207,7 @@ function AuditLogCard() {
           border-radius: 12px;
           background: rgba(255, 255, 255, 0.06);
           border: 1px solid rgba(255, 255, 255, 0.1);
-          font-size: 12.5px;
+          font-size: 13px;
           color: rgba(255, 255, 255, 0.65);
         }
         @media (max-width: 560px) { .note { display: none; } }
@@ -271,8 +271,8 @@ function SleepPhoto() {
           border-width: 0 2px 2px 0;
           transform: rotate(45deg);
         }
-        .m-t { font-size: 13.5px; font-weight: 700; color: var(--text); }
-        .m-s { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); margin-top: 2px; }
+        .m-t { font-size: 14px; font-weight: 700; color: var(--text); }
+        .m-s { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 2px; }
         @media (max-width: 880px) { .mini { left: 12px; } }
       `}</style>
     </div>
@@ -285,7 +285,7 @@ export default function CompliancePage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Compliance"
           title={<>Always <Em>compliant.</Em></>}

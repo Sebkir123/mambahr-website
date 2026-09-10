@@ -54,11 +54,11 @@ function MenuItem({ item, onNavigate }: { item: NavItem; onNavigate: () => void 
         {item.icon ? iconMap[item.icon] : null}
       </span>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14.5, fontWeight: 600, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em', whiteSpace: 'nowrap' }}>
+        <p style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 15, fontWeight: 600, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em', whiteSpace: 'nowrap' }}>
           {item.label}
           {item.pill && <span style={navPill}>{item.pill}</span>}
         </p>
-        <p style={{ fontSize: 12.5, color: 'var(--text-muted)', margin: '2px 0 0', lineHeight: 1.4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.description}</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '2px 0 0', lineHeight: 1.4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.description}</p>
       </div>
     </Link>
   )
@@ -66,7 +66,7 @@ function MenuItem({ item, onNavigate }: { item: NavItem; onNavigate: () => void 
 
 const navPill = {
   fontFamily: 'var(--font-mono)',
-  fontSize: 9.5,
+  fontSize: 12,
   fontWeight: 500,
   textTransform: 'uppercase' as const,
   letterSpacing: '0.05em',
@@ -78,7 +78,7 @@ const navPill = {
   whiteSpace: 'nowrap' as const,
 }
 
-const colLabel = { fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', color: 'var(--text-faint)', textTransform: 'uppercase' as const, margin: '0 0 14px 12px' }
+const colLabel = { fontSize: 12, fontWeight: 700, letterSpacing: '0.16em', color: 'var(--text-faint)', textTransform: 'uppercase' as const, margin: '0 0 14px 12px' }
 
 const topLinks = [
   { label: 'Pricing',   href: '/pricing'   },
@@ -301,7 +301,7 @@ export default function MegaNav() {
                           border: '1px solid var(--border-faint)',
                         }}
                       >
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-mono), monospace', fontSize: 10, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--gold-dark)' }}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: 'var(--font-mono), monospace', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--gold-dark)' }}>
                           <span style={{ width: 7, height: 7, borderRadius: 999, background: '#6A5DA6', display: 'inline-block' }} />
                           Meet MambaHR
                         </span>
@@ -314,7 +314,7 @@ export default function MegaNav() {
                   {/* The procurement checklist, exact keywords buyers scan for */}
                   <div style={{ padding: '0 32px 20px' }}>
                     <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: 8, paddingTop: 18, borderTop: '1px solid var(--border-faint)' }}>
-                      <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-faint)', marginRight: 4 }}>
+                      <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-faint)', marginRight: 4 }}>
                         Also handled
                       </span>
                       {alsoHandled.map((k) => (
@@ -324,7 +324,7 @@ export default function MegaNav() {
                           onClick={() => setProductOpen(false)}
                           className="nav-kw"
                           style={{
-                            fontSize: 11.5,
+                            fontSize: 12,
                             fontWeight: 500,
                             color: 'var(--text-muted)',
                             textDecoration: 'none',
@@ -352,13 +352,13 @@ export default function MegaNav() {
                       borderTop: '1px solid var(--border-faint)',
                     }}
                   >
-                    <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 14.5, color: 'var(--text-muted)' }}>
+                    <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 15, color: 'var(--text-muted)' }}>
                       One agent. Every job on this list.
                     </span>
                     <Link
                       href="/product"
                       onClick={() => setProductOpen(false)}
-                      style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none', whiteSpace: 'nowrap' }}
+                      style={{ fontSize: 14, fontWeight: 600, color: 'var(--gold-dark)', textDecoration: 'none', whiteSpace: 'nowrap' }}
                     >
                       See it run →
                     </Link>

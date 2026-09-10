@@ -135,7 +135,7 @@ function CapCard({ bullets }: { bullets: string[] }) {
             <circle cx="8" cy="8" r="8" fill="var(--gold-tint)" />
             <path d="M4.5 8.2l2.3 2.3 4.7-5" stroke="var(--gold-dark)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <span style={{ fontSize: 14.5, color: 'var(--text)', lineHeight: 1.45 }}>{b}</span>
+          <span style={{ fontSize: 15, color: 'var(--text)', lineHeight: 1.45 }}>{b}</span>
         </div>
       ))}
     </div>
@@ -148,7 +148,7 @@ export default function ProductPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="The product"
           title={<>See the agent <Em>run the work.</Em></>}
@@ -169,10 +169,10 @@ export default function ProductPage() {
             </div>
             {STEPS.slice(0, 3).map((s) => (
               <div key={s.n} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 0', borderTop: '1px solid var(--border-faint)' }}>
-                <span style={{ fontSize: 11, color: 'var(--text-faint)', fontVariantNumeric: 'tabular-nums', width: 20 }}>{s.n}</span>
+                <span style={{ fontSize: 12, color: 'var(--text-faint)', fontVariantNumeric: 'tabular-nums', width: 20 }}>{s.n}</span>
                 {s.img && <img src={s.img} alt="" width={24} height={24} style={{ borderRadius: 999, objectFit: 'cover' }} />}
-                <span style={{ flex: 1, fontSize: 13.5, color: 'var(--text)', fontWeight: 500 }}>{s.label}</span>
-                <span style={{ fontSize: 11, color: s.who === 'you' ? 'var(--gold-dark)' : 'var(--text-faint)' }}>
+                <span style={{ flex: 1, fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>{s.label}</span>
+                <span style={{ fontSize: 12, color: s.who === 'you' ? 'var(--gold-dark)' : 'var(--text-faint)' }}>
                   {s.who === 'you' ? 'You decide' : 'MambaHR'}
                 </span>
               </div>

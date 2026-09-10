@@ -61,7 +61,7 @@ export default function CompareHub() {
     <>
       <MegaNav />
       <RevealInit />
-      <main>
+      <main id="main">
         {/* ── Hero ── */}
         <section className="ch">
           <div className="aurora" aria-hidden="true"><span className="blob b1" /><span className="blob b2" /></div>
@@ -95,13 +95,13 @@ export default function CompareHub() {
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 660px; margin: 22px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
             :global(.ch .btn-p) {
-              display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 15.5px;
+              display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 16px;
               padding: 14px 28px; border-radius: 999px; text-decoration: none;
               box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22); transition: transform 0.15s ease;
             }
             :global(.ch .btn-p:hover) { transform: translateY(-2px); }
             :global(.ch .btn-g) {
-              display: inline-block; color: var(--text); font-weight: 600; font-size: 15.5px;
+              display: inline-block; color: var(--text); font-weight: 600; font-size: 16px;
               padding: 14px 24px; border-radius: 999px; border: 1px solid var(--border-mid);
               background: rgba(255, 255, 255, 0.6); text-decoration: none;
             }
@@ -141,14 +141,14 @@ export default function CompareHub() {
             .op { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 22px); align-items: stretch; }
             .card { display: flex; flex-direction: column; gap: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 28px); box-shadow: var(--shadow-sm); }
             .t { font-family: var(--font-serif); font-size: 22px; font-weight: 500; color: var(--text); margin: 0; letter-spacing: -0.01em; }
-            .block p { font-size: 13.5px; line-height: 1.55; color: var(--text-muted); margin: 6px 0 0; }
+            .block p { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 6px 0 0; }
             .block.mamba { margin-top: auto; background: var(--bg-warm); border: 1px solid var(--border-faint); border-radius: 12px; padding: 13px 15px; }
-            .lbl { font-family: var(--font-mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+            .lbl { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
             .lbl.good { color: var(--color-green); }
             .lbl.bad { color: #B0584A; }
             .lbl.gold { color: var(--gold-dark); }
@@ -180,7 +180,7 @@ export default function CompareHub() {
             .vs { background: var(--bg-warm); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15px, 1.7vw, 17px); line-height: 1.6; color: var(--text-muted); margin: 14px auto 0; max-width: 540px; }
             .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.4vw, 18px); }
@@ -203,7 +203,7 @@ export default function CompareHub() {
               top: -10px;
               left: 18px;
               font-family: var(--font-mono);
-              font-size: 9.5px;
+              font-size: 12px;
               font-weight: 600;
               text-transform: uppercase;
               letter-spacing: 0.05em;
@@ -213,11 +213,11 @@ export default function CompareHub() {
               padding: 4px 11px;
               box-shadow: 0 0 0 4px var(--bg);
             }
-            .vs-l { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); }
+            .vs-l { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); }
             .vs-l em { font-style: italic; color: var(--gold-dark); }
             .nm { font-family: var(--font-serif); font-size: clamp(22px, 2.2vw, 28px); color: var(--text); letter-spacing: -0.015em; margin-top: 6px; }
             .sub { font-size: 13px; line-height: 1.5; color: var(--text-muted); margin-top: 10px; flex: 1; }
-            .go { font-size: 12.5px; font-weight: 700; color: var(--gold-dark); margin-top: 16px; }
+            .go { font-size: 13px; font-weight: 700; color: var(--gold-dark); margin-top: 16px; }
             @media (max-width: 1080px) { .grid { grid-template-columns: repeat(2, 1fr); } }
             @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
           `}</style>
@@ -244,7 +244,7 @@ export default function CompareHub() {
             .df { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 1.8vw, 22px); }
             .card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }

@@ -83,7 +83,7 @@ export default function Compliance() {
         .m-body { min-width: 0; }
         .m-who {
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: var(--text-faint);
@@ -111,7 +111,7 @@ export default function Compliance() {
         .a-sub {
           display: block;
           margin-top: 6px;
-          font-size: 13.5px;
+          font-size: 14px;
           font-weight: 400;
           color: var(--text-muted);
         }
@@ -120,7 +120,7 @@ export default function Compliance() {
           font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #8A6535;
+          color: #7A5A2E;
           margin: 0 0 18px;
         }
         .title {
@@ -152,7 +152,7 @@ export default function Compliance() {
           flex-wrap: wrap;
           gap: 12px;
           margin-top: 28px;
-          font-size: 13.5px;
+          font-size: 14px;
           color: var(--text-muted);
         }
         .trust i { width: 4px; height: 4px; border-radius: 999px; background: var(--border-mid); }

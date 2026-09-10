@@ -77,7 +77,7 @@ export default function Difference() {
         .df { background: var(--bg); padding-block: clamp(96px, 13vw, 168px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { max-width: none; margin-bottom: clamp(44px, 5vw, 64px); }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 18px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.08; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
         .lead { font-size: clamp(17px, 2vw, 19px); line-height: 1.6; color: var(--text-muted); margin: 20px 0 0; max-width: 620px; }
@@ -112,7 +112,7 @@ export default function Difference() {
           display: block;
           margin-top: 5px;
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--text-faint);
@@ -122,7 +122,7 @@ export default function Difference() {
           align-items: center;
           gap: 12px;
           height: 48px;
-          font-size: 14.5px;
+          font-size: 15px;
           color: var(--text-muted);
         }
         .box {
@@ -137,7 +137,7 @@ export default function Difference() {
         .cost {
           flex: none;
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           color: #A8552F;
           white-space: nowrap;
         }
@@ -164,7 +164,7 @@ export default function Difference() {
           box-shadow: var(--shadow-float);
         }
         .u-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-        .u-title { display: flex; align-items: center; gap: 10px; font-size: 16.5px; font-weight: 700; color: #fff; }
+        .u-title { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: #fff; }
         .logo {
           width: 26px;
           height: 26px;
@@ -181,7 +181,7 @@ export default function Difference() {
         :global(.mamba-chip.ondark .mc-i) { background: #AEA2E6; }
         .u-sub {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: rgba(255, 255, 255, 0.55);
@@ -201,7 +201,7 @@ export default function Difference() {
         .when {
           flex: none;
           font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
           color: #8FC9A4;
           white-space: nowrap;
         }
@@ -248,9 +248,9 @@ export default function Difference() {
         }
 
         .compare { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-        .cmp-l { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); margin-right: 4px; }
+        .cmp-l { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); margin-right: 4px; }
         .compare :global(a) {
-          font-size: 13.5px;
+          font-size: 14px;
           font-weight: 600;
           color: var(--text-muted);
           border: 1px solid var(--border);

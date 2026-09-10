@@ -215,7 +215,7 @@ export default function Lifecycle() {
         .lc { background: var(--bg); padding-block: clamp(96px, 13vw, 168px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { max-width: none; margin-bottom: clamp(44px, 5vw, 64px); }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 18px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.08; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
         .lead { font-size: clamp(18px, 2vw, 20px); line-height: 1.55; color: var(--text-muted); margin: 20px 0 0; max-width: 600px; }
@@ -311,11 +311,11 @@ export default function Lifecycle() {
           .stop.on .halo { animation: none; opacity: 0.5; }
           .dot { transition: none; }
         }
-        .num { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.05em; color: var(--text-faint); }
+        .num { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.05em; color: var(--text-faint); }
         .lbl { font-size: 13px; font-weight: 600; color: var(--text-faint); transition: color 0.2s ease; text-align: center; line-height: 1.25; }
         .stop:hover .lbl { color: var(--text-muted); }
         .stop.on .lbl { color: var(--text); }
-        .stop.on .num { color: #8A6535; }
+        .stop.on .num { color: #7A5A2E; }
 
         /* spotlight card */
         .spot {
@@ -346,11 +346,11 @@ export default function Lifecycle() {
           max-width: 460px;
         }
         .chips { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-        .chips-l { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); margin-right: 2px; }
+        .chips-l { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); margin-right: 2px; }
         .chip {
           font-family: var(--font-mono);
-          font-size: 11px;
-          color: #8A6535;
+          font-size: 12px;
+          color: #7A5A2E;
           background: rgba(255, 255, 255, 0.7);
           border: 1px solid #E6D3BC;
           border-radius: 999px;
@@ -385,11 +385,11 @@ export default function Lifecycle() {
           border: 2px solid rgba(255, 255, 255, 0.2);
         }
         .lp-n { font-size: 14px; font-weight: 700; color: #fff; }
-        .lp-r { font-size: 11.5px; color: rgba(255, 255, 255, 0.55); margin-top: 1px; }
+        .lp-r { font-size: 12px; color: rgba(255, 255, 255, 0.55); margin-top: 1px; }
         .lp-tag {
           margin-left: auto;
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.07em;
           color: rgba(255, 255, 255, 0.45);
@@ -406,7 +406,7 @@ export default function Lifecycle() {
         .log-check { flex: none; width: 16px; height: 16px; border-radius: 999px; background: var(--color-green); position: relative; }
         .log-check::after { content: ''; position: absolute; left: 5px; top: 3px; width: 3.5px; height: 7px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .log-text { flex: 1; min-width: 0; font-size: 14px; color: rgba(255, 255, 255, 0.92); font-weight: 500; }
-        .log-t { font-family: var(--font-mono); font-size: 10.5px; color: #8FC9A4; white-space: nowrap; }
+        .log-t { font-family: var(--font-mono); font-size: 12px; color: #8FC9A4; white-space: nowrap; }
 
         @media (max-width: 900px) {
           .rail { grid-template-columns: repeat(4, 1fr); row-gap: 18px; }

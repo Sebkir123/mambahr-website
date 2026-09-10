@@ -54,17 +54,17 @@ function ReviewDraftCard() {
         }
         .av { width: 38px; height: 38px; border-radius: 999px; object-fit: cover; flex: none; border: 2px solid #fff; box-shadow: var(--shadow-sm); }
         .hmain { flex: 1; min-width: 0; }
-        .hname { font-size: 14.5px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+        .hname { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
         .hmeta { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
         .body { padding: 6px 20px; }
         .line { padding: 13px 0; }
         .line + .line { border-top: 1px solid var(--border-faint); }
-        .lt { font-size: 13.5px; line-height: 1.55; color: var(--text-muted); margin: 0; }
+        .lt { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 0; }
         .src {
           display: inline-block;
           margin-top: 7px;
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--gold-dark);
@@ -79,7 +79,7 @@ function ReviewDraftCard() {
           gap: 8px;
           padding: 13px 20px;
           border-top: 1px solid var(--border-faint);
-          font-size: 12.5px;
+          font-size: 13px;
           color: var(--text-muted);
         }
         .fdot { width: 8px; height: 8px; border-radius: 999px; background: var(--color-green); flex: none; }
@@ -140,7 +140,7 @@ function PipCard() {
         .tick { flex: none; width: 16px; height: 16px; margin-top: 2px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
         .tick::after { content: ''; position: absolute; left: 5px; top: 2.5px; width: 3px; height: 7px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .rl { font-size: 13px; font-weight: 600; color: var(--text); }
-        .rd2 { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
+        .rd2 { font-size: 13px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
         .approve {
           display: flex;
           align-items: center;
@@ -150,8 +150,8 @@ function PipCard() {
           border-top: 1px solid rgba(138, 101, 53, 0.22);
         }
         .ad { width: 8px; height: 8px; border-radius: 999px; background: var(--gold); flex: none; }
-        .at { flex: 1; font-size: 12.5px; color: var(--gold-dark); font-weight: 600; line-height: 1.4; }
-        .btn { flex: none; font-size: 12.5px; font-weight: 600; color: #fff; background: #14110C; border-radius: 999px; padding: 7px 15px; }
+        .at { flex: 1; font-size: 13px; color: var(--gold-dark); font-weight: 600; line-height: 1.4; }
+        .btn { flex: none; font-size: 13px; font-weight: 600; color: #fff; background: #14110C; border-radius: 999px; padding: 7px 15px; }
         @media (max-width: 640px) { .approve { flex-wrap: wrap; } }
       `}</style>
     </div>
@@ -191,7 +191,7 @@ function PhotoCard() {
           padding: 13px 16px;
           max-width: 290px;
         }
-        .ft { font-size: 13.5px; font-weight: 700; color: var(--text); margin-top: 9px; }
+        .ft { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 9px; }
         .fm { font-size: 12px; color: var(--text-faint); margin-top: 3px; }
         @media (max-width: 880px) { .float { left: 12px; } }
       `}</style>
@@ -205,7 +205,7 @@ export default function PerformancePage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Performance"
           title={<>Reviews, <Em>written.</Em></>}

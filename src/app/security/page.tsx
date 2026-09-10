@@ -40,7 +40,7 @@ function SecurityLogCard() {
         .sec { position: relative; overflow: hidden; background: #14110C; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 20px 0 0; box-shadow: var(--shadow-float); }
         .s-head { display: flex; align-items: center; justify-content: space-between; padding: 0 22px 16px; }
         .s-t { font-family: var(--font-serif); font-size: 19px; color: #FFF2E6; letter-spacing: -0.01em; }
-        .s-chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: #D4AA7C; background: rgba(212, 170, 124, 0.12); border: 1px solid rgba(212, 170, 124, 0.25); border-radius: 999px; padding: 4px 10px; }
+        .s-chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: #D4AA7C; background: rgba(212, 170, 124, 0.12); border: 1px solid rgba(212, 170, 124, 0.25); border-radius: 999px; padding: 4px 10px; }
         .s-chip i { width: 6px; height: 6px; border-radius: 999px; background: #D4AA7C; }
         .rows { border-top: 1px solid rgba(255, 255, 255, 0.07); }
         .row { display: flex; align-items: center; gap: 12px; padding: 13px 22px; font-family: var(--font-mono); font-size: 12px; }
@@ -49,9 +49,9 @@ function SecurityLogCard() {
         .ok { flex: none; width: 14px; height: 14px; border-radius: 999px; background: rgba(46, 160, 94, 0.2); border: 1px solid rgba(110, 200, 140, 0.5); position: relative; }
         .ok::after { content: ''; position: absolute; left: 4.5px; top: 2px; width: 3px; height: 7px; border: solid #8FD6A8; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
         .txt { color: rgba(255, 242, 230, 0.88); flex: 1; min-width: 0; }
-        .tag { flex: none; font-size: 10px; color: #AEA2E6; background: rgba(106, 93, 166, 0.22); border-radius: 999px; padding: 3px 9px; }
-        .s-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 22px; border-top: 1px solid rgba(255, 255, 255, 0.07); font-size: 11.5px; color: rgba(255, 242, 230, 0.5); flex-wrap: wrap; }
-        .mono { font-family: var(--font-mono); font-size: 10.5px; color: rgba(255, 242, 230, 0.35); }
+        .tag { flex: none; font-size: 12px; color: #AEA2E6; background: rgba(106, 93, 166, 0.22); border-radius: 999px; padding: 3px 9px; }
+        .s-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 22px; border-top: 1px solid rgba(255, 255, 255, 0.07); font-size: 12px; color: rgba(255, 242, 230, 0.5); flex-wrap: wrap; }
+        .mono { font-family: var(--font-mono); font-size: 12px; color: rgba(255, 242, 230, 0.35); }
         @media (max-width: 520px) { .tag { display: none; } }
       `}</style>
     </div>
@@ -94,19 +94,19 @@ function Commitments() {
         .cm { background: var(--bg); padding-block: clamp(88px, 11vw, 144px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { margin-bottom: clamp(36px, 4vw, 52px); text-align: center; }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
         .card { background: var(--bg); border: 1px solid var(--border); border-radius: 18px; padding: 8px 0; box-shadow: var(--shadow-float); max-width: 920px; margin: 0 auto; }
         .row { display: flex; align-items: center; gap: 16px; padding: 16px clamp(18px, 2.4vw, 28px); }
         .row + .row { border-top: 1px solid var(--border-faint); }
-        .num { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); width: 22px; flex: none; }
+        .num { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 22px; flex: none; }
         .mark { flex: none; width: 18px; height: 18px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .lbl { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .desc { font-size: 13.5px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
+        .desc { font-size: 14px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
         .main { flex: 1; min-width: 0; }
-        .tag { flex: none; font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+        .tag { flex: none; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #7A5A2E; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
         @media (max-width: 640px) { .row { flex-wrap: wrap; } }
       `}</style>
     </section>
@@ -146,12 +146,12 @@ function SsoCard() {
         .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; border-top: 1px solid var(--border-faint); }
         .mark { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--gold-tint); color: var(--gold-dark); font-family: var(--font-serif); font-size: 16px; display: flex; align-items: center; justify-content: center; }
         .main { flex: 1; min-width: 0; }
-        .nm { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .nm { font-size: 14px; font-weight: 700; color: var(--text); }
         .dd { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-        .chip { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
+        .chip { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
         .chip i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
         .s-foot { padding: 12px 20px; border-top: 1px solid var(--border-faint); background: var(--bg-warm); border-radius: 0 0 16px 16px; }
-        .mono { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+        .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
       `}</style>
     </div>
   )
@@ -194,10 +194,10 @@ function ApprovalGateCard() {
         .row { display: flex; align-items: center; gap: 12px; padding: 12px 20px; border-top: 1px solid var(--border-faint); }
         .row img { width: 30px; height: 30px; border-radius: 999px; object-fit: cover; flex: none; }
         .main { flex: 1; min-width: 0; }
-        .t { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .t { font-size: 14px; font-weight: 700; color: var(--text); }
         .m { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-        .hold { flex: none; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
-        .done-c { flex: none; display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
+        .hold { flex: none; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: #7A5A2E; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+        .done-c { flex: none; display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
         .done-c i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
         .g-foot { display: flex; align-items: center; gap: 10px; padding: 13px 20px; border-top: 1px solid var(--border-faint); flex-wrap: wrap; }
         .g-note { font-size: 12px; color: var(--text-muted); }
@@ -268,7 +268,7 @@ function SecurityReview() {
         .sr { background: var(--bg-warm); padding: clamp(72px, 9vw, 120px) var(--page-pad); }
         .wrap { max-width: var(--page-max); margin: 0 auto; }
         .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 56px); }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
@@ -290,7 +290,7 @@ export default function SecurityPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Security"
           title={<>Locked down, <Em>logged.</Em></>}

@@ -54,27 +54,27 @@ function PeopleWindow() {
         .dots b:first-child { background: #f0a59a; }
         .dots b:nth-child(2) { background: #f4ce8e; }
         .dots b:nth-child(3) { background: #a9cfa6; }
-        .addr { margin: 0 auto; font-size: 11.5px; color: var(--text-faint); background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 2px 16px; }
+        .addr { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 2px 16px; }
         .body { padding: 16px 18px 18px; }
         .head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 12px; }
         .ht { display: flex; align-items: center; gap: 10px; }
         .title { font-family: var(--font-serif); font-size: 21px; color: var(--text); letter-spacing: -0.01em; }
-        .live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 3px 9px; }
+        .live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 3px 9px; }
         .live i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
-        .count { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); }
+        .count { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
         .table { border: 1px solid var(--border); border-radius: 11px; overflow: hidden; }
         .th, .tr { display: grid; grid-template-columns: 1.5fr 0.9fr 0.9fr 0.7fr; align-items: center; gap: 10px; padding: 10px 14px; }
-        .th { font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); background: #F8F6F1; border-bottom: 1px solid var(--border); padding-block: 8px; }
+        .th { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); background: #F8F6F1; border-bottom: 1px solid var(--border); padding-block: 8px; }
         .tr + .tr { border-top: 1px solid var(--border-faint); }
         .who { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 600; color: var(--text); }
         .who img { width: 26px; height: 26px; border-radius: 999px; object-fit: cover; }
-        .team { font-size: 12.5px; color: var(--text-muted); }
-        .chip { font-size: 11px; font-weight: 600; border-radius: 999px; padding: 3px 9px; }
+        .team { font-size: 13px; color: var(--text-muted); }
+        .chip { font-size: 12px; font-weight: 600; border-radius: 999px; padding: 3px 9px; }
         .chip.ok { color: var(--color-green); background: rgba(34, 160, 94, 0.09); }
         .chip.warm { color: var(--gold-dark); background: var(--gold-tint); }
         .chip.vio { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); }
         .r { text-align: right; }
-        .time { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); }
+        .time { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
         .foot { display: flex; align-items: center; gap: 10px; margin-top: 13px; flex-wrap: wrap; }
         .foot-t { font-size: 12px; color: var(--text-muted); }
         @media (max-width: 520px) { .th span:last-child, .tr .time { display: none; } }
@@ -128,7 +128,7 @@ function OrgChartCard() {
         .ceo { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--border); border-radius: 12px; padding: 9px 16px 9px 10px; background: var(--bg-warm); box-shadow: var(--shadow-sm); margin: 0 auto; display: flex; width: fit-content; }
         .ceo img { width: 34px; height: 34px; border-radius: 999px; object-fit: cover; }
         .nm { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.2; }
-        .rl { font-size: 11.5px; color: var(--text-muted); }
+        .rl { font-size: 12px; color: var(--text-muted); }
         .lines { display: flex; justify-content: center; gap: 26%; height: 22px; margin: 4px 0; }
         .lines i { width: 1px; background: var(--border); transform: skewX(0deg); }
         .lines i:first-child { transform: rotate(28deg); }
@@ -136,9 +136,9 @@ function OrgChartCard() {
         .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
         .mgr { border: 1px solid var(--border-faint); border-radius: 12px; padding: 12px 10px; text-align: center; background: var(--bg); box-shadow: var(--shadow-sm); }
         .mgr img { width: 28px; height: 28px; border-radius: 999px; object-fit: cover; margin-bottom: 6px; }
-        .ct { display: inline-block; margin-top: 7px; font-family: var(--font-mono); font-size: 9.5px; color: var(--gold-dark); background: var(--gold-tint); border-radius: 999px; padding: 2px 8px; }
+        .ct { display: inline-block; margin-top: 7px; font-family: var(--font-mono); font-size: 12px; color: var(--gold-dark); background: var(--gold-tint); border-radius: 999px; padding: 2px 8px; }
         .o-foot { margin-top: 16px; border-top: 1px solid var(--border-faint); padding-top: 11px; text-align: center; }
-        .mono { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); }
+        .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
       `}</style>
     </div>
   )
@@ -163,9 +163,9 @@ function ImportStage() {
         .float { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 13px; padding: 12px 18px 12px 14px; box-shadow: var(--shadow-md); }
         .f-check { flex: none; width: 20px; height: 20px; border-radius: 999px; background: var(--color-green); position: relative; }
         .f-check::after { content: ''; position: absolute; left: 7px; top: 4px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .f-t { font-size: 13.5px; font-weight: 700; color: var(--text); }
-        .f-s { font-size: 11.5px; color: var(--text-muted); margin-top: 1px; }
-        .mono { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); }
+        .f-t { font-size: 14px; font-weight: 700; color: var(--text); }
+        .f-s { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+        .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
       `}</style>
     </div>
   )
@@ -177,7 +177,7 @@ export default function PeoplePage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Employee records"
           title={<>One record, <Em>current.</Em></>}

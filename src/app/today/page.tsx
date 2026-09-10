@@ -103,7 +103,7 @@ function QueueWindow() {
         .qw-body { padding: 20px 22px 22px; }
         .qw-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
         .greet { font-family: var(--font-serif); font-weight: 400; font-size: 23px; color: var(--text); margin: 0; letter-spacing: -0.01em; }
-        .date { font-size: 12.5px; color: var(--text-faint); }
+        .date { font-size: 13px; color: var(--text-faint); }
         .panel { margin-top: 16px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
         .p-head {
           display: flex;
@@ -115,28 +115,28 @@ function QueueWindow() {
           font-weight: 600;
           color: var(--text);
         }
-        .p-count { font-family: var(--font-mono); font-size: 11px; color: #8A6535; background: var(--gold-tint); border-radius: 999px; padding: 2px 8px; }
+        .p-count { font-family: var(--font-mono); font-size: 12px; color: #7A5A2E; background: var(--gold-tint); border-radius: 999px; padding: 2px 8px; }
         .ap { display: flex; align-items: center; gap: 12px; padding: 12px 16px; }
         .ap + .ap { border-top: 1px solid var(--border-faint); }
         .ap-av { width: 34px; height: 34px; border-radius: 999px; object-fit: cover; flex: none; }
         .ap-main { flex: 1; min-width: 0; }
-        .ap-t { font-size: 13.5px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
-        .ap-tag { font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 999px; }
+        .ap-t { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+        .ap-tag { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 999px; }
         .ap-tag.urgent { color: var(--color-red); background: rgba(220, 38, 38, 0.08); }
-        .ap-tag.warn { color: #8A6535; background: var(--gold-tint); }
-        .ap-m { font-size: 12.5px; color: var(--text-muted); margin-top: 3px; }
+        .ap-tag.warn { color: #7A5A2E; background: var(--gold-tint); }
+        .ap-m { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
         .ap-btns { display: flex; gap: 7px; flex: none; }
-        .ap-ok { font-size: 12.5px; font-weight: 600; color: #fff; background: #1A1A19; border-radius: 999px; padding: 7px 15px; }
-        .ap-no { font-size: 12.5px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
+        .ap-ok { font-size: 13px; font-weight: 600; color: #fff; background: #1A1A19; border-radius: 999px; padding: 7px 15px; }
+        .ap-no { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
         .feed { margin-top: 16px; }
-        .f-head { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-faint); margin-bottom: 8px; }
-        .f-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; font-size: 12.5px; }
+        .f-head { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-faint); margin-bottom: 8px; }
+        .f-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; font-size: 13px; }
         .f-row + .f-row { border-top: 1px solid var(--border-faint); }
         .f-check { flex: none; width: 16px; height: 16px; border-radius: 999px; background: var(--color-green); position: relative; }
         .f-check::after { content: ''; position: absolute; left: 5px; top: 3px; width: 3px; height: 7px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .f-who { font-weight: 600; color: var(--text); }
         .f-what { color: var(--text-muted); flex: 1; min-width: 0; }
-        .f-time { color: var(--text-faint); font-size: 11px; }
+        .f-time { color: var(--text-faint); font-size: 12px; }
         @media (max-width: 560px) {
           .ap-btns .ap-no { display: none; }
         }
@@ -196,10 +196,10 @@ function DecisionCard() {
         }
         .dc-head { display: flex; gap: 13px; align-items: center; }
         .dc-av { width: 40px; height: 40px; border-radius: 999px; object-fit: cover; flex: none; }
-        .dc-t { font-size: 14.5px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 9px; }
+        .dc-t { font-size: 15px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 9px; }
         .dc-tag {
           font-family: var(--font-mono);
-          font-size: 9.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.04em;
           color: var(--color-red);
@@ -207,10 +207,10 @@ function DecisionCard() {
           border-radius: 999px;
           padding: 2px 8px;
         }
-        .dc-m { font-size: 12.5px; color: var(--text-muted); margin-top: 3px; }
+        .dc-m { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
         .gauge { margin-top: 18px; }
-        .g-labels { display: flex; justify-content: space-between; gap: 12px; font-size: 11.5px; color: var(--text-faint); margin-bottom: 7px; }
-        .g-over { color: #8A6535; font-weight: 600; }
+        .g-labels { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--text-faint); margin-bottom: 7px; }
+        .g-over { color: #7A5A2E; font-weight: 600; }
         .g-track {
           position: relative;
           height: 8px;
@@ -235,7 +235,7 @@ function DecisionCard() {
           height: 14px;
           border-radius: 999px;
           transform: translate(-50%, -50%);
-          background: #8A6535;
+          background: #7A5A2E;
           border: 2.5px solid #fff;
           box-shadow: var(--shadow-sm);
         }
@@ -244,7 +244,7 @@ function DecisionCard() {
           align-items: center;
           gap: 8px;
           margin-top: 16px;
-          font-size: 12.5px;
+          font-size: 13px;
           color: var(--text-muted);
           background: var(--gold-tint);
           border: 1px solid rgba(138, 101, 53, 0.18);
@@ -263,7 +263,7 @@ function DecisionCard() {
         .dc-acts { display: flex; align-items: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
         .b-ok { font-size: 13px; font-weight: 600; color: #fff; background: #1A1A19; border-radius: 999px; padding: 8px 18px; }
         .b-no { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 8px 18px; }
-        .dc-log { font-size: 11px; color: var(--text-faint); margin-left: auto; }
+        .dc-log { font-size: 12px; color: var(--text-faint); margin-left: auto; }
       `}</style>
     </div>
   )
@@ -308,7 +308,7 @@ function MorningPhoto() {
         .f-check { flex: none; width: 22px; height: 22px; border-radius: 999px; background: var(--color-green); position: relative; }
         .f-check::after { content: ''; position: absolute; left: 7.5px; top: 4.5px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .f-t { font-size: 14px; font-weight: 700; color: var(--text); }
-        .f-s { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); margin-top: 1px; }
+        .f-s { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 1px; }
         @media (max-width: 880px) {
           .float { left: 8px; }
         }
@@ -324,7 +324,7 @@ export default function TodayPage() {
       <RevealInit />
       <CountUp />
 
-      <main>
+      <main id="main">
 
       <PageHero
         eyebrow="Approvals"

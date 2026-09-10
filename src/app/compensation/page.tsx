@@ -68,7 +68,7 @@ function CompReviewCard() {
           border-bottom: 1px solid var(--border-faint);
           background: var(--bg-warm);
         }
-        .bt { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .bt { font-size: 14px; font-weight: 700; color: var(--text); }
         .row { display: flex; align-items: center; gap: 13px; padding: 16px 20px; flex-wrap: wrap; }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .row.hot { background: linear-gradient(90deg, rgba(220, 38, 38, 0.04), rgba(220, 38, 38, 0)); }
@@ -96,7 +96,7 @@ function CompReviewCard() {
           top: 11px;
           transform: translateX(-50%);
           font-family: var(--font-mono);
-          font-size: 9.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: var(--text-faint);
@@ -105,7 +105,7 @@ function CompReviewCard() {
         .chip {
           flex: none;
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           border-radius: 999px;
@@ -114,15 +114,15 @@ function CompReviewCard() {
         .chip.ok { color: var(--color-green); background: rgba(22, 130, 70, 0.09); border: 1px solid rgba(22, 130, 70, 0.22); }
         .chip.route { color: var(--color-red); background: rgba(220, 38, 38, 0.07); border: 1px solid rgba(220, 38, 38, 0.2); }
         .btns { display: flex; gap: 7px; flex: none; }
-        .ok-b { font-size: 12.5px; font-weight: 600; color: #fff; background: #14110C; border-radius: 999px; padding: 7px 15px; }
-        .no-b { font-size: 12.5px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
+        .ok-b { font-size: 13px; font-weight: 600; color: #fff; background: #14110C; border-radius: 999px; padding: 7px 15px; }
+        .no-b { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
         .foot {
           display: flex;
           align-items: center;
           gap: 8px;
           padding: 12px 20px;
           border-top: 1px solid var(--border-faint);
-          font-size: 12.5px;
+          font-size: 13px;
           color: var(--text-muted);
         }
         .fd { width: 8px; height: 8px; border-radius: 999px; background: var(--gold); flex: none; }
@@ -172,21 +172,21 @@ function EquityCard() {
           background: var(--bg-warm);
           flex-wrap: wrap;
         }
-        .ht { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .ht { font-size: 14px; font-weight: 700; color: var(--text); }
         .row { display: flex; align-items: center; gap: 12px; padding: 14px 18px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; position: relative; }
         .mark.ok { background: var(--color-green); }
         .mark.ok::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.review { background: linear-gradient(135deg, #D4AA7C, #8A6535); }
+        .mark.review { background: linear-gradient(135deg, #D4AA7C, #7A5A2E); }
         .mark.review::after { content: ''; position: absolute; left: 7.5px; top: 4px; width: 2px; height: 6px; background: #fff; border-radius: 2px; }
         .main { flex: 1; min-width: 0; }
-        .rt { font-size: 13.5px; font-weight: 600; color: var(--text); }
-        .rm { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
+        .rt { font-size: 14px; font-weight: 600; color: var(--text); }
+        .rm { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
         .tag {
           flex: none;
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           border-radius: 999px;
@@ -232,7 +232,7 @@ function PhotoCard() {
           padding: 13px 16px;
           max-width: 290px;
         }
-        .ft { font-size: 13.5px; font-weight: 700; color: var(--text); margin-top: 9px; }
+        .ft { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 9px; }
         .fm { font-size: 12px; color: var(--text-faint); margin-top: 3px; }
         @media (max-width: 880px) { .float { left: 12px; } }
       `}</style>
@@ -246,7 +246,7 @@ export default function CompensationPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Compensation"
           title={<>Every raise, <Em>right.</Em></>}

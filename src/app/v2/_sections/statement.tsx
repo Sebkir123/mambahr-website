@@ -146,7 +146,7 @@ export default function Statement() {
           object-fit: cover;
         }
         .quote figcaption span {
-          font-size: 13.5px;
+          font-size: 14px;
           color: rgba(255, 255, 255, 0.62);
         }
         @media (max-width: 760px) {

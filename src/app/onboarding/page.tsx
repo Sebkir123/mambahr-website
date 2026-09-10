@@ -57,14 +57,14 @@ function DayOneCard() {
         .who { display: flex; align-items: center; gap: 11px; }
         .who img { width: 38px; height: 38px; border-radius: 999px; object-fit: cover; }
         .nm { font-size: 15px; font-weight: 700; color: var(--text); }
-        .meta { font-size: 12.5px; color: var(--text-faint); margin-top: 1px; }
+        .meta { font-size: 13px; color: var(--text-faint); margin-top: 1px; }
         .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
-        .time { flex: none; font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); width: 56px; }
+        .time { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 56px; }
         .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .lbl { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; color: var(--text); }
-        .src { flex: none; font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); }
+        .src { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
         .foot {
           font-size: 12px;
           color: var(--text-muted);
@@ -127,20 +127,20 @@ function ExitChecklist() {
           border-bottom: 1px solid var(--border-faint);
         }
         .t { font-size: 15px; font-weight: 700; color: var(--text); }
-        .m { font-size: 12.5px; color: var(--text-faint); margin-top: 2px; }
+        .m { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
         .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
         .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #8A6535); }
+        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #7A5A2E); }
         .main { flex: 1; min-width: 0; }
-        .lbl { font-size: 13.5px; font-weight: 600; color: var(--text); }
-        .meta { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+        .lbl { font-size: 14px; font-weight: 600; color: var(--text); }
+        .meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
         .tag {
           flex: none;
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--color-green);
@@ -148,7 +148,7 @@ function ExitChecklist() {
           border-radius: 999px;
           padding: 3px 9px;
         }
-        .tag.gold { color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+        .tag.gold { color: #7A5A2E; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
         @media (max-width: 640px) { .row { flex-wrap: wrap; } }
       `}</style>
     </div>
@@ -203,7 +203,7 @@ export default function OnboardingPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         <PageHero
           eyebrow="Onboarding & offboarding"
           title={<>Day one, <Em>ready.</Em></>}

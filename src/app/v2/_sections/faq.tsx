@@ -42,7 +42,7 @@ export default function Faq() {
           align-items: start;
         }
         .side { position: sticky; top: 110px; }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 18px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3vw, 40px); line-height: 1.12; letter-spacing: -0.02em; color: var(--text); margin: 0; }
         .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
         .lead { font-size: 16px; color: var(--text-muted); margin: 16px 0 0; }
@@ -55,11 +55,11 @@ export default function Faq() {
           box-shadow: var(--shadow-sm);
         }
         .ask-t { font-size: 15px; font-weight: 700; color: var(--text); }
-        .ask-b { font-size: 13.5px; color: var(--text-muted); margin: 6px 0 12px; }
+        .ask-b { font-size: 14px; color: var(--text-muted); margin: 6px 0 12px; }
         .ask-cta {
           display: inline-block;
           font-family: var(--font-mono);
-          font-size: 12.5px;
+          font-size: 13px;
           color: var(--gold-dark);
           background: var(--gold-tint);
           border: 1px solid rgba(138, 101, 53, 0.22);

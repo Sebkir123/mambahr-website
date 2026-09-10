@@ -25,7 +25,7 @@ export default function LegalPage({
   return (
     <>
       <MegaNav />
-      <main className="lg">
+      <main id="main" className="lg">
         <div className="wrap">
           <header className="head">
             <p className="eyebrow">Legal</p>
@@ -95,14 +95,14 @@ export default function LegalPage({
         }
         .toc-l {
           font-family: var(--font-mono);
-          font-size: 10.5px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           color: var(--text-faint);
           margin: 0 0 12px;
         }
         .toc ol { margin: 0; padding-left: 20px; display: grid; gap: 7px; }
-        .toc li { font-size: 14.5px; color: var(--text-muted); }
+        .toc li { font-size: 15px; color: var(--text-muted); }
         .sec { margin-top: 44px; scroll-margin-top: 92px; }
         .sec h2 {
           font-family: var(--font-serif);
@@ -122,7 +122,7 @@ export default function LegalPage({
         .lg .sec strong { color: var(--text); font-weight: 600; }
         .lg a { color: var(--gold-dark); text-decoration: underline; text-underline-offset: 2px; }
         .lg a:hover { color: var(--text); }
-        .lg table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 14.5px; }
+        .lg table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 15px; }
         .lg th, .lg td {
           text-align: left;
           padding: 10px 12px;

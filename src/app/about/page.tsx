@@ -72,7 +72,7 @@ export default function AboutPage() {
       <MegaNav />
       <RevealInit />
       <CountUp />
-      <main>
+      <main id="main">
         {/* ── Hero ── */}
         <section className="ah">
           <div className="aurora" aria-hidden="true"><span className="blob b1" /><span className="blob b2" /></div>
@@ -157,7 +157,7 @@ export default function AboutPage() {
           <style jsx>{`
             .man { background: var(--bg); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
             .wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 26px; }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: #8A6535; margin: 0; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: #7A5A2E; margin: 0; }
             .lede { font-family: var(--font-serif); font-size: clamp(22px, 2.5vw, 30px); line-height: 1.42; letter-spacing: -0.01em; color: var(--text); margin: 0; }
             .body { font-size: 17px; line-height: 1.75; color: var(--text-muted); margin: 0; }
             .close { font-family: var(--font-serif); font-size: clamp(20px, 2.2vw, 26px); line-height: 1.4; color: var(--text); margin: 6px 0 0; padding-left: 24px; border-left: 3px solid transparent; border-image: linear-gradient(180deg, #B98A4E, #6A5DA6) 1; }
@@ -190,7 +190,7 @@ export default function AboutPage() {
             .pf { background: var(--bg-warm); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 52px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 640px; }
             .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.4vw, 18px); }
@@ -209,8 +209,8 @@ export default function AboutPage() {
             }
             :global(.pf .cell:hover) { transform: translateY(-3px); box-shadow: var(--shadow-float); }
             @media (prefers-reduced-motion: reduce) { :global(.pf .cell:hover) { transform: none; } }
-            .c-l { font-size: 14.5px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-            .c-d { font-size: 12.5px; color: var(--text-muted); }
+            .c-l { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+            .c-d { font-size: 13px; color: var(--text-muted); }
             .c-a { position: absolute; top: 16px; right: 16px; font-size: 13px; color: var(--gold-dark); opacity: 0; transition: opacity 0.16s ease; }
             :global(.pf .cell:hover) .c-a { opacity: 1; }
             @media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, 1fr); } }
@@ -241,7 +241,7 @@ export default function AboutPage() {
             .pr { background: var(--bg); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .list { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; }
             .row { display: grid; grid-template-columns: minmax(96px, 140px) 1fr; column-gap: clamp(24px, 4vw, 48px); padding: clamp(28px, 3.4vw, 40px) 0; border-top: 1px solid var(--border); align-items: start; }
@@ -302,7 +302,7 @@ export default function AboutPage() {
             .fd { background: var(--bg-warm); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
             .wrap { max-width: 880px; margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 52px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 600px; }
             .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
@@ -316,9 +316,9 @@ export default function AboutPage() {
             .nm { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; text-shadow: 0 1px 8px rgba(20, 17, 12, 0.4); }
             .rl { color: rgba(255, 255, 255, 0.85); font-size: 13px; }
             .foot { display: flex; align-items: center; justify-content: flex-end; padding: 12px 16px; border-top: 1px solid var(--border-faint); }
-            .li { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold-dark); }
+            .li { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold-dark); }
             .facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin-top: clamp(28px, 3.4vw, 40px); padding-top: clamp(20px, 2.4vw, 28px); border-top: 1px solid var(--border-faint); }
-            .fact { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 500; color: var(--text-muted); }
+            .fact { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); }
             .fact i { width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, #B98A4E, #6A5DA6); }
             :global(.fd .fact a) { color: var(--gold-dark); font-weight: 700; text-decoration: none; }
             :global(.fd .fact a:hover) { text-decoration: underline; }
