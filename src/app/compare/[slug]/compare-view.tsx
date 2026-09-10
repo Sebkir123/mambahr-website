@@ -7,6 +7,9 @@ import RevealInit from '@/app/v2/_sections/reveal-init'
 import { PageCta, Em } from '@/components/v2/page-kit'
 import type { CompetitorData } from './data'
 
+/** Vendors MambaHR has a one-time importer for. Everything else comes in by CSV. */
+const IMPORTERS = new Set(['gusto', 'bamboohr', 'rippling', 'workday', 'adp', 'namely', 'greenhouse', 'lever'])
+
 function Cell({ value, mine }: { value: string | boolean; mine: boolean }) {
   if (typeof value === 'boolean') {
     return value ? <span className="yes" aria-label="Yes">✓</span> : <span className="no" aria-label="No">—</span>
@@ -248,7 +251,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
               <div className="step" data-reveal data-delay="1">
                 <span className="d">Day 1</span>
                 <h3 className="t">Your data imports</h3>
-                <p className="b">People, history, documents, time-off balances, pulled from {data.name} in one pass. Nothing re-keyed, nothing lost.</p>
+                <p className="b">People, history, documents, time-off balances, {IMPORTERS.has(data.slug) ? `pulled from ${data.name} in one pass` : 'imported by CSV in one pass'}. Nothing re-keyed, nothing lost.</p>
               </div>
               <div className="step" data-reveal data-delay="2">
                 <span className="d">Day 2</span>

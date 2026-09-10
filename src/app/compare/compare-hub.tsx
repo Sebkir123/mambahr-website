@@ -7,9 +7,9 @@ import RevealInit from '@/app/v2/_sections/reveal-init'
 import { PageCta, Em } from '@/components/v2/page-kit'
 
 const CARDS = [
-  { slug: 'rippling', name: 'Rippling', sub: 'Rippling is the stack. MambaHR is the department that runs on it.', tag: 'Most requested' },
+  { slug: 'rippling', name: 'Rippling', sub: 'Rippling is the stack. MambaHR is the department, and the stack.', tag: 'Most requested' },
   { slug: 'gusto', name: 'Gusto', sub: 'Gusto handles payday. MambaHR handles every other day.', tag: null },
-  { slug: 'deel', name: 'Deel', sub: 'Deel pays global contractors. MambaHR runs your domestic HR.', tag: null },
+  { slug: 'deel', name: 'Deel', sub: 'Deel is global payroll and EOR. MambaHR runs your US HR, on Deel for payroll.', tag: null },
   { slug: 'bamboohr', name: 'BambooHR', sub: 'BambooHR stores your data. MambaHR acts on it.', tag: null },
   { slug: 'namely', name: 'Namely', sub: 'Namely made the HRIS prettier. MambaHR makes it unnecessary.', tag: null },
   { slug: 'hibob', name: 'HiBob', sub: 'HiBob made HR look modern. MambaHR makes it do the work.', tag: null },
@@ -51,8 +51,8 @@ const OPTIONS = [
 
 const DIFFS = [
   { num: '01', title: 'It does the work.', desc: 'Leave approved. Offer drafted. Candidate screened. MambaHR handles the request end-to-end, not just surfaces the information for someone else to act on.' },
-  { num: '02', title: 'It lives in Slack.', desc: 'No new software to learn. Employees mention @MambaHR in any channel and get answers in seconds. Managers approve in a thread.' },
-  { num: '03', title: 'Human in the loop.', desc: 'Every high-stakes decision, offers above band, terminations, PIPs, routes to you for approval before anything happens. The agent handles the routine, you handle the judgment.' },
+  { num: '02', title: 'Ask in Slack. The work happens in MambaHR.', desc: 'No new software to learn. Employees mention @MambaHR in any channel and get answers in seconds. Managers approve in a thread.' },
+  { num: '03', title: 'Human in the loop.', desc: 'Every high-stakes decision, offers above band, terminations, large raises, routes to you for approval before anything happens. MambaHR handles the routine, you handle the judgment.' },
   { num: '04', title: 'Built for the long tail.', desc: 'The compliance engine, the audit trail, the specialist agents, all of it built for the HR lead doing the work of ten.' },
 ]
 
