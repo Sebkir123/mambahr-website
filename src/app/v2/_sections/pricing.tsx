@@ -19,7 +19,7 @@ export default function Pricing() {
         <div className="grid">
           {TIERS.map((t, i) => (
             <div key={t.name} className={`card${t.popular ? ' pop' : ''}`} data-reveal data-delay={String(i + 1)}>
-              {t.popular && <span className="ribbon">Most popular</span>}
+              {t.badge && <span className="ribbon">{t.badge}</span>}
               <div className="name">{t.name}</div>
               <div className="size">{t.size}</div>
               <div className="price">

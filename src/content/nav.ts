@@ -16,27 +16,27 @@ export type NavSection = {
 
 /**
  * The Product menu, 14 links in three groups:
- *  - "By function": the seven workflows, one card each.
+ *  - "By function": the seven functions, one card each.
  *  - "How it works": the agent, the desk, the record, the documents.
  *  - "For": the three buyer-category pages.
  * Every href resolves to a real page.
  */
 export const byFunction: NavItem[] = [
   // Descriptions are ONE line in the mega menu, keep them short so they never wrap.
-  { label: 'Hiring',              href: '/hiring',       description: 'Req to signed offer',         live: true, icon: 'hiring' },
+  { label: 'Hiring',              href: '/hiring',       description: 'Job post to signed offer',         live: true, icon: 'hiring' },
   { label: 'Onboarding',          href: '/onboarding',   description: 'Ready before they arrive',    live: true, icon: 'onboarding' },
   { label: 'Payroll',             href: '/payroll',      description: 'Every change in before payday', live: true, icon: 'payroll', pill: 'Deel' },
-  { label: 'Time off & leave',    href: '/leave',        description: 'PTO to FMLA, in seconds',     live: true, icon: 'timeoff' },
-  { label: 'Compensation',        href: '/compensation', description: 'Raises priced to your bands', live: true, icon: 'comp' },
+  { label: 'Time off & leave',    href: '/leave',        description: 'Vacation days to family leave, in seconds',     live: true, icon: 'timeoff' },
+  { label: 'Compensation',        href: '/compensation', description: 'Raises priced to your pay ranges', live: true, icon: 'comp' },
   { label: 'Compliance',          href: '/compliance',   description: 'Every answer cites the law',  live: true, icon: 'compliance' },
-  { label: 'Headcount & layoffs', href: '/rif',          description: 'The hard days, done right',   live: true, icon: 'rif' },
+  { label: 'Headcount & layoffs', href: '/rif',          description: 'Notices, severance, and final pay, done right',   live: true, icon: 'rif' },
 ]
 
 export const howItWorks: NavItem[] = [
-  { label: 'How MambaHR works',  href: '/mamba',     description: 'The agent, in Slack and the app', live: true, icon: 'agent' },
-  { label: 'To do',              href: '/today',     description: 'The decisions that need you',     live: true, icon: 'today' },
-  { label: 'Employee records',   href: '/people',    description: 'The system of record',            live: true, icon: 'people' },
-  { label: 'Documents & e-sign', href: '/documents', description: 'Generated, signed, filed',        live: true, icon: 'documents' },
+  { label: 'How MambaHR works',  href: '/mamba',     description: 'Ask in Slack or the app, it does the work', live: true, icon: 'agent' },
+  { label: 'To do',              href: '/today',     description: 'Only the calls that need you',     live: true, icon: 'today' },
+  { label: 'Employee records',   href: '/people',    description: 'Every record and the org chart, always current',            live: true, icon: 'people' },
+  { label: 'Documents & e-sign', href: '/documents', description: 'Drafted, signed, and filed',        live: true, icon: 'documents' },
 ]
 
 export const forWhom: NavItem[] = [

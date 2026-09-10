@@ -1,16 +1,15 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { MambaMark } from '@/components/mamba-mark'
 
 const cols = [
   {
     title: 'Product',
     links: [
-      { label: 'The AI agent', href: '/mamba' },
-      { label: 'Approvals', href: '/today' },
+      { label: 'How MambaHR works', href: '/mamba' },
+      { label: 'To do', href: '/today' },
       { label: 'Employee records', href: '/people' },
-      { label: 'Hiring & ATS', href: '/hiring' },
-      { label: 'See it run', href: '/product' },
+      { label: 'Hiring', href: '/hiring' },
+      { label: 'See how it works', href: '/product' },
       { label: 'Pricing', href: '/pricing' },
     ],
   },
@@ -30,8 +29,8 @@ const cols = [
       { label: 'AI HR software', href: '/ai-hr-software' },
       { label: 'Best HRIS for startups', href: '/best-hris-for-startups' },
       { label: 'HR software for small business', href: '/hr-software-small-business' },
-      { label: 'Compliance engine', href: '/compliance' },
-      { label: 'Payroll-ready exports', href: '/payroll' },
+      { label: 'Compliance', href: '/compliance' },
+      { label: 'Payroll', href: '/payroll' },
     ],
   },
   {

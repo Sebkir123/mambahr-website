@@ -20,7 +20,7 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
       { f: 'Every employee question answered in Slack', from: 0 },
       { f: 'Headcount and org answers on demand', from: 0 },
       { f: 'HR document storage', from: 0 },
-      { f: 'Workflows & approvals', from: 0 },
+      { f: 'Approvals, with your rules', from: 0 },
       { f: 'Compliance guidance', from: 0 },
       { f: 'Payroll change files', from: 0 },
       { f: 'Slack & the MambaHR app', from: 0 },
@@ -29,8 +29,8 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
   {
     group: 'HR Ops Manager and up',
     rows: [
-      { f: 'Onboarding, run end to end', from: 1 },
-      { f: 'Offboarding, run end to end', from: 1 },
+      { f: 'Onboarding, start to finish', from: 1 },
+      { f: 'Offboarding, start to finish', from: 1 },
       { f: 'Offer & HR document generation', from: 1 },
       { f: 'Approval routing', from: 1 },
       { f: 'Manager questions answered with the policy cited', from: 1 },
@@ -42,14 +42,13 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
     ],
   },
   {
-    group: 'AI HR Department and up',
+    group: 'Whole department and up',
     rows: [
-      { f: 'Advanced workflow automation', from: 2 },
-      { f: 'RIF & change planning', from: 2 },
-      { f: 'Advanced compliance workflows', from: 2 },
-      { f: 'Advanced audit trails', from: 2 },
-      { f: 'Custom workflows', from: 2 },
-      { f: 'SSO & security review', from: 2 },
+      { f: 'Your own approval rules per process', from: 2 },
+      { f: 'Layoff planning with legal checks', from: 2 },
+      { f: 'Compliance research with the citation', from: 2 },
+      { f: 'Audit log export for your lawyer', from: 2 },
+      { f: 'Single sign-on & security review', from: 2 },
       { f: 'Deel-managed payroll, person-approved', from: 2 },
       { f: 'Priority support', from: 2 },
     ],
@@ -59,7 +58,7 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
     rows: [
       { f: 'Custom implementation', from: 3 },
       { f: 'Advanced security & procurement support', from: 3 },
-      { f: 'High-volume workflows & custom approval logic', from: 3 },
+      { f: 'High-volume queues & custom approval chains', from: 3 },
       { f: 'Custom payroll file requirements', from: 3 },
       { f: 'Dedicated success support & enterprise integrations', from: 3 },
     ],
@@ -69,8 +68,8 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
 const COST_ROWS = [
   { hire: 'Records, onboarding & document admin', cost: '$70k–$95k', alt: 'HR Starter or Ops Manager' },
   { hire: 'Plus leave, policy & the question queue', cost: '$85k–$120k', alt: 'HR Ops Manager' },
-  { hire: 'Plus hiring ops & payroll changes', cost: '$110k–$150k', alt: 'Ops Manager or AI HR Dept' },
-  { hire: 'Plus compensation cycles & compliance', cost: '$100k–$140k', alt: 'AI HR Department' },
+  { hire: 'Plus hiring ops & payroll changes', cost: '$110k–$150k', alt: 'Ops Manager or Whole department' },
+  { hire: 'Plus compensation cycles & compliance', cost: '$100k–$140k', alt: 'Whole department' },
 ]
 
 const EXPORTS = [
@@ -106,7 +105,7 @@ function MathCard() {
             <span className="r-v grad">$26k<em>/yr</em></span>
           </div>
           <span className="bar"><i style={{ width: '24%' }} /></span>
-          <span className="r-note">The same workload · handled overnight · logged end to end</span>
+          <span className="r-note">The same workload · handled overnight · every step logged</span>
         </div>
       </div>
       <div className="foot">
@@ -162,13 +161,13 @@ export default function PricingPage() {
             <p className="eyebrow" data-reveal>Pricing</p>
             <h1 className="title" data-reveal data-delay="1">Before you hire HR, <Em>hire MambaHR.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
-              Most HR software stores your people data. MambaHR does the work: onboarding, leave and
-              compliance, approvals, and offboarding, run end to end, with every payroll change prepared,
-              for a fraction of what running it by hand costs. Priced per employee, the way the work actually scales.
+              Most HR software stores your people data. MambaHR does the work: onboarding, leave,
+              approvals, compliance, payroll changes, and offboarding. It costs a fraction of doing it by
+              hand. You pay per employee, because that is how the work grows.
             </p>
             <div className="ctas" data-reveal data-delay="3">
               <Link href="/demo" className="btn btn-primary">Book a demo</Link>
-              <Link href="/product" className="btn btn-secondary">See it run</Link>
+              <Link href="/product" className="btn btn-secondary">See how it works</Link>
             </div>
             <div className="proof" data-reveal data-delay="3">
               <div className="faces">
@@ -177,7 +176,7 @@ export default function PricingPage() {
                   <img key={p} src={`/avatars/${p}.jpg`} alt="" width={34} height={34} />
                 ))}
               </div>
-              <span className="proof-t">Built for lean HR teams</span>
+              <span className="proof-t">Built by the founders, who answer the demo call</span>
             </div>
           </div>
           <div className="stage" data-reveal data-delay="4">
@@ -219,7 +218,7 @@ export default function PricingPage() {
               <p className="f-t">Founding customer pricing is open for our first cohort.</p>
               <p className="f-s">Discounted annual pricing, onboarding directly with the founders, and priority say in the roadmap.</p>
             </div>
-            <Link href="/demo" className="f-cta">Get founding pricing</Link>
+            <Link href="/demo" className="f-cta">Book a demo</Link>
           </div>
           <style jsx>{`
             .found { background: var(--bg); padding: clamp(40px, 5vw, 64px) var(--page-pad) 0; }
@@ -374,7 +373,7 @@ export default function PricingPage() {
             </div>
             <p className="compare-line" data-reveal data-delay="2">
               Simpler than Rippling. Faster than Workday. More execution than BambooHR. Cheaper than doing it by hand.{' '}
-              <Link href="/compare">See the comparisons →</Link>
+              <Link href="/compare">Compare</Link>
             </p>
           </div>
           <style jsx>{`
@@ -405,10 +404,10 @@ export default function PricingPage() {
               <p className="eyebrow">Payday</p>
               <h2 className="title">Two ways to run <Em>payday.</Em></h2>
               <p className="lead">
-                MambaHR prepares every payroll change: every hire, raise, leave, and exit. You choose per company
-                between a change file for your current payroll provider and Deel-managed payroll, where MambaHR sends
-                the changes to Deel and a person approves every run. Benefits administration is not part of MambaHR today;
-                COBRA notices at offboarding are.
+                MambaHR prepares every payroll change: every hire, raise, leave, and exit. You choose per company:
+                a change file for your current payroll provider, or Deel-managed payroll. On Deel, MambaHR sends the
+                changes and a person approves every run. Benefits administration is not part of MambaHR today. The
+                health-coverage continuation notices (COBRA) at offboarding are.
               </p>
             </div>
             <div className="chips" data-reveal data-delay="1">
@@ -433,7 +432,7 @@ export default function PricingPage() {
           stats={[
             { n: 84, prefix: '$', suffix: 'k', label: 'back in the budget vs. staffing the same admin, at 100 employees' },
             { n: 27, label: 'hours of HR admin a week, we estimate, taken off a lean team. Our model, not a customer average' },
-            { n: 100, suffix: '%', label: 'of terminations and offers above band wait for a person to approve' },
+            { n: 100, suffix: '%', label: 'of terminations and offers above your pay range wait for a person to approve' },
           ]}
         />
 
@@ -476,7 +475,7 @@ export default function PricingPage() {
 
         <PageCta
           title={<>Before you hire HR, <Em>hire MambaHR.</Em></>}
-          sub="Built to do the work. A 30-minute demo with your real headcount, we'll quote it on the call."
+          sub="A 30-minute demo with your real headcount. We quote your price on the call."
         />
       </main>
       <Footer />

@@ -36,7 +36,7 @@ const pricingJsonLd = {
   '@type': 'Product',
   name: 'MambaHR, AI HR Department',
   description:
-    'The AI HR department, hiring, onboarding, time off, compensation, compliance, and payroll changes, run end to end. A human approves the calls that matter.',
+    'The AI HR department: hiring, onboarding, time off, compensation, compliance, and payroll changes, done for you. A person approves the calls that matter.',
   brand: { '@type': 'Brand', name: 'MambaHR' },
   url: 'https://mambahr.com/pricing',
   offers: {
