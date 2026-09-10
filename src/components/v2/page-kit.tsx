@@ -37,6 +37,7 @@ const FACES = ['priya', 'anna', 'maya', 'dave', 'brian']
       aurora blobs + grain + face cluster + optional human photo card ── */
 export function PageHero({
   eyebrow,
+  pill,
   title,
   lead,
   proof = 'Built for lean HR teams',
@@ -46,6 +47,8 @@ export function PageHero({
   children,
 }: {
   eyebrow: string
+  /** Optional partner credit under the eyebrow, e.g. 'Powered by Deel'. */
+  pill?: ReactNode
   title: ReactNode
   lead: string
   proof?: string
@@ -66,6 +69,7 @@ export function PageHero({
       <span className="v2-grain" />
       <div className="top">
         <p className="eyebrow" data-reveal>{eyebrow}</p>
+        {pill && <p className="hero-pill" data-reveal data-delay="1"><span>{pill}</span></p>}
         <h1 className="title" data-reveal data-delay="1">{title}</h1>
         <p className="lead" data-reveal data-delay="2">{lead}</p>
         <div className="ctas" data-reveal data-delay="3">
@@ -140,6 +144,19 @@ export function PageHero({
           letter-spacing: 0.16em;
           color: var(--gold-dark);
           margin: 0;
+        }
+        .hero-pill { margin: 14px 0 0; }
+        .hero-pill span {
+          display: inline-block;
+          font-family: var(--font-mono);
+          font-size: 10.5px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--gold-dark);
+          background: var(--gold-tint);
+          border: 1px solid rgba(138, 101, 53, 0.25);
+          border-radius: 999px;
+          padding: 4px 10px;
         }
         .title {
           font-family: var(--font-serif);
