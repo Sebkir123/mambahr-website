@@ -5,6 +5,8 @@ export type NavItem = {
   live: boolean
   /** Key into the icon map in MegaNav (icons are JSX, so they live in the component). */
   icon?: string
+  /** Optional partner credit shown as a small pill beside the label. */
+  pill?: string
 }
 
 export type NavSection = {
@@ -22,7 +24,7 @@ export const byFunction: NavItem[] = [
   // Descriptions are ONE line in the mega menu, keep ≤ 28 chars so they never wrap.
   { label: 'Hiring & ATS',          href: '/hiring',       description: 'Req to signed offer, fast',   live: true, icon: 'hiring' },
   { label: 'Onboarding',            href: '/onboarding',   description: 'Ready before they arrive',    live: true, icon: 'onboarding' },
-  { label: 'Payroll & benefits',    href: '/payroll',      description: 'Payday, on autopilot',        live: true, icon: 'payroll' },
+  { label: 'Payroll & benefits',    href: '/payroll',      description: 'Payday, on autopilot',        live: true, icon: 'payroll', pill: 'Powered by Deel' },
   { label: 'Time off & leave',      href: '/leave',        description: 'PTO to FMLA, in seconds',     live: true, icon: 'timeoff' },
   { label: 'Performance',           href: '/performance',  description: 'Reviews, written for you',    live: true, icon: 'performance' },
   { label: 'Compensation',          href: '/compensation', description: 'Raises priced to your bands', live: true, icon: 'comp' },

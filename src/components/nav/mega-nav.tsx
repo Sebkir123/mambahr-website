@@ -54,11 +54,28 @@ function MenuItem({ item, onNavigate }: { item: NavItem; onNavigate: () => void 
         {item.icon ? iconMap[item.icon] : null}
       </span>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ fontSize: 14.5, fontWeight: 600, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em', whiteSpace: 'nowrap' }}>{item.label}</p>
+        <p style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14.5, fontWeight: 600, color: 'var(--text)', margin: 0, letterSpacing: '-0.01em', whiteSpace: 'nowrap' }}>
+          {item.label}
+          {item.pill && <span style={navPill}>{item.pill}</span>}
+        </p>
         <p style={{ fontSize: 12.5, color: 'var(--text-muted)', margin: '2px 0 0', lineHeight: 1.4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.description}</p>
       </div>
     </Link>
   )
+}
+
+const navPill = {
+  fontFamily: 'var(--font-mono)',
+  fontSize: 9.5,
+  fontWeight: 500,
+  textTransform: 'uppercase' as const,
+  letterSpacing: '0.05em',
+  color: 'var(--gold-dark)',
+  background: 'var(--gold-tint)',
+  border: '1px solid rgba(138, 101, 53, 0.25)',
+  borderRadius: 999,
+  padding: '2px 7px',
+  whiteSpace: 'nowrap' as const,
 }
 
 const colLabel = { fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', color: 'var(--text-faint)', textTransform: 'uppercase' as const, margin: '0 0 14px 12px' }
@@ -349,6 +366,7 @@ export default function MegaNav() {
                   {byFunction.map((item) => (
                     <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: 'block', padding: '10px 0', fontSize: 15, fontWeight: 500, color: 'var(--text)', textDecoration: 'none' }}>
                       {item.label}
+                      {item.pill && <span style={{ ...navPill, marginLeft: 8 }}>{item.pill}</span>}
                       <span style={{ display: 'block', fontSize: 13, color: 'var(--text-muted)', marginTop: 2 }}>{item.description}</span>
                     </Link>
                   ))}
