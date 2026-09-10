@@ -97,7 +97,7 @@ function HeroPlanCard() {
           width: 18px;
           height: 18px;
           border-radius: 999px;
-          background: linear-gradient(135deg, #D4AA7C, #8A6535);
+          background: linear-gradient(135deg, var(--gold-pale), var(--gold));
         }
         .g-note {
           font-family: var(--font-mono);
@@ -170,7 +170,7 @@ function RedeployCard() {
           font-size: 10.5px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          color: #6A5DA6;
+          color: var(--violet);
           background: rgba(106, 93, 166, 0.1);
           border-radius: 999px;
           padding: 5px 11px;
@@ -204,7 +204,7 @@ function RedeployCard() {
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: #fff;
-          background: linear-gradient(135deg, #D4AA7C, #8A6535);
+          background: linear-gradient(135deg, var(--gold-pale), var(--gold));
           border-radius: 999px;
           padding: 4px 10px;
         }
@@ -255,7 +255,7 @@ function DignityPhoto() {
           width: 20px;
           height: 20px;
           border-radius: 999px;
-          background: linear-gradient(135deg, #D4AA7C, #8A6535);
+          background: linear-gradient(135deg, var(--gold-pale), var(--gold));
         }
         .m-t { font-size: 13.5px; font-weight: 700; color: var(--text); }
         .m-s { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); margin-top: 2px; }

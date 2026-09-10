@@ -119,14 +119,14 @@ function AckTracker() {
         .ack { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 20px 20px 16px; box-shadow: var(--shadow-float); }
         .a-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
         .a-t { font-family: var(--font-serif); font-size: 18px; color: var(--text); }
-        .a-live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 999px; padding: 3px 9px; }
-        .a-live i { width: 6px; height: 6px; border-radius: 999px; background: #6A5DA6; }
+        .a-live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 999px; padding: 3px 9px; }
+        .a-live i { width: 6px; height: 6px; border-radius: 999px; background: var(--violet); }
         .pol { border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; background: var(--bg-warm); }
         .pol-top { display: flex; align-items: baseline; justify-content: space-between; }
         .pol-name { font-size: 13.5px; font-weight: 700; color: var(--text); }
         .pol-pct { font-family: var(--font-serif); font-size: 21px; color: var(--gold-dark); }
         .bar-track { height: 7px; border-radius: 999px; background: #E6D3BC; margin-top: 10px; overflow: hidden; }
-        .bar-fill { display: block; width: 94%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #B98A4E, #8A6535); }
+        .bar-fill { display: block; width: 94%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--gold-mid), var(--gold)); }
         .pol-meta { display: flex; justify-content: space-between; gap: 10px; margin-top: 9px; font-size: 11.5px; color: var(--text-muted); flex-wrap: wrap; }
         .mono { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); }
         .rows { margin-top: 12px; }

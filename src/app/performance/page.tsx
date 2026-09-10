@@ -151,7 +151,7 @@ function PipCard() {
         }
         .ad { width: 8px; height: 8px; border-radius: 999px; background: var(--gold); flex: none; }
         .at { flex: 1; font-size: 12.5px; color: var(--gold-dark); font-weight: 600; line-height: 1.4; }
-        .btn { flex: none; font-size: 12.5px; font-weight: 600; color: #fff; background: #14110C; border-radius: 999px; padding: 7px 15px; }
+        .btn { flex: none; font-size: 12.5px; font-weight: 600; color: #fff; background: var(--ink); border-radius: 999px; padding: 7px 15px; }
         @media (max-width: 640px) { .approve { flex-wrap: wrap; } }
       `}</style>
     </div>

@@ -72,7 +72,7 @@ function PeopleWindow() {
         .chip { font-size: 11px; font-weight: 600; border-radius: 999px; padding: 3px 9px; }
         .chip.ok { color: var(--color-green); background: rgba(34, 160, 94, 0.09); }
         .chip.warm { color: var(--gold-dark); background: var(--gold-tint); }
-        .chip.vio { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); }
+        .chip.vio { color: var(--violet); background: rgba(106, 93, 166, 0.1); }
         .r { text-align: right; }
         .time { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint); }
         .foot { display: flex; align-items: center; gap: 10px; margin-top: 13px; flex-wrap: wrap; }

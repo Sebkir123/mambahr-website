@@ -115,7 +115,7 @@ function QueueWindow() {
           font-weight: 600;
           color: var(--text);
         }
-        .p-count { font-family: var(--font-mono); font-size: 11px; color: #8A6535; background: var(--gold-tint); border-radius: 999px; padding: 2px 8px; }
+        .p-count { font-family: var(--font-mono); font-size: 11px; color: var(--gold); background: var(--gold-tint); border-radius: 999px; padding: 2px 8px; }
         .ap { display: flex; align-items: center; gap: 12px; padding: 12px 16px; }
         .ap + .ap { border-top: 1px solid var(--border-faint); }
         .ap-av { width: 34px; height: 34px; border-radius: 999px; object-fit: cover; flex: none; }
@@ -123,10 +123,10 @@ function QueueWindow() {
         .ap-t { font-size: 13.5px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
         .ap-tag { font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 999px; }
         .ap-tag.urgent { color: var(--color-red); background: rgba(220, 38, 38, 0.08); }
-        .ap-tag.warn { color: #8A6535; background: var(--gold-tint); }
+        .ap-tag.warn { color: var(--gold); background: var(--gold-tint); }
         .ap-m { font-size: 12.5px; color: var(--text-muted); margin-top: 3px; }
         .ap-btns { display: flex; gap: 7px; flex: none; }
-        .ap-ok { font-size: 12.5px; font-weight: 600; color: #fff; background: #1A1A19; border-radius: 999px; padding: 7px 15px; }
+        .ap-ok { font-size: 12.5px; font-weight: 600; color: #fff; background: var(--text); border-radius: 999px; padding: 7px 15px; }
         .ap-no { font-size: 12.5px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
         .feed { margin-top: 16px; }
         .f-head { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-faint); margin-bottom: 8px; }
@@ -210,7 +210,7 @@ function DecisionCard() {
         .dc-m { font-size: 12.5px; color: var(--text-muted); margin-top: 3px; }
         .gauge { margin-top: 18px; }
         .g-labels { display: flex; justify-content: space-between; gap: 12px; font-size: 11.5px; color: var(--text-faint); margin-bottom: 7px; }
-        .g-over { color: #8A6535; font-weight: 600; }
+        .g-over { color: var(--gold); font-weight: 600; }
         .g-track {
           position: relative;
           height: 8px;
@@ -225,7 +225,7 @@ function DecisionCard() {
           top: 0;
           bottom: 0;
           border-radius: 999px;
-          background: linear-gradient(90deg, #E6D3BC, #D4AA7C);
+          background: linear-gradient(90deg, #E6D3BC, var(--gold-pale));
         }
         .g-dot {
           position: absolute;
@@ -235,7 +235,7 @@ function DecisionCard() {
           height: 14px;
           border-radius: 999px;
           transform: translate(-50%, -50%);
-          background: #8A6535;
+          background: var(--gold);
           border: 2.5px solid #fff;
           box-shadow: var(--shadow-sm);
         }
@@ -261,7 +261,7 @@ function DecisionCard() {
           padding: 2px 0 2px 11px;
         }
         .dc-acts { display: flex; align-items: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-        .b-ok { font-size: 13px; font-weight: 600; color: #fff; background: #1A1A19; border-radius: 999px; padding: 8px 18px; }
+        .b-ok { font-size: 13px; font-weight: 600; color: #fff; background: var(--text); border-radius: 999px; padding: 8px 18px; }
         .b-no { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 8px 18px; }
         .dc-log { font-size: 11px; color: var(--text-faint); margin-left: auto; }
       `}</style>

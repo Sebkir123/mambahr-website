@@ -95,7 +95,7 @@ export default function CompareHub() {
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 660px; margin: 22px auto 0; }
             .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
             :global(.ch .btn-p) {
-              display: inline-block; background: #1A1A19; color: #fff; font-weight: 600; font-size: 15.5px;
+              display: inline-block; background: var(--text); color: #fff; font-weight: 600; font-size: 15.5px;
               padding: 14px 28px; border-radius: 999px; text-decoration: none;
               box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22); transition: transform 0.15s ease;
             }
@@ -141,7 +141,7 @@ export default function CompareHub() {
             .op { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 22px); align-items: stretch; }
             .card { display: flex; flex-direction: column; gap: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 28px); box-shadow: var(--shadow-sm); }
@@ -180,7 +180,7 @@ export default function CompareHub() {
             .vs { background: var(--bg-warm); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15px, 1.7vw, 17px); line-height: 1.6; color: var(--text-muted); margin: 14px auto 0; max-width: 540px; }
             .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.4vw, 18px); }
@@ -208,7 +208,7 @@ export default function CompareHub() {
               text-transform: uppercase;
               letter-spacing: 0.05em;
               color: #fff;
-              background: linear-gradient(120deg, #B98A4E, #6A5DA6);
+              background: linear-gradient(120deg, var(--gold-mid), var(--violet));
               border-radius: 999px;
               padding: 4px 11px;
               box-shadow: 0 0 0 4px var(--bg);
@@ -244,7 +244,7 @@ export default function CompareHub() {
             .df { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
             .wrap { max-width: var(--page-max); margin: 0 auto; }
             .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #8A6535; margin: 0 0 16px; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 1.8vw, 22px); }
             .card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
@@ -252,7 +252,7 @@ export default function CompareHub() {
               font-family: var(--font-serif);
               font-size: 34px;
               line-height: 1;
-              background: linear-gradient(120deg, #B98A4E, #6A5DA6);
+              background: linear-gradient(120deg, var(--gold-mid), var(--violet));
               -webkit-background-clip: text;
               background-clip: text;
               color: transparent;

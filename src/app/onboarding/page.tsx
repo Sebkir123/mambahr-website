@@ -133,7 +133,7 @@ function ExitChecklist() {
         .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
         .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #8A6535); }
+        .mark.gold { background: linear-gradient(135deg, var(--gold-pale), var(--gold)); }
         .main { flex: 1; min-width: 0; }
         .lbl { font-size: 13.5px; font-weight: 600; color: var(--text); }
         .meta { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
@@ -148,7 +148,7 @@ function ExitChecklist() {
           border-radius: 999px;
           padding: 3px 9px;
         }
-        .tag.gold { color: #8A6535; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+        .tag.gold { color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
         @media (max-width: 640px) { .row { flex-wrap: wrap; } }
       `}</style>
     </div>

@@ -79,7 +79,7 @@ function CompReviewCard() {
         .meta { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
         .gauge { position: relative; margin: 14px 0 16px; height: 6px; max-width: 320px; }
         .track { position: absolute; inset: 0; border-radius: 999px; background: var(--border-faint); }
-        .seg { position: absolute; top: 0; bottom: 0; left: 18%; right: 18%; border-radius: 999px; background: linear-gradient(90deg, #E6D3BC, #D4AA7C); }
+        .seg { position: absolute; top: 0; bottom: 0; left: 18%; right: 18%; border-radius: 999px; background: linear-gradient(90deg, #E6D3BC, var(--gold-pale)); }
         .dot {
           position: absolute;
           top: 50%;
@@ -114,7 +114,7 @@ function CompReviewCard() {
         .chip.ok { color: var(--color-green); background: rgba(22, 130, 70, 0.09); border: 1px solid rgba(22, 130, 70, 0.22); }
         .chip.route { color: var(--color-red); background: rgba(220, 38, 38, 0.07); border: 1px solid rgba(220, 38, 38, 0.2); }
         .btns { display: flex; gap: 7px; flex: none; }
-        .ok-b { font-size: 12.5px; font-weight: 600; color: #fff; background: #14110C; border-radius: 999px; padding: 7px 15px; }
+        .ok-b { font-size: 12.5px; font-weight: 600; color: #fff; background: var(--ink); border-radius: 999px; padding: 7px 15px; }
         .no-b { font-size: 12.5px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
         .foot {
           display: flex;
@@ -178,7 +178,7 @@ function EquityCard() {
         .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; position: relative; }
         .mark.ok { background: var(--color-green); }
         .mark.ok::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.review { background: linear-gradient(135deg, #D4AA7C, #8A6535); }
+        .mark.review { background: linear-gradient(135deg, var(--gold-pale), var(--gold)); }
         .mark.review::after { content: ''; position: absolute; left: 7.5px; top: 4px; width: 2px; height: 6px; background: #fff; border-radius: 2px; }
         .main { flex: 1; min-width: 0; }
         .rt { font-size: 13.5px; font-weight: 600; color: var(--text); }
