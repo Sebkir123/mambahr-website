@@ -29,7 +29,7 @@ export const byFunction: NavItem[] = [
   { label: 'Time off & leave',    href: '/leave',        description: 'Vacation to family leave, in seconds',     live: true, icon: 'timeoff' },
   { label: 'Compensation',        href: '/compensation', description: 'Raises priced to your pay ranges', live: true, icon: 'comp' },
   { label: 'Compliance',          href: '/compliance',   description: 'Every answer cites the law',  live: true, icon: 'compliance' },
-  { label: 'Headcount & layoffs', href: '/rif',          description: 'Notices, severance, and final pay, done right',   live: true, icon: 'rif' },
+  { label: 'Headcount & layoffs', href: '/rif',          description: 'Notices, severance, final pay',   live: true, icon: 'rif' },
 ]
 
 export const howItWorks: NavItem[] = [
