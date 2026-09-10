@@ -187,6 +187,7 @@ export default function PayrollPage() {
       <main>
         <PageHero
           eyebrow="Payroll & benefits"
+          pill="Powered by Deel"
           title={<>Payday, <Em>perfect.</Em></>}
           lead={'Every raise, new hire, exit, and life event lands in your provider’s file before payday, double-checked, reconciled, and ready to upload.'}
           proof="Built for the teams who run payday"
