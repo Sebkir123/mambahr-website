@@ -52,7 +52,7 @@ export default function Statement() {
             radial-gradient(64% 50% at 86% 8%, rgba(106, 93, 166, 0.2), transparent 60%),
             radial-gradient(80% 60% at 50% 110%, rgba(106, 93, 166, 0.1), transparent 60%),
             #14110C;
-          padding: clamp(96px, 13vw, 168px) var(--page-pad);
+          padding: clamp(80px, 10vw, 128px) var(--page-pad);
         }
         .inner {
           position: relative;

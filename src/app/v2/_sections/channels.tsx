@@ -113,7 +113,7 @@ export default function Channels() {
       <style jsx>{`
         .ch {
           background: var(--bg-warm);
-          padding-block: clamp(96px, 13vw, 168px);
+          padding-block: clamp(80px, 10vw, 128px);
         }
         .wrap {
           max-width: var(--page-max);

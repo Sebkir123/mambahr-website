@@ -1,13 +1,18 @@
 'use client'
 
-const LOGOS = ['Gusto', 'Workday', 'Rippling', 'BambooHR', 'Namely', 'ADP']
+const HRIS = ['Gusto', 'BambooHR', 'Rippling', 'Workday', 'ADP', 'Namely']
+const ATS = ['Greenhouse', 'Lever']
 
 export default function Logos() {
   return (
     <section className="logos">
-      <p className="kicker" data-reveal>Your data imports from your current HRIS in a day</p>
+      <p className="kicker" data-reveal>Imports from</p>
       <div className="row" data-reveal data-delay="1">
-        {LOGOS.map((l) => (
+        {HRIS.map((l) => (
+          <span key={l} className="logo">{l}</span>
+        ))}
+        <span className="sep" aria-hidden="true" />
+        {ATS.map((l) => (
           <span key={l} className="logo">{l}</span>
         ))}
         <span className="arrow" aria-hidden="true">
@@ -16,14 +21,14 @@ export default function Logos() {
         <span className="mamba"><span className="m">M</span>MambaHR</span>
       </div>
       <p className="sub" data-reveal data-delay="2">
-        One import: people, comp, balances, and reporting lines. We check it line by line before you go live.
+        One-time import of people, comp, balances, reporting lines, and open pipelines. Not a customer list: these are the systems we read on day one.
       </p>
 
       <style jsx>{`
         .logos {
           max-width: var(--page-max);
           margin: 0 auto;
-          padding: clamp(44px, 6vw, 72px) var(--page-pad);
+          padding: clamp(32px, 4vw, 52px) var(--page-pad);
           text-align: center;
         }
         .kicker {
@@ -46,17 +51,17 @@ export default function Logos() {
         .logo {
           font-family: var(--font-sans);
           font-weight: 600;
-          font-size: clamp(15px, 1.6vw, 18px);
+          font-size: clamp(14px, 1.4vw, 16px);
           color: var(--text-faint);
           letter-spacing: -0.01em;
           opacity: 0.92;
-          filter: saturate(0);
           transition: opacity 0.2s ease, color 0.2s ease;
         }
         .logo:hover {
           opacity: 1;
           color: var(--text-muted);
         }
+        .sep { width: 1px; height: 18px; background: var(--border-mid); }
         .arrow {
           color: var(--gold);
           display: inline-flex;
@@ -92,7 +97,8 @@ export default function Logos() {
           margin: 22px 0 0;
         }
         @media (prefers-reduced-motion: reduce) {
-          .arrow { animation: none; }
+          .sep { width: 1px; height: 18px; background: var(--border-mid); }
+        .arrow { animation: none; }
         }
       `}</style>
     </section>

@@ -31,7 +31,7 @@ export default function Faq() {
       </div>
 
       <style jsx>{`
-        .faq { background: var(--bg-warm); padding-block: clamp(96px, 13vw, 168px); }
+        .faq { background: var(--bg-warm); padding-block: clamp(80px, 10vw, 128px); }
         .wrap {
           max-width: var(--page-max);
           margin: 0 auto;

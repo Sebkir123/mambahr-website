@@ -74,7 +74,7 @@ export default function Difference() {
       </div>
 
       <style jsx>{`
-        .df { background: var(--bg); padding-block: clamp(96px, 13vw, 168px); }
+        .df { background: var(--bg); padding-block: clamp(80px, 10vw, 128px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { max-width: none; margin-bottom: clamp(44px, 5vw, 64px); }
         .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }

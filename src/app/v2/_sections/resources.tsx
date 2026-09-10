@@ -14,10 +14,6 @@ const BULLETS = [
   'Manager, employee, and team scripts',
 ]
 
-const MORE = [
-  { title: 'Multi-State Leave Compliance Checklist', kicker: 'Checklist' },
-  { title: 'The First-90-Days Onboarding Kit', kicker: 'Kit' },
-]
 
 // Published playbooks managed in the admin (Marketing → Resources). Each links to
 // its own trackable /resources/<slug> landing page.
@@ -92,30 +88,21 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
           </div>
         </div>
 
-        <div className="more" data-reveal data-delay="2">
-          <span className="more-l">More guides</span>
-          {playbooks.length > 0
-            ? playbooks.map((p) => (
-                <a key={p.slug} href={`/resources/${p.slug}`} className="more-item" data-track="cta_click" data-track-label={`resource:${p.slug}`}>
-                  <span className="mini-cover" aria-hidden="true">
-                    <span className="mini-m">M</span>
-                    <span className="mini-k">{p.kicker}</span>
-                  </span>
-                  <span className="more-t">{p.title}</span>
-                  <span className="get">Get it →</span>
-                </a>
-              ))
-            : MORE.map((m) => (
-                <div key={m.title} className="more-item" aria-disabled="true">
-                  <span className="mini-cover" aria-hidden="true">
-                    <span className="mini-m">M</span>
-                    <span className="mini-k">{m.kicker}</span>
-                  </span>
-                  <span className="more-t">{m.title}</span>
-                  <span className="soon">Coming soon</span>
-                </div>
-              ))}
-        </div>
+        {playbooks.length > 0 && (
+          <div className="more" data-reveal data-delay="2">
+            <span className="more-l">More guides</span>
+            {playbooks.map((p) => (
+              <a key={p.slug} href={`/resources/${p.slug}`} className="more-item" data-track="cta_click" data-track-label={`resource:${p.slug}`}>
+                <span className="mini-cover" aria-hidden="true">
+                  <span className="mini-m">M</span>
+                  <span className="mini-k">{p.kicker}</span>
+                </span>
+                <span className="more-t">{p.title}</span>
+                <span className="get">Get it →</span>
+              </a>
+            ))}
+          </div>
+        )}
       </div>
 
       <style jsx>{`
@@ -232,16 +219,6 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
           background: var(--bg);
           box-shadow: var(--shadow-sm);
           opacity: 0.78;
-        }
-        .soon {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          color: var(--text-faint);
-          border: 1px solid var(--border);
-          border-radius: 999px;
-          padding: 2px 8px;
         }
         a.more-item {
           opacity: 1;
