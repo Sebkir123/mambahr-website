@@ -4,6 +4,8 @@ import { env } from '@/lib/env'
 import { getSupabase } from '@/lib/supabase'
 import { sendWaitlistWelcome } from '@/lib/email'
 import { notifyLeadSlack } from '@/lib/slack'
+import { verifyTurnstile } from '@/lib/turnstile'
+import { createMemoryLimiter, durableRateLimit, getClientIp } from '@/lib/rate-limit'
 
 // Service-role client used only for the rate-limit RPC (which is locked down to service_role).
 // Typed as SupabaseClient (no generated DB types) so the untyped rpc() call type-checks.
@@ -21,71 +23,13 @@ function getAdminClient(): SupabaseClient | null {
 async function checkSupabaseRateLimit(ip: string): Promise<boolean> {
   const client = getAdminClient()
   if (!client) return true // No service-role key configured → skip durable check.
-  const { data, error } = await client.rpc('check_signup_rate_limit', {
-    p_ip: ip,
-    p_max: 5,
-    p_window_secs: 3600,
-  })
-  // Fail open: if the DB call errors, fall back to the in-memory limiter alone rather than blocking
-  // legitimate signups. The in-memory limiter is still the first line of defense.
-  if (error) return true
-  return data === true
+  // Fail open on RPC error (logged in lib/rate-limit.ts): the in-memory limiter
+  // and Turnstile still stand, and a Supabase blip must not block signups.
+  return durableRateLimit(client, { route: '/api/waitlist', ip, max: 5 })
 }
 
-const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
-
-async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
-  const secret = process.env.TURNSTILE_SECRET_KEY
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
-  // No secret OR no site key (widget couldn't render) → accept bypass token
-  if (!secret || !siteKey) return token === 'dev-mode-bypass'
-  if (!token) return false
-
-  try {
-    const formData = new URLSearchParams()
-    formData.append('secret', secret)
-    formData.append('response', token)
-    formData.append('remoteip', ip)
-
-    const res = await fetch(TURNSTILE_VERIFY_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData.toString(),
-    })
-    if (!res.ok) return false
-    const data = (await res.json()) as { success: boolean }
-    return data.success === true
-  } catch {
-    return false
-  }
-}
-
-// In-memory rate limiter (per IP, sliding window).
-// Vercel restarts the function frequently so this is more of a "spam dampener"
-// than a hard guarantee. Good enough for a waitlist form.
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000 // 1 hour
-const RATE_LIMIT_MAX = 5                     // 5 requests / hour / IP
-const ipBuckets = new Map<string, number[]>()
-
-function rateLimit(ip: string): { ok: boolean; retryAfterSec?: number } {
-  const now = Date.now()
-  const cutoff = now - RATE_LIMIT_WINDOW_MS
-  const timestamps = (ipBuckets.get(ip) ?? []).filter((t) => t > cutoff)
-  if (timestamps.length >= RATE_LIMIT_MAX) {
-    const oldest = timestamps[0]
-    return { ok: false, retryAfterSec: Math.ceil((oldest + RATE_LIMIT_WINDOW_MS - now) / 1000) }
-  }
-  timestamps.push(now)
-  ipBuckets.set(ip, timestamps)
-  return { ok: true }
-}
-
-function getClientIp(req: NextRequest): string {
-  // Vercel forwards via x-forwarded-for; first value is the real client
-  const fwd = req.headers.get('x-forwarded-for')
-  if (fwd) return fwd.split(',')[0].trim()
-  return req.headers.get('x-real-ip') ?? 'unknown'
-}
+// Spam dampener: 5 requests / hour / IP, per instance (see lib/rate-limit.ts).
+const rateLimit = createMemoryLimiter(5, 60 * 60 * 1000)
 
 export async function POST(req: NextRequest) {
   const contentType = req.headers.get('content-type') ?? ''
