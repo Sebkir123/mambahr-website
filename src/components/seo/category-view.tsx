@@ -28,8 +28,8 @@ function SlackFragment() {
       <div className="sf-msg sf-mamba">
         <span className="sf-av sf-av-m" aria-hidden="true" />
         <div className="sf-body">
-          <div className="sf-meta"><b>MambaHR</b><span className="sf-bot">agent</span><span>9:24 AM</span></div>
-          <p className="sf-text">You’re eligible for 12 weeks of FMLA bonding leave, job protected. I’ve attached the California CFRA and PFL rules and routed the plan to Dave to confirm the stack.</p>
+          <div className="sf-meta"><b>MambaHR</b><span className="sf-bot">app</span><span>9:24 AM</span></div>
+          <p className="sf-text">You’re eligible for 12 weeks of federal family leave (FMLA) for bonding, job protected. I’ve attached California’s own leave rules (CFRA and PFL) and sent the plan to Dave to confirm how they combine.</p>
           <div className="sf-pills">
             <span className="sf-pill">FMLA · CFRA · CA PFL</span>
             <span className="sf-pill sf-pill-g">Routed to Dave</span>
@@ -74,7 +74,6 @@ export default function CategoryView({ data }: { data: CategoryData }) {
           eyebrow={data.eyebrow}
           title={<>{data.hero.lead} <Em>{data.hero.em}</Em>{data.hero.tail}</>}
           lead={data.heroSub}
-          proof="Built for lean US teams"
         >
           <SlackFragment />
         </PageHero>
@@ -184,7 +183,7 @@ export default function CategoryView({ data }: { data: CategoryData }) {
                 <span className="rl-label">Keep comparing</span>
                 <div className="rl-links">
                   {data.related.map((r) => (
-                    <Link key={r.href} href={r.href} className="rl">{r.label} →</Link>
+                    <Link key={r.href} href={r.href} className="rl">{r.label}</Link>
                   ))}
                 </div>
               </div>

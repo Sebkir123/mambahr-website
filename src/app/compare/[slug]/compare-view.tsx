@@ -44,7 +44,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
                   <img key={p} src={`/avatars/${p}.jpg`} alt="" width={34} height={34} />
                 ))}
               </div>
-              <span className="proof-t">Teams compare. Then they switch.</span>
+              <span className="proof-t">Built by the founders, who answer the demo call</span>
             </div>
           </div>
           <style jsx>{`
@@ -167,7 +167,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
             </div>
             <div className="money" data-reveal>
               <p className="money-t">{data.costLine}</p>
-              <Link href="/pricing" className="money-a">Do the math on pricing →</Link>
+              <Link href="/pricing" className="money-a">See pricing</Link>
             </div>
           </div>
           <style jsx>{`
@@ -261,7 +261,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
               <div className="step" data-reveal data-delay="3">
                 <span className="d">Week 1</span>
                 <h3 className="t">The work is getting done</h3>
-                <p className="b">Leave approved, questions answered with citations, the first payroll change file ready to load. You approve the big calls.</p>
+                <p className="b">Leave approved, questions answered with citations, the first payroll change file ready to load. You approve the sensitive calls.</p>
               </div>
             </div>
           </div>
