@@ -123,7 +123,7 @@ export const categories: Record<string, CategoryData> = {
     faq: [
       {
         q: 'Is AI HR software safe for sensitive employee data?',
-        a: 'Yes. MambaHR encrypts data in transit and at rest and keeps a full audit trail of every action. Your data stays in the US, and it never trains any model. High-risk decisions always go to a person for approval.',
+        a: 'Yes. MambaHR encrypts data in transit and at rest and keeps a full audit trail of every action. Your data never trains any model. High-risk decisions always go to a person for approval.',
       },
       {
         q: 'Does AI HR software replace my HR team?',

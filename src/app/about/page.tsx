@@ -172,7 +172,6 @@ export default function AboutPage() {
             </div>
             <div className="facts" data-reveal>
               <span className="fact"><i aria-hidden="true" />Headquartered in San Francisco</span>
-              <span className="fact"><i aria-hidden="true" />US data residency</span>
               <span className="fact"><i aria-hidden="true" />Statute cited on every answer</span>
               <span className="fact"><i aria-hidden="true" />We&rsquo;re hiring, <a href="mailto:hello@mambahr.com">hello@mambahr.com</a></span>
             </div>

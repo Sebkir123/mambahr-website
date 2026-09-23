@@ -297,8 +297,8 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          <strong>8.1</strong> MambaHR commits to United States storage for Customer Personal Data
-          unless an Order states otherwise. MambaHR sells to United States employers, and the
+          <strong>8.1</strong> Customer Personal Data is processed where MambaHR and the
+          subprocessors listed in Schedule 3 process it. MambaHR sells to United States employers, and the
           Services are not offered for the establishment of employment in the European Economic
           Area, the United Kingdom, or Switzerland. The remainder of this Section applies only if
           Customer Personal Data is nonetheless transferred from one of those regions to a country
@@ -490,9 +490,7 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          MambaHR lists only providers actually used in production. Primary processing location is
-          the United States unless Customer agrees otherwise in an Order or product-specific
-          addendum.
+          MambaHR lists only providers actually used in production.
         </p>
         <div className="scroller">
           <table>

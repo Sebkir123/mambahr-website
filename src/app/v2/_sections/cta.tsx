@@ -16,7 +16,7 @@ export default function Cta() {
           <a className="btn btn-primary" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
         </div>
         <div className="trust">
-          <span>Your data imports in a day</span><i /><span>Your data stays in the US</span><i /><span>A person signs off on every termination</span>
+          <span>Your data imports in a day</span><i /><span>A person signs off on every termination</span>
         </div>
       </div>
 

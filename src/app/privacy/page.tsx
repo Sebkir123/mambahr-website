@@ -226,7 +226,7 @@ const sections: LegalSection[] = [
       <>
         <p>
           We keep the list short on purpose. Each of these companies processes data on our
-          instructions, under contract, and all of them process it in the United States.
+          instructions, under contract.
         </p>
         <div className="scroller">
           <table>

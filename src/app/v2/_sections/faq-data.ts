@@ -14,7 +14,7 @@ export const QA = [
   },
   {
     q: 'Is our people data safe?',
-    a: 'Yes. Encrypted in transit and at rest, role-based access, and a full audit trail on every change. Your data stays in the US, and we never train AI on it; both are written into our Data Processing Addendum, available on request.',
+    a: 'Yes. Encrypted in transit and at rest, role-based access, and a full audit trail on every change. We never train AI on it, and that is written into our Data Processing Addendum, available on request.',
   },
   {
     q: 'What happens if it gets something wrong?',

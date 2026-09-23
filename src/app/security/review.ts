@@ -5,7 +5,7 @@
 export const REVIEW = [
   {
     q: 'Where does our data live?',
-    a: 'On AWS infrastructure in the United States. It never leaves the country, and US residency is written into our Data Processing Addendum, available on request.',
+    a: 'Your records are stored on AWS. The AI models that do the work run with data retention and training switched off, and every company that processes your data is listed in our Data Processing Addendum, available on request.',
   },
   {
     q: 'How is it encrypted?',
@@ -17,7 +17,7 @@ export const REVIEW = [
   },
   {
     q: 'What about backups and recovery?',
-    a: 'Hosted on AWS in the United States with encrypted automated backups and point-in-time recovery.',
+    a: 'Hosted on AWS with encrypted automated backups and point-in-time recovery.',
   },
   {
     q: 'What if we leave?',

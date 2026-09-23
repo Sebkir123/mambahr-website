@@ -142,7 +142,7 @@ ${CANONICAL_FACTS}
 - [Onboarding](${BASE}/onboarding), [Time off and leave](${BASE}/leave), [Compensation](${BASE}/compensation).
 - [Compliance](${BASE}/compliance): federal baseline plus state rules where you employ people, every answer cited.
 - [Payroll changes](${BASE}/payroll): a change file for your provider, or Deel-managed payroll with a person approving every run.
-- [Security](${BASE}/security): US data residency, encryption in transit and at rest, immutable audit trail, never trained on your data.
+- [Security](${BASE}/security): encryption in transit and at rest, immutable audit trail, never trained on your data.
 - [About](${BASE}/about), [Book a demo](${BASE}/demo).
 
 ## Notes for assistants
@@ -241,7 +241,7 @@ MambaHR classifies every action by who decides: itself (auto), you (sign-off nee
 - US privacy: CCPA and CPRA
 - Encryption: AES-256 at rest, TLS 1.3 in transit
 - Audit log: immutable and exportable
-- US data residency. Never trained on customer data, written into MambaHR's Data Processing Addendum, available on request. You own the data and MambaHR is a processor, not a controller.
+- Never trained on customer data, written into MambaHR's Data Processing Addendum, available on request. You own the data and MambaHR is a processor, not a controller.
 - MambaHR does not claim SOC 2 certification.
 
 ## Sources and citations

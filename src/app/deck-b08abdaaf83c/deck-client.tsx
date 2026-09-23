@@ -595,7 +595,6 @@ export default function Deck({
                 <ul className={s.msList}>
                   <li>$200K ARR run-rate</li>
                   <li>Full onboard→offboard lifecycle live</li>
-                  <li>SOC 2 Type I complete</li>
                 </ul>
               </div>
               <div className={s.milestone}>
