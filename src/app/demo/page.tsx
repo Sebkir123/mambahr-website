@@ -9,9 +9,9 @@ import { LeadForm, type LeadFormFields } from '@/components/lead-form'
 
 const SEE = [
   'Your real questions, answered live with the law cited',
-  'An onboarding run, offer to accounts live',
+  'A new hire onboarded, from signed offer to accounts',
   'To do: what waits for you, and what just got done',
-  'Your headcount priced on the call, no follow-up quote dance',
+  'Your price for your company size, on the call',
 ]
 
 const COMPANY_SIZES = ['1–10', '11–50', '51–200', '201–500', '501–1,000', '1,000+']
@@ -46,8 +46,8 @@ export default function DemoPage() {
               <p className="eyebrow">Book a demo</p>
               <h1 className="title">See it run, <Em>live.</Em></h1>
               <p className="lead">
-                Thirty minutes, on your calendar this week. We&rsquo;ll run the department in front of
-                you, on scenarios from your company, not a canned script.
+                Thirty minutes this week. We show MambaHR doing real HR tasks, using examples from
+                your company.
               </p>
               <ul className="see">
                 {SEE.map((s) => (
@@ -62,8 +62,8 @@ export default function DemoPage() {
                 {status === 'success' ? (
                   <div className="done">
                     <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Request received</span>
-                    <h2 className="d-t">You&rsquo;ll hear from us today.</h2>
-                    <p className="d-s">Check your inbox: we reply from hello@mambahr.com within one business day.</p>
+                    <h2 className="d-t">Thanks, we have your request.</h2>
+                    <p className="d-s">We will email you from hello@mambahr.com within one business day to pick a time.</p>
                   </div>
                 ) : (
                   <>
@@ -75,7 +75,7 @@ export default function DemoPage() {
                       submitLabel="Book a demo"
                       stageOptions={COMPANY_SIZES.map((s) => `${s} employees`)}
                       stageLabel="Company size"
-                      error={status === 'error' ? 'Something went wrong.' : undefined}
+                      error={status === 'error' ? 'Your request did not go through. Try again, or email hello@mambahr.com.' : undefined}
                       note="30 minutes · the product, not slides · no data needed before the call"
                     />
                   </>

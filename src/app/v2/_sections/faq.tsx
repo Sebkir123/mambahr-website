@@ -8,7 +8,7 @@ export default function Faq() {
       <div className="wrap">
         <div className="side" data-reveal>
           <p className="eyebrow">Before you ask</p>
-          <h2 className="title">The questions every <span className="em">people leader has.</span></h2>
+          <h2 className="title">Questions HR teams <span className="em">ask us.</span></h2>
           <div className="ask">
             <div className="ask-t">Still have a question?</div>
             <a className="ask-cta" href="mailto:hello@mambahr.com">hello@mambahr.com</a>

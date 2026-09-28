@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Multi-State HR Compliance | MambaHR',
   description:
-    'Every answer cites the law. Federal baseline plus state rules for the states where you employ people, EEO data collected at apply, and edge cases routed to a human.',
+    'Every answer cites the law. Federal law plus the rules for each state where you employ people, equal-opportunity data collected at apply, and unclear cases sent to a person.',
   openGraph: {
     title: 'Multi-State HR Compliance | MambaHR',
     description:
-      'Every answer cites the law. Federal baseline plus state rules where you employ people, EEO data collected at apply, edge cases to a human.',
+      'Every answer cites the law. Federal law plus the rules for your states, and unclear cases sent to a person.',
     url: 'https://www.mambahr.com/compliance',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Multi-State HR Compliance | MambaHR',
     description:
-      'Every answer cites the law. Federal baseline plus state rules where you employ people, EEO data collected at apply, edge cases to a human.',
+      'Every answer cites the law. Federal law plus the rules for your states, and unclear cases sent to a person.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://www.mambahr.com/compliance' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'Multi-State HR Compliance | MambaHR',
   url: 'https://www.mambahr.com/compliance',
   description:
-    'MambaHR compliance: the federal baseline plus state rules for the states where you employ people. Every answer cites the law and its review date, EEO data is collected at apply, and edge cases route to a human.',
+    'MambaHR compliance: federal law plus the rules for each state where you employ people. Every answer cites the law and its review date, equal-opportunity data is collected at apply, and unclear cases go to a person.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
-    name: 'Compliance agent',
+    name: 'Compliance',
     description:
-      'Applies the federal baseline plus each state rule to every decision. Cites the governing statute or regulation on every answer with its review date, collects EEO self-identification at apply, and routes genuine edge cases to a human for sign-off.',
+      'Applies federal law and each state’s rules to every decision. Cites the law behind every answer with its review date, collects voluntary equal-opportunity (EEO) answers at apply, and sends unclear cases to a person for sign-off.',
   },
 }
 

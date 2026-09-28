@@ -1,5 +1,8 @@
 'use client'
 
+const GRAIN =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
+
 export default function Channels() {
   return (
     <section className="ch" id="run">
@@ -10,9 +13,8 @@ export default function Channels() {
             Ask it in Slack. It does the work <span className="em">in MambaHR.</span>
           </h2>
           <p className="lead">
-            No new tool to learn. No portal to log into. Your team messages
-            <b> @MambaHR</b> like a coworker. It reads the thread, checks your policy,
-            does the work, and logs it.
+            Your team asks <b>@MambaHR</b> in Slack, the way they would ask a colleague.
+            It checks your policy, does the task, and keeps a record of it.
           </p>
           <div className="chans">
             <div className="chan">
@@ -31,10 +33,13 @@ export default function Channels() {
               </div>
             </div>
           </div>
-          <p className="audit"><span className="a-dot" aria-hidden="true" />Every action logged. One record of everything, everywhere.</p>
+          <p className="audit"><span className="a-dot" aria-hidden="true" />Every action is logged, so you can always see what happened and why.</p>
         </div>
 
         <div className="stage" data-reveal data-delay="1">
+          <span className="field" aria-hidden="true"><i className="fa" /><i className="fb" /><i className="fg" /></span>
+          <div className="chip chip-a" aria-hidden="true"><span className="chip-k">Balance</span><span className="chip-v">12 &rarr; 9 days</span></div>
+          <div className="chip chip-b" aria-hidden="true"><span className="chip-dot" /><span className="chip-v">Payday record updated</span></div>
           <div className="sw agent-edge agent-working">
             <div className="sw-bar">
               <span className="dots"><i /><i /><i /></span>
@@ -205,7 +210,43 @@ export default function Channels() {
         .a-dot { flex: none; width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
 
         /* ---- Slack window ---- */
+        .stage {
+          position: relative;
+          isolation: isolate;
+          padding: clamp(28px, 4vw, 56px);
+          border-radius: 28px;
+          overflow: hidden;
+          box-shadow: 0 40px 80px -40px rgba(60, 40, 110, 0.5);
+        }
+        .field { position: absolute; inset: 0; z-index: -1; background: linear-gradient(150deg, #c9b3e3 0%, #9d8fe0 45%, #6a5da6 100%); }
+        .field i { position: absolute; border-radius: 50%; filter: blur(50px); }
+        .fa { width: 70%; height: 70%; left: -20%; top: -25%; background: radial-gradient(circle, rgba(255, 214, 170, 0.9), rgba(255, 214, 170, 0) 70%); }
+        .fb { width: 60%; height: 70%; right: -20%; bottom: -30%; background: radial-gradient(circle, rgba(74, 58, 150, 0.9), rgba(74, 58, 150, 0) 70%); }
+        .fg { inset: 0; border-radius: 0; filter: none; background-image: ${GRAIN}; background-size: 220px; opacity: 0.35; mix-blend-mode: overlay; }
+        .chip {
+          position: absolute;
+          z-index: 3;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 14px;
+          border-radius: 14px;
+          background: rgba(255, 255, 255, 0.66);
+          -webkit-backdrop-filter: blur(18px) saturate(170%);
+          backdrop-filter: blur(18px) saturate(170%);
+          border: 1px solid rgba(255, 255, 255, 0.8);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 18px 40px -16px rgba(40, 25, 80, 0.5);
+          font-size: 13.5px;
+          color: #1a1a19;
+        }
+        .chip-a { right: 22px; top: 16px; }
+        .chip-b { left: 14px; bottom: 12%; }
+        .chip-k { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b4e26; }
+        .chip-v { font-weight: 600; }
+        .chip-dot { width: 8px; height: 8px; border-radius: 50%; background: #1f7a45; box-shadow: 0 0 0 4px rgba(31, 122, 69, 0.18); }
+        @media (max-width: 640px) { .chip { display: none; } }
         .sw {
+          position: relative;
           border-radius: 14px;
           background: var(--bg);
           box-shadow: var(--shadow-float);

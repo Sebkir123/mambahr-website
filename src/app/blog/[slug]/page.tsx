@@ -148,8 +148,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <div className={styles.cta}>
           <div>
-            <p className={styles.ctaKicker}>Before you hire HR, hire MambaHR.</p>
-            <p className={styles.ctaSub}>The whole department, hiring to compliance, done for you.</p>
+            <p className={styles.ctaKicker}>Take the HR admin off your plate.</p>
+            <p className={styles.ctaSub}>MambaHR does the admin, from hiring paperwork to compliance answers. You approve what matters.</p>
           </div>
           <Link href="/demo" className="btn-gold">Book a demo</Link>
         </div>

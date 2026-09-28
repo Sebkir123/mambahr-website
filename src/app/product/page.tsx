@@ -49,16 +49,16 @@ const ONBOARDING_QUEUE = [
 
 /* The capability lists that used to be four more splits, as short chips. */
 const ALSO: { label: string; href: string }[] = [
-  { label: 'Market bands on every role', href: '/compensation' },
+  { label: 'Pay ranges for every role', href: '/compensation' },
   { label: 'Pay-equity check before a raise is final', href: '/compensation' },
-  { label: 'Statute cited on every decision', href: '/compliance' },
-  { label: 'Append-only audit log', href: '/compliance' },
+  { label: 'The law cited on every decision', href: '/compliance' },
+  { label: 'A change log no one can edit', href: '/compliance' },
   { label: 'Layoff notices (WARN Act) and severance math', href: '/rif' },
   { label: 'Open internal roles shown before a layoff', href: '/rif' },
   { label: 'Offers, NDAs and policies, e-signed', href: '/documents' },
   { label: 'Documents filed and retained per policy', href: '/documents' },
   { label: 'Careers page on your domain', href: '/job-portal' },
-  { label: 'Org chart that draws itself', href: '/people' },
+  { label: 'Org chart, always up to date', href: '/people' },
   { label: 'Time-off balances, tracked', href: '/leave' },
   { label: 'Form I-9 collection', href: '/onboarding' },
   { label: 'Payroll change files, or Deel-managed payroll', href: '/payroll' },
@@ -75,26 +75,26 @@ export default function ProductPage() {
         <PageHero
           eyebrow="The product"
           title={<>See MambaHR <Em>do the work.</Em></>}
-          lead="MambaHR runs hiring, onboarding, leave, compensation, and compliance, start to finish. A person signs off on the sensitive calls."
+          lead="MambaHR does the admin in hiring, onboarding, leave, pay changes and compliance. Your team approves the sensitive calls."
         >
           <div className="mock-card agent-edge agent-working"><TodoDesk show="pane" /></div>
         </PageHero>
 
         <AgentLoop
-          eyebrow="Live today"
+          eyebrow="A sample morning"
           title="Four jobs. One morning."
-          lead="A sample of what MambaHR handles while you focus on what requires you."
+          lead="What MambaHR handles on a normal morning, and what it leaves for you to decide."
           steps={STEPS}
         />
 
         <FeatureSplit
           eyebrow="Hire"
           title="Job post to signed offer, on one board."
-          lead="MambaHR posts the role, reads and ranks every applicant with reasons, and orders the background check. The offer waits for you, inside your pay range."
+          lead="MambaHR posts the role, collects every application in one place, schedules interviews and orders the background check. You decide who moves forward, and the offer waits for your approval, inside your pay range."
           bullets={[
             'Careers page and job-board feeds, posted the same day',
-            'Every applicant ranked with the why, you make every advance-or-pass call',
-            'Offer drafted inside your pay range, e-signed after your nod',
+            'Every application in one place; you decide who moves forward',
+            'Offer drafted inside your pay range, e-signed after you approve',
           ]}
         >
           <div className="mock-card"><PipelineBoard /></div>
@@ -105,7 +105,7 @@ export default function ProductPage() {
           warm
           eyebrow="Onboard"
           title="Day one, ready before they arrive."
-          lead="A signed offer starts everything: the Form I-9, the account and laptop requests, the first-week plan. What needs a person lands on your To do with the read already done."
+          lead="A signed offer starts everything: the Form I-9, the account and laptop requests, the first-week plan. Anything that needs a person lands on your To do list, with a recommendation."
           bullets={[
             'Form I-9 and E-Verify started from the signed offer',
             'Login, Slack, and app accounts requested; laptop request sent to IT',
@@ -117,12 +117,12 @@ export default function ProductPage() {
 
         <FeatureSplit
           eyebrow="Leave"
-          title="Leave that reads the statute for you."
-          lead="Requests come in as plain text. MambaHR checks eligibility, cites the rule, auto-approves within policy, and sends the rest to you where you already are."
+          title="Leave requests, checked against the law."
+          lead="Employees ask in plain words. MambaHR checks eligibility, cites the rule, approves what fits your policy, and sends the rest to you."
           bullets={[
             'Time-off accrual and balances, tracked automatically',
-            'FMLA eligibility checked; state leave cited and sent to a person to decide how they combine',
-            'Anything medical or ambiguous escalates',
+            'Family leave (FMLA) eligibility checked; state rules cited, and a person decides how they combine',
+            'Anything medical or unclear goes to a person',
           ]}
         >
           <div className="mock-card slack">
@@ -145,12 +145,12 @@ export default function ProductPage() {
           flip
           warm
           eyebrow="Exit"
-          title="Every exit, prepared and human-approved."
+          title="Every exit prepared, and approved by you."
           lead="Ask for a separation and the paperwork, the final-pay math for that state, and the account shutdowns are lined up. Nothing happens to anyone until you approve it."
           bullets={[
             'Separation agreement and final pay per the state rule',
-            'Accounts revoked and devices recovered on the last day, not after',
-            'A person signs off on every single exit',
+            'Accounts switched off on the last day, and a device return requested',
+            'You approve every exit',
           ]}
         >
           <div className="mock-card">
@@ -171,8 +171,8 @@ export default function ProductPage() {
 
         <section className="also">
           <div className="wrap">
-            <p className="eyebrow">Also handled</p>
-            <h2 className="title">The rest of the job, without another page each.</h2>
+            <p className="eyebrow">Also included</p>
+            <h2 className="title">Everything else MambaHR takes care of.</h2>
             <ul className="chips">
               {ALSO.map((a) => (
                 <li key={a.label}><Link href={a.href}>{a.label}</Link></li>
@@ -182,8 +182,8 @@ export default function ProductPage() {
         </section>
 
         <PageCta
-          title={<>One AI department.<br />Every HR function.</>}
-          sub="A 30-minute demo of these four jobs on your own scenarios. Then we import your data and switch you over."
+          title={<>Less admin.<br />More time for your people.</>}
+          sub="A 30-minute demo using examples from your company. Then we import your data and you are up and running."
         />
       </main>
       <Footer />

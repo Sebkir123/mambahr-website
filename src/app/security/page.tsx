@@ -10,7 +10,7 @@ import { REVIEW } from './review'
 /* ── Hero fragment: dark security log ── */
 const LOG = [
   { time: '09:31:08', text: 'Access granted · role: HR admin', tag: 'logged' },
-  { time: '09:31:42', text: 'Record changed · comp · by MambaHR', tag: 'rule cited' },
+  { time: '09:31:42', text: 'Record changed · pay · by MambaHR', tag: 'rule cited' },
   { time: '09:32:15', text: 'Export requested · approved by B. Bell', tag: 'logged' },
   { time: '09:33:01', text: 'Document viewed · offer · by HR admin', tag: 'logged' },
 ]
@@ -34,7 +34,7 @@ function SecurityLogCard() {
         ))}
       </div>
       <div className="s-foot">
-        <span>Append-only · cannot be edited, not even by us</span>
+        <span>Entries can be added, never changed</span>
         <span className="mono">4 of 247 today</span>
       </div>
       <style jsx>{`
@@ -61,10 +61,10 @@ function SecurityLogCard() {
 
 /* ── Commitments section (page-local, styled like AgentLoop's card) ── */
 const COMMITMENTS = [
-  { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption at rest, TLS 1.2 or higher in transit. Your records are protected while stored and while moving between systems.', tag: 'Always on' },
-  { n: '02', label: 'Access by role, least privilege', desc: 'Each person sees only what their role allows. Managers see their team; employees see their own record.', tag: 'Always on' },
-  { n: '03', label: 'Every change logged with who and why', desc: 'Every action, by a person or by MambaHR, is written to a record nobody can edit, with the reason attached.', tag: 'Always on' },
-  { n: '04', label: 'Never used to train AI', desc: 'Names, salaries, leave and health information, none of it trains any AI model. Not ours, not anyone else’s.', tag: 'In our DPA' },
+  { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption when stored, and TLS 1.2 or higher when moving between systems.', tag: 'Always on' },
+  { n: '02', label: 'Access by role', desc: 'Each person sees only what their role allows. Managers see their team. Employees see their own record.', tag: 'Always on' },
+  { n: '03', label: 'Every change logged with who and why', desc: 'Every action, by a person or by MambaHR, is saved to a log that cannot be edited, with the reason attached.', tag: 'Always on' },
+  { n: '04', label: 'Never used to train AI', desc: 'Names, salaries, leave, and health information never train any AI model, ours or anyone else’s.', tag: 'In writing' },
 ]
 
 function Commitments() {
@@ -74,7 +74,7 @@ function Commitments() {
         <div className="head" data-reveal>
           <p className="eyebrow">Our commitments</p>
           <h2 className="title">How we treat your data</h2>
-          <p className="lead">The four things that hold for every customer, written into our Data Processing Addendum, available on request.</p>
+          <p className="lead">Four commitments that apply to every account. They are written into our Data Processing Addendum, available on request.</p>
         </div>
         <div className="card agent-edge agent-done" data-reveal data-delay="1">
           {COMMITMENTS.map((c) => (
@@ -119,12 +119,12 @@ function SsoCard() {
     <div className="sso agent-edge agent-done">
       <div className="s-head">
         <span className="s-t">Single sign-on</span>
-        <span className="s-sub">Your login, your rules</span>
+        <span className="s-sub">Use the login you already have</span>
       </div>
       {[
-        { name: 'Okta', d: 'Sign-on + user provisioning', mark: 'O' },
-        { name: 'Microsoft Entra', d: 'Sign-on + user provisioning', mark: 'E' },
-        { name: 'WorkOS', d: 'Sign-on for everything else', mark: 'W' },
+        { name: 'Okta', d: 'Sign-in and account setup', mark: 'O' },
+        { name: 'Microsoft Entra', d: 'Sign-in and account setup', mark: 'E' },
+        { name: 'WorkOS', d: 'Sign-in for other providers', mark: 'W' },
       ].map((p) => (
         <div className="row" key={p.name}>
           <span className="mark">{p.mark}</span>
@@ -166,8 +166,8 @@ function ApprovalGateCard() {
         <span className="g-sub">MambaHR stops. A person decides.</span>
       </div>
       {[
-        { img: '/avatars/maya.jpg', t: 'Offer · Maya Chen', m: '$195k · above band 8%', hold: true },
-        { img: '/avatars/tom.jpg', t: 'Comp change · Tom Harrison', m: '+12% merit · within band', hold: true },
+        { img: '/avatars/maya.jpg', t: 'Offer · Maya Chen', m: '$195k · 8% above range', hold: true },
+        { img: '/avatars/tom.jpg', t: 'Pay change · Tom Harrison', m: '+12% merit · within range', hold: true },
         { img: '/avatars/priya.jpg', t: 'Address update · Jordan Lee', m: 'Filed automatically · logged', hold: false },
       ].map((r) => (
         <div className="row" key={r.t}>
@@ -178,13 +178,13 @@ function ApprovalGateCard() {
             <div className="m">{r.m}</div>
           </div>
           {r.hold
-            ? <span className="hold">requires human sign-off</span>
+            ? <span className="hold">needs your sign-off</span>
             : <span className="done-c"><i aria-hidden="true" />done</span>}
         </div>
       ))}
       <div className="g-foot">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
-        <span className="g-note">Routine work runs; the sensitive calls wait for you</span>
+        <span className="g-note">Routine work gets done. Sensitive calls wait for you.</span>
       </div>
       <style jsx>{`
         .gate { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 18px 0 0; box-shadow: var(--shadow-float); }
@@ -215,7 +215,7 @@ function SecurityReview() {
         <div className="head" data-reveal>
           <p className="eyebrow">For your security review</p>
           <h2 className="title">The questionnaire, <Em>answered.</Em></h2>
-          <p className="lead">The questions your IT and legal reviewers will ask, answered before they ask them. Forward this page, or bring them to the demo.</p>
+          <p className="lead">The questions your IT and legal reviewers will ask, answered here. Forward this page, or bring them to the demo.</p>
         </div>
         <div className="grid">
           {REVIEW.map((r, i) => (
@@ -258,11 +258,11 @@ export default function SecurityPage() {
       <main id="main">
         <PageHero
           eyebrow="Security"
-          title={<>Locked down, <Em>logged.</Em></>}
-          lead="Salaries, leave records, health information, the most sensitive data your company holds. Encrypted everywhere, access by role, every change on the record, and never used to train AI. Written into our Data Processing Addendum, available on request."
+          title={<>Your people data, <Em>kept safe.</Em></>}
+          lead="Salaries, leave records, and health information are the most sensitive data your company holds. MambaHR encrypts it, limits access by role, logs every change, and never uses it to train AI. These commitments are in our Data Processing Addendum, available on request."
           photo="/v2-people/sofia.jpg"
           photoChip="MambaHR · done"
-          photoCaption="Audit question answered the same morning"
+          photoCaption="Every change logged with who and why"
         >
           <SecurityLogCard />
         </PageHero>
@@ -272,11 +272,11 @@ export default function SecurityPage() {
         <FeatureSplit
           eyebrow="Access"
           title={<>Your logins, <Em>your rules</Em></>}
-          lead="Orphaned accounts are how breaches start. Sign-on and user setup run through WorkOS, Okta, or Microsoft Entra, and access follows your org chart. When someone is offboarded, they are locked out the same minute."
+          lead="Accounts left open after someone leaves are a common way in for attackers. Sign-in and account setup run through WorkOS, Okta, or Microsoft Entra, and access follows your org chart. When someone leaves, they are locked out the same minute."
           bullets={[
             'Your team signs in with the accounts they already use',
-            'Permissions follow each person’s role, automatically',
-            'Offboarded means locked out, no orphaned accounts',
+            'Permissions follow each person’s role automatically',
+            'When someone leaves, their access ends. No forgotten accounts.',
           ]}
         >
           <SsoCard />
@@ -285,23 +285,24 @@ export default function SecurityPage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="Human oversight"
-          title={<>A human on <Em>the big calls</Em></>}
-          lead="MambaHR acts within the policy you set. Offers above your pay range, terminations, and big pay changes always stop and wait for a person to sign off. Every time, with the reasoning attached."
+          eyebrow="You stay in charge"
+          title={<>A person on <Em>the big calls</Em></>}
+          lead="MambaHR works within the policy you set. Offers above your pay range, terminations, and big pay changes always wait for a person to sign off, with the reasons attached."
           bullets={[
             'You decide which actions need a person',
             'Nothing high-stakes happens without a named approver',
-            'Every approval, and every decline, is on the record',
+            'Every approval and every decline is logged',
           ]}
         >
           <ApprovalGateCard />
         </FeatureSplit>
 
         <StatTrio
+          note={null}
           stats={[
             { n: 100, suffix: '%', label: 'of changes logged with who and why' },
-            { n: 0, label: 'AI training on your data, written into our DPA' },
-            { n: 1, label: 'human required on every high-stakes action' },
+            { n: 0, label: 'AI training on your data, in writing' },
+            { n: 1, label: 'person required on every high-stakes action' },
           ]}
         />
 

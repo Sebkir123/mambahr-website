@@ -106,7 +106,7 @@ export default function Footer() {
               <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 17, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
             </Link>
             <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.55, maxWidth: 210, margin: 0 }}>
-              The AI HR department. You keep the judgment.
+              The HR admin, done for your team. You make the calls.
             </p>
             <div>
               <a

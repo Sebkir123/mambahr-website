@@ -4,9 +4,9 @@ import Link from 'next/link'
 
 const ROWS = [
   { them: 'File the Form I-9, chase E-Verify', themCost: '45 min', us: 'Form I-9 and E-Verify check started', usWhen: '9:02 AM' },
-  { them: 'Hunt down the right approver', themCost: '3 emails', us: 'Routed and approved in policy', usWhen: '9:04 AM' },
-  { them: 'Google the family-leave (FMLA) eligibility rule', themCost: '1 hr + Legal', us: 'Answered, statute attached', usWhen: '9:06 AM' },
-  { them: 'Build the headcount report', themCost: '2 hrs', us: 'Report generated on ask', usWhen: '9:11 AM' },
+  { them: 'Hunt down the right approver', themCost: '3 emails', us: 'Approved, within your policy', usWhen: '9:04 AM' },
+  { them: 'Google the family-leave (FMLA) eligibility rule', themCost: '1 hr + Legal', us: 'Answered, with the law cited', usWhen: '9:06 AM' },
+  { them: 'Build the headcount report', themCost: '2 hrs', us: 'Report ready when asked', usWhen: '9:11 AM' },
   { them: 'Onboard the new hire, click by click', themCost: 'half a day', us: 'Day-one ready, accounts and all', usWhen: '9:14 AM' },
   { them: 'Answer the same time-off question. Again.', themCost: 'daily', us: 'Answered in Slack, instantly', usWhen: 'always' },
 ]
@@ -18,10 +18,10 @@ export default function Difference() {
         <div className="head" data-reveal>
           <p className="eyebrow">Why MambaHR</p>
           <h2 className="title">
-            Your old HR system stored the work. MambaHR is the one that <span className="em">does it.</span>
+            Your HR system stores the data. MambaHR also <span className="em">does the admin.</span>
           </h2>
           <p className="lead">
-            Same employee data, now in the system that does the work. One difference: who pushes the buttons.
+            Same employee records, in one place. The difference: the forms, reminders and approvals get done for you.
           </p>
         </div>
 
@@ -50,7 +50,7 @@ export default function Difference() {
               <span className="u-title"><span className="logo">M</span>MambaHR</span>
               <span className="mamba-chip working ondark"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
             </div>
-            <div className="u-sub">Monday, with the AI HR department</div>
+            <div className="u-sub">Monday, with MambaHR</div>
             {ROWS.map((r) => (
               <div key={r.us} className="u-line">
                 <span className="check" aria-hidden="true" />

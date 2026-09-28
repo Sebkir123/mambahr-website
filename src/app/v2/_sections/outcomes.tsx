@@ -12,9 +12,8 @@ export default function Outcomes() {
           <p className="eyebrow">What you get back</p>
           <h2 className="title">Give your HR team <span className="em">their week back.</span></h2>
           <p className="lead">
-            We estimate MambaHR takes about 27 hours of admin a week off a lean HR team, with the
-            statute cited on every answer. That is our model, not a customer average, and we will
-            publish real numbers as soon as we have them.
+            We estimate MambaHR takes about 27 hours of admin a week off a small HR team. That is
+            our estimate from how long these tasks take today, not a measured customer average.
           </p>
         </div>
 
@@ -23,7 +22,7 @@ export default function Outcomes() {
           <article className="card dark" data-reveal data-delay="1">
             <span className="lbl muted">Hours back, every week</span>
             <div className="num big"><span data-count="27">27</span><em>hrs</em></div>
-            <p className="cap ondark">MambaHR handles payroll prep, onboarding, leave, and compliance. You handle the approvals.</p>
+            <p className="cap ondark">MambaHR prepares payroll changes and handles onboarding, leave and compliance checks. You approve what matters.</p>
             <div className="spark">
               {SPARK.map((h, i) => (
                 <span key={i} style={{ height: `${h}%` }} />
@@ -51,22 +50,21 @@ export default function Outcomes() {
 
           {/* the cited answer */}
           <article className="card light agent-edge agent-done" data-reveal data-delay="3">
-            <span className="lbl">Right answer, backed by law</span>
+            <span className="lbl">Clear answers, with the law cited</span>
             <div className="qa">
               <p className="q">&ldquo;I&rsquo;m having a baby in June. How much leave can I take?&rdquo;</p>
               <div className="a">
                 <span className="a-who">MambaHR <em>6 seconds later</em></span>
-                12 weeks of federal family leave (FMLA) for bonding, job protected.
-                <span className="a-sub">California&rsquo;s own leave rules (CFRA and PDL) cited and sent to you to confirm how they combine.</span>
+                Up to 12 weeks of job-protected federal family leave (FMLA) for bonding, once eligibility is confirmed.
+                <span className="a-sub">California has its own leave rules too. MambaHR cites them and asks HR to confirm how they combine.</span>
               </div>
             </div>
-            <p className="cap">Every answer carries the statute it relied on and a review date. A person signs off on the big calls.</p>
+            <p className="cap">Every answer shows the law it relied on. Anything that needs judgment goes to a person first.</p>
           </article>
         </div>
 
         <p className="note" data-reveal>
-          Modeled from the admin hours these tasks take a lean team today, not measured
-          customer averages. We will publish real numbers once our first customers are live.
+          Estimates based on how long these tasks take a small HR team today.
         </p>
       </div>
 

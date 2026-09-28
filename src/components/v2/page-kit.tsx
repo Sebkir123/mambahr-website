@@ -422,7 +422,7 @@ export function FeatureSplit({
 /* ── Stat trio: tinted gradient cards with count-ups ── */
 export function StatTrio({
   stats,
-  note = 'Modeled from the tasks MambaHR runs, not measured customer averages.',
+  note = 'Estimates based on sample runs, not measured results.',
 }: {
   stats: { n: number; prefix?: string; suffix?: string; label: string }[]
   /** Provenance line under the stats. Pass null only if the stats are cited in-place. */
@@ -501,49 +501,49 @@ export function PageCta({
   return (
     <section className="pc">
       <div className="panel" data-reveal>
+        <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /><i className="f3" /></span>
         <span className="v2-grain" />
         <h2 className="t">{title}</h2>
         <p className="s">{sub}</p>
         <div className="btns">
           <Link href="/demo" className="btn btn-primary">Book a demo</Link>
-          <Link href="/product" className="btn btn-ghost">See how it works</Link>
+          <Link href="/product" className="btn btn-secondary">See how it works</Link>
         </div>
       </div>
       <style jsx>{`
         .pc { padding: clamp(32px, 5vw, 64px) var(--page-pad) clamp(72px, 9vw, 104px); background: var(--bg); }
+        /* Same luminous field as the homepage close: warm gold into iris, light enough for ink text. */
         .panel {
           position: relative;
+          isolation: isolate;
           overflow: hidden;
-          max-width: var(--page-max);
+          max-width: 1320px;
           margin: 0 auto;
-          border-radius: 18px;
-          padding: clamp(52px, 7vw, 88px) var(--page-pad);
+          border-radius: 32px;
+          padding: clamp(64px, 9vw, 112px) var(--page-pad);
           text-align: center;
-          background:
-            radial-gradient(90% 80% at 18% 0%, rgba(244, 200, 138, 0.85), transparent 58%),
-            radial-gradient(85% 75% at 88% 100%, rgba(94, 80, 158, 0.9), transparent 62%),
-            linear-gradient(160deg, #C99655 0%, #B07A78 48%, #7A6AB0 100%);
+          background: linear-gradient(155deg, #f3c796 0%, #eab2a4 40%, #c3aee0 72%, #9d8fe0 100%);
         }
+        .field { position: absolute; inset: 0; z-index: -1; }
+        .field i { position: absolute; border-radius: 50%; filter: blur(70px); }
+        .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, rgba(255, 226, 184, 0.95), rgba(255, 226, 184, 0) 70%); }
+        .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, rgba(139, 127, 208, 0.9), rgba(139, 127, 208, 0) 70%); }
+        .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, rgba(255, 246, 234, 0.8), rgba(255, 246, 234, 0) 70%); }
         .t {
           position: relative;
           font-family: var(--font-serif);
           font-weight: 400;
-          color: #fff;
-          font-size: clamp(30px, 4vw, 50px);
-          line-height: 1.04;
-          letter-spacing: -0.02em;
-          margin: 0;
-          text-shadow: 0 2px 18px rgba(20, 18, 14, 0.18);
+          color: var(--text);
+          font-size: clamp(34px, 4.8vw, 64px);
+          line-height: 1.02;
+          letter-spacing: -0.035em;
+          max-width: 18ch;
+          margin: 0 auto;
+          text-wrap: balance;
         }
-        /* The shared <Em> gradient is unreadable on the gradient panel, force white. */
-        .t :global(span) {
-          background: none !important;
-          color: #fff !important;
-          -webkit-text-fill-color: #fff;
-        }
-        .s { position: relative; color: rgba(255, 255, 255, 0.92); font-size: 17px; margin: 16px 0 28px; }
+        .s { position: relative; color: var(--text-muted); font-size: clamp(16px, 1.6vw, 18px); line-height: 1.6; max-width: 52ch; margin: 18px auto 30px; }
         .btns { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .btns :global(.btn-ghost) { color: #fff; }
+        .btns :global(.btn-secondary) { background: rgba(255, 255, 255, 0.55); }
       `}</style>
     </section>
   )

@@ -5,10 +5,10 @@ import type { MetadataRoute } from 'next'
 // Colors mirror the Warm Editorial Premium system: oat background, gold accent.
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'MambaHR, The AI HR Department',
+    name: 'MambaHR',
     short_name: 'MambaHR',
     description:
-      'The AI HR department for US companies: hiring, onboarding, time off, compliance, and payroll changes, done for you.',
+      'MambaHR does the HR admin for US companies: hiring, onboarding, time off and leave, payroll changes, and compliance. You make the judgment calls.',
     start_url: '/',
     display: 'standalone',
     background_color: '#F4F2EC',

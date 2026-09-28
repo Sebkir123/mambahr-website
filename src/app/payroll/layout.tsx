@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Payroll changes | MambaHR',
   description:
-    'MambaHR prepares every payroll change: new hires, terms, comp changes, leave. A change file for your current provider, or Deel-managed payroll where a person approves every run.',
+    'MambaHR prepares every payroll change: new hires, exits, pay changes, and leave. It builds a change file for your current provider, or sends the changes to Deel-managed payroll. A person approves every pay run.',
   openGraph: {
     title: 'Payroll changes | MambaHR',
     description:
-      'Every payroll change prepared. A change file for your provider, or Deel-managed payroll with a person approving every run.',
+      'Every payroll change prepared: a change file for your provider, or changes sent to Deel-managed payroll. A person approves every pay run.',
     url: 'https://www.mambahr.com/payroll',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Payroll changes | MambaHR',
     description:
-      'Every payroll change prepared. A change file for your provider, or Deel-managed payroll with a person approving every run.',
+      'Every payroll change prepared: a change file for your provider, or changes sent to Deel-managed payroll. A person approves every pay run.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://www.mambahr.com/payroll' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'Payroll changes | MambaHR',
   url: 'https://www.mambahr.com/payroll',
   description:
-    'MambaHR payroll changes: prepares every payroll change, new hires, terminations, comp changes, and leave, as a change file in your provider’s format or as a Deel-managed payroll run that a person approves.',
+    'MambaHR payroll changes: prepares every payroll change (new hires, exits, pay changes, and leave) as a change file in your provider’s format, or sends the changes to Deel-managed payroll. A person approves every pay run.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
-    name: 'Payroll file agent',
+    name: 'Payroll changes',
     description:
-      'Prepares every payroll change each cycle, new hires, terminations, comp changes, and leave. Delivers a change file in your provider’s format, or sends the changes to Deel for a managed run. A person approves every run.',
+      'Prepares every payroll change each pay cycle: new hires, exits, pay changes, and leave. Builds a change file in your provider’s format, or sends the changes to Deel-managed payroll (Powered by Deel). A person approves every pay run.',
   },
 }
 

@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Compensation Management | MambaHR',
   description:
-    'Every raise priced against your bands. Above-band routes to a human. Pay equity screened on every change, filed to the record.',
+    'Every raise checked against your pay ranges and for pay equity before it happens. Raises above the range come to you. Approved changes are filed to the employee record.',
   openGraph: {
     title: 'Compensation Management | MambaHR',
     description:
-      'Every raise priced against your bands. Above-band routes to a human. Pay equity screened on every change.',
+      'Every raise checked against your pay ranges and for pay equity. Anything above the range comes to you.',
     url: 'https://www.mambahr.com/compensation',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Compensation Management | MambaHR',
     description:
-      'Every raise priced against your bands. Above-band routes to a human. Pay equity screened on every change.',
+      'Every raise checked against your pay ranges and for pay equity. Anything above the range comes to you.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://www.mambahr.com/compensation' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'Compensation Management | MambaHR',
   url: 'https://www.mambahr.com/compensation',
   description:
-    'MambaHR compensation: every raise priced against your bands, with above-band requests routed to a human. Pay equity is screened on every change and the approved change is filed to the record.',
+    'MambaHR compensation: every raise checked against your pay ranges, and anything above the range sent to a person to approve. Every change is checked for pay equity, and the approved change is filed to the employee record.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
-    name: 'Compensation agent',
+    name: 'Compensation',
     description:
-      'Prices every raise against your comp bands and routes anything above band to a human for approval. Screens pay equity on every change, then files the approved, effective-dated change to the employee record.',
+      'Checks every raise against your pay ranges and sends anything above the range to a person for approval. Checks every change for pay equity, then files the approved, dated change to the employee record.',
   },
 }
 

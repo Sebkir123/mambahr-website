@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Onboarding Software | MambaHR',
   description:
-    'Day-one ready before they arrive: Form I-9 started, accounts provisioned, device setup requested, first-week plan set. Humans stay in the loop for the budget calls.',
+    'New hires ready before day one: Form I-9 started, accounts set up, device setup requested, first week planned. Exits handled with nothing forgotten. You approve anything that costs money.',
   openGraph: {
     title: 'Onboarding Software | MambaHR',
     description:
-      'Day-one ready before they arrive: Form I-9 started, accounts, device setup requested, first-week plan. Humans approve the budget calls.',
+      'New hires ready before day one: Form I-9 started, accounts set up, device requested, first week planned. You approve anything that costs money.',
     url: 'https://www.mambahr.com/onboarding',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Onboarding Software | MambaHR',
     description:
-      'Day-one ready before they arrive: Form I-9 started, accounts, device setup requested, first-week plan. Humans approve the budget calls.',
+      'New hires ready before day one: Form I-9 started, accounts set up, device requested, first week planned. You approve anything that costs money.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://www.mambahr.com/onboarding' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'Onboarding Software | MambaHR',
   url: 'https://www.mambahr.com/onboarding',
   description:
-    'MambaHR onboarding: new hires are day-one ready before they arrive. MambaHR starts the Form I-9 and E-Verify check, provisions accounts, requests device setup, and builds the first-week plan. Humans approve the budget calls.',
+    'MambaHR onboarding: new hires are ready before day one. MambaHR starts the Form I-9 and E-Verify check, sets up accounts, requests device setup from IT, and plans the first week. You approve anything that costs money.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
-    name: 'Onboarding agent',
+    name: 'Onboarding and offboarding',
     description:
-      'Gets new hires day-one ready before they walk in: starts the Form I-9 and E-Verify check, provisions accounts, requests device setup, and assembles the first-week plan. Humans stay in the loop on the budget calls; everything else runs without you.',
+      'Gets new hires ready before they walk in: starts the Form I-9 and E-Verify check, sets up accounts, requests device setup from IT, and plans the first week. At exit, works out final pay by state rules, tracks COBRA deadlines, and switches off logins after your sign-off. You approve anything that costs money.',
   },
 }
 

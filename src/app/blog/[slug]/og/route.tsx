@@ -91,7 +91,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <div style={{ width: 96, height: 4, borderRadius: 4, background: 'linear-gradient(100deg, #B98A4E, #6A5DA6)' }} />
           <div style={{ fontSize: 22, fontFamily: 'sans-serif', color: '#7A7A75' }}>
-            The AI HR department · mambahr.com
+            HR admin, done for you · mambahr.com
           </div>
         </div>
       </div>

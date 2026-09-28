@@ -31,9 +31,9 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.mambahr.com'),
-  title: 'MambaHR: The AI HR department. Before you hire HR.',
+  title: 'MambaHR: HR that runs itself',
   description:
-    'MambaHR is the AI HR department for startups. It runs hiring, onboarding, payroll changes, time off and compliance end to end. You approve what matters.',
+    "MambaHR takes the HR admin off your team's plate: hiring, onboarding, time off, payroll changes and compliance, with the law cited. You approve what matters.",
   keywords: [
     'AI HR department',
     'AI HR software',
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
     'HR without an HR hire',
   ],
   openGraph: {
-    title: 'MambaHR: The AI HR department.',
-    description: 'Before you hire HR, hire MambaHR. Hiring, onboarding, payroll changes, time off and compliance, done for you, so your team spends its week on people.',
+    title: 'MambaHR: HR that runs itself',
+    description: "MambaHR takes the HR admin off your team's plate: hiring, onboarding, time off, payroll changes and compliance, with the law cited. You approve what matters.",
     url: 'https://www.mambahr.com',
     siteName: 'MambaHR',
     type: 'website',
@@ -55,8 +55,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MambaHR: The AI HR department.',
-    description: 'Before you hire HR, hire MambaHR. The whole department, done for you.',
+    title: 'MambaHR: HR that runs itself',
+    description: 'The HR admin, done for your team. You approve what matters.',
     images: ['/mambahr_og_sharing.jpg'],
   },
   alternates: {
@@ -85,7 +85,7 @@ const jsonLd = [
     name: 'MambaHR',
     url: 'https://www.mambahr.com',
     applicationCategory: 'BusinessApplication',
-    description: 'The AI HR department: hiring, onboarding, payroll changes, time off, and compliance, done for you.',
+    description: 'HR software that does the admin for your team: hiring, onboarding, payroll changes, time off and compliance.',
     offers: {
       '@type': 'Offer',
       price: '14',
@@ -106,9 +106,9 @@ const jsonLd = [
     logo: 'https://www.mambahr.com/MambaHR_logo.png',
     image: 'https://www.mambahr.com/mambahr_og_sharing.jpg',
     description:
-      'The AI HR department for US companies. The system of record (employee records and applicant tracking) that runs hiring, onboarding, leave, compensation, and compliance itself. A person approves the calls that matter.',
+      'HR software for US companies that keeps your employee records and hiring in one place and does the admin in them: hiring, onboarding, leave, pay changes and compliance. A person approves the decisions that matter.',
     foundingDate: '2026',
-    slogan: 'Before you hire HR, hire MambaHR.',
+    slogan: 'HR that runs itself.',
     areaServed: { '@type': 'Country', name: 'United States' },
     knowsAbout: [
       'HR automation',

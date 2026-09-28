@@ -16,8 +16,8 @@ export const DEFAULT_COLUMNS: PipelineColumn[] = [
     { name: 'Yuki Tanaka', sub: 'Referral · yesterday', pill: 'Referral' },
   ] },
   { name: 'Screen', color: '#A5B98A', count: 6, cards: [
-    { name: 'Sofia Lindqvist', sub: 'Ranked 1 of 6 · notes attached', pill: 'Ranked', ai: true },
-    { name: 'Daniel Okafor', sub: 'Ranked 2 of 6' },
+    { name: 'Sofia Lindqvist', sub: 'Phone screen Tue 2:00 · invite sent', pill: 'Scheduled', ai: true },
+    { name: 'Daniel Okafor', sub: 'Phone screen Wed 11:30' },
   ] },
   { name: 'Interview', color: '#C4A46A', count: 4, cards: [
     { name: 'Elena Petrova', sub: 'Panel Thu 10:00 · 3 of 4 scorecards in' },

@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Employee records | MambaHR',
   description:
-    'People ops without the ops. Directory, comp, leave, one agent, every record, every change.',
+    'Your employee records in one place, kept current as the work happens: directory, pay, leave, and exits. Every change logged.',
   openGraph: {
     title: 'Employee records | MambaHR',
     description:
-      'Directory, comp, leave, one agent across every record and every change.',
+      'Directory, pay, leave, and exits in one set of employee records, kept current and logged.',
     url: 'https://www.mambahr.com/people',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Employee records | MambaHR',
     description:
-      'Directory, comp, leave, one agent across every record and every change.',
+      'Directory, pay, leave, and exits in one set of employee records, kept current and logged.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://www.mambahr.com/people' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'Employee records | MambaHR',
   url: 'https://www.mambahr.com/people',
   description:
-    'MambaHR employee records: the directory, every record, pay, leave, and offboarding, kept current by the system that does the work.',
+    'MambaHR employee records: the directory, pay, leave, and exits, kept current as MambaHR does the work.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
-    name: 'People agent',
+    name: 'Employee records',
     description:
-      'A single agent that owns the employee record across directory, comp, leave, and offboarding. Migrates from Gusto, Workday, Rippling, BambooHR, Namely, or ADP; every change carries a citation and an audit trail.',
+      'Keeps every employee record current across the directory, pay, leave, and exits. Imports from Gusto, Workday, Rippling, BambooHR, Namely, or ADP. Every change is logged with who made it and why.',
   },
 }
 

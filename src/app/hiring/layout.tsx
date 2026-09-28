@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Hiring | MambaHR',
   description:
-    'From job post to offer, without the loop. MambaHR screens, ranks, orders the background check, and drafts the offer. You decide who joins.',
+    'Job posts with pay ranges, every application in one pipeline, interview scheduling, background checks through Checkr, and offers drafted inside your pay range. Your team decides who joins.',
   openGraph: {
     title: 'Hiring | MambaHR',
     description:
-      'From job post to offer, without the loop. MambaHR runs posting, screening, background checks, and offer drafting.',
+      'Job posts, applications in one place, background checks, and offer drafts. Your team makes every hiring decision.',
     url: 'https://www.mambahr.com/hiring',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Hiring | MambaHR',
     description:
-      'From job post to offer, without the loop. MambaHR runs posting, screening, background checks, and offer drafting.',
+      'Job posts, applications in one place, background checks, and offer drafts. Your team makes every hiring decision.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://www.mambahr.com/hiring' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'Hiring | MambaHR',
   url: 'https://www.mambahr.com/hiring',
   description:
-    'MambaHR hiring: the job post, careers-page posting, screening and ranking, the background check, and the offer. People approve every hire and every offer above the pay range.',
+    'MambaHR hiring: job posts with pay ranges, your careers page, one pipeline for every application, interview scheduling, background checks through Checkr, and offers drafted inside your pay range. People make every hiring decision and approve every offer.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
-    name: 'Hiring agent',
+    name: 'Hiring',
     description:
-      'Hiring, done by MambaHR: drafts the job post with the pay range, posts to your careers page and job boards, ranks resumes (advisory), runs background checks through Checkr, and drafts offers. You approve the job post, every advance-or-pass call, and any offer above the pay range. Interview scheduling is coming.',
+      'Drafts the job post with the pay range, posts it to your careers page and job boards, and collects every application in one pipeline for your team to review. Schedules interviews, orders background checks through Checkr, and drafts offers inside your pay range. You approve the job post, decide who moves forward, and approve every offer.',
   },
 }
 

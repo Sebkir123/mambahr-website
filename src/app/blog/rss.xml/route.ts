@@ -46,7 +46,7 @@ export async function GET() {
     <title>MambaHR Blog</title>
     <link>${SITE}/blog</link>
     <atom:link href="${SITE}/blog/rss.xml" rel="self" type="application/rss+xml" />
-    <description>Field notes on AI in HR, compliance, hiring, and running a people function end to end.</description>
+    <description>Field notes on HR, compliance, hiring and AI, for people who run HR.</description>
     <language>en-us</language>
     <lastBuildDate>${updated}</lastBuildDate>
 ${items}

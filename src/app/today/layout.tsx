@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'To do | MambaHR',
   description:
-    'Your To do list. MambaHR did the work overnight; this morning, three decisions. Approve, decline, done.',
+    'One list of the decisions that need you. MambaHR handles the routine HR work and logs every step.',
   openGraph: {
     title: 'To do | MambaHR',
     description:
-      'To do: the calls that need you, and the work MambaHR already did, on one screen.',
+      'To do: the decisions that need you, and the work MambaHR already finished, in one place.',
     url: 'https://www.mambahr.com/today',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'To do | MambaHR',
     description:
-      'To do: the calls that need you, and the work MambaHR already did, on one screen.',
+      'To do: the decisions that need you, and the work MambaHR already finished, in one place.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://www.mambahr.com/today' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'To do | MambaHR',
   url: 'https://www.mambahr.com/today',
   description:
-    'The To do screen in MambaHR. MambaHR does the HR work; you sign off on the decisions that matter.',
+    'The To do list in MambaHR. MambaHR handles the routine HR work, and you approve the decisions that matter.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'To do',
     description:
-      'The daily decision list: MambaHR does routine work itself, judgment calls come to a person, and high-stakes decisions are always yours. Every card shows the action, the reasoning, the status, the decision buttons, and the full audit trail.',
+      'A daily list of decisions. MambaHR handles routine work, judgment calls come to a person, and high-stakes decisions are always yours. Each card shows what is proposed, the reasons, the status, approve and decline buttons, and the full history.',
   },
 }
 

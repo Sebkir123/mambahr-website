@@ -81,7 +81,7 @@ function SlackWindow() {
                 <div className="m-t">You have 9 days left, and up to 5 carry over. Policy attached.</div>
                 <div className="attach">
                   <div className="a-row"><span className="a-k">Policy</span><span className="a-v">Time-off carryover, section 4.2, cited</span></div>
-                  <div className="a-row"><span className="a-k">Balance</span><span className="a-v">9 days · accrual current</span></div>
+                  <div className="a-row"><span className="a-k">Balance</span><span className="a-v">9 days · up to date</span></div>
                   <div className="a-foot"><span className="ok-dot" />Logged &middot; answered from your handbook</div>
                 </div>
               </div>
@@ -325,8 +325,8 @@ export default function MambaPage() {
 
       <PageHero
         eyebrow="How it works"
-        title={<>Message it like a coworker. <Em>It does the work.</Em></>}
-        lead="Your team writes @MambaHR in Slack or the app. It reads the thread, checks your policy and the law, does the work, and shows you the receipt."
+        title={<>Ask in Slack. <Em>The admin gets done.</Em></>}
+        lead="Your team writes @MambaHR in Slack or the app. MambaHR reads the request, checks your policy and the law, does the task, and shows you what it did."
       >
         <SlackWindow />
       </PageHero>
@@ -334,25 +334,25 @@ export default function MambaPage() {
       <AgentLoop
         eyebrow="Behind every reply"
         title={<>What happens to every message</>}
-        lead="Each request runs the same loop, whether it’s a quick policy question or a new hire’s first day."
+        lead="Every request follows the same steps, from a quick policy question to a new hire’s first day."
         steps={[
-          { n: '01', label: 'Reads the thread, and the person', desc: 'It knows who’s asking, their role, their manager, and what was already said.', who: 'agent', time: '< 1s', img: '/avatars/dave.jpg' },
-          { n: '02', label: 'Checks your policy and the law', desc: 'Your handbook first, then the rules for the state the person works in.', who: 'agent', time: '2s' },
-          { n: '03', label: 'Does the work', desc: 'Books the time off, files the letter, updates the record.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
-          { n: '04', label: 'Answers with the receipt attached', desc: 'Not just “done”, what changed, which rule applied, and where it’s filed.', who: 'agent' },
-          { n: '05', label: 'The big calls come to you first', desc: 'Offers above your pay range, terminations, and raises above your threshold are always a human decision.', who: 'you', img: '/avatars/anna.jpg' },
-          { n: '06', label: 'Logs it all', desc: 'Every action lands in one record, so there’s never a question about what happened.', who: 'agent' },
+          { n: '01', label: 'Reads the request and who sent it', desc: 'It knows who is asking, their role, their manager, and what was already said.', who: 'agent', time: '< 1s', img: '/avatars/dave.jpg' },
+          { n: '02', label: 'Checks your policy and the law', desc: 'Your handbook first, then the rules for the state where the person works.', who: 'agent', time: '2s' },
+          { n: '03', label: 'Does the task', desc: 'Books the time off, files the letter, updates the record.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
+          { n: '04', label: 'Replies with what it did', desc: 'Not just “done”: what changed, which rule applied, and where it is filed.', who: 'agent' },
+          { n: '05', label: 'The big calls come to you first', desc: 'Offers above your pay range, terminations, and raises above your limit are always decided by a person.', who: 'you', img: '/avatars/anna.jpg' },
+          { n: '06', label: 'Logs everything', desc: 'Every action is saved in one record, so you can always see what happened.', who: 'agent' },
         ]}
       />
 
       <FeatureSplit
         eyebrow="Slack and the app"
         title={<>One MambaHR, one record, wherever you ask</>}
-        lead="Ask in Slack or in the MambaHR app. It is one system with one memory and one record. Start in Slack, approve in the app, and nothing gets lost in between."
+        lead="Ask in Slack or in the MambaHR app. It is one system with one record. Start in Slack, approve in the app, and nothing gets lost."
         bullets={[
-          'Mention it in any channel or DM, it picks up the whole thread',
-          'Start in Slack, finish in the app, the context follows',
-          'One record of everything, no matter where it was asked',
+          'Mention it in any channel or direct message and it reads the whole thread',
+          'Start in Slack, finish in the app, and the context comes with you',
+          'One record of everything, wherever it was asked',
         ]}
       >
         <div className="mock-card agent-edge agent-working"><ChatThread /></div>
@@ -363,11 +363,11 @@ export default function MambaPage() {
         warm
         eyebrow="Nothing to roll out"
         title={<>No training. No new logins.</>}
-        lead="No portal your employees will forget the password to. They message the way they already message, and the work gets done."
+        lead="No new portal for employees to forget the password to. They send a message the way they already do, and the task gets done."
         bullets={[
-          'Employees never log into anything new',
-          'Managers approve from wherever they already are',
-          'Your data imports in a day, not a quarter',
+          'Employees ask in Slack, with nothing new to log in to',
+          'Managers approve from where they already work',
+          'Your data imports in a day',
         ]}
       >
         <TeamPhoto />
@@ -375,14 +375,14 @@ export default function MambaPage() {
 
       <StatTrio
         stats={[
-          { n: 9, suffix: 's', label: 'to an answer in the modeled run, with the receipt attached' },
-          { n: 24, suffix: '/7', label: 'answering while your team is off the clock' },
+          { n: 9, suffix: 's', label: 'to an answer in a sample run, with the details attached' },
+          { n: 0, label: 'new logins for your employees: they ask in Slack' },
           { n: 100, suffix: '%', label: 'of actions logged with the rule followed' },
         ]}
       />
 
 
-      <PageCta title={<>See it do the work, <Em>live.</Em></>} sub="A 30-minute demo on your own Slack questions. Then we import your data and switch you over." />
+      <PageCta title={<>See it do the work, <Em>live.</Em></>} sub="A 30-minute demo using your own Slack questions. Then we import your data and switch you over." />
       </main>
 
       <Footer />

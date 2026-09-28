@@ -6,11 +6,11 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'HR Documents & E-Signature | MambaHR',
   description:
-    'Offers, agreements, and acknowledgments generated, e-signed, filed, and retained per policy, with a full audit trail on every document.',
+    'Offers, agreements, and acknowledgments drafted, e-signed, filed, and kept according to your retention policy, with a record of every signature.',
   openGraph: {
     title: 'HR Documents & E-Signature | MambaHR',
     description:
-      'Offers, agreements, acknowledgments generated, e-signed, filed, and retained per policy. Full audit trail.',
+      'Offers, agreements, and acknowledgments drafted, e-signed, and filed, with a record of every signature.',
     url: 'https://www.mambahr.com/documents',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'HR Documents & E-Signature | MambaHR',
     description:
-      'Offers, agreements, acknowledgments generated, e-signed, filed, and retained per policy. Full audit trail.',
+      'Offers, agreements, and acknowledgments drafted, e-signed, and filed, with a record of every signature.',
     images: [ogImage],
   },
   alternates: { canonical: 'https://www.mambahr.com/documents' },
@@ -30,13 +30,13 @@ const jsonLd = {
   name: 'HR Documents & E-Signature | MambaHR',
   url: 'https://www.mambahr.com/documents',
   description:
-    'MambaHR documents: offers, agreements, and acknowledgments generated, e-signed, filed, and retained per policy, with a full audit trail on every document.',
+    'MambaHR documents: offers, agreements, and acknowledgments drafted, e-signed, filed, and kept according to your retention policy, with a record of every signature.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
-    name: 'Documents agent',
+    name: 'Documents and e-signature',
     description:
-      'Generates HR documents, offers, agreements, policy acknowledgments, and routes them for e-signature. Files every signed document to the employee record and enforces retention by policy, keeping a full audit trail of who signed what and when.',
+      'Drafts HR documents (offers, agreements, and policy acknowledgments) and sends them for e-signature. Files every signed document to the employee record, keeps it according to your retention policy, and records who signed what and when.',
   },
 }
 

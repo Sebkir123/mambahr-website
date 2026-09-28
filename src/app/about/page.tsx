@@ -6,7 +6,7 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageCta, Em } from '@/components/v2/page-kit'
-/* The platform, everything the department runs, each a real page. */
+/* The platform: every area MambaHR covers, each a real page. */
 const PLATFORM = [
   { label: 'Hiring', desc: 'Job post to signed offer', href: '/hiring' },
   { label: 'Careers page', desc: 'Hosted on your domain', href: '/job-portal' },
@@ -18,7 +18,7 @@ const PLATFORM = [
   { label: 'Headcount & layoffs', desc: 'Notices, severance, final pay', href: '/rif' },
   { label: 'Employee records', desc: 'Every record, always current', href: '/people' },
   { label: 'Documents & e-sign', desc: 'Signed and filed', href: '/documents' },
-  { label: 'Security', desc: 'Locked down, logged', href: '/security' },
+  { label: 'Security', desc: 'Encrypted and logged', href: '/security' },
 ]
 
 const LEADERSHIP = [
@@ -49,11 +49,11 @@ export default function AboutPage() {
           <span className="v2-grain" />
           <div className="top">
             <p className="eyebrow" data-reveal>About MambaHR</p>
-            <h1 className="title" data-reveal data-delay="1">The AI HR <Em>department.</Em></h1>
+            <h1 className="title" data-reveal data-delay="1">Less admin for <Em>HR teams.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
-              For thirty years, HR software was a database with a UI, and companies paid people to click
-              through it. MambaHR is the company building what comes next: an AI department that <b>does</b> the
-              work end to end, with a human on the calls that matter.
+              HR software has always stored your data and left the work to your team: forms, approvals,
+              reminders and records. MambaHR keeps your employee records and <b>does</b> that admin for you,
+              with a person approving the decisions that matter.
             </p>
           </div>
           <div className="stage" data-reveal data-delay="3">
@@ -62,7 +62,7 @@ export default function AboutPage() {
               <img src="/v2-people/team.jpg" alt="A team at work" />
               <div className="float agent-edge agent-working">
                 <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
-                <div className="f-t">The AI HR department</div>
+                <div className="f-t">Your team focuses on people</div>
               </div>
             </div>
           </div>
@@ -96,11 +96,10 @@ export default function AboutPage() {
           <div className="wrap">
             <div className="head" data-reveal>
               <p className="eyebrow">What we build</p>
-              <h2 className="title">One department, <Em>every job.</Em></h2>
+              <h2 className="title">Everything in <Em>one place.</Em></h2>
               <p className="lead">
-                MambaHR is the record and the worker in one. It is the applicant tracking system (ATS) and
-                the recruiter, the careers page and the coordinator, the HR records system (HRIS) and the
-                ops manager. Eleven functions, one system, every action logged.
+                Your employee records, hiring pipeline, careers page and documents live in MambaHR, and it
+                does the admin in each of them. Eleven areas, one system, every action logged.
               </p>
             </div>
             <div className="grid">
@@ -172,7 +171,7 @@ export default function AboutPage() {
             </div>
             <div className="facts" data-reveal>
               <span className="fact"><i aria-hidden="true" />Headquartered in San Francisco</span>
-              <span className="fact"><i aria-hidden="true" />Statute cited on every answer</span>
+              <span className="fact"><i aria-hidden="true" />The law cited on every answer</span>
               <span className="fact"><i aria-hidden="true" />We&rsquo;re hiring, <a href="mailto:hello@mambahr.com">hello@mambahr.com</a></span>
             </div>
           </div>

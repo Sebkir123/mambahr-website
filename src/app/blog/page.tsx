@@ -64,10 +64,10 @@ function Cover({ post, variant }: { post: Post; variant: 'lead' | 'card' }) {
 export const metadata: Metadata = {
   title: 'Blog | MambaHR',
   description:
-    'Field notes on AI in HR, multi-state compliance, hiring, onboarding and running a people function end to end, from the team building the AI HR department.',
+    'Plain-English guides to US employment rules, hiring, onboarding, time off and leave, payroll changes, and the everyday HR admin.',
   openGraph: {
     title: 'Blog | MambaHR',
-    description: 'Field notes on AI in HR, compliance, hiring, and running a people function.',
+    description: 'Plain-English guides to US employment rules, hiring, onboarding and HR admin.',
     url: `${SITE}/blog`,
     type: 'website',
     images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Blog | MambaHR',
-    description: 'Field notes on AI in HR, compliance, hiring, and running a people function.',
+    description: 'Plain-English guides to US employment rules, hiring, onboarding and HR admin.',
     images: ['/mambahr_og_sharing.jpg'],
   },
   alternates: {
@@ -113,10 +113,10 @@ export default async function BlogIndex() {
       <main id="main" className={styles.page}>
         <header className={styles.head}>
           <p className="eyebrow">The MambaHR blog</p>
-          <h1 className={styles.title}>Notes from the AI HR department.</h1>
+          <h1 className={styles.title}>Plain-English notes on HR.</h1>
           <p className={styles.lede}>
-            What we&rsquo;re learning building the system that runs hiring, onboarding, payroll changes,
-            leave, and compliance for you.
+            Guides to US employment rules, hiring, onboarding, leave and payroll changes, written
+            for the people who do HR.
           </p>
         </header>
 

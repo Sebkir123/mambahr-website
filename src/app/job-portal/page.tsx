@@ -28,7 +28,7 @@ function PortalCard() {
             <div className="co-n">Your Company</div>
             <div className="co-t">We&rsquo;re hiring across three teams</div>
           </div>
-          <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · screening</span>
+          <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · collecting applications</span>
         </div>
         {ROLES.map((r) => (
           <div key={r.title} className="job">
@@ -48,7 +48,7 @@ function PortalCard() {
             <span className="j-apply">Apply</span>
           </div>
         ))}
-        <div className="foot">Equal-opportunity questions handled at apply, nothing for you to set up.</div>
+        <div className="foot">Equal-opportunity questions asked at apply. Nothing for you to set up.</div>
       </div>
       <style jsx>{`
         .cs { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
@@ -84,7 +84,7 @@ function PortalCard() {
   )
 }
 
-/* ── Feature visual: application → ranked in the pipeline ── */
+/* ── Feature visual: application → filed in the pipeline ── */
 function InflowCard() {
   return (
     <div className="if agent-edge agent-done">
@@ -99,16 +99,16 @@ function InflowCard() {
           <div className="c-n">Jordan Lee</div>
           <div className="c-m">Staff Engineer · 9 yrs · NYC</div>
         </div>
-        <span className="score">Strong match</span>
+        <span className="score">New</span>
       </div>
       <div className="why">
-        <div className="w-row"><span className="tick" aria-hidden="true" />Led two zero-to-one platform launches</div>
-        <div className="w-row"><span className="tick" aria-hidden="true" />Band fit: asks $195k, role tops at $205k</div>
-        <div className="w-row"><span className="tick" aria-hidden="true" />References available from prior manager</div>
+        <div className="w-row"><span className="tick" aria-hidden="true" />Resume and answers attached</div>
+        <div className="w-row"><span className="tick" aria-hidden="true" />Asks $195k · the role pays up to $205k</div>
+        <div className="w-row"><span className="tick" aria-hidden="true" />Confirmation sent to Jordan</div>
       </div>
       <div className="foot">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · ranked &amp; filed</span>
-        <span className="f-t">Recommendation only, you make the call</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · filed</span>
+        <span className="f-t">Waiting for your team to review</span>
       </div>
       <style jsx>{`
         .if { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
@@ -141,7 +141,7 @@ function BrandCard() {
       <div className="float agent-edge agent-done">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="f-t">jobs.yourcompany.com · live</div>
-        <div className="f-m">Brand, roles, and pay bands imported</div>
+        <div className="f-m">Brand, roles, and pay ranges imported</div>
       </div>
       <style jsx>{`
         .bc { position: relative; }
@@ -165,7 +165,7 @@ export default function JobPortalPage() {
         <PageHero
           eyebrow="The careers page"
           title={<>Your jobs, <Em>live.</Em></>}
-          lead="A branded careers page on your own address, live in a day. Candidates apply in two minutes, with no account to create. The questions hiring law requires are collected quietly."
+          lead="A careers page with your brand, on your own web address, live in a day. Candidates apply in two minutes without creating an account. The equal-opportunity questions the law requires are asked for you."
           photo="/v2-people/sofia.jpg"
           photoChip="MambaHR · done"
           photoCaption="Careers page live · before lunch"
@@ -174,27 +174,27 @@ export default function JobPortalPage() {
         </PageHero>
 
         <AgentLoop
-          eyebrow="How it runs"
+          eyebrow="How it works"
           title="From job post to applicant"
-          lead="From the moment a role opens to the moment a candidate applies. No job-board logins, no copy-pasting resumes, no missing equal-opportunity data."
+          lead="No job-board logins, no copying resumes between tools, no missing equal-opportunity data."
           steps={[
-            { n: '01', label: 'Careers page live', desc: 'Your logo, colors, and domain. It looks like you built it, because your brand did.', who: 'agent', time: 'day 1' },
-            { n: '02', label: 'Roles published', desc: 'Open roles go live on your careers page and your job-board feeds, written in your voice with pay ranges shown.', who: 'agent', time: 'same day' },
-            { n: '03', label: 'Candidates apply', desc: 'A two-minute apply flow, no account creation, no resume re-typing. Candidates finish it.', who: 'agent', img: '/avatars/priya.jpg' },
-            { n: '04', label: 'Hiring-law questions', desc: 'The equal-opportunity questions the law requires are asked once, stored properly, and kept out of screening.', who: 'agent' },
-            { n: '05', label: 'Every applicant hears back', desc: 'MambaHR confirms each application, keeps candidates posted, and closes the loop when the role is filled. No black hole under your brand.', who: 'agent', time: 'same day' },
-            { n: '06', label: 'You pick who advances', desc: 'MambaHR ranks applicants with reasons. Every advance-or-pass call is yours.', who: 'you', img: '/avatars/tom.jpg' },
+            { n: '01', label: 'Careers page live', desc: 'Your logo, colors, and web address. Candidates see your brand, not ours.', who: 'agent', time: 'day 1' },
+            { n: '02', label: 'Roles published', desc: 'Open roles go live on your careers page and job boards, with pay ranges shown.', who: 'agent', time: 'same day' },
+            { n: '03', label: 'Candidates apply', desc: 'A two-minute form. No account to create, no retyping the resume.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '04', label: 'Equal-opportunity questions', desc: 'Asked once and stored apart from the application your team reviews.', who: 'agent' },
+            { n: '05', label: 'Every applicant hears back', desc: 'MambaHR confirms each application, keeps candidates updated, and tells them when the role is filled.', who: 'agent', time: 'same day' },
+            { n: '06', label: 'You pick who advances', desc: 'Your hiring team reviews every application and decides who moves forward.', who: 'you', img: '/avatars/tom.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Your brand, your address"
           title={<>Looks like you <Em>built it.</Em></>}
-          lead="No more sending candidates to a vendor page with someone else's logo. The careers page lives at jobs.yourcompany.com, with your brand on every pixel. Setup is one DNS record."
+          lead="Candidates stay with your brand, not a vendor page with someone else's logo. The careers page lives at jobs.yourcompany.com. Setup is one small change to your domain settings."
           bullets={[
-            'Your logo, colors, and domain, set up with one DNS record',
-            'Written in your voice, from your existing site',
-            'Updates itself: open a role and it appears, close it and it disappears',
+            'Your logo, colors, and web address',
+            'Written in your voice, based on your current website',
+            'Open a role and it appears. Close it and it disappears.',
           ]}
         >
           <BrandCard />
@@ -203,13 +203,13 @@ export default function JobPortalPage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="The applicant experience"
+          eyebrow="For applicants"
           title={<>Two minutes <Em>to apply.</Em></>}
-          lead="Candidates apply from their phone in two minutes, with no account and no resume re-typing. Every one of them hears back, so nobody is left waiting under your brand."
+          lead="Candidates apply from their phone, with no account and no retyping. Every one of them hears back."
           bullets={[
-            'No account creation, no re-typing the resume',
-            'Pay range shown on every role, the way state law increasingly requires',
-            'Every candidate gets an answer, and a shortlist with reasons waits for you',
+            'No account to create, no retyping the resume',
+            'Pay range shown on every role, as more states now require',
+            'Every application waits in one pipeline for your team to review',
           ]}
         >
           <InflowCard />
@@ -217,14 +217,14 @@ export default function JobPortalPage() {
 
         <StatTrio
           stats={[
-            { n: 1, suffix: ' day', label: 'from kickoff to your careers page live on your own domain' },
-            { n: 2, suffix: ' min', label: 'to apply, no account needed, from a phone' },
-            { n: 100, suffix: '%', label: 'of applicants hear back, no black hole under your brand' },
+            { n: 1, suffix: ' day', label: 'to put your careers page live on your own web address' },
+            { n: 2, suffix: ' min', label: 'to apply from a phone, no account needed' },
+            { n: 100, suffix: '%', label: 'of applicants get a reply' },
           ]}
         />
 
 
-        <PageCta title={<>Your careers page, <Em>by tomorrow.</Em></>} sub="A 30-minute demo. Then we put your careers page live with one DNS record." />
+        <PageCta title={<>Your careers page, <Em>by tomorrow.</Em></>} sub="A 30-minute demo. Then we set up your careers page on your own web address." />
       </main>
       <Footer />
     </>

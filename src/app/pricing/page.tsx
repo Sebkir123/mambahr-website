@@ -66,10 +66,10 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
 ]
 
 const COST_ROWS = [
-  { hire: 'Records, onboarding & document admin', cost: '$70k–$95k', alt: 'HR Starter or Ops Manager' },
-  { hire: 'Plus leave, policy & the question queue', cost: '$85k–$120k', alt: 'HR Ops Manager' },
-  { hire: 'Plus hiring ops & payroll changes', cost: '$110k–$150k', alt: 'Ops Manager or Whole department' },
-  { hire: 'Plus compensation cycles & compliance', cost: '$100k–$140k', alt: 'Whole department' },
+  { hire: 'Records, time off, documents and employee questions', cost: 'Up to 75 employees', alt: 'HR Starter' },
+  { hire: 'Plus hiring, offers and payroll change reports', cost: '75 to 150 employees', alt: 'HR Ops Manager' },
+  { hire: 'Plus pay reviews, compliance research and Deel-managed payroll', cost: '150 to 400 employees', alt: 'Whole department' },
+  { hire: 'Several companies, or custom approval chains', cost: '400+ employees', alt: 'Enterprise' },
 ]
 
 const EXPORTS = [
@@ -87,34 +87,32 @@ function MathCard() {
   return (
     <div className="mc agent-edge agent-working agent-lg">
       <div className="head">
-        <span className="t">What the admin costs to run</span>
+        <span className="t">What it costs</span>
         <span className="at">at 100 employees</span>
       </div>
       <div className="rows">
         <div className="r">
           <div className="r-top">
-            <span className="r-l">Staffed by hand, fully loaded</span>
-            <span className="r-v">~$110k<em>/yr</em></span>
+            <span className="r-l">HR Ops Manager plan</span>
+            <span className="r-v">$22<em>/employee/mo</em></span>
           </div>
-          <span className="bar gray"><i style={{ width: '100%' }} /></span>
-          <span className="r-note">A full-time role&rsquo;s worth of filing, chasing, and re-keying</span>
+          <span className="r-note">Hiring, onboarding, leave, approvals and payroll changes</span>
         </div>
         <div className="r">
           <div className="r-top">
-            <span className="r-l">Run by MambaHR</span>
-            <span className="r-v grad">$26k<em>/yr</em></span>
+            <span className="r-l">Per year, billed annually</span>
+            <span className="r-v grad">$26,400<em>/yr</em></span>
           </div>
-          <span className="bar"><i style={{ width: '24%' }} /></span>
-          <span className="r-note">The same workload · handled overnight · every step logged</span>
+          <span className="r-note">100 employees × $22 × 12 months</span>
         </div>
       </div>
       <div className="foot">
-        <span className="f-big">$84k</span>
-        <span className="f-t">back in your people budget, before counting the hours your team gets back</span>
+        <span className="f-big">27 hrs</span>
+        <span className="f-t">of admin a week taken off your team, by our estimate</span>
       </div>
       <p className="disclosure">
-        Illustrative at 100 employees, using published US salary ranges for the same admin
-        workload. Your numbers will differ; we will price yours on the call.
+        An example at 100 employees. The hours are our estimate of how long these tasks take a
+        small HR team today, not a measured customer average.
       </p>
       <style jsx>{`
         .disclosure {
@@ -134,9 +132,6 @@ function MathCard() {
         .r-v { font-family: var(--font-serif); font-size: 22px; color: var(--text); }
         .r-v em { font-style: normal; font-family: var(--font-sans); font-size: 12px; color: var(--text-faint); }
         .r-v.grad { background: linear-gradient(110deg, var(--gold), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .bar { display: block; height: 9px; border-radius: 999px; background: var(--border-faint); overflow: hidden; margin-top: 8px; }
-        .bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--gold-mid), var(--violet)); }
-        .bar.gray i { background: #C9C2B6; }
         .r-note { display: block; font-size: 12px; color: var(--text-faint); margin-top: 6px; }
         .foot { display: flex; align-items: baseline; gap: 12px; padding: 14px 22px 18px; margin-top: 10px; background: var(--bg-warm); border-top: 1px solid var(--border-faint); }
         .f-big { font-family: var(--font-serif); font-size: 30px; line-height: 1; background: linear-gradient(110deg, var(--gold), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -159,11 +154,11 @@ export default function PricingPage() {
           <span className="v2-grain" />
           <div className="top">
             <p className="eyebrow" data-reveal>Pricing</p>
-            <h1 className="title" data-reveal data-delay="1">Before you hire HR, <Em>hire MambaHR.</Em></h1>
+            <h1 className="title" data-reveal data-delay="1">Simple pricing, <Em>per employee.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
-              Most HR software stores your people data. MambaHR does the work: onboarding, leave,
-              approvals, compliance, payroll changes, and offboarding. It costs a fraction of doing it by
-              hand. You pay per employee, because that is how the work grows.
+              MambaHR takes the HR admin off your team: onboarding, time off, approvals, compliance,
+              payroll changes and offboarding. You pay one price per employee, per month, billed
+              annually.
             </p>
             <div className="ctas" data-reveal data-delay="3">
               <Link href="/demo" className="btn btn-primary">Book a demo</Link>
@@ -333,15 +328,15 @@ export default function PricingPage() {
         <section className="cost">
           <div className="wrap">
             <div className="head" data-reveal>
-              <p className="eyebrow">Compare the cost</p>
-              <h2 className="title">Cheaper than doing it <Em>by hand.</Em></h2>
-              <p className="lead">MambaHR runs the same workload for a fraction of what it costs to staff it. And when you do hire, they inherit a running department instead of a backlog.</p>
+              <p className="eyebrow">Choosing a plan</p>
+              <h2 className="title">Pick the plan that fits <Em>your team.</Em></h2>
+              <p className="lead">Start with the work your team spends the most time on, and your company&rsquo;s size.</p>
             </div>
             <div className="cost-table" data-reveal data-delay="1">
               <div className="row hd">
-                <span>The workload</span>
-                <span>Cost to staff it</span>
-                <span>The MambaHR plan</span>
+                <span>The work you want off your plate</span>
+                <span>Company size</span>
+                <span>Plan</span>
               </div>
               {COST_ROWS.map((r) => (
                 <div key={r.hire} className="row">
@@ -385,8 +380,8 @@ export default function PricingPage() {
               <p className="lead">
                 MambaHR prepares every payroll change: every hire, raise, leave, and exit. You choose per company:
                 a change file for your current payroll provider, or Deel-managed payroll. On Deel, MambaHR sends the
-                changes and a person approves every run. Benefits administration is not part of MambaHR today. The
-                health-coverage continuation notices (COBRA) at offboarding are.
+                changes and a person approves every run. Benefits administration is not part of MambaHR today;
+                MambaHR does track the COBRA deadlines when someone leaves.
               </p>
             </div>
             <div className="chips" data-reveal data-delay="1">
@@ -408,10 +403,11 @@ export default function PricingPage() {
         </section>
 
         <StatTrio
+          note={null}
           stats={[
-            { n: 84, prefix: '$', suffix: 'k', label: 'back in the budget vs. staffing the same admin, at 100 employees' },
-            { n: 27, label: 'hours of HR admin a week, we estimate, taken off a lean team. Our model, not a customer average' },
-            { n: 100, suffix: '%', label: 'of terminations and offers above your pay range wait for a person to approve' },
+            { n: 27, label: 'hours of HR admin a week taken off a small team, by our estimate' },
+            { n: 1, label: 'day to bring your data over from your current HR system' },
+            { n: 100, suffix: '%', label: 'of terminations and offers above your pay range wait for your approval' },
           ]}
         />
 
@@ -447,7 +443,7 @@ export default function PricingPage() {
 
 
         <PageCta
-          title={<>Before you hire HR, <Em>hire MambaHR.</Em></>}
+          title={<>See what MambaHR takes <Em>off your plate.</Em></>}
           sub="A 30-minute demo on your real headcount and your own HR questions."
         />
       </main>

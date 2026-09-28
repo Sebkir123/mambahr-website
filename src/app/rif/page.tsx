@@ -11,13 +11,13 @@ function HeroPlanCard() {
   const rows = [
     { what: 'Notices', note: 'WARN timing checked' },
     { what: 'Severance', note: 'calculated per policy' },
-    { what: 'Final pay', note: '4 states, each correct' },
-    { what: 'Redeployment', note: '3 internal roles suggested' },
+    { what: 'Final pay', note: 'checked for 4 states' },
+    { what: 'Internal roles', note: '3 open roles to consider' },
   ]
   return (
     <div className="pc agent-edge agent-working agent-lg">
       <div className="pc-top">
-        <span className="pc-title">Reduction plan · Q3</span>
+        <span className="pc-title">Layoff plan · Q3</span>
         <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · awaiting your sign-off</span>
       </div>
       {rows.map((r) => (
@@ -114,8 +114,8 @@ function HeroPlanCard() {
 /* ── Redeployment card: roles a person could move into ── */
 function RedeployCard() {
   const roles = [
-    { role: 'Solutions Engineer', team: 'Customer team', note: 'strong skills match' },
-    { role: 'Technical Account Mgr', team: 'Success team', note: 'same comp band' },
+    { role: 'Solutions Engineer', team: 'Customer team', note: 'same location' },
+    { role: 'Technical Account Mgr', team: 'Success team', note: 'same pay range' },
     { role: 'Sales Engineer', team: 'Revenue team', note: 'open since May' },
   ]
   return (
@@ -129,7 +129,7 @@ function RedeployCard() {
             <div className="p-sub">Support Engineer · role affected</div>
           </div>
         </div>
-        <span className="match">3 open roles match</span>
+        <span className="match">3 open roles</span>
       </div>
       {roles.map((r) => (
         <div key={r.role} className="r-row">
@@ -142,7 +142,7 @@ function RedeployCard() {
       ))}
       <div className="rd-foot">
         <span className="f-chip">for your review</span>
-        <span className="f-txt">Suggestions only, people decide.</span>
+        <span className="f-txt">Suggestions only. You decide.</span>
       </div>
       <style jsx>{`
         .rd {
@@ -224,7 +224,7 @@ function DignityPhoto() {
         <span className="g-mark" aria-hidden="true" />
         <div>
           <div className="m-t">Every exit</div>
-          <div className="m-s">human-approved</div>
+          <div className="m-s">approved by a person</div>
         </div>
       </div>
       <style jsx>{`
@@ -273,37 +273,37 @@ export default function RIFPage() {
       <CountUp />
       <main id="main">
         <PageHero
-          eyebrow="Headcount & layoffs"
+          eyebrow="Layoff planning"
           title={<>Notices, severance, <Em>final pay.</Em></>}
-          lead="When a layoff has to happen, MambaHR gets every notice out on time and computes severance and final pay by each state’s rules. A person signs off on every single exit."
+          lead="When a layoff can’t be avoided, MambaHR checks the notice timing, works out severance and final pay by each state’s rules, and drafts the paperwork. A person approves every exit."
           photo="/v2-people/team2.jpg"
-          photoCaption="Every exit · human-approved"
+          photoCaption="Every exit · approved by a person"
         >
           <HeroPlanCard />
         </PageHero>
 
         <AgentLoop
-          eyebrow="The process"
-          title={<>When it&rsquo;s unavoidable</>}
-          lead="MambaHR prepares everything, the math, the timing, the paperwork. Nothing happens to anyone until you approve it."
+          eyebrow="How it works"
+          title={<>When it can&rsquo;t be avoided</>}
+          lead="MambaHR prepares the numbers, the timing, and the paperwork. Nothing happens to anyone until you approve it."
           steps={[
-            { n: '01', label: 'MambaHR models the plan', desc: 'Headcount scenarios with full cost, severance, and final pay, before anyone is named.', who: 'agent' },
-            { n: '02', label: 'Notice timing checked per state', desc: 'The federal layoff-notice law (WARN Act) and state notice windows, verified before the plan can move.', who: 'agent' },
-            { n: '03', label: 'Severance and final pay computed', desc: 'Per your policy, with each state’s final-pay deadline and rules applied to each person.', who: 'agent' },
-            { n: '04', label: 'Internal moves suggested', desc: 'Open roles a person could move into, shown before the exit list is final. Suggestions only, people decide.', who: 'agent', img: '/avatars/tom.jpg' },
-            { n: '05', label: 'Every letter and script drafted', desc: 'Notices, separation paperwork, and manager talking points, ready for review. You send them.', who: 'agent', img: '/avatars/priya.jpg' },
-            { n: '06', label: 'You approve every single exit', desc: 'A person signs off on every termination before anything happens. Non-negotiable.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '01', label: 'MambaHR models the plan', desc: 'Cost, severance, and final pay for each option, before anyone is named.', who: 'agent' },
+            { n: '02', label: 'Notice timing checked by state', desc: 'The federal layoff-notice law (WARN Act) and state notice periods, checked before the plan moves.', who: 'agent' },
+            { n: '03', label: 'Severance and final pay worked out', desc: 'Based on your policy, with each state’s final-pay deadline applied to each person.', who: 'agent' },
+            { n: '04', label: 'Internal moves suggested', desc: 'Open roles a person could move into, shown before the list is final. Suggestions only. You decide.', who: 'agent', img: '/avatars/tom.jpg' },
+            { n: '05', label: 'Letters and talking points drafted', desc: 'Notices, separation paperwork, and talking points for managers, ready for your review. You send them.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '06', label: 'You approve every exit', desc: 'A person signs off on every termination before anything happens.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Before the list is final"
-          title={<>MambaHR finds open roles before the list is final</>}
-          lead="Before anyone is let go, MambaHR shows you open internal roles a person could move into, with the team and why it fits. The suggestions are advisory. People decide."
+          title={<>Open roles, shown before the list is final</>}
+          lead="Before anyone is let go, MambaHR shows you open internal roles an affected person could move into, with the team and pay range. These are suggestions. You decide."
           bullets={[
-            'Open roles matched to each affected person',
-            'Shown before the exit list is final, not after',
-            'Always a human decision, never an automatic move',
+            'Open roles listed for each affected person',
+            'Shown before the list is final, not after',
+            'Always your decision, never an automatic move',
           ]}
         >
           <RedeployCard />
@@ -314,11 +314,11 @@ export default function RIFPage() {
           warm
           eyebrow="The details"
           title={<>The documents, the timing, the final paycheck</>}
-          lead="Final pay lands on each state's deadline, the health-coverage continuation notices go out at exit, and every manager has a script drafted before the conversation."
+          lead="Final pay lands on each state's deadline, COBRA health-coverage deadlines are tracked and flagged at exit, and managers have talking points before the conversation."
           bullets={[
             'Final pay on each state’s deadline, to the day',
-            'Health-coverage continuation notices (COBRA) ready at exit',
-            'Manager scripts drafted so no one improvises the hardest conversation',
+            'COBRA health-coverage deadlines tracked and flagged at exit',
+            'Talking points drafted, so no manager has to improvise the hardest conversation',
           ]}
         >
           <DignityPhoto />
@@ -326,14 +326,14 @@ export default function RIFPage() {
 
         <StatTrio
           stats={[
-            { n: 100, suffix: '%', label: 'of exits signed off by a person' },
-            { n: 1, label: 'final-pay computation per state rule, held for your approval' },
-            { n: 100, suffix: '%', label: 'of notices drafted with WARN timing checked' },
+            { n: 100, suffix: '%', label: 'of exits approved by a person' },
+            { n: 1, label: 'final-pay calculation per state, held for your approval' },
+            { n: 100, suffix: '%', label: 'of notices drafted with federal notice timing (WARN) checked' },
           ]}
         />
 
 
-        <PageCta title={<>A layoff plan, <Em>ready before you need it.</Em></>} sub="A 30-minute demo of a layoff plan, with the notices and the math. Then we import your data and keep it ready." />
+        <PageCta title={<>A layoff plan, <Em>ready before you need it.</Em></>} sub="A 30-minute demo of a layoff plan, with the notices and the numbers. Then we import your data." />
       </main>
       <Footer />
     </>

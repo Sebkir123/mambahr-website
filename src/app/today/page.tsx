@@ -21,8 +21,8 @@ function DecisionCard() {
 
       <div className="gauge">
         <div className="g-labels">
-          <span>Band: $160k&ndash;$180k</span>
-          <span className="g-over">Offer: $195k &middot; +8% above band</span>
+          <span>Range: $160k&ndash;$180k</span>
+          <span className="g-over">Offer: $195k &middot; 8% above range</span>
         </div>
         <div className="g-track">
           <span className="g-band" />
@@ -32,10 +32,10 @@ function DecisionCard() {
 
       <div className="dc-note">
         <span className="n-dot" aria-hidden="true" />
-        Top candidate from a 6-week search &middot; holding a competing offer
+        Your team&rsquo;s pick after a 6-week search &middot; has a competing offer
       </div>
       <div className="dc-policy">
-        Policy: offers above band always come to you. Approving files the justification with the offer.
+        Policy: offers above the pay range always come to you. If you approve, the reason is filed with the offer.
       </div>
 
       <div className="dc-acts">
@@ -190,32 +190,32 @@ export default function TodayPage() {
       <PageHero
         eyebrow="To do"
         title={<>Only the calls <Em>that need you.</Em></>}
-        lead="Everything that needs you is on one list called To do. The rest is already done and logged."
+        lead="Everything that needs your decision is on one list called To do. The rest is done and logged."
       >
         <div className="mock-card agent-edge agent-working"><TodoDesk /></div>
       </PageHero>
 
       <AgentLoop
-        eyebrow="The daily rhythm"
+        eyebrow="Your day"
         title={<>How To do stays short</>}
-        lead="MambaHR does the work all day. Only the calls that deserve a person ever reach your To do."
+        lead="MambaHR handles the routine work during the day. Only decisions that need a person reach your To do."
         steps={[
-          { n: '01', label: 'Within-policy work gets done', desc: 'Time off, letters, record updates, day-one setup, done and logged before you look.', who: 'agent', time: 'all day' },
-          { n: '02', label: 'Edge cases get a card', desc: 'Offers above your pay range, terminations, and raises above your threshold come to you with the full context.', who: 'agent', img: '/avatars/maya.jpg' },
-          { n: '03', label: 'You decide, with the whole picture', desc: 'Read the card, weigh the call, tap once. No chasing context across five tabs before you can think.', who: 'you', img: '/avatars/anna.jpg' },
-          { n: '04', label: 'Urgent floats up, with a clock', desc: 'A competing offer or a start date this week sits at the top, not page three.', who: 'agent', img: '/avatars/tom.jpg' },
-          { n: '05', label: 'One tap, reasoning attached', desc: 'Your decision is logged like everything else, with the policy and numbers it was based on.', who: 'agent' },
+          { n: '01', label: 'Routine work gets done', desc: 'Time off, letters, record updates, and day-one setup, done and logged.', who: 'agent', time: 'all day' },
+          { n: '02', label: 'Bigger decisions get a card', desc: 'Offers above your pay range, terminations, and raises above your limit come to you with the details.', who: 'agent', img: '/avatars/maya.jpg' },
+          { n: '03', label: 'You decide with the full picture', desc: 'Read the card, make the call, tap once. No hunting for context across five tabs.', who: 'you', img: '/avatars/anna.jpg' },
+          { n: '04', label: 'Urgent items go to the top', desc: 'A competing offer or a start date this week sits at the top, with the deadline shown.', who: 'agent', img: '/avatars/tom.jpg' },
+          { n: '05', label: 'Logged with the reasons', desc: 'Your decision is saved with the policy and the numbers it was based on.', who: 'agent' },
         ]}
       />
 
       <FeatureSplit
-        eyebrow="Built for fast calls"
+        eyebrow="Quick decisions"
         title={<>The context is on the card</>}
-        lead="Every card carries everything you need to decide: the numbers, the policy, the history. No tab-hopping, no asking around, no digging through old threads."
+        lead="Each card has what you need to decide: the numbers, the policy, and the history. No switching tabs or digging through old threads."
         bullets={[
-          'The offer next to the band, on one line',
+          'The offer next to the pay range, on one line',
           'The policy that applies, quoted on the card',
-          'The history, how long the search ran, what else is in play',
+          'The history: how long the search ran and what else is going on',
         ]}
       >
         <DecisionCard />
@@ -226,11 +226,11 @@ export default function TodayPage() {
         warm
         eyebrow="After you close the tab"
         title={<>MambaHR keeps working when you are done</>}
-        lead="You make the calls only you can make and close the tab. MambaHR carries on with the within-policy work and logs every action it takes."
+        lead="Make the calls only you can make, then close the tab. MambaHR carries on with the routine work and logs every step."
         bullets={[
-          'The list is short because the work is already done',
+          'The list is short because the routine work is already done',
           'Decisions, not data entry',
-          'Everything you approved, and everything MambaHR did, in one record',
+          'What you approved and what MambaHR did, in one record',
         ]}
       >
         <MorningPhoto />
@@ -238,14 +238,14 @@ export default function TodayPage() {
 
       <StatTrio
         stats={[
-          { n: 3, label: 'decisions in a typical morning' },
-          { n: 18, label: 'handled automatically while you slept' },
-          { n: 30, suffix: ' min', label: 'a day on the calls only you can make' },
+          { n: 3, label: 'decisions on a sample morning' },
+          { n: 18, label: 'routine tasks finished overnight' },
+          { n: 30, suffix: ' min', label: 'a day on the decisions that need you' },
         ]}
       />
 
 
-      <PageCta title={<>Run HR from one short <Em>To do list.</Em></>} sub="A 30-minute demo of To do on your own approvals. Then we import your data and switch you over." />
+      <PageCta title={<>Run HR from one short <Em>To do list.</Em></>} sub="A 30-minute demo of To do with your own approvals. Then we import your data and switch you over." />
       </main>
 
       <Footer />

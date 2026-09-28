@@ -6,46 +6,46 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import { PageCta, Em } from '@/components/v2/page-kit'
 
-const CARDS = [
-  { slug: 'rippling', name: 'Rippling', sub: 'Rippling is the stack. MambaHR is the department, and the stack.', tag: 'Most requested' },
-  { slug: 'gusto', name: 'Gusto', sub: 'Gusto handles payday. MambaHR handles every other day.', tag: null },
-  { slug: 'deel', name: 'Deel', sub: 'Deel is global payroll and employer of record (EOR). MambaHR runs your US HR, on Deel for payroll.', tag: null },
-  { slug: 'bamboohr', name: 'BambooHR', sub: 'BambooHR stores your data. MambaHR acts on it.', tag: null },
-  { slug: 'namely', name: 'Namely', sub: 'Namely made the HRIS prettier. MambaHR makes it unnecessary.', tag: null },
-  { slug: 'hibob', name: 'HiBob', sub: 'HiBob made HR look modern. MambaHR makes it do the work.', tag: null },
-  { slug: 'adp', name: 'ADP', sub: 'ADP is the back office. MambaHR is the front line.', tag: null },
-  { slug: 'workday', name: 'Workday', sub: 'Workday is a project. MambaHR is a product.', tag: null },
-  { slug: 'justworks', name: 'Justworks', sub: 'Justworks gives you a support queue. MambaHR gives you the answer.', tag: null },
-  { slug: 'trinet', name: 'TriNet', sub: 'TriNet is a PEO with a rep. MambaHR is the department.', tag: null },
-  { slug: 'paychex', name: 'Paychex', sub: 'Paychex sells you services. MambaHR does the work.', tag: null },
-  { slug: 'zenefits', name: 'Zenefits', sub: 'Zenefits gave you a dashboard. MambaHR does the work behind it.', tag: null },
-  { slug: 'paylocity', name: 'Paylocity', sub: 'Paylocity is a suite to operate. MambaHR does the operating.', tag: null },
-  { slug: 'ukg', name: 'UKG', sub: 'UKG is software you implement. MambaHR you turn on.', tag: null },
-  { slug: 'greenhouse', name: 'Greenhouse', sub: 'Greenhouse is an ATS. MambaHR hires, then runs the rest.', tag: null },
-  { slug: 'lever', name: 'Lever', sub: 'Lever is recruiting software. MambaHR is the whole department.', tag: null },
-  { slug: 'remote', name: 'Remote', sub: 'Remote pays across borders. MambaHR runs the team you employ.', tag: null },
-  { slug: 'oyster', name: 'Oyster', sub: 'Oyster hires across borders. MambaHR runs the team at home.', tag: null },
+const CARDS: { slug: string; name: string; sub: string; tag: string | null }[] = [
+  { slug: 'rippling', name: 'Rippling', sub: 'Rippling gives you software to run. MambaHR does the admin for you.', tag: null },
+  { slug: 'gusto', name: 'Gusto', sub: 'Gusto handles payday. MambaHR handles the HR admin around it.', tag: null },
+  { slug: 'deel', name: 'Deel', sub: 'Deel runs payroll and hires abroad. MambaHR does your US HR admin and sends Deel the payroll changes.', tag: null },
+  { slug: 'bamboohr', name: 'BambooHR', sub: 'BambooHR keeps your records. MambaHR keeps them and does the admin too.', tag: null },
+  { slug: 'namely', name: 'Namely', sub: 'Namely gives your team HR software to run. MambaHR also does the admin.', tag: null },
+  { slug: 'hibob', name: 'HiBob', sub: 'HiBob gives employees an HR app they like. MambaHR also does the admin for your team.', tag: null },
+  { slug: 'adp', name: 'ADP', sub: 'ADP runs payroll and benefits. MambaHR does the everyday HR admin.', tag: null },
+  { slug: 'workday', name: 'Workday', sub: 'Workday is a suite your admins configure. MambaHR does the admin, set up in a day.', tag: null },
+  { slug: 'justworks', name: 'Justworks', sub: 'Justworks co-employs your team. MambaHR does the admin while you stay the employer.', tag: null },
+  { slug: 'trinet', name: 'TriNet', sub: 'TriNet co-employs your team and assigns a rep. MambaHR does the admin directly.', tag: null },
+  { slug: 'paychex', name: 'Paychex', sub: 'Paychex sells HR services one by one. MambaHR does the HR admin in one product.', tag: null },
+  { slug: 'zenefits', name: 'Zenefits', sub: 'Zenefits puts HR in one dashboard. MambaHR also does the admin.', tag: null },
+  { slug: 'paylocity', name: 'Paylocity', sub: 'Paylocity is a suite for your HR team to run. MambaHR also does the admin.', tag: null },
+  { slug: 'ukg', name: 'UKG', sub: 'UKG is built for large, shift-based teams. MambaHR takes the HR admin off your plate.', tag: null },
+  { slug: 'greenhouse', name: 'Greenhouse', sub: 'Greenhouse runs your hiring pipeline. MambaHR covers hiring and what comes after.', tag: null },
+  { slug: 'lever', name: 'Lever', sub: 'Lever helps recruiters find candidates. MambaHR takes a hire from job post to first day.', tag: null },
+  { slug: 'remote', name: 'Remote', sub: 'Remote employs people abroad. MambaHR does the HR admin for your US team.', tag: null },
+  { slug: 'oyster', name: 'Oyster', sub: 'Oyster hires in other countries. MambaHR does the HR admin for your team at home.', tag: null },
 ]
 
-/* The choices teams weigh when HR gets messy, not just vendors. */
+/* The choices a team weighs when HR admin piles up, not just vendors. */
 const OPTIONS = [
   {
-    title: 'Hire someone',
-    good: 'Judgment, presence, a person who owns it. Nothing replaces that.',
-    breaks: 'They arrive to a backlog. Most of year one goes on filing and chasing instead of the work you hired them for.',
-    mamba: 'MambaHR does the repeatable work, so the person you hire spends their time on judgment from day one, not on cleanup.',
+    title: 'Do it by hand',
+    good: 'Your team knows your people and your policies.',
+    breaks: 'Admin crowds out the work that needs a person: filing, chasing forms, answering the same questions again.',
+    mamba: 'MambaHR does the repeat admin, so your team spends its time on people and judgment calls.',
   },
   {
     title: 'Buy more software',
     good: 'Cleaner records, better forms, nicer dashboards.',
-    breaks: 'A system of record stores the work. Someone on your team still does it, in every module you bought.',
-    mamba: 'MambaHR is the system of record and the worker in one. The data lives there, and the work gets done there.',
+    breaks: 'Software stores the work. Someone on your team still does each task, in every tool you bought.',
+    mamba: 'MambaHR keeps your HR records and also does the admin. You approve what matters.',
   },
   {
     title: 'Spreadsheets and Slack',
-    good: 'Free, flexible, starts today.',
-    breaks: 'Breaks fast. No audit trail, inconsistent process, and the payroll change someone forgot becomes a real problem.',
-    mamba: 'MambaHR gives you structure, approvals, and an audit trail from day one, still in Slack, where your team already is.',
+    good: 'Free, flexible and ready today.',
+    breaks: 'No record of who changed what, a different process each time, and a missed payroll change becomes a real problem.',
+    mamba: 'MambaHR adds approvals and a log of every change, and still works in Slack, where your team already is.',
   },
 ]
 
@@ -64,9 +64,9 @@ export default function CompareHub() {
             <p className="eyebrow" data-reveal>Compare</p>
             <h1 className="title" data-reveal data-delay="1">Weigh your <Em>options.</Em></h1>
             <p className="lead" data-reveal data-delay="2">
-              When HR work gets messy, you have a few choices: hire someone, buy another system, or keep
-              stitching it together yourself. Here&rsquo;s the comparison against all of them,
-              including the rows we lose.
+              When HR admin piles up, you have a few choices: do it by hand, buy more software, or
+              keep patching it together in spreadsheets. Here is how MambaHR compares, including
+              the rows where others do more.
             </p>
             <div className="ctas" data-reveal data-delay="3">
               <Link href="/demo" className="btn-p">Book a demo</Link>
@@ -120,11 +120,11 @@ export default function CompareHub() {
                     <p>{o.good}</p>
                   </div>
                   <div className="block">
-                    <span className="lbl bad">Where it breaks</span>
+                    <span className="lbl bad">Where it falls short</span>
                     <p>{o.breaks}</p>
                   </div>
                   <div className="block mamba">
-                    <span className="lbl gold">The MambaHR answer</span>
+                    <span className="lbl gold">With MambaHR</span>
                     <p>{o.mamba}</p>
                   </div>
                 </div>
@@ -156,7 +156,7 @@ export default function CompareHub() {
             <div className="head" data-reveal>
               <p className="eyebrow">Head to head</p>
               <h2 className="title">Pick the system <Em>you use today.</Em></h2>
-              <p className="lead">Comparisons against every major HR records system (HRIS), co-employer (PEO), payroll, and applicant tracking system (ATS). Feature tables included, the rows we lose included.</p>
+              <p className="lead">Side-by-side pages for the main HR records systems, payroll providers, co-employers (PEOs) and hiring tools. Each table includes the rows where the other product does more.</p>
             </div>
             <div className="grid">
               {CARDS.map((c, i) => (
@@ -218,8 +218,8 @@ export default function CompareHub() {
         </section>
 
         <PageCta
-          title={<>Compare it <Em>live.</Em></>}
-          sub="A 30-minute demo. Bring your current bill."
+          title={<>See it on <Em>your own requests.</Em></>}
+          sub="A 30-minute demo, run on your own HR scenarios."
         />
       </main>
       <Footer />

@@ -2,15 +2,15 @@ import type { Metadata } from 'next'
 import CompareHub from './compare-hub'
 
 const description =
-  'See how MambaHR compares to Rippling, Gusto, BambooHR, Workday, and to hiring, more software, or spreadsheets. MambaHR is the AI HR department that does the work.'
+  'See how MambaHR compares with Rippling, Gusto, BambooHR, Workday and others, and with doing HR admin by hand. MambaHR does the admin, you approve what matters.'
 const ogImage = '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'Compare MambaHR, vs Rippling, Gusto, BambooHR, Workday',
+  title: 'Compare MambaHR with Rippling, Gusto, BambooHR and Workday',
   description,
   alternates: { canonical: 'https://www.mambahr.com/compare' },
   openGraph: {
-    title: 'Compare MambaHR, vs Rippling, Gusto, BambooHR, Workday',
+    title: 'Compare MambaHR with Rippling, Gusto, BambooHR and Workday',
     description,
     url: 'https://www.mambahr.com/compare',
     siteName: 'MambaHR',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Compare MambaHR, vs Rippling, Gusto, BambooHR, Workday',
+    title: 'Compare MambaHR with Rippling, Gusto, BambooHR and Workday',
     description,
     images: [ogImage],
   },

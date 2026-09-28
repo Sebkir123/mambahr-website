@@ -26,7 +26,7 @@ function DayOneCard() {
             <div className="meta">Product Designer · starts Monday</div>
           </div>
         </div>
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · requests out in 4m</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · requests sent in 4 min</span>
       </div>
       {DAY1.map((r) => (
         <div key={r.label} className="row">
@@ -36,7 +36,7 @@ function DayOneCard() {
           <span className="src">{r.meta}</span>
         </div>
       ))}
-      <div className="foot">Everything ready before Alex&rsquo;s first coffee.</div>
+      <div className="foot">Everything ready before Alex arrives.</div>
       <style jsx>{`
         .d1 {
           background: var(--bg);
@@ -82,8 +82,8 @@ function DayOneCard() {
 /* ── Feature visual: exit checklist fragment ── */
 const EXIT = [
   { label: 'Final paycheck calculated for California rules', meta: 'Due last day', state: 'done' },
-  { label: 'COBRA notice prepared and queued', meta: 'Exit', state: 'done' },
-  { label: 'Handover doc collected from manager', meta: 'Knowledge', state: 'done' },
+  { label: 'COBRA health-coverage deadline tracked and flagged', meta: 'Health coverage', state: 'done' },
+  { label: 'Handover notes collected from manager', meta: 'Handover', state: 'done' },
   { label: 'Switch off all logins at 5:00 PM Friday', meta: 'Email · Slack · laptop', state: 'you' },
 ]
 
@@ -207,36 +207,36 @@ export default function OnboardingPage() {
         <PageHero
           eyebrow="Onboarding & offboarding"
           title={<>Day one, <Em>ready.</Em></>}
-          lead="Form I-9 started, logins working, device setup requested, first week planned, before your new hire walks in. And when someone leaves, a clean exit with nothing forgotten."
+          lead="Before your new hire arrives, the Form I-9 is started, logins work, device setup is requested, and the first week is planned. When someone leaves, nothing is forgotten."
           photo="/v2-people/marcus.jpg"
-          photoChip="MambaHR · done in 4m"
+          photoChip="MambaHR · done in 4 min"
           photoCaption="Alex set up · logins live by 9 AM"
         >
           <DayOneCard />
         </PageHero>
 
         <AgentLoop
-          eyebrow="How it runs"
+          eyebrow="How it works"
           title="From yes to day one"
-          lead="The moment the offer is accepted, everything starts moving. By Monday morning there&rsquo;s nothing left on your list but the welcome."
+          lead="It starts the moment the offer is signed. By Monday, the only thing left for you is the welcome."
           steps={[
-            { n: '01', label: 'Offer signature', desc: 'The accepted offer is countersigned and filed where you can always find it.', who: 'agent', time: 'minutes' },
-            { n: '02', label: 'Form I-9', desc: 'Work-eligibility paperwork collected and filed, and the Form I-9 and E-Verify check started.', who: 'agent', time: 'day 1' },
-            { n: '03', label: 'Logins ready', desc: 'Email, Slack, and every tool they need, live before they sit down.', who: 'agent', time: 'before 9 AM' },
-            { n: '04', label: 'Equipment & buddy', desc: 'Device setup requested from your IT team, and an onboarding buddy picked and briefed.', who: 'agent', img: '/avatars/priya.jpg' },
-            { n: '05', label: 'First-week plan', desc: 'Intros, team lunches, and sessions planned for the manager, and on the calendar once Google or Microsoft 365 is connected.', who: 'agent' },
-            { n: '06', label: 'The welcome', desc: 'You give the welcome. The handshake, the story, the why-we-hired-you, that’s yours.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '01', label: 'Offer signed', desc: 'The accepted offer is countersigned and filed where you can find it.', who: 'agent', time: 'minutes' },
+            { n: '02', label: 'Form I-9', desc: 'Work-eligibility paperwork collected, and the Form I-9 and E-Verify check started.', who: 'agent', time: 'day 1' },
+            { n: '03', label: 'Logins ready', desc: 'Email, Slack, and the tools they need, working before they sit down.', who: 'agent', time: 'before 9 AM' },
+            { n: '04', label: 'Equipment and buddy', desc: 'Device setup requested from your IT team. An onboarding buddy picked and briefed.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '05', label: 'First-week plan', desc: 'Intros and team sessions planned with the manager, and added to calendars once Google or Microsoft 365 is connected.', who: 'agent' },
+            { n: '06', label: 'The welcome', desc: 'The welcome is yours: the handshake, the story, why you hired them.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Offboarding"
-          title={<>Exits with <Em>zero loose ends.</Em></>}
-          lead="Exits are where details get expensive. MambaHR gets the final paycheck right for their state and prepares the health-coverage continuation notices (COBRA). It collects the handover and switches off every login, but only after your sign-off."
+          title={<>Exits with <Em>nothing forgotten.</Em></>}
+          lead="MambaHR works out the final paycheck by state rules, tracks the COBRA health-coverage deadlines and flags them at exit, and collects the handover. Logins are switched off only after you sign off."
           bullets={[
-            'Final pay timed to each state’s rules, California’s last-day deadline included',
-            'COBRA notices prepared on schedule, ready to send',
-            'Nothing gets switched off until you say so',
+            'Final pay timed to each state’s rules, including California’s last-day deadline',
+            'COBRA deadlines tracked and flagged to you at exit',
+            'Nothing is switched off until you say so',
           ]}
         >
           <ExitChecklist />
@@ -247,11 +247,11 @@ export default function OnboardingPage() {
           warm
           eyebrow="Day one"
           title={<>Working logins, <Em>a buddy at 9:05.</Em></>}
-          lead="Accounts are live before the new hire sits down and the onboarding buddy has already been briefed, so day one is about meeting people rather than waiting on access."
+          lead="Accounts work before the new hire sits down, and their buddy is already briefed. Day one is for meeting people, not waiting for access."
           bullets={[
-            'A first week that says we were ready for you',
-            'Managers get a nudge list, not a to-do list',
-            'New hires answer one short form, MambaHR does the rest',
+            'A first week that is ready for them',
+            'Managers get a short list of reminders',
+            'New hires fill in one short form. MambaHR handles the rest.',
           ]}
         >
           <FirstDay />
@@ -259,14 +259,14 @@ export default function OnboardingPage() {
 
         <StatTrio
           stats={[
-            { n: 4, suffix: ' min', label: 'from signed offer to accounts and paperwork requests out' },
-            { n: 1, label: 'form the new hire fills in; MambaHR does the rest' },
-            { n: 0, label: 'forgotten logins on exit, every account accounted for' },
+            { n: 4, suffix: ' min', label: 'from signed offer to account and paperwork requests sent' },
+            { n: 1, label: 'short form for the new hire to fill in' },
+            { n: 0, label: 'logins left on after an exit' },
           ]}
         />
 
 
-        <PageCta title={<>Day one, ready. <Em>Every day after, too.</Em></>} sub="A 30-minute demo of one onboarding, offer to logins live. Then we import your data and switch you over." />
+        <PageCta title={<>Every new hire, <Em>ready on day one.</Em></>} sub="A 30-minute demo of one onboarding, from signed offer to working logins. Then we import your data and switch you over." />
       </main>
       <Footer />
     </>

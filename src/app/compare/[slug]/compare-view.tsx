@@ -12,7 +12,7 @@ const IMPORTERS = new Set(['gusto', 'bamboohr', 'rippling', 'workday', 'adp', 'n
 
 function Cell({ value, mine }: { value: string | boolean; mine: boolean }) {
   if (typeof value === 'boolean') {
-    return value ? <span className="yes" aria-label="Yes">✓</span> : <span className="no" aria-label="No">—</span>
+    return value ? <span className="yes" aria-label="Yes">✓</span> : <span className="no" aria-label="No">No</span>
   }
   return <span className={mine ? 'pill mine' : 'pill'}>{value}</span>
 }
@@ -87,7 +87,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
           <div className="wrap">
             <div className="head" data-reveal>
               <p className="eyebrow">The difference</p>
-              <h2 className="title">Three reasons to <Em>switch.</Em></h2>
+              <h2 className="title">What changes for <Em>your team.</Em></h2>
             </div>
             <div className="grid">
               {data.switchReasons.map((r, i) => (
@@ -118,7 +118,7 @@ export default function CompareView({ data }: { data: CompetitorData }) {
             <div className="head" data-reveal>
               <p className="eyebrow">Side by side</p>
               <h2 className="title">MambaHR vs <Em>{data.name}.</Em></h2>
-              <p className="lead">Including the rows where {data.name} wins, you&rsquo;ll check anyway.</p>
+              <p className="lead">Including the rows where {data.name} does more.</p>
             </div>
             <div className="card agent-edge agent-done" data-reveal data-delay="1">
               <div className="row hd">
@@ -216,24 +216,24 @@ export default function CompareView({ data }: { data: CompetitorData }) {
         <section className="sw">
           <div className="wrap">
             <div className="head" data-reveal>
-              <p className="eyebrow">Switching</p>
-              <h2 className="title">Switching takes a day, <Em>not a quarter.</Em></h2>
+              <p className="eyebrow">Getting started</p>
+              <h2 className="title">Set up in a day, <Em>not a quarter.</Em></h2>
             </div>
             <div className="grid">
               <div className="step" data-reveal data-delay="1">
                 <span className="d">Day 1</span>
                 <h3 className="t">Your data imports</h3>
-                <p className="b">People, history, documents, time-off balances, {IMPORTERS.has(data.slug) ? `pulled from ${data.name} in one pass` : 'imported by CSV in one pass'}. Nothing re-keyed, nothing lost.</p>
+                <p className="b">People, history, documents and time-off balances, {IMPORTERS.has(data.slug) ? `pulled from ${data.name} in one pass` : 'imported by CSV in one pass'}. Nothing typed in twice.</p>
               </div>
               <div className="step" data-reveal data-delay="2">
                 <span className="d">Day 2</span>
-                <h3 className="t">The department is live</h3>
-                <p className="b">Slack connected, policies loaded, approvals routed to the right people. Your team just starts asking.</p>
+                <h3 className="t">Requests start coming in</h3>
+                <p className="b">Slack connected, your policies loaded, approvals set to go to the right people. Employees and managers start asking.</p>
               </div>
               <div className="step" data-reveal data-delay="3">
                 <span className="d">Week 1</span>
-                <h3 className="t">The work is getting done</h3>
-                <p className="b">Leave approved, questions answered with citations, the first payroll change file ready to load. You approve the sensitive calls.</p>
+                <h3 className="t">The admin is getting done</h3>
+                <p className="b">Time off approved within your policy, questions answered with the law cited, and the first payroll changes ready for you to approve.</p>
               </div>
             </div>
           </div>
@@ -264,8 +264,8 @@ export default function CompareView({ data }: { data: CompetitorData }) {
         </section>
 
         <PageCta
-          title={<>See the difference <Em>live.</Em></>}
-          sub={`A 30-minute demo. Bring your ${data.name} bill.`}
+          title={<>See it on <Em>your own requests.</Em></>}
+          sub="A 30-minute demo, run on your own HR scenarios."
         />
       </main>
       <Footer />

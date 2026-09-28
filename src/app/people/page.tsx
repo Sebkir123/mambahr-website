@@ -19,7 +19,7 @@ function OrgChartCard() {
     <div className="org agent-edge agent-done">
       <div className="o-head">
         <span className="o-t">Org chart</span>
-        <span className="o-sub">Always current, drawn from the record</span>
+        <span className="o-sub">Always current, from your employee records</span>
       </div>
       <div className="ceo">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -42,7 +42,7 @@ function OrgChartCard() {
         ))}
       </div>
       <div className="o-foot">
-        <span className="mono">Headcount: 1,247 · 0 unknowns</span>
+        <span className="mono">Headcount: 247 · no gaps</span>
       </div>
       <style jsx>{`
         .org { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 22px 22px 18px; box-shadow: var(--shadow-float); }
@@ -77,7 +77,7 @@ function ImportStage() {
       <div className="float agent-edge agent-done">
         <span className="f-check" aria-hidden="true" />
         <div>
-          <div className="f-t">1,247 records imported</div>
+          <div className="f-t">247 records imported</div>
           <div className="f-s">0 lost · from Gusto · <span className="mono">today, 2:14 PM</span></div>
         </div>
       </div>
@@ -104,34 +104,34 @@ export default function PeoplePage() {
       <main id="main">
         <PageHero
           eyebrow="Employee records"
-          title={<>One record, <Em>current.</Em></>}
-          lead="MambaHR does the work and keeps the record: every person, every detail, right without anyone touching it."
+          title={<>One record, <Em>always current.</Em></>}
+          lead="MambaHR keeps your employee records up to date as the work happens. Every person and every detail, without anyone retyping it."
         >
           <div className="mock-card agent-edge agent-done"><PeopleDirectory /></div>
         </PageHero>
 
         <AgentLoop
-          eyebrow="The record keeps itself"
-          title="Why it never goes stale"
-          lead="Old systems go stale because a person has to remember to type. Here, the work and the record are the same thing."
+          eyebrow="How records stay current"
+          title="Why it doesn’t go stale"
+          lead="Records usually go stale because someone has to remember to update them. Here, the record updates as the work gets done."
           steps={[
-            { n: '01', label: 'Someone’s hired', desc: 'The record creates itself from the signed offer, name, role, comp, start date.', who: 'agent', time: 'instant', img: '/avatars/dave.jpg' },
-            { n: '02', label: 'A raise goes through', desc: 'MambaHR updates the pay everywhere it lives: the record, the band, the payroll file.', who: 'agent', time: 'same minute' },
-            { n: '03', label: 'An address changes in Slack', desc: 'Jordan mentions she moved; it’s filed in seconds and flagged for the next pay file.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
-            { n: '04', label: 'Leave goes through', desc: 'MambaHR updates the record and payday before anyone has to ask.', who: 'agent', time: 'same minute' },
-            { n: '05', label: 'MambaHR logs every change', desc: 'Who changed what, when, and why, kept with the record.', who: 'agent', time: 'always' },
-            { n: '06', label: 'You just look things up', desc: 'Headcount, tenure, who reports to whom, they’re right, every time.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '01', label: 'Someone is hired', desc: 'The record is created from the signed offer: name, role, pay, and start date.', who: 'agent', time: 'instant', img: '/avatars/dave.jpg' },
+            { n: '02', label: 'A raise is approved', desc: 'MambaHR updates the pay on the record and in the next payroll file.', who: 'agent', time: 'same minute' },
+            { n: '03', label: 'An address changes in Slack', desc: 'Jordan mentions she moved. It is saved in seconds and flagged for the next payroll file.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
+            { n: '04', label: 'Leave is approved', desc: 'MambaHR updates the record and prepares the payroll change.', who: 'agent', time: 'same minute' },
+            { n: '05', label: 'Every change is logged', desc: 'Who changed what, when, and why, kept with the record.', who: 'agent', time: 'always' },
+            { n: '06', label: 'You just look things up', desc: 'Headcount, tenure, who reports to whom. It is all up to date.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Org chart"
-          title={<>The org chart draws itself</>}
-          lead="Your CEO asks for headcount by team and you answer in the meeting, not after a weekend of spreadsheet archaeology. Reporting lines are always true because they come straight from the record."
+          title={<>An org chart that stays current</>}
+          lead="When your CEO asks for headcount by team, you can answer in the meeting. Reporting lines come straight from your employee records, so they stay accurate."
           bullets={[
-            'Reporting lines update the moment a transfer happens',
-            'Headcount by team, location, or manager, instantly',
-            'New hires appear on day one, leavers come off the same day',
+            'Reporting lines update when a transfer happens',
+            'Headcount by team, location, or manager, right away',
+            'New hires appear on day one, and leavers come off the same day',
           ]}
         >
           <OrgChartCard />
@@ -142,11 +142,11 @@ export default function PeoplePage() {
           warm
           eyebrow="Switching"
           title={<>Import in a day, keep it all</>}
-          lead="The migration project you’ve been dreading is one import from Gusto, Workday, Rippling, BambooHR, Namely, or ADP. Your data is in within a day, every history and balance carried over. Then your old system retires."
+          lead="Moving from Gusto, Workday, Rippling, BambooHR, Namely, or ADP is one import. Your data is in within a day, with history and balances carried over. Then you can retire the old system."
           bullets={[
-            'Every record, every history, every balance carried over',
+            'Every record, history, and balance carried over',
             'We check the import line by line before you go live',
-            'No parallel running, no re-keying, no cleanup project',
+            'No running two systems side by side, no retyping, no cleanup project',
           ]}
         >
           <ImportStage />
@@ -154,9 +154,9 @@ export default function PeoplePage() {
 
         <StatTrio
           stats={[
-            { n: 1247, label: 'records, current to the minute' },
+            { n: 247, label: 'records in a sample import, none lost' },
             { n: 1, suffix: ' day', label: 'to import your data from your old system' },
-            { n: 0, label: 'stale spreadsheets' },
+            { n: 0, label: 'spreadsheets to keep in sync' },
           ]}
         />
 

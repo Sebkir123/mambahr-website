@@ -1,119 +1,61 @@
 'use client'
 
+const GRAIN =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
+
 export default function Cta() {
   return (
     <section className="cta" id="access">
       <div className="panel" data-reveal>
-        <span className="v2-grain" />
-        <p className="eyebrow">Get started</p>
-        <h2 className="title">
-          See MambaHR do a week of HR work <span className="em">in 30 minutes.</span>
-        </h2>
-        <p className="sub">
-          Book a demo this week. We import your data the day you sign, and the work starts the next morning.
-        </p>
-        <div className="form">
-          <a className="btn btn-primary" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
+        <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /><i className="f3" /><i className="grain" /></span>
+        <h2 className="title">See MambaHR do a week of HR work in 30 minutes.</h2>
+        <p className="sub">Book a demo this week. We import your data the day you sign, and the work starts the next morning.</p>
+        <div className="ctas">
+          <a className="main" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
+          <a className="alt" href="/pricing">See pricing</a>
         </div>
-        <div className="trust">
-          <span>Your data imports in a day</span><i /><span>A person signs off on every termination</span>
-        </div>
+        <p className="trust">Your data imports in a day. Nothing sensitive happens without your OK.</p>
       </div>
 
       <style jsx>{`
-        .cta {
-          padding: clamp(40px, 6vw, 72px) var(--page-pad) clamp(72px, 9vw, 110px);
-          background: var(--bg);
-        }
+        .cta { padding: clamp(40px, 6vw, 72px) var(--page-pad) clamp(72px, 9vw, 110px); background: var(--bg); }
         .panel {
-          max-width: var(--page-max);
-          margin: 0 auto;
-          border-radius: 18px;
-          padding: clamp(56px, 8vw, 100px) var(--page-pad);
-          text-align: center;
           position: relative;
+          isolation: isolate;
           overflow: hidden;
-          /* gold → rose → violet, routed through a warm rose so the midpoint
-             never goes muddy brown-gray */
-          background:
-            radial-gradient(90% 80% at 18% 0%, rgba(244, 200, 138, 0.85), transparent 58%),
-            radial-gradient(85% 75% at 88% 100%, rgba(94, 80, 158, 0.9), transparent 62%),
-            linear-gradient(160deg, #C99655 0%, #B07A78 48%, #7A6AB0 100%);
-          background-size: 150% 150%;
-          animation: ctaGlow 20s ease-in-out infinite;
+          max-width: 1320px;
+          margin: 0 auto;
+          border-radius: 32px;
+          padding: clamp(72px, 10vw, 132px) var(--page-pad);
+          text-align: center;
+          color: #1a1a19;
         }
-        @keyframes ctaGlow {
-          0%, 100% { background-position: 0% 0%; }
-          50% { background-position: 100% 60%; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .panel { animation: none; }
-        }
-        .panel::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background:
-            radial-gradient(55% 45% at 50% 30%, rgba(255, 255, 255, 0.16), transparent 65%),
-            radial-gradient(70% 60% at 50% 120%, rgba(255, 255, 255, 0.18), transparent 60%);
-          pointer-events: none;
-        }
-        .trust {
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-          gap: 12px;
-          margin-top: 26px;
-          font-size: 13px;
-          color: rgba(255, 255, 255, 0.78);
-        }
-        .trust i { width: 4px; height: 4px; border-radius: 999px; background: rgba(255, 255, 255, 0.45); }
-        .eyebrow {
-          position: relative;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.16em;
-          color: rgba(255, 255, 255, 0.85);
-          margin: 0 0 18px;
-        }
+        .field { position: absolute; inset: 0; z-index: -1; background: linear-gradient(155deg, #f3c796 0%, #eab2a4 40%, #c3aee0 72%, #9d8fe0 100%); }
+        .field i { position: absolute; border-radius: 50%; filter: blur(70px); }
+        .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, rgba(255, 226, 184, 0.95), rgba(255, 226, 184, 0) 70%); }
+        .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, rgba(139, 127, 208, 0.9), rgba(139, 127, 208, 0) 70%); }
+        .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, rgba(255, 246, 234, 0.8), rgba(255, 246, 234, 0) 70%); }
+        .field .grain { inset: 0; border-radius: 0; filter: none; background-image: ${GRAIN}; background-size: 220px; opacity: 0.35; mix-blend-mode: overlay; }
         .title {
-          position: relative;
           font-family: var(--font-serif);
           font-weight: 400;
-          color: #fff;
-          font-size: clamp(32px, 4.4vw, 56px);
+          font-size: clamp(38px, 5.6vw, 76px);
           line-height: 1;
-          letter-spacing: -0.03em;
-          margin: 0;
+          letter-spacing: -0.04em;
+          max-width: 15ch;
+          margin: 0 auto;
+          color: inherit;
+          text-wrap: balance;
         }
-        .em { color: #ECD7B0; font-style: italic; }
-        .sub {
-          position: relative;
-          color: rgba(255, 255, 255, 0.9);
-          font-size: 17px;
-          margin: 24px 0 0;
-        }
-        .form {
-          position: relative;
-          display: flex;
-          gap: 10px;
-          justify-content: center;
-          margin-top: 34px;
-          flex-wrap: wrap;
-        }
-        .input {
-          background: rgba(255, 255, 255, 0.96);
-          border: none;
-          border-radius: 999px;
-          padding: 15px 22px;
-          font-size: 15px;
-          width: min(320px, 100%);
-          color: var(--text);
-          outline: none;
-        }
+        .sub { font-size: clamp(16px, 1.7vw, 19px); line-height: 1.6; max-width: 52ch; margin: 22px auto 0; opacity: 0.78; }
+        .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
+        .main, .alt { display: inline-flex; align-items: center; height: 50px; padding: 0 26px; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none; transition: transform 0.2s ease, background 0.2s ease; }
+        .main { background: #1a1a19; color: #fff; box-shadow: 0 10px 24px -8px rgba(20, 18, 14, 0.45); }
+        .main:hover { transform: translateY(-2px); }
+        .alt { background: rgba(255, 255, 255, 0.5); color: #1a1a19; border: 1px solid rgba(26, 26, 25, 0.14); }
+        .alt:hover { background: #fff; }
+        .main:focus-visible, .alt:focus-visible { outline: 2px solid #6a5da6; outline-offset: 3px; }
+        .trust { margin: 26px 0 0; font-size: 13.5px; opacity: 0.66; }
       `}</style>
     </section>
   )

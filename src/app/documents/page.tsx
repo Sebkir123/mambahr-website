@@ -24,7 +24,7 @@ function SignedDocCard() {
           </span>
           <div>
             <div className="d-name">Offer, Maya Chen.pdf</div>
-            <div className="d-meta">Senior Engineer · generated from your template</div>
+            <div className="d-meta">Senior Engineer · drafted from your template</div>
           </div>
           <span className="chip">Signed · 11:15 AM</span>
         </div>
@@ -40,11 +40,11 @@ function SignedDocCard() {
           </div>
         </div>
         <div className="filed">
-          <span className="mono">Filed → Maya Chen / Employment · audit trail attached</span>
+          <span className="mono">Filed → Maya Chen / Employment · signing record attached</span>
         </div>
         <div className="foot">
           <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · signed &amp; filed</span>
-          <span className="foot-t">Drafted, sent, signed, and filed, 41 minutes start to finish</span>
+          <span className="foot-t">Drafted, sent, signed, and filed in 41 minutes</span>
         </div>
       </div>
       <style jsx>{`
@@ -96,7 +96,7 @@ function AckTracker() {
         </div>
         <div className="bar-track" aria-hidden="true"><span className="bar-fill" /></div>
         <div className="pol-meta">
-          <span>1,172 of 1,247 acknowledged</span>
+          <span>232 of 247 acknowledged</span>
           <span className="mono">Sent for e-signature · status tracked</span>
         </div>
       </div>
@@ -152,7 +152,7 @@ function RetrievalStage() {
         <span className="f-check" aria-hidden="true" />
         <div>
           <div className="f-t">Every version · every signature · kept</div>
-          <div className="f-s">Ask for any document, it&rsquo;s back in seconds, with its history</div>
+          <div className="f-s">Ask for any document and get it back in seconds, with its history</div>
         </div>
       </div>
       <style jsx>{`
@@ -178,36 +178,36 @@ export default function DocumentsPage() {
         <PageHero
           eyebrow="Documents & e-sign"
           title={<>Signed and <Em>filed.</Em></>}
-          lead="MambaHR drafts offers, agreements, and acknowledgments in seconds, sends them for e-signature, chases them, and files them where you’ll find them in three years."
+          lead="MambaHR drafts offers, agreements, and acknowledgments, sends them for e-signature, tracks who has signed, and files them where you can find them years later."
           photo="/v2-people/team.jpg"
           photoChip="MambaHR · signed & filed"
-          photoCaption="Maya’s offer, out, signed, filed in 41 min"
+          photoCaption="Maya’s offer · signed and filed in 41 min"
         >
           <SignedDocCard />
         </PageHero>
 
         <AgentLoop
           eyebrow="From draft to filed"
-          title={<>MambaHR moves every document from draft to filed</>}
-          lead="No template hunting, no chasing, no “where did that go?” The right template, the right people, the right folder, every time."
+          title={<>From draft to signed to filed</>}
+          lead="No hunting for templates, no chasing signatures, no lost files."
           steps={[
-            { n: '01', label: 'Drafted from your template', desc: 'The right template, the right details, name, role, comp, dates, filled in correctly.', who: 'agent', time: 'seconds' },
-            { n: '02', label: 'Sent for e-signature', desc: 'Delivered for e-signature, to the right people in the right order.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
-            { n: '03', label: 'You sign what matters', desc: 'Offers, agreements, anything with your name on it, a person signs, always.', who: 'you', img: '/avatars/anna.jpg' },
-            { n: '04', label: 'Status tracked until signed', desc: 'Sent for e-signature, status tracked. You see who has signed and who has not.', who: 'agent', time: 'as needed', img: '/avatars/tom.jpg' },
-            { n: '05', label: 'Filed with the audit trail', desc: 'Into the right folder, under the right person, with who signed what and when.', who: 'agent', time: 'instant' },
-            { n: '06', label: 'Back the second you ask', desc: 'Three years later, in an audit or a dispute, it’s one question away.', who: 'agent', time: 'seconds' },
+            { n: '01', label: 'Drafted from your template', desc: 'Name, role, pay, and dates filled in from your template.', who: 'agent', time: 'seconds' },
+            { n: '02', label: 'Sent for e-signature', desc: 'Sent to the right people, in the right order.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
+            { n: '03', label: 'You sign what matters', desc: 'Offers, agreements, anything with your name on it. A person always signs.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '04', label: 'Tracked until signed', desc: 'You can see who has signed and who has not.', who: 'agent', time: 'as needed', img: '/avatars/tom.jpg' },
+            { n: '05', label: 'Filed with the signing record', desc: 'Saved under the right person, with who signed what and when.', who: 'agent', time: 'instant' },
+            { n: '06', label: 'Found when you ask', desc: 'Years later, in an audit or a dispute, it is one question away.', who: 'agent', time: 'seconds' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Policy rollouts"
           title={<>Acknowledged, <Em>every last one</Em></>}
-          lead="A handbook update used to mean a spreadsheet of who hasn’t. Now MambaHR files policies with version history and collects acknowledgments by e-signature, so you see one number: done."
+          lead="A handbook update used to mean a spreadsheet of who still hasn’t signed. MambaHR files each policy with its version history and collects acknowledgments by e-signature, so you can see who is done."
           bullets={[
-            'Every acknowledgment collected by e-signature, with date',
+            'Every acknowledgment collected by e-signature, with the date',
             'Policies filed with version history',
-            'A clean record for the day an auditor asks',
+            'A clean record if an auditor asks',
           ]}
         >
           <AckTracker />
@@ -216,13 +216,13 @@ export default function DocumentsPage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="Retrieval"
+          eyebrow="Finding documents"
           title={<>Found in seconds, <Em>years later</Em></>}
-          lead="The day a dispute lands, the document you need is one question away, not buried in someone’s old shared drive. MambaHR files every offer, agreement, and acknowledgment under the right person, with the signature record attached."
+          lead="When a dispute comes up, the document you need is one question away, not lost in an old shared drive. MambaHR files every offer, agreement, and acknowledgment under the right person, with the signing record attached."
           bullets={[
             'Filed by person, not buried in a shared drive',
-            'Signature record attached, who signed and when',
-            'Audits and disputes answered in minutes, not weekends',
+            'Signing record attached: who signed and when',
+            'Audit and dispute requests answered in minutes',
           ]}
         >
           <RetrievalStage />
@@ -231,13 +231,13 @@ export default function DocumentsPage() {
         <StatTrio
           stats={[
             { n: 30, suffix: 's', label: 'from approved offer to sent for signature' },
-            { n: 100, suffix: '%', label: 'of documents filed under the right person, signature record attached' },
+            { n: 100, suffix: '%', label: 'of documents filed under the right person, with the signing record' },
             { n: 0, label: 'lost agreements' },
           ]}
         />
 
 
-        <PageCta title={<>Paperwork that <Em>does itself.</Em></>} sub="A 30-minute demo of one offer, drafted to filed. Then we import your documents and switch you over." />
+        <PageCta title={<>Paperwork, <Em>off your plate.</Em></>} sub="A 30-minute demo of one offer, from draft to filed. Then we import your documents and switch you over." />
       </main>
       <Footer />
     </>

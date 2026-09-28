@@ -6,7 +6,7 @@ const ATS = ['Greenhouse', 'Lever']
 export default function Logos() {
   return (
     <section className="logos">
-      <p className="kicker" data-reveal>Imports from</p>
+      <p className="kicker" data-reveal>Bring your data from</p>
       <div className="row" data-reveal data-delay="1">
         {HRIS.map((l) => (
           <span key={l} className="logo">{l}</span>
@@ -21,7 +21,7 @@ export default function Logos() {
         <span className="mamba"><span className="m">M</span>MambaHR</span>
       </div>
       <p className="sub" data-reveal data-delay="2">
-        One-time import of people, comp, balances, reporting lines, and open pipelines. Not a customer list: these are the systems we read on day one.
+        A one-time import of your people, pay, time-off balances, reporting lines and open roles. Done in a day.
       </p>
 
       <style jsx>{`

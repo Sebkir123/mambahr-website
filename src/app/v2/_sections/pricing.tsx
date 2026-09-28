@@ -11,8 +11,7 @@ export default function Pricing() {
           <p className="eyebrow">Pricing</p>
           <h2 className="title">Priced per employee, <span className="em">per month.</span></h2>
           <p className="lead">
-            The admin workload that eats a full-time generalist&rsquo;s week runs from $24k a
-            year here. Your team spends that week on people instead.
+            One price per employee, billed annually. Pick the plan that fits your company&rsquo;s size.
           </p>
         </div>
 

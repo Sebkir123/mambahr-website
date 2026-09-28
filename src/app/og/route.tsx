@@ -21,7 +21,7 @@ async function loadFraunces(text: string, weight: number): Promise<ArrayBuffer |
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
-  const title = (searchParams.get('title') || 'The AI HR department').slice(0, 120)
+  const title = (searchParams.get('title') || 'HR that runs itself.').slice(0, 120)
   const eyebrow = (searchParams.get('eyebrow') || 'MambaHR').slice(0, 40)
 
   const glyphs = title + eyebrow + 'MambaHR'
@@ -63,7 +63,7 @@ export async function GET(req: Request) {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <div style={{ width: 96, height: 4, borderRadius: 4, background: 'linear-gradient(100deg, #B98A4E, #6A5DA6)' }} />
-          <div style={{ fontSize: 22, fontFamily: 'sans-serif', color: '#7A7A75' }}>The AI HR department · mambahr.com</div>
+          <div style={{ fontSize: 22, fontFamily: 'sans-serif', color: '#7A7A75' }}>HR admin, done for you · mambahr.com</div>
         </div>
       </div>
     ),

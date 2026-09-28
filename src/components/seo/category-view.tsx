@@ -159,7 +159,7 @@ export default function CategoryView({ data }: { data: CategoryData }) {
           `}</style>
         </section>
 
-        <StatTrio stats={data.stats} />
+        <StatTrio note={null} stats={data.stats} />
 
         {/* ── FAQ ── */}
         <section className="faq">

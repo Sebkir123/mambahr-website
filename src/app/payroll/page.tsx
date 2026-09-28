@@ -9,9 +9,9 @@ import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/comp
 /* ── Hero fragment: the pay cycle, prepped ── */
 function PayCycleCard() {
   const rows = [
-    { img: '/avatars/maya.jpg', name: 'Maya Chen', what: 'Merit raise +12%', note: 'priced against band' },
+    { img: '/avatars/maya.jpg', name: 'Maya Chen', what: 'Merit raise +12%', note: 'checked against pay range' },
     { img: '/avatars/anna.jpg', name: 'Alex Park', what: 'New hire added', note: 'first check prorated' },
-    { img: '/avatars/marcus.jpg', name: 'Marcus Webb', what: 'Final pay', note: 'state-correct timing' },
+    { img: '/avatars/marcus.jpg', name: 'Marcus Webb', what: 'Final pay', note: 'timed to state rules' },
     { img: '/avatars/priya.jpg', name: 'Jordan Lee', what: 'Address change', note: 'flagged for the next pay file' },
   ]
   return (
@@ -107,7 +107,7 @@ function DeelRunCard() {
       </div>
       <div className="rows">
         <div className="r"><span className="k">Changes sent to Deel</span><span className="v">4 of 4 · Tue 2:14 PM</span></div>
-        <div className="r"><span className="k">Reconciled</span><span className="v">Twice · 0 discrepancies</span></div>
+        <div className="r"><span className="k">Checked</span><span className="v">Twice · 0 discrepancies</span></div>
         <div className="r"><span className="k">Approver</span><span className="v">Anna Park · Head of People</span></div>
         <div className="r"><span className="k">Run status</span><span className="v">Held until approved</span></div>
       </div>
@@ -145,7 +145,7 @@ function PaydayPhoto() {
       <img className="photo" src="/v2-people/team.jpg" alt="An HR team on payday, relaxed" />
       <div className="mini">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
-        <div className="mini-t">Pay file reconciled twice</div>
+        <div className="mini-t">Pay file checked twice</div>
         <div className="mini-s">0 discrepancies · ready to upload</div>
       </div>
       <style jsx>{`
@@ -189,37 +189,37 @@ export default function PayrollPage() {
           eyebrow="Payroll changes"
           pill="Powered by Deel"
           title={<>Payday, <Em>prepared.</Em></>}
-          lead={'MambaHR prepares every payroll change. You choose per company: a change file for your current provider, or Deel-managed payroll. On Deel, MambaHR sends the changes and a person approves every run.'}
+          lead={'MambaHR prepares every payroll change. It builds a change file for your current payroll provider, or sends the changes to Deel-managed payroll. You choose. A person approves every pay run.'}
           photo="/v2-people/team.jpg"
           photoChip="MambaHR · ready"
-          photoCaption="42 paid right · 0 discrepancies"
+          photoCaption="42 people · 0 discrepancies"
         >
           <PayCycleCard />
         </PageHero>
 
         <AgentLoop
           eyebrow="The pay cycle"
-          title={<>The pay cycle, done early.</>}
-          lead={'MambaHR tracks every change all month. Then it builds one clean change file in your provider’s format, or sends the changes to Deel for a managed run. Either way, a person approves before anyone is paid.'}
+          title={<>Payroll changes, ready early.</>}
+          lead={'MambaHR collects changes all month. Before payday it builds one change file in your provider’s format, or sends the changes to Deel. A person approves before anyone is paid.'}
           steps={[
-            { n: '01', label: 'Collects every change', desc: 'Raises, new hires, exits, address moves, gathered the moment they happen, not the night before.', who: 'agent', time: 'all month' },
-            { n: '02', label: 'Prices raises against your pay ranges', desc: 'MambaHR checks every merit change against your pay ranges before it touches the file.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
-            { n: '03', label: 'Computes final pay by state rules', desc: 'MambaHR computes final pay by state rule and holds it for your approval.', who: 'agent', time: 'instant', img: '/avatars/tom.jpg' },
-            { n: '04', label: 'Builds the change file, or sends it to Deel', desc: 'A change file in your provider’s format, checked against the record. Or, on Deel-managed payroll, the changes go straight to Deel. Ask us about your provider.', who: 'agent', time: '2 days early' },
-            { n: '05', label: 'Reconciles twice', desc: 'Every line checked against the record, then checked again. Discrepancies get caught before you ever see the file.', who: 'agent', time: 'twice' },
-            { n: '06', label: 'You approve. Done.', desc: 'Upload the file to your provider, or approve the Deel run. Payday runs without a scramble.', who: 'you', img: '/avatars/anna.jpg' },
+            { n: '01', label: 'Collects every change', desc: 'Raises, new hires, exits, and address changes, recorded when they happen.', who: 'agent', time: 'all month' },
+            { n: '02', label: 'Checks raises against your pay ranges', desc: 'Every raise is checked against your pay ranges before it goes into the file.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
+            { n: '03', label: 'Works out final pay by state rules', desc: 'Final pay follows each state’s rules and waits for your approval.', who: 'agent', time: 'instant', img: '/avatars/tom.jpg' },
+            { n: '04', label: 'Builds the change file, or sends it to Deel', desc: 'A change file in your provider’s format, checked against your records. Or, with Deel-managed payroll, the changes go to Deel. Ask us about your provider.', who: 'agent', time: '2 days early' },
+            { n: '05', label: 'Checks it twice', desc: 'Every line is checked against your records, then checked again, so mistakes are caught before you see the file.', who: 'agent', time: 'twice' },
+            { n: '06', label: 'You approve', desc: 'Upload the file to your provider, or approve the pay run in Deel.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Deel-managed payroll"
-          title={<>Two ways to run payday.</>}
-          lead="Keep your current provider and load the change file MambaHR builds, or switch to Deel-managed payroll and let MambaHR send every change to Deel. You choose once, per company."
+          title={<>Two ways to handle payday.</>}
+          lead="Keep your current payroll provider and upload the change file MambaHR builds. Or switch to Deel-managed payroll, and MambaHR sends each change to Deel. You choose once for your company."
           bullets={[
-            'A change file in your provider’s format, checked against the record',
+            'A change file in your provider’s format, checked against your records',
             'Or Deel-managed payroll, with the changes sent to Deel for you',
-            'A person approves every run before anyone is paid',
-            'Benefits administration is not part of MambaHR today; the health-coverage continuation notices (COBRA) at offboarding are',
+            'A person approves every pay run before anyone is paid',
+            'Benefits administration is not included today. MambaHR tracks COBRA health-coverage deadlines at exit and flags them to you.',
           ]}
         >
           <DeelRunCard />
@@ -230,11 +230,11 @@ export default function PayrollPage() {
           warm
           eyebrow="Before payday"
           title={<>The file is ready days early.</>}
-          lead={'Every change is collected as it happens, reconciled twice against the record, and waiting for you days before anyone gets paid.'}
+          lead={'Changes are collected as they happen, checked twice against your records, and ready for you days before payday.'}
           bullets={[
-            'Every change accounted for, with the receipt to prove it',
-            'Discrepancies caught and fixed before the file reaches you',
-            'A full trail of what changed, when, and why',
+            'Every change accounted for, with a record of where it came from',
+            'Mistakes caught and fixed before the file reaches you',
+            'A full history of what changed, when, and why',
           ]}
         >
           <PaydayPhoto />
@@ -242,14 +242,14 @@ export default function PayrollPage() {
 
         <StatTrio
           stats={[
-            { n: 24, suffix: 'h', label: 'of payroll prep gone each month, by our estimate' },
+            { n: 24, suffix: 'h', label: 'of payroll prep saved each month, by our estimate' },
             { n: 0, label: 'pay runs released without a person approving' },
-            { n: 2, suffix: '×', label: 'every file reconciled before you see it' },
+            { n: 2, suffix: '×', label: 'checks on every file before you see it' },
           ]}
         />
 
 
-        <PageCta title={<>Make payday a non-event.</>} sub="A 30-minute demo with one of your real pay cycles. Then we import your data and switch you over." />
+        <PageCta title={<>Make payday <Em>calm.</Em></>} sub="A 30-minute demo using one of your real pay cycles. Then we import your data and switch you over." />
       </main>
       <Footer />
     </>

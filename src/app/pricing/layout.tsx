@@ -5,24 +5,24 @@ import { FAQS } from './faqs'
 import { TIERS } from '@/content/pricing-tiers'
 
 export const metadata: Metadata = {
-  title: 'Pricing | MambaHR | Your first AI HR department',
+  title: 'Pricing | MambaHR',
   description:
-    'Simple per-employee pricing for hiring, onboarding, time off, compliance, and payroll changes. Your whole HR department from $9k a year.',
+    'Simple per-employee pricing. MambaHR takes the HR admin off your team: hiring, onboarding, time off, compliance and payroll changes. From $9k a year.',
   alternates: { canonical: 'https://www.mambahr.com/pricing' },
   openGraph: {
     title: 'Pricing | MambaHR',
     description:
-      'Simple per-employee pricing for your whole AI HR department, hiring, onboarding, time off, compliance, and payroll changes. From $9k a year.',
+      'Simple per-employee pricing for the HR admin your team does today: hiring, onboarding, time off, compliance and payroll changes. From $9k a year.',
     url: 'https://www.mambahr.com/pricing',
     siteName: 'MambaHR',
     type: 'website',
-    images: [{ url: '/og?title=Pricing%20for%20your%20AI%20HR%20department&eyebrow=Pricing', width: 1200, height: 630 }],
+    images: [{ url: '/og?title=Simple%20pricing%2C%20per%20employee&eyebrow=Pricing', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing | MambaHR',
-    description: 'Your whole AI HR department, priced per employee. From $9k a year.',
-    images: ['/og?title=Pricing%20for%20your%20AI%20HR%20department&eyebrow=Pricing'],
+    description: 'HR admin, done for your team. Priced per employee, from $9k a year.',
+    images: ['/og?title=Simple%20pricing%2C%20per%20employee&eyebrow=Pricing'],
   },
 }
 
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
 const pricingJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: 'MambaHR, AI HR Department',
+  name: 'MambaHR',
   description:
-    'The AI HR department: hiring, onboarding, time off, compensation, compliance, and payroll changes, done for you. A person approves the calls that matter.',
+    'HR software that does the admin for your team: hiring, onboarding, time off, pay changes, compliance and payroll changes. A person approves the decisions that matter.',
   brand: { '@type': 'Brand', name: 'MambaHR' },
   url: 'https://www.mambahr.com/pricing',
   offers: {

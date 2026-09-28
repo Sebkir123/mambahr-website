@@ -11,7 +11,7 @@ function CompReviewCard() {
   return (
     <div className="cr agent-edge agent-working agent-lg">
       <div className="bar">
-        <span className="bt">Merit cycle · comp review</span>
+        <span className="bt">Merit raises · pay review</span>
         <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
       </div>
 
@@ -20,7 +20,7 @@ function CompReviewCard() {
         <img className="av" src="/avatars/tom.jpg" alt="Tom Harrison" width={36} height={36} />
         <div className="main">
           <div className="name">Tom Harrison · merit raise <b className="up">+12%</b></div>
-          <div className="meta">Senior Engineer · band</div>
+          <div className="meta">Senior Engineer · pay range</div>
           <div className="gauge" aria-hidden="true">
             <span className="track" />
             <span className="seg" />
@@ -30,17 +30,17 @@ function CompReviewCard() {
             <span className="mk" style={{ left: '100%' }}>high</span>
           </div>
         </div>
-        <span className="chip ok">Within band</span>
+        <span className="chip ok">Within range</span>
       </div>
 
       <div className="row hot">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="av" src="/avatars/maya.jpg" alt="Maya Chen" width={36} height={36} />
         <div className="main">
-          <div className="name">Maya Chen · <b className="up">+18%</b> · above band 8%</div>
-          <div className="meta">Staff Engineer · band · 9:41 AM</div>
+          <div className="name">Maya Chen · <b className="up">+18%</b> · 8% above range</div>
+          <div className="meta">Staff Engineer · 9:41 AM</div>
         </div>
-        <span className="chip route">Routes to you</span>
+        <span className="chip route">Comes to you</span>
         <div className="btns">
           <span className="ok-b">Approve</span>
           <span className="no-b">Decline</span>
@@ -49,7 +49,7 @@ function CompReviewCard() {
 
       <div className="foot">
         <span className="fd" aria-hidden="true" />
-        MambaHR checks every recommendation against your bands before anyone sees it
+        MambaHR checks every raise against your pay ranges first
       </div>
       <style jsx>{`
         .cr {
@@ -135,13 +135,13 @@ function CompReviewCard() {
 function EquityCard() {
   const rows = [
     { t: 'Similar roles, similar pay', m: 'Senior Engineering · 11 peers compared', state: 'ok' as const },
-    { t: 'No gap by gender or ethnicity', m: 'Screened on every change, not once a year', state: 'ok' as const },
-    { t: '2 flags raised for your review', m: 'Both routed to your Head of People with context', state: 'review' as const },
+    { t: 'No gap by gender or ethnicity', m: 'Checked on every change, not once a year', state: 'ok' as const },
+    { t: '2 flags raised for your review', m: 'Both sent to your Head of People with details', state: 'review' as const },
   ]
   return (
     <div className="eq agent-edge agent-done">
       <div className="head">
-        <span className="ht">Pay-equity check · before the change lands</span>
+        <span className="ht">Pay-equity check · before the change</span>
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
       </div>
       {rows.map((r) => (
@@ -204,11 +204,11 @@ function PhotoCard() {
   return (
     <div className="pc">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="ph" src="/v2-people/marcus.jpg" alt="A manager walking into a comp conversation prepared" width={640} height={460} />
+      <img className="ph" src="/v2-people/marcus.jpg" alt="A manager heading into a pay conversation, prepared" width={640} height={460} />
       <div className="float agent-edge agent-done">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
-        <div className="ft">Comp letter signed and filed</div>
-        <div className="fm">Tom Harrison · payroll updated · 2:14 PM</div>
+        <div className="ft">Pay letter signed and filed</div>
+        <div className="fm">Tom Harrison · payroll change ready · 2:14 PM</div>
       </div>
       <style jsx>{`
         .pc { position: relative; }
@@ -249,8 +249,8 @@ export default function CompensationPage() {
       <main id="main">
         <PageHero
           eyebrow="Compensation"
-          title={<>Every raise, <Em>right.</Em></>}
-          lead="No more six weeks of spreadsheets and second-guessing. MambaHR checks every number against your pay ranges (your bands) and screens it for pay equity before anyone sees it. Anything above the band comes to you first."
+          title={<>Every raise, <Em>checked.</Em></>}
+          lead="No more weeks of spreadsheets. MambaHR checks every raise against your pay ranges and for pay equity before anyone sees it. Anything above the range comes to you first."
           photo="/v2-people/team2.jpg"
           photoChip="MambaHR · done"
           photoCaption="Maya’s raise · approved, letter signed"
@@ -259,26 +259,26 @@ export default function CompensationPage() {
         </PageHero>
 
         <AgentLoop
-          eyebrow="The loop"
+          eyebrow="How it works"
           title={<>How a raise <Em>happens.</Em></>}
-          lead="From a manager&rsquo;s Slack message to an updated payroll file, with you on every call that matters."
+          lead="From a manager’s Slack message to the payroll change, with you on every call that matters."
           steps={[
-            { n: '01', label: 'A manager asks in Slack', desc: '“Can we get Tom to $185k?” That message is the whole request, no form, no ticket.', who: 'agent', time: 'sec', img: '/avatars/dave.jpg' },
-            { n: '02', label: 'Checked against bands and pay equity', desc: 'MambaHR holds the number up against your salary bands and screens it for equity issues before it moves.', who: 'agent', time: 'min' },
-            { n: '03', label: 'The big calls come to you first', desc: 'Within policy proceeds. Anything above your threshold routes to a human before it goes anywhere.', who: 'you', img: '/avatars/priya.jpg' },
-            { n: '04', label: 'Approved, dated, filed', desc: 'Comp change approved, effective-dated, and filed to the employee record.', who: 'agent', time: 'min', img: '/avatars/tom.jpg' },
-            { n: '05', label: 'Payroll file updated', desc: 'The change lands in the next payroll file, effective-dated correctly. Nothing to re-key.', who: 'agent', time: 'same day' },
+            { n: '01', label: 'A manager asks in Slack', desc: '“Can we get Tom to $185k?” That message is the whole request. No form, no ticket.', who: 'agent', time: 'sec', img: '/avatars/dave.jpg' },
+            { n: '02', label: 'Checked against pay ranges and pay equity', desc: 'MambaHR compares the number with your pay ranges and checks it for pay-equity issues.', who: 'agent', time: 'min' },
+            { n: '03', label: 'The big calls come to you first', desc: 'Raises within policy go ahead. Anything above your limit comes to a person first.', who: 'you', img: '/avatars/priya.jpg' },
+            { n: '04', label: 'Approved, dated, filed', desc: 'The approved change is dated and filed to the employee record.', who: 'agent', time: 'min', img: '/avatars/tom.jpg' },
+            { n: '05', label: 'Payroll change ready', desc: 'The change goes into the next payroll file with the right effective date. Nothing to retype.', who: 'agent', time: 'same day' },
           ]}
         />
 
         <FeatureSplit
           eyebrow="Pay equity"
           title={<>Equity checked, <Em>every time.</Em></>}
-          lead="MambaHR screens every pay change for equity issues before it happens, not in a year-end audit panic. Clear changes proceed. Anything that looks off comes to a person with the context attached."
+          lead="MambaHR checks every pay change for equity issues before it happens, not in a rush at year end. Clear changes go ahead. Anything that looks off comes to a person with the details."
           bullets={[
-            'Screened on every change, against real peers in the same band',
-            'Flags arrive with context, not just a red number',
-            'No annual scramble, the audit is continuous',
+            'Checked on every change, against people in similar roles',
+            'Flags come with context, not just a red number',
+            'No yearly scramble. The check happens all year.',
           ]}
         >
           <EquityCard />
@@ -287,13 +287,13 @@ export default function CompensationPage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="What changes"
+          eyebrow="Before the conversation"
           title={<>The number is checked <Em>before the conversation.</Em></>}
-          lead="The band check and the equity screen both run before the manager makes the offer, so the conversation is about the person rather than the math."
+          lead="The pay-range check and the equity check both happen before the manager talks to the employee. The conversation can be about the person, not the math."
           bullets={[
-            'Managers know the number is defensible before they say it',
+            'Managers know the number holds up before they say it',
             'Employees hear a consistent story about how pay works',
-            'The paperwork after the conversation handles itself',
+            'The paperwork afterwards is drafted for you',
           ]}
         >
           <PhotoCard />
@@ -301,14 +301,14 @@ export default function CompensationPage() {
 
         <StatTrio
           stats={[
-            { n: 100, suffix: '%', label: 'of raises checked against your bands' },
-            { n: 0, label: 'comp letters you write by hand' },
-            { n: 1, label: 'human on every above-band call' },
+            { n: 100, suffix: '%', label: 'of raises checked against your pay ranges' },
+            { n: 0, label: 'pay letters written by hand' },
+            { n: 1, label: 'person approves every raise above the range' },
           ]}
         />
 
 
-        <PageCta title={<>Pay people right. <Em>Prove it.</Em></>} sub="A 30-minute demo on one raise against your own bands. Then we import your data and switch you over." />
+        <PageCta title={<>Pay people right. <Em>Prove it.</Em></>} sub="A 30-minute demo with one raise, checked against your own pay ranges. Then we import your data and switch you over." />
       </main>
       <Footer />
     </>
