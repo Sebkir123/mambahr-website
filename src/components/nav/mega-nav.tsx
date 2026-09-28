@@ -48,7 +48,10 @@ const topLinks = [
   { label: 'About',   href: '/about'   },
 ]
 
-export default function MegaNav() {
+// `tone="onDark"` lets a page with a dark hero start with a transparent bar
+// and light text; it turns into the normal light bar once the page scrolls or
+// the Product panel opens.
+export default function MegaNav({ tone = 'light' }: { tone?: 'light' | 'onDark' } = {}) {
   const [scrolled, setScrolled] = useState(false)
   const [productOpen, setProductOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -138,7 +141,7 @@ export default function MegaNav() {
       <nav
         ref={navRef}
         aria-label="Main navigation"
-        className={`${s.nav}${scrolled ? ` ${s.scrolled}` : ''}${scrolled || productOpen ? ` ${s.raised}` : ''}`}
+        className={`${s.nav}${scrolled ? ` ${s.scrolled}` : ''}${scrolled || productOpen ? ` ${s.raised}` : ''}${tone === 'onDark' && !scrolled && !productOpen && !mobileOpen ? ` ${s.onDark}` : ''}`}
       >
         {/* gradient hairline, fades in on scroll */}
         <div aria-hidden="true" className={s.hairline} />

@@ -18,6 +18,20 @@
   border-bottom-color: var(--border);
 }
 .nav.scrolled { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); }
+.nav.onDark {
+  background-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+.nav.onDark .wordmark { color: #F6F1E7; }
+.nav.onDark .logo > span:first-child { color: #E0B884 !important; }
+.nav.onDark .trigger,
+.nav.onDark .topLink { color: rgba(246, 241, 231, 0.78); }
+.nav.onDark .trigger:hover,
+.nav.onDark .topLink:hover { color: #F6F1E7; }
+.nav.onDark .burger { color: #F6F1E7; }
+.nav.onDark :global(.btn-dark) { background: #F6F1E7; color: #100D14; }
 .hairline {
   position: absolute;
   left: 0;
