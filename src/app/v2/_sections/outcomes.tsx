@@ -1,142 +1,184 @@
 'use client'
 
-const SPARK = [40, 55, 48, 70, 62, 80, 72, 90, 84, 96]
+const SOURCES = ['Onboarding', 'Time off', 'Approvals', 'Payroll changes', 'Employee questions']
 
-/* Outcomes + compliance in one beat: the hours back, an onboarding before and
-   after, and the cited answer. Three cards, one section. */
+const DAY_ONE = [
+  { t: 'Offer signed', when: 'Thu', done: true },
+  { t: 'Form I-9 sent to Maya', when: 'Thu', done: true },
+  { t: 'Okta, Slack and Google requested', when: 'Thu', done: true },
+  { t: 'Laptop request sent to IT', when: 'Fri', done: true },
+  { t: 'Pick her first-week buddy', when: 'Your call', done: false },
+]
+
+/* What the team gets back: three matching light cards. The hours, a new hire
+   ready before day one, and an answer with the law behind it. */
 export default function Outcomes() {
   return (
-    <section className="oc">
+    <section className="oc" id="outcomes">
       <div className="wrap">
         <div className="head" data-reveal>
           <p className="eyebrow">What you get back</p>
           <h2 className="title">Give your HR team <span className="em">their week back.</span></h2>
           <p className="lead">
-            We estimate MambaHR takes about 27 hours of admin a week off a small HR team. That is
-            our estimate from how long these tasks take today, not a measured customer average.
+            By our estimate, MambaHR takes about 27 hours of admin a week off a small HR team.
+            That time goes back to your people.
           </p>
         </div>
 
         <div className="grid">
-          {/* hours back, dark hero metric */}
-          <article className="card dark" data-reveal data-delay="1">
-            <span className="lbl muted">Hours back, every week</span>
-            <div className="num big"><span data-count="27">27</span><em>hrs</em></div>
-            <p className="cap ondark">MambaHR prepares payroll changes and handles onboarding, leave and compliance checks. You approve what matters.</p>
-            <div className="spark">
-              {SPARK.map((h, i) => (
-                <span key={i} style={{ height: `${h}%` }} />
+          <article className="card hours" data-reveal data-delay="1">
+            <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /></span>
+            <div className="top">
+              <span className="lbl">Hours back, every week</span>
+              <div className="big">27<span>hrs</span></div>
+              <p className="cap">of admin taken off a small HR team, by our estimate.</p>
+            </div>
+            <div className="glass">
+              <span className="g-l">Where the time comes from</span>
+              <div className="pills">
+                {SOURCES.map((s) => <span key={s} className="pill">{s}</span>)}
+              </div>
+            </div>
+          </article>
+
+          <article className="card" data-reveal data-delay="2">
+            <div className="top">
+              <span className="lbl">A new hire, ready before day one</span>
+              <p className="cap">Your part takes about 4 minutes. By hand it is closer to half a day.</p>
+            </div>
+            <ul className="list">
+              {DAY_ONE.map((d) => (
+                <li key={d.t} className={d.done ? '' : 'open'}>
+                  <span className={d.done ? 'tick' : 'ring'} aria-hidden="true" />
+                  <span className="li-t">{d.t}</span>
+                  <span className="li-w">{d.when}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </article>
 
-          {/* onboarding before/after */}
-          <article className="card light" data-reveal data-delay="2">
-            <span className="lbl">Onboarding a new hire</span>
-            <div className="cmp">
-              <div className="cmp-row">
-                <span className="cmp-l">The old way</span>
-                <span className="cmp-bar old"><i style={{ width: '100%' }} /></span>
-                <span className="cmp-v old-v">half a day</span>
-              </div>
-              <div className="cmp-row">
-                <span className="cmp-l">With MambaHR</span>
-                <span className="cmp-bar new"><i style={{ width: '9%' }} /></span>
-                <span className="cmp-v new-v">4 min</span>
-              </div>
-            </div>
-            <p className="cap">Paperwork, logins, and first week, ready before they arrive.</p>
-          </article>
-
-          {/* the cited answer */}
-          <article className="card light agent-edge agent-done" data-reveal data-delay="3">
-            <span className="lbl">Clear answers, with the law cited</span>
-            <div className="qa">
+          <article className="card" data-reveal data-delay="3">
+            <div className="top">
+              <span className="lbl">Clear answers, with the law cited</span>
               <p className="q">&ldquo;I&rsquo;m having a baby in June. How much leave can I take?&rdquo;</p>
-              <div className="a">
-                <span className="a-who">MambaHR <em>6 seconds later</em></span>
-                Up to 12 weeks of job-protected federal family leave (FMLA) for bonding, once eligibility is confirmed.
-                <span className="a-sub">California has its own leave rules too. MambaHR cites them and asks HR to confirm how they combine.</span>
-              </div>
             </div>
-            <p className="cap">Every answer shows the law it relied on. Anything that needs judgment goes to a person first.</p>
+            <div className="ans">
+              <span className="a-who">MambaHR <em>6 seconds later</em></span>
+              <p className="a-t">Up to 12 weeks of job-protected federal family leave (FMLA) for bonding, once eligibility is confirmed.</p>
+              <p className="a-s">California has its own leave rules too. MambaHR cites them and asks HR to confirm how they combine.</p>
+              <div className="cites"><span>29 U.S.C. § 2612</span><span>Cal. Gov. Code § 12945.2</span></div>
+            </div>
           </article>
         </div>
 
-        <p className="note" data-reveal>
-          Estimates based on how long these tasks take a small HR team today.
-        </p>
+        <p className="foot">Hours are our estimate of how long these tasks take a small HR team today.</p>
       </div>
 
       <style jsx>{`
-        .note {
-          margin: 26px auto 0;
-          max-width: 640px;
-          text-align: center;
-          font-size: 12px;
-          line-height: 1.55;
-          color: var(--text-faint);
-        }
-        .oc { background: var(--bg); padding-block: clamp(72px, 9vw, 112px); }
+        .oc { background: var(--bg); padding-block: clamp(80px, 10vw, 128px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
-        .head { max-width: none; margin-bottom: clamp(40px, 5vw, 60px); }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
-        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-        .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
-        .lead { font-size: clamp(17px, 2vw, 19px); line-height: 1.6; color: var(--text-muted); margin: 20px 0 0; max-width: 620px; }
-
-        .grid { display: grid; grid-template-columns: 1fr 1fr 1.25fr; gap: 18px; }
-        .card { border-radius: 18px; padding: 24px; min-height: 240px; display: flex; flex-direction: column; transition: transform 0.22s ease, box-shadow 0.22s ease; }
-        .card:hover { transform: translateY(-4px); }
-        .light { background: var(--bg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-        .light:hover { box-shadow: var(--shadow-md); }
-        .dark { background: radial-gradient(90% 80% at 20% 0%, rgba(185, 138, 78, 0.22), transparent 60%), radial-gradient(70% 60% at 90% 100%, rgba(106, 93, 166, 0.18), transparent 60%), #14110C; color: #fff; }
-
-        .lbl { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .lbl.muted { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.66); font-weight: 600; }
-        .num { font-family: var(--font-serif); font-size: clamp(40px, 4vw, 52px); line-height: 1; color: var(--text); margin: 10px 0; }
-        .num.big { color: #fff; display: flex; align-items: baseline; gap: 6px; }
-        .num.big em { font-style: normal; font-size: 15px; color: rgba(255,255,255,0.6); }
-        .cap { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 8px 0 0; }
-        .cap.ondark { color: rgba(255,255,255,0.62); }
-        .dark .lbl { color: #fff; }
-
-        .spark { margin-top: auto; display: flex; align-items: flex-end; gap: 5px; height: 52px; padding-top: 16px; }
-        .spark span { flex: 1; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, #D4AA7C, #B98A4E); opacity: 0.9; }
-        .spark span:nth-child(n+8) { background: linear-gradient(180deg, #AEA2E6, #6A5DA6); }
-
-        /* before/after comparison */
-        .cmp { display: flex; flex-direction: column; gap: 13px; margin: 18px 0 4px; }
-        .cmp-row { display: grid; grid-template-columns: 74px 1fr auto; align-items: center; gap: 10px; }
-        .cmp-l { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-faint); }
-        .cmp-bar { height: 10px; border-radius: 999px; background: var(--bg-elevated); overflow: hidden; }
-        .cmp-bar i { display: block; height: 100%; border-radius: 999px; }
-        .cmp-bar.old i { background: var(--border-mid); }
-        .cmp-bar.new i { background: linear-gradient(90deg, #B98A4E, #6A5DA6); }
-        .cmp-v { font-family: var(--font-mono); font-size: 12px; white-space: nowrap; }
-        .old-v { color: var(--text-faint); text-decoration: line-through; }
-        .new-v { color: var(--color-green); font-weight: 600; }
-
-        /* the cited answer */
-        .qa { margin: 14px 0 4px; display: flex; flex-direction: column; gap: 10px; }
-        .q { font-family: var(--font-serif); font-size: 18px; line-height: 1.35; letter-spacing: -0.01em; color: var(--text); margin: 0; }
-        .a {
-          background: linear-gradient(160deg, #FFF2E6, #FBE6D6);
-          border: 1px solid #E6D3BC;
-          border-radius: 4px 14px 14px 14px;
-          padding: 12px 14px;
-          font-size: 15px;
-          font-weight: 700;
-          color: var(--text);
-          letter-spacing: -0.01em;
+        .eyebrow {
+          font-family: var(--font-mono);
+          font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: 0.16em;
+          color: var(--gold-dark);
+          margin: 0 0 16px;
         }
-        .a-who { display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); margin-bottom: 6px; }
-        .a-who em { font-style: normal; text-transform: none; letter-spacing: 0; color: var(--color-green); margin-left: 6px; }
-        .a-sub { display: block; margin-top: 6px; font-size: 13px; font-weight: 400; color: var(--text-muted); }
+        .title {
+          font-family: var(--font-serif);
+          font-weight: 400;
+          font-size: clamp(34px, 4.6vw, 58px);
+          line-height: 1.04;
+          letter-spacing: -0.03em;
+          color: var(--text);
+          margin: 0;
+          text-wrap: balance;
+        }
+        .em { font-style: italic; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .lead { font-size: 18px; line-height: 1.6; color: var(--text-muted); max-width: 56ch; margin: 20px 0 0; }
 
-        @media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
-        @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } .card.agent-edge { grid-column: 1 / -1; } }
-        @media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 20px;
+          margin-top: clamp(40px, 5vw, 56px);
+          align-items: stretch;
+        }
+        .card {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 24px;
+          padding: 28px;
+          border-radius: 24px;
+          background: #fff;
+          border: 1px solid var(--border-faint);
+          box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 24px 48px -32px rgba(60, 40, 90, 0.3);
+        }
+        .top { display: grid; gap: 10px; }
+        .lbl { font-size: 15px; font-weight: 600; color: var(--text); }
+        .cap { margin: 0; font-size: 15px; line-height: 1.55; color: var(--text-muted); }
+
+        /* card 1: the luminous field */
+        .hours { background: linear-gradient(155deg, #f6d3ad 0%, #efc3b8 45%, #d3c4ec 100%); border-color: rgba(255, 255, 255, 0.7); }
+        .field { position: absolute; inset: 0; z-index: -1; }
+        .field i { position: absolute; border-radius: 50%; filter: blur(50px); }
+        .f1 { width: 80%; height: 70%; left: -20%; top: -30%; background: radial-gradient(circle, rgba(255, 236, 210, 0.95), rgba(255, 236, 210, 0) 70%); }
+        .f2 { width: 70%; height: 70%; right: -20%; bottom: -30%; background: radial-gradient(circle, rgba(157, 143, 224, 0.75), rgba(157, 143, 224, 0) 70%); }
+        .big {
+          font-family: var(--font-serif);
+          font-size: clamp(72px, 8vw, 104px);
+          line-height: 0.9;
+          letter-spacing: -0.05em;
+          color: var(--text);
+          margin-top: 6px;
+        }
+        .big span { font-size: 0.26em; letter-spacing: 0; margin-left: 8px; color: var(--text-muted); }
+        .hours .cap { color: #4a4540; }
+        .glass {
+          display: grid;
+          gap: 10px;
+          padding: 14px;
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.55);
+          -webkit-backdrop-filter: blur(14px);
+          backdrop-filter: blur(14px);
+          border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        .g-l { font-size: 12.5px; font-weight: 600; color: #5b5750; }
+        .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+        .pill { font-size: 13px; padding: 5px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.85); color: var(--text); border: 1px solid rgba(26, 26, 25, 0.06); }
+
+        /* card 2: the day-one checklist */
+        .list { list-style: none; margin: 0; padding: 6px 16px; border-radius: 16px; background: var(--bg-surface); border: 1px solid var(--border-faint); }
+        .list li { display: grid; grid-template-columns: 20px 1fr auto; gap: 10px; align-items: center; padding: 10px 0; font-size: 14px; color: var(--text); }
+        .list li + li { border-top: 1px solid var(--border-faint); }
+        .tick { width: 20px; height: 20px; border-radius: 50%; background: var(--color-green); position: relative; }
+        .tick::after { content: ''; position: absolute; left: 7px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .ring { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--violet); background: #fff; }
+        .li-w { font-size: 12.5px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+        .open .li-t { font-weight: 600; }
+        .open .li-w { color: var(--violet); font-weight: 600; }
+
+        /* card 3: the cited answer */
+        .q { margin: 4px 0 0; font-family: var(--font-serif); font-size: 21px; line-height: 1.3; color: var(--text); }
+        .ans { display: grid; gap: 8px; padding: 16px; border-radius: 16px; background: var(--bg-surface); border: 1px solid var(--border-faint); }
+        .a-who { font-size: 12.5px; font-weight: 600; color: var(--text); }
+        .a-who em { font-style: normal; font-weight: 400; color: var(--color-green); margin-left: 6px; }
+        .a-t { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.45; color: var(--text); }
+        .a-s { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--text-muted); }
+        .cites { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+        .cites span { font-family: var(--font-mono); font-size: 11px; color: var(--gold-dark); background: var(--gold-tint); border-radius: 6px; padding: 2px 7px; }
+
+        .foot { margin: 22px 0 0; font-size: 13px; color: var(--text-faint); }
+
+        @media (max-width: 1000px) {
+          .grid { grid-template-columns: 1fr; max-width: 560px; }
+        }
       `}</style>
     </section>
   )

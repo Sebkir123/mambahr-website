@@ -3,14 +3,16 @@
 import Link from 'next/link'
 
 const ROWS = [
-  { them: 'File the Form I-9, chase E-Verify', themCost: '45 min', us: 'Form I-9 and E-Verify check started', usWhen: '9:02 AM' },
-  { them: 'Hunt down the right approver', themCost: '3 emails', us: 'Approved, within your policy', usWhen: '9:04 AM' },
-  { them: 'Google the family-leave (FMLA) eligibility rule', themCost: '1 hr + Legal', us: 'Answered, with the law cited', usWhen: '9:06 AM' },
-  { them: 'Build the headcount report', themCost: '2 hrs', us: 'Report ready when asked', usWhen: '9:11 AM' },
-  { them: 'Onboard the new hire, click by click', themCost: 'half a day', us: 'Day-one ready, accounts and all', usWhen: '9:14 AM' },
-  { them: 'Answer the same time-off question. Again.', themCost: 'daily', us: 'Answered in Slack, instantly', usWhen: 'always' },
+  { them: 'File the Form I-9, chase E-Verify', themCost: '45 min', us: 'Form I-9 and E-Verify check started', usWhen: '9:02' },
+  { them: 'Find the right person to approve', themCost: '3 emails', us: 'Approved, within your policy', usWhen: '9:04' },
+  { them: 'Look up the family leave (FMLA) rule', themCost: '1 hr', us: 'Answered, with the law cited', usWhen: '9:06' },
+  { them: 'Build the headcount report', themCost: '2 hrs', us: 'Report ready when asked', usWhen: '9:11' },
+  { them: 'Set up the new hire, click by click', themCost: 'half a day', us: 'Day one ready, accounts and all', usWhen: '9:14' },
+  { them: 'Answer the same time-off question', themCost: 'every day', us: 'Answered in Slack right away', usWhen: 'always' },
 ]
 
+/* The same Monday twice: by hand, and with MambaHR. Both cards share one grid
+   (subgrid rows), so each task sits level with its MambaHR counterpart. */
 export default function Difference() {
   return (
     <section className="df">
@@ -26,246 +28,124 @@ export default function Difference() {
         </div>
 
         <div className="cols" data-reveal data-delay="1">
-          {/* Your list with any other HR system */}
           <div className="col them">
-            <div className="t-head">
-              <span className="t-title">Monday, before MambaHR</span>
-              <span className="t-sub">Rippling · Gusto · Workday · BambooHR</span>
+            <div className="c-head">
+              <span className="c-t">Monday, by hand</span>
+              <span className="c-s">In your current HR software</span>
             </div>
             {ROWS.map((r) => (
-              <div key={r.them} className="t-line">
+              <div key={r.them} className="row">
                 <span className="box" aria-hidden="true" />
-                <span className="t-text">{r.them}</span>
-                <span className="cost">{r.themCost}</span>
+                <span className="r-t">{r.them}</span>
+                <span className="r-v cost">{r.themCost}</span>
               </div>
             ))}
-            <div className="t-foot">
-              Still yours to do <b>&asymp; 9 hrs / week</b>
+            <div className="c-foot">
+              <span>Monday alone</span>
+              <b>about 9 hours</b>
             </div>
           </div>
 
-          {/* The same Monday, on MambaHR, dark agent surface */}
-          <div className="col us agent-edge agent-working agent-lg">
-            <div className="u-head">
-              <span className="u-title"><span className="logo">M</span>MambaHR</span>
-              <span className="mamba-chip working ondark"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
+          <div className="col us">
+            <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /></span>
+            <div className="c-head">
+              <span className="c-t"><span className="mark" aria-hidden="true">M</span>Monday, with MambaHR</span>
+              <span className="c-s">Done for you, and logged</span>
             </div>
-            <div className="u-sub">Monday, with MambaHR</div>
             {ROWS.map((r) => (
-              <div key={r.us} className="u-line">
+              <div key={r.us} className="row">
                 <span className="check" aria-hidden="true" />
-                <span className="u-text">{r.us}</span>
-                <span className="when">{r.usWhen}</span>
+                <span className="r-t">{r.us}</span>
+                <span className="r-v">{r.usWhen}</span>
               </div>
             ))}
-            <div className="u-foot">
-              Still yours <b>the judgment call</b>
+            <div className="c-foot">
+              <span>Left for you</span>
+              <b>the judgment calls</b>
             </div>
           </div>
         </div>
 
-        <div className="compare" data-reveal data-delay="2">
-          <span className="cmp-l">Compare</span>
-          <Link href="/compare/rippling">vs Rippling</Link>
-          <Link href="/compare/gusto">vs Gusto</Link>
-          <Link href="/compare/workday">vs Workday</Link>
-          <Link href="/compare/bamboohr">vs BambooHR</Link>
-        </div>
+        <p className="compare" data-reveal data-delay="2">
+          Compare MambaHR with{' '}
+          <Link href="/compare/rippling">Rippling</Link>,{' '}
+          <Link href="/compare/gusto">Gusto</Link>,{' '}
+          <Link href="/compare/workday">Workday</Link> or{' '}
+          <Link href="/compare/bamboohr">BambooHR</Link>.
+        </p>
       </div>
 
       <style jsx>{`
         .df { background: var(--bg); padding-block: clamp(80px, 10vw, 128px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
-        .head { max-width: none; margin-bottom: clamp(44px, 5vw, 64px); }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
-        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.08; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-        .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
-        .lead { font-size: clamp(17px, 2vw, 19px); line-height: 1.6; color: var(--text-muted); margin: 20px 0 0; max-width: 620px; }
+        .head { margin-bottom: clamp(40px, 5vw, 56px); }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0 0 16px; }
+        .title {
+          font-family: var(--font-serif);
+          font-weight: 400;
+          font-size: clamp(34px, 4.6vw, 58px);
+          line-height: 1.04;
+          letter-spacing: -0.03em;
+          color: var(--text);
+          margin: 0;
+          max-width: 22ch;
+          text-wrap: balance;
+        }
+        .em { font-style: italic; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .lead { font-size: 18px; line-height: 1.6; color: var(--text-muted); max-width: 56ch; margin: 20px 0 0; }
 
         .cols {
           display: grid;
-          grid-template-columns: 0.9fr 1.1fr;
-          gap: clamp(18px, 2.6vw, 34px);
-          align-items: center;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-template-rows: auto repeat(6, auto) auto;
+          column-gap: 20px;
         }
-        .col { border-radius: 18px; display: flex; flex-direction: column; }
-
-        /* ── The paper to-do list ── */
-        .them {
-          background: #FFFEFB;
-          border: 1px solid var(--border);
-          box-shadow: var(--shadow-sm);
-          padding: 26px 24px 22px;
-          transform: rotate(-1deg);
-        }
-        .t-head { padding-bottom: 14px; border-bottom: 1px solid var(--border-faint); }
-        .t-title {
-          display: block;
-          font-family: var(--font-serif);
-          font-style: italic;
-          font-size: 21px;
-          color: var(--text-muted);
-        }
-        .t-sub {
-          display: block;
-          margin-top: 5px;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--text-faint);
-        }
-        /* Ruled rows grow with their text: a fixed row height let two-line
-           items on a phone print over the next row. */
-        .t-line {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          min-height: 48px;
-          padding: 8px 0;
-          border-bottom: 1px solid var(--border-faint);
-          line-height: 1.35;
-          font-size: 15px;
-          color: var(--text-muted);
-        }
-        .box {
-          flex: none;
-          width: 16px;
-          height: 16px;
-          border: 1.5px solid var(--border-mid);
-          border-radius: 4px;
-          background: #fff;
-        }
-        .t-text { flex: 1; min-width: 0; }
-        .cost {
-          flex: none;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          color: #A8552F;
-          white-space: nowrap;
-        }
-        .t-foot {
-          margin-top: 14px;
-          padding-top: 14px;
-          border-top: 1px dashed var(--border-mid);
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-          gap: 10px;
-          font-size: 13px;
-          color: var(--text-faint);
-        }
-        .t-foot b { font-family: var(--font-mono); font-size: 13px; color: #A8552F; font-weight: 600; }
-
-        /* ── The dark agent surface ── */
-        .us {
-          background:
-            radial-gradient(80% 60% at 12% 0%, rgba(185, 138, 78, 0.22), transparent 58%),
-            radial-gradient(70% 55% at 95% 10%, rgba(106, 93, 166, 0.26), transparent 60%),
-            #14110C;
-          padding: 28px 26px 24px;
-          box-shadow: var(--shadow-float);
-        }
-        .u-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-        .u-title { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: #fff; }
-        .logo {
-          width: 26px;
-          height: 26px;
-          border-radius: 8px;
-          background: #fff;
-          color: #14110C;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: var(--font-serif);
-          font-size: 16px;
-        }
-        :global(.mamba-chip.ondark) { color: #AEA2E6; }
-        :global(.mamba-chip.ondark .mc-i) { background: #AEA2E6; }
-        .u-sub {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          color: rgba(255, 255, 255, 0.55);
-          margin: 14px 0 6px;
-          padding-bottom: 10px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .u-line {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 12.5px 0;
-          font-size: 15px;
-        }
-        .u-line + .u-line { border-top: 1px solid rgba(255, 255, 255, 0.07); }
-        .u-text { flex: 1; min-width: 0; color: rgba(255, 255, 255, 0.94); font-weight: 500; }
-        .when {
-          flex: none;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          color: #8FC9A4;
-          white-space: nowrap;
-        }
-        .check {
-          flex: none;
-          width: 18px;
-          height: 18px;
-          border-radius: 999px;
-          background: var(--color-green);
+        .col {
           position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          grid-row: 1 / span 8;
+          display: grid;
+          grid-template-rows: subgrid;
+          padding: 8px 28px;
+          border-radius: 24px;
+          border: 1px solid var(--border-faint);
+          background: #fff;
+          box-shadow: 0 24px 48px -32px rgba(60, 40, 90, 0.28);
         }
-        .check::after {
-          content: '';
-          position: absolute;
-          left: 6px;
-          top: 3.5px;
-          width: 4px;
-          height: 8px;
-          border: solid #fff;
-          border-width: 0 2px 2px 0;
-          transform: rotate(45deg);
-        }
-        .u-foot {
-          margin-top: 16px;
-          padding: 13px 16px;
-          border-radius: 12px;
-          background: rgba(255, 255, 255, 0.06);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-          gap: 10px;
-          font-size: 13px;
-          color: rgba(255, 255, 255, 0.6);
-        }
-        .u-foot b {
-          font-family: var(--font-mono);
-          font-size: 13px;
-          font-weight: 600;
-          background: linear-gradient(100deg, #D4AA7C, #AEA2E6);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-        }
+        .us { background: linear-gradient(155deg, #fbe7d3 0%, #f3dcd8 45%, #e4dcf6 100%); border-color: rgba(255, 255, 255, 0.8); }
+        .field { position: absolute; inset: 0; z-index: -1; }
+        .field i { position: absolute; border-radius: 50%; filter: blur(50px); }
+        .f1 { width: 60%; height: 60%; left: -15%; top: -25%; background: radial-gradient(circle, rgba(255, 240, 220, 0.95), rgba(255, 240, 220, 0) 70%); }
+        .f2 { width: 60%; height: 70%; right: -20%; bottom: -30%; background: radial-gradient(circle, rgba(170, 156, 232, 0.55), rgba(170, 156, 232, 0) 70%); }
 
-        .compare { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-        .cmp-l { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); margin-right: 4px; }
-        .compare :global(a) {
-          font-size: 14px;
-          font-weight: 600;
-          color: var(--text-muted);
-          border: 1px solid var(--border);
-          border-radius: 999px;
-          padding: 8px 15px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-        .compare :global(a:hover) { color: var(--text); border-color: var(--border-mid); }
+        .c-head { display: grid; gap: 4px; padding: 22px 0 18px; border-bottom: 1px solid var(--border-faint); }
+        .us .c-head { border-bottom-color: rgba(26, 26, 25, 0.08); }
+        .c-t { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 22px; letter-spacing: -0.01em; color: var(--text); }
+        .c-s { font-size: 14px; color: var(--text-faint); }
+        .mark { width: 26px; height: 26px; border-radius: 7px; background: var(--text); color: #fff; display: grid; place-items: center; font-size: 14px; font-weight: 600; flex: none; }
 
-        @media (max-width: 760px) {
-          .cols { grid-template-columns: 1fr; }
-          .them { transform: none; }
+        .row { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 13px 0; font-size: 15px; color: var(--text); border-bottom: 1px solid var(--border-faint); }
+        .us .row { border-bottom-color: rgba(26, 26, 25, 0.07); }
+        .them .r-t { color: var(--text-muted); }
+        .r-v { font-size: 13px; color: var(--text-faint); font-variant-numeric: tabular-nums; white-space: nowrap; }
+        .cost { color: #A4512C; }
+        .box { width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid var(--border-mid); background: #fff; }
+        .check { width: 20px; height: 20px; border-radius: 50%; background: var(--color-green); position: relative; }
+        .check::after { content: ''; position: absolute; left: 7px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+
+        .c-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 18px 0 20px; font-size: 14px; color: var(--text-faint); }
+        .c-foot b { font-family: var(--font-serif); font-weight: 400; font-size: 20px; color: var(--text); }
+        .them .c-foot b { color: #A4512C; }
+
+        .compare { margin: 24px 0 0; font-size: 15px; color: var(--text-muted); }
+        .compare :global(a) { color: var(--text); font-weight: 600; text-decoration: underline; text-decoration-color: var(--border-mid); text-underline-offset: 3px; }
+        .compare :global(a:hover) { text-decoration-color: var(--text); }
+
+        @media (max-width: 860px) {
+          .cols { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 16px; }
+          .col { grid-row: auto; grid-template-rows: none; display: block; padding: 4px 20px; }
+          .row { font-size: 14.5px; }
         }
       `}</style>
     </section>

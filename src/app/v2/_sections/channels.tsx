@@ -10,37 +10,32 @@ export default function Channels() {
         <div className="copy" data-reveal>
           <p className="eyebrow">No new tool to learn</p>
           <h2 className="title">
-            Ask it in Slack. It does the work <span className="em">in MambaHR.</span>
+            Ask in Slack. <span className="em">The admin gets done.</span>
           </h2>
           <p className="lead">
             Your team asks <b>@MambaHR</b> in Slack, the way they would ask a colleague.
             It checks your policy, does the task, and keeps a record of it.
           </p>
-          <div className="chans">
-            <div className="chan">
+          <ul className="points">
+            <li>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="ch-logo" src="/slack-new-logo.svg" alt="" width={22} height={22} />
-              <div>
-                <div className="ch-n">Slack</div>
-                <div className="ch-d">Mention it in any channel or DM</div>
-              </div>
-            </div>
-            <div className="chan">
-              <span className="ch-logo mamba" aria-hidden="true">M</span>
-              <div>
-                <div className="ch-n">The MambaHR app</div>
-                <div className="ch-d">Approvals, records, and the full trail</div>
-              </div>
-            </div>
-          </div>
-          <p className="audit"><span className="a-dot" aria-hidden="true" />Every action is logged, so you can always see what happened and why.</p>
+              <img className="pt-i" src="/slack-new-logo.svg" alt="" width={20} height={20} />
+              <div><b>In Slack</b><span>Mention @MambaHR in any channel or direct message.</span></div>
+            </li>
+            <li>
+              <span className="pt-i pt-m" aria-hidden="true">M</span>
+              <div><b>In the MambaHR app</b><span>Approvals, employee records and the full history.</span></div>
+            </li>
+            <li>
+              <span className="pt-i pt-ok" aria-hidden="true" />
+              <div><b>Every action logged</b><span>You can always see what happened and why.</span></div>
+            </li>
+          </ul>
         </div>
 
         <div className="stage" data-reveal data-delay="1">
           <span className="field" aria-hidden="true"><i className="fa" /><i className="fb" /><i className="fg" /></span>
-          <div className="chip chip-a" aria-hidden="true"><span className="chip-k">Balance</span><span className="chip-v">12 &rarr; 9 days</span></div>
-          <div className="chip chip-b" aria-hidden="true"><span className="chip-dot" /><span className="chip-v">Payday record updated</span></div>
-          <div className="sw agent-edge agent-working">
+          <div className="sw">
             <div className="sw-bar">
               <span className="dots"><i /><i /><i /></span>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -161,55 +156,17 @@ export default function Channels() {
           max-width: 420px;
         }
         .lead b { color: var(--violet); font-weight: 700; }
-        .chans { display: flex; flex-direction: column; gap: 4px; margin-top: 26px; }
-        .chan {
-          display: flex;
-          align-items: center;
-          gap: 13px;
-          padding: 11px 14px;
-          border-radius: 12px;
-          border: 1px solid transparent;
-          transition: border-color 0.15s ease, background 0.15s ease;
-        }
-        .chan:hover { background: var(--bg); border-color: var(--border); }
-        .ch-logo {
-          flex: none;
-          width: 30px;
-          height: 30px;
-          border-radius: 8px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: var(--bg);
-          border: 1px solid var(--border);
-          padding: 4px;
-          box-sizing: border-box;
-        }
-        .ch-logo.mamba {
-          background: #1A1A19;
-          border-color: #1A1A19;
-          color: #fff;
-          font-family: var(--font-serif);
-          font-size: 17px;
-        }
-        .ch-n { font-size: 15px; font-weight: 700; color: var(--text); }
-        .ch-d { font-size: 13px; color: var(--text-faint); margin-top: 1px; }
-        .audit {
-          display: flex;
-          align-items: center;
-          gap: 9px;
-          margin: 22px 0 0;
-          padding: 11px 14px;
-          font-size: 13px;
-          color: var(--text-muted);
-          background: var(--gold-tint);
-          border: 1px solid rgba(138, 101, 53, 0.18);
-          border-radius: 10px;
-          max-width: 420px;
-        }
-        .a-dot { flex: none; width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
 
         /* ---- Slack window ---- */
+        .points { list-style: none; margin: 30px 0 0; padding: 0; display: grid; }
+        .points li { display: grid; grid-template-columns: 28px 1fr; gap: 14px; align-items: start; padding: 16px 0; border-top: 1px solid var(--border-faint); }
+        .points li:last-child { border-bottom: 1px solid var(--border-faint); }
+        .points b { display: block; font-size: 15px; font-weight: 600; color: var(--text); }
+        .points div span { font-size: 14.5px; color: var(--text-muted); line-height: 1.5; }
+        .pt-i { width: 24px; height: 24px; margin-top: 1px; }
+        .pt-m { display: grid; place-items: center; border-radius: 7px; background: var(--text); color: #fff; font-family: var(--font-serif); font-size: 13px; }
+        .pt-ok { position: relative; border-radius: 50%; background: var(--color-green); }
+        .pt-ok::after { content: ''; position: absolute; left: 9px; top: 5px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .stage {
           position: relative;
           isolation: isolate;
@@ -223,28 +180,6 @@ export default function Channels() {
         .fa { width: 70%; height: 70%; left: -20%; top: -25%; background: radial-gradient(circle, rgba(255, 214, 170, 0.9), rgba(255, 214, 170, 0) 70%); }
         .fb { width: 60%; height: 70%; right: -20%; bottom: -30%; background: radial-gradient(circle, rgba(74, 58, 150, 0.9), rgba(74, 58, 150, 0) 70%); }
         .fg { inset: 0; border-radius: 0; filter: none; background-image: ${GRAIN}; background-size: 220px; opacity: 0.35; mix-blend-mode: overlay; }
-        .chip {
-          position: absolute;
-          z-index: 3;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 10px 14px;
-          border-radius: 14px;
-          background: rgba(255, 255, 255, 0.66);
-          -webkit-backdrop-filter: blur(18px) saturate(170%);
-          backdrop-filter: blur(18px) saturate(170%);
-          border: 1px solid rgba(255, 255, 255, 0.8);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 18px 40px -16px rgba(40, 25, 80, 0.5);
-          font-size: 13.5px;
-          color: #1a1a19;
-        }
-        .chip-a { right: 22px; top: 16px; }
-        .chip-b { left: 14px; bottom: 12%; }
-        .chip-k { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b4e26; }
-        .chip-v { font-weight: 600; }
-        .chip-dot { width: 8px; height: 8px; border-radius: 50%; background: #1f7a45; box-shadow: 0 0 0 4px rgba(31, 122, 69, 0.18); }
-        @media (max-width: 640px) { .chip { display: none; } }
         .sw {
           position: relative;
           border-radius: 14px;
@@ -281,9 +216,10 @@ export default function Channels() {
           text-align: center;
         }
         .sw-body { display: grid; grid-template-columns: 188px 1fr; min-height: 384px; }
-        /* Slack's actual aubergine rail */
+        /* Slack in its light theme */
         .sw-side {
-          background: #3F0E40;
+          background: #F7F2F8;
+          border-right: 1px solid rgba(29, 28, 29, 0.08);
           padding: 14px 10px;
         }
         .sw-ws {
@@ -292,15 +228,15 @@ export default function Channels() {
           justify-content: space-between;
           font-weight: 700;
           font-size: 14px;
-          color: #fff;
+          color: #1D1C1D;
           padding: 4px 8px 12px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+          border-bottom: 1px solid rgba(29, 28, 29, 0.1);
           margin-bottom: 10px;
         }
-        .sw-ws svg { color: rgba(255, 255, 255, 0.6); }
+        .sw-ws svg { color: rgba(29, 28, 29, 0.45); }
         .sw-sec {
           font-size: 12px;
-          color: rgba(255, 255, 255, 0.55);
+          color: rgba(29, 28, 29, 0.55);
           padding: 10px 8px 5px;
           letter-spacing: 0.02em;
         }
@@ -311,26 +247,25 @@ export default function Channels() {
           gap: 7px;
           padding: 5px 8px;
           border-radius: 6px;
-          color: rgba(255, 255, 255, 0.72);
+          color: rgba(29, 28, 29, 0.78);
           font-size: 14px;
           cursor: pointer;
         }
-        .hash { color: rgba(255, 255, 255, 0.5); font-weight: 600; }
-        /* Slack's active-channel blue */
+        .hash { color: rgba(29, 28, 29, 0.45); font-weight: 600; }
         .sw-ch.on {
-          background: #1164A3;
-          color: #fff;
+          background: #E8DDF1;
+          color: #3D2A55;
           font-weight: 600;
         }
-        .sw-ch.on .hash { color: rgba(255, 255, 255, 0.85); }
+        .sw-ch.on .hash { color: #3D2A55; }
         .sw-dm .seg {
           width: 9px;
           height: 9px;
           border-radius: 3px;
-          border: 1.5px solid rgba(255, 255, 255, 0.45);
+          border: 1.5px solid rgba(29, 28, 29, 0.35);
         }
         .sw-dm .seg.green { background: #2EB67D; border-color: transparent; }
-        .sw-dm:first-of-type { color: #fff; }
+        .sw-dm:first-of-type { color: #1D1C1D; }
         .sw-dm .badge {
           margin-left: auto;
           background: #E01E5A;
@@ -399,9 +334,9 @@ export default function Channels() {
         .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
         .attach {
           margin-top: 9px;
-          border-left: 3px solid var(--gold);
-          background: #FAF6EF;
-          border-radius: 0 10px 10px 0;
+          border: 1px solid var(--border-faint);
+          background: #FAF7F2;
+          border-radius: 12px;
           padding: 12px 14px;
           max-width: 380px;
         }

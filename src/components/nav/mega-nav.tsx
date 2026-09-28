@@ -24,6 +24,7 @@ const iconMap: Record<string, ReactNode> = {
   agent: (<svg {...stroke}><path d="M3 12a9 9 0 1 1 9 9H3v-9z" /><circle cx="9" cy="11" r="0.7" fill="currentColor" /><circle cx="15" cy="11" r="0.7" fill="currentColor" /></svg>),
   today: (<svg {...stroke}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>),
   people: (<svg {...stroke}><circle cx="9" cy="9" r="3" /><path d="M3 19c0-3 2.7-5 6-5s4.5 1.3 5.5 3" /><circle cx="17" cy="11" r="2.5" /><path d="M14 19c.5-2 2-3 4-3s2.5 1 3 3" /></svg>),
+  careers: (<svg {...stroke}><rect x="3.5" y="7" width="17" height="12" rx="2" /><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7" /><path d="M3.5 12h17" /></svg>),
   documents: (<svg {...stroke}><path d="M7 3h7l4 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" /><path d="M13 3v4h4M9 12h6M9 16h6" /></svg>),
 }
 
@@ -177,7 +178,6 @@ export default function MegaNav() {
                 className={s.panelWrap}
               >
                 <div className={`nav-dropdown ${s.panel}`}>
-                  <div aria-hidden="true" className={s.panelRule} />
                   <div className={s.panelGrid}>
                     <div>
                       <p className={s.colLabel}>By function</p>
@@ -192,18 +192,17 @@ export default function MegaNav() {
                         {howItWorks.map((item) => (
                           <Link key={item.label} href={item.href} onClick={closeAll} className={s.railLink}>
                             <span className={s.railLabel}>{item.label}</span>
+                            <span className={s.railDesc}>{item.description}</span>
                           </Link>
                         ))}
                       </div>
-                      <div className={s.forRow}>
-                        <p className={s.colLabel}>For</p>
-                        <div className={s.forLinks}>
-                          {forWhom.map((item) => (
-                            <Link key={item.label} href={item.href} onClick={closeAll} className={s.forLink}>{item.label}</Link>
-                          ))}
-                        </div>
-                      </div>
                     </div>
+                  </div>
+                  <div className={s.panelFoot}>
+                    <span className={s.footLabel}>Made for</span>
+                    {forWhom.map((item) => (
+                      <Link key={item.label} href={item.href} onClick={closeAll} className={s.forLink}>{item.label}</Link>
+                    ))}
                   </div>
                 </div>
               </div>
