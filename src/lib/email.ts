@@ -234,6 +234,61 @@ export async function sendFieldGuide(opts: { email: string; guideTitle: string; 
 /* ════════════════════════════════════════════
    DEMO REQUEST CONFIRMATION
    ════════════════════════════════════════════ */
+const TEAM_INBOX = 'hello@mambahr.com'
+
+/** A job application, sent to the team inbox with reply-to set to the applicant. */
+export async function sendCareersApplication(opts: {
+  name: string
+  email: string
+  role: string
+  link: string
+  note: string
+}): Promise<boolean> {
+  const client = await getClient()
+  const subject = `Application: ${opts.role} | ${opts.name}`
+  const html = emailShell(
+    subject,
+    kicker('Careers') +
+    serif(`${escapeHtml(opts.name)} applied`) +
+    body(`<strong style="color:#1A1611;">Role:</strong> ${escapeHtml(opts.role)}`) +
+    body(`<strong style="color:#1A1611;">Email:</strong> ${escapeHtml(opts.email)}`) +
+    (opts.link ? body(`<strong style="color:#1A1611;">Link:</strong> ${escapeHtml(opts.link)}`) : '') +
+    divider() +
+    body(escapeHtml(opts.note).replace(/\n/g, '<br/>')) +
+    finePrint('Reply to this email to answer the applicant directly.'),
+  )
+  if (!client) { console.log('[email:careers-application] (dev) →', TEAM_INBOX, opts.email); return true }
+  try {
+    const { error } = await client.emails.send({ from: FROM_EMAIL, to: TEAM_INBOX, replyTo: opts.email, subject, html })
+    if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
+    return true
+  } catch (err) {
+    console.error('[email:careers-application] failed:', err)
+    return false
+  }
+}
+
+/** Confirmation to the applicant. Best-effort. */
+export async function sendCareersConfirmation(opts: { email: string; name: string; role: string }): Promise<void> {
+  const client = await getClient()
+  const firstName = escapeHtml(opts.name.split(' ')[0] || opts.name)
+  const subject = 'We got your application | MambaHR'
+  const html = emailShell(
+    subject,
+    kicker('Careers') +
+    serif(`Thanks, ${firstName}.`) +
+    body(`Your application for <strong style="color:#1A1611;">${escapeHtml(opts.role)}</strong> is with the team. We will reply by email.`) +
+    finePrint('Anything to add? Reply to this email.'),
+  )
+  if (!client) { console.log('[email:careers-confirmation] (dev) →', opts.email); return }
+  try {
+    const { error } = await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
+    if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
+  } catch (err) {
+    console.error('[email:careers-confirmation] failed:', err)
+  }
+}
+
 export async function sendDemoConfirmation(opts: { email: string; name: string; company: string }): Promise<void> {
   const client = await getClient()
   const firstName = opts.name ? escapeHtml(opts.name.split(' ')[0]) : null

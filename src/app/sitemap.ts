@@ -53,6 +53,8 @@ const STATIC_ROUTES: StaticRoute[] = [
   { path: '/documents',    file: 'src/app/documents/page.tsx',       changeFrequency: 'monthly', priority: 0.8 },
   { path: '/security',     file: 'src/app/security/page.tsx',        changeFrequency: 'monthly', priority: 0.75 },
   { path: '/about',        file: 'src/app/about/page.tsx',           changeFrequency: 'monthly', priority: 0.7 },
+
+  { path: '/careers',        file: 'src/app/careers/page.tsx',           changeFrequency: 'monthly', priority: 0.7 },
   { path: '/blog',         file: 'src/app/blog/page.tsx',            changeFrequency: 'daily',   priority: 0.8 },
   // Legal. Low priority, but procurement and security reviewers look for them.
   { path: '/privacy',      file: 'src/app/privacy/page.tsx',         changeFrequency: 'yearly',  priority: 0.3 },

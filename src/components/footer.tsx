@@ -46,6 +46,7 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
       { label: 'About', href: '/about' },
       { label: 'Blog', href: '/blog' },
       { label: 'Security', href: '/security' },
+      { label: 'Careers', href: '/careers' },
       { label: 'Book a demo', href: '/demo' },
     ],
   },

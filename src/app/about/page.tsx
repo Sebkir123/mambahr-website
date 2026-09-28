@@ -4,24 +4,9 @@ import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
-import CountUp from '@/app/v2/_sections/count-up'
 import { PageCta, Em } from '@/components/v2/page-kit'
-/* The platform: every area MambaHR covers, each a real page. */
-const PLATFORM = [
-  { label: 'Hiring', desc: 'Job post to signed offer', href: '/hiring' },
-  { label: 'Careers page', desc: 'Hosted on your domain', href: '/job-portal' },
-  { label: 'Onboarding', desc: 'Day-one ready', href: '/onboarding' },
-  { label: 'Payroll changes', desc: 'Every change in before payday', href: '/payroll' },
-  { label: 'Time off & leave', desc: 'Vacation days to family leave', href: '/leave' },
-  { label: 'Compensation', desc: 'Priced to your pay ranges', href: '/compensation' },
-  { label: 'Compliance', desc: 'Every answer cites the law', href: '/compliance' },
-  { label: 'Headcount & layoffs', desc: 'Notices, severance, final pay', href: '/rif' },
-  { label: 'Employee records', desc: 'Every record, always current', href: '/people' },
-  { label: 'Documents & e-sign', desc: 'Signed and filed', href: '/documents' },
-  { label: 'Security', desc: 'Encrypted and logged', href: '/security' },
-]
 
-const LEADERSHIP = [
+const FOUNDERS = [
   {
     name: 'Brian Bell',
     role: 'Co-founder & CEO',
@@ -41,170 +26,161 @@ export default function AboutPage() {
     <>
       <MegaNav />
       <RevealInit />
-      <CountUp />
       <main id="main">
         {/* ── Hero ── */}
         <section className="ah">
-          <div className="aurora" aria-hidden="true"><span className="blob b1" /><span className="blob b2" /></div>
-          <span className="v2-grain" />
-          <div className="top">
-            <p className="eyebrow" data-reveal>About MambaHR</p>
-            <h1 className="title" data-reveal data-delay="1">Less admin for <Em>HR teams.</Em></h1>
-            <p className="lead" data-reveal data-delay="2">
-              HR software has always stored your data and left the work to your team: forms, approvals,
-              reminders and records. MambaHR keeps your employee records and <b>does</b> that admin for you,
-              with a person approving the decisions that matter.
+          <div className="wrap">
+            <p className="eyebrow" data-reveal="eager">About MambaHR</p>
+            <h1 className="title" data-reveal="eager">
+              We build HR software that <Em>does the admin.</Em>
+            </h1>
+            <p className="lead" data-reveal="eager">
+              HR teams spend most of their week on forms, approvals and records. MambaHR takes that
+              work on, so they can spend their time on people.
             </p>
           </div>
-          <div className="stage" data-reveal data-delay="3">
-            <div className="photo-wrap">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/v2-people/team.jpg" alt="A team at work" />
-              <div className="float agent-edge agent-working">
-                <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
-                <div className="f-t">Your team focuses on people</div>
-              </div>
-            </div>
-          </div>
           <style jsx>{`
-            .ah { position: relative; overflow: hidden; padding: clamp(124px, 14vw, 172px) var(--page-pad) clamp(64px, 8vw, 96px); background: linear-gradient(180deg, #F7F3EB 0%, var(--bg-warm) 58%); }
-            .aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-            .aurora::after { content: ''; position: absolute; inset: 0; background: radial-gradient(54% 48% at 50% 32%, rgba(254, 253, 250, 0.82), rgba(254, 253, 250, 0) 72%); }
-            .blob { position: absolute; border-radius: 50%; filter: blur(72px); }
-            .b1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(196, 154, 108, 0.58), rgba(196, 154, 108, 0) 68%); top: -220px; left: -140px; animation: ahA 24s ease-in-out infinite alternate; }
-            .b2 { width: 640px; height: 640px; background: radial-gradient(circle, rgba(106, 93, 166, 0.46), rgba(106, 93, 166, 0) 68%); top: -170px; right: -130px; animation: ahB 28s ease-in-out infinite alternate; }
-            @keyframes ahA { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(120px, 80px) scale(1.16); } }
-            @keyframes ahB { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-110px, 60px) scale(1.1); } }
-            @media (prefers-reduced-motion: reduce) { .blob { animation: none; } }
-            .top { position: relative; max-width: 980px; margin: 0 auto; text-align: center; }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(42px, 5.8vw, 76px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 18px 0 0; text-wrap: balance; }
-            .lead { font-size: clamp(17px, 2vw, 20px); line-height: 1.58; color: var(--text-muted); max-width: 660px; margin: 22px auto 0; }
-            .lead b { color: var(--text); font-weight: 600; }
-            .stage { position: relative; max-width: 880px; margin: clamp(44px, 5.4vw, 64px) auto 0; }
-            .photo-wrap { position: relative; }
-            .photo-wrap img { display: block; width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-radius: 18px; box-shadow: 0 30px 60px rgba(20, 18, 14, 0.18); }
-            .float { position: absolute; left: 24px; bottom: -26px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-float); padding: 14px 18px; }
-            .f-t { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 10px; }
-            @media (max-width: 880px) { .photo-wrap img { aspect-ratio: 4 / 3; } }
-          `}</style>
-        </section>
-
-
-        {/* ── The platform ── */}
-        <section className="pf">
-          <div className="wrap">
-            <div className="head" data-reveal>
-              <p className="eyebrow">What we build</p>
-              <h2 className="title">Everything in <Em>one place.</Em></h2>
-              <p className="lead">
-                Your employee records, hiring pipeline, careers page and documents live in MambaHR, and it
-                does the admin in each of them. Eleven areas, one system, every action logged.
-              </p>
-            </div>
-            <div className="grid">
-              {PLATFORM.map((p, i) => (
-                <Link key={p.label} href={p.href} className="cell" data-reveal data-delay={String(Math.min((i % 4) + 1, 4))}>
-                  <span className="c-l">{p.label}</span>
-                  <span className="c-d">{p.desc}</span>
-                  <span className="c-a" aria-hidden="true">→</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-          <style jsx>{`
-            .pf { background: var(--bg-warm); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
-            .wrap { max-width: var(--page-max); margin: 0 auto; }
-            .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 52px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-            .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 640px; }
-            .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.4vw, 18px); }
-            :global(.pf .cell) {
-              position: relative;
-              display: flex;
-              flex-direction: column;
-              gap: 4px;
+            .ah {
+              padding: clamp(128px, 14vw, 176px) var(--page-pad) clamp(40px, 5vw, 64px);
               background: var(--bg);
-              border: 1px solid var(--border);
-              border-radius: 14px;
-              padding: 18px 18px 16px;
-              text-decoration: none;
-              box-shadow: var(--shadow-sm);
-              transition: transform 0.16s ease, box-shadow 0.16s ease;
             }
-            :global(.pf .cell:hover) { transform: translateY(-3px); box-shadow: var(--shadow-float); }
-            @media (prefers-reduced-motion: reduce) { :global(.pf .cell:hover) { transform: none; } }
-            .c-l { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-            .c-d { font-size: 13px; color: var(--text-muted); }
-            .c-a { position: absolute; top: 16px; right: 16px; font-size: 13px; color: var(--gold-dark); opacity: 0; transition: opacity 0.16s ease; }
-            :global(.pf .cell:hover) .c-a { opacity: 1; }
-            @media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-            @media (max-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+            .wrap { max-width: 1180px; margin: 0 auto; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0 0 20px; }
+            .title {
+              font-family: var(--font-serif);
+              font-weight: 400;
+              font-size: clamp(44px, 6.4vw, 92px);
+              line-height: 0.98;
+              letter-spacing: -0.045em;
+              color: var(--text);
+              margin: 0;
+              max-width: 14ch;
+              text-wrap: balance;
+            }
+            .lead { font-size: clamp(17px, 1.9vw, 20px); line-height: 1.6; color: var(--text-muted); max-width: 52ch; margin: 26px 0 0; }
           `}</style>
         </section>
 
-        {/* ── Leadership ── */}
+        {/* ── The founders, on the same luminous field as the homepage ── */}
         <section className="fd">
-          <div className="wrap">
-            <div className="head" data-reveal>
-              <p className="eyebrow">Leadership</p>
-              <h2 className="title">The <Em>founders.</Em></h2>
-            </div>
+          <div className="stage" data-reveal>
+            <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /><i className="f3" /></span>
+            <h2 className="h">The founders</h2>
             <div className="grid">
-              {LEADERSHIP.map((p, i) => (
-                <a key={p.name} className="card" href={p.linkedin} target="_blank" rel="noopener noreferrer" data-reveal data-delay={String(i + 1)}>
+              {FOUNDERS.map((p) => (
+                <article key={p.name} className="card">
                   <div className="ph">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.photo} alt={p.name} />
-                    <span className="scrim" aria-hidden="true" />
-                    <div className="who">
-                      <span className="nm">{p.name}</span>
-                      <span className="rl">{p.role}</span>
+                    <img src={p.photo} alt={p.name} loading="lazy" decoding="async" />
+                  </div>
+                  <div className="meta">
+                    <div>
+                      <p className="nm">{p.name}</p>
+                      <p className="rl">{p.role}</p>
                     </div>
+                    <a className="li" href={p.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} on LinkedIn`}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" /><circle cx="4" cy="4" r="2" /></svg>
+                      LinkedIn
+                    </a>
                   </div>
-                  <div className="foot">
-                    <span className="li">LinkedIn</span>
-                  </div>
-                </a>
+                </article>
               ))}
-            </div>
-            <div className="facts" data-reveal>
-              <span className="fact"><i aria-hidden="true" />Headquartered in San Francisco</span>
-              <span className="fact"><i aria-hidden="true" />The law cited on every answer</span>
-              <span className="fact"><i aria-hidden="true" />We&rsquo;re hiring, <a href="mailto:hello@mambahr.com">hello@mambahr.com</a></span>
             </div>
           </div>
           <style jsx>{`
-            .fd { background: var(--bg-warm); padding: clamp(80px, 10vw, 128px) var(--page-pad); }
-            .wrap { max-width: 880px; margin: 0 auto; }
-            .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 52px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-            .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
-            :global(.fd .card) { display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; background: var(--bg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); text-decoration: none; transition: transform 0.18s ease, box-shadow 0.18s ease; }
-            :global(.fd .card:hover) { transform: translateY(-4px); box-shadow: var(--shadow-float); }
-            @media (prefers-reduced-motion: reduce) { :global(.fd .card:hover) { transform: none; } }
-            .ph { position: relative; aspect-ratio: 4 / 3.4; }
-            .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-            .scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20, 17, 12, 0) 55%, rgba(20, 17, 12, 0.6) 100%); }
-            .who { position: absolute; left: 18px; right: 18px; bottom: 16px; display: flex; flex-direction: column; gap: 2px; }
-            .nm { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; text-shadow: 0 1px 8px rgba(20, 17, 12, 0.4); }
-            .rl { color: rgba(255, 255, 255, 0.85); font-size: 13px; }
-            .foot { display: flex; align-items: center; justify-content: flex-end; padding: 12px 16px; border-top: 1px solid var(--border-faint); }
-            .li { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold-dark); }
-            .facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin-top: clamp(28px, 3.4vw, 40px); padding-top: clamp(20px, 2.4vw, 28px); border-top: 1px solid var(--border-faint); }
-            .fact { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); }
-            .fact i { width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); }
-            :global(.fd .fact a) { color: var(--gold-dark); font-weight: 700; text-decoration: none; }
-            :global(.fd .fact a:hover) { text-decoration: underline; }
+            .fd { padding: 0 var(--page-pad) clamp(56px, 7vw, 96px); background: var(--bg); }
+            .stage {
+              position: relative;
+              isolation: isolate;
+              overflow: hidden;
+              max-width: 1320px;
+              margin: 0 auto;
+              border-radius: 32px;
+              padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 72px);
+              background: linear-gradient(155deg, #f3c796 0%, #eab2a4 40%, #c3aee0 72%, #9d8fe0 100%);
+            }
+            .field { position: absolute; inset: 0; z-index: -1; }
+            .field i { position: absolute; border-radius: 50%; filter: blur(70px); }
+            .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, rgba(255, 226, 184, 0.95), rgba(255, 226, 184, 0) 70%); }
+            .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, rgba(139, 127, 208, 0.9), rgba(139, 127, 208, 0) 70%); }
+            .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, rgba(255, 246, 234, 0.7), rgba(255, 246, 234, 0) 70%); }
+            .h {
+              font-family: var(--font-serif);
+              font-weight: 400;
+              font-size: clamp(30px, 3.6vw, 44px);
+              letter-spacing: -0.03em;
+              color: var(--text);
+              margin: 0 0 clamp(24px, 3vw, 36px);
+              text-align: center;
+            }
+            .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 28px); max-width: 880px; margin: 0 auto; }
+            .card {
+              background: rgba(255, 255, 255, 0.72);
+              -webkit-backdrop-filter: blur(16px);
+              backdrop-filter: blur(16px);
+              border: 1px solid rgba(255, 255, 255, 0.85);
+              border-radius: 22px;
+              padding: 10px;
+              box-shadow: 0 24px 48px -24px rgba(60, 40, 90, 0.4);
+            }
+            /* One crop and one tone for both portraits, so two different shoots read as a set. */
+            .ph { aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; background: #e9e2d8; }
+            .ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block; filter: saturate(0.88) contrast(1.03); }
+            .meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 10px 8px; }
+            .nm { margin: 0; font-family: var(--font-serif); font-size: 22px; letter-spacing: -0.01em; color: var(--text); }
+            .rl { margin: 2px 0 0; font-size: 14px; color: var(--text-muted); }
+            .li {
+              display: inline-flex;
+              align-items: center;
+              gap: 7px;
+              height: 40px;
+              padding: 0 14px;
+              border-radius: 999px;
+              border: 1px solid rgba(26, 26, 25, 0.12);
+              background: #fff;
+              color: var(--text);
+              font-size: 13.5px;
+              font-weight: 600;
+              text-decoration: none;
+              flex: none;
+            }
+            .li:hover { border-color: var(--text); }
+            .li:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
             @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+          `}</style>
+        </section>
+
+        {/* ── Hiring ── */}
+        <section className="hi">
+          <div className="band" data-reveal>
+            <div>
+              <h2 className="h">We&rsquo;re hiring.</h2>
+              <p className="p">If you&rsquo;d like to build HR software that does the work, we&rsquo;d like to hear from you.</p>
+            </div>
+            <Link href="/careers" className="btn btn-primary">See careers</Link>
+          </div>
+          <style jsx>{`
+            .hi { padding: 0 var(--page-pad) clamp(24px, 4vw, 48px); background: var(--bg); }
+            .band {
+              max-width: 1180px;
+              margin: 0 auto;
+              display: flex;
+              flex-wrap: wrap;
+              align-items: center;
+              justify-content: space-between;
+              gap: 20px 40px;
+              padding: clamp(28px, 4vw, 40px) 0;
+              border-top: 1px solid var(--border-faint);
+              border-bottom: 1px solid var(--border-faint);
+            }
+            .h { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -0.03em; color: var(--text); margin: 0; }
+            .p { margin: 8px 0 0; font-size: 17px; color: var(--text-muted); max-width: 52ch; }
           `}</style>
         </section>
 
         <PageCta
           title={<>See MambaHR <Em>do the work.</Em></>}
-          sub="A 30-minute demo on your own scenarios. Then we import your data and switch you over."
+          sub="A 30-minute demo using examples from your company."
         />
       </main>
       <Footer />
