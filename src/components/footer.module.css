@@ -1,0 +1,123 @@
+/* Site footer. Five link columns that mirror the Product menu, the brand
+   block with the address in plain text, and the sign-off set large at the
+   very bottom in the same gold-to-iris light as the hero stage. */
+
+.foot {
+  position: relative;
+  background: var(--bg-surface);
+  padding: clamp(56px, 7vw, 88px) var(--page-pad) 0;
+  overflow: hidden;
+}
+.foot::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-mid) 30%, var(--violet) 70%, transparent);
+  opacity: 0.5;
+}
+.inner {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 4fr);
+  gap: clamp(32px, 5vw, 64px);
+}
+
+.brand { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.logo { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+.wordmark {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.tag { margin: 0; font-size: 15px; line-height: 1.55; color: var(--text-muted); max-width: 24ch; }
+.contact { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+.mail {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--border-mid);
+  text-underline-offset: 3px;
+}
+.mail:hover { text-decoration-color: var(--text); }
+.social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: var(--text-faint);
+}
+.social:hover { color: var(--text); background: rgba(26, 26, 25, 0.05); }
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 28px;
+}
+.colTitle {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.link {
+  display: inline-block;
+  padding: 5px 0;
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.link:hover { color: var(--text); }
+
+.bottom {
+  margin-top: clamp(48px, 6vw, 72px);
+  padding-top: 20px;
+  border-top: 1px solid var(--border-faint);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+.copy { margin: 0; font-size: 13.5px; color: var(--text-faint); }
+.legal { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.legal a { font-size: 13.5px; color: var(--text-faint); text-decoration: none; padding: 6px 0; }
+.legal a:hover { color: var(--text); }
+
+.sign {
+  margin: clamp(28px, 4vw, 44px) 0 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(52px, 10.4vw, 150px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  padding-bottom: 0.14em;
+  background: linear-gradient(100deg, #D9B58A 0%, #D4A9A8 45%, #A99BE3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-wrap: balance;
+  user-select: none;
+}
+
+@media (max-width: 1000px) {
+  .top { grid-template-columns: 1fr; }
+  .cols { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 36px; }
+}
+@media (max-width: 560px) {
+  .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .link { padding: 9px 0; }
+}

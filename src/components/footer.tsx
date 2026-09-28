@@ -1,16 +1,43 @@
 import Link from 'next/link'
 import { MambaMark } from '@/components/mamba-mark'
+import s from './footer.module.css'
 
-const cols = [
+// The same groups as the Product menu (src/content/nav.ts), so the two never
+// disagree about what the product covers.
+const cols: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: 'Product',
     links: [
-      { label: 'How MambaHR works', href: '/mamba' },
+      { label: 'The product', href: '/product' },
+      { label: 'How it works', href: '/mamba' },
       { label: 'To do', href: '/today' },
       { label: 'Employee records', href: '/people' },
-      { label: 'Hiring', href: '/hiring' },
-      { label: 'See how it works', href: '/product' },
+      { label: 'Documents & e-sign', href: '/documents' },
       { label: 'Pricing', href: '/pricing' },
+    ],
+  },
+  {
+    title: 'What it does',
+    links: [
+      { label: 'Hiring', href: '/hiring' },
+      { label: 'Careers page', href: '/job-portal' },
+      { label: 'Onboarding', href: '/onboarding' },
+      { label: 'Payroll', href: '/payroll' },
+      { label: 'Time off & leave', href: '/leave' },
+      { label: 'Compensation', href: '/compensation' },
+      { label: 'Compliance', href: '/compliance' },
+      { label: 'Headcount & layoffs', href: '/rif' },
+    ],
+  },
+  {
+    title: 'Compare',
+    links: [
+      { label: 'vs Rippling', href: '/compare/rippling' },
+      { label: 'vs Gusto', href: '/compare/gusto' },
+      { label: 'vs Deel', href: '/compare/deel' },
+      { label: 'vs BambooHR', href: '/compare/bamboohr' },
+      { label: 'vs Workday', href: '/compare/workday' },
+      { label: 'All comparisons', href: '/compare' },
     ],
   },
   {
@@ -19,165 +46,71 @@ const cols = [
       { label: 'About', href: '/about' },
       { label: 'Blog', href: '/blog' },
       { label: 'Security', href: '/security' },
-      { label: 'Careers', href: 'mailto:hello@mambahr.com' },
-      { label: 'Contact', href: 'mailto:hello@mambahr.com' },
+      { label: 'Book a demo', href: '/demo' },
     ],
   },
   {
-    title: 'Solutions',
+    title: 'Made for',
     links: [
+      { label: 'Startups', href: '/best-hris-for-startups' },
+      { label: 'Small businesses', href: '/hr-software-small-business' },
       { label: 'AI HR software', href: '/ai-hr-software' },
-      { label: 'Best HRIS for startups', href: '/best-hris-for-startups' },
-      { label: 'HR software for small business', href: '/hr-software-small-business' },
-      { label: 'Compliance', href: '/compliance' },
-      { label: 'Payroll', href: '/payroll' },
-    ],
-  },
-  {
-    title: 'Compare',
-    twoCol: true,
-    links: [
-      { label: 'vs Rippling', href: '/compare/rippling' },
-      { label: 'vs Gusto', href: '/compare/gusto' },
-      { label: 'vs Deel', href: '/compare/deel' },
-      { label: 'vs BambooHR', href: '/compare/bamboohr' },
-      { label: 'vs Workday', href: '/compare/workday' },
-      { label: 'vs ADP', href: '/compare/adp' },
-      { label: 'vs Justworks', href: '/compare/justworks' },
-      { label: 'vs TriNet', href: '/compare/trinet' },
-      { label: 'vs Paychex', href: '/compare/paychex' },
-      { label: 'All comparisons', href: '/compare' },
     ],
   },
 ]
 
 export default function Footer() {
   return (
-    <footer className="site-footer" style={{ background: 'var(--bg-surface)', position: 'relative', padding: '0 24px 40px' }}>
-      {/* gradient hairline */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 1,
-          background: 'linear-gradient(90deg, transparent, #B98A4E 30%, #6A5DA6 70%, transparent)',
-          opacity: 0.55,
-        }}
-      />
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        {/* Serif sign-off */}
-        <div
-          style={{
-            padding: '56px 0 44px',
-            borderBottom: '1px solid var(--border-faint)',
-            marginBottom: 48,
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'var(--font-serif), Georgia, serif',
-              fontSize: 'clamp(28px, 3.6vw, 44px)',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.1,
-              color: 'var(--text)',
-              margin: 0,
-            }}
-          >
-            HR that runs itself.
-          </p>
-        </div>
-
-        {/* Columns */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-            gap: 40,
-            marginBottom: 56,
-          }}
-        >
-          {/* Brand */}
-          <div>
-            <Link href="/" prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', marginBottom: 14 }}>
-              <MambaMark size={20} color="var(--gold)" title="MambaHR" />
-              <span style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontSize: 17, fontWeight: 400, color: 'var(--text)', letterSpacing: '-0.02em' }}>MambaHR</span>
+    <footer className={`site-footer ${s.foot}`}>
+      <div className={s.inner}>
+        <div className={s.top}>
+          <div className={s.brand}>
+            <Link href="/" prefetch={false} className={s.logo}>
+              <MambaMark size={22} color="var(--gold)" title="MambaHR" />
+              <span className={s.wordmark}>MambaHR</span>
             </Link>
-            <p style={{ fontFamily: 'var(--font-serif), Georgia, serif', fontStyle: 'italic', fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.55, maxWidth: 210, margin: 0 }}>
-              The HR admin, done for your team. You make the calls.
-            </p>
-            <div>
+            <p className={s.tag}>The HR admin, done for your team. You make the calls.</p>
+            <div className={s.contact}>
+              <a className={s.mail} href="mailto:hello@mambahr.com">hello@mambahr.com</a>
               <a
+                className={s.social}
                 href="https://www.linkedin.com/company/mamba-hr/"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 44, height: 44, marginTop: 4, marginLeft: -13, borderRadius: 8, color: 'var(--text-faint)' }}
                 aria-label="MambaHR on LinkedIn"
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" /><circle cx="4" cy="4" r="2" /></svg>
               </a>
             </div>
           </div>
 
-          {cols.map((col) => (
-            <div key={col.title}>
-              <p style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--text-faint)', marginBottom: 16 }}>
-                {col.title}
-              </p>
-              <div
-                style={
-                  col.twoCol
-                    ? { display: 'grid', gridTemplateColumns: 'max-content max-content', gap: '0 24px' }
-                    : { display: 'flex', flexDirection: 'column', gap: 0 }
-                }
-              >
-                {col.links.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    prefetch={false}
-                    style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44, alignSelf: 'flex-start', fontSize: 14, color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.15s' }}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+          <nav className={s.cols} aria-label="Footer">
+            {cols.map((col) => (
+              <div key={col.title}>
+                <p className={s.colTitle}>{col.title}</p>
+                <ul className={s.list}>
+                  {col.links.map((link) => (
+                    <li key={link.label}>
+                      <Link href={link.href} prefetch={false} className={s.link}>{link.label}</Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
-          ))}
+            ))}
+          </nav>
         </div>
 
-        {/* Bottom row */}
-        <div
-          style={{
-            borderTop: '1px solid var(--border)',
-            paddingTop: 24,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: 12,
-          }}
-        >
-          <p style={{ fontSize: 13, color: 'var(--text-faint)' }}>
-            © {new Date().getFullYear()} MambaHR, Inc. All rights reserved.
-          </p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
-            <Link href="/privacy" prefetch={false} style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44, fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
-              Privacy
-            </Link>
-            <Link href="/terms" prefetch={false} style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44, fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
-              Terms
-            </Link>
-            <Link href="/dpa" prefetch={false} style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
-              DPA
-            </Link>
-            <Link href="/subscription-terms" prefetch={false} style={{ fontSize: 13, color: 'var(--text-faint)', textDecoration: 'none' }}>
-              Subscription terms
-            </Link>
+        <div className={s.bottom}>
+          <p className={s.copy}>© {new Date().getFullYear()} MambaHR, Inc. All rights reserved.</p>
+          <div className={s.legal}>
+            <Link href="/privacy" prefetch={false}>Privacy</Link>
+            <Link href="/terms" prefetch={false}>Terms</Link>
+            <Link href="/dpa" prefetch={false}>DPA</Link>
+            <Link href="/subscription-terms" prefetch={false}>Subscription terms</Link>
           </div>
         </div>
+
+        <p className={s.sign}>HR that runs itself.</p>
       </div>
     </footer>
   )
