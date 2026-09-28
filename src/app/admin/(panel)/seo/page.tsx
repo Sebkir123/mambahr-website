@@ -6,7 +6,7 @@ import styles from './seo.module.css'
 
 export const dynamic = 'force-dynamic'
 
-const SITE = 'https://mambahr.com'
+const SITE = 'https://www.mambahr.com'
 
 const SITEMAPS = [
   { label: 'Sitemap', href: `${SITE}/sitemap.xml`, note: 'All static + published blog URLs' },

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Time Off & Leave Management | MambaHR',
     description:
       'Vacation days to family leave approved in seconds. State leave cited, military and bereavement leave handled.',
-    url: 'https://mambahr.com/leave',
+    url: 'https://www.mambahr.com/leave',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'Vacation days to family leave approved in seconds. State leave cited, military and bereavement leave handled.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/leave' },
+  alternates: { canonical: 'https://www.mambahr.com/leave' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Time Off & Leave Management | MambaHR',
-  url: 'https://mambahr.com/leave',
+  url: 'https://www.mambahr.com/leave',
   description:
     'MambaHR time off and leave: vacation days through federal family and medical leave (FMLA) approved in seconds. State paid-leave programs are cited and sent to a person; military leave (USERRA) and bereavement handled, every request checked against policy.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Leave agent',

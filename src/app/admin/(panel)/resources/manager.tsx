@@ -9,7 +9,7 @@ import styles from './resources.module.css'
 
 const MAX_PDF_BYTES = 50 * 1024 * 1024
 
-const SITE = 'https://mambahr.com'
+const SITE = 'https://www.mambahr.com'
 
 export type Row = {
   id: string

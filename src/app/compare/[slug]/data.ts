@@ -48,7 +48,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Every action audit-logged', mamba: true, them: true },
     ],
     bottomLine: "Rippling is the modern HR stack. MambaHR is the modern HR department, the work, done.",
-    costLine: "Most teams pay MambaHR less than their Rippling module tree, and it does the work instead of hosting it. From $14 per employee.",
+    costLine: "One price per employee instead of a Rippling module tree, and it does the work instead of hosting it. From $14 per employee.",
   },
 
   gusto: {
@@ -84,7 +84,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Every decision logged and traceable', mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Gusto is great payroll. MambaHR is everything else, and it gets your payroll ready. One product. One team. One bill.',
-    costLine: "Your Gusto history imports in a day. MambaHR feeds the change file to whichever payroll provider you keep, or runs managed payroll on Deel. It does the other twelve jobs, from $14 per employee.",
+    costLine: "Your Gusto history imports in a day. MambaHR feeds the change file to whichever payroll provider you keep, or sends the changes to Deel-managed payroll. It does the other twelve jobs, from $14 per employee.",
   },
 
   deel: {
@@ -121,7 +121,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Typical setup time', mamba: '1 day to import', them: '1–3 weeks' },
       { feature: 'Audit log on every action', mamba: true, them: 'Partial' },
     ],
-    bottomLine: "Deel is the way to pay anyone, anywhere. MambaHR is the way to run the people on your US payroll, and it can run that payroll on Deel. Different problems, and they fit together.",
+    bottomLine: "Deel is the way to pay anyone, anywhere. MambaHR is the way to run the people on your US payroll, and it can send that payroll to Deel to run. Different problems, and they fit together.",
     costLine: "Keep Deel for global contractors and EOR. For the team on your US payroll, MambaHR runs the whole department from $14 per employee, with Deel-managed payroll as an option.",
   },
 

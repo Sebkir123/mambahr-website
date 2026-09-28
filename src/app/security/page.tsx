@@ -34,7 +34,7 @@ function SecurityLogCard() {
         ))}
       </div>
       <div className="s-foot">
-        <span>Kept forever · cannot be edited, not even by us</span>
+        <span>Append-only · cannot be edited, not even by us</span>
         <span className="mono">4 of 247 today</span>
       </div>
       <style jsx>{`
@@ -61,7 +61,7 @@ function SecurityLogCard() {
 
 /* ── Commitments section (page-local, styled like AgentLoop's card) ── */
 const COMMITMENTS = [
-  { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption at rest, TLS 1.3 in transit. Your records are protected while stored and while moving between systems.', tag: 'Always on' },
+  { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption at rest, TLS 1.2 or higher in transit. Your records are protected while stored and while moving between systems.', tag: 'Always on' },
   { n: '02', label: 'Access by role, least privilege', desc: 'Each person sees only what their role allows. Managers see their team; employees see their own record.', tag: 'Always on' },
   { n: '03', label: 'Every change logged with who and why', desc: 'Every action, by a person or by MambaHR, is written to a record nobody can edit, with the reason attached.', tag: 'Always on' },
   { n: '04', label: 'Never used to train AI', desc: 'Names, salaries, leave and health information, none of it trains any AI model. Not ours, not anyone else’s.', tag: 'In our DPA' },

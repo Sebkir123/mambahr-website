@@ -12,9 +12,9 @@ import {
 import { PipelineBoard, TodoDesk, SlackApproval, ChatThread, type TodoFocus } from '@/components/mockups'
 
 const STEPS: LoopStep[] = [
-  { n: '01', img: '/avatars/maya.jpg',   label: 'Offer letter sent, Maya Chen',   desc: 'Senior Engineer · $195k · 8% above your pay range',     who: 'agent', time: '2 min' },
+  { n: '01', img: '/avatars/maya.jpg',   label: 'Offer letter sent, Maya Chen',   desc: 'Senior Engineer · $165k · inside your pay range',     who: 'agent', time: '2 min' },
   { n: '02', img: '/avatars/priya.jpg',  label: 'Leave approved, Jordan Lee',    desc: 'Family leave (FMLA) eligibility checked · job protected · statute cited', who: 'agent', time: '4 min' },
-  { n: '03', img: '/avatars/marcus.jpg', label: 'Leave approved, Marcus Webb',    desc: '12 weeks, federal and Colorado stacked · calendar and payday updated', who: 'you',   time: 'Pending' },
+  { n: '03', img: '/avatars/dave.jpg',   label: 'Leave request, Dave Buchanan',   desc: '12 weeks, federal and Colorado leave run together · calendar and payday ready', who: 'you',   time: 'Pending' },
   { n: '04', img: '/avatars/anna.jpg',  label: 'Separation docs, Sarah Lin',     desc: 'Final pay by state rule · ready for signature', who: 'you',   time: 'Review' },
 ]
 
@@ -25,7 +25,7 @@ const ONBOARDING: TodoFocus = {
   position: '1 of 4 · next',
   title: 'Day one · Maya Chen',
   person: 'Maya Chen, Senior Engineer, signed Thursday. Yours.',
-  facts: 'Offer countersigned. Form I-9 started, E-Verify pending. Okta, Slack and Google accounts requested. Laptop ordered to Berlin.',
+  facts: 'Offer countersigned. Form I-9 started, E-Verify pending. Okta, Slack and Google accounts requested. Laptop request sent to IT.',
   finding: '6 of 7 steps done, one needs you',
   read: 'Everything is in place for Monday except the buddy. Priya Nair is on the same team and has had two new starters this year. Recommend assigning Priya.',
   decisions: [
@@ -105,10 +105,10 @@ export default function ProductPage() {
           warm
           eyebrow="Onboard"
           title="Day one, ready before they arrive."
-          lead="A signed offer starts everything: the Form I-9, the account requests, the laptop, the first-week plan. What needs a person lands on your To do with the read already done."
+          lead="A signed offer starts everything: the Form I-9, the account and laptop requests, the first-week plan. What needs a person lands on your To do with the read already done."
           bullets={[
             'Form I-9 and E-Verify started from the signed offer',
-            'Login, Slack, and app accounts requested; laptops ordered',
+            'Login, Slack, and app accounts requested; laptop request sent to IT',
             'The one call that needs you, with the recommendation attached',
           ]}
         >

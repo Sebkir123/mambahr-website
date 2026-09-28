@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `MambaHR vs ${c.name}`,
       description: c.description,
-      url: `https://mambahr.com/compare/${slug}`,
+      url: `https://www.mambahr.com/compare/${slug}`,
       images: [{ url: ogUrl, width: 1200, height: 630 }],
     },
     twitter: {
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: c.description,
       images: [ogUrl],
     },
-    alternates: { canonical: `https://mambahr.com/compare/${slug}` },
+    alternates: { canonical: `https://www.mambahr.com/compare/${slug}` },
   }
 }
 
@@ -47,17 +47,17 @@ export default async function ComparePage({ params }: Props) {
     '@type': 'Article',
     headline: `MambaHR vs ${c.name}`,
     description: c.heroSub,
-    url: `https://mambahr.com/compare/${slug}`,
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://mambahr.com/compare/${slug}` },
-    author: { '@type': 'Organization', name: 'MambaHR', url: 'https://mambahr.com' },
+    url: `https://www.mambahr.com/compare/${slug}`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://www.mambahr.com/compare/${slug}` },
+    author: { '@type': 'Organization', name: 'MambaHR', url: 'https://www.mambahr.com' },
     publisher: {
       '@type': 'Organization',
       name: 'MambaHR',
-      url: 'https://mambahr.com',
-      logo: { '@type': 'ImageObject', url: 'https://mambahr.com/MambaHR_logo.png' },
+      url: 'https://www.mambahr.com',
+      logo: { '@type': 'ImageObject', url: 'https://www.mambahr.com/MambaHR_logo.png' },
     },
     about: [
-      { '@type': 'SoftwareApplication', name: 'MambaHR', url: 'https://mambahr.com', applicationCategory: 'BusinessApplication' },
+      { '@type': 'SoftwareApplication', name: 'MambaHR', url: 'https://www.mambahr.com', applicationCategory: 'BusinessApplication' },
       { '@type': 'SoftwareApplication', name: c.name, applicationCategory: 'BusinessApplication' },
     ],
   }
@@ -68,9 +68,9 @@ export default async function ComparePage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://mambahr.com' },
-      { '@type': 'ListItem', position: 2, name: 'Compare', item: 'https://mambahr.com/compare' },
-      { '@type': 'ListItem', position: 3, name: `MambaHR vs ${c.name}`, item: `https://mambahr.com/compare/${slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.mambahr.com' },
+      { '@type': 'ListItem', position: 2, name: 'Compare', item: 'https://www.mambahr.com/compare' },
+      { '@type': 'ListItem', position: 3, name: `MambaHR vs ${c.name}`, item: `https://www.mambahr.com/compare/${slug}` },
     ],
   }
 

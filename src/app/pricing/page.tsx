@@ -448,7 +448,7 @@ export default function PricingPage() {
 
         <PageCta
           title={<>Before you hire HR, <Em>hire MambaHR.</Em></>}
-          sub="A 30-minute demo with your real headcount. We quote your price on the call."
+          sub="A 30-minute demo on your real headcount and your own HR questions."
         />
       </main>
       <Footer />

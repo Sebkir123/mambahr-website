@@ -92,15 +92,13 @@ export default function Difference() {
 
         /* ── The paper to-do list ── */
         .them {
-          background:
-            repeating-linear-gradient(180deg, transparent 0 47px, var(--border-faint) 47px 48px),
-            #FFFEFB;
+          background: #FFFEFB;
           border: 1px solid var(--border);
           box-shadow: var(--shadow-sm);
           padding: 26px 24px 22px;
           transform: rotate(-1deg);
         }
-        .t-head { padding-bottom: 14px; }
+        .t-head { padding-bottom: 14px; border-bottom: 1px solid var(--border-faint); }
         .t-title {
           display: block;
           font-family: var(--font-serif);
@@ -117,11 +115,16 @@ export default function Difference() {
           letter-spacing: 0.05em;
           color: var(--text-faint);
         }
+        /* Ruled rows grow with their text: a fixed row height let two-line
+           items on a phone print over the next row. */
         .t-line {
           display: flex;
           align-items: center;
           gap: 12px;
-          height: 48px;
+          min-height: 48px;
+          padding: 8px 0;
+          border-bottom: 1px solid var(--border-faint);
+          line-height: 1.35;
           font-size: 15px;
           color: var(--text-muted);
         }

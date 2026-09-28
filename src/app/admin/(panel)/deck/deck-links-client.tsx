@@ -20,7 +20,7 @@ export function DeckLinks({ links, slug }: { links: DeckLinkRow[]; slug: string 
   const [copied, setCopied] = useState<string | null>(null)
 
   const urlFor = (token: string) =>
-    `${typeof window !== 'undefined' ? window.location.origin : 'https://mambahr.com'}/${slug}?k=${encodeURIComponent(token)}`
+    `${typeof window !== 'undefined' ? window.location.origin : 'https://www.mambahr.com'}/${slug}?k=${encodeURIComponent(token)}`
 
   const copy = async (token: string) => {
     try {

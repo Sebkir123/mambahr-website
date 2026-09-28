@@ -254,7 +254,7 @@ export function AgentLoop({
         <div className="card agent-edge agent-working agent-lg" data-reveal data-delay="1">
           <div className="card-top">
             <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
-            <span className="card-top-t">Live run · today</span>
+            <span className="card-top-t">Sample run</span>
           </div>
           {steps.map((s) => (
             <div key={s.n} className={`row${s.who === 'you' ? ' yours' : ''}`}>

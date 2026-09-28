@@ -10,7 +10,7 @@ import styles from './blog.module.css'
 
 export const dynamic = 'force-dynamic'
 
-const SITE = 'https://mambahr.com'
+const SITE = 'https://www.mambahr.com'
 
 // Deterministic 0–360° hue per post so each branded plate reads a little
 // differently (gold→violet glow shifts) without storing anything per post.

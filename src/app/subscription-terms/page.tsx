@@ -12,7 +12,7 @@ const description =
 export const metadata: Metadata = {
   title: 'Customer Subscription Terms | MambaHR',
   description,
-  alternates: { canonical: 'https://mambahr.com/subscription-terms' },
+  alternates: { canonical: 'https://www.mambahr.com/subscription-terms' },
   robots: { index: false, follow: false, nocache: true },
 }
 

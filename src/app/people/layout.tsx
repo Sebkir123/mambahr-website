@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Employee records | MambaHR',
     description:
       'Directory, comp, leave, one agent across every record and every change.',
-    url: 'https://mambahr.com/people',
+    url: 'https://www.mambahr.com/people',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'Directory, comp, leave, one agent across every record and every change.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/people' },
+  alternates: { canonical: 'https://www.mambahr.com/people' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Employee records | MambaHR',
-  url: 'https://mambahr.com/people',
+  url: 'https://www.mambahr.com/people',
   description:
     'MambaHR employee records: the directory, every record, pay, leave, and offboarding, kept current by the system that does the work.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'People agent',

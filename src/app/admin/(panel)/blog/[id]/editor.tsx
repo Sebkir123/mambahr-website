@@ -21,7 +21,7 @@ const RichText = dynamic(() => import('./rich-text'), {
   loading: () => <div className={styles.editorLoading}>Loading editor…</div>,
 })
 
-const SITE = 'https://mambahr.com'
+const SITE = 'https://www.mambahr.com'
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 

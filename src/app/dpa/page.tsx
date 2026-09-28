@@ -11,7 +11,7 @@ const description =
 export const metadata: Metadata = {
   title: 'Data Processing Addendum | MambaHR',
   description,
-  alternates: { canonical: 'https://mambahr.com/dpa' },
+  alternates: { canonical: 'https://www.mambahr.com/dpa' },
   robots: { index: false, follow: false, nocache: true },
 }
 

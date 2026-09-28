@@ -35,7 +35,7 @@ function SlackApprovalCard() {
               <div className="a-row"><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
               <div className="a-row"><span className="a-k">Record</span><span className="a-v">Mon&ndash;Wed booked, payday updated</span></div>
               <div className="a-row"><span className="a-k">Manager</span><span className="a-v">B. Bell notified</span></div>
-              <div className="a-foot"><span className="ok-dot" aria-hidden="true" />Within policy &middot; logged &middot; ref <span className="mono">leave_4f81a2</span></div>
+              <div className="a-foot"><span className="ok-dot" aria-hidden="true" />Within policy &middot; logged</div>
             </div>
           </div>
         </div>

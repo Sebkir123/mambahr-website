@@ -27,7 +27,7 @@ export const DEFAULT_COLUMNS: PipelineColumn[] = [
     { name: 'Maya Chen', sub: '$165k · in band · awaiting you', pill: 'Awaiting you' },
   ] },
   { name: 'Hired', color: '#7FA69B', count: 1, cards: [
-    { name: 'Leo Schulz', sub: 'Starts Nov 3 · onboarding running' },
+    { name: 'Noah Bennett', sub: 'Starts Nov 3 · onboarding running' },
   ] },
 ]
 
@@ -38,7 +38,7 @@ export const DEFAULT_COLUMNS: PipelineColumn[] = [
  */
 export function PipelineBoard({
   title = 'Senior Backend Engineer',
-  location = 'Berlin',
+  location = 'Austin',
   status = 'Open',
   tabs = [
     { label: 'Pipeline', count: 24, on: true },
@@ -60,7 +60,7 @@ export function PipelineBoard({
     <div className={`${s.mk} ${s.pipeCq}${className ? ` ${className}` : ''}`} aria-hidden="true">
       <div className={s.pipe}>
       <div className={s.reqHead}>
-        <h1 className={s.reqTitle}>{title} <span>· {location} · {status}</span></h1>
+        <div className={s.reqTitle}>{title} <span>· {location} · {status}</span></div>
         <div className={s.reqActions}>
           <span className={s.btnSecondary}>Hold</span>
           <span className={s.btnSecondary}>Close req</span>

@@ -25,10 +25,10 @@ export function InitialsAvatar({ name, size = 'md', seed = 0 }: { name: string; 
 }
 
 export const DEFAULT_PEOPLE: PersonRow[] = [
-  { name: 'Jackson Bauer', sub: 'Staff Engineer · Engineering · Berlin · jb@acme.com', status: { label: 'Onboarding', tone: 'info' }, manager: 'A. Ruiz', meta: 'Full-time · Started 2019' },
+  { name: 'Jackson Bauer', sub: 'Staff Engineer · Engineering · Austin · jb@acme.com', status: { label: 'Onboarding', tone: 'info' }, manager: 'A. Ruiz', meta: 'Full-time · Started 2019' },
   { name: 'Leo Schulz', sub: 'Backend Engineer · Engineering · Remote · ls@acme.com', ai: 'Drafting offer', manager: 'J. Bauer', meta: 'Full-time · Started 2022' },
   { name: 'Priya Nair', sub: 'Engineering Manager · Engineering · New York · pn@acme.com', status: { label: 'Active', tone: 'success' }, manager: 'A. Ruiz', meta: 'Full-time · Started 2021' },
-  { name: 'Marcus Webb', sub: 'Site Reliability Engineer · Engineering · Denver · mw@acme.com', status: { label: 'On leave', tone: 'warning' }, manager: 'P. Nair', meta: 'Full-time · Started 2020' },
+  { name: 'Marcus Webb', sub: 'Site Reliability Engineer · Engineering · Denver · mw@acme.com', status: { label: 'Active', tone: 'success' }, manager: 'P. Nair', meta: 'Full-time · Started 2020' },
   { name: 'Dana Whitfield', sub: 'Frontend Engineer · Engineering · Austin · dw@acme.com', status: { label: 'Joined 3 days ago', tone: 'outline' }, manager: 'P. Nair', meta: 'Full-time · Started 2026' },
 ]
 
@@ -56,7 +56,7 @@ export function PeopleDirectory({
       <div className={s.people}>
       {withHead && (
         <div className={s.pageHead}>
-          <h1 className={s.pageTitle}>People</h1>
+          <div className={s.pageTitle}>People</div>
           <p className={s.pageDesc}>Everyone in your organization</p>
         </div>
       )}

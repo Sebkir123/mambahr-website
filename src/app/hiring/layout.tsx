@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Hiring | MambaHR',
     description:
       'From job post to offer, without the loop. MambaHR runs posting, screening, background checks, and offer drafting.',
-    url: 'https://mambahr.com/hiring',
+    url: 'https://www.mambahr.com/hiring',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'From job post to offer, without the loop. MambaHR runs posting, screening, background checks, and offer drafting.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/hiring' },
+  alternates: { canonical: 'https://www.mambahr.com/hiring' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Hiring | MambaHR',
-  url: 'https://mambahr.com/hiring',
+  url: 'https://www.mambahr.com/hiring',
   description:
     'MambaHR hiring: the job post, careers-page posting, screening and ranking, the background check, and the offer. People approve every hire and every offer above the pay range.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Hiring agent',

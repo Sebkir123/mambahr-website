@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Security | MambaHR',
     description: 'Security for HR operations. Encryption, no AI training on your data, full audit trail.',
-    url: 'https://mambahr.com/security',
+    url: 'https://www.mambahr.com/security',
     images: [{ url: '/og?title=Built%20for%20the%20most%20sensitive%20HR%20data&eyebrow=Security', width: 1200, height: 630 }],
   },
   twitter: {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description: 'Security for HR operations. Encrypted, logged, US-resident.',
     images: ['/og?title=Built%20for%20the%20most%20sensitive%20HR%20data&eyebrow=Security'],
   },
-  alternates: { canonical: 'https://mambahr.com/security' },
+  alternates: { canonical: 'https://www.mambahr.com/security' },
 }
 
 // Mirrors the visible review list on the page (same REVIEW), as Google requires.

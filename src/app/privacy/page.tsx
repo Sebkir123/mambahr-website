@@ -8,11 +8,11 @@ const description =
 export const metadata: Metadata = {
   title: 'Privacy Policy | MambaHR',
   description,
-  alternates: { canonical: 'https://mambahr.com/privacy' },
+  alternates: { canonical: 'https://www.mambahr.com/privacy' },
   openGraph: {
     title: 'Privacy Policy | MambaHR',
     description,
-    url: 'https://mambahr.com/privacy',
+    url: 'https://www.mambahr.com/privacy',
     siteName: 'MambaHR',
     type: 'website',
     images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],

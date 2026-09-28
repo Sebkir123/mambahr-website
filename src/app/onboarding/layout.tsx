@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Onboarding Software | MambaHR',
     description:
       'Day-one ready before they arrive: Form I-9 started, accounts, device setup requested, first-week plan. Humans approve the budget calls.',
-    url: 'https://mambahr.com/onboarding',
+    url: 'https://www.mambahr.com/onboarding',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'Day-one ready before they arrive: Form I-9 started, accounts, device setup requested, first-week plan. Humans approve the budget calls.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/onboarding' },
+  alternates: { canonical: 'https://www.mambahr.com/onboarding' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Onboarding Software | MambaHR',
-  url: 'https://mambahr.com/onboarding',
+  url: 'https://www.mambahr.com/onboarding',
   description:
     'MambaHR onboarding: new hires are day-one ready before they arrive. MambaHR starts the Form I-9 and E-Verify check, provisions accounts, requests device setup, and builds the first-week plan. Humans approve the budget calls.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Onboarding agent',

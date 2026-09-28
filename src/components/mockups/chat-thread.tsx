@@ -37,7 +37,7 @@ export function ChatThread({
     <div className={`${s.mk} ${s.chatCq}${className ? ` ${className}` : ''}`} aria-hidden="true">
       <div className={s.chat}>
       <div>
-        <h1 className={s.greeting}>{greeting}</h1>
+        <div className={s.greeting}>{greeting}</div>
         <p className={s.greetSub}><b>{needs}</b> · To do</p>
       </div>
 

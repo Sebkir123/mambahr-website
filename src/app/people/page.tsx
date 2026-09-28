@@ -119,7 +119,7 @@ export default function PeoplePage() {
             { n: '02', label: 'A raise goes through', desc: 'MambaHR updates the pay everywhere it lives: the record, the band, the payroll file.', who: 'agent', time: 'same minute' },
             { n: '03', label: 'An address changes in Slack', desc: 'Jordan mentions she moved; it’s filed in seconds and flagged for the next pay file.', who: 'agent', time: 'seconds', img: '/avatars/priya.jpg' },
             { n: '04', label: 'Leave goes through', desc: 'MambaHR updates the record and payday before anyone has to ask.', who: 'agent', time: 'same minute' },
-            { n: '05', label: 'MambaHR logs every change', desc: 'Who changed what, when, and why, kept with the record forever.', who: 'agent', time: 'always' },
+            { n: '05', label: 'MambaHR logs every change', desc: 'Who changed what, when, and why, kept with the record.', who: 'agent', time: 'always' },
             { n: '06', label: 'You just look things up', desc: 'Headcount, tenure, who reports to whom, they’re right, every time.', who: 'you', img: '/avatars/anna.jpg' },
           ]}
         />

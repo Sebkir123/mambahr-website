@@ -12,7 +12,7 @@ import styles from './post.module.css'
 
 export const dynamic = 'force-dynamic'
 
-const SITE = 'https://mambahr.com'
+const SITE = 'https://www.mambahr.com'
 
 function fmtDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })

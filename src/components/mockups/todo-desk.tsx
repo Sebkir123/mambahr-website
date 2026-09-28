@@ -22,7 +22,7 @@ export const COMP_CHANGE: TodoFocus = {
   position: '3 of 29 · next',
   title: 'Compensation change · Jackson Bauer',
   person: 'Jackson Bauer, submitted 2 days ago. Yours.',
-  facts: 'Staff Engineer, level 4, Berlin. Requested by A. Ruiz.',
+  facts: 'Staff Engineer, level 4, Austin. Requested by A. Ruiz.',
   finding: '$148,000 to $165,000, an 11.5% increase',
   read: 'Above band for level 4 by 8%. Two peers at this level sit at $152k and $158k. Recommend approving at $160k or holding for the cycle.',
   decisions: [
@@ -73,7 +73,7 @@ export function TodoDesk({
     <div className={`${s.mk} ${s.deskCq}${className ? ` ${className}` : ''}`} aria-hidden="true">
       <div className={`${s.desk}${mode ? ` ${mode}` : ''}`}>
       <div className={s.queue}>
-        <h1 className={s.queueH1}>To do</h1>
+        <div className={s.queueH1}>To do</div>
         <p className={s.queueSum}>{summary}</p>
         <div className={s.lane}>Yours</div>
         {queue.map((q, i) => (

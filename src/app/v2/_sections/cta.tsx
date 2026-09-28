@@ -10,7 +10,7 @@ export default function Cta() {
           See MambaHR do a week of HR work <span className="em">in 30 minutes.</span>
         </h2>
         <p className="sub">
-          Book a demo this week. We import your data the day you sign, and most teams are live the next morning.
+          Book a demo this week. We import your data the day you sign, and the work starts the next morning.
         </p>
         <div className="form">
           <a className="btn btn-primary" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>

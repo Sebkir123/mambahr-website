@@ -9,7 +9,6 @@ export default function Faq() {
         <div className="side" data-reveal>
           <p className="eyebrow">Before you ask</p>
           <h2 className="title">The questions every <span className="em">people leader has.</span></h2>
-          <p className="lead">No sales call required.</p>
           <div className="ask">
             <div className="ask-t">Still have a question?</div>
             <a className="ask-cta" href="mailto:hello@mambahr.com">hello@mambahr.com</a>

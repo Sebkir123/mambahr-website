@@ -495,7 +495,7 @@ export default async function RifPlaybookPage({
               inputs, or last-minute legal panic. From structured manager reasons to age-waiver-ready (OWBPA) severance
               agreements, it prepares every step for your approval and shows the cost before you commit.
             </p>
-            <a className={s.ctaBtn} href="https://mambahr.com">
+            <a className={s.ctaBtn} href="https://www.mambahr.com">
               Get started at mambahr.com
             </a>
           </div>

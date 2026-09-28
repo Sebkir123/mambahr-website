@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: 'Pricing | MambaHR | Your first AI HR department',
   description:
     'Simple per-employee pricing for hiring, onboarding, time off, compliance, and payroll changes. Your whole HR department from $9k a year.',
-  alternates: { canonical: 'https://mambahr.com/pricing' },
+  alternates: { canonical: 'https://www.mambahr.com/pricing' },
   openGraph: {
     title: 'Pricing | MambaHR',
     description:
       'Simple per-employee pricing for your whole AI HR department, hiring, onboarding, time off, compliance, and payroll changes. From $9k a year.',
-    url: 'https://mambahr.com/pricing',
+    url: 'https://www.mambahr.com/pricing',
     siteName: 'MambaHR',
     type: 'website',
     images: [{ url: '/og?title=Pricing%20for%20your%20AI%20HR%20department&eyebrow=Pricing', width: 1200, height: 630 }],
@@ -38,7 +38,7 @@ const pricingJsonLd = {
   description:
     'The AI HR department: hiring, onboarding, time off, compensation, compliance, and payroll changes, done for you. A person approves the calls that matter.',
   brand: { '@type': 'Brand', name: 'MambaHR' },
-  url: 'https://mambahr.com/pricing',
+  url: 'https://www.mambahr.com/pricing',
   offers: {
     '@type': 'AggregateOffer',
     priceCurrency: 'USD',

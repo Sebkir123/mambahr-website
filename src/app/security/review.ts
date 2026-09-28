@@ -9,7 +9,7 @@ export const REVIEW = [
   },
   {
     q: 'How is it encrypted?',
-    a: 'AES-256 at rest, TLS 1.3 in transit, for the database, documents, and every backup.',
+    a: 'AES-256 at rest, TLS 1.2 or higher in transit, for the database, documents, and every backup.',
   },
   {
     q: 'Who at MambaHR can see it?',

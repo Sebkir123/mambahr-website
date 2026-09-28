@@ -8,11 +8,11 @@ const ogImage = '/mambahr_og_sharing.jpg'
 export const metadata: Metadata = {
   title: 'Compare MambaHR, vs Rippling, Gusto, BambooHR, Workday',
   description,
-  alternates: { canonical: 'https://mambahr.com/compare' },
+  alternates: { canonical: 'https://www.mambahr.com/compare' },
   openGraph: {
     title: 'Compare MambaHR, vs Rippling, Gusto, BambooHR, Workday',
     description,
-    url: 'https://mambahr.com/compare',
+    url: 'https://www.mambahr.com/compare',
     siteName: 'MambaHR',
     type: 'website',
     images: [{ url: ogImage, width: 1200, height: 630 }],

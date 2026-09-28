@@ -35,11 +35,11 @@ export const TIERS: PricingTier[] = [
     price: '$22',
     unit: '/employee/mo',
     min: '$24k/yr minimum · billed annually',
-    blurb: 'A full HR ops workload, for a tenth of the cost.',
+    blurb: 'A full HR ops workload, without the hire.',
     feats: ['Everything in Starter', 'Hiring: job posts, candidates & offers', 'Candidates screened and ranked', 'Offers sent, approvals routed', 'Payroll change files & change reports'],
     cta: 'Choose Ops Manager',
     popular: true,
-    badge: 'Where most teams start',
+    badge: 'Recommended',
   },
   {
     name: 'Whole department',

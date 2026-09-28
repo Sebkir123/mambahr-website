@@ -4,7 +4,7 @@ import { competitors } from './compare/[slug]/data'
 import { getPublishedSlugs } from '@/lib/blog-queries'
 
 const COMPARE_SLUGS = Object.keys(competitors)
-const BASE = 'https://mambahr.com'
+const BASE = 'https://www.mambahr.com'
 
 // Use the file's git commit time as a real, stable lastmod signal. Crawlers learn to ignore
 // sitemaps where every URL claims to have changed today, so honesty matters here.

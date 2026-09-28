@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'Product | MambaHR',
     description:
       'Watch MambaHR run hiring, onboarding, leave, compensation, and compliance, from Slack and the app.',
-    url: 'https://mambahr.com/product',
+    url: 'https://www.mambahr.com/product',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description: 'See the AI HR department do the work.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/product' },
+  alternates: { canonical: 'https://www.mambahr.com/product' },
 }
 
 export default function ProductLayout({ children }: { children: React.ReactNode }) {

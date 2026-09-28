@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!r) return { title: 'Resource | MambaHR' }
   const title = `${r.title} | MambaHR`
   const description = r.description || `Download ${r.title}, a free playbook from MambaHR.`
-  const url = `https://mambahr.com/resources/${r.slug}`
+  const url = `https://www.mambahr.com/resources/${r.slug}`
   return {
     title,
     description,
@@ -31,7 +31,7 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
   const r = await getAnyResource(slug)
   if (!r) notFound()
 
-  const shareUrl = `https://mambahr.com/resources/${r.slug}`
+  const shareUrl = `https://www.mambahr.com/resources/${r.slug}`
 
   return (
     <>

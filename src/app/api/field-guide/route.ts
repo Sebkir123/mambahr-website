@@ -16,7 +16,7 @@ import { createMemoryLimiter, durableRateLimit, getClientIp } from '@/lib/rate-l
 const GUIDES: Record<string, { title: string; path: string }> = {
   'rif-playbook': { title: 'The layoff playbook', path: '/resources/rif-playbook' },
 }
-const SITE_URL = 'https://mambahr.com'
+const SITE_URL = 'https://www.mambahr.com'
 
 let adminClient: SupabaseClient | null = null
 function getAdminClient(): SupabaseClient | null {

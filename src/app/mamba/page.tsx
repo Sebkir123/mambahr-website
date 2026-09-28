@@ -60,7 +60,7 @@ function SlackWindow() {
                   <div className="a-row"><span className="a-k">Paid leave</span><span className="a-v">16 weeks at 100%</span></div>
                   <div className="a-row"><span className="a-k">Eligibility</span><span className="a-v">Day one, all employees</span></div>
                   <div className="a-row"><span className="a-k">Source</span><span className="a-v">Parental Leave Policy &sect; 2.1</span></div>
-                  <div className="a-foot"><span className="ok-dot" />Answered from your handbook &middot; ref <span className="mono">pol_8c21e4</span></div>
+                  <div className="a-foot"><span className="ok-dot" />Answered from your handbook</div>
                 </div>
               </div>
             </div>
@@ -82,7 +82,7 @@ function SlackWindow() {
                 <div className="attach">
                   <div className="a-row"><span className="a-k">Policy</span><span className="a-v">Time-off carryover, section 4.2, cited</span></div>
                   <div className="a-row"><span className="a-k">Balance</span><span className="a-v">9 days · accrual current</span></div>
-                  <div className="a-foot"><span className="ok-dot" />Logged &middot; answered from your handbook &middot; ref <span className="mono">ask_2b94f7</span></div>
+                  <div className="a-foot"><span className="ok-dot" />Logged &middot; answered from your handbook</div>
                 </div>
               </div>
             </div>
@@ -283,8 +283,7 @@ function TeamPhoto() {
       <img className="photo" src="/v2-people/team.jpg" alt="A team at work, no HR portal in sight" />
       <div className="float">
         <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR &middot; working</span>
-        <div className="f-n"><span data-count="847">847</span></div>
-        <div className="f-l">questions answered this quarter</div>
+        <div className="f-l">Questions answered in Slack, policy cited</div>
       </div>
       <style jsx>{`
         .tp { position: relative; max-width: 560px; margin: 0 auto; }
@@ -306,17 +305,7 @@ function TeamPhoto() {
           padding: 14px 18px;
           box-shadow: var(--shadow-float);
         }
-        .f-n {
-          font-family: var(--font-serif);
-          font-size: 34px;
-          line-height: 1;
-          margin-top: 10px;
-          background: linear-gradient(110deg, var(--gold), var(--violet));
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-        }
-        .f-l { font-size: 12px; color: var(--text-faint); margin-top: 4px; max-width: 160px; }
+        .f-l { font-size: 13px; color: var(--text-muted); margin-top: 8px; max-width: 180px; }
         @media (max-width: 880px) {
           .float { right: 8px; }
         }

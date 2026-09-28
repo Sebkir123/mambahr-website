@@ -31,7 +31,7 @@ const COMPARE_RELATED = [
 ]
 
 export function categoryJsonLd(data: CategoryData) {
-  const url = `https://mambahr.com/${data.slug}`
+  const url = `https://www.mambahr.com/${data.slug}`
   return [
     {
       '@context': 'https://schema.org',
@@ -39,13 +39,13 @@ export function categoryJsonLd(data: CategoryData) {
       name: data.metaTitle,
       description: data.metaDescription,
       url,
-      isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
-      about: { '@type': 'SoftwareApplication', name: 'MambaHR', applicationCategory: 'BusinessApplication', url: 'https://mambahr.com' },
+      isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
+      about: { '@type': 'SoftwareApplication', name: 'MambaHR', applicationCategory: 'BusinessApplication', url: 'https://www.mambahr.com' },
       publisher: {
         '@type': 'Organization',
         name: 'MambaHR',
-        url: 'https://mambahr.com',
-        logo: { '@type': 'ImageObject', url: 'https://mambahr.com/MambaHR_logo.png' },
+        url: 'https://www.mambahr.com',
+        logo: { '@type': 'ImageObject', url: 'https://www.mambahr.com/MambaHR_logo.png' },
       },
     },
     {
@@ -61,7 +61,7 @@ export function categoryJsonLd(data: CategoryData) {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://mambahr.com' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.mambahr.com' },
         { '@type': 'ListItem', position: 2, name: data.h1, item: url },
       ],
     },
@@ -112,7 +112,7 @@ export const categories: Record<string, CategoryData> = {
         { t: 'Keep a person on the risky calls', d: 'Do the safe work; send terminations and pay decisions to a person.' },
         { t: 'Audit every action', d: 'A traceable log of what MambaHR did and why, defensible if challenged.' },
         { t: 'Be the system of record', d: 'Own the employee records, the applicant tracking system, and onboarding. Not a layer that re-keys data.' },
-        { t: 'Import in a day', d: 'Import your data, connect Slack; most teams are live within a day of importing, no implementation project.' },
+        { t: 'Import in a day', d: 'Import your data, connect Slack, and the work starts the next day. No implementation project.' },
       ],
     },
     stats: [
@@ -127,7 +127,7 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         q: 'Does AI HR software replace my HR team?',
-        a: 'No. It takes over the administrative work: the leave filing, onboarding tasks, policy answers, and compliance checks. Your people stay on the delicate calls. Most teams move them off clicking buttons and onto the judgment work they were hired for.',
+        a: 'No. It takes over the administrative work: the leave filing, onboarding tasks, policy answers, and compliance checks. Your people move off clicking buttons and onto the judgment calls they were hired for.',
       },
       {
         q: 'How is MambaHR different from an HR chatbot or copilot?',
@@ -168,7 +168,7 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         title: 'Priced and deployed for a startup.',
-        desc: "No implementation project, no module tree, no setup fee. Import your data and connect Slack; most teams are live within a day of importing, from $14 per employee with a $9k annual minimum.",
+        desc: "No implementation project, no module tree, no setup fee. Import your data and connect Slack; the work starts the next day, from $14 per employee with a $9k annual minimum.",
       },
     ],
     checklist: {
@@ -179,7 +179,7 @@ export const categories: Record<string, CategoryData> = {
         { t: 'Runs before you have HR', d: "The system does the admin work, so HR isn’t a role you have to staff before you’re ready." },
         { t: 'State compliance built in', d: 'Remote team across state lines? Pay transparency and final-pay rules cited for each state; federal family leave (FMLA) today, state leave combining coming.' },
         { t: 'Hiring + onboarding included', d: 'Applicant tracking, offers, and onboarding in the same product, no second tool, no handoff.' },
-        { t: 'Payroll changes', d: "Generates the change file in your provider’s format, or runs managed payroll on Deel. A person approves every run." },
+        { t: 'Payroll changes', d: "Generates the change file in your provider’s format, or sends the changes to Deel-managed payroll. A person approves every run." },
         { t: 'Imports in a day', d: 'No implementation consultant. Import your data, connect Slack, go.' },
         { t: 'Scales past Series A', d: 'The same system carries you from 50 to 2,000, no painful re-platform later.' },
       ],
@@ -242,7 +242,7 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         title: 'No IT project, no big bill.',
-        desc: "Import your data and connect Slack. Most teams are live within a day of importing. Flat per-employee pricing, everything included, no implementation fee.",
+        desc: "Import your data and connect Slack. The work starts the next day. Flat per-employee pricing, everything included, no implementation fee.",
       },
     ],
     checklist: {
@@ -253,7 +253,7 @@ export const categories: Record<string, CategoryData> = {
         { t: 'Does the work, not the dashboard', d: "Resolves requests for you. You’re not learning a new admin system to click through." },
         { t: 'Hiring to onboarding in one place', d: 'Post the role, send the offer, run onboarding, without stitching tools together.' },
         { t: 'Compliance with a citation', d: 'Overtime, family leave (FMLA), pay transparency, and final-pay rules cited for your states.' },
-        { t: 'Payroll change files', d: "Generates the change file for your payroll provider, or runs managed payroll on Deel. A person approves every run." },
+        { t: 'Payroll change files', d: "Generates the change file for your payroll provider, or sends the changes to Deel-managed payroll. A person approves every run." },
         { t: 'A human on the sensitive calls', d: 'Terminations and pay decisions still come to you to approve.' },
         { t: 'Affordable and fast to start', d: 'Flat per-employee pricing, your data imported in a day, no implementation consultant.' },
       ],
@@ -278,7 +278,7 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         q: 'Is it hard to set up for a small team?',
-        a: "No. There’s no implementation project. You import your existing data, connect Slack, and most teams are live within a day of importing.",
+        a: "No. There’s no implementation project. You import your existing data, connect Slack, and the work starts the next day.",
       },
     ],
     cta: { title: 'Give your team', em: 'the HR hours back.', sub: 'A live demo on your own scenarios in 30 minutes. Then we import your data and switch you over.' },

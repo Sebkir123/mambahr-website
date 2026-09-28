@@ -10,7 +10,7 @@ export const QA = [
   },
   {
     q: 'How fast can we be up and running?',
-    a: 'Most teams are live within a day of importing. Day one we import your people data and you set your approval rules in Settings. Your team keeps working in Slack the whole time, and most employees never notice the switch, except that HR got faster.',
+    a: 'The day after your import. Day one we import your people data and you set your approval rules in Settings. Your team keeps working in Slack the whole time; employees notice only that HR answers faster.',
   },
   {
     q: 'Is our people data safe?',

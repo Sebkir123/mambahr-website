@@ -84,7 +84,7 @@ function emailShell(headline: string, body: string): string {
           <tr>
             <td style="padding-top:32px;text-align:center;">
               <p style="font-family:'Courier New',Courier,monospace;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9A8F82;margin:0 0 6px 0;">MambaHR &middot; The AI HR Department</p>
-              <p style="margin:0;"><a href="https://mambahr.com" style="font-family:'Courier New',Courier,monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#B08D57;text-decoration:none;">mambahr.com</a></p>
+              <p style="margin:0;"><a href="https://www.mambahr.com" style="font-family:'Courier New',Courier,monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#B08D57;text-decoration:none;">mambahr.com</a></p>
             </td>
           </tr>
 
@@ -165,7 +165,7 @@ export async function sendInvestorAck(opts: { email: string; name: string }) {
     kicker('Investor inquiry') +
     serif(`Thanks, ${firstName}.`) +
     body('We received your message and one of the founders will get back to you within 24 hours.') +
-    body('In the meantime, our investor materials live at <a href="https://mambahr.com/investors" style="color:#B08D57;font-weight:600;text-decoration:none;">mambahr.com/investors</a>.') +
+    body('In the meantime, our investor materials live at <a href="https://www.mambahr.com/investors" style="color:#B08D57;font-weight:600;text-decoration:none;">mambahr.com/investors</a>.') +
     divider() +
     finePrint('Brian Bell (CEO) &amp; Sebastian Kirsch (CTO)<br/>MambaHR'),
   )
@@ -192,7 +192,7 @@ export async function sendHRBenchAck(opts: { email: string }) {
     body('We&rsquo;ll let you know the moment HR-Bench ships, including the full dataset, methodology, and benchmark results across leading AI models.') +
     body('HR-Bench is the first open benchmark for evaluating AI on HR decision-making. 500+ scenarios across federal and state regulations, validated by domain experts.') +
     divider() +
-    finePrint('Read more about our research: <a href="https://mambahr.com/research" style="color:#B08D57;font-weight:600;text-decoration:none;">mambahr.com/research &rarr;</a>'),
+    finePrint('Read more about our research: <a href="https://www.mambahr.com/research" style="color:#B08D57;font-weight:600;text-decoration:none;">mambahr.com/research &rarr;</a>'),
   )
 
   if (!client) { console.log('[email:hrbench-ack] sent successfully'); return }

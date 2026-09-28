@@ -60,7 +60,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'ia_archiver', disallow: '/' },
       { userAgent: 'archive.org_bot', disallow: '/' },
     ],
-    sitemap: 'https://mambahr.com/sitemap.xml',
-    host: 'https://mambahr.com',
+    sitemap: 'https://www.mambahr.com/sitemap.xml',
+    host: 'https://www.mambahr.com',
   }
 }

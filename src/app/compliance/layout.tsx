@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Multi-State HR Compliance | MambaHR',
     description:
       'Every answer cites the law. Federal baseline plus state rules where you employ people, EEO data collected at apply, edge cases to a human.',
-    url: 'https://mambahr.com/compliance',
+    url: 'https://www.mambahr.com/compliance',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'Every answer cites the law. Federal baseline plus state rules where you employ people, EEO data collected at apply, edge cases to a human.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/compliance' },
+  alternates: { canonical: 'https://www.mambahr.com/compliance' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Multi-State HR Compliance | MambaHR',
-  url: 'https://mambahr.com/compliance',
+  url: 'https://www.mambahr.com/compliance',
   description:
     'MambaHR compliance: the federal baseline plus state rules for the states where you employ people. Every answer cites the law and its review date, EEO data is collected at apply, and edge cases route to a human.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Compliance agent',

@@ -4,11 +4,11 @@
 export const FAQS = [
   {
     q: 'Is MambaHR software or an HR department?',
-    a: 'It’s your HR department. There’s a system underneath, records, documents, audit trails, but you’re not buying screens to click. You’re buying the work: onboarding done, changes processed, questions answered, payroll changes ready. You approve the sensitive calls.',
+    a: 'It’s your HR department. There’s a system underneath (records, documents, audit trails), but you’re not buying screens to click. You’re buying the work: onboarding done, changes processed, questions answered, payroll changes ready. You approve the sensitive calls.',
   },
   {
     q: 'Can it do the work of our first HR hire?',
-    a: 'For most teams under 250 people, yes, that’s the job it was built for. It does the repeatable work that forces an early HR hire: records, onboarding, offboarding, changes, documents, manager questions. When you do hire HR, they start with a running department instead of a backlog. Their first month goes to people rather than cleanup.',
+    a: 'Under about 250 employees, yes: that’s the job it was built for. It does the repeatable work that forces an early HR hire: records, onboarding, offboarding, changes, documents, manager questions. When you do hire HR, they start with a running department instead of a backlog. Their first month goes to people rather than cleanup.',
   },
   {
     q: 'Does it replace a senior HR person?',
@@ -28,7 +28,7 @@ export const FAQS = [
   },
   {
     q: 'Which plan should we choose?',
-    a: 'Most growing companies start with HR Ops Manager. It covers the workload they were about to staff. Choose Starter if you mainly need records, answers, and clean payroll changes. Choose Whole department when compliance, compensation, and layoffs need to run themselves too.',
+    a: 'HR Ops Manager if you are about to staff an HR ops role: it covers that workload. Choose Starter if you mainly need records, answers, and clean payroll changes. Choose Whole department when compliance, compensation, and layoffs need to run themselves too.',
   },
   {
     q: 'What is founding customer pricing?',

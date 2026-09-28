@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Careers page | MambaHR',
     description:
       'Branded careers page on your domain. Applications land read, ranked, and EEO-tracked in your pipeline.',
-    url: 'https://mambahr.com/job-portal',
+    url: 'https://www.mambahr.com/job-portal',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'Branded careers page on your domain. Applications land read, ranked, and EEO-tracked in your pipeline.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/job-portal' },
+  alternates: { canonical: 'https://www.mambahr.com/job-portal' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Careers page | MambaHR',
-  url: 'https://mambahr.com/job-portal',
+  url: 'https://www.mambahr.com/job-portal',
   description:
     'MambaHR careers page: a branded careers page hosted on your domain, with a two-minute apply flow. Applications arrive read and ranked, with the equal-opportunity data collected.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Careers page agent',

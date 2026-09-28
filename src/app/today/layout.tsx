@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'To do | MambaHR',
     description:
       'To do: the calls that need you, and the work MambaHR already did, on one screen.',
-    url: 'https://mambahr.com/today',
+    url: 'https://www.mambahr.com/today',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'To do: the calls that need you, and the work MambaHR already did, on one screen.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/today' },
+  alternates: { canonical: 'https://www.mambahr.com/today' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'To do | MambaHR',
-  url: 'https://mambahr.com/today',
+  url: 'https://www.mambahr.com/today',
   description:
     'The To do screen in MambaHR. MambaHR does the HR work; you sign off on the decisions that matter.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'To do',

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About | MambaHR',
     description: 'The HR department is changing shape. We are building the AI HR department: MambaHR does the work, and a person signs off only when it matters. Meet the team.',
-    url: 'https://mambahr.com/about',
+    url: 'https://www.mambahr.com/about',
     images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
   },
   twitter: {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: "The HR department is changing shape. We're building the AI HR department: MambaHR does the work, and a person signs off only when it matters.",
     images: ['/mambahr_og_sharing.jpg'],
   },
-  alternates: { canonical: 'https://mambahr.com/about' },
+  alternates: { canonical: 'https://www.mambahr.com/about' },
 }
 
 // Hardcoded team schema, not user input, safe to inline as JSON-LD.
@@ -24,8 +24,8 @@ const teamSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'MambaHR',
-  url: 'https://mambahr.com',
-  logo: 'https://mambahr.com/MambaHR_logo.png',
+  url: 'https://www.mambahr.com',
+  logo: 'https://www.mambahr.com/MambaHR_logo.png',
   description: 'AI HR department for US companies. MambaHR does the operational work; the person owns the judgment calls.',
   founders: [
     {

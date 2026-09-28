@@ -124,7 +124,7 @@ export default function HiringPage() {
 
         <StatTrio
           stats={[
-            { n: 6, suffix: ' days', label: 'days from job post to offer in the modeled run, with MambaHR running the loop' },
+            { n: 6, suffix: ' days', label: 'from job post to offer in the modeled run, with MambaHR running the loop' },
             { n: 47, label: 'candidates sourced for one role, screened overnight' },
             { n: 1, label: 'decision that stays yours: who joins' },
           ]}

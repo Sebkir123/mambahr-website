@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Payroll changes | MambaHR',
     description:
       'Every payroll change prepared. A change file for your provider, or Deel-managed payroll with a person approving every run.',
-    url: 'https://mambahr.com/payroll',
+    url: 'https://www.mambahr.com/payroll',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'Every payroll change prepared. A change file for your provider, or Deel-managed payroll with a person approving every run.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/payroll' },
+  alternates: { canonical: 'https://www.mambahr.com/payroll' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Payroll changes | MambaHR',
-  url: 'https://mambahr.com/payroll',
+  url: 'https://www.mambahr.com/payroll',
   description:
     'MambaHR payroll changes: prepares every payroll change, new hires, terminations, comp changes, and leave, as a change file in your provider’s format or as a Deel-managed payroll run that a person approves.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Payroll file agent',

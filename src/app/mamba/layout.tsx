@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'The AI HR Agent | MambaHR',
     description:
       'Not a chatbot, a coworker. Message it in Slack or the app. It does the work.',
-    url: 'https://mambahr.com/mamba',
+    url: 'https://www.mambahr.com/mamba',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'Not a chatbot, a coworker. Message it in Slack or the app. It does the work.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/mamba' },
+  alternates: { canonical: 'https://www.mambahr.com/mamba' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'The AI HR Agent | MambaHR',
-  url: 'https://mambahr.com/mamba',
+  url: 'https://www.mambahr.com/mamba',
   description:
     'MambaHR is the AI HR department, a coworker, not a chatbot. Message it in Slack or the app. It does the HR work and brings the big calls to you first.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'MambaHR agent',

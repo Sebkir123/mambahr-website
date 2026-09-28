@@ -17,7 +17,7 @@ function ago(iso: string | null): string {
   return `${Math.floor(h / 24)}d ago`
 }
 function origin(): string {
-  return typeof window !== 'undefined' ? window.location.origin : 'https://mambahr.com'
+  return typeof window !== 'undefined' ? window.location.origin : 'https://www.mambahr.com'
 }
 
 export function FieldGuideManager({

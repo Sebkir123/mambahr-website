@@ -82,12 +82,12 @@ export default function CompareView({ data }: { data: CompetitorData }) {
           `}</style>
         </section>
 
-        {/* ── Why teams switch ── */}
+        {/* ── Three reasons to switch ── */}
         <section className="why">
           <div className="wrap">
             <div className="head" data-reveal>
-              <p className="eyebrow">Why teams switch</p>
-              <h2 className="title">Three reasons teams <Em>switch.</Em></h2>
+              <p className="eyebrow">The difference</p>
+              <h2 className="title">Three reasons to <Em>switch.</Em></h2>
             </div>
             <div className="grid">
               {data.switchReasons.map((r, i) => (

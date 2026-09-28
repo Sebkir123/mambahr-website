@@ -69,7 +69,6 @@ export default function DemoPage() {
                   <>
                     <div className="card-head">
                       <span className="ch-t">Book your 30 minutes</span>
-                      <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />Replies same day</span>
                     </div>
                     <LeadForm
                       onSubmit={handleSubmit}
@@ -77,7 +76,7 @@ export default function DemoPage() {
                       stageOptions={COMPANY_SIZES.map((s) => `${s} employees`)}
                       stageLabel="Company size"
                       error={status === 'error' ? 'Something went wrong.' : undefined}
-                      note="30 minutes · no deck, just the product · your data never touched"
+                      note="30 minutes · the product, not slides · no data needed before the call"
                     />
                   </>
                 )}

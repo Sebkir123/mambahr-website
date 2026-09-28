@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'HR Documents & E-Signature | MambaHR',
     description:
       'Offers, agreements, acknowledgments generated, e-signed, filed, and retained per policy. Full audit trail.',
-    url: 'https://mambahr.com/documents',
+    url: 'https://www.mambahr.com/documents',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'Offers, agreements, acknowledgments generated, e-signed, filed, and retained per policy. Full audit trail.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/documents' },
+  alternates: { canonical: 'https://www.mambahr.com/documents' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'HR Documents & E-Signature | MambaHR',
-  url: 'https://mambahr.com/documents',
+  url: 'https://www.mambahr.com/documents',
   description:
     'MambaHR documents: offers, agreements, and acknowledgments generated, e-signed, filed, and retained per policy, with a full audit trail on every document.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Documents agent',

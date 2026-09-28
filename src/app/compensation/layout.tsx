@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Compensation Management | MambaHR',
     description:
       'Every raise priced against your bands. Above-band routes to a human. Pay equity screened on every change.',
-    url: 'https://mambahr.com/compensation',
+    url: 'https://www.mambahr.com/compensation',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'Every raise priced against your bands. Above-band routes to a human. Pay equity screened on every change.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/compensation' },
+  alternates: { canonical: 'https://www.mambahr.com/compensation' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Compensation Management | MambaHR',
-  url: 'https://mambahr.com/compensation',
+  url: 'https://www.mambahr.com/compensation',
   description:
     'MambaHR compensation: every raise priced against your bands, with above-band requests routed to a human. Pay equity is screened on every change and the approved change is filed to the record.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Compensation agent',

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Layoffs & headcount | MambaHR',
     description:
       'WARN timing, severance math, redeployment (advisory only), every exit human-approved.',
-    url: 'https://mambahr.com/rif',
+    url: 'https://www.mambahr.com/rif',
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   twitter: {
@@ -21,17 +21,17 @@ export const metadata: Metadata = {
       'WARN timing, severance math, redeployment (advisory only), every exit human-approved.',
     images: [ogImage],
   },
-  alternates: { canonical: 'https://mambahr.com/rif' },
+  alternates: { canonical: 'https://www.mambahr.com/rif' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Layoffs & headcount | MambaHR',
-  url: 'https://mambahr.com/rif',
+  url: 'https://www.mambahr.com/rif',
   description:
     'MambaHR layoff planning. MambaHR checks federal layoff-notice (WARN Act) timing, runs the severance math, shows internal roles as suggestions only, and holds every exit for a person to approve.',
-  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://mambahr.com' },
+  isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareFeature',
     name: 'Layoff planning',

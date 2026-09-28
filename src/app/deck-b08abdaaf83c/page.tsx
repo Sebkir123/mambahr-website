@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     'The AI HR department. We don’t sell software seats. We sell digital headcount. Seed round, $3M.',
   robots: { index: false, follow: false },
-  alternates: { canonical: `https://mambahr.com/${DECK_SLUG}` },
+  alternates: { canonical: `https://www.mambahr.com/${DECK_SLUG}` },
 }
 
 // Server-side, JS-independent open log. Fires on every render of the deck for a

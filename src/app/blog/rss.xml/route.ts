@@ -3,7 +3,7 @@ import { postUrl, sanitizePostHtml } from '@/lib/blog'
 
 export const dynamic = 'force-dynamic'
 
-const SITE = 'https://mambahr.com'
+const SITE = 'https://www.mambahr.com'
 
 function esc(s: string): string {
   return s
