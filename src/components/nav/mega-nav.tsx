@@ -46,6 +46,7 @@ function MenuItem({ item, onNavigate }: { item: NavItem; onNavigate: () => void 
 const topLinks = [
   { label: 'Pricing', href: '/pricing' },
   { label: 'Compare', href: '/compare' },
+  { label: 'Security', href: '/security' },
   { label: 'About',   href: '/about'   },
 ]
 

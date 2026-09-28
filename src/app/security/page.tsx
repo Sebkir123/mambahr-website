@@ -3,111 +3,108 @@
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
-import CountUp from '@/app/v2/_sections/count-up'
-import { PageHero, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
+import { FeatureSplit, PageCta, Em } from '@/components/v2/page-kit'
 import { REVIEW } from './review'
 
-/* ── Hero fragment: dark security log ── */
-const LOG = [
-  { time: '09:31:08', text: 'Access granted · role: HR admin', tag: 'logged' },
-  { time: '09:31:42', text: 'Record changed · pay · by MambaHR', tag: 'rule cited' },
-  { time: '09:32:15', text: 'Export requested · approved by B. Bell', tag: 'logged' },
-  { time: '09:33:01', text: 'Document viewed · offer · by HR admin', tag: 'logged' },
-]
-
-function SecurityLogCard() {
-  return (
-    <div className="sec agent-edge agent-done">
-      <span className="v2-grain" />
-      <div className="s-head">
-        <span className="s-t">Audit log</span>
-        <span className="s-chip"><i />Every action logged</span>
-      </div>
-      <div className="rows">
-        {LOG.map((r) => (
-          <div className="row" key={r.time}>
-            <span className="time">{r.time}</span>
-            <span className="ok" aria-hidden="true" />
-            <span className="txt">{r.text}</span>
-            <span className="tag">{r.tag}</span>
-          </div>
-        ))}
-      </div>
-      <div className="s-foot">
-        <span>Entries can be added, never changed</span>
-        <span className="mono">4 of 247 today</span>
-      </div>
-      <style jsx>{`
-        .sec { position: relative; overflow: hidden; background: var(--ink); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 20px 0 0; box-shadow: var(--shadow-float); }
-        .s-head { display: flex; align-items: center; justify-content: space-between; padding: 0 22px 16px; }
-        .s-t { font-family: var(--font-serif); font-size: 19px; color: #FFF2E6; letter-spacing: -0.01em; }
-        .s-chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-pale); background: rgba(212, 170, 124, 0.12); border: 1px solid rgba(212, 170, 124, 0.25); border-radius: 999px; padding: 4px 10px; }
-        .s-chip i { width: 6px; height: 6px; border-radius: 999px; background: var(--gold-pale); }
-        .rows { border-top: 1px solid rgba(255, 255, 255, 0.07); }
-        .row { display: flex; align-items: center; gap: 12px; padding: 13px 22px; font-family: var(--font-mono); font-size: 12px; }
-        .row + .row { border-top: 1px solid rgba(255, 255, 255, 0.06); }
-        .time { color: rgba(255, 242, 230, 0.4); flex: none; }
-        .ok { flex: none; width: 14px; height: 14px; border-radius: 999px; background: rgba(46, 160, 94, 0.2); border: 1px solid rgba(110, 200, 140, 0.5); position: relative; }
-        .ok::after { content: ''; position: absolute; left: 4.5px; top: 2px; width: 3px; height: 7px; border: solid #8FD6A8; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
-        .txt { color: rgba(255, 242, 230, 0.88); flex: 1; min-width: 0; }
-        .tag { flex: none; font-size: 12px; color: #AEA2E6; background: rgba(106, 93, 166, 0.22); border-radius: 999px; padding: 3px 9px; }
-        .s-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 22px; border-top: 1px solid rgba(255, 255, 255, 0.07); font-size: 12px; color: rgba(255, 242, 230, 0.5); flex-wrap: wrap; }
-        .mono { font-family: var(--font-mono); font-size: 12px; color: rgba(255, 242, 230, 0.35); }
-        @media (max-width: 520px) { .tag { display: none; } }
-      `}</style>
-    </div>
-  )
-}
-
-/* ── Commitments section (page-local, styled like AgentLoop's card) ── */
+/* ── Hero: the four commitments as glass cards on the luminous stage ── */
 const COMMITMENTS = [
-  { n: '01', label: 'Encrypted in transit and at rest', desc: 'AES-256 encryption when stored, and TLS 1.2 or higher when moving between systems.', tag: 'Always on' },
-  { n: '02', label: 'Access by role', desc: 'Each person sees only what their role allows. Managers see their team. Employees see their own record.', tag: 'Always on' },
-  { n: '03', label: 'Every change logged with who and why', desc: 'Every action, by a person or by MambaHR, is saved to a log that cannot be edited, with the reason attached.', tag: 'Always on' },
-  { n: '04', label: 'Never used to train AI', desc: 'Names, salaries, leave, and health information never train any AI model, ours or anyone else’s.', tag: 'In writing' },
+  {
+    title: 'Encrypted',
+    text: 'AES-256 when stored, and TLS 1.2 or higher when it moves.',
+    icon: <path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z" />,
+  },
+  {
+    title: 'Access by role',
+    text: 'Each person sees only what their role allows.',
+    icon: <><circle cx="12" cy="8" r="3.5" /><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" /></>,
+  },
+  {
+    title: 'Every change logged',
+    text: 'Who did what, when and why, in a log no one can edit.',
+    icon: <><rect x="5" y="4" width="14" height="17" rx="2" /><path d="M9 9h6M9 13h6M9 17h3" /></>,
+  },
+  {
+    title: 'Never used to train AI',
+    text: 'Your people data never trains any AI model.',
+    icon: <><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" /><path d="M9 12l2 2 4-4" /></>,
+  },
 ]
 
-function Commitments() {
+function SecurityHero() {
   return (
-    <section className="cm">
-      <div className="wrap">
-        <div className="head" data-reveal>
-          <p className="eyebrow">Our commitments</p>
-          <h2 className="title">How we treat your data</h2>
-          <p className="lead">Four commitments that apply to every account. They are written into our Data Processing Addendum, available on request.</p>
-        </div>
-        <div className="card agent-edge agent-done" data-reveal data-delay="1">
+    <section className="sh">
+      <div className="top">
+        <p className="eyebrow" data-reveal="eager">Security</p>
+        <h1 className="title" data-reveal="eager">Your people data, <Em>kept safe.</Em></h1>
+        <p className="lead" data-reveal="eager">
+          Salaries, leave records and health information are the most sensitive data your company
+          holds. This is how MambaHR protects it.
+        </p>
+      </div>
+      <div className="stage" data-reveal>
+        <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /><i className="f3" /></span>
+        <ul className="cards">
           {COMMITMENTS.map((c) => (
-            <div className="row" key={c.n}>
-              <span className="num">{c.n}</span>
-              <span className="mark" aria-hidden="true" />
-              <div className="main">
-                <div className="lbl">{c.label}</div>
-                <div className="desc">{c.desc}</div>
-              </div>
-              <span className="tag">{c.tag}</span>
-            </div>
+            <li key={c.title} className="glass">
+              <span className="ico">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{c.icon}</svg>
+              </span>
+              <p className="c-t">{c.title}</p>
+              <p className="c-x">{c.text}</p>
+            </li>
           ))}
-        </div>
+        </ul>
+        <p className="dpa">These commitments are in our Data Processing Addendum, available on request.</p>
       </div>
       <style jsx>{`
-        .cm { background: var(--bg); padding-block: clamp(88px, 11vw, 144px); }
-        .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
-        .head { margin-bottom: clamp(36px, 4vw, 52px); text-align: center; }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
-        .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-        .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
-        .card { background: var(--bg); border: 1px solid var(--border); border-radius: 18px; padding: 8px 0; box-shadow: var(--shadow-float); max-width: 920px; margin: 0 auto; }
-        .row { display: flex; align-items: center; gap: 16px; padding: 16px clamp(18px, 2.4vw, 28px); }
-        .row + .row { border-top: 1px solid var(--border-faint); }
-        .num { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 22px; flex: none; }
-        .mark { flex: none; width: 18px; height: 18px; border-radius: 999px; background: var(--color-green); position: relative; }
-        .mark::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .lbl { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-        .desc { font-size: 14px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
-        .main { flex: 1; min-width: 0; }
-        .tag { flex: none; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
-        @media (max-width: 640px) { .row { flex-wrap: wrap; } }
+        .sh { background: var(--bg); padding: clamp(128px, 13vw, 168px) var(--page-pad) clamp(40px, 5vw, 64px); }
+        .top { max-width: 900px; margin: 0 auto; text-align: center; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0 0 20px; }
+        .title {
+          font-family: var(--font-serif);
+          font-weight: 400;
+          font-size: clamp(42px, 6vw, 84px);
+          line-height: 0.98;
+          letter-spacing: -0.045em;
+          color: var(--text);
+          margin: 0;
+          text-wrap: balance;
+        }
+        .lead { font-size: clamp(17px, 1.9vw, 20px); line-height: 1.6; color: var(--text-muted); max-width: 52ch; margin: 24px auto 0; text-wrap: pretty; }
+        .stage {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          max-width: 1320px;
+          margin: clamp(48px, 6vw, 72px) auto 0;
+          border-radius: 32px;
+          padding: clamp(24px, 4.4vw, 56px);
+          background: linear-gradient(155deg, #f3c796 0%, #eab2a4 40%, #c3aee0 72%, #9d8fe0 100%);
+        }
+        .field { position: absolute; inset: 0; z-index: -1; }
+        .field i { position: absolute; border-radius: 50%; filter: blur(70px); }
+        .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, rgba(255, 226, 184, 0.95), rgba(255, 226, 184, 0) 70%); }
+        .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, rgba(139, 127, 208, 0.9), rgba(139, 127, 208, 0) 70%); }
+        .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, rgba(255, 246, 234, 0.7), rgba(255, 246, 234, 0) 70%); }
+        .cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 18px); }
+        .glass {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          padding: clamp(18px, 2vw, 24px);
+          border-radius: 20px;
+          background: rgba(255, 255, 255, 0.66);
+          -webkit-backdrop-filter: blur(18px) saturate(160%);
+          backdrop-filter: blur(18px) saturate(160%);
+          border: 1px solid rgba(255, 255, 255, 0.85);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 24px 48px -24px rgba(60, 40, 90, 0.4);
+        }
+        .ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: #fff; color: #5a4f8f; border: 1px solid rgba(26, 26, 25, 0.06); margin-bottom: 6px; }
+        .c-t { margin: 0; font-family: var(--font-serif); font-size: clamp(20px, 1.8vw, 23px); letter-spacing: -0.02em; color: var(--text); }
+        .c-x { margin: 0; font-size: 15px; line-height: 1.55; color: #45413b; }
+        .dpa { margin: clamp(18px, 2.4vw, 28px) 0 0; text-align: center; font-size: 14px; color: #4a4540; }
+        @media (max-width: 1000px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 560px) { .cards { grid-template-columns: 1fr; } }
       `}</style>
     </section>
   )
@@ -214,8 +211,8 @@ function SecurityReview() {
       <div className="wrap">
         <div className="head" data-reveal>
           <p className="eyebrow">For your security review</p>
-          <h2 className="title">The questionnaire, <Em>answered.</Em></h2>
-          <p className="lead">The questions your IT and legal reviewers will ask, answered here. Forward this page, or bring them to the demo.</p>
+          <h2 className="title">Answers for your <Em>security review.</Em></h2>
+          <p className="lead">The questions IT and legal teams ask, answered. Forward this page, or bring them to the demo.</p>
         </div>
         <div className="grid">
           {REVIEW.map((r, i) => (
@@ -230,18 +227,18 @@ function SecurityReview() {
         </p>
       </div>
       <style jsx>{`
-        .sr { background: var(--bg-warm); padding: clamp(72px, 9vw, 120px) var(--page-pad); }
-        .wrap { max-width: var(--page-max); margin: 0 auto; }
-        .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 56px); }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
+        .sr { background: var(--bg); padding: clamp(64px, 8vw, 104px) var(--page-pad); }
+        .wrap { max-width: 1180px; margin: 0 auto; }
+        .head { margin-bottom: clamp(28px, 3.4vw, 44px); }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0 0 16px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-        .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
-        .item { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(20px, 2.4vw, 28px); box-shadow: var(--shadow-sm); }
-        .q { font-size: 16px; font-weight: 700; color: var(--text); margin: 0; letter-spacing: -0.01em; }
-        .a { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin: 10px 0 0; }
-        .contact { text-align: center; font-size: 14px; color: var(--text-muted); margin: 28px 0 0; }
-        :global(.sr .contact a) { color: var(--gold-dark); font-weight: 700; text-decoration: none; }
+        .lead { font-size: clamp(16px, 1.8vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 16px 0 0; max-width: 60ch; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(28px, 4vw, 56px); border-top: 1px solid var(--border-faint); }
+        .item { padding: 22px 0; border-bottom: 1px solid var(--border-faint); }
+        .q { font-family: var(--font-serif); font-size: 20px; font-weight: 400; color: var(--text); margin: 0; letter-spacing: -0.01em; }
+        .a { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 8px 0 0; }
+        .contact { font-size: 15px; color: var(--text-muted); margin: 24px 0 0; }
+        :global(.sr .contact a) { color: var(--text); font-weight: 600; text-decoration: underline; text-decoration-color: var(--border-mid); text-underline-offset: 3px; }
         :global(.sr .contact a:hover) { text-decoration: underline; }
         @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
       `}</style>
@@ -254,20 +251,8 @@ export default function SecurityPage() {
     <>
       <MegaNav />
       <RevealInit />
-      <CountUp />
       <main id="main">
-        <PageHero
-          eyebrow="Security"
-          title={<>Your people data, <Em>kept safe.</Em></>}
-          lead="Salaries, leave records, and health information are the most sensitive data your company holds. MambaHR encrypts it, limits access by role, logs every change, and never uses it to train AI. These commitments are in our Data Processing Addendum, available on request."
-          photo="/v2-people/sofia.jpg"
-          photoChip="MambaHR · done"
-          photoCaption="Every change logged with who and why"
-        >
-          <SecurityLogCard />
-        </PageHero>
-
-        <Commitments />
+        <SecurityHero />
 
         <FeatureSplit
           eyebrow="Access"
@@ -296,18 +281,7 @@ export default function SecurityPage() {
         >
           <ApprovalGateCard />
         </FeatureSplit>
-
-        <StatTrio
-          note={null}
-          stats={[
-            { n: 100, suffix: '%', label: 'of changes logged with who and why' },
-            { n: 0, label: 'AI training on your data, in writing' },
-            { n: 1, label: 'person required on every high-stakes action' },
-          ]}
-        />
-
         <SecurityReview />
-
 
         <PageCta
           title={<>Encrypted, logged, <Em>never used to train AI.</Em></>}

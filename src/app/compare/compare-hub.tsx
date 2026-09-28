@@ -6,49 +6,114 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import { PageCta, Em } from '@/components/v2/page-kit'
 
-const CARDS: { slug: string; name: string; sub: string; tag: string | null }[] = [
-  { slug: 'rippling', name: 'Rippling', sub: 'Rippling gives you software to run. MambaHR does the admin for you.', tag: null },
-  { slug: 'gusto', name: 'Gusto', sub: 'Gusto handles payday. MambaHR handles the HR admin around it.', tag: null },
-  { slug: 'deel', name: 'Deel', sub: 'Deel runs payroll and hires abroad. MambaHR does your US HR admin and sends Deel the payroll changes.', tag: null },
-  { slug: 'bamboohr', name: 'BambooHR', sub: 'BambooHR keeps your records. MambaHR keeps them and does the admin too.', tag: null },
-  { slug: 'namely', name: 'Namely', sub: 'Namely gives your team HR software to run. MambaHR also does the admin.', tag: null },
-  { slug: 'hibob', name: 'HiBob', sub: 'HiBob gives employees an HR app they like. MambaHR also does the admin for your team.', tag: null },
-  { slug: 'adp', name: 'ADP', sub: 'ADP runs payroll and benefits. MambaHR does the everyday HR admin.', tag: null },
-  { slug: 'workday', name: 'Workday', sub: 'Workday is a suite your admins configure. MambaHR does the admin, set up in a day.', tag: null },
-  { slug: 'justworks', name: 'Justworks', sub: 'Justworks co-employs your team. MambaHR does the admin while you stay the employer.', tag: null },
-  { slug: 'trinet', name: 'TriNet', sub: 'TriNet co-employs your team and assigns a rep. MambaHR does the admin directly.', tag: null },
-  { slug: 'paychex', name: 'Paychex', sub: 'Paychex sells HR services one by one. MambaHR does the HR admin in one product.', tag: null },
-  { slug: 'zenefits', name: 'Zenefits', sub: 'Zenefits puts HR in one dashboard. MambaHR also does the admin.', tag: null },
-  { slug: 'paylocity', name: 'Paylocity', sub: 'Paylocity is a suite for your HR team to run. MambaHR also does the admin.', tag: null },
-  { slug: 'ukg', name: 'UKG', sub: 'UKG is built for large, shift-based teams. MambaHR takes the HR admin off your plate.', tag: null },
-  { slug: 'greenhouse', name: 'Greenhouse', sub: 'Greenhouse runs your hiring pipeline. MambaHR covers hiring and what comes after.', tag: null },
-  { slug: 'lever', name: 'Lever', sub: 'Lever helps recruiters find candidates. MambaHR takes a hire from job post to first day.', tag: null },
-  { slug: 'remote', name: 'Remote', sub: 'Remote employs people abroad. MambaHR does the HR admin for your US team.', tag: null },
-  { slug: 'oyster', name: 'Oyster', sub: 'Oyster hires in other countries. MambaHR does the HR admin for your team at home.', tag: null },
-]
+type Entry = { slug: string; name: string; what: string }
 
-/* The choices a team weighs when HR admin piles up, not just vendors. */
-const OPTIONS = [
+/* Every comparison page, grouped by what kind of product it is, so a reader
+   finds the system they use today at a glance. */
+const GROUPS: { title: string; items: Entry[] }[] = [
   {
-    title: 'Do it by hand',
-    good: 'Your team knows your people and your policies.',
-    breaks: 'Admin crowds out the work that needs a person: filing, chasing forms, answering the same questions again.',
-    mamba: 'MambaHR does the repeat admin, so your team spends its time on people and judgment calls.',
+    title: 'HR software',
+    items: [
+      { slug: 'rippling', name: 'Rippling', what: 'HR, payroll and IT in one platform' },
+      { slug: 'bamboohr', name: 'BambooHR', what: 'HR records for small teams' },
+      { slug: 'hibob', name: 'HiBob', what: 'An HR app employees like' },
+      { slug: 'namely', name: 'Namely', what: 'HR software for mid-size teams' },
+      { slug: 'workday', name: 'Workday', what: 'A large HR suite you configure' },
+      { slug: 'ukg', name: 'UKG', what: 'Built for shift-based teams' },
+      { slug: 'paylocity', name: 'Paylocity', what: 'Payroll and HR in one suite' },
+      { slug: 'zenefits', name: 'Zenefits', what: 'HR in one dashboard' },
+    ],
   },
   {
-    title: 'Buy more software',
-    good: 'Cleaner records, better forms, nicer dashboards.',
-    breaks: 'Software stores the work. Someone on your team still does each task, in every tool you bought.',
-    mamba: 'MambaHR keeps your HR records and also does the admin. You approve what matters.',
+    title: 'Payroll',
+    items: [
+      { slug: 'gusto', name: 'Gusto', what: 'Payroll for small businesses' },
+      { slug: 'adp', name: 'ADP', what: 'Payroll and benefits' },
+      { slug: 'paychex', name: 'Paychex', what: 'Payroll and HR services' },
+    ],
+  },
+  {
+    title: 'Co-employers',
+    items: [
+      { slug: 'justworks', name: 'Justworks', what: 'Co-employs your team' },
+      { slug: 'trinet', name: 'TriNet', what: 'Co-employer with a rep' },
+    ],
+  },
+  {
+    title: 'Hiring abroad',
+    items: [
+      { slug: 'deel', name: 'Deel', what: 'Pays people abroad' },
+      { slug: 'remote', name: 'Remote', what: 'Employs people abroad' },
+      { slug: 'oyster', name: 'Oyster', what: 'Hires in other countries' },
+    ],
+  },
+  {
+    title: 'Hiring tools',
+    items: [
+      { slug: 'greenhouse', name: 'Greenhouse', what: 'Hiring pipeline' },
+      { slug: 'lever', name: 'Lever', what: 'Recruiting and sourcing' },
+    ],
+  },
+]
+
+/* For teams without a system yet. */
+const OPTIONS = [
+  {
+    title: 'Doing it by hand',
+    breaks: 'Filing, chasing forms and answering the same questions crowd out the work that needs a person.',
+    mamba: 'MambaHR does the repeat admin, so your team spends its time on people.',
+  },
+  {
+    title: 'Adding more software',
+    breaks: 'Software stores the work. Someone on your team still does each task, in every tool.',
+    mamba: 'MambaHR keeps your records and also does the admin. You approve what matters.',
   },
   {
     title: 'Spreadsheets and Slack',
-    good: 'Free, flexible and ready today.',
-    breaks: 'No record of who changed what, a different process each time, and a missed payroll change becomes a real problem.',
-    mamba: 'MambaHR adds approvals and a log of every change, and still works in Slack, where your team already is.',
+    breaks: 'No record of who changed what, and a missed payroll change becomes a real problem.',
+    mamba: 'MambaHR adds approvals and a log of every change, and still works in Slack.',
   },
 ]
 
+function Group({ title, items }: { title: string; items: Entry[] }) {
+  return (
+    <div className="grp">
+      <p className="g-t">{title}</p>
+      <ul className="g-l">
+        {items.map((e) => (
+          <li key={e.slug}>
+            <Link href={`/compare/${e.slug}`} className="row">
+              <span className="r-n">{e.name}</span>
+              <span className="r-w">{e.what}</span>
+              <svg className="r-a" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <style jsx>{`
+        .grp { display: grid; gap: 8px; align-content: start; }
+        .g-t { margin: 0 0 2px 12px; font-size: 13px; font-weight: 600; color: var(--text-faint); }
+        .g-l { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+        .grp :global(.row) {
+          display: grid;
+          grid-template-columns: minmax(0, auto) minmax(0, 1fr) 16px;
+          align-items: baseline;
+          gap: 12px;
+          padding: 11px 12px;
+          border-radius: 12px;
+          text-decoration: none;
+          color: var(--text);
+          transition: background 0.15s ease;
+        }
+        .grp :global(.row:hover) { background: rgba(255, 255, 255, 0.9); }
+        .grp :global(.row:focus-visible) { outline: 2px solid var(--violet); outline-offset: 1px; }
+        .r-n { font-family: var(--font-serif); font-size: 19px; letter-spacing: -0.01em; white-space: nowrap; }
+        .r-w { font-size: 14px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .r-a { color: var(--text-faint); align-self: center; }
+      `}</style>
+    </div>
+  )
+}
 
 export default function CompareHub() {
   return (
@@ -56,173 +121,117 @@ export default function CompareHub() {
       <MegaNav />
       <RevealInit />
       <main id="main">
-        {/* ── Hero ── */}
-        <section className="ch">
-          <div className="aurora" aria-hidden="true"><span className="blob b1" /><span className="blob b2" /></div>
-          <span className="v2-grain" />
+        <section className="hub">
           <div className="top">
-            <p className="eyebrow" data-reveal>Compare</p>
-            <h1 className="title" data-reveal data-delay="1">Weigh your <Em>options.</Em></h1>
-            <p className="lead" data-reveal data-delay="2">
-              When HR admin piles up, you have a few choices: do it by hand, buy more software, or
-              keep patching it together in spreadsheets. Here is how MambaHR compares, including
-              the rows where others do more.
+            <p className="eyebrow" data-reveal="eager">Compare</p>
+            <h1 className="title" data-reveal="eager">How MambaHR <Em>compares.</Em></h1>
+            <p className="lead" data-reveal="eager">
+              Pick the system you use today. Each page puts it side by side with MambaHR,
+              including where the other product does more.
             </p>
-            <div className="ctas" data-reveal data-delay="3">
-              <Link href="/demo" className="btn-p">Book a demo</Link>
-              <Link href="/pricing" className="btn-g">See pricing</Link>
+          </div>
+
+          <div className="stage" data-reveal>
+            <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /><i className="f3" /></span>
+            <div className="panel">
+              <div className="col wide"><Group {...GROUPS[0]} /></div>
+              <div className="col"><Group {...GROUPS[1]} /><Group {...GROUPS[2]} /></div>
+              <div className="col"><Group {...GROUPS[3]} /><Group {...GROUPS[4]} /></div>
             </div>
           </div>
-          <style jsx>{`
-            .ch { position: relative; overflow: hidden; padding: clamp(124px, 14vw, 168px) var(--page-pad) clamp(56px, 7vw, 84px); background: linear-gradient(180deg, #F7F3EB 0%, var(--bg-warm) 58%); }
-            .aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-            .aurora::after { content: ''; position: absolute; inset: 0; background: radial-gradient(54% 48% at 50% 32%, rgba(254, 253, 250, 0.82), rgba(254, 253, 250, 0) 72%); }
-            .blob { position: absolute; border-radius: 50%; filter: blur(72px); }
-            .b1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(196, 154, 108, 0.58), rgba(196, 154, 108, 0) 68%); top: -220px; left: -140px; animation: cmA 24s ease-in-out infinite alternate; }
-            .b2 { width: 640px; height: 640px; background: radial-gradient(circle, rgba(106, 93, 166, 0.46), rgba(106, 93, 166, 0) 68%); top: -170px; right: -130px; animation: cmB 28s ease-in-out infinite alternate; }
-            @keyframes cmA { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(120px, 80px) scale(1.16); } }
-            @keyframes cmB { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-110px, 60px) scale(1.1); } }
-            @media (prefers-reduced-motion: reduce) { .blob { animation: none; } }
-            .top { position: relative; max-width: 980px; margin: 0 auto; text-align: center; }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(42px, 5.8vw, 76px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 18px 0 0; text-wrap: balance; }
-            .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 660px; margin: 22px auto 0; }
-            .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
-            :global(.ch .btn-p) {
-              display: inline-block; background: var(--text); color: #fff; font-weight: 600; font-size: 16px;
-              padding: 14px 28px; border-radius: 999px; text-decoration: none;
-              box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22); transition: transform 0.15s ease;
-            }
-            :global(.ch .btn-p:hover) { transform: translateY(-2px); }
-            :global(.ch .btn-g) {
-              display: inline-block; color: var(--text); font-weight: 600; font-size: 16px;
-              padding: 14px 24px; border-radius: 999px; border: 1px solid var(--border-mid);
-              background: rgba(255, 255, 255, 0.6); text-decoration: none;
-            }
-            :global(.ch .btn-g:hover) { background: #fff; }
-            @media (prefers-reduced-motion: reduce) { :global(.ch .btn-p:hover) { transform: none; } }
-          `}</style>
         </section>
 
-        {/* ── The real options ── */}
-        <section className="op">
+        <section className="none">
           <div className="wrap">
-            <div className="head" data-reveal>
-              <p className="eyebrow">Before the vendors</p>
-              <h2 className="title">Your three <Em>options.</Em></h2>
-            </div>
-            <div className="grid">
-              {OPTIONS.map((o, i) => (
-                <div key={o.title} className="card" data-reveal data-delay={String(i + 1)}>
-                  <h3 className="t">{o.title}</h3>
-                  <div className="block">
-                    <span className="lbl good">What it&rsquo;s good for</span>
-                    <p>{o.good}</p>
-                  </div>
-                  <div className="block">
-                    <span className="lbl bad">Where it falls short</span>
-                    <p>{o.breaks}</p>
-                  </div>
-                  <div className="block mamba">
-                    <span className="lbl gold">With MambaHR</span>
-                    <p>{o.mamba}</p>
-                  </div>
+            <h2 className="h2" data-reveal>No HR system yet?</h2>
+            <div className="opts">
+              {OPTIONS.map((o) => (
+                <div key={o.title} className="opt" data-reveal>
+                  <p className="o-t">{o.title}</p>
+                  <p className="o-b">{o.breaks}</p>
+                  <p className="o-m"><b>With MambaHR:</b> {o.mamba}</p>
                 </div>
               ))}
             </div>
           </div>
-          <style jsx>{`
-            .op { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
-            .wrap { max-width: var(--page-max); margin: 0 auto; }
-            .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-            .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 22px); align-items: stretch; }
-            .card { display: flex; flex-direction: column; gap: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 28px); box-shadow: var(--shadow-sm); }
-            .t { font-family: var(--font-serif); font-size: 22px; font-weight: 500; color: var(--text); margin: 0; letter-spacing: -0.01em; }
-            .block p { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 6px 0 0; }
-            .block.mamba { margin-top: auto; background: var(--bg-warm); border: 1px solid var(--border-faint); border-radius: 12px; padding: 13px 15px; }
-            .lbl { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-            .lbl.good { color: var(--color-green); }
-            .lbl.bad { color: #B0584A; }
-            .lbl.gold { color: var(--gold-dark); }
-            @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
-          `}</style>
-        </section>
-
-        {/* ── Vendor grid ── */}
-        <section className="vs">
-          <div className="wrap">
-            <div className="head" data-reveal>
-              <p className="eyebrow">Head to head</p>
-              <h2 className="title">Pick the system <Em>you use today.</Em></h2>
-              <p className="lead">Side-by-side pages for the main HR records systems, payroll providers, co-employers (PEOs) and hiring tools. Each table includes the rows where the other product does more.</p>
-            </div>
-            <div className="grid">
-              {CARDS.map((c, i) => (
-                <Link key={c.slug} href={`/compare/${c.slug}`} className="card" data-reveal data-delay={String(Math.min((i % 4) + 1, 4))}>
-                  {c.tag && <span className="tag">{c.tag}</span>}
-                  <span className="vs-l">MambaHR <em>vs</em></span>
-                  <span className="nm">{c.name}</span>
-                  <span className="sub">{c.sub}</span>
-                  <span className="go">Compare</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-          <style jsx>{`
-            .vs { background: var(--bg-warm); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
-            .wrap { max-width: var(--page-max); margin: 0 auto; }
-            .head { text-align: center; margin-bottom: clamp(32px, 4vw, 48px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-            .lead { font-size: clamp(15px, 1.7vw, 17px); line-height: 1.6; color: var(--text-muted); margin: 14px auto 0; max-width: 540px; }
-            .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.4vw, 18px); }
-            :global(.vs .card) {
-              position: relative;
-              display: flex;
-              flex-direction: column;
-              background: var(--bg);
-              border: 1px solid var(--border);
-              border-radius: 16px;
-              padding: clamp(20px, 2.2vw, 26px);
-              text-decoration: none;
-              box-shadow: var(--shadow-sm);
-              transition: transform 0.16s ease, box-shadow 0.16s ease;
-            }
-            :global(.vs .card:hover) { transform: translateY(-4px); box-shadow: var(--shadow-float); }
-            @media (prefers-reduced-motion: reduce) { :global(.vs .card:hover) { transform: none; } }
-            .tag {
-              position: absolute;
-              top: -10px;
-              left: 18px;
-              font-family: var(--font-mono);
-              font-size: 12px;
-              font-weight: 600;
-              text-transform: uppercase;
-              letter-spacing: 0.05em;
-              color: #fff;
-              background: linear-gradient(120deg, var(--gold-mid), var(--violet));
-              border-radius: 999px;
-              padding: 4px 11px;
-              box-shadow: 0 0 0 4px var(--bg);
-            }
-            .vs-l { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); }
-            .vs-l em { font-style: italic; color: var(--gold-dark); }
-            .nm { font-family: var(--font-serif); font-size: clamp(22px, 2.2vw, 28px); color: var(--text); letter-spacing: -0.015em; margin-top: 6px; }
-            .sub { font-size: 13px; line-height: 1.5; color: var(--text-muted); margin-top: 10px; flex: 1; }
-            .go { font-size: 13px; font-weight: 700; color: var(--gold-dark); margin-top: 16px; }
-            @media (max-width: 1080px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-            @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
-          `}</style>
         </section>
 
         <PageCta
           title={<>See it on <Em>your own requests.</Em></>}
-          sub="A 30-minute demo, run on your own HR scenarios."
+          sub="A 30-minute demo using examples from your company."
         />
       </main>
       <Footer />
+
+      <style jsx>{`
+        .hub { background: var(--bg); padding: clamp(128px, 13vw, 168px) var(--page-pad) clamp(48px, 6vw, 80px); }
+        .top { max-width: 900px; margin: 0 auto; text-align: center; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0 0 20px; }
+        .title {
+          font-family: var(--font-serif);
+          font-weight: 400;
+          font-size: clamp(42px, 6vw, 84px);
+          line-height: 0.98;
+          letter-spacing: -0.045em;
+          color: var(--text);
+          margin: 0;
+          text-wrap: balance;
+        }
+        .lead { font-size: clamp(17px, 1.9vw, 20px); line-height: 1.6; color: var(--text-muted); max-width: 52ch; margin: 24px auto 0; text-wrap: pretty; }
+
+        .stage {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          max-width: 1320px;
+          margin: clamp(48px, 6vw, 72px) auto 0;
+          border-radius: 32px;
+          padding: clamp(20px, 4vw, 56px);
+          background: linear-gradient(155deg, #f3c796 0%, #eab2a4 40%, #c3aee0 72%, #9d8fe0 100%);
+        }
+        .field { position: absolute; inset: 0; z-index: -1; }
+        .field i { position: absolute; border-radius: 50%; filter: blur(70px); }
+        .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, rgba(255, 226, 184, 0.95), rgba(255, 226, 184, 0) 70%); }
+        .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, rgba(139, 127, 208, 0.9), rgba(139, 127, 208, 0) 70%); }
+        .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, rgba(255, 246, 234, 0.7), rgba(255, 246, 234, 0) 70%); }
+        .panel {
+          display: grid;
+          grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 1fr);
+          gap: clamp(16px, 2.4vw, 32px);
+          padding: clamp(16px, 2.4vw, 28px);
+          border-radius: 24px;
+          background: rgba(255, 255, 255, 0.7);
+          -webkit-backdrop-filter: blur(18px) saturate(160%);
+          backdrop-filter: blur(18px) saturate(160%);
+          border: 1px solid rgba(255, 255, 255, 0.85);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 30px 60px -30px rgba(60, 40, 90, 0.45);
+        }
+        .col { display: grid; gap: 20px; align-content: start; }
+        .col + .col { border-left: 1px solid rgba(26, 26, 25, 0.07); padding-left: clamp(12px, 2vw, 24px); }
+
+        .none { background: var(--bg); padding: clamp(24px, 4vw, 48px) var(--page-pad) clamp(40px, 5vw, 64px); }
+        .wrap { max-width: 1180px; margin: 0 auto; }
+        .h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -0.03em; color: var(--text); margin: 0 0 24px; }
+        .opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--border-faint); }
+        .opt { display: grid; gap: 10px; align-content: start; padding: 24px 28px 8px 0; }
+        .opt + .opt { padding-left: 28px; border-left: 1px solid var(--border-faint); }
+        .o-t { margin: 0; font-family: var(--font-serif); font-size: 22px; letter-spacing: -0.01em; color: var(--text); }
+        .o-b { margin: 0; font-size: 15px; line-height: 1.55; color: var(--text-muted); }
+        .o-m { margin: 0; font-size: 15px; line-height: 1.55; color: var(--text); }
+        .o-m b { font-weight: 600; }
+
+        @media (max-width: 1000px) {
+          .panel { grid-template-columns: 1fr 1fr; }
+          .col.wide { grid-column: 1 / -1; }
+          .col + .col { border-left: 0; padding-left: 0; }
+        }
+        @media (max-width: 700px) {
+          .panel { grid-template-columns: 1fr; }
+          .opts { grid-template-columns: 1fr; }
+          .opt, .opt + .opt { padding: 20px 0 8px; border-left: 0; }
+          .opt + .opt { border-top: 1px solid var(--border-faint); }
+        }
+      `}</style>
     </>
   )
 }
