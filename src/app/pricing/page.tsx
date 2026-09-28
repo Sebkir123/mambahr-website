@@ -5,8 +5,7 @@ import Link from 'next/link'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
-import CountUp from '@/app/v2/_sections/count-up'
-import { StatTrio, PageCta, Em } from '@/components/v2/page-kit'
+import { PageCta, Em } from '@/components/v2/page-kit'
 import { FAQS } from './faqs'
 import { TIERS } from '@/content/pricing-tiers'
 
@@ -65,13 +64,6 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
   },
 ]
 
-const COST_ROWS = [
-  { hire: 'Records, time off, documents and employee questions', cost: 'Up to 75 employees', alt: 'HR Starter' },
-  { hire: 'Plus hiring, offers and payroll change reports', cost: '75 to 150 employees', alt: 'HR Ops Manager' },
-  { hire: 'Plus pay reviews, compliance research and Deel-managed payroll', cost: '150 to 400 employees', alt: 'Whole department' },
-  { hire: 'Several companies, or custom approval chains', cost: '400+ employees', alt: 'Enterprise' },
-]
-
 const EXPORTS = [
   'New-hire payroll reports',
   'Termination reports',
@@ -82,178 +74,56 @@ const EXPORTS = [
   'Audit-ready change history',
 ]
 
-/* ── Hero: the cost of the admin workload, made visual ── */
-function MathCard() {
-  return (
-    <div className="mc agent-edge agent-working agent-lg">
-      <div className="head">
-        <span className="t">What it costs</span>
-        <span className="at">at 100 employees</span>
-      </div>
-      <div className="rows">
-        <div className="r">
-          <div className="r-top">
-            <span className="r-l">HR Ops Manager plan</span>
-            <span className="r-v">$22<em>/employee/mo</em></span>
-          </div>
-          <span className="r-note">Hiring, onboarding, leave, approvals and payroll changes</span>
-        </div>
-        <div className="r">
-          <div className="r-top">
-            <span className="r-l">Per year, billed annually</span>
-            <span className="r-v grad">$26,400<em>/yr</em></span>
-          </div>
-          <span className="r-note">100 employees × $22 × 12 months</span>
-        </div>
-      </div>
-      <div className="foot">
-        <span className="f-big">27 hrs</span>
-        <span className="f-t">of admin a week taken off your team, by our estimate</span>
-      </div>
-      <p className="disclosure">
-        An example at 100 employees. The hours are our estimate of how long these tasks take a
-        small HR team today, not a measured customer average.
-      </p>
-      <style jsx>{`
-        .disclosure {
-          margin: 0;
-          padding: 0 22px 16px;
-          font-size: 12px;
-          line-height: 1.5;
-          color: var(--text-faint);
-        }
-        .mc { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
-        .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 22px; border-bottom: 1px solid var(--border-faint); }
-        .t { font-size: 14px; font-weight: 700; color: var(--text); }
-        .at { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); white-space: nowrap; }
-        .rows { padding: 18px 22px 6px; display: flex; flex-direction: column; gap: 18px; }
-        .r-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-        .r-l { font-size: 14px; font-weight: 600; color: var(--text); }
-        .r-v { font-family: var(--font-serif); font-size: 22px; color: var(--text); }
-        .r-v em { font-style: normal; font-family: var(--font-sans); font-size: 12px; color: var(--text-faint); }
-        .r-v.grad { background: linear-gradient(110deg, var(--gold), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .r-note { display: block; font-size: 12px; color: var(--text-faint); margin-top: 6px; }
-        .foot { display: flex; align-items: baseline; gap: 12px; padding: 14px 22px 18px; margin-top: 10px; background: var(--bg-warm); border-top: 1px solid var(--border-faint); }
-        .f-big { font-family: var(--font-serif); font-size: 30px; line-height: 1; background: linear-gradient(110deg, var(--gold), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .f-t { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
-      `}</style>
-    </div>
-  )
-}
 
 export default function PricingPage() {
   return (
     <>
       <MegaNav />
       <RevealInit />
-      <CountUp />
       <main id="main">
-        {/* ── Hero ── */}
-        <section className="ph">
-          <div className="aurora" aria-hidden="true"><span className="blob b1" /><span className="blob b2" /></div>
-          <span className="v2-grain" />
+        {/* ── Hero + the plans, on the luminous stage ── */}
+        <section className="pp">
           <div className="top">
-            <p className="eyebrow" data-reveal>Pricing</p>
-            <h1 className="title" data-reveal data-delay="1">Simple pricing, <Em>per employee.</Em></h1>
-            <p className="lead" data-reveal data-delay="2">
-              MambaHR takes the HR admin off your team: onboarding, time off, approvals, compliance,
-              payroll changes and offboarding. You pay one price per employee, per month, billed
-              annually.
+            <p className="eyebrow" data-reveal="eager">Pricing</p>
+            <h1 className="title" data-reveal="eager">Simple pricing, <Em>per employee.</Em></h1>
+            <p className="lead" data-reveal="eager">
+              One price per employee, per month, billed annually. Pick the plan that fits your
+              company&rsquo;s size.
             </p>
-            <div className="ctas" data-reveal data-delay="3">
-              <Link href="/demo" className="btn btn-primary">Book a demo</Link>
-              <Link href="/product" className="btn btn-secondary">See how it works</Link>
-            </div>
+            <Link href="/demo" className="found" data-reveal="eager">
+              <span className="f-dot" aria-hidden="true" />
+              Founding customer pricing is open
+            </Link>
           </div>
-          <div className="stage" data-reveal data-delay="4">
-            <MathCard />
-          </div>
-          <style jsx>{`
-            .ph { position: relative; overflow: hidden; padding: clamp(124px, 14vw, 172px) var(--page-pad) clamp(64px, 8vw, 96px); background: linear-gradient(180deg, #F7F3EB 0%, var(--bg-warm) 58%); }
-            .aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-            .aurora::after { content: ''; position: absolute; inset: 0; background: radial-gradient(54% 48% at 50% 32%, rgba(254, 253, 250, 0.82), rgba(254, 253, 250, 0) 72%); }
-            .blob { position: absolute; border-radius: 50%; filter: blur(72px); }
-            .b1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(196, 154, 108, 0.58), rgba(196, 154, 108, 0) 68%); top: -220px; left: -140px; animation: prA 24s ease-in-out infinite alternate; }
-            .b2 { width: 640px; height: 640px; background: radial-gradient(circle, rgba(106, 93, 166, 0.46), rgba(106, 93, 166, 0) 68%); top: -170px; right: -130px; animation: prB 28s ease-in-out infinite alternate; }
-            @keyframes prA { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(120px, 80px) scale(1.16); } }
-            @keyframes prB { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-110px, 60px) scale(1.1); } }
-            @media (prefers-reduced-motion: reduce) { .blob { animation: none; } }
-            .top { position: relative; max-width: 1040px; margin: 0 auto; text-align: center; }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 4vw, 54px); line-height: 1.04; letter-spacing: -0.028em; color: var(--text); margin: 18px 0 0; text-wrap: balance; }
-            .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.58; color: var(--text-muted); max-width: 690px; margin: 22px auto 0; }
-            .ctas { display: flex; gap: 13px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
-            .stage { position: relative; max-width: 720px; margin: clamp(44px, 5.4vw, 64px) auto 0; }
-          `}</style>
-        </section>
 
-        {/* ── Founding customers ── */}
-        <section className="found">
-          <div className="band" data-reveal>
-            <div className="f-copy">
-              <span className="f-tag">Founding cohort</span>
-              <p className="f-t">Founding customer pricing is open for our first cohort.</p>
-            </div>
-            <Link href="/demo" className="f-cta">Book a demo</Link>
-          </div>
-          <style jsx>{`
-            .found { background: var(--bg); padding: clamp(40px, 5vw, 64px) var(--page-pad) 0; }
-            .band {
-              max-width: var(--page-max);
-              margin: 0 auto;
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              gap: 20px;
-              flex-wrap: wrap;
-              border: 1px solid var(--border);
-              border-radius: 18px;
-              padding: clamp(20px, 2.6vw, 30px) clamp(22px, 3vw, 36px);
-              background:
-                radial-gradient(70% 100% at 4% 0%, rgba(196, 154, 108, 0.18), transparent 55%),
-                radial-gradient(60% 100% at 100% 100%, rgba(106, 93, 166, 0.14), transparent 55%),
-                var(--bg);
-              box-shadow: var(--shadow-sm);
-            }
-            .f-tag { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #fff; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); border-radius: 999px; padding: 4px 11px; }
-            .f-t { font-family: var(--font-serif); font-size: clamp(19px, 2.2vw, 24px); color: var(--text); margin: 10px 0 0; letter-spacing: -0.01em; }
-            :global(.found .f-cta) {
-              flex: none; display: inline-block; background: var(--text); color: #fff; font-weight: 600; font-size: 15px;
-              padding: 13px 24px; border-radius: 999px; text-decoration: none;
-              box-shadow: 0 10px 22px rgba(20, 18, 14, 0.18);
-            }
-            :global(.found .f-cta:hover) { background: #2A2A28; }
-          `}</style>
-        </section>
-
-        {/* ── Tier cards ── */}
-        <section className="tiers">
-          <div className="wrap">
-            <div className="grid">
-              {TIERS.map((t, i) => (
-                <div key={t.name} className={`card${t.popular ? ' pop agent-edge agent-working agent-lg' : ''}`} data-reveal data-delay={String(Math.min(i + 1, 4))}>
-                  {t.badge && <span className="pop-tag">{t.badge}</span>}
-                  <div className="c-name">{t.name}</div>
-                  <div className="c-size">{t.size}</div>
-                  <div className="c-price">
-                    <span className="c-n">{t.price}</span>
-                    {t.unit && <span className="c-u">{t.unit}</span>}
+          <div className="stage" data-reveal>
+            <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /><i className="f3" /></span>
+            <div className="plans">
+              {TIERS.map((t) => (
+                <div key={t.name} className={`plan${t.popular ? ' pop' : ''}`}>
+                  {t.badge && <span className="p-badge">{t.badge}</span>}
+                  <span className="p-name">{t.name}</span>
+                  <span className="p-size">{t.size}</span>
+                  <div className="p-price">
+                    <span className="p-n">{t.price}</span>
+                    {t.unit && <span className="p-u">per employee / month</span>}
                   </div>
-                  <div className="c-min">{t.min}</div>
-                  <p className="c-blurb">{t.blurb}</p>
-                  <ul className="c-feats">
+                  <span className="p-min">{t.min}</span>
+                  <p className="p-blurb">{t.blurb}</p>
+                  <ul className="p-feats">
                     {t.feats.map((f) => (
                       <li key={f}><span className="tick" aria-hidden="true" />{f}</li>
                     ))}
                   </ul>
-                  <Link href="/demo" className={`btn btn-sm btn-block ${t.popular ? 'btn-primary' : 'btn-secondary'}`}>{t.cta}</Link>
+                  <Link href="/demo" className={`btn btn-block ${t.popular ? 'btn-primary' : 'btn-secondary'}`}>{t.unit ? 'Book a demo' : t.cta}</Link>
                 </div>
               ))}
             </div>
-            <p className="note" data-reveal>Annual billing. Every employee on the platform counts once, contractors and board members don&rsquo;t.</p>
+            <p className="s-note">Every employee counts once. Contractors and board members don&rsquo;t.</p>
+          </div>
 
-            {/* Collapsible full matrix */}
-            <details className="matrix" data-reveal>
+          <div className="wrap">
+            <details className="matrix">
               <summary>Compare all plans in detail</summary>
               <div className="m-scroll" role="group" tabIndex={0} aria-label="Plan comparison table">
                 <table>
@@ -272,7 +142,9 @@ export default function PricingPage() {
                             <td>{r.f}</td>
                             {TIERS.map((t, ti) => (
                               <td key={t.name} className="c">
-                                {ti >= r.from ? <span className="yes" aria-label="Included">✓</span> : <span className="no" aria-label="Not included">—</span>}
+                                {ti >= r.from
+                                  ? <span className="yes" aria-label="Included" />
+                                  : <span className="no" aria-label="Not included" />}
                               </td>
                             ))}
                           </tr>
@@ -284,143 +156,165 @@ export default function PricingPage() {
               </div>
             </details>
           </div>
+
           <style jsx>{`
-            .tiers { background: var(--bg); padding: clamp(48px, 6vw, 72px) var(--page-pad) clamp(40px, 5vw, 64px); }
-            .wrap { max-width: var(--page-max); margin: 0 auto; }
-            .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 1.6vw, 20px); align-items: stretch; }
-            .card { position: relative; display: flex; flex-direction: column; background: var(--bg); border: 1px solid var(--border); border-radius: 18px; padding: clamp(22px, 2.4vw, 30px) clamp(18px, 2vw, 26px); box-shadow: var(--shadow-sm); transition: transform 0.18s ease, box-shadow 0.18s ease; }
-            .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-float); }
-            @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
-            .card.pop { background: linear-gradient(180deg, #FFFDF8, var(--bg)); box-shadow: var(--shadow-float); }
-            .pop-tag { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); z-index: 3; font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); border-radius: 999px; padding: 5px 12px; white-space: nowrap; box-shadow: 0 0 0 4px var(--bg), 0 6px 14px rgba(20, 18, 14, 0.16); }
-            .c-name { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-            .c-size { font-family: var(--font-mono); font-size: 12px; color: var(--gold-dark); margin-top: 4px; }
-            .c-price { display: flex; align-items: baseline; gap: 6px; margin-top: 18px; }
-            .c-n { font-family: var(--font-serif); font-size: clamp(32px, 2.8vw, 40px); line-height: 1; color: var(--text); letter-spacing: -0.02em; }
-            .c-u { font-size: 13px; color: var(--text-faint); }
-            .c-min { font-size: 12px; color: var(--text-faint); margin-top: 6px; }
-            .c-blurb { font-size: 14px; line-height: 1.5; color: var(--text-muted); margin: 13px 0 0; min-height: 40px; }
-            .c-feats { list-style: none; padding: 0; margin: 14px 0 20px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
-            .c-feats li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.45; color: var(--text-muted); }
-            .tick { flex: none; width: 16px; height: 16px; margin-top: 1px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
-            .tick::after { content: ''; position: absolute; left: 5px; top: 2.5px; width: 3px; height: 7px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
-            .note { text-align: center; font-size: 13px; color: var(--text-faint); margin: 26px 0 0; }
-            .matrix { margin-top: clamp(28px, 3.4vw, 40px); border: 1px solid var(--border); border-radius: 16px; background: var(--bg); overflow: hidden; }
-            .matrix summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 20px; font-size: 15px; font-weight: 700; color: var(--text); }
+            .pp { background: var(--bg); padding: clamp(128px, 13vw, 168px) var(--page-pad) clamp(40px, 5vw, 64px); }
+            .top { max-width: 900px; margin: 0 auto; text-align: center; }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0 0 20px; }
+            .title {
+              font-family: var(--font-serif);
+              font-weight: 400;
+              font-size: clamp(42px, 6vw, 84px);
+              line-height: 0.98;
+              letter-spacing: -0.045em;
+              color: var(--text);
+              margin: 0;
+              text-wrap: balance;
+            }
+            .lead { font-size: clamp(17px, 1.9vw, 20px); line-height: 1.6; color: var(--text-muted); max-width: 50ch; margin: 22px auto 0; }
+            .top :global(.found) {
+              display: inline-flex;
+              align-items: center;
+              gap: 9px;
+              margin-top: 24px;
+              padding: 8px 16px;
+              border-radius: 999px;
+              background: #fff;
+              border: 1px solid var(--border-faint);
+              box-shadow: 0 8px 20px -12px rgba(60, 40, 90, 0.35);
+              font-size: 14px;
+              font-weight: 600;
+              color: var(--text);
+              text-decoration: none;
+            }
+            .top :global(.found:hover) { border-color: var(--border-mid); }
+            .f-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); }
+
+            .stage {
+              position: relative;
+              isolation: isolate;
+              overflow: hidden;
+              max-width: 1320px;
+              margin: clamp(44px, 5vw, 64px) auto 0;
+              border-radius: 32px;
+              padding: clamp(20px, 3.6vw, 48px);
+              background: linear-gradient(155deg, #f3c796 0%, #eab2a4 40%, #c3aee0 72%, #9d8fe0 100%);
+            }
+            .field { position: absolute; inset: 0; z-index: -1; }
+            .field i { position: absolute; border-radius: 50%; filter: blur(70px); }
+            .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, rgba(255, 226, 184, 0.95), rgba(255, 226, 184, 0) 70%); }
+            .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, rgba(139, 127, 208, 0.9), rgba(139, 127, 208, 0) 70%); }
+            .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, rgba(255, 246, 234, 0.7), rgba(255, 246, 234, 0) 70%); }
+            .plans { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 16px); align-items: stretch; padding-top: 12px; }
+            .plan {
+              position: relative;
+              display: flex;
+              flex-direction: column;
+              padding: clamp(20px, 2vw, 26px);
+              border-radius: 22px;
+              background: rgba(255, 255, 255, 0.62);
+              -webkit-backdrop-filter: blur(18px) saturate(160%);
+              backdrop-filter: blur(18px) saturate(160%);
+              border: 1px solid rgba(255, 255, 255, 0.85);
+              box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 24px 48px -28px rgba(60, 40, 90, 0.4);
+            }
+            .plan.pop { background: #fff; box-shadow: 0 0 0 2px var(--violet), 0 30px 60px -28px rgba(60, 40, 90, 0.55); }
+            .p-name { font-size: 16px; font-weight: 700; color: var(--text); }
+            /* On the card's top edge, so every card's rows stay level. */
+            .p-badge {
+              position: absolute;
+              top: 0;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              font-size: 12px;
+              font-weight: 600;
+              color: #fff;
+              background: var(--violet);
+              border-radius: 999px;
+              padding: 4px 12px;
+              white-space: nowrap;
+              box-shadow: 0 0 0 3px #fff;
+            }
+            .p-size { font-size: 13.5px; color: var(--text-muted); margin-top: 4px; }
+            .p-price { display: flex; align-items: baseline; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+            .p-n { font-family: var(--font-serif); font-size: clamp(40px, 3.6vw, 52px); line-height: 1; letter-spacing: -0.03em; color: var(--text); }
+            .p-u { font-size: 13px; color: var(--text-muted); }
+            .p-min { font-size: 13px; color: var(--text-faint); margin-top: 8px; }
+            .p-blurb { font-size: 15px; line-height: 1.5; color: var(--text); margin: 16px 0 0; padding-top: 16px; border-top: 1px solid rgba(26, 26, 25, 0.08); min-height: 3em; }
+            .p-feats { list-style: none; padding: 0; margin: 14px 0 22px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
+            .p-feats li { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; line-height: 1.45; color: var(--text-muted); }
+            .tick { flex: none; width: 16px; height: 16px; margin-top: 2px; border-radius: 50%; background: var(--color-green); position: relative; }
+            .tick::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3px; height: 7px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }
+            .s-note { margin: clamp(16px, 2vw, 24px) 0 0; text-align: center; font-size: 14px; color: #4a4540; }
+
+            .wrap { max-width: 1180px; margin: 0 auto; }
+            .matrix { margin-top: clamp(28px, 3.4vw, 40px); border: 1px solid var(--border-faint); border-radius: 18px; background: #fff; overflow: hidden; }
+            .matrix summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 20px; font-size: 15px; font-weight: 600; color: var(--text); }
             .matrix summary::-webkit-details-marker { display: none; }
-            .matrix summary::after { content: '+'; font-family: var(--font-mono); font-size: 16px; color: var(--gold-dark); }
-            .matrix[open] summary::after { content: '–'; }
+            .matrix summary::after { content: '+'; font-size: 18px; line-height: 1; color: var(--text-faint); }
+            .matrix[open] summary::after { content: '−'; }
             .matrix[open] summary { border-bottom: 1px solid var(--border-faint); }
+            .matrix summary:focus-visible { outline: 2px solid var(--violet); outline-offset: -2px; }
             .m-scroll { overflow-x: auto; }
-            table { width: 100%; border-collapse: collapse; font-size: 13px; }
-            th { text-align: left; font-size: 12px; font-weight: 700; color: var(--text); padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-surface); white-space: nowrap; }
+            table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+            th { text-align: left; font-size: 13px; font-weight: 600; color: var(--text); padding: 12px 16px; border-bottom: 1px solid var(--border-faint); background: var(--bg-surface); white-space: nowrap; }
             th + th, td.c { text-align: center; }
-            td { padding: 9px 16px; color: var(--text-muted); border-bottom: 1px solid var(--border-faint); }
-            .g-row td { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); background: var(--bg-warm); padding: 8px 16px; }
-            .yes { color: var(--color-green); font-weight: 700; }
-            .no { color: var(--border-mid); }
-            @media (max-width: 1080px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-            @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+            td { padding: 10px 16px; color: var(--text-muted); border-bottom: 1px solid var(--border-faint); }
+            .g-row td { font-size: 13px; font-weight: 600; color: var(--text); background: var(--bg-surface); padding: 9px 16px; }
+            /* Included: a green check. Not included: a small grey dot, no glyph to read aloud. */
+            .yes { display: inline-block; width: 16px; height: 16px; border-radius: 50%; background: var(--color-green); position: relative; vertical-align: middle; }
+            .yes::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3px; height: 7px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }
+            .no { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--border-mid); vertical-align: middle; }
+
+            @media (max-width: 1080px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+            @media (max-width: 620px) { .plans { grid-template-columns: 1fr; row-gap: 28px; } }
           `}</style>
         </section>
 
-        {/* ── Cost comparison ── */}
-        <section className="cost">
-          <div className="wrap">
-            <div className="head" data-reveal>
-              <p className="eyebrow">Choosing a plan</p>
-              <h2 className="title">Pick the plan that fits <Em>your team.</Em></h2>
-              <p className="lead">Start with the work your team spends the most time on, and your company&rsquo;s size.</p>
-            </div>
-            <div className="cost-table" data-reveal data-delay="1">
-              <div className="row hd">
-                <span>The work you want off your plate</span>
-                <span>Company size</span>
-                <span>Plan</span>
-              </div>
-              {COST_ROWS.map((r) => (
-                <div key={r.hire} className="row">
-                  <span className="h">{r.hire}</span>
-                  <span className="c">{r.cost}</span>
-                  <span className="a">{r.alt}</span>
-                </div>
-              ))}
-            </div>
-            <p className="compare-line" data-reveal data-delay="2">
-              <Link href="/compare">Compare MambaHR with the system you use today</Link>
-            </p>
-          </div>
-          <style jsx>{`
-            .cost { background: var(--bg-warm); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
-            .wrap { max-width: 920px; margin: 0 auto; }
-            .head { text-align: center; margin-bottom: clamp(30px, 3.6vw, 44px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-            .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 600px; }
-            .cost-table { display: block; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-float); }
-            .row { display: grid; grid-template-columns: 1.1fr 1fr 1.3fr; gap: 12px; padding: 14px 22px; align-items: baseline; }
-            .row + .row { border-top: 1px solid var(--border-faint); }
-            .row.hd { background: var(--bg-surface); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); }
-            .h { font-size: 15px; font-weight: 700; color: var(--text); }
-            .c { font-family: var(--font-serif); font-size: 17px; color: var(--text); }
-            .a { font-size: 14px; font-weight: 600; background: linear-gradient(110deg, var(--gold), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-            .compare-line { text-align: center; font-size: 14px; color: var(--text-muted); margin: 24px 0 0; }
-            :global(.cost .compare-line a) { color: var(--gold-dark); font-weight: 700; text-decoration: none; }
-            :global(.cost .compare-line a:hover) { text-decoration: underline; }
-            @media (max-width: 640px) { .row { grid-template-columns: 1fr; gap: 4px; } }
-          `}</style>
-        </section>
-
-        {/* ── Payroll ── */}
+        {/* ── Payroll: the two ways ── */}
         <section className="pb">
           <div className="wrap">
-            <div className="copy" data-reveal>
-              <p className="eyebrow">Payday</p>
-              <h2 className="title">Two ways to run <Em>payday.</Em></h2>
-              <p className="lead">
-                MambaHR prepares every payroll change: every hire, raise, leave, and exit. You choose per company:
-                a change file for your current payroll provider, or Deel-managed payroll. On Deel, MambaHR sends the
-                changes and a person approves every run. Benefits administration is not part of MambaHR today;
-                MambaHR does track the COBRA deadlines when someone leaves.
-              </p>
+            <h2 className="h2" data-reveal>Two ways to run <Em>payday.</Em></h2>
+            <p className="sub" data-reveal>MambaHR prepares every payroll change: every hire, raise, leave and exit. You choose one of two ways, per company.</p>
+            <div className="ways">
+              <div className="way" data-reveal>
+                <p className="w-t">Keep your payroll provider</p>
+                <p className="w-x">MambaHR builds a change file in your provider&rsquo;s format, checked against the record, ready for you to load.</p>
+              </div>
+              <div className="way" data-reveal>
+                <p className="w-t">Deel-managed payroll <span className="deel">Powered by Deel</span></p>
+                <p className="w-x">MambaHR sends the changes to Deel, and a person approves every run. On Whole department and Enterprise.</p>
+              </div>
             </div>
-            <div className="chips" data-reveal data-delay="1">
-              {EXPORTS.map((e) => (
-                <span key={e} className="chip"><span className="dot" aria-hidden="true" />{e}</span>
-              ))}
+            <div className="chips" data-reveal>
+              <span className="c-l">Reports for every pay run</span>
+              {EXPORTS.map((e) => <span key={e} className="chip">{e}</span>)}
             </div>
           </div>
           <style jsx>{`
-            .pb { background: var(--bg); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
-            .wrap { max-width: 920px; margin: 0 auto; text-align: center; }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-            .lead { font-size: clamp(15.5px, 1.8vw, 17.5px); line-height: 1.65; color: var(--text-muted); margin: 18px auto 0; max-width: 640px; }
-            .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin-top: 28px; }
-            .chip { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: var(--text-muted); background: var(--bg-surface); border: 1px solid var(--border-faint); border-radius: 999px; padding: 6px 13px; white-space: nowrap; }
-            .dot { width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); }
+            .pb { background: var(--bg); padding: clamp(40px, 6vw, 80px) var(--page-pad); }
+            .wrap { max-width: 1180px; margin: 0 auto; }
+            .h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin: 0; }
+            .sub { font-size: 17px; line-height: 1.6; color: var(--text-muted); margin: 14px 0 0; max-width: 60ch; }
+            .ways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: clamp(24px, 3vw, 36px); }
+            .way { padding: clamp(20px, 2.4vw, 28px); border-radius: 20px; background: #fff; border: 1px solid var(--border-faint); box-shadow: 0 20px 40px -32px rgba(60, 40, 90, 0.35); }
+            .w-t { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 22px; letter-spacing: -0.01em; color: var(--text); }
+            .w-x { margin: 10px 0 0; font-size: 15.5px; line-height: 1.55; color: var(--text-muted); }
+            .deel { font-family: var(--font-sans); font-size: 12.5px; font-weight: 600; color: var(--gold-dark); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.22); border-radius: 999px; padding: 3px 10px; letter-spacing: 0; }
+            .chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; }
+            .c-l { font-size: 14px; font-weight: 600; color: var(--text-faint); margin-right: 4px; }
+            .chip { font-size: 13.5px; color: var(--text-muted); background: var(--bg-surface); border: 1px solid var(--border-faint); border-radius: 999px; padding: 6px 12px; }
+            @media (max-width: 720px) { .ways { grid-template-columns: 1fr; } }
           `}</style>
         </section>
-
-        <StatTrio
-          note={null}
-          stats={[
-            { n: 27, label: 'hours of HR admin a week taken off a small team, by our estimate' },
-            { n: 1, label: 'day to bring your data over from your current HR system' },
-            { n: 100, suffix: '%', label: 'of terminations and offers above your pay range wait for your approval' },
-          ]}
-        />
 
         {/* ── FAQ ── */}
         <section className="faq">
           <div className="wrap">
-            <div className="head" data-reveal>
-              <p className="eyebrow">Pricing</p>
-              <h2 className="title">Questions, <Em>answered.</Em></h2>
-            </div>
-            <div className="grid">
-              {FAQS.map((f, i) => (
-                <div key={f.q} className="item" data-reveal data-delay={String(Math.min((i % 4) + 1, 4))}>
+            <h2 className="h2" data-reveal>Questions about pricing</h2>
+            <div className="list">
+              {FAQS.map((f) => (
+                <div key={f.q} className="item" data-reveal>
                   <h3 className="q">{f.q}</h3>
                   <p className="a">{f.a}</p>
                 </div>
@@ -428,19 +322,16 @@ export default function PricingPage() {
             </div>
           </div>
           <style jsx>{`
-            .faq { background: var(--bg-warm); padding: clamp(72px, 9vw, 120px) var(--page-pad); }
-            .wrap { max-width: var(--page-max); margin: 0 auto; }
-            .head { text-align: center; margin-bottom: clamp(36px, 4.4vw, 56px); }
-            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
-            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-            .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
-            .item { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(20px, 2.4vw, 28px); box-shadow: var(--shadow-sm); }
-            .q { font-size: 16px; font-weight: 700; color: var(--text); margin: 0; letter-spacing: -0.01em; }
-            .a { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin: 10px 0 0; }
-            @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+            .faq { background: var(--bg); padding: clamp(32px, 5vw, 64px) var(--page-pad) clamp(48px, 6vw, 80px); }
+            .wrap { max-width: 1180px; margin: 0 auto; }
+            .h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin: 0 0 clamp(20px, 2.4vw, 28px); }
+            .list { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(28px, 4vw, 56px); border-top: 1px solid var(--border-faint); }
+            .item { padding: 22px 0; border-bottom: 1px solid var(--border-faint); }
+            .q { font-family: var(--font-serif); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; color: var(--text); margin: 0; }
+            .a { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 8px 0 0; }
+            @media (max-width: 760px) { .list { grid-template-columns: 1fr; } }
           `}</style>
         </section>
-
 
         <PageCta
           title={<>See what MambaHR takes <Em>off your plate.</Em></>}
