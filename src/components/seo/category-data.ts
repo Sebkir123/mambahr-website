@@ -135,7 +135,7 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         q: 'What does AI HR software cost?',
-        a: 'MambaHR has one price per employee, per plan, from $14 per employee per month, billed annually. Plans differ: hiring starts with HR Ops Manager, and Deel-managed payroll with Whole department.',
+        a: 'MambaHR has one price per employee, per plan, from $14 per employee per month, billed annually. Plans differ: hiring starts with HR Ops Manager. US payroll through Deel is an add-on on any plan, $10 per employee paid per month.',
       },
     ],
     cta: { title: 'See AI HR software that', em: 'does the admin.', sub: 'A 30-minute demo, run on your own HR scenarios.' },

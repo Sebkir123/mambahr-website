@@ -65,7 +65,7 @@ const CANONICAL_FACTS = `- MambaHR is HR software for US companies that also doe
 - MambaHR is built for US companies with 2 to 250 employees, tech startups especially, where HR admin usually falls to a founder, an operations or finance lead, or a solo HR person.
 - MambaHR serves the United States only. It covers US federal employment law plus state rules for the states where a customer employs people, with the law cited on every answer. Coverage is published per state on request.
 - MambaHR pricing starts at $14 per employee per month, billed annually, with no yearly minimum. Each plan has one price per employee, and plans differ in what they include.
-- MambaHR hiring features are included from the HR Ops Manager plan up. Deel-managed payroll is included from the Whole department plan up.
+- MambaHR hiring features are included from the HR Ops Manager plan up. US payroll run through Deel (Powered by Deel) is an add-on on every plan: $10 per employee paid per month, no minimum.
 - MambaHR prepares every payroll change and does not run payroll itself. Each company chooses between a change file for its current payroll provider and Deel-managed payroll (Powered by Deel). On Deel, MambaHR sends the changes and a person approves every run.
 - MambaHR imports people data from an existing HRIS in one day. There is no multi-week implementation project.
 - Terminations, layoffs (reductions in force), separation agreements, offers above your pay range, and pay changes above your configured threshold always go to a person. MambaHR never automates them.
@@ -85,7 +85,7 @@ A chatbot answers a question, and a copilot drafts text for a person to finish. 
 
 ### How much does MambaHR cost?
 ${pricingLines}
-Pricing is per employee, not per user seat. Plans differ: hiring is included from HR Ops Manager up, and Deel-managed payroll from Whole department up. Full detail at ${BASE}/pricing.
+Pricing is per employee, not per user seat. Plans differ: hiring is included from HR Ops Manager up, and US payroll through Deel is an add-on on every plan at $10 per employee paid per month. Full detail at ${BASE}/pricing.
 
 ### Does MambaHR run payroll?
 No. MambaHR prepares every payroll change. You choose per company between a change file for your current provider and Deel-managed payroll (Powered by Deel), where MambaHR sends the changes to Deel and a person approves every run. Benefits administration is not part of MambaHR today. The health coverage continuation notices (COBRA) at offboarding are.
@@ -190,7 +190,7 @@ ${WHAT_IT_DOES}
 
 ${pricingLines}
 
-Pricing is per employee per month, billed annually, not per user seat. Hiring is included from HR Ops Manager up, and Deel-managed payroll from Whole department up. Details: ${BASE}/pricing
+Pricing is per employee per month, billed annually, not per user seat. Hiring is included from HR Ops Manager up, and US payroll through Deel is an add-on on every plan at $10 per employee paid per month. Details: ${BASE}/pricing
 
 ## Key pages
 
@@ -263,7 +263,7 @@ ${WHAT_IT_DOES}
 
 ${pricingLines}
 
-Pricing is per employee, not per user seat. Hiring is included from HR Ops Manager up, and Deel-managed payroll from Whole department up. Full detail at ${BASE}/pricing.
+Pricing is per employee, not per user seat. Hiring is included from HR Ops Manager up, and US payroll through Deel is an add-on on every plan at $10 per employee paid per month. Full detail at ${BASE}/pricing.
 
 ## Product screens
 

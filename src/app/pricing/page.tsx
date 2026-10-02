@@ -22,6 +22,7 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
       { f: 'Approvals, with your rules', from: 0 },
       { f: 'Compliance guidance', from: 0 },
       { f: 'Payroll change files', from: 0 },
+      { f: 'US payroll through Deel (add-on, $10 per employee paid)', from: 0 },
       { f: 'Onboarding, start to finish', from: 0 },
       { f: 'Offboarding, start to finish', from: 0 },
       { f: 'Leave & policy handling', from: 0 },
@@ -48,7 +49,6 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
       { f: 'Compliance research with the citation', from: 2 },
       { f: 'Audit log export for your lawyer', from: 2 },
       { f: 'Single sign-on & security review', from: 2 },
-      { f: 'Deel-managed payroll, person-approved', from: 2 },
       { f: 'Priority support', from: 2 },
     ],
   },
@@ -283,7 +283,7 @@ export default function PricingPage() {
               </div>
               <div className="way" data-reveal>
                 <p className="w-t">Deel-managed payroll <span className="deel">Powered by Deel</span></p>
-                <p className="w-x">MambaHR sends the changes to Deel, and a person approves every run. On Whole department and Enterprise.</p>
+                <p className="w-x">MambaHR sends the changes to Deel, and a person approves every run. US payroll, an add-on on every plan: $10 per employee paid per month, no minimum.</p>
               </div>
             </div>
             <div className="chips" data-reveal>

@@ -20,6 +20,7 @@ export default function robots(): MetadataRoute.Robots {
       // future tightening of the default, and naming a vendor's *current* agent
       // is the only way to stay allowed if that vendor ever splits its crawler
       // into train/search/browse identities (OpenAI and Anthropic both did).
+      { userAgent: 'bingbot', ...ALLOW_DEFAULT },               // Bing, which ChatGPT search and Copilot draw on
       { userAgent: 'GPTBot', ...ALLOW_DEFAULT },                // OpenAI training
       { userAgent: 'OAI-SearchBot', ...ALLOW_DEFAULT },         // OpenAI search index
       { userAgent: 'ChatGPT-User', ...ALLOW_DEFAULT },          // ChatGPT live browsing

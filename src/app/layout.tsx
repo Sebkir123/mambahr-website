@@ -31,6 +31,13 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.mambahr.com'),
+  // Search console ownership tags. Set the codes in Vercel's environment
+  // (Google Search Console: HTML tag method; Bing Webmaster Tools: meta tag);
+  // unset, no tag renders.
+  verification: {
+    ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
+    ...(process.env.BING_SITE_VERIFICATION ? { other: { 'msvalidate.01': process.env.BING_SITE_VERIFICATION } } : {}),
+  },
   title: 'MambaHR: HR that runs itself',
   description:
     "MambaHR takes the HR admin off your team's plate: hiring, onboarding, time off, payroll changes and compliance, with the law cited. You approve what matters.",

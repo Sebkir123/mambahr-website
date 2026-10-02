@@ -16,7 +16,7 @@ export const FAQS = [
   },
   {
     q: 'Why a per-employee price?',
-    a: 'Because the work grows with your team. Every employee brings questions, time off and paperwork. You pay one price per employee, per month, and it rises only when your team grows. Deel-managed payroll is optional. There are no other add-ons.',
+    a: 'Because the work grows with your team. Every employee brings questions, time off and paperwork. You pay one price per employee, per month, and it rises only when your team grows. The one add-on is US payroll run through Deel: $10 per employee paid per month, on any plan, with no minimum.',
   },
   {
     q: 'Is there a minimum?',
@@ -24,7 +24,7 @@ export const FAQS = [
   },
   {
     q: 'Which plan should we choose?',
-    a: 'Start with HR Starter if you mainly need records, time off, documents and answers. Choose HR Ops Manager if you hire and onboard people every month. Choose Whole department if you also run pay reviews and need compliance research or Deel-managed payroll.',
+    a: 'Start with HR Starter if you mainly need records, time off, documents and answers. Choose HR Ops Manager if you hire and onboard people every month. Choose Whole department if you also run pay reviews and need compliance research. Payroll through Deel is an add-on on any plan.',
   },
   {
     q: 'What is founding customer pricing?',

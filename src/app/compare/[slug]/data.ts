@@ -29,7 +29,7 @@ const F = {
   everyday: 'Time off, leave and everyday HR requests',
 }
 
-const PAYROLL_NOTE = 'MambaHR prepares the changes and you approve each run. Deel-managed payroll: Whole department plan and up.'
+const PAYROLL_NOTE = 'MambaHR prepares the changes and you approve each run. Payroll run through Deel (Powered by Deel) is an add-on on every plan.'
 const HIRING_NOTE = 'HR Ops Manager plan and up'
 const COBRA_NOTE = 'MambaHR does send the health coverage (COBRA) notice when someone leaves.'
 const IMPORT_DAY = 'Data imported in a day'
@@ -139,7 +139,7 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Deel pays people, in the US and abroad. MambaHR does the HR admin for your US team and sends the payroll changes to Deel. They work together.',
-    costLine: 'Keep Deel for payroll and for people abroad. MambaHR is one price per employee, per plan, from $14. Deel-managed payroll comes with the Whole department plan and up.',
+    costLine: 'Keep Deel for payroll and for people abroad. MambaHR is one price per employee, per plan, from $14. US payroll through Deel is an add-on on any plan, $10 per employee paid per month.',
   },
 
   bamboohr: {
