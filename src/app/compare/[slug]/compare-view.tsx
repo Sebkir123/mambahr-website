@@ -6,6 +6,7 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import { PageCta, Em } from '@/components/v2/page-kit'
 import type { CompareFaq, CompetitorData, ImportFrom } from './data'
+import { SIGNUP_URL, TRIAL_LABEL, DEMO_HREF, DEMO_LABEL } from '@/content/cta'
 
 function Cell({ value, mine }: { value: string | boolean; mine: boolean }) {
   if (typeof value === 'boolean') {
@@ -33,8 +34,8 @@ export default function CompareView({ data, faqs, importFrom }: { data: Competit
             {line2 && <p className="title2" data-reveal data-delay="1">{line2}</p>}
             <p className="lead" data-reveal data-delay="2">{data.heroSub}</p>
             <div className="ctas" data-reveal data-delay="3">
-              <Link href="/demo" className="btn-p">Book a demo</Link>
-              <Link href="/pricing" className="btn-g">See pricing</Link>
+              <a href={SIGNUP_URL} className="btn-p" data-track="cta_click" data-track-label="trial:compare">{TRIAL_LABEL}</a>
+              <Link href={DEMO_HREF} className="btn-g">{DEMO_LABEL}</Link>
             </div>
           </div>
           <style jsx>{`

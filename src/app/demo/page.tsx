@@ -6,6 +6,7 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import { Em } from '@/components/v2/page-kit'
 import { LeadForm, type LeadFormFields } from '@/components/lead-form'
+import { SIGNUP_URL, TRIAL_LABEL } from '@/content/cta'
 
 const SEE = [
   'Your real questions, answered live with the law cited',
@@ -54,6 +55,10 @@ export default function DemoPage() {
                   <li key={s}><span className="tick" aria-hidden="true" />{s}</li>
                 ))}
               </ul>
+              <p className="self">
+                Rather set it up yourself?{' '}
+                <a href={SIGNUP_URL} data-track="cta_click" data-track-label="trial:demo-page">{TRIAL_LABEL}</a>
+              </p>
             </div>
 
             {/* ── Form card ── */}
@@ -115,6 +120,8 @@ export default function DemoPage() {
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(40px, 5vw, 64px); line-height: 1.02; letter-spacing: -0.03em; color: var(--text); margin: 16px 0 0; text-wrap: balance; }
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.6; color: var(--text-muted); margin: 18px 0 0; max-width: 480px; }
             .see { list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-direction: column; gap: 13px; }
+            .self { margin: 26px 0 0; font-size: 15px; color: var(--text-muted); }
+            .self a { color: var(--text); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
             .see li { display: flex; align-items: flex-start; gap: 11px; font-size: 15px; line-height: 1.5; color: var(--text-muted); }
             .tick { flex: none; width: 18px; height: 18px; margin-top: 2px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
             .tick::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 3.5px; height: 7.5px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }

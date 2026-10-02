@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { MambaMark } from '@/components/mamba-mark'
 import s from './footer.module.css'
+import { SIGNUP_URL, TRIAL_LABEL, DEMO_HREF, DEMO_LABEL } from '@/content/cta'
 
 // The same groups as the Product menu (src/content/nav.ts), so the two never
 // disagree about what the product covers.
@@ -9,7 +10,8 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
     title: 'Product',
     links: [
       { label: 'The product', href: '/product' },
-      { label: 'How it works', href: '/mamba' },
+      { label: 'How it works', href: '/how-it-works' },
+      { label: 'Ask in Slack', href: '/mamba' },
       { label: 'To do', href: '/today' },
       { label: 'Employee records', href: '/people' },
       { label: 'Documents & e-sign', href: '/documents' },
@@ -47,7 +49,8 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
       { label: 'Blog', href: '/blog' },
       { label: 'Security', href: '/security' },
       { label: 'Careers', href: '/careers' },
-      { label: 'Book a demo', href: '/demo' },
+      { label: TRIAL_LABEL, href: SIGNUP_URL },
+      { label: DEMO_LABEL, href: DEMO_HREF },
     ],
   },
   {

@@ -8,6 +8,7 @@ import RevealInit from '@/app/v2/_sections/reveal-init'
 import { PageCta, Em } from '@/components/v2/page-kit'
 import { FAQS } from './faqs'
 import { TIERS } from '@/content/pricing-tiers'
+import { SIGNUP_URL, TRIAL_LABEL, TRIAL_DAYS, DEMO_HREF, DEMO_LABEL } from '@/content/cta'
 
 /* Plan matrix: tier index = first column where the feature is included. */
 const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
@@ -22,6 +23,7 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
       { f: 'Approvals, with your rules', from: 0 },
       { f: 'Compliance guidance', from: 0 },
       { f: 'Payroll change files', from: 0 },
+      { f: 'Payroll through Deel, person-approved (add-on)', from: 0 },
       { f: 'Onboarding, start to finish', from: 0 },
       { f: 'Offboarding, start to finish', from: 0 },
       { f: 'Leave & policy handling', from: 0 },
@@ -48,7 +50,6 @@ const MATRIX: { group: string; rows: { f: string; from: number }[] }[] = [
       { f: 'Compliance research with the citation', from: 2 },
       { f: 'Audit log export for your lawyer', from: 2 },
       { f: 'Single sign-on & security review', from: 2 },
-      { f: 'Deel-managed payroll, person-approved', from: 2 },
       { f: 'Priority support', from: 2 },
     ],
   },
@@ -115,11 +116,19 @@ export default function PricingPage() {
                       <li key={f}><span className="tick" aria-hidden="true" />{f}</li>
                     ))}
                   </ul>
-                  <Link href="/demo" className={`btn btn-block ${t.popular ? 'btn-primary' : 'btn-secondary'}`}>{t.unit ? 'Book a demo' : t.cta}</Link>
+                  {t.unit ? (
+                    <a href={SIGNUP_URL} className={`btn btn-block ${t.popular ? 'btn-primary' : 'btn-secondary'}`} data-track="cta_click" data-track-label={`trial:pricing:${t.name}`}>{TRIAL_LABEL}</a>
+                  ) : (
+                    <Link href={DEMO_HREF} className="btn btn-block btn-secondary">{t.cta}</Link>
+                  )}
                 </div>
               ))}
             </div>
-            <p className="s-note">Every employee counts once. Contractors and board members don&rsquo;t.</p>
+            <p className="s-note">
+              Every plan starts with a {TRIAL_DAYS}-day free trial you set up yourself. Rather see it first?{' '}
+              <Link href={DEMO_HREF} className="s-demo">{DEMO_LABEL}</Link>.
+            </p>
+            <p className="s-note s-note-2">Every employee counts once. Contractors and board members don&rsquo;t.</p>
           </div>
 
           <div className="wrap">
@@ -246,6 +255,8 @@ export default function PricingPage() {
             .tick { flex: none; width: 16px; height: 16px; margin-top: 2px; border-radius: 50%; background: var(--color-green); position: relative; }
             .tick::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3px; height: 7px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }
             .s-note { margin: clamp(16px, 2vw, 24px) 0 0; text-align: center; font-size: 14px; color: #4a4540; }
+            .s-note-2 { margin-top: 6px; }
+            .s-note :global(.s-demo) { color: var(--text); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 
             .wrap { max-width: 1180px; margin: 0 auto; }
             .matrix { margin-top: clamp(28px, 3.4vw, 40px); border: 1px solid var(--border-faint); border-radius: 18px; background: #fff; overflow: hidden; }
@@ -283,7 +294,7 @@ export default function PricingPage() {
               </div>
               <div className="way" data-reveal>
                 <p className="w-t">Deel-managed payroll <span className="deel">Powered by Deel</span></p>
-                <p className="w-x">MambaHR sends the changes to Deel, and a person approves every run. On Whole department and Enterprise.</p>
+                <p className="w-x">MambaHR sends the changes to Deel, and a person approves every run. US payroll, as an add-on on any plan: $10 per employee paid, per month, no minimum.</p>
               </div>
             </div>
             <div className="chips" data-reveal>

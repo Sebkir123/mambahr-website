@@ -33,6 +33,7 @@ const STATIC_ROUTES: StaticRoute[] = [
   { path: '/demo',         file: 'src/app/demo/page.tsx',            changeFrequency: 'weekly',  priority: 0.95 },
   { path: '/pricing',      file: 'src/app/pricing/page.tsx',         changeFrequency: 'weekly',  priority: 0.95 },
   { path: '/product',      file: 'src/app/product/page.tsx',         changeFrequency: 'weekly',  priority: 0.9 },
+  { path: '/how-it-works', file: 'src/app/how-it-works/content.ts',  changeFrequency: 'monthly', priority: 0.9 },
   { path: '/compare',      file: 'src/app/compare/page.tsx',         changeFrequency: 'monthly', priority: 0.9 },
   // Category / intent pages, the high-volume search + answer-engine surface.
   { path: '/ai-hr-software',            file: 'src/app/ai-hr-software/page.tsx',            changeFrequency: 'weekly', priority: 0.9 },

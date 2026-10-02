@@ -13,6 +13,7 @@
 
 import { type ReactNode } from 'react'
 import Link from 'next/link'
+import { SIGNUP_URL, TRIAL_LABEL, DEMO_HREF, DEMO_LABEL } from '@/content/cta'
 
 /* Gradient italic accent for headlines. */
 export function Em({ children }: { children: ReactNode }) {
@@ -72,8 +73,8 @@ export function PageHero({
         <h1 className="title" data-reveal="eager">{title}</h1>
         <p className="lead" data-reveal="eager">{lead}</p>
         <div className="ctas" data-reveal="eager">
-          <Link href="/demo" className="btn btn-primary">Book a demo</Link>
-          <Link href="/product" className="btn btn-secondary">See how it works</Link>
+          <a href={SIGNUP_URL} className="btn btn-primary" data-track="cta_click" data-track-label="trial:page-hero">{TRIAL_LABEL}</a>
+          <Link href={DEMO_HREF} className="btn btn-secondary">{DEMO_LABEL}</Link>
         </div>
       </div>
       <div className="stage" data-reveal="eager">
@@ -493,10 +494,13 @@ export function StatTrio({
 /* ── Page CTA: gradient panel with grain, faces, real buttons ── */
 export function PageCta({
   title,
-  sub = 'A 30-minute demo. Then we import your data and switch you over.',
+  sub = 'Start a free trial and set up your company yourself, or book a 30-minute demo first. Your data imports in a day.',
+  howLink = true,
 }: {
   title: ReactNode
   sub?: string
+  /** The "See how it works" link under the buttons. Off on /how-it-works itself. */
+  howLink?: boolean
 }) {
   return (
     <section className="pc">
@@ -506,9 +510,10 @@ export function PageCta({
         <h2 className="t">{title}</h2>
         <p className="s">{sub}</p>
         <div className="btns">
-          <Link href="/demo" className="btn btn-primary">Book a demo</Link>
-          <Link href="/product" className="btn btn-secondary">See how it works</Link>
+          <a href={SIGNUP_URL} className="btn btn-primary" data-track="cta_click" data-track-label="trial:page-cta">{TRIAL_LABEL}</a>
+          <Link href={DEMO_HREF} className="btn btn-secondary">{DEMO_LABEL}</Link>
         </div>
+        {howLink && <Link href="/how-it-works" className="hiw">See how it works, step by step</Link>}
       </div>
       <style jsx>{`
         .pc { padding: clamp(32px, 5vw, 64px) var(--page-pad) clamp(72px, 9vw, 104px); background: var(--bg); }
@@ -544,6 +549,18 @@ export function PageCta({
         .s { position: relative; color: var(--text-muted); font-size: clamp(16px, 1.6vw, 18px); line-height: 1.6; max-width: 52ch; margin: 18px auto 30px; }
         .btns { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
         .btns :global(.btn-secondary) { background: rgba(255, 255, 255, 0.55); }
+        .panel :global(.hiw) {
+          position: relative;
+          display: inline-block;
+          margin-top: 22px;
+          font-size: 15px;
+          font-weight: 600;
+          color: var(--text);
+          text-decoration: underline;
+          text-underline-offset: 4px;
+          text-decoration-color: rgba(26, 26, 25, 0.3);
+        }
+        .panel :global(.hiw:hover) { text-decoration-color: currentColor; }
       `}</style>
     </section>
   )

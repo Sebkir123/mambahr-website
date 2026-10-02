@@ -138,7 +138,7 @@ export const categories: Record<string, CategoryData> = {
         a: 'MambaHR has one price per employee, per plan, from $14 per employee per month, billed annually. Plans differ: hiring starts with HR Ops Manager, and Deel-managed payroll with Whole department.',
       },
     ],
-    cta: { title: 'See AI HR software that', em: 'does the admin.', sub: 'A 30-minute demo, run on your own HR scenarios.' },
+    cta: { title: 'See AI HR software that', em: 'does the admin.', sub: 'Start a free trial and set it up yourself, or book a 30-minute demo run on your own HR scenarios.' },
     related: COMPARE_RELATED,
   },
 
@@ -207,7 +207,7 @@ export const categories: Record<string, CategoryData> = {
         a: 'Yes. The same product runs HR from about 50 people into the hundreds. Larger plans add hiring, compensation cycles and layoff planning with legal checks, so you do not have to switch systems as you grow.',
       },
     ],
-    cta: { title: 'HR that', em: 'runs itself.', sub: 'A 30-minute demo, run on your own HR scenarios.' },
+    cta: { title: 'HR that', em: 'runs itself.', sub: 'Start a free trial and set it up yourself, or book a 30-minute demo run on your own HR scenarios.' },
     related: [
       { label: 'MambaHR vs Gusto', href: '/compare/gusto' },
       { label: 'MambaHR vs Rippling', href: '/compare/rippling' },
@@ -281,7 +281,7 @@ export const categories: Record<string, CategoryData> = {
         a: 'No. There is no setup project. You import your data, connect Slack, and requests get handled the next day.',
       },
     ],
-    cta: { title: 'Give your team', em: 'its time back.', sub: 'A 30-minute demo, run on your own HR scenarios.' },
+    cta: { title: 'Give your team', em: 'its time back.', sub: 'Start a free trial and set it up yourself, or book a 30-minute demo run on your own HR scenarios.' },
     related: [
       { label: 'MambaHR vs Gusto', href: '/compare/gusto' },
       { label: 'MambaHR vs BambooHR', href: '/compare/bamboohr' },

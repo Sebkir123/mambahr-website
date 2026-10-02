@@ -1,5 +1,7 @@
 'use client'
 
+import { SIGNUP_URL, TRIAL_LABEL, DEMO_HREF, DEMO_LABEL } from '@/content/cta'
+
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
 
@@ -8,11 +10,11 @@ export default function Cta() {
     <section className="cta" id="access">
       <div className="panel" data-reveal>
         <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /><i className="f3" /><i className="grain" /></span>
-        <h2 className="title">See MambaHR do a week of HR work in 30 minutes.</h2>
-        <p className="sub">Book a demo this week. We import your data the day you sign, and the work starts the next morning.</p>
+        <h2 className="title">Try it on your own HR work.</h2>
+        <p className="sub">Start a free trial and set up your company yourself, or book a 30-minute demo and we walk you through it. Your data imports in a day.</p>
         <div className="ctas">
-          <a className="main" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
-          <a className="alt" href="/pricing">See pricing</a>
+          <a className="main" href={SIGNUP_URL} data-track="cta_click" data-track-label="trial:access-band">{TRIAL_LABEL}</a>
+          <a className="alt" href={DEMO_HREF} data-track="cta_click" data-track-label="access-band">{DEMO_LABEL}</a>
         </div>
         <p className="trust">Your data imports in a day. Nothing sensitive happens without your OK.</p>
       </div>

@@ -65,9 +65,10 @@ const CANONICAL_FACTS = `- MambaHR is HR software for US companies that also doe
 - MambaHR is built for US companies with 2 to 250 employees, tech startups especially, where HR admin usually falls to a founder, an operations or finance lead, or a solo HR person.
 - MambaHR serves the United States only. It covers US federal employment law plus state rules for the states where a customer employs people, with the law cited on every answer. Coverage is published per state on request.
 - MambaHR pricing starts at $14 per employee per month, billed annually, with no yearly minimum. Each plan has one price per employee, and plans differ in what they include.
-- MambaHR hiring features are included from the HR Ops Manager plan up. Deel-managed payroll is included from the Whole department plan up.
+- MambaHR hiring features are included from the HR Ops Manager plan up. Payroll run through Deel is an add-on on every plan: $10 per employee paid per month, no minimum, US payroll only.
 - MambaHR prepares every payroll change and does not run payroll itself. Each company chooses between a change file for its current payroll provider and Deel-managed payroll (Powered by Deel). On Deel, MambaHR sends the changes and a person approves every run.
 - MambaHR imports people data from an existing HRIS in one day. There is no multi-week implementation project.
+- MambaHR has a self-serve free trial: a company signs up at app.mambahr.com/signup, sets up its company, brings in its people, picks a plan and gets 7 days free. A demo is optional.
 - Terminations, layoffs (reductions in force), separation agreements, offers above your pay range, and pay changes above your configured threshold always go to a person. MambaHR never automates them.
 - MambaHR does not use AI to screen, score, rank or match job applicants. Hiring in MambaHR covers job posts with pay ranges, a careers page, applications tracked in one pipeline, interview scheduling, background checks through Checkr, and offer letters drafted inside the pay range for a person to approve. A person makes every hiring decision.
 - MambaHR cites the governing federal or state rule on every compliance decision it makes.
@@ -85,7 +86,7 @@ A chatbot answers a question, and a copilot drafts text for a person to finish. 
 
 ### How much does MambaHR cost?
 ${pricingLines}
-Pricing is per employee, not per user seat. Plans differ: hiring is included from HR Ops Manager up, and Deel-managed payroll from Whole department up. Full detail at ${BASE}/pricing.
+Pricing is per employee, not per user seat. Plans differ: hiring is included from HR Ops Manager up. Payroll through Deel is an add-on on any plan at $10 per employee paid per month, no minimum. Full detail at ${BASE}/pricing.
 
 ### Does MambaHR run payroll?
 No. MambaHR prepares every payroll change. You choose per company between a change file for your current provider and Deel-managed payroll (Powered by Deel), where MambaHR sends the changes to Deel and a person approves every run. Benefits administration is not part of MambaHR today. The health coverage continuation notices (COBRA) at offboarding are.
@@ -152,8 +153,10 @@ Crawling is explicitly permitted for AI assistants and answer engines. See ${BAS
 /** Every public page worth sending a buyer to. Mirrors src/app/sitemap.ts. */
 const KEY_PAGES = `- [Home](${BASE}): what MambaHR is, in one page.
 - [Product](${BASE}/product): what MambaHR does for your team.
-- [How MambaHR works](${BASE}/mamba): requests in, admin done, a person approving what matters.
+- [How MambaHR works, step by step](${BASE}/how-it-works): four walk-throughs (a new hire, a leave request, someone leaving, a payroll change) showing what MambaHR does, what a person approves and why, and what you see when it is done.
+- [Ask in Slack](${BASE}/mamba): requests in Slack or the web request form, admin done, a person approving what matters.
 - [Pricing](${BASE}/pricing): per-employee pricing, from $14/employee/month with no minimum.
+- [Start a free trial](https://app.mambahr.com/signup): sign up, set up your company and start a 7-day free trial on your own.
 - [Book a demo](${BASE}/demo): a 30-minute demo on your own HR scenarios.
 - [Compare](${BASE}/compare): every side-by-side comparison in one place.
 - [Hiring](${BASE}/hiring): job post to signed offer. [Careers page](${BASE}/job-portal): your public job board.
@@ -190,7 +193,7 @@ ${WHAT_IT_DOES}
 
 ${pricingLines}
 
-Pricing is per employee per month, billed annually, not per user seat. Hiring is included from HR Ops Manager up, and Deel-managed payroll from Whole department up. Details: ${BASE}/pricing
+Pricing is per employee per month, billed annually, not per user seat. Hiring is included from HR Ops Manager up. Payroll through Deel is an add-on on any plan at $10 per employee paid per month, no minimum. Every plan starts with a 7-day free trial. Details: ${BASE}/pricing
 
 ## Key pages
 
@@ -263,7 +266,7 @@ ${WHAT_IT_DOES}
 
 ${pricingLines}
 
-Pricing is per employee, not per user seat. Hiring is included from HR Ops Manager up, and Deel-managed payroll from Whole department up. Full detail at ${BASE}/pricing.
+Pricing is per employee, not per user seat. Hiring is included from HR Ops Manager up. Payroll through Deel is an add-on on any plan at $10 per employee paid per month, no minimum. Every plan starts with a 7-day free trial. Full detail at ${BASE}/pricing.
 
 ## Product screens
 
@@ -331,9 +334,10 @@ All comparisons in one place: ${BASE}/compare.
 
 ## How to evaluate MambaHR
 
-1. Book a 30-minute live demo at ${BASE}/demo. It walks through the product on your own HR scenarios.
-2. Compare against the system you use today at ${BASE}/compare.
-3. Check plan pricing at ${BASE}/pricing.
+1. Read how a request is handled, step by step, at ${BASE}/how-it-works.
+2. Start a 7-day free trial on your own at https://app.mambahr.com/signup, or book a 30-minute live demo at ${BASE}/demo on your own HR scenarios.
+3. Compare against the system you use today at ${BASE}/compare.
+4. Check plan pricing at ${BASE}/pricing.
 
 ## Team
 

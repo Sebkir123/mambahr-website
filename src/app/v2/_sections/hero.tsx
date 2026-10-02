@@ -1,6 +1,7 @@
 'use client'
 
 import { AppFrame, TodoDesk, COMP_CHANGE } from '@/components/mockups'
+import { SIGNUP_URL, TRIAL_LABEL, DEMO_HREF, DEMO_LABEL } from '@/content/cta'
 
 const HERO_QUEUE = [
   { name: 'Jackson Bauer', kind: 'Compensation change', date: 'Today' },
@@ -42,9 +43,10 @@ export default function Hero() {
           imports in a day.
         </p>
         <div className="ctas">
-          <a href="/demo" className="cta-main">Book a demo</a>
-          <a href="/product" className="cta-alt">See how it works</a>
+          <a href={SIGNUP_URL} className="cta-main" data-track="cta_click" data-track-label="trial:home-hero">{TRIAL_LABEL}</a>
+          <a href={DEMO_HREF} className="cta-alt">{DEMO_LABEL}</a>
         </div>
+        <a href="/how-it-works" className="cta-how">See how it works, step by step</a>
       </div>
 
       <div className="stage" aria-hidden="true">
@@ -177,7 +179,18 @@ export default function Hero() {
         .cta-main:hover { transform: translateY(-2px); }
         .cta-alt { color: var(--ink-1); background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(26, 26, 25, 0.14); }
         .cta-alt:hover { background: #fff; }
-        .cta-main:focus-visible, .cta-alt:focus-visible { outline: 2px solid #8b7fd0; outline-offset: 3px; }
+        .cta-main:focus-visible, .cta-alt:focus-visible, .cta-how:focus-visible { outline: 2px solid #8b7fd0; outline-offset: 3px; }
+        .cta-how {
+          display: inline-block;
+          margin-top: 18px;
+          font-size: 15px;
+          font-weight: 600;
+          color: var(--ink-2);
+          text-decoration: underline;
+          text-underline-offset: 4px;
+          text-decoration-color: rgba(26, 26, 25, 0.25);
+        }
+        .cta-how:hover { color: var(--ink-1); text-decoration-color: currentColor; }
 
         /* ---- the stage ---- */
         .stage {

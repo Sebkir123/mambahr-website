@@ -14,7 +14,7 @@ export const QA = [
   },
   {
     q: 'How fast can we get started?',
-    a: 'The day after your import. On day one we import your people data and you set your approval rules. Your team keeps working in Slack the whole time.',
+    a: 'The day after your import. You can start on your own: sign up, set up your company, bring in your people and start a 7-day free trial. Or book a demo and we walk you through it. Your team keeps working in Slack the whole time.',
   },
   {
     q: 'Is our people data safe?',

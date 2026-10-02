@@ -91,7 +91,7 @@ const jsonLd = [
       '@type': 'Offer',
       price: '14',
       priceCurrency: 'USD',
-      description: 'Per employee / month, billed annually. Book a demo.',
+      description: 'Per employee / month, billed annually, no minimum. Every plan starts with a 7-day free trial.',
     },
     operatingSystem: 'Web',
     // Freshness signal. Answer engines discount undated facts, and this is the
@@ -108,7 +108,7 @@ const jsonLd = [
     logo: 'https://www.mambahr.com/MambaHR_logo.png',
     image: 'https://www.mambahr.com/mambahr_og_sharing.jpg',
     description:
-      'HR software for US companies that keeps your employee records and hiring in one place and does the admin in them: hiring, onboarding, leave, pay changes and compliance. A person approves the decisions that matter.',
+      'MambaHR is HR software that keeps your employee records and does the HR admin. You approve the decisions that matter.',
     foundingDate: '2026',
     slogan: 'HR that runs itself.',
     areaServed: { '@type': 'Country', name: 'United States' },

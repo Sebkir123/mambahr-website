@@ -12,11 +12,11 @@ export const FAQS = [
   },
   {
     q: 'Does it run our payroll?',
-    a: 'MambaHR prepares every payroll change. You choose per company: a change file for your current payroll provider, or Deel-managed payroll. On Deel, MambaHR sends the changes and a person approves every run. Benefits administration is not part of MambaHR today; MambaHR does track the COBRA deadlines when someone leaves.',
+    a: 'MambaHR prepares every payroll change. You choose per company: a change file for your current payroll provider, or Deel-managed payroll. On Deel, MambaHR sends the changes and a person approves every run, for $10 per employee paid per month on any plan, with no minimum. Benefits administration is not part of MambaHR today; MambaHR does track the COBRA deadlines when someone leaves.',
   },
   {
     q: 'Why a per-employee price?',
-    a: 'Because the work grows with your team. Every employee brings questions, time off and paperwork. You pay one price per employee, per month, and it rises only when your team grows. Deel-managed payroll is optional. There are no other add-ons.',
+    a: 'Because the work grows with your team. Every employee brings questions, time off and paperwork. You pay one price per employee, per month, and it rises only when your team grows. Payroll through Deel is the one add-on: $10 per employee paid per month, on any plan, with no minimum.',
   },
   {
     q: 'Is there a minimum?',
@@ -24,7 +24,11 @@ export const FAQS = [
   },
   {
     q: 'Which plan should we choose?',
-    a: 'Start with HR Starter if you mainly need records, time off, documents and answers. Choose HR Ops Manager if you hire and onboard people every month. Choose Whole department if you also run pay reviews and need compliance research or Deel-managed payroll.',
+    a: 'Start with HR Starter if you mainly need records, time off, documents and answers. Choose HR Ops Manager if you hire and onboard people every month. Choose Whole department if you also run pay reviews and need compliance research. Payroll through Deel can be added to any plan.',
+  },
+  {
+    q: 'Can we try MambaHR before we buy?',
+    a: 'Yes. Sign up at app.mambahr.com, set up your company, bring in your people and pick a plan. Every plan starts with a 7-day free trial: you add a card when you pick the plan, and nothing is charged until the trial ends. If you would rather see it first, book a 30-minute demo.',
   },
   {
     q: 'What is founding customer pricing?',

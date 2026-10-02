@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { byFunction, howItWorks, forWhom, type NavItem } from '@/content/nav'
 import { MambaMark } from '@/components/mamba-mark'
+import { SIGNUP_URL, TRIAL_LABEL, DEMO_HREF, DEMO_LABEL } from '@/content/cta'
 import s from './mega-nav.module.css'
 
 // Single-stroke icons, keyed to NavItem.icon. Icons are JSX so they live here,
@@ -221,11 +222,14 @@ export default function MegaNav() {
             ))}
           </div>
 
-          {/* Right CTA, single conversion action */}
+          {/* Right CTAs: the self-serve trial first, the demo for those who want a walkthrough */}
           <div className={s.right}>
-            <Link href="/demo" className="btn btn-dark">
-              Book a demo
+            <Link href={DEMO_HREF} className={`nav-top-link ${s.topLink} ${s.demoLink}`}>
+              {DEMO_LABEL}
             </Link>
+            <a href={SIGNUP_URL} className="btn btn-dark" data-track="cta_click" data-track-label="trial:nav">
+              {TRIAL_LABEL}
+            </a>
             <button
               ref={burgerRef}
               type="button"
@@ -295,8 +299,11 @@ export default function MegaNav() {
             ))}
 
             <div className={s.mobileCta}>
-              <Link href="/demo" className="btn btn-dark btn-block" onClick={closeMobile}>
-                Book a demo
+              <a href={SIGNUP_URL} className="btn btn-dark btn-block" onClick={closeMobile} data-track="cta_click" data-track-label="trial:nav-mobile">
+                {TRIAL_LABEL}
+              </a>
+              <Link href={DEMO_HREF} className="btn btn-secondary btn-block" onClick={closeMobile}>
+                {DEMO_LABEL}
               </Link>
             </div>
           </div>
