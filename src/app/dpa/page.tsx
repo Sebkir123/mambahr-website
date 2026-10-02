@@ -60,11 +60,6 @@ const SUBPROCESSORS: Array<[string, string, string]> = [
     'Candidate identifiers including government identifier and date of birth, only where Customer enables screening.',
   ],
   [
-    'DocuSign, Inc.',
-    'Electronic signature',
-    'Documents sent for signature, including offer letters and separation agreements.',
-  ],
-  [
     'Tracker I-9',
     'Form I-9 and E-Verify',
     'Employment eligibility verification data, including the government identifier required by law for E-Verify, where Customer enables the feature.',

@@ -10,7 +10,8 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
     title: 'Product',
     links: [
       { label: 'The product', href: '/product' },
-      { label: 'How it works', href: '/mamba' },
+      { label: 'How it works', href: '/how-it-works' },
+      { label: 'Ask in Slack', href: '/mamba' },
       { label: 'To do', href: '/today' },
       { label: 'Employee records', href: '/people' },
       { label: 'Documents & e-sign', href: '/documents' },

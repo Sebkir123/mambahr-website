@@ -49,6 +49,7 @@ const STATIC_ROUTES: StaticRoute[] = [
   { path: '/compliance',   file: 'src/app/compliance/page.tsx',      changeFrequency: 'monthly', priority: 0.85 },
   { path: '/rif',          file: 'src/app/rif/page.tsx',             changeFrequency: 'monthly', priority: 0.8 },
   // Platform pages.
+  { path: '/how-it-works', file: 'src/app/how-it-works/content.ts',  changeFrequency: 'monthly', priority: 0.9 },
   { path: '/mamba',        file: 'src/app/mamba/page.tsx',           changeFrequency: 'monthly', priority: 0.85 },
   { path: '/today',        file: 'src/app/today/page.tsx',           changeFrequency: 'monthly', priority: 0.8 },
   { path: '/people',       file: 'src/app/people/page.tsx',          changeFrequency: 'monthly', priority: 0.8 },

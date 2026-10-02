@@ -25,7 +25,7 @@ export const REVIEW = [
   },
   {
     q: 'Who are your subprocessors?',
-    a: 'AWS (including Bedrock) for hosting and AI, Google for Gemini where turned on and for calendar access you allow, WorkOS for sign-in, Temporal Cloud to keep multi-step tasks running, Qdrant for document search, Stripe for billing, DocuSign for e-signature, Checkr for background checks, and Tracker I-9 for work authorization. The full list is in our Data Processing Addendum, available on request, and we tell you before it changes.',
+    a: 'AWS (including Bedrock) for hosting and AI, Google for Gemini where turned on and for calendar access you allow, WorkOS for sign-in, Temporal Cloud to keep multi-step tasks running, Qdrant for document search, Stripe for billing, Checkr for background checks, and Tracker I-9 for work authorization. The full list is in our Data Processing Addendum, available on request, and we tell you before it changes.',
   },
   {
     q: 'What happens if there is an incident?',

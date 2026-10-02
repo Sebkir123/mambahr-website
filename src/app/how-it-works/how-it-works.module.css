@@ -1,0 +1,309 @@
+/* /how-it-works. Light only, the site's tokens (globals.css), the same type
+   scale as the v2 page kit: mono eyebrows, Fraunces titles, Inter body. */
+
+.wrap {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold-dark);
+  margin: 0 0 16px;
+}
+
+.h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3.8vw, 46px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.lead {
+  font-size: clamp(16px, 1.9vw, 18px);
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 16px 0 0;
+  max-width: 640px;
+}
+
+.center { text-align: center; }
+.center .lead { margin-left: auto; margin-right: auto; }
+
+/* ── Hero fragment: the four stages as one card ── */
+.flowCard {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-float);
+  overflow: hidden;
+}
+.flowTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px clamp(18px, 2.4vw, 28px);
+  background: linear-gradient(90deg, #FBF7EE, #F4F1F9);
+  border-bottom: 1px solid var(--border-faint);
+}
+.flowTopT { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
+.flowGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.flowCell {
+  position: relative;
+  padding: clamp(18px, 2.2vw, 26px) clamp(16px, 2vw, 24px);
+  text-align: left;
+}
+.flowCell + .flowCell { border-left: 1px solid var(--border-faint); }
+.flowN {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--violet);
+  background: var(--violet-soft);
+}
+.flowCell.person .flowN { color: var(--gold-dark); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+.flowT { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); margin: 14px 0 0; }
+.flowB { font-size: 14px; line-height: 1.5; color: var(--text-muted); margin: 6px 0 0; }
+.flowWho {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--violet);
+}
+.flowCell.person .flowWho { color: var(--gold-dark); }
+
+/* ── The four steps, explained ── */
+.steps { background: var(--bg); padding-block: clamp(80px, 10vw, 128px); }
+.stepGrid {
+  list-style: none;
+  padding: 0;
+  margin: clamp(36px, 4vw, 52px) 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 1.8vw, 20px);
+}
+.stepCard {
+  border-radius: 18px;
+  padding: clamp(22px, 2.6vw, 32px);
+  border: 1px solid var(--border-faint);
+  box-shadow: var(--shadow-sm);
+  background: linear-gradient(165deg, #F4F2FA, #ECE8F6);
+}
+.stepCard:nth-child(1) { background: linear-gradient(165deg, #FFF6EC, #FBE9DA); border-color: #EFD9C2; }
+.stepCard:nth-child(2) { background: linear-gradient(165deg, #F4F2FA, #ECE8F6); border-color: #DDD7EC; }
+.stepCard:nth-child(3) { background: linear-gradient(165deg, #FAF5EA, #F2EADA); border-color: #E6D9C0; }
+.stepCard:nth-child(4) { background: linear-gradient(165deg, #F6F4EF, #EEEBE3); border-color: #E2DDD2; }
+.stepNum {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(110deg, var(--gold), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.stepT { font-family: var(--font-serif); font-weight: 400; font-size: clamp(21px, 2.2vw, 26px); letter-spacing: -0.015em; color: var(--text); margin: 14px 0 0; }
+.stepB { font-size: 15.5px; line-height: 1.6; color: var(--text-muted); margin: 10px 0 0; }
+
+/* ── Jump links to the walk-throughs ── */
+.jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; padding: 0; list-style: none; }
+.jump a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.jump a:hover { color: var(--gold-dark); border-color: var(--gold-light); background: var(--gold-tint); }
+.jump a:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+
+/* ── One walk-through ── */
+.walk { padding-block: clamp(80px, 10vw, 128px); scroll-margin-top: 72px; }
+.walk.warm { background: var(--bg-warm); }
+.walk.plain { background: var(--bg); }
+.walkGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+.walkCopy { position: sticky; top: 96px; }
+.walkMore { display: inline-block; margin-top: 20px; font-size: 15px; font-weight: 700; color: var(--gold-dark); text-decoration: none; }
+.walkMore:hover { text-decoration: underline; }
+
+/* The request, as it arrives (Slack or the web form). Built from the site's
+   own styles, not a screenshot. */
+.ask {
+  margin-top: 28px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.askTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-faint);
+  font-size: 12.5px;
+  color: var(--text-faint);
+}
+.askTop b { color: var(--text); font-weight: 700; }
+.askBody { display: flex; gap: 11px; padding: 14px 16px 16px; }
+.askAv { flex: none; width: 34px; height: 34px; border-radius: 9px; object-fit: cover; }
+.askWho { font-size: 14px; font-weight: 700; color: var(--text); }
+.askWho time { font-weight: 400; font-size: 12px; color: var(--text-faint); margin-left: 8px; }
+.askText { font-size: 14.5px; line-height: 1.5; color: var(--text); margin: 3px 0 0; }
+.mention { color: #1264A3; background: rgba(29, 155, 209, 0.1); border-radius: 4px; padding: 0 3px; font-weight: 600; }
+
+/* The ordered steps, with who does each one. */
+.list { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 16px;
+  padding: 0 0 26px;
+}
+.item::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 38px;
+  bottom: 4px;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(106, 93, 166, 0.28), rgba(106, 93, 166, 0.06));
+}
+.item:last-child::before { display: none; }
+.dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--violet);
+  background: var(--bg);
+  border: 1px solid rgba(106, 93, 166, 0.35);
+  box-shadow: var(--shadow-sm);
+}
+.item.person .dot { color: #fff; background: linear-gradient(135deg, #D4AA7C, #7A5A2E); border-color: transparent; }
+.itemHead { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-top: 6px; }
+.itemT { font-size: 16.5px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); margin: 0; }
+.who {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--violet);
+  background: rgba(106, 93, 166, 0.1);
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+.item.person .who { color: var(--gold-dark); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+.itemB { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 6px 0 0; }
+
+/* Why a person, and what you see at the end: two cards under the steps. */
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 8px; }
+.note {
+  border-radius: 16px;
+  padding: 20px 22px;
+  background: var(--bg);
+  border: 1px solid var(--border-faint);
+  box-shadow: var(--shadow-sm);
+}
+.noteWhy { background: linear-gradient(165deg, #FFF8EF, #FBEFE2); border-color: #EFD9C2; }
+.noteDone { background: linear-gradient(165deg, #F6F4FB, #EEEBF7); border-color: #DDD7EC; }
+.noteL { font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); margin: 0 0 8px; }
+.noteDone .noteL { color: var(--violet); }
+.noteB { font-size: 14.5px; line-height: 1.6; color: var(--text-muted); margin: 0; }
+
+/* ── Who decides what ── */
+.decide { background: var(--bg); padding-block: clamp(80px, 10vw, 128px); }
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 20px); margin-top: clamp(36px, 4vw, 52px); }
+.col { border-radius: 18px; padding: clamp(22px, 2.4vw, 30px); border: 1px solid var(--border-faint); box-shadow: var(--shadow-sm); background: var(--bg); }
+.col.always { background: linear-gradient(165deg, #FFF6EC, #FBE9DA); border-color: #EFD9C2; }
+.col.yours { background: linear-gradient(165deg, #FAF5EA, #F2EADA); border-color: #E6D9C0; }
+.col.mamba { background: linear-gradient(165deg, #F4F2FA, #ECE8F6); border-color: #DDD7EC; }
+.colT { font-family: var(--font-serif); font-weight: 400; font-size: 23px; letter-spacing: -0.015em; color: var(--text); margin: 0; }
+.colS { font-size: 14.5px; line-height: 1.55; color: var(--text-muted); margin: 8px 0 0; }
+.colList { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-direction: column; gap: 10px; }
+.colList li { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; line-height: 1.5; color: var(--text); }
+.tick { flex: none; width: 16px; height: 16px; margin-top: 2px; border-radius: 999px; position: relative; background: var(--violet); }
+.tick::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3px; height: 7px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }
+.always .tick, .yours .tick { background: linear-gradient(135deg, #D4AA7C, #7A5A2E); }
+.why { margin: clamp(28px, 3vw, 40px) auto 0; max-width: 760px; text-align: center; font-size: 16px; line-height: 1.65; color: var(--text-muted); }
+
+/* ── Start on your own ── */
+.start { background: var(--bg-warm); padding-block: clamp(80px, 10vw, 128px); }
+.startGrid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.startBtns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.startCard {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-float);
+  padding: 8px 0;
+}
+.startList { list-style: none; margin: 0; padding: 0; }
+.startItem { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 14px; padding: 16px clamp(18px, 2.4vw, 28px); }
+.startItem + .startItem { border-top: 1px solid var(--border-faint); }
+.startN { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); padding-top: 2px; }
+.startT { font-size: 15.5px; font-weight: 700; color: var(--text); margin: 0; letter-spacing: -0.01em; }
+.startB { font-size: 14.5px; line-height: 1.55; color: var(--text-muted); margin: 3px 0 0; }
+
+/* ── Questions ── */
+.faq { background: var(--bg); padding-block: clamp(72px, 9vw, 112px) clamp(24px, 4vw, 48px); }
+.faqList { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(28px, 4vw, 56px); border-top: 1px solid var(--border-faint); margin-top: clamp(24px, 3vw, 36px); }
+.faqItem { padding: 22px 0; border-bottom: 1px solid var(--border-faint); }
+.faqQ { font-family: var(--font-serif); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; color: var(--text); margin: 0; }
+.faqA { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 8px 0 0; }
+
+@media (max-width: 960px) {
+  .flowGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .flowCell:nth-child(3) { border-left: 0; }
+  .flowCell:nth-child(n + 3) { border-top: 1px solid var(--border-faint); }
+  .cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 880px) {
+  .walkGrid, .startGrid { grid-template-columns: 1fr; }
+  .walkCopy { position: static; }
+}
+@media (max-width: 640px) {
+  .flowGrid, .stepGrid, .pair, .faqList { grid-template-columns: 1fr; }
+  .flowCell + .flowCell { border-left: 0; border-top: 1px solid var(--border-faint); }
+}

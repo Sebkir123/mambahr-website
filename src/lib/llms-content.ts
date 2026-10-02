@@ -407,9 +407,10 @@ ${STATE_FACTS}
 
 ## How to evaluate MambaHR
 
-1. Book a 30-minute live demo at ${BASE}/demo. It walks through the product on your own HR scenarios.
-2. Compare against the system you use today at ${BASE}/compare.
-3. Check plan pricing at ${BASE}/pricing.
+1. Read how a request is handled, step by step, at ${BASE}/how-it-works.
+2. Book a 30-minute live demo at ${BASE}/demo. It walks through the product on your own HR scenarios.
+3. Compare against the system you use today at ${BASE}/compare.
+4. Check plan pricing at ${BASE}/pricing.
 
 ## Team
 

@@ -4,11 +4,11 @@ const ogImage =
   '/mambahr_og_sharing.jpg'
 
 export const metadata: Metadata = {
-  title: 'How MambaHR works | MambaHR',
+  title: 'Ask MambaHR in Slack | MambaHR',
   description:
     'Message MambaHR in Slack or the app. It handles the HR admin, cites your policy and the law, and brings the big decisions to you first.',
   openGraph: {
-    title: 'How MambaHR works | MambaHR',
+    title: 'Ask MambaHR in Slack | MambaHR',
     description:
       'Message MambaHR in Slack or the app. It handles the admin and brings the big decisions to you.',
     url: 'https://www.mambahr.com/mamba',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'How MambaHR works | MambaHR',
+    title: 'Ask MambaHR in Slack | MambaHR',
     description:
       'Message MambaHR in Slack or the app. It handles the admin and brings the big decisions to you.',
     images: [ogImage],
@@ -27,10 +27,10 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'How MambaHR works | MambaHR',
+  name: 'Ask MambaHR in Slack | MambaHR',
   url: 'https://www.mambahr.com/mamba',
   description:
-    'How MambaHR works: your team messages it in Slack or the app. It handles the HR admin and brings the big decisions to you first.',
+    'Your team messages MambaHR in Slack or the app. It handles the HR admin and brings the big decisions to you first.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
     '@type': 'SoftwareApplication',

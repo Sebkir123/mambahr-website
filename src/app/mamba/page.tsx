@@ -324,7 +324,7 @@ export default function MambaPage() {
       <main id="main">
 
       <PageHero
-        eyebrow="How it works"
+        eyebrow="Ask in Slack"
         title={<>Ask in Slack. <Em>The admin gets done.</Em></>}
         lead="Your team writes @MambaHR in Slack or the app. MambaHR reads the request, checks your policy and the law, does the task, and shows you what it did."
       >

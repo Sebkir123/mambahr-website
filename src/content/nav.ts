@@ -15,9 +15,9 @@ export type NavSection = {
 }
 
 /**
- * The Product menu, 14 links in three groups:
+ * The Product menu, 15 links in three groups:
  *  - "By function": the eight functions, one card each.
- *  - "How it works": the agent, the desk, the record, the documents.
+ *  - "How it works": the step-by-step guide, the agent, the desk, the record, the documents.
  *  - "For": the three buyer-category pages.
  * Every href resolves to a real page.
  */
@@ -34,7 +34,8 @@ export const byFunction: NavItem[] = [
 ]
 
 export const howItWorks: NavItem[] = [
-  { label: 'How MambaHR works',  href: '/mamba',     description: 'Ask in Slack or the app',          live: true, icon: 'agent' },
+  { label: 'How MambaHR works',  href: '/how-it-works', description: 'Four requests, step by step',   live: true, icon: 'agent' },
+  { label: 'Ask in Slack',       href: '/mamba',     description: 'Slack, the app or the web form',   live: true, icon: 'agent' },
   { label: 'To do',              href: '/today',     description: 'Only the decisions that need you', live: true, icon: 'today' },
   { label: 'Employee records',   href: '/people',    description: 'Records and org chart, current',   live: true, icon: 'people' },
   { label: 'Documents & e-sign', href: '/documents', description: 'Drafted, signed and filed',        live: true, icon: 'documents' },
