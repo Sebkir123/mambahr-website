@@ -20,31 +20,33 @@ const STEPS: LoopStep[] = [
 
 /* The onboarding item in focus on the To do desk. */
 const ONBOARDING: TodoFocus = {
-  ref: 'TO-1851',
-  due: 'starts Monday',
-  position: '1 of 4 · next',
-  title: 'Day one · Maya Chen',
-  person: 'Maya Chen, Senior Engineer, signed Thursday. Yours.',
-  facts: 'Offer countersigned. Form I-9 started, E-Verify pending. Okta, Slack and Google accounts requested. Laptop request sent to IT.',
-  finding: '6 of 7 steps done, one needs you',
-  read: 'Everything is in place for Monday except the buddy. Priya Nair is on the same team and has had two new starters this year. Recommend assigning Priya.',
+  eyebrow: 'Started when Maya signed · Thursday',
+  position: '1 of 4',
+  title: 'Day one for Maya Chen',
+  summary: 'Maya starts Monday as a Senior Engineer. Six of seven steps are done; one needs you.',
+  facts: [
+    { k: 'Offer', v: 'Countersigned Thursday' },
+    { k: 'Form I-9', v: 'Started; E-Verify pending' },
+    { k: 'Accounts', v: 'Okta and Slack requested' },
+    { k: 'Laptop', v: 'Request sent to IT' },
+  ],
+  read: 'Everything is ready for Monday except Form I-9 Section 2: someone at the company has to review her documents by Wednesday.',
   decisions: [
-    { label: 'Assign Priya', primary: true, consequence: 'Priya is told today, day-one plan sent to Maya' },
-    { label: 'Pick someone else', consequence: 'Nothing is sent until you choose' },
+    { label: 'Assign to me', primary: true, consequence: 'It goes on your To do for Monday.' },
+    { label: 'Pick someone else', consequence: 'Nothing is assigned until you choose.' },
   ],
   history: [
     { what: 'Offer signed', when: 'Thu 16:20' },
     { what: 'Accounts requested', when: 'Thu 16:21' },
     { what: 'Form I-9 started', when: 'Fri 9:02' },
-    { what: 'Came to a person', when: 'Fri 9:05' },
   ],
 }
 
 const ONBOARDING_QUEUE = [
-  { name: 'Maya Chen', kind: 'Day one', date: 'Mon' },
-  { name: 'Jackson Bauer', kind: 'Compensation change', date: 'Today' },
-  { name: 'Leo Schulz', kind: 'Leave request', date: 'Tomorrow' },
-  { name: 'Marcus Webb', kind: 'Separation', date: 'Fri' },
+  { title: 'Maya Chen · day one', meta: 'Onboarding · Yours', date: 'Mon' },
+  { title: 'Jackson Bauer · raise', meta: 'Pay · Yours', date: 'Due today' },
+  { title: 'Leo Schulz · 5 days off', meta: 'Time off · Yours', date: 'Tomorrow' },
+  { title: 'Marcus Webb · last day', meta: 'Offboarding · Yours', date: 'Fri' },
 ]
 
 /* The capability lists that used to be four more splits, as short chips. */

@@ -3,19 +3,16 @@
 import { AppFrame, TodoDesk, COMP_CHANGE } from '@/components/mockups'
 
 const HERO_QUEUE = [
-  { name: 'Jackson Bauer', kind: 'Compensation change', date: 'Today' },
-  { name: 'Leo Schulz', kind: 'Leave request', date: 'Tomorrow' },
-  { name: 'Priya Nair', kind: 'Offer above band', date: 'Thu' },
+  { title: 'Jackson Bauer · raise', meta: 'Pay · Yours', date: 'Today' },
+  { title: 'Leo Schulz · time off', meta: 'Time off · Yours', date: 'Fri' },
+  { title: 'Priya Nair · offer', meta: 'Hiring · Yours', date: 'Thu' },
 ]
-const HERO_FOCUS = {
-  ...COMP_CHANGE,
-  position: '',
-  read: 'Above band for level 4 by 8%. Peers sit at $152k and $158k. Recommend $160k, or hold for the cycle.',
-}
+// Three facts in the hero: the peers already sit in MambaHR's read.
+const HERO_FOCUS = { ...COMP_CHANGE, facts: COMP_CHANGE.facts.slice(0, 3) }
 
 const STEPS = [
   { t: 'Form I-9 sent to Maya', at: '9:02' },
-  { t: 'Okta, Slack and Google requested', at: '9:02' },
+  { t: 'Okta and Slack accounts requested', at: '9:02' },
   { t: 'Laptop request sent to IT', at: '9:03' },
   { t: 'Added to the June 15 payroll changes', at: '9:03' },
 ]
@@ -96,10 +93,10 @@ export default function Hero() {
         {/* The law behind an answer */}
         <div className="glass c-law">
           <div className="law-top">
-            <span className="law-t">Leave approved, Jordan Lee</span>
-            <span className="ok">Done</span>
+            <span className="law-t">Leave for Jordan Lee</span>
+            <span className="ok">Checked</span>
           </div>
-          <span className="law-s">12 weeks of bonding leave, eligibility checked</span>
+          <span className="law-s">12 weeks, eligibility checked, sent to you to approve</span>
           <span className="cite">29 U.S.C. § 2612</span>
         </div>
 
