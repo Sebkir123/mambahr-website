@@ -1,4 +1,3 @@
-import { TIERS } from '@/content/pricing-tiers'
 
 export type CompetitorData = {
   slug: string
@@ -1060,9 +1059,6 @@ const listOf = (items: string[]) => {
   return `${items.slice(0, -1).join(', ')}${last}${items[items.length - 1]}`
 }
 
-/** "$9k/yr minimum · billed annually" -> "$9k" */
-const minAmount = (min: string) => min.split('/')[0]
-
 /** The questions a buyer asks about this comparison, answered only from the
  *  entry above and the published plans. Rendered on the page and as FAQPage
  *  JSON-LD from this one list, so the two can never disagree. */
@@ -1090,10 +1086,9 @@ export function compareFaqs(c: CompetitorData): CompareFaq[] {
     })
   }
 
-  const tier = c.costLine.includes('HR Ops Manager') ? TIERS[1] : TIERS[0]
   faqs.push({
     q: complement ? `What does MambaHR cost alongside ${c.name}?` : `What does MambaHR cost compared with ${c.name}?`,
-    a: `${c.costLine} Plans are billed annually, and the ${tier.name} plan has a ${minAmount(tier.min)} yearly minimum.`,
+    a: `${c.costLine} Plans are billed annually, with no yearly minimum.`,
   })
 
   faqs.push({

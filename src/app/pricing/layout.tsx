@@ -7,12 +7,12 @@ import { TIERS } from '@/content/pricing-tiers'
 export const metadata: Metadata = {
   title: 'Pricing | MambaHR',
   description:
-    'Simple per-employee pricing. MambaHR takes the HR admin off your team: hiring, onboarding, time off, compliance and payroll changes. From $9k a year.',
+    'Simple per-employee pricing. MambaHR takes the HR admin off your team: hiring, onboarding, time off, compliance and payroll changes. From $14 per employee a month, no minimum.',
   alternates: { canonical: 'https://www.mambahr.com/pricing' },
   openGraph: {
     title: 'Pricing | MambaHR',
     description:
-      'Simple per-employee pricing for the HR admin your team does today: hiring, onboarding, time off, compliance and payroll changes. From $9k a year.',
+      'Simple per-employee pricing for the HR admin your team does today: hiring, onboarding, time off, compliance and payroll changes. From $14 per employee a month, no minimum.',
     url: 'https://www.mambahr.com/pricing',
     siteName: 'MambaHR',
     type: 'website',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing | MambaHR',
-    description: 'HR admin, done for your team. Priced per employee, from $9k a year.',
+    description: 'HR admin, done for your team. Priced per employee, no minimum.',
     images: ['/og?title=Simple%20pricing%2C%20per%20employee&eyebrow=Pricing'],
   },
 }
@@ -52,8 +52,8 @@ const pricingJsonLd = {
       ...(t.price.startsWith('$') ? { price: t.price.slice(1) } : {}),
       priceCurrency: 'USD',
       description: t.price.startsWith('$')
-        ? `Per employee / month · ${t.min.replace(' · billed annually', '')} · ${t.size.replace('For ', '')}.`
-        : `Custom pricing ${t.min} · ${t.size.replace('For ', '')}.`,
+        ? `Per employee / month · ${t.min.replace(' · billed annually', '').toLowerCase()} · ${t.size.replace('For ', '')}.`
+        : `${t.min} · ${t.size.replace('For ', '')}.`,
     })),
   },
 }

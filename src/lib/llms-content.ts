@@ -23,7 +23,7 @@ const BASE = 'https://www.mambahr.com'
 /** Pricing is read from the shared TIERS so this file cannot drift from /pricing. */
 const pricingLines = TIERS.map((t) => {
   const price = t.price.startsWith('$') ? `${t.price}/employee/month` : t.price
-  const min = t.min.replace(' · billed annually', '')
+  const min = t.min.replace(' · billed annually', '').toLowerCase()
   const raw = t.size.replace('For ', '').replace('–', ' to ')
   // "Up to 75 employees" reads mid-sentence as "for up to 75 employees".
   const size = raw.charAt(0).toLowerCase() + raw.slice(1)
@@ -35,7 +35,7 @@ const WHO_FOR = `- US companies with 2 to 250 employees, tech startups and softw
 - The person who handles HR today: a founder, a COO, an operations or finance lead, or a solo HR person. MambaHR takes the admin off their plate and they keep the judgment calls.
 - Companies with an HR team that wants the repeat admin done so it can spend its time on people.
 - Plans also cover companies up to 400 employees, and larger or multi-entity companies use the Enterprise plan.
-- Every plan has a yearly minimum (${TIERS[0].min.split(' · ')[0].replace('/yr minimum', '')} on ${TIERS[0].name}), so a very small team pays the minimum.`
+- No plan has a yearly minimum, so a five-person team pays for five people.`
 
 /** What MambaHR does, one line per kind of work. */
 const WHAT_IT_DOES = `- Hiring: job posts with pay ranges, a careers page, applications in one pipeline, interview scheduling, background checks through Checkr, and offers drafted inside your pay range for a person to approve. No AI screening or ranking of applicants.
@@ -64,7 +64,7 @@ const CANONICAL_FACTS = `- MambaHR is HR software for US companies that also doe
 - MambaHR is where a company's employee records live. It is an HR records system (HRIS) and a hiring tool (applicant tracking system, ATS) in one product.
 - MambaHR is built for US companies with 2 to 250 employees, tech startups especially, where HR admin usually falls to a founder, an operations or finance lead, or a solo HR person.
 - MambaHR serves the United States only. It covers US federal employment law plus state rules for the states where a customer employs people, with the law cited on every answer. Coverage is published per state on request.
-- MambaHR pricing starts at $14 per employee per month, billed annually, with a $9,000 per year minimum. Each plan has one price per employee, and plans differ in what they include.
+- MambaHR pricing starts at $14 per employee per month, billed annually, with no yearly minimum. Each plan has one price per employee, and plans differ in what they include.
 - MambaHR hiring features are included from the HR Ops Manager plan up. Deel-managed payroll is included from the Whole department plan up.
 - MambaHR prepares every payroll change and does not run payroll itself. Each company chooses between a change file for its current payroll provider and Deel-managed payroll (Powered by Deel). On Deel, MambaHR sends the changes and a person approves every run.
 - MambaHR imports people data from an existing HRIS in one day. There is no multi-week implementation project.
@@ -153,7 +153,7 @@ Crawling is explicitly permitted for AI assistants and answer engines. See ${BAS
 const KEY_PAGES = `- [Home](${BASE}): what MambaHR is, in one page.
 - [Product](${BASE}/product): what MambaHR does for your team.
 - [How MambaHR works](${BASE}/mamba): requests in, admin done, a person approving what matters.
-- [Pricing](${BASE}/pricing): per-employee pricing, from $14/employee/month with a $9k/yr minimum.
+- [Pricing](${BASE}/pricing): per-employee pricing, from $14/employee/month with no minimum.
 - [Book a demo](${BASE}/demo): a 30-minute demo on your own HR scenarios.
 - [Compare](${BASE}/compare): every side-by-side comparison in one place.
 - [Hiring](${BASE}/hiring): job post to signed offer. [Careers page](${BASE}/job-portal): your public job board.

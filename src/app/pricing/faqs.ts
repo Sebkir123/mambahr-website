@@ -19,8 +19,8 @@ export const FAQS = [
     a: 'Because the work grows with your team. Every employee brings questions, time off and paperwork. You pay one price per employee, per month, and it rises only when your team grows. Deel-managed payroll is optional. There are no other add-ons.',
   },
   {
-    q: 'What does the minimum mean?',
-    a: 'Each plan has a yearly minimum. If your number of employees times the per-employee price comes in under it, you pay the minimum. Every quarter we check your average number of employees. If you grew, we bill the difference for the rest of the year.',
+    q: 'Is there a minimum?',
+    a: 'No. You pay for the people you have: your number of employees times your plan\'s price per employee, billed annually. Every quarter we check your average number of employees. If you grew, we bill the difference for the rest of the year.',
   },
   {
     q: 'Which plan should we choose?',

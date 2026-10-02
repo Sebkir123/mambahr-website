@@ -168,13 +168,13 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         title: 'Priced and set up for a startup.',
-        desc: 'No long setup project. Import your data and connect Slack, and requests get handled the next day. Plans start at $14 per employee, with a $9k yearly minimum.',
+        desc: 'No long setup project. Import your data and connect Slack, and requests get handled the next day. Plans start at $14 per employee, with no yearly minimum.',
       },
     ],
     checklist: {
       eyebrow: 'How to choose',
       title: 'What a startup HR system needs',
-      lead: 'Skip the enterprise checklist. These matter when you have 50 to 200 people.',
+      lead: 'Skip the enterprise checklist. These matter from your first hire to your 250th.',
       items: [
         { t: 'Takes the admin off your plate', d: 'Whoever handles HR today gets the routine work done for them, from forms to follow-ups.' },
         { t: 'State rules built in', d: 'Team across state lines? Pay transparency and final pay rules are cited for each state. Federal family leave (FMLA) is checked, and state leave rules are cited for you to decide.' },
@@ -192,7 +192,7 @@ export const categories: Record<string, CategoryData> = {
     faq: [
       {
         q: 'Do startups even need an HRIS?',
-        a: 'Once you pass about 50 employees, especially across state lines, yes. You need one place for employee records, onboarding that meets the rules, leave tracking and payroll data. MambaHR gives you that and does the admin that comes with it.',
+        a: 'From your first hire, yes. The day someone joins, you need their records, onboarding paperwork that meets your state\'s rules, time off tracking and payroll data in one place, and it gets harder with every hire and every new state. MambaHR gives you that and does the admin that comes with it.',
       },
       {
         q: 'What’s the difference between an HRIS and MambaHR?',
@@ -200,7 +200,7 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         q: 'Is it affordable for an early-stage startup?',
-        a: 'MambaHR has one price per employee, per plan, starting at $14 per employee per month, billed annually. The smallest plan has a $9k yearly minimum.',
+        a: 'MambaHR has one price per employee, per plan, starting at $14 per employee per month, billed annually, with no yearly minimum.',
       },
       {
         q: 'Can it grow with us?',
@@ -270,7 +270,7 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         q: 'How much does small-business HR software cost?',
-        a: 'MambaHR has one price per employee, per plan, from $14 per employee per month, billed annually. The smallest plan has a $9k yearly minimum.',
+        a: 'MambaHR has one price per employee, per plan, from $14 per employee per month, billed annually, with no yearly minimum.',
       },
       {
         q: 'Do I still need a payroll provider?',
