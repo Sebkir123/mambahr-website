@@ -1,4 +1,4 @@
-/* Site footer. Five link columns that mirror the Product menu, the brand
+/* Site footer. Six link columns that mirror the Product menu, the brand
    block with the address in plain text, and the sign-off set large at the
    very bottom in the same gold-to-iris light as the hero stage. */
 
@@ -61,8 +61,8 @@
 
 .cols {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 24px;
 }
 .colTitle {
   margin: 0 0 14px;
