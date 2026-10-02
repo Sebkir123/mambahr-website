@@ -22,7 +22,7 @@ const SUBPROCESSORS: Array<[string, string, string]> = [
   [
     'Amazon Web Services, Inc.',
     'Cloud infrastructure and AI model services',
-    'Primary hosting and processing: managed database, application compute, object storage for documents, cache and queue, key management, secrets, transactional email, logging and metrics, document text extraction, and speech transcription. Also Amazon Bedrock, which serves the Claude models used by AI features. United States regions.',
+    'Primary hosting and processing: managed database, application compute, object storage for documents, cache and queue, key management, secrets, transactional email, logging and metrics, document text extraction, and speech transcription. Also Amazon Bedrock, used for some AI features such as document search. United States regions.',
   ],
   [
     'Temporal Technologies, Inc. (Temporal Cloud)',
@@ -38,6 +38,11 @@ const SUBPROCESSORS: Array<[string, string, string]> = [
     'WorkOS, Inc.',
     'Enterprise identity, SSO, and directory sync',
     'User identity, authentication, single sign-on, SCIM directory data, and audit log events.',
+  ],
+  [
+    'OpenRouter, Inc.',
+    'AI model routing',
+    'Inputs and outputs for enabled AI features, sent to the AI models that produce them (including Anthropic Claude and OpenAI models), only through model hosts that do not retain the data.',
   ],
   [
     'Google LLC',
