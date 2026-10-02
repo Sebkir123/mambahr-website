@@ -18,6 +18,7 @@ const GROUPS: { title: string; items: Entry[] }[] = [
       { slug: 'bamboohr', name: 'BambooHR', what: 'HR records for small teams' },
       { slug: 'hibob', name: 'HiBob', what: 'An HR app employees like' },
       { slug: 'namely', name: 'Namely', what: 'HR software for mid-size teams' },
+      { slug: 'lattice', name: 'Lattice', what: 'Reviews, goals and surveys' },
       { slug: 'workday', name: 'Workday', what: 'A large HR suite you configure' },
       { slug: 'ukg', name: 'UKG', what: 'Built for shift-based teams' },
       { slug: 'paylocity', name: 'Paylocity', what: 'Payroll and HR in one suite' },
@@ -30,6 +31,10 @@ const GROUPS: { title: string; items: Entry[] }[] = [
       { slug: 'gusto', name: 'Gusto', what: 'Payroll for small businesses' },
       { slug: 'adp', name: 'ADP', what: 'Payroll and benefits' },
       { slug: 'paychex', name: 'Paychex', what: 'Payroll and HR services' },
+      { slug: 'paycor', name: 'Paycor', what: 'Payroll and HR suite' },
+      { slug: 'paycom', name: 'Paycom', what: 'Payroll and HR in one system' },
+      { slug: 'onpay', name: 'OnPay', what: 'Small business payroll' },
+      { slug: 'quickbooks-payroll', name: 'QuickBooks Payroll', what: 'Payroll inside your books' },
     ],
   },
   {
@@ -37,6 +42,7 @@ const GROUPS: { title: string; items: Entry[] }[] = [
     items: [
       { slug: 'justworks', name: 'Justworks', what: 'Co-employs your team' },
       { slug: 'trinet', name: 'TriNet', what: 'Co-employer with a rep' },
+      { slug: 'insperity', name: 'Insperity', what: 'Co-employer with HR specialists' },
     ],
   },
   {
@@ -52,6 +58,10 @@ const GROUPS: { title: string; items: Entry[] }[] = [
     items: [
       { slug: 'greenhouse', name: 'Greenhouse', what: 'Hiring pipeline' },
       { slug: 'lever', name: 'Lever', what: 'Recruiting and sourcing' },
+      { slug: 'ashby', name: 'Ashby', what: 'Recruiting for growing teams' },
+      { slug: 'workable', name: 'Workable', what: 'Job posting and sourcing' },
+      { slug: 'jazzhr', name: 'JazzHR', what: 'Hiring for small teams' },
+      { slug: 'breezyhr', name: 'Breezy HR', what: 'A visual hiring pipeline' },
     ],
   },
 ]

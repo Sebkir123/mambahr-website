@@ -6,7 +6,7 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Multi-State HR Compliance | MambaHR',
   description:
-    'Every answer cites the law. Federal law plus the rules for each state where you employ people, equal-opportunity data collected at apply, and unclear cases sent to a person.',
+    'Every answer cites the law: federal law plus the rules for each state where you employ people. Unclear cases go to a person to decide.',
   openGraph: {
     title: 'Multi-State HR Compliance | MambaHR',
     description:
@@ -33,8 +33,12 @@ const jsonLd = {
     'MambaHR compliance: federal law plus the rules for each state where you employ people. Every answer cites the law and its review date, equal-opportunity data is collected at apply, and unclear cases go to a person.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
-    '@type': 'SoftwareFeature',
-    name: 'Compliance',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: 'https://www.mambahr.com',
+    featureList: 'Compliance',
     description:
       'Applies federal law and each state’s rules to every decision. Cites the law behind every answer with its review date, collects voluntary equal-opportunity (EEO) answers at apply, and sends unclear cases to a person for sign-off.',
   },

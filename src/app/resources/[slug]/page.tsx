@@ -21,6 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title,
     description,
     alternates: { canonical: url },
+    // A draft is reachable for preview, but never indexed.
+    ...(r.status === 'published' ? {} : { robots: { index: false, follow: false } }),
     openGraph: { title, description, url, siteName: 'MambaHR', type: 'article', images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }] },
     twitter: { card: 'summary_large_image', title, description, images: ['/mambahr_og_sharing.jpg'] },
   }

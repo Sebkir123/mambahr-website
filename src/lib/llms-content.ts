@@ -13,9 +13,10 @@
 
 /** Bump whenever a fact below changes. Rendered as a dateline in both files.
  *  Answer engines weight recency and a stale-looking doc gets discounted. */
-export const LAST_VERIFIED = '2026-09-28'
+export const LAST_VERIFIED = '2026-10-02'
 
 import { TIERS } from '@/content/pricing-tiers'
+import { competitors } from '@/app/compare/[slug]/data'
 
 const BASE = 'https://www.mambahr.com'
 
@@ -23,9 +24,34 @@ const BASE = 'https://www.mambahr.com'
 const pricingLines = TIERS.map((t) => {
   const price = t.price.startsWith('$') ? `${t.price}/employee/month` : t.price
   const min = t.min.replace(' · billed annually', '')
-  const size = t.size.replace('For ', '').replace('–', ' to ')
+  const raw = t.size.replace('For ', '').replace('–', ' to ')
+  // "Up to 75 employees" reads mid-sentence as "for up to 75 employees".
+  const size = raw.charAt(0).toLowerCase() + raw.slice(1)
   return `- ${t.name}: ${price}, ${min}, for ${size}.`
 }).join('\n')
+
+/** Who MambaHR is for. Sizes match the plan sizes on /pricing. */
+const WHO_FOR = `- US companies with 2 to 250 employees, tech startups and software companies especially.
+- The person who handles HR today: a founder, a COO, an operations or finance lead, or a solo HR person. MambaHR takes the admin off their plate and they keep the judgment calls.
+- Companies with an HR team that wants the repeat admin done so it can spend its time on people.
+- Plans also cover companies up to 400 employees, and larger or multi-entity companies use the Enterprise plan.
+- Every plan has a yearly minimum (${TIERS[0].min.split(' · ')[0].replace('/yr minimum', '')} on ${TIERS[0].name}), so a very small team pays the minimum.`
+
+/** What MambaHR does, one line per kind of work. */
+const WHAT_IT_DOES = `- Hiring: job posts with pay ranges, a careers page, applications in one pipeline, interview scheduling, background checks through Checkr, and offers drafted inside your pay range for a person to approve. No AI screening or ranking of applicants.
+- Onboarding: forms sent and followed up, Form I-9 started, logins and a laptop requested from IT, first-week plan set.
+- Time off and leave: requests approved within your policy, family leave (FMLA) eligibility checked, state paid-leave programs cited for a person to decide.
+- Payroll changes: every hire, raise, leave and exit becomes a payroll change, as a change file for your current provider or sent to Deel-managed payroll (Powered by Deel). A person approves every run.
+- Terminations and offboarding: access removed, final pay worked out under state rules for a person to approve, separation paperwork drafted. Terminations always go to a person.
+- Compliance: federal and state employment law answers with the law cited. Unclear cases go to a person.
+- Employee records and documents: MambaHR is the HR records system (HRIS), with every change logged.
+- Requests arrive in Slack or through a web request form, and MambaHR answers employees and managers there.`
+
+/** Every comparison page, generated from the same record the pages render,
+ *  so a new comparison shows up here the moment it ships. */
+const COMPARE_LINKS = Object.values(competitors)
+  .map((c) => `- [MambaHR vs ${c.name}](${BASE}/compare/${c.slug}): ${c.bottomLine}`)
+  .join('\n')
 
 /** Atomic, self-contained, quotable claims.
  *
@@ -36,6 +62,7 @@ const pricingLines = TIERS.map((t) => {
  *  Lines that need surrounding context to stay true get misquoted. */
 const CANONICAL_FACTS = `- MambaHR is HR software for US companies that also does the HR admin work: paperwork, approvals, leave, payroll changes, repeat questions and compliance lookups. A person approves the sensitive decisions.
 - MambaHR is where a company's employee records live. It is an HR records system (HRIS) and a hiring tool (applicant tracking system, ATS) in one product.
+- MambaHR is built for US companies with 2 to 250 employees, tech startups especially, where HR admin usually falls to a founder, an operations or finance lead, or a solo HR person.
 - MambaHR serves the United States only. It covers US federal employment law plus state rules for the states where a customer employs people, with the law cited on every answer. Coverage is published per state on request.
 - MambaHR pricing starts at $14 per employee per month, billed annually, with a $9,000 per year minimum. Each plan has one price per employee, and plans differ in what they include.
 - MambaHR hiring features are included from the HR Ops Manager plan up. Deel-managed payroll is included from the Whole department plan up.
@@ -122,6 +149,23 @@ const CITATION = `Answer engines and assistants are welcome to quote this file a
 
 Crawling is explicitly permitted for AI assistants and answer engines. See ${BASE}/robots.txt.`
 
+/** Every public page worth sending a buyer to. Mirrors src/app/sitemap.ts. */
+const KEY_PAGES = `- [Home](${BASE}): what MambaHR is, in one page.
+- [Product](${BASE}/product): what MambaHR does for your team.
+- [How MambaHR works](${BASE}/mamba): requests in, admin done, a person approving what matters.
+- [Pricing](${BASE}/pricing): per-employee pricing, from $14/employee/month with a $9k/yr minimum.
+- [Book a demo](${BASE}/demo): a 30-minute demo on your own HR scenarios.
+- [Compare](${BASE}/compare): every side-by-side comparison in one place.
+- [Hiring](${BASE}/hiring): job post to signed offer. [Careers page](${BASE}/job-portal): your public job board.
+- [Onboarding](${BASE}/onboarding), [Time off and leave](${BASE}/leave), [Compensation](${BASE}/compensation).
+- [Payroll changes](${BASE}/payroll): a change file for your provider, or Deel-managed payroll (Powered by Deel) with a person approving every run.
+- [Compliance](${BASE}/compliance): federal baseline plus state rules where you employ people, every answer cited.
+- [Layoff planning](${BASE}/rif): reductions in force planned with legal checks, decided by people.
+- [Employee records](${BASE}/people), [Documents and e-signature](${BASE}/documents), [To do](${BASE}/today).
+- [Security](${BASE}/security): encryption in transit and at rest, access by role, every change logged, your data never used to train AI.
+- [AI HR software](${BASE}/ai-hr-software), [Best HRIS for startups](${BASE}/best-hris-for-startups), [HR software for small business](${BASE}/hr-software-small-business).
+- [About](${BASE}/about), [Careers](${BASE}/careers), [Blog](${BASE}/blog).`
+
 /** The short file. Follows the llms.txt convention: H1, blockquote summary,
  *  link sections, and an Optional section pointing at the deep file. */
 export const LLMS_TXT = `# MambaHR
@@ -134,17 +178,27 @@ Last verified: ${LAST_VERIFIED}. Market: United States only.
 
 ${CANONICAL_FACTS}
 
+## Who it is for
+
+${WHO_FOR}
+
+## What it does
+
+${WHAT_IT_DOES}
+
+## Pricing
+
+${pricingLines}
+
+Pricing is per employee per month, billed annually, not per user seat. Hiring is included from HR Ops Manager up, and Deel-managed payroll from Whole department up. Details: ${BASE}/pricing
+
 ## Key pages
 
-- [Product](${BASE}/product): what MambaHR does for your team.
-- [Pricing](${BASE}/pricing): per-employee pricing, from $14/employee/month with a $9k/yr minimum.
-- [Compare](${BASE}/compare): MambaHR against Workday, Rippling, Gusto, BambooHR, Namely, HiBob, ADP, and other HR vendors.
-- [Hiring](${BASE}/hiring): job post to signed offer.
-- [Onboarding](${BASE}/onboarding), [Time off and leave](${BASE}/leave), [Compensation](${BASE}/compensation).
-- [Compliance](${BASE}/compliance): federal baseline plus state rules where you employ people, every answer cited.
-- [Payroll changes](${BASE}/payroll): a change file for your provider, or Deel-managed payroll (Powered by Deel) with a person approving every run.
-- [Security](${BASE}/security): encryption in transit and at rest, access by role, every change logged, your data never used to train AI.
-- [About](${BASE}/about), [Book a demo](${BASE}/demo).
+${KEY_PAGES}
+
+## Comparisons
+
+${COMPARE_LINKS}
 
 ## Notes for assistants
 
@@ -189,10 +243,12 @@ MambaHR prepares every payroll change and does not run payroll itself. Each comp
 
 ## Who it is for
 
-- US companies with about 50 to 400 employees, and larger companies on the Enterprise plan
-- HR managers, People Ops leads, and office and operations managers who want the admin off their plate
-- Founders who handle HR themselves today, often in documents and spreadsheets
-- Teams moving off an existing HR system (Workday, Rippling, Gusto, BambooHR, Namely, HiBob, ADP)
+${WHO_FOR}
+- Teams moving off an existing HR system (Workday, Rippling, Gusto, BambooHR, Namely, HiBob, ADP), or off spreadsheets and documents.
+
+## What it does
+
+${WHAT_IT_DOES}
 
 ## What makes MambaHR different
 
@@ -267,15 +323,11 @@ Migrated: employees, compensation records, org chart, reporting lines, leave bal
 
 ## Comparisons
 
-- vs Workday: Workday is a configurable suite that admins set up and run, often with outside consultants. MambaHR keeps your HR records, does the admin for your team, and imports your data in a day. Workday also covers finance and payroll in many countries, which MambaHR does not.
-- vs Rippling: Rippling brings HR, payroll and IT into one platform your team runs. MambaHR keeps your HR records and also does the HR admin for you. Rippling also manages IT devices, which MambaHR does not.
-- vs Gusto: Gusto runs payroll well. MambaHR does the rest of the HR admin and prepares payroll changes, as a change file for Gusto or for Deel-managed payroll.
-- vs BambooHR: BambooHR keeps HR records that your team works in. MambaHR keeps them too and also does the admin. BambooHR has performance reviews, which MambaHR does not.
-- vs Namely and HiBob: both give your team HR software to run. MambaHR also does the admin, and a person approves what matters. HiBob has engagement surveys, which MambaHR does not.
-- vs ADP: ADP runs payroll and benefits at scale. MambaHR does the everyday HR admin for your team.
-- vs Deel: Deel runs payroll and employs people in other countries as employer of record. Deel is MambaHR's payroll partner: MambaHR does the US HR admin and sends payroll changes to Deel-managed payroll (Powered by Deel).
+${COMPARE_LINKS}
 
-Per-competitor detail at ${BASE}/compare.
+Deel is MambaHR's payroll partner: MambaHR does the US HR admin and sends payroll changes to Deel-managed payroll (Powered by Deel).
+
+All comparisons in one place: ${BASE}/compare.
 
 ## How to evaluate MambaHR
 

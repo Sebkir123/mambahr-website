@@ -5,10 +5,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import { PageCta, Em } from '@/components/v2/page-kit'
-import type { CompetitorData } from './data'
-
-/** Vendors MambaHR has a one-time importer for. Everything else comes in by CSV. */
-const IMPORTERS = new Set(['gusto', 'bamboohr', 'rippling', 'workday', 'adp', 'namely', 'greenhouse', 'lever'])
+import type { CompareFaq, CompetitorData, ImportFrom } from './data'
 
 function Cell({ value, mine }: { value: string | boolean; mine: boolean }) {
   if (typeof value === 'boolean') {
@@ -17,7 +14,9 @@ function Cell({ value, mine }: { value: string | boolean; mine: boolean }) {
   return <span className={mine ? 'pill mine' : 'pill'}>{value}</span>
 }
 
-export default function CompareView({ data }: { data: CompetitorData }) {
+/** `importFrom`: how this vendor's data reaches MambaHR (decided on the server,
+ *  so the competitor table never ships in the client bundle). */
+export default function CompareView({ data, faqs, importFrom }: { data: CompetitorData; faqs: CompareFaq[]; importFrom: ImportFrom }) {
   const [line1, line2] = data.heroHeadline.split('\n')
   return (
     <>
@@ -212,6 +211,36 @@ export default function CompareView({ data }: { data: CompetitorData }) {
           `}</style>
         </section>
 
+        {/* ── Questions (mirrored in the page's FAQPage JSON-LD) ── */}
+        <section className="fq">
+          <div className="wrap">
+            <div className="head" data-reveal>
+              <p className="eyebrow">Questions</p>
+              <h2 className="title">MambaHR and {data.name}, <Em>answered.</Em></h2>
+            </div>
+            <div className="list">
+              {faqs.map((f) => (
+                <div key={f.q} className="item" data-reveal>
+                  <h3 className="q">{f.q}</h3>
+                  <p className="a">{f.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <style jsx>{`
+            .fq { background: var(--bg); padding: 0 var(--page-pad) clamp(72px, 9vw, 112px); }
+            .wrap { max-width: 1080px; margin: 0 auto; }
+            .head { text-align: center; margin-bottom: clamp(24px, 3vw, 36px); }
+            .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
+            .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
+            .list { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(28px, 4vw, 56px); border-top: 1px solid var(--border-faint); }
+            .item { padding: 22px 0; border-bottom: 1px solid var(--border-faint); }
+            .q { font-family: var(--font-serif); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; color: var(--text); margin: 0; }
+            .a { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 8px 0 0; }
+            @media (max-width: 760px) { .list { grid-template-columns: 1fr; } }
+          `}</style>
+        </section>
+
         {/* ── Switching, de-risked ── */}
         <section className="sw">
           <div className="wrap">
@@ -223,7 +252,12 @@ export default function CompareView({ data }: { data: CompetitorData }) {
               <div className="step" data-reveal data-delay="1">
                 <span className="d">Day 1</span>
                 <h3 className="t">Your data imports</h3>
-                <p className="b">People, history, documents and time-off balances, {IMPORTERS.has(data.slug) ? `pulled from ${data.name} in one pass` : 'imported by CSV in one pass'}. Nothing typed in twice.</p>
+                <p className="b">
+                  {importFrom === 'ats'
+                    ? `Your hiring pipeline pulled from ${data.name}, and people, history and documents from your HR system or by CSV, in one pass.`
+                    : `People, history, documents and time-off balances, ${importFrom === 'hris' ? `pulled from ${data.name} in one pass` : 'imported by CSV in one pass'}.`}{' '}
+                  Nothing typed in twice.
+                </p>
               </div>
               <div className="step" data-reveal data-delay="2">
                 <span className="d">Day 2</span>

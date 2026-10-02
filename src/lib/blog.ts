@@ -78,10 +78,16 @@ export function sanitizePostHtml(dirty: string): string {
           target: '_blank',
         },
       }),
+      // Every image carries an alt attribute; one the author left blank is
+      // marked decorative (alt="") rather than missing.
+      img: (tagName, attribs) => ({ tagName, attribs: { ...attribs, alt: attribs.alt ?? '' } }),
     },
-    // Drop empty <span> wrappers TipTap sometimes emits.
+    // Drop empty <span> wrappers TipTap sometimes emits, and any <img> whose
+    // source was stripped (a pasted data: or relative URL), which would
+    // otherwise render as a broken, unlabeled image.
     exclusiveFilter: (frame) =>
-      frame.tag === 'span' && !frame.text.trim() && !Object.keys(frame.attribs).length,
+      (frame.tag === 'span' && !frame.text.trim() && !Object.keys(frame.attribs).length) ||
+      (frame.tag === 'img' && !frame.attribs.src),
   })
 }
 

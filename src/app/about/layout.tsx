@@ -23,11 +23,14 @@ export const metadata: Metadata = {
 const teamSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  // Same @id as the site-wide Organization in the root layout, so the two
+  // blocks describe one entity instead of two.
+  '@id': 'https://www.mambahr.com/#organization',
   name: 'MambaHR',
   url: 'https://www.mambahr.com',
   logo: 'https://www.mambahr.com/MambaHR_logo.png',
   description: 'HR software for US companies. MambaHR does the admin; your team makes the decisions.',
-  founders: [
+  founder: [
     {
       '@type': 'Person',
       name: 'Brian Bell',
@@ -41,7 +44,7 @@ const teamSchema = {
       sameAs: 'https://www.linkedin.com/in/sebastiankirsch-/',
     },
   ],
-  sameAs: ['https://www.linkedin.com/company/mamba-hr'],
+  sameAs: ['https://www.linkedin.com/company/mamba-hr/'],
 }
 
 const teamJsonLd = JSON.stringify(teamSchema)

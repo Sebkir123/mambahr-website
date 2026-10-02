@@ -6,7 +6,7 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Compensation Management | MambaHR',
   description:
-    'Every raise checked against your pay ranges and for pay equity before it happens. Raises above the range come to you. Approved changes are filed to the employee record.',
+    'Every raise checked against your pay ranges and for pay equity before it happens. Raises above the range come to you, and approved changes are filed.',
   openGraph: {
     title: 'Compensation Management | MambaHR',
     description:
@@ -33,8 +33,12 @@ const jsonLd = {
     'MambaHR compensation: every raise checked against your pay ranges, and anything above the range sent to a person to approve. Every change is checked for pay equity, and the approved change is filed to the employee record.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
-    '@type': 'SoftwareFeature',
-    name: 'Compensation',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: 'https://www.mambahr.com',
+    featureList: 'Compensation',
     description:
       'Checks every raise against your pay ranges and sends anything above the range to a person for approval. Checks every change for pay equity, then files the approved, dated change to the employee record.',
   },

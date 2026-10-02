@@ -6,7 +6,7 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Careers page | MambaHR',
   description:
-    'A careers page with your brand, on your own web address. Candidates apply in two minutes, every application is tracked in one pipeline, and equal-opportunity answers are stored separately.',
+    'A careers page with your brand on your own web address. Candidates apply in two minutes, and every application is tracked in one pipeline for your team.',
   openGraph: {
     title: 'Careers page | MambaHR',
     description:
@@ -33,8 +33,12 @@ const jsonLd = {
     'MambaHR careers page: hosted on your own web address, with a two-minute apply form. Every application lands in one pipeline for your hiring team to review, with the equal-opportunity questions asked for you.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
-    '@type': 'SoftwareFeature',
-    name: 'Careers page',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: 'https://www.mambahr.com',
+    featureList: 'Careers page',
     description:
       'Hosts your branded careers page on your own web address, posts your open roles, and tracks every application in one pipeline for your hiring team to review. Voluntary equal-opportunity (EEO) answers are collected at apply and stored separately.',
   },

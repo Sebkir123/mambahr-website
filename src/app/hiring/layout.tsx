@@ -6,7 +6,7 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Hiring | MambaHR',
   description:
-    'Job posts with pay ranges, every application in one pipeline, interview scheduling, background checks through Checkr, and offers drafted inside your pay range. Your team decides who joins.',
+    'Job posts with pay ranges, one pipeline for applications, interview scheduling, Checkr background checks and offers in your pay range. You decide who joins.',
   openGraph: {
     title: 'Hiring | MambaHR',
     description:
@@ -33,8 +33,12 @@ const jsonLd = {
     'MambaHR hiring: job posts with pay ranges, your careers page, one pipeline for every application, interview scheduling, background checks through Checkr, and offers drafted inside your pay range. People make every hiring decision and approve every offer.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
-    '@type': 'SoftwareFeature',
-    name: 'Hiring',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: 'https://www.mambahr.com',
+    featureList: 'Hiring',
     description:
       'Drafts the job post with the pay range, posts it to your careers page and job boards, and collects every application in one pipeline for your team to review. Schedules interviews, orders background checks through Checkr, and drafts offers inside your pay range. You approve the job post, decide who moves forward, and approve every offer.',
   },

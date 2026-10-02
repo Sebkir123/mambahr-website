@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { competitors } from './data'
+import { competitors, compareFaqs, compareTitle, importFrom } from './data'
 import { JsonLd } from '@/components/json-ld'
 import CompareView from './compare-view'
 
@@ -15,22 +15,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const c = competitors[slug]
   if (!c) return {}
   const ogUrl = '/mambahr_og_sharing.jpg'
+  const title = compareTitle(c)
+  const url = `https://www.mambahr.com/compare/${slug}`
   return {
-    title: `MambaHR vs ${c.name} | MambaHR`,
+    title,
     description: c.description,
     openGraph: {
-      title: `MambaHR vs ${c.name}`,
+      title,
       description: c.description,
-      url: `https://www.mambahr.com/compare/${slug}`,
+      url,
+      siteName: 'MambaHR',
+      type: 'article',
       images: [{ url: ogUrl, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `MambaHR vs ${c.name}`,
+      title,
       description: c.description,
       images: [ogUrl],
     },
-    alternates: { canonical: `https://www.mambahr.com/compare/${slug}` },
+    alternates: { canonical: url },
   }
 }
 
@@ -38,6 +42,7 @@ export default async function ComparePage({ params }: Props) {
   const { slug } = await params
   const c = competitors[slug]
   if (!c) notFound()
+  const faqs = compareFaqs(c)
 
   // Comparison-aware structured data: helps search engines surface this page for
   // "MambaHR vs <competitor>" queries. Content is drawn entirely from the hardcoded
@@ -74,10 +79,22 @@ export default async function ComparePage({ params }: Props) {
     ],
   }
 
+  // The same questions the page renders in its FAQ section, so the markup only
+  // ever describes content a reader can see.
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+
   return (
     <>
-      <JsonLd data={[comparisonJsonLd, breadcrumbJsonLd]} />
-      <CompareView data={c} />
+      <JsonLd data={[comparisonJsonLd, breadcrumbJsonLd, faqJsonLd]} />
+      <CompareView data={c} faqs={faqs} importFrom={importFrom(slug)} />
     </>
   )
 }

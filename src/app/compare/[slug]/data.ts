@@ -1,3 +1,5 @@
+import { TIERS } from '@/content/pricing-tiers'
+
 export type CompetitorData = {
   slug: string
   name: string
@@ -678,4 +680,430 @@ export const competitors: Record<string, CompetitorData> = {
     bottomLine: 'Oyster is a good way to hire across borders. MambaHR does the HR admin for the team you employ at home. You can use both.',
     costLine: 'Keep Oyster for people abroad. For your US team, MambaHR is one price per employee, per plan, from $14.',
   },
+
+  lattice: {
+    slug: 'lattice',
+    description: 'Looking for a Lattice alternative for your startup? Lattice runs reviews, goals and surveys. MambaHR does the everyday HR admin: leave, onboarding and hiring.',
+    name: 'Lattice',
+    tagline: 'MambaHR vs Lattice',
+    heroHeadline: 'Lattice helps you run reviews and goals.\nMambaHR does the everyday HR admin.',
+    heroSub: 'Lattice is people management software: performance reviews, goals, one-on-ones and engagement surveys, with HR records and payroll available too. MambaHR keeps your employee records and does the admin around them: leave, onboarding, hiring and payroll changes. You approve what matters.',
+    switchReasons: [
+      {
+        title: 'Reviews happen a few times a year. The admin happens every day.',
+        desc: 'Lattice is built around review cycles, goals and surveys. Leave requests, new hire paperwork and policy questions arrive every day. MambaHR handles them in Slack and brings you the ones that need a decision.',
+      },
+      {
+        title: 'Employment law answers, with the law cited.',
+        desc: 'MambaHR checks federal family leave (FMLA) eligibility, cites the pay transparency rule for each state you hire in, and works out final pay timing. Unclear cases come to you.',
+      },
+      {
+        title: 'Hiring and onboarding in one record.',
+        desc: 'MambaHR posts jobs with the pay range, tracks applications, schedules interviews and drafts the offer inside your pay range for your approval. Then it onboards the new hire in the same record.',
+      },
+    ],
+    tableRows: [
+      { feature: F.admin, mamba: true, them: 'Not included' },
+      { feature: F.law, mamba: true, them: 'Not included' },
+      { feature: 'Performance reviews and goals', mamba: 'Not included', them: true, note: 'Lattice strength: review cycles, goals and one-on-ones.' },
+      { feature: 'Engagement surveys', mamba: 'Not included', them: true },
+      { feature: F.records, mamba: true, them: true },
+      { feature: F.hiring, mamba: true, them: 'Not included', note: HIRING_NOTE },
+      { feature: F.onboarding, mamba: true, them: 'Checklists' },
+    ],
+    bottomLine: 'Choose Lattice if your priority is performance reviews, goals and engagement. Choose MambaHR if you want the everyday HR admin done for you, with you approving what matters.',
+    costLine: 'One price per employee, per plan, from $14. Your Lattice data imports by CSV in a day.',
+  },
+
+  ashby: {
+    slug: 'ashby',
+    description: 'Looking for an Ashby alternative for your startup? Ashby is a strong recruiting tool. MambaHR covers hiring, then onboarding, payroll changes and everyday HR.',
+    name: 'Ashby',
+    tagline: 'MambaHR vs Ashby',
+    heroHeadline: 'Ashby runs recruiting for growing teams.\nMambaHR covers hiring and everything after the offer.',
+    heroSub: 'Ashby brings applicant tracking, candidate outreach, interview scheduling and recruiting analytics into one product. It stops at the hire. MambaHR posts jobs with pay ranges, tracks applications, schedules interviews and drafts the offer inside your pay range for your approval. Then it onboards your new hire and keeps their record.',
+    switchReasons: [
+      {
+        title: 'Hiring is where the admin starts.',
+        desc: 'Ashby manages recruiting up to the hire. Once the candidate says yes, you still need onboarding, payroll setup, compliance checks and an employee record. MambaHR does that too.',
+      },
+      {
+        title: 'A person reviews every candidate.',
+        desc: 'MambaHR does not use AI to screen, score or rank applicants. It handles the hiring admin: job posts, interview scheduling, background checks through Checkr and offer drafts. Your team makes every hiring decision.',
+      },
+      {
+        title: 'No handoff between systems.',
+        desc: 'With a recruiting-only tool, new hires move to a separate HR system, which can mean typing data in twice. In MambaHR the candidate becomes an employee in the same record.',
+      },
+    ],
+    tableRows: [
+      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true, note: HIRING_NOTE },
+      { feature: 'Candidate sourcing and outreach', mamba: 'Not included', them: true, note: 'Ashby strength: finding candidates and keeping in touch with them.' },
+      { feature: F.onboarding, mamba: true, them: 'Not included' },
+      { feature: F.records, mamba: true, them: 'Not included' },
+      { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: 'Not included', note: PAYROLL_NOTE },
+      { feature: F.everyday, mamba: true, them: 'Not included' },
+    ],
+    bottomLine: 'Ashby is a strong recruiting tool. MambaHR covers hiring and the HR admin after it in one product, so there is no handoff.',
+    costLine: 'Hiring comes with the HR Ops Manager plan and up, from $22 per employee, with employee records and onboarding in the same product.',
+  },
+
+  workable: {
+    slug: 'workable',
+    description: 'Looking for a Workable alternative for your startup? Workable helps you find and hire people. MambaHR covers hiring, onboarding, payroll changes and HR admin.',
+    name: 'Workable',
+    tagline: 'MambaHR vs Workable',
+    heroHeadline: 'Workable helps you find and hire candidates.\nMambaHR takes a hire from job post to first day.',
+    heroSub: 'Workable is recruiting software with job board posting, candidate sourcing and a hiring pipeline, plus HR features for after the hire. MambaHR posts jobs with pay ranges, tracks applications, schedules interviews and drafts the offer inside your pay range for your approval. Then it onboards your new hire and does their everyday HR admin.',
+    switchReasons: [
+      {
+        title: 'Hiring is one part of HR.',
+        desc: 'Workable is built around recruiting. Leave requests, policy questions, payroll changes and exits come after the hire. MambaHR handles hiring and the admin that follows.',
+      },
+      {
+        title: 'A person reviews every candidate.',
+        desc: 'MambaHR does not use AI to screen, score or rank applicants. It handles the hiring admin, from job posts and interview scheduling to background checks through Checkr and offer drafts. Your team decides.',
+      },
+      {
+        title: 'The admin gets done, not just tracked.',
+        desc: 'MambaHR files leave within your policy, follows up on each onboarding step and prepares payroll changes for your approval. Employees and managers ask in Slack.',
+      },
+    ],
+    tableRows: [
+      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true, note: HIRING_NOTE },
+      { feature: 'Candidate sourcing', mamba: 'Not included', them: true, note: 'Workable strength: posting widely and finding candidates.' },
+      { feature: F.admin, mamba: true, them: 'Not included' },
+      { feature: F.law, mamba: true, them: 'Not included' },
+      { feature: F.records, mamba: true, them: 'Basic HR features' },
+      { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: 'Not included', note: PAYROLL_NOTE },
+      { feature: F.onboarding, mamba: true, them: 'Checklists' },
+    ],
+    bottomLine: 'Workable is a good way to fill roles. MambaHR covers hiring and the HR admin after it in one product, with you approving what matters.',
+    costLine: 'Hiring comes with the HR Ops Manager plan and up, from $22 per employee, with employee records and onboarding in the same product.',
+  },
+
+  jazzhr: {
+    slug: 'jazzhr',
+    description: 'Looking for a JazzHR alternative for your startup? JazzHR helps small teams hire. MambaHR covers hiring, then onboarding, payroll changes and everyday HR admin.',
+    name: 'JazzHR',
+    tagline: 'MambaHR vs JazzHR',
+    heroHeadline: 'JazzHR helps small teams hire.\nMambaHR covers hiring and the HR admin after it.',
+    heroSub: 'JazzHR is applicant tracking for small and growing businesses: post jobs, collect applications, schedule interviews and send offers. It ends at the hire. MambaHR posts jobs with pay ranges, tracks applications and drafts the offer inside your pay range for your approval. Then it onboards your new hire and keeps their record.',
+    switchReasons: [
+      {
+        title: 'Hiring is one part of HR.',
+        desc: 'JazzHR gets the role filled. Onboarding, payroll setup, leave and policy questions land somewhere else afterwards. MambaHR handles hiring and the admin after it.',
+      },
+      {
+        title: 'Pay ranges in every post and offer.',
+        desc: 'MambaHR drafts each job post with the pay range and each offer inside it, which matters in states with pay transparency rules. Offers above the range come to you.',
+      },
+      {
+        title: 'One record from applicant to employee.',
+        desc: 'In MambaHR the candidate becomes an employee in the same record. There is no export to another HR system and nothing typed in twice.',
+      },
+    ],
+    tableRows: [
+      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true, note: HIRING_NOTE },
+      { feature: F.admin, mamba: true, them: 'Not included' },
+      { feature: F.onboarding, mamba: true, them: 'Limited' },
+      { feature: F.records, mamba: true, them: 'Not included' },
+      { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: 'Not included', note: PAYROLL_NOTE },
+      { feature: F.everyday, mamba: true, them: 'Not included' },
+    ],
+    bottomLine: 'JazzHR is simple hiring software for small teams. MambaHR covers hiring and the HR admin after it in one product, so there is no handoff.',
+    costLine: 'Hiring comes with the HR Ops Manager plan and up, from $22 per employee, with employee records and onboarding in the same product.',
+  },
+
+  breezyhr: {
+    slug: 'breezyhr',
+    description: 'Looking for a Breezy HR alternative for your startup? Breezy HR tracks applicants. MambaHR covers hiring, then onboarding, payroll changes and everyday HR admin.',
+    name: 'Breezy HR',
+    tagline: 'MambaHR vs Breezy HR',
+    heroHeadline: 'Breezy HR gives you a hiring pipeline.\nMambaHR takes a hire from job post to first day.',
+    heroSub: 'Breezy HR is applicant tracking for small and growing businesses, with a visual pipeline, job board posting and interview scheduling. MambaHR posts jobs with pay ranges, tracks applications, schedules interviews and drafts the offer inside your pay range for your approval. Then it onboards your new hire and does their HR admin.',
+    switchReasons: [
+      {
+        title: 'Hiring is where the admin starts.',
+        desc: 'Breezy HR moves candidates through your pipeline. Once someone is hired, onboarding, payroll setup and everyday HR requests still need doing. MambaHR does that too.',
+      },
+      {
+        title: 'A person reviews every candidate.',
+        desc: 'MambaHR does not use AI to screen, score or rank applicants. It handles the hiring admin, from job posts and interview scheduling to background checks through Checkr and offer drafts, and your team decides.',
+      },
+      {
+        title: 'No handoff to a separate records system.',
+        desc: 'In MambaHR the candidate becomes an employee in the same record, so nothing is typed in twice and onboarding starts as soon as the offer is signed.',
+      },
+    ],
+    tableRows: [
+      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true, note: HIRING_NOTE },
+      { feature: F.admin, mamba: true, them: 'Not included' },
+      { feature: F.onboarding, mamba: true, them: 'Limited' },
+      { feature: F.records, mamba: true, them: 'Not included' },
+      { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: 'Not included', note: PAYROLL_NOTE },
+      { feature: F.everyday, mamba: true, them: 'Not included' },
+    ],
+    bottomLine: 'Breezy HR is an easy hiring pipeline. MambaHR covers hiring and the HR admin after it in one product, so there is no handoff.',
+    costLine: 'Hiring comes with the HR Ops Manager plan and up, from $22 per employee, with employee records and onboarding in the same product.',
+  },
+
+  insperity: {
+    slug: 'insperity',
+    description: 'Looking for an Insperity alternative for your startup? Insperity is a PEO that co-employs your team. MambaHR does the HR admin while you stay the employer.',
+    name: 'Insperity',
+    tagline: 'MambaHR vs Insperity',
+    heroHeadline: 'Insperity co-employs your team and offers HR services.\nMambaHR does the admin, and you stay the employer.',
+    heroSub: 'Insperity is a PEO (professional employer organization). It co-employs your staff, bundles benefits and gives you access to HR specialists. MambaHR does the HR admin for your team without co-employment. You keep your tax ID and your benefits broker, and you approve what matters.',
+    switchReasons: [
+      {
+        title: 'You stay the only employer.',
+        desc: 'A PEO co-employs your staff and shares some employer duties. MambaHR does not change who employs your team, so there is no co-employment to unwind later.',
+      },
+      {
+        title: 'Answers in Slack, with the law cited.',
+        desc: 'Insperity sends harder questions to its HR specialists. MambaHR answers in Slack as soon as the question is asked: family leave (FMLA) eligibility, final pay timing and pay transparency. Judgment calls come to you.',
+      },
+      {
+        title: 'Keep your plans.',
+        desc: 'PEO benefits are bundled, so leaving one usually means shopping for new coverage. MambaHR does not run benefits, so you keep your plans and your broker.',
+      },
+    ],
+    tableRows: [
+      { feature: F.slack, mamba: true, them: 'Not included' },
+      { feature: F.admin, mamba: true, them: 'HR specialists you contact' },
+      { feature: 'Co-employment', mamba: 'None, you stay the employer', them: 'Yes, as a PEO' },
+      { feature: F.law, mamba: true, them: 'Specialist-assisted' },
+      { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
+      { feature: 'Benefits', mamba: 'Keep your own broker', them: 'PEO-bundled plans', note: 'A PEO can give a small team access to large-group plans.' },
+      { feature: F.onboarding, mamba: true, them: 'Specialist-assisted' },
+      { feature: F.log, mamba: true, them: 'Partial' },
+    ],
+    bottomLine: 'Insperity is a full-service PEO if co-employment and bundled benefits suit you. MambaHR does the HR admin while you keep your tax ID, your benefits and your employment relationship.',
+    costLine: 'One price per employee, per plan, from $14. Your benefits stay with your broker.',
+  },
+
+  paycor: {
+    slug: 'paycor',
+    description: 'Looking for a Paycor alternative for your startup? Paycor gives you payroll and HR software to run. MambaHR does the HR admin and prepares your payroll changes.',
+    name: 'Paycor',
+    tagline: 'MambaHR vs Paycor',
+    heroHeadline: 'Paycor gives your team payroll and HR software to run.\nMambaHR does the HR admin for you.',
+    heroSub: 'Paycor brings payroll, HR, time tracking, benefits administration and hiring into one suite that your team runs. MambaHR keeps your HR records and does the admin: employee questions, leave, onboarding, hiring paperwork and compliance answers. It prepares every payroll change, and you approve what matters.',
+    switchReasons: [
+      {
+        title: 'Software to run, or admin done for you.',
+        desc: 'Paycor gives your team modules to set up and work in. MambaHR handles the requests, applies your policies and brings the judgment calls to you.',
+      },
+      {
+        title: 'Employees ask in Slack.',
+        desc: 'With MambaHR, employees and managers ask in Slack and get an answer with the policy cited. Nobody has to learn another portal.',
+      },
+      {
+        title: 'Employment law answers, not only payroll tax.',
+        desc: 'MambaHR checks family leave (FMLA) eligibility, final pay timing and pay transparency by state, with the law cited. Clear cases get handled. The rest come to you.',
+      },
+    ],
+    tableRows: [
+      { feature: F.admin, mamba: true, them: 'Not included' },
+      { feature: F.law, mamba: true, them: 'Payroll tax compliance' },
+      { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
+      { feature: F.benefits, mamba: 'Not included', them: true, note: COBRA_NOTE },
+      { feature: 'Time tracking and scheduling', mamba: 'Not included', them: true },
+      { feature: F.hiring, mamba: true, them: true, note: HIRING_NOTE },
+      { feature: F.setup, mamba: IMPORT_DAY, them: 'An implementation project' },
+    ],
+    bottomLine: 'Paycor is a capable payroll and HR suite for your team to run. MambaHR does the HR admin for you and prepares the payroll changes for your approval.',
+    costLine: 'Keep Paycor for payroll and load the change file MambaHR prepares, or use Deel-managed payroll. MambaHR is one price per employee, per plan, from $14.',
+  },
+
+  paycom: {
+    slug: 'paycom',
+    description: 'Looking for a Paycom alternative for your startup? Paycom is payroll and HR software your team runs. MambaHR does the HR admin and prepares your payroll changes.',
+    name: 'Paycom',
+    tagline: 'MambaHR vs Paycom',
+    heroHeadline: 'Paycom gives you payroll and HR in one system.\nMambaHR does the HR admin for your team.',
+    heroSub: 'Paycom puts payroll, HR, time tracking, benefits and hiring in one system, and lets employees check their own paycheck before payroll runs. MambaHR keeps your HR records and does the admin: employee questions, leave, onboarding and compliance answers. It prepares every payroll change, and you approve what matters.',
+    switchReasons: [
+      {
+        title: 'Fewer modules to run.',
+        desc: 'Paycom gives your team a broad system to work in. MambaHR handles the routine requests as they arrive and brings you only the ones that need a decision.',
+      },
+      {
+        title: 'Employees ask in Slack.',
+        desc: 'Employees and managers ask MambaHR in Slack and get answers with the policy cited. There is no new app to learn.',
+      },
+      {
+        title: 'Employment law answers, not only payroll tax.',
+        desc: 'MambaHR answers employment questions: family leave (FMLA) eligibility, final pay timing and pay transparency by state, with the law cited. Unclear cases come to you.',
+      },
+    ],
+    tableRows: [
+      { feature: F.admin, mamba: true, them: 'Not included' },
+      { feature: F.law, mamba: true, them: 'Payroll tax compliance' },
+      { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
+      { feature: 'Employees check their own paycheck before payroll runs', mamba: 'Not included', them: true },
+      { feature: F.benefits, mamba: 'Not included', them: true, note: COBRA_NOTE },
+      { feature: 'Time tracking', mamba: 'Not included', them: true },
+      { feature: F.hiring, mamba: true, them: true, note: HIRING_NOTE },
+      { feature: F.setup, mamba: IMPORT_DAY, them: 'An implementation project' },
+    ],
+    bottomLine: 'Choose Paycom if you want payroll, time tracking and HR in one system your team runs. Choose MambaHR if you want the HR admin done for you, with you approving what matters.',
+    costLine: 'Keep Paycom for payroll and load the change file MambaHR prepares, or use Deel-managed payroll. MambaHR is one price per employee, per plan, from $14.',
+  },
+
+  onpay: {
+    slug: 'onpay',
+    description: 'Looking for an OnPay alternative for your startup? OnPay runs small business payroll. MambaHR does the rest of the HR admin and prepares your payroll changes.',
+    name: 'OnPay',
+    tagline: 'MambaHR vs OnPay',
+    heroHeadline: 'OnPay runs payroll for small businesses.\nMambaHR does the HR admin around it.',
+    heroSub: "OnPay is straightforward payroll for small businesses, with HR tools like onboarding forms and time off tracking. The rest of HR still lands on someone's desk: leave, hiring, onboarding follow-ups and policy questions. MambaHR does that work, prepares your payroll changes, and brings you the decisions that need a person.",
+    switchReasons: [
+      {
+        title: 'Payroll is one part of HR.',
+        desc: 'OnPay pays your people. Leave requests, offer letters, onboarding steps and exits still need someone. MambaHR does that work and asks you to approve anything sensitive.',
+      },
+      {
+        title: 'Employment law answers, with the law cited.',
+        desc: "MambaHR answers questions like whether someone qualifies for family leave (FMLA) or what a state's pay transparency rule requires in a job post. Unclear cases come to you.",
+      },
+      {
+        title: 'Hiring and onboarding in one place.',
+        desc: 'MambaHR posts jobs with the pay range, tracks applications, schedules interviews and drafts the offer inside your pay range for your approval. Then onboarding starts.',
+      },
+    ],
+    tableRows: [
+      { feature: F.admin, mamba: true, them: 'Not included' },
+      { feature: F.law, mamba: true, them: 'Payroll tax only' },
+      { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
+      { feature: F.benefits, mamba: 'Not included', them: true, note: COBRA_NOTE },
+      { feature: F.onboarding, mamba: true, them: 'Forms and checklists' },
+      { feature: F.records, mamba: true, them: true },
+    ],
+    bottomLine: 'OnPay is good small business payroll. MambaHR does the other HR admin and gets your payroll changes ready, for OnPay or for Deel-managed payroll.',
+    costLine: 'Keep OnPay and load the change file MambaHR prepares, or use Deel-managed payroll. MambaHR is one price per employee, per plan, from $14.',
+  },
+
+  'quickbooks-payroll': {
+    slug: 'quickbooks-payroll',
+    description: 'Looking for a QuickBooks Payroll alternative for your startup? QuickBooks pays your team. MambaHR does the HR admin around payroll and prepares each change.',
+    name: 'QuickBooks Payroll',
+    tagline: 'MambaHR vs QuickBooks Payroll',
+    heroHeadline: 'QuickBooks Payroll pays your team inside your books.\nMambaHR does the HR admin around it.',
+    heroSub: 'QuickBooks Payroll runs payroll inside QuickBooks, so pay and accounting stay together. The HR work around payroll still lands on someone: leave, new hires, onboarding and policy questions. MambaHR does that work, prepares your payroll changes, and brings you the decisions that need a person.',
+    switchReasons: [
+      {
+        title: 'Payroll is one part of HR.',
+        desc: 'QuickBooks pays people and keeps your books in order. Leave requests, offers, onboarding and exits still need someone. MambaHR does that work and asks you to approve anything sensitive.',
+      },
+      {
+        title: 'Employment law answers, with the law cited.',
+        desc: "MambaHR answers questions like whether someone qualifies for family leave (FMLA), when final pay is due in your state, or what a state's pay transparency rule requires. Unclear cases come to you.",
+      },
+      {
+        title: 'An HR record, not only a payroll record.',
+        desc: 'MambaHR keeps the full employee record: role, manager, pay history, time off and documents. Each change that affects pay becomes a payroll change for you to approve.',
+      },
+    ],
+    tableRows: [
+      { feature: F.admin, mamba: true, them: 'Not included' },
+      { feature: F.law, mamba: true, them: 'Payroll tax only' },
+      { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
+      { feature: 'Accounting and bookkeeping', mamba: 'Not included', them: true, note: 'QuickBooks strength: payroll and your books in one place.' },
+      { feature: F.hiring, mamba: true, them: 'Not included', note: HIRING_NOTE },
+      { feature: F.onboarding, mamba: true, them: 'Payroll setup only' },
+      { feature: F.everyday, mamba: true, them: 'Not included' },
+    ],
+    bottomLine: 'QuickBooks Payroll keeps pay and your books together. MambaHR does the HR admin and gets your payroll changes ready, for QuickBooks or for Deel-managed payroll.',
+    costLine: 'Keep QuickBooks Payroll and load the change file MambaHR prepares, or use Deel-managed payroll. MambaHR is one price per employee, per plan, from $14.',
+  },
+}
+
+/** Vendors MambaHR has a one-time importer for. Everything else comes in by CSV. */
+export const IMPORTERS = new Set(['gusto', 'bamboohr', 'rippling', 'workday', 'adp', 'namely', 'greenhouse', 'lever'])
+
+/** Of those, the hiring tools: what imports from them is the hiring pipeline, not people records. */
+const ATS_IMPORTERS = new Set(['greenhouse', 'lever'])
+
+/** How this vendor's data reaches MambaHR. */
+export type ImportFrom = 'hris' | 'ats' | 'csv'
+export function importFrom(slug: string): ImportFrom {
+  if (ATS_IMPORTERS.has(slug)) return 'ats'
+  return IMPORTERS.has(slug) ? 'hris' : 'csv'
+}
+
+/** Products a team keeps next to MambaHR (payroll and employment abroad), so
+ *  the page is framed as "how they fit", never as a replacement. */
+const COMPLEMENTS = new Set(['deel', 'remote', 'oyster'])
+
+/** Page title. Carries "<name> alternative for startups" where that is true,
+ *  falling back to a shorter form when the long one would be cut off in results. */
+export function compareTitle(c: CompetitorData): string {
+  if (COMPLEMENTS.has(c.slug)) return `MambaHR vs ${c.name}: Compared for Startups`
+  const long = `MambaHR vs ${c.name}: ${c.name} Alternative for Startups`
+  return long.length <= 60 ? long : `${c.name} Alternative for Startups | MambaHR`
+}
+
+export type CompareFaq = { q: string; a: string }
+
+const withStop = (t: string) => (/[.!?]$/.test(t) ? t : `${t}.`)
+
+/** Sentence-case a row label for use mid-sentence, leaving acronyms ("IT and ...") alone. */
+const lowerFirst = (t: string) => (/^[A-Z]{2}/.test(t) ? t : t.charAt(0).toLowerCase() + t.slice(1))
+
+/** ["a", "b", "c"] -> "a, b and c" */
+const listOf = (items: string[]) => {
+  if (items.length < 2) return items.join('')
+  // An item that itself contains "and" needs the serial comma to stay readable.
+  const last = items.some((i) => i.includes(' and ')) ? ', and ' : ' and '
+  return `${items.slice(0, -1).join(', ')}${last}${items[items.length - 1]}`
+}
+
+/** "$9k/yr minimum · billed annually" -> "$9k" */
+const minAmount = (min: string) => min.split('/')[0]
+
+/** The questions a buyer asks about this comparison, answered only from the
+ *  entry above and the published plans. Rendered on the page and as FAQPage
+ *  JSON-LD from this one list, so the two can never disagree. */
+export function compareFaqs(c: CompetitorData): CompareFaq[] {
+  const complement = COMPLEMENTS.has(c.slug)
+  const faqs: CompareFaq[] = []
+
+  faqs.push(
+    complement
+      ? { q: `Do MambaHR and ${c.name} work together?`, a: c.bottomLine }
+      : { q: `Is MambaHR a good ${c.name} alternative for a startup?`, a: c.bottomLine },
+  )
+
+  // Where the other product does more, said plainly.
+  const theirs = c.tableRows.filter((r) => r.them !== false && (r.mamba === 'Not included' || r.mamba === 'US only'))
+  if (theirs.length > 0) {
+    // Table shorthand like "Workday strength: ..." reads badly as prose, so only full-sentence notes carry over.
+    const notes = theirs
+      .map((r) => r.note)
+      .filter((n): n is string => Boolean(n) && !/ strength: /.test(n as string))
+      .map(withStop)
+    faqs.push({
+      q: `What does ${c.name} do that MambaHR does not?`,
+      a: [`${c.name} covers these, and MambaHR does not: ${listOf(theirs.map((r) => lowerFirst(r.feature)))}.`, ...notes].join(' '),
+    })
+  }
+
+  const tier = c.costLine.includes('HR Ops Manager') ? TIERS[1] : TIERS[0]
+  faqs.push({
+    q: complement ? `What does MambaHR cost alongside ${c.name}?` : `What does MambaHR cost compared with ${c.name}?`,
+    a: `${c.costLine} Plans are billed annually, and the ${tier.name} plan has a ${minAmount(tier.min)} yearly minimum.`,
+  })
+
+  faqs.push({
+    q: complement ? `How do we start with MambaHR if we use ${c.name}?` : `How do we move from ${c.name} to MambaHR?`,
+    a: {
+      hris: `MambaHR imports your ${c.name} data in a day: people, history, documents and time-off balances. Requests get handled the day after the import.`,
+      ats: `MambaHR imports your ${c.name} hiring pipeline in a day, and your people data comes in from your HR system or by CSV. Requests get handled the day after the import.`,
+      csv: `Your people data comes into MambaHR by CSV in a day: people, history, documents and time-off balances. Requests get handled the day after the import.`,
+    }[importFrom(c.slug)],
+  })
+
+  return faqs
 }

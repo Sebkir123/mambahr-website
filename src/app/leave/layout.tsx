@@ -6,7 +6,7 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Time Off & Leave Management | MambaHR',
   description:
-    'Time off that fits your policy is approved in seconds. Family and medical leave is checked for eligibility, state leave is cited, and military and bereavement leave are covered. Every answer shows the law it used.',
+    'Time off within your policy approved in seconds. Family and medical leave checked for eligibility and state leave cited, with the law shown on every answer.',
   openGraph: {
     title: 'Time Off & Leave Management | MambaHR',
     description:
@@ -33,8 +33,12 @@ const jsonLd = {
     'MambaHR time off and leave: every request, from vacation days to federal family and medical leave (FMLA), checked against your policy. State paid-leave programs are cited and sent to a person to decide. Military leave (USERRA) and bereavement leave are covered.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
-    '@type': 'SoftwareFeature',
-    name: 'Time off and leave',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: 'https://www.mambahr.com',
+    featureList: 'Time off and leave',
     description:
       'Approves time off that fits your policy in seconds. Checks family and medical leave (FMLA) eligibility, cites state paid-leave programs and asks a person how they combine, and covers military leave (USERRA) and bereavement. Keeps balances current.',
   },

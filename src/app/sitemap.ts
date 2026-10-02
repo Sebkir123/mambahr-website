@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { execFileSync } from 'node:child_process'
 import { competitors } from './compare/[slug]/data'
 import { getPublishedSlugs } from '@/lib/blog-queries'
+import { listPublishedResources } from '@/lib/resources'
 
 const COMPARE_SLUGS = Object.keys(competitors)
 const BASE = 'https://www.mambahr.com'
@@ -94,5 +95,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     blogRoutes = []
   }
 
-  return [...staticRoutes, ...compareRoutes, ...blogRoutes]
+  // Published resource landing pages (drafts are noindex and never listed).
+  let resourceRoutes: MetadataRoute.Sitemap = []
+  try {
+    const resources = await listPublishedResources()
+    resourceRoutes = resources.map((r) => ({
+      url: `${BASE}/resources/${r.slug}`,
+      lastModified: new Date(r.updated_at),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    }))
+  } catch {
+    resourceRoutes = []
+  }
+
+  return [...staticRoutes, ...compareRoutes, ...blogRoutes, ...resourceRoutes]
 }

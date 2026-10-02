@@ -33,8 +33,12 @@ const jsonLd = {
     'The To do list in MambaHR. MambaHR handles the routine HR work, and you approve the decisions that matter.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
-    '@type': 'SoftwareFeature',
-    name: 'To do',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: 'https://www.mambahr.com',
+    featureList: 'To do',
     description:
       'A daily list of decisions. MambaHR handles routine work, judgment calls come to a person, and high-stakes decisions are always yours. Each card shows what is proposed, the reasons, the status, approve and decline buttons, and the full history.',
   },

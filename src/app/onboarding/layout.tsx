@@ -6,7 +6,7 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Onboarding Software | MambaHR',
   description:
-    'New hires ready before day one: Form I-9 started, accounts set up, device setup requested, first week planned. Exits handled with nothing forgotten. You approve anything that costs money.',
+    'New hires ready before day one: Form I-9 started, accounts and devices requested, first week planned. Exits handled with nothing missed. You approve the costs.',
   openGraph: {
     title: 'Onboarding Software | MambaHR',
     description:
@@ -33,8 +33,12 @@ const jsonLd = {
     'MambaHR onboarding: new hires are ready before day one. MambaHR starts the Form I-9 and E-Verify check, sets up accounts, requests device setup from IT, and plans the first week. You approve anything that costs money.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
-    '@type': 'SoftwareFeature',
-    name: 'Onboarding and offboarding',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: 'https://www.mambahr.com',
+    featureList: 'Onboarding and offboarding',
     description:
       'Gets new hires ready before they walk in: starts the Form I-9 and E-Verify check, sets up accounts, requests device setup from IT, and plans the first week. At exit, works out final pay by state rules, tracks COBRA deadlines, and switches off logins after your sign-off. You approve anything that costs money.',
   },

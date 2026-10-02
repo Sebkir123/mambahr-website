@@ -6,7 +6,7 @@ const ogImage =
 export const metadata: Metadata = {
   title: 'Payroll changes | MambaHR',
   description:
-    'MambaHR prepares every payroll change: new hires, exits, pay changes, and leave. It builds a change file for your current provider, or sends the changes to Deel-managed payroll. A person approves every pay run.',
+    'MambaHR prepares every payroll change, as a change file for your current provider or sent to Deel-managed payroll. A person approves every pay run.',
   openGraph: {
     title: 'Payroll changes | MambaHR',
     description:
@@ -33,8 +33,12 @@ const jsonLd = {
     'MambaHR payroll changes: prepares every payroll change (new hires, exits, pay changes, and leave) as a change file in your provider’s format, or sends the changes to Deel-managed payroll. A person approves every pay run.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
-    '@type': 'SoftwareFeature',
-    name: 'Payroll changes',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: 'https://www.mambahr.com',
+    featureList: 'Payroll changes',
     description:
       'Prepares every payroll change each pay cycle: new hires, exits, pay changes, and leave. Builds a change file in your provider’s format, or sends the changes to Deel-managed payroll (Powered by Deel). A person approves every pay run.',
   },

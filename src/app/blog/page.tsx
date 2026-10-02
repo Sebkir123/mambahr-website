@@ -62,11 +62,11 @@ function Cover({ post, variant }: { post: Post; variant: 'lead' | 'card' }) {
 }
 
 export const metadata: Metadata = {
-  title: 'Blog | MambaHR',
+  title: 'HR Blog: Employment Rules and HR Admin | MambaHR',
   description:
     'Plain-English guides to US employment rules, hiring, onboarding, time off and leave, payroll changes, and the everyday HR admin.',
   openGraph: {
-    title: 'Blog | MambaHR',
+    title: 'HR Blog: Employment Rules and HR Admin | MambaHR',
     description: 'Plain-English guides to US employment rules, hiring, onboarding and HR admin.',
     url: `${SITE}/blog`,
     type: 'website',
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog | MambaHR',
+    title: 'HR Blog: Employment Rules and HR Admin | MambaHR',
     description: 'Plain-English guides to US employment rules, hiring, onboarding and HR admin.',
     images: ['/mambahr_og_sharing.jpg'],
   },

@@ -33,8 +33,12 @@ const jsonLd = {
     'MambaHR documents: offers, agreements, and acknowledgments drafted, e-signed, filed, and kept according to your retention policy, with a record of every signature.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
-    '@type': 'SoftwareFeature',
-    name: 'Documents and e-signature',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: 'https://www.mambahr.com',
+    featureList: 'Documents and e-signature',
     description:
       'Drafts HR documents (offers, agreements, and policy acknowledgments) and sends them for e-signature. Files every signed document to the employee record, keeps it according to your retention policy, and records who signed what and when.',
   },

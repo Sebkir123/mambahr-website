@@ -33,8 +33,12 @@ const jsonLd = {
     'MambaHR employee records: the directory, pay, leave, and exits, kept current as MambaHR does the work.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
-    '@type': 'SoftwareFeature',
-    name: 'Employee records',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: 'https://www.mambahr.com',
+    featureList: 'Employee records',
     description:
       'Keeps every employee record current across the directory, pay, leave, and exits. Imports from Gusto, Workday, Rippling, BambooHR, Namely, or ADP. Every change is logged with who made it and why.',
   },

@@ -33,8 +33,12 @@ const jsonLd = {
     'How MambaHR works: your team messages it in Slack or the app. It handles the HR admin and brings the big decisions to you first.',
   isPartOf: { '@type': 'WebSite', name: 'MambaHR', url: 'https://www.mambahr.com' },
   mainEntity: {
-    '@type': 'SoftwareFeature',
-    name: 'MambaHR in Slack and the app',
+    '@type': 'SoftwareApplication',
+    name: 'MambaHR',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: 'https://www.mambahr.com',
+    featureList: 'MambaHR in Slack and the app',
     description:
       'Takes requests from Slack and the MambaHR app and handles the HR admin: drafting documents, setting up logins, and checking your policy and the law. High-stakes decisions come to you for approval first.',
   },

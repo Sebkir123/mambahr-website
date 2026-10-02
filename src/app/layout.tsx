@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     'HRIS for startups',
     'ATS',
     'multi-state HR compliance',
-    'HR without an HR hire',
+    'HR software for startups',
   ],
   openGraph: {
     title: 'MambaHR: HR that runs itself',
@@ -85,6 +85,7 @@ const jsonLd = [
     name: 'MambaHR',
     url: 'https://www.mambahr.com',
     applicationCategory: 'BusinessApplication',
+    publisher: { '@id': 'https://www.mambahr.com/#organization' },
     description: 'HR software that does the admin for your team: hiring, onboarding, payroll changes, time off and compliance.',
     offers: {
       '@type': 'Offer',
@@ -100,6 +101,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': 'https://www.mambahr.com/#organization',
     name: 'MambaHR',
     legalName: 'MambaHR',
     url: 'https://www.mambahr.com',
@@ -137,7 +139,7 @@ const jsonLd = [
     '@type': 'WebSite',
     name: 'MambaHR',
     url: 'https://www.mambahr.com',
-    publisher: { '@type': 'Organization', name: 'MambaHR' },
+    publisher: { '@id': 'https://www.mambahr.com/#organization' },
     dateModified: LAST_VERIFIED,
     inLanguage: 'en-US',
   },
