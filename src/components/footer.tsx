@@ -3,7 +3,8 @@ import { MambaMark } from '@/components/mamba-mark'
 import s from './footer.module.css'
 
 // The same groups as the Product menu (src/content/nav.ts), so the two never
-// disagree about what the product covers.
+// disagree about what the product covers, plus the Guides column that links
+// the answer pages (/guides, /hr-by-state).
 const cols: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: 'Product',
@@ -48,6 +49,16 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
       { label: 'Security', href: '/security' },
       { label: 'Careers', href: '/careers' },
       { label: 'Book a demo', href: '/demo' },
+    ],
+  },
+  {
+    title: 'Guides',
+    links: [
+      { label: 'All HR guides', href: '/guides' },
+      { label: 'HR laws by state', href: '/hr-by-state' },
+      { label: 'HR laws by company size', href: '/guides/hr-laws-by-company-size' },
+      { label: 'Onboarding checklist', href: '/guides/new-hire-onboarding-checklist' },
+      { label: 'Final paycheck rules', href: '/guides/final-paycheck-laws' },
     ],
   },
   {

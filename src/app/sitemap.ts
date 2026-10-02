@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process'
 import { competitors } from './compare/[slug]/data'
 import { getPublishedSlugs } from '@/lib/blog-queries'
 import { listPublishedResources } from '@/lib/resources'
+import { allGuides, allStates, THRESHOLDS_SLUG } from '@/content/guides'
 
 const COMPARE_SLUGS = Object.keys(competitors)
 const BASE = 'https://www.mambahr.com'
@@ -55,6 +56,12 @@ const STATIC_ROUTES: StaticRoute[] = [
   { path: '/security',     file: 'src/app/security/page.tsx',        changeFrequency: 'monthly', priority: 0.75 },
   { path: '/about',        file: 'src/app/about/page.tsx',           changeFrequency: 'monthly', priority: 0.7 },
 
+  // Answer pages: the hubs and the company-size data page. Individual guides
+  // and state pages are listed below from the same records the pages render.
+  { path: '/guides',       file: 'src/app/guides/page.tsx',          changeFrequency: 'monthly', priority: 0.85 },
+  { path: '/hr-by-state',  file: 'src/app/hr-by-state/page.tsx',     changeFrequency: 'monthly', priority: 0.85 },
+  { path: `/guides/${THRESHOLDS_SLUG}`, file: 'src/content/guides/thresholds.ts', changeFrequency: 'monthly', priority: 0.8 },
+
   { path: '/careers',        file: 'src/app/careers/page.tsx',           changeFrequency: 'monthly', priority: 0.7 },
   { path: '/blog',         file: 'src/app/blog/page.tsx',            changeFrequency: 'daily',   priority: 0.8 },
   // Legal. Low priority, but procurement and security reviewers look for them.
@@ -76,6 +83,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const compareRoutes: MetadataRoute.Sitemap = COMPARE_SLUGS.map((slug) => ({
     url: `${BASE}/compare/${slug}`,
     lastModified: compareLastMod,
+    changeFrequency: 'monthly',
+    priority: 0.75,
+  }))
+
+  // Guides and state pages. Each group's lastmod is its data file's commit time.
+  const guideFile: Record<string, string> = {
+    Hiring: 'src/content/guides/hiring.ts',
+    Onboarding: 'src/content/guides/onboarding.ts',
+    Pay: 'src/content/guides/pay.ts',
+    Leave: 'src/content/guides/leave.ts',
+    Compliance: 'src/content/guides/compliance.ts',
+  }
+  const guideRoutes: MetadataRoute.Sitemap = allGuides.map((g) => ({
+    url: `${BASE}/guides/${g.slug}`,
+    lastModified: gitMtime(guideFile[g.category] ?? 'src/content/guides'),
+    changeFrequency: 'monthly',
+    priority: 0.75,
+  }))
+  const statesLastMod = gitMtime('src/content/states')
+  const stateRoutes: MetadataRoute.Sitemap = allStates.map((st) => ({
+    url: `${BASE}/hr-by-state/${st.slug}`,
+    lastModified: statesLastMod,
     changeFrequency: 'monthly',
     priority: 0.75,
   }))
@@ -109,5 +138,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     resourceRoutes = []
   }
 
-  return [...staticRoutes, ...compareRoutes, ...blogRoutes, ...resourceRoutes]
+  return [...staticRoutes, ...compareRoutes, ...guideRoutes, ...stateRoutes, ...blogRoutes, ...resourceRoutes]
 }

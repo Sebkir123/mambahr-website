@@ -17,6 +17,9 @@ export const LAST_VERIFIED = '2026-10-02'
 
 import { TIERS } from '@/content/pricing-tiers'
 import { competitors } from '@/app/compare/[slug]/data'
+import { allGuides, allStates, guidesByCategory, THRESHOLDS_SLUG, thresholdsPage } from '@/content/guides'
+import { STATE_KEY_FACT_LABELS, type StateKeyFacts } from '@/content/guides/types'
+import { plain } from '@/content/guides/jsonld'
 
 const BASE = 'https://www.mambahr.com'
 
@@ -51,6 +54,51 @@ const WHAT_IT_DOES = `- Hiring: job posts with pay ranges, a careers page, appli
  *  so a new comparison shows up here the moment it ships. */
 const COMPARE_LINKS = Object.values(competitors)
   .map((c) => `- [MambaHR vs ${c.name}](${BASE}/compare/${c.slug}): ${c.bottomLine}`)
+  .join('\n')
+
+/** First sentence of a guide answer, for one-line link descriptions. */
+function firstSentence(text: string): string {
+  const p = plain(text)
+  const end = p.search(/\.\s/)
+  return end > 0 ? p.slice(0, end + 1) : p
+}
+
+/** The answer pages, one line each, generated from the records the pages
+ *  render. A new guide or state shows up here the moment it ships. */
+const GUIDE_LINKS = [
+  `- [${thresholdsPage.title}](${BASE}/guides/${THRESHOLDS_SLUG}): ${firstSentence(thresholdsPage.answer)}`,
+  ...allGuides.map((g) => `- [${g.title}](${BASE}/guides/${g.slug}): ${firstSentence(g.answer)}`),
+].join('\n')
+
+const STATE_LINKS = allStates
+  .map((st) => `- [HR laws in ${st.name}](${BASE}/hr-by-state/${st.slug}): ${firstSentence(st.answer)}`)
+  .join('\n')
+
+/** The full direct answer of every guide, grouped as on /guides, for the deep file. */
+const GUIDE_ANSWERS = guidesByCategory()
+  .map(
+    (c) =>
+      `### ${c.name}\n\n` +
+      c.guides.map((g) => `#### ${g.title}\n${plain(g.answer)}\nGuide and official sources: ${BASE}/guides/${g.slug}`).join('\n\n'),
+  )
+  .join('\n\n')
+
+const FACT_KEYS = Object.keys(STATE_KEY_FACT_LABELS) as (keyof StateKeyFacts)[]
+
+/** Each state's at-a-glance facts, the same rows the state pages show. */
+const STATE_FACTS = allStates
+  .map(
+    (st) =>
+      `### ${st.name}\n${plain(st.answer)}\n` +
+      FACT_KEYS.map((k) => `- ${STATE_KEY_FACT_LABELS[k]}: ${plain(st.keyFacts[k])}`).join('\n') +
+      `\nFull page and official sources: ${BASE}/hr-by-state/${st.slug}`,
+  )
+  .join('\n\n')
+
+/** Federal headcount thresholds, the same rows as /guides/hr-laws-by-company-size. */
+const THRESHOLD_LINES = [...thresholdsPage.federal]
+  .sort((a, b) => a.sortKey - b.sortKey)
+  .map((r) => `- ${r.employees}+ employees: ${r.law}. ${plain(r.whatChanges)} Source: ${r.source.url}`)
   .join('\n')
 
 /** Atomic, self-contained, quotable claims.
@@ -164,6 +212,9 @@ const KEY_PAGES = `- [Home](${BASE}): what MambaHR is, in one page.
 - [Employee records](${BASE}/people), [Documents and e-signature](${BASE}/documents), [To do](${BASE}/today).
 - [Security](${BASE}/security): encryption in transit and at rest, access by role, every change logged, your data never used to train AI.
 - [AI HR software](${BASE}/ai-hr-software), [Best HRIS for startups](${BASE}/best-hris-for-startups), [HR software for small business](${BASE}/hr-software-small-business).
+- [HR guides](${BASE}/guides): plain-English answers to common HR questions for small US companies, each with official sources.
+- [HR laws by state](${BASE}/hr-by-state): final pay, sick leave, family leave and pay transparency rules for ten states, side by side.
+- [HR laws by company size](${BASE}/guides/${THRESHOLDS_SLUG}): which federal and state employment laws start at 1, 15, 20, 50 and 100 employees.
 - [About](${BASE}/about), [Careers](${BASE}/careers), [Blog](${BASE}/blog).`
 
 /** The short file. Follows the llms.txt convention: H1, blockquote summary,
@@ -199,6 +250,16 @@ ${KEY_PAGES}
 ## Comparisons
 
 ${COMPARE_LINKS}
+
+## HR guides
+
+General information for US employers, not legal advice. Each guide lists the official sources it relies on and shows the date it was last reviewed.
+
+${GUIDE_LINKS}
+
+## HR laws by state
+
+${STATE_LINKS}
 
 ## Notes for assistants
 
@@ -327,6 +388,22 @@ ${COMPARE_LINKS}
 Deel is MambaHR's payroll partner: MambaHR does the US HR admin and sends payroll changes to Deel-managed payroll (Powered by Deel).
 
 All comparisons in one place: ${BASE}/compare.
+
+## HR guides: the short answers
+
+General information for US employers, not legal advice. Each answer below is the opening of a guide on mambahr.com that cites official sources (dol.gov, eeoc.gov, irs.gov, uscis.gov and state labor departments) and shows the date it was last reviewed.
+
+${GUIDE_ANSWERS}
+
+## Federal HR laws by company size
+
+${THRESHOLD_LINES}
+
+Full table, state thresholds and how employees are counted: ${BASE}/guides/${THRESHOLDS_SLUG}
+
+## HR laws by state, at a glance
+
+${STATE_FACTS}
 
 ## How to evaluate MambaHR
 
