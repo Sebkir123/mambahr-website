@@ -235,7 +235,7 @@ function VacationPhoto() {
       <div className="mini">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="mini-t">3 out next week · covered</div>
-        <div className="mini-s">Calendars blocked · handoffs noted</div>
+        <div className="mini-s">Balances updated · managers told</div>
       </div>
       <style jsx>{`
         .vp { position: relative; }
@@ -293,7 +293,7 @@ export default function LeavePage() {
             { n: '01', label: 'Reads the request', desc: 'In Slack or the MambaHR app. MambaHR picks up the dates, the reason, and who is asking.', who: 'agent', time: 'instant', img: '/avatars/maya.jpg' },
             { n: '02', label: 'Checks balance and policy', desc: 'Days available, blackout dates, and notice rules, checked against your actual policy.', who: 'agent', time: 'seconds' },
             { n: '03', label: 'Checks federal family leave when it applies', desc: 'For parental or medical leave, MambaHR checks eligibility for federal family and medical leave (FMLA). It cites any state paid-leave program and asks a person to decide how they combine.', who: 'agent', time: 'seconds' },
-            { n: '04', label: 'Updates the record and payroll', desc: 'The time off is recorded and the payroll change prepared, so pay is right. Calendars are blocked once Google or Microsoft 365 is connected.', who: 'agent', time: 'same minute' },
+            { n: '04', label: 'Updates the record and payroll', desc: 'The time off is recorded and the payroll change prepared, so pay is right.', who: 'agent', time: 'same minute' },
             { n: '05', label: 'Tells the manager', desc: 'A short note with the dates and coverage. No back-and-forth for requests within policy.', who: 'agent', time: 'same minute', img: '/avatars/anna.jpg' },
             { n: '06', label: 'The unclear cases', desc: 'Anything unclear comes to you, with the balance, the policy, and the relevant law laid out.', who: 'you', img: '/avatars/tom.jpg' },
           ]}
@@ -318,7 +318,7 @@ export default function LeavePage() {
           warm
           eyebrow="Balances and coverage"
           title={<>Vacations, <Em>taken.</Em></>}
-          lead={'Balances are always up to date, requests within policy are approved in seconds, and the team can see who is away.'}
+          lead={'Balances are always up to date, requests within your policy can be approved in seconds, and the team can see who is away.'}
           bullets={[
             'Balances always current, no spreadsheet to check',
             'Team coverage visible before anyone says yes',

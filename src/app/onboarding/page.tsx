@@ -83,7 +83,6 @@ function DayOneCard() {
 const EXIT = [
   { label: 'Final paycheck calculated for California rules', meta: 'Due last day', state: 'done' },
   { label: 'COBRA health-coverage deadline tracked and flagged', meta: 'Health coverage', state: 'done' },
-  { label: 'Handover notes collected from manager', meta: 'Handover', state: 'done' },
   { label: 'Switch off all logins at 5:00 PM Friday', meta: 'Email · Slack · laptop', state: 'you' },
 ]
 
@@ -223,7 +222,7 @@ export default function OnboardingPage() {
             { n: '01', label: 'Offer signed', desc: 'The accepted offer is countersigned and filed where you can find it.', who: 'agent', time: 'minutes' },
             { n: '02', label: 'Form I-9', desc: 'Work-eligibility paperwork collected, and the Form I-9 and E-Verify check started.', who: 'agent', time: 'day 1' },
             { n: '03', label: 'Logins ready', desc: 'Email, Slack, and the tools they need, working before they sit down.', who: 'agent', time: 'before 9 AM' },
-            { n: '04', label: 'Equipment and buddy', desc: 'Device setup requested from your IT team. An onboarding buddy picked and briefed.', who: 'agent', img: '/avatars/priya.jpg' },
+            { n: '04', label: 'Equipment and buddy', desc: 'Device setup requested from your IT team. An onboarding buddy assigned.', who: 'agent', img: '/avatars/priya.jpg' },
             { n: '05', label: 'First-week plan', desc: 'Intros and team sessions planned with the manager, and added to calendars once Google or Microsoft 365 is connected.', who: 'agent' },
             { n: '06', label: 'The welcome', desc: 'The welcome is yours: the handshake, the story, why you hired them.', who: 'you', img: '/avatars/anna.jpg' },
           ]}

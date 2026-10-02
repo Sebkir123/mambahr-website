@@ -265,7 +265,7 @@ export default function CompensationPage() {
           steps={[
             { n: '01', label: 'A manager asks in Slack', desc: '“Can we get Tom to $185k?” That message is the whole request. No form, no ticket.', who: 'agent', time: 'sec', img: '/avatars/dave.jpg' },
             { n: '02', label: 'Checked against pay ranges and pay equity', desc: 'MambaHR compares the number with your pay ranges and checks it for pay-equity issues.', who: 'agent', time: 'min' },
-            { n: '03', label: 'The big calls come to you first', desc: 'Raises within policy go ahead. Anything above your limit comes to a person first.', who: 'you', img: '/avatars/priya.jpg' },
+            { n: '03', label: 'The big calls come to you first', desc: 'Every raise comes to a person to approve, with the pay range and the reasons beside it.', who: 'you', img: '/avatars/priya.jpg' },
             { n: '04', label: 'Approved, dated, filed', desc: 'The approved change is dated and filed to the employee record.', who: 'agent', time: 'min', img: '/avatars/tom.jpg' },
             { n: '05', label: 'Payroll change ready', desc: 'The change goes into the next payroll file with the right effective date. Nothing to retype.', who: 'agent', time: 'same day' },
           ]}
