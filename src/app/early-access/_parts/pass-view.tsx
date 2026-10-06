@@ -58,6 +58,7 @@ export function PassView({ token, pass, link, welcome }: Props) {
                 sub={name ? domain : 'Your company'}
                 joined={shortDate(pass.joinedAt)}
                 code={passCode(pass.referralCode)}
+                link={link}
                 stamp={welcome ? 'land' : 'still'}
               />
               {pass.referrals > 0 && (

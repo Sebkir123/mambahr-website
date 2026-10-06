@@ -47,9 +47,10 @@ export function labelFor(options: Option[], value: string | null | undefined): s
 export const REFERRAL_REWARD = 'One free month on your plan for every company that joins with your link and becomes a customer.'
 export const REFERRAL_GIFT = 'They skip the queue and get founding customer pricing.'
 
-// Partner program (founder chose "full program now" 2026-10-06; the share is
-// the proposed figure shown on the preview for sign-off).
-export const PARTNER_SHARE = '20%'
+// Partner program (founder chose "full program now" 2026-10-06, then found
+// 20% too high; 10% of first-year revenue is the common rate for referral
+// partners who pass introductions rather than resell).
+export const PARTNER_SHARE = '10%'
 
 export const PARTNER_TYPES: Option[] = [
   { value: 'accountant', label: 'Accountant or bookkeeper' },
@@ -94,20 +95,4 @@ export function sameCompany(a: string, b: string): boolean {
 export function emailDomain(email: string): string | null {
   const d = email.split('@')[1]?.trim().toLowerCase()
   return d && d.includes('.') ? d : null
-}
-
-/**
- * A decorative barcode drawn from a pass code: the same code always draws the
- * same bars, on the page and in the email. Each entry is a bar width and the
- * gap after it, in units.
- */
-export function barcodeBars(seed: string): { w: number; gap: number }[] {
-  const bars = [{ w: 2, gap: 1 }, { w: 1, gap: 1 }]
-  for (const ch of seed.toLowerCase()) {
-    const v = parseInt(ch, 36) || 0
-    bars.push({ w: 1 + (v % 3), gap: 1 + ((v >> 2) % 2) })
-    bars.push({ w: 1 + ((v >> 1) % 2), gap: 1 + (v % 2) })
-  }
-  bars.push({ w: 1, gap: 1 }, { w: 2, gap: 0 })
-  return bars
 }

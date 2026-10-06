@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
+import { PARTNER_SHARE } from '@/content/early-access'
 
 const TITLE = 'Partner program | MambaHR'
-const DESCRIPTION =
-  'For accountants, fractional CFOs and HR leads, and VC platform teams. Bring MambaHR to the companies you advise and earn 20% of their first-year revenue.'
+const DESCRIPTION = `For accountants, fractional CFOs and HR leads, and VC platform teams. Bring MambaHR to the companies you advise and earn ${PARTNER_SHARE} of their first-year revenue.`
 
 export const metadata: Metadata = {
   title: TITLE,

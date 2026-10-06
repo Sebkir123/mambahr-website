@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og'
-import { earlyAccessDb, isReferralCode } from '@/lib/early-access'
-import { barcodeBars, companyFromEmail } from '@/content/early-access'
+import { earlyAccessDb, isReferralCode, referralUrl } from '@/lib/early-access'
+import { companyFromEmail } from '@/content/early-access'
+import { qrSvg } from '@/lib/qr'
 
 // The founding pass as a PNG, for the welcome email. Mail apps cannot be
 // trusted with the pass's layout (tables collapse, dashed rules vanish, bar
@@ -36,7 +37,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ code: s
   const joined = new Date(data.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })
   const passNo = `EA-${ref.slice(0, 6).toUpperCase()}`
 
-  const sansText = `MambaHR FOUNDING SPOT PRICING JOINED Founding ${joined} ${sub}`
+  const qr = `data:image/svg+xml;base64,${Buffer.from(qrSvg(referralUrl(ref))).toString('base64')}`
+  const sansText = `MambaHR FOUNDING SPOT PRICING JOINED Founding Scan to give a founding spot ${joined} ${sub}`
   const [serif, serifSemi, sans, sansSemi, mono] = await Promise.all([
     googleFont('Fraunces', 400, name + 'MambaHR'),
     googleFont('Fraunces', 600, 'MambaHR'),
@@ -124,7 +126,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ code: s
             <div style={{ position: 'absolute', left: -22, top: -20, width: 44, height: 44, borderRadius: 999, background: '#EDB59F' }} />
             <div style={{ position: 'absolute', right: -22, top: -20, width: 44, height: 44, borderRadius: 999, background: '#AC9CDB' }} />
           </div>
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', padding: '26px 52px 34px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '22px 40px 26px 52px' }}>
             <div style={{ display: 'flex' }}>
               <div style={{ display: 'flex', flexDirection: 'column', marginRight: 56 }}>
                 <span style={label}>PRICING</span>
@@ -135,13 +137,15 @@ export async function GET(_req: Request, { params }: { params: Promise<{ code: s
                 <span style={value}>{joined}</span>
               </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-              <div style={{ display: 'flex', height: 58 }}>
-                {barcodeBars(passNo).map((b, i) => (
-                  <div key={i} style={{ width: b.w * 3, height: 58, marginRight: b.gap * 3, background: '#1F1B26' }} />
-                ))}
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', marginRight: 22 }}>
+                <span style={{ fontFamily: 'Mono', fontSize: 23, letterSpacing: '0.14em', color: '#3D3D3A' }}>{passNo}</span>
+                <span style={{ fontFamily: 'Inter', fontSize: 18, color: '#8C8276', marginTop: 8 }}>Scan to give a founding spot</span>
               </div>
-              <span style={{ fontFamily: 'Mono', fontSize: 21, letterSpacing: '0.14em', color: '#3D3D3A', marginTop: 10 }}>{passNo}</span>
+              <div style={{ display: 'flex', width: 128, height: 128, padding: 10, borderRadius: 18, background: '#FFFFFF', boxShadow: '0 0 0 2px rgba(26,26,25,0.08), 0 10px 22px -12px rgba(40,25,70,0.4)' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={qr} width={108} height={108} alt="" />
+              </div>
             </div>
           </div>
         </div>

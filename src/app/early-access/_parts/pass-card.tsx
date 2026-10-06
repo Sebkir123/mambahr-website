@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { MambaMark } from '@/components/mamba-mark'
-import { barcodeBars } from '@/content/early-access'
+import { qrPath } from '@/lib/qr'
 import s from './ea.module.css'
 
 export type PassCardProps = {
@@ -13,6 +13,8 @@ export type PassCardProps = {
   joined: string
   /** null until the visitor has joined. */
   code: string | null
+  /** The share link the QR code carries; null before joining. */
+  link?: string | null
   /** Show a typing caret after the name (landing preview while focused). */
   typing?: boolean
   /** The ink stamp on the pass page; `land` plays the stamp landing once. */
@@ -21,7 +23,7 @@ export type PassCardProps = {
 
 // The founding pass: a glass ticket that tilts toward the pointer and catches
 // the light where the pointer is. Still for prefers-reduced-motion.
-export function PassCard({ name, sub, joined, code, typing, stamp }: PassCardProps) {
+export function PassCard({ name, sub, joined, code, link, typing, stamp }: PassCardProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   function onMove(e: React.PointerEvent) {
@@ -66,8 +68,11 @@ export function PassCard({ name, sub, joined, code, typing, stamp }: PassCardPro
             <div><dt>Joined</dt><dd>{joined}</dd></div>
           </dl>
           <div className={s.passCode}>
-            <Barcode seed={code ?? 'ea000000'} faint={!code} />
-            <span className={code ? s.codeText : s.codePending}>{code ?? 'Your pass number'}</span>
+            <span className={s.codeCopy}>
+              <span className={code ? s.codeText : s.codePending}>{code ?? 'Your pass number'}</span>
+              <span className={s.codeHint}>{link ? 'Scan to give a founding spot' : 'and share code, when you join'}</span>
+            </span>
+            <Qr text={link ?? 'https://www.mambahr.com/early-access'} faint={!link} />
           </div>
         </div>
       </div>
@@ -75,12 +80,13 @@ export function PassCard({ name, sub, joined, code, typing, stamp }: PassCardPro
   )
 }
 
-function Barcode({ seed, faint }: { seed: string; faint?: boolean }) {
+function Qr({ text, faint }: { text: string; faint?: boolean }) {
+  const { size, d } = qrPath(text)
   return (
-    <span className={faint ? `${s.barcode} ${s.barFaint}` : s.barcode} aria-hidden="true">
-      {barcodeBars(seed).map((b, i) => (
-        <i key={i} style={{ width: b.w * 1.5, marginRight: b.gap * 1.5 }} />
-      ))}
+    <span className={faint ? `${s.qr} ${s.qrFaint}` : s.qr} aria-hidden="true">
+      <svg viewBox={`0 0 ${size} ${size}`} shapeRendering="crispEdges">
+        <path d={d} fill="#1f1b26" />
+      </svg>
     </span>
   )
 }
