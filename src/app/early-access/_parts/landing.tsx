@@ -181,16 +181,27 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
                 <span className={s.when}>Today</span>
                 <p className={s.what}>Your spot is held.</p>
                 <p className={s.how}>Founding customer pricing is locked in for your company while you wait.</p>
+                <div className={s.frag} aria-hidden="true">
+                  <div className={s.fragLine}><span className={s.savedDot} /><span><b>Founding pricing</b> held for your company</span></div>
+                </div>
               </div>
               <div className={s.moment}>
                 <span className={s.when}>When your group opens</span>
                 <p className={s.what}>Your records come over.</p>
                 <p className={s.how}>From Gusto, BambooHR, Rippling, ADP or a spreadsheet, in a day. Nobody re-types anything.</p>
+                <div className={s.frag} aria-hidden="true">
+                  <div className={s.fragRow}><span>BambooHR</span><span className={s.fragArrow}>→</span><span>MambaHR</span><span className={s.fragOk}>84 records</span></div>
+                  <div className={s.bar}><i /></div>
+                </div>
               </div>
               <div className={s.moment}>
                 <span className={s.when}>The next morning</span>
                 <p className={s.what}>The admin starts moving.</p>
                 <p className={s.how}>Ask in Slack or the request form. MambaHR does the work, and you approve what matters.</p>
+                <div className={s.frag} aria-hidden="true">
+                  <div className={s.slack}><span className={s.av}>PN</span><span><span className={s.at}>@MambaHR</span> Maya signed. She starts Monday.</span></div>
+                  <div className={s.slack}><span className={`${s.av} ${s.avM}`}>M</span><span>Done. I-9 sent, accounts requested, and she&rsquo;s on Friday&rsquo;s payroll changes.</span></div>
+                </div>
               </div>
             </div>
           </div>
@@ -231,12 +242,18 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
         <section className={`${s.section} ${s.sectionTight}`}>
           <div className={s.wrap}>
             <div className={s.strip}>
-              <div>
+              <div className={s.stripLead}>
+                <span className={s.stripArt} aria-hidden="true">
+                  <span className={s.field}><i className={`${s.f} ${s.f1}`} /><i className={`${s.f} ${s.f2}`} /><i className={s.grain} /></span>
+                  {PARTNER_SHARE}
+                </span>
+                <div>
                 <p className={s.stripT}>Advise several companies?</p>
                 <p className={s.stripS}>
                   Accountants, fractional CFOs and HR leads, and VC platform teams earn {PARTNER_SHARE} of the
                   first-year revenue of every company they bring to MambaHR.
                 </p>
+                </div>
               </div>
               <Link href="/partners" className={`${s.btn} ${s.btnGhost}`}>Become a partner</Link>
             </div>

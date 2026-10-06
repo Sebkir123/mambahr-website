@@ -58,6 +58,7 @@ export function PassView({ token, pass, link, welcome }: Props) {
                 sub={name ? domain : 'Your company'}
                 joined={shortDate(pass.joinedAt)}
                 code={passCode(pass.referralCode)}
+                stamp={welcome ? 'land' : 'still'}
               />
               {pass.referrals > 0 && (
                 <div className={`${s.glass} ${s.cJoined}`}>
@@ -81,11 +82,17 @@ export function PassView({ token, pass, link, welcome }: Props) {
         <section className={`${s.section} ${s.sectionTight}`}>
           <div className={s.wrap}>
             <div className={s.strip}>
-              <div>
+              <div className={s.stripLead}>
+                <span className={s.stripArt} aria-hidden="true">
+                  <span className={s.field}><i className={`${s.f} ${s.f1}`} /><i className={`${s.f} ${s.f2}`} /><i className={s.grain} /></span>
+                  {PARTNER_SHARE}
+                </span>
+                <div>
                 <p className={s.stripT}>Advise several companies?</p>
                 <p className={s.stripS}>
                   Partners earn {PARTNER_SHARE} of the first-year revenue of every company they bring to MambaHR.
                 </p>
+                </div>
               </div>
               <Link href="/partners" className={`${s.btn} ${s.btnGhost}`}>Become a partner</Link>
             </div>
@@ -221,7 +228,8 @@ function GiftCard({ link, referrals }: { link: string; referrals: number }) {
   const linkedIn = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}`
 
   return (
-    <div className={s.card}>
+    <div className={`${s.card} ${s.cardGift}`}>
+      <span className={s.field} aria-hidden="true"><i className={`${s.f} ${s.f1}`} /><i className={`${s.f} ${s.f2}`} /><i className={`${s.f} ${s.f3}`} /><i className={s.grain} /></span>
       <h2 className={s.cardT}>Give a founding spot</h2>
       <p className={s.cardS}>Know another company buried in HR admin? {REFERRAL_GIFT} You get a free month on your plan for every one that becomes a customer.</p>
       <div className={s.linkRow} style={{ marginTop: 20 }}>

@@ -95,3 +95,19 @@ export function emailDomain(email: string): string | null {
   const d = email.split('@')[1]?.trim().toLowerCase()
   return d && d.includes('.') ? d : null
 }
+
+/**
+ * A decorative barcode drawn from a pass code: the same code always draws the
+ * same bars, on the page and in the email. Each entry is a bar width and the
+ * gap after it, in units.
+ */
+export function barcodeBars(seed: string): { w: number; gap: number }[] {
+  const bars = [{ w: 2, gap: 1 }, { w: 1, gap: 1 }]
+  for (const ch of seed.toLowerCase()) {
+    const v = parseInt(ch, 36) || 0
+    bars.push({ w: 1 + (v % 3), gap: 1 + ((v >> 2) % 2) })
+    bars.push({ w: 1 + ((v >> 1) % 2), gap: 1 + (v % 2) })
+  }
+  bars.push({ w: 1, gap: 1 }, { w: 2, gap: 0 })
+  return bars
+}

@@ -221,7 +221,7 @@
 .mailSub { font-size: 13.5px; font-weight: 600; line-height: 1.35; }
 
 /* glass fragment: records importing */
-.cImport { right: 6%; bottom: 34px; width: 290px; padding: 14px 16px; animation-delay: 1s; }
+.cImport { right: 5%; bottom: 20px; width: 290px; padding: 14px 16px; animation-delay: 1s; }
 .impTop { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; }
 .impFrom { display: inline-flex; align-items: center; gap: 6px; }
 .impTag { font-size: 11.5px; font-weight: 600; color: #1f7a45; background: rgba(31, 122, 69, 0.12); border-radius: 999px; padding: 2px 8px; }
@@ -238,14 +238,16 @@
 .joinedMeta { margin-left: auto; font-size: 12px; color: var(--ink-3); }
 
 /* ── the founding pass ── */
-.passWrap { perspective: 1200px; z-index: 1; width: min(440px, 100%); margin-top: 36px; }
+.passWrap { perspective: 1200px; z-index: 1; width: min(460px, 100%); margin-top: 18px; }
 .pending { color: #a39d93; font-weight: 500; }
 .pass {
   position: relative;
   border-radius: 24px;
   padding: 24px 26px 22px;
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.86), rgba(255, 252, 247, 0.72));
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='64'%3E%3Cg fill='none' stroke='%238a6535' stroke-opacity='0.16' stroke-width='0.7'%3E%3Cpath d='M0 8 C20 -6 40 -6 60 8 S100 22 120 8 S160 -6 180 8 S220 22 240 8'/%3E%3Cpath d='M0 18 C20 4 40 4 60 18 S100 32 120 18 S160 4 180 18 S220 32 240 18'/%3E%3Cpath d='M0 28 C20 14 40 14 60 28 S100 42 120 28 S160 14 180 28 S220 42 240 28'/%3E%3Cpath d='M0 38 C20 24 40 24 60 38 S100 52 120 38 S160 24 180 38 S220 52 240 38'/%3E%3Cpath d='M0 48 C20 34 40 34 60 48 S100 62 120 48 S160 34 180 48 S220 62 240 48'/%3E%3Cpath d='M0 58 C20 44 40 44 60 58 S100 72 120 58 S160 44 180 58 S220 72 240 58'/%3E%3C/g%3E%3Cg fill='none' stroke='%236a5da6' stroke-opacity='0.12' stroke-width='0.7'%3E%3Cpath d='M0 13 C20 27 40 27 60 13 S100 -1 120 13 S160 27 180 13 S220 -1 240 13'/%3E%3Cpath d='M0 33 C20 47 40 47 60 33 S100 19 120 33 S160 47 180 33 S220 19 240 33'/%3E%3Cpath d='M0 53 C20 67 40 67 60 53 S100 39 120 53 S160 67 180 53 S220 39 240 53'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 240px 64px repeat-x,
+    linear-gradient(160deg, rgba(255, 255, 255, 0.88), rgba(255, 252, 247, 0.74));
+  background-position: 0 86px, 0 0;
   -webkit-backdrop-filter: blur(24px) saturate(160%);
   backdrop-filter: blur(24px) saturate(160%);
   box-shadow:
@@ -302,11 +304,13 @@
   border-radius: 999px;
   padding: 4px 10px;
 }
+.passBody { position: relative; margin-top: 30px; display: flex; align-items: center; gap: 16px; }
+.passWho { flex: 1; min-width: 0; }
 .passName {
-  margin: 34px 0 0;
+  margin: 0;
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(34px, 3.4vw, 44px);
+  font-size: clamp(32px, 3.2vw, 42px);
   line-height: 1.02;
   letter-spacing: -0.03em;
   overflow-wrap: anywhere;
@@ -315,10 +319,61 @@
 .passName.ghost { color: #b3aca2; }
 .passSub { margin: 6px 0 0; font-size: 14.5px; color: var(--ink-3); min-height: 1.4em; overflow-wrap: anywhere; }
 .perf { margin: 26px -26px 18px; border-top: 1.5px dashed rgba(26, 26, 25, 0.16); }
-.passFoot { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 12px; }
-.passFoot dt { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #8c8276; }
-.passFoot dd { margin: 4px 0 0; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.passFoot div:last-child { text-align: right; }
+.passFoot { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.passFacts { margin: 0; display: flex; gap: 28px; }
+.passFacts dt { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #8c8276; }
+.passFacts dd { margin: 4px 0 0; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.passCode { display: grid; justify-items: end; gap: 6px; }
+.barcode { display: flex; align-items: stretch; height: 30px; }
+.barcode i { display: block; background: #1f1b26; border-radius: 0.5px; }
+.barFaint { opacity: 0.18; }
+.codePending { font-size: 12px; color: #a39d93; }
+.codeText { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+/* holographic seal: an iridescent foil disc that slowly turns under the M */
+.seal {
+  position: relative;
+  flex: none;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9), inset 0 0 0 5px rgba(255, 255, 255, 0.28), 0 6px 16px -6px rgba(60, 40, 90, 0.45);
+}
+.seal::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background: conic-gradient(from 0deg, #f6d3a1, #f2b8b0, #d9c2f0, #b8e0e6, #e8f0c4, #f6d3a1);
+  animation: spin 9s linear infinite;
+}
+.seal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) 0 2px, rgba(255, 255, 255, 0.28) 2px 3px);
+}
+.seal > * { position: relative; z-index: 1; }
+
+/* the ink stamp, pressed onto the pass corner */
+.stamp {
+  position: relative;
+  flex: none;
+  margin: -24px -10px -24px 0;
+  z-index: 3;
+  color: rgba(106, 93, 166, 0.82);
+  transform: rotate(-14deg);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.stamp svg { display: block; }
+.stampLand { animation: stampIn 0.5s cubic-bezier(0.3, 1.5, 0.5, 1) 1.5s both; }
+.passWrap { position: relative; }
 .caret { display: inline-block; width: 2px; height: 0.9em; margin-left: 3px; vertical-align: -0.08em; background: var(--violet); animation: blink 1.1s steps(1) infinite; }
 
 /* ── sections ── */
@@ -554,6 +609,8 @@ select.input {
 @keyframes sweep { from { left: -60%; } to { left: 130%; } }
 @keyframes fill { from { transform: scaleX(0.04); } to { transform: scaleX(1); } }
 @keyframes blink { 50% { opacity: 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes stampIn { from { opacity: 0; transform: rotate(-24deg) scale(1.9); } to { opacity: 1; transform: rotate(-14deg) scale(1); } }
 
 @media (max-width: 1080px) {
   .heroGrid, .band, .applyGrid { grid-template-columns: 1fr; }
@@ -567,6 +624,9 @@ select.input {
   .stage { min-height: 0; padding: 22px 16px; display: grid; gap: 12px; border-radius: 24px; }
   .glass { position: relative; inset: auto; width: auto; }
   .passWrap { margin-top: 0; }
+  .stamp { scale: 0.8; margin: -24px -14px -24px -8px; }
+  .passFacts { gap: 18px; }
+  .seal { width: 44px; height: 44px; }
   .capsule { flex-wrap: wrap; border-radius: 22px; padding: 8px; }
   .capsuleInput { flex-basis: 100%; padding: 0 12px; }
   .join { width: 100%; justify-content: center; }
@@ -575,8 +635,60 @@ select.input {
   .row2 { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .f, .glass, .pass, .pass::after, .gift, .bar i, .caret { animation: none !important; }
+  .f, .glass, .pass, .pass::after, .gift, .bar i, .caret, .seal::before, .stampLand { animation: none !important; }
   .pass { transition: none; transform: none; }
 }
 
 .srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* product fragments under the timeline moments */
+.frag {
+  margin-top: 18px;
+  max-width: 380px;
+  display: grid;
+  gap: 9px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 16px 32px -26px rgba(40, 25, 70, 0.55);
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.frag b { color: var(--ink-1); font-weight: 600; }
+.frag .bar { margin-top: 0; }
+.fragLine { display: flex; align-items: center; gap: 10px; }
+.fragRow { display: flex; align-items: center; gap: 8px; font-weight: 600; color: var(--ink-1); }
+.fragArrow { color: #9a948a; font-weight: 400; }
+.fragOk { margin-left: auto; font-size: 12px; font-weight: 600; color: #1f7a45; background: rgba(31, 122, 69, 0.12); border-radius: 999px; padding: 2px 8px; }
+.slack { display: grid; grid-template-columns: 24px 1fr; gap: 9px; align-items: start; }
+.slack .av { width: 24px; height: 24px; border-radius: 7px; font-size: 10px; }
+.avM { background: #1a1a19; font-family: var(--font-serif); font-size: 13px; }
+.at { color: #5b4a9c; background: rgba(139, 127, 208, 0.18); border-radius: 5px; padding: 0 4px; font-weight: 600; }
+
+/* partner strip art: the share, on a piece of the stage */
+.stripLead { display: flex; align-items: center; gap: 24px; min-width: 0; }
+.stripArt {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  flex: none;
+  width: 96px;
+  height: 96px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-serif);
+  font-size: 32px;
+  letter-spacing: -0.03em;
+  color: var(--ink-1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 16px 30px -18px rgba(60, 40, 90, 0.6);
+}
+
+/* the referral card on the pass page sits on the stage gradient */
+.cardGift { position: relative; isolation: isolate; overflow: hidden; border-color: transparent; }
+.cardGift .cardS, .cardGift .fine { color: rgba(26, 26, 25, 0.74); }
+.cardGift .linkBox { background: rgba(255, 255, 255, 0.9); }
+.cardGift .count { color: var(--ink-1); }
+@media (max-width: 760px) { .stripArt { display: none; } }

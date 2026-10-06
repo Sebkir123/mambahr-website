@@ -44,7 +44,6 @@ function emailShell(headline: string, body: string): string {
   <style>
     @media (max-width: 480px) {
       .mh-card { padding: 30px 22px 26px !important; }
-      .mh-pass-pad { padding-left: 16px !important; padding-right: 16px !important; }
     }
   </style>
   <!--[if mso]><noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript><![endif]-->
@@ -108,35 +107,15 @@ function finePrint(text: string): string {
   return `<p style="font-family:${SANS};font-size:13px;line-height:1.6;color:#8C8276;margin:0;">${text}</p>`
 }
 
-// The founding pass, drawn with tables so it survives Outlook and Gmail. The
-// gradient is a progressive enhancement over the warm bgcolor.
-function passCard(p: { company: string; sub: string; joined: string; code: string }): string {
-  const label = (t: string) => `<p style="font-family:${SANS};font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#8C7A68;margin:0 0 4px;">${t}</p>`
-  const value = (t: string) => `<p style="font-family:${SANS};font-size:14px;font-weight:600;color:${INK};margin:0;white-space:nowrap;">${t}</p>`
+// The founding pass is a picture rendered by the site
+// (/early-access/pass-image/<code>): mail apps collapse table layouts, drop
+// dashed rules and ignore cell widths, so drawing the ticket in HTML broke.
+// The alt text carries every fact for readers who block images.
+function passImage(p: { referralCode: string; alt: string }): string {
   return `<table width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation" style="margin:8px 0 28px;">
     <tr>
-      <td bgcolor="#EFD8C4" style="border-radius:18px;padding:10px;background:#EFD8C4;background-image:linear-gradient(135deg,#F3C796 0%,#EAB2A4 45%,#B9A2D6 100%);">
-        <table width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation" style="background:#FFFCF8;border-radius:12px;">
-          <tr>
-            <td class="mh-pass-pad" style="padding:20px 22px 16px;">
-              <p style="font-family:${SANS};font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#8A6535;margin:0 0 10px;">Founding spot</p>
-              <p style="font-family:${SERIF};font-size:26px;line-height:1.15;color:${INK};margin:0;">${escapeHtml(p.company)}</p>
-              <p style="font-family:${SANS};font-size:13.5px;color:#7A6F64;margin:4px 0 0;">${escapeHtml(p.sub)}</p>
-            </td>
-          </tr>
-          <tr><td style="padding:0 22px;"><table width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td style="border-top:1px dashed #E2D6C6;font-size:0;line-height:0;height:1px;">&nbsp;</td></tr></table></td></tr>
-          <tr>
-            <td class="mh-pass-pad" style="padding:14px 22px 18px;">
-              <table width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation">
-                <tr>
-                  <td width="38%" valign="top">${label('Pricing')}${value('Founding')}</td>
-                  <td width="30%" valign="top">${label('Joined')}${value(escapeHtml(p.joined))}</td>
-                  <td width="32%" valign="top" align="right">${label('Pass')}${value(escapeHtml(p.code))}</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
+      <td align="center">
+        <img src="https://www.mambahr.com/early-access/pass-image/${escapeHtml(p.referralCode)}" width="480" alt="${escapeHtml(p.alt)}" style="display:block;width:100%;max-width:480px;height:auto;border:0;outline:none;border-radius:22px;font-family:${SANS};font-size:14px;color:#4A4038;" />
       </td>
     </tr>
   </table>`
@@ -153,11 +132,10 @@ type PassEmail = { company: string | null; email: string; referralCode: string; 
 
 function passFor(p: PassEmail) {
   const domain = p.email.split('@')[1] ?? p.email
-  return passCard({
-    company: p.company || domain,
-    sub: p.company ? domain : 'Your company',
-    joined: new Date(p.joinedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }),
-    code: passCode(p.referralCode),
+  const joined = new Date(p.joinedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })
+  return passImage({
+    referralCode: p.referralCode,
+    alt: `Your founding pass: ${p.company || domain}, founding pricing, joined ${joined}, pass ${passCode(p.referralCode)}`,
   })
 }
 

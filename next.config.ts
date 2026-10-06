@@ -62,6 +62,11 @@ const config: NextConfig = {
         source: '/brand/:path*',
         headers: [{ key: 'Cross-Origin-Resource-Policy', value: 'cross-origin' }],
       },
+      {
+        // The founding pass picture in the welcome email (same reason).
+        source: '/early-access/pass-image/:path*',
+        headers: [{ key: 'Cross-Origin-Resource-Policy', value: 'cross-origin' }],
+      },
     ]
   },
 }
