@@ -90,7 +90,7 @@ export default function PricingPage() {
               One price per employee, per month, billed annually. Pick the plan that fits your
               company&rsquo;s size.
             </p>
-            <Link href="/demo" className="found" data-reveal="eager">
+            <Link href="/early-access" className="found" data-reveal="eager">
               <span className="f-dot" aria-hidden="true" />
               Founding customer pricing is open
             </Link>

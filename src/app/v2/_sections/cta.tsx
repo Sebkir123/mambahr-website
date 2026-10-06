@@ -12,7 +12,7 @@ export default function Cta() {
         <p className="sub">Book a demo this week. We import your data the day you sign, and the work starts the next morning.</p>
         <div className="ctas">
           <a className="main" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
-          <a className="alt" href="/pricing">See pricing</a>
+          <a className="alt" href="/early-access" data-track="cta_click" data-track-label="access-band-early-access">Get early access</a>
         </div>
         <p className="trust">Your data imports in a day. Nothing sensitive happens without your OK.</p>
       </div>

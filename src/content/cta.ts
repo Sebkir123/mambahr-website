@@ -17,3 +17,8 @@ export const TRIAL_DAYS = 7
 
 export const DEMO_HREF = '/demo'
 export const DEMO_LABEL = 'Book a demo'
+
+// The low-commitment path while self-serve is closed: join the list, get
+// invited in a small group at founding customer pricing.
+export const EARLY_ACCESS_HREF = '/early-access'
+export const EARLY_ACCESS_LABEL = 'Get early access'

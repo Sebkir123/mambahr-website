@@ -40,7 +40,7 @@ export default function Hero() {
         </p>
         <div className="ctas">
           <a href="/demo" className="cta-main">Book a demo</a>
-          <a href="/product" className="cta-alt">See how it works</a>
+          <a href="/early-access" className="cta-alt" data-track="cta_click" data-track-label="hero-early-access">Get early access</a>
         </div>
       </div>
 

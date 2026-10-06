@@ -130,21 +130,26 @@ function finePrint(text: string): string {
 /* ════════════════════════════════════════════
    WAITLIST WELCOME EMAIL
    ════════════════════════════════════════════ */
-export async function sendWaitlistWelcome(opts: { email: string; company: string }) {
+export async function sendWaitlistWelcome(opts: { email: string; company: string; hrSystem: string | null }) {
   const client = await getClient()
-  const subject = 'We got your application | MambaHR'
+  const subject = 'You are on the MambaHR early access list'
+  // "Spreadsheets" and "Something else" read wrong after "from"; name real systems only.
+  const from = opts.hrSystem && opts.hrSystem !== 'Spreadsheets' && opts.hrSystem !== 'Something else'
+    ? escapeHtml(opts.hrSystem)
+    : 'wherever they live today'
   const html = emailShell(
     subject,
-    serif('We got your application.') +
-    body(`Thanks for reaching out${opts.company ? ` from <strong style="color:#1A1611;">${escapeHtml(opts.company)}</strong>` : ''}. We&rsquo;ll email you within one business day.`) +
-    body(`MambaHR takes the HR admin off your team: onboarding, offboarding, hiring, leave and compliance. Your team keeps the decisions that need judgment.`) +
+    kicker('Early access') +
+    serif('You&rsquo;re on the list.') +
+    body(`Thanks for joining${opts.company ? ` from <strong style="color:#1A1611;">${escapeHtml(opts.company)}</strong>` : ''}. We&rsquo;re opening MambaHR to companies in small groups, and we&rsquo;ll email you when yours opens. Founding customer pricing is held for you.`) +
+    body(`When you&rsquo;re in, we bring your records over from ${from}, and MambaHR takes the HR admin off your team: hiring, onboarding, time off and leave, payroll changes, and compliance. You make the judgment calls.`) +
     divider() +
-    body(`While you wait, follow us on LinkedIn, it&rsquo;s where we build in public.`) +
-    ctaButton('https://www.linkedin.com/company/mamba-hr', 'Follow on LinkedIn →') +
+    body(`Want to see it before then? A demo takes 30 minutes and uses examples from your company.`) +
+    ctaButton('https://www.mambahr.com/demo', 'Book a demo') +
     finePrint('Questions? Just reply, this goes straight to us.<br/>Brian &amp; Sebastian, MambaHR'),
   )
 
-  if (!client) { console.log('[email:waitlist-welcome] sent successfully'); return }
+  if (!client) { console.warn('[email:waitlist-welcome] skipped: no RESEND_API_KEY'); return }
   try {
     const { error } = await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
     if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
@@ -170,7 +175,7 @@ export async function sendInvestorAck(opts: { email: string; name: string }) {
     finePrint('Brian Bell (CEO) &amp; Sebastian Kirsch (CTO)<br/>MambaHR'),
   )
 
-  if (!client) { console.log('[email:investor-ack] sent successfully'); return }
+  if (!client) { console.warn('[email:investor-ack] skipped: no RESEND_API_KEY'); return }
   try {
     const { error } = await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
     if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
@@ -195,7 +200,7 @@ export async function sendHRBenchAck(opts: { email: string }) {
     finePrint('Read more about our research: <a href="https://www.mambahr.com/research" style="color:#B08D57;font-weight:600;text-decoration:none;">mambahr.com/research &rarr;</a>'),
   )
 
-  if (!client) { console.log('[email:hrbench-ack] sent successfully'); return }
+  if (!client) { console.warn('[email:hrbench-ack] skipped: no RESEND_API_KEY'); return }
   try {
     const { error } = await client.emails.send({ from: FROM_EMAIL, to: opts.email, subject, html })
     if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))

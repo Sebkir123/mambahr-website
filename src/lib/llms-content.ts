@@ -203,6 +203,7 @@ const KEY_PAGES = `- [Home](${BASE}): what MambaHR is, in one page.
 - [How MambaHR works](${BASE}/mamba): requests in, admin done, a person approving what matters.
 - [Pricing](${BASE}/pricing): per-employee pricing, from $14/employee/month with no minimum.
 - [Book a demo](${BASE}/demo): a 30-minute demo on your own HR scenarios.
+- [Get early access](${BASE}/early-access): join the list; companies are invited in small groups at founding customer pricing.
 - [Compare](${BASE}/compare): every side-by-side comparison in one place.
 - [Hiring](${BASE}/hiring): job post to signed offer. [Careers page](${BASE}/job-portal): your public job board.
 - [Onboarding](${BASE}/onboarding), [Time off and leave](${BASE}/leave), [Compensation](${BASE}/compensation).

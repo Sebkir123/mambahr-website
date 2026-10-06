@@ -3,6 +3,7 @@ import { unstable_cache } from 'next/cache'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { serviceDb } from '@/lib/supabase/service'
+import { HR_SYSTEMS, TEAM_SIZES, labelFor } from '@/content/early-access'
 
 // First-party analytics for the admin panel. Reads lead tables + post_views AS
 // THE LOGGED-IN ADMIN, the magic-link session, governed by RLS (is_admin() is
@@ -44,6 +45,24 @@ function str(v: unknown): string | null {
 
 type RawRow = Record<string, unknown>
 
+// A lead's one-line detail: the first non-empty of these columns, or a formatter.
+type DetailOf = string[] | ((r: RawRow) => string | null)
+
+function leadDetail(r: RawRow, detailOf: DetailOf): string | null {
+  if (typeof detailOf === 'function') return detailOf(r)
+  for (const k of detailOf) {
+    const v = str(r[k])
+    if (v) return v
+  }
+  return null
+}
+
+// "BambooHR · 75 to 150". Rows from before /early-access only carry a referral code.
+function earlyAccessDetail(r: RawRow): string | null {
+  const parts = [labelFor(HR_SYSTEMS, str(r.hr_system)), labelFor(TEAM_SIZES, str(r.team_size))].filter(Boolean)
+  return parts.length ? parts.join(' · ') : str(r.referral_code)
+}
+
 // Cached 20s (service-role, admin-gated at the page) so the Overview dashboard
 // loads instantly on repeat visits instead of re-querying every lead table.
 const cachedOverview = unstable_cache(async () => computeOverview(serviceDb()!), ['admin-overview-v1'], { revalidate: 20 })
@@ -56,7 +75,7 @@ export async function getOverview(): Promise<Overview> {
 async function computeOverview(supabase: SupabaseClient): Promise<Overview> {
   const warnings: string[] = []
 
-  async function fetchLeads(table: string, source: LeadSource, detailKeys: string[]): Promise<Lead[]> {
+  async function fetchLeads(table: string, source: LeadSource, detailOf: DetailOf): Promise<Lead[]> {
     const { data, error } = await supabase
       .from(table)
       .select('*')
@@ -67,11 +86,7 @@ async function computeOverview(supabase: SupabaseClient): Promise<Overview> {
       return []
     }
     return ((data as RawRow[] | null) ?? []).map((r) => {
-      let detail: string | null = null
-      for (const k of detailKeys) {
-        const v = str(r[k])
-        if (v) { detail = v; break }
-      }
+      const detail = leadDetail(r, detailOf)
       return {
         source,
         email: str(r.email) ?? '—',
@@ -84,7 +99,7 @@ async function computeOverview(supabase: SupabaseClient): Promise<Overview> {
   }
 
   const [waitlist, demo, magnet] = await Promise.all([
-    fetchLeads('waitlist', 'waitlist', ['referral_code', 'referred_by']),
+    fetchLeads('waitlist', 'waitlist', earlyAccessDetail),
     fetchLeads('demo_requests', 'demo', ['company_size', 'source']),
     fetchLeads('magnet_requests', 'magnet', ['company_stage', 'magnet_id', 'asset']),
   ])
@@ -178,7 +193,7 @@ export async function getAllLeads(): Promise<{ leads: Lead[]; warnings: string[]
 async function computeAllLeads(supabase: SupabaseClient): Promise<{ leads: Lead[]; warnings: string[] }> {
   const warnings: string[] = []
 
-  async function fetchLeads(table: string, source: LeadSource, detailKeys: string[]): Promise<Lead[]> {
+  async function fetchLeads(table: string, source: LeadSource, detailOf: DetailOf): Promise<Lead[]> {
     const { data, error } = await supabase
       .from(table)
       .select('*')
@@ -186,8 +201,7 @@ async function computeAllLeads(supabase: SupabaseClient): Promise<{ leads: Lead[
       .limit(10000)
     if (error) { warnings.push(`Could not read ${table}: ${error.message}`); return [] }
     return ((data as RawRow[] | null) ?? []).map((r) => {
-      let detail: string | null = null
-      for (const k of detailKeys) { const v = str(r[k]); if (v) { detail = v; break } }
+      const detail = leadDetail(r, detailOf)
       return {
         source,
         email: str(r.email) ?? '—',
@@ -200,7 +214,7 @@ async function computeAllLeads(supabase: SupabaseClient): Promise<{ leads: Lead[
   }
 
   const [waitlist, demo, magnet] = await Promise.all([
-    fetchLeads('waitlist', 'waitlist', ['referral_code', 'referred_by']),
+    fetchLeads('waitlist', 'waitlist', earlyAccessDetail),
     fetchLeads('demo_requests', 'demo', ['company_size', 'source']),
     fetchLeads('magnet_requests', 'magnet', ['company_stage', 'magnet_id', 'asset']),
   ])
