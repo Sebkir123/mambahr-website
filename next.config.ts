@@ -55,6 +55,13 @@ const config: NextConfig = {
           { key: 'X-Permitted-Cross-Domain-Policies', value: 'none' },
         ],
       },
+      {
+        // The brand files are embedded by our emails, which mail apps load
+        // from their own origin; same-origin CORP would block the logo in
+        // Apple Mail. Later rules override earlier ones for the same key.
+        source: '/brand/:path*',
+        headers: [{ key: 'Cross-Origin-Resource-Policy', value: 'cross-origin' }],
+      },
     ]
   },
 }

@@ -4,7 +4,7 @@ import { getAllLeads, type Lead } from '@/lib/admin-analytics'
 
 export const dynamic = 'force-dynamic'
 
-const SOURCES: Lead['source'][] = ['waitlist', 'demo', 'magnet']
+const SOURCES: Lead['source'][] = ['waitlist', 'demo', 'magnet', 'partner']
 
 // RFC 4180 CSV escaping: wrap in quotes, double any embedded quote.
 function csvCell(v: string | null): string {

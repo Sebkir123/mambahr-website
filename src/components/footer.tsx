@@ -51,6 +51,7 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
       { label: 'Careers', href: '/careers' },
       { label: 'Book a demo', href: '/demo' },
       { label: 'Get early access', href: '/early-access' },
+      { label: 'Partners', href: '/partners' },
     ],
   },
   {
