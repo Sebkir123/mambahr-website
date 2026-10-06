@@ -2,6 +2,7 @@ import { ImageResponse } from 'next/og'
 import { earlyAccessDb, isReferralCode, referralUrl } from '@/lib/early-access'
 import { companyFromEmail } from '@/content/early-access'
 import { qrSvg } from '@/lib/qr'
+import { markSvg } from '@/content/brand-mark'
 
 // The founding pass as a PNG, for the welcome email. Mail apps cannot be
 // trusted with the pass's layout (tables collapse, dashed rules vanish, bar
@@ -35,14 +36,15 @@ export async function GET(_req: Request, { params }: { params: Promise<{ code: s
   // A personal inbox (gmail.com, …) is not the company: never print it as one.
   const personal = !companyFromEmail(data.email)
   const name = data.company || companyFromEmail(data.email) || 'Founding member'
-  const sub = personal ? (data.company ? 'Founding member' : 'mambahr.com/early-access') : domain
+  const sub = personal ? (data.company ? 'Founding member' : 'Add your company on your pass') : domain
   const joined = new Date(data.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })
   const passNo = `EA-${ref.slice(0, 6).toUpperCase()}`
 
   const qr = `data:image/svg+xml;base64,${Buffer.from(qrSvg(referralUrl(ref))).toString('base64')}`
-  const sansText = `MambaHR FOUNDING SPOT PRICING JOINED Founding Scan to give a founding spot ${joined} ${sub}`
+  const mark = `data:image/svg+xml;base64,${Buffer.from(markSvg('#7A5A2E')).toString('base64')}`
+  const sansText = `MambaHR FOUNDING SPOT PRICING JOINED Founding Scan to share HELD ${joined} ${sub}`
   const [serif, serifSemi, sans, sansSemi, mono] = await Promise.all([
-    googleFont('Fraunces', 400, name + 'MambaHR'),
+    googleFont('Fraunces', 400, name + 'MambaHR Held'),
     googleFont('Fraunces', 600, 'MambaHR'),
     googleFont('Inter', 400, sansText),
     googleFont('Inter', 600, sansText),
@@ -56,7 +58,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ code: s
     mono && { name: 'Mono', data: mono, weight: 500 as const, style: 'normal' as const },
   ].filter((f): f is NonNullable<typeof f> => Boolean(f))
 
-  const label = { fontFamily: 'Inter', fontSize: 19, fontWeight: 600, letterSpacing: '0.08em', color: '#8C8276' } as const
+  const label = { fontFamily: 'Inter', fontSize: 21, fontWeight: 600, letterSpacing: '0.08em', color: '#8C8276' } as const
   const value = { fontFamily: 'Inter', fontSize: 30, fontWeight: 600, color: '#1A1A19', marginTop: 6 } as const
 
   return new ImageResponse(
@@ -88,7 +90,9 @@ export async function GET(_req: Request, { params }: { params: Promise<{ code: s
           <div style={{ display: 'flex', flexDirection: 'column', padding: '36px 52px 30px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'Fraunces', fontSize: 30, color: '#1A1A19' }}>
-                <span style={{ color: '#8A6535', fontWeight: 600, marginRight: 12 }}>M</span>MambaHR
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={mark} width={30} height={30} alt="" style={{ marginRight: 12 }} />
+                MambaHR
               </div>
               <div style={{ display: 'flex', fontFamily: 'Inter', fontSize: 19, fontWeight: 600, letterSpacing: '0.08em', color: '#8A6535', background: '#F8EFE3', border: '2px solid #E6D3B8', borderRadius: 999, padding: '8px 18px' }}>
                 FOUNDING SPOT
@@ -97,36 +101,32 @@ export async function GET(_req: Request, { params }: { params: Promise<{ code: s
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 34 }}>
               <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 620 }}>
                 <div style={{ display: 'flex', fontFamily: 'Fraunces', fontSize: name.length <= 12 ? 76 : name.length <= 20 ? 60 : 48, lineHeight: 1.04, letterSpacing: '-0.03em', color: '#1A1A19' }}>{name}</div>
-                <div style={{ display: 'flex', fontFamily: 'Inter', fontSize: 28, color: '#7A6F64', marginTop: 12 }}>{sub}</div>
+                <div style={{ display: 'flex', fontFamily: 'Inter', fontSize: 30, color: '#7A6F64', marginTop: 12 }}>{sub}</div>
               </div>
-              {/* the foil seal */}
+              {/* the "Held" stamp: this pass belongs to someone who has joined */}
               <div
                 style={{
-                  width: 108,
-                  height: 108,
+                  width: 132,
+                  height: 132,
                   borderRadius: 999,
+                  border: '4px solid rgba(106,93,166,0.78)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '3px solid rgba(255,255,255,0.95)',
-                  backgroundImage:
-                    'radial-gradient(circle at 30% 25%, #FFFFFF 0%, rgba(255,255,255,0) 35%), linear-gradient(135deg, #F6D3A1 0%, #F2B8B0 30%, #D9C2F0 58%, #B8E0E6 82%, #E8F0C4 100%)',
-                  boxShadow: '0 10px 24px -10px rgba(60,40,90,0.5)',
-                  fontFamily: 'Fraunces',
-                  fontWeight: 600,
-                  fontSize: 42,
-                  color: '#3D2F52',
+                  transform: 'rotate(-12deg)',
                 }}
               >
-                M
+                <div style={{ width: 104, height: 104, borderRadius: 999, border: '2px solid rgba(106,93,166,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'rgba(106,93,166,0.9)' }}>
+                  <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: 13, letterSpacing: '0.16em' }}>FOUNDING</span>
+                  <span style={{ fontFamily: 'Fraunces', fontSize: 34, lineHeight: 1.1 }}>Held</span>
+                  <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: 13, letterSpacing: '0.16em' }}>PRICING</span>
+                </div>
               </div>
             </div>
           </div>
-          {/* perforation, with the ticket notches cut in the stage colours */}
+          {/* perforation */}
           <div style={{ display: 'flex', position: 'relative', height: 4, alignItems: 'center' }}>
-            <div style={{ display: 'flex', flex: 1, borderTop: '3px dashed #E2D6C6', margin: '0 36px' }} />
-            <div style={{ position: 'absolute', left: -22, top: -20, width: 44, height: 44, borderRadius: 999, background: '#EDB59F' }} />
-            <div style={{ position: 'absolute', right: -22, top: -20, width: 44, height: 44, borderRadius: 999, background: '#AC9CDB' }} />
+            <div style={{ display: 'flex', flex: 1, borderTop: '3px dashed #E2D6C6', margin: '0 52px' }} />
           </div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '22px 40px 26px 52px' }}>
             <div style={{ display: 'flex' }}>
@@ -142,7 +142,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ code: s
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', marginRight: 22 }}>
                 <span style={{ fontFamily: 'Mono', fontSize: 23, letterSpacing: '0.14em', color: '#3D3D3A' }}>{passNo}</span>
-                <span style={{ fontFamily: 'Inter', fontSize: 18, color: '#8C8276', marginTop: 8 }}>Scan to give a founding spot</span>
+                <span style={{ fontFamily: 'Inter', fontSize: 22, color: '#7A6F64', marginTop: 8 }}>Scan to share</span>
               </div>
               <div style={{ display: 'flex', width: 128, height: 128, padding: 10, borderRadius: 18, background: '#FFFFFF', boxShadow: '0 0 0 2px rgba(26,26,25,0.08), 0 10px 22px -12px rgba(40,25,70,0.4)' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}

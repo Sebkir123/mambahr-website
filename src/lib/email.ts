@@ -56,7 +56,7 @@ function emailShell(headline: string, body: string): string {
         <table width="560" cellpadding="0" cellspacing="0" border="0" role="presentation" style="max-width:560px;width:100%;">
           <tr>
             <td style="padding:0 4px 28px;">
-              <a href="https://www.mambahr.com" style="text-decoration:none;"><img src="https://www.mambahr.com/brand/mamba-logo-light.png" width="126" height="20" alt="MambaHR" style="display:block;border:0;outline:none;width:126px;height:20px;" /></a>
+              <a href="https://www.mambahr.com" style="text-decoration:none;"><img src="https://www.mambahr.com/email-assets/wordmark" width="126" height="24" alt="MambaHR" style="display:block;border:0;outline:none;width:126px;height:24px;" /></a>
             </td>
           </tr>
           <tr>

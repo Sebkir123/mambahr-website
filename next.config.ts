@@ -67,6 +67,10 @@ const config: NextConfig = {
         source: '/early-access/pass-image/:path*',
         headers: [{ key: 'Cross-Origin-Resource-Policy', value: 'cross-origin' }],
       },
+      {
+        source: '/email-assets/:path*',
+        headers: [{ key: 'Cross-Origin-Resource-Policy', value: 'cross-origin' }],
+      },
     ]
   },
 }
