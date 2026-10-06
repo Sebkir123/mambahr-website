@@ -32,8 +32,10 @@ export async function GET(_req: Request, { params }: { params: Promise<{ code: s
   if (!data) return new Response('Not found', { status: 404 })
 
   const domain = String(data.email).split('@')[1] ?? ''
-  const name = data.company || companyFromEmail(data.email) || domain
-  const sub = data.company || companyFromEmail(data.email) ? domain : 'Your company'
+  // A personal inbox (gmail.com, …) is not the company: never print it as one.
+  const personal = !companyFromEmail(data.email)
+  const name = data.company || companyFromEmail(data.email) || 'Founding member'
+  const sub = personal ? (data.company ? 'Founding member' : 'mambahr.com/early-access') : domain
   const joined = new Date(data.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })
   const passNo = `EA-${ref.slice(0, 6).toUpperCase()}`
 

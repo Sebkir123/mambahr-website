@@ -5,6 +5,7 @@
 
 import { Resend } from 'resend'
 import { getSecret } from '@/lib/secrets'
+import { companyFromEmail } from '@/content/early-access'
 
 function escapeHtml(s: string): string {
   return s
@@ -131,11 +132,10 @@ export function passCode(referralCode: string): string {
 type PassEmail = { company: string | null; email: string; referralCode: string; joinedAt: string; passUrl: string; referralUrl: string }
 
 function passFor(p: PassEmail) {
-  const domain = p.email.split('@')[1] ?? p.email
   const joined = new Date(p.joinedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })
   return passImage({
     referralCode: p.referralCode,
-    alt: `Your founding pass: ${p.company || domain}, founding pricing, joined ${joined}, pass ${passCode(p.referralCode)}`,
+    alt: `Your founding pass: ${p.company || companyFromEmail(p.email) || 'founding member'}, founding pricing, joined ${joined}, pass ${passCode(p.referralCode)}`,
   })
 }
 

@@ -17,6 +17,8 @@ export function PassView({ token, pass, link, welcome }: Props) {
   const [company, setCompany] = useState(pass.company ?? companyFromEmail(pass.email) ?? '')
   const [saved, setSaved] = useState(Boolean(pass.teamSize && pass.hrSystem))
   const name = company.trim() || null
+  // A personal inbox (gmail.com, …) is not the company; never print it as one.
+  const personal = !companyFromEmail(pass.email)
 
   return (
     <>
@@ -54,8 +56,8 @@ export function PassView({ token, pass, link, welcome }: Props) {
                 </div>
               </div>
               <PassCard
-                name={name ?? domain}
-                sub={name ? domain : 'Your company'}
+                name={name}
+                sub={name ? (personal ? 'Founding member' : domain) : 'Add your company below'}
                 joined={shortDate(pass.joinedAt)}
                 code={passCode(pass.referralCode)}
                 link={link}
