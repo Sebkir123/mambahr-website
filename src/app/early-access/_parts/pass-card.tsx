@@ -19,11 +19,13 @@ export type PassCardProps = {
   typing?: boolean
   /** The ink stamp on the pass page; `land` plays the stamp landing once. */
   stamp?: 'still' | 'land'
+  /** The words around the stamp's ring. */
+  stampRing?: string
 }
 
 // The founding pass: a glass ticket that tilts toward the pointer and catches
 // the light where the pointer is. Still for prefers-reduced-motion.
-export function PassCard({ name, sub, joined, code, link, typing, stamp }: PassCardProps) {
+export function PassCard({ name, sub, joined, code, link, typing, stamp, stampRing = 'FOUNDING PRICING' }: PassCardProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   function onMove(e: React.PointerEvent) {
@@ -52,14 +54,14 @@ export function PassCard({ name, sub, joined, code, link, typing, stamp }: PassC
         </div>
         <div className={s.passBody}>
           <div className={s.passWho}>
-            <p className={name ? s.passName : `${s.passName} ${s.ghost}`}>
+            <p className={[s.passName, !name && s.ghost, name && name.length > 16 && s.passNameLong].filter(Boolean).join(' ')}>
               {name ?? 'Your company'}
               {typing && <span className={s.caret} aria-hidden="true" />}
             </p>
             <p className={s.passSub}>{sub}</p>
           </div>
           {/* The foil seal before joining; the ink stamp in its place after. */}
-          {stamp ? <Stamp land={stamp === 'land'} /> : <span className={s.seal} aria-hidden="true"><MambaMark size={20} color="#3d2f52" /></span>}
+          {stamp ? <Stamp land={stamp === 'land'} ring={stampRing} /> : <span className={s.seal} aria-hidden="true"><MambaMark size={20} color="#3d2f52" /></span>}
         </div>
         <div className={s.perf} />
         <div className={s.passFoot}>
@@ -69,8 +71,8 @@ export function PassCard({ name, sub, joined, code, link, typing, stamp }: PassC
           </dl>
           <div className={s.passCode}>
             <span className={s.codeCopy}>
-              <span className={code ? s.codeText : s.codePending}>{code ?? 'Your pass number'}</span>
-              <span className={s.codeHint}>{link ? 'Scan to give a founding spot' : 'and share code, when you join'}</span>
+              <span className={code ? s.codeText : s.codePending}>{code ?? 'Pass number'}</span>
+              <span className={s.codeHint}>{link ? 'Scan to share' : 'Shows when you join'}</span>
             </span>
             <Qr text={link ?? 'https://www.mambahr.com/early-access'} faint={!link} />
           </div>
@@ -92,7 +94,7 @@ function Qr({ text, faint }: { text: string; faint?: boolean }) {
 }
 
 // A round ink stamp: "Founding pricing · held", pressed onto the pass corner.
-function Stamp({ land }: { land: boolean }) {
+function Stamp({ land, ring }: { land: boolean; ring: string }) {
   return (
     <span className={land ? `${s.stamp} ${s.stampLand}` : s.stamp} aria-hidden="true">
       <svg viewBox="0 0 120 120" width="96" height="96">
@@ -102,7 +104,7 @@ function Stamp({ land }: { land: boolean }) {
         <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" strokeWidth="2.4" />
         <circle cx="60" cy="60" r="33" fill="none" stroke="currentColor" strokeWidth="1.4" />
         <text fontSize="10.5" letterSpacing="2.6" fill="currentColor" fontWeight="700">
-          <textPath href="#ea-ring">FOUNDING PRICING · FOUNDING PRICING ·</textPath>
+          <textPath href="#ea-ring">{`${ring} · ${ring} ·`}</textPath>
         </text>
         <text x="60" y="66" textAnchor="middle" fontSize="19" fill="currentColor" fontFamily="var(--font-serif)" fontStyle="italic">Held</text>
       </svg>
