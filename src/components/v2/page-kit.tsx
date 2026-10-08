@@ -299,7 +299,7 @@ export function AgentLoop({
           align-items: center;
           justify-content: space-between;
           padding: 14px clamp(18px, 2.4vw, 28px);
-          background: linear-gradient(90deg, #FBF7EE, #F4F1F9);
+          background: var(--bg-surface);
           border-bottom: 1px solid var(--border-faint);
         }
         .card-top-t { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
@@ -310,12 +310,12 @@ export function AgentLoop({
           padding: 16px clamp(18px, 2.4vw, 28px);
         }
         .row + .row { border-top: 1px solid var(--border-faint); }
-        .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
+        .row.yours { background: #FCF8F1; }
         .num { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 22px; flex: none; }
         .rowav { flex: none; width: 26px; height: 26px; border-radius: 999px; object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); }
         .mark { flex: none; width: 18px; height: 18px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.gold { background: linear-gradient(135deg, var(--gold-pale), var(--gold)); }
+        .mark.gold { background: var(--gold); }
         .main { flex: 1; min-width: 0; }
         .lbl { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
         .desc { font-size: 14px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
@@ -335,7 +335,19 @@ export function AgentLoop({
         .who.you { color: var(--gold); background: var(--gold-tint); }
         @media (max-width: 640px) {
           .time { display: none; }
-          .row { flex-wrap: wrap; }
+        }
+        /* Phone: the badge sits under the step text instead of squeezing it. */
+        @media (max-width: 480px) {
+          .row {
+            display: grid;
+            grid-template-columns: 22px 26px minmax(0, 1fr);
+            column-gap: 12px;
+            row-gap: 8px;
+            align-items: start;
+          }
+          .num, .mark, .rowav { margin-top: 2px; }
+          .mark { justify-self: center; }
+          .who { grid-column: 3; justify-self: start; }
         }
       `}</style>
     </section>

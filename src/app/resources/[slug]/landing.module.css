@@ -1,14 +1,14 @@
 .main {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, #F7F3EB 0%, var(--bg-warm) 60%);
+  background: linear-gradient(180deg, #F9F7F2 0%, var(--bg) 60%);
   padding: clamp(56px, 9vw, 120px) 24px clamp(64px, 9vw, 120px);
   min-height: 70vh;
 }
 .aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .blob, .blob2 { position: absolute; border-radius: 50%; filter: blur(80px); }
-.blob { width: 620px; height: 620px; background: radial-gradient(circle, rgba(196,154,108,0.5), rgba(196,154,108,0) 68%); top: -200px; left: -120px; }
-.blob2 { width: 560px; height: 560px; background: radial-gradient(circle, rgba(106,93,166,0.34), rgba(106,93,166,0) 68%); top: -140px; right: -110px; }
+.blob { width: 620px; height: 620px; background: radial-gradient(circle, rgba(226,186,130,0.5), transparent 68%); top: -200px; left: -120px; }
+.blob2 { width: 560px; height: 560px; background: radial-gradient(circle, rgba(140,124,214,0.34), transparent 68%); top: -140px; right: -110px; }
 
 .wrap {
   position: relative;
@@ -37,14 +37,13 @@
 /* Large faint brand monogram — the cover's focal emblem. */
 .coverEmblem { position: absolute; top: 44%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
 .coverTop { position: relative; display: flex; flex-direction: column; gap: 14px; }
-.coverBrand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; letter-spacing: -0.01em; }
-.m { width: 24px; height: 24px; border-radius: 7px; background: #fff; color: var(--text); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 15px; }
+.coverBrand { display: flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-weight: 400; font-size: 17px; letter-spacing: -0.01em; }
 .coverRule { height: 1px; width: 100%; background: var(--grad); opacity: 0.9; }
 .coverBody { position: relative; margin-top: auto; }
 .coverKicker { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-light); }
 .coverTitle { font-family: var(--font-serif); font-weight: 400; font-size: clamp(26px, 3.2vw, 32px); line-height: 1.1; letter-spacing: -0.015em; margin: 12px 0 0; color: #fff; }
 .coverFoot { position: relative; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.14); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.coverFootText { font-size: 13px; color: rgba(255,255,255,0.55); }
+.coverFootText { font-size: 13px; color: rgba(255,255,255,0.72); }
 .coverDash { width: 34px; height: 3px; border-radius: 999px; background: var(--grad); flex: none; }
 .coverMeta { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin: 0; }
 
@@ -62,7 +61,7 @@
 /* ── Gate card ── */
 .gateCard {
   margin-top: 28px; padding: clamp(20px, 2.4vw, 28px);
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float);
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-float);
 }
 .gateHead { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
 .gateTitle { font-family: var(--font-serif); font-size: 20px; color: var(--text); letter-spacing: -0.01em; }
@@ -71,12 +70,12 @@
   border: 1px solid var(--border-mid); background: var(--bg-card); color: var(--text-muted);
   border-radius: 999px; font-size: 13px; font-weight: 500; padding: 7px 14px; cursor: pointer;
 }
-.shareBtn:hover { background: var(--bg-surface); color: var(--text); border-color: var(--gold-light); }
+.shareBtn:hover { background: var(--bg-surface); color: var(--text); border-color: var(--text); }
 
 .gate { display: flex; flex-direction: column; gap: 12px; }
 .gateRow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .gateInput {
-  border: 1px solid var(--border-mid); border-radius: 10px; background: var(--bg-card); color: var(--text);
+  border: 1px solid var(--control-border); border-radius: var(--radius-md); background: var(--bg-card); color: var(--text);
   font-size: 15px; padding: 12px 14px; outline: none; font-family: var(--font-sans); min-width: 0; width: 100%; box-sizing: border-box;
 }
 .gateInput:focus { border-color: var(--gold-dark); box-shadow: 0 0 0 3px var(--gold-tint); }
@@ -85,18 +84,18 @@ select.gateInput { appearance: none; -webkit-appearance: none; cursor: pointer; 
 
 .download {
   display: inline-block; width: 100%; box-sizing: border-box; text-align: center;
-  background: var(--text); color: #fff; font-weight: 600; font-size: 16px;
-  border: none; border-radius: 12px; padding: 15px 24px; cursor: pointer; text-decoration: none;
-  box-shadow: 0 12px 26px rgba(20,18,14,0.2); transition: transform 0.15s ease, background 0.15s ease;
+  background: var(--text); color: #fff; font-weight: 500; font-size: 16px;
+  border: none; border-radius: var(--radius-full); padding: 15px 24px; cursor: pointer; text-decoration: none;
+  box-shadow: 0 1px 2px rgba(20,18,14,0.12), 0 8px 22px rgba(20,18,14,0.16); transition: transform 0.15s ease, background 0.15s ease;
 }
-.download:hover:not(:disabled) { transform: translateY(-2px); background: #000; }
+.download:hover:not(:disabled) { transform: translateY(-1px); background: #2A2A28; }
 .download:disabled { opacity: 0.5; cursor: default; }
 .note { font-size: 13px; color: var(--text-faint); text-align: center; display: block; }
 .errNote { font-size: 13px; color: #b4392f; text-align: center; display: block; }
 .unavailable { font-size: 14px; color: var(--text-faint); }
 
 .success { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text); line-height: 1.5; padding: 8px 0; }
-.successTick { flex: none; width: 26px; height: 26px; border-radius: 999px; background: var(--color-green, #16a34a); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; }
+.successTick { flex: none; width: 26px; height: 26px; border-radius: 999px; background: var(--green); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; }
 .retryLink { color: var(--gold-dark); text-decoration: underline; }
 
 @media (prefers-reduced-motion: reduce) {

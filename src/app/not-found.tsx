@@ -46,8 +46,8 @@ export default function NotFound() {
               The link might be stale, or the page was moved. Try the homepage, or pick up where most people start.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <Link href="/" className="btn-gold">Back to homepage →</Link>
-              <Link href="/mamba" className="btn-secondary">See how MambaHR works</Link>
+              <Link href="/" className="btn btn-primary">Back to homepage →</Link>
+              <Link href="/mamba" className="btn btn-secondary">See how MambaHR works</Link>
             </div>
           </div>
         </section>

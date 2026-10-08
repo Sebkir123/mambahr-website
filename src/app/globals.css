@@ -335,32 +335,6 @@ h4, h5, h6 {
 .btn:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-/* Legacy gold pill, still used on the blog and the 404. */
-.btn-gold {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background-color: var(--gold);
-  color: #FFFFFF;
-  padding: 12px 28px;
-  border-radius: var(--radius-full);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-}
-.btn-gold:hover {
-  background-color: var(--gold-light);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(176, 141, 87, 0.3);
-}
-.btn-gold:focus-visible {
-  outline: 2px solid var(--text);
-  outline-offset: 3px;
-}
-
 /* Card hover lift */
 .card-hover {
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);

@@ -90,7 +90,7 @@ function Rail({ children, photo }: { children: React.ReactNode; photo?: string }
         <p className={s.railQuote}>{children}</p>
       </div>
       <span className={s.railMark}>
-        <MambaMark size={40} color="var(--bg)" />
+        <MambaMark size={40} color="var(--bg-card)" />
       </span>
     </aside>
   )

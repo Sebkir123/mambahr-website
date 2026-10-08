@@ -11,8 +11,8 @@ export default function manifest(): MetadataRoute.Manifest {
       'MambaHR does the HR admin for US companies: hiring, onboarding, time off and leave, payroll changes, and compliance. You make the judgment calls.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#F4F2EC',
-    theme_color: '#7A5A2E',
+    background_color: '#F5F2EC',
+    theme_color: '#F5F2EC',
     icons: [
       { src: '/MambaHR_logo.png', sizes: '2000x2000', type: 'image/png', purpose: 'any' },
       { src: '/MambaHR_logo.png', sizes: '512x512', type: 'image/png', purpose: 'any' },

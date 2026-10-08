@@ -112,27 +112,21 @@ export default function Pricing() {
           .card { transition: none; }
           .card:hover { transform: none; }
         }
+        /* The recommended plan: an ink ring, as on /pricing. Dusk is the agent's. */
         .pop {
-          border: none;
-          background:
-            linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
-            var(--grad) border-box;
-          border: 2px solid transparent;
-          box-shadow: var(--shadow-float);
+          box-shadow: 0 0 0 2px var(--text), var(--shadow-float);
           position: relative;
         }
         .ribbon {
           position: absolute;
           top: -11px;
           left: 22px;
-          font-family: var(--font-mono);
           font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
+          font-weight: 600;
           color: #fff;
-          background: var(--grad);
+          background: var(--text);
           padding: 4px 11px;
-          border-radius: 999px;
+          border-radius: var(--radius-full);
         }
         .name {
           font-weight: 600;
@@ -200,7 +194,7 @@ export default function Pricing() {
           top: 2.5px;
           width: 3px;
           height: 6px;
-          border: solid #7A5A2E;
+          border: solid var(--gold);
           border-width: 0 2px 2px 0;
           transform: rotate(45deg);
         }

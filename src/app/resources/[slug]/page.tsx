@@ -53,7 +53,7 @@ export default async function ResourceLanding({ params }: { params: Promise<{ sl
                 <span className={styles.grain} aria-hidden="true" />
                 <MambaMark size={230} color="rgba(196,154,108,0.13)" className={styles.coverEmblem} />
                 <div className={styles.coverTop}>
-                  <span className={styles.coverBrand}><span className={styles.m}>M</span>MambaHR</span>
+                  <span className={styles.coverBrand}><MambaMark size={20} color="#C9A26C" />MambaHR</span>
                   <span className={styles.coverRule} aria-hidden="true" />
                 </div>
                 <div className={styles.coverBody}>

@@ -200,12 +200,12 @@ export default async function DesignAdminPage() {
             </div>
             <div className={styles.fontCard}>
               <div className={`${styles.fontSample} ${styles.fontSans}`}>Aa</div>
-              <span className={styles.fontName}>Inter</span>
+              <span className={styles.fontName}>Geist</span>
               <span className={styles.fontUse}>Sans · body & UI, var(--font-sans)</span>
             </div>
             <div className={styles.fontCard}>
               <div className={`${styles.fontSample} ${styles.fontMono}`}>123</div>
-              <span className={styles.fontName}>JetBrains Mono</span>
+              <span className={styles.fontName}>Geist Mono</span>
               <span className={styles.fontUse}>Mono · numbers & labels, var(--font-mono)</span>
             </div>
           </div>
@@ -273,7 +273,6 @@ export default async function DesignAdminPage() {
         <div className={ui.card}>
           <div className={styles.compArea}>
             <span className="btn-primary">Primary</span>
-            <span className="btn-gold">Gold pill</span>
             <span className="btn-secondary">Secondary</span>
             <span className="btn-dark">Dark</span>
           </div>

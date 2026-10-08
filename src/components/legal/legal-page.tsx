@@ -1,6 +1,6 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import { Children, type ReactNode } from 'react'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 
@@ -31,7 +31,7 @@ export default function LegalPage({
             <p className="eyebrow">Legal</p>
             <h1 className="title">{title}</h1>
             <p className="updated">Last updated {updated}</p>
-            <div className="intro">{intro}</div>
+            <div className="intro">{Children.toArray(intro)}</div>
           </header>
 
           <nav className="toc" aria-label="On this page">
@@ -48,7 +48,8 @@ export default function LegalPage({
           {sections.map((s, i) => (
             <section key={s.heading} className="sec" id={`s${i + 1}`}>
               <h2>{s.heading}</h2>
-              {s.body}
+              {/* Server-rendered fragments arrive as unkeyed arrays; key them. */}
+              {Children.toArray(s.body)}
             </section>
           ))}
         </div>
@@ -90,8 +91,8 @@ export default function LegalPage({
           margin: 36px 0 8px;
           padding: 20px 24px;
           background: var(--bg-card);
-          border: 1px solid var(--border-faint);
-          border-radius: 14px;
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-sm);
         }
         .toc-l {
           font-family: var(--font-mono);

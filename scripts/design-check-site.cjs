@@ -10,6 +10,7 @@
 // Adapted from scripts/design-check-early-access.cjs on site/early-access.
 // Needs Playwright (PLAYWRIGHT_PATH or a resolvable `playwright`).
 // REDUCED=1 renders with prefers-reduced-motion: reduce (the still frames).
+/* eslint-disable @typescript-eslint/no-require-imports -- a plain Node CommonJS tool */
 const { chromium } = require(process.env.PLAYWRIGHT_PATH || 'playwright');
 const fs = require('fs');
 const OUT = process.argv[2];
