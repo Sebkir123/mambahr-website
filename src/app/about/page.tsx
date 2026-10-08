@@ -116,13 +116,13 @@ export default function AboutPage() {
           margin: clamp(48px, 6vw, 72px) auto 0;
           border-radius: 32px;
           padding: clamp(28px, 5vw, 64px);
-          background: linear-gradient(155deg, #f3c796 0%, #eab2a4 40%, #c3aee0 72%, #9d8fe0 100%);
+          background: var(--stage-field);
         }
         .field { position: absolute; inset: 0; z-index: -1; }
         .field i { position: absolute; border-radius: 50%; filter: blur(70px); }
-        .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, rgba(255, 226, 184, 0.95), rgba(255, 226, 184, 0) 70%); }
-        .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, rgba(139, 127, 208, 0.9), rgba(139, 127, 208, 0) 70%); }
-        .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, rgba(255, 246, 234, 0.7), rgba(255, 246, 234, 0) 70%); }
+        .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, var(--stage-glow-1), transparent 70%); }
+        .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, var(--stage-glow-2), transparent 70%); }
+        .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, var(--stage-glow-4), transparent 70%); }
         .principles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 2vw, 20px); }
         .glass {
           display: flex;

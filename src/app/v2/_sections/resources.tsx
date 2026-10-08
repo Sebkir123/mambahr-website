@@ -110,13 +110,13 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
         .head { max-width: none; margin-bottom: clamp(36px, 4vw, 52px); }
         .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.06; letter-spacing: -0.025em; color: var(--text); margin: 0; }
-        .em { background: linear-gradient(100deg, #B98A4E, #6A5DA6); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
+        .em { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic; }
 
         .feature {
           display: grid;
           grid-template-columns: 0.78fr 1.22fr;
           gap: clamp(20px, 3vw, 36px);
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 18px;
           padding: clamp(20px, 2.4vw, 28px);
@@ -214,7 +214,7 @@ export default function Resources({ playbooks = [] }: { playbooks?: PlaybookCard
           border: 1px solid var(--border);
           border-radius: 12px;
           padding: 8px 16px 8px 8px;
-          background: var(--bg);
+          background: var(--bg-card);
           box-shadow: var(--shadow-sm);
           opacity: 0.78;
         }

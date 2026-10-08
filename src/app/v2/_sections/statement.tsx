@@ -39,7 +39,7 @@ export default function Statement() {
           </figcaption>
 
           <div className="group">
-            <span className="g-label"><span className="mark" aria-hidden="true">M</span>MambaHR takes on</span>
+            <span className="g-label"><span className="agent-mark g-mark" aria-hidden="true" />MambaHR takes on</span>
             <div className="blocks">
               {TAKES.map((t, i) => (
                 <span key={t} className="blk take" style={{ ['--i' as string]: i }}>
@@ -119,34 +119,23 @@ export default function Statement() {
 
         .board {
           margin: 0;
-          background: #fff;
-          border: 1px solid var(--border-faint);
-          border-radius: 24px;
+          background: var(--bg-card);
+          border-radius: var(--radius-lg);
           padding: clamp(20px, 3vw, 32px);
           display: grid;
           gap: 26px;
-          box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 30px 60px -36px rgba(60, 40, 90, 0.35);
+          box-shadow: var(--shadow-md);
         }
         .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
         .group { display: grid; gap: 12px; }
         .g-label { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text); }
-        .mark {
-          width: 24px;
-          height: 24px;
-          border-radius: 7px;
-          background: var(--text);
-          color: #fff;
-          display: grid;
-          place-items: center;
-          font-family: var(--font-serif);
-          font-size: 13px;
-        }
+        .g-mark { --am-size: 26px; }
         .you { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(140deg, #f3c796, #d4aa7c); box-shadow: inset 0 0 0 5px #fbf2e6; }
         .blocks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
         .blk {
           position: relative;
           min-height: 84px;
-          border-radius: 14px;
+          border-radius: var(--radius-md);
           padding: 42px 14px 12px;
           display: flex;
           align-items: flex-end;

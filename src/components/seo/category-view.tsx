@@ -37,11 +37,11 @@ function SlackFragment() {
         </div>
       </div>
       <style jsx>{`
-        .sf { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-float); text-align: left; }
+        .sf { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-float); text-align: left; }
         .sf-top { display: flex; align-items: center; gap: 7px; padding: 12px 16px; background: linear-gradient(90deg, #FBF7EE, #F4F1F9); border-bottom: 1px solid var(--border-faint); }
         .sf-hash { color: var(--text-faint); font-weight: 700; }
         .sf-ch { font-size: 13px; font-weight: 700; color: var(--text); }
-        .sf-chip { margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: #fff; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); border-radius: 999px; padding: 4px 11px; }
+        .sf-chip { margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: #fff; background: var(--grad); border-radius: 999px; padding: 4px 11px; }
         .sf-msg { display: flex; gap: 11px; padding: 14px 16px; }
         .sf-msg + .sf-msg { border-top: 1px solid var(--border-faint); }
         .sf-mamba { background: rgba(106, 93, 166, 0.05); }
@@ -115,7 +115,7 @@ export default function CategoryView({ data }: { data: CategoryData }) {
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 22px); }
-            .card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
+            .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
             .t { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 0 0 10px; line-height: 1.3; }
             .b { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin: 0; }
             @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
@@ -150,7 +150,7 @@ export default function CategoryView({ data }: { data: CategoryData }) {
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.06; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15px, 1.7vw, 17px); line-height: 1.6; color: var(--text-muted); margin: 14px auto 0; max-width: 560px; }
             .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(12px, 1.6vw, 18px); }
-            .item { display: flex; gap: 13px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: clamp(18px, 2.2vw, 24px); box-shadow: var(--shadow-sm); }
+            .item { display: flex; gap: 13px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: clamp(18px, 2.2vw, 24px); box-shadow: var(--shadow-sm); }
             .tick { flex: none; width: 22px; height: 22px; margin-top: 1px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
             .tick::after { content: ''; position: absolute; left: 7.5px; top: 4px; width: 4px; height: 9px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
             .it-t { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 0 0 5px; }
@@ -194,7 +194,7 @@ export default function CategoryView({ data }: { data: CategoryData }) {
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .list { display: flex; flex-direction: column; gap: 14px; }
-            .qa { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: clamp(20px, 2.4vw, 28px); box-shadow: var(--shadow-sm); }
+            .qa { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: clamp(20px, 2.4vw, 28px); box-shadow: var(--shadow-sm); }
             .q { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 0 0 9px; }
             .a { font-size: 15px; line-height: 1.62; color: var(--text-muted); margin: 0; }
             .related { margin-top: clamp(32px, 4vw, 44px); text-align: center; }

@@ -51,20 +51,20 @@ function PortalCard() {
         <div className="foot">Equal-opportunity questions asked at apply. Nothing for you to set up.</div>
       </div>
       <style jsx>{`
-        .cs { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
+        .cs { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
         .bar { display: flex; align-items: center; gap: 12px; height: 42px; padding: 0 14px; background: #F8F6F1; border-bottom: 1px solid var(--border); }
         .dots { display: flex; gap: 6px; }
         .dots b { width: 9px; height: 9px; border-radius: 999px; background: #e3ddd6; }
         .dots b:first-child { background: #f0a59a; }
         .dots b:nth-child(2) { background: #f4ce8e; }
         .dots b:nth-child(3) { background: #a9cfa6; }
-        .addr { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 3px 16px; }
+        .addr { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg-card); border: 1px solid var(--border); border-radius: 7px; padding: 3px 16px; }
         .live { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-green); }
         .live i { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
         .body { padding: 18px 22px 16px; }
         .co { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--border-faint); }
         .co > div { flex: 1; min-width: 0; }
-        .logo { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--gold-mid), var(--violet)); color: #fff; font-family: var(--font-serif); font-size: 19px; display: flex; align-items: center; justify-content: center; }
+        .logo { width: 36px; height: 36px; border-radius: 10px; background: var(--grad); color: #fff; font-family: var(--font-serif); font-size: 19px; display: flex; align-items: center; justify-content: center; }
         .co-n { font-size: 15px; font-weight: 700; color: var(--text); }
         .co-t { font-size: 13px; color: var(--text-muted); margin-top: 1px; }
         .job { display: flex; align-items: center; gap: 12px; padding: 13px 4px; }
@@ -111,7 +111,7 @@ function InflowCard() {
         <span className="f-t">Waiting for your team to review</span>
       </div>
       <style jsx>{`
-        .if { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
+        .if { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float); overflow: hidden; }
         .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--border-faint); }
         .t { font-size: 14px; font-weight: 700; color: var(--text); }
         .time { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
@@ -146,7 +146,7 @@ function BrandCard() {
       <style jsx>{`
         .bc { position: relative; }
         .ph { display: block; width: 100%; border-radius: 18px; box-shadow: var(--shadow-float); object-fit: cover; aspect-ratio: 4 / 3; }
-        .float { position: absolute; right: -14px; bottom: -22px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-float); padding: 14px 18px; transform: rotate(1.5deg); }
+        .float { position: absolute; right: -14px; bottom: -22px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-float); padding: 14px 18px; transform: rotate(1.5deg); }
         .f-t { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 10px; }
         .f-m { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
         @media (max-width: 880px) { .float { right: 8px; bottom: -16px; } }

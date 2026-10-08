@@ -1,5 +1,6 @@
 import s from './mockups.module.css'
 import { Icon } from './icons'
+import { MambaMark } from '@/components/mamba-mark'
 
 /**
  * The Block Kit approval card MambaHR posts to Slack: header "{subject} ·
@@ -39,7 +40,7 @@ export function SlackApproval({
         <span>· Slack</span>
       </div>
       <div className={s.slackMsg}>
-        <span className={s.slackAv}>M</span>
+        <span className={s.slackAv}><MambaMark size={20} color="#C9A26C" /></span>
         <div className={s.slackBody}>
           <div className={s.slackWho}><b>MambaHR</b><span className={s.slackApp}>APP</span><span className={s.slackTime}>{time}</span></div>
           <div className={s.slackHead}>{subject} · {kind}</div>

@@ -120,7 +120,7 @@ export default function DemoPage() {
             .tick::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 3.5px; height: 7.5px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
 
             .card {
-              background: var(--bg);
+              background: var(--bg-card);
               border: 1px solid var(--border);
               border-radius: 18px;
               box-shadow: var(--shadow-float);

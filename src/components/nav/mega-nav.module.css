@@ -8,13 +8,13 @@
   right: 0;
   z-index: 50;
   transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: rgba(245, 242, 236, 0.78);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
 .nav.raised {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(245, 242, 236, 0.96);
   border-bottom-color: var(--border);
 }
 .nav.scrolled { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); }
@@ -24,7 +24,7 @@
   right: 0;
   bottom: -1px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-mid) 30%, var(--violet) 70%, transparent);
+  background: linear-gradient(90deg, transparent, var(--dusk-1) 25%, var(--dusk-2) 50%, var(--dusk-3) 75%, transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -160,12 +160,12 @@
   width: 36px;
   height: 36px;
   border-radius: 11px;
-  background: linear-gradient(150deg, #FBEEDF 0%, #F3E4E3 50%, #E9E4F8 100%);
+  background: linear-gradient(150deg, #F8E6CF 0%, #F3DADC 50%, #E6DEF6 100%);
   border: 1px solid rgba(26, 26, 25, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #5A4F8F;
+  color: var(--violet);
   flex-shrink: 0;
 }
 .itemBody { flex: 1; min-width: 0; }
@@ -196,7 +196,7 @@
   letter-spacing: 0;
   color: var(--gold-dark);
   background: var(--gold-tint);
-  border: 1px solid rgba(138, 101, 53, 0.25);
+  border: 1px solid rgba(123, 90, 47, 0.18);
   border-radius: 999px;
   padding: 2px 7px;
   white-space: nowrap;

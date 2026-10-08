@@ -58,7 +58,7 @@ export default function CompareView({ data, faqs, importFrom }: { data: Competit
               letter-spacing: -0.028em;
               margin: 6px 0 0;
               text-wrap: balance;
-              background: linear-gradient(100deg, var(--gold-mid), var(--violet));
+              background: var(--grad);
               -webkit-background-clip: text;
               background-clip: text;
               color: transparent;
@@ -104,7 +104,7 @@ export default function CompareView({ data, faqs, importFrom }: { data: Competit
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 22px); }
-            .card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
+            .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
             .t { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin: 0 0 10px; line-height: 1.3; }
             .b { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin: 0; }
             @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
@@ -148,12 +148,12 @@ export default function CompareView({ data, faqs, importFrom }: { data: Competit
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .lead { font-size: clamp(15px, 1.7vw, 17px); line-height: 1.6; color: var(--text-muted); margin: 14px auto 0; max-width: 540px; }
-            .card { background: var(--bg); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-float); }
+            .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-float); }
             .row { display: grid; grid-template-columns: 1.6fr 1fr 1fr; align-items: center; }
             .row + .row { border-top: 1px solid var(--border-faint); }
             .row.hd { background: var(--bg-surface); border-bottom: 1px solid var(--border); }
             .row.hd .m, .row.hd .o { font-size: 13px; font-weight: 700; padding: 14px 12px; text-align: center; }
-            .row.hd .m { color: #fff; background: linear-gradient(120deg, var(--gold-mid), var(--violet)); }
+            .row.hd .m { color: #fff; background: var(--grad); }
             .row.hd .o { color: var(--text); }
             .f { padding: 13px 20px; font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.4; display: flex; flex-direction: column; gap: 3px; }
             .note { font-style: normal; font-size: 12px; font-weight: 400; color: var(--text-faint); }
@@ -278,7 +278,7 @@ export default function CompareView({ data, faqs, importFrom }: { data: Competit
             .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
             .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
             .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 22px); }
-            .step { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
+            .step { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: clamp(22px, 2.6vw, 30px); box-shadow: var(--shadow-sm); }
             .d {
               display: inline-block;
               font-family: var(--font-mono);
@@ -287,7 +287,7 @@ export default function CompareView({ data, faqs, importFrom }: { data: Competit
               text-transform: uppercase;
               letter-spacing: 0.06em;
               color: #fff;
-              background: linear-gradient(120deg, var(--gold-mid), var(--violet));
+              background: var(--grad);
               border-radius: 999px;
               padding: 4px 11px;
             }

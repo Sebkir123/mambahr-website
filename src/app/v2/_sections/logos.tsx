@@ -1,5 +1,7 @@
 'use client'
 
+import { MambaMark } from '@/components/mamba-mark'
+
 const HRIS = ['Gusto', 'BambooHR', 'Rippling', 'Workday', 'ADP', 'Namely']
 const ATS = ['Greenhouse', 'Lever']
 
@@ -18,7 +20,7 @@ export default function Logos() {
         <span className="arrow" aria-hidden="true">
           <svg width="26" height="14" viewBox="0 0 26 14"><path d="M1 7h22m0 0l-6-6m6 6l-6 6" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </span>
-        <span className="mamba"><span className="m">M</span>MambaHR</span>
+        <span className="mamba"><MambaMark size={22} color="var(--gold)" />MambaHR</span>
       </div>
       <p className="sub" data-reveal data-delay="2">
         A one-time import of your people, pay, time-off balances, reporting lines and open roles. Done in a day.
@@ -75,21 +77,11 @@ export default function Logos() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          font-weight: 700;
-          font-size: clamp(15px, 1.6vw, 18px);
-          color: var(--text);
-        }
-        .mamba .m {
-          width: 26px;
-          height: 26px;
-          border-radius: 8px;
-          background: #1A1A19;
-          color: #fff;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
           font-family: var(--font-serif);
-          font-size: 16px;
+          font-weight: 400;
+          letter-spacing: -0.01em;
+          font-size: clamp(17px, 1.8vw, 20px);
+          color: var(--text);
         }
         .sub {
           font-size: 14px;

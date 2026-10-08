@@ -62,13 +62,13 @@
 /* ── Gate card ── */
 .gateCard {
   margin-top: 28px; padding: clamp(20px, 2.4vw, 28px);
-  background: var(--bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float);
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-float);
 }
 .gateHead { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
 .gateTitle { font-family: var(--font-serif); font-size: 20px; color: var(--text); letter-spacing: -0.01em; }
 .shareBtn {
   display: inline-flex; align-items: center; gap: 6px;
-  border: 1px solid var(--border-mid); background: var(--bg); color: var(--text-muted);
+  border: 1px solid var(--border-mid); background: var(--bg-card); color: var(--text-muted);
   border-radius: 999px; font-size: 13px; font-weight: 500; padding: 7px 14px; cursor: pointer;
 }
 .shareBtn:hover { background: var(--bg-surface); color: var(--text); border-color: var(--gold-light); }
@@ -76,7 +76,7 @@
 .gate { display: flex; flex-direction: column; gap: 12px; }
 .gateRow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .gateInput {
-  border: 1px solid var(--border-mid); border-radius: 10px; background: var(--bg); color: var(--text);
+  border: 1px solid var(--border-mid); border-radius: 10px; background: var(--bg-card); color: var(--text);
   font-size: 15px; padding: 12px 14px; outline: none; font-family: var(--font-sans); min-width: 0; width: 100%; box-sizing: border-box;
 }
 .gateInput:focus { border-color: var(--gold-dark); box-shadow: 0 0 0 3px var(--gold-tint); }

@@ -30,11 +30,11 @@ export default function Cta() {
           text-align: center;
           color: #1a1a19;
         }
-        .field { position: absolute; inset: 0; z-index: -1; background: linear-gradient(155deg, #f3c796 0%, #eab2a4 40%, #c3aee0 72%, #9d8fe0 100%); }
+        .field { position: absolute; inset: 0; z-index: -1; background: var(--stage-field); }
         .field i { position: absolute; border-radius: 50%; filter: blur(70px); }
-        .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, rgba(255, 226, 184, 0.95), rgba(255, 226, 184, 0) 70%); }
-        .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, rgba(139, 127, 208, 0.9), rgba(139, 127, 208, 0) 70%); }
-        .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, rgba(255, 246, 234, 0.8), rgba(255, 246, 234, 0) 70%); }
+        .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, var(--stage-glow-1), transparent 70%); }
+        .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, var(--stage-glow-2), transparent 70%); }
+        .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, var(--stage-glow-4), transparent 70%); }
         .field .grain { inset: 0; border-radius: 0; filter: none; background-image: ${GRAIN}; background-size: 220px; opacity: 0.35; mix-blend-mode: overlay; }
         .title {
           font-family: var(--font-serif);
@@ -47,15 +47,15 @@ export default function Cta() {
           color: inherit;
           text-wrap: balance;
         }
-        .sub { font-size: clamp(16px, 1.7vw, 19px); line-height: 1.6; max-width: 52ch; margin: 22px auto 0; opacity: 0.78; }
+        .sub { font-size: clamp(16px, 1.7vw, 19px); line-height: 1.6; max-width: 52ch; margin: 22px auto 0; color: #2b2a27; }
         .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
-        .main, .alt { display: inline-flex; align-items: center; height: 50px; padding: 0 26px; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none; transition: transform 0.2s ease, background 0.2s ease; }
-        .main { background: #1a1a19; color: #fff; box-shadow: 0 10px 24px -8px rgba(20, 18, 14, 0.45); }
-        .main:hover { transform: translateY(-2px); }
-        .alt { background: rgba(255, 255, 255, 0.5); color: #1a1a19; border: 1px solid rgba(26, 26, 25, 0.14); }
+        .main, .alt { display: inline-flex; align-items: center; height: 50px; padding: 0 26px; border-radius: 999px; font-weight: 500; font-size: 16px; text-decoration: none; transition: transform 0.2s var(--ease), background 0.15s ease; }
+        .main { background: #1a1a19; color: #fff; box-shadow: 0 1px 2px rgba(20, 18, 14, 0.12), 0 10px 24px -8px rgba(20, 18, 14, 0.4); }
+        .main:hover { transform: translateY(-1px); background: #2a2a28; }
+        .alt { background: rgba(255, 255, 255, 0.72); color: #1a1a19; border: 1px solid rgba(26, 26, 25, 0.16); }
         .alt:hover { background: #fff; }
-        .main:focus-visible, .alt:focus-visible { outline: 2px solid #6a5da6; outline-offset: 3px; }
-        .trust { margin: 26px 0 0; font-size: 13.5px; opacity: 0.66; }
+        .main:focus-visible, .alt:focus-visible { outline: 2px solid #1a1a19; outline-offset: 3px; }
+        .trust { margin: 26px 0 0; font-size: 14px; color: #2b2a27; }
       `}</style>
     </section>
   )

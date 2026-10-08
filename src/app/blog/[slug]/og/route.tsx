@@ -56,7 +56,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
         {/* top seam */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <div style={{ width: 40, height: 40, borderRadius: 10, background: 'linear-gradient(135deg, #B98A4E, #6A5DA6)' }} />
+            <div style={{ width: 40, height: 40, borderRadius: 10, background: 'linear-gradient(110deg, #926D3E, #A95E6B 50%, #6A5BC4)' }} />
             <div style={{ fontSize: 30, fontWeight: 600, color: '#1A1A19', letterSpacing: '-0.02em' }}>MambaHR</div>
           </div>
           <div
@@ -89,7 +89,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
 
         {/* bottom rule */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <div style={{ width: 96, height: 4, borderRadius: 4, background: 'linear-gradient(100deg, #B98A4E, #6A5DA6)' }} />
+          <div style={{ width: 96, height: 4, borderRadius: 4, background: 'linear-gradient(110deg, #926D3E, #A95E6B 50%, #6A5BC4)' }} />
           <div style={{ fontSize: 22, fontFamily: 'sans-serif', color: '#7A7A75' }}>
             HR admin, done for you · mambahr.com
           </div>

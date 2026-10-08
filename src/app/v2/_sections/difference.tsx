@@ -49,7 +49,7 @@ export default function Difference() {
           <div className="col us">
             <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /></span>
             <div className="c-head">
-              <span className="c-t"><span className="mark" aria-hidden="true">M</span>Monday, with MambaHR</span>
+              <span className="c-t"><span className="agent-mark c-mark" aria-hidden="true" />Monday, with MambaHR</span>
               <span className="c-s">Done for you, and logged</span>
             </div>
             {ROWS.map((r) => (
@@ -108,35 +108,34 @@ export default function Difference() {
           display: grid;
           grid-template-rows: subgrid;
           padding: 8px 28px;
-          border-radius: 24px;
-          border: 1px solid var(--border-faint);
-          background: #fff;
-          box-shadow: 0 24px 48px -32px rgba(60, 40, 90, 0.28);
+          border-radius: var(--radius-lg);
+          background: var(--bg-card);
+          box-shadow: var(--shadow-md);
         }
-        .us { background: linear-gradient(155deg, #fbe7d3 0%, #f3dcd8 45%, #e4dcf6 100%); border-color: rgba(255, 255, 255, 0.8); }
+        .us { background: linear-gradient(155deg, #f8e6cf 0%, #f3dadc 45%, #e6def6 100%); }
         .field { position: absolute; inset: 0; z-index: -1; }
         .field i { position: absolute; border-radius: 50%; filter: blur(50px); }
-        .f1 { width: 60%; height: 60%; left: -15%; top: -25%; background: radial-gradient(circle, rgba(255, 240, 220, 0.95), rgba(255, 240, 220, 0) 70%); }
-        .f2 { width: 60%; height: 70%; right: -20%; bottom: -30%; background: radial-gradient(circle, rgba(170, 156, 232, 0.55), rgba(170, 156, 232, 0) 70%); }
+        .f1 { width: 60%; height: 60%; left: -15%; top: -25%; background: radial-gradient(circle, var(--stage-glow-1), transparent 70%); }
+        .f2 { width: 60%; height: 70%; right: -20%; bottom: -30%; background: radial-gradient(circle, var(--stage-glow-2), transparent 70%); }
 
         .c-head { display: grid; gap: 4px; padding: 22px 0 18px; border-bottom: 1px solid var(--border-faint); }
         .us .c-head { border-bottom-color: rgba(26, 26, 25, 0.08); }
         .c-t { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 22px; letter-spacing: -0.01em; color: var(--text); }
         .c-s { font-size: 14px; color: var(--text-faint); }
-        .mark { width: 26px; height: 26px; border-radius: 7px; background: var(--text); color: #fff; display: grid; place-items: center; font-size: 14px; font-weight: 600; flex: none; }
+        .c-mark { --am-size: 28px; }
 
         .row { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 13px 0; font-size: 15px; color: var(--text); border-bottom: 1px solid var(--border-faint); }
         .us .row { border-bottom-color: rgba(26, 26, 25, 0.07); }
         .them .r-t { color: var(--text-muted); }
         .r-v { font-size: 13px; color: var(--text-faint); font-variant-numeric: tabular-nums; white-space: nowrap; }
-        .cost { color: #A4512C; }
-        .box { width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid var(--border-mid); background: #fff; }
+        .cost { color: #984608; }
+        .box { width: 18px; height: 18px; border-radius: var(--radius-xs); border: 1.5px solid var(--border-mid); background: #fff; }
         .check { width: 20px; height: 20px; border-radius: 50%; background: var(--color-green); position: relative; }
         .check::after { content: ''; position: absolute; left: 7px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
 
         .c-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 18px 0 20px; font-size: 14px; color: var(--text-faint); }
         .c-foot b { font-family: var(--font-serif); font-weight: 400; font-size: 20px; color: var(--text); }
-        .them .c-foot b { color: #A4512C; }
+        .them .c-foot b { color: #984608; }
 
         .compare { margin: 24px 0 0; font-size: 15px; color: var(--text-muted); }
         .compare :global(a) { color: var(--text); font-weight: 600; text-decoration: underline; text-decoration-color: var(--border-mid); text-underline-offset: 3px; }

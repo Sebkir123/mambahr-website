@@ -42,7 +42,7 @@ function SlackApprovalCard() {
       </div>
       <style jsx>{`
         .sac {
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 16px;
           box-shadow: var(--shadow-float);
@@ -216,7 +216,7 @@ function ParentalLeaveCard() {
           font-weight: 600;
           letter-spacing: 0.04em;
           color: var(--gold-dark);
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid rgba(138, 101, 53, 0.3);
           border-radius: 999px;
           padding: 4px 11px;
@@ -252,7 +252,7 @@ function VacationPhoto() {
           position: absolute;
           left: -18px;
           bottom: 26px;
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 14px;
           padding: 14px 16px;

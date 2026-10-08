@@ -9,23 +9,23 @@ import { PipelineBoard, SlackApproval, type PipelineColumn } from '@/components/
 
 /* ── Hero board data: applications tracked, reviewed by the hiring team ── */
 const HIRING_COLUMNS: PipelineColumn[] = [
-  { name: 'Applied', color: '#8FA8C4', count: 12, cards: [
+  { name: 'Applied', color: '#73879D', count: 12, cards: [
     { name: 'Anna Keller', sub: 'Careers page · 2h ago' },
     { name: 'Marco Rossi', sub: 'LinkedIn · 5h ago' },
     { name: 'Yuki Tanaka', sub: 'Referral · yesterday', pill: 'Referral' },
   ] },
-  { name: 'Review', color: '#A5B98A', count: 6, cards: [
+  { name: 'Review', color: '#7B8A67', count: 6, cards: [
     { name: 'Sofia Lindqvist', sub: 'Hiring team reviewing · notes attached', pill: 'Your review' },
     { name: 'Daniel Okafor', sub: 'Resume and answers attached' },
   ] },
-  { name: 'Interview', color: '#C4A46A', count: 4, cards: [
+  { name: 'Interview', color: '#9A8153', count: 4, cards: [
     { name: 'Elena Petrova', sub: 'Panel Thu 10:00 · 3 of 4 feedback forms in' },
     { name: 'Tom Harrison', sub: 'Onsite Fri · invite sent' },
   ] },
-  { name: 'Offer', color: '#B08BA8', count: 1, cards: [
+  { name: 'Offer', color: '#9C7B95', count: 1, cards: [
     { name: 'Maya Chen', sub: '$165k · in range · awaiting you', pill: 'Awaiting you' },
   ] },
-  { name: 'Hired', color: '#7FA69B', count: 1, cards: [
+  { name: 'Hired', color: '#6B8B82', count: 1, cards: [
     { name: 'Noah Bennett', sub: 'Starts Nov 3 · onboarding started' },
   ] },
 ]
@@ -55,7 +55,7 @@ function HumanCall() {
           position: absolute;
           right: -14px;
           bottom: -22px;
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 14px;
           box-shadow: var(--shadow-float);
@@ -84,7 +84,7 @@ export default function HiringPage() {
           title={<>Hiring, <Em>without the chasing.</Em></>}
           lead="MambaHR posts the job with its pay range, collects every application in one place, schedules interviews, orders the background check, and drafts the offer. Your team reviews the applicants and decides who joins."
         >
-          <div className="mock-card agent-edge agent-working"><PipelineBoard columns={HIRING_COLUMNS} /></div>
+          <div className="mock-card"><PipelineBoard columns={HIRING_COLUMNS} /></div>
         </PageHero>
 
         <AgentLoop

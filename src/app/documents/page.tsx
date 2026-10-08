@@ -48,14 +48,14 @@ function SignedDocCard() {
         </div>
       </div>
       <style jsx>{`
-        .doc { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-float); }
+        .doc { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-float); }
         .bar { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 14px; background: #F8F6F1; border-bottom: 1px solid var(--border); }
         .dots { display: flex; gap: 6px; }
         .dots b { width: 9px; height: 9px; border-radius: 999px; background: #e3ddd6; }
         .dots b:first-child { background: #f0a59a; }
         .dots b:nth-child(2) { background: #f4ce8e; }
         .dots b:nth-child(3) { background: #a9cfa6; }
-        .addr { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 2px 16px; }
+        .addr { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg-card); border: 1px solid var(--border); border-radius: 7px; padding: 2px 16px; }
         .body { padding: 16px 18px 18px; }
         .d-head { display: flex; align-items: center; gap: 11px; }
         .d-ic { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--gold-tint); color: var(--gold-dark); display: flex; align-items: center; justify-content: center; }
@@ -116,7 +116,7 @@ function AckTracker() {
         ))}
       </div>
       <style jsx>{`
-        .ack { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 20px 20px 16px; box-shadow: var(--shadow-float); }
+        .ack { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px 20px 16px; box-shadow: var(--shadow-float); }
         .a-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
         .a-t { font-family: var(--font-serif); font-size: 18px; color: var(--text); }
         .a-live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 999px; padding: 3px 9px; }
@@ -158,7 +158,7 @@ function RetrievalStage() {
       <style jsx>{`
         .ret { position: relative; }
         .photo { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: var(--shadow-float); }
-        .float { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 13px; padding: 12px 18px 12px 14px; box-shadow: var(--shadow-md); max-width: calc(100% - 36px); }
+        .float { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 11px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 13px; padding: 12px 18px 12px 14px; box-shadow: var(--shadow-md); max-width: calc(100% - 36px); }
         .f-check { flex: none; width: 20px; height: 20px; border-radius: 999px; background: var(--color-green); position: relative; }
         .f-check::after { content: ''; position: absolute; left: 7px; top: 4px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .f-t { font-size: 14px; font-weight: 700; color: var(--text); }

@@ -23,7 +23,7 @@ export default function DraftNotice({ children }: { children?: React.ReactNode }
         .draft {
           margin-top: 24px;
           padding: 18px 22px;
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--gold-dark);
           border-radius: 14px;
         }

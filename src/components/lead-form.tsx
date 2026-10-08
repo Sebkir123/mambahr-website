@@ -191,7 +191,7 @@ export function LeadForm({
       </form>
       <style jsx>{`
         .lbl { display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 8px; }
-        .inp { width: 100%; box-sizing: border-box; padding: 14px 16px; margin-bottom: 18px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; font-size: 15px; font-family: var(--font-sans); color: var(--text); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+        .inp { width: 100%; box-sizing: border-box; padding: 14px 16px; margin-bottom: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; font-size: 15px; font-family: var(--font-sans); color: var(--text); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
         .inp:focus { border-color: var(--gold-dark); box-shadow: 0 0 0 3px var(--gold-tint); }
         .inp.bad { border-color: var(--color-red); margin-bottom: 6px; }
         .f-err { font-size: 13px; color: var(--color-red); margin: 0 0 14px; }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { MambaMark } from '@/components/mamba-mark'
 
 // Compact floating CTA, bottom-right pill instead of a full-width bar.
 // Appears once the hero scrolls away, hides again near the final CTA band
@@ -33,7 +34,7 @@ export default function StickyCta() {
   return (
     <div className={`fcta${show ? ' show' : ''}`} aria-hidden={!show} inert={!show}>
       <a href="/demo" className="pill" tabIndex={show ? 0 : -1}>
-        <span className="m" aria-hidden="true">M</span>
+        <span className="m" aria-hidden="true"><MambaMark size={18} color="#C9A26C" /></span>
         Book a demo
       </a>
       <button className="x" type="button" aria-label="Dismiss" tabIndex={show ? 0 : -1} onClick={() => setDismissed(true)}>
@@ -65,9 +66,9 @@ export default function StickyCta() {
           gap: 10px;
           background: #1a1a19;
           color: #fff;
-          font-weight: 600;
+          font-weight: 500;
           font-size: 15px;
-          padding: 12px 20px 12px 12px;
+          padding: 12px 20px 12px 14px;
           border-radius: 999px;
           box-shadow: 0 10px 30px rgba(20, 18, 14, 0.28);
           transition: transform 0.15s ease;
@@ -76,21 +77,16 @@ export default function StickyCta() {
         .m {
           width: 26px;
           height: 26px;
-          border-radius: 999px;
-          background: linear-gradient(120deg, #d4aa7c, #6a5da6);
-          color: #fff;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          font-family: var(--font-serif);
-          font-size: 15px;
         }
         .x {
           width: 26px;
           height: 26px;
           border-radius: 999px;
           border: 1px solid var(--border-mid);
-          background: var(--bg);
+          background: var(--bg-card);
           color: var(--text-faint);
           display: inline-flex;
           align-items: center;

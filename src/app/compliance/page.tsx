@@ -243,7 +243,7 @@ function SleepPhoto() {
           position: absolute;
           left: clamp(-14px, -1.5vw, -20px);
           bottom: 26px;
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 14px;
           padding: 13px 16px;

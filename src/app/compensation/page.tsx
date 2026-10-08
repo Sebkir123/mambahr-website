@@ -53,7 +53,7 @@ function CompReviewCard() {
       </div>
       <style jsx>{`
         .cr {
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 18px;
           box-shadow: var(--shadow-float);
@@ -115,7 +115,7 @@ function CompReviewCard() {
         .chip.route { color: var(--color-red); background: rgba(220, 38, 38, 0.07); border: 1px solid rgba(220, 38, 38, 0.2); }
         .btns { display: flex; gap: 7px; flex: none; }
         .ok-b { font-size: 13px; font-weight: 600; color: #fff; background: var(--ink); border-radius: 999px; padding: 7px 15px; }
-        .no-b { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
+        .no-b { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg-card); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
         .foot {
           display: flex;
           align-items: center;
@@ -156,7 +156,7 @@ function EquityCard() {
       ))}
       <style jsx>{`
         .eq {
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 18px;
           box-shadow: var(--shadow-float);
@@ -225,7 +225,7 @@ function PhotoCard() {
           position: absolute;
           left: -18px;
           bottom: 26px;
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 14px;
           box-shadow: var(--shadow-float);

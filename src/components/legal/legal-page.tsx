@@ -89,7 +89,7 @@ export default function LegalPage({
         .toc {
           margin: 36px 0 8px;
           padding: 20px 24px;
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border-faint);
           border-radius: 14px;
         }

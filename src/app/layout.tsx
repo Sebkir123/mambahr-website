@@ -1,26 +1,28 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, JetBrains_Mono, Fraunces } from 'next/font/google'
+import { Geist, Geist_Mono, Fraunces } from 'next/font/google'
 import AnalyticsGate from '@/components/analytics-gate'
 import StyledJsxRegistry from './styled-jsx-registry'
 import SiteTracker from '@/components/site-tracker'
 import { LAST_VERIFIED } from '@/lib/llms-content'
 import './globals.css'
 
-const inter = Inter({
+// The product's interface face (Warm Soft): Geist for everything a person
+// reads or operates, Geist Mono where the site already sets mono, Fraunces for
+// the editorial voice. One brand across the site and the app.
+const geist = Geist({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  variable: '--font-inter',
+  variable: '--font-geist',
   display: 'swap',
 })
 
-const jetbrains = JetBrains_Mono({
+const geistMono = Geist_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-jetbrains',
+  variable: '--font-geist-mono',
   display: 'swap',
 })
 
-// Design-system display face, Warm Editorial Premium uses Fraunces.
+// Display face: Fraunces, as in the app.
 const fraunces = Fraunces({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
@@ -78,10 +80,10 @@ export const metadata: Metadata = {
   },
 }
 
-// Browser/OS chrome color, matches the oat background of the Warm Editorial
-// Premium system so the address bar blends into the page on mobile Safari/Chrome.
+// Browser/OS chrome color: the Warm Soft oat ground, so the address bar
+// blends into the page on mobile Safari/Chrome.
 export const viewport: Viewport = {
-  themeColor: '#F4F2EC',
+  themeColor: '#F5F2EC',
 }
 
 // Static JSON-LD, hardcoded constants, not user input
@@ -164,7 +166,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID
 
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${fraunces.variable}`}>
+    <html lang="en" className={`${geist.variable} ${geistMono.variable} ${fraunces.variable}`}>
       <head>
         <link rel="preconnect" href="https://dqoqnlecylqlwsahudjn.supabase.co" />
         <link rel="dns-prefetch" href="https://dqoqnlecylqlwsahudjn.supabase.co" />
@@ -175,7 +177,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: jsonLdString }}
         />
       </head>
-      <body style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
+      <body>
         <a href="#main" className="skip-link">Skip to content</a>
         <StyledJsxRegistry>{children}</StyledJsxRegistry>
         <SiteTracker />

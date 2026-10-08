@@ -1,39 +1,50 @@
 /* ── Product mockups: hand-built reproductions of the real MambaHR app.
-   Tokens are the app's light theme (web/app/globals.css), scoped under .mk so
-   the marketing site's own variables never leak in. Fraunces for titles and
-   row names, Inter for UI sans (the app uses Geist, which the site does not
-   load), tabular numerals for ids and counts. Gold = brand and active nav
-   only. Violet = AI moments only. Primary buttons are ink, never gold. */
+   Tokens are the app's Warm Soft light theme (mamba_hr web/app/globals.css),
+   scoped under .mk so the marketing site's own variables never leak in.
+   White cards on warm oat with a soft wide lift; controls 14px, cards 22px,
+   small chips 8px, every button, badge, chip and avatar a pill. Fraunces for
+   titles and names, Geist for the interface, tabular numerals for counts.
+   Gold = the person (active nav, the logo). Violet = the agent. Dusk (gold,
+   rose, violet) = the agent's ring and mark. Primary buttons are ink. */
 
 .mk {
-  --mk-base: #F4F2EC;
-  --mk-elev: #FEFDFA;
+  --mk-base: #F5F2EC;
+  --mk-elev: #FFFFFF;
   --mk-surface: #F8F6F1;
   --mk-muted: #ECE9E2;
+  --mk-bubble: #EFEAE1;
   --mk-subtle: rgba(0, 0, 0, 0.025);
   --mk-hover: rgba(0, 0, 0, 0.04);
   --mk-active: rgba(0, 0, 0, 0.06);
   --mk-t1: #1A1A19;
   --mk-t2: #3D3D3A;
   --mk-t3: #5C5C58;
-  --mk-t4: #6B6B66;
+  --mk-t4: #656561;
   --mk-b: rgba(0, 0, 0, 0.12);
   --mk-b-subtle: rgba(0, 0, 0, 0.07);
   --mk-b-strong: rgba(0, 0, 0, 0.24);
-  --mk-gold: #8A6535;
-  --mk-gold-ink: #1A1108;
-  --mk-gold-subtle: rgba(138, 101, 53, 0.10);
-  --mk-gold-badge: rgba(138, 101, 53, 0.15);
-  --mk-gold-border: rgba(138, 101, 53, 0.20);
-  --mk-violet: rgb(106, 93, 166);
-  --mk-violet-subtle: rgba(106, 93, 166, 0.14);
-  --mk-violet-border: rgba(106, 93, 166, 0.24);
-  --mk-success: #16A34A;
-  --mk-warning: #B45309;
-  --mk-error: #DC2626;
+  --mk-control: rgba(0, 0, 0, 0.30);
+  --mk-gold: #7B5A2F;
+  --mk-gold-ink: #FFFFFF;
+  --mk-gold-subtle: rgba(123, 90, 47, 0.10);
+  --mk-gold-badge: rgba(123, 90, 47, 0.12);
+  --mk-gold-border: rgba(123, 90, 47, 0.18);
+  --mk-violet: #5F5394;
+  --mk-violet-subtle: rgba(95, 83, 148, 0.12);
+  --mk-violet-border: rgba(95, 83, 148, 0.24);
+  --mk-dusk-1: #926D3E;
+  --mk-dusk-2: #A95E6B;
+  --mk-dusk-3: #6A5BC4;
+  --mk-dusk: linear-gradient(110deg, var(--mk-dusk-1), var(--mk-dusk-2) 50%, var(--mk-dusk-3));
+  --mk-success: #0F6C31;
+  --mk-warning: #984608;
+  --mk-error: #B31F1F;
   --mk-info: #1E5AA8;
   --mk-shadow-xs: 0 1px 2px rgba(20, 18, 14, 0.04);
-  --mk-shadow-sm: 0 2px 4px rgba(20, 18, 14, 0.06), 0 1px 2px rgba(20, 18, 14, 0.04);
+  --mk-shadow-sm: 0 1px 2px rgba(26, 22, 14, 0.05), 0 6px 20px rgba(26, 22, 14, 0.06);
+  --mk-r-sm: 8px;
+  --mk-r-md: 14px;
+  --mk-r-lg: 22px;
   --mk-sans: var(--font-sans);
   --mk-serif: var(--font-serif);
   --mk-mono: var(--font-mono);
@@ -85,9 +96,9 @@
 .mark {
   width: 26px;
   height: 26px;
-  border-radius: 7px;
-  background: var(--mk-gold-subtle);
-  border: 1px solid var(--mk-gold-border);
+  border-radius: 999px;
+  background: var(--mk-elev);
+  border: 1px solid var(--mk-b-subtle);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -117,7 +128,7 @@
   align-items: center;
   gap: 12px;
   padding: 7px 10px;
-  border-radius: 10px;
+  border-radius: var(--mk-r-sm);
   font-size: 14px;
   font-weight: 500;
   color: var(--mk-t2);
@@ -193,7 +204,7 @@
   height: 32px;
   width: 280px;
   max-width: 100%;
-  border-radius: 8px;
+  border-radius: 999px;
   background: var(--mk-muted);
   border: 1px solid var(--mk-b-subtle);
   color: var(--mk-t3);
@@ -234,12 +245,13 @@
 }
 .avatar.sm { width: 24px; height: 24px; font-size: 10px; }
 .avatar.lg { width: 32px; height: 32px; font-size: 12px; }
-.avatar.c1 { background: #E7DFD0; }
-.avatar.c2 { background: #DCE3EA; }
-.avatar.c3 { background: #E3E7D8; }
-.avatar.c4 { background: #EADDE4; }
-.avatar.c5 { background: #D9E5E1; }
-.avatar.c6 { background: #EFE3CF; }
+/* The app's hashed initials avatars: soft tint, AA ink. */
+.avatar.c1 { background: #E8DDD0; color: #5C4A3A; border-color: transparent; }
+.avatar.c2 { background: #D9E1D2; color: #3E5240; border-color: transparent; }
+.avatar.c3 { background: #E2D5E8; color: #574566; border-color: transparent; }
+.avatar.c4 { background: #E5DCC9; color: #5A4A2E; border-color: transparent; }
+.avatar.c5 { background: #D4DCE0; color: #3E4F58; border-color: transparent; }
+.avatar.c6 { background: #E8D6D2; color: #6A4540; border-color: transparent; }
 
 .viewport { position: relative; overflow: hidden; }
 .viewport::after {
@@ -249,7 +261,7 @@
   right: 0;
   bottom: 0;
   height: 56px;
-  background: linear-gradient(180deg, rgba(244, 242, 236, 0), var(--mk-base));
+  background: linear-gradient(180deg, rgba(245, 242, 236, 0), var(--mk-base));
   pointer-events: none;
 }
 
@@ -280,18 +292,18 @@
   flex: 0 0 clamp(240px, 34%, 300px);
   min-width: 0;
   background: var(--mk-elev);
-  border: 1px solid var(--mk-b-subtle);
-  border-radius: 14px;
+  border-radius: var(--mk-r-lg);
+  box-shadow: var(--mk-shadow-sm);
   overflow: hidden;
 }
 .qChips { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 14px 12px; border-bottom: 1px solid var(--mk-b-subtle); }
 .qChip { font-size: 12px; font-weight: 500; padding: 4px 9px; border-radius: 999px; white-space: nowrap; }
 .qChip_gold { background: var(--mk-gold-badge); color: var(--mk-gold); }
 .qChip_muted { background: var(--mk-active); color: var(--mk-t2); }
-.qChip_green { background: rgba(22, 163, 74, 0.12); color: #15803D; }
+.qChip_green { background: rgba(15, 108, 49, 0.12); color: var(--mk-success); }
 .qRow { display: flex; flex-direction: column; gap: 3px; padding: 13px 16px; border-bottom: 1px solid var(--mk-b-subtle); }
 .qRow:last-child { border-bottom: 0; }
-.qRow.on { background: var(--mk-gold-subtle); box-shadow: inset 2px 0 0 var(--mk-gold); }
+.qRow.on { background: var(--mk-gold-subtle); }
 .qLine { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .qName { font-family: var(--mk-serif); font-weight: 400; font-size: 15.5px; letter-spacing: -0.01em; color: var(--mk-t1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .qDate { font-size: 12px; color: var(--mk-gold); white-space: nowrap; flex: none; }
@@ -302,8 +314,8 @@
   flex: 1;
   min-width: 0;
   background: var(--mk-elev);
-  border: 1px solid var(--mk-b-subtle);
-  border-radius: 14px;
+  border-radius: var(--mk-r-lg);
+  box-shadow: var(--mk-shadow-sm);
   padding: 24px 28px 28px;
   container: pane / inline-size;
 }
@@ -330,32 +342,36 @@
 .factRow { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; padding: 8px 0; border-top: 1px solid var(--mk-b-subtle); font-size: 14px; line-height: 1.4; }
 .factRow dt { color: var(--mk-t3); }
 .factRow dd { margin: 0; color: var(--mk-t1); }
+/* MambaHR's read: the one card with the agent's static Dusk ring. */
 .readRing {
-  padding: 1px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(138, 101, 53, 0.55), rgba(106, 93, 166, 0.55));
+  padding: 1.5px;
+  border-radius: var(--mk-r-lg);
+  background: var(--mk-dusk);
 }
-.read { background: var(--mk-elev); border-radius: 11px; padding: 14px 16px; }
+.read { background: var(--mk-elev); border-radius: calc(var(--mk-r-lg) - 1.5px); padding: 14px 18px; }
 .read .label { color: var(--mk-violet); }
 .readText { font-size: 14px; line-height: 1.5; color: var(--mk-t1); margin-top: 6px; }
 
-.decide { background: var(--mk-surface); border: 1px solid var(--mk-b-subtle); border-radius: 12px; padding: 16px; }
+/* Your decision: each choice a full-width pill whose words start at its left
+   edge (the app's option block), its consequence under it. */
+.decide { background: var(--mk-surface); border-radius: var(--mk-r-lg); padding: 16px 16px 18px; }
 .pills { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
 .choice { min-width: 0; }
 .pill {
   min-height: 40px;
-  border-radius: 10px;
+  border-radius: 999px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: 14px;
   font-weight: 500;
-  text-align: center;
-  padding: 0 14px;
+  text-align: left;
+  padding: 8px 16px;
+  line-height: 1.3;
 }
-.pill.primary { background: var(--mk-t1); color: var(--mk-base); border: 1px solid var(--mk-t1); }
-.pill.secondary { background: var(--mk-elev); color: var(--mk-t1); border: 1px solid var(--mk-b); }
-.consequence { font-size: 12.5px; color: var(--mk-t3); margin-top: 6px; line-height: 1.4; }
+.pill.primary { background: var(--mk-t1); color: #FFFFFF; border: 1px solid var(--mk-t1); }
+.pill.secondary { background: var(--mk-elev); color: var(--mk-t1); border: 1px solid var(--mk-control); }
+.consequence { font-size: 12.5px; color: var(--mk-t3); margin-top: 6px; padding-left: 16px; line-height: 1.4; }
 .history { grid-area: hist; display: flex; flex-direction: column; gap: 8px; padding-top: 2px; }
 .hLine { display: flex; gap: 10px; font-size: 12.5px; color: var(--mk-t2); }
 .hLine i { flex: none; width: 6px; height: 6px; border-radius: 999px; background: var(--mk-b-strong); margin-top: 6px; }
@@ -403,7 +419,7 @@
   flex: 1 1 200px;
   min-width: 180px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: 999px;
   background: var(--mk-elev);
   border: 1px solid var(--mk-b);
   color: var(--mk-t4);
@@ -418,7 +434,7 @@
 .search span { overflow: hidden; text-overflow: ellipsis; }
 .select {
   height: 36px;
-  border-radius: 8px;
+  border-radius: 999px;
   background: var(--mk-elev);
   border: 1px solid var(--mk-b);
   color: var(--mk-t2);
@@ -433,7 +449,7 @@
 .iconBtn {
   height: 36px;
   min-width: 36px;
-  border-radius: 8px;
+  border-radius: 999px;
   background: var(--mk-elev);
   border: 1px solid var(--mk-b);
   color: var(--mk-t2);
@@ -443,12 +459,12 @@
   padding: 0 8px;
   gap: 2px;
 }
-.iconBtn .seg { display: inline-flex; padding: 4px; border-radius: 5px; }
+.iconBtn .seg { display: inline-flex; padding: 4px; border-radius: 999px; }
 .iconBtn .seg.on { background: var(--mk-active); color: var(--mk-t1); }
 .checkbox { width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--mk-b-strong); background: var(--mk-elev); flex: none; }
 .btnSecondary {
   height: 36px;
-  border-radius: 8px;
+  border-radius: 999px;
   background: var(--mk-elev);
   border: 1px solid var(--mk-b);
   color: var(--mk-t1);
@@ -498,12 +514,12 @@
   white-space: nowrap;
 }
 .badge.neutral { background: var(--mk-active); color: var(--mk-t2); }
-.badge.success { background: rgba(22, 163, 74, 0.15); color: #15803D; }
-.badge.warning { background: rgba(180, 83, 9, 0.15); color: var(--mk-warning); }
-.badge.info { background: rgba(30, 90, 168, 0.15); color: var(--mk-info); }
+.badge.success { background: rgba(15, 108, 49, 0.12); color: var(--mk-success); }
+.badge.warning { background: rgba(152, 70, 8, 0.12); color: var(--mk-warning); }
+.badge.info { background: rgba(30, 90, 168, 0.10); color: var(--mk-info); }
 .badge.outline { background: transparent; border-color: var(--mk-b); color: var(--mk-t2); }
 .badge.ai { background: var(--mk-violet-subtle); color: var(--mk-violet); border-color: var(--mk-violet-border); }
-.badge.ai i { width: 6px; height: 6px; border-radius: 999px; background: var(--mk-violet); }
+.badge.ai i { width: 6px; height: 6px; border-radius: 999px; background: var(--mk-dusk); }
 .pRight { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right; white-space: nowrap; }
 .pMgr { font-size: 12px; color: var(--mk-t2); }
 .pMgr b { font-weight: 500; color: var(--mk-gold); }
@@ -515,7 +531,11 @@
   .pageHead, .toolbar, .groupHead, .pRow { padding-left: 16px; padding-right: 16px; }
 }
 
-/* ─────────────────────────── Chat thread ─────────────────────────── */
+/* ─────────────────────────── Chat (the answer shape) ───────────────────────────
+   The app's one chat, answer layout of 2026-10-08: the person's bubble, then
+   the agent's mark beside the answer in one line, at most one data card, at
+   most one action in the Dusk ring ("Needs you"), then "Based on" chips. The
+   chat box at the bottom wears the Dusk ring. */
 .chat {
   background: var(--mk-base);
   padding: 28px 28px 24px;
@@ -523,55 +543,73 @@
   flex-direction: column;
   gap: 20px;
 }
-.greeting { font-family: var(--mk-serif); font-size: 28px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; color: var(--mk-t1); }
-.greetSub { font-size: 14px; color: var(--mk-t3); margin-top: 4px; }
-.greetSub b { font-weight: 500; color: var(--mk-gold); }
-.thread { display: flex; flex-direction: column; gap: 16px; }
+.thread { display: flex; flex-direction: column; gap: 18px; }
 .userMsg {
   align-self: flex-end;
   max-width: 80%;
-  background: var(--mk-gold-subtle);
-  border: 1px solid var(--mk-b-subtle);
-  border-radius: 14px 14px 6px 14px;
-  padding: 8px 12px;
+  background: var(--mk-bubble);
+  border-radius: 20px 20px 6px 20px;
+  padding: 10px 16px;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--mk-t1);
 }
-.assist { display: flex; gap: 12px; align-items: flex-start; }
-.chip {
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  border: 1px solid var(--mk-b-subtle);
-  background: var(--mk-elev);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.assist { display: flex; gap: 14px; align-items: flex-start; }
+.assistBody { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.answer { font-size: 16px; font-weight: 500; line-height: 1.45; color: var(--mk-t1); margin-top: 6px; }
+
+/* The agent's mark: the M on white in a 2px Dusk ring (static at rest). */
+.agentMark {
+  position: relative;
   flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--mk-dusk);
+  overflow: hidden;
 }
-.chip .mark { width: 18px; height: 18px; border-radius: 5px; font-size: 11px; }
-.assistBody { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
-.prose { font-size: 14px; line-height: 1.6; color: var(--mk-t1); }
-.prose p + p { margin-top: 8px; }
-.toolCard { background: var(--mk-elev); border: 1px solid var(--mk-b-subtle); border-radius: 10px; padding: 10px 12px; }
-.toolHead { display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; color: var(--mk-t3); }
-.toolBody { font-size: 12px; color: var(--mk-t2); margin-top: 6px; line-height: 1.5; }
-.approval {
-  background: color-mix(in srgb, var(--mk-warning) 6%, var(--mk-elev));
-  border: 1px solid color-mix(in srgb, var(--mk-warning) 20%, transparent);
-  border-radius: 6px;
-  padding: 12px;
+.agentMark::before { content: ''; position: absolute; inset: 2px; border-radius: inherit; background: var(--mk-elev); }
+.agentMark > span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--mk-dusk-1); }
+
+/* One data card, built from real data: a header (avatar, serif name, note)
+   and up to three figures. */
+.dataCard {
+  border-radius: var(--mk-r-lg);
+  padding: 16px 18px;
+  background: var(--mk-elev);
+  box-shadow: inset 0 0 0 1px var(--mk-b);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
-.approvalLine { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--mk-warning); }
-.approvalDetail { font-size: 13px; color: var(--mk-t2); line-height: 1.5; }
-.approvalBtns { display: flex; gap: 8px; }
-.aBtn { padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; }
-.aBtn.ok { background: var(--mk-gold); color: var(--mk-gold-ink); }
-.aBtn.no { background: var(--mk-base); border: 1px solid var(--mk-b); color: var(--mk-t2); }
+.dataHead { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; }
+.dataName { font-family: var(--mk-serif); font-size: 16px; font-weight: 500; letter-spacing: -0.01em; color: var(--mk-t1); }
+.dataNote { font-size: 12.5px; color: var(--mk-t3); }
+.figures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.figure { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.figLabel { font-size: 12.5px; color: var(--mk-t2); }
+.figValue { font-family: var(--mk-serif); font-size: 22px; line-height: 1.05; color: var(--mk-t1); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.figValue small { font-family: var(--mk-sans); font-size: 12px; color: var(--mk-t3); }
+.figSub { font-size: 12px; color: var(--mk-t3); }
+
+/* Needs you: the one action, last, in the static Dusk ring. */
+.needsRing { padding: 1.5px; border-radius: var(--mk-r-lg); background: var(--mk-dusk); }
+.needs { border-radius: calc(var(--mk-r-lg) - 1.5px); background: var(--mk-elev); padding: 16px 18px; display: flex; flex-direction: column; gap: 9px; }
+.needsLabel { font-size: 12px; font-weight: 600; color: var(--mk-violet); }
+.needsTitle { font-family: var(--mk-serif); font-size: 18px; font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; color: var(--mk-t1); }
+.needsBody { padding: 10px 14px; border-radius: var(--mk-r-md); background: var(--mk-base); color: var(--mk-t2); font-size: 13.5px; line-height: 1.5; }
+.btnRow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn { min-height: 36px; padding: 0 16px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; font-size: 13.5px; font-weight: 500; white-space: nowrap; border: 1px solid transparent; }
+.btn.primary { background: var(--mk-t1); color: #FFFFFF; }
+.btn.secondary { background: var(--mk-elev); color: var(--mk-t1); border-color: var(--mk-control); }
+.btn.ghost { background: transparent; color: var(--mk-t2); padding: 0 10px; }
+
+/* Based on: what the turn read, as quiet pill chips. */
+.sources { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.sourcesLead { font-size: 12px; color: var(--mk-t3); margin-right: 2px; }
+.source { height: 26px; padding: 0 10px; border-radius: 999px; background: var(--mk-base); box-shadow: inset 0 0 0 1px var(--mk-b-subtle); color: var(--mk-t2); font-size: 12px; display: inline-flex; align-items: center; white-space: nowrap; }
+
+/* The chat box: a pill field in the Dusk ring, the send button an ink circle. */
 .composerWrap { margin-top: auto; }
 .ctx {
   display: inline-flex;
@@ -580,21 +618,21 @@
   font-size: 12px;
   color: var(--mk-violet);
   background: var(--mk-violet-subtle);
-  border: 1px solid var(--mk-violet-border);
   border-radius: 999px;
-  padding: 3px 10px 3px 8px;
+  padding: 4px 10px 4px 8px;
   margin-bottom: 10px;
 }
-.ring { padding: 1.5px; border-radius: 14px; background: linear-gradient(110deg, var(--mk-gold), var(--mk-violet)); }
-.composer { background: var(--mk-elev); border-radius: 12px; padding: 14px 14px 10px; }
-.placeholder { font-size: 14px; color: var(--mk-t4); }
-.composerRow { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
-.composerChip { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--mk-t2); border: 1px solid var(--mk-b); border-radius: 6px; padding: 4px 8px; background: var(--mk-base); }
-.send { margin-left: auto; width: 28px; height: 28px; border-radius: 6px; background: var(--mk-t1); color: var(--mk-base); display: inline-flex; align-items: center; justify-content: center; }
+.ring { padding: 2px; border-radius: 30px; background: var(--mk-dusk); }
+.composer { background: var(--mk-elev); border-radius: 28px; padding: 8px 8px 8px 20px; display: flex; align-items: center; gap: 10px; }
+.placeholder { flex: 1; min-width: 0; font-size: 14px; color: var(--mk-t4); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.send { flex: none; width: 36px; height: 36px; border-radius: 999px; background: var(--mk-t1); color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; }
 @container chat (max-width: 480px) {
-  .chat { padding: 20px 18px; }
-  .greeting { font-size: 24px; }
+  .chat { padding: 20px 16px; }
   .userMsg { max-width: 92%; }
+  .assist { gap: 10px; }
+  .agentMark { width: 30px; height: 30px; }
+  .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .figures .figure:nth-child(3) { display: none; }
 }
 
 /* ─────────────────────────── Pipeline board ─────────────────────────── */
@@ -608,19 +646,19 @@
 .tab.on { color: var(--mk-t1); border-bottom-color: var(--mk-t1); }
 .tabCount { font-size: 11px; font-weight: 600; color: var(--mk-t2); background: var(--mk-active); border-radius: 999px; padding: 1px 6px; font-variant-numeric: tabular-nums; }
 .board { position: relative; display: flex; gap: 14px; padding: 20px 24px 24px; overflow: hidden; }
-.boardFade { position: absolute; top: 0; right: 0; bottom: 0; width: 64px; background: linear-gradient(90deg, rgba(244, 242, 236, 0), var(--mk-base)); pointer-events: none; }
+.boardFade { position: absolute; top: 0; right: 0; bottom: 0; width: 64px; background: linear-gradient(90deg, rgba(245, 242, 236, 0), var(--mk-base)); pointer-events: none; }
 .col {
   flex: 0 0 var(--col);
   width: var(--col);
   background: var(--mk-elev);
-  border: 1px solid var(--mk-b);
-  border-radius: 14px;
+  border-radius: var(--mk-r-lg);
+  box-shadow: var(--mk-shadow-sm);
   overflow: hidden;
   position: relative;
 }
 .col::before { content: ''; display: block; height: 2px; background: var(--stage); }
 .colHead { display: flex; align-items: center; gap: 8px; padding: 12px 16px 8px; font-size: 13px; font-weight: 500; color: var(--mk-t1); }
-.swatch { width: 8px; height: 8px; border-radius: 4px; background: var(--stage); flex: none; }
+.swatch { width: 8px; height: 8px; border-radius: 999px; background: var(--stage); flex: none; }
 .colCount { font-size: 11px; font-weight: 600; color: var(--mk-t3); font-variant-numeric: tabular-nums; }
 .colBody { padding: 0 16px 8px; }
 .cand { display: flex; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--mk-b-subtle); }
@@ -630,7 +668,7 @@
 .candSub { font-size: 11px; color: var(--mk-t3); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .stagePill { font-size: 11px; color: var(--mk-t2); background: var(--mk-active); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
 .stagePill.ai { color: var(--mk-violet); background: var(--mk-violet-subtle); }
-.colEmpty { padding: 14px 0 18px; font-size: 12px; color: var(--mk-t4); }
+.colEmpty { padding: 14px 0 18px; font-size: 12px; color: var(--mk-t3); }
 @container pipe (max-width: 720px) {
   .pipe { --col: 220px; }
   .reqHead { padding: 18px 16px 0; }
@@ -652,7 +690,8 @@
 .slackTop { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid rgba(29, 28, 29, 0.08); font-size: 13px; color: #616061; }
 .slackTop b { color: #1D1C1D; font-weight: 700; }
 .slackMsg { display: flex; gap: 10px; padding: 12px 14px 14px; }
-.slackAv { width: 36px; height: 36px; border-radius: 6px; background: var(--mk-gold); color: var(--mk-base); display: inline-flex; align-items: center; justify-content: center; font-family: var(--mk-serif); font-style: italic; font-size: 19px; flex: none; }
+/* The MambaHR app icon as Slack shows it: the gold M on a dark square. */
+.slackAv { width: 36px; height: 36px; border-radius: 8px; background: #0C0C0B; display: inline-flex; align-items: center; justify-content: center; flex: none; }
 .slackBody { flex: 1; min-width: 0; font-size: 14px; line-height: 1.5; }
 .slackWho { display: flex; align-items: baseline; gap: 6px; }
 .slackWho b { font-weight: 900; font-size: 15px; }

@@ -40,7 +40,7 @@ function PayCycleCard() {
       </div>
       <style jsx>{`
         .pcc {
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 16px;
           box-shadow: var(--shadow-float);
@@ -125,7 +125,7 @@ function DeelRunCard() {
         .id { flex: 1; min-width: 0; }
         .who { font-size: 15px; font-weight: 700; color: var(--text); }
         .ev { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
-        .rows { margin-top: 18px; border: 1px solid var(--border-faint); border-radius: 12px; overflow: hidden; background: var(--bg); }
+        .rows { margin-top: 18px; border: 1px solid var(--border-faint); border-radius: 12px; overflow: hidden; background: var(--bg-card); }
         .r { display: flex; justify-content: space-between; gap: 16px; padding: 10px 14px; }
         .r + .r { border-top: 1px solid var(--border-faint); }
         .k { font-size: 13px; color: var(--text-faint); }
@@ -163,7 +163,7 @@ function PaydayPhoto() {
           position: absolute;
           left: -18px;
           bottom: 26px;
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 14px;
           padding: 14px 16px;

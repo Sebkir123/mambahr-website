@@ -1,26 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  /* Surfaces — Warm Editorial Premium (MambaHR design system, light mode) */
-  --color-bg:           #FEFDFA;
-  --color-bg-warm:      #F4F2EC;
+  /* Surfaces: Warm Soft, the product's light theme (mamba_hr web/app/globals.css). */
+  --color-bg:           #F5F2EC;
+  --color-bg-warm:      #EEEAE2;
   --color-bg-cream:     #ECE9E2;
   --color-bg-surface:   #F8F6F1;
-  --color-bg-elevated:  #ECE9E2;
+  --color-bg-elevated:  #FFFFFF;
 
   /* Text */
   --color-text:         #1A1A19;
   --color-text-muted:   #3D3D3A;
-  --color-text-faint:   #66665F;
+  --color-text-faint:   #5C5C58;
 
-  /* Brand — gold accent + iris-violet AI secondary */
-  --color-gold:         #7A5A2E;
+  /* Brand: gold marks the person, violet marks the agent */
+  --color-gold:         #7B5A2F;
   --color-gold-dark:    #6B4E26;
   --color-gold-light:   #C49A6C;
-  --color-gold-tint:    #F2ECE0;
-  --color-violet:       #6A5DA6;
-  --color-peach:        #FFE8D6;
-  --color-peach-deep:   #FFD8B5;
+  --color-gold-tint:    #F3EBDD;
+  --color-violet:       #5F5394;
+  --color-peach:        #FBE6DC;
+  --color-peach-deep:   #F6D3C8;
 
   /* Borders */
   --color-border:       rgba(0,0,0,0.12);
@@ -28,59 +28,103 @@
   --color-border-faint: rgba(0,0,0,0.07);
 
   /* Status */
-  --color-green:        #1A7A3E;
-  --color-red:          #C42020;
+  --color-green:        #0F6C31;
+  --color-red:          #B31F1F;
 }
 
+/* ── Warm Soft + Dusk (approved 2026-10-08 for the product; the site uses the
+   same system so site and app are one brand). White cards on warm oat with a
+   soft wide lift and no heavy borders; controls 14px, cards 22px, dialogs
+   24px, small chips 8px; every button, badge, chip and avatar is a pill.
+   Dusk is the agent's gradient: gold (the person) through rose (the bridge)
+   to violet (the agent). White text clears 4.5:1 on every Dusk stop. */
 :root {
-  --bg:           #FEFDFA;
-  --bg-warm:      #F4F2EC;
-  --bg-cream:     #ECE9E2;
-  --bg-surface:   #F8F6F1;
-  --bg-elevated:  #ECE9E2;
+  --bg:           #F5F2EC;   /* oat: the page ground (product bg-base) */
+  --bg-warm:      #EEEAE2;   /* the alternate band, one step deeper */
+  --bg-cream:     #ECE9E2;   /* sunken wells (product bg-muted) */
+  --bg-surface:   #F8F6F1;   /* secondary panels (product bg-surface) */
+  --bg-elevated:  #FFFFFF;   /* cards (product bg-elevated) */
+  --bg-card:      #FFFFFF;
 
   --text:         #1A1A19;
-  --ink:          #14110C;   /* dark panel ground */
-  --text-muted:   #3D3D3A;
-  --text-faint:   #66665F;
+  --ink:          #14110C;
+  --text-muted:   #3D3D3A;   /* product text-secondary */
+  --text-faint:   #5C5C58;   /* product text-tertiary: 4.5:1 on every ground used here */
 
-  --gold:         #7A5A2E;
+  --gold:         #7B5A2F;   /* product accent-primary */
   --gold-dark:    #6B4E26;
   --gold-light:   #C49A6C;
-  --gold-tint:    #F2ECE0;
-  --gold-mid:     #B98A4E;   /* gradient start, gold → violet */
-  --gold-pale:    #D4AA7C;   /* gradient start on dark panels */
-  --violet:       #6A5DA6;
-  --violet-soft:  rgba(106,93,166,0.12);
-  --peach:        #FFE8D6;
-  --peach-deep:   #FFD8B5;
+  --gold-tint:    #F3EBDD;
+  --gold-mid:     #926D3E;   /* Dusk stop 1 */
+  --gold-pale:    #D4AA7C;
+  --violet:       #5F5394;   /* product accent-secondary: violet TEXT and marks */
+  --violet-soft:  rgba(95,83,148,0.12);
+  --violet-border: rgba(95,83,148,0.24);
+  --peach:        #FBE6DC;
+  --peach-deep:   #F6D3C8;
+
+  /* Dusk stops (light theme) and the gradients built from them. */
+  --dusk-1:       #926D3E;   /* champagne gold, the person */
+  --dusk-2:       #A95E6B;   /* rose, the bridge */
+  --dusk-3:       #6A5BC4;   /* iris violet, the agent */
+  --grad:         linear-gradient(110deg, var(--dusk-1), var(--dusk-2) 50%, var(--dusk-3));
+  --grad-flow:    linear-gradient(110deg, var(--dusk-1), var(--dusk-2), var(--dusk-3), var(--dusk-2), var(--dusk-1), var(--dusk-2), var(--dusk-3), var(--dusk-2), var(--dusk-1));
+  /* The beam: one soft Dusk head on a hairline track (product
+     --gradient-agent-beam-stops). Read with
+     conic-gradient(from var(--beam-angle), var(--beam-stops)). */
+  --beam-stops:
+    rgba(0,0,0,0.07) 0deg,
+    rgba(0,0,0,0.07) 200deg,
+    color-mix(in srgb, var(--dusk-3) 45%, transparent) 262deg,
+    color-mix(in srgb, var(--dusk-2) 90%, transparent) 300deg,
+    color-mix(in srgb, var(--dusk-1) 80%, transparent) 330deg,
+    color-mix(in srgb, var(--dusk-1) 30%, transparent) 348deg,
+    rgba(0,0,0,0.07) 360deg;
+  --grad-warm:  linear-gradient(135deg, #F6EAD6, #F6DCD8 55%, #E6DDF3);
+  --grad-gold:  linear-gradient(100deg, var(--gold-pale), var(--gold));
+
+  /* The stage: the big soft Dusk field behind hero and CTA panels. Pastel
+     Dusk (champagne, rose, iris) so ink text and white glass both read on it. */
+  --stage-field: linear-gradient(155deg, #F2D3A6 0%, #EDB9B9 36%, #C9B4E6 68%, #8F82DA 100%);
+  --stage-glow-1: rgba(250, 222, 182, 0.95);   /* champagne */
+  --stage-glow-2: rgba(160, 146, 228, 0.9);    /* iris */
+  --stage-glow-3: rgba(226, 158, 172, 0.8);    /* rose */
+  --stage-glow-4: rgba(255, 246, 234, 0.85);   /* light */
 
   --border:       rgba(0,0,0,0.12);
   --border-mid:   rgba(0,0,0,0.18);
   --border-faint: rgba(0,0,0,0.07);
+  --control-border: rgba(0,0,0,0.45);
 
-  /* Brand gradients — gold → iris-violet accent + warm washes */
-  --grad:       linear-gradient(100deg, var(--gold-mid) 0%, var(--gold) 48%, var(--violet) 100%);
-  --grad-warm:  linear-gradient(135deg, #F6EAD6, #FBDFC9 55%, #EBD3DE);
-  --grad-gold:  linear-gradient(100deg, var(--gold-pale), var(--gold));
+  --green:        #0F6C31;
+  --green-tint:   rgba(15,108,49,0.12);
+  --red:          #B31F1F;
 
-  /* Radius scale. --radius-full was referenced but never defined. */
-  --radius-sm:   7px;
-  --radius-md:   12px;
-  --radius-lg:   18px;
-  --radius-full: 999px;
+  /* Warm Soft shape */
+  --radius-xs:   4px;
+  --radius-sm:   8px;    /* small chips */
+  --radius-md:   14px;   /* controls, inputs, inner cards */
+  --radius-lg:   22px;   /* cards, the agent ring */
+  --radius-xl:   24px;   /* dialogs, big panels */
+  --radius-full: 9999px; /* buttons, badges, chips, avatars */
 
-  /* Design-system light-mode elevation — warm, low-alpha. */
-  --shadow-sm:      0 2px 4px rgba(20,18,14,0.06), 0 1px 2px rgba(20,18,14,0.04);
-  --shadow-md:      0 4px 12px rgba(20,18,14,0.08), 0 1px 3px rgba(20,18,14,0.05);
+  /* Warm Soft depth: a soft wide lift, never a heavy border. */
+  --shadow-xs:      0 1px 2px rgba(20,18,14,0.04);
+  --shadow-sm:      0 1px 2px rgba(26,22,14,0.05), 0 6px 20px rgba(26,22,14,0.06);
+  --shadow-md:      0 1px 2px rgba(26,22,14,0.05), 0 10px 32px rgba(26,22,14,0.08);
+  --shadow-lg:      0 12px 32px rgba(20,18,14,0.10), 0 2px 6px rgba(20,18,14,0.06);
   --shadow-float:   0 20px 56px rgba(20,18,14,0.12), 0 4px 12px rgba(20,18,14,0.08);
+  --glow-ai:        0 0 0 1px rgba(106,93,166,0.22), 0 4px 22px rgba(106,93,166,0.20);
   --sheen:          inset 0 1px 0 rgba(255,255,255,0.6);
 
-  --font-sans:  var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-serif: var(--font-fraunces), 'Fraunces', Georgia, serif;
-  --font-mono:  var(--font-jetbrains), 'SF Mono', 'Fira Code', monospace;
+  --ease:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.7, 0, 0.84, 0);
 
-  /* Layout rhythm — every beat uses one max-width + vertical scale so the
+  --font-sans:  var(--font-geist), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: var(--font-fraunces), 'Fraunces', Georgia, serif;
+  --font-mono:  var(--font-geist-mono), 'SF Mono', 'Fira Code', monospace;
+
+  /* Layout rhythm: every beat uses one max-width + vertical scale so the
      page breathes consistently instead of each section reinventing spacing. */
   --page-max:        1120px;
   --page-pad:        24px;
@@ -88,12 +132,19 @@
   --beat-pad-tight:  clamp(56px, 7vw, 88px);
 }
 
+/* The beam's angle is a registered property so it can animate. */
+@property --beam-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 /* ── TYPE SCALE ─────────────────────────────────────
-   Instrument Serif for display/headlines, Inter for lead/body.
+   Fraunces for display/headlines, Geist for lead/body.
    Beats use these instead of hand-tuning font-size inline. */
 .t-display {
   font-family: var(--font-serif), Georgia, serif;
@@ -129,7 +180,7 @@ html {
    that don't carry .btn-* classes (scenario player tabs, compare
    chips, footer icon, etc.). Pointer focus stays unstyled. */
 :focus-visible {
-  outline: 2px solid var(--gold-dark);
+  outline: 2px solid var(--text);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -237,29 +288,32 @@ h4, h5, h6 {
   gap: 8px;
   font-family: var(--font-sans);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2;
+  letter-spacing: 0.005em;
+  min-height: 48px;
   padding: 14px 28px;
   border-radius: var(--radius-full);
   border: 1px solid transparent;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.15s ease, border-color 0.15s ease;
 }
 .btn-primary {
   background: var(--text);
   color: #FFFFFF;
   border-color: var(--text);
-  box-shadow: 0 12px 26px rgba(20, 18, 14, 0.22);
+  box-shadow: 0 1px 2px rgba(20, 18, 14, 0.12), 0 8px 22px rgba(20, 18, 14, 0.16);
 }
-.btn-primary:hover { transform: translateY(-2px); background: #2A2A28; }
+.btn-primary:hover { transform: translateY(-1px); background: #2A2A28; }
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--bg-card);
   color: var(--text);
   border-color: var(--border-mid);
+  box-shadow: var(--shadow-xs);
 }
-.btn-secondary:hover { background: #FFFFFF; border-color: var(--text); }
+.btn-secondary:hover { background: var(--bg-card); border-color: var(--text); }
 .btn-ghost {
   background: transparent;
   color: inherit;
@@ -270,14 +324,15 @@ h4, h5, h6 {
   background: var(--text);
   color: #FFFFFF;
   border-color: var(--text);
+  min-height: 40px;
   padding: 9px 20px;
-  font-size: 13px;
-  box-shadow: 0 4px 14px rgba(20, 18, 14, 0.18);
+  font-size: 14px;
+  box-shadow: 0 1px 2px rgba(20, 18, 14, 0.12), 0 4px 14px rgba(20, 18, 14, 0.14);
 }
-.btn-dark:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(20, 18, 14, 0.24); }
-.btn-sm { padding: 11px 18px; font-size: 14px; }
+.btn-dark:hover { background: #2A2A28; }
+.btn-sm { min-height: 44px; padding: 11px 18px; font-size: 14px; }
 .btn-block { width: 100%; }
-.btn:focus-visible { outline: 2px solid var(--gold-dark); outline-offset: 3px; }
+.btn:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
 /* Legacy gold pill, still used on the blog and the 404. */
@@ -302,7 +357,7 @@ h4, h5, h6 {
   box-shadow: 0 4px 16px rgba(176, 141, 87, 0.3);
 }
 .btn-gold:focus-visible {
-  outline: 2px solid var(--gold-dark);
+  outline: 2px solid var(--text);
   outline-offset: 3px;
 }
 
@@ -312,7 +367,7 @@ h4, h5, h6 {
 }
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+  box-shadow: var(--shadow-md);
 }
 
 /* FINDING-011: Inputs on dark background (request-access section) */
@@ -495,7 +550,7 @@ h4, h5, h6 {
   align-items: center;
   background-color: var(--gold-tint);
   color: var(--gold-dark);
-  border: 1px solid rgba(176, 141, 87, 0.2);
+  border: 1px solid rgba(123, 90, 47, 0.18);
   border-radius: 999px;
   padding: 4px 12px;
   font-size: 12px;
@@ -511,8 +566,7 @@ h4, h5, h6 {
 
 /* Compare card hover */
 .compare-card:hover {
-  border-color: var(--gold) !important;
-  box-shadow: 0 4px 20px rgba(176, 141, 87, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -553,20 +607,19 @@ h4, h5, h6 {
   will-change: transform;
 }
 .card-lift:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-float);
-  border-color: var(--gold-light);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 @media (prefers-reduced-motion: reduce) {
   .card-lift:hover { transform: none; }
 }
 
-/* ── Agent gradient border — the "Mamba is working / done" ring.
-   Matches the app's <AgentBorder> / design-preview treatment. A masked
-   ::before paints a gold→violet ring on ANY card (no wrapper); .agent-working
-   flows the gradient + breathes a violet glow, .agent-done is a static ring.
-   Add `agent-edge agent-working|agent-done` to a card; its own border is
-   neutralized so the ring is the only edge. */
+/* ── The agent ring (Dusk). The app's <AgentBorder>: a masked ::before paints
+   the Dusk ring on ANY card (no wrapper). .agent-working sweeps Dusk along the
+   ring (4s) and breathes a soft violet glow (3s); .agent-done is the static
+   Dusk ring. Add `agent-edge agent-working|agent-done` to a card; its own
+   border is neutralized so the ring is the only edge. Reduced motion shows the
+   static Dusk ring, never a frozen sweep. */
 @keyframes pvFlow { to { background-position: 200% 0; } }
 @keyframes pvBreathe { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
@@ -577,8 +630,7 @@ h4, h5, h6 {
   inset: 0;
   border-radius: inherit;
   padding: 1.5px;
-  background: linear-gradient(110deg, var(--gold), var(--violet), var(--gold), var(--violet), var(--gold));
-  background-size: 200% 100%;
+  background: var(--grad);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -591,22 +643,159 @@ h4, h5, h6 {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  box-shadow: 0 0 0 1px rgba(106, 93, 166, 0.22), 0 6px 28px rgba(106, 93, 166, 0.22);
+  box-shadow: var(--glow-ai);
   opacity: 0;
   pointer-events: none;
 }
-.agent-working::before { animation: pvFlow 4s linear infinite; }
-.agent-working::after { animation: pvBreathe 3.2s ease-in-out infinite; }
-/* Large ring — the prominent treatment for marquee agent cards. */
-.agent-edge.agent-lg::before { padding: 2.5px; }
-.agent-done::before {
-  background: linear-gradient(110deg, var(--gold), var(--violet) 55%, var(--gold));
-  background-size: 100% 100%;
-}
+.agent-working::before { background: var(--grad-flow); background-size: 200% 100%; animation: pvFlow 4s linear infinite; }
+.agent-working::after { animation: pvBreathe 3s ease-in-out infinite; }
+/* Large ring: the prominent treatment for marquee agent cards. */
+.agent-edge.agent-lg::before { padding: 2px; }
+.agent-done::before { background: var(--grad); }
 @media (prefers-reduced-motion: reduce) {
-  .agent-working::before { animation: none; }
+  .agent-working::before { animation: none; background: var(--grad); background-size: 100% 100%; }
   .agent-working::after { animation: none; opacity: 0; }
 }
+
+/* ── The agent's mark (the app's <AgentMark>): the M on a white face inside a
+   Dusk ring. Working: one soft Dusk head travels around the ring (2.4s), the
+   same beam as every agent surface. At rest: the static Dusk ring. No orb, no
+   dot, no spinner. Reduced motion: the static ring, never a frozen beam.
+     <span class="agent-mark is-working" aria-hidden="true"><i></i></span>
+   --am-size sets the diameter (default 36px). */
+@keyframes agentBeam { to { --beam-angle: 360deg; } }
+.agent-mark {
+  --am-size: 36px;
+  position: relative;
+  flex: none;
+  display: inline-block;
+  width: var(--am-size);
+  height: var(--am-size);
+  border-radius: var(--radius-full);
+  background: var(--grad);
+  overflow: hidden;
+  vertical-align: middle;
+}
+.agent-mark::before {
+  content: "";
+  position: absolute;
+  inset: max(1.5px, calc(var(--am-size) * 0.056));
+  border-radius: inherit;
+  background: var(--bg-card);
+}
+.agent-mark::after {
+  content: "";
+  position: absolute;
+  inset: 28%;
+  background: var(--dusk-1);
+  -webkit-mask: url('/brand/mamba-mark-light.svg') center / contain no-repeat;
+          mask: url('/brand/mamba-mark-light.svg') center / contain no-repeat;
+}
+.agent-mark.is-working {
+  background: conic-gradient(from var(--beam-angle), var(--beam-stops));
+  animation: agentBeam 2.4s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .agent-mark.is-working { animation: none; background: var(--grad); }
+}
+
+/* ── The status line beside a working mark: the words light up once across in
+   rose, on repeat (the app's WorkingSteps). Still under reduced motion. */
+@keyframes agentShimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+.agent-status {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.agent-status.is-working {
+  color: transparent;
+  background: linear-gradient(90deg, var(--text-muted) 0%, var(--text-muted) 35%, var(--dusk-2) 50%, var(--text-muted) 65%, var(--text-muted) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  animation: agentShimmer 2.2s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .agent-status.is-working { animation: none; color: var(--text-muted); background: none; }
+}
+
+/* ── App fragment kit: the pieces of today's app every hand-built fragment
+   reuses. Decorative spans, never focusable.
+   Pill buttons: ink primary, white secondary with a control edge, ghost. */
+.ui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.ui-btn.primary { background: var(--text); color: #FFFFFF; }
+.ui-btn.secondary { background: var(--bg-card); color: var(--text); border-color: rgba(0,0,0,0.30); }
+.ui-btn.ghost { background: transparent; color: var(--text-muted); padding: 0 10px; }
+.ui-btn.sm { min-height: 30px; padding: 0 12px; font-size: 13px; }
+
+/* "Needs you": the one action in an answer, in the static Dusk ring. */
+.ui-needs {
+  padding: 1.5px;
+  border-radius: var(--radius-lg);
+  background: var(--grad);
+}
+.ui-needs > .ui-needs-in {
+  border-radius: calc(var(--radius-lg) - 1.5px);
+  background: var(--bg-card);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+.ui-needs-label { font-size: 12px; font-weight: 600; color: var(--violet); }
+.ui-needs-title { font-family: var(--font-serif); font-size: 18px; font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; color: var(--text); }
+.ui-needs-body { font-size: 13.5px; line-height: 1.5; color: var(--text-muted); }
+.ui-needs-quote { padding: 10px 12px; border-radius: var(--radius-md); background: var(--bg); color: var(--text-muted); font-size: 13.5px; line-height: 1.5; }
+.ui-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 2px; }
+
+/* "Based on": the sources under an answer, as quiet pill chips. */
+.ui-sources { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ui-sources > b { font-size: 12px; font-weight: 400; color: var(--text-faint); margin-right: 2px; }
+.ui-sources > span {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg);
+  color: var(--text-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Status badges: pills with a meaning, the app's tint over solid text. */
+.ui-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  background: rgba(0,0,0,0.06);
+  color: var(--text-muted);
+}
+.ui-badge.success { background: var(--green-tint); color: var(--green); }
+.ui-badge.warning { background: rgba(152,70,8,0.12); color: #984608; }
+.ui-badge.info { background: rgba(30,90,168,0.10); color: #1E5AA8; }
+.ui-badge.agent { background: rgba(95,83,148,0.12); color: var(--violet); }
+.ui-badge.gold { background: rgba(123,90,47,0.10); color: var(--gold); }
 
 /* ── Nav polish — link hovers, dropdown entrance ── */
 .nav-top-link {
@@ -622,7 +811,7 @@ h4, h5, h6 {
   bottom: 4px;
   height: 1.5px;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--gold), var(--violet));
+  background: var(--grad);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.22s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -640,7 +829,7 @@ h4, h5, h6 {
 .nav-rail-link { transition: background 0.15s ease; }
 .nav-rail-link:hover { background: var(--bg-warm); }
 .nav-kw { transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease; }
-.nav-kw:hover { color: var(--gold-dark); border-color: var(--gold-light); background: var(--gold-tint); }
+.nav-kw:hover { color: var(--text); border-color: var(--border-mid); background: var(--bg-card); }
 @media (prefers-reduced-motion: reduce) {
   .btn { transition: none; }
   .btn:hover { transform: none; }
@@ -649,62 +838,69 @@ h4, h5, h6 {
 }
 
 /* ── Product mockup card: the frame every hand-built app fragment sits in.
-   Pair with agent-edge agent-working|agent-done for the gold-violet ring. */
+   Warm Soft: a 22px card on a soft wide lift, no heavy border. Pair with
+   agent-edge agent-working|agent-done for the Dusk ring. */
 .mock-card {
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  border: 0;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-float);
-  background: var(--bg-warm);
+  background: var(--bg);
 }
 .mock-card.slack { max-width: 520px; margin: 0 auto; box-shadow: var(--shadow-md); }
 
-/* ── Mamba status chip — pairs with .agent-edge surfaces.
-   "MAMBA · WORKING" (violet, pulsing dot) / "MAMBA · DONE" (gold check).
-   Matches the design-gallery agent cards. */
+/* ── MambaHR status chip: the agent's mark (20px) and a status line.
+   .working: the beam travels around the mark and the line shimmers.
+   .done: the static Dusk ring and a settled line. */
 .mamba-chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-muted);
 }
-.mamba-chip.working { color: var(--violet); }
-.mamba-chip.working .mc-i {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: var(--violet);
-  animation: mcPulse 2.2s ease-in-out infinite;
-}
-.mamba-chip.done { color: var(--gold); }
-.mamba-chip.done .mc-i {
-  width: 15px;
-  height: 15px;
-  border-radius: 999px;
-  background: var(--gold);
+.mamba-chip .mc-i {
   position: relative;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background: var(--grad);
+  overflow: hidden;
 }
-.mamba-chip.done .mc-i::after {
+.mamba-chip .mc-i::before {
   content: "";
   position: absolute;
-  left: 5px;
-  top: 3px;
-  width: 3px;
-  height: 6px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  inset: 1.5px;
+  border-radius: inherit;
+  background: var(--bg-card);
 }
-@keyframes mcPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(106, 93, 166, 0.45); }
-  50% { box-shadow: 0 0 0 6px rgba(106, 93, 166, 0); }
+.mamba-chip .mc-i::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  background: var(--dusk-1);
+  -webkit-mask: url('/brand/mamba-mark-light.svg') center / contain no-repeat;
+          mask: url('/brand/mamba-mark-light.svg') center / contain no-repeat;
+}
+.mamba-chip.working .mc-i {
+  background: conic-gradient(from var(--beam-angle), var(--beam-stops));
+  animation: agentBeam 2.4s linear infinite;
+}
+.mamba-chip.working {
+  color: transparent;
+  background: linear-gradient(90deg, var(--text-muted) 0%, var(--text-muted) 35%, var(--dusk-2) 50%, var(--text-muted) 65%, var(--text-muted) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  animation: agentShimmer 2.2s linear infinite;
 }
 @media (prefers-reduced-motion: reduce) {
-  .mamba-chip.working .mc-i { animation: none; }
+  .mamba-chip.working { animation: none; color: var(--text-muted); background: none; }
+  .mamba-chip.working .mc-i { animation: none; background: var(--grad); }
 }
 
 /* Reduced motion: every looping or decorative keyframe stands still */

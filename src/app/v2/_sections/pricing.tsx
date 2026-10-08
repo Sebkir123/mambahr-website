@@ -41,7 +41,7 @@ export default function Pricing() {
       <style jsx>{`
         .pr {
           background: var(--bg);
-          padding-block: clamp(96px, 13vw, 168px);
+          padding-block: clamp(80px, 10vw, 128px);
         }
         .wrap {
           max-width: var(--page-max);
@@ -57,7 +57,7 @@ export default function Pricing() {
           font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #7A5A2E;
+          color: var(--gold);
           margin: 0 0 18px;
         }
         .title {
@@ -70,7 +70,7 @@ export default function Pricing() {
           margin: 0;
         }
         .em {
-          background: linear-gradient(100deg, #B98A4E, #6A5DA6);
+          background: var(--grad);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
@@ -96,9 +96,9 @@ export default function Pricing() {
           gap: 18px;
         }
         .card {
-          background: var(--bg);
-          border: 1px solid var(--border);
-          border-radius: 18px;
+          background: var(--bg-card);
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-sm);
           padding: 26px 22px;
           display: flex;
           flex-direction: column;
@@ -115,8 +115,8 @@ export default function Pricing() {
         .pop {
           border: none;
           background:
-            linear-gradient(var(--bg), var(--bg)) padding-box,
-            linear-gradient(150deg, #D4AA7C, #B98A4E 55%, #6A5DA6) border-box;
+            linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+            var(--grad) border-box;
           border: 2px solid transparent;
           box-shadow: var(--shadow-float);
           position: relative;
@@ -130,7 +130,7 @@ export default function Pricing() {
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: #fff;
-          background: linear-gradient(120deg, #B98A4E, #6A5DA6);
+          background: var(--grad);
           padding: 4px 11px;
           border-radius: 999px;
         }

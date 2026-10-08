@@ -39,7 +39,7 @@ function DayOneCard() {
       <div className="foot">Everything ready before Alex arrives.</div>
       <style jsx>{`
         .d1 {
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 16px;
           box-shadow: var(--shadow-float);
@@ -110,7 +110,7 @@ function ExitChecklist() {
       ))}
       <style jsx>{`
         .ex {
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 16px;
           box-shadow: var(--shadow-float);
@@ -179,7 +179,7 @@ function FirstDay() {
           position: absolute;
           right: -14px;
           bottom: -22px;
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 14px;
           box-shadow: var(--shadow-float);

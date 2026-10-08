@@ -48,7 +48,7 @@ function DecisionCard() {
         .dc {
           max-width: 460px;
           margin: 0 auto;
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 16px;
           box-shadow: var(--shadow-float);
@@ -123,7 +123,7 @@ function DecisionCard() {
         }
         .dc-acts { display: flex; align-items: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
         .b-ok { font-size: 13px; font-weight: 600; color: #fff; background: var(--text); border-radius: 999px; padding: 8px 18px; }
-        .b-no { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 8px 18px; }
+        .b-no { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg-card); border: 1px solid var(--border); border-radius: 999px; padding: 8px 18px; }
         .dc-log { font-size: 12px; color: var(--text-faint); margin-left: auto; }
       `}</style>
     </div>
@@ -160,7 +160,7 @@ function MorningPhoto() {
           display: flex;
           align-items: center;
           gap: 11px;
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 14px;
           padding: 12px 18px;
@@ -192,7 +192,7 @@ export default function TodayPage() {
         title={<>Only the calls <Em>that need you.</Em></>}
         lead="Everything that needs your decision is on one list called To do. The rest is done and logged."
       >
-        <div className="mock-card agent-edge agent-working"><TodoDesk /></div>
+        <div className="mock-card"><TodoDesk /></div>
       </PageHero>
 
       <AgentLoop

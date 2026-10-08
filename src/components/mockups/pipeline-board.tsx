@@ -10,23 +10,23 @@ export type PipelineColumn = {
 }
 
 export const DEFAULT_COLUMNS: PipelineColumn[] = [
-  { name: 'Applied', color: '#8FA8C4', count: 12, cards: [
+  { name: 'Applied', color: '#73879D', count: 12, cards: [
     { name: 'Anna Keller', sub: 'Careers page · 2h ago' },
     { name: 'Marco Rossi', sub: 'LinkedIn · 5h ago' },
     { name: 'Yuki Tanaka', sub: 'Referral · yesterday', pill: 'Referral' },
   ] },
-  { name: 'Screen', color: '#A5B98A', count: 6, cards: [
+  { name: 'Screen', color: '#7B8A67', count: 6, cards: [
     { name: 'Sofia Lindqvist', sub: 'Phone screen Tue 2:00 · invite sent', pill: 'Scheduled', ai: true },
     { name: 'Daniel Okafor', sub: 'Phone screen Wed 11:30' },
   ] },
-  { name: 'Interview', color: '#C4A46A', count: 4, cards: [
+  { name: 'Interview', color: '#9A8153', count: 4, cards: [
     { name: 'Elena Petrova', sub: 'Panel Thu 10:00 · 3 of 4 scorecards in' },
     { name: 'Tom Harrison', sub: 'Onsite Fri · kit sent' },
   ] },
-  { name: 'Offer', color: '#B08BA8', count: 1, cards: [
+  { name: 'Offer', color: '#9C7B95', count: 1, cards: [
     { name: 'Maya Chen', sub: '$165k · in band · awaiting you', pill: 'Awaiting you' },
   ] },
-  { name: 'Hired', color: '#7FA69B', count: 1, cards: [
+  { name: 'Hired', color: '#6B8B82', count: 1, cards: [
     { name: 'Noah Bennett', sub: 'Starts Nov 3 · onboarding running' },
   ] },
 ]

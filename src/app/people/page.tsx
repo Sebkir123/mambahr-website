@@ -45,7 +45,7 @@ function OrgChartCard() {
         <span className="mono">Headcount: 247 · no gaps</span>
       </div>
       <style jsx>{`
-        .org { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 22px 22px 18px; box-shadow: var(--shadow-float); }
+        .org { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 22px 18px; box-shadow: var(--shadow-float); }
         .o-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
         .o-t { font-family: var(--font-serif); font-size: 19px; color: var(--text); }
         .o-sub { font-size: 12px; color: var(--text-faint); }
@@ -58,7 +58,7 @@ function OrgChartCard() {
         .lines i:first-child { transform: rotate(28deg); }
         .lines i:last-child { transform: rotate(-28deg); }
         .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .mgr { border: 1px solid var(--border-faint); border-radius: 12px; padding: 12px 10px; text-align: center; background: var(--bg); box-shadow: var(--shadow-sm); }
+        .mgr { border: 1px solid var(--border-faint); border-radius: 12px; padding: 12px 10px; text-align: center; background: var(--bg-card); box-shadow: var(--shadow-sm); }
         .mgr img { width: 28px; height: 28px; border-radius: 999px; object-fit: cover; margin-bottom: 6px; }
         .ct { display: inline-block; margin-top: 7px; font-family: var(--font-mono); font-size: 12px; color: var(--gold-dark); background: var(--gold-tint); border-radius: 999px; padding: 2px 8px; }
         .o-foot { margin-top: 16px; border-top: 1px solid var(--border-faint); padding-top: 11px; text-align: center; }
@@ -84,7 +84,7 @@ function ImportStage() {
       <style jsx>{`
         .imp { position: relative; }
         .photo { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: var(--shadow-float); }
-        .float { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 13px; padding: 12px 18px 12px 14px; box-shadow: var(--shadow-md); }
+        .float { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 11px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 13px; padding: 12px 18px 12px 14px; box-shadow: var(--shadow-md); }
         .f-check { flex: none; width: 20px; height: 20px; border-radius: 999px; background: var(--color-green); position: relative; }
         .f-check::after { content: ''; position: absolute; left: 7px; top: 4px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .f-t { font-size: 14px; font-weight: 700; color: var(--text); }
@@ -107,7 +107,7 @@ export default function PeoplePage() {
           title={<>One record, <Em>always current.</Em></>}
           lead="MambaHR keeps your employee records up to date as the work happens. Every person and every detail, without anyone retyping it."
         >
-          <div className="mock-card agent-edge agent-done"><PeopleDirectory /></div>
+          <div className="mock-card"><PeopleDirectory /></div>
         </PageHero>
 
         <AgentLoop

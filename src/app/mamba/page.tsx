@@ -105,7 +105,7 @@ function SlackWindow() {
       <style jsx>{`
         .sw {
           border-radius: 14px;
-          background: var(--bg);
+          background: var(--bg-card);
           box-shadow: var(--shadow-float);
           border: 1px solid var(--border);
           overflow: hidden;
@@ -129,7 +129,7 @@ function SlackWindow() {
         .sw-find {
           font-size: 12px;
           color: var(--text-faint);
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 7px;
           padding: 3px 12px;
@@ -299,7 +299,7 @@ function TeamPhoto() {
           position: absolute;
           right: -14px;
           bottom: 26px;
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 14px;
           padding: 14px 18px;
@@ -355,7 +355,7 @@ export default function MambaPage() {
           'One record of everything, wherever it was asked',
         ]}
       >
-        <div className="mock-card agent-edge agent-working"><ChatThread /></div>
+        <div className="mock-card"><ChatThread /></div>
       </FeatureSplit>
 
       <FeatureSplit

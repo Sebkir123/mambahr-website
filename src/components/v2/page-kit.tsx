@@ -2,7 +2,7 @@
 
 // ── v2 page kit ───────────────────────────────────────────────────────────
 // Shared primitives for the function pages (/hiring, /leave, /payroll, and so on)
-// so every page matches the v2 landing bar: Fraunces + gold→violet system,
+// so every page matches the v2 landing bar: Fraunces + Geist, Warm Soft cards, Dusk,
 // real-UI fragments, real people, mamba chips, scroll reveals, ONE-line
 // headlines. Pages compose: <PageHero> → <AgentLoop> → feature splits →
 // <StatTrio> → <PageCta>. Global classes used: agent-edge/
@@ -19,7 +19,7 @@ export function Em({ children }: { children: ReactNode }) {
   return (
     <span
       style={{
-        background: 'linear-gradient(100deg, #B98A4E, #6A5DA6)',
+        background: 'var(--grad)',
         WebkitBackgroundClip: 'text',
         backgroundClip: 'text',
         color: 'transparent',
@@ -101,25 +101,25 @@ export function PageHero({
           position: relative;
           overflow: hidden;
           padding: clamp(124px, 14vw, 172px) var(--page-pad) clamp(72px, 9vw, 108px);
-          background: linear-gradient(180deg, #F7F3EB 0%, var(--bg-warm) 58%);
+          background: linear-gradient(180deg, #F9F7F2 0%, var(--bg) 58%);
         }
         .aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
         .aurora::after {
           content: '';
           position: absolute;
           inset: 0;
-          background: radial-gradient(54% 48% at 50% 32%, rgba(254, 253, 250, 0.82), rgba(254, 253, 250, 0) 72%);
+          background: radial-gradient(54% 48% at 50% 32%, rgba(250, 248, 244, 0.82), rgba(250, 248, 244, 0) 72%);
         }
         .blob { position: absolute; border-radius: 50%; filter: blur(72px); will-change: transform; }
         .b1 {
           width: 700px; height: 700px;
-          background: radial-gradient(circle, rgba(196, 154, 108, 0.58), rgba(196, 154, 108, 0) 68%);
+          background: radial-gradient(circle, rgba(226, 186, 130, 0.58), transparent 68%);
           top: -220px; left: -140px;
           animation: phA 24s ease-in-out infinite alternate;
         }
         .b2 {
           width: 640px; height: 640px;
-          background: radial-gradient(circle, rgba(106, 93, 166, 0.46), rgba(106, 93, 166, 0) 68%);
+          background: radial-gradient(circle, rgba(140, 124, 214, 0.44), transparent 68%);
           top: -170px; right: -130px;
           animation: phB 28s ease-in-out infinite alternate;
         }
@@ -144,7 +144,7 @@ export function PageHero({
           letter-spacing: 0.05em;
           color: var(--gold-dark);
           background: var(--gold-tint);
-          border: 1px solid rgba(138, 101, 53, 0.25);
+          border: 1px solid rgba(123, 90, 47, 0.18);
           border-radius: 999px;
           padding: 4px 10px;
         }
@@ -180,13 +180,14 @@ export function PageHero({
           margin: 0;
           display: flex;
           flex-direction: column;
-          border-radius: 18px;
+          border-radius: var(--radius-lg);
           overflow: hidden;
-          background: var(--bg);
-          border: 1px solid var(--border);
+          background: var(--bg-card);
           box-shadow: var(--shadow-float);
         }
-        .p-img { position: relative; flex: 1; min-height: 260px; }
+        /* Dark under the photo, so the caption keeps its contrast even before
+           (or without) the image. */
+        .p-img { position: relative; flex: 1; min-height: 260px; background-color: #2a241d; }
         .p-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         .p-scrim {
           position: absolute;
@@ -209,7 +210,7 @@ export function PageHero({
           display: flex;
           align-items: center;
           padding: 12px 14px;
-          background: var(--bg);
+          background: var(--bg-card);
           border-top: 1px solid var(--border-faint);
         }
         @media (max-width: 880px) {
@@ -281,13 +282,12 @@ export function AgentLoop({
         .al { background: var(--bg); padding-block: clamp(88px, 11vw, 144px); }
         .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad); }
         .head { margin-bottom: clamp(36px, 4vw, 52px); text-align: center; }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 16px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 16px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 16px auto 0; max-width: 620px; }
         .card {
-          background: var(--bg);
-          border: 1px solid var(--border);
-          border-radius: 18px;
+          background: var(--bg-card);
+          border-radius: var(--radius-lg);
           padding: 0 0 8px;
           box-shadow: var(--shadow-float);
           max-width: 920px;
@@ -315,24 +315,24 @@ export function AgentLoop({
         .rowav { flex: none; width: 26px; height: 26px; border-radius: 999px; object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-sm); }
         .mark { flex: none; width: 18px; height: 18px; border-radius: 999px; background: var(--color-green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.gold { background: linear-gradient(135deg, #D4AA7C, #7A5A2E); }
+        .mark.gold { background: linear-gradient(135deg, var(--gold-pale), var(--gold)); }
         .main { flex: 1; min-width: 0; }
         .lbl { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
         .desc { font-size: 14px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
-        .time { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--color-green); white-space: nowrap; }
+        .time { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); white-space: nowrap; }
         .who {
           flex: none;
           font-family: var(--font-mono);
           font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          color: #6A5DA6;
-          background: rgba(106, 93, 166, 0.1);
+          color: var(--violet);
+          background: var(--violet-soft);
           border-radius: 999px;
           padding: 4px 10px;
           white-space: nowrap;
         }
-        .who.you { color: #7A5A2E; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+        .who.you { color: var(--gold); background: var(--gold-tint); }
         @media (max-width: 640px) {
           .time { display: none; }
           .row { flex-wrap: wrap; }
@@ -393,18 +393,18 @@ export function FeatureSplit({
         .wrap.flip { grid-template-columns: 1.05fr 0.95fr; }
         .wrap.flip .copy { order: 2; }
         .wrap.flip .stage { order: 1; }
-        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7A5A2E; margin: 0 0 18px; }
+        .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin: 0 0 18px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(27px, 3vw, 38px); line-height: 1.08; letter-spacing: -0.02em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(16px, 1.9vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 18px 0 0; max-width: 460px; }
         .points { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-direction: column; gap: 12px; }
         .points li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 1.5; color: var(--text-muted); }
-        .tick { flex: none; width: 17px; height: 17px; margin-top: 2px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
+        .tick { flex: none; width: 17px; height: 17px; margin-top: 2px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(123, 90, 47, 0.24); position: relative; }
         .tick::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3px; height: 7px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
         :global(.fs .more) {
           display: inline-block;
           margin-top: 24px;
           font-size: 15px;
-          font-weight: 700;
+          font-weight: 600;
           color: var(--gold-dark);
           text-decoration: none;
         }
@@ -460,20 +460,20 @@ export function StatTrio({
           gap: clamp(14px, 1.8vw, 22px);
         }
         .stat {
-          border-radius: 16px;
+          border-radius: var(--radius-lg);
           padding: clamp(24px, 3vw, 36px) clamp(20px, 2.4vw, 30px);
-          border: 1px solid var(--border-faint);
           box-shadow: var(--shadow-sm);
         }
-        .stat.warm { background: linear-gradient(165deg, #FFF6EC, #FBE9DA); border-color: #EFD9C2; }
-        .stat.vio { background: linear-gradient(165deg, #F4F2FA, #ECE8F6); border-color: #DDD7EC; }
-        .stat.goldt { background: linear-gradient(165deg, #FAF5EA, #F2EADA); border-color: #E6D9C0; }
+        /* Pastel Dusk: champagne, iris, rose-gold. */
+        .stat.warm { background: linear-gradient(165deg, #FDF3E6, #F8E5D2); }
+        .stat.vio { background: linear-gradient(165deg, #F4F1FB, #EAE5F7); }
+        .stat.goldt { background: linear-gradient(165deg, #FBF1EE, #F4E0DF); }
         .num {
           font-family: var(--font-serif);
           font-size: clamp(38px, 4.2vw, 56px);
           line-height: 1;
           letter-spacing: -0.02em;
-          background: linear-gradient(110deg, #7A5A2E, #6A5DA6);
+          background: var(--grad);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
@@ -522,13 +522,13 @@ export function PageCta({
           border-radius: 32px;
           padding: clamp(64px, 9vw, 112px) var(--page-pad);
           text-align: center;
-          background: linear-gradient(155deg, #f3c796 0%, #eab2a4 40%, #c3aee0 72%, #9d8fe0 100%);
+          background: var(--stage-field);
         }
         .field { position: absolute; inset: 0; z-index: -1; }
         .field i { position: absolute; border-radius: 50%; filter: blur(70px); }
-        .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, rgba(255, 226, 184, 0.95), rgba(255, 226, 184, 0) 70%); }
-        .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, rgba(139, 127, 208, 0.9), rgba(139, 127, 208, 0) 70%); }
-        .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, rgba(255, 246, 234, 0.8), rgba(255, 246, 234, 0) 70%); }
+        .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, var(--stage-glow-1), transparent 70%); }
+        .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, var(--stage-glow-2), transparent 70%); }
+        .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, var(--stage-glow-4), transparent 70%); }
         .t {
           position: relative;
           font-family: var(--font-serif);
@@ -541,9 +541,9 @@ export function PageCta({
           margin: 0 auto;
           text-wrap: balance;
         }
-        .s { position: relative; color: var(--text-muted); font-size: clamp(16px, 1.6vw, 18px); line-height: 1.6; max-width: 52ch; margin: 18px auto 30px; }
+        .s { position: relative; color: #2b2a27; font-size: clamp(16px, 1.6vw, 18px); line-height: 1.6; max-width: 52ch; margin: 18px auto 30px; }
         .btns { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .btns :global(.btn-secondary) { background: rgba(255, 255, 255, 0.55); }
+        .btns :global(.btn-secondary) { background: rgba(255, 255, 255, 0.72); }
       `}</style>
     </section>
   )

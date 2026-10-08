@@ -79,7 +79,7 @@ export default function ProductPage() {
           title={<>See MambaHR <Em>do the work.</Em></>}
           lead="MambaHR does the admin in hiring, onboarding, leave, pay changes and compliance. Your team approves the sensitive calls."
         >
-          <div className="mock-card agent-edge agent-working"><TodoDesk show="pane" /></div>
+          <div className="mock-card"><TodoDesk show="pane" /></div>
         </PageHero>
 
         <AgentLoop
@@ -157,16 +157,26 @@ export default function ProductPage() {
         >
           <div className="mock-card">
             <ChatThread
-              greeting="Good morning, Sam."
-              needs="4 things need you today"
               context="Discussing Marcus Webb"
               user="Prepare a separation for Marcus Webb, last day Friday. Standard severance."
-              tool={{ title: 'Prepared', status: 'Done', body: 'Separation agreement draft · Colorado final-pay rule · Severance at 6 weeks · Okta, Slack, GitHub revocations queued for Fri 18:00' }}
-              assistant={[
-                'Colorado requires final pay immediately on an involuntary separation, so payroll is set to run Friday. Severance is 6 weeks at his current base, $17,300.',
-                'The agreement carries the age-discrimination waiver language (OWBPA) since Marcus is over 40. Nothing is sent until you approve.',
-              ]}
-              approval={{ detail: 'Send the separation agreement to Marcus Webb for signature and schedule the Friday shutdowns.', approve: 'Approve', decline: 'Hold' }}
+              answer="Marcus Webb's separation is ready. Nothing is sent until you approve."
+              card={{
+                name: 'Marcus Webb',
+                note: 'Separation, Colorado',
+                initials: 'MW',
+                figures: [
+                  { label: 'Last day', value: 'Fri', sub: 'Accounts off at 6:00 PM' },
+                  { label: 'Final pay', value: 'Fri', sub: 'Colorado: immediately' },
+                  { label: 'Severance', value: '$17,300', sub: '6 weeks at base' },
+                ],
+              }}
+              action={{
+                title: 'Send Marcus the separation agreement',
+                body: 'It carries the age-discrimination waiver language (OWBPA) since Marcus is over 40. Okta, Slack and GitHub switch off Friday at 6:00 PM.',
+                primary: 'Approve',
+                secondary: 'Hold',
+              }}
+              sources={['Separation agreement draft', 'Colorado final-pay rule', 'Severance policy']}
             />
           </div>
         </FeatureSplit>
@@ -202,7 +212,7 @@ export default function ProductPage() {
           padding: 8px 16px;
           border-radius: 999px;
           border: 1px solid var(--border);
-          background: var(--bg);
+          background: var(--bg-card);
           font-size: 14px;
           font-weight: 500;
           color: var(--text-muted);

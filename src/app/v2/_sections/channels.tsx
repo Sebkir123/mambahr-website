@@ -1,5 +1,7 @@
 'use client'
 
+import { MambaMark } from '@/components/mamba-mark'
+
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
 
@@ -23,7 +25,7 @@ export default function Channels() {
               <div><b>In Slack</b><span>Mention @MambaHR in any channel or direct message.</span></div>
             </li>
             <li>
-              <span className="pt-i pt-m" aria-hidden="true">M</span>
+              <span className="pt-i pt-m" aria-hidden="true"><MambaMark size={20} color="var(--gold)" /></span>
               <div><b>In the MambaHR app</b><span>Approvals, employee records and the full history.</span></div>
             </li>
             <li>
@@ -79,7 +81,7 @@ export default function Channels() {
                   </div>
 
                   <div className="m">
-                    <div className="av app">M</div>
+                    <div className="av app"><MambaMark size={22} color="#C9A26C" /></div>
                     <div className="m-body">
                       <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:14 AM</time></div>
                       <div className="m-t">Approved. Enjoy the wedding.</div>
@@ -93,8 +95,8 @@ export default function Channels() {
                   </div>
 
                   <div className="typing">
-                    <span className="typing-dot" /><span className="typing-dot" /><span className="typing-dot" />
-                    <span className="typing-t"><b>MambaHR</b> is updating the payroll record&hellip;</span>
+                    <span className="agent-mark is-working t-mark" />
+                    <span className="typing-t agent-status is-working">MambaHR is updating the payroll record&hellip;</span>
                   </div>
                 </div>
 
@@ -129,7 +131,7 @@ export default function Channels() {
           font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #7A5A2E;
+          color: var(--gold);
           margin: 0 0 18px;
         }
         .title {
@@ -142,7 +144,7 @@ export default function Channels() {
           margin: 0;
         }
         .em {
-          background: linear-gradient(100deg, #B98A4E, #6A5DA6);
+          background: var(--grad);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
@@ -164,26 +166,26 @@ export default function Channels() {
         .points b { display: block; font-size: 15px; font-weight: 600; color: var(--text); }
         .points div span { font-size: 14.5px; color: var(--text-muted); line-height: 1.5; }
         .pt-i { width: 24px; height: 24px; margin-top: 1px; }
-        .pt-m { display: grid; place-items: center; border-radius: 7px; background: var(--text); color: #fff; font-family: var(--font-serif); font-size: 13px; }
+        .pt-m { display: grid; place-items: center; }
         .pt-ok { position: relative; border-radius: 50%; background: var(--color-green); }
         .pt-ok::after { content: ''; position: absolute; left: 9px; top: 5px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .stage {
           position: relative;
           isolation: isolate;
           padding: clamp(28px, 4vw, 56px);
-          border-radius: 28px;
+          border-radius: var(--radius-xl);
           overflow: hidden;
-          box-shadow: 0 40px 80px -40px rgba(60, 40, 110, 0.5);
+          box-shadow: 0 40px 80px -40px rgba(90, 60, 120, 0.45);
         }
-        .field { position: absolute; inset: 0; z-index: -1; background: linear-gradient(150deg, #c9b3e3 0%, #9d8fe0 45%, #6a5da6 100%); }
+        .field { position: absolute; inset: 0; z-index: -1; background: linear-gradient(150deg, #efcfae 0%, #e0aab6 34%, #ae9de6 68%, #7364cc 100%); }
         .field i { position: absolute; border-radius: 50%; filter: blur(50px); }
-        .fa { width: 70%; height: 70%; left: -20%; top: -25%; background: radial-gradient(circle, rgba(255, 214, 170, 0.9), rgba(255, 214, 170, 0) 70%); }
-        .fb { width: 60%; height: 70%; right: -20%; bottom: -30%; background: radial-gradient(circle, rgba(74, 58, 150, 0.9), rgba(74, 58, 150, 0) 70%); }
+        .fa { width: 70%; height: 70%; left: -20%; top: -25%; background: radial-gradient(circle, var(--stage-glow-1), transparent 70%); }
+        .fb { width: 60%; height: 70%; right: -20%; bottom: -30%; background: radial-gradient(circle, rgba(106, 91, 196, 0.85), transparent 70%); }
         .fg { inset: 0; border-radius: 0; filter: none; background-image: ${GRAIN}; background-size: 220px; opacity: 0.35; mix-blend-mode: overlay; }
         .sw {
           position: relative;
           border-radius: 14px;
-          background: var(--bg);
+          background: var(--bg-card);
           box-shadow: var(--shadow-float);
           border: 1px solid var(--border);
           overflow: hidden;
@@ -207,12 +209,16 @@ export default function Channels() {
         .sw-find {
           font-size: 12px;
           color: var(--text-faint);
-          background: var(--bg);
-          border: 1px solid var(--border);
-          border-radius: 7px;
+          background: var(--bg-card);
+          border-radius: var(--radius-full);
+          box-shadow: inset 0 0 0 1px var(--border);
           padding: 3px 12px;
           margin: 0 auto;
-          min-width: 220px;
+          flex: 0 1 240px;
+          min-width: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
           text-align: center;
         }
         .sw-body { display: grid; grid-template-columns: 188px 1fr; min-height: 384px; }
@@ -236,7 +242,7 @@ export default function Channels() {
         .sw-ws svg { color: rgba(29, 28, 29, 0.45); }
         .sw-sec {
           font-size: 12px;
-          color: rgba(29, 28, 29, 0.55);
+          color: rgba(29, 28, 29, 0.72);
           padding: 10px 8px 5px;
           letter-spacing: 0.02em;
         }
@@ -251,7 +257,7 @@ export default function Channels() {
           font-size: 14px;
           cursor: pointer;
         }
-        .hash { color: rgba(29, 28, 29, 0.45); font-weight: 600; }
+        .hash { color: rgba(29, 28, 29, 0.66); font-weight: 600; }
         .sw-ch.on {
           background: #E8DDF1;
           color: #3D2A55;
@@ -307,14 +313,12 @@ export default function Channels() {
           object-fit: cover;
           flex: none;
         }
+        /* The MambaHR app icon: the gold M on a dark square. */
         .av.app {
-          background: #1A1A19;
-          color: #fff;
+          background: #0c0c0b;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-family: var(--font-serif);
-          font-size: 20px;
         }
         .m-body { min-width: 0; }
         .m-h { display: flex; align-items: baseline; gap: 8px; }
@@ -331,7 +335,7 @@ export default function Channels() {
           padding: 1px 5px;
         }
         .m-t { font-size: 14px; line-height: 1.5; color: var(--text); margin-top: 3px; }
-        .mention { color: #6A5DA6; background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+        .mention { color: var(--violet); background: var(--violet-soft); border-radius: 4px; padding: 0 4px; font-weight: 600; }
         .attach {
           margin-top: 9px;
           border: 1px solid var(--border-faint);
@@ -370,7 +374,7 @@ export default function Channels() {
           font-size: 13px;
           font-weight: 600;
           color: var(--text);
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border-mid);
           border-radius: 7px;
           padding: 7px 16px;
@@ -380,16 +384,16 @@ export default function Channels() {
         .typing {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 8px;
           padding: 4px 8px 0;
         }
-        .typing-t { font-size: 12px; color: var(--text-faint); margin-left: 7px; }
-        .typing-t b { color: var(--violet); font-weight: 600; }
+        .t-mark { --am-size: 20px; }
+        .typing-t { font-size: 12.5px; }
         .reacts { margin-left: auto; align-self: flex-start; }
         .re {
           font-size: 12px;
           color: var(--text-muted);
-          background: var(--bg);
+          background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 999px;
           padding: 2px 9px;
