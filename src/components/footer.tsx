@@ -118,8 +118,6 @@ export default function Footer() {
           <div className={s.legal}>
             <Link href="/privacy" prefetch={false}>Privacy</Link>
             <Link href="/terms" prefetch={false}>Terms</Link>
-            <Link href="/dpa" prefetch={false}>DPA</Link>
-            <Link href="/subscription-terms" prefetch={false}>Subscription terms</Link>
           </div>
         </div>
 
