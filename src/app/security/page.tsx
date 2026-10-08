@@ -54,7 +54,7 @@ function SecurityHero() {
             </li>
           ))}
         </ul>
-        <p className="dpa">These commitments are in our Data Processing Addendum, available on request.</p>
+        <p className="dpa">These commitments are in our Data Processing Addendum, provided with the order form.</p>
       </div>
       <style jsx>{`
         .sh { background: var(--bg); padding: clamp(128px, 13vw, 168px) var(--page-pad) clamp(40px, 5vw, 64px); }

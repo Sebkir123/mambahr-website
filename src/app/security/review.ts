@@ -1,11 +1,11 @@
 // Security review Q&A, shared between the visible list (page.tsx) and the
 // FAQPage structured data (layout.tsx) so the schema always mirrors the page.
-// Contract references point at the Data Processing Addendum, which is a draft
-// available on request; do not describe it as in force.
+// Contract references point at the Data Processing Addendum, which is provided
+// with the order form (no public page); do not describe it as in force.
 export const REVIEW = [
   {
     q: 'Who hosts our data?',
-    a: 'Your records are hosted on AWS. The AI models that do the work run with data retention and training switched off. Every company that processes your data is listed in our Data Processing Addendum, available on request.',
+    a: 'Your records are hosted on AWS. The AI models that do the work run with data retention and training switched off. Every company that processes your data is listed in our Data Processing Addendum, provided with the order form.',
   },
   {
     q: 'How is it encrypted?',
@@ -25,14 +25,14 @@ export const REVIEW = [
   },
   {
     q: 'Who are your subprocessors?',
-    a: 'AWS for hosting and some AI features (Amazon Bedrock), OpenRouter to reach the AI models behind MambaHR, only through model hosts that keep no data, Google for Gemini where turned on and for calendar access you allow, WorkOS for sign-in, Temporal Cloud to keep multi-step tasks running, Qdrant for document search, Stripe for billing, Checkr for background checks, and Tracker I-9 for work authorization. The full list is in our Data Processing Addendum, available on request, and we tell you before it changes.',
+    a: 'AWS for hosting, OpenRouter for AI with zero data retention (OpenRouter sends each request to a model host under its own account: Amazon Bedrock or Google Vertex AI for Anthropic models, Microsoft Azure for OpenAI models), Temporal Cloud to keep multi-step tasks running, WorkOS for sign-in, Cloudflare for DNS and bot protection on public forms, Stripe for billing, and Deel only if you choose Deel-managed payroll. Background checks run on your own Checkr account, and signing is built into MambaHR. The full list is in our Data Processing Addendum, provided with the order form, and we tell you before it changes.',
   },
   {
     q: 'What happens if there is an incident?',
-    a: 'We tell you without undue delay, explain exactly what was affected, and give you what you need for your own notices. That commitment is in our Data Processing Addendum, available on request.',
+    a: 'We tell you without undue delay, explain exactly what was affected, and give you what you need for your own notices. That commitment is in our Data Processing Addendum, provided with the order form.',
   },
   {
     q: 'Does any of it train AI?',
-    a: 'No. Names, salaries, leave, and health information never train any model, ours or anyone else’s. That is written into our Data Processing Addendum, available on request.',
+    a: 'No. Names, salaries, leave, and health information never train any model, ours or anyone else’s. That is written into our Data Processing Addendum, provided with the order form.',
   },
 ]

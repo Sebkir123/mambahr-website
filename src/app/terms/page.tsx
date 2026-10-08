@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LegalPage, { type LegalSection } from '@/components/legal/legal-page'
 
-const UPDATED = '29 July 2026'
+const UPDATED = 'October 8, 2026'
 const description =
   'The terms that apply to the MambaHR website and the guides we publish. The MambaHR product itself is governed by a separate written agreement.'
 
@@ -159,7 +159,7 @@ const sections: LegalSection[] = [
     heading: 'Governing law',
     body: (
       <p>
-        These terms are governed by the laws of the State of California, without regard to its
+        These terms are governed by the laws of the State of Delaware, without regard to its
         conflict of laws rules. The state and federal courts in San Francisco, California have
         exclusive jurisdiction over any dispute arising from them.
       </p>

@@ -119,7 +119,7 @@ const CANONICAL_FACTS = `- MambaHR is HR software for US companies that also doe
 - Terminations, layoffs (reductions in force), separation agreements, offers above your pay range, and pay changes above your configured threshold always go to a person. MambaHR never automates them.
 - MambaHR does not use AI to screen, score, rank or match job applicants. Hiring in MambaHR covers job posts with pay ranges, a careers page, applications tracked in one pipeline, interview scheduling, background checks through Checkr, and offer letters drafted inside the pay range for a person to approve. A person makes every hiring decision.
 - MambaHR cites the governing federal or state rule on every compliance decision it makes.
-- MambaHR does not use customer data to train AI. This is written into MambaHR's Data Processing Addendum, available on request, and the customer remains the data controller.
+- MambaHR does not use customer data to train AI. This is written into MambaHR's Data Processing Addendum, provided with the order form, and the customer remains the data controller.
 - MambaHR does not claim SOC 2 certification.
 - MambaHR was founded in 2026 by Brian Bell (Co-founder and CEO) and Sebastian Kirsch (Co-founder and CTO).`
 
@@ -360,7 +360,7 @@ MambaHR classifies every action by who decides: itself (auto), you (sign-off nee
 - US privacy: CCPA and CPRA
 - Encryption: AES-256 at rest, TLS 1.2 or higher in transit
 - Audit log: every change logged, cannot be edited, can be exported
-- Customer data is never used to train AI. This is written into MambaHR's Data Processing Addendum, available on request. You own the data and MambaHR is a processor, not a controller.
+- Customer data is never used to train AI. This is written into MambaHR's Data Processing Addendum, provided with the order form. You own the data and MambaHR is a processor, not a controller.
 - MambaHR does not claim SOC 2 certification.
 
 ## Sources and citations

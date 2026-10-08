@@ -18,7 +18,7 @@ export const QA = [
   },
   {
     q: 'Is our people data safe?',
-    a: 'Yes. It is encrypted, each person sees only what their role allows, and every change is logged. Your data is never used to train AI, and that is written into our Data Processing Addendum, available on request.',
+    a: 'Yes. It is encrypted, each person sees only what their role allows, and every change is logged. Your data is never used to train AI, and that is written into our Data Processing Addendum, provided with the order form.',
   },
   {
     q: 'What if it gets something wrong?',
