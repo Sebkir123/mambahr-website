@@ -37,7 +37,7 @@ function HumanCall() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="ph" src="/v2-people/team2.jpg" alt="A hiring panel meeting a candidate" />
       <div className="float agent-edge agent-done">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR &middot; done</span>
         <div className="f-t">Offer signed · Maya Chen</div>
         <div className="f-m">Senior Engineer · starts June 22</div>
       </div>
@@ -46,7 +46,7 @@ function HumanCall() {
         .ph {
           display: block;
           width: 100%;
-          border-radius: 18px;
+          border-radius: var(--radius-lg);
           box-shadow: var(--shadow-float);
           object-fit: cover;
           aspect-ratio: 4 / 3;
@@ -56,13 +56,12 @@ function HumanCall() {
           right: -14px;
           bottom: -22px;
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 14px;
+          border-radius: var(--radius-lg);
           box-shadow: var(--shadow-float);
-          padding: 14px 18px;
+          padding: 14px 20px;
           transform: rotate(1.5deg);
         }
-        .f-t { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 10px; }
+        .f-t { font-size: 14px; font-weight: 600; color: var(--text); margin-top: 10px; }
         .f-m { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
         @media (max-width: 880px) {
           .float { right: 8px; bottom: -16px; }

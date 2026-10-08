@@ -6,6 +6,7 @@ import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import { ChatThread } from '@/components/mockups'
+import { MambaMark } from '@/components/mamba-mark'
 
 /* ── Hero fragment: a realistic Slack window, policy answer + letter receipt ── */
 function SlackWindow() {
@@ -52,16 +53,15 @@ function SlackWindow() {
             </div>
 
             <div className="m">
-              <div className="av app">M</div>
+              <div className="av app"><MambaMark size={22} color="#C9A26C" /></div>
               <div className="m-body">
                 <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:02 AM</time></div>
                 <div className="m-t">16 weeks, fully paid, for every new parent, birth, adoption, or foster.</div>
                 <div className="attach">
                   <div className="a-row"><span className="a-k">Paid leave</span><span className="a-v">16 weeks at 100%</span></div>
                   <div className="a-row"><span className="a-k">Eligibility</span><span className="a-v">Day one, all employees</span></div>
-                  <div className="a-row"><span className="a-k">Source</span><span className="a-v">Parental Leave Policy &sect; 2.1</span></div>
-                  <div className="a-foot"><span className="ok-dot" />Answered from your handbook</div>
                 </div>
+                <div className="ui-sources srcs"><b>Based on</b><span>Parental Leave Policy &sect; 2.1</span><span>Your handbook</span></div>
               </div>
             </div>
 
@@ -75,21 +75,21 @@ function SlackWindow() {
             </div>
 
             <div className="m">
-              <div className="av app">M</div>
+              <div className="av app"><MambaMark size={22} color="#C9A26C" /></div>
               <div className="m-body">
                 <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:11 AM</time></div>
                 <div className="m-t">You have 9 days left, and up to 5 carry over. Policy attached.</div>
                 <div className="attach">
-                  <div className="a-row"><span className="a-k">Policy</span><span className="a-v">Time-off carryover, section 4.2, cited</span></div>
-                  <div className="a-row"><span className="a-k">Balance</span><span className="a-v">9 days · up to date</span></div>
-                  <div className="a-foot"><span className="ok-dot" />Logged &middot; answered from your handbook</div>
+                  <div className="a-row"><span className="a-k">Balance</span><span className="a-v">9 days &middot; up to date</span></div>
+                  <div className="a-row"><span className="a-k">Carry over</span><span className="a-v">Up to 5 days</span></div>
                 </div>
+                <div className="ui-sources srcs"><b>Based on</b><span>Time-off policy &sect; 4.2</span><span>Leave balance</span></div>
               </div>
             </div>
 
             <div className="typing">
-              <span className="typing-dot" /><span className="typing-dot" /><span className="typing-dot" />
-              <span className="typing-t"><b>MambaHR</b> is filing the letter&hellip;</span>
+              <span className="agent-mark is-working t-mark" aria-hidden="true" />
+              <span className="typing-t agent-status is-working">MambaHR is filing the letter&hellip;</span>
             </div>
           </div>
 
@@ -104,10 +104,9 @@ function SlackWindow() {
 
       <style jsx>{`
         .sw {
-          border-radius: 14px;
+          border-radius: var(--radius-lg);
           background: var(--bg-card);
           box-shadow: var(--shadow-float);
-          border: 1px solid var(--border);
           overflow: hidden;
           font-size: 13px;
         }
@@ -117,7 +116,7 @@ function SlackWindow() {
           align-items: center;
           gap: 14px;
           padding: 0 14px;
-          background: #F8F6F1;
+          background: var(--bg-surface);
           border-bottom: 1px solid var(--border);
         }
         .dots { display: flex; gap: 6px; }
@@ -130,28 +129,33 @@ function SlackWindow() {
           font-size: 12px;
           color: var(--text-faint);
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 7px;
+          border-radius: var(--radius-full);
+          box-shadow: inset 0 0 0 1px var(--border);
           padding: 3px 12px;
           margin: 0 auto;
-          min-width: 200px;
+          flex: 0 1 240px;
+          min-width: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
           text-align: center;
         }
         .sw-body { display: grid; grid-template-columns: 178px 1fr; position: relative; z-index: 0; }
-        .sw-side { background: #3F0E40; padding: 14px 10px; }
+        /* Slack in its light theme */
+        .sw-side { background: #F7F2F8; border-right: 1px solid rgba(29, 28, 29, 0.08); padding: 14px 10px; }
         .sw-ws {
           display: flex;
           align-items: center;
           justify-content: space-between;
           font-weight: 700;
           font-size: 14px;
-          color: #fff;
+          color: #1D1C1D;
           padding: 4px 8px 12px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+          border-bottom: 1px solid rgba(29, 28, 29, 0.1);
           margin-bottom: 10px;
         }
-        .sw-ws svg { color: rgba(255, 255, 255, 0.6); }
-        .sw-sec { font-size: 12px; color: rgba(255, 255, 255, 0.55); padding: 10px 8px 5px; letter-spacing: 0.02em; }
+        .sw-ws svg { color: rgba(29, 28, 29, 0.45); }
+        .sw-sec { font-size: 12px; color: rgba(29, 28, 29, 0.72); padding: 10px 8px 5px; letter-spacing: 0.02em; }
         .sw-ch,
         .sw-dm {
           display: flex;
@@ -159,25 +163,25 @@ function SlackWindow() {
           gap: 7px;
           padding: 5px 8px;
           border-radius: 6px;
-          color: rgba(255, 255, 255, 0.72);
+          color: rgba(29, 28, 29, 0.78);
           font-size: 14px;
         }
-        .hash { color: rgba(255, 255, 255, 0.5); font-weight: 600; }
-        .sw-ch.on { background: #1164A3; color: #fff; font-weight: 600; }
-        .sw-ch.on .hash { color: rgba(255, 255, 255, 0.85); }
-        .sw-dm .seg { width: 9px; height: 9px; border-radius: 3px; border: 1.5px solid rgba(255, 255, 255, 0.45); }
+        .hash { color: rgba(29, 28, 29, 0.66); font-weight: 600; }
+        .sw-ch.on { background: #E8DDF1; color: #3D2A55; font-weight: 600; }
+        .sw-ch.on .hash { color: #3D2A55; }
+        .sw-dm .seg { width: 9px; height: 9px; border-radius: 3px; border: 1.5px solid rgba(29, 28, 29, 0.35); }
         .sw-dm .seg.green { background: #2EB67D; border-color: transparent; }
-        .sw-dm.first { color: #fff; font-weight: 600; }
+        .sw-dm.first { color: #1D1C1D; font-weight: 600; }
         .sw-dm .badge {
           margin-left: auto;
           background: #E01E5A;
           color: #fff;
           font-size: 12px;
           font-weight: 700;
-          border-radius: 999px;
+          border-radius: var(--radius-full);
           padding: 1px 7px;
         }
-        .sw-main { display: flex; flex-direction: column; }
+        .sw-main { display: flex; flex-direction: column; min-width: 0; }
         .sw-head { display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--border); }
         .h-ch { font-weight: 700; font-size: 15px; color: var(--text); display: flex; gap: 2px; }
         .h-ch .hash { color: var(--text-faint); }
@@ -188,20 +192,19 @@ function SlackWindow() {
           font-size: 12px;
           color: var(--text-faint);
           border: 1px solid var(--border);
-          border-radius: 7px;
-          padding: 2px 8px;
+          border-radius: var(--radius-full);
+          padding: 2px 9px;
         }
         .sw-feed { padding: 16px 20px 6px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
         .m { display: flex; gap: 11px; }
         .av { width: 36px; height: 36px; border-radius: 9px; object-fit: cover; flex: none; }
+        /* The MambaHR app icon in Slack: the gold M on a dark square. */
         .av.app {
-          background: var(--text);
-          color: #fff;
+          background: #0C0C0B;
+          border-radius: var(--radius-sm);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-family: var(--font-serif);
-          font-size: 19px;
         }
         .m-body { min-width: 0; }
         .m-h { display: flex; align-items: baseline; gap: 8px; }
@@ -213,45 +216,34 @@ function SlackWindow() {
           font-weight: 600;
           letter-spacing: 0.04em;
           color: var(--text-muted);
-          background: var(--bg-elevated);
-          border-radius: 4px;
-          padding: 1px 5px;
+          background: var(--bg-cream);
+          border-radius: var(--radius-sm);
+          padding: 1px 6px;
         }
         .m-t { font-size: 14px; line-height: 1.45; color: var(--text); margin-top: 2px; }
-        .mention { color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+        .mention { color: var(--violet); background: var(--violet-soft); border-radius: 4px; padding: 0 4px; font-weight: 600; }
         .attach {
-          margin-top: 8px;
-          border-left: 3px solid var(--gold);
-          background: #FAF6EF;
-          border-radius: 0 10px 10px 0;
-          padding: 10px 13px;
-          max-width: 440px;
+          margin-top: 9px;
+          background: var(--bg-surface);
+          border-radius: var(--radius-md);
+          padding: 10px 14px;
+          max-width: 400px;
         }
-        .a-row { display: flex; justify-content: space-between; gap: 16px; padding: 2.5px 0; }
-        .a-k { font-size: 12px; color: var(--text-faint); }
-        .a-v { font-size: 12px; color: var(--text); font-weight: 600; text-align: right; }
-        .a-foot {
-          display: flex;
-          align-items: center;
-          gap: 7px;
-          margin-top: 8px;
-          padding-top: 8px;
-          border-top: 1px solid var(--border);
-          font-size: 12px;
-          color: var(--text-faint);
-        }
-        .ok-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); flex: none; }
-        .mono { font-family: var(--font-mono); font-size: 12px; }
-        .typing { display: flex; align-items: center; gap: 4px; padding: 2px 0 0; }
-        .typing-t { font-size: 12px; color: var(--text-faint); margin-left: 7px; }
-        .typing-t b { color: var(--violet); font-weight: 600; }
+        .a-row { display: flex; justify-content: space-between; gap: 16px; padding: 3px 0; }
+        .a-row + .a-row { border-top: 1px solid var(--border-faint); }
+        .a-k { font-size: 13px; color: var(--text-faint); }
+        .a-v { font-size: 13px; color: var(--text); font-weight: 600; text-align: right; }
+        .srcs { margin-top: 9px; }
+        .typing { display: flex; align-items: center; gap: 9px; padding: 2px 0 0; }
+        .t-mark { --am-size: 20px; }
+        .typing-t { font-size: 12.5px; }
         .sw-composer {
           margin: 8px 18px 14px;
           display: flex;
           align-items: center;
           justify-content: space-between;
           border: 1px solid var(--border-mid);
-          border-radius: 10px;
+          border-radius: var(--radius-md);
           padding: 10px 14px;
           color: var(--text-faint);
           font-size: 14px;
@@ -290,7 +282,7 @@ function TeamPhoto() {
         .photo {
           width: 100%;
           display: block;
-          border-radius: 18px;
+          border-radius: var(--radius-lg);
           object-fit: cover;
           aspect-ratio: 4 / 3;
           box-shadow: var(--shadow-float);
@@ -300,9 +292,8 @@ function TeamPhoto() {
           right: -14px;
           bottom: 26px;
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 14px;
-          padding: 14px 18px;
+          border-radius: var(--radius-lg);
+          padding: 14px 20px;
           box-shadow: var(--shadow-float);
         }
         .f-l { font-size: 13px; color: var(--text-muted); margin-top: 8px; max-width: 180px; }

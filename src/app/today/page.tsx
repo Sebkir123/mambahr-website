@@ -9,12 +9,12 @@ import { TodoDesk } from '@/components/mockups'
 
 function DecisionCard() {
   return (
-    <div className="dc agent-edge agent-done">
+    <div className="dc">
       <div className="dc-head">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="dc-av" src="/avatars/maya.jpg" alt="Maya Chen" width={40} height={40} />
         <div className="dc-id">
-          <div className="dc-t">Offer &middot; Maya Chen<span className="dc-tag">Urgent</span></div>
+          <div className="dc-t">Offer &middot; Maya Chen<span className="ui-badge warning">Urgent</span></div>
           <div className="dc-m">Senior Engineer &middot; $195k base &middot; starts in 3 weeks</div>
         </div>
       </div>
@@ -31,53 +31,51 @@ function DecisionCard() {
       </div>
 
       <div className="dc-note">
-        <span className="n-dot" aria-hidden="true" />
         Your team&rsquo;s pick after a 6-week search &middot; has a competing offer
       </div>
-      <div className="dc-policy">
-        Policy: offers above the pay range always come to you. If you approve, the reason is filed with the offer.
-      </div>
 
-      <div className="dc-acts">
-        <span className="b-ok">Approve</span>
-        <span className="b-no">Decline</span>
-        <span className="dc-log">Your decision is logged either way</span>
+      <div className="ui-needs dc-read">
+        <div className="ui-needs-in">
+          <span className="ui-needs-label">Needs you</span>
+          <p className="ui-needs-body">
+            Policy: offers above the pay range always come to you. If you approve, the reason is filed with the offer.
+          </p>
+          <div className="dc-decide">
+            <div className="choice">
+              <div className="pill primary">Approve</div>
+              <p className="conseq">The offer goes out for e-signature. The reason is filed with it.</p>
+            </div>
+            <div className="choice">
+              <div className="pill secondary">Decline</div>
+              <p className="conseq">Nothing goes out. Your team is told.</p>
+            </div>
+          </div>
+        </div>
       </div>
+      <div className="dc-log">Your decision is logged either way</div>
 
       <style jsx>{`
         .dc {
-          max-width: 460px;
+          max-width: 480px;
           margin: 0 auto;
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 16px;
+          border-radius: var(--radius-lg);
           box-shadow: var(--shadow-float);
-          padding: 18px 20px;
+          padding: 20px 22px 18px;
           font-size: 13px;
         }
         .dc-head { display: flex; gap: 13px; align-items: center; }
-        .dc-av { width: 40px; height: 40px; border-radius: 999px; object-fit: cover; flex: none; }
-        .dc-t { font-size: 15px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 9px; }
-        .dc-tag {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.04em;
-          color: var(--color-red);
-          background: rgba(220, 38, 38, 0.08);
-          border-radius: 999px;
-          padding: 2px 8px;
-        }
+        .dc-av { width: 40px; height: 40px; border-radius: var(--radius-full); object-fit: cover; flex: none; }
+        .dc-t { font-size: 15px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
         .dc-m { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
         .gauge { margin-top: 18px; }
-        .g-labels { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--text-faint); margin-bottom: 7px; }
+        .g-labels { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--text-faint); margin-bottom: 8px; flex-wrap: wrap; }
         .g-over { color: var(--gold); font-weight: 600; }
         .g-track {
           position: relative;
           height: 8px;
-          border-radius: 999px;
-          background: var(--bg-elevated, #F2EEE6);
-          border: 1px solid var(--border-faint);
+          border-radius: var(--radius-full);
+          background: var(--bg-cream);
         }
         .g-band {
           position: absolute;
@@ -85,8 +83,8 @@ function DecisionCard() {
           width: 58%;
           top: 0;
           bottom: 0;
-          border-radius: 999px;
-          background: linear-gradient(90deg, #E6D3BC, var(--gold-pale));
+          border-radius: var(--radius-full);
+          background: #E6D3BC;
         }
         .g-dot {
           position: absolute;
@@ -94,37 +92,39 @@ function DecisionCard() {
           top: 50%;
           width: 14px;
           height: 14px;
-          border-radius: 999px;
+          border-radius: var(--radius-full);
           transform: translate(-50%, -50%);
           background: var(--gold);
           border: 2.5px solid #fff;
           box-shadow: var(--shadow-sm);
         }
         .dc-note {
-          display: flex;
-          align-items: center;
-          gap: 8px;
           margin-top: 16px;
           font-size: 13px;
+          line-height: 1.45;
           color: var(--text-muted);
           background: var(--gold-tint);
-          border: 1px solid rgba(138, 101, 53, 0.18);
-          border-radius: 10px;
-          padding: 9px 12px;
+          border-radius: var(--radius-md);
+          padding: 10px 14px;
         }
-        .n-dot { flex: none; width: 7px; height: 7px; border-radius: 999px; background: var(--gold); }
-        .dc-policy {
-          margin-top: 10px;
-          font-size: 12px;
-          line-height: 1.5;
-          color: var(--text-faint);
-          border-left: 3px solid var(--gold);
-          padding: 2px 0 2px 11px;
+        .dc-read { margin-top: 12px; }
+        .dc-decide { margin-top: 4px; }
+        .choice + .choice { margin-top: 12px; }
+        .pill {
+          min-height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          padding: 8px 18px;
+          border-radius: var(--radius-full);
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 1.3;
         }
-        .dc-acts { display: flex; align-items: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-        .b-ok { font-size: 13px; font-weight: 600; color: #fff; background: var(--text); border-radius: 999px; padding: 8px 18px; }
-        .b-no { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg-card); border: 1px solid var(--border); border-radius: 999px; padding: 8px 18px; }
-        .dc-log { font-size: 12px; color: var(--text-faint); margin-left: auto; }
+        .pill.primary { background: var(--text); color: #fff; border: 1px solid var(--text); }
+        .pill.secondary { background: var(--bg-card); color: var(--text); border: 1px solid rgba(0, 0, 0, 0.3); }
+        .conseq { margin: 6px 0 0; padding-left: 18px; font-size: 12.5px; line-height: 1.4; color: var(--text-faint); }
+        .dc-log { margin-top: 12px; font-size: 12px; color: var(--text-faint); text-align: center; }
       `}</style>
     </div>
   )
@@ -148,7 +148,7 @@ function MorningPhoto() {
         .photo {
           width: 100%;
           display: block;
-          border-radius: 18px;
+          border-radius: var(--radius-lg);
           object-fit: cover;
           aspect-ratio: 4 / 3;
           box-shadow: var(--shadow-float);
@@ -161,14 +161,13 @@ function MorningPhoto() {
           align-items: center;
           gap: 11px;
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 14px;
-          padding: 12px 18px;
+          border-radius: var(--radius-lg);
+          padding: 12px 20px 12px 16px;
           box-shadow: var(--shadow-float);
         }
         .f-check { flex: none; width: 22px; height: 22px; border-radius: 999px; background: var(--color-green); position: relative; }
         .f-check::after { content: ''; position: absolute; left: 7.5px; top: 4.5px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .f-t { font-size: 14px; font-weight: 700; color: var(--text); }
+        .f-t { font-size: 14px; font-weight: 600; color: var(--text); }
         .f-s { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 1px; }
         @media (max-width: 880px) {
           .float { left: 8px; }

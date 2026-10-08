@@ -16,7 +16,7 @@ const MANAGERS = [
 
 function OrgChartCard() {
   return (
-    <div className="org agent-edge agent-done">
+    <div className="org">
       <div className="o-head">
         <span className="o-t">Org chart</span>
         <span className="o-sub">Always current, from your employee records</span>
@@ -37,7 +37,7 @@ function OrgChartCard() {
             <img src={m.img} alt="" width={28} height={28} />
             <div className="nm">{m.name}</div>
             <div className="rl">{m.team}</div>
-            <span className="ct">{m.n} reports</span>
+            <span className="ui-badge ct">{m.n} reports</span>
           </div>
         ))}
       </div>
@@ -45,22 +45,24 @@ function OrgChartCard() {
         <span className="mono">Headcount: 247 · no gaps</span>
       </div>
       <style jsx>{`
-        .org { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 22px 18px; box-shadow: var(--shadow-float); }
+        .org { background: var(--bg-card); border-radius: var(--radius-lg); padding: 22px 22px 18px; box-shadow: var(--shadow-float); }
         .o-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
         .o-t { font-family: var(--font-serif); font-size: 19px; color: var(--text); }
         .o-sub { font-size: 12px; color: var(--text-faint); }
-        .ceo { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--border); border-radius: 12px; padding: 9px 16px 9px 10px; background: var(--bg-warm); box-shadow: var(--shadow-sm); margin: 0 auto; display: flex; width: fit-content; }
-        .ceo img { width: 34px; height: 34px; border-radius: 999px; object-fit: cover; }
-        .nm { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.2; }
+        .ceo { align-items: center; gap: 10px; border-radius: var(--radius-full); padding: 8px 18px 8px 8px; background: var(--bg-surface); box-shadow: inset 0 0 0 1px var(--border-faint); margin: 0 auto; display: flex; width: fit-content; }
+        .ceo img { width: 34px; height: 34px; border-radius: var(--radius-full); object-fit: cover; }
+        .nm { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.2; }
         .rl { font-size: 12px; color: var(--text-muted); }
-        .lines { display: flex; justify-content: center; gap: 26%; height: 22px; margin: 4px 0; }
-        .lines i { width: 1px; background: var(--border); transform: skewX(0deg); }
-        .lines i:first-child { transform: rotate(28deg); }
-        .lines i:last-child { transform: rotate(-28deg); }
+        .lines { position: relative; height: 24px; margin: 2px 0 0; }
+        .lines::before { content: ''; position: absolute; left: calc((100% - 20px) / 6); right: calc((100% - 20px) / 6); top: 12px; height: 1px; background: var(--border-mid); }
+        .lines i { position: absolute; width: 1px; background: var(--border-mid); top: 12px; bottom: 0; left: 50%; }
+        .lines i:first-child { left: calc((100% - 20px) / 6); }
+        .lines i:last-child { left: calc(100% - (100% - 20px) / 6); }
+        .lines i:nth-child(2) { top: 0; }
         .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .mgr { border: 1px solid var(--border-faint); border-radius: 12px; padding: 12px 10px; text-align: center; background: var(--bg-card); box-shadow: var(--shadow-sm); }
-        .mgr img { width: 28px; height: 28px; border-radius: 999px; object-fit: cover; margin-bottom: 6px; }
-        .ct { display: inline-block; margin-top: 7px; font-family: var(--font-mono); font-size: 12px; color: var(--gold-dark); background: var(--gold-tint); border-radius: 999px; padding: 2px 8px; }
+        .mgr { border-radius: var(--radius-md); padding: 12px 10px; text-align: center; background: var(--bg-surface); box-shadow: inset 0 0 0 1px var(--border-faint); }
+        .mgr img { display: block; width: 28px; height: 28px; border-radius: var(--radius-full); object-fit: cover; margin: 0 auto 6px; }
+        .ct { margin-top: 7px; height: 22px; padding: 0 8px; }
         .o-foot { margin-top: 16px; border-top: 1px solid var(--border-faint); padding-top: 11px; text-align: center; }
         .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
       `}</style>
@@ -83,11 +85,11 @@ function ImportStage() {
       </div>
       <style jsx>{`
         .imp { position: relative; }
-        .photo { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: var(--shadow-float); }
-        .float { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 11px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 13px; padding: 12px 18px 12px 14px; box-shadow: var(--shadow-md); }
+        .photo { width: 100%; height: auto; display: block; border-radius: var(--radius-lg); box-shadow: var(--shadow-float); }
+        .float { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 11px; background: var(--bg-card); border-radius: var(--radius-lg); padding: 12px 20px 12px 14px; box-shadow: var(--shadow-md); }
         .f-check { flex: none; width: 20px; height: 20px; border-radius: 999px; background: var(--color-green); position: relative; }
         .f-check::after { content: ''; position: absolute; left: 7px; top: 4px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .f-t { font-size: 14px; font-weight: 700; color: var(--text); }
+        .f-t { font-size: 14px; font-weight: 600; color: var(--text); }
         .f-s { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
         .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
       `}</style>

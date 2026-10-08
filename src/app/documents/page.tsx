@@ -26,7 +26,7 @@ function SignedDocCard() {
             <div className="d-name">Offer, Maya Chen.pdf</div>
             <div className="d-meta">Senior Engineer · drafted from your template</div>
           </div>
-          <span className="chip">Signed · 11:15 AM</span>
+          <span className="ui-badge success chip">Signed &middot; 11:15 AM</span>
         </div>
         <div className="preview">
           <div className="p-line w80" /><div className="p-line w95" /><div className="p-line w70" />
@@ -48,22 +48,22 @@ function SignedDocCard() {
         </div>
       </div>
       <style jsx>{`
-        .doc { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-float); }
-        .bar { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 14px; background: #F8F6F1; border-bottom: 1px solid var(--border); }
+        .doc { background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-float); }
+        .bar { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 14px; background: var(--bg-surface); border-bottom: 1px solid var(--border); }
         .dots { display: flex; gap: 6px; }
         .dots b { width: 9px; height: 9px; border-radius: 999px; background: #e3ddd6; }
         .dots b:first-child { background: #f0a59a; }
         .dots b:nth-child(2) { background: #f4ce8e; }
         .dots b:nth-child(3) { background: #a9cfa6; }
-        .addr { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg-card); border: 1px solid var(--border); border-radius: 7px; padding: 2px 16px; }
+        .addr { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg-card); box-shadow: inset 0 0 0 1px var(--border); border-radius: var(--radius-full); padding: 2px 16px; }
         .body { padding: 16px 18px 18px; }
         .d-head { display: flex; align-items: center; gap: 11px; }
-        .d-ic { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--gold-tint); color: var(--gold-dark); display: flex; align-items: center; justify-content: center; }
-        .d-name { font-size: 14px; font-weight: 700; color: var(--text); }
+        .d-ic { flex: none; width: 34px; height: 34px; border-radius: var(--radius-full); background: var(--gold-tint); color: var(--gold-dark); display: flex; align-items: center; justify-content: center; }
+        .d-name { font-size: 14px; font-weight: 600; color: var(--text); }
         .d-meta { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-        .chip { margin-left: auto; flex: none; font-size: 12px; font-weight: 600; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
-        .preview { margin-top: 14px; border: 1px solid var(--border); border-radius: 11px; background: #FDFCF9; padding: 16px 18px 14px; }
-        .p-line { height: 7px; border-radius: 999px; background: var(--border-faint); margin-bottom: 8px; }
+        .chip { margin-left: auto; flex: none; }
+        .preview { margin-top: 14px; border-radius: var(--radius-md); background: var(--bg-surface); box-shadow: inset 0 0 0 1px var(--border-faint); padding: 16px 18px 14px; }
+        .p-line { height: 7px; border-radius: var(--radius-full); background: var(--border); margin-bottom: 8px; }
         .w80 { width: 80%; } .w95 { width: 95%; } .w70 { width: 70%; }
         .sig { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: 16px; }
         .sig-block { display: flex; flex-direction: column; }
@@ -72,7 +72,7 @@ function SignedDocCard() {
         .sig-lbl { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
         .sig-ok { width: 20px; height: 20px; border-radius: 999px; background: var(--color-green); position: relative; }
         .sig-ok::after { content: ''; position: absolute; left: 7px; top: 4px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .filed { margin-top: 11px; border: 1px solid var(--border-faint); border-radius: 9px; background: var(--bg-warm); padding: 8px 13px; }
+        .filed { margin-top: 11px; border-radius: var(--radius-md); background: var(--bg-surface); padding: 9px 14px; }
         .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
         .foot { display: flex; align-items: center; gap: 10px; margin-top: 13px; flex-wrap: wrap; }
         .foot-t { font-size: 12px; color: var(--text-muted); }
@@ -84,10 +84,10 @@ function SignedDocCard() {
 /* ── Acknowledgement tracker fragment ── */
 function AckTracker() {
   return (
-    <div className="ack agent-edge agent-done">
+    <div className="ack">
       <div className="a-head">
         <span className="a-t">Policy acknowledgments</span>
-        <span className="a-live"><i />Collected by e-signature</span>
+        <span className="ui-badge agent">Collected by e-signature</span>
       </div>
       <div className="pol">
         <div className="pol-top">
@@ -110,32 +110,29 @@ function AckTracker() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={r.img} alt="" width={24} height={24} />
             <span className="r-name">{r.name}</span>
-            <span className={`r-s${r.ok ? ' ok' : ''}`}>{r.s}</span>
+            <span className={`ui-badge r-s ${r.ok ? 'success' : 'warning'}`}>{r.s}</span>
             <span className="r-t">{r.t}</span>
           </div>
         ))}
       </div>
       <style jsx>{`
-        .ack { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px 20px 16px; box-shadow: var(--shadow-float); }
-        .a-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+        .ack { background: var(--bg-card); border-radius: var(--radius-lg); padding: 20px 20px 16px; box-shadow: var(--shadow-float); }
+        .a-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
         .a-t { font-family: var(--font-serif); font-size: 18px; color: var(--text); }
-        .a-live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 999px; padding: 3px 9px; }
-        .a-live i { width: 6px; height: 6px; border-radius: 999px; background: var(--violet); }
-        .pol { border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; background: var(--bg-warm); }
+        .pol { border-radius: var(--radius-md); padding: 14px 16px; background: var(--bg-surface); }
         .pol-top { display: flex; align-items: baseline; justify-content: space-between; }
-        .pol-name { font-size: 14px; font-weight: 700; color: var(--text); }
+        .pol-name { font-size: 14px; font-weight: 600; color: var(--text); }
         .pol-pct { font-family: var(--font-serif); font-size: 21px; color: var(--gold-dark); }
-        .bar-track { height: 7px; border-radius: 999px; background: #E6D3BC; margin-top: 10px; overflow: hidden; }
-        .bar-fill { display: block; width: 94%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--gold-mid), var(--gold)); }
+        .bar-track { height: 7px; border-radius: var(--radius-full); background: var(--bg-cream); margin-top: 10px; overflow: hidden; }
+        .bar-fill { display: block; width: 94%; height: 100%; border-radius: var(--radius-full); background: var(--green); }
         .pol-meta { display: flex; justify-content: space-between; gap: 10px; margin-top: 9px; font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
         .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
         .rows { margin-top: 12px; }
         .row { display: flex; align-items: center; gap: 9px; padding: 8px 4px; font-size: 13px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
-        .row img { width: 24px; height: 24px; border-radius: 999px; object-fit: cover; }
+        .row img { width: 24px; height: 24px; border-radius: var(--radius-full); object-fit: cover; }
         .r-name { font-weight: 600; color: var(--text); }
-        .r-s { color: var(--gold-dark); flex: 1; text-align: right; }
-        .r-s.ok { color: var(--color-green); }
+        .r-s { margin-left: auto; }
         .r-t { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 64px; text-align: right; }
       `}</style>
     </div>
@@ -157,11 +154,11 @@ function RetrievalStage() {
       </div>
       <style jsx>{`
         .ret { position: relative; }
-        .photo { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: var(--shadow-float); }
-        .float { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 11px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 13px; padding: 12px 18px 12px 14px; box-shadow: var(--shadow-md); max-width: calc(100% - 36px); }
+        .photo { width: 100%; height: auto; display: block; border-radius: var(--radius-lg); box-shadow: var(--shadow-float); }
+        .float { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 11px; background: var(--bg-card); border-radius: var(--radius-lg); padding: 12px 20px 12px 14px; box-shadow: var(--shadow-md); max-width: calc(100% - 36px); }
         .f-check { flex: none; width: 20px; height: 20px; border-radius: 999px; background: var(--color-green); position: relative; }
         .f-check::after { content: ''; position: absolute; left: 7px; top: 4px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .f-t { font-size: 14px; font-weight: 700; color: var(--text); }
+        .f-t { font-size: 14px; font-weight: 600; color: var(--text); }
         .f-s { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
       `}</style>
     </div>
