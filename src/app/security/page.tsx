@@ -77,7 +77,7 @@ function SecurityHero() {
           overflow: hidden;
           max-width: 1320px;
           margin: clamp(48px, 6vw, 72px) auto 0;
-          border-radius: 32px;
+          border-radius: var(--radius-xl);
           padding: clamp(24px, 4.4vw, 56px);
           background: var(--stage-field);
         }
@@ -92,17 +92,14 @@ function SecurityHero() {
           flex-direction: column;
           gap: 8px;
           padding: clamp(18px, 2vw, 24px);
-          border-radius: 20px;
-          background: rgba(255, 255, 255, 0.66);
-          -webkit-backdrop-filter: blur(18px) saturate(160%);
-          backdrop-filter: blur(18px) saturate(160%);
-          border: 1px solid rgba(255, 255, 255, 0.85);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 24px 48px -24px rgba(60, 40, 90, 0.4);
+          border-radius: var(--radius-lg);
+          background: var(--bg-card);
+          box-shadow: var(--shadow-md);
         }
-        .ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: #fff; color: #5a4f8f; border: 1px solid rgba(26, 26, 25, 0.06); margin-bottom: 6px; }
+        .ico { width: 40px; height: 40px; border-radius: var(--radius-full); display: grid; place-items: center; background: var(--gold-tint); color: var(--gold); margin-bottom: 6px; }
         .c-t { margin: 0; font-family: var(--font-serif); font-size: clamp(20px, 1.8vw, 23px); letter-spacing: -0.02em; color: var(--text); }
-        .c-x { margin: 0; font-size: 15px; line-height: 1.55; color: #45413b; }
-        .dpa { margin: clamp(18px, 2.4vw, 28px) 0 0; text-align: center; font-size: 14px; color: #4a4540; }
+        .c-x { margin: 0; font-size: 15px; line-height: 1.55; color: var(--text-muted); }
+        .dpa { margin: clamp(18px, 2.4vw, 28px) 0 0; text-align: center; font-size: 14px; color: var(--text-muted); }
         @media (max-width: 1000px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
         @media (max-width: 560px) { .cards { grid-template-columns: 1fr; } }
       `}</style>
@@ -113,7 +110,7 @@ function SecurityHero() {
 /* ── SSO fragment ── */
 function SsoCard() {
   return (
-    <div className="sso agent-edge agent-done">
+    <div className="sso">
       <div className="s-head">
         <span className="s-t">Single sign-on</span>
         <span className="s-sub">Use the login you already have</span>
@@ -129,25 +126,23 @@ function SsoCard() {
             <div className="nm">{p.name}</div>
             <div className="dd">{p.d}</div>
           </div>
-          <span className="chip"><i />connected</span>
+          <span className="ui-badge success">Connected</span>
         </div>
       ))}
       <div className="s-foot">
         <span className="mono">Offboarded at 4:02 PM → locked out at 4:02 PM</span>
       </div>
       <style jsx>{`
-        .sso { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 0 0; box-shadow: var(--shadow-float); }
+        .sso { background: var(--bg-card); border-radius: var(--radius-lg); padding: 18px 0 0; box-shadow: var(--shadow-md); overflow: hidden; }
         .s-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 0 20px 14px; flex-wrap: wrap; }
         .s-t { font-family: var(--font-serif); font-size: 19px; color: var(--text); }
         .s-sub { font-size: 12px; color: var(--text-faint); }
         .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; border-top: 1px solid var(--border-faint); }
-        .mark { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--gold-tint); color: var(--gold-dark); font-family: var(--font-serif); font-size: 16px; display: flex; align-items: center; justify-content: center; }
+        .mark { flex: none; width: 34px; height: 34px; border-radius: var(--radius-full); background: var(--gold-tint); color: var(--gold-dark); font-family: var(--font-serif); font-size: 16px; display: flex; align-items: center; justify-content: center; }
         .main { flex: 1; min-width: 0; }
         .nm { font-size: 14px; font-weight: 700; color: var(--text); }
         .dd { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-        .chip { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
-        .chip i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
-        .s-foot { padding: 12px 20px; border-top: 1px solid var(--border-faint); background: var(--bg-warm); border-radius: 0 0 16px 16px; }
+        .s-foot { padding: 12px 20px; border-top: 1px solid var(--border-faint); background: var(--bg-warm); }
         .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
       `}</style>
     </div>
@@ -175,8 +170,8 @@ function ApprovalGateCard() {
             <div className="m">{r.m}</div>
           </div>
           {r.hold
-            ? <span className="hold">needs your sign-off</span>
-            : <span className="done-c"><i aria-hidden="true" />done</span>}
+            ? <span className="hold">Needs your sign-off</span>
+            : <span className="ui-badge success">Done</span>}
         </div>
       ))}
       <div className="g-foot">
@@ -184,7 +179,7 @@ function ApprovalGateCard() {
         <span className="g-note">Routine work gets done. Sensitive calls wait for you.</span>
       </div>
       <style jsx>{`
-        .gate { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 0 0; box-shadow: var(--shadow-float); }
+        .gate { background: var(--bg-card); border-radius: var(--radius-lg); padding: 18px 0 0; box-shadow: var(--shadow-float); }
         .g-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 0 20px 14px; flex-wrap: wrap; }
         .g-t { font-family: var(--font-serif); font-size: 19px; color: var(--text); }
         .g-sub { font-size: 12px; color: var(--text-faint); }
@@ -193,9 +188,7 @@ function ApprovalGateCard() {
         .main { flex: 1; min-width: 0; }
         .t { font-size: 14px; font-weight: 700; color: var(--text); }
         .m { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-        .hold { flex: none; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
-        .done-c { flex: none; display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-green); background: rgba(34, 160, 94, 0.09); border-radius: 999px; padding: 4px 10px; }
-        .done-c i { width: 6px; height: 6px; border-radius: 999px; background: var(--color-green); }
+        .hold { flex: none; display: inline-flex; align-items: center; height: 24px; font-size: 12px; font-weight: 500; color: var(--gold); background: var(--gold-tint); border-radius: var(--radius-full); padding: 0 10px; white-space: nowrap; }
         .g-foot { display: flex; align-items: center; gap: 10px; padding: 13px 20px; border-top: 1px solid var(--border-faint); flex-wrap: wrap; }
         .g-note { font-size: 12px; color: var(--text-muted); }
         @media (max-width: 460px) { .hold { display: none; } }
@@ -233,8 +226,8 @@ function SecurityReview() {
         .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-dark); margin: 0 0 16px; }
         .title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.025em; color: var(--text); margin: 0; }
         .lead { font-size: clamp(16px, 1.8vw, 18px); line-height: 1.6; color: var(--text-muted); margin: 16px 0 0; max-width: 60ch; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(28px, 4vw, 56px); border-top: 1px solid var(--border-faint); }
-        .item { padding: 22px 0; border-bottom: 1px solid var(--border-faint); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 1.6vw, 18px); align-items: start; }
+        .item { padding: clamp(20px, 2.2vw, 26px); background: var(--bg-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
         .q { font-family: var(--font-serif); font-size: 20px; font-weight: 400; color: var(--text); margin: 0; letter-spacing: -0.01em; }
         .a { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 8px 0 0; }
         .contact { font-size: 15px; color: var(--text-muted); margin: 24px 0 0; }

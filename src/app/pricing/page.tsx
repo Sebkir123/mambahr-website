@@ -91,7 +91,6 @@ export default function PricingPage() {
               company&rsquo;s size.
             </p>
             <Link href="/demo" className="found" data-reveal="eager">
-              <span className="f-dot" aria-hidden="true" />
               Founding customer pricing is open
             </Link>
           </div>
@@ -177,18 +176,17 @@ export default function PricingPage() {
               align-items: center;
               gap: 9px;
               margin-top: 24px;
-              padding: 8px 16px;
-              border-radius: 999px;
-              background: #fff;
-              border: 1px solid var(--border-faint);
-              box-shadow: 0 8px 20px -12px rgba(60, 40, 90, 0.35);
+              min-height: 44px;
+              padding: 0 18px;
+              border-radius: var(--radius-full);
+              background: var(--bg-card);
+              box-shadow: var(--shadow-sm);
               font-size: 14px;
               font-weight: 600;
               color: var(--text);
               text-decoration: none;
             }
-            .top :global(.found:hover) { border-color: var(--border-mid); }
-            .f-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grad); }
+            .top :global(.found:hover) { box-shadow: var(--shadow-md); }
 
             .stage {
               position: relative;
@@ -196,7 +194,7 @@ export default function PricingPage() {
               overflow: hidden;
               max-width: 1320px;
               margin: clamp(44px, 5vw, 64px) auto 0;
-              border-radius: 32px;
+              border-radius: var(--radius-xl);
               padding: clamp(20px, 3.6vw, 48px);
               background: var(--stage-field);
             }
@@ -211,14 +209,11 @@ export default function PricingPage() {
               display: flex;
               flex-direction: column;
               padding: clamp(20px, 2vw, 26px);
-              border-radius: 22px;
-              background: rgba(255, 255, 255, 0.62);
-              -webkit-backdrop-filter: blur(18px) saturate(160%);
-              backdrop-filter: blur(18px) saturate(160%);
-              border: 1px solid rgba(255, 255, 255, 0.85);
-              box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 24px 48px -28px rgba(60, 40, 90, 0.4);
+              border-radius: var(--radius-lg);
+              background: var(--bg-card);
+              box-shadow: var(--shadow-md);
             }
-            .plan.pop { background: #fff; box-shadow: 0 0 0 2px var(--violet), 0 30px 60px -28px rgba(60, 40, 90, 0.55); }
+            .plan.pop { box-shadow: 0 0 0 2px var(--text), var(--shadow-float); }
             .p-name { font-size: 16px; font-weight: 700; color: var(--text); }
             /* On the card's top edge, so every card's rows stay level. */
             .p-badge {
@@ -229,11 +224,11 @@ export default function PricingPage() {
               font-size: 12px;
               font-weight: 600;
               color: #fff;
-              background: var(--violet);
-              border-radius: 999px;
+              background: var(--text);
+              border-radius: var(--radius-full);
               padding: 4px 12px;
               white-space: nowrap;
-              box-shadow: 0 0 0 3px #fff;
+              box-shadow: 0 0 0 3px var(--bg-card);
             }
             .p-size { font-size: 13.5px; color: var(--text-muted); margin-top: 4px; }
             .p-price { display: flex; align-items: baseline; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
@@ -245,10 +240,10 @@ export default function PricingPage() {
             .p-feats li { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; line-height: 1.45; color: var(--text-muted); }
             .tick { flex: none; width: 16px; height: 16px; margin-top: 2px; border-radius: 50%; background: var(--color-green); position: relative; }
             .tick::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3px; height: 7px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }
-            .s-note { margin: clamp(16px, 2vw, 24px) 0 0; text-align: center; font-size: 14px; color: #4a4540; }
+            .s-note { margin: clamp(16px, 2vw, 24px) 0 0; text-align: center; font-size: 14px; color: var(--text-muted); }
 
             .wrap { max-width: 1180px; margin: 0 auto; }
-            .matrix { margin-top: clamp(28px, 3.4vw, 40px); border: 1px solid var(--border-faint); border-radius: 18px; background: #fff; overflow: hidden; }
+            .matrix { margin-top: clamp(28px, 3.4vw, 40px); border-radius: var(--radius-lg); background: var(--bg-card); box-shadow: var(--shadow-sm); overflow: hidden; }
             .matrix summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 20px; font-size: 15px; font-weight: 600; color: var(--text); }
             .matrix summary::-webkit-details-marker { display: none; }
             .matrix summary::after { content: '+'; font-size: 18px; line-height: 1; color: var(--text-faint); }
@@ -297,13 +292,13 @@ export default function PricingPage() {
             .h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin: 0; }
             .sub { font-size: 17px; line-height: 1.6; color: var(--text-muted); margin: 14px 0 0; max-width: 60ch; }
             .ways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: clamp(24px, 3vw, 36px); }
-            .way { padding: clamp(20px, 2.4vw, 28px); border-radius: 20px; background: #fff; border: 1px solid var(--border-faint); box-shadow: 0 20px 40px -32px rgba(60, 40, 90, 0.35); }
+            .way { padding: clamp(20px, 2.4vw, 28px); border-radius: var(--radius-lg); background: var(--bg-card); box-shadow: var(--shadow-sm); }
             .w-t { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 22px; letter-spacing: -0.01em; color: var(--text); }
             .w-x { margin: 10px 0 0; font-size: 15.5px; line-height: 1.55; color: var(--text-muted); }
-            .deel { font-family: var(--font-sans); font-size: 12.5px; font-weight: 600; color: var(--gold-dark); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.22); border-radius: 999px; padding: 3px 10px; letter-spacing: 0; }
+            .deel { font-family: var(--font-sans); font-size: 12.5px; font-weight: 600; color: var(--gold-dark); background: var(--gold-tint); border-radius: var(--radius-full); padding: 3px 10px; letter-spacing: 0; }
             .chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; }
             .c-l { font-size: 14px; font-weight: 600; color: var(--text-faint); margin-right: 4px; }
-            .chip { font-size: 13.5px; color: var(--text-muted); background: var(--bg-surface); border: 1px solid var(--border-faint); border-radius: 999px; padding: 6px 12px; }
+            .chip { font-size: 13.5px; color: var(--text-muted); background: var(--bg-card); box-shadow: var(--shadow-xs); border-radius: var(--radius-full); padding: 6px 12px; }
             @media (max-width: 720px) { .ways { grid-template-columns: 1fr; } }
           `}</style>
         </section>
@@ -325,8 +320,8 @@ export default function PricingPage() {
             .faq { background: var(--bg); padding: clamp(32px, 5vw, 64px) var(--page-pad) clamp(48px, 6vw, 80px); }
             .wrap { max-width: 1180px; margin: 0 auto; }
             .h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin: 0 0 clamp(20px, 2.4vw, 28px); }
-            .list { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(28px, 4vw, 56px); border-top: 1px solid var(--border-faint); }
-            .item { padding: 22px 0; border-bottom: 1px solid var(--border-faint); }
+            .list { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 1.6vw, 18px); align-items: start; }
+            .item { padding: clamp(20px, 2.2vw, 26px); background: var(--bg-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
             .q { font-family: var(--font-serif); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; color: var(--text); margin: 0; }
             .a { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 8px 0 0; }
             @media (max-width: 760px) { .list { grid-template-columns: 1fr; } }

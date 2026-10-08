@@ -13,7 +13,7 @@
   margin-bottom: 28px;
 }
 .crumbLink { color: var(--gold-dark); text-decoration: none; font-weight: 600; }
-.crumbSep { color: var(--border-mid); }
+.crumbSep { color: var(--text-faint); }
 
 .header { margin-bottom: 36px; }
 .title {
@@ -30,20 +30,20 @@
   font-size: 14px;
   color: var(--text-muted);
 }
-.bDot { color: var(--border-mid); }
+.bDot { color: var(--text-faint); }
 .tagRow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .tag {
   font-size: 12px;
   font-weight: 600;
   color: var(--gold-dark);
   background: var(--gold-tint);
-  border: 1px solid rgba(176, 141, 87, 0.2);
+  border: 1px solid rgba(123, 90, 47, 0.18);
   border-radius: 999px;
   padding: 4px 12px;
 }
 
 .cover {
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   margin-bottom: 44px;
   box-shadow: var(--shadow-md);
@@ -87,8 +87,9 @@
 .prose :global(a) { color: var(--gold-dark); text-decoration: underline; text-underline-offset: 2px; }
 .prose :global(a:hover) { color: var(--gold); }
 .prose :global(blockquote) {
-  border-left: 3px solid var(--gold);
-  padding: 4px 0 4px 22px;
+  padding: 18px 24px;
+  border-radius: var(--radius-md);
+  background: var(--gold-tint);
   margin: 1.6em 0;
   font-family: var(--font-serif), Georgia, serif;
   font-size: 22px;
@@ -96,7 +97,7 @@
   font-style: italic;
   color: var(--text);
 }
-.prose :global(img) { max-width: 100%; border-radius: 12px; margin: 1.4em 0; box-shadow: var(--shadow-sm); }
+.prose :global(img) { max-width: 100%; border-radius: var(--radius-md); margin: 1.4em 0; box-shadow: var(--shadow-sm); }
 .prose :global(figure) { margin: 1.6em 0; }
 .prose :global(figcaption) { font-size: 14px; color: var(--text-faint); text-align: center; margin-top: 8px; }
 .prose :global(hr) { border: none; border-top: 1px solid var(--border-faint); margin: 2.4em 0; }
@@ -111,7 +112,7 @@
   background: var(--bg-elevated);
   border: 1px solid var(--border-faint);
   padding: 18px 20px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   overflow-x: auto;
   margin: 0 0 1.6em;
 }
@@ -127,9 +128,8 @@
   flex-wrap: wrap;
   margin-top: 56px;
   padding: 28px 32px;
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   background: var(--grad-warm);
-  border: 1px solid var(--border-faint);
 }
 .ctaKicker {
   font-family: var(--font-serif), Georgia, serif;
@@ -160,12 +160,12 @@
   text-decoration: none;
   color: inherit;
   background: var(--bg-card);
-  border: 1px solid var(--border-faint);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   padding: 22px;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
 }
-.moreCard:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--gold-light); }
+.moreCard:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
 .moreCardTitle {
   font-family: var(--font-serif), Georgia, serif;
   font-size: 19px;

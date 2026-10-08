@@ -96,8 +96,8 @@ export default function CareersPage() {
 
         .roles { padding: 0 var(--page-pad) clamp(48px, 6vw, 72px); background: var(--bg); }
         .h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.6vw, 44px); letter-spacing: -0.03em; color: var(--text); margin: 0 0 20px; }
-        .list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border-faint); }
-        .role { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--border-faint); }
+        .list { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(12px, 1.6vw, 16px); }
+        .role { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: clamp(20px, 2.4vw, 28px); background: var(--bg-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
         .r-t { margin: 0; font-family: var(--font-serif); font-size: 24px; letter-spacing: -0.01em; color: var(--text); }
         .r-m { margin: 4px 0 0; font-size: 14px; color: var(--text-faint); }
         .r-s { margin: 10px 0 0; font-size: 15.5px; line-height: 1.55; color: var(--text-muted); max-width: 64ch; }
@@ -109,7 +109,7 @@ export default function CareersPage() {
           overflow: hidden;
           max-width: 1320px;
           margin: 0 auto;
-          border-radius: 32px;
+          border-radius: var(--radius-xl);
           padding: clamp(32px, 6vw, 72px);
           display: grid;
           grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
@@ -122,15 +122,12 @@ export default function CareersPage() {
         .f1 { width: 60%; height: 90%; left: -10%; top: -40%; background: radial-gradient(circle, var(--stage-glow-1), transparent 70%); }
         .f2 { width: 55%; height: 90%; right: -12%; bottom: -40%; background: radial-gradient(circle, var(--stage-glow-2), transparent 70%); }
         .f3 { width: 50%; height: 60%; left: 25%; top: 20%; background: radial-gradient(circle, var(--stage-glow-4), transparent 70%); }
-        .copy .p { margin: 0; font-size: 17px; line-height: 1.6; color: #3d3a35; max-width: 34ch; }
+        .copy .p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--text-muted); max-width: 34ch; }
         .card {
-          background: rgba(255, 255, 255, 0.82);
-          -webkit-backdrop-filter: blur(16px);
-          backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.9);
-          border-radius: 22px;
+          background: var(--bg-card);
+          border-radius: var(--radius-lg);
           padding: clamp(20px, 3vw, 32px);
-          box-shadow: 0 30px 60px -30px rgba(60, 40, 90, 0.45);
+          box-shadow: var(--shadow-float);
         }
         @media (max-width: 860px) {
           .stage { grid-template-columns: 1fr; }
@@ -264,13 +261,13 @@ function CareersForm({ role, onRoleChange }: { role: string; onRoleChange: (r: s
           width: 100%;
           height: 52px;
           border: 0;
-          border-radius: 999px;
+          border-radius: var(--radius-full);
           background: var(--text);
           color: #fff;
           font-size: 16px;
           font-weight: 600;
           cursor: pointer;
-          box-shadow: 0 12px 26px -10px rgba(20, 18, 14, 0.45);
+          box-shadow: var(--shadow-sm);
           transition: transform 0.15s ease;
         }
         .send:hover:not(:disabled) { transform: translateY(-1px); }
@@ -303,15 +300,15 @@ function Field({ id, label, error, hint, children }: { id: string; label: string
           box-sizing: border-box;
           padding: 13px 15px;
           background: #fff;
-          border: 1px solid var(--border);
-          border-radius: 12px;
+          border: 1px solid rgba(0, 0, 0, 0.45);
+          border-radius: var(--radius-md);
           font: inherit;
           font-size: 15px;
           color: var(--text);
           outline: none;
           transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
-        .fld :global(.inp:focus) { border-color: var(--violet); box-shadow: 0 0 0 3px rgba(106, 93, 166, 0.16); }
+        .fld :global(.inp:focus) { border-color: var(--text); box-shadow: 0 0 0 3px var(--gold-tint); }
         .fld :global(.inp.bad) { border-color: var(--color-red); }
         .fld :global(.ta) { resize: vertical; min-height: 140px; line-height: 1.55; }
       `}</style>

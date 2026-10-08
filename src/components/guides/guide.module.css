@@ -1,5 +1,5 @@
 /* Guides, state pages, the company-size page and their hubs. Light mode only,
-   same tokens, serif and gold-to-violet ring as the rest of the site. */
+   Warm Soft cards and the Dusk ring on the agent's own box only. */
 
 .page { background: var(--bg); }
 
@@ -37,7 +37,7 @@
 
 .crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; list-style: none; margin: 0 0 22px; padding: 0; font-size: 13.5px; color: var(--text-faint); }
 .crumbs li { display: inline-flex; align-items: center; gap: 6px; }
-.crumbs li + li::before { content: '/'; color: var(--border-mid); }
+.crumbs li + li::before { content: '/'; color: var(--text-faint); }
 .crumbs a { color: var(--gold-dark); font-weight: 600; text-decoration: none; }
 .crumbs a:hover { text-decoration: underline; text-underline-offset: 2px; }
 
@@ -71,9 +71,8 @@
 .answer {
   margin-top: clamp(24px, 3vw, 32px);
   max-width: 820px;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid var(--border);
-  border-radius: 18px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
   padding: clamp(20px, 2.6vw, 28px) clamp(20px, 2.8vw, 32px);
   box-shadow: var(--shadow-md);
 }
@@ -82,14 +81,14 @@
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--violet);
+  color: var(--gold-dark);
   margin: 0 0 8px;
 }
 .answerText { font-size: clamp(17px, 1.9vw, 19.5px); line-height: 1.6; color: var(--text); margin: 0; }
 .answerText a { color: var(--gold-dark); text-decoration: underline; text-underline-offset: 2px; }
 
 .meta { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 18px 0 0; font-size: 14px; color: var(--text-faint); }
-.dot { color: var(--border-mid); }
+.dot { color: var(--text-faint); }
 
 /* ── Body: article + sticky table of contents ── */
 .body {
@@ -130,8 +129,7 @@
 .tableWrap {
   margin: 4px 0 1.4em;
   overflow-x: auto;
-  border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   background: var(--bg-card);
   box-shadow: var(--shadow-sm);
 }
@@ -155,18 +153,18 @@
 
 /* ── FAQ ── */
 .faq { display: flex; flex-direction: column; gap: 12px; }
-.qa { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: clamp(18px, 2.2vw, 24px); box-shadow: var(--shadow-sm); }
+.qa { background: var(--bg-card); border-radius: var(--radius-lg); padding: clamp(18px, 2.2vw, 24px); box-shadow: var(--shadow-sm); }
 .qa p { margin: 0; font-size: 16px; line-height: 1.62; }
 
 /* ── How MambaHR handles this ── */
 .mamba {
   margin-top: clamp(40px, 5vw, 56px);
-  border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   padding: clamp(22px, 3vw, 32px);
-  background: linear-gradient(135deg, var(--gold-tint), color-mix(in srgb, var(--violet) 7%, var(--bg)));
+  background: var(--bg-card);
+  box-shadow: var(--shadow-md);
 }
-.mambaKicker { font-family: var(--font-serif); font-size: clamp(21px, 2.4vw, 25px); letter-spacing: -0.02em; color: var(--text); margin: 0 0 10px !important; }
+.mambaKicker { display: flex; align-items: center; gap: 12px; font-family: var(--font-serif); font-size: clamp(21px, 2.4vw, 25px); letter-spacing: -0.02em; color: var(--text); margin: 0 0 10px !important; }
 .mambaText { margin: 0 0 18px !important; font-size: 16.5px; line-height: 1.62; }
 .mambaCtas { display: flex; flex-wrap: wrap; gap: 10px; }
 
@@ -186,8 +184,7 @@
   height: 100%;
   min-height: 44px;
   padding: 16px 18px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   background: var(--bg-card);
   box-shadow: var(--shadow-sm);
   color: var(--text) !important;
@@ -195,14 +192,14 @@
   font-size: 15.5px;
   font-weight: 600;
   line-height: 1.35;
-  transition: border-color 0.15s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 0.15s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.relatedCard:hover { border-color: var(--gold-light); transform: translateY(-2px); }
+.relatedCard:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
 .arrow { color: var(--gold); flex: none; }
 
 /* ── Table of contents ── */
 .aside { position: sticky; top: 96px; }
-.toc { border: 1px solid var(--border-faint); border-radius: 16px; padding: 20px; background: var(--bg-surface); }
+.toc { border-radius: var(--radius-lg); padding: 20px; background: var(--bg-card); box-shadow: var(--shadow-sm); }
 .tocTitle { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin: 0 0 12px; }
 .toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
 .toc ol a { display: block; padding: 5px 0; font-size: 14px; line-height: 1.4; color: var(--text-muted); text-decoration: none; }
@@ -214,8 +211,8 @@
 /* ── State page: at a glance ── */
 .glance { scroll-margin-top: 96px; margin-bottom: clamp(36px, 4.5vw, 52px); }
 .glanceGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; }
-.glanceItem { border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; background: var(--bg-card); box-shadow: var(--shadow-sm); }
-.glanceItem dt { font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-dark); margin: 0 0 6px; }
+.glanceItem { border-radius: var(--radius-lg); padding: 16px 18px; background: var(--bg-card); box-shadow: var(--shadow-sm); }
+.glanceItem dt { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-dark); margin: 0 0 6px; }
 .glanceItem dd { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--text); }
 
 /* ── Hubs ── */
@@ -231,20 +228,19 @@
   gap: 10px;
   height: 100%;
   padding: clamp(18px, 2.2vw, 24px);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   background: var(--bg-card);
   box-shadow: var(--shadow-sm);
   color: inherit;
   text-decoration: none;
-  transition: border-color 0.15s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
 }
-.card:hover { border-color: var(--gold-light); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
 .cardTitle { font-family: var(--font-serif); font-size: 19.5px; line-height: 1.22; letter-spacing: -0.015em; color: var(--text); margin: 0; }
 .cardText { font-size: 14.5px; line-height: 1.55; color: var(--text-muted); margin: 0; }
 .cardMore { margin-top: auto; font-size: 14px; font-weight: 600; color: var(--gold-dark); }
 .feature { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-bottom: clamp(44px, 5.5vw, 64px); }
-.featureCard { background: linear-gradient(135deg, var(--gold-tint), color-mix(in srgb, var(--violet) 7%, var(--bg))); }
+.featureCard { background: var(--gold-tint); box-shadow: none; }
 .hubNote { margin-top: clamp(40px, 5vw, 56px); font-size: 14.5px; line-height: 1.6; color: var(--text-faint); }
 .hubNote a { color: var(--gold-dark); }
 .hubProse { font-size: 16.5px; line-height: 1.65; color: var(--text-muted); }

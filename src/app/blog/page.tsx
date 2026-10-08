@@ -123,7 +123,7 @@ export default async function BlogIndex() {
         {posts.length === 0 ? (
           <div className={styles.empty}>
             <p>No posts yet. The first one is on its way.</p>
-            <Link href="/demo" className="btn-gold">Book a demo</Link>
+            <Link href="/demo" className="btn btn-primary btn-sm">Book a demo</Link>
           </div>
         ) : (
           <>

@@ -85,7 +85,7 @@ export default function ArticleShell({
             <Crumbs items={crumbs} />
             <p className={s.eyebrow}>{eyebrow}</p>
             <h1 className={s.title}>{title}</h1>
-            <div className={`${s.answer} agent-edge agent-done`}>
+            <div className={s.answer}>
               <p className={s.answerLabel}>The short answer</p>
               <p className={s.answerText}>
                 <RichText text={answer} />
@@ -129,7 +129,7 @@ export default function ArticleShell({
             )}
 
             <section id="how-mambahr-handles-this" className={`${s.mamba} agent-edge agent-done`}>
-              <p className={s.mambaKicker}>How MambaHR handles this</p>
+              <p className={s.mambaKicker}><span className="agent-mark" style={{ ['--am-size' as string]: '28px' }} aria-hidden="true" />How MambaHR handles this</p>
               <p className={s.mambaText}>
                 <RichText text={mambahr} />
               </p>

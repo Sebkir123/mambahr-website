@@ -58,7 +58,7 @@
   border-bottom: 1px solid var(--border-faint);
 }
 .leadMedia {
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 16 / 10;
   background: var(--bg-elevated);
@@ -75,10 +75,7 @@
   justify-content: space-between;
   padding: 28px;
   overflow: hidden;
-  background:
-    radial-gradient(130% 130% at 18% 8%, rgba(185,138,78,0.30), transparent 58%),
-    radial-gradient(120% 120% at 88% 96%, rgba(106,93,166,0.26), transparent 60%),
-    linear-gradient(150deg, var(--gold-tint), var(--bg-cream) 52%, rgba(106,93,166,0.10));
+  background: var(--stage-field);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .lead:hover .plate, .card:hover .plate { transform: scale(1.03); }
@@ -98,17 +95,11 @@
   gap: 12px;
 }
 .plateMark {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: var(--grad);
-  color: #fff;
+  /* The brand is the gold M and the name, with no tile behind it. */
+  color: var(--gold);
   font-family: var(--font-serif), Georgia, serif;
-  font-size: 22px;
+  font-size: 30px;
   line-height: 1;
-  box-shadow: 0 6px 18px rgba(106,93,166,0.28);
 }
 .plateBrand {
   font-family: var(--font-serif), Georgia, serif;
@@ -126,7 +117,7 @@
   height: 2px;
   width: 64px;
   border-radius: 2px;
-  background: var(--grad);
+  background: var(--gold);
 }
 .plateTag {
   font-family: var(--font-mono), monospace;
@@ -138,7 +129,7 @@
 }
 /* card variant: smaller mark + brand to fit the tighter media box */
 .plateCard { padding: 20px; }
-.plateCard .plateMark { width: 30px; height: 30px; border-radius: 8px; font-size: 17px; }
+.plateCard .plateMark { font-size: 24px; }
 .plateCard .plateBrand { font-size: 19px; }
 .plateCard .plateRule { width: 48px; }
 .leadTitle {
@@ -164,22 +155,26 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px 32px;
+  gap: 28px;
 }
 .card {
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease;
 }
+.card:hover { box-shadow: var(--shadow-md); }
 .cardMedia {
-  border-radius: 14px;
   overflow: hidden;
   aspect-ratio: 16 / 10;
   background: var(--bg-elevated);
-  margin-bottom: 16px;
-  box-shadow: var(--shadow-sm);
 }
+.cardBody { display: flex; flex-direction: column; flex: 1; padding: 6px 22px 22px; }
 .cardTitle {
   font-family: var(--font-serif), Georgia, serif;
   font-size: 22px;
@@ -207,7 +202,7 @@
   font-size: 13px;
   color: var(--text-faint);
 }
-.metaDot { color: var(--border-mid); }
+.metaDot { color: var(--text-faint); }
 .tag {
   font-size: 12px;
   font-weight: 600;
@@ -233,5 +228,9 @@
 @media (max-width: 760px) {
   .page { padding-top: 96px; }
   .lead { grid-template-columns: 1fr; gap: 24px; }
-  .grid { grid-template-columns: 1fr; gap: 36px; }
+  .grid { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .leadImg, .cardImg, .plate, .card { transition: none; }
+  .lead:hover .leadImg, .card:hover .cardImg, .lead:hover .plate, .card:hover .plate { transform: none; }
 }

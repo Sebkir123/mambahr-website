@@ -106,19 +106,19 @@ function Group({ title, items }: { title: string; items: Entry[] }) {
         .g-l { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
         .grp :global(.row) {
           display: grid;
-          grid-template-columns: minmax(0, auto) minmax(0, 1fr) 16px;
+          grid-template-columns: auto minmax(0, 1fr) 16px;
           align-items: baseline;
           gap: 12px;
           padding: 11px 12px;
-          border-radius: 12px;
+          border-radius: var(--radius-md);
           text-decoration: none;
           color: var(--text);
           transition: background 0.15s ease;
         }
-        .grp :global(.row:hover) { background: rgba(255, 255, 255, 0.9); }
+        .grp :global(.row:hover) { background: var(--bg); }
         .grp :global(.row:focus-visible) { outline: 2px solid var(--violet); outline-offset: 1px; }
         .r-n { font-family: var(--font-serif); font-size: 19px; letter-spacing: -0.01em; white-space: nowrap; }
-        .r-w { font-size: 14px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .r-w { font-size: 14px; line-height: 1.4; color: var(--text-muted); }
         .r-a { color: var(--text-faint); align-self: center; }
       `}</style>
     </div>
@@ -195,7 +195,7 @@ export default function CompareHub() {
           overflow: hidden;
           max-width: 1320px;
           margin: clamp(48px, 6vw, 72px) auto 0;
-          border-radius: 32px;
+          border-radius: var(--radius-xl);
           padding: clamp(20px, 4vw, 56px);
           background: var(--stage-field);
         }
@@ -209,22 +209,18 @@ export default function CompareHub() {
           grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 1fr);
           gap: clamp(16px, 2.4vw, 32px);
           padding: clamp(16px, 2.4vw, 28px);
-          border-radius: 24px;
-          background: rgba(255, 255, 255, 0.7);
-          -webkit-backdrop-filter: blur(18px) saturate(160%);
-          backdrop-filter: blur(18px) saturate(160%);
-          border: 1px solid rgba(255, 255, 255, 0.85);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 30px 60px -30px rgba(60, 40, 90, 0.45);
+          border-radius: var(--radius-lg);
+          background: var(--bg-card);
+          box-shadow: var(--shadow-md);
         }
         .col { display: grid; gap: 20px; align-content: start; }
-        .col + .col { border-left: 1px solid rgba(26, 26, 25, 0.07); padding-left: clamp(12px, 2vw, 24px); }
+        .col + .col { border-left: 1px solid var(--border-faint); padding-left: clamp(12px, 2vw, 24px); }
 
         .none { background: var(--bg); padding: clamp(24px, 4vw, 48px) var(--page-pad) clamp(40px, 5vw, 64px); }
         .wrap { max-width: 1180px; margin: 0 auto; }
         .h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -0.03em; color: var(--text); margin: 0 0 24px; }
-        .opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--border-faint); }
-        .opt { display: grid; gap: 10px; align-content: start; padding: 24px 28px 8px 0; }
-        .opt + .opt { padding-left: 28px; border-left: 1px solid var(--border-faint); }
+        .opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 18px); }
+        .opt { display: grid; gap: 10px; align-content: start; padding: clamp(20px, 2.4vw, 28px); background: var(--bg-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
         .o-t { margin: 0; font-family: var(--font-serif); font-size: 22px; letter-spacing: -0.01em; color: var(--text); }
         .o-b { margin: 0; font-size: 15px; line-height: 1.55; color: var(--text-muted); }
         .o-m { margin: 0; font-size: 15px; line-height: 1.55; color: var(--text); }
@@ -238,8 +234,6 @@ export default function CompareHub() {
         @media (max-width: 700px) {
           .panel { grid-template-columns: 1fr; }
           .opts { grid-template-columns: 1fr; }
-          .opt, .opt + .opt { padding: 20px 0 8px; border-left: 0; }
-          .opt + .opt { border-top: 1px solid var(--border-faint); }
         }
       `}</style>
     </>

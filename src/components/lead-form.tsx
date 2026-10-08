@@ -190,9 +190,9 @@ export function LeadForm({
         {note && <p className="fine">{note}</p>}
       </form>
       <style jsx>{`
-        .lbl { display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 8px; }
-        .inp { width: 100%; box-sizing: border-box; padding: 14px 16px; margin-bottom: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; font-size: 15px; font-family: var(--font-sans); color: var(--text); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
-        .inp:focus { border-color: var(--gold-dark); box-shadow: 0 0 0 3px var(--gold-tint); }
+        .lbl { display: block; font-size: 14px; font-weight: 600; color: var(--text); margin: 0 0 8px; }
+        .inp { width: 100%; box-sizing: border-box; padding: 14px 16px; margin-bottom: 18px; background: var(--bg-card); border: 1px solid rgba(0, 0, 0, 0.45); border-radius: var(--radius-md); font-size: 15px; font-family: var(--font-sans); color: var(--text); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+        .inp:focus { border-color: var(--text); box-shadow: 0 0 0 3px var(--gold-tint); }
         .inp.bad { border-color: var(--color-red); margin-bottom: 6px; }
         .f-err { font-size: 13px; color: var(--color-red); margin: 0 0 14px; }
         .ts .f-err { margin: 0; }
@@ -202,7 +202,7 @@ export function LeadForm({
         .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
         @media (max-width: 480px) { .grid2 { grid-template-columns: 1fr; } }
         .ts { min-height: 65px; margin-bottom: 16px; }
-        .btn { width: 100%; padding: 15px 24px; background: #1A1A19; color: #fff; font-weight: 600; font-size: 16px; border: none; border-radius: 999px; cursor: pointer; box-shadow: 0 12px 26px rgba(20,18,14,0.2); transition: transform 0.15s ease, background 0.15s ease; }
+        .btn { width: 100%; padding: 15px 24px; min-height: 52px; background: var(--text); color: #fff; font-weight: 600; font-size: 16px; border: none; border-radius: var(--radius-full); cursor: pointer; box-shadow: var(--shadow-sm); transition: transform 0.15s ease, background 0.15s ease; }
         .btn:hover:not(:disabled) { transform: translateY(-2px); background: #2A2A28; }
         .btn:active:not(:disabled) { transform: translateY(0); }
         .btn:disabled { opacity: 0.45; cursor: not-allowed; }

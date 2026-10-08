@@ -132,7 +132,7 @@ export default function HowItWorksPage() {
             </div>
             <ol className={s.stepGrid}>
               {FLOW.map((f, i) => (
-                <li key={f.title} className={s.stepCard} data-reveal data-delay={String((i % 2) + 1)}>
+                <li key={f.title} className={`${s.stepCard}${f.who === 'person' ? ` ${s.person}` : ''}`} data-reveal data-delay={String((i % 2) + 1)}>
                   <span className={s.stepNum} aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
                   <h3 className={s.stepT}>{f.title}</h3>
                   <p className={s.stepB}>{f.body}</p>

@@ -41,8 +41,7 @@
 /* ── Hero fragment: the four stages as one card ── */
 .flowCard {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-float);
   overflow: hidden;
 }
@@ -52,7 +51,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 14px clamp(18px, 2.4vw, 28px);
-  background: linear-gradient(90deg, #FBF7EE, #F4F1F9);
+  background: var(--bg-surface);
   border-bottom: 1px solid var(--border-faint);
 }
 .flowTopT { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
@@ -78,19 +77,17 @@
   color: var(--violet);
   background: var(--violet-soft);
 }
-.flowCell.person .flowN { color: var(--gold-dark); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+.flowCell.person .flowN { color: var(--gold); background: var(--gold-tint); }
 .flowT { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); margin: 14px 0 0; }
 .flowB { font-size: 14px; line-height: 1.5; color: var(--text-muted); margin: 6px 0 0; }
 .flowWho {
   display: inline-block;
   margin-top: 12px;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--violet);
 }
-.flowCell.person .flowWho { color: var(--gold-dark); }
+.flowCell.person .flowWho { color: var(--gold); }
 
 /* ── The four steps, explained ── */
 .steps { background: var(--bg); padding-block: clamp(80px, 10vw, 128px); }
@@ -103,26 +100,20 @@
   gap: clamp(14px, 1.8vw, 20px);
 }
 .stepCard {
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   padding: clamp(22px, 2.6vw, 32px);
-  border: 1px solid var(--border-faint);
   box-shadow: var(--shadow-sm);
-  background: linear-gradient(165deg, #F4F2FA, #ECE8F6);
+  background: var(--bg-card);
 }
-.stepCard:nth-child(1) { background: linear-gradient(165deg, #FFF6EC, #FBE9DA); border-color: #EFD9C2; }
-.stepCard:nth-child(2) { background: linear-gradient(165deg, #F4F2FA, #ECE8F6); border-color: #DDD7EC; }
-.stepCard:nth-child(3) { background: linear-gradient(165deg, #FAF5EA, #F2EADA); border-color: #E6D9C0; }
-.stepCard:nth-child(4) { background: linear-gradient(165deg, #F6F4EF, #EEEBE3); border-color: #E2DDD2; }
+/* Violet numerals are the agent's steps; gold is the person's. */
 .stepNum {
   font-family: var(--font-serif);
   font-size: 40px;
   line-height: 1;
   letter-spacing: -0.02em;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--violet);
 }
+.stepCard.person .stepNum { color: var(--gold); }
 .stepT { font-family: var(--font-serif); font-weight: 400; font-size: clamp(21px, 2.2vw, 26px); letter-spacing: -0.015em; color: var(--text); margin: 14px 0 0; }
 .stepB { font-size: 15.5px; line-height: 1.6; color: var(--text-muted); margin: 10px 0 0; }
 
@@ -134,15 +125,15 @@
   min-height: 44px;
   padding: 8px 18px;
   border-radius: 999px;
-  border: 1px solid var(--border);
   background: var(--bg-card);
+  box-shadow: var(--shadow-xs);
   font-size: 14.5px;
   font-weight: 600;
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
-.jump a:hover { color: var(--gold-dark); border-color: var(--gold-light); background: var(--gold-tint); }
+.jump a:hover { color: var(--gold-dark); background: var(--gold-tint); }
 .jump a:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
 
 /* ── One walk-through ── */
@@ -164,8 +155,7 @@
 .ask {
   margin-top: 28px;
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
 }
@@ -181,7 +171,7 @@
 }
 .askTop b { color: var(--text); font-weight: 700; }
 .askBody { display: flex; gap: 11px; padding: 14px 16px 16px; }
-.askAv { flex: none; width: 34px; height: 34px; border-radius: 9px; object-fit: cover; }
+.askAv { flex: none; width: 34px; height: 34px; border-radius: var(--radius-full); object-fit: cover; }
 .askWho { font-size: 14px; font-weight: 700; color: var(--text); }
 .askWho time { font-weight: 400; font-size: 12px; color: var(--text-faint); margin-left: 8px; }
 .askText { font-size: 14.5px; line-height: 1.5; color: var(--text); margin: 3px 0 0; }
@@ -203,7 +193,7 @@
   top: 38px;
   bottom: 4px;
   width: 2px;
-  background: linear-gradient(180deg, rgba(106, 93, 166, 0.28), rgba(106, 93, 166, 0.06));
+  background: var(--border-faint);
 }
 .item:last-child::before { display: none; }
 .dot {
@@ -216,56 +206,48 @@
   font-family: var(--font-mono);
   font-size: 12.5px;
   color: var(--violet);
-  background: var(--bg-card);
-  border: 1px solid rgba(106, 93, 166, 0.35);
-  box-shadow: var(--shadow-sm);
+  background: var(--violet-soft);
 }
-.item.person .dot { color: #fff; background: linear-gradient(135deg, #D4AA7C, #7A5A2E); border-color: transparent; }
+.item.person .dot { color: var(--gold); background: var(--gold-tint); }
 .itemHead { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-top: 6px; }
 .itemT { font-size: 16.5px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); margin: 0; }
 .who {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 12px;
+  font-weight: 500;
   color: var(--violet);
-  background: rgba(106, 93, 166, 0.1);
-  border-radius: 999px;
+  background: var(--violet-soft);
+  border-radius: var(--radius-full);
   padding: 3px 10px;
   white-space: nowrap;
 }
-.item.person .who { color: var(--gold-dark); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+.item.person .who { color: var(--gold); background: var(--gold-tint); }
 .itemB { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 6px 0 0; }
 
 /* Why a person, and what you see at the end: two cards under the steps. */
 .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 8px; }
 .note {
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   padding: 20px 22px;
   background: var(--bg-card);
-  border: 1px solid var(--border-faint);
   box-shadow: var(--shadow-sm);
 }
-.noteWhy { background: linear-gradient(165deg, #FFF8EF, #FBEFE2); border-color: #EFD9C2; }
-.noteDone { background: linear-gradient(165deg, #F6F4FB, #EEEBF7); border-color: #DDD7EC; }
-.noteL { font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-dark); margin: 0 0 8px; }
-.noteDone .noteL { color: var(--violet); }
+.noteWhy { background: var(--gold-tint); box-shadow: none; }
+.noteL { font-size: 13px; font-weight: 600; color: var(--gold-dark); margin: 0 0 8px; }
+.noteDone .noteL { color: var(--green); }
 .noteB { font-size: 14.5px; line-height: 1.6; color: var(--text-muted); margin: 0; }
 
 /* ── Who decides what ── */
 .decide { background: var(--bg); padding-block: clamp(80px, 10vw, 128px); }
 .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 20px); margin-top: clamp(36px, 4vw, 52px); }
-.col { border-radius: 18px; padding: clamp(22px, 2.4vw, 30px); border: 1px solid var(--border-faint); box-shadow: var(--shadow-sm); background: var(--bg-card); }
-.col.always { background: linear-gradient(165deg, #FFF6EC, #FBE9DA); border-color: #EFD9C2; }
-.col.yours { background: linear-gradient(165deg, #FAF5EA, #F2EADA); border-color: #E6D9C0; }
-.col.mamba { background: linear-gradient(165deg, #F4F2FA, #ECE8F6); border-color: #DDD7EC; }
+.col { border-radius: var(--radius-lg); padding: clamp(22px, 2.4vw, 30px); box-shadow: var(--shadow-sm); background: var(--bg-card); }
 .colT { font-family: var(--font-serif); font-weight: 400; font-size: 23px; letter-spacing: -0.015em; color: var(--text); margin: 0; }
 .colS { font-size: 14.5px; line-height: 1.55; color: var(--text-muted); margin: 8px 0 0; }
 .colList { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-direction: column; gap: 10px; }
 .colList li { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; line-height: 1.5; color: var(--text); }
 .tick { flex: none; width: 16px; height: 16px; margin-top: 2px; border-radius: 999px; position: relative; background: var(--violet); }
 .tick::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3px; height: 7px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }
-.always .tick, .yours .tick { background: linear-gradient(135deg, #D4AA7C, #7A5A2E); }
+.always .tick, .yours .tick { background: var(--gold); }
+.mamba .tick { background: var(--violet); }
 .why { margin: clamp(28px, 3vw, 40px) auto 0; max-width: 760px; text-align: center; font-size: 16px; line-height: 1.65; color: var(--text-muted); }
 
 /* ── Start on your own ── */
@@ -274,8 +256,7 @@
 .startBtns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .startCard {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-float);
   padding: 8px 0;
 }
@@ -288,8 +269,8 @@
 
 /* ── Questions ── */
 .faq { background: var(--bg); padding-block: clamp(72px, 9vw, 112px) clamp(24px, 4vw, 48px); }
-.faqList { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(28px, 4vw, 56px); border-top: 1px solid var(--border-faint); margin-top: clamp(24px, 3vw, 36px); }
-.faqItem { padding: 22px 0; border-bottom: 1px solid var(--border-faint); }
+.faqList { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: clamp(12px, 1.6vw, 18px); margin-top: clamp(24px, 3vw, 36px); }
+.faqItem { padding: clamp(20px, 2.2vw, 26px); background: var(--bg-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
 .faqQ { font-family: var(--font-serif); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; color: var(--text); margin: 0; }
 .faqA { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 8px 0 0; }
 

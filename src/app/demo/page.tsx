@@ -58,7 +58,7 @@ export default function DemoPage() {
 
             {/* ── Form card ── */}
             <div className="formcol" data-reveal data-delay="1">
-              <div className="card agent-edge agent-working agent-lg">
+              <div className={status === 'success' ? 'card agent-edge agent-done agent-lg' : 'card'}>
                 {status === 'success' ? (
                   <div className="done">
                     <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />Request received</span>
@@ -94,7 +94,7 @@ export default function DemoPage() {
               align-items: center;
             }
             .aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-            .aurora::after { content: ''; position: absolute; inset: 0; background: radial-gradient(54% 48% at 50% 32%, rgba(254, 253, 250, 0.82), rgba(254, 253, 250, 0) 72%); }
+            .aurora::after { content: ''; position: absolute; inset: 0; background: radial-gradient(54% 48% at 50% 32%, rgba(250, 248, 244, 0.82), rgba(250, 248, 244, 0) 72%); }
             .blob { position: absolute; border-radius: 50%; filter: blur(72px); }
             .b1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(196, 154, 108, 0.58), rgba(196, 154, 108, 0) 68%); top: -220px; left: -140px; animation: dmA 24s ease-in-out infinite alternate; }
             .b2 { width: 640px; height: 640px; background: radial-gradient(circle, rgba(106, 93, 166, 0.46), rgba(106, 93, 166, 0) 68%); top: -170px; right: -130px; animation: dmB 28s ease-in-out infinite alternate; }
@@ -116,13 +116,12 @@ export default function DemoPage() {
             .lead { font-size: clamp(16.5px, 1.9vw, 19px); line-height: 1.6; color: var(--text-muted); margin: 18px 0 0; max-width: 480px; }
             .see { list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-direction: column; gap: 13px; }
             .see li { display: flex; align-items: flex-start; gap: 11px; font-size: 15px; line-height: 1.5; color: var(--text-muted); }
-            .tick { flex: none; width: 18px; height: 18px; margin-top: 2px; border-radius: 999px; background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.3); position: relative; }
+            .tick { flex: none; width: 18px; height: 18px; margin-top: 2px; border-radius: var(--radius-full); background: var(--gold-tint); border: 1px solid rgba(123, 90, 47, 0.24); position: relative; }
             .tick::after { content: ''; position: absolute; left: 6px; top: 3.5px; width: 3.5px; height: 7.5px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: rotate(45deg); }
 
             .card {
               background: var(--bg-card);
-              border: 1px solid var(--border);
-              border-radius: 18px;
+              border-radius: var(--radius-lg);
               box-shadow: var(--shadow-float);
               padding: clamp(24px, 3vw, 34px);
             }

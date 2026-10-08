@@ -114,7 +114,7 @@ export default function AboutPage() {
           overflow: hidden;
           max-width: 1320px;
           margin: clamp(48px, 6vw, 72px) auto 0;
-          border-radius: 32px;
+          border-radius: var(--radius-xl);
           padding: clamp(28px, 5vw, 64px);
           background: var(--stage-field);
         }
@@ -129,16 +129,13 @@ export default function AboutPage() {
           flex-direction: column;
           gap: 10px;
           padding: clamp(20px, 2.4vw, 28px);
-          border-radius: 20px;
-          background: rgba(255, 255, 255, 0.66);
-          -webkit-backdrop-filter: blur(18px) saturate(160%);
-          backdrop-filter: blur(18px) saturate(160%);
-          border: 1px solid rgba(255, 255, 255, 0.85);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 24px 48px -24px rgba(60, 40, 90, 0.4);
+          border-radius: var(--radius-lg);
+          background: var(--bg-card);
+          box-shadow: var(--shadow-md);
         }
-        .ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: #fff; color: #5a4f8f; border: 1px solid rgba(26, 26, 25, 0.06); margin-bottom: 6px; }
+        .ico { width: 40px; height: 40px; border-radius: var(--radius-full); display: grid; place-items: center; background: var(--gold-tint); color: var(--gold); margin-bottom: 6px; }
         .p-t { margin: 0; font-family: var(--font-serif); font-size: clamp(21px, 2vw, 25px); letter-spacing: -0.02em; color: var(--text); }
-        .p-x { margin: 0; font-size: 15.5px; line-height: 1.55; color: #45413b; }
+        .p-x { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--text-muted); }
 
         .team {
           max-width: 1180px;
@@ -154,7 +151,7 @@ export default function AboutPage() {
         .team-l { margin: 0; font-size: 14px; font-weight: 600; color: var(--text-faint); }
         .people { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px 32px; }
         .person { display: flex; align-items: center; gap: 12px; }
-        .av { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: 50% 25%; filter: saturate(0.9); }
+        .av { width: 44px; height: 44px; border-radius: var(--radius-full); object-fit: cover; object-position: 50% 25%; filter: saturate(0.9); }
         .who { display: flex; flex-direction: column; line-height: 1.3; }
         .nm { font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; }
         .nm:hover { text-decoration: underline; text-underline-offset: 3px; }
