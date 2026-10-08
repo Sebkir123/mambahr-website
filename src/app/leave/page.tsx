@@ -1,5 +1,6 @@
 'use client'
 
+import { MambaMark } from '@/components/mamba-mark'
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
@@ -9,7 +10,7 @@ import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/comp
 /* ── Hero fragment: the Slack exchange, done in seconds ── */
 function SlackApprovalCard() {
   return (
-    <div className="sac agent-edge agent-done agent-lg">
+    <div className="sac">
       <div className="bar">
         <span className="dots"><i /><i /><i /></span>
         <span className="chn"><span className="hash">#</span>people-ops</span>
@@ -27,7 +28,8 @@ function SlackApprovalCard() {
           </div>
         </div>
         <div className="m">
-          <div className="av app" aria-hidden="true">M</div>
+          {/* The MambaHR app icon in Slack: the gold M on a dark square. */}
+          <div className="av app" aria-hidden="true"><MambaMark size={22} color="#C9A26C" /></div>
           <div className="m-body">
             <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:14 AM</time></div>
             <div className="m-t">Approved. Enjoy the wedding.</div>
@@ -43,8 +45,7 @@ function SlackApprovalCard() {
       <style jsx>{`
         .sac {
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 16px;
+          border-radius: 14px;
           box-shadow: var(--shadow-float);
           overflow: hidden;
         }
@@ -53,11 +54,11 @@ function SlackApprovalCard() {
           align-items: center;
           gap: 12px;
           padding: 10px 16px;
-          background: #F8F6F1;
+          background: var(--bg-surface);
           border-bottom: 1px solid var(--border);
         }
         .dots { display: flex; gap: 6px; }
-        .dots i { width: 10px; height: 10px; border-radius: 999px; background: #e3ddd6; display: block; }
+        .dots i { width: 10px; height: 10px; border-radius: var(--radius-full); background: #e3ddd6; display: block; }
         .dots i:first-child { background: #f0a59a; }
         .dots i:nth-child(2) { background: #f4ce8e; }
         .dots i:nth-child(3) { background: #a9cfa6; }
@@ -68,13 +69,10 @@ function SlackApprovalCard() {
         .m { display: flex; gap: 11px; }
         .av { width: 38px; height: 38px; border-radius: 9px; object-fit: cover; flex: none; }
         .av.app {
-          background: var(--ink);
-          color: #fff;
+          background: #0c0c0b;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-family: var(--font-serif);
-          font-size: 20px;
         }
         .m-body { min-width: 0; }
         .m-h { display: flex; align-items: baseline; gap: 8px; }
@@ -87,18 +85,18 @@ function SlackApprovalCard() {
           letter-spacing: 0.04em;
           color: var(--text-muted);
           background: var(--bg-surface);
-          border-radius: 4px;
+          border-radius: var(--radius-xs);
           padding: 1px 5px;
         }
         .m-t { font-size: 14px; line-height: 1.5; color: var(--text); margin-top: 3px; }
-        .mention { color: var(--violet); background: rgba(106, 93, 166, 0.1); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+        .mention { color: var(--violet); background: var(--violet-soft); border-radius: var(--radius-xs); padding: 0 4px; font-weight: 600; }
         .attach {
           margin-top: 9px;
-          border-left: 3px solid var(--gold);
-          background: #FAF6EF;
-          border-radius: 0 10px 10px 0;
+          border: 1px solid var(--border-faint);
+          background: var(--bg-surface);
+          border-radius: 12px;
           padding: 12px 14px;
-          max-width: 360px;
+          max-width: 380px;
         }
         .a-row { display: flex; justify-content: space-between; gap: 16px; padding: 3px 0; }
         .a-k { font-size: 13px; color: var(--text-faint); }
@@ -113,8 +111,7 @@ function SlackApprovalCard() {
           font-size: 12px;
           color: var(--text-faint);
         }
-        .ok-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
-        .mono { font-family: var(--font-mono); font-size: 12px; }
+        .ok-dot { width: 7px; height: 7px; border-radius: var(--radius-full); background: var(--green); }
         @media (max-width: 520px) { .bar :global(.mamba-chip) { display: none; } }
       `}</style>
     </div>
@@ -125,102 +122,53 @@ function SlackApprovalCard() {
 function ParentalLeaveCard() {
   return (
     <div className="plc agent-edge agent-done agent-lg">
-      <div className="msg">
+      <div className="ask">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="av" src="/avatars/violet.jpg" alt="" width={42} height={42} />
-        <div className="m-body">
+        <img className="av" src="/avatars/violet.jpg" alt="" width={36} height={36} />
+        <div className="bubble">
           <div className="m-who">Violet Hayes · California</div>
           <div className="q">&ldquo;I&rsquo;m having a baby in June. How much leave can I take?&rdquo;</div>
         </div>
       </div>
-      <div className="msg reply">
-        <div className="m-logo" aria-hidden="true">M</div>
-        <div className="m-body">
-          <div className="m-who">MambaHR <span className="m-time">6 seconds later</span></div>
-          <div className="a">
-            Up to 12 weeks of job-protected family leave (FMLA).
-            <span className="a-sub">California&rsquo;s own leave rules (CFRA and PDL) cited and sent to your HR lead to confirm how they combine.</span>
-            <span className="laws">
-              <span className="law">CA PDL</span>
-              <span className="law">CA CFRA</span>
-              <span className="law">FMLA</span>
-            </span>
-          </div>
-        </div>
+      <div className="reply">
+        <span className="r-who"><span className="agent-mark r-mark" aria-hidden="true" />MambaHR <em>6 seconds later</em></span>
+        <p className="a">Up to 12 weeks of job-protected family leave (FMLA).</p>
+        <p className="a-sub">California&rsquo;s own leave rules (CFRA and PDL) cited and sent to your HR lead to confirm how they combine.</p>
+        <div className="ui-sources"><b>Based on</b><span>CA PDL</span><span>CA CFRA</span><span>FMLA</span></div>
       </div>
       <style jsx>{`
         .plc {
-          background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
-          border: 1px solid var(--border);
-          border-radius: 18px;
-          padding: clamp(24px, 3vw, 34px);
+          background: var(--bg-card);
+          border-radius: var(--radius-lg);
+          padding: clamp(22px, 3vw, 30px);
           box-shadow: var(--shadow-float);
           display: flex;
           flex-direction: column;
-          gap: 24px;
+          gap: 22px;
         }
-        .msg { display: flex; gap: 14px; align-items: flex-start; }
-        .av { width: 42px; height: 42px; border-radius: 999px; object-fit: cover; flex: none; }
-        .m-logo {
-          flex: none;
-          width: 42px;
-          height: 42px;
-          border-radius: 12px;
-          background: var(--ink);
-          color: #fff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: var(--font-serif);
-          font-size: 22px;
+        .ask { display: flex; gap: 12px; align-items: flex-end; justify-content: flex-end; }
+        .av { width: 36px; height: 36px; border-radius: var(--radius-full); object-fit: cover; flex: none; order: 2; }
+        .bubble {
+          background: #EFEAE1;
+          border-radius: 20px 20px 6px 20px;
+          padding: 12px 16px;
+          max-width: 86%;
         }
-        .m-body { min-width: 0; }
-        .m-who {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          color: var(--text-faint);
-        }
-        .m-time { text-transform: none; letter-spacing: 0; color: var(--color-green); margin-left: 6px; }
+        .m-who { font-size: 12px; font-weight: 500; color: var(--text-muted); }
         .q {
           font-family: var(--font-serif);
-          font-size: clamp(20px, 2.2vw, 25px);
+          font-size: clamp(18px, 2vw, 22px);
           line-height: 1.3;
           letter-spacing: -0.01em;
           color: var(--text);
-          margin-top: 8px;
+          margin-top: 4px;
         }
-        .a {
-          margin-top: 10px;
-          background: linear-gradient(160deg, #FFF2E6, #FBE6D6);
-          border: 1px solid #E6D3BC;
-          border-radius: 4px 16px 16px 16px;
-          padding: 16px 18px;
-          font-size: 17px;
-          font-weight: 700;
-          color: var(--text);
-          letter-spacing: -0.01em;
-        }
-        .a-sub {
-          display: block;
-          margin-top: 6px;
-          font-size: 14px;
-          font-weight: 400;
-          color: var(--text-muted);
-        }
-        .laws { display: flex; gap: 8px; margin-top: 12px; }
-        .law {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          font-weight: 600;
-          letter-spacing: 0.04em;
-          color: var(--gold-dark);
-          background: var(--bg-card);
-          border: 1px solid rgba(138, 101, 53, 0.3);
-          border-radius: 999px;
-          padding: 4px 11px;
-        }
+        .reply { display: grid; gap: 8px; }
+        .r-who { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text); }
+        .r-mark { --am-size: 24px; }
+        .r-who em { font-style: normal; font-weight: 400; color: var(--text-faint); }
+        .a { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; color: var(--text); }
+        .a-sub { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
       `}</style>
     </div>
   )
@@ -232,7 +180,7 @@ function VacationPhoto() {
     <div className="vp">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="photo" src="/v2-people/team2.jpg" alt="A team that takes its vacations" />
-      <div className="mini">
+      <div className="mini agent-edge agent-done">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="mini-t">3 out next week · covered</div>
         <div className="mini-s">Balances updated · managers told</div>
@@ -243,7 +191,7 @@ function VacationPhoto() {
           width: 100%;
           height: auto;
           display: block;
-          border-radius: 18px;
+          border-radius: var(--radius-lg);
           object-fit: cover;
           aspect-ratio: 5 / 4;
           box-shadow: var(--shadow-float);
@@ -253,8 +201,7 @@ function VacationPhoto() {
           left: -18px;
           bottom: 26px;
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 14px;
+          border-radius: var(--radius-lg);
           padding: 14px 16px;
           box-shadow: var(--shadow-float);
           max-width: 250px;

@@ -10,114 +10,61 @@ import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/comp
 function HeroAnswerCard() {
   return (
     <div className="hc agent-edge agent-done agent-lg">
-      <div className="hc-top">
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · answered</span>
-      </div>
-
-      <div className="msg">
+      <div className="ask">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="av" src="/avatars/tom.jpg" alt="" width={42} height={42} />
-        <div className="m-body">
+        <img className="av" src="/avatars/tom.jpg" alt="" width={36} height={36} />
+        <div className="bubble">
           <div className="m-who">Tom · Texas</div>
           <div className="q">&ldquo;Can we ask about salary history in interviews?&rdquo;</div>
         </div>
       </div>
 
-      <div className="msg">
-        <div className="m-logo" aria-hidden="true">M</div>
-        <div className="m-body">
-          <div className="m-who">MambaHR <span className="m-time">4 seconds later</span></div>
-          <div className="a">
-            Depends on the state.
-            <span className="a-sub">Here is the rule for each state you hire in, cited.</span>
-          </div>
-          <div className="chips">
-            <span className="chip">Pay transparency</span>
-            <span className="chip">State law</span>
-          </div>
-        </div>
+      <div className="reply">
+        <span className="r-who"><span className="agent-mark r-mark" aria-hidden="true" />MambaHR <em>4 seconds later</em></span>
+        <p className="a">Depends on the state.</p>
+        <p className="a-sub">Here is the rule for each state you hire in, cited.</p>
+        <div className="ui-sources"><b>Based on</b><span>Pay transparency</span><span>State law</span></div>
       </div>
 
       <style jsx>{`
         .hc {
-          background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
-          border: 1px solid var(--border);
-          border-radius: 18px;
-          padding: clamp(24px, 3vw, 34px);
+          background: var(--bg-card);
+          border-radius: var(--radius-lg);
+          padding: clamp(22px, 3vw, 30px);
           box-shadow: var(--shadow-float);
           display: flex;
           flex-direction: column;
           gap: 22px;
         }
-        .hc-top { display: flex; justify-content: flex-end; }
-        .msg { display: flex; gap: 14px; align-items: flex-start; }
-        .av { width: 42px; height: 42px; border-radius: 999px; object-fit: cover; flex: none; }
-        .m-logo {
-          flex: none;
-          width: 42px;
-          height: 42px;
-          border-radius: 12px;
-          background: var(--ink);
-          color: #fff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: var(--font-serif);
-          font-size: 22px;
+        .ask { display: flex; gap: 12px; align-items: flex-end; justify-content: flex-end; }
+        .av { width: 36px; height: 36px; border-radius: var(--radius-full); object-fit: cover; flex: none; order: 2; }
+        .bubble {
+          background: #EFEAE1;
+          border-radius: 20px 20px 6px 20px;
+          padding: 12px 16px;
+          max-width: 86%;
         }
-        .m-body { min-width: 0; }
-        .m-who {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          color: var(--text-faint);
-        }
-        .m-time { text-transform: none; letter-spacing: 0; color: var(--color-green); margin-left: 6px; }
+        .m-who { font-size: 12px; font-weight: 500; color: var(--text-muted); }
         .q {
           font-family: var(--font-serif);
-          font-size: clamp(20px, 2.2vw, 25px);
+          font-size: clamp(18px, 2vw, 22px);
           line-height: 1.3;
           letter-spacing: -0.01em;
           color: var(--text);
-          margin-top: 8px;
+          margin-top: 4px;
         }
-        .a {
-          margin-top: 10px;
-          background: linear-gradient(160deg, #FFF2E6, #FBE6D6);
-          border: 1px solid #E6D3BC;
-          border-radius: 4px 16px 16px 16px;
-          padding: 16px 18px;
-          font-size: 17px;
-          font-weight: 700;
-          color: var(--text);
-          letter-spacing: -0.01em;
-        }
-        .a-sub {
-          display: block;
-          margin-top: 6px;
-          font-size: 14px;
-          font-weight: 400;
-          color: var(--text-muted);
-        }
-        .chips { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-        .chip {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--gold-dark);
-          background: var(--gold-tint);
-          border: 1px solid rgba(138, 101, 53, 0.25);
-          border-radius: 999px;
-          padding: 4px 10px;
-        }
+        .reply { display: grid; gap: 8px; }
+        .r-who { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text); }
+        .r-mark { --am-size: 24px; }
+        .r-who em { font-style: normal; font-weight: 400; color: var(--text-faint); }
+        .a { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; color: var(--text); }
+        .a-sub { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
       `}</style>
     </div>
   )
 }
 
-/* ── Dark audit-log fragment ── */
+/* ── Audit-log fragment ── */
 function AuditLogCard() {
   const rows = [
     { t: '09:02:14', what: 'Leave approved', note: 'within policy · family leave (FMLA) cited' },
@@ -129,8 +76,8 @@ function AuditLogCard() {
   return (
     <div className="log agent-edge agent-working agent-lg">
       <div className="l-head">
-        <span className="l-title"><span className="logo" aria-hidden="true">M</span>Audit trail</span>
-        <span className="l-sub">can’t be edited · exportable</span>
+        <span className="l-title"><span className="agent-mark is-working lm" aria-hidden="true" />Audit trail</span>
+        <span className="l-sub">Can’t be edited · exportable</span>
       </div>
       {rows.map((r) => (
         <div key={r.t} className="l-row">
@@ -143,42 +90,23 @@ function AuditLogCard() {
       <div className="l-foot">Every row: who, when, and the rule it followed.</div>
       <style jsx>{`
         .log {
-          background:
-            radial-gradient(80% 60% at 12% 0%, rgba(185, 138, 78, 0.22), transparent 58%),
-            radial-gradient(70% 55% at 95% 10%, rgba(106, 93, 166, 0.26), transparent 60%),
-            var(--ink);
-          border-radius: 18px;
+          background: var(--bg-card);
+          border-radius: var(--radius-lg);
           padding: 26px 26px 22px;
           box-shadow: var(--shadow-float);
         }
         .l-head {
           display: flex;
-          align-items: baseline;
+          align-items: center;
           justify-content: space-between;
+          flex-wrap: wrap;
           gap: 12px;
           padding-bottom: 14px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 1px solid var(--border-faint);
         }
-        .l-title { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: #fff; }
-        .logo {
-          width: 24px;
-          height: 24px;
-          border-radius: 7px;
-          background: #fff;
-          color: var(--ink);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: var(--font-serif);
-          font-size: 15px;
-        }
-        .l-sub {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          color: rgba(255, 255, 255, 0.5);
-        }
+        .l-title { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: var(--text); }
+        .lm { --am-size: 26px; }
+        .l-sub { font-size: 13px; color: var(--text-faint); }
         .l-row {
           display: flex;
           align-items: center;
@@ -186,29 +114,26 @@ function AuditLogCard() {
           padding: 13px 0;
           font-size: 14px;
         }
-        .l-row + .l-row { border-top: 1px solid rgba(255, 255, 255, 0.07); }
-        .ts { flex: none; font-family: var(--font-mono); font-size: 12px; color: #AEA2E6; }
-        .dot { flex: none; width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
-        .what { flex: none; color: rgba(255, 255, 255, 0.94); font-weight: 600; }
+        .l-row + .l-row { border-top: 1px solid var(--border-faint); }
+        .ts { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--violet); }
+        .dot { flex: none; width: 7px; height: 7px; border-radius: var(--radius-full); background: var(--green); }
+        .what { flex: none; color: var(--text); font-weight: 600; }
         .note {
           flex: 1;
           min-width: 0;
           font-family: var(--font-mono);
           font-size: 12px;
-          color: rgba(255, 255, 255, 0.55);
+          color: var(--text-muted);
+          line-height: 1.4;
           text-align: right;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
         }
         .l-foot {
           margin-top: 14px;
           padding: 11px 14px;
-          border-radius: 12px;
-          background: rgba(255, 255, 255, 0.06);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: var(--radius-md);
+          background: var(--bg-surface);
           font-size: 13px;
-          color: rgba(255, 255, 255, 0.65);
+          color: var(--text-muted);
         }
         @media (max-width: 560px) { .note { display: none; } }
       `}</style>
@@ -235,7 +160,7 @@ function SleepPhoto() {
           width: 100%;
           height: auto;
           display: block;
-          border-radius: 18px;
+          border-radius: var(--radius-lg);
           object-fit: cover;
           box-shadow: var(--shadow-float);
         }
@@ -244,8 +169,7 @@ function SleepPhoto() {
           left: clamp(-14px, -1.5vw, -20px);
           bottom: 26px;
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 14px;
+          border-radius: var(--radius-lg);
           padding: 13px 16px;
           box-shadow: var(--shadow-md);
           display: flex;
@@ -256,8 +180,8 @@ function SleepPhoto() {
           flex: none;
           width: 20px;
           height: 20px;
-          border-radius: 999px;
-          background: var(--color-green);
+          border-radius: var(--radius-full);
+          background: var(--green);
           position: relative;
         }
         .m-check::after {
@@ -272,7 +196,7 @@ function SleepPhoto() {
           transform: rotate(45deg);
         }
         .m-t { font-size: 14px; font-weight: 700; color: var(--text); }
-        .m-s { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 2px; }
+        .m-s { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
         @media (max-width: 880px) { .mini { left: 12px; } }
       `}</style>
     </div>

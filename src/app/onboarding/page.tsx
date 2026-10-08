@@ -40,8 +40,7 @@ function DayOneCard() {
       <style jsx>{`
         .d1 {
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 16px;
+          border-radius: var(--radius-lg);
           box-shadow: var(--shadow-float);
           padding: 6px 0 0;
         }
@@ -55,23 +54,31 @@ function DayOneCard() {
           border-bottom: 1px solid var(--border-faint);
         }
         .who { display: flex; align-items: center; gap: 11px; }
-        .who img { width: 38px; height: 38px; border-radius: 999px; object-fit: cover; }
+        .who img { width: 38px; height: 38px; border-radius: var(--radius-full); object-fit: cover; }
         .nm { font-size: 15px; font-weight: 700; color: var(--text); }
         .meta { font-size: 13px; color: var(--text-faint); margin-top: 1px; }
         .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .time { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 56px; }
-        .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
+        .mark { flex: none; width: 17px; height: 17px; border-radius: var(--radius-full); background: var(--green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .lbl { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; color: var(--text); }
-        .src { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
-        .foot {
+        .src {
+          flex: none;
           font-size: 12px;
+          font-weight: 500;
+          color: var(--text-muted);
+          background: var(--bg);
+          border-radius: var(--radius-full);
+          padding: 3px 10px;
+        }
+        .foot {
+          font-size: 13px;
           color: var(--text-muted);
           padding: 12px 20px 14px;
           border-top: 1px solid var(--border-faint);
-          background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0));
-          border-radius: 0 0 16px 16px;
+          background: var(--bg-surface);
+          border-radius: 0 0 var(--radius-lg) var(--radius-lg);
         }
         @media (max-width: 640px) { .src { display: none; } }
       `}</style>
@@ -80,15 +87,14 @@ function DayOneCard() {
 }
 
 /* ── Feature visual: exit checklist fragment ── */
-const EXIT = [
-  { label: 'Final paycheck calculated for California rules', meta: 'Due last day', state: 'done' },
-  { label: 'COBRA health-coverage deadline tracked and flagged', meta: 'Health coverage', state: 'done' },
-  { label: 'Switch off all logins at 5:00 PM Friday', meta: 'Email · Slack · laptop', state: 'you' },
+const EXIT_DONE = [
+  { label: 'Final paycheck calculated for California rules', meta: 'Due last day' },
+  { label: 'COBRA health-coverage deadline tracked and flagged', meta: 'Health coverage' },
 ]
 
 function ExitChecklist() {
   return (
-    <div className="ex agent-edge agent-working">
+    <div className="ex">
       <div className="head">
         <div>
           <div className="t">Exit · Jordan Mills</div>
@@ -96,25 +102,35 @@ function ExitChecklist() {
         </div>
         <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
       </div>
-      {EXIT.map((r) => (
-        <div key={r.label} className={`row${r.state === 'you' ? ' yours' : ''}`}>
-          <span className={`mark${r.state === 'you' ? ' gold' : ''}`} aria-hidden="true" />
+      {EXIT_DONE.map((r) => (
+        <div key={r.label} className="row">
+          <span className="mark" aria-hidden="true" />
           <div className="main">
             <div className="lbl">{r.label}</div>
             <div className="meta">{r.meta}</div>
           </div>
-          <span className={`tag${r.state === 'you' ? ' gold' : ''}`}>
-            {r.state === 'you' ? 'Awaiting your sign-off' : 'Done'}
-          </span>
+          <span className="ui-badge success">Done</span>
         </div>
       ))}
+      <div className="need">
+        <div className="ui-needs">
+          <div className="ui-needs-in">
+            <span className="ui-needs-label">Needs you</span>
+            <div className="ui-needs-title">Switch off all logins at 5:00 PM Friday</div>
+            <div className="ui-needs-body">Email · Slack · laptop. Nothing is switched off until you sign off.</div>
+            <div className="ui-actions">
+              <span className="ui-btn primary sm">Sign off</span>
+              <span className="ui-btn secondary sm">Not yet</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <style jsx>{`
         .ex {
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 16px;
-          box-shadow: var(--shadow-float);
-          padding: 6px 0 8px;
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-md);
+          padding: 6px 0 0;
         }
         .head {
           display: flex;
@@ -129,25 +145,12 @@ function ExitChecklist() {
         .m { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
         .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
-        .row.yours { background: linear-gradient(90deg, #FFF6EC, rgba(255, 246, 236, 0)); }
-        .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
+        .mark { flex: none; width: 17px; height: 17px; border-radius: var(--radius-full); background: var(--green); position: relative; }
         .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.gold { background: linear-gradient(135deg, var(--gold-pale), var(--gold)); }
         .main { flex: 1; min-width: 0; }
         .lbl { font-size: 14px; font-weight: 600; color: var(--text); }
-        .meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-        .tag {
-          flex: none;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--color-green);
-          background: rgba(22, 130, 70, 0.08);
-          border-radius: 999px;
-          padding: 3px 9px;
-        }
-        .tag.gold { color: var(--gold); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
+        .meta { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+        .need { padding: 6px 16px 16px; }
         @media (max-width: 640px) { .row { flex-wrap: wrap; } }
       `}</style>
     </div>
@@ -170,7 +173,7 @@ function FirstDay() {
         .ph {
           display: block;
           width: 100%;
-          border-radius: 18px;
+          border-radius: var(--radius-lg);
           box-shadow: var(--shadow-float);
           object-fit: cover;
           aspect-ratio: 4 / 3;
@@ -180,8 +183,7 @@ function FirstDay() {
           right: -14px;
           bottom: -22px;
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 14px;
+          border-radius: var(--radius-lg);
           box-shadow: var(--shadow-float);
           padding: 14px 18px;
           transform: rotate(-1.5deg);

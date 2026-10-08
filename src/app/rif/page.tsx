@@ -15,10 +15,10 @@ function HeroPlanCard() {
     { what: 'Internal roles', note: '3 open roles to consider' },
   ]
   return (
-    <div className="pc agent-edge agent-working agent-lg">
+    <div className="pc">
       <div className="pc-top">
         <span className="pc-title">Layoff plan · Q3</span>
-        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · awaiting your sign-off</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · awaiting your sign-off</span>
       </div>
       {rows.map((r) => (
         <div key={r.what} className="row">
@@ -27,16 +27,23 @@ function HeroPlanCard() {
           <span className="note">{r.note}</span>
         </div>
       ))}
-      <div className="row gold">
-        <span className="g-mark" aria-hidden="true" />
-        <span className="what">Your sign-off</span>
-        <span className="note g-note">required on every exit</span>
+      <div className="need">
+        <div className="ui-needs">
+          <div className="ui-needs-in">
+            <span className="ui-needs-label">Needs you</span>
+            <div className="ui-needs-title">Your sign-off</div>
+            <div className="ui-needs-body">Required on every exit. Nothing happens to anyone until you approve.</div>
+            <div className="ui-actions">
+              <span className="ui-btn primary sm">Sign off</span>
+              <span className="ui-btn secondary sm">Review plan</span>
+            </div>
+          </div>
+        </div>
       </div>
       <style jsx>{`
         .pc {
-          background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
-          border: 1px solid var(--border);
-          border-radius: 18px;
+          background: var(--bg-card);
+          border-radius: var(--radius-lg);
           padding: clamp(22px, 2.8vw, 30px);
           box-shadow: var(--shadow-float);
         }
@@ -67,8 +74,8 @@ function HeroPlanCard() {
           flex: none;
           width: 18px;
           height: 18px;
-          border-radius: 999px;
-          background: var(--color-green);
+          border-radius: var(--radius-full);
+          background: var(--green);
           position: relative;
         }
         .check::after {
@@ -84,28 +91,7 @@ function HeroPlanCard() {
         }
         .what { flex: none; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
         .note { flex: 1; min-width: 0; text-align: right; color: var(--text-muted); font-size: 14px; }
-        .row.gold {
-          margin-top: 6px;
-          background: linear-gradient(90deg, var(--gold-tint), rgba(255, 246, 236, 0));
-          border-top: 1px solid rgba(138, 101, 53, 0.25);
-          border-radius: 10px;
-          padding-left: 12px;
-          padding-right: 12px;
-        }
-        .g-mark {
-          flex: none;
-          width: 18px;
-          height: 18px;
-          border-radius: 999px;
-          background: linear-gradient(135deg, var(--gold-pale), var(--gold));
-        }
-        .g-note {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--gold-dark);
-        }
+        .need { margin-top: 10px; }
       `}</style>
     </div>
   )
@@ -129,7 +115,7 @@ function RedeployCard() {
             <div className="p-sub">Support Engineer · role affected</div>
           </div>
         </div>
-        <span className="match">3 open roles</span>
+        <span className="ui-badge agent">3 open roles</span>
       </div>
       {roles.map((r) => (
         <div key={r.role} className="r-row">
@@ -141,14 +127,13 @@ function RedeployCard() {
         </div>
       ))}
       <div className="rd-foot">
-        <span className="f-chip">for your review</span>
+        <span className="ui-badge gold">For your review</span>
         <span className="f-txt">Suggestions only. You decide.</span>
       </div>
       <style jsx>{`
         .rd {
-          background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
-          border: 1px solid var(--border);
-          border-radius: 18px;
+          background: var(--bg-card);
+          border-radius: var(--radius-lg);
           padding: clamp(22px, 2.8vw, 30px);
           box-shadow: var(--shadow-float);
         }
@@ -162,19 +147,9 @@ function RedeployCard() {
           border-bottom: 1px solid var(--border-faint);
         }
         .person { display: flex; align-items: center; gap: 12px; }
-        .av { width: 42px; height: 42px; border-radius: 999px; object-fit: cover; flex: none; }
+        .av { width: 42px; height: 42px; border-radius: var(--radius-full); object-fit: cover; flex: none; }
         .p-name { font-size: 15px; font-weight: 700; color: var(--text); }
-        .p-sub { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 2px; }
-        .match {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--violet);
-          background: rgba(106, 93, 166, 0.1);
-          border-radius: 999px;
-          padding: 5px 11px;
-        }
+        .p-sub { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
         .r-row {
           display: flex;
           align-items: center;
@@ -186,27 +161,16 @@ function RedeployCard() {
         .r-main { min-width: 0; }
         .r-role { display: block; font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
         .r-team { display: block; font-size: 13px; color: var(--text-muted); margin-top: 2px; }
-        .r-note { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--color-green); white-space: nowrap; }
+        .r-note { flex: none; font-size: 13px; color: var(--text-muted); white-space: nowrap; }
         .rd-foot {
           margin-top: 12px;
           padding: 12px 14px;
-          border-radius: 12px;
-          background: var(--gold-tint);
-          border: 1px solid rgba(138, 101, 53, 0.25);
+          border-radius: var(--radius-md);
+          background: var(--bg-surface);
           display: flex;
           align-items: center;
           gap: 10px;
           flex-wrap: wrap;
-        }
-        .f-chip {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: #fff;
-          background: linear-gradient(135deg, var(--gold-pale), var(--gold));
-          border-radius: 999px;
-          padding: 4px 10px;
         }
         .f-txt { font-size: 13px; color: var(--text-muted); }
       `}</style>
@@ -233,7 +197,7 @@ function DignityPhoto() {
           width: 100%;
           height: auto;
           display: block;
-          border-radius: 18px;
+          border-radius: var(--radius-lg);
           object-fit: cover;
           box-shadow: var(--shadow-float);
         }
@@ -242,8 +206,7 @@ function DignityPhoto() {
           left: clamp(-14px, -1.5vw, -20px);
           bottom: 26px;
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 14px;
+          border-radius: var(--radius-lg);
           padding: 13px 16px;
           box-shadow: var(--shadow-md);
           display: flex;
@@ -254,11 +217,11 @@ function DignityPhoto() {
           flex: none;
           width: 20px;
           height: 20px;
-          border-radius: 999px;
-          background: linear-gradient(135deg, var(--gold-pale), var(--gold));
+          border-radius: var(--radius-full);
+          background: var(--gold);
         }
         .m-t { font-size: 14px; font-weight: 700; color: var(--text); }
-        .m-s { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 2px; }
+        .m-s { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
         @media (max-width: 880px) { .mini { left: 12px; } }
       `}</style>
     </div>

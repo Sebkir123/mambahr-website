@@ -15,13 +15,13 @@ function PayCycleCard() {
     { img: '/avatars/priya.jpg', name: 'Jordan Lee', what: 'Address change', note: 'flagged for the next pay file' },
   ]
   return (
-    <div className="pcc agent-edge agent-working agent-lg">
+    <div className="pcc agent-edge agent-done agent-lg">
       <div className="head">
         <div>
           <div className="t">Pay cycle · June 15</div>
           <div className="s">42 people · 4 changes this cycle</div>
         </div>
-        <span className="fmt">Format: ADP</span>
+        <span className="ui-badge">Format: ADP</span>
       </div>
       {rows.map((r) => (
         <div key={r.name} className="row">
@@ -36,15 +36,13 @@ function PayCycleCard() {
       ))}
       <div className="foot">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · ready for upload</span>
-        <span className="zero">0 discrepancies</span>
+        <span className="ui-badge success">0 discrepancies</span>
       </div>
       <style jsx>{`
         .pcc {
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 16px;
+          border-radius: var(--radius-lg);
           box-shadow: var(--shadow-float);
-          overflow: hidden;
         }
         .head {
           display: flex;
@@ -53,40 +51,28 @@ function PayCycleCard() {
           gap: 12px;
           padding: 18px 20px;
           border-bottom: 1px solid var(--border-faint);
-          background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
         }
         .t { font-weight: 700; font-size: 15px; color: var(--text); letter-spacing: -0.01em; }
         .s { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
-        .fmt {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--gold-dark);
-          background: var(--gold-tint);
-          border: 1px solid rgba(138, 101, 53, 0.25);
-          border-radius: 999px;
-          padding: 4px 10px;
-          white-space: nowrap;
-        }
         .row { display: flex; align-items: center; gap: 12px; padding: 12px 20px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
-        .av { width: 32px; height: 32px; border-radius: 999px; object-fit: cover; flex: none; }
+        .av { width: 32px; height: 32px; border-radius: var(--radius-full); object-fit: cover; flex: none; }
         .main { flex: 1; min-width: 0; }
         .who { font-size: 14px; font-weight: 600; color: var(--text); }
         .what { font-size: 13px; color: var(--text-muted); margin-top: 1px; }
-        .check { flex: none; width: 17px; height: 17px; border-radius: 999px; background: var(--color-green); position: relative; }
+        .check { flex: none; width: 17px; height: 17px; border-radius: var(--radius-full); background: var(--green); position: relative; }
         .check::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .foot {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          flex-wrap: wrap;
           gap: 12px;
           padding: 14px 20px;
           border-top: 1px solid var(--border-faint);
-          background: #FAF6EF;
+          background: var(--bg-surface);
+          border-radius: 0 0 var(--radius-lg) var(--radius-lg);
         }
-        .zero { font-family: var(--font-mono); font-size: 12px; color: var(--color-green); font-weight: 600; }
       `}</style>
     </div>
   )
@@ -95,7 +81,7 @@ function PayCycleCard() {
 /* ── Feature fragment: a Deel-managed run, waiting on a person ── */
 function DeelRunCard() {
   return (
-    <div className="ec agent-edge agent-done agent-lg">
+    <div className="ec">
       <div className="top">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="av" src="/avatars/priya.jpg" alt="" width={42} height={42} />
@@ -103,7 +89,7 @@ function DeelRunCard() {
           <div className="who">Pay run · June 15</div>
           <div className="ev">Deel-managed payroll · 42 people · 4 changes</div>
         </div>
-        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · waiting on you</span>
+        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · waiting on you</span>
       </div>
       <div className="rows">
         <div className="r"><span className="k">Changes sent to Deel</span><span className="v">4 of 4 · Tue 2:14 PM</span></div>
@@ -111,27 +97,37 @@ function DeelRunCard() {
         <div className="r"><span className="k">Approver</span><span className="v">Anna Park · Head of People</span></div>
         <div className="r"><span className="k">Run status</span><span className="v">Held until approved</span></div>
       </div>
-      <div className="foot"><span className="dot" aria-hidden="true" />Nothing pays out until a person approves the run</div>
+      <div className="ui-needs">
+        <div className="ui-needs-in">
+          <span className="ui-needs-label">Needs you</span>
+          <div className="ui-needs-title">Approve the June 15 pay run</div>
+          <div className="ui-needs-body">Nothing pays out until a person approves the run.</div>
+          <div className="ui-actions">
+            <span className="ui-btn primary sm">Approve pay run</span>
+            <span className="ui-btn secondary sm">Review changes</span>
+          </div>
+        </div>
+      </div>
       <style jsx>{`
         .ec {
-          background: linear-gradient(165deg, #FFFFFF, #FAF6EF);
-          border: 1px solid var(--border);
-          border-radius: 16px;
-          box-shadow: var(--shadow-float);
-          padding: 22px 24px;
+          background: var(--bg-card);
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-md);
+          padding: 22px 24px 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
         }
         .top { display: flex; align-items: center; gap: 13px; flex-wrap: wrap; }
-        .av { width: 42px; height: 42px; border-radius: 999px; object-fit: cover; flex: none; }
-        .id { flex: 1; min-width: 0; }
+        .av { width: 42px; height: 42px; border-radius: var(--radius-full); object-fit: cover; flex: none; }
+        .id { flex: 1 1 180px; min-width: 0; }
         .who { font-size: 15px; font-weight: 700; color: var(--text); }
         .ev { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
-        .rows { margin-top: 18px; border: 1px solid var(--border-faint); border-radius: 12px; overflow: hidden; background: var(--bg-card); }
+        .rows { border-radius: var(--radius-md); overflow: hidden; background: var(--bg-surface); }
         .r { display: flex; justify-content: space-between; gap: 16px; padding: 10px 14px; }
         .r + .r { border-top: 1px solid var(--border-faint); }
         .k { font-size: 13px; color: var(--text-faint); }
         .v { font-size: 13px; font-weight: 600; color: var(--text); text-align: right; }
-        .foot { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 12px; color: var(--text-muted); }
-        .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-green); }
       `}</style>
     </div>
   )
@@ -143,7 +139,7 @@ function PaydayPhoto() {
     <div className="pp">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="photo" src="/v2-people/team.jpg" alt="An HR team on payday, relaxed" />
-      <div className="mini">
+      <div className="mini agent-edge agent-done">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="mini-t">Pay file checked twice</div>
         <div className="mini-s">0 discrepancies · ready to upload</div>
@@ -154,7 +150,7 @@ function PaydayPhoto() {
           width: 100%;
           height: auto;
           display: block;
-          border-radius: 18px;
+          border-radius: var(--radius-lg);
           object-fit: cover;
           aspect-ratio: 5 / 4;
           box-shadow: var(--shadow-float);
@@ -164,8 +160,7 @@ function PaydayPhoto() {
           left: -18px;
           bottom: 26px;
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 14px;
+          border-radius: var(--radius-lg);
           padding: 14px 16px;
           box-shadow: var(--shadow-float);
           max-width: 240px;

@@ -9,7 +9,7 @@ import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/comp
 /* ── Hero fragment: comp review with band gauge + above-band routing ── */
 function CompReviewCard() {
   return (
-    <div className="cr agent-edge agent-working agent-lg">
+    <div className="cr">
       <div className="bar">
         <span className="bt">Merit raises · pay review</span>
         <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
@@ -30,32 +30,35 @@ function CompReviewCard() {
             <span className="mk" style={{ left: '100%' }}>high</span>
           </div>
         </div>
-        <span className="chip ok">Within range</span>
+        <span className="ui-badge success">Within range</span>
       </div>
 
-      <div className="row hot">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="av" src="/avatars/maya.jpg" alt="Maya Chen" width={36} height={36} />
-        <div className="main">
-          <div className="name">Maya Chen · <b className="up">+18%</b> · 8% above range</div>
-          <div className="meta">Staff Engineer · 9:41 AM</div>
-        </div>
-        <span className="chip route">Comes to you</span>
-        <div className="btns">
-          <span className="ok-b">Approve</span>
-          <span className="no-b">Decline</span>
+      <div className="need">
+        <div className="ui-needs">
+          <div className="ui-needs-in">
+            <span className="ui-needs-label">Needs you</span>
+            <div className="who">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="av" src="/avatars/maya.jpg" alt="Maya Chen" width={36} height={36} />
+              <div className="ui-needs-title">Maya Chen · <span className="up">+18%</span> · 8% above range</div>
+            </div>
+            <div className="ui-needs-body">Staff Engineer · 9:41 AM. Above the range, so it comes to you first.</div>
+            <div className="ui-actions">
+              <span className="ui-btn primary sm">Approve</span>
+              <span className="ui-btn secondary sm">Decline</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="foot">
-        <span className="fd" aria-hidden="true" />
+        <span className="agent-mark fm" aria-hidden="true" />
         MambaHR checks every raise against your pay ranges first
       </div>
       <style jsx>{`
         .cr {
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 18px;
+          border-radius: var(--radius-lg);
           box-shadow: var(--shadow-float);
           overflow: hidden;
         }
@@ -66,28 +69,26 @@ function CompReviewCard() {
           gap: 12px;
           padding: 14px 20px;
           border-bottom: 1px solid var(--border-faint);
-          background: var(--bg-warm);
+          background: var(--bg-surface);
         }
         .bt { font-size: 14px; font-weight: 700; color: var(--text); }
         .row { display: flex; align-items: center; gap: 13px; padding: 16px 20px; flex-wrap: wrap; }
-        .row + .row { border-top: 1px solid var(--border-faint); }
-        .row.hot { background: linear-gradient(90deg, rgba(220, 38, 38, 0.04), rgba(220, 38, 38, 0)); }
-        .av { width: 36px; height: 36px; border-radius: 999px; object-fit: cover; flex: none; }
+        .av { width: 36px; height: 36px; border-radius: var(--radius-full); object-fit: cover; flex: none; }
         .main { flex: 1; min-width: 200px; }
         .name { font-size: 14px; font-weight: 700; color: var(--text); }
-        .name .up { color: var(--color-green); }
-        .meta { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
-        .gauge { position: relative; margin: 14px 0 16px; height: 6px; max-width: 320px; }
-        .track { position: absolute; inset: 0; border-radius: 999px; background: var(--border-faint); }
-        .seg { position: absolute; top: 0; bottom: 0; left: 18%; right: 18%; border-radius: 999px; background: linear-gradient(90deg, #E6D3BC, var(--gold-pale)); }
+        .up { color: var(--green); }
+        .meta { font-size: 13px; color: var(--text-faint); margin-top: 2px; }
+        .gauge { position: relative; margin: 14px 0 20px; height: 6px; max-width: 320px; }
+        .track { position: absolute; inset: 0; border-radius: var(--radius-full); background: var(--border-faint); }
+        .seg { position: absolute; top: 0; bottom: 0; left: 18%; right: 18%; border-radius: var(--radius-full); background: var(--gold-pale); opacity: 0.7; }
         .dot {
           position: absolute;
           top: 50%;
           width: 14px;
           height: 14px;
-          border-radius: 999px;
+          border-radius: var(--radius-full);
           transform: translate(-50%, -50%);
-          background: var(--color-green);
+          background: var(--green);
           border: 3px solid #fff;
           box-shadow: var(--shadow-sm);
         }
@@ -97,35 +98,23 @@ function CompReviewCard() {
           transform: translateX(-50%);
           font-family: var(--font-mono);
           font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
+          letter-spacing: 0.04em;
           color: var(--text-faint);
         }
         .mk:first-of-type { transform: none; }
-        .chip {
-          flex: none;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          border-radius: 999px;
-          padding: 4px 11px;
-        }
-        .chip.ok { color: var(--color-green); background: rgba(22, 130, 70, 0.09); border: 1px solid rgba(22, 130, 70, 0.22); }
-        .chip.route { color: var(--color-red); background: rgba(220, 38, 38, 0.07); border: 1px solid rgba(220, 38, 38, 0.2); }
-        .btns { display: flex; gap: 7px; flex: none; }
-        .ok-b { font-size: 13px; font-weight: 600; color: #fff; background: var(--ink); border-radius: 999px; padding: 7px 15px; }
-        .no-b { font-size: 13px; font-weight: 600; color: var(--text-muted); background: var(--bg-card); border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px; }
+        .need { padding: 4px 16px 16px; }
+        .who { display: flex; align-items: center; gap: 12px; }
+        .who .ui-needs-title { font-family: var(--font-sans); font-size: 15px; font-weight: 600; }
         .foot {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 10px;
           padding: 12px 20px;
           border-top: 1px solid var(--border-faint);
           font-size: 13px;
           color: var(--text-muted);
         }
-        .fd { width: 8px; height: 8px; border-radius: 999px; background: var(--gold); flex: none; }
+        .fm { --am-size: 18px; }
       `}</style>
     </div>
   )
@@ -151,16 +140,14 @@ function EquityCard() {
             <div className="rt">{r.t}</div>
             <div className="rm">{r.m}</div>
           </div>
-          <span className={`tag ${r.state}`}>{r.state === 'ok' ? 'Clear' : 'Your review'}</span>
+          <span className={`ui-badge ${r.state === 'ok' ? 'success' : 'gold'}`}>{r.state === 'ok' ? 'Clear' : 'Your review'}</span>
         </div>
       ))}
       <style jsx>{`
         .eq {
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 18px;
-          box-shadow: var(--shadow-float);
-          overflow: hidden;
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-md);
         }
         .head {
           display: flex;
@@ -169,31 +156,21 @@ function EquityCard() {
           gap: 12px;
           padding: 14px 18px;
           border-bottom: 1px solid var(--border-faint);
-          background: var(--bg-warm);
+          background: var(--bg-surface);
+          border-radius: var(--radius-lg) var(--radius-lg) 0 0;
           flex-wrap: wrap;
         }
         .ht { font-size: 14px; font-weight: 700; color: var(--text); }
         .row { display: flex; align-items: center; gap: 12px; padding: 14px 18px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
-        .mark { flex: none; width: 17px; height: 17px; border-radius: 999px; position: relative; }
-        .mark.ok { background: var(--color-green); }
+        .mark { flex: none; width: 17px; height: 17px; border-radius: var(--radius-full); position: relative; }
+        .mark.ok { background: var(--green); }
         .mark.ok::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .mark.review { background: linear-gradient(135deg, var(--gold-pale), var(--gold)); }
+        .mark.review { background: var(--gold); }
         .mark.review::after { content: ''; position: absolute; left: 7.5px; top: 4px; width: 2px; height: 6px; background: #fff; border-radius: 2px; }
         .main { flex: 1; min-width: 0; }
         .rt { font-size: 14px; font-weight: 600; color: var(--text); }
         .rm { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
-        .tag {
-          flex: none;
-          font-family: var(--font-mono);
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          border-radius: 999px;
-          padding: 3px 9px;
-        }
-        .tag.ok { color: var(--color-green); background: rgba(22, 130, 70, 0.09); }
-        .tag.review { color: var(--gold-dark); background: var(--gold-tint); border: 1px solid rgba(138, 101, 53, 0.25); }
       `}</style>
     </div>
   )
@@ -216,18 +193,16 @@ function PhotoCard() {
           width: 100%;
           height: auto;
           display: block;
-          border-radius: 18px;
+          border-radius: var(--radius-lg);
           object-fit: cover;
           box-shadow: var(--shadow-float);
-          border: 1px solid var(--border);
         }
         .float {
           position: absolute;
           left: -18px;
           bottom: 26px;
           background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 14px;
+          border-radius: var(--radius-lg);
           box-shadow: var(--shadow-float);
           padding: 13px 16px;
           max-width: 290px;
