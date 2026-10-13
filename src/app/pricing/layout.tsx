@@ -31,6 +31,12 @@ export const metadata: Metadata = {
 // on the page (no user input), read from the shared TIERS so the schema cannot
 // drift from the cards. Custom/Enterprise carries no numeric price, so it is
 // excluded from lowPrice/highPrice but listed as an offer.
+//
+// There is no `review` and no `aggregateRating` on purpose. Search Console
+// lists both as missing, as a suggestion: a Product needs only one of review,
+// aggregateRating or offers, and this one has offers. Google accepts ratings
+// only when they come from customers, are collected on this site and are shown
+// on this page. Until that exists, leave both out.
 const pricingJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -45,7 +51,9 @@ const pricingJsonLd = {
     lowPrice: '14',
     highPrice: '30',
     offerCount: '4',
-    unitText: 'per employee per month, billed annually',
+    // `description`, not `unitText`: an AggregateOffer has no unitText in the
+    // schema.org vocabulary, so validators flagged it as an unknown field.
+    description: 'Per employee per month, billed annually.',
     offers: TIERS.map((t) => ({
       '@type': 'Offer',
       name: t.name,
