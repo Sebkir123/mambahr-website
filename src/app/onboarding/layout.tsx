@@ -40,7 +40,7 @@ const jsonLd = {
     url: 'https://www.mambahr.com',
     featureList: 'Onboarding and offboarding',
     description:
-      'Gets new hires ready before they walk in: starts the Form I-9 and E-Verify check, sets up accounts, requests device setup from IT, and plans the first week. At exit, works out final pay by state rules, tracks COBRA deadlines, and switches off logins after your sign-off. You approve anything that costs money.',
+      'Gets new hires ready before they walk in: starts the Form I-9 and E-Verify check, requests accounts and device setup from IT, and plans the first week. At exit, works out final pay by state rules, tracks COBRA deadlines, and sends IT the logins to close after your sign-off. You approve anything that costs money.',
   },
 }
 

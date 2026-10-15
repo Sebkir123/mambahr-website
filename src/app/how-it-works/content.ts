@@ -135,7 +135,7 @@ export const WALKS: Walk[] = [
       { who: 'mamba', title: 'Works out the final pay', body: 'Applies the final-pay deadline for the state Marcus works in, and pays out unused vacation where that state requires it.' },
       { who: 'mamba', title: 'Drafts the paperwork', body: 'If you offer severance, drafts the separation agreement. For someone 40 or older, it carries the waiver wording and the review periods federal age-discrimination law requires: 21 days to consider and 7 days to change his mind.' },
       { who: 'person', title: 'A person approves the exit', body: 'HR approves the exit, the final pay and any agreement. Nothing is sent and no access is removed before that, for a resignation as much as a termination.' },
-      { who: 'mamba', title: 'Removes access', body: 'Once the exit is approved, removes Marcus from your single sign-on directory and Slack, and can wipe his laptop remotely through your device management tool.' },
+      { who: 'mamba', title: 'Removes access', body: 'Once the exit is approved, sends IT the list of Marcus’s logins to close and his laptop to collect. Automatic removal through your sign-on and device tools is coming soon.' },
       { who: 'mamba', title: 'Sends the health coverage notice', body: 'Prepares the COBRA continuation coverage notice. If it cannot be sent, it lands on your To do with the deadline.' },
       { who: 'mamba', title: 'Closes the record', body: 'Sends the final payroll change, files the signed documents with his record, and marks him as gone with his last day.' },
     ],
