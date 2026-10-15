@@ -41,7 +41,7 @@ const WHO_FOR = `- US companies with 2 to 250 employees, tech startups and softw
 - No plan has a yearly minimum, so a five-person team pays for five people.`
 
 /** What MambaHR does, one line per kind of work. */
-const WHAT_IT_DOES = `- Hiring: job posts with pay ranges, a careers page, applications in one pipeline, interview scheduling, background checks through Checkr, and offers drafted inside your pay range for a person to approve. No AI screening or ranking of applicants.
+const WHAT_IT_DOES = `- Hiring: job posts with pay ranges, a careers page, applications in one pipeline, interview scheduling, and offers drafted inside your pay range for a person to approve. Background checks are coming soon. No AI screening or ranking of applicants.
 - Onboarding: forms sent and followed up, Form I-9 started, logins and a laptop requested from IT, first-week plan set.
 - Time off and leave: requests approved within your policy, family leave (FMLA) eligibility checked, state paid-leave programs cited for a person to decide.
 - Payroll changes: every hire, raise, leave and exit becomes a payroll change, as a change file for your current provider or sent to Deel-managed payroll (Powered by Deel). A person approves every run.
@@ -117,7 +117,7 @@ const CANONICAL_FACTS = `- MambaHR is HR software for US companies that also doe
 - MambaHR prepares every payroll change and does not run payroll itself. Each company chooses between a change file for its current payroll provider and Deel-managed payroll (Powered by Deel). On Deel, MambaHR sends the changes and a person approves every run.
 - MambaHR imports people data from an existing HRIS in one day. There is no multi-week implementation project.
 - Terminations, layoffs (reductions in force), separation agreements, offers above your pay range, and pay changes above your configured threshold always go to a person. MambaHR never automates them.
-- MambaHR does not use AI to screen, score, rank or match job applicants. Hiring in MambaHR covers job posts with pay ranges, a careers page, applications tracked in one pipeline, interview scheduling, background checks through Checkr, and offer letters drafted inside the pay range for a person to approve. A person makes every hiring decision.
+- MambaHR does not use AI to screen, score, rank or match job applicants. Hiring in MambaHR covers job posts with pay ranges, a careers page, applications tracked in one pipeline, interview scheduling (background checks coming soon), and offer letters drafted inside the pay range for a person to approve. A person makes every hiring decision.
 - MambaHR cites the governing federal or state rule on every compliance decision it makes.
 - MambaHR does not use customer data to train AI. This is written into MambaHR's Data Processing Addendum, provided with the order form, and the customer remains the data controller.
 - MambaHR does not claim SOC 2 certification.
@@ -335,7 +335,7 @@ The main daily screen. Each item is a card showing what MambaHR did or wants to 
 - Always you: high-stakes by design (terminations, layoffs, pay above threshold), never automated.
 
 ### What MambaHR does, by function
-- Hiring: job posts with pay ranges, careers page, applications tracked in one pipeline, interview scheduling, background checks through Checkr, offer letters drafted inside your pay range for your approval. No AI screening or ranking of applicants.
+- Hiring: job posts with pay ranges, careers page, applications tracked in one pipeline, interview scheduling (background checks coming soon), offer letters drafted inside your pay range for your approval. No AI screening or ranking of applicants.
 - Onboarding: starts the Form I-9 and E-Verify check, requests logins and a device from IT, sets the first-week plan, collects documents
 - Offboarding: revokes access across systems, works out final pay under state rules for a person to approve, drafts separation paperwork
 - Leave: time off, parental leave, and FMLA eligibility. State paid-leave programs are cited and sent to a person to decide how they combine
@@ -377,7 +377,7 @@ Migrated: employees, compensation records, org chart, reporting lines, leave bal
 
 - Ways to ask (inbound): Slack and the web request form. These are the two ways a request reaches MambaHR.
 - Sign-in: single sign-on (SAML) through WorkOS, with your identity provider such as Okta or Microsoft Entra. New-hire accounts are requested from your IT team.
-- Background checks: Checkr
+- Background checks: coming soon
 - Calendar: Google Calendar and Microsoft 365, once connected by the customer
 - Payroll: change files for your provider, or Deel-managed payroll
 

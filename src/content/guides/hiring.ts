@@ -893,7 +893,7 @@ export const hiringGuides: Guide[] = [
       },
     ],
     mambahr:
-      'MambaHR orders background checks through Checkr from the same hiring pipeline as the job post and the offer, and a person approves the decisions that matter. State rules such as fair chance laws come back with the law cited, unclear cases go to a person, and every change is logged.',
+      'Background checks are coming soon to MambaHR, ordered from the same hiring pipeline as the job post and the offer, with a person approving the decisions that matter. State rules such as fair chance laws come back with the law cited, unclear cases go to a person, and every change is logged.',
     sources: [
       {
         label: 'FTC and EEOC: Background checks, what employers need to know',

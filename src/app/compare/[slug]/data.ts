@@ -88,7 +88,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
       {
         title: 'Hiring and onboarding in one place.',
-        desc: 'MambaHR posts jobs with the pay range, tracks applications, schedules interviews, orders background checks through Checkr and drafts the offer inside your pay range for your approval. Then onboarding starts.',
+        desc: 'MambaHR posts jobs with the pay range, tracks applications, schedules interviews and drafts the offer inside your pay range for your approval, with background checks coming soon. Then onboarding starts.',
       },
     ],
     tableRows: [
@@ -550,7 +550,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
       {
         title: 'The hiring admin, handled.',
-        desc: 'MambaHR posts the job with the pay range, collects applications in one pipeline, schedules interviews, orders background checks through Checkr and drafts the offer. Your team reviews every candidate and makes every hiring decision.',
+        desc: 'MambaHR posts the job with the pay range, collects applications in one pipeline, schedules interviews and drafts the offer, with background checks coming soon. Your team reviews every candidate and makes every hiring decision.',
       },
       {
         title: 'No handoff between systems.',
@@ -585,7 +585,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
       {
         title: 'The hiring admin, handled.',
-        desc: 'MambaHR posts the job, tracks applications, schedules interviews, orders background checks through Checkr and drafts the offer for your approval. Your team reviews candidates and makes every hiring decision.',
+        desc: 'MambaHR posts the job, tracks applications, schedules interviews and drafts the offer for your approval, with background checks coming soon. Your team reviews candidates and makes every hiring decision.',
       },
       {
         title: 'No handoff to a separate records system.',
@@ -728,7 +728,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
       {
         title: 'A person reviews every candidate.',
-        desc: 'MambaHR does not use AI to screen, score or rank applicants. It handles the hiring admin: job posts, interview scheduling, background checks through Checkr and offer drafts. Your team makes every hiring decision.',
+        desc: 'MambaHR does not use AI to screen, score or rank applicants. It handles the hiring admin: job posts, interview scheduling and offer drafts, with background checks coming soon. Your team makes every hiring decision.',
       },
       {
         title: 'No handoff between systems.',
@@ -761,7 +761,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
       {
         title: 'A person reviews every candidate.',
-        desc: 'MambaHR does not use AI to screen, score or rank applicants. It handles the hiring admin, from job posts and interview scheduling to background checks through Checkr and offer drafts. Your team decides.',
+        desc: 'MambaHR does not use AI to screen, score or rank applicants. It handles the hiring admin, from job posts and interview scheduling to offer drafts, with background checks coming soon. Your team decides.',
       },
       {
         title: 'The admin gets done, not just tracked.',
@@ -828,7 +828,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
       {
         title: 'A person reviews every candidate.',
-        desc: 'MambaHR does not use AI to screen, score or rank applicants. It handles the hiring admin, from job posts and interview scheduling to background checks through Checkr and offer drafts, and your team decides.',
+        desc: 'MambaHR does not use AI to screen, score or rank applicants. It handles the hiring admin, from job posts and interview scheduling to offer drafts, with background checks coming soon, and your team decides.',
       },
       {
         title: 'No handoff to a separate records system.',

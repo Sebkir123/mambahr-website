@@ -92,7 +92,7 @@ export default function ProductPage() {
         <FeatureSplit
           eyebrow="Hire"
           title="Job post to signed offer, on one board."
-          lead="MambaHR posts the role, collects every application in one place, schedules interviews and orders the background check. You decide who moves forward, and the offer waits for your approval, inside your pay range."
+          lead="MambaHR posts the role, collects every application in one place and schedules interviews; background checks are coming soon. You decide who moves forward, and the offer waits for your approval, inside your pay range."
           bullets={[
             'Careers page and job-board feeds, posted the same day',
             'Every application in one place; you decide who moves forward',

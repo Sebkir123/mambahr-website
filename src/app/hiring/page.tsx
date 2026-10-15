@@ -110,7 +110,7 @@ export default function HiringPage() {
         <PageHero
           eyebrow="Hiring"
           title={<>Hiring, <Em>without the chasing.</Em></>}
-          lead="MambaHR posts the job with its pay range, collects every application in one place, schedules interviews, orders the background check, and drafts the offer. Your team reviews the applicants and decides who joins."
+          lead="MambaHR posts the job with its pay range, collects every application in one place, schedules interviews, and drafts the offer. Your team reviews the applicants and decides who joins."
         >
           <HiringBoard />
         </PageHero>
@@ -125,8 +125,8 @@ export default function HiringPage() {
             { n: '03', label: 'Applications in one place', desc: 'Every application lands in one pipeline. Your team reviews each one and decides who moves forward.', who: 'you', img: '/avatars/tom.jpg' },
             { n: '04', label: 'Interviews scheduled', desc: 'Interview times come from your interviewers\u2019 calendars once Google or Microsoft 365 is connected. You confirm the panel.', who: 'you' },
             { n: '05', label: 'Interview feedback', desc: 'Every interviewer fills in the same feedback form, so your team decides on the same evidence.', who: 'agent' },
-            { n: '06', label: 'Reference check', desc: 'Ordered through Checkr and tracked until it is done.', who: 'agent', img: '/avatars/dave.jpg' },
-            { n: '07', label: 'Background check', desc: 'Ordered through Checkr when you say go, and tracked until it is done.', who: 'agent' },
+            { n: '06', label: 'Reference check', desc: 'Coming soon: ordered from MambaHR and tracked until it is done.', who: 'agent', img: '/avatars/dave.jpg' },
+            { n: '07', label: 'Background check', desc: 'Coming soon: ordered when you say go, and tracked until it is done.', who: 'agent' },
             { n: '08', label: 'The offer', desc: 'Drafted inside your pay range and ready for e-signature. It goes out when you approve it.', who: 'you', img: '/avatars/maya.jpg' },
           ]}
         />
