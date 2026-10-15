@@ -1,11 +1,26 @@
 'use client'
 
 import { MambaMark } from '@/components/mamba-mark'
+import { useStory, Typed } from '@/components/story'
+
+// The Slack moment, played once when it scrolls into view: Maya types her
+// ask, MambaHR checks the policy, approves, fills in what it did, then
+// updates the payroll record. Everything is laid out from the start and
+// fades in, so the page never moves. Phases (ms): 1 sent, 2 checking,
+// 3 the reply, 4-6 its three rows, 7 logged + updating payroll, 8 done.
+const ASK = '@MambaHR I need 3 days off next week, Mon\u2013Wed for a wedding'
+const SCRIPT = {
+  phases: [2300, 2700, 3400, 3700, 4000, 4300, 4700, 5900],
+  typing: [{ at: 300, text: ASK, ms: 28 }],
+} as const
 
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
 
 export default function Channels() {
+  const { ref, phase, typed } = useStory(SCRIPT)
+  const sent = phase >= 1
+  const on = (n: number) => (phase >= n ? ' in' : '')
   return (
     <section className="ch" id="run">
       <div className="wrap">
@@ -35,7 +50,7 @@ export default function Channels() {
           </ul>
         </div>
 
-        <div className="stage" data-reveal data-delay="1">
+        <div className="stage" data-reveal data-delay="1" ref={ref}>
           <span className="field" aria-hidden="true"><i className="fa" /><i className="fb" /><i className="fg" /></span>
           <div className="sw">
             <div className="sw-bar">
@@ -69,7 +84,7 @@ export default function Channels() {
                 </div>
 
                 <div className="sw-feed">
-                  <div className="m">
+                  <div className={`m fade${on(1)}`}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img className="av" src="/avatars/maya.jpg" alt="Maya Chen" width={38} height={38} loading="lazy" decoding="async" />
                     <div className="m-body">
@@ -80,29 +95,48 @@ export default function Channels() {
                     </div>
                   </div>
 
-                  <div className="m">
-                    <div className="av app"><MambaMark size={22} color="#C9A26C" /></div>
-                    <div className="m-body">
-                      <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:14 AM</time></div>
-                      <div className="m-t">Approved. Enjoy the wedding.</div>
-                      <div className="attach">
-                        <div className="a-row"><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
-                        <div className="a-row"><span className="a-k">Record</span><span className="a-v">Apr 7&ndash;9 booked, payday updated</span></div>
-                        <div className="a-row"><span className="a-k">Manager</span><span className="a-v">B. Bell notified</span></div>
-                        <div className="a-foot"><span className="ok-dot" />Logged &middot; within policy</div>
+                  <div className="slot">
+                    <div className={`checking${phase === 2 ? ' in' : ''}`}>
+                      <span className="agent-mark is-working t-mark" />
+                      <span className="typing-t agent-status is-working">MambaHR is checking your leave policy&hellip;</span>
+                    </div>
+                    <div className={`m fade${on(3)}`}>
+                      <div className="av app"><MambaMark size={22} color="#C9A26C" /></div>
+                      <div className="m-body">
+                        <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:14 AM</time></div>
+                        <div className="m-t">Approved. Enjoy the wedding.</div>
+                        <div className="attach">
+                          <div className={`a-row fade${on(4)}`}><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
+                          <div className={`a-row fade${on(5)}`}><span className="a-k">Record</span><span className="a-v">{phase >= 8 ? <>Apr 7&ndash;9 booked, payday updated</> : <>Apr 7&ndash;9 booked</>}</span></div>
+                          <div className={`a-row fade${on(6)}`}><span className="a-k">Manager</span><span className="a-v">B. Bell notified</span></div>
+                          <div className={`a-foot fade${on(7)}`}><span className="ok-dot" />Logged &middot; within policy</div>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="typing">
-                    <span className="agent-mark is-working t-mark" />
-                    <span className="typing-t agent-status is-working">MambaHR is updating the payroll record&hellip;</span>
+                  <div className={`typing fade${on(7)}`}>
+                    {phase >= 8 ? (
+                      <>
+                        <span className="done-tick" aria-hidden="true" />
+                        <span className="typing-t done-t">Payroll record updated &middot; 9:14 AM</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="agent-mark is-working t-mark" />
+                        <span className="typing-t agent-status is-working">MambaHR is updating the payroll record&hellip;</span>
+                      </>
+                    )}
                   </div>
                 </div>
 
                 <div className="sw-composer">
-                  <span>Message #people-ops</span>
-                  <span className="send" aria-hidden="true">
+                  <span className={`draft${!sent && typed[0] > 0 ? ' live' : ''}`}>
+                    {!sent && typed[0] > 0
+                      ? <Typed text={ASK} n={typed[0]} mention="@MambaHR" caret />
+                      : <>Message #people-ops</>}
+                  </span>
+                  <span className={`send${!sent && typed[0] > 0 ? ' live' : ''}`} aria-hidden="true">
                     <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 8l12-5-5 12-2-5-5-2z" fill="currentColor" /></svg>
                   </span>
                 </div>
@@ -417,8 +451,25 @@ export default function Channels() {
           width: 28px;
           height: 24px;
           border-radius: 5px;
-          background: #007A5A;
-          color: #fff;
+          background: var(--bg-cream);
+          color: var(--text-faint);
+          transition: background 0.2s ease, color 0.2s ease;
+        }
+        .send.live { background: #007A5A; color: #fff; }
+        .draft { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: clip; }
+        .draft.live { color: var(--text); }
+
+        /* The moment: everything is in place from the start and fades in. */
+        .fade { opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade.in { opacity: 1; transform: none; }
+        .slot { position: relative; }
+        .checking { position: absolute; left: 8px; top: 6px; display: flex; align-items: center; gap: 8px; opacity: 0; transition: opacity 0.3s ease; }
+        .checking.in { opacity: 1; }
+        .done-tick { width: 16px; height: 16px; border-radius: 999px; background: var(--color-green); position: relative; flex: none; margin: 2px; }
+        .done-tick::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .done-t { color: var(--text-faint); }
+        @media (prefers-reduced-motion: reduce) {
+          .fade, .checking, .send { transition: none; }
         }
 
         @media (max-width: 900px) {

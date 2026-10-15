@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useStory } from '@/components/story'
 
 const ROWS = [
   { them: 'File the Form I-9, chase E-Verify', themCost: '45 min', us: 'Form I-9 and E-Verify check started', usWhen: '9:02' },
@@ -11,9 +12,22 @@ const ROWS = [
   { them: 'Answer the same time-off question', themCost: 'every day', us: 'Answered in Slack right away', usWhen: 'always' },
 ]
 
+// The race, played once when it scrolls into view: MambaHR ticks off all
+// six while the by-hand side is still on its second task.
+const EVENTS = [
+  ...ROWS.map((_, i) => ({ k: `us${i}`, at: 300 + i * 170 })),
+  { k: 'usFoot', at: 1450 },
+  ...ROWS.map((_, i) => ({ k: `them${i}`, at: 500 + i * 650 })),
+  { k: 'themFoot', at: 4250 },
+].sort((a, b) => a.at - b.at)
+const SCRIPT = { phases: EVENTS.map((e) => e.at), rootMargin: '0px 0px -25% 0px' }
+
 /* The same Monday twice: by hand, and with MambaHR. Both cards share one grid
    (subgrid rows), so each task sits level with its MambaHR counterpart. */
 export default function Difference() {
+  const { ref, phase } = useStory(SCRIPT)
+  const done = new Set(EVENTS.slice(0, phase).map((e) => e.k))
+  const on = (k: string) => (done.has(k) ? ' on' : '')
   return (
     <section className="df">
       <div className="wrap">
@@ -27,20 +41,20 @@ export default function Difference() {
           </p>
         </div>
 
-        <div className="cols" data-reveal data-delay="1">
+        <div className="cols" data-reveal data-delay="1" ref={ref}>
           <div className="col them">
             <div className="c-head">
               <span className="c-t">Monday, by hand</span>
               <span className="c-s">In your current HR software</span>
             </div>
-            {ROWS.map((r) => (
-              <div key={r.them} className="row">
+            {ROWS.map((r, i) => (
+              <div key={r.them} className={`row${on(`them${i}`)}`}>
                 <span className="box" aria-hidden="true" />
                 <span className="r-t">{r.them}</span>
                 <span className="r-v cost">{r.themCost}</span>
               </div>
             ))}
-            <div className="c-foot">
+            <div className={`c-foot${on('themFoot')}`}>
               <span>Monday alone</span>
               <b>about 9 hours</b>
             </div>
@@ -52,14 +66,14 @@ export default function Difference() {
               <span className="c-t"><span className="agent-mark c-mark" aria-hidden="true" />Monday, with MambaHR</span>
               <span className="c-s">Done for you, and logged</span>
             </div>
-            {ROWS.map((r) => (
-              <div key={r.us} className="row">
+            {ROWS.map((r, i) => (
+              <div key={r.us} className={`row${on(`us${i}`)}`}>
                 <span className="check" aria-hidden="true" />
                 <span className="r-t">{r.us}</span>
                 <span className="r-v">{r.usWhen}</span>
               </div>
             ))}
-            <div className="c-foot">
+            <div className={`c-foot${on('usFoot')}`}>
               <span>Left for you</span>
               <b>the judgment calls</b>
             </div>
@@ -130,8 +144,19 @@ export default function Difference() {
         .r-v { font-size: 13px; color: var(--text-faint); font-variant-numeric: tabular-nums; white-space: nowrap; }
         .cost { color: #984608; }
         .box { width: 18px; height: 18px; border-radius: var(--radius-xs); border: 1.5px solid var(--border-mid); background: #fff; }
-        .check { width: 20px; height: 20px; border-radius: 50%; background: var(--color-green); position: relative; }
-        .check::after { content: ''; position: absolute; left: 7px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .check { width: 20px; height: 20px; border-radius: 50%; background: transparent; box-shadow: inset 0 0 0 1.5px rgba(26, 26, 25, 0.22); position: relative; transition: background 0.25s ease, box-shadow 0.25s ease; }
+        .check::after { content: ''; position: absolute; left: 7px; top: 3.5px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) scale(0.4); opacity: 0; transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .row.on .check { background: var(--color-green); box-shadow: none; }
+        .row.on .check::after { opacity: 1; transform: rotate(45deg); }
+        /* The race: MambaHR's times and the by-hand costs arrive as each task
+           is done; the totals arrive last. Rows are in place from the start. */
+        .r-v { opacity: 0; transition: opacity 0.3s ease; }
+        .row.on .r-v { opacity: 1; }
+        .c-foot b { opacity: 0; transition: opacity 0.4s ease; }
+        .c-foot.on b { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) {
+          .check, .check::after, .r-v, .c-foot b { transition: none; }
+        }
 
         .c-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 18px 0 20px; font-size: 14px; color: var(--text-faint); }
         .c-foot b { font-family: var(--font-serif); font-weight: 400; font-size: 20px; color: var(--text); }

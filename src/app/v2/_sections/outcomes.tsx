@@ -1,18 +1,33 @@
 'use client'
 
+import { useStory, Typed } from '@/components/story'
+
 const SOURCES = ['Onboarding', 'Time off', 'Approvals', 'Payroll changes', 'Employee questions']
 
 const DAY_ONE = [
   { t: 'Offer signed', when: 'Thu', done: true },
   { t: 'Form I-9 sent to Maya', when: 'Thu', done: true },
-  { t: 'Okta, Slack and Google requested', when: 'Thu', done: true },
+  { t: 'Accounts requested from IT', when: 'Thu', done: true },
   { t: 'Laptop request sent to IT', when: 'Fri', done: true },
   { t: 'Pick her first-week buddy', when: 'Your call', done: false },
 ]
 
+// The cited answer, played once when it scrolls into view: the question
+// types itself, MambaHR checks the rules, the answer and its sources arrive.
+// Phases (ms): 1 checking, 2 the answer, 3 the California line, 4-5 sources.
+const QUESTION = 'I\u2019m having a baby in June. How much leave can I take?'
+const SCRIPT = {
+  phases: [1650, 2550, 2950, 3350, 3600],
+  typing: [{ at: 200, text: QUESTION, ms: 24 }],
+  rootMargin: '0px 0px -20% 0px',
+} as const
+
 /* What the team gets back: three matching light cards. The hours, a new hire
    ready before day one, and an answer with the law behind it. */
 export default function Outcomes() {
+  const { ref, phase, typed } = useStory<HTMLElement>(SCRIPT)
+  const on = (n: number) => (phase >= n ? ' in' : '')
+  const typing = typed[0] < QUESTION.length
   return (
     <section className="oc" id="outcomes">
       <div className="wrap">
@@ -57,18 +72,27 @@ export default function Outcomes() {
             </ul>
           </article>
 
-          <article className="card" data-reveal data-delay="3">
+          <article className="card" data-reveal data-delay="3" ref={ref}>
             <div className="top">
               <span className="lbl">Clear answers, with the law cited</span>
-              <p className="q">&ldquo;I&rsquo;m having a baby in June. How much leave can I take?&rdquo;</p>
+              {/* The full question holds the space; the typed copy sits on it. */}
+              <p className="q">
+                <span className="q-ghost">&ldquo;{QUESTION}&rdquo;</span>
+                <span className="q-live" aria-hidden="true">
+                  {typed[0] > 0 && <>&ldquo;<Typed text={QUESTION} n={typed[0]} caret={typing} />{!typing && <>&rdquo;</>}</>}
+                </span>
+              </p>
             </div>
             {/* The app's answer shape: the mark, the answer in one line, the
                 sources as "Based on" chips. */}
             <div className="ans">
-              <span className="a-who"><span className="agent-mark a-mark" aria-hidden="true" />MambaHR <em>6 seconds later</em></span>
-              <p className="a-t">Up to 12 weeks of job-protected federal family leave (FMLA) for bonding, once eligibility is confirmed.</p>
-              <p className="a-s">California has its own leave rules too. I have asked HR to confirm how they combine.</p>
-              <div className="ui-sources cites"><b>Based on</b><span>29 U.S.C. § 2612</span><span>Cal. Gov. Code § 12945.2</span></div>
+              <span className="a-who"><span className={`agent-mark a-mark${phase === 1 ? ' is-working' : ''}`} aria-hidden="true" />MambaHR <em>6 seconds later</em></span>
+              <div className="a-tw">
+                <span className={`a-status agent-status is-working${phase === 1 ? ' in' : ''}`} aria-hidden="true">Checking federal and California leave rules&hellip;</span>
+                <p className={`a-t fade${on(2)}`}>Up to 12 weeks of job-protected federal family leave (FMLA) for bonding, once eligibility is confirmed.</p>
+              </div>
+              <p className={`a-s fade${on(3)}`}>California has its own leave rules too. I have asked HR to confirm how they combine.</p>
+              <div className="ui-sources cites"><b className={`fade${on(4)}`}>Based on</b><span className={`fade${on(4)}`}>29 U.S.C. § 2612</span><span className={`fade${on(5)}`}>Cal. Gov. Code § 12945.2</span></div>
             </div>
           </article>
         </div>
@@ -166,7 +190,19 @@ export default function Outcomes() {
         .open .li-w { color: var(--gold); font-weight: 600; }
 
         /* card 3: the cited answer */
-        .q { margin: 4px 0 0; font-family: var(--font-serif); font-size: 21px; line-height: 1.3; color: var(--text); }
+        .q { position: relative; margin: 4px 0 0; font-family: var(--font-serif); font-size: 21px; line-height: 1.3; color: var(--text); }
+        /* Transparent, not hidden: screen readers still read the question. */
+        .q-ghost { color: transparent; }
+        .q-live { position: absolute; inset: 0; }
+        /* The answer arrives in place: nothing moves when it does. */
+        .a-tw { position: relative; }
+        .a-status { position: absolute; left: 0; top: 0; font-size: 14px; opacity: 0; transition: opacity 0.3s ease; }
+        .a-status.in { opacity: 1; }
+        .fade { opacity: 0; transform: translateY(4px); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+          .fade, .a-status { transition: none; }
+        }
         .ans { display: grid; gap: 8px; padding: 16px; border-radius: var(--radius-md); background: var(--bg-surface); }
         .a-who { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: var(--text); }
         .a-mark { --am-size: 22px; }
