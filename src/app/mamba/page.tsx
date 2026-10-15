@@ -7,11 +7,20 @@ import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import { ChatThread } from '@/components/mockups'
 import { MambaMark } from '@/components/mamba-mark'
+import { useStory } from '@/components/story'
 
 /* ── Hero fragment: a realistic Slack window, policy answer + letter receipt ── */
+/* Hero: two questions answered in Slack. Played once on load: Dave asks (1),
+   MambaHR checks (2) and answers with its sources (3); Jordan asks (4),
+   MambaHR checks (5) and answers (6); the next task starts (7). Everything
+   is in place from the start and fades in. */
+const ASK_SCRIPT = { phases: [400, 900, 1700, 2600, 3100, 3900, 4500], rootMargin: '0px 0px -5% 0px' } as const
+
 function SlackWindow() {
+  const { ref, phase } = useStory(ASK_SCRIPT)
+  const on = (n: number) => (phase >= n ? ' in' : '')
   return (
-    <div className="sw agent-edge agent-working agent-lg">
+    <div className="sw agent-edge agent-working agent-lg" ref={ref}>
       <div className="sw-bar">
         <span className="dots"><i /><i /><i /></span>
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -43,7 +52,7 @@ function SlackWindow() {
           </div>
 
           <div className="sw-feed">
-            <div className="m">
+            <div className={`m fade${on(1)}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="av" src="/avatars/dave.jpg" alt="Dave Buchanan" width={36} height={36} />
               <div className="m-body">
@@ -52,7 +61,12 @@ function SlackWindow() {
               </div>
             </div>
 
-            <div className="m">
+            <div className="slot">
+              <div className={`checking${phase === 2 ? ' in' : ''}`} aria-hidden="true">
+                <span className="agent-mark is-working t-mark" />
+                <span className="typing-t agent-status is-working">MambaHR is checking your policy&hellip;</span>
+              </div>
+              <div className={`m fade${on(3)}`}>
               <div className="av app"><MambaMark size={22} color="#C9A26C" /></div>
               <div className="m-body">
                 <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:02 AM</time></div>
@@ -65,7 +79,9 @@ function SlackWindow() {
               </div>
             </div>
 
-            <div className="m">
+            </div>
+
+            <div className={`m fade${on(4)}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="av" src="/avatars/priya.jpg" alt="Jordan Lee" width={36} height={36} />
               <div className="m-body">
@@ -74,7 +90,12 @@ function SlackWindow() {
               </div>
             </div>
 
-            <div className="m">
+            <div className="slot">
+              <div className={`checking${phase === 5 ? ' in' : ''}`} aria-hidden="true">
+                <span className="agent-mark is-working t-mark" />
+                <span className="typing-t agent-status is-working">MambaHR is checking your policy&hellip;</span>
+              </div>
+              <div className={`m fade${on(6)}`}>
               <div className="av app"><MambaMark size={22} color="#C9A26C" /></div>
               <div className="m-body">
                 <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:11 AM</time></div>
@@ -87,7 +108,9 @@ function SlackWindow() {
               </div>
             </div>
 
-            <div className="typing">
+            </div>
+
+            <div className={`typing fade${on(7)}`}>
               <span className="agent-mark is-working t-mark" aria-hidden="true" />
               <span className="typing-t agent-status is-working">MambaHR is filing the letter&hellip;</span>
             </div>
@@ -103,6 +126,15 @@ function SlackWindow() {
       </div>
 
       <style jsx>{`
+        /* The moment: everything is in place from the start and fades in. */
+        .fade { opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade.in { opacity: 1; transform: none; }
+        .slot { position: relative; }
+        .checking { position: absolute; left: 8px; top: 6px; display: flex; align-items: center; gap: 8px; opacity: 0; transition: opacity 0.3s ease; }
+        .checking.in { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) {
+          .fade, .checking { transition: none; }
+        }
         .sw {
           border-radius: var(--radius-lg);
           background: var(--bg-card);

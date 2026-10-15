@@ -6,30 +6,10 @@ import { PageHero, PageCta, Em } from '@/components/v2/page-kit'
 import { DEMO_HREF, DEMO_LABEL } from '@/content/cta'
 import { FLOW, WALKS, DECIDE, START, FAQS, type Walk } from './content'
 import s from './how-it-works.module.css'
+import FlowCard from './flow-card'
 
 const whoLabel = { mamba: 'MambaHR', person: 'A person' } as const
 
-/* The four stages as one card: the hero fragment. Built from the site's own
-   styles, not a product screenshot. */
-function FlowCard() {
-  return (
-    <div className={`${s.flowCard} agent-edge agent-working agent-lg`}>
-      <div className={s.flowTop}>
-        <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
-        <span className={s.flowTopT}>Every request, the same four steps</span>
-      </div>
-      <ol className={s.flowGrid}>
-        {FLOW.map((f, i) => (
-          <li key={f.title} className={`${s.flowCell}${f.who === 'person' ? ` ${s.person}` : ''}`}>
-            <span className={s.flowN} aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            <p className={s.flowT}>{f.title}</p>
-            <span className={s.flowWho}>{whoLabel[f.who]}</span>
-          </li>
-        ))}
-      </ol>
-    </div>
-  )
-}
 
 function Request({ r }: { r: Walk['request'] }) {
   return (

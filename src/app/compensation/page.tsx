@@ -5,11 +5,19 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
+import { useStory } from '@/components/story'
 
 /* ── Hero fragment: comp review with band gauge + above-band routing ── */
+/* Hero: raises checked against the pay range. Played once on load: Tom's
+   raise is placed on his range (1) and lands inside it (2); Maya's, above
+   her range, comes to you (3). */
+const COMP_SCRIPT = { phases: [700, 1700, 2500], rootMargin: '0px 0px -5% 0px' } as const
+
 function CompReviewCard() {
+  const { ref, phase } = useStory(COMP_SCRIPT)
+  const on = (n: number) => (phase >= n ? ' in' : '')
   return (
-    <div className="cr">
+    <div className="cr" ref={ref}>
       <div className="bar">
         <span className="bt">Merit raises · pay review</span>
         <span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · working</span>
@@ -24,16 +32,16 @@ function CompReviewCard() {
           <div className="gauge" aria-hidden="true">
             <span className="track" />
             <span className="seg" />
-            <span className="dot" style={{ left: '58%' }} />
+            <span className="dot" style={{ left: phase >= 1 ? '58%' : '0%' }} />
             <span className="mk" style={{ left: '0%' }}>low</span>
             <span className="mk" style={{ left: '50%' }}>mid</span>
             <span className="mk" style={{ left: '100%' }}>high</span>
           </div>
         </div>
-        <span className="ui-badge success">Within range</span>
+        <span className={`ui-badge success fade${on(2)}`}>Within range</span>
       </div>
 
-      <div className="need">
+      <div className={`need fade${on(3)}`}>
         <div className="ui-needs">
           <div className="ui-needs-in">
             <span className="ui-needs-label">Needs you</span>
@@ -91,6 +99,14 @@ function CompReviewCard() {
           background: var(--green);
           border: 3px solid #fff;
           box-shadow: var(--shadow-sm);
+          transition: left 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        /* The moment: the raise slides onto the range, the verdict lands, the
+           one above range arrives for you. */
+        .fade { opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+          .dot, .fade { transition: none; }
         }
         .mk {
           position: absolute;

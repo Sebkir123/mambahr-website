@@ -88,6 +88,16 @@
   color: var(--violet);
 }
 .flowCell.person .flowWho { color: var(--gold); }
+/* The hero moment: the steps light up in turn; the one in progress is
+   tinted. Unlit steps are quiet but readable. */
+.flowCell { transition: background 0.35s ease; }
+.flowCell .flowN, .flowCell .flowT, .flowCell .flowWho { opacity: 0.45; transition: opacity 0.35s ease; }
+.flowCell.lit .flowN, .flowCell.lit .flowT, .flowCell.lit .flowWho { opacity: 1; }
+.flowCell.now { background: var(--violet-soft); }
+.flowCell.person.now { background: var(--gold-tint); }
+@media (prefers-reduced-motion: reduce) {
+  .flowCell, .flowCell .flowN, .flowCell .flowT, .flowCell .flowWho { transition: none; }
+}
 
 /* ── The four steps, explained ── */
 .steps { background: var(--bg); padding-block: clamp(80px, 10vw, 128px); }

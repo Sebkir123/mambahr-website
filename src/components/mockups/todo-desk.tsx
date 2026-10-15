@@ -70,6 +70,8 @@ export function TodoDesk({
   simple = false,
   fresh,
   animatePane = false,
+  build,
+  doneToday,
   className,
 }: {
   /** Hero-calm version: no page title (the top bar names the page), no history. */
@@ -78,6 +80,12 @@ export function TodoDesk({
   fresh?: number
   /** Fade the open item in each time it changes (keyed by its title). */
   animatePane?: boolean
+  /** Hero motion: how much of the open item has arrived, in order: each
+      fact, then MambaHR's read, then the decision, then the history.
+      Everything keeps its place; unset shows it all. */
+  build?: number
+  /** Hero motion: the Done today count. */
+  doneToday?: number
   queue?: TodoItem[]
   activeIndex?: number
   summary?: string
@@ -86,6 +94,8 @@ export function TodoDesk({
   className?: string
 }) {
   const mode = show === 'pane' ? s.paneOnly : show === 'queue' ? s.queueOnly : ''
+  // build: part i is shown once build > i; unset, everything is shown.
+  const arrived = (i: number) => (build === undefined ? '' : build > i ? ` ${s.bIn}` : ` ${s.bOut}`)
   return (
     <div className={`${s.mk} ${s.deskCq}${className ? ` ${className}` : ''}`} aria-hidden="true">
       <div className={`${s.desk}${mode ? ` ${mode}` : ''}`}>
@@ -98,7 +108,7 @@ export function TodoDesk({
         <div className={s.deskBody}>
           <div className={s.queue}>
             <div className={s.qChips}>
-              {[{ label: 'Yours', n: String(queue.length), tone: 'gold' }, ...OTHER_CHIPS.filter((c) => !simple || c.label !== 'Covering')].map((c) => (
+              {[{ label: 'Yours', n: String(queue.length), tone: 'gold' }, ...OTHER_CHIPS.filter((c) => !simple || c.label !== 'Covering').map((c) => (c.label === 'Done today' && doneToday !== undefined ? { ...c, n: String(doneToday) } : c))].map((c) => (
                 <span key={c.label} className={`${s.qChip} ${s[`qChip_${c.tone}`]}`}>{c.label} {c.n}</span>
               ))}
             </div>
@@ -125,8 +135,8 @@ export function TodoDesk({
               <div className={s.factsBlock}>
                 <div className={s.label}>The facts</div>
                 <dl className={s.factList}>
-                  {focus.facts.map((f) => (
-                    <div key={f.k} className={s.factRow}>
+                  {focus.facts.map((f, i) => (
+                    <div key={f.k} className={`${s.factRow}${arrived(i)}`}>
                       <dt>{f.k}</dt>
                       <dd>{f.v}</dd>
                     </div>
@@ -134,14 +144,14 @@ export function TodoDesk({
                 </dl>
               </div>
 
-              <div className={s.readRing}>
+              <div className={`${s.readRing}${arrived(focus.facts.length)}`}>
                 <div className={s.read}>
                   <div className={s.label}>MambaHR&rsquo;s read</div>
                   <p className={s.readText}>{focus.read}</p>
                 </div>
               </div>
 
-              <div className={s.decide}>
+              <div className={`${s.decide}${arrived(focus.facts.length + 1)}`}>
                 <div className={s.label}>Your decision</div>
                 <div className={s.pills}>
                   {focus.decisions.map((d) => (
@@ -154,7 +164,7 @@ export function TodoDesk({
               </div>
 
               {!simple && (
-                <div className={s.history}>
+                <div className={`${s.history}${arrived(focus.facts.length + 2)}`}>
                   {focus.history.map((h) => (
                     <div key={h.what + h.when} className={s.hLine}><i /><span>{h.what}</span><span>{h.when}</span></div>
                   ))}

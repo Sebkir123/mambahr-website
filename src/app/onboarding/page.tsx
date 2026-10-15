@@ -5,18 +5,25 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
+import { useStory } from '@/components/story'
 
 /* ── Hero fragment: day-one timeline card ── */
 const DAY1 = [
   { time: '9:02 AM', label: 'Offer countersigned', meta: 'E-signed' },
   { time: '9:03 AM', label: 'Form I-9 and E-Verify check started', meta: 'Federal' },
-  { time: '9:05 AM', label: 'Email, Slack, and single sign-on live', meta: 'Accounts live' },
-  { time: '9:07 AM', label: 'Device setup requested', meta: 'IT notified' },
+  { time: '9:05 AM', label: 'Accounts requested: email, Slack, tools', meta: 'Sent to IT' },
+  { time: '9:07 AM', label: 'Device setup requested', meta: 'Sent to IT' },
 ]
 
+/* Hero: day one being set up. Played once on load: each step lands with its
+   time (1-4), then the summary (5). */
+const DAY1_SCRIPT = { phases: [600, 1200, 1800, 2400, 3000], rootMargin: '0px 0px -5% 0px' } as const
+
 function DayOneCard() {
+  const { ref, phase } = useStory(DAY1_SCRIPT)
+  const on = (n: number) => (phase >= n ? ' in' : '')
   return (
-    <div className="d1 agent-edge agent-done agent-lg">
+    <div className="d1 agent-edge agent-done agent-lg" ref={ref}>
       <div className="head">
         <div className="who">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -26,17 +33,17 @@ function DayOneCard() {
             <div className="meta">Product Designer · starts Monday</div>
           </div>
         </div>
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · requests sent in 4 min</span>
+        <span className={`mamba-chip done fade${on(5)}`}><span className="mc-i" aria-hidden="true" />MambaHR · requests sent in 4 min</span>
       </div>
-      {DAY1.map((r) => (
-        <div key={r.label} className="row">
+      {DAY1.map((r, i) => (
+        <div key={r.label} className={`row${phase > i ? ' on' : ''}`}>
           <span className="time">{r.time}</span>
           <span className="mark" aria-hidden="true" />
           <span className="lbl">{r.label}</span>
           <span className="src">{r.meta}</span>
         </div>
       ))}
-      <div className="foot">Everything ready before Alex arrives.</div>
+      <div className={`foot fade${on(5)}`}>Everything requested before Alex arrives.</div>
       <style jsx>{`
         .d1 {
           background: var(--bg-card);
@@ -60,8 +67,20 @@ function DayOneCard() {
         .row { display: flex; align-items: center; gap: 13px; padding: 13px 20px; }
         .row + .row { border-top: 1px solid var(--border-faint); }
         .time { flex: none; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 56px; }
-        .mark { flex: none; width: 17px; height: 17px; border-radius: var(--radius-full); background: var(--green); position: relative; }
-        .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .mark { flex: none; width: 17px; height: 17px; border-radius: var(--radius-full); background: transparent; box-shadow: inset 0 0 0 1.5px var(--border-mid); position: relative; transition: background 0.25s ease, box-shadow 0.25s ease; }
+        .mark::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) scale(0.4); opacity: 0; transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        /* The moment: each step lands with its time; the summary arrives last. */
+        .row.on .mark { background: var(--green); box-shadow: none; }
+        .row.on .mark::after { opacity: 1; transform: rotate(45deg); }
+        .row .time, .row .src { opacity: 0; transition: opacity 0.3s ease; }
+        .row.on .time, .row.on .src { opacity: 1; }
+        .row .lbl { color: var(--text-faint); transition: color 0.3s ease; }
+        .row.on .lbl { color: var(--text); }
+        .fade { opacity: 0; transition: opacity 0.4s ease; }
+        .fade.in { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) {
+          .mark, .mark::after, .time, .src, .lbl, .fade { transition: none; }
+        }
         .lbl { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; color: var(--text); }
         .src {
           flex: none;
@@ -116,8 +135,8 @@ function ExitChecklist() {
         <div className="ui-needs">
           <div className="ui-needs-in">
             <span className="ui-needs-label">Needs you</span>
-            <div className="ui-needs-title">Switch off all logins at 5:00 PM Friday</div>
-            <div className="ui-needs-body">Email · Slack · laptop. Nothing is switched off until you sign off.</div>
+            <div className="ui-needs-title">Close all logins at 5:00 PM Friday</div>
+            <div className="ui-needs-body">Email · Slack · laptop. IT gets the list once you sign off.</div>
             <div className="ui-actions">
               <span className="ui-btn primary sm">Sign off</span>
               <span className="ui-btn secondary sm">Not yet</span>
@@ -166,7 +185,7 @@ function FirstDay() {
       <div className="float agent-edge agent-done">
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
         <div className="f-t">Day 1 ready · Alex Park</div>
-        <div className="f-m">Logins live · buddy assigned · week planned</div>
+        <div className="f-m">Accounts requested · buddy assigned · week planned</div>
       </div>
       <style jsx>{`
         .fd { position: relative; }
@@ -208,10 +227,10 @@ export default function OnboardingPage() {
         <PageHero
           eyebrow="Onboarding & offboarding"
           title={<>Day one, <Em>ready.</Em></>}
-          lead="Before your new hire arrives, the Form I-9 is started, logins work, device setup is requested, and the first week is planned. When someone leaves, nothing is forgotten."
+          lead="Before your new hire arrives, the Form I-9 is started, their accounts and device are requested from IT, and the first week is planned. When someone leaves, nothing is forgotten."
           photo="/v2-people/marcus.jpg"
           photoChip="MambaHR · done in 4 min"
-          photoCaption="Alex set up · logins live by 9 AM"
+          photoCaption="Alex set up · requests sent by 9:07 AM"
         >
           <DayOneCard />
         </PageHero>
@@ -223,7 +242,7 @@ export default function OnboardingPage() {
           steps={[
             { n: '01', label: 'Offer signed', desc: 'The accepted offer is countersigned and filed where you can find it.', who: 'agent', time: 'minutes' },
             { n: '02', label: 'Form I-9', desc: 'Work-eligibility paperwork collected, and the Form I-9 and E-Verify check started.', who: 'agent', time: 'day 1' },
-            { n: '03', label: 'Logins ready', desc: 'Email, Slack, and the tools they need, working before they sit down.', who: 'agent', time: 'before 9 AM' },
+            { n: '03', label: 'Accounts requested', desc: 'Email, Slack, and the tools they need, requested from your IT team before day one. Automatic setup through your sign-on provider is coming soon.', who: 'agent', time: 'day 1' },
             { n: '04', label: 'Equipment and buddy', desc: 'Device setup requested from your IT team. An onboarding buddy assigned.', who: 'agent', img: '/avatars/priya.jpg' },
             { n: '05', label: 'First-week plan', desc: 'Intros and team sessions planned with the manager, and added to calendars once Google or Microsoft 365 is connected.', who: 'agent' },
             { n: '06', label: 'The welcome', desc: 'The welcome is yours: the handshake, the story, why you hired them.', who: 'you', img: '/avatars/anna.jpg' },
@@ -233,11 +252,11 @@ export default function OnboardingPage() {
         <FeatureSplit
           eyebrow="Offboarding"
           title={<>Exits with <Em>nothing forgotten.</Em></>}
-          lead="MambaHR works out the final paycheck by state rules, tracks the COBRA health-coverage deadlines and flags them at exit, and collects the handover. Logins are switched off only after you sign off."
+          lead="MambaHR works out the final paycheck by state rules, tracks the COBRA health-coverage deadlines and flags them at exit, and collects the handover. Once you sign off, IT gets the list of logins to close."
           bullets={[
             'Final pay timed to each state’s rules, including California’s last-day deadline',
             'COBRA deadlines tracked and flagged to you at exit',
-            'Nothing is switched off until you say so',
+            'IT is asked to close logins only after you sign off',
           ]}
         >
           <ExitChecklist />
@@ -247,8 +266,8 @@ export default function OnboardingPage() {
           flip
           warm
           eyebrow="Day one"
-          title={<>Working logins, <Em>a buddy at 9:05.</Em></>}
-          lead="Accounts work before the new hire sits down, and their buddy is already briefed. Day one is for meeting people, not waiting for access."
+          title={<>Accounts requested, <Em>a buddy at 9:05.</Em></>}
+          lead="IT has the account and device requests days before the new hire sits down, and their buddy is already briefed. Day one is for meeting people, not waiting for access."
           bullets={[
             'A first week that is ready for them',
             'Managers get a short list of reminders',
@@ -262,12 +281,12 @@ export default function OnboardingPage() {
           stats={[
             { n: 4, suffix: ' min', label: 'from signed offer to account and paperwork requests sent' },
             { n: 1, label: 'short form for the new hire to fill in' },
-            { n: 0, label: 'logins left on after an exit' },
+            { n: 0, label: 'exit steps left untracked' },
           ]}
         />
 
 
-        <PageCta title={<>Every new hire, <Em>ready on day one.</Em></>} sub="A 30-minute demo of one onboarding, from signed offer to working logins. Then we import your data and switch you over." />
+        <PageCta title={<>Every new hire, <Em>ready on day one.</Em></>} sub="A 30-minute demo of one onboarding, from signed offer to day one. Then we import your data and switch you over." />
       </main>
       <Footer />
     </>

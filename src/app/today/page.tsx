@@ -6,6 +6,22 @@ import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import { TodoDesk } from '@/components/mockups'
+import { useStory } from '@/components/story'
+
+/* Hero: only the call that needs you. Played once on load: the open item
+   builds itself, fact by fact (1-4), MambaHR's read (5), your decision (6),
+   what happened so far (7), while the routine work is counted as done
+   (Done today climbs to 11). */
+const TODO_SCRIPT = { phases: [500, 850, 1200, 1550, 2100, 2700, 3200], rootMargin: '0px 0px -5% 0px' } as const
+
+function TodoLive() {
+  const { ref, phase } = useStory(TODO_SCRIPT)
+  return (
+    <div className="mock-card" ref={ref}>
+      <TodoDesk build={phase} doneToday={6 + Math.min(phase, 5)} />
+    </div>
+  )
+}
 
 function DecisionCard() {
   return (
@@ -191,7 +207,7 @@ export default function TodayPage() {
         title={<>Only the calls <Em>that need you.</Em></>}
         lead="Everything that needs your decision is on one list called To do. The rest is done and logged."
       >
-        <div className="mock-card"><TodoDesk /></div>
+        <TodoLive />
       </PageHero>
 
       <AgentLoop

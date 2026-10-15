@@ -5,11 +5,24 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
+import { useStory } from '@/components/story'
 
 /* ── Hero fragment: signed offer letter, filed ── */
+/* Hero: an offer from draft to filed. Played once on load: drafted (1), sent
+   for signature (2), Maya signs (3, the signature writes on), signed (4),
+   filed (5), the summary (6). */
+const DOC_SCRIPT = { phases: [500, 1300, 2000, 2900, 3400, 3900], rootMargin: '0px 0px -5% 0px' } as const
+
 function SignedDocCard() {
+  const { ref, phase } = useStory(DOC_SCRIPT)
+  const on = (n: number) => (phase >= n ? ' in' : '')
+  const badge = phase >= 4
+    ? <span className="ui-badge success chip">Signed &middot; 11:15 AM</span>
+    : phase >= 2
+      ? <span className="ui-badge warning chip">Out for signature</span>
+      : <span className="ui-badge chip">Draft</span>
   return (
-    <div className="doc agent-edge agent-done">
+    <div className="doc agent-edge agent-done" ref={ref}>
       <div className="bar">
         <span className="dots"><b /><b /><b /></span>
         <span className="addr">app.mambahr.com</span>
@@ -26,23 +39,23 @@ function SignedDocCard() {
             <div className="d-name">Offer, Maya Chen.pdf</div>
             <div className="d-meta">Senior Engineer · drafted from your template</div>
           </div>
-          <span className="ui-badge success chip">Signed &middot; 11:15 AM</span>
+          {badge}
         </div>
-        <div className="preview">
+        <div className={`preview${on(1)}`}>
           <div className="p-line w80" /><div className="p-line w95" /><div className="p-line w70" />
           <div className="sig">
             <div className="sig-block">
-              <span className="sig-name">Maya Chen</span>
+              <span className={`sig-name${on(3)}`}>Maya Chen</span>
               <span className="sig-rule" />
               <span className="sig-lbl">Employee · e-signed</span>
             </div>
-            <span className="sig-ok" aria-hidden="true" />
+            <span className={`sig-ok${on(4)}`} aria-hidden="true" />
           </div>
         </div>
-        <div className="filed">
+        <div className={`filed fade${on(5)}`}>
           <span className="mono">Filed → Maya Chen / Employment · signing record attached</span>
         </div>
-        <div className="foot">
+        <div className={`foot fade${on(6)}`}>
           <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · signed &amp; filed</span>
           <span className="foot-t">Drafted, sent, signed, and filed in 41 minutes</span>
         </div>
@@ -72,6 +85,21 @@ function SignedDocCard() {
         .sig-lbl { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
         .sig-ok { width: 20px; height: 20px; border-radius: 999px; background: var(--color-green); position: relative; }
         .sig-ok::after { content: ''; position: absolute; left: 7px; top: 4px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        /* The moment: the draft fills in, the signature writes on left to
+           right, then the tick, the filing line and the summary. */
+        .preview .p-line { transform-origin: left center; transform: scaleX(0); transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .preview .p-line:nth-child(2) { transition-delay: 0.12s; }
+        .preview .p-line:nth-child(3) { transition-delay: 0.24s; }
+        .preview.in .p-line { transform: none; }
+        .sig-name { clip-path: inset(0 100% 0 0); transition: clip-path 0.9s cubic-bezier(0.45, 0, 0.3, 1); }
+        .sig-name.in { clip-path: inset(0 0 0 0); }
+        .sig-ok { opacity: 0; transform: scale(0.4); transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .sig-ok.in { opacity: 1; transform: none; }
+        .fade { opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+          .preview .p-line, .sig-name, .sig-ok, .fade { transition: none; }
+        }
         .filed { margin-top: 11px; border-radius: var(--radius-md); background: var(--bg-surface); padding: 9px 14px; }
         .mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
         .foot { display: flex; align-items: center; gap: 10px; margin-top: 13px; flex-wrap: wrap; }

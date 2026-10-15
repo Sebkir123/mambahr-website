@@ -5,21 +5,29 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
+import { useStory } from '@/components/story'
 
 /* ── Hero fragment: the hosted careers site, live ── */
 const ROLES = [
-  { title: 'Senior Engineer', loc: 'New York · Hybrid', pay: '$180k–$205k', hot: '12 applicants today', avs: ['/avatars/tom.jpg', '/avatars/priya.jpg', '/avatars/dave.jpg'] },
+  { title: 'Senior Engineer', loc: 'New York · Hybrid', pay: '$180k–$205k', hot: 'applicants today', avs: ['/avatars/tom.jpg', '/avatars/priya.jpg', '/avatars/dave.jpg'] },
   { title: 'Account Executive', loc: 'Remote · US', pay: '$95k–$120k + comm.', avs: ['/avatars/anna.jpg', '/avatars/marcus.jpg'] },
   { title: 'People Operations Manager', loc: 'Austin · On-site', pay: '$110k–$135k', avs: ['/avatars/violet.jpg'] },
 ]
 
+/* Hero: the careers page going live. Played once on load: it goes live (1),
+   the open roles appear (2-4), a new application lands on the first role
+   (5). */
+const PORTAL_SCRIPT = { phases: [600, 1000, 1300, 1600, 2600], rootMargin: '0px 0px -5% 0px' } as const
+
 function PortalCard() {
+  const { ref, phase } = useStory(PORTAL_SCRIPT)
+  const on = (n: number) => (phase >= n ? ' in' : '')
   return (
-    <div className="cs agent-edge agent-working agent-lg">
+    <div className="cs agent-edge agent-working agent-lg" ref={ref}>
       <div className="bar">
         <span className="dots"><b /><b /><b /></span>
         <span className="addr">jobs.yourcompany.com</span>
-        <span className="ui-badge success">Live</span>
+        {phase >= 1 ? <span className="ui-badge success">Live</span> : <span className="ui-badge info">Publishing</span>}
       </div>
       <div className="body">
         <div className="co">
@@ -28,21 +36,22 @@ function PortalCard() {
             <div className="co-n">Your Company</div>
             <div className="co-t">We&rsquo;re hiring across three teams</div>
           </div>
-          <div className="co-chip"><span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · collecting applications</span></div>
+          <div className={`co-chip fade${on(1)}`}><span className="mamba-chip working"><span className="mc-i" aria-hidden="true" />MambaHR · collecting applications</span></div>
         </div>
-        {ROLES.map((r) => (
-          <div key={r.title} className="job">
+        {ROLES.map((r, i) => (
+          <div key={r.title} className={`job fade${on(i + 2)}`}>
             <div className="j-main">
               <div className="j-t">
                 {r.title}
-                {r.hot && <span className="ui-badge info">{r.hot}</span>}
+                {r.hot && <span className="ui-badge info">{phase >= 5 ? 12 : 11} {r.hot}</span>}
               </div>
               <div className="j-m">{r.loc} · {r.pay}</div>
             </div>
             <span className="avs" aria-hidden="true">
-              {r.avs.map((a) => (
+              {/* The first role's newest applicant arrives last. */}
+              {(i === 0 && phase < 5 ? r.avs.slice(0, -1) : r.avs).map((a, k) => (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img key={a} src={a} alt="" width={24} height={24} />
+                <img key={a} src={a} alt="" width={24} height={24} className={i === 0 && k === r.avs.length - 1 ? 'new' : undefined} />
               ))}
             </span>
             <span className="ui-btn primary sm j-apply">Apply</span>
@@ -75,6 +84,15 @@ function PortalCard() {
         .avs img { width: 24px; height: 24px; border-radius: var(--radius-full); object-fit: cover; border: 2px solid #fff; box-shadow: var(--shadow-xs); margin-left: -7px; background: var(--bg-elevated); }
         .avs img:first-child { margin-left: 0; }
         .j-apply { flex: none; }
+        /* The moment: the page goes live, the roles appear, an application lands. */
+        .fade { opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade.in { opacity: 1; transform: none; }
+        .avs img.new { animation: avIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+        @keyframes avIn { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+        @media (prefers-reduced-motion: reduce) {
+          .fade { transition: none; }
+          .avs img.new { animation: none; }
+        }
         .foot { font-size: 12px; color: var(--text-faint); padding-top: 12px; border-top: 1px solid var(--border-faint); margin-top: 2px; }
         @media (max-width: 640px) { .avs { display: none; } .co { flex-wrap: wrap; } .co-chip { flex: 0 0 100%; } }
       `}</style>

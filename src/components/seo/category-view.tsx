@@ -7,40 +7,66 @@ import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import { MambaMark } from '@/components/mamba-mark'
+import { useStory } from '@/components/story'
 import type { CategoryData } from './category-data'
 
 /* Small Slack-style exchange shown in the hero stage, the product, as a
    hardcoded CSS fragment (not a screenshot), per the marketing display rule. */
+/* Hero: a leave question answered with the law cited. Played once on load:
+   Anna asks (1), MambaHR checks (2), answers (3), fills in federal,
+   California and the next step (4-6), cites its sources (7), done (8).
+   Everything is in place from the start and fades in. */
+const SF_SCRIPT = { phases: [400, 900, 1700, 2000, 2300, 2600, 2950, 3300], rootMargin: '0px 0px -5% 0px' } as const
+
 function SlackFragment() {
+  const { ref, phase } = useStory(SF_SCRIPT)
+  const on = (n: number) => (phase >= n ? ' in' : '')
   return (
-    <div className="sf">
+    <div className="sf" ref={ref}>
       <div className="sf-top">
         <span className="sf-hash">#</span>
         <span className="sf-ch">people-help</span>
-        <span className="mamba-chip done sf-chip"><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
+        <span className={`mamba-chip done sf-chip fade${on(8)}`}><span className="mc-i" aria-hidden="true" />MambaHR · done</span>
       </div>
-      <div className="sf-msg">
+      <div className={`sf-msg fade${on(1)}`}>
         <span className="sf-av" aria-hidden="true">A</span>
         <div className="sf-body">
           <div className="sf-meta"><b>Anna</b><span>9:24 AM</span></div>
           <p className="sf-text">@MambaHR I’m taking parental leave starting June 3. What am I eligible for in California?</p>
         </div>
       </div>
-      <div className="sf-msg">
+      <div className="slot">
+      <div className={`checking${phase === 2 ? ' in' : ''}`} aria-hidden="true">
+        <span className="agent-mark is-working t-mark" />
+        <span className="agent-status is-working t-t">MambaHR is checking federal and California rules&hellip;</span>
+      </div>
+      <div className={`sf-msg fade${on(3)}`}>
         {/* The MambaHR app icon in Slack: the gold M on a dark square. */}
         <span className="sf-app" aria-hidden="true"><MambaMark size={20} color="#C9A26C" /></span>
         <div className="sf-body">
           <div className="sf-meta"><b>MambaHR</b><span className="sf-bot">App</span><span>9:24 AM</span></div>
           <p className="sf-text sf-answer">You’re eligible for 12 weeks of federal family leave (FMLA) for bonding, job protected.</p>
           <div className="sf-card">
-            <div className="sf-row"><span className="sf-k">Federal</span><span className="sf-v">FMLA, 12 weeks, job protected</span></div>
-            <div className="sf-row"><span className="sf-k">California</span><span className="sf-v">CFRA and PFL rules attached</span></div>
-            <div className="sf-row"><span className="sf-k">Next</span><span className="sf-v">Plan sent to Dave to confirm how they combine</span></div>
+            <div className={`sf-row fade${on(4)}`}><span className="sf-k">Federal</span><span className="sf-v">FMLA, 12 weeks, job protected</span></div>
+            <div className={`sf-row fade${on(5)}`}><span className="sf-k">California</span><span className="sf-v">CFRA and PFL rules attached</span></div>
+            <div className={`sf-row fade${on(6)}`}><span className="sf-k">Next</span><span className="sf-v">Plan sent to Dave to confirm how they combine</span></div>
           </div>
-          <div className="ui-sources"><b>Based on</b><span>FMLA</span><span>CFRA</span><span>CA PFL</span></div>
+          <div className={`ui-sources fade${on(7)}`}><b>Based on</b><span>FMLA</span><span>CFRA</span><span>CA PFL</span></div>
         </div>
       </div>
+      </div>
       <style jsx>{`
+        /* The moment: everything is in place from the start and fades in. */
+        .fade { opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade.in { opacity: 1; transform: none; }
+        .slot { position: relative; }
+        .checking { position: absolute; left: 0; top: 6px; display: flex; align-items: center; gap: 8px; opacity: 0; transition: opacity 0.3s ease; }
+        .checking.in { opacity: 1; }
+        .t-mark { --am-size: 20px; }
+        .t-t { font-size: 12.5px; }
+        @media (prefers-reduced-motion: reduce) {
+          .fade, .checking { transition: none; }
+        }
         .sf { background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-float); text-align: left; }
         .sf-top { display: flex; align-items: center; gap: 7px; padding: 12px 16px; background: var(--bg-surface); border-bottom: 1px solid var(--border-faint); }
         .sf-hash { color: var(--text-faint); font-weight: 700; }

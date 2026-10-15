@@ -10,6 +10,21 @@ import {
   type LoopStep,
 } from '@/components/v2/page-kit'
 import { PipelineBoard, TodoDesk, SlackApproval, ChatThread, type TodoFocus } from '@/components/mockups'
+import { useStory } from '@/components/story'
+
+/* Hero: MambaHR doing the work on one open item. Played once on load: the
+   facts gathered one by one (1-4), its read (5), your decision (6), what
+   happened so far (7). */
+const PANE_SCRIPT = { phases: [500, 850, 1200, 1550, 2100, 2700, 3200], rootMargin: '0px 0px -5% 0px' } as const
+
+function PaneLive() {
+  const { ref, phase } = useStory(PANE_SCRIPT)
+  return (
+    <div className="mock-card" ref={ref}>
+      <TodoDesk show="pane" build={phase} />
+    </div>
+  )
+}
 
 const STEPS: LoopStep[] = [
   { n: '01', img: '/avatars/maya.jpg',   label: 'Offer letter sent, Maya Chen',   desc: 'Senior Engineer · $165k · inside your pay range',     who: 'agent', time: '2 min' },
@@ -79,7 +94,7 @@ export default function ProductPage() {
           title={<>See MambaHR <Em>do the work.</Em></>}
           lead="MambaHR does the admin in hiring, onboarding, leave, pay changes and compliance. Your team approves the sensitive calls."
         >
-          <div className="mock-card"><TodoDesk show="pane" /></div>
+          <PaneLive />
         </PageHero>
 
         <AgentLoop

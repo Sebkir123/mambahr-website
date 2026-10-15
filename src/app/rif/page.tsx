@@ -5,9 +5,17 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
+import { useStory } from '@/components/story'
 
 /* ── Hero fragment: a RIF plan awaiting human sign-off ── */
+/* Hero: the plan being prepared. Played once on load: notices, severance,
+   final pay and internal roles are each checked (1-4), then the sign-off a
+   person must give arrives (5) and the plan waits for it (6). */
+const RIF_SCRIPT = { phases: [600, 1150, 1700, 2250, 2900, 3300], rootMargin: '0px 0px -5% 0px' } as const
+
 function HeroPlanCard() {
+  const { ref, phase } = useStory(RIF_SCRIPT)
+  const on = (n: number) => (phase >= n ? ' in' : '')
   const rows = [
     { what: 'Notices', note: 'WARN timing checked' },
     { what: 'Severance', note: 'calculated per policy' },
@@ -15,19 +23,19 @@ function HeroPlanCard() {
     { what: 'Internal roles', note: '3 open roles to consider' },
   ]
   return (
-    <div className="pc">
+    <div className="pc" ref={ref}>
       <div className="pc-top">
         <span className="pc-title">Layoff plan · Q3</span>
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · awaiting your sign-off</span>
+        <span className={`mamba-chip done fade${on(6)}`}><span className="mc-i" aria-hidden="true" />MambaHR · awaiting your sign-off</span>
       </div>
-      {rows.map((r) => (
-        <div key={r.what} className="row">
+      {rows.map((r, i) => (
+        <div key={r.what} className={`row${phase > i ? ' on' : ''}`}>
           <span className="check" aria-hidden="true" />
           <span className="what">{r.what}</span>
           <span className="note">{r.note}</span>
         </div>
       ))}
-      <div className="need">
+      <div className={`need fade${on(5)}`}>
         <div className="ui-needs">
           <div className="ui-needs-in">
             <span className="ui-needs-label">Needs you</span>
@@ -75,8 +83,10 @@ function HeroPlanCard() {
           width: 18px;
           height: 18px;
           border-radius: var(--radius-full);
-          background: var(--green);
+          background: transparent;
+          box-shadow: inset 0 0 0 1.5px var(--border-mid);
           position: relative;
+          transition: background 0.25s ease, box-shadow 0.25s ease;
         }
         .check::after {
           content: '';
@@ -87,7 +97,19 @@ function HeroPlanCard() {
           height: 8px;
           border: solid #fff;
           border-width: 0 2px 2px 0;
-          transform: rotate(45deg);
+          transform: rotate(45deg) scale(0.4);
+          opacity: 0;
+          transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        /* The moment: each part is checked in turn; the sign-off arrives last. */
+        .row.on .check { background: var(--green); box-shadow: none; }
+        .row.on .check::after { opacity: 1; transform: rotate(45deg); }
+        .row .note { opacity: 0; transition: opacity 0.3s ease; }
+        .row.on .note { opacity: 1; }
+        .fade { opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+          .check, .check::after, .note, .fade { transition: none; }
         }
         .what { flex: none; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
         .note { flex: 1; min-width: 0; text-align: right; color: var(--text-muted); font-size: 14px; }
