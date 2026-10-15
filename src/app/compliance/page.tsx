@@ -31,7 +31,8 @@ function HeroAnswerCard() {
           <div className="m-who">Tom · Texas</div>
           {/* The full question holds the space; the typed copy sits on it. */}
           <div className="q">
-            <span className="q-ghost">&ldquo;{QUESTION}&rdquo;</span>
+            <span className="q-ghost" aria-hidden="true">&ldquo;{QUESTION}&rdquo;</span>
+            <span className="sr-only">&ldquo;{QUESTION}&rdquo;</span>
             <span className="q-live" aria-hidden="true">
               {typed[0] > 0 && <>&ldquo;<Typed text={QUESTION} n={typed[0]} caret={typing} />{!typing && <>&rdquo;</>}</>}
             </span>
@@ -83,8 +84,8 @@ function HeroAnswerCard() {
         .a { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; color: var(--text); }
         .a-sub { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
         .q { position: relative; }
-        /* Transparent, not hidden: screen readers still read the question. */
-        .q-ghost { color: transparent; }
+        /* The placeholder holds the space; screen readers read the sr-only copy. */
+        .q-ghost { visibility: hidden; }
         .q-live { position: absolute; inset: 0; }
         .a-wrap { position: relative; }
         .a-status { position: absolute; left: 0; top: 2px; font-size: 14px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }

@@ -77,7 +77,8 @@ export default function Outcomes() {
               <span className="lbl">Clear answers, with the law cited</span>
               {/* The full question holds the space; the typed copy sits on it. */}
               <p className="q">
-                <span className="q-ghost">&ldquo;{QUESTION}&rdquo;</span>
+                <span className="q-ghost" aria-hidden="true">&ldquo;{QUESTION}&rdquo;</span>
+                <span className="sr-only">&ldquo;{QUESTION}&rdquo;</span>
                 <span className="q-live" aria-hidden="true">
                   {typed[0] > 0 && <>&ldquo;<Typed text={QUESTION} n={typed[0]} caret={typing} />{!typing && <>&rdquo;</>}</>}
                 </span>
@@ -191,8 +192,8 @@ export default function Outcomes() {
 
         /* card 3: the cited answer */
         .q { position: relative; margin: 4px 0 0; font-family: var(--font-serif); font-size: 21px; line-height: 1.3; color: var(--text); }
-        /* Transparent, not hidden: screen readers still read the question. */
-        .q-ghost { color: transparent; }
+        /* The placeholder holds the space; screen readers read the sr-only copy. */
+        .q-ghost { visibility: hidden; }
         .q-live { position: absolute; inset: 0; }
         /* The answer arrives in place: nothing moves when it does. */
         .a-tw { position: relative; }

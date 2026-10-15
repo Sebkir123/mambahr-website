@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { forwardRef, memo, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { AppFrame, TodoDesk, COMP_CHANGE, type TodoFocus, type TodoItem } from '@/components/mockups'
 import { MambaMark } from '@/components/mamba-mark'
 import { useStory, useMedia, Typed, StoryReplay } from '@/components/story'
@@ -88,6 +88,34 @@ function midway(a: Cam, b: Cam, pull: number): Cam {
   return { x: FRAME.w / 2 - cx * s, y: FRAME.h / 2 - cy * s, s }
 }
 
+/* The MambaHR app, memoised: it only changes when Maya's row arrives and
+   opens, so the typing and the Slack beats (a render per letter) skip it. */
+const HeroApp = memo(forwardRef<HTMLDivElement, { arrived: boolean; opened: boolean; narrow: boolean }>(
+  function HeroApp({ arrived, opened, narrow }, ref) {
+    const queue = arrived ? [DAY_ONE_ROW, RAISE, LEAVE] : [RAISE, LEAVE]
+    const focus = opened ? DAY_ONE : RAISE_FOCUS
+    return (
+      <div className="hero-app" ref={ref}>
+        <div className="hero-app-bar">
+          <span className="hero-dots"><b /><b /><b /></span>
+          <span className="hero-addr">app.mambahr.com</span>
+        </div>
+        <AppFrame active="todo" org="Acme" user="AR" height={narrow ? 780 : 600} minimal>
+          {/* Wide: the queue beside the open item, the decision beside its
+              facts. Narrow, where the desk would drop the open item: the
+              open item alone. */}
+          <div className="desk-full">
+            <TodoDesk simple animatePane queue={queue} fresh={arrived && !opened ? 0 : undefined} activeIndex={opened ? 0 : arrived ? 1 : 0} focus={focus} />
+          </div>
+          <div className="desk-pane">
+            <TodoDesk simple animatePane show="pane" queue={queue} focus={focus} />
+          </div>
+        </AppFrame>
+      </div>
+    )
+  },
+))
+
 // Grain for the light field: fractal noise, alpha only, tiled.
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
@@ -110,7 +138,6 @@ export default function Hero() {
   const arrived = phase >= 10
   const opened = phase >= 11
   const shot: 'a' | 'b' | 'c' | 'd' = phase >= 12 ? 'd' : inApp ? 'c' : replied ? 'b' : 'a'
-  const queue = arrived ? [DAY_ONE_ROW, RAISE, LEAVE] : [RAISE, LEAVE]
 
   const cam: Cam = useMemo(
     () => (narrow ? { x: 0, y: -(shot === 'd' ? stops.d : shot === 'c' ? stops.c : stops.a), s: 1 } : WIDE[shot]),
@@ -298,30 +325,7 @@ export default function Hero() {
             </div>
 
             {/* C: the MambaHR app */}
-            <div className="app" ref={appRef}>
-              <div className="app-bar">
-                <span className="dots"><b /><b /><b /></span>
-                <span className="addr">app.mambahr.com</span>
-              </div>
-              <AppFrame active="todo" org="Acme" user="AR" height={narrow ? 780 : 600} minimal>
-                {/* Wide: the queue beside the open item, the decision beside
-                    its facts. Narrow, where the desk would drop the open
-                    item: the open item alone. */}
-                <div className="desk-full">
-                  <TodoDesk
-                    simple
-                    animatePane
-                    queue={queue}
-                    fresh={arrived && !opened ? 0 : undefined}
-                    activeIndex={opened ? 0 : arrived ? 1 : 0}
-                    focus={opened ? DAY_ONE : RAISE_FOCUS}
-                  />
-                </div>
-                <div className="desk-pane">
-                  <TodoDesk simple animatePane show="pane" queue={queue} focus={opened ? DAY_ONE : RAISE_FOCUS} />
-                </div>
-              </AppFrame>
-            </div>
+            <HeroApp ref={appRef} arrived={arrived} opened={opened} narrow={narrow} />
           </div>
         </div>
 
@@ -507,8 +511,8 @@ export default function Hero() {
         .send { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 24px; border-radius: 5px; background: var(--bg-cream); color: var(--text-faint); transition: background 0.2s ease, color 0.2s ease; }
         .send.live { background: #007a5a; color: #fff; }
 
-        /* ---- C: the app ---- */
-        .app {
+        /* ---- C: the app (HeroApp sits outside this scope, hence :global) ---- */
+        .canvas :global(.hero-app) {
           position: absolute;
           left: 1400px;
           top: 24px;
@@ -519,14 +523,14 @@ export default function Hero() {
           box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5), 0 2px 6px rgba(40, 25, 60, 0.08),
             0 30px 70px -20px rgba(40, 25, 60, 0.45);
         }
-        .app-bar { display: flex; align-items: center; gap: 12px; padding: 0 16px; height: 40px; background: var(--bg-surface); border-bottom: 1px solid var(--border-faint); }
-        .dots { display: flex; gap: 6px; }
-        .dots b { width: 10px; height: 10px; border-radius: 999px; }
-        .dots b:nth-child(1) { background: #f0a59a; }
-        .dots b:nth-child(2) { background: #f4ce8e; }
-        .dots b:nth-child(3) { background: #a9cfa6; }
-        .addr { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg-card); border-radius: var(--radius-full); box-shadow: inset 0 0 0 1px var(--border-faint); padding: 3px 16px; }
-        .desk-pane { display: none; padding: 16px; }
+        .canvas :global(.hero-app-bar) { display: flex; align-items: center; gap: 12px; padding: 0 16px; height: 40px; background: var(--bg-surface); border-bottom: 1px solid var(--border-faint); }
+        .canvas :global(.hero-dots) { display: flex; gap: 6px; }
+        .canvas :global(.hero-dots b) { width: 10px; height: 10px; border-radius: 999px; }
+        .canvas :global(.hero-dots b:nth-child(1)) { background: #f0a59a; }
+        .canvas :global(.hero-dots b:nth-child(2)) { background: #f4ce8e; }
+        .canvas :global(.hero-dots b:nth-child(3)) { background: #a9cfa6; }
+        .canvas :global(.hero-addr) { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg-card); border-radius: var(--radius-full); box-shadow: inset 0 0 0 1px var(--border-faint); padding: 3px 16px; }
+        .canvas :global(.desk-pane) { display: none; padding: 16px; }
 
         /* Wide: bottom left, over the app's quiet sidebar, clear of the
            decision. Narrow: under the stage, where it covers nothing. */
@@ -548,10 +552,10 @@ export default function Hero() {
           .fit { position: absolute; inset: 0; width: auto; height: auto; transform: none; }
           .canvas { position: relative; width: auto; height: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 32px; }
           .threads { display: none; }
-          .sw, .app { position: relative; left: auto; top: auto; width: 100%; max-width: 640px; margin: 0 auto; }
+          .sw, .canvas :global(.hero-app) { position: relative; left: auto; top: auto; width: 100%; max-width: 640px; margin: 0 auto; }
           .sw { grid-template-columns: 150px minmax(0, 1fr); }
-          .desk-full { display: none; }
-          .desk-pane { display: block; }
+          .canvas :global(.desk-full) { display: none; }
+          .canvas :global(.desk-pane) { display: block; }
           .stage-wrap { display: flex; flex-direction: column; align-items: center; }
           .stage { width: 100%; }
           .stage-wrap :global(.hero-replay) { position: static; margin-top: 14px; }
