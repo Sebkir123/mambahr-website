@@ -27,10 +27,10 @@ const ONBOARDING: TodoFocus = {
   facts: [
     { k: 'Offer', v: 'Countersigned Thursday' },
     { k: 'Form I-9', v: 'Started; E-Verify pending' },
-    { k: 'Accounts', v: 'Okta and Slack requested' },
+    { k: 'Accounts', v: 'Requested from IT' },
     { k: 'Laptop', v: 'Request sent to IT' },
   ],
-  read: 'Everything is ready for Monday except Form I-9 Section 2: someone at the company has to review her documents by Wednesday.',
+  read: 'Everything is ready for Monday except Form I-9 Section 2: someone at the company has to review her documents by Thursday.',
   decisions: [
     { label: 'Assign to me', primary: true, consequence: 'It goes on your To do for Monday.' },
     { label: 'Pick someone else', consequence: 'Nothing is assigned until you choose.' },
@@ -172,7 +172,7 @@ export default function ProductPage() {
               }}
               action={{
                 title: 'Send Marcus the separation agreement',
-                body: 'It carries the age-discrimination waiver language (OWBPA) since Marcus is over 40. Okta, Slack and GitHub switch off Friday at 6:00 PM.',
+                body: 'It carries the age-discrimination waiver language (OWBPA) since Marcus is over 40. IT gets the list of his accounts to close Friday at 6:00 PM.',
                 primary: 'Approve',
                 secondary: 'Hold',
               }}

@@ -376,7 +376,7 @@ Migrated: employees, compensation records, org chart, reporting lines, leave bal
 ## Integrations
 
 - Ways to ask (inbound): Slack and the web request form. These are the two ways a request reaches MambaHR.
-- Identity and SSO: Okta, Azure AD, with account provisioning on hire and deprovisioning on termination
+- Sign-in: single sign-on (SAML) through WorkOS, with your identity provider such as Okta or Microsoft Entra. New-hire accounts are requested from your IT team.
 - Background checks: Checkr
 - Calendar: Google Calendar and Microsoft 365, once connected by the customer
 - Payroll: change files for your provider, or Deel-managed payroll

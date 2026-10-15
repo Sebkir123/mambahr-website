@@ -76,7 +76,7 @@ export const WALKS: Walk[] = [
       { who: 'person', title: 'A person approves the offer', body: 'The offer waits for the approver your rules name, usually the hiring manager or HR. Nothing goes to Maya until they approve it.' },
       { who: 'mamba', title: 'Sends it for signature and files it', body: 'Maya signs online. The signed offer is filed with her documents, where you can find it later.' },
       { who: 'mamba', title: 'Starts the new-hire paperwork', body: 'Creates Maya’s employee record, sends her the new-hire forms and starts the Form I-9. The E-Verify check runs once her I-9 is complete. If you run background checks, it orders one through Checkr, where Maya gives her consent.' },
-      { who: 'mamba', title: 'Requests her accounts and laptop', body: 'Sets up her accounts in your single sign-on directory, such as Okta, and in Slack, and sends a laptop request to your IT team.' },
+      { who: 'mamba', title: 'Requests her accounts and laptop', body: 'Asks your IT team to set up her accounts and sends them her laptop request.' },
       { who: 'mamba', title: 'Plans the first day', body: 'Builds her first-day schedule and assigns an onboarding buddy from her team.' },
       { who: 'mamba', title: 'Adds her to payroll', body: 'Her salary and start date go into the next payroll change, so she is paid from her first pay period.' },
     ],
