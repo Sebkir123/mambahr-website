@@ -386,8 +386,21 @@
   to { max-height: 80px; opacity: 1; }
 }
 @keyframes mkPaneIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+/* A list row or board card arriving or leaving (People, Hiring heroes). */
+.rowIn { overflow: hidden; animation: mkGrowIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.rowOut { overflow: hidden; animation: mkFoldOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) both; }
+@keyframes mkGrowIn {
+  from { max-height: 0; min-height: 0; padding-top: 0; padding-bottom: 0; opacity: 0; background: var(--mk-gold-subtle); }
+  60% { opacity: 1; }
+  to { max-height: 120px; }
+}
+@keyframes mkFoldOut {
+  from { max-height: 120px; }
+  to { max-height: 0; min-height: 0; padding-top: 0; padding-bottom: 0; opacity: 0; border-width: 0; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .qRow.fresh, .paneIn { animation: none; }
+  .qRow.fresh, .paneIn, .rowIn { animation: none; }
+  .rowOut { animation: none; display: none; }
 }
 
 .desk.paneOnly .queue { display: none; }

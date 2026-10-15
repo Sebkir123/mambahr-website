@@ -5,9 +5,15 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
+import { useStory } from '@/components/story'
 
 /* ── Hero fragment: the pay cycle, prepped ── */
+/* Hero: the pay cycle being checked. Played once on load: each change is
+   checked in turn (1-4), then the file is ready (5). */
+const PAY_SCRIPT = { phases: [700, 1300, 1900, 2500, 3200], rootMargin: '0px 0px -5% 0px' } as const
+
 function PayCycleCard() {
+  const { ref, phase } = useStory(PAY_SCRIPT)
   const rows = [
     { img: '/avatars/maya.jpg', name: 'Maya Chen', what: 'Merit raise +12%', note: 'checked against pay range' },
     { img: '/avatars/anna.jpg', name: 'Alex Park', what: 'New hire added', note: 'first check prorated' },
@@ -15,7 +21,7 @@ function PayCycleCard() {
     { img: '/avatars/priya.jpg', name: 'Jordan Lee', what: 'Address change', note: 'flagged for the next pay file' },
   ]
   return (
-    <div className="pcc agent-edge agent-done agent-lg">
+    <div className="pcc agent-edge agent-done agent-lg" ref={ref}>
       <div className="head">
         <div>
           <div className="t">Pay cycle · June 15</div>
@@ -23,18 +29,18 @@ function PayCycleCard() {
         </div>
         <span className="ui-badge">Format: ADP</span>
       </div>
-      {rows.map((r) => (
-        <div key={r.name} className="row">
+      {rows.map((r, i) => (
+        <div key={r.name} className={`row${phase > i ? ' on' : ''}`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="av" src={r.img} alt="" width={32} height={32} />
           <div className="main">
             <div className="who">{r.name}</div>
-            <div className="what">{r.what} · {r.note}</div>
+            <div className="what">{r.what}<span className="note"> · {r.note}</span></div>
           </div>
           <span className="check" aria-hidden="true" />
         </div>
       ))}
-      <div className="foot">
+      <div className={`foot${phase >= 5 ? ' on' : ''}`}>
         <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · ready for upload</span>
         <span className="ui-badge success">0 discrepancies</span>
       </div>
@@ -60,8 +66,18 @@ function PayCycleCard() {
         .main { flex: 1; min-width: 0; }
         .who { font-size: 14px; font-weight: 600; color: var(--text); }
         .what { font-size: 13px; color: var(--text-muted); margin-top: 1px; }
-        .check { flex: none; width: 17px; height: 17px; border-radius: var(--radius-full); background: var(--green); position: relative; }
-        .check::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .check { flex: none; width: 17px; height: 17px; border-radius: var(--radius-full); background: transparent; box-shadow: inset 0 0 0 1.5px var(--border-mid); position: relative; transition: background 0.25s ease, box-shadow 0.25s ease; }
+        .check::after { content: ''; position: absolute; left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) scale(0.4); opacity: 0; transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .row.on .check { background: var(--green); box-shadow: none; }
+        .row.on .check::after { opacity: 1; transform: rotate(45deg); }
+        /* Each change shows what it was checked against once it is checked. */
+        .note { opacity: 0; transition: opacity 0.3s ease; }
+        .row.on .note { opacity: 1; }
+        .foot > :global(*) { opacity: 0; transition: opacity 0.4s ease; }
+        .foot.on > :global(*) { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) {
+          .check, .check::after, .note, .foot > :global(*) { transition: none; }
+        }
         .foot {
           display: flex;
           align-items: center;

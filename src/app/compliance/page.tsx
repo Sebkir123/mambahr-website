@@ -5,25 +5,48 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
+import { useStory, Typed } from '@/components/story'
 
 /* ── Hero fragment: a real compliance question, answered with the law ── */
+/* Hero: a question answered with the law cited. Played once on load: the
+   question types itself, MambaHR checks the rules (1), the answer (2), the
+   detail (3) and its sources (4-5) arrive in place. */
+const QUESTION = 'Can we ask about salary history in interviews?'
+const ANSWER_SCRIPT = {
+  phases: [1450, 2400, 2800, 3150, 3400],
+  typing: [{ at: 200, text: QUESTION, ms: 24 }],
+  rootMargin: '0px 0px -5% 0px',
+} as const
+
 function HeroAnswerCard() {
+  const { ref, phase, typed } = useStory(ANSWER_SCRIPT)
+  const on = (n: number) => (phase >= n ? ' in' : '')
+  const typing = typed[0] < QUESTION.length
   return (
-    <div className="hc agent-edge agent-done agent-lg">
+    <div className="hc agent-edge agent-done agent-lg" ref={ref}>
       <div className="ask">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="av" src="/avatars/tom.jpg" alt="" width={36} height={36} />
         <div className="bubble">
           <div className="m-who">Tom · Texas</div>
-          <div className="q">&ldquo;Can we ask about salary history in interviews?&rdquo;</div>
+          {/* The full question holds the space; the typed copy sits on it. */}
+          <div className="q">
+            <span className="q-ghost">&ldquo;{QUESTION}&rdquo;</span>
+            <span className="q-live" aria-hidden="true">
+              {typed[0] > 0 && <>&ldquo;<Typed text={QUESTION} n={typed[0]} caret={typing} />{!typing && <>&rdquo;</>}</>}
+            </span>
+          </div>
         </div>
       </div>
 
       <div className="reply">
-        <span className="r-who"><span className="agent-mark r-mark" aria-hidden="true" />MambaHR <em>4 seconds later</em></span>
-        <p className="a">Depends on the state.</p>
-        <p className="a-sub">Here is the rule for each state you hire in, cited.</p>
-        <div className="ui-sources"><b>Based on</b><span>Pay transparency</span><span>State law</span></div>
+        <span className="r-who"><span className={`agent-mark r-mark${phase === 1 ? ' is-working' : ''}`} aria-hidden="true" />MambaHR <em>4 seconds later</em></span>
+        <div className="a-wrap">
+          <span className={`a-status agent-status is-working${phase === 1 ? ' in' : ''}`} aria-hidden="true">Checking the rules for each state you hire in&hellip;</span>
+          <p className={`a fade${on(2)}`}>Depends on the state.</p>
+        </div>
+        <p className={`a-sub fade${on(3)}`}>Here is the rule for each state you hire in, cited.</p>
+        <div className="ui-sources"><b className={`fade${on(4)}`}>Based on</b><span className={`fade${on(4)}`}>Pay transparency</span><span className={`fade${on(5)}`}>State law</span></div>
       </div>
 
       <style jsx>{`
@@ -59,6 +82,18 @@ function HeroAnswerCard() {
         .r-who em { font-style: normal; font-weight: 400; color: var(--text-faint); }
         .a { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; color: var(--text); }
         .a-sub { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
+        .q { position: relative; }
+        /* Transparent, not hidden: screen readers still read the question. */
+        .q-ghost { color: transparent; }
+        .q-live { position: absolute; inset: 0; }
+        .a-wrap { position: relative; }
+        .a-status { position: absolute; left: 0; top: 2px; font-size: 14px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+        .a-status.in { opacity: 1; }
+        .fade { opacity: 0; transform: translateY(4px); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+          .fade, .a-status { transition: none; }
+        }
       `}</style>
     </div>
   )

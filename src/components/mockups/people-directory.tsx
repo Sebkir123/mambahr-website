@@ -10,6 +10,10 @@ export type PersonRow = {
   manager: string
   meta: string
   selected?: boolean
+  /** Hero motion: 'in' grows in at its place, 'out' folds away. */
+  anim?: 'in' | 'out'
+  /** Fixes the avatar colour when rows move (defaults to the row index). */
+  seed?: number
 }
 
 const COLORS = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'] as const
@@ -77,9 +81,9 @@ export function PeopleDirectory({
       </div>
       <div className={s.groupHead}>{group} · {count}</div>
       {rows.map((r, i) => (
-        <div key={r.name} className={`${s.pRow}${r.selected ? ` ${s.sel}` : ''}`}>
+        <div key={r.name} className={`${s.pRow}${r.selected ? ` ${s.sel}` : ''}${r.anim === 'in' ? ` ${s.rowIn}` : r.anim === 'out' ? ` ${s.rowOut}` : ''}`}>
           <span className={s.checkbox} />
-          <InitialsAvatar name={r.name} seed={i} />
+          <InitialsAvatar name={r.name} seed={r.seed ?? i} />
           <div className={s.pMain}>
             <div className={s.pName}>
               {r.name}

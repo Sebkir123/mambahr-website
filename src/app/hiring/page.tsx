@@ -6,21 +6,34 @@ import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
 import { PipelineBoard, SlackApproval, type PipelineColumn } from '@/components/mockups'
+import { useStory } from '@/components/story'
 
-/* ── Hero board data: applications tracked, reviewed by the hiring team ── */
-const HIRING_COLUMNS: PipelineColumn[] = [
-  { name: 'Applied', color: '#73879D', count: 12, cards: [
+/* ── Hero board: applications tracked, reviewed by the hiring team ──
+   Played once on load: a new application arrives (1), the last feedback form
+   comes in and Elena is ready for the team's call (2), Tom's onsite lands on
+   the interviewers' calendars (3). The board keeps its height throughout.
+   The people decide; MambaHR does the chasing. */
+const HIRING_SCRIPT = { phases: [900, 2100, 3300], rootMargin: '0px 0px -5% 0px' } as const
+
+function hiringColumns(phase: number): PipelineColumn[] {
+  return [
+  { name: 'Applied', color: '#73879D', count: phase >= 1 ? 13 : 12, cards: [
+    ...(phase >= 1 ? [{ name: 'Ava Brooks', sub: 'Careers page · just now', pill: 'New', anim: 'in' as const }] : []),
     { name: 'Anna Keller', sub: 'Careers page · 2h ago' },
     { name: 'Marco Rossi', sub: 'LinkedIn · 5h ago' },
-    { name: 'Yuki Tanaka', sub: 'Referral · yesterday', pill: 'Referral' },
+    { name: 'Yuki Tanaka', sub: 'Referral · yesterday', pill: 'Referral', ...(phase >= 1 ? { anim: 'out' as const } : {}) },
   ] },
   { name: 'Review', color: '#7B8A67', count: 6, cards: [
     { name: 'Sofia Lindqvist', sub: 'Hiring team reviewing · notes attached', pill: 'Your review' },
     { name: 'Daniel Okafor', sub: 'Resume and answers attached' },
   ] },
   { name: 'Interview', color: '#9A8153', count: 4, cards: [
-    { name: 'Elena Petrova', sub: 'Panel Thu 10:00 · 3 of 4 feedback forms in' },
-    { name: 'Tom Harrison', sub: 'Onsite Fri · invite sent' },
+    phase >= 2
+      ? { name: 'Elena Petrova', sub: '4 of 4 feedback forms in', pill: 'Your call' }
+      : { name: 'Elena Petrova', sub: 'Panel Thu 10:00 · 3 of 4 feedback forms in' },
+    phase >= 3
+      ? { name: 'Tom Harrison', sub: 'Fri 10:00 · on 4 calendars', pill: 'Scheduled', ai: true }
+      : { name: 'Tom Harrison', sub: 'Onsite Fri · finding a time' },
   ] },
   { name: 'Offer', color: '#9C7B95', count: 1, cards: [
     { name: 'Maya Chen', sub: '$165k · in range · awaiting you', pill: 'Awaiting you' },
@@ -28,7 +41,23 @@ const HIRING_COLUMNS: PipelineColumn[] = [
   { name: 'Hired', color: '#6B8B82', count: 1, cards: [
     { name: 'Noah Bennett', sub: 'Starts Nov 3 · onboarding started' },
   ] },
-]
+  ]
+}
+
+function HiringBoard() {
+  const { ref, phase } = useStory(HIRING_SCRIPT)
+  const tabs = [
+    { label: 'Pipeline', count: phase >= 1 ? 25 : 24, on: true },
+    { label: 'Posting' },
+    { label: 'Setup' },
+    { label: 'Internal', count: 3 },
+  ]
+  return (
+    <div className="mock-card" ref={ref}>
+      <PipelineBoard columns={hiringColumns(phase)} tabs={tabs} />
+    </div>
+  )
+}
 
 /* ── Feature visual: real photo + floating done card ── */
 function HumanCall() {
@@ -83,7 +112,7 @@ export default function HiringPage() {
           title={<>Hiring, <Em>without the chasing.</Em></>}
           lead="MambaHR posts the job with its pay range, collects every application in one place, schedules interviews, orders the background check, and drafts the offer. Your team reviews the applicants and decides who joins."
         >
-          <div className="mock-card"><PipelineBoard columns={HIRING_COLUMNS} /></div>
+          <HiringBoard />
         </PageHero>
 
         <AgentLoop

@@ -5,7 +5,45 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
-import { PeopleDirectory } from '@/components/mockups'
+import { PeopleDirectory, type PersonRow } from '@/components/mockups'
+import { useStory } from '@/components/story'
+
+/* ── Hero: the directory keeping itself current ──
+   Played once on load: Maya's record arrives from her signed offer (1),
+   Jackson's pay is being updated (2) and is updated (3), Leo's day off is
+   booked (4). The list keeps its height: the last row folds away as
+   Maya's arrives. */
+const PEOPLE_SCRIPT = { phases: [900, 2000, 2900, 3700], rootMargin: '0px 0px -5% 0px' } as const
+
+function peopleRows(phase: number): PersonRow[] {
+  const active = { label: 'Active', tone: 'success' } as const
+  return [
+    ...(phase >= 1
+      ? [{ name: 'Maya Chen', sub: 'Senior Engineer · Engineering · Austin · mc@acme.com', status: { label: 'Starts Monday', tone: 'info' } as const, manager: 'A. Ruiz', meta: 'Full-time · From her signed offer', anim: 'in' as const, seed: 5 }]
+      : []),
+    {
+      name: 'Jackson Bauer',
+      sub: 'Staff Engineer · Engineering · Austin · jb@acme.com',
+      ...(phase >= 3 ? { status: { label: 'Raise from Nov 1', tone: 'success' } as const } : phase >= 2 ? { ai: 'Updating pay' } : { status: active }),
+      manager: 'A. Ruiz',
+      meta: 'Full-time · Started 2019',
+      seed: 0,
+    },
+    { name: 'Leo Schulz', sub: 'Backend Engineer · Engineering · Remote · ls@acme.com', status: phase >= 4 ? { label: 'Off Friday', tone: 'outline' } : active, manager: 'J. Bauer', meta: 'Full-time · Started 2022', seed: 1 },
+    { name: 'Priya Nair', sub: 'Engineering Manager · Engineering · New York · pn@acme.com', status: active, manager: 'A. Ruiz', meta: 'Full-time · Started 2021', seed: 2 },
+    { name: 'Marcus Webb', sub: 'Site Reliability Engineer · Engineering · Denver · mw@acme.com', status: active, manager: 'P. Nair', meta: 'Full-time · Started 2020', seed: 3 },
+    { name: 'Dana Whitfield', sub: 'Frontend Engineer · Engineering · Austin · dw@acme.com', status: { label: 'Joined 3 days ago', tone: 'outline' }, manager: 'P. Nair', meta: 'Full-time · Started 2026', seed: 4, ...(phase >= 1 ? { anim: 'out' as const } : {}) },
+  ]
+}
+
+function PeopleLive() {
+  const { ref, phase } = useStory(PEOPLE_SCRIPT)
+  return (
+    <div className="mock-card" ref={ref}>
+      <PeopleDirectory rows={peopleRows(phase)} count={phase >= 1 ? 43 : 42} />
+    </div>
+  )
+}
 
 /* ── Hero fragment: people table inside an app window ── */
 const MANAGERS = [
@@ -109,7 +147,7 @@ export default function PeoplePage() {
           title={<>One record, <Em>always current.</Em></>}
           lead="MambaHR keeps your employee records up to date as the work happens. Every person and every detail, without anyone retyping it."
         >
-          <div className="mock-card"><PeopleDirectory /></div>
+          <PeopleLive />
         </PageHero>
 
         <AgentLoop

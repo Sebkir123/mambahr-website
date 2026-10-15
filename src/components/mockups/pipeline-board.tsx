@@ -4,7 +4,8 @@ import { InitialsAvatar } from './people-directory'
 export type PipelineColumn = {
   name: string
   color: string
-  cards: { name: string; sub: string; pill?: string; ai?: boolean }[]
+  /** Hero motion: 'in' grows in at its place, 'out' folds away. */
+  cards: { name: string; sub: string; pill?: string; ai?: boolean; anim?: 'in' | 'out' }[]
   /** Shown as the count when the visible cards are only a sample. */
   count?: number
 }
@@ -84,7 +85,7 @@ export function PipelineBoard({
             </div>
             <div className={s.colBody}>
               {c.cards.map((k, ki) => (
-                <div key={k.name} className={s.cand}>
+                <div key={k.name} className={`${s.cand}${k.anim === 'in' ? ` ${s.rowIn}` : k.anim === 'out' ? ` ${s.rowOut}` : ''}`}>
                   <InitialsAvatar name={k.name} size="sm" seed={ci * 3 + ki} />
                   <div className={s.candMain}>
                     <div className={s.candName}>{k.name}</div>

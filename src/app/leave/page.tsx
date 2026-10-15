@@ -6,18 +6,26 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import CountUp from '@/app/v2/_sections/count-up'
 import { PageHero, AgentLoop, FeatureSplit, StatTrio, PageCta, Em } from '@/components/v2/page-kit'
+import { useStory } from '@/components/story'
 
-/* ── Hero fragment: the Slack exchange, done in seconds ── */
+/* ── Hero fragment: the Slack exchange, done in seconds ──
+   Played once on load: Maya's ask arrives (1), MambaHR checks the policy (2),
+   approves (3), fills in what it did (4-6), logs it (7), "done in seconds"
+   (8). Everything is in place from the start and fades in. */
+const LEAVE_SCRIPT = { phases: [500, 1100, 1900, 2200, 2500, 2800, 3100, 3500], rootMargin: '0px 0px -5% 0px' } as const
+
 function SlackApprovalCard() {
+  const { ref, phase } = useStory(LEAVE_SCRIPT)
+  const on = (n: number) => (phase >= n ? ' in' : '')
   return (
-    <div className="sac">
+    <div className="sac" ref={ref}>
       <div className="bar">
         <span className="dots"><i /><i /><i /></span>
         <span className="chn"><span className="hash">#</span>people-ops</span>
-        <span className="mamba-chip done"><span className="mc-i" aria-hidden="true" />MambaHR · done in seconds</span>
+        <span className={`mamba-chip done fade${on(8)}`}><span className="mc-i" aria-hidden="true" />MambaHR · done in seconds</span>
       </div>
       <div className="feed">
-        <div className="m">
+        <div className={`m fade${on(1)}`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="av" src="/avatars/maya.jpg" alt="Maya Chen" width={38} height={38} />
           <div className="m-body">
@@ -27,19 +35,25 @@ function SlackApprovalCard() {
             </div>
           </div>
         </div>
-        <div className="m">
+        <div className="slot">
+        <div className={`checking${phase === 2 ? ' in' : ''}`} aria-hidden="true">
+          <span className="agent-mark is-working t-mark" />
+          <span className="agent-status is-working t-t">MambaHR is checking your leave policy&hellip;</span>
+        </div>
+        <div className={`m fade${on(3)}`}>
           {/* The MambaHR app icon in Slack: the gold M on a dark square. */}
           <div className="av app" aria-hidden="true"><MambaMark size={22} color="#C9A26C" /></div>
           <div className="m-body">
             <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:14 AM</time></div>
             <div className="m-t">Approved. Enjoy the wedding.</div>
             <div className="attach">
-              <div className="a-row"><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
-              <div className="a-row"><span className="a-k">Record</span><span className="a-v">Mon&ndash;Wed booked, pay record updated</span></div>
-              <div className="a-row"><span className="a-k">Manager</span><span className="a-v">B. Bell notified</span></div>
-              <div className="a-foot"><span className="ok-dot" aria-hidden="true" />Within policy &middot; logged</div>
+              <div className={`a-row fade${on(4)}`}><span className="a-k">Balance</span><span className="a-v">12 &rarr; 9 days</span></div>
+              <div className={`a-row fade${on(5)}`}><span className="a-k">Record</span><span className="a-v">Mon&ndash;Wed booked, pay record updated</span></div>
+              <div className={`a-row fade${on(6)}`}><span className="a-k">Manager</span><span className="a-v">B. Bell notified</span></div>
+              <div className={`a-foot fade${on(7)}`}><span className="ok-dot" aria-hidden="true" />Within policy &middot; logged</div>
             </div>
           </div>
+        </div>
         </div>
       </div>
       <style jsx>{`
@@ -66,6 +80,17 @@ function SlackApprovalCard() {
         .hash { color: var(--text-faint); margin-right: 1px; }
         .bar :global(.mamba-chip) { margin-left: auto; }
         .feed { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 20px; }
+        /* The moment: everything is in place from the start and fades in. */
+        .fade { opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade.in { opacity: 1; transform: none; }
+        .slot { position: relative; }
+        .checking { position: absolute; left: 0; top: 8px; display: flex; align-items: center; gap: 8px; opacity: 0; transition: opacity 0.3s ease; }
+        .checking.in { opacity: 1; }
+        .t-mark { --am-size: 20px; }
+        .t-t { font-size: 12.5px; }
+        @media (prefers-reduced-motion: reduce) {
+          .fade, .checking { transition: none; }
+        }
         .m { display: flex; gap: 11px; }
         .av { width: 38px; height: 38px; border-radius: 9px; object-fit: cover; flex: none; }
         .av.app {
