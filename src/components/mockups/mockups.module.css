@@ -377,6 +377,19 @@
 .hLine i { flex: none; width: 6px; height: 6px; border-radius: 999px; background: var(--mk-b-strong); margin-top: 6px; }
 .hLine span:last-child { margin-left: auto; color: var(--mk-t4); white-space: nowrap; font-variant-numeric: tabular-nums; }
 
+/* Opt-in motion for the hero: a row that just arrived grows in at its place,
+   and the open item fades up when it changes. */
+.qRow.fresh { overflow: hidden; animation: mkRowIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.paneIn { animation: mkPaneIn 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes mkRowIn {
+  from { max-height: 0; padding-top: 0; padding-bottom: 0; opacity: 0; background: var(--mk-gold-badge); }
+  to { max-height: 80px; opacity: 1; }
+}
+@keyframes mkPaneIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .qRow.fresh, .paneIn { animation: none; }
+}
+
 .desk.paneOnly .queue { display: none; }
 .desk.queueOnly .pane { display: none; }
 .desk.queueOnly .queue { flex: 1 1 auto; }

@@ -68,10 +68,16 @@ export function TodoDesk({
   focus = COMP_CHANGE,
   show = 'both',
   simple = false,
+  fresh,
+  animatePane = false,
   className,
 }: {
   /** Hero-calm version: no page title (the top bar names the page), no history. */
   simple?: boolean
+  /** Index of a row that just arrived: it grows in at its place in the queue. */
+  fresh?: number
+  /** Fade the open item in each time it changes (keyed by its title). */
+  animatePane?: boolean
   queue?: TodoItem[]
   activeIndex?: number
   summary?: string
@@ -97,7 +103,7 @@ export function TodoDesk({
               ))}
             </div>
             {queue.map((q, i) => (
-              <div key={q.title} className={`${s.qRow}${i === activeIndex ? ` ${s.on}` : ''}`}>
+              <div key={q.title} className={`${s.qRow}${i === activeIndex ? ` ${s.on}` : ''}${i === fresh ? ` ${s.fresh}` : ''}`}>
                 <div className={s.qLine}>
                   <span className={s.qName}>{q.title}</span>
                   <span className={`${s.qDate}${q.overdue ? ` ${s.over}` : ''}`}>{q.date}</span>
@@ -107,7 +113,7 @@ export function TodoDesk({
             ))}
           </div>
 
-          <article className={s.pane}>
+          <article key={animatePane ? focus.title : undefined} className={`${s.pane}${animatePane ? ` ${s.paneIn}` : ''}`}>
             <div className={s.eyebrowRow}>
               <span>{focus.eyebrow}</span>
               {focus.position && <span className={s.right}>{focus.position}</span>}
