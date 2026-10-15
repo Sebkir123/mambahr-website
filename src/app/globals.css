@@ -894,3 +894,59 @@ h4, h5, h6 {
   .progress-fill { width: var(--progress, 50%); }
   .fcta, .fcta .pill { transition: none; }
 }
+
+/* ── Story kit (src/components/story): the shared bits of the animated
+   product moments. Typed lines, the caret, the @mention pill, Replay, and a
+   screen-reader-only summary of each moment (the moments themselves are
+   decorative and hidden from assistive tech). ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.story-caret {
+  display: inline-block;
+  width: 1.5px;
+  height: 1.1em;
+  margin-left: 1px;
+  vertical-align: -0.18em;
+  background: currentColor;
+  animation: storyBlink 1s steps(1) infinite;
+}
+@keyframes storyBlink { 50% { opacity: 0; } }
+.story-mention {
+  color: var(--violet);
+  background: var(--violet-soft);
+  border-radius: var(--radius-xs);
+  padding: 0 3px;
+  font-weight: 600;
+}
+.story-replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 10px 24px -12px rgba(40, 25, 70, 0.5);
+  animation: storyFade 0.5s ease both;
+}
+.story-replay:hover { background: #fff; }
+.story-replay:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+@keyframes storyFade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .story-caret, .story-replay { animation: none; }
+}

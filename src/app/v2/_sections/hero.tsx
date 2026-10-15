@@ -1,56 +1,40 @@
 'use client'
 
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { AppFrame, TodoDesk, COMP_CHANGE, type TodoFocus, type TodoItem } from '@/components/mockups'
-import { Icon } from '@/components/mockups/icons'
 import { MambaMark } from '@/components/mamba-mark'
+import { useStory, useMedia, Typed, StoryReplay } from '@/components/story'
 
 /* ─────────────────────────── The story ───────────────────────────
-   A camera journey over one wide canvas, played once (about 9 s):
-   A  Slack: Priya's message types itself, she sends it, MambaHR
-      answers "On it".
-   B  Wide: MambaHR in the middle; five lines draw out to plain stops
-      and each ticks as it is done.
-   C  The real app: Maya's day one arrives on To do and opens on the one
-      step a person has to take. The camera tilts down onto the decision
-      and rests.
-   Below 1100px there is no camera: the three stops stack and play in
-   place. Reduced motion shows the last frame. */
+   A camera journey, played once (about 6.5 s), over real product:
+   A  Slack, close on the composer: Priya's message types itself and sends.
+   B  The camera pulls back: MambaHR answers in the thread and ticks off
+      the onboarding, then says what is left for a person.
+   C  The camera glides along a Dusk line into the MambaHR app: Maya's day
+      one arrives on To do and opens on that one step; the camera pushes in.
+   Wide screens: one wide canvas and a camera (pull back, travel, push in).
+   Below 1100px: the shots stack in a fixed frame and the camera moves down.
+   Reduced motion: the last frame. */
 
 const MSG = '@MambaHR Maya signed. She starts Monday.'
 const MENTION = '@MambaHR'
-const TYPE_START = 350
-const TYPE_MS = 34
 
-// Phases after the typing: 1 sent, 2 MambaHR replies, 3 camera at B,
-// 4 camera at C, 5 Maya's row arrives, 6 it opens, 7 the camera leans in,
-// 8 at rest (Replay shows). Milliseconds from the start.
-const PHASES = [1850, 2350, 2950, 6350, 7450, 7950, 8500, 9200]
-const LAST = PHASES.length
+// 1 sent, 2 MambaHR replies (camera B), 3-7 the five steps tick, 8 what is
+// left for a person, 9 camera C, 10 Maya's row arrives, 11 it opens,
+// 12 push in, 13 at rest (Replay). Milliseconds from the start.
+const SCRIPT = {
+  phases: [1450, 1950, 2350, 2600, 2850, 3100, 3350, 3650, 4100, 5100, 5500, 5900, 6500],
+  typing: [{ at: 300, text: MSG, ms: 26 }],
+  rootMargin: '0px 0px -12% 0px',
+} as const
 
-// The canvas is laid out in a 1320 x 500 frame; --fit scales it to the
-// stage. Each camera is the canvas transform for one shot.
-const CAMERAS = [
-  'translate(0px, 0px) scale(1)', // A: Slack
-  'translate(-1240px, 0px) scale(1)', // B: the five stops
-  'translate(-2690px, 0px) scale(1)', // C: the app
-  'translate(-2795.3px, -113.9px) scale(1.03)', // C, tilted down onto the decision
+const STEPS = [
+  { t: 'Form I-9 sent to Maya', at: '9:02' },
+  { t: 'Day-one invite sent', at: '9:02' },
+  { t: 'Accounts requested from IT', at: '9:02' },
+  { t: 'Laptop request sent to IT', at: '9:03' },
+  { t: 'Added to the June 15 payroll changes', at: '9:03' },
 ]
-
-const STOPS = [
-  { icon: 'dollar-sign', label: 'Payroll', detail: 'Added to the June 15 changes', at: '9:02' },
-  { icon: 'calendar', label: 'Calendar', detail: 'Day-one invite sent', at: '9:02' },
-  { icon: 'files', label: 'Form I-9', detail: 'Sent to Maya', at: '9:02' },
-  { icon: 'at-sign', label: 'Accounts', detail: 'Requested from IT', at: '9:03' },
-  { icon: 'laptop', label: 'Laptop', detail: 'Request sent to IT', at: '9:03' },
-]
-// Tile row geometry on the canvas (left edge, width, gap), shared by the
-// tiles and the lines that reach them.
-const TILE_X = 1352
-const TILE_W = 200
-const TILE_GAP = 24
-const HUB = { x: 1900, bottom: 140 }
-const TILE_TOP = 226
 
 const RAISE: TodoItem = { title: 'Jackson Bauer · raise', meta: 'Pay · Yours', date: 'Today' }
 const LEAVE: TodoItem = { title: 'Leo Schulz · time off', meta: 'Time off · Yours', date: 'Fri' }
@@ -77,96 +61,101 @@ const DAY_ONE: TodoFocus = {
   history: [],
 }
 
+/* ── The camera ──
+   Wide: the canvas is laid out in a 1320 x 500 frame (--fit scales it to the
+   stage). A camera is the canvas transform for one shot. */
+type Cam = { x: number; y: number; s: number }
+const FRAME = { w: 1320, h: 500 }
+const WIDE: Record<'a' | 'b' | 'c' | 'd', Cam> = {
+  a: { x: -52.8, y: -136.4, s: 1.08 }, // close on the composer
+  b: { x: 0, y: 20, s: 1 }, // the whole Slack window
+  c: { x: -1317.6, y: 0, s: 0.96 }, // the app (1320 wide, so To do puts the decision beside the facts)
+  d: { x: -1371.7, y: -6.5, s: 0.985 }, // pushed in on the open item
+}
+// How each move travels: duration, and how far the camera pulls back on the
+// way (1 = straight).
+const MOVES: Record<string, { ms: number; pull: number }> = {
+  ab: { ms: 700, pull: 0.97 },
+  bc: { ms: 1150, pull: 0.8 },
+  cd: { ms: 800, pull: 1 },
+}
+const toT = (c: Cam) => `translate(${c.x}px, ${c.y}px) scale(${c.s})`
+// Halfway, pulled back around the midpoint of the two shots' centres.
+function midway(a: Cam, b: Cam, pull: number): Cam {
+  const cx = ((FRAME.w / 2 - a.x) / a.s + (FRAME.w / 2 - b.x) / b.s) / 2
+  const cy = ((FRAME.h / 2 - a.y) / a.s + (FRAME.h / 2 - b.y) / b.s) / 2
+  const s = Math.min(a.s, b.s) * pull
+  return { x: FRAME.w / 2 - cx * s, y: FRAME.h / 2 - cy * s, s }
+}
+
 // Grain for the light field: fractal noise, alpha only, tiled.
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
 
 export default function Hero() {
-  const stageRef = useRef<HTMLDivElement>(null)
-  const timers = useRef<number[]>([])
+  const { ref: stageRef, phase, typed, resetting, still, done, replay } = useStory(SCRIPT)
+  const narrow = useMedia('(max-width: 1099px)')
+  const canvasRef = useRef<HTMLDivElement>(null)
+  const slackRef = useRef<HTMLDivElement>(null)
+  const appRef = useRef<HTMLDivElement>(null)
   const gradId = useId().replace(/:/g, '')
-  const [typed, setTyped] = useState(0)
-  const [phase, setPhase] = useState(0)
-  const [reset, setReset] = useState(false)
-  const [still, setStill] = useState(false)
-
-  const clear = () => {
-    timers.current.forEach(clearTimeout)
-    timers.current = []
-  }
-  const at = (ms: number, fn: () => void) => timers.current.push(window.setTimeout(fn, ms))
-  const play = () => {
-    clear()
-    for (let i = 1; i <= MSG.length; i++) at(TYPE_START + i * TYPE_MS, () => setTyped(i))
-    PHASES.forEach((ms, i) => at(ms, () => setPhase(i + 1)))
-  }
-  const replay = () => {
-    clear()
-    // Jump back without animating backwards, then play from the top.
-    setReset(true)
-    setTyped(0)
-    setPhase(0)
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      setReset(false)
-      play()
-    }))
-  }
-
-  useEffect(() => {
-    const stage = stageRef.current
-    // Scale the 1320px-wide frame to the stage.
-    const fit = () => stage?.style.setProperty('--fit', String(Math.min(1, stage.clientWidth / 1320)))
-    fit()
-    const ro = 'ResizeObserver' in window && stage ? new ResizeObserver(fit) : null
-    if (ro && stage) ro.observe(stage)
-
-    // Reduced motion: no journey, straight to the last frame.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      at(0, () => {
-        setStill(true)
-        setTyped(MSG.length)
-        setPhase(LAST)
-      })
-      return () => {
-        ro?.disconnect()
-        clear()
-      }
-    }
-    let io: IntersectionObserver | null = null
-    if (stage && 'IntersectionObserver' in window) {
-      io = new IntersectionObserver(
-        (entries) => {
-          if (entries.some((e) => e.isIntersecting)) {
-            io?.disconnect()
-            play()
-          }
-        },
-        // Start once the top of the stage is on screen. A share of the
-        // stage would never be reached on phones, where it stacks tall.
-        { threshold: 0, rootMargin: '0px 0px -12% 0px' },
-      )
-      io.observe(stage)
-    } else {
-      play()
-    }
-    return () => {
-      io?.disconnect()
-      ro?.disconnect()
-      clear()
-    }
-    // play/clear only touch refs and state setters.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // Narrow screens: how far down the column each shot sits.
+  const [stops, setStops] = useState({ a: 0, c: 0, d: 0 })
 
   const sent = phase >= 1
   const replied = phase >= 2
-  const atB = phase >= 3
-  const atC = phase >= 4
-  const arrived = phase >= 5
-  const opened = phase >= 6
-  const camera = CAMERAS[phase >= 7 ? 3 : atC ? 2 : atB ? 1 : 0]
+  const ticked = Math.min(Math.max(phase - 2, 0), STEPS.length)
+  const leftForYou = phase >= 8
+  const inApp = phase >= 9
+  const arrived = phase >= 10
+  const opened = phase >= 11
+  const shot: 'a' | 'b' | 'c' | 'd' = phase >= 12 ? 'd' : inApp ? 'c' : replied ? 'b' : 'a'
   const queue = arrived ? [DAY_ONE_ROW, RAISE, LEAVE] : [RAISE, LEAVE]
-  const draft = sent ? '' : MSG.slice(0, typed)
+
+  const cam: Cam = useMemo(
+    () => (narrow ? { x: 0, y: -(shot === 'd' ? stops.d : shot === 'c' ? stops.c : stops.a), s: 1 } : WIDE[shot]),
+    [narrow, shot, stops],
+  )
+
+  // Wide: scale the 1320px frame to the stage. Narrow: measure the shots.
+  useEffect(() => {
+    const stage = stageRef.current
+    const canvas = canvasRef.current
+    if (!stage || !canvas) return
+    const measure = () => {
+      stage.style.setProperty('--fit', String(Math.min(1, stage.clientWidth / FRAME.w)))
+      const top = canvas.getBoundingClientRect().top
+      const y = (el: Element | null | undefined) => (el ? el.getBoundingClientRect().top - top : 0)
+      const yb = (el: Element | null | undefined) => (el ? el.getBoundingClientRect().bottom - top : 0)
+      const h = stage.clientHeight
+      const c = Math.max(0, y(appRef.current) - 16)
+      // The decision buttons of the open item, from the To do mockup.
+      const pills = appRef.current?.querySelector('.desk-pane [class*="pills"]')
+      const d = Math.max(c, yb(pills) + 40 - h)
+      setStops({ a: Math.max(0, y(slackRef.current) - 16), c, d })
+    }
+    const ro = new ResizeObserver(measure)
+    ro.observe(stage)
+    ro.observe(canvas)
+    return () => ro.disconnect()
+  }, [stageRef])
+
+  // Move the camera: pull back, travel, push in.
+  const prev = useRef<Cam>(cam)
+  const prevShot = useRef(shot)
+  useLayoutEffect(() => {
+    const el = canvasRef.current
+    const from = prev.current
+    const key = `${prevShot.current}${shot}`
+    prev.current = cam
+    prevShot.current = shot
+    if (!el || resetting || still || toT(from) === toT(cam)) return
+    const move = MOVES[key] ?? { ms: 800, pull: 1 }
+    const frames = narrow || move.pull === 1
+      ? [{ transform: toT(from) }, { transform: toT(cam) }]
+      : [{ transform: toT(from) }, { transform: toT(midway(from, cam, move.pull)), offset: 0.5 }, { transform: toT(cam) }]
+    el.animate(frames, { duration: move.ms, easing: 'cubic-bezier(0.65, 0, 0.35, 1)' })
+  }, [cam, narrow, resetting, shot, still])
 
   return (
     <section className="hero">
@@ -190,7 +179,14 @@ export default function Hero() {
         </div>
       </div>
 
+      <div className="stage-wrap">
       <div className="stage" ref={stageRef}>
+        <p className="sr-only">
+          An example of MambaHR at work: Priya asks MambaHR in Slack to onboard Maya Chen, who starts
+          Monday. MambaHR sends Form I-9 to Maya, sends the day-one invite, requests her accounts and
+          laptop from IT, and adds her to the June 15 payroll changes. The one step that needs a person,
+          Form I-9 Section 2 by Thursday, goes on the To do list in the MambaHR app.
+        </p>
         <div className="field" aria-hidden="true">
           <span className="f f1" />
           <span className="f f2" />
@@ -200,39 +196,21 @@ export default function Hero() {
         </div>
 
         <div className="fit" aria-hidden="true">
-          <div
-            className={`canvas${reset ? ' reset' : ''}${atB ? ' at-b' : ''}${atC ? ' at-c' : ''}`}
-            style={{ transform: camera }}
-          >
-            {/* The threads the camera follows: Slack to MambaHR, MambaHR to
-                each stop, the stops into the app. */}
-            <svg className="threads" width="3960" height="640" viewBox="0 0 3960 640">
+          <div ref={canvasRef} className={`canvas${resetting ? ' reset' : ''}${inApp ? ' in-app' : ''}`} style={{ transform: toT(cam) }}>
+            {/* The line the camera follows from Slack into the app. */}
+            <svg className="threads" width="2800" height="500" viewBox="0 0 2800 500">
               <defs>
-                <linearGradient id={gradId} gradientUnits="userSpaceOnUse" x1="900" y1="0" x2="2800" y2="0">
+                <linearGradient id={gradId} gradientUnits="userSpaceOnUse" x1="1040" y1="0" x2="1400" y2="0">
                   <stop offset="0" stopColor="var(--dusk-1)" />
                   <stop offset="0.5" stopColor="var(--dusk-2)" />
                   <stop offset="1" stopColor="var(--dusk-3)" />
                 </linearGradient>
               </defs>
-              <path className="th t1" pathLength={1} stroke={`url(#${gradId})`} d="M1040 200 C 1350 200, 1450 100, 1740 100" />
-              {STOPS.map((s, i) => {
-                const cx = TILE_X + TILE_W / 2 + i * (TILE_W + TILE_GAP)
-                return (
-                  <path
-                    key={s.label}
-                    className="th fan"
-                    style={{ ['--i' as string]: i }}
-                    pathLength={1}
-                    stroke={`url(#${gradId})`}
-                    d={`M${HUB.x} ${HUB.bottom} C ${HUB.x} 186, ${cx} 180, ${cx} ${TILE_TOP}`}
-                  />
-                )
-              })}
-              <path className="th t2" pathLength={1} stroke={`url(#${gradId})`} d="M2448 276 C 2600 276, 2620 300, 2780 300" />
+              <path className="th" pathLength={1} stroke={`url(#${gradId})`} d="M1040 300 C 1200 300, 1240 210, 1400 210" />
             </svg>
 
-            {/* A: Slack, where the ask arrives */}
-            <div className="sw">
+            {/* A + B: Slack */}
+            <div className="sw" ref={slackRef}>
               <div className="sw-side">
                 <span className="sw-ws">Acme</span>
                 <span className="sw-sec">Channels</span>
@@ -243,106 +221,92 @@ export default function Hero() {
                 <span className="sw-ch"><span className="sw-app"><MambaMark size={10} color="#C9A26C" /></span>MambaHR</span>
               </div>
               <div className="sw-main">
-              <div className="sw-head">
-                <span className="h-ch"><span className="hash">#</span>people-ops</span>
-                <span className="h-mem">12 members</span>
-              </div>
-              <div className="sw-feed">
-                <div className="m">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="av" src="/avatars/anna-72.jpg" alt="" width={36} height={36} />
-                  <div className="m-body">
-                    <div className="m-h"><b>Ana Ruiz</b><time>Yesterday 11:20 AM</time></div>
-                    <div className="m-t">Maya was great in the final round. Let&rsquo;s make the offer.</div>
-                  </div>
+                <div className="sw-head">
+                  <span className="h-ch"><span className="hash">#</span>people-ops</span>
+                  <span className="h-mem">12 members</span>
                 </div>
-                <div className="m">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="av" src="/avatars/brian-72.jpg" alt="" width={36} height={36} />
-                  <div className="m-body">
-                    <div className="m-h"><b>Brian Bell</b><time>Yesterday 4:12 PM</time></div>
-                    <div className="m-t">Maya&rsquo;s offer is out. She is reading it tonight.</div>
-                  </div>
-                </div>
-                {sent && (
-                  <div className="m pop">
+                <div className="sw-feed">
+                  <div className="m">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img className="av" src="/avatars/priya-72.jpg" alt="" width={36} height={36} />
+                    <img className="av" src="/avatars/anna-72.jpg" alt="" width={36} height={36} />
                     <div className="m-body">
-                      <div className="m-h"><b>Priya Nair</b><time>9:01 AM</time></div>
-                      <div className="m-t"><span className="mention">{MENTION}</span>{MSG.slice(MENTION.length)}</div>
+                      <div className="m-h"><b>Ana Ruiz</b><time>Yesterday 11:20 AM</time></div>
+                      <div className="m-t">Maya was great in the final round. Let&rsquo;s make the offer.</div>
                     </div>
                   </div>
-                )}
-                {replied && (
-                  <div className="m pop">
-                    <div className="av av-mark"><MambaMark size={20} color="#C9A26C" /></div>
+                  <div className="m">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img className="av" src="/avatars/brian-72.jpg" alt="" width={36} height={36} />
                     <div className="m-body">
-                      <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:01 AM</time></div>
-                      <div className="m-t">On it. Onboarding Maya Chen now.</div>
+                      <div className="m-h"><b>Brian Bell</b><time>Yesterday 4:12 PM</time></div>
+                      <div className="m-t">Maya&rsquo;s offer is out. She is reading it tonight.</div>
                     </div>
                   </div>
-                )}
-              </div>
-              <div className="sw-composer">
-                <span className="draft">
-                  {draft ? (
-                    <>
-                      {draft.length >= MENTION.length
-                        ? <><span className="mention">{MENTION}</span>{draft.slice(MENTION.length)}</>
-                        : draft}
-                      <span className="caret" />
-                    </>
-                  ) : (
-                    <span className="ph">Message #people-ops</span>
+                  {sent && (
+                    <div className="m pop">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img className="av" src="/avatars/priya-72.jpg" alt="" width={36} height={36} />
+                      <div className="m-body">
+                        <div className="m-h"><b>Priya Nair</b><time>9:01 AM</time></div>
+                        <div className="m-t"><Typed text={MSG} n={MSG.length} mention={MENTION} /></div>
+                      </div>
+                    </div>
                   )}
-                </span>
-                <span className={`send${draft ? ' live' : ''}`}>
-                  <svg width="15" height="15" viewBox="0 0 16 16"><path d="M2 8l12-5-5 12-2-5-5-2z" fill="currentColor" /></svg>
-                </span>
-              </div>
-              </div>
-            </div>
-
-            {/* B: MambaHR does the admin */}
-            <div className="hub">
-              <span className="hub-mark">
-                <span className="agent-mark is-working hm" />
-                <span className="agent-mark hm rest" />
-              </span>
-              <span className="hub-t">
-                <span className="agent-status is-working h-run">Onboarding Maya Chen</span>
-                <span className="h-done">Maya is ready for Monday</span>
-                <span className="hub-s">Asked in #people-ops · 9:01</span>
-              </span>
-            </div>
-            <div className="tiles">
-              {STOPS.map((s, i) => (
-                <div key={s.label} className="tile" style={{ ['--i' as string]: i }}>
-                  <div className="t-top">
-                    <span className="t-ic"><Icon name={s.icon} size={15} /></span>
-                    <b className="t-l">{s.label}</b>
-                    <span className="t-st">
-                      <svg className="tick" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
-                    </span>
-                  </div>
-                  <span className="t-d">{s.detail}</span>
-                  <span className="t-at">{s.at}</span>
+                  {phase === 1 && (
+                    <div className="typing pop">
+                      <span className="agent-mark is-working t-mark" />
+                      <span className="agent-status is-working t-t">MambaHR is on it&hellip;</span>
+                    </div>
+                  )}
+                  {replied && (
+                    <div className="m pop">
+                      <div className="av av-mark"><MambaMark size={20} color="#C9A26C" /></div>
+                      <div className="m-body">
+                        <div className="m-h"><b>MambaHR</b><span className="apptag">APP</span><time>9:01 AM</time></div>
+                        <div className="m-t">On it. Onboarding Maya Chen.</div>
+                        <div className="attach">
+                          {STEPS.map((s, i) => (
+                            <div key={s.t} className={`a-row${ticked > i ? ' on' : ''}`}>
+                              <span className="a-ic">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+                              </span>
+                              <span className="a-k">{s.t}</span>
+                              <span className="a-v">{s.at}</span>
+                            </div>
+                          ))}
+                          {leftForYou && (
+                            <div className="a-foot pop">
+                              <b>One step needs a person:</b> Form I-9 Section 2 by Thursday. It is on your To do.
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              ))}
+                <div className="sw-composer">
+                  <span className="draft">
+                    {!sent && typed[0] > 0
+                      ? <Typed text={MSG} n={typed[0]} mention={MENTION} caret />
+                      : <span className="ph">Message #people-ops</span>}
+                  </span>
+                  <span className={`send${!sent && typed[0] > 0 ? ' live' : ''}`}>
+                    <svg width="15" height="15" viewBox="0 0 16 16"><path d="M2 8l12-5-5 12-2-5-5-2z" fill="currentColor" /></svg>
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <p className="b-foot"><span>Done by 9:03. By hand, about half a day.</span></p>
-
-            {/* C: the real app, where the one step for a person lands */}
-            <div className="app">
+            {/* C: the MambaHR app */}
+            <div className="app" ref={appRef}>
               <div className="app-bar">
                 <span className="dots"><b /><b /><b /></span>
                 <span className="addr">app.mambahr.com</span>
               </div>
-              <AppFrame active="todo" org="Acme" user="AR" height={600} minimal>
-                {/* Wide: the queue beside the open item. Narrow, where the
-                    desk would drop the open item: the open item alone. */}
+              <AppFrame active="todo" org="Acme" user="AR" height={narrow ? 780 : 600} minimal>
+                {/* Wide: the queue beside the open item, the decision beside
+                    its facts. Narrow, where the desk would drop the open
+                    item: the open item alone. */}
                 <div className="desk-full">
                   <TodoDesk
                     simple
@@ -361,23 +325,15 @@ export default function Hero() {
           </div>
         </div>
 
-        {phase >= LAST && !still && (
-          <button type="button" className="replay" onClick={replay}>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
-            Replay
-          </button>
-        )}
+      </div>
+      {done && !still && <StoryReplay onClick={replay} className="hero-replay" />}
       </div>
 
       <style jsx>{`
         .hero {
           --ink-1: #1a1a19;
           --ink-2: #3d3d3a;
-          --glass-bg: rgba(255, 255, 255, 0.62);
-          --glass-line: rgba(255, 255, 255, 0.78);
-          --glass-sub: #57534c;
           --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
-          --ease-cam: cubic-bezier(0.65, 0, 0.35, 1);
           position: relative;
           overflow: hidden;
           padding: clamp(112px, 11vw, 148px) var(--page-pad) clamp(40px, 5vw, 72px);
@@ -445,7 +401,8 @@ export default function Hero() {
         .cta-alt:hover { border-color: var(--ink-1); }
         .cta-main:focus-visible, .cta-alt:focus-visible { outline: 2px solid var(--ink-1); outline-offset: 3px; }
 
-        /* ---- the stage: a 1320 x 600 frame, scaled to fit ---- */
+        /* ---- the stage: a 1320 x 500 frame, scaled to fit ---- */
+        .stage-wrap { position: relative; max-width: 1320px; margin: 0 auto; }
         .stage {
           --fit: 1;
           position: relative;
@@ -469,26 +426,16 @@ export default function Hero() {
         @keyframes drift3 { to { transform: translate(-6%, -8%) scale(1.06); } }
 
         .fit { position: absolute; left: 0; top: 0; width: 1320px; height: 500px; transform: scale(var(--fit)); transform-origin: 0 0; }
-        .canvas {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 3960px;
-          height: 640px;
-          transform-origin: 0 0;
-          transition: transform 1.05s var(--ease-cam);
-        }
-        .canvas.reset, .canvas.reset :global(*) { transition: none !important; animation: none !important; }
+        /* The camera moves by the Web Animations API (pull back, travel, push
+           in); the inline transform is where it rests. */
+        .canvas { position: absolute; left: 0; top: 0; width: 2800px; height: 500px; transform-origin: 0 0; }
+        .canvas.reset :global(*) { transition: none !important; animation: none !important; }
 
-        /* ---- the threads ---- */
         .threads { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
-        .th { fill: none; stroke-width: 2; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0.9; }
-        .t1 { transition: stroke-dashoffset 0.9s var(--ease-out) 0.1s; }
-        .fan { transition: stroke-dashoffset 0.35s ease-out calc(0.9s + var(--i) * 0.4s); }
-        .t2 { transition: stroke-dashoffset 1s var(--ease-out) 0.1s; }
-        .at-b .t1, .at-b .fan, .at-c .t2 { stroke-dashoffset: 0; }
+        .th { fill: none; stroke-width: 2; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0.9; transition: stroke-dashoffset 1s var(--ease-out) 0.1s; }
+        .in-app .th { stroke-dashoffset: 0; }
 
-        /* ---- A: Slack ---- */
+        /* ---- A + B: Slack (light, as in the Channels section) ---- */
         .sw {
           position: absolute;
           left: 280px;
@@ -504,7 +451,6 @@ export default function Hero() {
           font-size: 13px;
           color: var(--text);
         }
-        /* The light Slack of the Channels section, not Slack's dark sidebar. */
         .sw-side { background: #f7f2f8; border-right: 1px solid rgba(29, 28, 29, 0.08); padding: 14px 10px; display: flex; flex-direction: column; gap: 2px; }
         .sw-ws { font-weight: 700; font-size: 14px; color: #1d1c1d; padding: 4px 8px 12px; border-bottom: 1px solid rgba(29, 28, 29, 0.1); margin-bottom: 4px; }
         .sw-sec { font-size: 12px; letter-spacing: 0.02em; padding: 10px 8px 5px; color: rgba(29, 28, 29, 0.72); }
@@ -518,18 +464,32 @@ export default function Hero() {
         .h-ch { font-weight: 700; font-size: 15px; display: flex; gap: 2px; }
         .hash { color: var(--text-faint); font-weight: 600; }
         .h-mem { font-size: 12px; color: var(--text-faint); }
-        .sw-feed { height: 204px; padding: 0 18px 6px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; overflow: hidden; }
-        .m { display: flex; gap: 11px; }
-        .m.pop { animation: msgIn 0.4s var(--ease-out) both; }
+        .sw-feed { height: 300px; padding: 0 18px 6px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; overflow: hidden; }
+        .m { display: flex; gap: 11px; flex: none; }
+        .pop { animation: msgIn 0.4s var(--ease-out) both; }
         .av { width: 36px; height: 36px; border-radius: 9px; object-fit: cover; flex: none; }
         .av-mark { background: #0c0c0b; display: flex; align-items: center; justify-content: center; }
-        .m-body { min-width: 0; }
+        .m-body { min-width: 0; flex: 1; }
         .m-h { display: flex; align-items: baseline; gap: 8px; }
         .m-h b { font-size: 14px; font-weight: 700; }
         .m-h time { font-size: 12px; color: var(--text-faint); }
         .apptag { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--text-muted); background: var(--bg-cream); border-radius: 4px; padding: 1px 5px; }
         .m-t { font-size: 14px; line-height: 1.5; margin-top: 2px; }
-        .mention { color: var(--violet); background: var(--violet-soft); border-radius: 4px; padding: 0 3px; font-weight: 600; }
+        .typing { display: flex; align-items: center; gap: 8px; padding-left: 47px; flex: none; }
+        .t-mark { --am-size: 20px; }
+        .t-t { font-size: 12.5px; }
+        .attach { margin-top: 8px; border: 1px solid var(--border-faint); background: #faf7f2; border-radius: 12px; padding: 8px 14px 10px; max-width: 420px; }
+        .a-row { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 4px 0; font-size: 13px; }
+        .a-ic { width: 16px; height: 16px; border-radius: 999px; display: grid; place-items: center; color: #fff; box-shadow: inset 0 0 0 1.5px rgba(26, 26, 25, 0.22); transition: background 0.25s ease, box-shadow 0.25s ease; }
+        .a-ic svg { opacity: 0; transform: scale(0.4); transition: opacity 0.25s ease, transform 0.3s var(--ease-out); }
+        .a-k { color: var(--text-faint); transition: color 0.25s ease; }
+        .a-v { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); opacity: 0; transition: opacity 0.25s ease; }
+        .a-row.on .a-ic { background: var(--green); box-shadow: none; }
+        .a-row.on .a-ic svg { opacity: 1; transform: none; }
+        .a-row.on .a-k { color: var(--text); }
+        .a-row.on .a-v { opacity: 1; }
+        .a-foot { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 13px; line-height: 1.45; color: var(--text-muted); }
+        .a-foot b { color: var(--text); font-weight: 600; }
         .sw-composer {
           margin: 10px 18px 12px;
           display: flex;
@@ -544,96 +504,15 @@ export default function Hero() {
         }
         .draft { min-width: 0; white-space: nowrap; overflow: hidden; }
         .ph { color: var(--text-faint); }
-        .caret { display: inline-block; width: 1.5px; height: 1.1em; margin-left: 1px; vertical-align: -0.18em; background: var(--ink-1); animation: blink 1s steps(1) infinite; }
         .send { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 24px; border-radius: 5px; background: var(--bg-cream); color: var(--text-faint); transition: background 0.2s ease, color 0.2s ease; }
         .send.live { background: #007a5a; color: #fff; }
-
-        /* ---- B: MambaHR and the five stops ---- */
-        .hub {
-          position: absolute;
-          left: 1740px;
-          top: 60px;
-          width: 320px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 12px 16px;
-          border-radius: var(--radius-lg);
-          background: var(--glass-bg);
-          -webkit-backdrop-filter: blur(22px) saturate(170%);
-          backdrop-filter: blur(22px) saturate(170%);
-          border: 1px solid var(--glass-line);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 24px 48px -18px rgba(40, 25, 70, 0.45);
-          opacity: 0;
-          transform: translateY(10px);
-          transition: opacity 0.5s var(--ease-out) 0.7s, transform 0.5s var(--ease-out) 0.7s;
-        }
-        .at-b .hub { opacity: 1; transform: none; }
-        .hub-mark { position: relative; width: 36px; height: 36px; flex: none; }
-        .hub-mark .hm { position: absolute; inset: 0; }
-        .hub-mark .rest { opacity: 0; }
-        .hub-t { position: relative; display: grid; min-width: 0; }
-        .h-run, .h-done { grid-area: 1 / 1; font-size: 15px; white-space: nowrap; }
-        .h-done { font-weight: 600; color: var(--ink-1); opacity: 0; }
-        .hub-s { font-size: 12px; color: var(--glass-sub); margin-top: 2px; }
-        /* Out first, then in, so the two lines never overlap. */
-        .h-run, .hub-mark .hm:not(.rest) { transition: opacity 0.2s ease 3s; }
-        .h-done, .hub-mark .rest { transition: opacity 0.3s ease 3.2s; }
-        .at-b .h-run, .at-b .hub-mark .hm:not(.rest) { opacity: 0; }
-        .at-b .h-done, .at-b .hub-mark .rest { opacity: 1; }
-
-        .b-foot {
-          position: absolute;
-          left: 1700px;
-          top: 368px;
-          width: 400px;
-          margin: 0;
-          display: flex;
-          justify-content: center;
-          opacity: 0;
-          transition: opacity 0.5s ease 3.2s;
-        }
-        .b-foot span {
-          padding: 8px 16px;
-          border-radius: 999px;
-          font-size: 14px;
-          color: var(--ink-1);
-          background: var(--glass-bg);
-          -webkit-backdrop-filter: blur(14px);
-          backdrop-filter: blur(14px);
-          border: 1px solid var(--glass-line);
-        }
-        .at-b .b-foot { opacity: 1; }
-        .tiles { position: absolute; left: ${TILE_X}px; top: ${TILE_TOP}px; display: flex; gap: ${TILE_GAP}px; }
-        .tile {
-          width: ${TILE_W}px;
-          display: grid;
-          gap: 6px;
-          padding: 12px 14px;
-          border-radius: var(--radius-md);
-          background: var(--bg-card);
-          box-shadow: 0 1px 2px rgba(40, 25, 60, 0.06), 0 14px 30px -14px rgba(40, 25, 60, 0.35);
-          opacity: 0.55;
-          transition: opacity 0.35s ease calc(1.2s + var(--i) * 0.4s);
-        }
-        .at-b .tile { opacity: 1; }
-        .t-top { display: flex; align-items: center; gap: 8px; }
-        .t-ic { width: 26px; height: 26px; border-radius: var(--radius-sm); display: grid; place-items: center; background: var(--gold-tint); color: var(--gold); flex: none; }
-        .t-l { font-size: 14px; font-weight: 600; color: var(--ink-1); }
-        .t-st { margin-left: auto; width: 18px; height: 18px; border-radius: 999px; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px rgba(26, 26, 25, 0.2); transition: box-shadow 0.3s ease calc(1.2s + var(--i) * 0.4s), background 0.3s ease calc(1.2s + var(--i) * 0.4s); }
-        .tick { color: #fff; opacity: 0; transform: scale(0.4); transition: opacity 0.3s ease calc(1.2s + var(--i) * 0.4s), transform 0.35s var(--ease-out) calc(1.2s + var(--i) * 0.4s); }
-        .at-b .t-st { box-shadow: none; background: var(--green); }
-        .at-b .tick { opacity: 1; transform: none; }
-        .t-d { font-size: 13px; line-height: 1.4; color: var(--text-muted); }
-        .t-at { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-faint); font-variant-numeric: tabular-nums; opacity: 0; transition: opacity 0.3s ease calc(1.2s + var(--i) * 0.4s); }
-        .at-b .t-at { opacity: 1; }
 
         /* ---- C: the app ---- */
         .app {
           position: absolute;
-          left: 2780px;
+          left: 1400px;
           top: 24px;
-          width: 1140px;
+          width: 1320px;
           border-radius: var(--radius-lg);
           overflow: hidden;
           background: var(--bg-card);
@@ -649,38 +528,13 @@ export default function Hero() {
         .addr { margin: 0 auto; font-size: 12px; color: var(--text-faint); background: var(--bg-card); border-radius: var(--radius-full); box-shadow: inset 0 0 0 1px var(--border-faint); padding: 3px 16px; }
         .desk-pane { display: none; padding: 16px; }
 
-        /* ---- replay ---- */
-        .replay {
-          position: absolute;
-          right: 18px;
-          bottom: 18px;
-          z-index: 3;
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          min-height: 44px;
-          padding: 0 18px;
-          border-radius: 999px;
-          border: 1px solid var(--glass-line);
-          background: rgba(255, 255, 255, 0.72);
-          -webkit-backdrop-filter: blur(14px);
-          backdrop-filter: blur(14px);
-          color: var(--ink-1);
-          font: inherit;
-          font-size: 14px;
-          font-weight: 500;
-          cursor: pointer;
-          box-shadow: 0 10px 24px -12px rgba(40, 25, 70, 0.5);
-          animation: fadein 0.5s ease both;
-        }
-        .replay:hover { background: #fff; }
-        .replay:focus-visible { outline: 2px solid var(--ink-1); outline-offset: 3px; }
+        /* Wide: bottom left, over the app's quiet sidebar, clear of the
+           decision. Narrow: under the stage, where it covers nothing. */
+        .stage-wrap :global(.hero-replay) { position: absolute; left: 18px; bottom: 18px; z-index: 3; }
 
         @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-        @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes blink { 50% { opacity: 0; } }
 
-        /* Short laptop screens (1280x800, 1536x864): pull the stage up. */
+        /* Short laptop screens (1280x800, 1440x900, 1536x864): pull the stage up. */
         @media (min-width: 1100px) and (max-height: 920px) {
           .hero { padding-top: 112px; }
           .sub { margin-top: 20px; }
@@ -688,35 +542,31 @@ export default function Hero() {
           .stage { margin-top: 24px; }
         }
 
-        /* Below 1100px: no camera. The three stops stack and play in place. */
+        /* Below 1100px: the shots stack in a fixed frame; the camera moves down. */
         @media (max-width: 1099px) {
-          .stage { height: auto; padding: 24px 20px 76px; }
-          .fit { position: static; width: auto; height: auto; transform: none; }
-          .canvas { position: static; width: auto; height: auto; transform: none !important; display: flex; flex-direction: column; gap: 16px; }
+          .stage { height: 640px; }
+          .fit { position: absolute; inset: 0; width: auto; height: auto; transform: none; }
+          .canvas { position: relative; width: auto; height: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 32px; }
           .threads { display: none; }
-          .sw, .hub, .tiles, .app, .b-foot { position: static; }
-          .sw { width: 100%; max-width: 620px; margin: 0 auto; grid-template-columns: 150px minmax(0, 1fr); }
-          .b-foot { width: auto; transition-delay: 0s; }
-          .hub { width: 100%; max-width: 620px; margin: 8px auto 0; transition-delay: 0s; }
-          .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); width: 100%; max-width: 620px; margin: 0 auto; gap: 10px; }
-          .tile { width: auto; }
-          .app { width: 100%; margin-top: 8px; }
-          .replay { right: 50%; transform: translateX(50%); }
-        }
-        @media (max-width: 1099px) {
+          .sw, .app { position: relative; left: auto; top: auto; width: 100%; max-width: 640px; margin: 0 auto; }
+          .sw { grid-template-columns: 150px minmax(0, 1fr); }
           .desk-full { display: none; }
           .desk-pane { display: block; }
+          .stage-wrap { display: flex; flex-direction: column; align-items: center; }
+          .stage { width: 100%; }
+          .stage-wrap :global(.hero-replay) { position: static; margin-top: 14px; }
         }
         @media (max-width: 760px) {
-          .stage { padding: 16px 14px 72px; border-radius: 24px; }
+          .stage { height: min(620px, 158vw); border-radius: 24px; }
+          .canvas { padding: 14px 12px; }
           .sw { grid-template-columns: minmax(0, 1fr); }
           .sw-side { display: none; }
-          .sw-feed { height: 260px; }
-          .h-run, .h-done { white-space: normal; }
+          .sw-feed { height: 420px; }
+          .typing { padding-left: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .f, .m.pop, .caret, .replay { animation: none !important; }
-          .canvas, .th, .hub, .tile, .t-st, .tick, .t-at, .h-run, .h-done, .hub-mark .hm, .send, .b-foot { transition: none !important; }
+          .f, .pop { animation: none !important; }
+          .th, .a-ic, .a-ic svg, .a-k, .a-v, .send { transition: none !important; }
         }
       `}</style>
     </section>
