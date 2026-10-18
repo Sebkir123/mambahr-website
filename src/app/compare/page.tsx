@@ -2,10 +2,11 @@ import type { Metadata } from 'next'
 import CompareHub from './compare-hub'
 import { competitors } from './[slug]/data'
 import { JsonLd } from '@/components/json-ld'
+import { ogCard } from '@/lib/og'
 
 const description =
   'See how MambaHR compares with Rippling, Gusto, BambooHR, Workday, Lattice, Ashby and more, side by side. MambaHR does the HR admin, and you approve what matters.'
-const ogImage = '/mambahr_og_sharing.jpg'
+const ogImage = ogCard('How MambaHR compares.', 'Compare')
 
 export const metadata: Metadata = {
   title: 'Compare MambaHR with Rippling, Gusto, BambooHR and Workday',

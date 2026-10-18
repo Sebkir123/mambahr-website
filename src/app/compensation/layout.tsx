@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import { ogCard } from '@/lib/og'
 
 const ogImage =
-  '/mambahr_og_sharing.jpg'
+  ogCard('Every raise, checked.', 'Compensation')
 
 export const metadata: Metadata = {
   title: 'Compensation Management | MambaHR',

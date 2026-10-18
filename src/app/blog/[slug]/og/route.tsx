@@ -13,5 +13,5 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
   const tag = post?.tags?.[0] || 'MambaHR Blog'
   const fonts = await ogFonts(title + tag)
 
-  return new ImageResponse(<OgCard eyebrow={tag} title={title} serif={!!fonts} />, { ...OG_SIZE, fonts })
+  return new ImageResponse(<OgCard eyebrow={tag} title={title} />, { ...OG_SIZE, fonts })
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import { ogCard } from '@/lib/og'
 
 const ogImage =
-  '/mambahr_og_sharing.jpg'
+  ogCard('Time off, approved.', 'Time off & leave')
 
 export const metadata: Metadata = {
   title: 'Time Off & Leave Management | MambaHR',

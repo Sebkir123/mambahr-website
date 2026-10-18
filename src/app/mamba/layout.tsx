@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import { ogCard } from '@/lib/og'
 
 const ogImage =
-  '/mambahr_og_sharing.jpg'
+  ogCard('Ask in Slack. The admin gets done.', 'Ask in Slack')
 
 export const metadata: Metadata = {
   title: 'Ask MambaHR in Slack | MambaHR',

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ogCard } from '@/lib/og'
 
 const TITLE = 'Get early access | MambaHR'
 const DESCRIPTION =
@@ -11,13 +12,13 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: 'https://www.mambahr.com/early-access',
-    images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
+    images: [{ url: ogCard('Get in early.', 'Early access'), width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
-    images: ['/mambahr_og_sharing.jpg'],
+    images: [ogCard('Get in early.', 'Early access')],
   },
   alternates: { canonical: 'https://www.mambahr.com/early-access' },
 }

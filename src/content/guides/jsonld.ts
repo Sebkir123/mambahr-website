@@ -5,6 +5,7 @@
 import type { Faq } from './types'
 import { LAST_REVIEWED } from './types'
 import { SITE } from './index'
+import { ogCard } from '@/lib/og'
 
 const PUBLISHER = {
   '@type': 'Organization',
@@ -27,7 +28,7 @@ export function articleJsonLd({ path, headline, description }: { path: string; h
     inLanguage: 'en-US',
     author: { '@type': 'Organization', name: 'MambaHR', url: SITE },
     publisher: PUBLISHER,
-    image: `${SITE}/mambahr_og_sharing.jpg`,
+    image: `${SITE}${ogCard(headline, path.startsWith('/hr-by-state') ? 'HR by state' : 'Guide')}`,
   }
 }
 
@@ -95,7 +96,7 @@ export function collectionJsonLd({
 /** Shared page metadata shape (canonical, OG, Twitter). */
 export function pageMetadata({ path, title, description, type = 'article' }: { path: string; title: string; description: string; type?: 'article' | 'website' }) {
   const url = `${SITE}${path}`
-  const og = '/mambahr_og_sharing.jpg'
+  const og = ogCard(title.replace(/ \| MambaHR$/, ''), path.startsWith('/hr-by-state') ? 'HR by state' : 'Guide')
   return {
     title,
     description,

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import LegalPage, { type LegalSection } from '@/components/legal/legal-page'
+import { ogCard } from '@/lib/og'
 
 const UPDATED = 'October 8, 2026'
 const description =
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     url: 'https://www.mambahr.com/terms',
     siteName: 'MambaHR',
     type: 'website',
-    images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
+    images: [{ url: ogCard('Terms of service', 'Legal'), width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true },
 }

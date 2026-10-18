@@ -5,6 +5,7 @@ import StyledJsxRegistry from './styled-jsx-registry'
 import SiteTracker from '@/components/site-tracker'
 import { LAST_VERIFIED } from '@/lib/llms-content'
 import './globals.css'
+import { OG_HOME } from '@/lib/og'
 
 // The product's interface face (Warm Soft): Geist for everything a person
 // reads or operates, Geist Mono where the site already sets mono, Fraunces for
@@ -60,13 +61,13 @@ export const metadata: Metadata = {
     url: 'https://www.mambahr.com',
     siteName: 'MambaHR',
     type: 'website',
-    images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
+    images: [{ url: OG_HOME, width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'MambaHR: HR that runs itself',
     description: 'The HR admin, done for your team. You approve what matters.',
-    images: ['/mambahr_og_sharing.jpg'],
+    images: [OG_HOME],
   },
   alternates: {
     canonical: 'https://www.mambahr.com',
@@ -115,7 +116,7 @@ const jsonLd = [
     legalName: 'MambaHR',
     url: 'https://www.mambahr.com',
     logo: 'https://www.mambahr.com/MambaHR_logo.png',
-    image: 'https://www.mambahr.com/mambahr_og_sharing.jpg',
+    image: 'https://www.mambahr.com/og/home',
     description:
       'MambaHR is HR software that keeps your employee records and does the HR admin. You approve the decisions that matter.',
     foundingDate: '2026',

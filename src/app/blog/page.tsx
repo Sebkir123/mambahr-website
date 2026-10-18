@@ -7,6 +7,7 @@ import { JsonLd } from '@/components/json-ld'
 import { getPublishedPosts, effectiveDate } from '@/lib/blog-queries'
 import { postUrl, type Post } from '@/lib/blog'
 import styles from './blog.module.css'
+import { ogCard } from '@/lib/og'
 
 export const dynamic = 'force-dynamic'
 
@@ -70,13 +71,13 @@ export const metadata: Metadata = {
     description: 'Plain-English guides to US employment rules, hiring, onboarding and HR admin.',
     url: `${SITE}/blog`,
     type: 'website',
-    images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
+    images: [{ url: ogCard('Plain-English notes on HR.', 'Blog'), width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'HR Blog: Employment Rules and HR Admin | MambaHR',
     description: 'Plain-English guides to US employment rules, hiring, onboarding and HR admin.',
-    images: ['/mambahr_og_sharing.jpg'],
+    images: [ogCard('Plain-English notes on HR.', 'Blog')],
   },
   alternates: {
     canonical: `${SITE}/blog`,

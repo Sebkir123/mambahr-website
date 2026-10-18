@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { competitors, compareFaqs, compareTitle, importFrom } from './data'
 import { JsonLd } from '@/components/json-ld'
 import CompareView from './compare-view'
+import { ogCard } from '@/lib/og'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -14,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const c = competitors[slug]
   if (!c) return {}
-  const ogUrl = '/mambahr_og_sharing.jpg'
+  const ogUrl = ogCard(`MambaHR vs ${c.name}`, 'Compare')
   const title = compareTitle(c)
   const url = `https://www.mambahr.com/compare/${slug}`
   return {

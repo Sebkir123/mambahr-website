@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ogCard } from '@/lib/og'
 
 export const metadata: Metadata = {
   title: 'About | MambaHR',
@@ -8,13 +9,13 @@ export const metadata: Metadata = {
     title: 'About | MambaHR',
     description: 'MambaHR keeps your employee records and does the HR admin in them, so your team can focus on people. Meet the founders.',
     url: 'https://www.mambahr.com/about',
-    images: [{ url: '/mambahr_og_sharing.jpg', width: 1200, height: 630 }],
+    images: [{ url: ogCard('We build HR software that does the admin.', 'About'), width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About | MambaHR',
     description: "MambaHR keeps your employee records and does the HR admin in them, so your team can focus on people.",
-    images: ['/mambahr_og_sharing.jpg'],
+    images: [ogCard('We build HR software that does the admin.', 'About')],
   },
   alternates: { canonical: 'https://www.mambahr.com/about' },
 }

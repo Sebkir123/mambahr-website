@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import { JsonLd } from '@/components/json-ld'
 import CategoryView from '@/components/seo/category-view'
 import { categories, categoryJsonLd } from '@/components/seo/category-data'
+import { ogCard } from '@/lib/og'
 
 const data = categories['ai-hr-software']
-const ogUrl = '/mambahr_og_sharing.jpg'
+const ogUrl = ogCard(`${data.hero.lead} ${data.hero.em}${data.hero.tail ?? ''}`, data.eyebrow)
 
 export const metadata: Metadata = {
   title: data.metaTitle,

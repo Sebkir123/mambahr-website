@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   const eyebrow = (searchParams.get('eyebrow') || 'MambaHR').slice(0, 40)
   const fonts = await ogFonts(title + eyebrow)
 
-  return new ImageResponse(<OgCard eyebrow={eyebrow} title={title} serif={!!fonts} />, {
+  return new ImageResponse(<OgCard eyebrow={eyebrow} title={title} />, {
     ...OG_SIZE,
     fonts,
     headers: { 'Cache-Control': 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400' },
