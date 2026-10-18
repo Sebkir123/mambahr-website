@@ -50,7 +50,9 @@ const topLinks = [
   { label: 'About',   href: '/about'   },
 ]
 
-export default function MegaNav() {
+/** `ctaHref`: where "Get early access" goes. An ad landing page points it at
+    its own form ("#join"), so a paid visit stays on the page. */
+export default function MegaNav({ ctaHref = '/early-access' }: { ctaHref?: string } = {}) {
   const [scrolled, setScrolled] = useState(false)
   const [productOpen, setProductOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -223,7 +225,7 @@ export default function MegaNav() {
 
           {/* Right CTA, single conversion action */}
           <div className={s.right}>
-            <Link href="/early-access" className="btn btn-dark">
+            <Link href={ctaHref} className="btn btn-dark">
               Get early access
             </Link>
             <button
@@ -295,7 +297,7 @@ export default function MegaNav() {
             ))}
 
             <div className={s.mobileCta}>
-              <Link href="/early-access" className="btn btn-dark btn-block" onClick={closeMobile}>
+              <Link href={ctaHref} className="btn btn-dark btn-block" onClick={closeMobile}>
                 Get early access
               </Link>
             </div>

@@ -97,7 +97,7 @@ function FounderStage() {
 export default function StartupsPage() {
   return (
     <>
-      <MegaNav />
+      <MegaNav ctaHref="#join" />
       <RevealInit />
       <main id="main">
         <PageHero

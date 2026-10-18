@@ -67,7 +67,7 @@ export function useJoinForm({ refCode, form }: { refCode: string | null; form: s
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), name: name.trim(), company: companyValue.trim(), teamSize, ref: refCode, attribution: readAttribution(), turnstileToken: t }),
+        body: JSON.stringify({ email: email.trim(), name: name.trim(), company: companyValue.trim(), teamSize, ref: refCode, page: window.location.pathname, attribution: readAttribution(), turnstileToken: t }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {

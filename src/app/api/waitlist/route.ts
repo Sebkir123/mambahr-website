@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
 
   let email: string, name: string, company: string, teamSize: string | null, ref: string | null, turnstileToken: string
   let attribution: Attribution | null
+  let page: string | null
   try {
     const raw = await req.text()
     if (raw.length > 4096) return NextResponse.json({ error: 'Payload too large.' }, { status: 413 })
@@ -65,6 +66,8 @@ export async function POST(req: NextRequest) {
     const r = String(body.ref ?? '').trim().toLowerCase()
     ref = isReferralCode(r) ? r : null
     attribution = sanitizeAttribution(body.attribution)
+    const p = String(body.page ?? '').split(/[?#]/)[0].slice(0, 100)
+    page = /^\/[a-z0-9/_-]*$/i.test(p) ? p : null
     turnstileToken = String(body.turnstileToken ?? '').trim()
   } catch {
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 })
@@ -92,7 +95,7 @@ export async function POST(req: NextRequest) {
   const SELECT = 'email, name, company, referral_code, pass_token, created_at'
   const { data: created, error } = await db
     .from('waitlist')
-    .insert({ email, name, company, team_size: teamSize, referred_by: referredBy, ...attributionColumns(attribution) })
+    .insert({ email, name, company, team_size: teamSize, referred_by: referredBy, signup_page: page, ...attributionColumns(attribution) })
     .select(SELECT)
     .single<Row>()
 
@@ -122,7 +125,7 @@ export async function POST(req: NextRequest) {
 
   await Promise.all([
     notifyLeadSlack({
-      title: 'New early access signup',
+      title: PAGE_NAMES[page ?? ''] ? `New early access signup · ${PAGE_NAMES[page ?? '']}` : 'New early access signup',
       fields: [
         { label: 'Name', value: name },
         { label: 'Company', value: company },
@@ -131,6 +134,7 @@ export async function POST(req: NextRequest) {
         { label: 'Referred by', value: referrer ? `${referrer.company ?? referrer.email}` : null },
         { label: 'Already on the list', value: colleagues ? `${colleagues} more from ${domain}` : null },
         { label: 'Came from', value: cameFrom(attribution) },
+        { label: 'Signed up on', value: page ? PAGE_NAMES[page] ?? page : null },
       ],
       context: 'Early access · mambahr.com/early-access',
     }),
@@ -138,6 +142,14 @@ export async function POST(req: NextRequest) {
   ])
 
   return NextResponse.json({ status: 'joined', pass: created.pass_token })
+}
+
+// The page a signup happened on, named for the Slack card. The two ad landing
+// pages are the ad test (blue-collar companies vs SF tech startups).
+const PAGE_NAMES: Record<string, string> = {
+  '/crews': 'Crews page',
+  '/startups': 'Startups page',
+  '/early-access': 'Early access page',
 }
 
 // The ad or link that brought the signup, as columns the ad test can be counted

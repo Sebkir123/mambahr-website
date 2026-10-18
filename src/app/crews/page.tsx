@@ -86,7 +86,7 @@ const PAY_RUN: TodoFocus = {
 export default function CrewsPage() {
   return (
     <>
-      <MegaNav />
+      <MegaNav ctaHref="#join" />
       <RevealInit />
       <main id="main">
         <PageHero
