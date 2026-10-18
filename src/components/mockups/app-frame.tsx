@@ -57,6 +57,7 @@ export function AppFrame({
   user = 'AR',
   height,
   minimal = false,
+  todoCount = 3,
   children,
   className,
 }: {
@@ -70,6 +71,8 @@ export function AppFrame({
   user?: string
   /** Clip the content at this height like a viewport; the bottom fades out. */
   height?: number
+  /** The To do count on the nav badge and the top bar, matching the queue shown. */
+  todoCount?: number
   children: ReactNode
   className?: string
 }) {
@@ -84,7 +87,9 @@ export function AppFrame({
         </div>
         <div className={s.navBody}>
           <div className={s.navSection}>
-            {NAV.filter((i) => !minimal || MINIMAL.includes(i.key)).map((i) => <Row key={i.key} item={i} active={active} />)}
+            {NAV.filter((i) => !minimal || MINIMAL.includes(i.key)).map((i) => (
+              <Row key={i.key} item={i.key === 'todo' ? { ...i, badge: String(todoCount) } : i} active={active} />
+            ))}
           </div>
           <div className={s.navSpacer} />
           <div className={s.navSection}>
@@ -97,7 +102,7 @@ export function AppFrame({
           <span className={s.topLabel}>{label}</span>
           <span className={s.topRight}>
             <span className={s.askPill}><Icon name="sparkles" size={14} />Ask about this page</span>
-            <span className={s.todoPill}>3 to do</span>
+            <span className={s.todoPill}>{todoCount} to do</span>
             <span className={`${s.avatar} ${s.c6}`}>{user}</span>
           </span>
         </div>

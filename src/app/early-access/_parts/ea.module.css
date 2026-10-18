@@ -2,7 +2,10 @@
    page and /partners. The stage, glass and grain follow the home hero
    (src/app/v2/_sections/hero.tsx) so the pages read as one site. */
 
-.page {
+/* The form carries the same tokens, so it renders the same on the ad landing
+   pages, which embed it outside .page (src/app/early-access/_parts/join-form.tsx). */
+.page,
+.joinForm {
   --ink-1: #1a1a19;
   --ink-2: #3d3d3a;
   --ink-3: #5f5a52;
@@ -11,6 +14,8 @@
   --glass-line: rgba(255, 255, 255, 0.8);
   --violet: #6a5da6;
   --gold-ink: #8a6535;
+}
+.page {
   background: #fefdfa;
   color: var(--ink-1);
 }

@@ -8,7 +8,7 @@ import { ogCard } from '@/lib/og'
 const title = 'HR for Startups, in Slack | MambaHR'
 const description =
   'HR admin for startups, run from Slack: offers inside your pay range, onboarding before day one, California’s rules built in, and payroll powered by Deel.'
-const ogImage = ogCard('HR for startups, right in Slack.', 'For startups')
+const ogImage = ogCard('Gusto gives you software. MambaHR does the work.', 'For startups')
 
 export const metadata: Metadata = {
   title,

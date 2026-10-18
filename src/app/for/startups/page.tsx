@@ -3,13 +3,64 @@
 import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
-import { PageHero, AgentLoop, FeatureSplit, PageCta, Em } from '@/components/v2/page-kit'
-import { ChatThread, PeopleDirectory, SlackApproval } from '@/components/mockups'
+import { PageHero, FeatureSplit, Em } from '@/components/v2/page-kit'
+import { AppFrame, TodoDesk, ChatThread, SlackApproval, type TodoFocus, type TodoItem } from '@/components/mockups'
+import { useStory } from '@/components/story'
+import { JoinSection } from '@/components/ad-landing/join-section'
 
-// Startups, most of them in California: the figures are the California state
-// guide's (src/content/states/group-a.ts): a pay scale in job posts at 15
-// employees, at least 40 hours or 5 days of paid sick leave, daily overtime
-// after 8 hours, and final pay on the last day for a firing.
+// Startup side of the ad test, most of them in California. California facts
+// from the state guide (src/content/states/group-a.ts): pay ranges in job posts
+// at 15 employees, paid sick leave, final pay on the last day for a firing.
+
+/* ── Hero: the founder's To do. Priya's offer opens, line by line; then a
+   new time-off request arrives from Slack. ── */
+const HERO_SCRIPT = { phases: [700, 1200, 1700, 2200, 2800, 3400, 4600], rootMargin: '0px 0px -5% 0px' } as const
+
+const OFFER: TodoFocus = {
+  eyebrow: 'Asked by Sam Lee in #hiring · Today',
+  position: '1 of 3',
+  title: 'Offer for Priya Shah',
+  summary: 'Founding Engineer at $195,000, inside the range you posted. Ready to send.',
+  facts: [
+    { k: 'Role', v: 'Founding Engineer' },
+    { k: 'Pay', v: '$195,000 a year' },
+    { k: 'Range', v: '$180k to $210k, as posted' },
+    { k: 'Start', v: 'Nov 3' },
+  ],
+  read: 'Inside the range you posted, so it can go out today. Onboarding starts as soon as Priya signs.',
+  decisions: [
+    { label: 'Send the offer', primary: true, consequence: 'Out for e-signature now. Sam is told.' },
+    { label: 'Change it', consequence: 'Opens the draft for you.' },
+  ],
+  history: [],
+}
+
+const QUEUE: TodoItem[] = [
+  { title: 'Priya Shah · offer', meta: 'Hiring · Yours', date: 'Today' },
+  { title: 'Noah Bennett · starts Monday', meta: 'Onboarding · Ready', date: 'Mon' },
+  { title: 'Marcus Webb · last day', meta: 'Leaving · Yours', date: 'Fri' },
+]
+const ARRIVING: TodoItem = { title: 'Leo Schulz · 5 days off', meta: 'Time off · Asked in Slack', date: 'Tomorrow' }
+
+function FounderDesk() {
+  const { ref, phase } = useStory(HERO_SCRIPT)
+  const arrived = phase >= 7
+  return (
+    <div className="mock-card" ref={ref}>
+      <AppFrame active="todo" org="Acme" user="SL" height={640} minimal todoCount={arrived ? 4 : 3}>
+        <TodoDesk
+          simple
+          queue={arrived ? [QUEUE[0], ARRIVING, ...QUEUE.slice(1)] : QUEUE}
+          fresh={arrived ? 1 : undefined}
+          summary={arrived ? '4 need you · 6 done today' : '3 need you · 6 done today'}
+          focus={{ ...OFFER, position: `1 of ${arrived ? QUEUE.length + 1 : QUEUE.length}` }}
+          build={Math.min(phase, 6)}
+          doneToday={6}
+        />
+      </AppFrame>
+    </div>
+  )
+}
 
 export default function StartupsPage() {
   return (
@@ -19,73 +70,37 @@ export default function StartupsPage() {
       <main id="main">
         <PageHero
           eyebrow="For startups"
-          title={<>HR for startups, <Em>right in Slack.</Em></>}
-          lead="Ask in Slack and MambaHR does the work: the offer inside your range, the onboarding, the California rules and the payroll change. Founders and managers make the calls."
+          title={<>Gusto gives you software. <Em>MambaHR does the work.</Em></>}
+          lead="Ask in Slack and MambaHR handles the offer, the onboarding and the payroll change, with California’s rules built in. Founders and managers make the calls."
+          cta={{ href: '#join', label: 'Get early access' }}
+          secondary={null}
+        >
+          <FounderDesk />
+        </PageHero>
+
+        <FeatureSplit
+          eyebrow="Slack"
+          title={<>Your team asks <Em>in Slack.</Em></>}
+          lead="Time off, payday, policies: your team asks in Slack and gets the answer with your policy cited. Anything that needs you comes to you there, with the reason."
+          bullets={[
+            'Answers with your policy cited',
+            'Approvals in one tap',
+            'Everything also on your To do',
+          ]}
         >
           <div className="mock-card slack">
             <SlackApproval
-              channel="hiring"
-              subject="Priya Shah"
-              kind="Offer"
-              why="Priya is your pick for Founding Engineer. The offer is drafted at $195k, inside the $180k to $210k range in the job post."
+              channel="people"
+              subject="Leo Schulz"
+              kind="Time off"
+              why="Leo asked for 5 days off, Dec 15 to Dec 19. He has 9 days left this year and nobody else on his team is out that week."
               fields={[
-                { label: 'Range', value: '$180k to $210k' },
-                { label: 'Start', value: 'Nov 3' },
+                { label: 'Days', value: '5' },
+                { label: 'Left after', value: '4 days' },
               ]}
-              context="Yours · due today · also on your To do"
-              reference="TO-1907"
-              time="4:12 PM"
-            />
-          </div>
-        </PageHero>
-
-        <AgentLoop
-          eyebrow="How it works"
-          title="From first hire to payday"
-          lead="MambaHR does the admin between the decisions. Your team decides who joins, what they earn and when."
-          steps={[
-            { n: '01', label: 'Ask in Slack', desc: '“We are hiring a founding engineer.” MambaHR drafts the job post with the pay range California requires.', who: 'agent', time: '4 min' },
-            { n: '02', label: 'Interviews', desc: 'Times come from your interviewers’ own calendars once Google or Microsoft 365 is connected. You confirm the panel.', who: 'you', img: '/avatars/priya.jpg' },
-            { n: '03', label: 'The offer', desc: 'Drafted inside your range, approved by you in Slack, then out for e-signature.', who: 'you' },
-            { n: '04', label: 'Onboarding', desc: 'Form I-9, the W-4, California’s wage notice and your policies, sent before day one. The laptop and accounts are requested from IT.', who: 'agent', time: 'same day' },
-            { n: '05', label: 'Payroll', desc: 'Added to payroll, powered by Deel. A person approves every run.', who: 'agent' },
-            { n: '06', label: 'Questions', desc: 'Your team asks in Slack and gets the answer with your policy cited.', who: 'agent', img: '/avatars/marcus.jpg' },
-          ]}
-        />
-
-        <FeatureSplit
-          eyebrow="California"
-          title={<>California’s rules, <Em>built in.</Em></>}
-          lead="California is stricter than federal law, and much of it starts at 5 employees. MambaHR applies the rules for the state each person works in, so a 12-person startup in San Francisco gets them right from the first hire."
-          bullets={[
-            'A pay scale in every job post once you have 15 employees',
-            'At least 40 hours or 5 days of paid sick leave a year, tracked',
-            'Overtime after 8 hours in a day for non-exempt people',
-            'Final pay on the last day when you let someone go',
-          ]}
-        >
-          <div className="mock-card">
-            <ChatThread
-              context="Discussing Sam Patel"
-              user="Can we let Sam go on Friday and pay him out with the next payroll?"
-              answer="No. Sam works in California, so his final pay, including unused vacation, is due on his last day. I have drafted it for Friday."
-              card={{
-                name: 'Sam Patel',
-                note: 'Final pay, San Francisco',
-                initials: 'SP',
-                figures: [
-                  { label: 'Last day', value: 'Fri', sub: 'Oct 31' },
-                  { label: 'Final pay due', value: 'Fri', sub: 'Same day' },
-                  { label: 'If paid late', value: '30', unit: 'days', sub: 'of wages, at most' },
-                ],
-              }}
-              action={{
-                title: 'Approve Sam’s final pay',
-                body: 'Due Friday with his last day. Unused vacation included. Payroll is told when you approve.',
-                primary: 'Approve',
-                secondary: 'Edit',
-              }}
-              sources={['California Labor Code 201', 'Vacation policy', 'Payroll calendar']}
+              context="Yours · due tomorrow · also on your To do"
+              reference="TO-1912"
+              time="9:41 AM"
             />
           </div>
         </FeatureSplit>
@@ -93,23 +108,49 @@ export default function StartupsPage() {
         <FeatureSplit
           flip
           warm
-          eyebrow="Switching"
-          title={<>Bring your people <Em>from Gusto or Rippling.</Em></>}
-          lead="Moving from Gusto, Rippling, BambooHR, ADP or a spreadsheet is one import. Your people are in within a day, with their history and balances. Payroll moves to Deel, and MambaHR sends it every change."
+          eyebrow="California"
+          title={<>California’s rules, <Em>handled.</Em></>}
+          lead="California asks more of employers, and much of it starts at 5 people. MambaHR follows the rules for wherever each person works, from your first hire."
           bullets={[
-            'History and time-off balances carried over',
-            'You check the import before anything goes live',
-            'Then you can retire the old system',
+            'The pay range in every job post',
+            'Paid sick days tracked',
+            'A last paycheck on the last day',
           ]}
         >
           <div className="mock-card">
-            <PeopleDirectory />
+            <ChatThread
+              context="Discussing Sam Patel"
+              user="Can we let Sam go on Friday and pay him with the next payroll?"
+              answer="No. Sam works in California, so his last paycheck, with his unused vacation, is due on his last day. I have it ready for Friday."
+              card={{
+                name: 'Sam Patel',
+                note: 'Last paycheck, San Francisco',
+                initials: 'SP',
+                figures: [
+                  { label: 'Last day', value: 'Fri', sub: 'Oct 30' },
+                  { label: 'Paycheck due', value: 'Fri', sub: 'Same day' },
+                  { label: 'Vacation paid', value: '18', unit: 'hours' },
+                ],
+              }}
+              action={{
+                title: 'Approve Sam’s last paycheck',
+                body: 'Due Friday with his last day. Payroll is told when you approve.',
+                primary: 'Approve',
+                secondary: 'Edit',
+              }}
+              sources={['California final pay rules', 'Vacation policy']}
+            />
           </div>
         </FeatureSplit>
 
-        <PageCta
-          title={<>From first hire to payday, <Em>in Slack.</Em></>}
-          sub="Join early access. Founding customer pricing is held for your company: from $14 per employee a month, and payroll through Deel at $10 per employee paid."
+        <JoinSection
+          form="ad_startups"
+          title={<>First hire to payday, <Em>handled.</Em></>}
+          answers={[
+            { q: 'How is this different from Gusto?', a: 'Gusto gives you software to click through. MambaHR does the work and asks you only for the decisions.' },
+            { q: 'How long does it take to switch?', a: 'Within a day. Your people come over from Gusto, Rippling or a spreadsheet, with their history.' },
+            { q: 'Is our data safe?', a: 'Yes. It is encrypted, each person sees only what their role allows, and it never trains any AI.' },
+          ]}
         />
       </main>
       <Footer />

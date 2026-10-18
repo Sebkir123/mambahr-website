@@ -4,10 +4,10 @@ import { ogCard } from '@/lib/og'
 // Ad landing page for the blue-collar segment of the October 2026 ad test
 // (blue-collar companies vs SF tech startups). Not in the sitemap or the nav and
 // not indexed: its words change with the test, and the ads link straight to it.
-const title = 'HR for Hourly Teams | MambaHR'
+const title = 'HR for Crews, Shops and Job Sites | MambaHR'
 const description =
-  'HR admin for restaurants, trades and hourly teams: offers with the right hourly rate, joining paperwork and Form I-9 on time, tipped pay by your state’s rules, and final pay by the deadline.'
-const ogImage = ogCard('HR for hourly teams, done for you.', 'Restaurants, trades and hourly teams')
+  'HR admin for teams that work on shift, on site and on the floor: offers, joining paperwork and Form I-9 deadlines for every new hire, pay by each state’s rules, and final pay on time.'
+const ogImage = ogCard('You run the work. MambaHR runs the paperwork.', 'Crews, shops, kitchens and job sites')
 
 export const metadata: Metadata = {
   title,

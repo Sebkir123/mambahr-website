@@ -42,6 +42,8 @@ export function PageHero({
   photoPosition = 'center 20%',
   photoChip,
   photoCaption,
+  cta = { href: '/early-access', label: 'Get early access' },
+  secondary = { href: '/product', label: 'See how it works' },
   children,
 }: {
   eyebrow: string
@@ -57,6 +59,10 @@ export function PageHero({
   photoChip?: string
   /** Small caption under the chip, e.g. 'Offer signed · starts June 22'. */
   photoCaption?: string
+  /** The main button; an ad landing page points it at its own form ("#join"). */
+  cta?: { href: string; label: string }
+  /** The second button; null hides it. */
+  secondary?: { href: string; label: string } | null
   children: ReactNode
 }) {
   return (
@@ -72,8 +78,8 @@ export function PageHero({
         <h1 className="title" data-reveal="eager">{title}</h1>
         <p className="lead" data-reveal="eager">{lead}</p>
         <div className="ctas" data-reveal="eager">
-          <Link href="/early-access" className="btn btn-primary">Get early access</Link>
-          <Link href="/product" className="btn btn-secondary">See how it works</Link>
+          <Link href={cta.href} className="btn btn-primary">{cta.label}</Link>
+          {secondary && <Link href={secondary.href} className="btn btn-secondary">{secondary.label}</Link>}
         </div>
       </div>
       <div className="stage" data-reveal="eager">

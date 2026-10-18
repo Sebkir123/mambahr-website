@@ -1,0 +1,63 @@
+/* The join section of an ad landing page: the Dusk stage from the site's closing
+   panels (--stage-field and its glows), a white form card, Fraunces headline. */
+
+.wrap {
+  padding: clamp(56px, 8vw, 104px) clamp(16px, 4vw, 48px) clamp(24px, 4vw, 48px);
+  scroll-margin-top: 72px;
+}
+.panel {
+  position: relative;
+  overflow: hidden;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 64px);
+  border-radius: var(--radius-xl);
+  background: var(--stage-field);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+.field { position: absolute; inset: 0; pointer-events: none; }
+.field i { position: absolute; border-radius: 50%; filter: blur(50px); }
+.f1 { width: 50%; height: 90%; left: -10%; top: -30%; background: radial-gradient(circle, var(--stage-glow-1), transparent 70%); }
+.f2 { width: 50%; height: 90%; right: -12%; top: 20%; background: radial-gradient(circle, var(--stage-glow-2), transparent 70%); }
+.f3 { width: 40%; height: 60%; left: 32%; top: 10%; background: radial-gradient(circle, var(--stage-glow-4), transparent 70%); }
+
+.copy { position: relative; }
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.title {
+  margin: 14px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+.price { margin: 16px 0 0; font-size: 17px; line-height: 1.5; color: var(--text); }
+.answers { margin: 28px 0 0; display: grid; gap: 18px; }
+.answer { margin: 0; }
+.q { font-weight: 600; font-size: 16px; color: var(--ink); }
+.a { margin: 4px 0 0; font-size: 15px; line-height: 1.55; color: var(--text); }
+
+.card {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-float);
+  padding: clamp(22px, 3vw, 32px);
+}
+.cardT { margin: 0; font-family: var(--font-serif); font-size: 26px; letter-spacing: -0.02em; color: var(--ink); }
+.card :global(form) { margin-top: 18px; max-width: none; }
+
+@media (max-width: 960px) {
+  .panel { grid-template-columns: minmax(0, 1fr); }
+}
