@@ -7,7 +7,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import TurnstileWidget from '@/components/turnstile-widget'
 import { Em } from '@/components/v2/page-kit'
-import { PARTNER_SHARE, companyFromEmail, emailDomain } from '@/content/early-access'
+import { PARTNER_SHARE, TEAM_SIZES, companyFromEmail, emailDomain } from '@/content/early-access'
 import { PassCard, Sky, Stage, shortDate } from './pass-card'
 import s from './ea.module.css'
 
@@ -16,16 +16,48 @@ const noop = () => () => {}
 const EMAIL_RE = /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)*\.[A-Za-z]{2,}$/
 
 type Status = 'idle' | 'waiting' | 'sending' | 'exists' | 'error'
+type Field = 'email' | 'name' | 'company' | 'size'
+
+// What a missing field is called in the one-line error.
+const ASK: Record<Field, string> = { email: 'your work email', name: 'your name', company: 'your company', size: 'how many people work there' }
+function missingSentence(fields: Field[]): string {
+  if (fields.length === 1 && fields[0] === 'email') return 'Enter your work email, like you@company.com.'
+  const words = fields.map((f) => ASK[f])
+  const list = words.length > 1 ? `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}` : words[0]
+  return `Add ${list}.`
+}
 
 export function Landing({ refCode, referrer }: { refCode: string | null; referrer: string | null }) {
   const router = useRouter()
   const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+  // The company fills itself in from a work email's domain until it is edited.
+  const [company, setCompany] = useState('')
+  const [companyEdited, setCompanyEdited] = useState(false)
+  const [teamSize, setTeamSize] = useState('')
+  // After the first try, a field is marked while it is still empty or wrong.
+  const [tried, setTried] = useState(false)
   const [focused, setFocused] = useState(false)
   const [token, setToken] = useState<string | null>(null)
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState('')
   // The visitor's own date on the client; the server render says "Today".
   const today = useSyncExternalStore(noop, () => shortDate(new Date()), () => 'Today')
+
+  const guessed = companyFromEmail(email)
+  const companyValue = companyEdited ? company : (guessed ?? company)
+  const domain = emailDomain(email)
+  const gaps: Field[] = [
+    ...(!EMAIL_RE.test(email.trim()) ? (['email'] as const) : []),
+    ...(!name.trim() ? (['name'] as const) : []),
+    ...(!companyValue.trim() ? (['company'] as const) : []),
+    ...(!teamSize ? (['size'] as const) : []),
+  ]
+  const missing = tried ? gaps : []
+  const field = (f: Field) => (missing.includes(f) ? `${s.input} ${s.bad}` : s.input)
+  const edited = () => {
+    if (status === 'error' || status === 'exists') setStatus('idle')
+  }
 
   async function send(t: string) {
     setStatus('sending')
@@ -34,7 +66,7 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), ref: refCode, turnstileToken: t }),
+        body: JSON.stringify({ email: email.trim(), name: name.trim(), company: companyValue.trim(), teamSize, ref: refCode, turnstileToken: t }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {
@@ -66,8 +98,9 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (status === 'sending' || status === 'waiting') return
-    if (!EMAIL_RE.test(email.trim())) {
-      setError('Enter your work email, like you@company.com.')
+    setTried(true)
+    if (gaps.length) {
+      setError(missingSentence(gaps))
       setStatus('error')
       return
     }
@@ -78,8 +111,6 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
     }
   }
 
-  const company = companyFromEmail(email)
-  const domain = emailDomain(email)
   const busy = status === 'sending' || status === 'waiting'
   const gift = referrer !== null
 
@@ -101,30 +132,71 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
               <h1 className={s.title}>Get in <Em>early.</Em></h1>
               <p className={s.lead}>
                 {gift
-                  ? 'You skip the queue and keep founding customer pricing. Join with your work email and we’ll bring your team in with the next group.'
-                  : 'We’re opening MambaHR to companies in small groups. Join with your work email, and your founding pricing is held until your group opens.'}
+                  ? 'You skip the queue and keep founding customer pricing. Join the list and we’ll bring your team in with the next group.'
+                  : 'We’re opening MambaHR to companies in small groups. Join the list, and your founding pricing is held until your group opens.'}
               </p>
 
-              <form onSubmit={onSubmit} noValidate>
-                <div className={status === 'error' ? `${s.capsule} ${s.bad}` : s.capsule}>
-                  <label htmlFor="ea-email" className={s.srOnly}>Work email</label>
+              <form className={s.joinForm} onSubmit={onSubmit} noValidate>
+                <label className={s.fieldL}>
+                  <span className={s.lbl}>Work email</span>
                   <input
                     id="ea-email"
                     type="email"
-                    className={s.capsuleInput}
+                    className={field('email')}
                     placeholder="you@company.com"
                     autoComplete="email"
                     value={email}
-                    onChange={(e) => { setEmail(e.target.value); if (status === 'error' || status === 'exists') setStatus('idle') }}
+                    onChange={(e) => { setEmail(e.target.value); edited() }}
                     onFocus={() => setFocused(true)}
                     onBlur={() => setFocused(false)}
-                    aria-invalid={status === 'error' ? true : undefined}
+                    aria-invalid={missing.includes('email') ? true : undefined}
                     aria-describedby="ea-msg"
                   />
-                  <button type="submit" className={s.join} disabled={busy}>
-                    {busy ? 'Joining…' : <>Join the list <span className={s.arrow} aria-hidden="true">→</span></>}
-                  </button>
+                </label>
+                <div className={s.row2}>
+                  <label className={s.fieldL}>
+                    <span className={s.lbl}>Your name</span>
+                    <input
+                      className={field('name')}
+                      placeholder="Dana Whitfield"
+                      autoComplete="name"
+                      value={name}
+                      maxLength={80}
+                      onChange={(e) => { setName(e.target.value); edited() }}
+                      aria-invalid={missing.includes('name') ? true : undefined}
+                      aria-describedby="ea-msg"
+                    />
+                  </label>
+                  <label className={s.fieldL}>
+                    <span className={s.lbl}>Company</span>
+                    <input
+                      className={field('company')}
+                      placeholder="Northwind Trading"
+                      autoComplete="organization"
+                      value={companyValue}
+                      maxLength={120}
+                      onChange={(e) => { setCompany(e.target.value); setCompanyEdited(true); edited() }}
+                      onFocus={() => setFocused(true)}
+                      onBlur={() => setFocused(false)}
+                      aria-invalid={missing.includes('company') ? true : undefined}
+                      aria-describedby="ea-msg"
+                    />
+                  </label>
                 </div>
+                <fieldset className={s.fieldset} aria-describedby="ea-msg">
+                  <legend className={s.lbl}>Employees</legend>
+                  <div className={missing.includes('size') ? `${s.seg} ${s.segBad}` : s.seg}>
+                    {TEAM_SIZES.map((o) => (
+                      <label key={o.value} className={teamSize === o.value ? `${s.segO} ${s.on}` : s.segO}>
+                        <input type="radio" name="ea-size" value={o.value} checked={teamSize === o.value} onChange={() => { setTeamSize(o.value); edited() }} />
+                        {o.label}
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <button type="submit" className={`${s.join} ${s.joinWide}`} disabled={busy}>
+                  {busy ? 'Joining…' : <>Join the list <span className={s.arrow} aria-hidden="true">→</span></>}
+                </button>
                 <div className={s.captcha}>
                   <TurnstileWidget onSuccess={onToken} theme="light" appearance="interaction-only" />
                 </div>
@@ -138,7 +210,7 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
                 </div>
               </form>
               {status !== 'error' && status !== 'exists' && (
-                <p className={s.below}>No call needed. Rather see it first? <Link href="/how-it-works">See how it works</Link></p>
+                <p className={`${s.below} ${s.belowForm}`}>No call needed. Rather see it first? <Link href="/how-it-works">See how it works</Link></p>
               )}
             </div>
 
@@ -153,7 +225,7 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
                 </div>
               </div>
               <PassCard
-                name={company}
+                name={companyValue.trim() || null}
                 sub={domain ?? 'Type your work email'}
                 joined={today}
                 code={null}

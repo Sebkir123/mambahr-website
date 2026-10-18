@@ -129,7 +129,7 @@ export function passCode(referralCode: string): string {
 /* ════════════════════════════════════════════
    EARLY ACCESS: WELCOME, PASS LINK AGAIN, PARTNER
    ════════════════════════════════════════════ */
-type PassEmail = { company: string | null; email: string; referralCode: string; joinedAt: string; passUrl: string; referralUrl: string }
+type PassEmail = { name?: string | null; company: string | null; email: string; referralCode: string; joinedAt: string; passUrl: string; referralUrl: string }
 
 function passFor(p: PassEmail) {
   const joined = new Date(p.joinedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })
@@ -147,12 +147,14 @@ function giftBlock(referralUrl: string): string {
 
 export function renderWaitlistWelcome(p: PassEmail): { subject: string; html: string } {
   const subject = 'Your founding spot at MambaHR'
+  // "Dana" from "Dana Whitfield"; no greeting name when none was given.
+  const first = (p.name ?? '').trim().split(/\s+/)[0]
   const html = emailShell(
     subject,
-    serif('You&rsquo;re on the list.') +
+    serif(first ? `You&rsquo;re on the list, ${escapeHtml(first)}.` : 'You&rsquo;re on the list.') +
     body('We&rsquo;re opening MambaHR to companies in small groups, and we&rsquo;ll email you when yours opens. Your founding pricing is held until then.') +
     passFor(p) +
-    body('Tell us your team size and where your HR records live today, and we&rsquo;ll have the import ready the day you&rsquo;re in.') +
+    body('Tell us where your HR records live today, and we&rsquo;ll have the import ready the day you&rsquo;re in.') +
     ctaButton(p.passUrl, 'Open your pass') +
     giftBlock(p.referralUrl) +
     finePrint('Questions? Reply to this email, it comes straight to us.<br/>Brian and Sebastian'),

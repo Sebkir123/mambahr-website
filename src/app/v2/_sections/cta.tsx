@@ -9,7 +9,7 @@ export default function Cta() {
       <div className="panel" data-reveal>
         <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /><i className="f3" /><i className="grain" /></span>
         <h2 className="title">Join the next group.</h2>
-        <p className="sub">We’re opening MambaHR to companies in small groups. Join with your work email, and your founding pricing is held until your group opens.</p>
+        <p className="sub">We’re opening MambaHR to companies in small groups. Join the list, and your founding pricing is held until your group opens.</p>
         <div className="ctas">
           <a className="main" href="/early-access" data-track="cta_click" data-track-label="access-band">Get early access</a>
           <a className="alt" href="/pricing">See pricing</a>

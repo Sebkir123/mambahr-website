@@ -21,7 +21,8 @@ export const passUrl = (token: string) => `${SITE}/early-access/pass/${token}`
 export const referralUrl = (code: string) => `${SITE}/r/${code}`
 
 const TOKEN_RE = /^[0-9a-f]{32}$/
-const CODE_RE = /^[0-9a-f]{8}$/
+// Referral codes: 12 hex characters since 2026-10-18, 8 before (still valid).
+const CODE_RE = /^(?:[0-9a-f]{8}|[0-9a-f]{12})$/
 export const isPassToken = (t: string) => TOKEN_RE.test(t)
 export const isReferralCode = (c: string) => CODE_RE.test(c)
 

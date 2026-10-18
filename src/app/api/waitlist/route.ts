@@ -4,10 +4,10 @@ import { notifyLeadSlack } from '@/lib/slack'
 import { verifyTurnstile } from '@/lib/turnstile'
 import { createMemoryLimiter, durableRateLimit, getClientIp } from '@/lib/rate-limit'
 import { earlyAccessDb, isReferralCode, passUrl, referralUrl } from '@/lib/early-access'
-import { companyFromEmail, sameCompany } from '@/content/early-access'
+import { TEAM_SIZES, labelFor, sameCompany } from '@/content/early-access'
 
-// Joining the early access list: one email, behind Turnstile and the rate
-// limits. A new signup gets its pass token back and goes straight to its pass
+// Joining the early access list: work email, name, company and team size,
+// behind Turnstile and the rate limits. A new signup gets its pass token back and goes straight to its pass
 // page; the token is never returned for an address that was already on the
 // list, whose owner gets the link by email instead.
 
@@ -16,10 +16,11 @@ const rateLimit = createMemoryLimiter(5, 60 * 60 * 1000)
 
 const EMAIL_RE = /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)*\.[A-Za-z]{2,}$/
 
-type Row = { email: string; company: string | null; referral_code: string; pass_token: string; created_at: string }
+type Row = { email: string; name: string | null; company: string | null; referral_code: string; pass_token: string; created_at: string }
 
 const passEmail = (r: Row) => ({
   email: r.email,
+  name: r.name,
   company: r.company,
   referralCode: r.referral_code,
   joinedAt: r.created_at,
@@ -48,12 +49,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Too many tries. Wait a little and try again.' }, { status: 429, headers: { 'Retry-After': '3600' } })
   }
 
-  let email: string, ref: string | null, turnstileToken: string
+  let email: string, name: string, company: string, teamSize: string | null, ref: string | null, turnstileToken: string
   try {
     const raw = await req.text()
     if (raw.length > 2048) return NextResponse.json({ error: 'Payload too large.' }, { status: 413 })
     const body = JSON.parse(raw)
     email = String(body.email ?? '').trim().toLowerCase().slice(0, 200)
+    name = String(body.name ?? '').trim().replace(/\s+/g, ' ').slice(0, 80)
+    company = String(body.company ?? '').trim().replace(/\s+/g, ' ').slice(0, 120)
+    const size = String(body.teamSize ?? '')
+    teamSize = TEAM_SIZES.some((o) => o.value === size) ? size : null
     const r = String(body.ref ?? '').trim().toLowerCase()
     ref = isReferralCode(r) ? r : null
     turnstileToken = String(body.turnstileToken ?? '').trim()
@@ -63,6 +68,9 @@ export async function POST(req: NextRequest) {
 
   if (!EMAIL_RE.test(email)) {
     return NextResponse.json({ error: 'Enter an email address like you@company.com.' }, { status: 400 })
+  }
+  if (!name || !company || !teamSize) {
+    return NextResponse.json({ error: 'Add your name, your company and how many people work there.' }, { status: 400 })
   }
   if (!(await verifyTurnstile(turnstileToken, ip))) {
     return NextResponse.json({ error: 'The security check did not pass. Refresh the page and try again.' }, { status: 403 })
@@ -77,10 +85,10 @@ export async function POST(req: NextRequest) {
     if (data && data.email !== email && !sameCompany(data.email, email)) { referredBy = ref; referrer = data }
   }
 
-  const SELECT = 'email, company, referral_code, pass_token, created_at'
+  const SELECT = 'email, name, company, referral_code, pass_token, created_at'
   const { data: created, error } = await db
     .from('waitlist')
-    .insert({ email, company: companyFromEmail(email), referred_by: referredBy })
+    .insert({ email, name, company, team_size: teamSize, referred_by: referredBy })
     .select(SELECT)
     .single<Row>()
 
@@ -98,8 +106,10 @@ export async function POST(req: NextRequest) {
     notifyLeadSlack({
       title: 'New early access signup',
       fields: [
+        { label: 'Name', value: name },
+        { label: 'Company', value: company },
+        { label: 'Employees', value: labelFor(TEAM_SIZES, teamSize) },
         { label: 'Email', value: email },
-        { label: 'Company (from domain)', value: created.company },
         { label: 'Referred by', value: referrer ? `${referrer.company ?? referrer.email}` : null },
       ],
       context: 'Early access · mambahr.com/early-access',

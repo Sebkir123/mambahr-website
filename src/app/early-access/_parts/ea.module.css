@@ -98,38 +98,7 @@
 }
 .lead b { color: var(--ink-1); font-weight: 600; }
 
-/* ── the join capsule ── */
-.capsule {
-  position: relative;
-  margin-top: 34px;
-  max-width: 540px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 7px 7px 24px;
-  background: #fff;
-  border: 1px solid rgba(26, 26, 25, 0.12);
-  border-radius: 999px;
-  box-shadow: 0 1px 2px rgba(20, 18, 14, 0.06), 0 18px 40px -18px rgba(60, 40, 90, 0.4);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.capsule:focus-within {
-  border-color: rgba(106, 93, 166, 0.55);
-  box-shadow: 0 0 0 4px rgba(139, 127, 208, 0.18), 0 18px 40px -18px rgba(60, 40, 90, 0.45);
-}
-.capsule.bad { border-color: var(--color-red); }
-.capsuleInput {
-  flex: 1;
-  min-width: 0;
-  height: 50px;
-  border: 0;
-  outline: none;
-  background: transparent;
-  font-family: var(--font-sans);
-  font-size: 17px;
-  color: var(--ink-1);
-}
-.capsuleInput::placeholder { color: #857e74; }
+/* ── the join button ── */
 .join {
   flex: none;
   display: inline-flex;
@@ -153,6 +122,13 @@
 .join:focus-visible { outline: 2px solid #8b7fd0; outline-offset: 3px; }
 .arrow { transition: transform 0.2s ease; }
 .join:hover .arrow { transform: translateX(3px); }
+
+/* ── the join form: work email, name, company, size ── */
+.joinForm { margin-top: 30px; max-width: 540px; display: grid; gap: 16px; }
+.joinForm .msg, .joinForm .captcha { margin: 0; }
+.joinWide { width: 100%; justify-content: center; margin-top: 4px; }
+.segBad .segO { border-color: var(--color-red); }
+.belowForm { margin-left: 0; }
 
 .below {
   margin: 16px 0 0 24px;
@@ -639,8 +615,6 @@ select.input {
   .stamp { scale: 0.8; margin: -24px -14px -24px -8px; }
   .passFacts { gap: 18px; }
   .seal { width: 44px; height: 44px; }
-  .capsule { flex-wrap: wrap; border-radius: 22px; padding: 8px; }
-  .capsuleInput { flex-basis: 100%; padding: 0 12px; }
   .join { width: 100%; justify-content: center; }
   .below, .msg { margin-left: 4px; }
   .row2 { grid-template-columns: 1fr; }

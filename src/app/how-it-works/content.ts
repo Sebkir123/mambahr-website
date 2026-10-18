@@ -215,7 +215,7 @@ export const DECIDE = {
 }
 
 export const START: { title: string; body: string }[] = [
-  { title: 'Join early access', body: 'Your work email holds your place and your founding pricing. We open MambaHR to companies in small groups.' },
+  { title: 'Join early access', body: 'Your work email, name, company and team size hold your place and your founding pricing. We open MambaHR to companies in small groups.' },
   { title: 'Set up your company', body: 'Your company name and the state where most of your people work. The rest can wait.' },
   { title: 'Bring in your people', body: 'Import from Gusto, BambooHR, Rippling, Workday, ADP or Namely, upload a spreadsheet, add people by hand, or skip it for now. Hiring data can come over from Greenhouse or Lever.' },
   { title: 'Connect Slack', body: 'So your team can send requests where they already work. You can also skip this and use the web request form.' },

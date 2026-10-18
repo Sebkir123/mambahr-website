@@ -70,7 +70,7 @@ export function PassView({ token, pass, link, welcome }: Props) {
 
         <section className={`${s.section} ${s.afterStage}`}>
           <ol className={s.steps3}>
-            <li><ImportStep token={token} pass={pass} company={company} setCompany={setCompany} askCompany={personal} onSaved={setSavedSystem} /></li>
+            <li><ImportStep token={token} pass={pass} company={company} setCompany={setCompany} askCompany={!pass.company} onSaved={setSavedSystem} /></li>
             <li><GiftCard link={link} referrals={pass.referrals} /></li>
             <li><SignOffCard company={name} /></li>
           </ol>
@@ -92,6 +92,9 @@ function ImportStep({
   onSaved: (hrSystem: string) => void
 }) {
   const [teamSize, setTeamSize] = useState(pass.teamSize ?? '')
+  // Company and size come with the signup now; only passes from before then
+  // are asked for them here.
+  const askSize = !pass.teamSize
   const [hrSystem, setHrSystem] = useState(pass.hrSystem ?? '')
   const [handoffs, setHandoffs] = useState<string[]>(pass.handoffs)
   const [saved, setSaved] = useState(Boolean(pass.teamSize && pass.hrSystem))
@@ -101,7 +104,12 @@ function ImportStep({
   async function save(e: React.FormEvent) {
     e.preventDefault()
     if (!company.trim() || !teamSize || !hrSystem) {
-      setError(askCompany && !company.trim() ? 'Add your company, team size and where your records live.' : 'Choose your team size and where your records live.')
+      const gaps = [
+        askCompany && !company.trim() ? 'your company' : null,
+        askSize && !teamSize ? 'your team size' : null,
+        !hrSystem ? 'where your records live' : null,
+      ].filter(Boolean) as string[]
+      setError(`Add ${gaps.length > 1 ? `${gaps.slice(0, -1).join(', ')} and ${gaps[gaps.length - 1]}` : gaps[0]}.`)
       return
     }
     setPending(true)
@@ -146,7 +154,7 @@ function ImportStep({
         <span className={s.stepNo} aria-hidden="true">1</span>
         <div>
           <h2 className={s.cardT} id="ea-step1">Get your import ready</h2>
-          <p className={s.cardS}>Two answers, and your records come over the day your group opens.</p>
+          <p className={s.cardS}>{['One answer', 'Two answers', 'Three answers'][Number(askCompany) + Number(askSize)]}, and your records come over the day your group opens.</p>
         </div>
       </div>
       <div className={s.form}>
@@ -156,17 +164,19 @@ function ImportStep({
             <input className={s.input} value={company} onChange={(e) => setCompany(e.target.value)} autoComplete="organization" placeholder="Acme Inc." />
           </label>
         )}
-        <fieldset className={s.fieldset}>
-          <legend className={s.lbl}>Employees</legend>
-          <div className={s.seg}>
-            {TEAM_SIZES.map((o) => (
-              <label key={o.value} className={teamSize === o.value ? `${s.segO} ${s.on}` : s.segO}>
-                <input type="radio" name="teamSize" value={o.value} checked={teamSize === o.value} onChange={() => setTeamSize(o.value)} />
-                {o.label}
-              </label>
-            ))}
-          </div>
-        </fieldset>
+        {askSize && (
+          <fieldset className={s.fieldset}>
+            <legend className={s.lbl}>Employees</legend>
+            <div className={s.seg}>
+              {TEAM_SIZES.map((o) => (
+                <label key={o.value} className={teamSize === o.value ? `${s.segO} ${s.on}` : s.segO}>
+                  <input type="radio" name="teamSize" value={o.value} checked={teamSize === o.value} onChange={() => setTeamSize(o.value)} />
+                  {o.label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        )}
         <label className={s.fieldL}>
           <span className={s.lbl}>Where your HR records live</span>
           <select className={s.input} value={hrSystem} onChange={(e) => setHrSystem(e.target.value)}>
