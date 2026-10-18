@@ -1,0 +1,24 @@
+import type { Metadata } from 'next'
+import { ogCard } from '@/lib/og'
+
+// Ad landing page for the SF tech startup segment of the October 2026 ad test
+// (blue-collar companies vs SF tech startups). Not in the sitemap or the nav and
+// not indexed: its words change with the test, and the ads link straight to it.
+// The search page for startups is /best-hris-for-startups.
+const title = 'HR for Startups, in Slack | MambaHR'
+const description =
+  'HR admin for startups, run from Slack: offers inside your pay range, onboarding before day one, California’s rules built in, and payroll powered by Deel.'
+const ogImage = ogCard('HR for startups, right in Slack.', 'For startups')
+
+export const metadata: Metadata = {
+  title,
+  description,
+  robots: { index: false, follow: true },
+  openGraph: { title, description, url: 'https://www.mambahr.com/for/startups', images: [{ url: ogImage, width: 1200, height: 630 }] },
+  twitter: { card: 'summary_large_image', title, description, images: [ogImage] },
+  alternates: { canonical: 'https://www.mambahr.com/for/startups' },
+}
+
+export default function StartupsLayout({ children }: { children: React.ReactNode }) {
+  return children
+}
