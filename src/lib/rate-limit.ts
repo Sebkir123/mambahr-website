@@ -1,4 +1,5 @@
 import 'server-only'
+import { createHash } from 'node:crypto'
 import type { NextRequest } from 'next/server'
 import type { SupabaseClient } from '@supabase/supabase-js'
 
@@ -42,12 +43,21 @@ export function createMemoryLimiter(max: number, windowMs: number) {
 // which is the fail-closed answer for the forms that write with the service
 // role anyway; the waitlist and field-guide routes keep their documented
 // fallback to the in-memory limiter alone.
+//
+// Each route counts on its own, keyed by a salted hash of the route and the
+// key (the client IP, or an email address for pass-link resends), never the
+// raw value, and the database drops every row after a day: the privacy policy
+// says the IP address is not stored. So windowSecs is at most a day.
+const RATE_SALT = 'mambahr-rate-v1'
+const rateKey = (route: string, key: string) =>
+  createHash('sha256').update(`${RATE_SALT}:${route}:${key}`).digest('hex').slice(0, 32)
+
 export async function durableRateLimit(
   client: SupabaseClient,
-  opts: { route: string; ip: string; max: number; windowSecs?: number },
+  opts: { route: string; key: string; max: number; windowSecs?: number },
 ): Promise<boolean> {
   const { data, error } = await client.rpc('check_signup_rate_limit', {
-    p_ip: opts.ip,
+    p_ip: rateKey(opts.route, opts.key),
     p_max: opts.max,
     p_window_secs: opts.windowSecs ?? 3600,
   })

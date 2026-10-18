@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
   // RPC error at runtime still fails open, logged (see lib/rate-limit.ts).
   const client = getAdminClient()
   if (!client) return NextResponse.json({ error: 'Service unavailable.' }, { status: 503 })
-  if (!(await durableRateLimit(client, { route: '/api/demo', ip, max: 8 }))) return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 })
+  if (!(await durableRateLimit(client, { route: '/api/demo', key: ip, max: 8 }))) return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 })
 
   if (!(await verifyTurnstile(turnstileToken, ip))) {
     return NextResponse.json({ error: 'Verification failed. Refresh and try again.' }, { status: 403 })

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import LegalPage, { type LegalSection } from '@/components/legal/legal-page'
 import { ogCard } from '@/lib/og'
 
-const UPDATED = '29 July 2026'
+const UPDATED = '18 October 2026'
 const description =
   'How MambaHR handles personal information on mambahr.com: what we collect, why, who processes it, how long we keep it, and how to have it deleted.'
 
@@ -28,7 +28,7 @@ const sections: LegalSection[] = [
       <>
         <p>
           This policy covers <strong>mambahr.com</strong>, our public website: the pages you
-          browse, the demo request form, and the field guides you can download.
+          browse, the early access form, and the field guides you can download.
         </p>
         <p>
           It does <strong>not</strong> cover the MambaHR application itself. Employee data that a
@@ -45,8 +45,8 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          You only ever type into this website when you ask us for something. When you request a
-          demo, download a field guide, or join the waitlist, we collect:
+          You only ever type into this website when you ask us for something. When you join the
+          early access list or download a field guide, we collect:
         </p>
         <ul>
           <li>Your name</li>
@@ -54,6 +54,13 @@ const sections: LegalSection[] = [
           <li>Your company name</li>
           <li>Your company size band (a range, not a headcount)</li>
         </ul>
+        <p>
+          On your early access pass you can also tell us which HR system you use today and what
+          you would hand off first. If you joined through someone&rsquo;s share link, we record
+          whose link it was so we can credit them when your company becomes a customer. They see
+          how many companies joined with their link, never who. Your own share link shows your
+          company name and the date you joined to anyone you send it to.
+        </p>
         <p>
           If you email us, we keep that correspondence so we can reply and keep track of the
           conversation. We do not ask for, and this website does not collect, any sensitive
@@ -76,7 +83,7 @@ const sections: LegalSection[] = [
           <li>The referring site and any UTM campaign parameters in the link you followed</li>
           <li>Screen size and browser language</li>
           <li>Device type, browser, and operating system, derived from your user agent</li>
-          <li>Clicks on calls to action, such as a demo button</li>
+          <li>Clicks on calls to action, such as the early access button</li>
           <li>
             Approximate location (country, region, city) and network operator, derived from your IP
             address
@@ -86,7 +93,8 @@ const sections: LegalSection[] = [
           <strong>We do not store your IP address.</strong> It is used in the moment to derive the
           approximate location and network above, and to rate-limit abuse, then discarded. What we
           keep is a salted, truncated one-way hash of it, which lets us recognize repeat requests
-          in a session without holding the address itself.
+          in a session without holding the address itself. The hashes our forms use to stop spam
+          are deleted after a day.
         </p>
         <p>
           We also classify obvious bots and crawlers from the user agent so they do not pollute the
@@ -174,7 +182,7 @@ const sections: LegalSection[] = [
               </tr>
               <tr>
                 <td>Commercial information</td>
-                <td>Company name, company size band, what you asked us for</td>
+                <td>Company name, company size band, what you asked us for, and what you add on your early access pass</td>
                 <td>You</td>
                 <td>Until deleted</td>
               </tr>
@@ -208,7 +216,7 @@ const sections: LegalSection[] = [
       <>
         <p>We use the information above to:</p>
         <ul>
-          <li>Reply to your demo request and send you the guide you asked for</li>
+          <li>Hold your place on the early access list, and send you your pass or the guide you asked for</li>
           <li>Send the confirmation email for a request you submitted</li>
           <li>Understand which pages help people and which do not, so we can improve them</li>
           <li>Keep the forms free of spam and automated abuse</li>
@@ -242,7 +250,7 @@ const sections: LegalSection[] = [
               <tr><td>Supabase</td><td>Database that stores form submissions and analytics</td></tr>
               <tr><td>Resend</td><td>Sends the confirmation and field-guide emails</td></tr>
               <tr><td>Cloudflare</td><td>Turnstile bot check on our forms</td></tr>
-              <tr><td>Slack</td><td>Notifies our founders internally that you asked for a demo</td></tr>
+              <tr><td>Slack</td><td>Notifies our founders internally when you join the early access list</td></tr>
               <tr><td>Google Analytics</td><td>Aggregate traffic measurement, where enabled</td></tr>
             </tbody>
           </table>
@@ -268,9 +276,10 @@ const sections: LegalSection[] = [
           <li>All other analytics sessions are deleted after <strong>180 days</strong></li>
         </ul>
         <p>
-          Demo requests, field-guide requests, and email correspondence are business records. We
-          keep those while we are in contact with you and for as long as we may need them for our
-          legitimate business and legal purposes. Ask us to delete them and we will.
+          Early access signups, earlier demo requests, field-guide requests, and email correspondence
+          are business records. We keep those while we are in contact with you and for as long as
+          we may need them for our legitimate business and legal purposes. Ask us to delete them
+          and we will.
         </p>
       </>
     ),

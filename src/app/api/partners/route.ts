@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
   if (!rateLimit(ip).ok) return NextResponse.json({ error: 'Too many tries. Wait a little and try again.' }, { status: 429 })
   const db = earlyAccessDb()
   if (!db) return NextResponse.json({ error: 'Service unavailable.' }, { status: 503 })
-  if (!(await durableRateLimit(db, { route: '/api/partners', ip, max: 5 }))) {
+  if (!(await durableRateLimit(db, { route: '/api/partners', key: ip, max: 5 }))) {
     return NextResponse.json({ error: 'Too many tries. Wait a little and try again.' }, { status: 429 })
   }
 

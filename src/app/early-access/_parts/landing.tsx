@@ -41,6 +41,8 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
   const [token, setToken] = useState<string | null>(null)
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState('')
+  // Already on the list: false when the pass link was resent too often today.
+  const [resent, setResent] = useState(true)
   // The visitor's own date on the client; the server render says "Today".
   const today = useSyncExternalStore(noop, () => shortDate(new Date()), () => 'Today')
 
@@ -78,6 +80,7 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
         router.push(`/early-access/pass/${data.pass}?welcome=1`)
         return
       }
+      setResent(data.sent !== false)
       setStatus('exists')
     } catch {
       setError('That did not go through. Check your connection and try again.')
@@ -204,7 +207,9 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
                   {status === 'error' && <p className={`${s.msg} ${s.msgErr}`}>{error}</p>}
                   {status === 'exists' && (
                     <p className={`${s.msg} ${s.msgOk}`}>
-                      You&rsquo;re already on the list. We&rsquo;ve sent your pass link to <b>{email.trim()}</b>.
+                      {resent
+                        ? <>You&rsquo;re already on the list. We&rsquo;ve sent your pass link to <b>{email.trim()}</b>.</>
+                        : <>You&rsquo;re already on the list. Your pass link went to <b>{email.trim()}</b> earlier today. Check that inbox, including spam.</>}
                     </p>
                   )}
                 </div>

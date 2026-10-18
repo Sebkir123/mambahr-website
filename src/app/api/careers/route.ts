@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
 
   const client = getAdminClient()
   if (!client) return NextResponse.json({ error: 'Applications are not available right now. Email hello@mambahr.com instead.' }, { status: 503 })
-  if (!(await durableRateLimit(client, { route: '/api/careers', ip, max: 5 }))) {
+  if (!(await durableRateLimit(client, { route: '/api/careers', key: ip, max: 5 }))) {
     return NextResponse.json({ error: 'Too many applications from this network. Try again later.' }, { status: 429 })
   }
   if (!(await verifyTurnstile(turnstileToken, ip))) {

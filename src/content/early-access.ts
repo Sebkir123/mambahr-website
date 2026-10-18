@@ -92,6 +92,12 @@ export function sameCompany(a: string, b: string): boolean {
   return Boolean(da && !FREE_MAIL.has(da) && da === emailDomain(b))
 }
 
+/** One key per company: the work domain, or the whole address for a personal inbox. */
+export function companyKey(email: string): string {
+  const d = emailDomain(email)
+  return d && !FREE_MAIL.has(d) ? d : email.trim().toLowerCase()
+}
+
 export function emailDomain(email: string): string | null {
   const d = email.split('@')[1]?.trim().toLowerCase()
   return d && d.includes('.') ? d : null

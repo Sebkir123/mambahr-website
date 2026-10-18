@@ -1,6 +1,7 @@
 import 'server-only'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { env } from '@/lib/env'
+import { companyKey } from '@/content/early-access'
 
 // Service-role access for the early access list. The waitlist table has no
 // public policies: every read and write goes through these helpers, behind
@@ -46,10 +47,8 @@ export async function getPass(token: string): Promise<Pass | null> {
     .eq('pass_token', token)
     .maybeSingle()
   if (!data) return null
-  const { count } = await db
-    .from('waitlist')
-    .select('id', { count: 'exact', head: true })
-    .eq('referred_by', data.referral_code)
+  // The pass counts companies: colleagues who all came through the link count once.
+  const { data: referred } = await db.from('waitlist').select('email').eq('referred_by', data.referral_code)
   return {
     email: data.email,
     company: data.company || null,
@@ -58,7 +57,7 @@ export async function getPass(token: string): Promise<Pass | null> {
     handoffs: data.first_handoff ?? [],
     referralCode: data.referral_code,
     joinedAt: data.created_at,
-    referrals: count ?? 0,
+    referrals: new Set((referred ?? []).map((r) => companyKey(r.email))).size,
   }
 }
 

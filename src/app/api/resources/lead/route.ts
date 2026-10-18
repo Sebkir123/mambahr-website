@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
 
   const client = getAdminClient()
   if (!client) return NextResponse.json({ error: 'Service unavailable.' }, { status: 503 })
-  if (!(await durableRateLimit(client, { route: '/api/resources/lead', ip, max: 8 }))) return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 })
+  if (!(await durableRateLimit(client, { route: '/api/resources/lead', key: ip, max: 8 }))) return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 })
 
   // Resource must exist, be published, and have a file.
   const { data: r } = await client

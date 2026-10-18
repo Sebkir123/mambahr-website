@@ -31,7 +31,7 @@ function getAdminClient(): SupabaseClient | null {
 async function checkDurableRateLimit(ip: string): Promise<boolean> {
   const client = getAdminClient()
   if (!client) return true // no service-role key: the in-memory limiter + Turnstile stand alone
-  return durableRateLimit(client, { route: '/api/field-guide', ip, max: 5 })
+  return durableRateLimit(client, { route: '/api/field-guide', key: ip, max: 5 })
 }
 
 const rateLimit = createMemoryLimiter(5, 60 * 60 * 1000)

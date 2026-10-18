@@ -4,12 +4,13 @@ import { notifyLeadSlack } from '@/lib/slack'
 import { verifyTurnstile } from '@/lib/turnstile'
 import { createMemoryLimiter, durableRateLimit, getClientIp } from '@/lib/rate-limit'
 import { earlyAccessDb, isReferralCode, passUrl, referralUrl } from '@/lib/early-access'
-import { TEAM_SIZES, labelFor, sameCompany } from '@/content/early-access'
+import { TEAM_SIZES, companyKey, labelFor, sameCompany } from '@/content/early-access'
 
 // Joining the early access list: work email, name, company and team size,
 // behind Turnstile and the rate limits. A new signup gets its pass token back and goes straight to its pass
 // page; the token is never returned for an address that was already on the
-// list, whose owner gets the link by email instead.
+// list, whose owner gets the link by email instead (at most three times a day,
+// so the form cannot be used to flood an inbox).
 
 // Spam dampener: 5 requests / hour / IP, per instance (see lib/rate-limit.ts).
 const rateLimit = createMemoryLimiter(5, 60 * 60 * 1000)
@@ -45,7 +46,7 @@ export async function POST(req: NextRequest) {
   // Fail closed on misconfiguration, as /api/demo does.
   const db = earlyAccessDb()
   if (!db) return NextResponse.json({ error: 'Service unavailable.' }, { status: 503 })
-  if (!(await durableRateLimit(db, { route: '/api/waitlist', ip, max: 5 }))) {
+  if (!(await durableRateLimit(db, { route: '/api/waitlist', key: ip, max: 5 }))) {
     return NextResponse.json({ error: 'Too many tries. Wait a little and try again.' }, { status: 429, headers: { 'Retry-After': '3600' } })
   }
 
@@ -94,12 +95,26 @@ export async function POST(req: NextRequest) {
 
   if (error?.code === '23505') {
     const { data: existing } = await db.from('waitlist').select(SELECT).eq('email', email).maybeSingle<Row>()
-    if (existing) await sendPassLinkAgain(passEmail(existing))
-    return NextResponse.json({ status: 'exists' })
+    const resend = existing && (await durableRateLimit(db, { route: '/api/waitlist/resend', key: email, max: 3, windowSecs: 86400 }))
+    if (resend) await sendPassLinkAgain(passEmail(existing))
+    return NextResponse.json({ status: 'exists', sent: Boolean(resend) })
   }
   if (error || !created) {
     console.error('[waitlist] insert failed:', error?.message)
     return NextResponse.json({ error: 'That did not go through. Try again, or email hello@mambahr.com.' }, { status: 500 })
+  }
+
+  // For the founders only: a second person from a company already on the list
+  // is the same company, not a new one. The person joining is never told.
+  const domain = companyKey(email)
+  let colleagues = 0
+  if (domain !== email) {
+    const { count } = await db
+      .from('waitlist')
+      .select('id', { count: 'exact', head: true })
+      .like('email', `%@${domain.replace(/[\\%_]/g, '\\$&')}`)
+      .neq('email', email)
+    colleagues = count ?? 0
   }
 
   await Promise.all([
@@ -111,6 +126,7 @@ export async function POST(req: NextRequest) {
         { label: 'Employees', value: labelFor(TEAM_SIZES, teamSize) },
         { label: 'Email', value: email },
         { label: 'Referred by', value: referrer ? `${referrer.company ?? referrer.email}` : null },
+        { label: 'Already on the list', value: colleagues ? `${colleagues} more from ${domain}` : null },
       ],
       context: 'Early access · mambahr.com/early-access',
     }),
