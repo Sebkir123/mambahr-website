@@ -217,7 +217,10 @@ export function OgCard({ eyebrow, title }: { eyebrow: string; title: string }) {
           <Eyebrow>{eyebrow}</Eyebrow>
           <div style={{ fontFamily: SERIF, fontSize: size, lineHeight: 1.02, letterSpacing: '-0.035em', color: INK }}>{title}</div>
         </div>
-        <div style={{ fontSize: 21, color: FAINT }}>HR admin, done for you · mambahr.com</div>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, fontSize: 21, color: FAINT }}>
+          <div style={{ fontFamily: SERIF, fontSize: 25, color: INK, letterSpacing: '-0.02em' }}>HR that runs itself.</div>
+          <div>mambahr.com</div>
+        </div>
       </div>
 
       <Stage left={790}>
