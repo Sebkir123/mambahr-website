@@ -78,6 +78,9 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
         return
       }
       if (data.status === 'joined' && data.pass) {
+        // Google Analytics, when it is loaded (never for a visitor sending GPC or
+        // Do Not Track): the signup as a lead, to mark as a key event in GA.
+        ;(window as Window & { gtag?: (...args: unknown[]) => void }).gtag?.('event', 'generate_lead', { form: 'early_access', team_size: teamSize })
         router.push(`/early-access/pass/${data.pass}?welcome=1`)
         return
       }
