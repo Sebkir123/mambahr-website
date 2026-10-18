@@ -5,6 +5,7 @@ import { verifyTurnstile } from '@/lib/turnstile'
 import { createMemoryLimiter, durableRateLimit, getClientIp } from '@/lib/rate-limit'
 import { earlyAccessDb, isReferralCode, passUrl, referralUrl } from '@/lib/early-access'
 import { TEAM_SIZES, companyKey, labelFor, sameCompany } from '@/content/early-access'
+import { describeTouch, sanitizeAttribution, type Attribution } from '@/lib/attribution'
 
 // Joining the early access list: work email, name, company and team size,
 // behind Turnstile and the rate limits. A new signup gets its pass token back and goes straight to its pass
@@ -51,9 +52,10 @@ export async function POST(req: NextRequest) {
   }
 
   let email: string, name: string, company: string, teamSize: string | null, ref: string | null, turnstileToken: string
+  let attribution: Attribution | null
   try {
     const raw = await req.text()
-    if (raw.length > 2048) return NextResponse.json({ error: 'Payload too large.' }, { status: 413 })
+    if (raw.length > 4096) return NextResponse.json({ error: 'Payload too large.' }, { status: 413 })
     const body = JSON.parse(raw)
     email = String(body.email ?? '').trim().toLowerCase().slice(0, 200)
     name = String(body.name ?? '').trim().replace(/\s+/g, ' ').slice(0, 80)
@@ -62,6 +64,7 @@ export async function POST(req: NextRequest) {
     teamSize = TEAM_SIZES.some((o) => o.value === size) ? size : null
     const r = String(body.ref ?? '').trim().toLowerCase()
     ref = isReferralCode(r) ? r : null
+    attribution = sanitizeAttribution(body.attribution)
     turnstileToken = String(body.turnstileToken ?? '').trim()
   } catch {
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 })
@@ -89,7 +92,7 @@ export async function POST(req: NextRequest) {
   const SELECT = 'email, name, company, referral_code, pass_token, created_at'
   const { data: created, error } = await db
     .from('waitlist')
-    .insert({ email, name, company, team_size: teamSize, referred_by: referredBy })
+    .insert({ email, name, company, team_size: teamSize, referred_by: referredBy, ...attributionColumns(attribution) })
     .select(SELECT)
     .single<Row>()
 
@@ -127,6 +130,7 @@ export async function POST(req: NextRequest) {
         { label: 'Email', value: email },
         { label: 'Referred by', value: referrer ? `${referrer.company ?? referrer.email}` : null },
         { label: 'Already on the list', value: colleagues ? `${colleagues} more from ${domain}` : null },
+        { label: 'Came from', value: cameFrom(attribution) },
       ],
       context: 'Early access · mambahr.com/early-access',
     }),
@@ -134,4 +138,30 @@ export async function POST(req: NextRequest) {
   ])
 
   return NextResponse.json({ status: 'joined', pass: created.pass_token })
+}
+
+// The ad or link that brought the signup, as columns the ad test can be counted
+// by (the latest touch), plus the first touch whole.
+function attributionColumns(a: Attribution | null) {
+  if (!a) return {}
+  const t = a.last
+  return {
+    utm_source: t.source,
+    utm_medium: t.medium,
+    utm_campaign: t.campaign,
+    utm_content: t.content,
+    utm_term: t.term,
+    ad_platform: t.platform,
+    landing_path: t.landing,
+    referrer_host: t.referrer,
+    touched_at: t.at,
+    first_touch: a.first,
+  }
+}
+
+function cameFrom(a: Attribution | null): string {
+  if (!a) return 'Direct, or no source recorded'
+  const last = describeTouch(a.last)
+  const first = describeTouch(a.first)
+  return first === last ? `${last} (landed on ${a.last.landing})` : `${last} (first came from ${first})`
 }

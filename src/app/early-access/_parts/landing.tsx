@@ -8,6 +8,7 @@ import Footer from '@/components/footer'
 import TurnstileWidget from '@/components/turnstile-widget'
 import { Em } from '@/components/v2/page-kit'
 import { PARTNER_SHARE, TEAM_SIZES, companyFromEmail, emailDomain } from '@/content/early-access'
+import { readAttribution } from '@/lib/attribution'
 import { PassCard, Sky, Stage, shortDate } from './pass-card'
 import s from './ea.module.css'
 
@@ -68,7 +69,7 @@ export function Landing({ refCode, referrer }: { refCode: string | null; referre
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), name: name.trim(), company: companyValue.trim(), teamSize, ref: refCode, turnstileToken: t }),
+        body: JSON.stringify({ email: email.trim(), name: name.trim(), company: companyValue.trim(), teamSize, ref: refCode, attribution: readAttribution(), turnstileToken: t }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {

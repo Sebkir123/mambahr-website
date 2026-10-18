@@ -59,7 +59,9 @@ const sections: LegalSection[] = [
           you would hand off first. If you joined through someone&rsquo;s share link, we record
           whose link it was so we can credit them when your company becomes a customer. They see
           how many companies joined with their link, never who. Your own share link shows your
-          company name and the date you joined to anyone you send it to.
+          company name and the date you joined to anyone you send it to. We also note which ad or
+          link brought you to the site, so we can tell which of our ads work: the campaign it
+          belonged to and the page you landed on, never the ad network&rsquo;s click identifier.
         </p>
         <p>
           If you email us, we keep that correspondence so we can reply and keep track of the

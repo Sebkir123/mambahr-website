@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
+import { captureAttribution } from '@/lib/attribution'
 
 // Tiny first-party tracker. Signals page-views + engagement to /api/site/track,
 // where the server attaches the authoritative metadata. Per page it tracks max
@@ -46,6 +47,8 @@ export default function SiteTracker() {
     if (!pathname || pathname.startsWith('/admin') || pathname.startsWith('/api')) return
     if (typeof window === 'undefined') return
     if (optedOut()) return
+    // Which ad or link brought this visit, for the early access signup (not on the deck).
+    if (!pathname.startsWith('/deck-')) captureAttribution()
 
     // Identity: visitor persists (returning detection); session is per tab session.
     if (!idRef.current) {
