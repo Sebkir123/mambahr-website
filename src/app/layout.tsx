@@ -100,7 +100,7 @@ const jsonLd = [
       '@type': 'Offer',
       price: '14',
       priceCurrency: 'USD',
-      description: 'Per employee / month, billed annually. Book a demo.',
+      description: 'Per employee / month, billed annually. Founding customer pricing through early access.',
     },
     operatingSystem: 'Web',
     // Freshness signal. Answer engines discount undated facts, and this is the
@@ -138,7 +138,7 @@ const jsonLd = [
       '@type': 'ContactPoint',
       contactType: 'sales',
       email: 'hello@mambahr.com',
-      url: 'https://www.mambahr.com/demo',
+      url: 'https://www.mambahr.com/early-access',
       areaServed: 'US',
       availableLanguage: 'English',
     },

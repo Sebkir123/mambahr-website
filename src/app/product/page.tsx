@@ -210,7 +210,7 @@ export default function ProductPage() {
 
         <PageCta
           title={<>Less admin.<br />More time for your people.</>}
-          sub="A 30-minute demo using examples from your company. Then we import your data and you are up and running."
+          sub="Join early access. When your group opens, we import your data and you are up and running."
         />
       </main>
       <Footer />

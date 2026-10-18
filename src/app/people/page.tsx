@@ -201,7 +201,7 @@ export default function PeoplePage() {
         />
 
 
-        <PageCta title={<>Your people, on the record.</>} sub="A 30-minute demo with your own org chart. Then we import your records and switch you over." />
+        <PageCta title={<>Your people, on the record.</>} sub="Join early access. When your group opens, we import your records and switch you over." />
       </main>
       <Footer />
     </>

@@ -239,7 +239,7 @@ export default function JobPortalPage() {
         />
 
 
-        <PageCta title={<>Your careers page, <Em>by tomorrow.</Em></>} sub="A 30-minute demo. Then we set up your careers page on your own web address." />
+        <PageCta title={<>Your careers page, <Em>by tomorrow.</Em></>} sub="Join early access. When your group opens, we set up your careers page on your own web address." />
       </main>
       <Footer />
     </>

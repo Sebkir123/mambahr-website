@@ -33,7 +33,7 @@ export default function CompareView({ data, faqs, importFrom }: { data: Competit
             {line2 && <p className="title2" data-reveal data-delay="1">{line2}</p>}
             <p className="lead" data-reveal data-delay="2">{data.heroSub}</p>
             <div className="ctas" data-reveal data-delay="3">
-              <Link href="/demo" className="btn btn-primary">Book a demo</Link>
+              <Link href="/early-access" className="btn btn-primary">Get early access</Link>
               <Link href="/pricing" className="btn btn-secondary">See pricing</Link>
             </div>
           </div>
@@ -280,7 +280,7 @@ export default function CompareView({ data, faqs, importFrom }: { data: Competit
 
         <PageCta
           title={<>See it on <Em>your own requests.</Em></>}
-          sub="A 30-minute demo, run on your own HR scenarios."
+          sub="Join early access. When your group opens, we import your data and switch you over."
         />
       </main>
       <Footer />

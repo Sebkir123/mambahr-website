@@ -405,7 +405,7 @@ export default function MambaPage() {
       />
 
 
-      <PageCta title={<>See it do the work, <Em>live.</Em></>} sub="A 30-minute demo using your own Slack questions. Then we import your data and switch you over." />
+      <PageCta title={<>See it do the work, <Em>live.</Em></>} sub="Join early access. When your group opens, we import your data and switch you over." />
       </main>
 
       <Footer />

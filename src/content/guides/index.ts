@@ -60,7 +60,7 @@ const STATIC_LABELS: Record<string, string> = {
   '/rif': 'How MambaHR plans layoffs',
   '/people': 'Employee records in MambaHR',
   '/pricing': 'MambaHR pricing',
-  '/demo': 'Book a demo',
+  '/early-access': 'Get early access',
 }
 
 /** Human label for an internal path, used for related links. */

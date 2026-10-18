@@ -3,7 +3,7 @@ import MegaNav from '@/components/nav/mega-nav'
 import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import { PageHero, PageCta, Em } from '@/components/v2/page-kit'
-import { DEMO_HREF, DEMO_LABEL } from '@/content/cta'
+import { EARLY_ACCESS_HREF, EARLY_ACCESS_LABEL } from '@/content/cta'
 import { FLOW, WALKS, DECIDE, START, FAQS, type Walk } from './content'
 import s from './how-it-works.module.css'
 import FlowCard from './flow-card'
@@ -156,9 +156,9 @@ export default function HowItWorksPage() {
             <div data-reveal>
               <p className={s.eyebrow}>Getting started</p>
               <h2 id="start-title" className={s.h2}>Up and running <Em>in a day.</Em></h2>
-              <p className={s.lead}>Book a 30-minute demo and we walk you through MambaHR on examples from your company, then set it up with you. Your data imports in a day.</p>
+              <p className={s.lead}>Join early access with your work email. When your group opens, we set MambaHR up with you, and your data imports in a day.</p>
               <div className={s.startBtns}>
-                <Link href={DEMO_HREF} className="btn btn-primary" data-track="cta_click" data-track-label="demo:how-it-works">{DEMO_LABEL}</Link>
+                <Link href={EARLY_ACCESS_HREF} className="btn btn-primary" data-track="cta_click" data-track-label="early-access:how-it-works">{EARLY_ACCESS_LABEL}</Link>
               </div>
             </div>
             <div className={s.startCard} data-reveal data-delay="1">
@@ -194,7 +194,7 @@ export default function HowItWorksPage() {
 
         <PageCta
           title={<>Less admin. <Em>Same judgment.</Em></>}
-          sub="Book a 30-minute demo using examples from your company. Your data imports in a day."
+          sub="Join early access. When your group opens, your data imports in a day."
         />
       </main>
       <Footer />

@@ -309,7 +309,7 @@ export default function LeavePage() {
         />
 
 
-        <PageCta title={<>Time off that takes <Em>none of your time.</Em></>} sub="A 30-minute demo using your own leave policy. Then we import your balances and switch you over." />
+        <PageCta title={<>Time off that takes <Em>none of your time.</Em></>} sub="Join early access. When your group opens, we import your balances and switch you over." />
       </main>
       <Footer />
     </>

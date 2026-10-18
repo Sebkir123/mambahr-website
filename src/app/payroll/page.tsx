@@ -260,7 +260,7 @@ export default function PayrollPage() {
         />
 
 
-        <PageCta title={<>Make payday <Em>calm.</Em></>} sub="A 30-minute demo using one of your real pay cycles. Then we import your data and switch you over." />
+        <PageCta title={<>Make payday <Em>calm.</Em></>} sub="Join early access. When your group opens, we import your data and switch you over." />
       </main>
       <Footer />
     </>

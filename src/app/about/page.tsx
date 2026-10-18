@@ -86,7 +86,7 @@ export default function AboutPage() {
 
         <PageCta
           title={<>See MambaHR <Em>do the work.</Em></>}
-          sub="A 30-minute demo using examples from your company."
+          sub="Join early access. When your group opens, we import your data and switch you over."
         />
       </main>
       <Footer />

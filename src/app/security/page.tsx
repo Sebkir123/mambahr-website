@@ -205,7 +205,7 @@ function SecurityReview() {
         <div className="head" data-reveal>
           <p className="eyebrow">For your security review</p>
           <h2 className="title">Answers for your <Em>security review.</Em></h2>
-          <p className="lead">The questions IT and legal teams ask, answered. Forward this page, or bring them to the demo.</p>
+          <p className="lead">The questions IT and legal teams ask, answered. Forward this page to them.</p>
         </div>
         <div className="grid">
           {REVIEW.map((r, i) => (
@@ -278,7 +278,7 @@ export default function SecurityPage() {
 
         <PageCta
           title={<>Encrypted, logged, <Em>never used to train AI.</Em></>}
-          sub="A 30-minute demo. Bring your security team."
+          sub="Join early access. Your security team can review everything on this page before your group opens."
         />
       </main>
       <Footer />

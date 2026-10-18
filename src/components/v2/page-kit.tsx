@@ -72,7 +72,7 @@ export function PageHero({
         <h1 className="title" data-reveal="eager">{title}</h1>
         <p className="lead" data-reveal="eager">{lead}</p>
         <div className="ctas" data-reveal="eager">
-          <Link href="/demo" className="btn btn-primary">Book a demo</Link>
+          <Link href="/early-access" className="btn btn-primary">Get early access</Link>
           <Link href="/product" className="btn btn-secondary">See how it works</Link>
         </div>
       </div>
@@ -386,7 +386,7 @@ export function FeatureSplit({
               ))}
             </ul>
           )}
-          <Link href="/demo" className="more">Book a demo</Link>
+          <Link href="/early-access" className="more">Get early access</Link>
         </div>
         <div className="stage" data-reveal data-delay="1">{children}</div>
       </div>
@@ -505,7 +505,7 @@ export function StatTrio({
 /* ── Page CTA: gradient panel with grain, faces, real buttons ── */
 export function PageCta({
   title,
-  sub = 'A 30-minute demo. Then we import your data and switch you over.',
+  sub = 'Join early access. When your group opens, we import your data and switch you over.',
 }: {
   title: ReactNode
   sub?: string
@@ -518,7 +518,7 @@ export function PageCta({
         <h2 className="t">{title}</h2>
         <p className="s">{sub}</p>
         <div className="btns">
-          <Link href="/demo" className="btn btn-primary">Book a demo</Link>
+          <Link href="/early-access" className="btn btn-primary">Get early access</Link>
           <Link href="/product" className="btn btn-secondary">See how it works</Link>
         </div>
       </div>

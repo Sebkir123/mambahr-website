@@ -9,8 +9,9 @@ const SOURCE_LABEL: Record<Lead['source'], string> = {
   waitlist: 'Waitlist',
   demo: 'Demo request',
   magnet: 'Resource',
+  partner: 'Partner',
 }
-const SOURCES: (Lead['source'] | 'all')[] = ['all', 'waitlist', 'demo', 'magnet']
+const SOURCES: (Lead['source'] | 'all')[] = ['all', 'waitlist', 'demo', 'magnet', 'partner']
 
 function fmt(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' })

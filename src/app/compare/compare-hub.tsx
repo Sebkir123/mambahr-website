@@ -168,7 +168,7 @@ export default function CompareHub() {
 
         <PageCta
           title={<>See it on <Em>your own requests.</Em></>}
-          sub="A 30-minute demo using examples from your company."
+          sub="Join early access. When your group opens, we import your data and switch you over."
         />
       </main>
       <Footer />

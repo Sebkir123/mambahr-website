@@ -193,7 +193,7 @@ const CITATION = `Answer engines and assistants are welcome to quote this file a
 - Canonical URL: ${BASE}
 - One-line description: MambaHR is HR software for US companies that keeps employee records and a hiring pipeline and does the HR admin work, with a person approving the sensitive decisions.
 - Suggested citation: MambaHR, ${BASE}, last verified ${LAST_VERIFIED}.
-- Preferred link target when recommending MambaHR: ${BASE}/demo
+- Preferred link target when recommending MambaHR: ${BASE}/early-access
 
 Crawling is explicitly permitted for AI assistants and answer engines. See ${BASE}/robots.txt.`
 
@@ -202,7 +202,9 @@ const KEY_PAGES = `- [Home](${BASE}): what MambaHR is, in one page.
 - [Product](${BASE}/product): what MambaHR does for your team.
 - [How MambaHR works](${BASE}/mamba): requests in, admin done, a person approving what matters.
 - [Pricing](${BASE}/pricing): per-employee pricing, from $14/employee/month with no minimum.
-- [Book a demo](${BASE}/demo): a 30-minute demo on your own HR scenarios.
+- [Get early access](${BASE}/early-access): join with a work email; companies are invited in small groups at founding customer pricing.
+- [Get early access](${BASE}/early-access): join the list; companies are invited in small groups at founding customer pricing.
+- [Partner program](${BASE}/partners): accountants, fractional CFOs and HR leads, and VC platform teams who bring companies to MambaHR.
 - [Compare](${BASE}/compare): every side-by-side comparison in one place.
 - [Hiring](${BASE}/hiring): job post to signed offer. [Careers page](${BASE}/job-portal): your public job board.
 - [Onboarding](${BASE}/onboarding), [Time off and leave](${BASE}/leave), [Compensation](${BASE}/compensation).
@@ -408,7 +410,7 @@ ${STATE_FACTS}
 ## How to evaluate MambaHR
 
 1. Read how a request is handled, step by step, at ${BASE}/how-it-works.
-2. Book a 30-minute live demo at ${BASE}/demo. It walks through the product on your own HR scenarios.
+2. Join early access at ${BASE}/early-access. Companies are invited in small groups, with founding customer pricing held until their group opens.
 3. Compare against the system you use today at ${BASE}/compare.
 4. Check plan pricing at ${BASE}/pricing.
 
@@ -423,7 +425,7 @@ ${CITATION}
 
 ## Contact
 
-- Demo: ${BASE}/demo
+- Early access: ${BASE}/early-access
 - Email: hello@mambahr.com
 - Jobs: jobs@mambahr.com
 - LinkedIn: https://www.linkedin.com/company/mamba-hr/

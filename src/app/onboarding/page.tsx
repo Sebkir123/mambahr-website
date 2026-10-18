@@ -286,7 +286,7 @@ export default function OnboardingPage() {
         />
 
 
-        <PageCta title={<>Every new hire, <Em>ready on day one.</Em></>} sub="A 30-minute demo of one onboarding, from signed offer to day one. Then we import your data and switch you over." />
+        <PageCta title={<>Every new hire, <Em>ready on day one.</Em></>} sub="Join early access. When your group opens, we import your data and switch you over." />
       </main>
       <Footer />
     </>

@@ -158,10 +158,10 @@ export default function SiteTracker() {
         flush({ kind: tagged.dataset.track || 'custom', label: tagged.dataset.trackLabel || tagged.textContent?.trim().slice(0, 80) })
         return
       }
-      // 2) auto-detect demo CTAs by href so we don't have to tag every button
+      // 2) auto-detect the main CTA (early access; /demo now redirects there) by href
       const link = target?.closest('a[href]') as HTMLAnchorElement | null
       const href = link?.getAttribute('href') || ''
-      if (/(^|\/)demo(\/|$|\?|#)/.test(href) || href.includes('#access')) {
+      if (/(^|\/)(demo|early-access)(\/|$|\?|#)/.test(href) || href.includes('#access')) {
         flush({ kind: 'cta_click', label: link?.textContent?.trim().slice(0, 80) })
       }
     }

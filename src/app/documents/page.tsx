@@ -262,7 +262,7 @@ export default function DocumentsPage() {
         />
 
 
-        <PageCta title={<>Paperwork, <Em>off your plate.</Em></>} sub="A 30-minute demo of one offer, from draft to filed. Then we import your documents and switch you over." />
+        <PageCta title={<>Paperwork, <Em>off your plate.</Em></>} sub="Join early access. When your group opens, we import your documents and switch you over." />
       </main>
       <Footer />
     </>

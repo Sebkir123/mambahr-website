@@ -260,7 +260,7 @@ export default function TodayPage() {
       />
 
 
-      <PageCta title={<>Run HR from one short <Em>To do list.</Em></>} sub="A 30-minute demo of To do with your own approvals. Then we import your data and switch you over." />
+      <PageCta title={<>Run HR from one short <Em>To do list.</Em></>} sub="Join early access. When your group opens, we import your data and switch you over." />
       </main>
 
       <Footer />

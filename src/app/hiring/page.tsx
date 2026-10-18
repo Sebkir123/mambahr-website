@@ -182,7 +182,7 @@ export default function HiringPage() {
         />
 
 
-        <PageCta title={<>Post to signed offer, <Em>in one place.</Em></>} sub="A 30-minute demo on one of your open roles. Then we import your pipeline and switch you over." />
+        <PageCta title={<>Post to signed offer, <Em>in one place.</Em></>} sub="Join early access. When your group opens, we import your pipeline and switch you over." />
       </main>
       <Footer />
     </>

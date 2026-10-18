@@ -37,7 +37,12 @@ const config: NextConfig = {
   },
   async redirects() {
     // The Performance module is dark; the page is unmounted until it returns.
-    return [{ source: '/performance', destination: '/product', permanent: true }]
+    return [
+      { source: '/performance', destination: '/product', permanent: true },
+      // Early access replaced the demo as the way in (2026-10-18). Temporary, so
+      // the demo page can come back without search engines having forgotten it.
+      { source: '/demo', destination: '/early-access', permanent: false },
+    ]
   },
   async headers() {
     return [
@@ -54,6 +59,22 @@ const config: NextConfig = {
           { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
           { key: 'X-Permitted-Cross-Domain-Policies', value: 'none' },
         ],
+      },
+      {
+        // The brand files are embedded by our emails, which mail apps load
+        // from their own origin; same-origin CORP would block the logo in
+        // Apple Mail. Later rules override earlier ones for the same key.
+        source: '/brand/:path*',
+        headers: [{ key: 'Cross-Origin-Resource-Policy', value: 'cross-origin' }],
+      },
+      {
+        // The founding pass picture in the welcome email (same reason).
+        source: '/early-access/pass-image/:path*',
+        headers: [{ key: 'Cross-Origin-Resource-Policy', value: 'cross-origin' }],
+      },
+      {
+        source: '/email-assets/:path*',
+        headers: [{ key: 'Cross-Origin-Resource-Policy', value: 'cross-origin' }],
       },
     ]
   },

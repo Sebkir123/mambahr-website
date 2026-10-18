@@ -134,7 +134,7 @@ export default function ArticleShell({
                 <RichText text={mambahr} />
               </p>
               <div className={s.mambaCtas}>
-                <Link href="/demo" className="btn btn-primary">Book a demo</Link>
+                <Link href="/early-access" className="btn btn-primary">Get early access</Link>
                 <Link href="/pricing" className="btn btn-secondary">See pricing</Link>
               </div>
             </section>

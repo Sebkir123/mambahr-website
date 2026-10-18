@@ -201,7 +201,7 @@ export default function Hero() {
           imports in a day.
         </p>
         <div className="ctas">
-          <a href="/demo" className="cta-main">Book a demo</a>
+          <a href="/early-access" className="cta-main" data-track="cta_click" data-track-label="hero-early-access">Get early access</a>
           <a href="/product" className="cta-alt">See how it works</a>
         </div>
       </div>

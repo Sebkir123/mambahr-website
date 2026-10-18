@@ -90,7 +90,7 @@ export default function PricingPage() {
               One price per employee, per month, billed annually. Pick the plan that fits your
               company&rsquo;s size.
             </p>
-            <Link href="/demo" className="found" data-reveal="eager">
+            <Link href="/early-access" className="found" data-reveal="eager">
               Founding customer pricing is open
             </Link>
           </div>
@@ -114,7 +114,7 @@ export default function PricingPage() {
                       <li key={f}><span className="tick" aria-hidden="true" />{f}</li>
                     ))}
                   </ul>
-                  <Link href="/demo" className={`btn btn-block ${t.popular ? 'btn-primary' : 'btn-secondary'}`}>{t.unit ? 'Book a demo' : t.cta}</Link>
+                  <Link href={t.unit ? '/early-access' : 'mailto:hello@mambahr.com'} className={`btn btn-block ${t.popular ? 'btn-primary' : 'btn-secondary'}`}>{t.unit ? 'Get early access' : t.cta}</Link>
                 </div>
               ))}
             </div>
@@ -330,7 +330,7 @@ export default function PricingPage() {
 
         <PageCta
           title={<>See what MambaHR takes <Em>off your plate.</Em></>}
-          sub="A 30-minute demo on your real headcount and your own HR questions."
+          sub="Join early access. Founding customer pricing is held for your company until your group opens."
         />
       </main>
       <Footer />

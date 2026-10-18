@@ -33,9 +33,9 @@ export default function StickyCta() {
 
   return (
     <div className={`fcta${show ? ' show' : ''}`} aria-hidden={!show} inert={!show}>
-      <a href="/demo" className="pill" tabIndex={show ? 0 : -1}>
+      <a href="/early-access" className="pill" tabIndex={show ? 0 : -1}>
         <span className="m" aria-hidden="true"><MambaMark size={18} color="#C9A26C" /></span>
-        Book a demo
+        Get early access
       </a>
       <button className="x" type="button" aria-label="Dismiss" tabIndex={show ? 0 : -1} onClick={() => setDismissed(true)}>
         <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 1.5l7 7m0-7l-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>

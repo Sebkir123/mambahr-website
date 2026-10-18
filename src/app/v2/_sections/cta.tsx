@@ -8,10 +8,10 @@ export default function Cta() {
     <section className="cta" id="access">
       <div className="panel" data-reveal>
         <span className="field" aria-hidden="true"><i className="f1" /><i className="f2" /><i className="f3" /><i className="grain" /></span>
-        <h2 className="title">See MambaHR do a week of HR work in 30 minutes.</h2>
-        <p className="sub">Book a demo this week. We import your data the day you sign, and the work starts the next morning.</p>
+        <h2 className="title">Join the next group.</h2>
+        <p className="sub">We’re opening MambaHR to companies in small groups. Join with your work email, and your founding pricing is held until your group opens.</p>
         <div className="ctas">
-          <a className="main" href="/demo" data-track="cta_click" data-track-label="access-band">Book a demo</a>
+          <a className="main" href="/early-access" data-track="cta_click" data-track-label="access-band">Get early access</a>
           <a className="alt" href="/pricing">See pricing</a>
         </div>
         <p className="trust">Your data imports in a day. Nothing sensitive happens without your OK.</p>

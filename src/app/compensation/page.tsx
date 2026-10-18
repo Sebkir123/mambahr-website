@@ -299,7 +299,7 @@ export default function CompensationPage() {
         />
 
 
-        <PageCta title={<>Pay people right. <Em>Prove it.</Em></>} sub="A 30-minute demo with one raise, checked against your own pay ranges. Then we import your data and switch you over." />
+        <PageCta title={<>Pay people right. <Em>Prove it.</Em></>} sub="Join early access. When your group opens, we import your data and switch you over." />
       </main>
       <Footer />
     </>

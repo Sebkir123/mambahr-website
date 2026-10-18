@@ -223,8 +223,8 @@ export default function MegaNav() {
 
           {/* Right CTA, single conversion action */}
           <div className={s.right}>
-            <Link href="/demo" className="btn btn-dark">
-              Book a demo
+            <Link href="/early-access" className="btn btn-dark">
+              Get early access
             </Link>
             <button
               ref={burgerRef}
@@ -295,8 +295,8 @@ export default function MegaNav() {
             ))}
 
             <div className={s.mobileCta}>
-              <Link href="/demo" className="btn btn-dark btn-block" onClick={closeMobile}>
-                Book a demo
+              <Link href="/early-access" className="btn btn-dark btn-block" onClick={closeMobile}>
+                Get early access
               </Link>
             </div>
           </div>

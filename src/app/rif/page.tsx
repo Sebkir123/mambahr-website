@@ -318,7 +318,7 @@ export default function RIFPage() {
         />
 
 
-        <PageCta title={<>A layoff plan, <Em>ready before you need it.</Em></>} sub="A 30-minute demo of a layoff plan, with the notices and the numbers. Then we import your data." />
+        <PageCta title={<>A layoff plan, <Em>ready before you need it.</Em></>} sub="Join early access. When your group opens, we import your data and switch you over." />
       </main>
       <Footer />
     </>

@@ -12,6 +12,7 @@ const SOURCE_LABEL: Record<Lead['source'], string> = {
   waitlist: 'Waitlist',
   demo: 'Demo request',
   magnet: 'Resource',
+  partner: 'Partner',
 }
 
 function fmtDateTime(iso: string): string {
