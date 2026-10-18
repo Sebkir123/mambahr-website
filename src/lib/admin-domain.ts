@@ -4,7 +4,6 @@
 const ADMIN_EMAILS = new Set([
   'seb.kirsch@mambahr.com',
   'brian.bell@mambahr.com',
-  'jaz.cisneros@mambahr.com',
 ])
 
 // Exported for callers that need the domain string (e.g. login page hint).
