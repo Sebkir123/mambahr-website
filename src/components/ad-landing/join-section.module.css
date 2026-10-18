@@ -58,6 +58,11 @@
 .cardT { margin: 0; font-family: var(--font-serif); font-size: 26px; letter-spacing: -0.02em; color: var(--ink); }
 .card :global(form) { margin-top: 18px; max-width: none; }
 
+/* The hero's "Get early access" glides down to the form. */
+@media (prefers-reduced-motion: no-preference) {
+  :global(html:has(#join)) { scroll-behavior: smooth; }
+}
+
 @media (max-width: 960px) {
   .panel { grid-template-columns: minmax(0, 1fr); }
 }

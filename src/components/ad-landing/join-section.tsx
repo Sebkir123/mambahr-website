@@ -1,6 +1,6 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { JoinForm, useJoinForm } from '@/app/early-access/_parts/join-form'
 import s from './join-section.module.css'
 
@@ -14,9 +14,24 @@ export function JoinSection({ form, title, answers }: {
   answers: { q: string; a: string }[]
 }) {
   const f = useJoinForm({ refCode: null, form })
+  // A click on any "Get early access" link to #join puts the cursor in the
+  // email field once the scroll has landed.
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout> | undefined
+    const onClick = (e: MouseEvent) => {
+      if (!(e.target instanceof Element) || !e.target.closest('a[href$="#join"]')) return
+      clearTimeout(timer)
+      timer = setTimeout(() => document.getElementById('ea-email')?.focus({ preventScroll: true }), 600)
+    }
+    document.addEventListener('click', onClick)
+    return () => {
+      document.removeEventListener('click', onClick)
+      clearTimeout(timer)
+    }
+  }, [])
   return (
     <section className={s.wrap} id="join">
-      <div className={s.panel}>
+      <div className={s.panel} data-reveal>
         <span className={s.field} aria-hidden="true"><i className={s.f1} /><i className={s.f2} /><i className={s.f3} /></span>
         <div className={s.copy}>
           <p className={s.eyebrow}>Early access</p>

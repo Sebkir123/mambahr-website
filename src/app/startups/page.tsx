@@ -5,16 +5,25 @@ import Footer from '@/components/footer'
 import RevealInit from '@/app/v2/_sections/reveal-init'
 import { PageHero, FeatureSplit, Em } from '@/components/v2/page-kit'
 import { AppFrame, TodoDesk, ChatThread, SlackApproval, type TodoFocus, type TodoItem } from '@/components/mockups'
-import { useStory } from '@/components/story'
+import { useStory, useMedia, Typed, StoryReplay } from '@/components/story'
+import { MambaMark } from '@/components/mamba-mark'
 import { JoinSection } from '@/components/ad-landing/join-section'
+import s from './founder-stage.module.css'
 
-// Startup side of the ad test, most of them in California. California facts
+// Startup side of the ad test: AI and software startups, most of them in
+// California. They know agents; the guardrail answer comes from /security. California facts
 // from the state guide (src/content/states/group-a.ts): pay ranges in job posts
 // at 15 employees, paid sick leave, final pay on the last day for a firing.
 
-/* ── Hero: the founder's To do. Priya's offer opens, line by line; then a
-   new time-off request arrives from Slack. ── */
-const HERO_SCRIPT = { phases: [700, 1200, 1700, 2200, 2800, 3400, 4600], rootMargin: '0px 0px -5% 0px' } as const
+/* ── Hero: the founder's To do and the Slack thread that started it, one
+   moving thing at a time. Sam's message types itself, MambaHR replies, the
+   offer opens line by line, then a time-off request arrives from Slack. ── */
+const ASK = '@MambaHR Priya said yes. $195k, starting Nov 3.'
+const HERO_SCRIPT = {
+  phases: [300, 2100, 2700, 3000, 3300, 3600, 3900, 4200, 5000],
+  typing: [{ at: 400, text: ASK, ms: 26 }],
+  rootMargin: '0px 0px -5% 0px',
+} as const
 
 const OFFER: TodoFocus = {
   eyebrow: 'Asked by Sam Lee in #hiring · Today',
@@ -42,22 +51,45 @@ const QUEUE: TodoItem[] = [
 ]
 const ARRIVING: TodoItem = { title: 'Leo Schulz · 5 days off', meta: 'Time off · Asked in Slack', date: 'Tomorrow' }
 
-function FounderDesk() {
-  const { ref, phase } = useStory(HERO_SCRIPT)
-  const arrived = phase >= 7
+function FounderStage() {
+  const { ref, phase, typed, done, still, replay } = useStory(HERO_SCRIPT)
+  // 1 Sam asks · 2 MambaHR replies · 3 to 8 the offer opens · 9 Leo's request arrives
+  const arrived = phase >= 9
+  // Narrow screens show the queue only: the window ends with it, no empty space.
+  const narrow = useMedia('(max-width: 900px)')
   return (
-    <div className="mock-card" ref={ref}>
-      <AppFrame active="todo" org="Acme" user="SL" height={640} minimal todoCount={arrived ? 4 : 3}>
-        <TodoDesk
-          simple
-          queue={arrived ? [QUEUE[0], ARRIVING, ...QUEUE.slice(1)] : QUEUE}
-          fresh={arrived ? 1 : undefined}
-          summary={arrived ? '4 need you · 6 done today' : '3 need you · 6 done today'}
-          focus={{ ...OFFER, position: `1 of ${arrived ? QUEUE.length + 1 : QUEUE.length}` }}
-          build={Math.min(phase, 6)}
-          doneToday={6}
-        />
-      </AppFrame>
+    <div className={s.stage} ref={ref}>
+      <div className={`${s.slack} ${phase >= 1 ? s.on : s.off}`} aria-hidden="true">
+        <div className={s.head}><b>#hiring</b>· Slack</div>
+        <div className={s.msg}>
+          <span className={s.av}>SL</span>
+          <div>
+            <div className={s.who}>Sam Lee<span>4:10 PM</span></div>
+            <p className={s.text}><Typed text={ASK} n={typed[0]} mention="@MambaHR" caret={phase < 2} /></p>
+          </div>
+        </div>
+        <div className={`${s.msg} ${phase >= 2 ? s.reply : s.off}`}>
+          <span className={s.avM}><MambaMark size={14} /></span>
+          <div>
+            <div className={s.who}>MambaHR<span className={s.tag}>APP</span><span>4:10 PM</span></div>
+            <p className={s.text}>Drafted at $195k, inside the range you posted. It is on your To do to send.</p>
+          </div>
+        </div>
+      </div>
+      <div className="mock-card">
+        <AppFrame active="todo" org="Acme" user="SL" height={narrow ? undefined : 640} minimal todoCount={arrived ? 4 : 3}>
+          <TodoDesk
+            simple
+            queue={arrived ? [QUEUE[0], ARRIVING, ...QUEUE.slice(1)] : QUEUE}
+            fresh={arrived ? 1 : undefined}
+            summary={arrived ? '4 need you · 6 done today' : '3 need you · 6 done today'}
+            focus={{ ...OFFER, position: `1 of ${arrived ? QUEUE.length + 1 : QUEUE.length}` }}
+            build={Math.max(0, Math.min(6, phase - 2))}
+            doneToday={6}
+          />
+        </AppFrame>
+      </div>
+      {done && !still && <StoryReplay className={s.replay} onClick={replay} />}
     </div>
   )
 }
@@ -69,13 +101,13 @@ export default function StartupsPage() {
       <RevealInit />
       <main id="main">
         <PageHero
-          eyebrow="For startups"
-          title={<>Gusto gives you software. <Em>MambaHR does the work.</Em></>}
-          lead="Ask in Slack and MambaHR handles the offer, the onboarding and the payroll change, with California’s rules built in. Founders and managers make the calls."
+          eyebrow="For AI and software startups"
+          title={<>Your HR runs on agents. <Em>You approve in Slack.</Em></>}
+          lead="Offers, onboarding, California’s rules and every payroll change: MambaHR’s agents do the work. Anything that needs a person comes to you in Slack, with the reason."
           cta={{ href: '#join', label: 'Get early access' }}
           secondary={null}
         >
-          <FounderDesk />
+          <FounderStage />
         </PageHero>
 
         <FeatureSplit
@@ -147,7 +179,8 @@ export default function StartupsPage() {
           form="ad_startups"
           title={<>First hire to payday, <Em>handled.</Em></>}
           answers={[
-            { q: 'How is this different from Gusto?', a: 'Gusto gives you software to click through. MambaHR does the work and asks you only for the decisions.' },
+            { q: 'Does it decide anything on its own?', a: 'No. Offers above your range, terminations and big pay changes always wait for a named person. Every action is logged.' },
+            { q: 'How is this different from Rippling or Gusto?', a: 'They give you software to click through. MambaHR’s agents do the work and ask you only for the decisions.' },
             { q: 'How long does it take to switch?', a: 'Within a day. Your people come over from Gusto, Rippling or a spreadsheet, with their history.' },
             { q: 'Is our data safe?', a: 'Yes. It is encrypted, each person sees only what their role allows, and it never trains any AI.' },
           ]}

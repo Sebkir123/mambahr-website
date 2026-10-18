@@ -5,18 +5,18 @@ import { ogCard } from '@/lib/og'
 // (blue-collar companies vs SF tech startups). Not in the sitemap or the nav and
 // not indexed: its words change with the test, and the ads link straight to it.
 // The search page for startups is /best-hris-for-startups.
-const title = 'HR for Startups, in Slack | MambaHR'
+const title = 'HR for AI and Software Startups | MambaHR'
 const description =
-  'HR admin for startups, run from Slack: offers inside your pay range, onboarding before day one, California’s rules built in, and payroll powered by Deel.'
-const ogImage = ogCard('Gusto gives you software. MambaHR does the work.', 'For startups')
+  'Your HR runs on agents, and you approve in Slack: offers inside your pay range, onboarding before day one, California’s rules built in, and payroll powered by Deel.'
+const ogImage = ogCard('Your HR runs on agents. You approve in Slack.', 'For AI and software startups')
 
 export const metadata: Metadata = {
   title,
   description,
   robots: { index: false, follow: true },
-  openGraph: { title, description, url: 'https://www.mambahr.com/for/startups', images: [{ url: ogImage, width: 1200, height: 630 }] },
+  openGraph: { title, description, url: 'https://www.mambahr.com/startups', images: [{ url: ogImage, width: 1200, height: 630 }] },
   twitter: { card: 'summary_large_image', title, description, images: [ogImage] },
-  alternates: { canonical: 'https://www.mambahr.com/for/startups' },
+  alternates: { canonical: 'https://www.mambahr.com/startups' },
 }
 
 export default function StartupsLayout({ children }: { children: React.ReactNode }) {

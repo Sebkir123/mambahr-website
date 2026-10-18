@@ -1,0 +1,65 @@
+/* The startups hero: the founder's To do with the Slack thread that started it,
+   a glass card over the window's sidebar. Below 900px the card sits above the
+   window instead. */
+
+.stage { position: relative; }
+.replay { position: absolute; left: 0; bottom: -52px; }
+
+.slack {
+  position: absolute;
+  left: -64px;
+  top: 132px;
+  z-index: 2;
+  width: 268px;
+  padding: 14px 16px 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: var(--shadow-float);
+  transform: rotate(-1.5deg);
+  font-family: var(--font-sans);
+  color: var(--text);
+}
+.head { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-faint); }
+.head b { color: var(--text); font-weight: 600; }
+.msg { display: flex; gap: 10px; margin-top: 12px; }
+.av {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--violet-soft);
+  color: var(--violet);
+  font-size: 12px;
+  font-weight: 600;
+}
+.avM { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 7px; background: var(--ink); color: var(--gold-light); }
+.who { font-size: 13px; font-weight: 600; }
+.who span { margin-left: 6px; font-size: 12px; font-weight: 400; color: var(--text-faint); }
+.tag { margin-left: 6px; padding: 1px 4px; border-radius: 3px; background: var(--bg-surface); font-size: 9px; font-weight: 600; color: var(--text-faint); }
+.text { margin: 2px 0 0; font-size: 13px; line-height: 1.45; min-height: 19px; }
+
+/* Laid out from the start, shown when its moment comes: nothing shifts. */
+.off { visibility: hidden; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .slack.on { animation: cardIn 560ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .reply { animation: replyIn 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(16px) rotate(-1.5deg); }
+  to { opacity: 1; transform: rotate(-1.5deg); }
+}
+@keyframes replyIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 900px) {
+  .slack { position: relative; left: auto; top: auto; width: auto; max-width: 420px; margin: 0 auto -20px; transform: none; }
+  .slack.on { animation-name: replyIn; }
+  .replay { position: static; margin-top: 16px; }
+}

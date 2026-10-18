@@ -4,3 +4,4 @@ export { PeopleDirectory, InitialsAvatar, DEFAULT_PEOPLE, type PersonRow } from 
 export { ChatThread } from './chat-thread'
 export { PipelineBoard, DEFAULT_COLUMNS, type PipelineColumn } from './pipeline-board'
 export { SlackApproval } from './slack-approval'
+export { PhoneOnboarding, TextMessage, PHONE_ES, PHONE_EN, type PhoneCopy, type PhoneStep } from './phone-onboarding'

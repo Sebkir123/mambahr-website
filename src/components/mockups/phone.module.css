@@ -1,0 +1,166 @@
+/* The new hire's phone: an ink frame, the oat screen, the company's papers as a
+   checklist with an English / Español switch. Tokens from globals.css. */
+
+.phone {
+  width: 264px;
+  max-width: 100%;
+  aspect-ratio: 9 / 18.5;
+  padding: 9px;
+  border-radius: 42px;
+  background: var(--ink);
+  box-shadow: var(--shadow-float), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.screen {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 34px;
+  background: var(--bg);
+  padding: 10px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  color: var(--text);
+}
+.status { display: flex; align-items: center; justify-content: space-between; font-size: 11px; font-weight: 600; padding: 0 6px; }
+.island { width: 72px; height: 20px; border-radius: var(--radius-full); background: var(--ink); }
+.bars { display: inline-flex; gap: 2px; align-items: flex-end; }
+.bars i { display: block; width: 3px; border-radius: 1px; background: var(--text); }
+.bars i:nth-child(1) { height: 5px; }
+.bars i:nth-child(2) { height: 7px; }
+.bars i:nth-child(3) { height: 9px; }
+
+.top { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.company { font-family: var(--font-serif); font-size: 17px; letter-spacing: -0.02em; }
+.lang { display: inline-flex; padding: 2px; border-radius: var(--radius-full); background: var(--bg-surface); border: 1px solid var(--border-faint); font-size: 10px; }
+.lang span { padding: 3px 8px; border-radius: var(--radius-full); color: var(--text-faint); }
+.lang .langOn { background: var(--bg-card); color: var(--text); font-weight: 600; box-shadow: var(--shadow-xs); }
+
+.hello { margin: 18px 0 0; font-family: var(--font-serif); font-size: 26px; letter-spacing: -0.02em; line-height: 1.1; }
+.sub { margin: 8px 0 0; font-size: 12.5px; line-height: 1.45; color: var(--text-muted); }
+
+.progressRow { margin-top: 16px; display: grid; gap: 6px; }
+.progressT { font-size: 11px; font-weight: 600; color: var(--gold-dark); }
+.bar { display: block; height: 6px; border-radius: var(--radius-full); background: var(--bg-surface); overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: var(--radius-full); background: var(--green); transition: width 420ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+.steps { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 6px; }
+.step, .stepDone, .stepNow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  font-size: 12.5px;
+  box-shadow: var(--shadow-xs);
+}
+.stepDone { color: var(--text-muted); }
+.stepNow { box-shadow: 0 0 0 1.5px var(--violet), var(--shadow-xs); font-weight: 600; }
+.step { color: var(--text-faint); }
+.tick, .dot { flex: none; position: relative; width: 16px; height: 16px; border-radius: var(--radius-full); }
+.tick { background: var(--green); }
+.tick::after {
+  content: '';
+  position: absolute;
+  left: 5.5px;
+  top: 3px;
+  width: 4px;
+  height: 7px;
+  border: solid var(--bg-card);
+  border-width: 0 1.6px 1.6px 0;
+  transform: rotate(45deg);
+}
+.dot { border: 1.5px solid var(--border-mid); }
+.stepNow .dot { border-color: var(--violet); }
+
+.cta {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  border-radius: var(--radius-full);
+  background: var(--ink);
+  color: var(--bg-card);
+  font-size: 14px;
+  font-weight: 600;
+}
+.powered { margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 9.5px; color: var(--text-faint); }
+
+.doneWrap { margin-top: 22px; display: flex; flex-direction: column; flex: 1; }
+.bigTick { position: relative; width: 44px; height: 44px; border-radius: var(--radius-full); background: var(--green); }
+.bigTick::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 9px;
+  width: 10px;
+  height: 18px;
+  border: solid var(--bg-card);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+.doneT { margin: 16px 0 0; font-family: var(--font-serif); font-size: 24px; letter-spacing: -0.02em; line-height: 1.1; }
+.doneB { margin: 8px 0 0; font-size: 12.5px; line-height: 1.45; color: var(--text-muted); }
+.doneWrap .steps { margin-top: auto; }
+
+.sms {
+  display: flex;
+  gap: 10px;
+  width: 300px;
+  max-width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-sans);
+}
+.smsIcon { flex: none; width: 30px; height: 30px; border-radius: 8px; background: var(--green); position: relative; }
+.smsIcon::after {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  width: 16px;
+  height: 12px;
+  border-radius: 6px;
+  background: var(--bg-card);
+}
+.smsBody { display: grid; gap: 2px; min-width: 0; }
+.smsTop { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--text-faint); }
+.smsTop b { color: var(--text); font-weight: 600; }
+.smsText { font-size: 12.5px; line-height: 1.4; color: var(--text); }
+
+/* ── Lock screen: the soft Dusk ground, the time, and the text that brings the link. ── */
+.lockScreen { background: var(--stage-field); }
+.lockScreen .status { color: var(--ink); }
+.lock { display: flex; flex-direction: column; align-items: center; flex: 1; }
+.lockDate { margin: 26px 0 0; font-size: 13px; font-weight: 500; color: var(--ink); }
+.lockTime { margin: 0; font-family: var(--font-serif); font-size: 64px; line-height: 1; letter-spacing: -0.03em; color: var(--ink); }
+.notice { margin-top: 28px; width: 100%; }
+.lockScreen .powered { color: var(--text); }
+
+/* ── Motion: the text drops in, each screen fades up, a newly signed paper's
+   tick pops. Reduced motion shows the same frames without movement. ── */
+@media (prefers-reduced-motion: no-preference) {
+  .notice { animation: noticeIn 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .view { animation: viewIn 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .stepDone .tick { animation: tickPop 360ms cubic-bezier(0.3, 1.6, 0.4, 1) both; }
+  .doneWrap .bigTick { animation: tickPop 520ms cubic-bezier(0.3, 1.6, 0.4, 1) both; }
+  .stepNow { transition: box-shadow 300ms ease; }
+}
+@keyframes noticeIn {
+  from { opacity: 0; transform: translateY(-14px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes viewIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes tickPop {
+  0% { transform: scale(0.4); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
