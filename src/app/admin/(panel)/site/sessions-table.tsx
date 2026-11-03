@@ -127,19 +127,21 @@ function Detail({
   detail: SiteSessionDetail | null | undefined
   loading: boolean
 }) {
-  if (loading || detail === undefined) return <div className={styles.detail}><div className={styles.loading}>Loading session…</div></div>
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle')
+  if (loading) return <div className={styles.detail}><div className={styles.loading}>Loading session…</div></div>
+  if (detail === undefined) return <div className={styles.detail}><div className={styles.loading}>Session details unavailable. Collapse and reopen the row to retry.</div></div>
   if (detail === null) return <div className={styles.detail}><div className={styles.loading}>Session not found.</div></div>
 
   const s = detail.session
   const pages = detail.pageviews
-  const copy = () => navigator.clipboard?.writeText(s.id).catch(() => {})
+  async function copy() { try { await navigator.clipboard.writeText(s.id); setCopyState('copied') } catch { setCopyState('error') } }
 
   return (
     <div className={styles.detail}>
       <div className={styles.detailMeta}>
         <span className={styles.srcPill}>{s.source ?? 'direct'}</span>
         {s.isReturning && <strong>returning</strong>}
-        <button className={styles.copyId} onClick={copy} title="Copy session id">{s.id.slice(0, 8)}…</button>
+        <button className={styles.copyId} onClick={copy} title="Copy session id">{copyState === 'copied' ? 'Copied' : copyState === 'error' ? 'Copy failed; retry' : `${s.id.slice(0, 8)}…`}</button>
         {s.referrer && <span>via <strong>{(() => { try { return new URL(s.referrer!).hostname } catch { return s.referrer } })()}</strong></span>}
         {s.screen && <span>{s.screen}</span>}
         {s.locale && <span>{s.locale}</span>}

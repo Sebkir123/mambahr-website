@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import Icon from './icon'
 import { PAGES, type NavItem } from './navigation'
 import styles from './workspace-bar.module.css'
+import { useDialogLifecycle } from './use-dialog-lifecycle'
 import { refreshAdminWorkspace } from '../actions'
 
 const destinations: NavItem[] = [...PAGES,
@@ -17,6 +18,7 @@ export default function WorkspaceBar() {
   const pathname = usePathname()
   const router = useRouter()
   const dialog = useRef<HTMLDialogElement>(null)
+  useDialogLifecycle(dialog, pathname)
   const input = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState('')
   const [refreshing, startRefresh] = useTransition()
@@ -42,7 +44,7 @@ export default function WorkspaceBar() {
       </div>
     </div>
     <dialog ref={dialog} className={styles.dialog} aria-label="Jump to a page" onClick={(e) => { if (e.target === e.currentTarget) dialog.current?.close() }}>
-      <div className={styles.searchHead}><Icon name="search" /><input ref={input} value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Find an admin page" placeholder="Where would you like to go?" onKeyDown={(e) => { if (e.key === 'Enter' && results[0]) { dialog.current?.close(); router.push(results[0].href) } }} /><button type="button" aria-label="Close search" onClick={() => dialog.current?.close()}><kbd>Esc</kbd></button></div>
+      <div className={styles.searchHead}><Icon name="search" /><input ref={input} value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Find an admin page" placeholder="Where would you like to go?" onKeyDown={(e) => { if (e.key === 'Enter' && results[0]) { e.preventDefault(); e.stopPropagation(); dialog.current?.close(); router.push(results[0].href) } }} /><button type="button" aria-label="Close search" onClick={() => dialog.current?.close()}><kbd>Esc</kbd></button></div>
       <div className={styles.results}>{results.length === 0 ? <p className={styles.noResults}>No matching pages. Try “blog” or “contacts”.</p> : results.map((item) => <Link key={item.href} href={item.href} className={styles.result} onClick={() => dialog.current?.close()}><Icon name={item.icon} size={17} /><span>{item.label}</span><Icon name="chevron" size={13} /></Link>)}</div>
       <div className={styles.searchFoot}>Type to filter · Enter opens the first result</div>
     </dialog>
