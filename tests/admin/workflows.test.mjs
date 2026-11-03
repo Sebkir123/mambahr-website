@@ -66,7 +66,7 @@ test('a list at the safety boundary is complete; a larger list is visibly marked
 // sending emails, publishing posts or changing any live records during tests.
 function loadAction(relative, modules) {
   const filename = fileURLToPath(new URL(relative, import.meta.url))
-  const code = ts.transpileModule(readFileSync(filename, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText
+  const code = ts.transpileModule(readFileSync(filename, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX } }).outputText
   const actionModule = { exports: {} }
   new Function('require', 'module', 'exports', code)((name) => {
     if (!(name in modules)) throw new Error(`Unexpected import: ${name}`)
@@ -139,4 +139,48 @@ test('follow-up attention excludes closed contacts and treats today as due, not 
   assert.equal(needsAttention({ ...base, stage: 'won' }, 'unassigned', '2026-11-03'), false)
   assert.equal(needsAttention({ ...base, owner: '  ' }, 'unassigned', '2026-11-03'), true)
   assert.equal(filterContacts([base, { ...base, kind: 'investor' }, { ...base, owner: 'Owner' }], { kind: 'customer', owner: 'all', open: true, q: ' EXAMPLE ', attention: 'unassigned' }, '2026-11-03').length, 1)
+})
+
+test('responsive modal closes on desktop resize, route change and unmount so it cannot leave the document inert', () => {
+  const effects = []
+  const media = { matches: false, addEventListener(event, fn) { this.listener = fn }, removeEventListener(event, fn) { assert.equal(fn, this.listener); this.listener = null } }
+  const previousWindow = globalThis.window
+  globalThis.window = { matchMedia(query) { assert.equal(query, '(min-width: 881px)'); return media } }
+  const { useDialogLifecycle } = loadAction('../../src/app/admin/(panel)/_components/use-dialog-lifecycle.ts', { react: { useEffect: (effect) => effects.push(effect) } })
+  let closes = 0
+  const ref = { current: { close() { closes++ } } }
+  try {
+    useDialogLifecycle(ref, '/admin/blog', '(min-width: 881px)')
+    effects[0](); assert.equal(closes, 1)
+    const cleanup = effects[1](); assert.equal(closes, 1)
+    media.matches = true; media.listener(); assert.equal(closes, 2)
+    media.matches = false; media.listener(); assert.equal(closes, 2)
+    effects[0](); assert.equal(closes, 3)
+    cleanup(); assert.equal(closes, 4); assert.equal(media.listener, null)
+  } finally { globalThis.window = previousWindow }
+})
+test('page-search Enter cancels the native default before closing and navigating, preventing focus restoration from reopening it', () => {
+  const calls = []
+  let refCount = 0
+  const jsx = (type, props) => ({ type, props })
+  const component = loadAction('../../src/app/admin/(panel)/_components/workspace-bar.tsx', {
+    react: { useEffect() {}, useRef: () => ({ current: refCount++ === 0 ? { close: () => calls.push('close') } : null }), useState: (value) => [value, () => {}], useTransition: () => [false, () => {}] },
+    'react/jsx-runtime': { jsx, jsxs: jsx, Fragment: 'fragment' }, 'next/link': { default: 'a' }, 'next/navigation': { usePathname: () => '/admin', useRouter: () => ({ push: (href) => calls.push(href) }) },
+    './icon': { default: 'svg' }, './navigation': { PAGES: [{ href: '/admin/blog', label: 'Blog' }] }, './workspace-bar.module.css': { default: {} }, './use-dialog-lifecycle': { useDialogLifecycle() {} }, '../actions': {},
+  }).default
+  const tree = component()
+  function findInput(node) { if (!node || typeof node !== 'object') return null; if (node.type === 'input') return node; return [node.props?.children].flat(Infinity).map(findInput).find(Boolean) }
+  const input = findInput(tree); assert.ok(input)
+  input.props.onKeyDown({ key: 'Enter', preventDefault: () => calls.push('prevent'), stopPropagation: () => calls.push('stop') })
+  assert.deepEqual(calls, ['prevent', 'stop', 'close', '/admin/blog'])
+})
+
+test('contact deletion reports a database failure rather than returning a false success', async () => {
+  const { db } = dbStub([{ data: null, error: { message: 'offline' } }])
+  const actions = loadAction('../../src/app/admin/(panel)/crm/actions.ts', {
+    'next/cache': cacheStub(), '@/lib/auth': { requireAdmin: async () => ({ email: 'preview@example.test' }) }, '@/lib/supabase/server': { createSupabaseServerClient: async () => db }, '@/lib/crm': {},
+  })
+  const form = new FormData(); form.set('id', 'sample-id')
+  const result = await actions.deleteContact(form)
+  assert.equal(result.ok, false); assert.match(result.message, /could not be deleted/)
 })

@@ -7,6 +7,7 @@ import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { useAdminTheme } from '../../admin-theme'
 import Icon from './icon'
 import { MambaMark } from '@/components/mamba-mark'
+import { useDialogLifecycle } from './use-dialog-lifecycle'
 import { NAVIGATION, activeNav } from './navigation'
 import styles from './admin-nav.module.css'
 
@@ -26,7 +27,9 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
 
 export default function AdminNav({ email }: { email: string }) {
   const router = useRouter()
+  const pathname = usePathname()
   const drawer = useRef<HTMLDialogElement>(null)
+  useDialogLifecycle(drawer, pathname, '(min-width: 881px)')
   const { theme, toggle } = useAdminTheme()
   const [pending, setPending] = useState(false)
   const [error, setError] = useState('')

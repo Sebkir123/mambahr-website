@@ -182,15 +182,18 @@ export async function moveStage(fd: FormData): Promise<ActionResult> {
   return { ok: true, message: `Moved to ${stageLabel(kind, stage)}.` }
 }
 
-export async function deleteContact(fd: FormData): Promise<void> {
+export async function deleteContact(fd: FormData): Promise<ActionResult> {
   await requireAdmin()
   const supabase = await createSupabaseServerClient()
   const id = s(fd.get('id'))
-  if (id) await supabase.from('crm_contacts').delete().eq('id', id)
+  if (!id) return { ok: false, message: 'The contact could not be identified.' }
+  const { error } = await supabase.from('crm_contacts').delete().eq('id', id)
+  if (error) return { ok: false, message: 'The contact could not be deleted. Please try again.' }
   revalidatePath('/admin', 'layout')
   updateTag('admin-data')
   revalidatePath('/admin/crm')
   revalidatePath('/admin/crm/contacts')
+  return { ok: true, message: 'Contact deleted.' }
 }
 
 export async function logActivity(fd: FormData): Promise<ActionResult> {
