@@ -106,7 +106,8 @@ export function ContactDetailClient({
     fd.set('id', contact.id)
     setSaving(true)
     setErr('')
-    const r = await updateContact(fd)
+    let r
+    try { r = await updateContact(fd) } catch { setErr('Your changes could not be saved. Try again.'); setSaving(false); return }
     setSaving(false)
     if (!r.ok) {
       setErr(r.message)
@@ -117,12 +118,14 @@ export function ContactDetailClient({
     router.refresh()
   }
 
+  useEffect(() => { if (editing) formRef.current?.querySelector<HTMLInputElement>('input[name="name"]')?.focus() }, [editing])
   const disabled = !editing
 
   return (
     <div className={styles.panel}>
       <div className={styles.panelHead}>
-        <h2 className={styles.panelTitle}>Details</h2>
+        <h2 className={styles.panelTitle}>{editing ? 'Edit details' : 'Next step & notes'}</h2>
+        {!editing && <button type="button" className={ui.btnGhost} onClick={startEdit} disabled={lockedByOther}>{lockedByOther ? 'Being edited' : 'Edit details'}</button>}
         <div className={styles.presence}>
           {peers.length > 0 && (
             <span className={styles.presence} title={peers.map((p) => p.name).join(', ')}>
@@ -150,97 +153,84 @@ export function ContactDetailClient({
         </div>
       )}
 
-      <form ref={formRef} onSubmit={onSubmit}>
+      {!editing ? <div className={styles.contactSummary}>
+        <div><span>Next step</span><strong>{contact.next_step || 'Add a clear next step for this relationship'}</strong>{contact.next_step_due && <time dateTime={contact.next_step_due}>Due {new Date(`${contact.next_step_due}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>}</div>
+        <div><span>Notes</span><p>{contact.notes || 'No notes yet. Use Edit details for background context, or log a conversation below.'}</p></div>
+      </div> : <form ref={formRef} onSubmit={onSubmit}>
         <input type="hidden" name="expected_updated_at" value={contact.updated_at} />
         <div className={styles.formGrid}>
           <div className={styles.field}>
-            <label className={styles.label}>Name</label>
-            <input name="name" defaultValue={contact.name} className={styles.input} disabled={disabled} />
+            <label className={styles.label} htmlFor="contact-name">Name</label>
+          <input id="contact-name" name="name" defaultValue={contact.name} className={styles.input} disabled={disabled} />
           </div>
           <div className={styles.field}>
-            <label className={styles.label}>{contact.kind === 'investor' ? 'Firm' : 'Company'}</label>
-            <input name="company" defaultValue={contact.company ?? ''} className={styles.input} disabled={disabled} />
+            <label className={styles.label} htmlFor="contact-company">{contact.kind === 'investor' ? 'Firm' : 'Company'}</label>
+          <input id="contact-company" name="company" defaultValue={contact.company ?? ''} className={styles.input} disabled={disabled} />
           </div>
           <div className={styles.field}>
-            <label className={styles.label}>Email</label>
-            <input name="email" type="email" defaultValue={contact.email ?? ''} className={styles.input} disabled={disabled} />
+            <label className={styles.label} htmlFor="contact-email">Email</label>
+          <input id="contact-email" name="email" type="email" defaultValue={contact.email ?? ''} className={styles.input} disabled={disabled} />
           </div>
           <div className={styles.field}>
-            <label className={styles.label}>Title</label>
-            <input name="title" defaultValue={contact.title ?? ''} className={styles.input} disabled={disabled} />
+            <label className={styles.label} htmlFor="contact-title">Title</label>
+          <input id="contact-title" name="title" defaultValue={contact.title ?? ''} className={styles.input} disabled={disabled} />
           </div>
           <div className={styles.field}>
-            <label className={styles.label}>Stage</label>
-            <select name="stage" defaultValue={contact.stage} className={styles.select} disabled={disabled}>
+            <label className={styles.label} htmlFor="contact-stage">Stage</label>
+          <select id="contact-stage" name="stage" defaultValue={contact.stage} className={styles.select} disabled={disabled}>
               {stages.map((s) => (
                 <option key={s.key} value={s.key}>{s.label}</option>
               ))}
             </select>
           </div>
           <div className={styles.field}>
-            <label className={styles.label}>{contact.kind === 'investor' ? 'Check size (USD)' : 'Deal value (USD)'}</label>
-            <input name="value" inputMode="numeric" defaultValue={contact.value ?? ''} className={styles.input} disabled={disabled} />
+            <label className={styles.label} htmlFor="contact-value">{contact.kind === 'investor' ? 'Check size (USD)' : 'Deal value (USD)'}</label>
+          <input id="contact-value" name="value" inputMode="numeric" defaultValue={contact.value ?? ''} className={styles.input} disabled={disabled} />
           </div>
           <div className={styles.field}>
-            <label className={styles.label}>Priority</label>
-            <select name="priority" defaultValue={contact.priority} className={styles.select} disabled={disabled}>
+            <label className={styles.label} htmlFor="contact-priority">Priority</label>
+          <select id="contact-priority" name="priority" defaultValue={contact.priority} className={styles.select} disabled={disabled}>
               <option value="high">High</option>
               <option value="medium">Medium</option>
               <option value="low">Low</option>
             </select>
           </div>
           <div className={styles.field}>
-            <label className={styles.label}>Owner</label>
-            <input name="owner" defaultValue={contact.owner ?? ''} className={styles.input} disabled={disabled} placeholder="owner@mambahr.com" />
+            <label className={styles.label} htmlFor="contact-owner">Owner</label>
+          <input id="contact-owner" name="owner" defaultValue={contact.owner ?? ''} className={styles.input} disabled={disabled} placeholder="owner@mambahr.com" />
           </div>
           <div className={styles.field}>
-            <label className={styles.label}>Location</label>
-            <input name="location" defaultValue={contact.location ?? ''} className={styles.input} disabled={disabled} />
+            <label className={styles.label} htmlFor="contact-location">Location</label>
+          <input id="contact-location" name="location" defaultValue={contact.location ?? ''} className={styles.input} disabled={disabled} />
           </div>
           <div className={styles.field}>
-            <label className={styles.label}>Tags (comma-separated)</label>
-            <input name="tags" defaultValue={(contact.tags ?? []).join(', ')} className={styles.input} disabled={disabled} />
+            <label className={styles.label} htmlFor="contact-tags">Tags (comma-separated)</label>
+          <input id="contact-tags" name="tags" defaultValue={(contact.tags ?? []).join(', ')} className={styles.input} disabled={disabled} />
           </div>
-          <div className={styles.field}>
-            <label className={styles.label}>LinkedIn URL</label>
-            <input name="linkedin_url" defaultValue={contact.linkedin_url ?? ''} className={styles.input} disabled={disabled} />
-          </div>
-          <div className={styles.field}>
-            <label className={styles.label}>Website</label>
-            <input name="website" defaultValue={contact.website ?? ''} className={styles.input} disabled={disabled} />
+            <div className={styles.field}>
+            <label className={styles.label} htmlFor="contact-website">Website</label>
+          <input id="contact-website" name="website" defaultValue={contact.website ?? ''} className={styles.input} disabled={disabled} />
           </div>
           <div className={`${styles.field} ${styles.full}`}>
-            <label className={styles.label}>Next step</label>
-            <input name="next_step" defaultValue={contact.next_step ?? ''} className={styles.input} disabled={disabled} />
+            <label className={styles.label} htmlFor="contact-next_step">Next step</label>
+          <input id="contact-next_step" name="next_step" defaultValue={contact.next_step ?? ''} className={styles.input} disabled={disabled} />
           </div>
           <div className={styles.field}>
-            <label className={styles.label}>Next step due</label>
-            <input name="next_step_due" type="date" defaultValue={contact.next_step_due ?? ''} className={styles.input} disabled={disabled} />
+            <label className={styles.label} htmlFor="contact-next_step_due">Next step due</label>
+          <input id="contact-next_step_due" name="next_step_due" type="date" defaultValue={contact.next_step_due ?? ''} className={styles.input} disabled={disabled} />
           </div>
           <div className={`${styles.field} ${styles.full}`}>
-            <label className={styles.label}>Notes</label>
-            <textarea name="notes" defaultValue={contact.notes ?? ''} className={styles.textarea} disabled={disabled} />
+            <label className={styles.label} htmlFor="contact-notes">Notes</label>
+          <textarea id="contact-notes" name="notes" defaultValue={contact.notes ?? ''} className={styles.textarea} disabled={disabled} />
           </div>
         </div>
 
         <div className={styles.formActions}>
-          {editing ? (
-            <>
-              <button type="submit" className={ui.btnPrimary} disabled={saving}>
-                {saving ? 'Saving…' : 'Save changes'}
-              </button>
-              <button type="button" className={ui.btnGhost} onClick={cancelEdit} disabled={saving}>
-                Cancel
-              </button>
-            </>
-          ) : (
-            <button type="button" className={ui.btnPrimary} onClick={startEdit} disabled={lockedByOther}>
-              {lockedByOther ? `Locked, ${lockedBy?.name} editing` : 'Edit'}
-            </button>
-          )}
-          {err && <span className={`${styles.feedback} ${styles.feedbackErr}`}>{err}</span>}
+          <button type="submit" className={ui.btnPrimary} disabled={saving}>{saving ? 'Saving…' : 'Save changes'}</button>
+          <button type="button" className={ui.btnGhost} onClick={cancelEdit} disabled={saving}>Cancel</button>
+          {err && <span role="alert" className={`${styles.feedback} ${styles.feedbackErr}`}>{err}</span>}
         </div>
-      </form>
+      </form>}
 
       <p className={styles.statSub} style={{ marginTop: 12 }}>
         Currently {stageLabel(contact.kind, contact.stage)} · added {new Date(contact.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}

@@ -14,7 +14,7 @@ type Tz = 'ET' | 'CT' | 'MT' | 'PT'
 // position and shows the previous data until the new data is ready.
 function Seg({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
-    <button type="button" className={active ? styles.segActive : styles.segBtn} onClick={onClick}>{children}</button>
+    <button type="button" aria-pressed={active} className={active ? styles.segActive : styles.segBtn} onClick={onClick}>{children}</button>
   )
 }
 
@@ -40,13 +40,12 @@ export function SiteControls({
   }
 
   return (
-    <div className={styles.controls} style={pending ? { opacity: 0.6 } : undefined}>
+    <div className={styles.controls} aria-busy={pending} style={pending ? { opacity: 0.6 } : undefined}>
       <div className={styles.seg}>
-        <Seg active={property === 'website'} onClick={() => go({ property: 'website' })}>Website</Seg>
-        <Seg active={property === 'deck'} onClick={() => go({ property: 'deck' })}>Pitch deck</Seg>
+        <span className={styles.propertyLabel}>Website</span>
       </div>
       <div className={styles.seg}>
-        <button type="button" className={view === 'real' ? styles.segReal : styles.segBtn} onClick={() => go({ view: 'real' })}>Real {totals.real}</button>
+        <button type="button" aria-pressed={view === 'real'} className={view === 'real' ? styles.segReal : styles.segBtn} onClick={() => go({ view: 'real' })}>Real {totals.real}</button>
         <Seg active={view === 'all'} onClick={() => go({ view: 'all' })}>All {totals.all}</Seg>
         <Seg active={view === 'bots'} onClick={() => go({ view: 'bots' })}>Bots {totals.bots}</Seg>
       </div>

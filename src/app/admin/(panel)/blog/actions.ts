@@ -1,14 +1,14 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, updateTag } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { requireAdmin } from '@/lib/auth'
 import { slugify, readingTimeMinutes, sanitizePostHtml, type PostStatus } from '@/lib/blog'
 import { postImagePaths } from '@/lib/blog-images'
+import { publishingError } from '@/lib/admin-publishing'
 
-// Keep the newest N revisions per post. Every autosave (every ~1.2s while
-// typing) appends a snapshot, so without a cap the table grows without bound.
+// Keep the newest N revisions per post, recording at most one per minute.
 // The history panel only surfaces 30, this leaves headroom above that.
 const REVISION_KEEP = 50
 
@@ -24,6 +24,7 @@ export async function createDraft() {
     .select('id')
     .single()
   if (error || !data) throw new Error(error?.message || 'Could not create draft')
+  updateTag('admin-data')
   redirect(`/admin/blog/${data.id}`)
 }
 
@@ -78,7 +79,7 @@ export async function savePost(payload: SavePayload): Promise<SaveResult> {
   const base = slugify(payload.slug || payload.title) || `untitled-${Date.now().toString(36)}`
   const slug = await uniqueSlug(supabase, base, payload.id)
 
-  const { error } = await supabase
+  const { data: saved, error } = await supabase
     .from('posts')
     .update({
       title: payload.title.trim() || 'Untitled post',
@@ -104,6 +105,8 @@ export async function savePost(payload: SavePayload): Promise<SaveResult> {
       ...(payload.publishedAt ? { published_at: payload.publishedAt } : {}),
     })
     .eq('id', payload.id)
+    .select('id')
+    .maybeSingle()
 
   if (error) {
     // unique_violation on slug
@@ -111,27 +114,35 @@ export async function savePost(payload: SavePayload): Promise<SaveResult> {
     return { ok: false, error: error.message }
   }
 
-  // best-effort revision snapshot, full editorial content so it can be restored.
-  await supabase.from('post_revisions').insert({
-    post_id: payload.id,
-    body_json: payload.bodyJson,
-    body_html: cleanHtml,
-    excerpt: payload.excerpt.trim(),
-    title: payload.title,
-  })
+  if (!saved) return { ok: false, error: 'This post no longer exists or could not be saved. Refresh and try again.' }
 
-  // Prune anything past the newest REVISION_KEEP for this post (best-effort).
-  const { data: excess } = await supabase
-    .from('post_revisions')
-    .select('id')
-    .eq('post_id', payload.id)
-    .order('saved_at', { ascending: false })
-    .range(REVISION_KEEP, REVISION_KEEP + 1000)
-  if (excess && excess.length) {
-    await supabase.from('post_revisions').delete().in('id', excess.map((r) => r.id as string))
+  // Keep a useful history without inserting and pruning on every keystroke.
+  const { data: latest } = await supabase.from('post_revisions').select('saved_at').eq('post_id', payload.id).order('saved_at', { ascending: false }).limit(1).maybeSingle()
+  if (!latest || Date.now() - Date.parse(latest.saved_at) >= 60_000) {
+    await supabase.from('post_revisions').insert({
+      post_id: payload.id,
+      body_json: payload.bodyJson,
+      body_html: cleanHtml,
+      excerpt: payload.excerpt.trim(),
+      title: payload.title,
+    })
+
+    // Prune anything past the newest REVISION_KEEP for this post (best-effort).
+    const { data: excess } = await supabase
+      .from('post_revisions')
+      .select('id')
+      .eq('post_id', payload.id)
+      .order('saved_at', { ascending: false })
+      .range(REVISION_KEEP, REVISION_KEEP + 1000)
+    if (excess && excess.length) {
+      await supabase.from('post_revisions').delete().in('id', excess.map((r) => r.id as string))
+    }
   }
-
+  updateTag('admin-data')
   revalidatePath('/admin/blog')
+  revalidatePath('/admin')
+  revalidatePath('/admin/seo')
+  revalidatePath('/blog')
   revalidatePath(`/blog/${slug}`)
   return { ok: true, slug }
 }
@@ -147,9 +158,13 @@ export async function setPostStatus(
 
   const { data: existing } = await supabase
     .from('posts')
-    .select('slug, published_at')
+    .select('slug, published_at, title, body_html')
     .eq('id', id)
     .single()
+
+  if (!existing) return { ok: false, error: 'This post could not be loaded. Refresh and try again.' }
+  const validation = publishingError(status, scheduledFor, existing.title ?? '', existing.body_html ?? '')
+  if (validation) return { ok: false, error: validation }
 
   const patch: Record<string, unknown> = { status }
   if (status === 'published') {
@@ -158,13 +173,17 @@ export async function setPostStatus(
   } else if (status === 'scheduled') {
     patch.scheduled_for = scheduledFor ?? null
   } else {
-    // draft → keep published_at history but it won't render (status gate)
+    patch.scheduled_for = null
   }
 
-  const { error } = await supabase.from('posts').update(patch).eq('id', id)
+  const { data: updated, error } = await supabase.from('posts').update(patch).eq('id', id).select('id').maybeSingle()
   if (error) return { ok: false, error: error.message }
+  if (!updated) return { ok: false, error: 'This post no longer exists or its status could not be updated.' }
 
+  updateTag('admin-data')
   revalidatePath('/admin/blog')
+  revalidatePath('/admin')
+  revalidatePath('/admin/seo')
   revalidatePath('/blog')
   if (existing?.slug) revalidatePath(`/blog/${existing.slug}`)
   return { ok: true, slug: existing?.slug || '' }
@@ -217,12 +236,14 @@ export async function deletePost(id: string) {
   await requireAdmin()
   const supabase = await createSupabaseServerClient()
   // Delete the row and return the fields we need to clean up its images.
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('posts')
     .delete()
     .eq('id', id)
     .select('slug, cover_image_url, og_image_url, body_html')
     .maybeSingle()
+
+  if (error) throw new Error('The post could not be deleted. Please try again.')
 
   // Remove this post's cover/OG/in-body images from storage (best-effort). The
   // post_revisions rows cascade-delete with the post via the FK.
@@ -231,7 +252,10 @@ export async function deletePost(id: string) {
     if (paths.length) await supabase.storage.from('blog-media').remove(paths)
   }
 
+  updateTag('admin-data')
   revalidatePath('/admin/blog')
+  revalidatePath('/admin')
+  revalidatePath('/admin/seo')
   revalidatePath('/blog')
   if (data?.slug) revalidatePath(`/blog/${data.slug}`)
   redirect('/admin/blog')

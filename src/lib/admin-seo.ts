@@ -1,4 +1,5 @@
 import 'server-only'
+import { readAdminRows } from '@/lib/admin-rows'
 import { unstable_cache } from 'next/cache'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
@@ -91,7 +92,7 @@ function scorePost(p: RawPost): PostSeo {
   }
 }
 
-const cachedSeo = unstable_cache(async () => computeSeoOverview(serviceDb()!), ['seo-overview-v1'], { revalidate: 20 })
+const cachedSeo = unstable_cache(async () => computeSeoOverview(serviceDb()!), ['seo-overview-v1'], { revalidate: 20, tags: ['admin-data'] })
 
 export async function getSeoOverview(): Promise<SeoOverview> {
   if (serviceDb()) return cachedSeo()
@@ -105,14 +106,9 @@ async function computeSeoOverview(supabase: SupabaseClient): Promise<SeoOverview
     posts: [],
   }
 
-  const { data, error } = await supabase
-    .from('posts')
-    .select('id, slug, title, status, excerpt, cover_image_url, meta_title, meta_description, canonical_url, og_image_url, noindex')
-  if (error) {
-    return { ...empty, warnings: [`Could not read posts: ${error.message}`] }
-  }
-
-  const rows = (data as RawPost[] | null) ?? []
+  const result = await readAdminRows<RawPost>((from, to) => supabase.from('posts').select('id, slug, title, status, excerpt, cover_image_url, meta_title, meta_description, canonical_url, og_image_url, noindex').order('id').range(from, to))
+  if (result.error) return { ...empty, warnings: ['Search health could not be fully loaded. Refresh and try again.'] }
+  const rows = result.rows
   const posts = rows.map(scorePost)
 
   const published = posts.filter((p) => p.status === 'published')
@@ -127,7 +123,7 @@ async function computeSeoOverview(supabase: SupabaseClient): Promise<SeoOverview
   posts.sort((a, b) => order[a.status] - order[b.status] || a.score - b.score)
 
   return {
-    warnings: [],
+    warnings: result.truncated ? ['Search health includes only the first 10,000 posts.'] : [],
     totals: { posts: posts.length, published: published.length, indexable, noindex, avgScore },
     posts,
   }

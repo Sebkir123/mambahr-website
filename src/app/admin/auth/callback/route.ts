@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { safeAdminNext } from '@/lib/admin-auth-redirect'
 
 // Magic-link landing. Supabase appends ?code=… (PKCE); we exchange it for a
 // session cookie, then redirect into the panel (or the originally requested
@@ -7,15 +8,17 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = request.nextUrl
   const code = searchParams.get('code')
-  const next = searchParams.get('next') || '/admin'
+  const next = safeAdminNext(searchParams.get('next'))
+  let failure = 'auth'
 
   if (code) {
     const supabase = await createSupabaseServerClient()
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      return NextResponse.redirect(`${origin}${next.startsWith('/admin') ? next : '/admin'}`)
+      return NextResponse.redirect(`${origin}${next}`)
     }
+    if (error.code === 'pkce_code_verifier_not_found' || error.name === 'AuthPKCECodeVerifierMissingError') failure = 'browser'
   }
 
-  return NextResponse.redirect(`${origin}/admin/login?error=auth`)
+  return NextResponse.redirect(`${origin}/admin/login?error=${failure}`)
 }

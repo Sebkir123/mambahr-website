@@ -1,16 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/auth'
 import { getAllLeads, type Lead } from '@/lib/admin-analytics'
+import { csvCell, filterLeads } from '@/lib/admin-lead-filters'
 
 export const dynamic = 'force-dynamic'
 
 const SOURCES: Lead['source'][] = ['waitlist', 'demo', 'magnet', 'partner']
-
-// RFC 4180 CSV escaping: wrap in quotes, double any embedded quote.
-function csvCell(v: string | null): string {
-  const s = v ?? ''
-  return `"${s.replace(/"/g, '""')}"`
-}
 
 export async function GET(req: NextRequest) {
   await requireAdmin()
@@ -18,8 +13,9 @@ export async function GET(req: NextRequest) {
   const sourceParam = req.nextUrl.searchParams.get('source')
   const source = SOURCES.includes(sourceParam as Lead['source']) ? (sourceParam as Lead['source']) : null
 
-  const { leads } = await getAllLeads()
-  const rows = source ? leads.filter((l) => l.source === source) : leads
+  const { leads, warnings } = await getAllLeads()
+  if (warnings.length) return NextResponse.json({ error: 'Could not export a complete lead list. Refresh and try again.' }, { status: 503 })
+  const rows = filterLeads(leads, source ?? 'all', req.nextUrl.searchParams.get('q') ?? '')
 
   const header = ['email', 'name', 'company', 'source', 'detail', 'captured_at']
   const lines = [

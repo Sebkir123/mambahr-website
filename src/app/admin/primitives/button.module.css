@@ -1,0 +1,175 @@
+/* <Button> primitive — one source of truth for all action buttons.
+ * Tokens only — no hardcoded radii / colors / spacing. */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  /* Warm Soft: every button is a pill. A window drawn on a page (the mock's Share, Invite) sets --button-radius to
+     its own rounded rectangle. */
+  border-radius: var(--button-radius, var(--radius-full));
+  font-family: inherit;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-slight);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    box-shadow 120ms ease,
+    opacity 120ms ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* As a flex item a button holds its label rather than squashing it. Needed
+   since <Cluster wrap={false}> gives its children min-width: 0 — without this
+   an overconstrained row crushes the label instead of overflowing. .block
+   (width: 100%) is unaffected: it sets its own width rather than flexing. */
+.button {
+  flex-shrink: 0;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  /* A flex container drops the space between an icon and its word
+     (<Download /> Export), so the gap is drawn here. */
+  gap: var(--space-1-5);
+  line-height: 1;
+}
+
+.block { width: 100%; }
+
+.disabled,
+.button:disabled,
+.button[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Sizes ─────────────────────────────────────────────── */
+
+.s_sm {
+  min-height: 28px;
+  padding: 0 var(--space-3);
+  font-size: var(--text-xs);
+}
+
+.s_md {
+  min-height: 36px;
+  padding: 0 var(--space-4);
+  font-size: var(--text-base);
+}
+
+/* The one primary action on a page with nothing else to press (setup's
+   Next, artboards 96 to 99): the large control height, 44px, which is also
+   the touch target, so it needs no tablet bump. */
+.s_lg {
+  min-height: var(--control-h-lg);
+  padding: 0 var(--space-5);
+  font-size: var(--text-base);
+}
+
+/* iPad ergonomics — touch targets bump to 44px in the tablet band.
+   s_sm was left at 36px, under the 44px --hit-target the design system
+   requires, and size="sm" is what the session list uses for "Sign out" and
+   "Revoke" — the controls someone taps to eject a device they do not
+   recognise (plan R2-16). A finger does not get smaller because the button
+   is labelled small. */
+/* min-width alongside min-height: height alone leaves an icon-only ghost
+   button (leadingIcon, no visible label text — e.g. hiring's row "Role
+   actions" overflow trigger) at its padded content width, which for a
+   single 18px glyph is well under 44px. A text button is untouched here —
+   its own label already clears 44px in nearly every real case. */
+@media (min-width: 768px) and (max-width: 1280px) {
+  .s_sm { min-height: var(--hit-target); min-width: var(--hit-target); }
+  .s_md { min-height: var(--hit-target); min-width: var(--hit-target); }
+}
+/* Phone tier: --hit-target is 48px below 768px (globals.css). */
+@media (max-width: 767.98px) {
+  .s_sm { min-height: var(--hit-target); }
+  .s_md { min-height: var(--hit-target); }
+}
+
+/* ── Variants ──────────────────────────────────────────── */
+
+/* Inverted ink, NOT gold (skill_ui_ux §7: "Primary button = inverted …
+ * Never gold"). Theme-symmetric: ink fill + paper text in light, paper
+ * fill + ink text in dark — both flip with --text-primary / --bg-base, so
+ * contrast holds in either theme. Gold stays reserved for nav/logo/focus. */
+.v_primary {
+  background: var(--text-primary);
+  border: 1px solid var(--text-primary);
+  color: var(--bg-base);
+}
+
+.v_primary:hover:not(:disabled):not([aria-disabled="true"]) {
+  opacity: 0.88;
+}
+
+.v_secondary {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+}
+
+.v_secondary:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: var(--surface-hover);
+  border-color: var(--border-strong, var(--border-default));
+}
+
+.v_ghost {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+}
+
+.v_ghost:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+/* The person's hand at the moment of consent (skill_ui_ux rule 6): a gold
+ * fill for a signature or an approval, and nothing else. Every other primary
+ * is the inverted ink above. Focus stays the ink ring on .button. */
+.v_human {
+  background: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  color: var(--text-on-accent);
+}
+
+.v_human:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.v_destructive {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--error);
+}
+
+.v_destructive:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: color-mix(in srgb, var(--error) 8%, transparent);
+  border-color: var(--error);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button { transition: none; }
+}

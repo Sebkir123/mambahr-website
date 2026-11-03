@@ -1,45 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/auth'
 import { getContactsByKind, stageLabel } from '@/lib/crm'
-import { WON_STAGES, LOST_STAGES, type Contact, type ContactKind } from '@/lib/crm-types'
+import type { Contact } from '@/lib/crm-types'
+import { filterContacts } from '@/lib/admin-contact-filters'
+import { csvCell } from '@/lib/admin-lead-filters'
 
 export const dynamic = 'force-dynamic'
-
-// RFC 4180 CSV escaping: wrap in quotes, double any embedded quote.
-function csvCell(v: string | number | null | undefined): string {
-  const s = v == null ? '' : String(v)
-  return `"${s.replace(/"/g, '""')}"`
-}
 
 export async function GET(req: NextRequest) {
   await requireAdmin()
   const p = req.nextUrl.searchParams
   const kindParam = p.get('kind')
-  const ownerFilter = p.get('owner')
-  const openOnly = p.get('open') === '1'
-  const q = (p.get('q') ?? '').trim().toLowerCase()
+  // Do not deliver an apparently complete export when a source failed or was capped.
+  const results = await Promise.all((kindParam === 'customer' || kindParam === 'investor' ? [kindParam] as const : ['customer', 'investor'] as const).map(getContactsByKind))
+  if (results.some((result) => result.warnings.length)) return NextResponse.json({ error: 'The full contact list is unavailable. Refresh and try again.' }, { status: 503 })
+  const contacts: Contact[] = filterContacts(results.flatMap((result) => result.contacts), {
+    kind: kindParam ?? 'all', owner: p.get('owner') ?? 'all', open: p.get('open') === '1', q: p.get('q') ?? '', attention: p.get('attention') ?? '',
+  }).sort((a, b) => b.updated_at.localeCompare(a.updated_at))
 
-  // Mirror the on-screen filters so the export matches what the admin sees.
-  let contacts: Contact[]
-  if (kindParam === 'customer' || kindParam === 'investor') {
-    contacts = (await getContactsByKind(kindParam as ContactKind)).contacts
-  } else {
-    const [c, i] = await Promise.all([getContactsByKind('customer'), getContactsByKind('investor')])
-    contacts = [...c.contacts, ...i.contacts]
-  }
-  contacts = contacts
-    .filter((c) => (ownerFilter ? c.owner === ownerFilter : true))
-    .filter((c) => (openOnly ? !WON_STAGES.has(c.stage) && !LOST_STAGES.has(c.stage) : true))
-    .filter((c) =>
-      q
-        ? [c.name, c.company, c.email, c.title, c.location, ...(c.tags ?? [])]
-            .filter(Boolean)
-            .some((v) => (v as string).toLowerCase().includes(q))
-        : true,
-    )
-    .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
-
-  const header = ['name', 'type', 'company', 'title', 'email', 'stage', 'value_usd', 'priority', 'owner', 'source', 'location', 'linkedin', 'website', 'tags', 'next_step', 'next_step_due', 'created_at', 'updated_at']
+  const header = ['name', 'type', 'company', 'title', 'email', 'stage', 'value_usd', 'priority', 'owner', 'source', 'location', 'website', 'tags', 'next_step', 'next_step_due', 'created_at', 'updated_at']
   const lines = [
     header.join(','),
     ...contacts.map((c) =>
@@ -50,12 +29,11 @@ export async function GET(req: NextRequest) {
         csvCell(c.title),
         csvCell(c.email),
         csvCell(stageLabel(c.kind, c.stage)),
-        csvCell(c.value ?? ''),
+        csvCell(c.value == null ? '' : String(c.value)),
         csvCell(c.priority),
         csvCell(c.owner),
         csvCell(c.source),
         csvCell(c.location),
-        csvCell(c.linkedin_url),
         csvCell(c.website),
         csvCell((c.tags ?? []).join('; ')),
         csvCell(c.next_step),

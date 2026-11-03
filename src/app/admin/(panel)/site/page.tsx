@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
 import { getSiteAnalytics, fmtDur, type SiteProperty, type Range, type Tz } from '@/lib/site-analytics'
 import { SessionsTable } from './sessions-table'
 import { SiteControls } from './site-controls'
 import { TrafficChart } from './traffic-chart'
 import ui from '../admin-ui.module.css'
+import DataNotice from '../_components/data-notice'
 import styles from './site.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -101,7 +101,7 @@ export default async function SiteTrackingPage({
   searchParams: Promise<{ property?: string; range?: string; view?: string; tz?: string }>
 }) {
   const sp = await searchParams
-  const property: SiteProperty = sp.property === 'deck' ? 'deck' : sp.property === 'lp' ? 'lp' : 'website'
+  const property: SiteProperty = 'website'
   const range: Range = (['1h', '24h', '7d', '30d'] as const).includes(sp.range as Range) ? (sp.range as Range) : '24h'
   const view: View = sp.view === 'all' ? 'all' : sp.view === 'bots' ? 'bots' : 'real'
   const tz: Tz = (['ET', 'CT', 'MT', 'PT'] as const).includes(sp.tz as Tz) ? (sp.tz as Tz) : 'ET'
@@ -115,19 +115,17 @@ export default async function SiteTrackingPage({
     <>
       <div className={ui.header}>
         <div>
-          <h1 className={ui.h1}>Site Tracking</h1>
+          <h1 className={ui.h1}>Website analytics</h1>
           <p className={ui.subtitle}>
-            {property === 'deck' ? 'Pitch deck' : 'Website'} · first-party, server-recorded · last {range}
+            Website · first-party, server-recorded · last {range}
           </p>
         </div>
-        {property === 'deck' && (
-          <Link href="/admin/deck" className={ui.btnGhost}>Slide-level analytics →</Link>
-        )}
+
       </div>
 
       <SiteControls property={property} view={view} range={range} tz={tz} totals={{ all: t.all, real: t.real, bots: t.bots }} />
 
-      {a.warnings.length > 0 && <div className={styles.notice}>{a.warnings[0]}</div>}
+      <DataNotice warnings={a.warnings} />
 
       <div className={styles.stats}>
         <div className={`${styles.stat} ${styles.statHero}`}>

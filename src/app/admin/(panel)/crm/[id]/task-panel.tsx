@@ -11,19 +11,22 @@ export function TaskPanel({ contactId, tasks }: { contactId: string; tasks: Task
   const router = useRouter()
   const [title, setTitle] = useState('')
   const [due, setDue] = useState('')
+  const [error, setError] = useState('')
   const [pending, start] = useTransition()
 
   function add() {
-    if (!title.trim()) return
+    if (pending || !title.trim()) return
     const fd = new FormData()
     fd.set('contact_id', contactId)
     fd.set('title', title.trim())
     if (due) fd.set('due_date', due)
     start(async () => {
-      await addTask(fd)
-      setTitle('')
-      setDue('')
-      router.refresh()
+      setError('')
+      try {
+        const result = await addTask(fd)
+        if (!result.ok) { setError(result.message); return }
+        setTitle(''); setDue(''); router.refresh()
+      } catch { setError('Your follow-up could not be added. Try again.') }
     })
   }
 
@@ -33,8 +36,8 @@ export function TaskPanel({ contactId, tasks }: { contactId: string; tasks: Task
     fd.set('contact_id', contactId)
     fd.set('done', String(!t.done))
     start(async () => {
-      await toggleTask(fd)
-      router.refresh()
+      setError('')
+      try { const result = await toggleTask(fd); if (!result.ok) { setError(result.message); return }; router.refresh() } catch { setError('The task could not be updated. Try again.') }
     })
   }
 
@@ -43,8 +46,8 @@ export function TaskPanel({ contactId, tasks }: { contactId: string; tasks: Task
     fd.set('id', t.id)
     fd.set('contact_id', contactId)
     start(async () => {
-      await deleteTask(fd)
-      router.refresh()
+      setError('')
+      try { const result = await deleteTask(fd); if (!result.ok) { setError(result.message); return }; router.refresh() } catch { setError('The task could not be deleted. Try again.') }
     })
   }
 
@@ -53,13 +56,15 @@ export function TaskPanel({ contactId, tasks }: { contactId: string; tasks: Task
   const [now] = useState(() => Date.now())
   return (
     <div>
+      {error && <p role="alert" className={ui.error}>{error}</p>}
+      {tasks.length === 0 && <p className={styles.muted}>Add a follow-up so the next step stays in view.</p>}
       {tasks.length > 0 && (
         <ul className={styles.tasks}>
           {tasks.map((t) => {
-            const overdue = !t.done && t.due_date && new Date(t.due_date).getTime() < now
+            const overdue = !t.done && t.due_date && new Date(`${t.due_date}T23:59:59`).getTime() < now
             return (
               <li key={t.id} className={`${styles.task} ${t.done ? styles.taskDone : ''}`}>
-                <button type="button" className={styles.taskBox} onClick={() => toggle(t)} aria-label={t.done ? 'Mark incomplete' : 'Mark complete'}>
+                <button type="button" className={styles.taskBox} disabled={pending} onClick={() => toggle(t)} aria-label={t.done ? 'Mark incomplete' : 'Mark complete'}>
                   {t.done ? '☑' : '☐'}
                 </button>
                 <span className={styles.taskTitle}>{t.title}</span>
@@ -68,7 +73,7 @@ export function TaskPanel({ contactId, tasks }: { contactId: string; tasks: Task
                     {new Date(t.due_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   </span>
                 )}
-                <button type="button" className={styles.taskDel} onClick={() => remove(t)} aria-label="Delete task">✕</button>
+                <button type="button" className={styles.taskDel} disabled={pending} onClick={() => remove(t)} aria-label="Delete task">✕</button>
               </li>
             )
           })}
@@ -77,12 +82,13 @@ export function TaskPanel({ contactId, tasks }: { contactId: string; tasks: Task
       <div className={styles.compose}>
         <input
           className={styles.input}
+          aria-label="Follow-up title"
           placeholder="New follow-up…"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && add()}
         />
-        <input type="date" className={styles.input} style={{ width: 150 }} value={due} onChange={(e) => setDue(e.target.value)} />
+        <input aria-label="Follow-up due date" type="date" className={styles.input} style={{ width: 150 }} value={due} onChange={(e) => setDue(e.target.value)} />
         <button type="button" className={ui.btnGhost} onClick={add} disabled={pending || !title.trim()}>
           Add
         </button>

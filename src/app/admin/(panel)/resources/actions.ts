@@ -1,7 +1,7 @@
 'use server'
 
 import { randomBytes } from 'node:crypto'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, updateTag } from 'next/cache'
 import { requireAdmin } from '@/lib/auth'
 import { serviceDb } from '@/lib/supabase/service'
 
@@ -94,6 +94,7 @@ export async function saveResource(formData: FormData): Promise<SaveResult> {
     if (error) return { ok: false, message: error.message.includes('duplicate') ? 'That slug is already taken.' : error.message }
   }
 
+  updateTag('admin-data')
   revalidatePath('/admin/resources')
   revalidatePath('/') // homepage resources section
   revalidatePath(`/resources/${slug}`)
@@ -113,6 +114,7 @@ export async function setResourceStatus(formData: FormData): Promise<void> {
     if (!data?.file_path) return
   }
   await db.from('resources').update({ status, updated_at: new Date().toISOString() }).eq('id', id)
+  updateTag('admin-data')
   revalidatePath('/admin/resources')
   revalidatePath('/')
 }
@@ -126,6 +128,7 @@ export async function deleteResource(formData: FormData): Promise<void> {
   const { data } = await db.from('resources').select('file_path').eq('id', id).maybeSingle()
   if (data?.file_path) await db.storage.from(BUCKET).remove([data.file_path as string])
   await db.from('resources').delete().eq('id', id)
+  updateTag('admin-data')
   revalidatePath('/admin/resources')
   revalidatePath('/')
 }

@@ -86,7 +86,7 @@ const cachedAnalytics = unstable_cache(
     return computeSiteAnalytics(serviceDb()!, property, range, tz)
   },
   ['site-analytics-v1'],
-  { revalidate: 30 },
+  { revalidate: 30, tags: ['admin-data'] },
 )
 
 export async function getSiteAnalytics(property: SiteProperty, range: Range, tz: Tz = 'ET'): Promise<SiteAnalytics> {

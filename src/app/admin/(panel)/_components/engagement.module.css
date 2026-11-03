@@ -1,7 +1,7 @@
 .notice {
   background: var(--violet-soft);
-  border: 1px solid rgba(106, 93, 166, 0.25);
-  color: var(--text-muted);
+  border: 1px solid color-mix(in srgb, var(--accent-secondary) 25%, transparent);
+  color: var(--text-secondary);
   padding: 14px 18px;
   border-radius: 12px;
   font-size: 14px;
@@ -17,7 +17,7 @@
   margin-bottom: 20px;
   font-size: 13px;
   line-height: 1.55;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 .hint strong { color: var(--text); font-weight: 600; }
 .hint em { font-style: normal; color: var(--gold-dark); font-weight: 600; }
@@ -26,7 +26,7 @@
 .deckPath {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   background: var(--bg-surface);
   border: 1px solid var(--border-faint);
   border-radius: 6px;
@@ -118,29 +118,29 @@
   padding: 12px 14px;
   background: var(--gold-tint);
   border: 1px solid var(--gold-light);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   flex-wrap: wrap;
 }
 .freshLink strong { font-size: 13px; color: var(--gold-dark); display: block; margin-bottom: 4px; }
-.freshUrl { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); word-break: break-all; }
+.freshUrl { font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); word-break: break-all; }
 .input {
   flex: 1 1 180px;
   min-width: 0;
   padding: 9px 12px;
   border: 1px solid var(--border-mid);
-  border-radius: 9px;
+  border-radius: var(--radius-md);
   background: var(--bg);
   color: var(--text);
   font-size: 14px;
 }
 .input:focus {
   outline: none;
-  border-color: var(--text-muted);
+  border-color: var(--text-secondary);
 }
 .createBtn {
   padding: 9px 16px;
   border: none;
-  border-radius: 9px;
+  border-radius: var(--radius-md);
   background: var(--text);
   color: var(--bg);
   font-size: 14px;
@@ -200,7 +200,7 @@
   display: flex;
   gap: 6px;
   font-size: 13px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   white-space: nowrap;
 }
 .linkActions {
@@ -212,7 +212,7 @@
 .revokeBtn {
   padding: 7px 12px;
   border: 1px solid var(--border-mid);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: var(--bg);
   color: var(--text);
   font-size: 13px;
@@ -223,11 +223,11 @@
   background: var(--bg-surface);
 }
 .revokeBtn {
-  color: #b4392f;
-  border-color: rgba(180, 57, 47, 0.35);
+  color: var(--error);
+  border-color: color-mix(in srgb, var(--error) 35%, transparent);
 }
 .revokeBtn:hover {
-  background: rgba(180, 57, 47, 0.08);
+  background: color-mix(in srgb, var(--error) 8%, transparent);
 }
 
 /* Slide funnel */
@@ -315,9 +315,9 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #8a6d2f;
-  background: var(--gold-soft, rgba(185, 138, 78, 0.12));
-  border: 1px solid rgba(185, 138, 78, 0.35);
+  color: var(--accent-text);
+  background: var(--accent-subtle);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 35%, transparent);
   border-radius: 6px;
   padding: 1px 6px;
 }
@@ -348,7 +348,7 @@
   justify-content: center;
   font-variant-numeric: tabular-nums;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 .score {
   min-width: 34px;
@@ -360,17 +360,17 @@
   height: 64px;
   font-family: var(--font-serif);
   font-size: 30px;
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
 }
 .score_high {
-  color: #2f6b3a;
-  background: rgba(74, 138, 90, 0.14);
-  border: 1px solid rgba(74, 138, 90, 0.3);
+  color: var(--success);
+  background: color-mix(in srgb, var(--success) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--success) 30%, transparent);
 }
 .score_mid {
-  color: #8a6d2f;
-  background: rgba(185, 138, 78, 0.14);
-  border: 1px solid rgba(185, 138, 78, 0.3);
+  color: var(--accent-text);
+  background: color-mix(in srgb, var(--accent-primary) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 30%, transparent);
 }
 .score_low {
   color: var(--text-faint);
@@ -382,7 +382,7 @@
 .backLink {
   display: inline-block;
   font-size: 13px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   text-decoration: none;
   margin-bottom: 8px;
 }
@@ -452,10 +452,51 @@
   display: block;
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, #b98a4e, #6a5da6);
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
 }
 .timelineDwell {
   text-align: right;
   font-variant-numeric: tabular-nums;
   color: var(--text-faint);
 }
+/* Shared links and reading sessions. */
+.totals { gap: 12px; margin-bottom: 24px; }
+.total { padding: 19px 20px; border-radius: var(--radius-lg); background: var(--bg); box-shadow: var(--shadow-sm); }
+.totalValue { font: 550 28px/1.35 var(--font-sans); letter-spacing: -.05em; }
+.totalLabel { font-size: 10px; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--text-faint); }
+.totalSub { font-size: 10px; line-height: 1.6; }
+.cardHead { padding: 19px 22px; gap: 12px; }
+.cardTitle { font: 600 13px/1.5 var(--font-sans); letter-spacing: -.01em; }
+.cardHint { font-size: 10px; line-height: 1.6; }
+.createForm { padding: 20px 22px; gap: 10px; }
+.input { padding: 9px 12px; border-radius: var(--radius-md); border-color: var(--border); background: var(--bg); font-size: 12px; min-height: 37px; }
+.createBtn { background: var(--admin-solid); color: var(--admin-on-solid); border-radius: 999px; font-size: 12px; padding: 9px 16px; min-height: 36px; }
+.freshLink { background: var(--gold-tint); border-radius: var(--radius-md); padding: 14px 16px; margin: 0 22px 20px; font-size: 12px; gap: 12px; }
+.freshUrl { font-size: 10px; overflow-wrap: anywhere; }
+.linkRow { padding: 15px 22px; gap: 12px; }
+.linkWho { flex: 1 1 200px; flex-wrap: wrap; gap: 5px 8px; }
+.linkName { font-size: 12px; font-weight: 550; }
+.linkOrg, .linkStats { font-size: 10px; }
+.copyBtn, .revokeBtn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; font-size: 10px; padding: 6px 10px; border-color: var(--border); min-height: 30px; text-decoration: none; }
+.revokeBtn { color: var(--color-red); border-color: color-mix(in srgb, var(--color-red) 20%, transparent); }
+.revokedTag, .forwardedTag { font-size: 8px; font-weight: 500; padding: 2px 5px; border-radius: 4px; text-transform: none; letter-spacing: 0; }
+.forwardedTag { color: var(--gold-dark); background: var(--gold-tint); border-color: var(--border-faint); }
+.funnel { padding: 15px 22px 22px; gap: 13px; }
+.funnelRow { grid-template-columns: minmax(120px, 200px) 1fr 40px 50px; font-size: 11px; }
+.funnelBarTrack, .timelineBarTrack { height: 5px; }
+.funnelBar, .timelineBar { background: var(--gold); }
+.table { font-size: 11px; min-width: 650px; }
+.table th { font-size: 9px; font-weight: 550; text-transform: none; letter-spacing: 0; padding: 11px 20px; background: var(--bg-surface); }
+.table td { padding: 14px 20px; }
+.score { font-size: 10px; padding: 3px 7px; border-radius: var(--radius-full); min-width: 28px; }
+.scoreLg { font: 550 27px/1 var(--font-sans); width: 56px; height: 56px; border-radius: 12px; }
+.score_high { color: var(--color-green); background: color-mix(in srgb, var(--color-green) 9%, transparent); border-color: color-mix(in srgb, var(--color-green) 18%, transparent); }
+.score_mid { color: var(--gold-dark); background: var(--gold-tint); border-color: var(--border-faint); }
+.meta { padding: 20px 22px; gap: 20px; }
+.meta dt { font-size: 9px; font-weight: 500; text-transform: none; letter-spacing: .01em; }
+.meta dd { font-size: 12px; }
+.backLink { font-size: 11px; margin-bottom: 10px; }
+.timeline { padding: 20px 22px; gap: 14px; }
+.timelineRow { font-size: 11px; grid-template-columns: 22px minmax(100px, 180px) 1fr 50px; }
+.empty { font-size: 12px; padding: 26px 22px; }
+@media (max-width: 680px) { .totals { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .total { padding: 16px; } .cardHead { padding: 16px; flex-wrap: wrap; align-items: flex-start; } .createForm { padding: 16px; } .input { font-size: 16px; } .linkRow { padding: 14px 16px; } .linkActions { flex-basis: 100%; margin-left: 0; } .funnel { overflow-x: auto; } .funnelRow { min-width: 460px; } .timeline { overflow-x: auto; } .timelineRow { min-width: 470px; } .freshLink { margin: 0 16px 16px; flex-wrap: wrap; } }

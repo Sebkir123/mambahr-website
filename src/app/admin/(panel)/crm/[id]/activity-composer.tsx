@@ -29,11 +29,13 @@ export function ActivityComposer({ contactId }: { contactId: string }) {
     fd.set('body', body.trim())
     setErr('')
     start(async () => {
+      try {
       const r = await logActivity(fd)
       if (r.ok) {
         setBody('')
         router.refresh()
       } else setErr(r.message)
+      } catch { setErr('The activity could not be saved. Try again.') }
     })
   }
 
@@ -44,6 +46,7 @@ export function ActivityComposer({ contactId }: { contactId: string }) {
           <button
             key={k.key}
             type="button"
+            aria-pressed={kind === k.key}
             className={kind === k.key ? styles.kindChipActive : styles.kindChip}
             onClick={() => setKind(k.key)}
           >
@@ -52,6 +55,7 @@ export function ActivityComposer({ contactId }: { contactId: string }) {
         ))}
       </div>
       <textarea
+        aria-label="Activity details"
         className={styles.textarea}
         placeholder={kind === 'note' ? 'Add a note…' : `Log a ${kind}…`}
         value={body}
@@ -61,7 +65,7 @@ export function ActivityComposer({ contactId }: { contactId: string }) {
         <button type="button" className={ui.btnPrimary} onClick={submit} disabled={pending || !body.trim()}>
           {pending ? 'Logging…' : 'Log'}
         </button>
-        {err && <span className={`${styles.feedback} ${styles.feedbackErr}`}>{err}</span>}
+        {err && <span role="alert" className={`${styles.feedback} ${styles.feedbackErr}`}>{err}</span>}
       </div>
     </div>
   )

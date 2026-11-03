@@ -49,13 +49,7 @@ export const env = {
   supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
   gaId: process.env.NEXT_PUBLIC_GA_ID,
   turnstileSiteKey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-  // Social posting (LinkedIn), all optional; the Posts admin degrades to
-  // "connect not configured" until these are set.
-  linkedinClientId: process.env.LINKEDIN_CLIENT_ID,
-  linkedinClientSecret: process.env.LINKEDIN_CLIENT_SECRET,
-  socialTokenKey: process.env.SOCIAL_TOKEN_KEY, // 64 hex chars (32 bytes) → AES-256-GCM
   cronSecret: process.env.CRON_SECRET,
-  anthropicKey: process.env.ANTHROPIC_API_KEY, // AI post drafting (Claude)
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://mambahr.com',
 } as const
 

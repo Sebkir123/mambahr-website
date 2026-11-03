@@ -2,7 +2,8 @@ import { requireAdmin } from '@/lib/auth'
 import { getFieldGuideAnalytics, GUIDES } from '@/lib/admin-field-guides'
 import { FieldGuideManager } from './manager'
 import ui from '../admin-ui.module.css'
-import styles from '../deck/deck.module.css'
+import DataNotice from '../_components/data-notice'
+import styles from '../_components/engagement.module.css'
 
 export const dynamic = 'force-dynamic'
 
@@ -25,11 +26,11 @@ export default async function FieldGuidesPage() {
       <div className={ui.header}>
         <div>
           <h1 className={ui.h1}>Field guides</h1>
-          <p className={ui.subtitle}>Create tracked share links + see who actually opened each guide</p>
+          <p className={ui.subtitle}>Share a guide with a contact and follow their engagement.</p>
         </div>
       </div>
 
-      {a.warnings.length > 0 && <div className={styles.notice}>{a.warnings[0]}</div>}
+      <DataNotice warnings={a.warnings} />
 
       <div className={styles.totals}>
         <Stat label="Leads" value={a.totals.requests} sub="links + form captures" />

@@ -1,7 +1,9 @@
 'use client'
 
 import { useCallback, useState } from 'react'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import { MambaMark } from '@/components/mamba-mark'
 import TurnstileWidget from '@/components/turnstile-widget'
 import styles from './login.module.css'
 
@@ -43,18 +45,20 @@ export default function LoginForm() {
   }
 
   return (
-    <main className={styles.wrap}>
+    <main id="main" className={styles.wrap}>
+      <Link href="/" className={styles.homeLink}>← MambaHR website</Link>
       <div className={styles.card}>
-        <div className={styles.mark}>M</div>
-        <h1 className={styles.title}>MambaHR Admin</h1>
-        <p className={styles.sub}>Sign in with your work email. We&rsquo;ll send a one-time link.</p>
+        <div className={styles.mark}><MambaMark size={30} color="var(--accent-primary)" /><span>MambaHR</span></div>
+        <h1 className={styles.title}>Welcome to your workspace</h1>
+        <p className={styles.sub}>For approved MambaHR team members. Sign in with a one-time email link.</p>
 
         {status === 'sent' ? (
-          <div className={styles.sentBox}>
+          <div className={styles.sentBox} role="status">
             <p className={styles.sentTitle}>Check your inbox</p>
             <p className={styles.sentBody}>
-              We sent a sign-in link to <strong>{email}</strong>. Open it on this device to continue.
+              We sent a sign-in link to <strong>{email}</strong>. Open the newest link in this same browser to finish signing in.
             </p>
+            <button type="button" className={styles.retry} onClick={() => { setStatus('idle'); setToken(null) }}>Use another email or request a new link</button>
           </div>
         ) : (
           <form onSubmit={onSubmit} className={styles.form}>
@@ -72,12 +76,12 @@ export default function LoginForm() {
               className={styles.input}
             />
             <TurnstileWidget onSuccess={onTurnstile} theme="light" />
-            <button type="submit" className={styles.button} disabled={status === 'sending' || !token}>
+            <button type="submit" aria-busy={status === 'sending'} className={styles.button} disabled={status === 'sending' || !token}>
               {status === 'sending' ? 'Sending…' : 'Send sign-in link'}
             </button>
-            {status === 'error' && <p className={styles.error}>{message || 'Something went wrong.'}</p>}
-            {params.get('error') === 'auth' && (
-              <p className={styles.error}>That link expired or was already used. Request a new one.</p>
+            {status === 'error' && <p className={styles.error} role="alert">{message || 'Something went wrong.'}</p>}
+            {['auth', 'browser'].includes(params.get('error') ?? '') && (
+              <p className={styles.error} role="alert">{params.get('error') === 'browser' ? 'This link opened in a different browser, or its sign-in cookie is missing. Request a new link here and open it in this browser.' : 'The link could not complete sign-in. It may be expired or already used. Request a fresh link and open it in this browser.'}</p>
             )}
           </form>
         )}

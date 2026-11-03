@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { requireAdmin } from '@/lib/auth'
 import { getFieldGuideLead } from '@/lib/admin-field-guides'
 import ui from '../../admin-ui.module.css'
-import styles from '../../deck/deck.module.css'
+import styles from '../../_components/engagement.module.css'
 
 export const dynamic = 'force-dynamic'
 

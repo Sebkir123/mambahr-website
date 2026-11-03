@@ -1,206 +1,55 @@
 import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
 import { getOverview, type Lead } from '@/lib/admin-analytics'
-import { getDeckSummary } from '@/lib/admin-deck'
 import { getCrmDashboard, formatMoney } from '@/lib/crm'
+import { createDraft } from './blog/actions'
+import Icon from './_components/icon'
+import DataNotice from './_components/data-notice'
 import ui from './admin-ui.module.css'
 import styles from './overview.module.css'
 
 export const dynamic = 'force-dynamic'
-
-const SOURCE_LABEL: Record<Lead['source'], string> = {
-  waitlist: 'Waitlist',
-  demo: 'Demo request',
-  magnet: 'Resource',
-  partner: 'Partner',
-}
-
-function fmtDateTime(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
-}
-
-// Pure-SVG sparkline, no client JS. Points are the 14-day lead trend.
+const SOURCE_LABEL: Record<Lead['source'], string> = { waitlist: 'Early access', demo: 'Demo request', magnet: 'Resource', partner: 'Partner' }
+function date(iso: string) { return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }
 function Sparkline({ data }: { data: { day: string; count: number }[] }) {
-  const w = 280
-  const h = 56
-  const max = Math.max(1, ...data.map((d) => d.count))
-  const step = data.length > 1 ? w / (data.length - 1) : w
-  const pts = data.map((d, i) => [i * step, h - (d.count / max) * (h - 6) - 3] as const)
-  const line = pts.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`).join(' ')
-  const area = `${line} L${w},${h} L0,${h} Z`
-  return (
-    <svg width="100%" height={h} viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" className={styles.spark}>
-      <defs>
-        <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="var(--gold)" stopOpacity="0.22" />
-          <stop offset="100%" stopColor="var(--gold)" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={area} fill="url(#sparkFill)" />
-      <path d={line} fill="none" stroke="var(--gold)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-    </svg>
-  )
+  if (!data.some((point) => point.count > 0)) return <span className={styles.quiet}>No new leads in the last 14 days</span>
+  const max = Math.max(1, ...data.map((point) => point.count))
+  const points = data.map((point, index) => `${index / Math.max(1, data.length - 1) * 220},${30 - point.count / max * 26}`).join(' ')
+  return <svg className={styles.spark} viewBox="0 0 220 34" role="img" aria-label={`New leads in the last 14 days: ${data.reduce((sum, point) => sum + point.count, 0)}`}><polyline points={points} fill="none" stroke="var(--gold)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
 }
-
 export default async function AdminOverview() {
-  // Run the auth check concurrently with the data fetch so the getUser()
-  // round-trip overlaps the queries instead of blocking them.
-  const [admin, o, deck, crm] = await Promise.all([
-    requireAdmin(),
-    getOverview(),
-    getDeckSummary(),
-    getCrmDashboard(),
-  ])
-
-  return (
-    <>
-      <div className={ui.header}>
-        <div>
-          <h1 className={ui.h1}>Overview</h1>
-          <p className={ui.subtitle}>Signed in as {admin.email}</p>
-        </div>
-        <Link href="/admin/blog" className={ui.btnPrimary}>Write a post</Link>
+  await requireAdmin()
+  const [overview, crm] = await Promise.all([getOverview(), getCrmDashboard()])
+  const o = overview
+  return <>
+    <div className={ui.header}><div><p className={styles.eyebrow}>Your workspace</p><h1 className={ui.h1}>Overview</h1><p className={ui.subtitle}>A clear view of your relationships, website, and content.</p></div><div className={ui.actions}><Link href="/admin/leads" className={ui.btnGhost}>View leads</Link><form action={createDraft}><button type="submit" className={ui.btnPrimary}><Icon name="plus" size={15} />Write a post</button></form></div></div>
+    <DataNotice warnings={[...o.warnings, ...crm.warnings]} />
+    <div className={styles.stats}>
+      <div className={styles.stat}><span className={styles.statLabel}>Incoming leads <Icon name="inbox" size={15} /></span><span className={styles.statValue}>{o.leads.total.toLocaleString()}</span><span className={styles.statSub}>{o.leads.last7d} new this week</span></div>
+      <div className={styles.stat}><span className={styles.statLabel}>Last 30 days <Icon name="chart" size={15} /></span><span className={styles.statValue}>{o.leads.last30d.toLocaleString()}</span><Sparkline data={o.trend} /></div>
+      <div className={styles.stat}><span className={styles.statLabel}>Blog reads <Icon name="book" size={15} /></span><span className={styles.statValue}>{o.views.total.toLocaleString()}</span><span className={styles.statSub}>{o.views.last7d} reads this week · bots excluded</span></div>
+      <div className={styles.stat}><span className={styles.statLabel}>Published posts <Icon name="file" size={15} /></span><span className={styles.statValue}>{o.posts.published}</span><span className={styles.statSub}>{o.posts.draft} drafts · {o.posts.scheduled} scheduled</span></div>
+    </div>
+    <div className={styles.shortcuts}>
+      <Link href="/admin/customers"><Icon name="briefcase" /><span><strong>Customers</strong><small>{crm.byKind.customer.open} open · {formatMoney(crm.byKind.customer.openValue)} pipeline</small></span><Icon name="chevron" size={14} /></Link>
+      <Link href="/admin/investors"><Icon name="people" /><span><strong>Investors</strong><small>{crm.byKind.investor.open} open · {formatMoney(crm.byKind.investor.wonValue)} committed</small></span><Icon name="chevron" size={14} /></Link>
+      <Link href="/admin/blog"><Icon name="file" /><span><strong>Content</strong><small>{o.posts.draft} drafts · {o.posts.scheduled} scheduled</small></span><Icon name="chevron" size={14} /></Link>
+    </div>
+    <section className={styles.attention} aria-label="Needs attention">
+      <div><Icon name="check" size={17} /><strong>Needs attention</strong><span>Keep the next step moving</span></div>
+      <Link href="/admin/crm/contacts?attention=overdue"><strong>{crm.attention.overdue}</strong> overdue next steps <Icon name="chevron" size={12} /></Link>
+      <Link href="/admin/crm/contacts?attention=unassigned"><strong>{crm.attention.unassigned}</strong> need an owner <Icon name="chevron" size={12} /></Link>
+      <Link href="/admin/crm/contacts?attention=next-step"><strong>{crm.attention.missingNextStep}</strong> missing a next step <Icon name="chevron" size={12} /></Link>
+      <Link href="/admin/blog?status=draft"><strong>{o.posts.draft}</strong> drafts to continue <Icon name="chevron" size={12} /></Link>
+    </section>
+    <div className={styles.cols}>
+      <section className={ui.card}><div className={ui.cardHeader}><div><h2 className={ui.cardTitle}>Recent leads</h2><p className={ui.cardHint}>New people interested in MambaHR</p></div><Link href="/admin/leads" className={styles.cardLink}>View all <Icon name="chevron" size={13} /></Link></div>
+        {o.recent.length === 0 ? <div className={ui.empty}><span className={ui.emptyIcon}><Icon name="inbox" size={21} /></span><h3>You’re ready for new leads</h3><p>Early access requests, referrals, and resource signups will appear here.</p></div> : <div className={ui.tableWrap}><table className={`${ui.table} ${styles.leadsTable}`}><thead><tr><th>Contact</th><th>Source</th><th>Received</th></tr></thead><tbody>{o.recent.map((lead, index) => <tr key={`${lead.source}-${lead.email}-${index}`}><td><a className={ui.rowLink} href={`mailto:${lead.email}`}>{lead.name || lead.email}</a><div className={styles.secondary}>{lead.company || (lead.name ? lead.email : 'Company not provided')}</div></td><td><span className={styles.source}>{SOURCE_LABEL[lead.source]}</span></td><td className={styles.when}>{date(lead.created_at)}</td></tr>)}</tbody></table></div>}
+      </section>
+      <div className={styles.right}>
+        <section className={ui.card}><div className={ui.cardHeader}><div><h2 className={ui.cardTitle}>Follow-ups</h2><p className={ui.cardHint}>{crm.openTaskCount} open {crm.openTaskCount === 1 ? 'task' : 'tasks'} across your contacts</p></div><Icon name="check" size={16} /></div>{crm.upcomingTasks.length ? <ul className={styles.tasks}>{crm.upcomingTasks.slice(0, 4).map((task) => <li key={task.id}><Link href={`/admin/crm/${task.contact_id}`}><strong>{task.title}</strong><span>{task.contactName}</span></Link><time dateTime={task.due_date ?? undefined}>{task.due_date ? date(task.due_date) : 'No date'}</time></li>)}</ul> : <div className={styles.smallEmpty}><Icon name="check" size={18} /><div><strong>No follow-ups waiting</strong><p>Add a task from any contact to keep the next step in view.</p></div></div>}</section>
+        <section className={ui.card}><div className={ui.cardHeader}><div><h2 className={ui.cardTitle}>Most-read posts</h2><p className={ui.cardHint}>All-time reads · the same metric as Blog</p></div><Link href="/admin/blog" className={styles.cardLink}>Blog <Icon name="chevron" size={13} /></Link></div>{o.views.top.length ? <ol className={styles.posts}>{o.views.top.map((post, index) => <li key={post.slug}><span className={styles.rank}>{index + 1}</span><a href={`/blog/${post.slug}`} target="_blank" rel="noreferrer">{post.title}</a><span className={styles.reads}>{post.views.toLocaleString()}</span></li>)}</ol> : <div className={styles.smallEmpty}><Icon name="book" /><div><strong>Your next read starts here</strong><p>Published posts appear here once people start reading.</p></div></div>}</section>
       </div>
-
-      {o.warnings.length > 0 && (
-        <div className={styles.notice}>{o.warnings[0]}</div>
-      )}
-
-      {/* Stat cards */}
-      <div className={styles.stats}>
-        <div className={styles.stat}>
-          <span className={styles.statLabel}>Total leads</span>
-          <span className={styles.statValue}>{o.leads.total.toLocaleString()}</span>
-          <span className={styles.statSub}>{o.leads.last7d} in last 7 days</span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statLabel}>Last 30 days</span>
-          <span className={styles.statValue}>{o.leads.last30d.toLocaleString()}</span>
-          <Sparkline data={o.trend} />
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statLabel}>Post views</span>
-          <span className={styles.statValue}>{o.views.total.toLocaleString()}</span>
-          <span className={styles.statSub}>{o.views.last7d} in last 7 days</span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statLabel}>Published posts</span>
-          <span className={styles.statValue}>{o.posts.published}</span>
-          <span className={styles.statSub}>{o.posts.draft} draft · {o.posts.scheduled} scheduled</span>
-        </div>
-      </div>
-
-      {/* Section pulse, a compact launcher into each area, no detail duplicated */}
-      <div className={styles.sectionGrid}>
-        <SectionTile
-          title="Customers"
-          href="/admin/customers"
-          metrics={[
-            { label: 'Open', value: crm.byKind.customer.open.toLocaleString() },
-            { label: 'Pipeline', value: formatMoney(crm.byKind.customer.openValue) },
-          ]}
-        />
-        <SectionTile
-          title="Investors"
-          href="/admin/investors"
-          metrics={[
-            { label: 'Open', value: crm.byKind.investor.open.toLocaleString() },
-            { label: 'Committed', value: formatMoney(crm.byKind.investor.wonValue) },
-          ]}
-        />
-        <SectionTile
-          title="Deck"
-          href="/admin/deck"
-          metrics={[
-            { label: 'Opens', value: deck.opens.toLocaleString() },
-            { label: 'Reached', value: deck.recipients.toLocaleString() },
-          ]}
-        />
-        <SectionTile
-          title="Content"
-          href="/admin/blog"
-          metrics={[
-            { label: 'Published', value: o.posts.published.toLocaleString() },
-            { label: 'Views', value: o.views.total.toLocaleString() },
-          ]}
-        />
-      </div>
-
-      <div className={styles.cols}>
-        {/* Recent leads */}
-        <section className={ui.card}>
-          <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>Recent leads</h2>
-            <Link href="/admin/leads" className={styles.cardLink}>View all →</Link>
-          </div>
-          {o.recent.length === 0 ? (
-            <div className={ui.empty}><p>No leads captured yet.</p></div>
-          ) : (
-            <table className={ui.table}>
-              <thead>
-                <tr><th>Email</th><th>Company</th><th>Source</th><th>When</th></tr>
-              </thead>
-              <tbody>
-                {o.recent.map((l, i) => (
-                  <tr key={`${l.email}-${i}`}>
-                    <td className={styles.email}>{l.email}</td>
-                    <td>{l.company || '—'}</td>
-                    <td><span className={styles.srcTag}>{SOURCE_LABEL[l.source]}</span></td>
-                    <td className={styles.when}>{fmtDateTime(l.created_at)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </section>
-
-        {/* Top posts */}
-        <section className={ui.card}>
-          <div className={styles.cardHead}>
-            <h2 className={styles.cardTitle}>Top posts</h2>
-            <Link href="/admin/blog" className={styles.cardLink}>All posts →</Link>
-          </div>
-          {o.views.top.length === 0 ? (
-            <div className={ui.empty}><p>No post views yet.</p></div>
-          ) : (
-            <ul className={styles.topList}>
-              {o.views.top.map((p) => (
-                <li key={p.slug} className={styles.topItem}>
-                  <a href={`/blog/${p.slug}`} target="_blank" rel="noreferrer" className={styles.topTitle}>{p.title}</a>
-                  <span className={styles.topViews}>{p.views.toLocaleString()} views</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-      </div>
-    </>
-  )
-}
-
-function SectionTile({
-  title,
-  href,
-  metrics,
-}: {
-  title: string
-  href: string
-  metrics: { label: string; value: string }[]
-}) {
-  return (
-    <Link href={href} className={`${ui.card} ${styles.sectionTile}`}>
-      <div className={styles.sectionTileHead}>
-        <span className={styles.sectionTileTitle}>{title}</span>
-        <span className={styles.sectionTileArrow} aria-hidden="true">→</span>
-      </div>
-      <div className={styles.sectionTileMetrics}>
-        {metrics.map((m) => (
-          <div key={m.label} className={styles.deckMini}>
-            <span className={styles.deckMiniValue}>{m.value}</span>
-            <span className={styles.deckMiniLabel}>{m.label}</span>
-          </div>
-        ))}
-      </div>
-    </Link>
-  )
+    </div>
+  </>
 }

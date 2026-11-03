@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
 import { getSeoOverview, type PostSeo } from '@/lib/admin-seo'
 import ui from '../admin-ui.module.css'
+import DataNotice from '../_components/data-notice'
 import styles from './seo.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -30,14 +31,12 @@ export default async function SeoPage() {
       <div className={ui.header}>
         <div>
           <h1 className={ui.h1}>SEO</h1>
-          <p className={ui.subtitle}>Indexing surfaces and per-post on-page health</p>
+          <p className={ui.subtitle}>Find and fix the details that help people discover your content.</p>
         </div>
         <Link href="/admin/blog" className={ui.btnGhost}>Manage posts</Link>
       </div>
 
-      {o.warnings.length > 0 && (
-        <div className={styles.notice}>{o.warnings[0]}</div>
-      )}
+      <DataNotice warnings={o.warnings} />
 
       {/* Indexing surfaces */}
       <div className={styles.surfaces}>

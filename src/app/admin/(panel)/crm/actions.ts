@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, updateTag } from 'next/cache'
 import { requireAdmin } from '@/lib/auth'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { defaultStage, isValidStage, stageLabel, parseMoney, isoDateOrNull, ACTIVITY_KINDS, type ContactKind } from '@/lib/crm'
@@ -50,7 +50,6 @@ export async function createContact(fd: FormData): Promise<ActionResult> {
       source: orNull(s(fd.get('source'))) ?? 'manual',
       value: moneyOrNull(s(fd.get('value'))),
       priority: s(fd.get('priority')) || 'medium',
-      linkedin_url: orNull(s(fd.get('linkedin_url'))),
       website: orNull(s(fd.get('website'))),
       location: orNull(s(fd.get('location'))),
       tags: tagsOf(s(fd.get('tags'))),
@@ -71,6 +70,8 @@ export async function createContact(fd: FormData): Promise<ActionResult> {
     author: admin.email,
   })
 
+  revalidatePath('/admin', 'layout')
+  updateTag('admin-data')
   revalidatePath('/admin/crm')
   revalidatePath('/admin/crm/contacts')
   return { ok: true, message: 'Contact created.', id: data.id as string }
@@ -103,7 +104,7 @@ export async function updateContact(fd: FormData): Promise<ActionResult> {
 
   const ownerInput = s(fd.get('owner'))
 
-  const { error } = await supabase
+  let update = supabase
     .from('crm_contacts')
     .update({
       name: s(fd.get('name')) || 'Unnamed',
@@ -112,10 +113,9 @@ export async function updateContact(fd: FormData): Promise<ActionResult> {
       title: orNull(s(fd.get('title'))),
       stage,
       // Don't wipe ownership if the field is left blank, keep the prior owner.
-      owner: ownerInput || prev.owner,
+      owner: orNull(ownerInput),
       value: moneyOrNull(s(fd.get('value'))),
       priority: s(fd.get('priority')) || 'medium',
-      linkedin_url: orNull(s(fd.get('linkedin_url'))),
       website: orNull(s(fd.get('website'))),
       location: orNull(s(fd.get('location'))),
       tags: tagsOf(s(fd.get('tags'))),
@@ -125,7 +125,12 @@ export async function updateContact(fd: FormData): Promise<ActionResult> {
     })
     .eq('id', id)
 
+  // Apply the version check in the UPDATE itself so another save cannot slip
+  // between the earlier read and this write.
+  if (expected) update = update.eq('updated_at', expected)
+  const { data: saved, error } = await update.select('id').maybeSingle()
   if (error) return { ok: false, message: error.message }
+  if (!saved) return { ok: false, message: 'This contact changed while you were editing. Refresh and try again.' }
 
   if (stage !== prev.stage) {
     await supabase.from('crm_activities').insert({
@@ -137,6 +142,8 @@ export async function updateContact(fd: FormData): Promise<ActionResult> {
     })
   }
 
+  revalidatePath('/admin', 'layout')
+  updateTag('admin-data')
   revalidatePath('/admin/crm')
   revalidatePath('/admin/crm/contacts')
   revalidatePath(`/admin/crm/${id}`)
@@ -168,6 +175,8 @@ export async function moveStage(fd: FormData): Promise<ActionResult> {
     author: admin.email,
   })
 
+  revalidatePath('/admin', 'layout')
+  updateTag('admin-data')
   revalidatePath('/admin/crm')
   revalidatePath(`/admin/crm/${id}`)
   return { ok: true, message: `Moved to ${stageLabel(kind, stage)}.` }
@@ -178,6 +187,8 @@ export async function deleteContact(fd: FormData): Promise<void> {
   const supabase = await createSupabaseServerClient()
   const id = s(fd.get('id'))
   if (id) await supabase.from('crm_contacts').delete().eq('id', id)
+  revalidatePath('/admin', 'layout')
+  updateTag('admin-data')
   revalidatePath('/admin/crm')
   revalidatePath('/admin/crm/contacts')
 }
@@ -221,39 +232,44 @@ export async function addTask(fd: FormData): Promise<ActionResult> {
   })
   if (error) return { ok: false, message: error.message }
   revalidatePath(`/admin/crm/${contact_id}`)
+  revalidatePath('/admin', 'layout')
+  updateTag('admin-data')
   revalidatePath('/admin/crm')
   return { ok: true, message: 'Task added.' }
 }
 
-export async function toggleTask(fd: FormData): Promise<void> {
+export async function toggleTask(fd: FormData): Promise<ActionResult> {
   await requireAdmin()
   const supabase = await createSupabaseServerClient()
   const id = s(fd.get('id'))
-  const contact_id = s(fd.get('contact_id'))
+  const contactId = s(fd.get('contact_id'))
+  if (!id || !contactId) return { ok: false, message: 'The task could not be identified.' }
   const done = s(fd.get('done')) === 'true'
-  if (id) {
-    await supabase
-      .from('crm_tasks')
-      .update({ done, done_at: done ? new Date().toISOString() : null })
-      .eq('id', id)
-  }
-  if (contact_id) revalidatePath(`/admin/crm/${contact_id}`)
-  revalidatePath('/admin/crm')
+  const { error } = await supabase.from('crm_tasks').update({ done, done_at: done ? new Date().toISOString() : null }).eq('id', id).eq('contact_id', contactId)
+  if (error) return { ok: false, message: 'The task could not be updated. Try again.' }
+  updateTag('admin-data')
+  revalidatePath(`/admin/crm/${contactId}`)
+  revalidatePath('/admin', 'layout')
+  return { ok: true, message: 'Task updated.' }
 }
 
-export async function deleteTask(fd: FormData): Promise<void> {
+export async function deleteTask(fd: FormData): Promise<ActionResult> {
   await requireAdmin()
   const supabase = await createSupabaseServerClient()
   const id = s(fd.get('id'))
-  const contact_id = s(fd.get('contact_id'))
-  if (id) await supabase.from('crm_tasks').delete().eq('id', id)
-  if (contact_id) revalidatePath(`/admin/crm/${contact_id}`)
+  const contactId = s(fd.get('contact_id'))
+  if (!id || !contactId) return { ok: false, message: 'The task could not be identified.' }
+  const { error } = await supabase.from('crm_tasks').delete().eq('id', id).eq('contact_id', contactId)
+  if (error) return { ok: false, message: 'The task could not be deleted. Try again.' }
+  updateTag('admin-data')
+  revalidatePath(`/admin/crm/${contactId}`)
+  revalidatePath('/admin', 'layout')
+  return { ok: true, message: 'Task deleted.' }
 }
 
 // Pull existing first-party signals into the CRM as contacts. Idempotent:
 // dedupes on (kind, external_ref) so re-running only adds what's new.
 //   customers  ← waitlist / demo_requests / magnet_requests / field_guide_leads
-//   investors  ← deck_links (everyone who got a tracked deck link)
 export async function ingestLeads(): Promise<ActionResult> {
   await requireAdmin()
   const supabase = await createSupabaseServerClient()
@@ -317,26 +333,6 @@ export async function ingestLeads(): Promise<ActionResult> {
     inserts.push(row)
   }
 
-  // Investors, one per deck link.
-  const { data: deck, error: deckErr } = await supabase
-    .from('deck_links')
-    .select('id, recipient_name, recipient_org, created_at')
-    .limit(5000)
-  if (deckErr) warnings.push(`deck_links: ${deckErr.message}`)
-  for (const d of (deck as Row[] | null) ?? []) {
-    const ref = `deck:${d.id}`
-    if (have.has(`investor:${ref}`)) continue
-    inserts.push({
-      kind: 'investor',
-      name: str(d.recipient_name) ?? 'Investor',
-      company: str(d.recipient_org),
-      stage: 'pitched',
-      source: 'deck',
-      priority: 'medium',
-      external_ref: ref,
-    })
-  }
-
   const warnSuffix = warnings.length ? ` (skipped: ${warnings.join('; ')})` : ''
 
   if (inserts.length === 0) {
@@ -350,6 +346,8 @@ export async function ingestLeads(): Promise<ActionResult> {
     .upsert(inserts, { onConflict: 'kind,external_ref', ignoreDuplicates: true })
   if (error) return { ok: false, message: error.message }
 
+  revalidatePath('/admin', 'layout')
+  updateTag('admin-data')
   revalidatePath('/admin/crm')
   revalidatePath('/admin/crm/contacts')
   return { ok: true, message: `Imported ${inserts.length} contact${inserts.length === 1 ? '' : 's'}.${warnSuffix}` }
