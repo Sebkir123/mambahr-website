@@ -6,9 +6,6 @@ import ts from 'typescript'
 import { readAdminRows } from '../../src/lib/admin-rows.ts'
 import { publishingError } from '../../src/lib/admin-publishing.ts'
 import { safeAdminNext } from '../../src/lib/admin-auth-redirect.ts'
-import { csvCell, filterLeads } from '../../src/lib/admin-lead-filters.ts'
-import * as crmTypes from '../../src/lib/crm-types.ts'
-import { isoDateOrNull } from '../../src/lib/crm-types.ts'
 
 const now = Date.parse('2026-11-03T12:00:00Z')
 test('publishing requires saved content and a future schedule; unpublishing remains available', () => {
@@ -22,30 +19,8 @@ test('publishing requires saved content and a future schedule; unpublishing rema
   assert.match(publishingError('unknown', null, 'Title', '<p>Text</p>', now), /status/)
 })
 test('admin return paths retain nested destinations and reject lookalikes or external URLs', () => {
-  for (const path of ['/admin', '/admin/blog/123', '/admin/crm?kind=investor']) assert.equal(safeAdminNext(path), path)
+  for (const path of ['/admin', '/admin/blog/123', '/admin/blog?status=draft']) assert.equal(safeAdminNext(path), path)
   for (const path of ['https://example.test', '//example.test/admin', '/administrator', '/admin\\evil', '/admin\r\nLocation:bad', undefined]) assert.equal(safeAdminNext(path), '/admin')
-})
-test('lead filtering used for the list and export combines source with case-insensitive company/name/email/detail search', () => {
-  const leads = [
-    { source: 'waitlist', name: 'Alex Sample', email: 'alex@example.test', company: 'Example Labs', detail: null },
-    { source: 'demo', name: null, email: 'demo@example.test', company: 'Example Labs', detail: 'Referral' },
-    { source: 'partner', name: 'Morgan', email: 'morgan@example.test', company: null, detail: null },
-  ]
-  assert.equal(filterLeads(leads, 'all', ' EXAMPLE LABS ').length, 2)
-  assert.equal(filterLeads(leads, 'demo', 'example').length, 1)
-  assert.equal(filterLeads(leads, 'all', 'referral')[0].source, 'demo')
-  assert.equal(filterLeads(leads, 'waitlist', 'Morgan').length, 0)
-  assert.equal(filterLeads(leads, 'all', '').length, 3)
-})
-test('CSV exports quote commas, quotes and newlines, and neutralize spreadsheet formulas', () => {
-  assert.equal(csvCell('A, "B"\nC'), '"A, ""B""\nC"')
-  for (const value of ['=HYPERLINK("bad")', '+SUM(A1)', '-2+3', '@cmd', '\t=cmd']) assert.ok(csvCell(value).startsWith('"\''))
-  assert.equal(csvCell(null), '""')
-})
-test('calendar validation rejects rolled-over dates while accepting leap days', () => {
-  assert.equal(isoDateOrNull('2026-02-31'), null)
-  assert.equal(isoDateOrNull('2026-02-29'), null)
-  assert.equal(isoDateOrNull('2028-02-29'), '2028-02-29')
 })
 test('admin reads continue past the API row cap and preserve a partial result on a later failure', async () => {
   const rows = Array.from({ length: 1204 }, (_, id) => ({ id }))
@@ -92,16 +67,6 @@ test('the publishing action rejects a past schedule before issuing an update', a
   assert.equal(result.ok, false); assert.match(result.error, /future/)
   assert.equal(calls.length, 1)
 })
-test('contact saves apply the expected version in the database update and report concurrent edits', async () => {
-  const { db, calls } = dbStub([{ data: { kind: 'customer', stage: 'lead', owner: 'preview@example.test', updated_at: 'version-1' }, error: null }, { data: null, error: null }])
-  const actions = loadAction('../../src/app/admin/(panel)/crm/actions.ts', {
-    'next/cache': cacheStub(), '@/lib/auth': { requireAdmin: async () => ({ email: 'preview@example.test' }) }, '@/lib/supabase/server': { createSupabaseServerClient: async () => db }, '@/lib/crm': { isValidStage: () => true, parseMoney: () => null, isoDateOrNull, ACTIVITY_KINDS: [] },
-  })
-  const form = new FormData(); form.set('id', 'contact-id'); form.set('name', 'Sample'); form.set('stage', 'lead'); form.set('expected_updated_at', 'version-1')
-  const result = await actions.updateContact(form)
-  assert.equal(result.ok, false); assert.match(result.message, /changed/)
-  assert.ok(calls[1].some((op) => op.eq?.[0] === 'updated_at' && op.eq[1] === 'version-1'))
-})
 test('a missing post during publish is reported as failure rather than a successful status change', async () => {
   const { db } = dbStub([{ data: { slug: 'sample', published_at: null, title: 'Sample', body_html: '<p>Saved content</p>' }, error: null }, { data: null, error: null }])
   const actions = loadAction('../../src/app/admin/(panel)/blog/actions.ts', {
@@ -131,15 +96,6 @@ test('saving a deleted or inaccessible post reports failure without creating a f
   assert.equal(calls.length, 2)
 })
 
-const { needsAttention, filterContacts } = loadAction('../../src/lib/admin-contact-filters.ts', { './crm-types': crmTypes })
-test('follow-up attention excludes closed contacts and treats today as due, not overdue; exports use the same combined filters', () => {
-  const base = { name: 'Alex', company: 'Example', email: 'alex@example.test', tags: [], stage: 'lead', kind: 'customer', owner: null, next_step: null, next_step_due: '2026-11-02' }
-  assert.equal(needsAttention(base, 'overdue', '2026-11-03'), true)
-  assert.equal(needsAttention({ ...base, next_step_due: '2026-11-03' }, 'overdue', '2026-11-03'), false)
-  assert.equal(needsAttention({ ...base, stage: 'won' }, 'unassigned', '2026-11-03'), false)
-  assert.equal(needsAttention({ ...base, owner: '  ' }, 'unassigned', '2026-11-03'), true)
-  assert.equal(filterContacts([base, { ...base, kind: 'investor' }, { ...base, owner: 'Owner' }], { kind: 'customer', owner: 'all', open: true, q: ' EXAMPLE ', attention: 'unassigned' }, '2026-11-03').length, 1)
-})
 
 test('responsive modal closes on desktop resize, route change and unmount so it cannot leave the document inert', () => {
   const effects = []
@@ -175,12 +131,21 @@ test('page-search Enter cancels the native default before closing and navigating
   assert.deepEqual(calls, ['prevent', 'stop', 'close', '/admin/blog'])
 })
 
-test('contact deletion reports a database failure rather than returning a false success', async () => {
-  const { db } = dbStub([{ data: null, error: { message: 'offline' } }])
-  const actions = loadAction('../../src/app/admin/(panel)/crm/actions.ts', {
-    'next/cache': cacheStub(), '@/lib/auth': { requireAdmin: async () => ({ email: 'preview@example.test' }) }, '@/lib/supabase/server': { createSupabaseServerClient: async () => db }, '@/lib/crm': {},
+
+test('content overview reads content only and exposes publishing work without CRM dependencies', async () => {
+  const { db, calls } = dbStub([
+    { data: [{ id: 'p1', slug: 'one', title: 'One', status: 'published' }, { id: 'p2', slug: 'two', title: 'Two', status: 'draft' }, { id: 'p3', slug: 'three', title: 'Three', status: 'scheduled' }], error: null },
+    { data: [{ id: 'r1', status: 'published' }, { id: 'r2', status: 'draft' }], error: null },
+  ])
+  const { getOverview } = loadAction('../../src/lib/admin-analytics.ts', {
+    'server-only': {}, 'next/cache': { unstable_cache: (fn) => fn }, '@/lib/supabase/server': {}, '@/lib/supabase/service': { serviceDb: () => db }, '@/lib/admin-rows': { readAdminRows },
+    '@/lib/blog-analytics': { getBlogReadSummary: async () => ({ total: 20, last7d: 2, top: [{ slug: 'one', views: 12 }], warnings: [] }) },
+    '@/lib/site-analytics': { getSiteAnalytics: async () => ({ totals: { real: 29, pageviews: 42 }, spark: [1, 2], warnings: [] }) },
+    '@/lib/admin-seo': { getSeoOverview: async () => ({ warnings: [], posts: [{ status: 'published', noindex: false, hasMetaDescription: false }, { status: 'draft', noindex: false, hasMetaDescription: false }, { status: 'published', noindex: true, hasMetaDescription: false }] }) },
   })
-  const form = new FormData(); form.set('id', 'sample-id')
-  const result = await actions.deleteContact(form)
-  assert.equal(result.ok, false); assert.match(result.message, /could not be deleted/)
+  const result = await getOverview()
+  assert.deepEqual(calls.map((ops) => ops[0].table), ['posts', 'resources'])
+  assert.equal(result.posts.published, 1); assert.equal(result.posts.draft, 1); assert.equal(result.posts.scheduled, 1)
+  assert.deepEqual(result.resources, { published: 1, draft: 1 })
+  assert.equal(result.website.visits, 29); assert.equal(result.reads.top[0].title, 'One'); assert.equal(result.missingDescriptions, 1)
 })

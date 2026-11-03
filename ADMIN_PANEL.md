@@ -9,41 +9,31 @@ variable dependencies from the product source, preserving the scoped selectors.
 
 ## Pages
 
-- Overview: consistent blog reads, incoming leads, relationship summaries,
-  follow-ups, and actionable counts for overdue next steps, missing owners,
-  missing next steps, and drafts.
-- Website analytics: existing first-party visitor, source, engagement and session
-  reporting, with time-range/timezone controls and paginated session rows.
-- Customers and investors: relationship summaries and pipeline entry points.
-- Pipelines: search, drag/drop, and a keyboard/touch stage selector. Failed moves
-  roll back and report an error. Realtime refreshes are filtered and debounced.
-- All contacts: combined filters, sorting, pagination, attention filters, and a
-  matching CSV export. Contact detail prioritizes next steps, notes, tasks and
-  activity, with the full form available through Edit details.
-- Incoming leads: source/search filters, pagination and matching CSV export.
-- Blog: status filters, search, sorting and pagination; mobile article cards.
-- Editor: writing surface, publishing controls, metadata and optional search/share
-  settings, revision history on demand, save retry and unsaved-close warning.
-- Resources and field guides: search/manage content and share links; resource
-  editor identity is reset when changing rows.
-- Search health: existing on-page completeness checks, ordered by attention.
-- Login/callback: safe return-path validation, specific expired/missing verifier
-  feedback and clear instructions to use the requesting browser.
+- Overview: website visits, consistent blog reads, published content, a publishing
+  queue, recent updates and drafts to continue. Summary cards link to their pages.
+- Website analytics: first-party traffic, sources, engagement, session details,
+  time range and timezone controls, and pagination.
+- Blog: status/search filters, sorting and pagination; mobile article cards.
+- Editor: writing surface, publishing controls, optional search/share settings,
+  revision history on demand, save retry and unsaved-close warning.
+- Resources and field guides: manage content, files and trackable distribution links.
+- Search health: on-page completeness checks and links to the relevant editor.
+- Login/callback: safe return paths and specific expired/missing verifier feedback.
 
-Brand/design, pitch-deck management and LinkedIn publishing are removed from the
-panel. LinkedIn OAuth/drafting/publishing routes and the social cron are removed.
-Stored records and public deck URLs/tracking are retained. Existing public social
-links, email copy and referral attribution are outside this panel removal.
+Relationships are managed in Attio. Customers, Investors, All contacts, Incoming
+leads, CRM pipelines/tasks/exports, their routes/actions/libraries, and dashboard
+relationship metrics are removed. Existing database records and public signup,
+demo, partner and resource intake remain intact. This patch does not add an Attio
+sync. Brand/design, pitch-deck management and LinkedIn publishing are also removed;
+existing public deck URLs and stored records remain.
 
 ## Behavior and performance
 
 - `admin-data` cache tags allow explicit refresh and invalidate on relevant writes.
   Existing bounded 20–30 second service-side caches remain admin-gated.
-- Lead, contact and post list reads fetch bounded pages instead of trusting an
-  oversized PostgREST limit. Safety limits and read failures are visible. Exports
-  reject incomplete results instead of silently returning a partial CSV.
-- Contact version matching is part of the database UPDATE, preventing silent
-  overwrites when another editor saves first.
+- Content list reads fetch bounded pages instead of trusting an oversized
+  PostgREST limit. Safety limits and read failures are visible. The overview reads
+  posts/resources/website analytics only, with no CRM queries.
 - Publish/schedule wait for a successful save. Publishing requires title/content;
   schedules must be future timestamps. Missing/deleted posts report failure.
 - Autosaves are serialized, identical payloads are skipped, and opening an editor
@@ -68,13 +58,15 @@ source. Run `npx next typegen` first if deleted routes left a stale route manife
 Visual and route checks use a separate, uncommitted local copy with sample data,
 a mocked authenticated admin and writes blocked. Never deploy those fixtures or
 copy their authentication/proxy files into the real source. Check both themes,
-desktop and mobile navigation, blog filtering/editor, contact details and resource
-editing. Verify removed routes return 404.
+desktop and mobile navigation, blog filtering/editor, and resource editing. Verify removed routes return 404.
 
 ## Useful next additions
 
-- Explicit publisher, CRM and administrator roles instead of a single company
-  email-domain gate, paired with a searchable admin audit trail.
-- A shareable draft preview and an optional review/approval step before publishing.
-- Follow-up reminders and response-time reporting once owners/due dates are used
-  consistently; avoid sending automated outreach without an explicit workflow.
+- Explicit editor, publisher and administrator roles with a searchable audit trail.
+- A shareable draft preview and an optional review step before publishing.
+- Content conversion reporting tied to the existing website/resource tracker.
+
+The native dialog lifecycle closes on route changes/unmount and closes the mobile
+menu at desktop widths. An open drawer cannot be hidden while retaining modality.
+Keyboard page search consumes Enter before navigating. See
+`ADMIN_INTERACTION_CHECKS.md` for the reproduced failure and browser checks.

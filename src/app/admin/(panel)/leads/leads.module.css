@@ -1,4 +1,0 @@
-.email { font-size: 10px; color: var(--text-faint); margin-top: 4px; }
-.source { display: inline-block; font-size: 10px; font-weight: 500; background: var(--bg-muted); color: var(--text-secondary); border-radius: var(--radius-full); padding: 3px 7px; white-space: nowrap; }
-.detail { max-width: 240px; font-size: 11px; color: var(--text-faint); }
-.when { white-space: nowrap; font-size: 11px; }

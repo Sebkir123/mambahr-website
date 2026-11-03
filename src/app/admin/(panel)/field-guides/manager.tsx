@@ -102,7 +102,7 @@ export function FieldGuideManager({
           <span className={styles.cardHint}>{rows.length} total · firm resolved from the opener&rsquo;s network</span>
         </div>
         {rows.length === 0 ? (
-          <p className={styles.empty}>Nothing yet. Create a tracked link above, or share the field-guide form to capture leads.</p>
+          <p className={styles.empty}>Nothing yet. Create a tracked link above, or share the guide’s request form.</p>
         ) : (
           <ul className={styles.linkList}>
             {rows.map((r) => {

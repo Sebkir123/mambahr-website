@@ -2,7 +2,7 @@
 
 import { Suspense, useRef, useState } from 'react'
 import Link from 'next/link'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { useAdminTheme } from '../../admin-theme'
 import Icon from './icon'
@@ -13,8 +13,7 @@ import styles from './admin-nav.module.css'
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname()
-  const params = useSearchParams()
-  const active = activeNav(pathname, params.get('kind'))
+  const active = activeNav(pathname)
   return <>{NAVIGATION.map((group) => <div key={group.label} className={styles.group}>
     <div className={styles.groupTitle}>{group.label}</div>
     {group.items.map((item) => <Link key={item.href} href={item.href} prefetch={false}
