@@ -500,3 +500,6 @@
 .timelineRow { font-size: 11px; grid-template-columns: 22px minmax(100px, 180px) 1fr 50px; }
 .empty { font-size: 12px; padding: 26px 22px; }
 @media (max-width: 680px) { .totals { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .total { padding: 16px; } .cardHead { padding: 16px; flex-wrap: wrap; align-items: flex-start; } .createForm { padding: 16px; } .input { font-size: 16px; } .linkRow { padding: 14px 16px; } .linkActions { flex-basis: 100%; margin-left: 0; } .funnel { overflow-x: auto; } .funnelRow { min-width: 460px; } .timeline { overflow-x: auto; } .timelineRow { min-width: 470px; } .freshLink { margin: 0 16px 16px; flex-wrap: wrap; } }
+
+.listFilter { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 12px; }
+.listFilter select { border: 1px solid var(--border-mid); border-radius: var(--radius-md); background: var(--bg); color: var(--text); font: inherit; padding: 8px; }

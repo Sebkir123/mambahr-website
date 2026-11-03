@@ -1,4 +1,4 @@
-.toolbar { display: flex; justify-content: flex-end; margin-bottom: 16px; }
+.toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
 
 .titleBtn {
   border: none; background: none; padding: 0; cursor: pointer;
@@ -100,3 +100,12 @@
 .source { font-size: 11px; }
 .shareHint { font-size: 10px; }
 @media (max-width: 650px) { .toolbar { flex-wrap: wrap; } .toolbar > label { flex-basis: 100%; } .toolbar > button { margin-left: auto; } .row2 { grid-template-columns: minmax(0, 1fr); } .form { padding: 18px; } .editorHead { padding: 18px 18px 0; } .input, .textarea { font-size: 16px; } .statRow { grid-template-columns: repeat(2, minmax(0, 1fr)); } .analytics { padding: 18px; } }
+
+.form { border: 0; margin: 0; min-width: 0; }
+.filter { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-secondary); }
+.filter select { border: 1px solid var(--border-mid); border-radius: var(--radius-md); background: var(--bg); color: var(--text); padding: 8px; font: inherit; }
+.discard { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--gold); border-radius: var(--radius-md); background: var(--bg-elevated); }
+.discard p { margin: 4px 0 0; font-size: 13px; color: var(--text-secondary); }
+.discard > div { margin-right: auto; }
+
+.discardButton { color: var(--error); }

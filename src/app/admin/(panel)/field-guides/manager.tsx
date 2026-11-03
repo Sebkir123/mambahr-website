@@ -1,7 +1,10 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useDeferredValue, useMemo, useState, useTransition } from 'react'
 import Link from 'next/link'
+import { useListQuery } from '../_components/use-list-query'
+import Pagination, { PAGE_SIZE } from '../_components/pagination'
+import { ConfirmButton } from '../_components/confirm-button'
 import { createFieldGuideLink, revokeFieldGuideLink } from './actions'
 import type { FieldGuideRow } from '@/lib/admin-field-guides'
 import ui from '../admin-ui.module.css'
@@ -27,6 +30,12 @@ export function FieldGuideManager({
   rows: FieldGuideRow[]
   guides: { slug: string; title: string }[]
 }) {
+  const { query, status, sort, page, setQuery, setStatus, setSort, setPage, clear } = useListQuery(['all', 'active', 'revoked'], ['recent', 'opens', 'name'])
+  const needle = useDeferredValue(query.trim().toLowerCase())
+  const filtered = useMemo(() => rows.filter(row => (status === 'all' || (status === 'revoked' ? !!row.revokedAt : !row.revokedAt)) && [row.who, row.company, row.email, row.guideTitle].some(value => value?.toLowerCase().includes(needle))).sort((a, b) => sort === 'opens' ? b.opens - a.opens : sort === 'name' ? a.who.localeCompare(b.who) : b.requestedAt.localeCompare(a.requestedAt)), [rows, status, sort, needle])
+  const current = Math.min(page, Math.max(1, Math.ceil(filtered.length / PAGE_SIZE)))
+  const visible = filtered.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE)
+  const [actionNotice, setActionNotice] = useState<{ ok: boolean; message: string } | null>(null)
   const [pending, start] = useTransition()
   const [fresh, setFresh] = useState<{ url: string; name: string } | null>(null)
   const [err, setErr] = useState('')
@@ -101,11 +110,17 @@ export function FieldGuideManager({
           <h2 className={styles.cardTitle}>Requests &amp; links</h2>
           <span className={styles.cardHint}>{rows.length} total · firm resolved from the opener&rsquo;s network</span>
         </div>
-        {rows.length === 0 ? (
-          <p className={styles.empty}>Nothing yet. Create a tracked link above, or share the guide’s request form.</p>
+        <div className={ui.toolbar}>
+          <label className={ui.search}><input type="search" aria-label="Search guide links" placeholder="Search recipient, company or guide…" value={query} onChange={e => setQuery(e.target.value)} /></label>
+          <label className={styles.listFilter}>Status<select aria-label="Filter guide links" value={status} onChange={e => setStatus(e.target.value)}><option value="all">All links</option><option value="active">Active</option><option value="revoked">Revoked</option></select></label>
+          <label className={styles.listFilter}>Sort<select aria-label="Sort guide links" value={sort} onChange={e => setSort(e.target.value)}><option value="recent">Most recent</option><option value="opens">Most opened</option><option value="name">Recipient name</option></select></label>
+        </div>
+        {actionNotice && <p className={styles.notice} role={actionNotice.ok ? 'status' : 'alert'}>{actionNotice.message}</p>}
+        {filtered.length === 0 ? (
+          <div className={ui.empty}><h3>{rows.length ? 'No matching links' : 'No guide links yet'}</h3><p>{rows.length ? 'Try another search or status filter.' : 'Create a tracked link above, or share the guide’s request form.'}</p>{rows.length > 0 && <button className={ui.btnGhost} onClick={clear}>Clear filters</button>}</div>
         ) : (
           <ul className={styles.linkList}>
-            {rows.map((r) => {
+            {visible.map((r) => {
               const revoked = !!r.revokedAt
               return (
                 <li key={r.id} className={revoked ? `${styles.linkRow} ${styles.linkRevoked}` : styles.linkRow}>
@@ -131,10 +146,7 @@ export function FieldGuideManager({
                       </button>
                     )}
                     {!revoked && (
-                      <form action={revokeFieldGuideLink}>
-                        <input type="hidden" name="id" value={r.id} />
-                        <button type="submit" className={styles.revokeBtn}>Revoke</button>
-                      </form>
+                      <RevokeLink id={r.id} onResult={setActionNotice} />
                     )}
                   </div>
                 </li>
@@ -142,7 +154,17 @@ export function FieldGuideManager({
             })}
           </ul>
         )}
+        <Pagination total={filtered.length} page={current} onPage={setPage} label="links" />
       </div>
     </>
   )
+}
+
+function RevokeLink({ id, onResult }: { id: string; onResult: (result: { ok: boolean; message: string }) => void }) {
+  const [pending, start] = useTransition()
+  return <ConfirmButton className={styles.revokeBtn} pending={pending} pendingLabel="Revoking…" confirmLabel="Revoke link" onConfirm={() => start(async () => {
+    const fd = new FormData(); fd.set('id', id)
+    try { onResult(await revokeFieldGuideLink(fd)) }
+    catch { onResult({ ok: false, message: 'Could not revoke this link. Please retry.' }) }
+  })}>Revoke</ConfirmButton>
 }

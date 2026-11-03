@@ -11,9 +11,7 @@ import SubmitButton from '../_components/submit-button'
 import ui from '../admin-ui.module.css'
 import styles from './blog.module.css'
 export const dynamic = 'force-dynamic'
-export default async function BlogListPage({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
-  const query = await searchParams
-  const initialStatus = query.status === 'draft' || query.status === 'published' || query.status === 'scheduled' ? query.status : 'all'
+export default async function BlogListPage() {
   await requireAdmin()
   const supabase = await createSupabaseServerClient()
   const [result, analytics] = await Promise.all([
@@ -27,6 +25,6 @@ export default async function BlogListPage({ searchParams }: { searchParams: Pro
     <div className={ui.header}><div><h1 className={ui.h1}>Blog</h1><p className={ui.subtitle}>Write, refine, and publish your next story.</p></div><form action={createDraft}><SubmitButton pendingLabel="Creating draft…"><Icon name="plus" size={15} />New post</SubmitButton></form></div>
     <div className={styles.summary}><span><strong>{posts.filter((post) => post.status === 'published').length}</strong> published</span><span><strong>{posts.filter((post) => post.status === 'draft').length}</strong> drafts</span><span><strong>{posts.filter((post) => post.status === 'scheduled').length}</strong> scheduled</span><span className={styles.summaryReads}><Icon name="book" size={14} /><strong>{analytics.warning ? 'Unavailable' : compact(totalReads)}</strong> all-time reads · bots excluded</span></div>
     <DataNotice warnings={[...(analytics.warning ? [analytics.warning] : []), ...(result.truncated ? ['Only the 10,000 most recently edited posts are shown.'] : [])]} />
-    <BlogTable key={initialStatus} initialStatus={initialStatus} posts={posts} stats={Object.fromEntries(analytics.stats)} analyticsAvailable={!analytics.warning} />
+    <BlogTable posts={posts} stats={Object.fromEntries(analytics.stats)} analyticsAvailable={!analytics.warning} />
   </>
 }

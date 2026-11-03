@@ -87,8 +87,9 @@ export async function saveResource(formData: FormData): Promise<SaveResult> {
   }
 
   if (id) {
-    const { error } = await db.from('resources').update(row).eq('id', id)
+    const { data, error } = await db.from('resources').update(row).eq('id', id).select('id').maybeSingle()
     if (error) return { ok: false, message: error.message.includes('duplicate') ? 'That slug is already taken.' : error.message }
+    if (!data) return { ok: false, message: 'This resource no longer exists. Reload the list before editing.' }
   } else {
     const { error } = await db.from('resources').insert({ ...row, created_by: admin.email })
     if (error) return { ok: false, message: error.message.includes('duplicate') ? 'That slug is already taken.' : error.message }
@@ -101,34 +102,51 @@ export async function saveResource(formData: FormData): Promise<SaveResult> {
   return { ok: true, message: id ? 'Saved.' : 'Resource created.', slug }
 }
 
-export async function setResourceStatus(formData: FormData): Promise<void> {
-  await requireAdmin()
-  const db = serviceDb()
-  if (!db) return
-  const id = String(formData.get('id') || '')
-  const status = String(formData.get('status') || '') === 'published' ? 'published' : 'draft'
-  if (!id) return
-  // Don't publish a resource with no PDF (dead download button on the site).
-  if (status === 'published') {
-    const { data } = await db.from('resources').select('file_path').eq('id', id).maybeSingle()
-    if (!data?.file_path) return
-  }
-  await db.from('resources').update({ status, updated_at: new Date().toISOString() }).eq('id', id)
+function invalidateResource(slug: string) {
   updateTag('admin-data')
   revalidatePath('/admin/resources')
   revalidatePath('/')
+  revalidatePath(`/resources/${slug}`)
 }
-
-export async function deleteResource(formData: FormData): Promise<void> {
+export async function setResourceStatus(formData: FormData): Promise<SaveResult> {
   await requireAdmin()
   const db = serviceDb()
-  if (!db) return
-  const id = String(formData.get('id') || '')
-  if (!id) return
-  const { data } = await db.from('resources').select('file_path').eq('id', id).maybeSingle()
-  if (data?.file_path) await db.storage.from(BUCKET).remove([data.file_path as string])
-  await db.from('resources').delete().eq('id', id)
-  updateTag('admin-data')
-  revalidatePath('/admin/resources')
-  revalidatePath('/')
+  if (!db) return { ok: false, message: 'Service not configured.' }
+  const id = String(formData.get('id') || '').trim()
+  const status = String(formData.get('status') || '')
+  if (!id || !['published', 'draft'].includes(status)) return { ok: false, message: 'Choose a valid resource and status.' }
+  const { data: resource, error: readError } = await db.from('resources').select('slug,file_path').eq('id', id).maybeSingle()
+  if (readError) return { ok: false, message: 'Could not load the resource. Please retry.' }
+  if (!resource) return { ok: false, message: 'This resource no longer exists. Reload the list.' }
+  if (status === 'published' && !resource.file_path) return { ok: false, message: 'Attach a PDF before publishing.' }
+  let update = db.from('resources').update({ status, updated_at: new Date().toISOString() }).eq('id', id)
+  if (status === 'published') update = update.not('file_path', 'is', null)
+  const { data, error } = await update.select('id').maybeSingle()
+  if (error) return { ok: false, message: 'Could not change the status. Please retry.' }
+  if (!data) return { ok: false, message: 'The resource changed or was deleted. Reload the list and retry.' }
+  invalidateResource(resource.slug)
+  return { ok: true, message: status === 'published' ? 'Resource published.' : 'Resource returned to draft.' }
+}
+export async function deleteResource(formData: FormData): Promise<SaveResult> {
+  await requireAdmin()
+  const db = serviceDb()
+  if (!db) return { ok: false, message: 'Service not configured.' }
+  const id = String(formData.get('id') || '').trim()
+  if (!id) return { ok: false, message: 'Choose a resource to delete.' }
+  // Never remove the PDF until its owning record has actually been deleted.
+  const { data, error } = await db.from('resources').delete().eq('id', id).select('slug,file_path').maybeSingle()
+  if (error) return { ok: false, message: 'Could not delete the resource. Please retry.' }
+  if (!data) return { ok: false, message: 'This resource no longer exists. Reload the list.' }
+  invalidateResource(data.slug)
+  if (data.file_path) {
+    const { data: references, error: referenceError } = await db.from('resources').select('id').eq('file_path', data.file_path).limit(1)
+    if (referenceError) return { ok: true, message: 'Resource deleted. Its PDF was retained because file usage could not be checked.' }
+    if (!references?.length) {
+      try {
+        const { error: storageError } = await db.storage.from(BUCKET).remove([data.file_path])
+        if (storageError) return { ok: true, message: 'Resource deleted. Its PDF could not be removed from storage.' }
+      } catch { return { ok: true, message: 'Resource deleted. Its PDF could not be removed from storage.' } }
+    }
+  }
+  return { ok: true, message: 'Resource deleted.' }
 }

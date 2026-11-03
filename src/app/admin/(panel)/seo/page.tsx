@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
-import { getSeoOverview, type PostSeo } from '@/lib/admin-seo'
+import { getSeoOverview } from '@/lib/admin-seo'
 import ui from '../admin-ui.module.css'
 import DataNotice from '../_components/data-notice'
 import styles from './seo.module.css'
+import SeoTable from './seo-table'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,12 +16,6 @@ const SITEMAPS = [
   { label: 'RSS feed', href: `${SITE}/blog/rss.xml`, note: 'Latest 30 published posts' },
   { label: 'Blog index', href: `${SITE}/blog`, note: 'Public blog landing page' },
 ]
-
-function scoreClass(score: number): string {
-  if (score >= 85) return styles.scoreGood
-  if (score >= 60) return styles.scoreOk
-  return styles.scoreBad
-}
 
 export default async function SeoPage() {
   await requireAdmin()
@@ -61,35 +56,7 @@ export default async function SeoPage() {
         <Totals label="Avg score" value={`${o.totals.avgScore}`} sub="published posts" />
       </div>
 
-      {/* Per-post health */}
-      <div className={ui.card}>
-        <div className={styles.cardHead}>
-          <h2 className={styles.cardTitle}>Per-post SEO health</h2>
-          <span className={styles.cardHint}>Worst-scoring published posts first</span>
-        </div>
-        {o.posts.length === 0 ? (
-          <div className={ui.empty}>
-            <h3>No posts to score</h3>
-            <p>Write your first post to see its SEO health.</p>
-          </div>
-        ) : (
-          <table className={ui.table}>
-            <thead>
-              <tr>
-                <th>Post</th>
-                <th>Status</th>
-                <th>Score</th>
-                <th>Issues</th>
-              </tr>
-            </thead>
-            <tbody>
-              {o.posts.map((p) => (
-                <PostRow key={p.id} p={p} />
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
+      <SeoTable posts={o.posts} />
     </>
   )
 }
@@ -101,40 +68,5 @@ function Totals({ label, value, sub }: { label: string; value: string | number; 
       <span className={styles.totalLabel}>{label}</span>
       {sub && <span className={styles.totalSub}>{sub}</span>}
     </div>
-  )
-}
-
-const STATUS_CLASS: Record<PostSeo['status'], string> = {
-  published: ui.badgePublished,
-  draft: ui.badgeDraft,
-  scheduled: ui.badgeScheduled,
-}
-
-function PostRow({ p }: { p: PostSeo }) {
-  return (
-    <tr>
-      <td>
-        <Link href={`/admin/blog/${p.id}`} className={styles.postTitle}>{p.title}</Link>
-        <span className={styles.postSlug}>/blog/{p.slug}</span>
-      </td>
-      <td>
-        <span className={`${ui.badge} ${STATUS_CLASS[p.status]}`}>{p.status}</span>
-        {p.noindex && <span className={styles.noindexTag}>noindex</span>}
-      </td>
-      <td>
-        <span className={`${styles.score} ${scoreClass(p.score)}`}>{p.score}</span>
-      </td>
-      <td className={styles.issues}>
-        {p.issues.length === 0 ? (
-          <span className={styles.allGood}>All set</span>
-        ) : (
-          <ul className={styles.issueList}>
-            {p.issues.map((i) => (
-              <li key={i}>{i}</li>
-            ))}
-          </ul>
-        )}
-      </td>
-    </tr>
   )
 }

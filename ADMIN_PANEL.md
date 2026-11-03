@@ -63,10 +63,39 @@ desktop and mobile navigation, blog filtering/editor, and resource editing. Veri
 ## Useful next additions
 
 - Explicit editor, publisher and administrator roles with a searchable audit trail.
-- A shareable draft preview and an optional review step before publishing.
+- An optional review step before publishing; private saved previews are implemented.
 - Content conversion reporting tied to the existing website/resource tracker.
 
 The native dialog lifecycle closes on route changes/unmount and closes the mobile
 menu at desktop widths. An open drawer cannot be hidden while retaining modality.
 Keyboard page search consumes Enter before navigating. See
 `ADMIN_INTERACTION_CHECKS.md` for the reproduced failure and browser checks.
+
+## Editorial workflow improvements
+
+- Preview saves the current article first, then opens `/admin/blog/[id]/preview`
+  behind the existing admin gate. It renders sanitized saved HTML with the public
+  article styles, is noindexed, and carries no public sharing token. Failed saves
+  keep the editor open. The Back links retain the filtered Blog destination.
+- Blog, Resources, Field guides and Search health keep bounded search, filter,
+  sorting and pagination in the URL using Next's native history integration.
+  Filtering does not fetch the full server page again on every keystroke.
+- Resource Close/Cancel/New/switch and internal link navigation prompt inline
+  before discarding unsaved edits. Reload/window close invokes the browser's
+  unsaved-change guard. Fields are disabled during save/upload; failed saves
+  retain the form. SPA browser Back/Forward is not intercepted by this guard.
+- Resource publish/unpublish/delete and field-guide revoke provide pending and
+  result feedback. Writes verify the affected row. A missing PDF blocks publish.
+  Deletion removes the row first and keeps PDFs referenced by another resource;
+  storage cleanup failures are reported. Resource editing preserves library order.
+- Resource tables scroll horizontally on small screens. Search-health checks can
+  be filtered by missing description, missing cover, or noindex; completeness is
+  explicitly distinguished from measured search indexing/rankings.
+- Geist Mono uses its variable face, avoiding the upstream static per-weight
+  Google-font URL parsing failure without changing the typeface.
+
+This pass was verified with 23 workflow tests, changed-source ESLint, TypeScript,
+production build, and isolated rendered-route checks. The computer-use native
+pipe/browser host was unavailable, so these additions have not received a fresh
+interactive Chrome pass. Earlier native checks above apply to earlier changes.
+No production content, links or files were modified for verification.

@@ -2,6 +2,8 @@
 
 import { useRef, useState, useTransition, useMemo, useEffect } from 'react'
 import { saveResource, createResourceUploadUrl, setResourceStatus, deleteResource } from './actions'
+import { useRouter } from 'next/navigation'
+import { useListQuery } from '../_components/use-list-query'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { ConfirmButton } from '../_components/confirm-button'
 import ui from '../admin-ui.module.css'
@@ -48,26 +50,64 @@ function slugify(s: string): string {
 export default function ResourcesManager({ resources, stats, sources }: { resources: Row[]; stats: Record<string, Stat>; sources: Record<string, Src[]> }) {
   const [editing, setEditing] = useState<Row | null>(null)
   const [open, setOpen] = useState(false)
-  const [query, setQuery] = useState('')
-  const [page, setPage] = useState(1)
+  const router = useRouter()
+  const { query, status, sort, page, setQuery, setStatus, setSort, setPage } = useListQuery(['all', 'published', 'draft'], ['order', 'title', 'downloads'])
+  const [dirty, setDirty] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const [version, setVersion] = useState(0)
+  type Intent = { row: Row } | { close: true } | { href: string }
+  const [intent, setIntent] = useState<Intent | null>(null)
+  const [notice, setNotice] = useState<{ ok: boolean; message: string } | null>(null)
+  const guardRef = useRef<HTMLDivElement>(null)
+  function apply(next: Intent) {
+    setDirty(false); setIntent(null)
+    if ('href' in next) { router.push(next.href); return }
+    if ('close' in next) { setOpen(false); return }
+    setEditing({ ...next.row }); setVersion(v => v + 1); setOpen(true)
+  }
+  function request(next: Intent) {
+    if (busy) return
+    if (dirty) { setIntent(next); return }
+    apply(next)
+  }
+  useEffect(() => { if (intent) guardRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }) }, [intent])
+  useEffect(() => {
+    if (!dirty && !busy) return
+    const unload = (event: BeforeUnloadEvent) => { event.preventDefault(); event.returnValue = '' }
+    const navigate = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+      const anchor = (event.target as Element).closest?.('a[href]') as HTMLAnchorElement | null
+      if (!anchor || anchor.target === '_blank' || anchor.hasAttribute('download') || anchor.origin !== window.location.origin) return
+      if (anchor.pathname === window.location.pathname && anchor.search === window.location.search) return
+      event.preventDefault(); event.stopPropagation()
+      if (!busy) setIntent({ href: anchor.pathname + anchor.search + anchor.hash })
+    }
+    window.addEventListener('beforeunload', unload)
+    document.addEventListener('click', navigate, true)
+    return () => { window.removeEventListener('beforeunload', unload); document.removeEventListener('click', navigate, true) }
+  }, [dirty, busy])
   const editorRef = useRef<HTMLDivElement>(null)
-  const filtered = useMemo(() => resources.filter((resource) => `${resource.title} ${resource.kicker} ${resource.description}`.toLowerCase().includes(query.toLowerCase().trim())), [resources, query])
+  const filtered = useMemo(() => resources.filter((resource) => (status === 'all' || resource.status === status) && `${resource.title} ${resource.kicker} ${resource.description}`.toLowerCase().includes(query.toLowerCase().trim())).sort((a, b) => sort === 'title' ? a.title.localeCompare(b.title) : sort === 'downloads' ? (stats[b.slug]?.downloads ?? 0) - (stats[a.slug]?.downloads ?? 0) : a.sort_order - b.sort_order || a.title.localeCompare(b.title)), [resources, stats, query, status, sort])
   const current = Math.min(page, Math.max(1, Math.ceil(filtered.length / PAGE_SIZE)))
   const visible = filtered.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE)
   useEffect(() => { if (open) { editorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); editorRef.current?.focus() } }, [open, editing?.id])
 
-  const startNew = () => { setEditing({ ...BLANK }); setOpen(true) }
-  const startEdit = (r: Row) => { setEditing({ ...r }); setOpen(true) }
+  const startNew = () => request({ row: BLANK })
+  const startEdit = (r: Row) => { if (open && editing?.id === r.id) { editorRef.current?.scrollIntoView({ behavior: 'smooth' }); return }; request({ row: r }) }
 
   return (
     <>
       <div className={styles.toolbar}>
-        <label className={ui.search}><Icon name="search" size={15} /><input type="search" aria-label="Search resources" placeholder="Search resources…" value={query} onChange={(e) => { setQuery(e.target.value); setPage(1) }} /></label>
-        <button type="button" className={ui.btnPrimary} onClick={startNew}>+ New resource</button>
+        <label className={ui.search}><Icon name="search" size={15} /><input type="search" aria-label="Search resources" placeholder="Search resources…" value={query} onChange={(e) => { setQuery(e.target.value) }} /></label>
+        <label className={styles.filter}>Status<select aria-label="Filter resources" value={status} onChange={e => setStatus(e.target.value)}><option value="all">All resources</option><option value="published">Published</option><option value="draft">Draft</option></select></label>
+        <label className={styles.filter}>Sort<select aria-label="Sort resources" value={sort} onChange={e => setSort(e.target.value)}><option value="order">Library order</option><option value="title">Title</option><option value="downloads">Most downloaded</option></select></label>
+        <button type="button" disabled={busy} className={ui.btnPrimary} onClick={startNew}>+ New resource</button>
       </div>
 
+      {notice && <p role={notice.ok ? 'status' : 'alert'} className={notice.ok ? styles.okMsg : styles.errMsg}>{notice.message}</p>}
+      {intent && <div ref={guardRef} className={styles.discard} role="alert"><div><strong>Discard unsaved changes?</strong><p>Your resource edits have not been saved.</p></div><button type="button" className={ui.btnGhost} onClick={() => setIntent(null)}>Keep editing</button><button type="button" className={`${ui.btnGhost} ${styles.discardButton}`} onClick={() => apply(intent)}>Discard changes</button></div>}
       {open && editing && (
-        <div ref={editorRef} tabIndex={-1}><Editor key={editing.id || 'new'} row={editing} stat={stats[editing.slug]} srcs={sources[editing.slug] ?? []} onClose={() => setOpen(false)} /></div>
+        <div ref={editorRef} tabIndex={-1}><Editor key={version} row={editing} stat={stats[editing.slug]} srcs={sources[editing.slug] ?? []} onDirty={setDirty} onBusy={setBusy} onSaved={() => { setDirty(false); setOpen(false); setNotice({ ok: true, message: 'Resource saved.' }) }} onClose={() => request({ close: true })} /></div>
       )}
 
       <div className={ui.card}>
@@ -77,7 +117,7 @@ export default function ResourcesManager({ resources, stats, sources }: { resour
             <p>{resources.length ? 'Try another search term.' : 'Upload a playbook or guide to give it a shareable page and track downloads.'}</p>
           </div>
         ) : (
-          <table className={ui.table}>
+          <div className={ui.tableWrap}><table className={ui.table}>
             <thead>
               <tr>
                 <th>Title</th>
@@ -110,20 +150,13 @@ export default function ResourcesManager({ resources, stats, sources }: { resour
                     <td>{s?.topSource ? <span className={styles.source}>{s.topSource}</span> : '—'}</td>
                     <td><CopyOne url={url} label="Copy link" /></td>
                     <td className={styles.rowActions}>
-                      <form action={setResourceStatus}>
-                        <input type="hidden" name="id" value={r.id} />
-                        <input type="hidden" name="status" value={r.status === 'published' ? 'draft' : 'published'} />
-                        <button type="submit" className={styles.miniBtn} disabled={r.status === 'draft' && !r.file_path}>
-                          {r.status === 'published' ? 'Unpublish' : 'Publish'}
-                        </button>
-                      </form>
-                      <DeleteResourceBtn id={r.id} />
+                      <ResourceActions resource={r} disabled={open || busy} onResult={setNotice} />
                     </td>
                   </tr>
                 )
               })}
             </tbody>
-          </table>
+          </table></div>
         )}
         <Pagination total={filtered.length} page={current} onPage={setPage} label="resources" />
       </div>
@@ -131,18 +164,21 @@ export default function ResourcesManager({ resources, stats, sources }: { resour
   )
 }
 
-function DeleteResourceBtn({ id }: { id: string }) {
+function ResourceActions({ resource, disabled, onResult }: { resource: Row; disabled: boolean; onResult: (result: { ok: boolean; message: string }) => void }) {
   const [pending, start] = useTransition()
-  return (
-    <ConfirmButton
-      onConfirm={() => start(async () => { const fd = new FormData(); fd.set('id', id); await deleteResource(fd) })}
-      confirmLabel="Delete"
-      pending={pending}
-      className={styles.miniDanger}
-    >
-      Delete
-    </ConfirmButton>
-  )
+  const [removing, setRemoving] = useState(false)
+  function run(remove: boolean) {
+    setRemoving(remove)
+    start(async () => {
+      const fd = new FormData(); fd.set('id', resource.id); fd.set('status', resource.status === 'published' ? 'draft' : 'published')
+      try { onResult(await (remove ? deleteResource(fd) : setResourceStatus(fd))) }
+      catch { onResult({ ok: false, message: 'The resource could not be updated. Please retry.' }) }
+    })
+  }
+  return <>
+    <button type="button" className={styles.miniBtn} disabled={disabled || pending || (resource.status === 'draft' && !resource.file_path)} title={resource.status === 'draft' && !resource.file_path ? 'Attach a PDF in the editor before publishing.' : undefined} onClick={() => run(false)}>{pending && !removing ? 'Updating…' : resource.status === 'published' ? 'Unpublish' : 'Publish'}</button>
+    <ConfirmButton onConfirm={() => run(true)} disabled={disabled || pending} pending={pending && removing} confirmLabel="Delete resource" className={styles.miniDanger}>Delete</ConfirmButton>
+  </>
 }
 
 function CopyOne({ url, label }: { url: string; label: string }) {
@@ -154,7 +190,7 @@ function CopyOne({ url, label }: { url: string; label: string }) {
   return <button type="button" className={styles.copyBtn} onClick={copy}>{copied ? 'Copied' : failed ? 'Copy failed; retry' : label}</button>
 }
 
-function Editor({ row, stat, srcs, onClose }: { row: Row; stat?: Stat; srcs: Src[]; onClose: () => void }) {
+function Editor({ row, stat, srcs, onClose, onSaved, onDirty, onBusy }: { row: Row; stat?: Stat; srcs: Src[]; onClose: () => void; onSaved: () => void; onDirty: (dirty: boolean) => void; onBusy: (busy: boolean) => void }) {
   const [title, setTitle] = useState(row.title)
   const [slug, setSlug] = useState(row.slug)
   const [slugTouched, setSlugTouched] = useState(Boolean(row.slug))
@@ -173,6 +209,11 @@ function Editor({ row, stat, srcs, onClose }: { row: Row; stat?: Stat; srcs: Src
   const fileRef = useRef<HTMLInputElement>(null)
 
   const effectiveSlug = slug || slugify(title)
+
+  const fingerprint = JSON.stringify([title, slug, kicker, coverNo, description, bullets, featured, status, filePath, fileName, fileSize])
+  const initialFingerprint = useRef(fingerprint)
+  useEffect(() => { onDirty(fingerprint !== initialFingerprint.current) }, [fingerprint, onDirty])
+  useEffect(() => { onBusy(pending || uploading); return () => onBusy(false) }, [pending, uploading, onBusy])
 
   async function onPickFile(file: File) {
     if (file.type !== 'application/pdf') { setMsg({ ok: false, text: 'Upload a PDF.' }); return }
@@ -207,11 +248,11 @@ function Editor({ row, stat, srcs, onClose }: { row: Row; stat?: Stat; srcs: Src
     if (fileName) fd.set('file_name', fileName)
     if (fileSize) fd.set('file_size', String(fileSize))
     fd.set('featured', featured ? 'true' : 'false')
-    fd.set('status', status)
+    fd.set('status', status); fd.set('sort_order', String(row.sort_order))
     try {
       const res = await saveResource(fd)
       setMsg({ ok: res.ok, text: res.message })
-      if (res.ok) setTimeout(onClose, 600)
+      if (res.ok) onSaved()
     } catch { setMsg({ ok: false, text: 'Something went wrong.' }) }
     finally { setPending(false) }
   }
@@ -220,10 +261,10 @@ function Editor({ row, stat, srcs, onClose }: { row: Row; stat?: Stat; srcs: Src
     <div className={ui.card}>
       <div className={styles.editorHead}>
         <h2 className={styles.editorTitle}>{row.id ? 'Edit resource' : 'New resource'}</h2>
-        <button type="button" className={styles.miniBtn} onClick={onClose}>Close</button>
+        <button type="button" className={styles.miniBtn} disabled={pending || uploading} onClick={onClose}>Close</button>
       </div>
       {row.id && row.status === 'published' && <AnalyticsPanel slug={effectiveSlug} stat={stat} srcs={srcs} />}
-      <div className={styles.form}>
+      <fieldset disabled={pending || uploading} className={styles.form}>
         <label className={styles.field}>
           <span className={styles.label}>Title</span>
           <input className={styles.input} value={title} onChange={(e) => { setTitle(e.target.value); if (!slugTouched) setSlug(slugify(e.target.value)) }} placeholder="The Defensible Layoff Playbook" />
@@ -277,14 +318,14 @@ function Editor({ row, stat, srcs, onClose }: { row: Row; stat?: Stat; srcs: Src
           </label>
         </div>
 
-        {msg && <div className={msg.ok ? styles.okMsg : styles.errMsg}>{msg.text}</div>}
+        {msg && <div role={msg.ok ? 'status' : 'alert'} className={msg.ok ? styles.okMsg : styles.errMsg}>{msg.text}</div>}
         <div className={styles.actions}>
-          <button type="button" className={ui.btnGhost} onClick={onClose}>Cancel</button>
+          <button type="button" className={ui.btnGhost} disabled={pending || uploading} onClick={onClose}>Cancel</button>
           <button type="button" className={ui.btnPrimary} onClick={submit} disabled={pending || uploading}>
             {pending ? 'Saving…' : row.id ? 'Save' : 'Create'}
           </button>
         </div>
-      </div>
+      </fieldset>
     </div>
   )
 }
