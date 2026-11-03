@@ -226,7 +226,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
       if (!saved || !saved.ok) return
       try {
         const res = await setPostStatus(post.id, next, scheduledFor || null)
-        if (res.ok) { setStatus(next); if (next === 'published' && !publishedAt) setPublishedAt(new Date().toISOString()) }
+        if (res.ok) { setStatus(next); if (next !== 'scheduled') setScheduledFor(''); if (next === 'published' && !publishedAt) setPublishedAt(new Date().toISOString()) }
         else setError(res.error)
       } catch { setError('Could not update the post status. Please try again.') }
     })
@@ -371,6 +371,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
                 {pending ? 'Working…' : 'Unpublish'}
               </button>
             )}
+            {status === 'scheduled' && <button type="button" className={styles.unpublishBtn} disabled={pending} onClick={() => changeStatus('draft')}>{pending ? 'Working…' : 'Cancel schedule'}</button>}
             <div className={styles.scheduleRow}>
               <label className={styles.fieldLabel}>Schedule for</label>
               <input
