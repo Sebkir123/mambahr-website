@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { createFieldGuideLink, revokeFieldGuideLink } from './actions'
 import type { FieldGuideRow } from '@/lib/admin-field-guides'
 import ui from '../admin-ui.module.css'
-import styles from '../deck/deck.module.css'
+import styles from '../_components/engagement.module.css'
 
 function ago(iso: string | null): string {
   if (!iso) return 'never'
@@ -39,6 +39,7 @@ export function FieldGuideManager({
     const name = String(fd.get('recipient_name') || '')
     setErr('')
     start(async () => {
+      try {
       const r = await createFieldGuideLink(fd)
       if (r.ok && r.path && r.token) {
         setFresh({ url: `${origin()}${r.path}?k=${encodeURIComponent(r.token)}`, name })
@@ -46,6 +47,7 @@ export function FieldGuideManager({
       } else {
         setErr(r.message)
       }
+      } catch { setErr('The link could not be created. Please try again.') }
     })
   }
 
@@ -55,7 +57,7 @@ export function FieldGuideManager({
       setCopied(key)
       setTimeout(() => setCopied((c) => (c === key ? null : c)), 1500)
     } catch {
-      /* clipboard blocked */
+      setErr('Could not copy the link. Please try again.')
     }
   }
 
@@ -74,13 +76,13 @@ export function FieldGuideManager({
               <option key={g.slug} value={g.slug}>{g.title}</option>
             ))}
           </select>
-          <input name="recipient_name" placeholder="Recipient name (e.g. Jane Doe)" className={styles.input} required maxLength={120} />
-          <input name="company" placeholder="Company (optional)" className={styles.input} maxLength={120} />
+          <input name="recipient_name" aria-label="Recipient name" placeholder="Recipient name (e.g. Jane Doe)" className={styles.input} required maxLength={120} />
+          <input name="company" aria-label="Company (optional)" placeholder="Company (optional)" className={styles.input} maxLength={120} />
           <button type="submit" className={styles.createBtn} disabled={pending}>
             {pending ? 'Creating…' : 'Create link'}
           </button>
         </form>
-        {err && <p className={styles.notice}>{err}</p>}
+        {err && <p className={styles.notice} role="alert">{err}</p>}
         {fresh && (
           <div className={styles.freshLink}>
             <div>

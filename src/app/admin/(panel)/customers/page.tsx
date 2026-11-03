@@ -4,6 +4,7 @@ import { getCrmDashboard, getContactsByKind, formatMoney, stageLabel } from '@/l
 import { getOverview } from '@/lib/admin-analytics'
 import { getFieldGuideAnalytics } from '@/lib/admin-field-guides'
 import ui from '../admin-ui.module.css'
+import DataNotice from '../_components/data-notice'
 import styles from '../crm/crm.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -24,7 +25,7 @@ function Stat({ label, value, sub }: { label: string; value: string | number; su
 }
 
 export default async function CustomersOverview() {
-  const [, dash, { contacts }, overview, guides] = await Promise.all([
+  const [, dash, { contacts, warnings: contactWarnings }, overview, guides] = await Promise.all([
     requireAdmin(),
     getCrmDashboard(),
     getContactsByKind('customer'),
@@ -36,7 +37,7 @@ export default async function CustomersOverview() {
 
   // Top-of-funnel sources feeding the customer pipeline.
   const sources = [
-    { label: 'Waitlist', value: overview.leads.waitlist, href: '/admin/leads' },
+    { label: 'Early access', value: overview.leads.waitlist, href: '/admin/leads' },
     { label: 'Demo requests', value: overview.leads.demo, href: '/admin/leads' },
     { label: 'Resource downloads', value: overview.leads.magnet, href: '/admin/leads' },
     { label: 'Field guides', value: guides.totals.requests, href: '/admin/field-guides' },
@@ -67,9 +68,10 @@ export default async function CustomersOverview() {
         </div>
       </div>
 
+      <DataNotice warnings={[...dash.warnings,...overview.warnings,...guides.warnings,...contactWarnings]} />
       <div className={styles.stats}>
         <Stat label="Open" value={cust.open} sub={`${cust.total} total`} />
-        <Stat label="Open value" value={formatMoney(cust.openValue)} sub="weighted pipeline" />
+        <Stat label="Open value" value={formatMoney(cust.openValue)} sub="total open value" />
         <Stat label="Won" value={cust.won} sub={formatMoney(cust.wonValue)} />
         <Stat label="Win rate" value={`${cust.winRatePct}%`} sub={`${cust.won} of ${cust.won + cust.lost} closed`} />
         <Stat label="New leads" value={overview.leads.last7d} sub="last 7 days" />

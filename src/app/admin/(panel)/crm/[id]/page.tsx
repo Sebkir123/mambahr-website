@@ -99,7 +99,6 @@ export default async function ContactDetailPage({ params }: { params: Promise<{ 
             <Fact k="Owner" v={contact.owner ?? '—'} />
             <Fact k="Source" v={contact.source ? <span style={{ textTransform: 'capitalize' }}>{contact.source.replace(/_/g, ' ')}</span> : '—'} />
             <Fact k="Email" v={contact.email ? <a href={`mailto:${contact.email}`}>{contact.email}</a> : '—'} />
-            <Fact k="LinkedIn" v={contact.linkedin_url ? <a href={contact.linkedin_url} target="_blank" rel="noreferrer">Profile ↗</a> : '—'} />
             <Fact k="Website" v={contact.website ? <a href={contact.website} target="_blank" rel="noreferrer">Site ↗</a> : '—'} />
             <Fact k="Location" v={contact.location ?? '—'} />
             <Fact k="Next step" v={contact.next_step ? `${contact.next_step}${contact.next_step_due ? ` (by ${new Date(contact.next_step_due).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})` : ''}` : '—'} />

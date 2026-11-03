@@ -1,4 +1,6 @@
 import 'server-only'
+import { cache } from 'react'
+import { unstable_cache } from 'next/cache'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { serviceDb } from '@/lib/supabase/service'
@@ -45,16 +47,32 @@ function toStat(r: StatRow): BlogStat {
 
 // All posts' read stats, keyed by slug. For the blog list. Posts with no reads
 // simply won't appear in the map, callers default to zeroes.
+const ALL_TIME = '1970-01-01T00:00:00.000Z'
+async function loadStats(client: SupabaseClient, since: string) {
+  const { data, error } = await client.rpc('blog_stats', { p_since: since })
+  return { stats: ((data as StatRow[] | null) ?? []).map(toStat), warning: error ? 'Blog read analytics are temporarily unavailable.' : null }
+}
+const cachedStats = unstable_cache(async (since: string) => loadStats(serviceDb()!, since), ['admin-blog-stats-v2'], { revalidate: 20, tags: ['admin-data'] })
+export const getBlogStatsResult = cache(async () => {
+  const result = serviceDb() ? await cachedStats(ALL_TIME) : await loadStats(await db(), ALL_TIME)
+  return { stats: new Map(result.stats.map((stat) => [stat.slug, stat])), warning: result.warning }
+})
+
 export async function getBlogStatsBySlug(): Promise<Map<string, BlogStat>> {
-  const client = await db()
-  const { data, error } = await client.rpc('blog_stats')
-  const map = new Map<string, BlogStat>()
-  if (error || !data) return map
-  for (const row of data as StatRow[]) {
-    const stat = toStat(row)
-    map.set(stat.slug, stat)
+  return (await getBlogStatsResult()).stats
+}
+
+export async function getBlogReadSummary() {
+  const [{ stats, warning }, recent] = await Promise.all([
+    getBlogStatsResult(),
+    loadStats(await db(), new Date(Date.now() - 7 * 86400000).toISOString()),
+  ])
+  return {
+    total: Array.from(stats.values()).reduce((sum, stat) => sum + stat.views, 0),
+    last7d: recent.stats.reduce((sum, stat) => sum + stat.views, 0),
+    top: Array.from(stats.values()).sort((a, b) => b.views - a.views).slice(0, 5),
+    warnings: [warning, recent.warning].filter((value): value is string => Boolean(value)),
   }
-  return map
 }
 
 // Full analytics for one post: headline rollup + 30-day daily series + sources.
@@ -62,14 +80,14 @@ export async function getBlogPostAnalytics(slug: string): Promise<BlogPostAnalyt
   const client = await db()
   const path = `/blog/${slug}`
   const [statsRes, seriesRes, sourcesRes] = await Promise.all([
-    client.rpc('blog_stats'),
+    getBlogStatsResult(),
     client.rpc('blog_post_series', { p_path: path }),
-    client.rpc('blog_post_sources', { p_path: path }),
+    client.rpc('blog_post_sources', { p_path: path, p_since: ALL_TIME }),
   ])
 
-  const row = ((statsRes.data as StatRow[] | null) ?? []).find((r) => r.path === path)
+  const row = statsRes.stats.get(slug)
   const base: BlogStat = row
-    ? toStat(row)
+    ? row
     : { slug, path, views: 0, readers: 0, avgReadMs: 0, avgScroll: 0, completionPct: 0, lastView: null }
 
   const series = ((seriesRes.data as { day: string; views: number }[] | null) ?? []).map((d) => ({

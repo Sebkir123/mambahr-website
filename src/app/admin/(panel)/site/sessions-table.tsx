@@ -4,6 +4,8 @@ import { Fragment, useState } from 'react'
 import { loadSiteSession } from './actions'
 import { fmtDur, type SiteSessionRow, type SiteSessionDetail } from '@/lib/site-analytics-types'
 import styles from './site.module.css'
+import Pagination, { PAGE_SIZE } from '../_components/pagination'
+import ui from '../admin-ui.module.css'
 
 function flag(cc: string | null): string {
   if (!cc || cc.length !== 2) return '🌐'
@@ -22,6 +24,10 @@ function klass(cls: string, isBot: boolean) {
 
 export function SessionsTable({ sessions }: { sessions: SiteSessionRow[] }) {
   const [open, setOpen] = useState<string | null>(null)
+  const [page, setPage] = useState(1)
+  const [error, setError] = useState('')
+  const current = Math.min(page, Math.max(1, Math.ceil(sessions.length / PAGE_SIZE)))
+  const visible = sessions.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE)
   const [detail, setDetail] = useState<Record<string, SiteSessionDetail | null>>({})
   const [loading, setLoading] = useState<string | null>(null)
 
@@ -33,9 +39,8 @@ export function SessionsTable({ sessions }: { sessions: SiteSessionRow[] }) {
     setOpen(id)
     if (!(id in detail)) {
       setLoading(id)
-      const d = await loadSiteSession(id)
-      setDetail((prev) => ({ ...prev, [id]: d }))
-      setLoading(null)
+      setError('')
+      try { const d = await loadSiteSession(id); setDetail((prev) => ({ ...prev, [id]: d })) } catch { setError('Session details could not be loaded. Collapse and reopen the row to retry.') } finally { setLoading(null) }
     }
   }
 
@@ -44,6 +49,8 @@ export function SessionsTable({ sessions }: { sessions: SiteSessionRow[] }) {
   }
 
   return (
+    <>
+    {error && <p role="alert" className={ui.error}>{error}</p>}
     <div className={styles.tableWrap}>
       <table className={styles.table}>
         <thead>
@@ -60,7 +67,7 @@ export function SessionsTable({ sessions }: { sessions: SiteSessionRow[] }) {
           </tr>
         </thead>
         <tbody>
-          {sessions.map((s) => {
+          {visible.map((s) => {
             const k = klass(s.cls, s.isBot)
             const isOpen = open === s.id
             const durCn = `${styles.dur} ${s.cls === 'bounce' && !s.isBot ? styles.durBounce : s.cls === 'engaged' ? styles.durEngaged : ''}`
@@ -106,6 +113,8 @@ export function SessionsTable({ sessions }: { sessions: SiteSessionRow[] }) {
         </tbody>
       </table>
     </div>
+    <Pagination total={sessions.length} page={current} onPage={(page) => { setPage(page); setOpen(null) }} label="sessions" />
+    </>
   )
 }
 

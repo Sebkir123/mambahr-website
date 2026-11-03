@@ -1,4 +1,6 @@
 import 'server-only'
+import { needsAttention } from '@/lib/admin-contact-filters'
+import { readAdminRows } from '@/lib/admin-rows'
 import { unstable_cache } from 'next/cache'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
@@ -36,6 +38,7 @@ export type Dashboard = {
     byStage: { key: string; label: string; count: number; value: number }[]
   }>
   upcomingTasks: (Task & { contactName: string; contactKind: ContactKind })[]
+  attention: { overdue: number; unassigned: number; missingNextStep: number }
   openTaskCount: number
   recent: Contact[]
 }
@@ -47,7 +50,7 @@ function num(v: unknown): number {
 
 // Dashboard stats are cached 20s (service-role read, admin-gated at the page) so
 // the Overview / Investors / Customers pages don't re-query on every visit.
-const cachedDashboard = unstable_cache(async () => computeCrmDashboard(serviceDb()!), ['crm-dashboard-v1'], { revalidate: 20 })
+const cachedDashboard = unstable_cache(async () => computeCrmDashboard(serviceDb()!), ['crm-dashboard-v2'], { revalidate: 20, tags: ['admin-data'] })
 
 export async function getCrmDashboard(): Promise<Dashboard> {
   if (serviceDb()) return cachedDashboard()
@@ -57,20 +60,13 @@ export async function getCrmDashboard(): Promise<Dashboard> {
 async function computeCrmDashboard(supabase: SupabaseClient): Promise<Dashboard> {
   const warnings: string[] = []
 
-  const { data: cRows, error: cErr } = await supabase
-    .from('crm_contacts')
-    .select(CONTACT_COLS)
-    .order('updated_at', { ascending: false })
-    .limit(10000)
-  if (cErr) warnings.push(`Could not read crm_contacts: ${cErr.message}`)
-  const contacts = ((cRows as Contact[] | null) ?? []).map((c) => ({ ...c, value: c.value == null ? null : num(c.value) }))
-
-  const { data: tRows, error: tErr, count: openTaskCount } = await supabase
-    .from('crm_tasks')
-    .select('id, contact_id, title, due_date, done, done_at, assignee, created_at', { count: 'exact' })
-    .eq('done', false)
-    .order('due_date', { ascending: true, nullsFirst: false })
-    .limit(50)
+  const [contactResult, { data: tRows, error: tErr, count: openTaskCount }] = await Promise.all([
+    readAdminRows<Contact>((from, to) => supabase.from('crm_contacts').select(CONTACT_COLS).order('updated_at', { ascending: false }).order('id').range(from, to)),
+    supabase.from('crm_tasks').select('id, contact_id, title, due_date, done, done_at, assignee, created_at', { count: 'exact' }).eq('done', false).order('due_date', { ascending: true, nullsFirst: false }).limit(50),
+  ])
+  if (contactResult.error) warnings.push(`Could not read contacts: ${contactResult.error}`)
+  if (contactResult.truncated) warnings.push('Only the newest 10,000 contacts are included in the totals.')
+  const contacts = contactResult.rows.map((contact) => ({ ...contact, value: contact.value == null ? null : num(contact.value) }))
   if (tErr) warnings.push(`Could not read crm_tasks: ${tErr.message}`)
   const openTasks = (tRows as Task[] | null) ?? []
 
@@ -106,6 +102,7 @@ async function computeCrmDashboard(supabase: SupabaseClient): Promise<Dashboard>
   return {
     warnings,
     byKind: { customer: summarize('customer'), investor: summarize('investor') },
+    attention: { overdue: contacts.filter((c) => needsAttention(c, 'overdue')).length, unassigned: contacts.filter((c) => needsAttention(c, 'unassigned')).length, missingNextStep: contacts.filter((c) => needsAttention(c, 'next-step')).length },
     upcomingTasks,
     openTaskCount: openTaskCount ?? openTasks.length,
     recent: contacts.slice(0, 6),
@@ -116,14 +113,10 @@ async function computeCrmDashboard(supabase: SupabaseClient): Promise<Dashboard>
 // first; filtering + grouping into columns happens in the page.
 export async function getContactsByKind(kind: ContactKind): Promise<{ contacts: Contact[]; warnings: string[] }> {
   const supabase = await createSupabaseServerClient()
-  const { data, error } = await supabase
-    .from('crm_contacts')
-    .select(CONTACT_COLS)
-    .eq('kind', kind)
-    .order('updated_at', { ascending: false })
-    .limit(10000)
-  const warnings = error ? [`Could not read crm_contacts: ${error.message}`] : []
-  const contacts = ((data as Contact[] | null) ?? []).map((c) => ({ ...c, value: c.value == null ? null : num(c.value) }))
+  const result = await readAdminRows<Contact>((from, to) => supabase.from('crm_contacts').select(CONTACT_COLS).eq('kind', kind).order('updated_at', { ascending: false }).order('id').range(from, to))
+  const warnings = result.error ? [`Could not read contacts: ${result.error}`] : []
+  if (result.truncated) warnings.push('Only the newest 10,000 contacts are shown.')
+  const contacts = result.rows.map((contact) => ({ ...contact, value: contact.value == null ? null : num(contact.value) }))
   return { contacts, warnings }
 }
 

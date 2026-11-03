@@ -88,7 +88,7 @@ type ViewRow = {
   device: string | null
 }
 
-const cachedFieldGuides = unstable_cache(async () => computeFieldGuideAnalytics(serviceDb()!), ['field-guide-analytics-v1'], { revalidate: 20 })
+const cachedFieldGuides = unstable_cache(async () => computeFieldGuideAnalytics(serviceDb()!), ['field-guide-analytics-v1'], { revalidate: 20, tags: ['admin-data'] })
 
 export async function getFieldGuideAnalytics(): Promise<FieldGuideAnalytics> {
   if (serviceDb()) return cachedFieldGuides()

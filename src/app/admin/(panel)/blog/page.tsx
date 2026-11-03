@@ -1,111 +1,32 @@
-import Link from 'next/link'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { requireAdmin } from '@/lib/auth'
-import type { PostStatus } from '@/lib/blog'
-import { getBlogStatsBySlug, compact, formatReadTime } from '@/lib/blog-analytics'
-import ui from '../admin-ui.module.css'
+import { getBlogStatsResult } from '@/lib/blog-analytics'
+import { readAdminRows } from '@/lib/admin-rows'
+import { compact } from '@/lib/blog-analytics-types'
 import { createDraft } from './actions'
-
+import BlogTable, { type BlogRow } from './blog-table'
+import Icon from '../_components/icon'
+import DataNotice from '../_components/data-notice'
+import SubmitButton from '../_components/submit-button'
+import ui from '../admin-ui.module.css'
+import styles from './blog.module.css'
 export const dynamic = 'force-dynamic'
-
-type Row = {
-  id: string
-  title: string
-  slug: string
-  status: PostStatus
-  published_at: string | null
-  updated_at: string
-  tags: string[]
-}
-
-const STATUS_CLASS: Record<PostStatus, string> = {
-  published: ui.badgePublished,
-  draft: ui.badgeDraft,
-  scheduled: ui.badgeScheduled,
-}
-
-function fmt(date: string | null): string {
-  if (!date) return '—'
-  return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-}
-
-export default async function BlogListPage() {
+export default async function BlogListPage({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
+  const query = await searchParams
+  const initialStatus = query.status === 'draft' || query.status === 'published' || query.status === 'scheduled' ? query.status : 'all'
+  await requireAdmin()
   const supabase = await createSupabaseServerClient()
-  const [, { data }, stats] = await Promise.all([
-    requireAdmin(),
-    supabase
-      .from('posts')
-      .select('id, title, slug, status, published_at, updated_at, tags')
-      .order('updated_at', { ascending: false }),
-    getBlogStatsBySlug(),
+  const [result, analytics] = await Promise.all([
+    readAdminRows<BlogRow>((from, to) => supabase.from('posts').select('id, title, slug, status, published_at, updated_at, tags').order('updated_at', { ascending: false }).order('id').range(from, to)),
+    getBlogStatsResult(),
   ])
-  const posts = (data || []) as Row[]
-  const totalReads = Array.from(stats.values()).reduce((n, s) => n + s.views, 0)
-
-  return (
-    <>
-      <div className={ui.header}>
-        <div>
-          <h1 className={ui.h1}>Blog</h1>
-          <p className={ui.subtitle}>
-            {posts.length} post{posts.length === 1 ? '' : 's'}
-            {totalReads > 0 && ` · ${compact(totalReads)} read${totalReads === 1 ? '' : 's'} all-time`}
-          </p>
-        </div>
-        <form action={createDraft}>
-          <button type="submit" className={ui.btnPrimary}>New post</button>
-        </form>
-      </div>
-
-      <div className={ui.card}>
-        {posts.length === 0 ? (
-          <div className={ui.empty}>
-            <h3>No posts yet</h3>
-            <p>Write your first post and publish it to the marketing site.</p>
-            <form action={createDraft}>
-              <button type="submit" className={ui.btnPrimary}>New post</button>
-            </form>
-          </div>
-        ) : (
-          <table className={ui.table}>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Status</th>
-                <th style={{ textAlign: 'right' }}>Reads</th>
-                <th style={{ textAlign: 'right' }}>Readers</th>
-                <th style={{ textAlign: 'right' }}>Avg read</th>
-                <th>Published</th>
-                <th>Updated</th>
-              </tr>
-            </thead>
-            <tbody>
-              {posts.map((p) => {
-                const s = stats.get(p.slug)
-                return (
-                  <tr key={p.id}>
-                    <td>
-                      <Link href={`/admin/blog/${p.id}`} className={ui.rowLink}>
-                        {p.title || 'Untitled post'}
-                      </Link>
-                    </td>
-                    <td>
-                      <span className={`${ui.badge} ${STATUS_CLASS[p.status]}`}>{p.status}</span>
-                    </td>
-                    <td style={{ textAlign: 'right', fontWeight: s?.views ? 600 : 400 }}>
-                      {s?.views ? compact(s.views) : '—'}
-                    </td>
-                    <td style={{ textAlign: 'right' }}>{s?.readers ? compact(s.readers) : '—'}</td>
-                    <td style={{ textAlign: 'right' }}>{s?.views ? formatReadTime(s.avgReadMs) : '—'}</td>
-                    <td>{fmt(p.published_at)}</td>
-                    <td>{fmt(p.updated_at)}</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        )}
-      </div>
-    </>
-  )
+  if (result.error) throw new Error('Your posts could not be loaded. Please try again.')
+  const posts = result.rows
+  const totalReads = Array.from(analytics.stats.values()).reduce((total, stat) => total + stat.views, 0)
+  return <>
+    <div className={ui.header}><div><h1 className={ui.h1}>Blog</h1><p className={ui.subtitle}>Write, refine, and publish your next story.</p></div><form action={createDraft}><SubmitButton pendingLabel="Creating draft…"><Icon name="plus" size={15} />New post</SubmitButton></form></div>
+    <div className={styles.summary}><span><strong>{posts.filter((post) => post.status === 'published').length}</strong> published</span><span><strong>{posts.filter((post) => post.status === 'draft').length}</strong> drafts</span><span><strong>{posts.filter((post) => post.status === 'scheduled').length}</strong> scheduled</span><span className={styles.summaryReads}><Icon name="book" size={14} /><strong>{analytics.warning ? 'Unavailable' : compact(totalReads)}</strong> all-time reads · bots excluded</span></div>
+    <DataNotice warnings={[...(analytics.warning ? [analytics.warning] : []), ...(result.truncated ? ['Only the 10,000 most recently edited posts are shown.'] : [])]} />
+    <BlogTable key={initialStatus} initialStatus={initialStatus} posts={posts} stats={Object.fromEntries(analytics.stats)} analyticsAvailable={!analytics.warning} />
+  </>
 }

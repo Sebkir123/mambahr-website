@@ -1,10 +1,12 @@
 'use client'
 
-import { useRef, useState, useTransition } from 'react'
+import { useRef, useState, useTransition, useMemo, useEffect } from 'react'
 import { saveResource, createResourceUploadUrl, setResourceStatus, deleteResource } from './actions'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 import { ConfirmButton } from '../_components/confirm-button'
 import ui from '../admin-ui.module.css'
+import Icon from '../_components/icon'
+import Pagination, { PAGE_SIZE } from '../_components/pagination'
 import styles from './resources.module.css'
 
 const MAX_PDF_BYTES = 50 * 1024 * 1024
@@ -32,7 +34,7 @@ type Src = { source: string; views: number }
 // Pre-tagged share links for platforms whose in-app browsers strip the referrer
 // (so they'd otherwise land as "direct"). The unified link auto-attributes the
 // rest. Each appends ?utm_source so the tracker records it explicitly.
-const SHARE_PLATFORMS = ['linkedin', 'x', 'instagram', 'threads', 'facebook', 'tiktok', 'newsletter'] as const
+const SHARE_PLATFORMS = ['x', 'instagram', 'threads', 'facebook', 'tiktok', 'newsletter'] as const
 
 const BLANK: Row = {
   id: '', slug: '', title: '', kicker: 'Playbook', cover_no: '', description: '',
@@ -46,6 +48,13 @@ function slugify(s: string): string {
 export default function ResourcesManager({ resources, stats, sources }: { resources: Row[]; stats: Record<string, Stat>; sources: Record<string, Src[]> }) {
   const [editing, setEditing] = useState<Row | null>(null)
   const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const [page, setPage] = useState(1)
+  const editorRef = useRef<HTMLDivElement>(null)
+  const filtered = useMemo(() => resources.filter((resource) => `${resource.title} ${resource.kicker} ${resource.description}`.toLowerCase().includes(query.toLowerCase().trim())), [resources, query])
+  const current = Math.min(page, Math.max(1, Math.ceil(filtered.length / PAGE_SIZE)))
+  const visible = filtered.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE)
+  useEffect(() => { if (open) { editorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); editorRef.current?.focus() } }, [open, editing?.id])
 
   const startNew = () => { setEditing({ ...BLANK }); setOpen(true) }
   const startEdit = (r: Row) => { setEditing({ ...r }); setOpen(true) }
@@ -53,18 +62,19 @@ export default function ResourcesManager({ resources, stats, sources }: { resour
   return (
     <>
       <div className={styles.toolbar}>
+        <label className={ui.search}><Icon name="search" size={15} /><input type="search" aria-label="Search resources" placeholder="Search resources…" value={query} onChange={(e) => { setQuery(e.target.value); setPage(1) }} /></label>
         <button type="button" className={ui.btnPrimary} onClick={startNew}>+ New resource</button>
       </div>
 
       {open && editing && (
-        <Editor row={editing} stat={stats[editing.slug]} srcs={sources[editing.slug] ?? []} onClose={() => setOpen(false)} />
+        <div ref={editorRef} tabIndex={-1}><Editor key={editing.id || 'new'} row={editing} stat={stats[editing.slug]} srcs={sources[editing.slug] ?? []} onClose={() => setOpen(false)} /></div>
       )}
 
       <div className={ui.card}>
-        {resources.length === 0 ? (
+        {filtered.length === 0 ? (
           <div className={ui.empty}>
-            <h3>No resources yet</h3>
-            <p>Upload your first playbook, it’ll appear on the site with a trackable share page.</p>
+            <h3>{resources.length ? 'No matching resources' : 'Your resource library starts here'}</h3>
+            <p>{resources.length ? 'Try another search term.' : 'Upload a playbook or guide to give it a shareable page and track downloads.'}</p>
           </div>
         ) : (
           <table className={ui.table}>
@@ -80,7 +90,7 @@ export default function ResourcesManager({ resources, stats, sources }: { resour
               </tr>
             </thead>
             <tbody>
-              {resources.map((r) => {
+              {visible.map((r) => {
                 const s = stats[r.slug]
                 const url = `${SITE}/resources/${r.slug}`
                 return (
@@ -115,6 +125,7 @@ export default function ResourcesManager({ resources, stats, sources }: { resour
             </tbody>
           </table>
         )}
+        <Pagination total={filtered.length} page={current} onPage={setPage} label="resources" />
       </div>
     </>
   )
@@ -136,10 +147,11 @@ function DeleteResourceBtn({ id }: { id: string }) {
 
 function CopyOne({ url, label }: { url: string; label: string }) {
   const [copied, setCopied] = useState(false)
+  const [failed, setFailed] = useState(false)
   const copy = async () => {
-    try { await navigator.clipboard.writeText(url); setCopied(true); setTimeout(() => setCopied(false), 1500) } catch { /* ignore */ }
+    try { await navigator.clipboard.writeText(url); setCopied(true); setTimeout(() => setCopied(false), 1500) } catch { setFailed(true) }
   }
-  return <button type="button" className={styles.copyBtn} onClick={copy}>{copied ? 'Copied' : label}</button>
+  return <button type="button" className={styles.copyBtn} onClick={copy}>{copied ? 'Copied' : failed ? 'Copy failed; retry' : label}</button>
 }
 
 function Editor({ row, stat, srcs, onClose }: { row: Row; stat?: Stat; srcs: Src[]; onClose: () => void }) {
@@ -316,7 +328,7 @@ function AnalyticsPanel({ slug, stat, srcs }: { slug: string; stat?: Stat; srcs:
             <CopyOne key={p} url={`${url}?utm_source=${p}`} label={p} />
           ))}
         </div>
-        <p className={styles.shareHint}>Share the unified link anywhere, LinkedIn, X, Reddit, etc. are detected automatically. Use a tagged link only for Instagram / TikTok / Threads, whose apps hide the referrer.</p>
+        <p className={styles.shareHint}>Share the unified link anywhere; referral sources are detected automatically. Use a tagged link only for Instagram / TikTok / Threads, whose apps hide the referrer.</p>
       </div>
     </div>
   )

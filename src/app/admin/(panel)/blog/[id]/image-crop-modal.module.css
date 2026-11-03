@@ -25,8 +25,8 @@
 .frame {
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
-  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  background: var(--bg-muted);
   touch-action: none;
   cursor: grab;
   max-width: 100%;
@@ -52,10 +52,15 @@
 
 .actions { display: flex; gap: 10px; align-self: stretch; margin-top: 4px; }
 .cancelBtn, .confirmBtn {
-  flex: 1; padding: 10px; border-radius: 10px; font-size: 14px; font-weight: 600;
+  flex: 1; padding: 10px; border-radius: var(--radius-md); font-size: 14px; font-weight: 600;
   cursor: pointer; font-family: var(--font-sans); border: 1px solid var(--border-mid);
 }
-.cancelBtn { background: var(--bg); color: var(--text-muted); }
+.cancelBtn { background: var(--bg); color: var(--text-secondary); }
 .cancelBtn:hover { background: var(--bg-surface); }
 .confirmBtn { background: var(--grad); color: var(--bg); border: none; }
 .confirmBtn:disabled, .cancelBtn:disabled { opacity: 0.6; cursor: default; }
+.modal { padding: 24px; border-radius: 18px; border: 1px solid var(--border-faint); box-shadow: 0 24px 90px rgba(0,0,0,.22); }
+.title { font-size: 14px; letter-spacing: -.02em; }
+.presetOn, .presetOff { font-size: 10px; padding: 6px 9px; font-weight: 500; border-radius: 6px; }
+.cancelBtn, .confirmBtn { font-size: 12px; border-radius: 999px; min-height: 38px; font-weight: 550; }
+.confirmBtn { background: var(--admin-solid); color: var(--admin-on-solid); }

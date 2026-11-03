@@ -1,6 +1,7 @@
 'use client'
 
 import { useSyncExternalStore } from 'react'
+import { usePathname } from 'next/navigation'
 import { GoogleAnalytics } from '@next/third-parties/google'
 
 /**
@@ -35,7 +36,8 @@ function getServerAllowed(): boolean {
 }
 
 export default function AnalyticsGate({ gaId }: { gaId: string }) {
+  const pathname = usePathname()
   const allowed = useSyncExternalStore(subscribe, getClientAllowed, getServerAllowed)
-  if (!allowed) return null
+  if (!allowed || pathname?.startsWith('/admin')) return null
   return <GoogleAnalytics gaId={gaId} />
 }

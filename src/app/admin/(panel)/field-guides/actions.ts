@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, updateTag } from 'next/cache'
 import { requireAdmin } from '@/lib/auth'
 import { serviceDb } from '@/lib/supabase/service'
 import { GUIDES, guidePath, newFieldGuideToken } from '@/lib/admin-field-guides'
@@ -34,6 +34,7 @@ export async function createFieldGuideLink(fd: FormData): Promise<LinkResult> {
   })
   if (error) return { ok: false, message: error.message }
 
+  updateTag('admin-data')
   revalidatePath('/admin/field-guides')
   return { ok: true, message: `Tracked link created for ${name}.`, path: guidePath(guide), token }
 }
@@ -46,5 +47,6 @@ export async function revokeFieldGuideLink(fd: FormData): Promise<void> {
   const id = String(fd.get('id') || '')
   if (!id) return
   await db.from('field_guide_leads').update({ revoked_at: new Date().toISOString() }).eq('id', id)
+  updateTag('admin-data')
   revalidatePath('/admin/field-guides')
 }

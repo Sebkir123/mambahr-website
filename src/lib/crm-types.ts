@@ -65,7 +65,7 @@ export function isoDateOrNull(raw: string): string | null {
   const t = raw.trim()
   if (!/^\d{4}-\d{2}-\d{2}$/.test(t)) return null
   const d = new Date(t + 'T00:00:00Z')
-  return Number.isNaN(d.getTime()) ? null : t
+  return Number.isNaN(d.getTime()) || d.toISOString().slice(0, 10) !== t ? null : t
 }
 
 export type Contact = {

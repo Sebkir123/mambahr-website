@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import styles from './confirm-button.module.css'
 
 // Inline two-step confirm, replaces window.confirm() across all destructive
 // admin actions. First click arms the button (shows Cancel + Confirm); second
-// click fires the action. Auto-disarms after 4s if ignored.
+// click fires the action. Auto-disarms after 20s if ignored.
 export function ConfirmButton({
   onConfirm,
   confirmLabel = 'Delete',
@@ -26,9 +26,11 @@ export function ConfirmButton({
   const [armed, setArmed] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  useEffect(() => () => { if (timer.current) clearTimeout(timer.current) }, [])
+
   function arm() {
     setArmed(true)
-    timer.current = setTimeout(() => setArmed(false), 4000)
+    timer.current = setTimeout(() => setArmed(false), 20_000)
   }
 
   function disarm() {
@@ -51,7 +53,7 @@ export function ConfirmButton({
 
   if (armed) {
     return (
-      <span className={styles.armed}>
+      <span className={styles.armed} onKeyDown={(event) => { if (event.key === 'Escape') disarm() }}>
         <button type="button" className={styles.cancel} onClick={disarm}>Cancel</button>
         <button type="button" className={styles.confirm} onClick={fire}>{confirmLabel}</button>
       </span>

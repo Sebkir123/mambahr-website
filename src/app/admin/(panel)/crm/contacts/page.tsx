@@ -1,13 +1,17 @@
 import Link from 'next/link'
+import { ATTENTION_FILTERS, type AttentionFilter } from '@/lib/admin-contact-filters'
 import { requireAdmin } from '@/lib/auth'
 import { getContactsByKind } from '@/lib/crm'
 import { ContactsTable } from './contacts-table'
 import ui from '../../admin-ui.module.css'
+import DataNotice from '../../_components/data-notice'
 import styles from '../crm.module.css'
 
 export const dynamic = 'force-dynamic'
 
-export default async function ContactsListPage() {
+export default async function ContactsListPage({ searchParams }: { searchParams: Promise<{ attention?: string }> }) {
+  const query = await searchParams
+  const attention: AttentionFilter = ATTENTION_FILTERS.includes(query.attention as typeof ATTENTION_FILTERS[number]) ? query.attention as AttentionFilter : ''
   const [, cust, inv] = await Promise.all([
     requireAdmin(),
     getContactsByKind('customer'),
@@ -29,9 +33,9 @@ export default async function ContactsListPage() {
         <Link href="/admin/crm/new?kind=customer" className={ui.btnPrimary}>+ Add contact</Link>
       </div>
 
-      {warnings.length > 0 && <div className={styles.notice}>{warnings[0]}</div>}
+      <DataNotice warnings={warnings} />
 
-      <ContactsTable contacts={contacts} />
+      <ContactsTable key={attention} contacts={contacts} initialAttention={attention} />
     </>
   )
 }

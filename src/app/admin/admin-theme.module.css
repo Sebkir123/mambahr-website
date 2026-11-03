@@ -1,0 +1,58 @@
+.root {
+  --font-sans-loaded: var(--font-geist);
+  --font-serif-loaded: var(--font-fraunces);
+  --font-mono-loaded: var(--font-geist-mono);
+  --admin-canvas: var(--bg-base);
+  --admin-sidebar: var(--bg-surface);
+  --admin-solid: var(--text-primary);
+  --admin-on-solid: var(--bg-base);
+  --admin-hover: var(--bg-hover);
+  --admin-focus: var(--border-focus);
+  --bg: var(--bg-elevated);
+  --bg-warm: var(--bg-base);
+  --bg-cream: var(--bg-muted);
+  --bg-card: var(--bg-elevated);
+  --text: var(--text-primary);
+  --text-faint: var(--text-tertiary);
+  --gold: var(--accent-primary);
+  --gold-dark: var(--accent-text);
+  --gold-tint: var(--accent-subtle);
+  --gold-light: var(--accent-border);
+  --border-mid: var(--border-strong);
+  --border-faint: var(--border-subtle);
+  --color-green: var(--success);
+  --color-red: var(--error);
+  --green: var(--success);
+  --red: var(--error);
+  --violet: var(--accent-secondary);
+  --violet-soft: var(--accent-secondary-subtle);
+  --violet-border: var(--accent-secondary-border);
+  --grad: var(--admin-solid);
+  inline-size: 100%;
+  max-inline-size: 100%;
+  overflow-x: clip;
+  min-height: 100dvh;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  color-scheme: light;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+}
+.root[data-admin-theme='dark'] { color-scheme: dark; }
+.root :where(button, input, select, textarea) { font-family: inherit; }
+.root :where(button, a, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--admin-focus);
+  outline-offset: 3px;
+}
+.root :where(input, select, textarea) { accent-color: var(--gold); }
+.root :where(button) { touch-action: manipulation; }
+.root :where(button:disabled) { cursor: not-allowed; }
+.root :where(h1, h2, h3, h4) { text-wrap: balance; }
+.root :where(table) { font-variant-numeric: tabular-nums; }
+.root :where(th) { white-space: nowrap; }
+.root :where(td) { overflow-wrap: anywhere; }
+.root :where(input::placeholder, textarea::placeholder) { color: var(--text-faint); opacity: .8; }
+.root :where(details > summary) { cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .root *, .root *::before, .root *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

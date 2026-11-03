@@ -1,17 +1,16 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState, useTransition } from 'react'
+import { useCallback, useEffect, useRef, useState, useTransition, useId } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { type Post, slugify, TAG_OPTIONS } from '@/lib/blog'
+import { type Post, slugify, TAG_OPTIONS } from '@/lib/blog-types'
 import { savePost, setPostStatus, deletePost, listRevisions, restoreRevision, type SavePayload, type SaveResult, type Revision } from '../actions'
-import { uploadImage, deleteImages } from './upload'
-import { bodyImageUrls } from '@/lib/blog-images'
-import ImageCropModal from './image-crop-modal'
+import { uploadImage } from './upload'
 import PostAnalytics from './post-analytics'
 import { ConfirmButton } from '../../_components/confirm-button'
 import type { BlogPostAnalytics } from '@/lib/blog-analytics-types'
 import styles from './editor.module.css'
+import Icon from '../../_components/icon'
 
 // TipTap + ProseMirror is ~440 KB, by far the heaviest chunk in the app. It's
 // only needed inside this editor, so load it lazily (client-only) behind a
@@ -20,6 +19,8 @@ const RichText = dynamic(() => import('./rich-text'), {
   ssr: false,
   loading: () => <div className={styles.editorLoading}>Loading editor…</div>,
 })
+
+const ImageCropModal = dynamic(() => import('./image-crop-modal'), { ssr: false })
 
 const SITE = 'https://www.mambahr.com'
 
@@ -50,6 +51,8 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
   const [pending, startTransition] = useTransition()
   // revision history + restore signal pushed into the rich-text editor
   const [revisions, setRevisions] = useState<Revision[]>([])
+  const [historyOpen, setHistoryOpen] = useState(false)
+  const lastSavedPayload = useRef('')
   const [restore, setRestore] = useState<{ html: string | null; json: unknown; nonce: number } | null>(null)
 
   // latest body, written by the editor's onChange (kept in a ref to avoid
@@ -65,16 +68,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
   const fieldTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const bodyTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pendingSaveRef = useRef(false)
-  // Current cover/OG URLs mirrored into refs so the stable onBodyChange (which
-  // must not change identity, TipTap captures it once) can read the latest
-  // values when garbage-collecting removed in-body images.
-  const coverUrlRef = useRef(coverImageUrl)
-  const ogUrlRef = useRef(ogImageUrl)
-  useEffect(() => {
-    coverUrlRef.current = coverImageUrl
-    ogUrlRef.current = ogImageUrl
-  }, [coverImageUrl, ogImageUrl])
-
+  const unsavedRef = useRef(false)
   const buildPayload = useCallback(
     (): SavePayload => ({
       id: post.id,
@@ -118,8 +112,14 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
       if (deletingRef.current) return // don't resurrect a post mid-delete
       setSaveState('saving')
       setError('')
-      const res = await savePost(buildPayloadRef.current())
+      const payload = buildPayloadRef.current()
+      const fingerprint = JSON.stringify(payload)
+      if (fingerprint === lastSavedPayload.current) { unsavedRef.current = false; setSaveState('saved'); return { ok: true, slug: payload.slug } }
+      let res: SaveResult
+      try { res = await savePost(payload) } catch { res = { ok: false, error: 'Could not save your changes. Check your connection and retry.' } }
       if (res.ok) {
+        lastSavedPayload.current = JSON.stringify({ ...payload, slug: res.slug })
+        unsavedRef.current = JSON.stringify(buildPayloadRef.current()) !== fingerprint
         setSaveState('saved')
         // Reflect the slug the server actually persisted, it may have been
         // auto-deduped (untitled-post → untitled-post-2) to avoid a collision.
@@ -136,14 +136,16 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
   }, [])
 
   // Debounced autosave whenever a tracked field changes.
-  const dirtyRef = useRef(false)
+  const observedFields = useRef<string | null>(null)
   useEffect(() => {
-    if (!dirtyRef.current) {
-      dirtyRef.current = true
-      return // skip the mount pass
-    }
+    const fields = JSON.stringify([title, slug, excerpt, authorName, tags, coverImageUrl, metaTitle, metaDescription, canonicalUrl, ogTitle, ogDescription, ogImageUrl, noindex, scheduledFor, publishedAt])
+    if (observedFields.current === fields) return
+    const initial = observedFields.current === null
+    observedFields.current = fields
+    if (initial) return // Opening a post is read-only, including Strict Mode's effect replay.
     setSaveState('saving')
     pendingSaveRef.current = true
+    unsavedRef.current = true
     if (fieldTimer.current) clearTimeout(fieldTimer.current)
     fieldTimer.current = setTimeout(() => { pendingSaveRef.current = false; void doSave() }, 1200)
     return () => { if (fieldTimer.current) clearTimeout(fieldTimer.current) }
@@ -168,26 +170,29 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
   useEffect(() => {
     const onHide = () => { if (document.visibilityState === 'hidden') flushSave() }
     document.addEventListener('visibilitychange', onHide)
+    const beforeUnload = (event: BeforeUnloadEvent) => { if (unsavedRef.current) { event.preventDefault(); event.returnValue = '' } }
+    window.addEventListener('beforeunload', beforeUnload)
     window.addEventListener('pagehide', flushSave)
     return () => {
       document.removeEventListener('visibilitychange', onHide)
+      window.removeEventListener('beforeunload', beforeUnload)
       window.removeEventListener('pagehide', flushSave)
       flushSave()
     }
   }, [flushSave])
 
-  // Load revision history on mount and refresh it whenever a save lands (each
-  // autosave appends a new snapshot, so the list should follow).
+  // Fetch revision history only while it is open; refresh after a save.
   const loadRevisions = useCallback(() => {
-    void listRevisions(post.id).then(setRevisions)
+    void listRevisions(post.id).then(setRevisions).catch(() => setError('Version history could not be loaded. Try again.'))
   }, [post.id])
-  useEffect(() => { loadRevisions() }, [loadRevisions])
+  useEffect(() => { if (historyOpen) loadRevisions() }, [historyOpen, loadRevisions])
   useEffect(() => {
-    if (saveState === 'saved') loadRevisions()
-  }, [saveState, loadRevisions])
+    if (historyOpen && saveState === 'saved') loadRevisions()
+  }, [historyOpen, saveState, loadRevisions])
 
   const onRestore = useCallback(async (rev: Revision) => {
-    const res = await restoreRevision(post.id, rev.id)
+    let res
+    try { res = await restoreRevision(post.id, rev.id) } catch { setError('This version could not be restored. Try again.'); return }
     if (!res.ok) { setError(res.error); return }
     setTitle(res.title)
     if (res.excerpt !== null) setExcerpt(res.excerpt)
@@ -205,6 +210,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
     bodyRef.current = { html, json }
     setSaveState('saving')
     pendingSaveRef.current = true
+    unsavedRef.current = true
     if (bodyTimer.current) clearTimeout(bodyTimer.current)
     bodyTimer.current = setTimeout(() => { pendingSaveRef.current = false; void doSave() }, 1400)
   }, [doSave])
@@ -213,10 +219,16 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
     startTransition(async () => {
       // Persist current edits first so publish reflects them, chained
       // through the same save queue so it can't race a pending autosave.
-      await doSave()
-      const res = await setPostStatus(post.id, next, scheduledFor || null)
-      if (res.ok) setStatus(next)
-      else setError(res.error)
+      if (fieldTimer.current) clearTimeout(fieldTimer.current)
+      if (bodyTimer.current) clearTimeout(bodyTimer.current)
+      pendingSaveRef.current = false
+      const saved = await doSave()
+      if (!saved || !saved.ok) return
+      try {
+        const res = await setPostStatus(post.id, next, scheduledFor || null)
+        if (res.ok) { setStatus(next); if (next === 'published' && !publishedAt) setPublishedAt(new Date().toISOString()) }
+        else setError(res.error)
+      } catch { setError('Could not update the post status. Please try again.') }
     })
   }
 
@@ -236,19 +248,6 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
     if (file) setCropTarget({ file, kind: 'og' })
   }
 
-  // Delete an image we're dropping (replaced/removed cover or OG) from storage,
-  // but only if nothing else in the post still points at it. `next` carries the
-  // values AFTER the change (state updates are async, so we can't read them back
-  // yet). The cover/OG pickers have no undo stack, so eager deletion is safe here.
-  function gcCoverOg(removed: string | null, next: { cover: string | null; og: string | null }) {
-    if (!removed) return
-    const stillUsed =
-      removed === next.cover ||
-      removed === next.og ||
-      bodyImageUrls(bodyRef.current.html).includes(removed)
-    if (!stillUsed) void deleteImages([removed])
-  }
-
   async function onCropConfirm(blob: Blob) {
     const target = cropTarget
     setCropTarget(null)
@@ -257,25 +256,19 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
     const url = await uploadImage(cropped)
     if (!url) return
     if (target.kind === 'cover') {
-      const old = coverImageUrl
       setCoverImageUrl(url)
-      gcCoverOg(old, { cover: url, og: ogImageUrl })
     } else {
-      const old = ogImageUrl
       setOgImageUrl(url)
-      gcCoverOg(old, { cover: coverImageUrl, og: url })
     }
   }
 
   function removeCover() {
-    const old = coverImageUrl
+    // Storage cleanup is deferred to the aged-object sweep so a failed save
+    // cannot break the image still referenced by the published post.
     setCoverImageUrl(null)
-    gcCoverOg(old, { cover: null, og: ogImageUrl })
   }
   function useCoverForOg() {
-    const old = ogImageUrl
     setOgImageUrl(null)
-    gcCoverOg(old, { cover: coverImageUrl, og: null })
   }
 
   const effTitle = (metaTitle || title || 'Untitled post').trim()
@@ -289,24 +282,27 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
       <div className={styles.topbar}>
         <Link href="/admin/blog" className={styles.back}>← Blog</Link>
         <div className={styles.topRight}>
-          <span className={styles.saveState} data-state={saveState}>
+          <span className={styles.saveState} data-state={saveState} role="status" aria-live="polite">
+            {saveState === 'idle' && 'Changes save automatically'}
             {saveState === 'saving' && 'Saving…'}
             {saveState === 'saved' && 'Saved'}
             {saveState === 'error' && 'Save failed'}
           </span>
+          <button type="button" className={styles.smallBtn} disabled={saveState === 'saving' || pending} onClick={() => { if (fieldTimer.current) clearTimeout(fieldTimer.current); if (bodyTimer.current) clearTimeout(bodyTimer.current); pendingSaveRef.current = false; void doSave() }}><Icon name="check" size={13} />{saveState === 'error' ? 'Retry save' : 'Save'}</button>
           {status === 'published' && (
             <a href={`/blog/${slug}`} target="_blank" rel="noreferrer" className={styles.viewLink}>View ↗</a>
           )}
         </div>
       </div>
 
-      {error && <div className={styles.errorBar}>{error}</div>}
+      {error && <div className={styles.errorBar} role="alert">{error}</div>}
 
       <div className={styles.grid}>
         {/* Main column */}
         <div className={styles.main}>
           <input
             className={styles.titleInput}
+            aria-label="Post title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Post title"
@@ -316,6 +312,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
             <span className={styles.slugPrefix}>/blog/</span>
             <input
               className={styles.slugInput}
+              aria-label="Post URL slug"
               value={slug}
               onChange={(e) => { setSlug(cleanSlugInput(e.target.value)); setSlugTouched(true) }}
               placeholder="post-slug"
@@ -359,9 +356,6 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
 
         {/* Sidebar */}
         <aside className={styles.sidebar}>
-          {/* Reads */}
-          <PostAnalytics a={analytics} published={status === 'published'} />
-
           {/* Publish */}
           <section className={styles.panel}>
             <h3 className={styles.panelTitle}>Publish</h3>
@@ -407,9 +401,34 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
             )}
           </section>
 
-          {/* SEO */}
+          {/* Meta */}
           <section className={styles.panel}>
-            <h3 className={styles.panelTitle}>SEO</h3>
+            <h3 className={styles.panelTitle}>Details</h3>
+            <Field label="Excerpt"><textarea className={styles.textarea} value={excerpt} onChange={(e) => setExcerpt(e.target.value)} rows={3} placeholder="One or two sentences shown on the blog index." /></Field>
+            <Field label="Author"><input className={styles.input} value={authorName} onChange={(e) => setAuthorName(e.target.value)} /></Field>
+            <Field label="Tags">
+              <div className={styles.tagWrap}>
+                {TAG_OPTIONS.map((t) => {
+                  const on = tags.includes(t)
+                  return (
+                    <button
+                      key={t}
+                      type="button"
+                      className={on ? styles.tagOn : styles.tagOff}
+                      aria-pressed={on}
+                      onClick={() => setTags(on ? tags.filter((x) => x !== t) : [...tags, t])}
+                    >
+                      {t}
+                    </button>
+                  )
+                })}
+              </div>
+            </Field>
+          </section>
+
+          {/* SEO */}
+          <details className={styles.panel}>
+            <summary className={styles.panelTitle}>Search appearance</summary>
 
             <Field label="Meta title" hint={`${effTitle.length}/60`} over={effTitle.length > 60}>
               <input className={styles.input} value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} placeholder={title || 'Defaults to post title'} />
@@ -434,11 +453,11 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
               <input type="checkbox" checked={noindex} onChange={(e) => setNoindex(e.target.checked)} />
               <span>Hide from search engines (noindex)</span>
             </label>
-          </section>
+          </details>
 
           {/* Social card */}
-          <section className={styles.panel}>
-            <h3 className={styles.panelTitle}>Social card</h3>
+          <details className={styles.panel}>
+            <summary className={styles.panelTitle}>Social preview</summary>
             <div className={styles.socialCard}>
               {effOgImg ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -461,35 +480,13 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
               {ogImageUrl && <button type="button" className={styles.smallBtnGhost} onClick={useCoverForOg}>Use cover</button>}
               <input ref={ogRef} type="file" accept="image/*" hidden onChange={onOg} />
             </div>
-          </section>
+          </details>
 
-          {/* Meta */}
-          <section className={styles.panel}>
-            <h3 className={styles.panelTitle}>Details</h3>
-            <Field label="Excerpt"><textarea className={styles.textarea} value={excerpt} onChange={(e) => setExcerpt(e.target.value)} rows={3} placeholder="One or two sentences shown on the blog index." /></Field>
-            <Field label="Author"><input className={styles.input} value={authorName} onChange={(e) => setAuthorName(e.target.value)} /></Field>
-            <Field label="Tags">
-              <div className={styles.tagWrap}>
-                {TAG_OPTIONS.map((t) => {
-                  const on = tags.includes(t)
-                  return (
-                    <button
-                      key={t}
-                      type="button"
-                      className={on ? styles.tagOn : styles.tagOff}
-                      onClick={() => setTags(on ? tags.filter((x) => x !== t) : [...tags, t])}
-                    >
-                      {t}
-                    </button>
-                  )
-                })}
-              </div>
-            </Field>
-          </section>
+          <PostAnalytics a={analytics} published={status === 'published'} />
 
           {/* History */}
-          <section className={styles.panel}>
-            <h3 className={styles.panelTitle}>History</h3>
+          <details className={styles.panel} onToggle={(e) => setHistoryOpen(e.currentTarget.open)}>
+            <summary className={styles.panelTitle}>Version history</summary>
             {revisions.length === 0 ? (
               <p className={styles.historyEmpty}>No saved versions yet. Edits autosave a version you can roll back to.</p>
             ) : (
@@ -511,7 +508,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
                 ))}
               </ul>
             )}
-          </section>
+          </details>
 
           <ConfirmButton
             onConfirm={() => {
@@ -542,10 +539,11 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
 }
 
 function Field({ label, hint, over, children }: { label: string; hint?: string; over?: boolean; children: React.ReactNode }) {
+  const id = useId()
   return (
-    <div className={styles.field}>
+    <div className={styles.field} role="group" aria-labelledby={id}>
       <div className={styles.fieldHead}>
-        <label className={styles.fieldLabel}>{label}</label>
+        <span id={id} className={styles.fieldLabel}>{label}</span>
         {hint && <span className={over ? styles.hintOver : styles.hint}>{hint}</span>}
       </div>
       {children}

@@ -6,7 +6,7 @@ import ui from '../admin-ui.module.css'
 import styles from './crm.module.css'
 import type { ActionResult } from './actions'
 
-// Pulls existing waitlist / demo / field-guide / deck contacts into the CRM.
+// Pulls existing waitlist / demo / field-guide contacts into the CRM.
 // Idempotent, safe to click repeatedly; only new contacts are added.
 export function ImportButton({ action }: { action: () => Promise<ActionResult> }) {
   const router = useRouter()

@@ -13,8 +13,8 @@
 .cancel {
   border: 1px solid var(--border-mid);
   background: var(--bg);
-  color: var(--text-muted);
-  border-radius: 8px;
+  color: var(--text-secondary);
+  border-radius: 999px;
   font-size: inherit;
   font-family: var(--font-sans);
   padding: 5px 11px;
@@ -24,16 +24,18 @@
 .cancel:hover { background: var(--bg-surface); color: var(--text); }
 
 .confirm {
-  border: 1px solid rgba(220, 38, 38, 0.4);
-  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid color-mix(in srgb, var(--error) 40%, transparent);
+  background: color-mix(in srgb, var(--error) 8%, transparent);
   color: var(--color-red);
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: inherit;
   font-family: var(--font-sans);
-  font-weight: bold;
+  font-weight: 550;
   padding: 5px 11px;
   cursor: pointer;
   white-space: nowrap;
 }
-.confirm:hover { background: rgba(220, 38, 38, 0.15); }
+.confirm:hover { background: color-mix(in srgb, var(--error) 15%, transparent); }
 .confirm:disabled { opacity: 0.5; cursor: default; }
+
+.cancel, .confirm { font-size: 11px; min-height: 30px; }

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { verifyTurnstile, turnstileConfigured } from '@/lib/turnstile'
 import { isAdminEmail } from '@/lib/admin-domain'
+import { safeAdminNext } from '@/lib/admin-auth-redirect'
 
 // Server-mediated magic-link request for the admin panel. The browser used to
 // call supabase.auth.signInWithOtp directly; routing it through here lets us
@@ -78,7 +79,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true })
   }
 
-  const safeNext = next.startsWith('/admin') ? next : '/admin'
+  const safeNext = safeAdminNext(next)
   const origin = req.nextUrl.origin
   const supabase = await createSupabaseServerClient()
   const { error } = await supabase.auth.signInWithOtp({

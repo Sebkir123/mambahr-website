@@ -1,170 +1,26 @@
 import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth'
-import { getCrmDashboard, getContactsByKind, formatMoney, stageLabel } from '@/lib/crm'
-import { getDeckAnalytics } from '@/lib/admin-deck'
+import { getCrmDashboard, getContactsByKind, formatMoney } from '@/lib/crm'
+import DataNotice from '../_components/data-notice'
+import Icon from '../_components/icon'
 import ui from '../admin-ui.module.css'
 import styles from '../crm/crm.module.css'
-
 export const dynamic = 'force-dynamic'
-
-function dur(ms: number): string {
-  const s = Math.round(ms / 1000)
-  if (s < 60) return `${s}s`
-  return `${Math.floor(s / 60)}m`
-}
-function when(iso: string | null): string {
-  if (!iso) return '—'
-  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-}
-
-function Stat({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
-  return (
-    <div className={styles.stat}>
-      <span className={styles.statValue}>{value}</span>
-      <span className={styles.statLabel}>{label}</span>
-      {sub && <span className={styles.statSub}>{sub}</span>}
-    </div>
-  )
-}
-
+function date(value: string) { return new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }
 export default async function InvestorsOverview() {
-  const [, dash, { contacts }, deck] = await Promise.all([
-    requireAdmin(),
-    getCrmDashboard(),
-    getContactsByKind('investor'),
-    getDeckAnalytics(),
-  ])
-
-  const inv = dash.byKind.investor
-  const diligence = inv.byStage.find((s) => s.key === 'diligence')?.count ?? 0
-
-  // Deck engagement leaderboard, recipients who actually opened, busiest first.
-  const leaderboard = [...deck.links]
-    .filter((l) => l.opens > 0)
-    .sort((a, b) => b.opens - a.opens || b.totalMs - a.totalMs)
-    .slice(0, 6)
-
-  // Who to follow up with: open investors with a next step, soonest due first.
-  const followUps = contacts
-    .filter((c) => c.next_step && c.stage !== 'committed' && c.stage !== 'passed')
-    .sort((a, b) => {
-      const ad = a.next_step_due ? new Date(a.next_step_due).getTime() : Infinity
-      const bd = b.next_step_due ? new Date(b.next_step_due).getTime() : Infinity
-      return ad - bd
-    })
-    .slice(0, 8)
-
-  const investorTasks = dash.upcomingTasks.filter((t) => t.contactKind === 'investor')
-
-  return (
-    <>
-      <div className={ui.header}>
-        <div>
-          <h1 className={ui.h1}>Investors</h1>
-          <p className={ui.subtitle}>Raise progress, deck engagement, and who to follow up with</p>
-        </div>
-        <div className={styles.headerActions}>
-          <Link href="/admin/deck" className={ui.btnGhost}>Deck analytics</Link>
-          <Link href="/admin/crm?kind=investor" className={ui.btnPrimary}>Open pipeline →</Link>
-        </div>
-      </div>
-
-      <div className={styles.stats}>
-        <Stat label="Committed" value={inv.won} sub={formatMoney(inv.wonValue)} />
-        <Stat label="In diligence" value={diligence} sub="reviewing" />
-        <Stat label="Open pipeline" value={formatMoney(inv.openValue)} sub={`${inv.open} live`} />
-        <Stat label="Deck opens" value={deck.totals.opens.toLocaleString()} sub={`${deck.totals.recipients} reached`} />
-        <Stat label="Pass rate" value={`${100 - inv.winRatePct}%`} sub={`${inv.lost} of ${inv.won + inv.lost} closed`} />
-      </div>
-
-      <div className={styles.detailGrid}>
-        {/* Pipeline by stage */}
-        <section className={styles.panel}>
-          <div className={styles.panelHead}>
-            <h2 className={styles.panelTitle}>Pipeline by stage</h2>
-            <Link href="/admin/crm?kind=investor" className={styles.statSub} style={{ textDecoration: 'none' }}>View board →</Link>
-          </div>
-          {inv.total === 0 ? (
-            <p className={styles.muted}>
-              No investors yet. <Link href="/admin/crm/new?kind=investor" className={ui.rowLink}>Add one</Link> or import your deck recipients from the pipeline.
-            </p>
-          ) : (
-            <div>
-              {inv.byStage.map((st) => (
-                <div key={st.key} className={styles.readRow}>
-                  <span className={styles.readKey}>{st.label}</span>
-                  <span className={styles.readVal}>
-                    {st.count}
-                    {st.value > 0 && <span className={styles.muted}> · {formatMoney(st.value)}</span>}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* Deck engagement leaderboard */}
-        <section className={styles.panel}>
-          <div className={styles.panelHead}>
-            <h2 className={styles.panelTitle}>Deck engagement</h2>
-            <Link href="/admin/deck" className={styles.statSub} style={{ textDecoration: 'none' }}>Full analytics →</Link>
-          </div>
-          {leaderboard.length === 0 ? (
-            <p className={styles.muted}>No deck opens yet. Send a tracked link from Deck analytics.</p>
-          ) : (
-            <ul className={styles.timeline}>
-              {leaderboard.map((l) => (
-                <li key={l.id} className={styles.tlItem}>
-                  <span className={styles.tlIcon}>{(l.recipient_name || '?').charAt(0)}</span>
-                  <div className={styles.tlBody}>
-                    <div className={styles.tlText}>
-                      {l.recipient_name || 'Anonymous'}
-                      {l.recipient_org ? <span className={styles.muted}> · {l.recipient_org}</span> : ''}
-                      {l.forwarded && <span className={`${styles.pill} ${styles.pillTag}`} style={{ marginLeft: 8 }}>forwarded</span>}
-                    </div>
-                    <div className={styles.tlMeta}>
-                      {l.opens} open{l.opens === 1 ? '' : 's'} · {dur(l.totalMs)} read · last {when(l.lastViewedAt)}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-      </div>
-
-      {/* Follow-ups */}
-      <section className={styles.panel} style={{ marginTop: 18 }}>
-        <div className={styles.panelHead}>
-          <h2 className={styles.panelTitle}>Needs follow-up</h2>
-          <span className={styles.statSub}>{followUps.length + investorTasks.length} items</span>
-        </div>
-        {followUps.length === 0 && investorTasks.length === 0 ? (
-          <p className={styles.muted}>Nothing queued. Set a next step on an investor to see it here.</p>
-        ) : (
-          <ul className={styles.tasks}>
-            {followUps.map((c) => (
-              <li key={c.id} className={styles.task}>
-                <span className={styles.taskTitle}>
-                  <Link href={`/admin/crm/${c.id}`} className={ui.rowLink}>{c.name}</Link>
-                  {c.company ? <span className={styles.muted}> · {c.company}</span> : ''}
-                  <span className={styles.muted}>, {c.next_step}</span>
-                  <span className={`${styles.pill} ${styles.pillTag}`} style={{ marginLeft: 8 }}>{stageLabel('investor', c.stage)}</span>
-                </span>
-                <span className={styles.taskDue}>{c.next_step_due ? when(c.next_step_due) : 'no date'}</span>
-              </li>
-            ))}
-            {investorTasks.map((t) => (
-              <li key={t.id} className={styles.task}>
-                <span className={styles.taskTitle}>
-                  ☐ {t.title} · <Link href={`/admin/crm/${t.contact_id}`} className={ui.rowLink}>{t.contactName}</Link>
-                </span>
-                <span className={styles.taskDue}>{t.due_date ? when(t.due_date) : 'no date'}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-    </>
-  )
+  await requireAdmin()
+  const [dash, { contacts, warnings }] = await Promise.all([getCrmDashboard(), getContactsByKind('investor')])
+  const summary = dash.byKind.investor
+  const open = contacts.filter((contact) => !['committed','passed'].includes(contact.stage))
+  const followUps = open.filter((contact) => contact.next_step).sort((a, b) => (a.next_step_due ?? '9999').localeCompare(b.next_step_due ?? '9999')).slice(0, 8)
+  const tasks = dash.upcomingTasks.filter((task) => task.contactKind === 'investor')
+  return <>
+    <div className={ui.header}><div><h1 className={ui.h1}>Investors</h1><p className={ui.subtitle}>Keep introductions, conversations, and commitments moving.</p></div><div className={ui.actions}><Link href="/admin/crm/new?kind=investor" className={ui.btnGhost}><Icon name="plus" size={14} />Add investor</Link><Link href="/admin/crm?kind=investor" className={ui.btnPrimary}>Open pipeline</Link></div></div>
+    <DataNotice warnings={[...dash.warnings,...warnings]} />
+    <div className={styles.stats}>{[{label:'Open conversations',value:summary.open,sub:`${summary.total} total contacts`},{label:'Open value',value:formatMoney(summary.openValue),sub:'total potential commitments'},{label:'Committed',value:formatMoney(summary.wonValue),sub:`${summary.won} investors`},{label:'Without an owner',value:open.filter((contact) => !contact.owner).length,sub:'open contacts to assign'}].map((metric) => <div key={metric.label} className={styles.stat}><span className={styles.statValue}>{metric.value}</span><span className={styles.statLabel}>{metric.label}</span><span className={styles.statSub}>{metric.sub}</span></div>)}</div>
+    <div className={styles.detailGrid}>
+      <section className={styles.panel}><div className={styles.panelHead}><h2 className={styles.panelTitle}>Pipeline by stage</h2><Link href="/admin/crm?kind=investor" className={ui.rowLink}>View board →</Link></div>{summary.total ? summary.byStage.map((stage) => <div className={styles.readRow} key={stage.key}><span className={styles.readKey}>{stage.label}</span><span className={styles.readVal}>{stage.count}{stage.value > 0 && <span className={styles.muted}> · {formatMoney(stage.value)}</span>}</span></div>) : <p className={styles.muted}>Add your first investor to start tracking the conversation.</p>}</section>
+      <section className={styles.panel}><div className={styles.panelHead}><h2 className={styles.panelTitle}>Next steps</h2><span className={styles.statSub}>{followUps.length + tasks.length} follow-ups</span></div>{!followUps.length && !tasks.length ? <p className={styles.muted}>No follow-ups waiting. Add a next step or task to an investor to keep it in view.</p> : <ul className={styles.tasks}>{followUps.map((contact) => <li key={contact.id} className={styles.task}><span className={styles.taskTitle}><Link href={`/admin/crm/${contact.id}`} className={ui.rowLink}>{contact.name}</Link><span className={styles.muted}> · {contact.next_step}</span></span><span className={styles.taskDue}>{contact.next_step_due ? date(contact.next_step_due) : 'No date'}</span></li>)}{tasks.map((task) => <li key={task.id} className={styles.task}><span className={styles.taskTitle}>{task.title} · <Link href={`/admin/crm/${task.contact_id}`} className={ui.rowLink}>{task.contactName}</Link></span><span className={styles.taskDue}>{task.due_date ? date(task.due_date) : 'No date'}</span></li>)}</ul>}</section>
+    </div>
+  </>
 }

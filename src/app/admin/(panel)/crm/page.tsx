@@ -5,6 +5,7 @@ import { ingestLeads } from './actions'
 import CrmBoard from './crm-board'
 import { ImportButton } from './import-button'
 import ui from '../admin-ui.module.css'
+import DataNotice from '../_components/data-notice'
 import styles from './crm.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -39,22 +40,22 @@ export default async function CrmPage({ searchParams }: { searchParams: Promise<
           <h1 className={ui.h1}>{isInvestor ? 'Investor pipeline' : 'Customer pipeline'}</h1>
           <p className={ui.subtitle}>
             {isInvestor
-              ? 'Fundraise pipeline, drag to move stages · live & collaborative'
-              : 'Sales pipeline, drag to move stages · live & collaborative'}
+              ? 'Track conversations from first introduction to commitment.'
+              : 'Keep every customer conversation moving toward the next step.'}
           </p>
         </div>
         <div className={styles.headerActions}>
           <Link href="/admin/crm/contacts" className={ui.btnGhost}>List view</Link>
-          <ImportButton action={ingestLeads} />
+          {!isInvestor && <ImportButton action={ingestLeads} />}
           <Link href={`/admin/crm/new?kind=${kind}`} className={ui.btnPrimary}>+ Add {kind}</Link>
         </div>
       </div>
 
-      {warnings.length > 0 && <div className={styles.notice}>{warnings[0]}</div>}
+      <DataNotice warnings={warnings} />
 
       <div className={styles.stats}>
         <Stat label="Open" value={k.open} sub={`${k.total} total`} />
-        <Stat label={isInvestor ? 'Pipeline (open)' : 'Open value'} value={formatMoney(k.openValue)} sub="weighted pipeline" />
+        <Stat label={isInvestor ? 'Pipeline (open)' : 'Open value'} value={formatMoney(k.openValue)} sub="total open value" />
         <Stat label={isInvestor ? 'Committed' : 'Won'} value={k.won} sub={formatMoney(k.wonValue)} />
         <Stat label="Win rate" value={`${k.winRatePct}%`} sub={`${k.won} of ${k.won + k.lost} closed`} />
         <Stat label="Open tasks" value={dash.openTaskCount} sub="across all contacts" />
