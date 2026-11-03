@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState, useTransition, useId } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { safeAdminNext } from '@/lib/admin-auth-redirect'
 import { type Post, slugify, TAG_OPTIONS } from '@/lib/blog-types'
 import { savePost, setPostStatus, deletePost, listRevisions, restoreRevision, type SavePayload, type SaveResult, type Revision } from '../actions'
 import { uploadImage } from './upload'
@@ -27,6 +29,9 @@ const SITE = 'https://www.mambahr.com'
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 
 export default function Editor({ post, analytics }: { post: Post; analytics: BlogPostAnalytics }) {
+  const router = useRouter()
+  const returnTo = safeAdminNext(useSearchParams().get('returnTo') ?? '/admin/blog')
+  const [previewing, setPreviewing] = useState(false)
   const [title, setTitle] = useState(post.title)
   const [slug, setSlug] = useState(post.slug)
   const [slugTouched, setSlugTouched] = useState(!post.slug.startsWith('untitled-'))
@@ -280,7 +285,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
     <div className={styles.layout}>
       {/* Top bar */}
       <div className={styles.topbar}>
-        <Link href="/admin/blog" className={styles.back}>← Blog</Link>
+        <Link href={returnTo} className={styles.back}>← Blog</Link>
         <div className={styles.topRight}>
           <span className={styles.saveState} data-state={saveState} role="status" aria-live="polite">
             {saveState === 'idle' && 'Changes save automatically'}
@@ -288,7 +293,19 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
             {saveState === 'saved' && 'Saved'}
             {saveState === 'error' && 'Save failed'}
           </span>
-          <button type="button" className={styles.smallBtn} disabled={saveState === 'saving' || pending} onClick={() => { if (fieldTimer.current) clearTimeout(fieldTimer.current); if (bodyTimer.current) clearTimeout(bodyTimer.current); pendingSaveRef.current = false; void doSave() }}><Icon name="check" size={13} />{saveState === 'error' ? 'Retry save' : 'Save'}</button>
+          <button type="button" className={styles.smallBtn} disabled={saveState === 'saving' || pending || previewing} onClick={() => { if (fieldTimer.current) clearTimeout(fieldTimer.current); if (bodyTimer.current) clearTimeout(bodyTimer.current); pendingSaveRef.current = false; void doSave() }}><Icon name="check" size={13} />{saveState === 'error' ? 'Retry save' : 'Save'}</button>
+          <button type="button" className={styles.smallBtn} disabled={previewing || pending || deleting} onClick={async () => {
+            setPreviewing(true)
+            if (fieldTimer.current) clearTimeout(fieldTimer.current)
+            if (bodyTimer.current) clearTimeout(bodyTimer.current)
+            pendingSaveRef.current = false
+            const result = await doSave()
+            if (result?.ok && !unsavedRef.current) router.push(`/admin/blog/${post.id}/preview?returnTo=${encodeURIComponent(returnTo)}`)
+            else {
+              setPreviewing(false)
+              if (result?.ok) setError('You made more changes while saving. Click Preview again to include them.')
+            }
+          }}>{previewing ? 'Preparing preview…' : 'Preview'}</button>
           {status === 'published' && (
             <a href={`/blog/${slug}`} target="_blank" rel="noreferrer" className={styles.viewLink}>View ↗</a>
           )}
@@ -363,15 +380,15 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
               Status: <strong className={styles[`st_${status}`]}>{status}</strong>
             </div>
             {status !== 'published' ? (
-              <button className={styles.publishBtn} disabled={pending} onClick={() => changeStatus('published')}>
+              <button className={styles.publishBtn} disabled={pending || previewing} onClick={() => changeStatus('published')}>
                 {pending ? 'Working…' : 'Publish now'}
               </button>
             ) : (
-              <button className={styles.unpublishBtn} disabled={pending} onClick={() => changeStatus('draft')}>
+              <button className={styles.unpublishBtn} disabled={pending || previewing} onClick={() => changeStatus('draft')}>
                 {pending ? 'Working…' : 'Unpublish'}
               </button>
             )}
-            {status === 'scheduled' && <button type="button" className={styles.unpublishBtn} disabled={pending} onClick={() => changeStatus('draft')}>{pending ? 'Working…' : 'Cancel schedule'}</button>}
+            {status === 'scheduled' && <button type="button" className={styles.unpublishBtn} disabled={pending || previewing} onClick={() => changeStatus('draft')}>{pending ? 'Working…' : 'Cancel schedule'}</button>}
             <div className={styles.scheduleRow}>
               <label className={styles.fieldLabel}>Schedule for</label>
               <input
@@ -382,7 +399,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
               />
               <button
                 className={styles.smallBtn}
-                disabled={pending || !scheduledFor}
+                disabled={pending || previewing || !scheduledFor}
                 onClick={() => changeStatus('scheduled')}
               >
                 Schedule
@@ -501,6 +518,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
                     <ConfirmButton
                       onConfirm={() => onRestore(rev)}
                       confirmLabel="Restore"
+                      disabled={previewing || pending}
                       className={styles.smallBtnGhost}
                     >
                       Restore
@@ -519,6 +537,7 @@ export default function Editor({ post, analytics }: { post: Post; analytics: Blo
               startTransition(() => deletePost(post.id))
             }}
             confirmLabel="Delete post"
+            disabled={previewing || pending}
             pending={deleting}
             className={styles.deleteBtn}
           >

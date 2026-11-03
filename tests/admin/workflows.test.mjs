@@ -159,3 +159,144 @@ test('canceling a schedule returns the post to draft and clears its scheduled ti
   assert.equal(result.ok, true)
   assert.deepEqual(calls[1].find((op) => op.update).update[0], { status: 'draft', scheduled_for: null })
 })
+
+const resourceModules = (db) => ({ 'node:crypto': {}, 'next/cache': cacheStub(), '@/lib/auth': { requireAdmin: async () => ({ email: 'preview@example.test' }) }, '@/lib/supabase/service': { serviceDb: () => db } })
+const resourceActions = (db) => loadAction('../../src/app/admin/(panel)/resources/actions.ts', resourceModules(db))
+const form = (values) => { const fd = new FormData(); for (const [key, value] of Object.entries(values)) fd.set(key, value); return fd }
+
+test('resource status changes report missing rows, invalid statuses and unavailable PDFs without writing', async () => {
+  for (const [result, message] of [[{ data: null, error: null }, /no longer exists/], [{ data: null, error: { message: 'offline' } }, /Could not load/], [{ data: { slug: 'sample', file_path: null }, error: null }, /Attach a PDF/]]) {
+    const { db, calls } = dbStub([result])
+    const response = await resourceActions(db).setResourceStatus(form({ id: 'r1', status: 'published' }))
+    assert.equal(response.ok, false); assert.match(response.message, message); assert.equal(calls.length, 1)
+  }
+  const { db, calls } = dbStub([])
+  assert.equal((await resourceActions(db).setResourceStatus(form({ id: 'r1', status: 'unknown' }))).ok, false)
+  assert.equal(calls.length, 0)
+})
+test('resource status writes verify an affected row and revalidate the resource page', async () => {
+  const { db, calls } = dbStub([{ data: { slug: 'sample', file_path: 'pdf/one.pdf' }, error: null }, { data: { id: 'r1' }, error: null }])
+  const paths = []
+  const actions = loadAction('../../src/app/admin/(panel)/resources/actions.ts', { ...resourceModules(db), 'next/cache': { updateTag() {}, revalidatePath: path => paths.push(path) } })
+  assert.equal((await actions.setResourceStatus(form({ id: 'r1', status: 'published' }))).ok, true)
+  assert.deepEqual(calls[1].find(op => op.not).not, ['file_path', 'is', null])
+  assert.ok(calls[1].some(op => op.select)); assert.ok(paths.includes('/resources/sample'))
+  const missing = dbStub([{ data: { slug: 'sample', file_path: 'pdf/one.pdf' }, error: null }, { data: null, error: null }])
+  assert.equal((await resourceActions(missing.db).setResourceStatus(form({ id: 'r1', status: 'draft' }))).ok, false)
+})
+test('saving a removed resource keeps the edit unsuccessful rather than silently closing the form', async () => {
+  const { db } = dbStub([{ data: null, error: null }])
+  const result = await resourceActions(db).saveResource(form({ id: 'gone', title: 'Sample' }))
+  assert.equal(result.ok, false); assert.match(result.message, /no longer exists/)
+})
+test('resource deletion never removes storage before a successful row deletion and preserves shared PDFs', async () => {
+  for (const [deleted, refs, expectedRemoved, expectedOk] of [
+    [{ data: null, error: { message: 'offline' } }, null, 0, false],
+    [{ data: null, error: null }, null, 0, false],
+    [{ data: { slug: 'sample', file_path: 'pdf/shared.pdf' }, error: null }, { data: [{ id: 'other' }], error: null }, 0, true],
+    [{ data: { slug: 'sample', file_path: 'pdf/shared.pdf' }, error: null }, { data: [], error: null }, 1, true],
+    [{ data: { slug: 'sample', file_path: 'pdf/shared.pdf' }, error: null }, { data: null, error: { message: 'offline' } }, 0, true],
+  ]) {
+    const { db, calls } = dbStub([deleted, refs]); let removed = 0
+    db.storage = { from: () => ({ remove: async () => { assert.ok(calls[0].some(op => op.delete)); assert.equal(calls.length, 2); removed++; return { error: null } } }) }
+    assert.equal((await resourceActions(db).deleteResource(form({ id: 'r1' }))).ok, expectedOk)
+    assert.equal(removed, expectedRemoved)
+  }
+})
+test('field guide revocation reports errors and no-op writes instead of pretending the link was revoked', async () => {
+  for (const [result, ok] of [[{ data: null, error: null }, false], [{ data: null, error: { message: 'offline' } }, false], [{ data: { id: 'g1' }, error: null }, true]]) {
+    const { db, calls } = dbStub([result])
+    const actions = loadAction('../../src/app/admin/(panel)/field-guides/actions.ts', { 'next/cache': cacheStub(), '@/lib/auth': { requireAdmin: async () => ({}) }, '@/lib/supabase/service': { serviceDb: () => db }, '@/lib/admin-field-guides': {} })
+    assert.equal((await actions.revokeFieldGuideLink(form({ id: 'g1' }))).ok, ok)
+    assert.ok(calls[0].some(op => op.select))
+  }
+})
+
+const queryHelpers = loadAction('../../src/lib/admin-list-query.ts', {})
+test('list URLs survive reload/back and reject malformed state while keeping unrelated parameters', () => {
+  const defaults = { q: '', status: 'all', sort: 'updated', page: 1 }
+  const url = queryHelpers.patchListQuery('?utm_source=internal&page=8', { q: 'HR & AI', status: 'draft', page: 1 }, defaults)
+  const state = queryHelpers.listQuery(new URLSearchParams(url), ['all', 'draft'], ['updated', 'title'])
+  assert.deepEqual(state, { query: 'HR & AI', status: 'draft', sort: 'updated', page: 1 })
+  assert.equal(new URLSearchParams(url).get('utm_source'), 'internal'); assert.equal(new URLSearchParams(url).has('page'), false)
+  for (const page of ['-2', '0', '1.5', 'Infinity', 'bad']) assert.equal(queryHelpers.listQuery(new URLSearchParams(`status=invalid&sort=invalid&page=${page}`), ['all'], ['updated']).page, 1)
+  assert.equal(queryHelpers.listQuery(new URLSearchParams({ q: 'x'.repeat(500) }), ['all'], ['updated']).query.length, 200)
+})
+test('list controls update URL state without fetching or losing the hash, and restore changed search parameters', () => {
+  const previousWindow = globalThis.window
+  let href = '/admin/blog?status=draft#articles'
+  globalThis.window = { location: { pathname: '/admin/blog', search: '?status=draft', hash: '#articles' }, history: { replaceState(_state, _title, next) { href = next; globalThis.window.location.search = new URL(next, 'https://example.test').search } } }
+  try {
+    const { useListQuery } = loadAction('../../src/app/admin/(panel)/_components/use-list-query.ts', { 'next/navigation': { useSearchParams: () => new URLSearchParams(globalThis.window.location.search) }, '@/lib/admin-list-query': queryHelpers })
+    const first = useListQuery(['all', 'draft'], ['updated', 'title'])
+    first.setQuery('benefits'); first.setSort('title'); first.setPage(2)
+    assert.equal(href, '/admin/blog?status=draft&q=benefits&sort=title&page=2#articles')
+    assert.equal(useListQuery(['all', 'draft'], ['updated', 'title']).page, 2)
+    globalThis.window.location.search = '?q=old&status=draft'
+    assert.equal(useListQuery(['all', 'draft'], ['updated', 'title']).query, 'old')
+    useListQuery(['all', 'draft'], ['updated', 'title']).clear()
+    assert.equal(href, '/admin/blog#articles')
+  } finally { globalThis.window = previousWindow }
+})
+function findNode(node, predicate) {
+  if (!node || typeof node !== 'object') return null
+  if (predicate(node)) return node
+  return [node.props?.children].flat(Infinity).map(child => findNode(child, predicate)).find(Boolean)
+}
+test('the real Preview button saves first and never navigates on a failed save', async () => {
+  for (const succeeds of [false, true]) {
+    const calls = []; const jsx = (type, props) => ({ type, props })
+    const Editor = loadAction('../../src/app/admin/(panel)/blog/[id]/editor.tsx', {
+      react: { useEffect() {}, useRef: current => ({ current }), useState: value => [value, () => {}], useTransition: () => [false, () => {}], useId: () => 'test', useCallback: fn => fn },
+      'react/jsx-runtime': { jsx, jsxs: jsx, Fragment: 'fragment' }, 'next/dynamic': { default: () => 'dynamic' }, 'next/link': { default: 'a' }, 'next/navigation': { useRouter: () => ({ push: href => calls.push(href) }), useSearchParams: () => new URLSearchParams('returnTo=%2Fadmin%2Fblog%3Fstatus%3Ddraft') }, '@/lib/admin-auth-redirect': { safeAdminNext },
+      '@/lib/blog-types': { slugify: value => value, TAG_OPTIONS: [] }, '../actions': { savePost: async () => { calls.push('save'); return succeeds ? { ok: true, slug: 'sample' } : { ok: false, error: 'offline' } } }, './upload': {}, './post-analytics': {}, '../../_components/confirm-button': {}, './editor.module.css': { default: {} }, '../../_components/icon': {},
+    }).default
+    const tree = Editor({ post: { id: 'p1', title: 'Sample', slug: 'sample', tags: [], body_html: '<p>Content</p>', status: 'draft', excerpt: '', author_name: 'QA', noindex: false }, analytics: {} })
+    const preview = findNode(tree, node => node.type === 'button' && node.props.children === 'Preview')
+    assert.ok(preview); await preview.props.onClick()
+    assert.deepEqual(calls, succeeds ? ['save', '/admin/blog/p1/preview?returnTo=%2Fadmin%2Fblog%3Fstatus%3Ddraft'] : ['save'])
+  }
+})
+
+test('resource Close and New protect dirty edits; Keep editing preserves them and Discard follows the chosen action', () => {
+  const slots = []; let cursor = 0
+  const useState = initial => { const index = cursor++; if (!(index in slots)) slots[index] = typeof initial === 'function' ? initial() : initial; return [slots[index], next => { slots[index] = typeof next === 'function' ? next(slots[index]) : next }] }
+  const jsx = (type, props) => ({ type, props })
+  const Manager = loadAction('../../src/app/admin/(panel)/resources/manager.tsx', {
+    react: { useState, useRef: current => { const [ref] = useState(() => ({ current })); return ref }, useMemo: fn => fn(), useEffect() {}, useTransition: () => [false, () => {}] },
+    'react/jsx-runtime': { jsx, jsxs: jsx, Fragment: 'fragment' }, 'next/navigation': { useRouter: () => ({ push() {} }) }, '../_components/use-list-query': { useListQuery: () => ({ query: '', status: 'all', sort: 'order', page: 1 }) },
+    './actions': {}, '@/lib/supabase/browser': {}, '../_components/confirm-button': {}, '../admin-ui.module.css': { default: {} }, '../_components/icon': {}, '../_components/pagination': { PAGE_SIZE: 25 }, './resources.module.css': { default: {} },
+  }).default
+  const render = () => { cursor = 0; return Manager({ resources: [], stats: {}, sources: {} }) }
+  const button = (tree, text) => findNode(tree, node => node.type === 'button' && node.props.children === text)
+  let tree = render(); button(tree, '+ New resource').props.onClick(); tree = render()
+  const editor = () => findNode(tree, node => typeof node.type === 'function' && node.type.name === 'Editor')
+  assert.ok(editor()); editor().props.onDirty(true); tree = render(); editor().props.onClose(); tree = render()
+  assert.ok(button(tree, 'Keep editing')); assert.ok(editor())
+  button(tree, 'Keep editing').props.onClick(); tree = render(); assert.ok(editor()); assert.equal(button(tree, 'Discard changes'), undefined)
+  editor().props.onClose(); tree = render(); button(tree, 'Discard changes').props.onClick(); tree = render(); assert.equal(editor(), undefined)
+  button(tree, '+ New resource').props.onClick(); tree = render(); editor().props.onDirty(true); tree = render()
+  button(tree, '+ New resource').props.onClick(); tree = render(); assert.ok(button(tree, 'Discard changes')); assert.ok(editor())
+})
+test('the private preview checks admin access before querying drafts and renders only saved sanitized content', async () => {
+  let reads = 0; let allowed = false
+  const jsx = (type, props) => ({ type, props })
+  const Preview = loadAction('../../src/app/admin/(panel)/blog/[id]/preview/page.tsx', {
+    'react/jsx-runtime': { jsx, jsxs: jsx, Fragment: 'fragment' }, 'next/link': { default: 'a' }, 'next/image': { default: 'img' }, 'next/navigation': { notFound: () => { throw new Error('not found') } },
+    '@/lib/admin-auth-redirect': { safeAdminNext }, '@/lib/auth': { requireAdmin: async () => { if (!allowed) throw new Error('login required') } },
+    '@/lib/supabase/server': { createSupabaseServerClient: async () => { reads++; return dbStub([{ data: { id: 'p1', title: 'Saved title', status: 'draft', updated_at: '2026-11-03T12:00:00Z', body_html: '<p>Saved body</p><script>bad()</script>', tags: [] }, error: null }]).db } },
+    '@/lib/blog': { sanitizePostHtml: html => html.replace(/<script>.*?<\/script>/g, '') }, '@/app/blog/[slug]/post.module.css': { default: {} }, '../../../admin-ui.module.css': { default: {} }, './preview.module.css': { default: {} },
+  }).default
+  await assert.rejects(Preview({ params: Promise.resolve({ id: 'p1' }), searchParams: Promise.resolve({}) }), /login required/); assert.equal(reads, 0)
+  allowed = true
+  const tree = await Preview({ params: Promise.resolve({ id: 'p1' }), searchParams: Promise.resolve({}) })
+  const article = findNode(tree, node => node.type === 'article')
+  assert.equal(article.props.dangerouslySetInnerHTML.__html, '<p>Saved body</p>'); assert.equal(reads, 1)
+})
+test('a previously armed confirmation cannot remain actionable after its control becomes disabled', () => {
+  let fires = 0
+  const jsx = (type, props) => ({ type, props })
+  const { ConfirmButton } = loadAction('../../src/app/admin/(panel)/_components/confirm-button.tsx', { react: { useState: () => [true, () => {}], useRef: () => ({ current: null }), useEffect() {} }, 'react/jsx-runtime': { jsx, jsxs: jsx }, './confirm-button.module.css': { default: {} } })
+  const tree = ConfirmButton({ onConfirm: () => fires++, disabled: true, children: 'Delete' })
+  assert.equal(tree.type, 'button'); assert.equal(tree.props.disabled, true); assert.equal(tree.props.children, 'Delete'); assert.equal(fires, 0)
+})

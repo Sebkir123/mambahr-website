@@ -1,0 +1,4 @@
+.canvas { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: 16px; overflow: hidden; }
+.page { padding: 48px 24px 64px; max-width: 768px; }
+.cover { width: 100%; margin-left: 0; margin-right: 0; }
+@media (max-width: 600px) { .page { padding: 28px 18px 40px; } }

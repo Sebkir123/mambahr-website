@@ -51,7 +51,7 @@ export function ConfirmButton({
     )
   }
 
-  if (armed) {
+  if (armed && !disabled) {
     return (
       <span className={styles.armed} onKeyDown={(event) => { if (event.key === 'Escape') disarm() }}>
         <button type="button" className={styles.cancel} onClick={disarm}>Cancel</button>

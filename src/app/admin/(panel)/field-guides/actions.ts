@@ -40,13 +40,16 @@ export async function createFieldGuideLink(fd: FormData): Promise<LinkResult> {
 }
 
 // Revoke a link, the gated page immediately 404s for that token; opens are kept.
-export async function revokeFieldGuideLink(fd: FormData): Promise<void> {
+export async function revokeFieldGuideLink(fd: FormData): Promise<LinkResult> {
   await requireAdmin()
   const db = serviceDb()
-  if (!db) return
+  if (!db) return { ok: false, message: 'Service not configured.' }
   const id = String(fd.get('id') || '')
-  if (!id) return
-  await db.from('field_guide_leads').update({ revoked_at: new Date().toISOString() }).eq('id', id)
+  if (!id) return { ok: false, message: 'Choose a link to revoke.' }
+  const { data, error } = await db.from('field_guide_leads').update({ revoked_at: new Date().toISOString() }).eq('id', id).select('id').maybeSingle()
+  if (error) return { ok: false, message: 'Could not revoke this link. Please retry.' }
+  if (!data) return { ok: false, message: 'This link no longer exists. Reload the list.' }
   updateTag('admin-data')
   revalidatePath('/admin/field-guides')
+  return { ok: true, message: 'Link revoked. Existing activity has been kept.' }
 }

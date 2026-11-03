@@ -16,9 +16,9 @@ const geist = Geist({
   display: 'swap',
 })
 
+// Use the variable face so Google returns one font rather than per-weight URLs.
 const geistMono = Geist_Mono({
   subsets: ['latin'],
-  weight: ['400', '500'],
   variable: '--font-geist-mono',
   display: 'swap',
 })

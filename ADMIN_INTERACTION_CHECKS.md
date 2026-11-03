@@ -41,3 +41,20 @@ and delete the temporary sample post back to the Blog list. Cancel schedule now
 returns the post to Draft and clears both the stored timestamp and editor field.
 The fixture database, mocked auth/client/service and preview proxy changes are
 outside the production source tree and were not committed or deployed.
+
+
+## Saved previews and list workflows (2026-11-03)
+
+23 workflow tests now include preview save-before-navigation/failure and admin
+access, URL state restoration, resource discard confirmation, missing-row writes,
+PDF publish requirements, shared-file deletion safety, and revoke failures.
+Isolated sample-data HTTP checks cover filtered/paged Blog, Resources, Field
+guides and Search health plus saved/missing previews and removed routes. Next's
+streamed missing preview can return HTTP 200 with its not-found boundary and noindex.
+
+The native computer-use pipe and browser-access host were unavailable during this
+pass, including after resetting the connection. These checks establish server
+rendering and handler behavior, not a fresh visual or physical click-through.
+Pending interactive checks: Preview/back-to-filtered-list, resource dirty Close /
+Keep editing / Discard, resource save/status feedback, guide Revoke confirmation,
+and the new list filters/pagination at mobile and desktop widths.

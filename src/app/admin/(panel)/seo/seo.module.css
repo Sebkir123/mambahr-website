@@ -187,3 +187,6 @@
 .noindexTag { font-size: 9px; border-radius: var(--radius-full); }
 @media (max-width: 950px) { .surfaces { grid-template-columns: repeat(2, minmax(0, 1fr)); } .totals { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .totals { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .total { padding: 16px; } .surface { padding: 14px; } .cardHead { padding: 16px; flex-wrap: wrap; } }
+
+.listFilter { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 12px; }
+.listFilter select { border: 1px solid var(--border-mid); border-radius: var(--radius-md); background: var(--bg); color: var(--text); font: inherit; padding: 8px; }
