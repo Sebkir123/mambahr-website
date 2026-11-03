@@ -149,3 +149,13 @@ test('content overview reads content only and exposes publishing work without CR
   assert.deepEqual(result.resources, { published: 1, draft: 1 })
   assert.equal(result.website.visits, 29); assert.equal(result.reads.top[0].title, 'One'); assert.equal(result.missingDescriptions, 1)
 })
+
+test('canceling a schedule returns the post to draft and clears its scheduled timestamp', async () => {
+  const { db, calls } = dbStub([{ data: { slug: 'sample', published_at: null, title: 'Sample', body_html: '<p>Saved content</p>' }, error: null }, { data: { id: 'post-id' }, error: null }])
+  const actions = loadAction('../../src/app/admin/(panel)/blog/actions.ts', {
+    'next/cache': cacheStub(), 'next/navigation': { redirect() {} }, '@/lib/auth': { requireAdmin: async () => ({ email: 'preview@example.test' }) }, '@/lib/supabase/server': { createSupabaseServerClient: async () => db }, '@/lib/blog': {}, '@/lib/blog-images': {}, '@/lib/admin-publishing': { publishingError },
+  })
+  const result = await actions.setPostStatus('post-id', 'draft', '2026-11-05T10:30:00Z')
+  assert.equal(result.ok, true)
+  assert.deepEqual(calls[1].find((op) => op.update).update[0], { status: 'draft', scheduled_for: null })
+})

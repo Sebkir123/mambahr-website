@@ -22,7 +22,7 @@ closing and navigating, preventing the restored trigger from reopening it.
   pagination and session expansion; sample-preview writes were intentionally blocked.
 - Failed session-detail loads now finish with an explicit retry instruction
   rather than an endless Loading label. Session ID copy reports its result.
-- Eleven workflow tests cover the real server actions with external-service
+- Twelve workflow tests cover the real server actions with external-service
   stubs plus native-dialog lifecycle and the actual page-search key handler.
 - Production build, TypeScript, changed-source ESLint and diff checks pass.
 
@@ -33,3 +33,11 @@ header adjustment remain outside the source checkout and deployment.
 Relationships were subsequently removed from the panel in favor of Attio. Their
 routes/actions and retired feature tests are deleted. A content-overview regression
 verifies only posts/resources are read directly and no CRM dependency returns.
+
+Additional native Chrome checks exercised the real publishing server-action flow
+against a separate ephemeral in-memory database: create a draft, edit title/body,
+autosave, publish, unpublish, enter a future date, schedule, cancel that schedule,
+and delete the temporary sample post back to the Blog list. Cancel schedule now
+returns the post to Draft and clears both the stored timestamp and editor field.
+The fixture database, mocked auth/client/service and preview proxy changes are
+outside the production source tree and were not committed or deployed.
