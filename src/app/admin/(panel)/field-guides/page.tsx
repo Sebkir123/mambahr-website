@@ -26,7 +26,7 @@ export default async function FieldGuidesPage() {
       <div className={ui.header}>
         <div>
           <h1 className={ui.h1}>Field guides</h1>
-          <p className={ui.subtitle}>Share a guide with a contact and follow their engagement.</p>
+          <p className={ui.subtitle}>Track distribution and engagement for your guides.</p>
         </div>
       </div>
 
@@ -35,9 +35,9 @@ export default async function FieldGuidesPage() {
       <div className={styles.totals}>
         <Stat label="Leads" value={a.totals.requests} sub="links + form captures" />
         <Stat label="Opened" value={a.totals.opened} sub="opened the link" />
-        <Stat label="Open rate" value={`${a.totals.openRatePct}%`} sub="of leads" />
-        <Stat label="This week" value={a.totals.last7d} sub="new leads" />
-        <Stat label="Total opens" value={a.totals.opens} sub="across all leads" />
+        <Stat label="Open rate" value={`${a.totals.openRatePct}%`} sub="of links" />
+        <Stat label="This week" value={a.totals.last7d} sub="new requests" />
+        <Stat label="Total opens" value={a.totals.opens} sub="across all links" />
       </div>
 
       <FieldGuideManager rows={a.rows} guides={guides} />
