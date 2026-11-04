@@ -71,10 +71,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Verification failed. Refresh and try again.' }, { status: 403 })
   }
 
-  // Only send for admin-domain addresses. For anything else, return a generic
+  // Only send for explicitly allowlisted addresses. For anything else, return a generic
   // success WITHOUT sending, both to avoid being an open relay to arbitrary
-  // inboxes and to not leak which domains are privileged. (The DB trigger blocks
-  // account creation regardless; this is the friendly, safe front door.)
+  // inboxes and to not leak which addresses are privileged. Database signup
+  // checks independently restrict account creation to the company domain.
   if (!isAdminEmail(email)) {
     return NextResponse.json({ success: true })
   }

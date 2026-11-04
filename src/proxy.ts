@@ -11,7 +11,7 @@ import { isAdminEmail } from '@/lib/admin-domain'
 
 // --- Admin auth gate --------------------------------------------------------
 // Refreshes the Supabase session on every /admin request and bounces anyone who
-// isn't a signed-in @mambahr.com admin to the login screen. The domain check
+// isn't a signed-in, explicitly allowlisted admin to the login screen. The email check
 // (not just "is there a user") is the real gate: an authenticated non-admin
 // session must not pass. is_admin() RLS + per-page requireAdmin() enforce it
 // again in depth, this is the coarse edge gate so no admin page renders for a
@@ -39,8 +39,8 @@ async function adminGate(req: NextRequest): Promise<NextResponse> {
   )
 
   // getUser() validates the JWT with the auth server, a forged/expired cookie
-  // can't pass, and the domain check makes "authenticated" insufficient on its
-  // own; only @mambahr.com is an admin.
+  // can't pass, and the email allowlist makes "authenticated" insufficient on its
+  // own; only approved team addresses pass this gate.
   const {
     data: { user },
   } = await supabase.auth.getUser()
