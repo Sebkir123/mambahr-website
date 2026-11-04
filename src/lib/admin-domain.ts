@@ -4,6 +4,10 @@
 const ADMIN_EMAILS = new Set([
   'seb.kirsch@mambahr.com',
   'brian.bell@mambahr.com',
+  'audley.harley@mambahr.com',
+  'jasimen.harley@mambahr.com',
+  'mark.bahle@mambahr.com',
+  'petra.gojun@mambahr.com',
 ])
 
 // Exported for callers that need the domain string (e.g. login page hint).
