@@ -135,7 +135,6 @@ export default function ArticleShell({
               </p>
               <div className={s.mambaCtas}>
                 <Link href="/early-access" className="btn btn-primary">Get early access</Link>
-                <Link href="/pricing" className="btn btn-secondary">See pricing</Link>
               </div>
             </section>
 

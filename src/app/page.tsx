@@ -8,7 +8,6 @@ import Statement from './v2/_sections/statement'
 import Difference from './v2/_sections/difference'
 import Channels from './v2/_sections/channels'
 import Outcomes from './v2/_sections/outcomes'
-import Pricing from './v2/_sections/pricing'
 import Faq from './v2/_sections/faq'
 import Cta from './v2/_sections/cta'
 import RevealInit from './v2/_sections/reveal-init'
@@ -45,7 +44,6 @@ export default function HomePage() {
         <Difference />
         <Channels />
         <Outcomes />
-        <Pricing />
         <Faq />
         <Cta />
       </main>

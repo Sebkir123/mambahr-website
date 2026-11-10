@@ -34,7 +34,6 @@ export default function CompareView({ data, faqs, importFrom }: { data: Competit
             <p className="lead" data-reveal data-delay="2">{data.heroSub}</p>
             <div className="ctas" data-reveal data-delay="3">
               <Link href="/early-access" className="btn btn-primary">Get early access</Link>
-              <Link href="/pricing" className="btn btn-secondary">See pricing</Link>
             </div>
           </div>
           <style jsx>{`
@@ -123,10 +122,6 @@ export default function CompareView({ data, faqs, importFrom }: { data: Competit
                 </div>
               ))}
             </div>
-            <div className="money" data-reveal>
-              <p className="money-t">{data.costLine}</p>
-              <Link href="/pricing" className="money-a">See pricing</Link>
-            </div>
           </div>
           <style jsx>{`
             .tb { background: var(--bg-warm); padding: clamp(72px, 9vw, 112px) var(--page-pad); }
@@ -158,21 +153,6 @@ export default function CompareView({ data, faqs, importFrom }: { data: Competit
               .row { grid-template-columns: 1.2fr 1fr 1fr; }
               .f { padding: 12px 14px; font-size: 13px; }
             }
-            .money {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              gap: 16px;
-              flex-wrap: wrap;
-              margin-top: clamp(18px, 2.2vw, 26px);
-              border-radius: var(--radius-lg);
-              padding: clamp(18px, 2.2vw, 24px) clamp(20px, 2.6vw, 30px);
-              background: var(--bg-card);
-              box-shadow: var(--shadow-sm);
-            }
-            .money-t { font-family: var(--font-serif); font-size: clamp(16.5px, 1.9vw, 19.5px); line-height: 1.45; color: var(--text); margin: 0; max-width: 620px; letter-spacing: -0.01em; }
-            :global(.tb .money-a) { flex: none; display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 700; color: var(--gold-dark); text-decoration: none; white-space: nowrap; }
-            :global(.tb .money-a:hover) { text-decoration: underline; }
           `}</style>
         </section>
 

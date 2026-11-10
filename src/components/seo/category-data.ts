@@ -133,10 +133,6 @@ export const categories: Record<string, CategoryData> = {
         q: 'How is MambaHR different from an HR chatbot?',
         a: 'A chatbot answers questions. MambaHR also does the admin: it files the leave, requests the new hire’s logins and drafts the offer for your approval. You make the judgment calls.',
       },
-      {
-        q: 'What does AI HR software cost?',
-        a: 'MambaHR has one price per employee, per plan, from $14 per employee per month, billed annually. Plans differ: hiring starts with HR Ops Manager. US payroll through Deel is an add-on on any plan, $10 per employee paid per month.',
-      },
     ],
     cta: { title: 'See AI HR software that', em: 'does the admin.', sub: 'Join early access. When your group opens, we import your data and switch you over.' },
     related: COMPARE_RELATED,
@@ -146,7 +142,7 @@ export const categories: Record<string, CategoryData> = {
     slug: 'best-hris-for-startups',
     metaTitle: `Best HRIS for Startups (${CURRENT_YEAR}) | MambaHR`,
     metaDescription:
-      'The best HRIS for startups keeps your records and does the admin. MambaHR handles onboarding, leave, payroll changes and compliance, from $14 per employee.',
+      'The best HRIS for startups keeps your records and does the admin. MambaHR handles onboarding, leave, payroll changes and compliance.',
     h1: 'The best HRIS for startups keeps your records and does the admin',
     eyebrow: `Best HRIS for startups · ${CURRENT_YEAR}`,
     hero: { lead: 'HR support that grows', em: 'with your startup.', tail: '' },
@@ -155,7 +151,7 @@ export const categories: Record<string, CategoryData> = {
     answer: {
       question: 'What is the best HRIS for startups?',
       answer:
-        'For a startup, the best HRIS (HR records system) keeps your employee records and also does the admin that comes with them. MambaHR handles onboarding, time off and leave, payroll changes, and compliance answers with the law cited, from requests in Slack. A founder or ops lead approves the sensitive decisions. Your data imports in a day, and plans start at $14 per employee per month.',
+        'For a startup, the best HRIS (HR records system) keeps your employee records and also does the admin that comes with them. MambaHR handles onboarding, time off and leave, payroll changes, and compliance answers with the law cited, from requests in Slack. A founder or ops lead approves the sensitive decisions. Your data imports in a day.',
     },
     reasons: [
       {
@@ -167,8 +163,8 @@ export const categories: Record<string, CategoryData> = {
         desc: 'One misclassified role or missed state leave rule costs real money at a small company. MambaHR applies federal law plus the rules for your states, with the law cited, and sends unclear cases to you.',
       },
       {
-        title: 'Priced and set up for a startup.',
-        desc: 'No long setup project. Import your data and connect Slack, and requests get handled the next day. Plans start at $14 per employee, with no yearly minimum.',
+        title: 'Set up for a startup.',
+        desc: 'No long setup project. Import your data and connect Slack, and requests get handled the next day.',
       },
     ],
     checklist: {
@@ -178,16 +174,16 @@ export const categories: Record<string, CategoryData> = {
       items: [
         { t: 'Takes the admin off your plate', d: 'Whoever handles HR today gets the routine work done for them, from forms to follow-ups.' },
         { t: 'State rules built in', d: 'Team across state lines? Pay transparency and final pay rules are cited for each state. Federal family leave (FMLA) is checked, and state leave rules are cited for you to decide.' },
-        { t: 'Hiring and onboarding in one place', d: 'Job posts, applications, interviews, offers and onboarding in the same product. Hiring comes with the HR Ops Manager plan and up.' },
+        { t: 'Hiring and onboarding in one place', d: 'Job posts, applications, interviews, offers and onboarding in the same product.' },
         { t: 'Payroll changes', d: 'A change file in your payroll provider’s format, or changes sent to Deel-managed payroll. You approve every run.' },
         { t: 'Imports in a day', d: 'Import your data, connect Slack, and start.' },
         { t: 'Grows with you', d: 'The same product covers you from 50 employees to 400 and beyond, so there is no switch later.' },
       ],
     },
     stats: [
-      { n: 14, prefix: '$', label: 'per employee per month to start, billed annually' },
       { n: 1, suffix: ' day', label: 'to import your data' },
       { n: 100, suffix: '%', label: 'of compliance answers cite the law they rely on' },
+      { n: 0, label: 'terminations, layoffs or out-of-range pay changes made without your approval' },
     ],
     faq: [
       {
@@ -199,12 +195,8 @@ export const categories: Record<string, CategoryData> = {
         a: 'A traditional HRIS (BambooHR, Gusto, Rippling) stores your data and gives your team tools to work in. MambaHR stores your data too, and it also does the admin: it handles requests, checks the rules and prepares payroll changes. You approve what matters.',
       },
       {
-        q: 'Is it affordable for an early-stage startup?',
-        a: 'MambaHR has one price per employee, per plan, starting at $14 per employee per month, billed annually, with no yearly minimum.',
-      },
-      {
         q: 'Can it grow with us?',
-        a: 'Yes. The same product runs HR from about 50 people into the hundreds. Larger plans add hiring, compensation cycles and layoff planning with legal checks, so you do not have to switch systems as you grow.',
+        a: 'Yes. The same product runs HR from about 50 people into the hundreds. It covers hiring, compensation cycles and layoff planning with legal checks, so you do not have to switch systems as you grow.',
       },
     ],
     cta: { title: 'HR that', em: 'runs itself.', sub: 'Join early access. When your group opens, we import your data and switch you over.' },
@@ -220,7 +212,7 @@ export const categories: Record<string, CategoryData> = {
     slug: 'hr-software-small-business',
     metaTitle: 'HR Software for Small Business | MambaHR',
     metaDescription:
-      'HR software for small business that does the admin. MambaHR handles onboarding, leave, payroll changes and compliance in Slack, from $14 per employee.',
+      'HR software for small business that does the admin. MambaHR handles onboarding, leave, payroll changes and compliance in Slack.',
     h1: 'HR software for small business that does the admin for you',
     eyebrow: 'HR software for small business',
     hero: { lead: 'HR software that takes', em: 'the admin off your plate.', tail: '' },
@@ -229,7 +221,7 @@ export const categories: Record<string, CategoryData> = {
     answer: {
       question: 'What is the best HR software for a small business?',
       answer:
-        'The best HR software for a small business does the admin instead of adding another system to manage. MambaHR handles onboarding, time off and leave, payroll changes, and compliance answers with the law cited, from requests in Slack. An owner or office manager approves the sensitive decisions. Your data imports in a day, and plans start at $14 per employee per month.',
+        'The best HR software for a small business does the admin instead of adding another system to manage. MambaHR handles onboarding, time off and leave, payroll changes, and compliance answers with the law cited, from requests in Slack. An owner or office manager approves the sensitive decisions. Your data imports in a day.',
     },
     reasons: [
       {
@@ -242,7 +234,7 @@ export const categories: Record<string, CategoryData> = {
       },
       {
         title: 'No IT project.',
-        desc: 'Import your data and connect Slack. Requests get handled the next day. One price per employee, per plan.',
+        desc: 'Import your data and connect Slack. Requests get handled the next day.',
       },
     ],
     checklist: {
@@ -251,26 +243,22 @@ export const categories: Record<string, CategoryData> = {
       lead: 'What to require before you buy.',
       items: [
         { t: 'Does the admin, not another dashboard', d: 'It handles requests for you, so you are not learning a new admin system.' },
-        { t: 'Hiring to onboarding in one place', d: 'Post the job, track applicants, send the offer for your approval and run onboarding. Hiring comes with the HR Ops Manager plan and up.' },
+        { t: 'Hiring to onboarding in one place', d: 'Post the job, track applicants, send the offer for your approval and run onboarding.' },
         { t: 'Compliance with the law cited', d: 'Overtime, family leave (FMLA), pay transparency and final pay rules, cited for your states.' },
         { t: 'Payroll change files', d: 'A change file for your payroll provider, or changes sent to Deel-managed payroll. You approve every run.' },
         { t: 'A person on the sensitive calls', d: 'Terminations and pay decisions come to you to approve.' },
-        { t: 'Quick to start', d: 'One price per employee, per plan, and your data imported in a day.' },
+        { t: 'Quick to start', d: 'Your data imported in a day, with no IT project.' },
       ],
     },
     stats: [
-      { n: 14, prefix: '$', label: 'per employee per month to start, billed annually' },
       { n: 1, suffix: ' day', label: 'to import your data, with no IT project' },
       { n: 100, suffix: '%', label: 'of compliance answers cite the law they rely on' },
+      { n: 0, label: 'terminations, layoffs or out-of-range pay changes made without your approval' },
     ],
     faq: [
       {
         q: 'What HR software is best for a small business?',
         a: 'Look for software that takes admin off your plate rather than adding more. MambaHR handles onboarding, leave, payroll changes and compliance answers from requests in Slack. It suits small businesses where HR is one of someone’s jobs.',
-      },
-      {
-        q: 'How much does small-business HR software cost?',
-        a: 'MambaHR has one price per employee, per plan, from $14 per employee per month, billed annually, with no yearly minimum.',
       },
       {
         q: 'Do I still need a payroll provider?',

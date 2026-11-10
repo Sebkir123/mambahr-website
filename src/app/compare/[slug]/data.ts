@@ -10,8 +10,6 @@ export type CompetitorData = {
   switchReasons: { title: string; desc: string }[]
   tableRows: { feature: string; mamba: string | boolean; them: string | boolean; note?: string }[]
   bottomLine: string
-  /** One-line price anchor rendered under the table, money on the page. */
-  costLine: string
 }
 
 /* Row labels shared across the tables, so every page words a feature the same way. */
@@ -29,8 +27,7 @@ const F = {
   everyday: 'Time off, leave and everyday HR requests',
 }
 
-const PAYROLL_NOTE = 'MambaHR prepares the changes and you approve each run. Payroll run through Deel (Powered by Deel) is an add-on on every plan.'
-const HIRING_NOTE = 'HR Ops Manager plan and up'
+const PAYROLL_NOTE = 'MambaHR prepares the changes and you approve each run. Or Deel runs US payroll (Powered by Deel).'
 const COBRA_NOTE = 'MambaHR does send the health coverage (COBRA) notice when someone leaves.'
 const IMPORT_DAY = 'Data imported in a day'
 
@@ -48,8 +45,8 @@ export const competitors: Record<string, CompetitorData> = {
         desc: 'Rippling puts your tools in one place. Someone on your team still files the leave, drafts the paperwork and checks the rules. MambaHR does that work and brings you the decisions that need a person.',
       },
       {
-        title: 'One price per employee.',
-        desc: 'Rippling prices its HR, IT and finance products separately. MambaHR has one price per employee, per plan, covering employee records, onboarding, leave, compliance answers and payroll changes.',
+        title: 'One product, not several.',
+        desc: 'Rippling sells its HR, IT and finance products separately. MambaHR is one product covering employee records, onboarding, leave, compliance answers and payroll changes.',
       },
       {
         title: 'Working the day after your import.',
@@ -63,11 +60,9 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
       { feature: 'IT and device management', mamba: 'Not included', them: true, note: 'MambaHR asks IT for a device. Rippling can manage the device itself.' },
       { feature: F.setup, mamba: IMPORT_DAY, them: 'Weeks to months' },
-      { feature: 'One price per employee, per plan', mamba: true, them: 'Priced per product' },
       { feature: F.log, mamba: true, them: true },
     ],
     bottomLine: 'Choose Rippling if you want HR, payroll and IT devices in one platform your team runs. Choose MambaHR if you want the HR admin done for you, with you approving what matters.',
-    costLine: 'One price per employee, per plan, from $14. No separate products to add.',
   },
 
   gusto: {
@@ -97,13 +92,12 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: 'Payroll tax only' },
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
       { feature: F.benefits, mamba: 'Not included', them: true, note: COBRA_NOTE },
-      { feature: F.hiring, mamba: true, them: 'Basic job posting only', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Basic job posting only' },
       { feature: F.onboarding, mamba: true, them: 'Checklists only' },
       { feature: F.setup, mamba: IMPORT_DAY, them: '1 to 2 weeks' },
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Gusto is good payroll. MambaHR does the other HR admin and gets your payroll changes ready, for Gusto or for Deel-managed payroll.',
-    costLine: 'Your Gusto history imports in a day. Keep Gusto and load the change file MambaHR prepares, or use Deel-managed payroll. One price per employee, per plan, from $14.',
   },
 
   deel: {
@@ -134,12 +128,11 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: 'Focus on global employment' },
       { feature: 'Employing and paying people in other countries', mamba: 'Not included', them: true },
       { feature: 'Running payroll', mamba: 'Prepares the changes', them: true, note: 'MambaHR sends the changes to Deel-managed payroll and you approve each run. Powered by Deel.' },
-      { feature: F.hiring, mamba: true, them: 'Not included', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Not included' },
       { feature: F.onboarding, mamba: true, them: 'Partial' },
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Deel pays people, in the US and abroad. MambaHR does the HR admin for your US team and sends the payroll changes to Deel. They work together.',
-    costLine: 'Keep Deel for payroll and for people abroad. MambaHR is one price per employee, per plan, from $14. US payroll through Deel is an add-on on any plan, $10 per employee paid per month.',
   },
 
   bamboohr: {
@@ -168,13 +161,12 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.admin, mamba: true, them: 'Not included' },
       { feature: F.law, mamba: true, them: 'Not included' },
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
-      { feature: F.hiring, mamba: true, them: 'Basic hiring tool', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Basic hiring tool' },
       { feature: 'Performance reviews', mamba: 'Not included', them: true },
       { feature: F.setup, mamba: IMPORT_DAY, them: '2 to 4 weeks' },
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'BambooHR is a good home for HR records. MambaHR keeps your records and also does the admin work for your team.',
-    costLine: 'One price per employee, per plan, from $14. Your BambooHR data imports in a day.',
   },
 
   namely: {
@@ -204,12 +196,11 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: 'Not included' },
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
       { feature: F.benefits, mamba: 'Not included', them: true, note: COBRA_NOTE },
-      { feature: F.hiring, mamba: true, them: 'Basic hiring tool', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Basic hiring tool' },
       { feature: F.setup, mamba: IMPORT_DAY, them: '4 to 8 weeks' },
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Choose Namely if you want HR, payroll and benefits on one platform your team runs. Choose MambaHR if you want the HR admin done, with you approving what matters.',
-    costLine: 'One price per employee, per plan, from $14. Your Namely data imports in a day.',
   },
 
   hibob: {
@@ -241,12 +232,11 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Engagement surveys', mamba: 'Not included', them: true },
       { feature: F.records, mamba: true, them: true },
       { feature: 'Teams outside the US', mamba: 'Not included', them: true },
-      { feature: F.hiring, mamba: true, them: 'Basic', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Basic' },
       { feature: F.setup, mamba: IMPORT_DAY, them: '2 to 6 weeks' },
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'HiBob is a good HR system for global teams that want engagement tools. MambaHR is for US teams that want the HR admin done, with you approving what matters.',
-    costLine: 'One price per employee, per plan, from $14. Your HiBob data imports by CSV in a day.',
   },
 
   adp: {
@@ -276,12 +266,11 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: 'Payroll tax compliance' },
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
       { feature: F.benefits, mamba: 'Not included', them: true, note: COBRA_NOTE },
-      { feature: F.hiring, mamba: true, them: 'Available as add-on', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Available as add-on' },
       { feature: F.setup, mamba: IMPORT_DAY, them: '4 to 12 weeks' },
       { feature: F.log, mamba: true, them: true },
     ],
     bottomLine: 'ADP is a dependable back office for payroll and benefits. MambaHR does the day-to-day HR admin with your employees and managers, and brings the judgment calls to you.',
-    costLine: 'One price per employee, per plan, from $14. No add-ons to buy.',
   },
 
   workday: {
@@ -316,7 +305,6 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.log, mamba: true, them: true },
     ],
     bottomLine: 'Choose Workday if you need finance, HR and global operations in one configurable platform. Choose MambaHR if you want the HR admin done for your US team, with you approving what matters.',
-    costLine: 'One price per employee, per plan, from $14. Your Workday data imports in a day.',
   },
 
   justworks: {
@@ -347,13 +335,12 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: 'Support-assisted' },
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
       { feature: 'Benefits', mamba: 'Keep your own broker', them: 'PEO-bundled plans', note: 'A PEO can give a small team access to large-group plans.' },
-      { feature: F.hiring, mamba: true, them: 'Not included', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Not included' },
       { feature: F.onboarding, mamba: true, them: 'Checklists only' },
       { feature: F.setup, mamba: IMPORT_DAY, them: '2 to 4 weeks' },
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Justworks is a good PEO if you want bundled benefits and a support team to call. MambaHR does the HR admin for your team while you keep your employment relationship.',
-    costLine: 'One price per employee, per plan, from $14. MambaHR does not touch your benefits, so there is no coverage to re-shop.',
   },
 
   trinet: {
@@ -384,13 +371,12 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: 'Rep-assisted' },
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
       { feature: 'Benefits', mamba: 'Keep your own broker', them: 'PEO-bundled plans', note: 'A PEO can give a small team access to large-group plans.' },
-      { feature: F.hiring, mamba: true, them: 'Not included', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Not included' },
       { feature: F.onboarding, mamba: true, them: 'Rep-assisted' },
       { feature: F.setup, mamba: IMPORT_DAY, them: '4 to 8 weeks' },
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'TriNet is a capable PEO if co-employment and bundled benefits suit you. MambaHR does the HR admin while you keep your tax ID, your benefits and your employment relationship.',
-    costLine: 'One price per employee, per plan, from $14. Your benefits stay with your broker.',
   },
 
   paychex: {
@@ -403,7 +389,7 @@ export const competitors: Record<string, CompetitorData> = {
     switchReasons: [
       {
         title: 'One product instead of add-ons.',
-        desc: 'Paychex sells HR services, time tracking and compliance help as separate items. MambaHR covers employee records, onboarding, leave and compliance answers in one product, with one price per employee, per plan.',
+        desc: 'Paychex sells HR services, time tracking and compliance help as separate items. MambaHR covers employee records, onboarding, leave and compliance answers in one product.',
       },
       {
         title: 'Employees ask in Slack.',
@@ -420,14 +406,12 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: 'Payroll tax, plus paid services' },
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
       { feature: F.benefits, mamba: 'Not included', them: true, note: COBRA_NOTE },
-      { feature: F.hiring, mamba: true, them: 'Add-on module', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Add-on module' },
       { feature: F.onboarding, mamba: true, them: 'Add-on module' },
-      { feature: 'Pricing', mamba: 'One price per employee, per plan', them: 'Fee per module' },
       { feature: F.setup, mamba: IMPORT_DAY, them: '2 to 6 weeks' },
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Paychex is reliable payroll with HR services you add on. MambaHR does the HR admin in one product and prepares the payroll changes for you to approve.',
-    costLine: 'Keep Paychex for payroll and load the change file MambaHR prepares. MambaHR is one price per employee, per plan, from $14.',
   },
 
   zenefits: {
@@ -457,13 +441,12 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: 'Tracking and alerts' },
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: 'Add-on', note: PAYROLL_NOTE },
       { feature: F.benefits, mamba: 'Not included', them: true, note: COBRA_NOTE },
-      { feature: F.hiring, mamba: true, them: 'Basic', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Basic' },
       { feature: F.onboarding, mamba: true, them: 'Checklists only' },
       { feature: F.setup, mamba: IMPORT_DAY, them: '1 to 3 weeks' },
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Zenefits is a clean HR dashboard for small businesses. MambaHR does the admin work the dashboard organizes, and you approve what matters.',
-    costLine: 'One price per employee, per plan, from $14. Your Zenefits data imports by CSV in a day.',
   },
 
   paylocity: {
@@ -493,12 +476,11 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: true },
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
       { feature: 'Benefits and time tracking', mamba: 'Not included', them: true },
-      { feature: F.hiring, mamba: true, them: 'Module included', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Module included' },
       { feature: F.setup, mamba: IMPORT_DAY, them: '4 to 8 weeks' },
       { feature: F.log, mamba: true, them: true },
     ],
     bottomLine: 'Paylocity is a solid suite for an HR team to run. MambaHR does the admin for your HR team, with your data imported in a day.',
-    costLine: 'One price per employee, per plan, from $14.',
   },
 
   ukg: {
@@ -528,12 +510,11 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: true },
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
       { feature: 'Time, attendance and shift scheduling', mamba: 'Not included', them: true, note: 'UKG strength: shift workforce management' },
-      { feature: F.hiring, mamba: true, them: 'Module included', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Module included' },
       { feature: 'Time until requests get handled', mamba: 'The day after import', them: 'Months' },
       { feature: F.log, mamba: true, them: true },
     ],
     bottomLine: 'Choose UKG if you run a large shift-based workforce that needs deep scheduling. Choose MambaHR if you want the HR admin done for your team, with you approving what matters.',
-    costLine: 'One price per employee, per plan, from $14. Your data imports in a day.',
   },
 
   greenhouse: {
@@ -558,7 +539,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
     ],
     tableRows: [
-      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true, note: HIRING_NOTE },
+      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true },
       { feature: F.slack, mamba: true, them: 'Notifications only' },
       { feature: F.onboarding, mamba: true, them: 'Separate product' },
       { feature: F.records, mamba: true, them: 'Not included' },
@@ -568,7 +549,6 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.setup, mamba: IMPORT_DAY, them: '2 to 4 weeks' },
     ],
     bottomLine: 'Greenhouse is a great hiring tool. MambaHR covers hiring and everything after it in one product, so there is no handoff.',
-    costLine: 'Hiring comes with the HR Ops Manager plan and up, from $22 per employee, with employee records and onboarding in the same product.',
   },
 
   lever: {
@@ -593,7 +573,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
     ],
     tableRows: [
-      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true, note: HIRING_NOTE },
+      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true },
       { feature: F.slack, mamba: true, them: 'Notifications only' },
       { feature: F.onboarding, mamba: true, them: 'Not included' },
       { feature: F.records, mamba: true, them: 'Not included' },
@@ -603,7 +583,6 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.setup, mamba: IMPORT_DAY, them: '2 to 4 weeks' },
     ],
     bottomLine: 'Lever is recruiting software done well. MambaHR covers hiring and the HR admin after it in one product, so there is no handoff.',
-    costLine: 'Hiring comes with the HR Ops Manager plan and up, from $22 per employee, with employee records and onboarding in the same product.',
   },
 
   remote: {
@@ -634,13 +613,12 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: 'Focus on global employment' },
       { feature: 'Employing and paying people in other countries', mamba: 'Not included', them: true },
       { feature: 'Payroll for US employees', mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
-      { feature: F.hiring, mamba: true, them: 'Not included', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Not included' },
       { feature: F.onboarding, mamba: true, them: 'Partial' },
       { feature: F.setup, mamba: IMPORT_DAY, them: '1 to 3 weeks' },
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Remote is a good way to employ people in other countries. MambaHR does the HR admin for the team you employ in the US. You can use both.',
-    costLine: 'Keep Remote for people abroad. For your US team, MambaHR is one price per employee, per plan, from $14.',
   },
 
   oyster: {
@@ -671,13 +649,12 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: 'Focus on global employment' },
       { feature: 'Hiring people in other countries', mamba: 'Not included', them: true },
       { feature: 'Payroll for US employees', mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
-      { feature: F.hiring, mamba: true, them: 'Global hiring only', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Global hiring only' },
       { feature: F.onboarding, mamba: true, them: 'Partial' },
       { feature: F.setup, mamba: IMPORT_DAY, them: '1 to 3 weeks' },
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Oyster is a good way to hire across borders. MambaHR does the HR admin for the team you employ at home. You can use both.',
-    costLine: 'Keep Oyster for people abroad. For your US team, MambaHR is one price per employee, per plan, from $14.',
   },
 
   lattice: {
@@ -707,11 +684,10 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Performance reviews and goals', mamba: 'Not included', them: true, note: 'Lattice strength: review cycles, goals and one-on-ones.' },
       { feature: 'Engagement surveys', mamba: 'Not included', them: true },
       { feature: F.records, mamba: true, them: true },
-      { feature: F.hiring, mamba: true, them: 'Not included', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Not included' },
       { feature: F.onboarding, mamba: true, them: 'Checklists' },
     ],
     bottomLine: 'Choose Lattice if your priority is performance reviews, goals and engagement. Choose MambaHR if you want the everyday HR admin done for you, with you approving what matters.',
-    costLine: 'One price per employee, per plan, from $14. Your Lattice data imports by CSV in a day.',
   },
 
   ashby: {
@@ -736,7 +712,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
     ],
     tableRows: [
-      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true, note: HIRING_NOTE },
+      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true },
       { feature: 'Candidate sourcing and outreach', mamba: 'Not included', them: true, note: 'Ashby strength: finding candidates and keeping in touch with them.' },
       { feature: F.onboarding, mamba: true, them: 'Not included' },
       { feature: F.records, mamba: true, them: 'Not included' },
@@ -744,7 +720,6 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.everyday, mamba: true, them: 'Not included' },
     ],
     bottomLine: 'Ashby is a strong recruiting tool. MambaHR covers hiring and the HR admin after it in one product, so there is no handoff.',
-    costLine: 'Hiring comes with the HR Ops Manager plan and up, from $22 per employee, with employee records and onboarding in the same product.',
   },
 
   workable: {
@@ -769,7 +744,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
     ],
     tableRows: [
-      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true, note: HIRING_NOTE },
+      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true },
       { feature: 'Candidate sourcing', mamba: 'Not included', them: true, note: 'Workable strength: posting widely and finding candidates.' },
       { feature: F.admin, mamba: true, them: 'Not included' },
       { feature: F.law, mamba: true, them: 'Not included' },
@@ -778,7 +753,6 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.onboarding, mamba: true, them: 'Checklists' },
     ],
     bottomLine: 'Workable is a good way to fill roles. MambaHR covers hiring and the HR admin after it in one product, with you approving what matters.',
-    costLine: 'Hiring comes with the HR Ops Manager plan and up, from $22 per employee, with employee records and onboarding in the same product.',
   },
 
   jazzhr: {
@@ -803,7 +777,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
     ],
     tableRows: [
-      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true, note: HIRING_NOTE },
+      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true },
       { feature: F.admin, mamba: true, them: 'Not included' },
       { feature: F.onboarding, mamba: true, them: 'Limited' },
       { feature: F.records, mamba: true, them: 'Not included' },
@@ -811,7 +785,6 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.everyday, mamba: true, them: 'Not included' },
     ],
     bottomLine: 'JazzHR is simple hiring software for small teams. MambaHR covers hiring and the HR admin after it in one product, so there is no handoff.',
-    costLine: 'Hiring comes with the HR Ops Manager plan and up, from $22 per employee, with employee records and onboarding in the same product.',
   },
 
   breezyhr: {
@@ -836,7 +809,7 @@ export const competitors: Record<string, CompetitorData> = {
       },
     ],
     tableRows: [
-      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true, note: HIRING_NOTE },
+      { feature: 'Job posts, applications and interview scheduling', mamba: true, them: true },
       { feature: F.admin, mamba: true, them: 'Not included' },
       { feature: F.onboarding, mamba: true, them: 'Limited' },
       { feature: F.records, mamba: true, them: 'Not included' },
@@ -844,7 +817,6 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.everyday, mamba: true, them: 'Not included' },
     ],
     bottomLine: 'Breezy HR is an easy hiring pipeline. MambaHR covers hiring and the HR admin after it in one product, so there is no handoff.',
-    costLine: 'Hiring comes with the HR Ops Manager plan and up, from $22 per employee, with employee records and onboarding in the same product.',
   },
 
   insperity: {
@@ -879,7 +851,6 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.log, mamba: true, them: 'Partial' },
     ],
     bottomLine: 'Insperity is a full-service PEO if co-employment and bundled benefits suit you. MambaHR does the HR admin while you keep your tax ID, your benefits and your employment relationship.',
-    costLine: 'One price per employee, per plan, from $14. Your benefits stay with your broker.',
   },
 
   paycor: {
@@ -909,11 +880,10 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
       { feature: F.benefits, mamba: 'Not included', them: true, note: COBRA_NOTE },
       { feature: 'Time tracking and scheduling', mamba: 'Not included', them: true },
-      { feature: F.hiring, mamba: true, them: true, note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: true },
       { feature: F.setup, mamba: IMPORT_DAY, them: 'An implementation project' },
     ],
     bottomLine: 'Paycor is a capable payroll and HR suite for your team to run. MambaHR does the HR admin for you and prepares the payroll changes for your approval.',
-    costLine: 'Keep Paycor for payroll and load the change file MambaHR prepares, or use Deel-managed payroll. MambaHR is one price per employee, per plan, from $14.',
   },
 
   paycom: {
@@ -944,11 +914,10 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: 'Employees check their own paycheck before payroll runs', mamba: 'Not included', them: true },
       { feature: F.benefits, mamba: 'Not included', them: true, note: COBRA_NOTE },
       { feature: 'Time tracking', mamba: 'Not included', them: true },
-      { feature: F.hiring, mamba: true, them: true, note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: true },
       { feature: F.setup, mamba: IMPORT_DAY, them: 'An implementation project' },
     ],
     bottomLine: 'Choose Paycom if you want payroll, time tracking and HR in one system your team runs. Choose MambaHR if you want the HR admin done for you, with you approving what matters.',
-    costLine: 'Keep Paycom for payroll and load the change file MambaHR prepares, or use Deel-managed payroll. MambaHR is one price per employee, per plan, from $14.',
   },
 
   onpay: {
@@ -981,7 +950,6 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.records, mamba: true, them: true },
     ],
     bottomLine: 'OnPay is good small business payroll. MambaHR does the other HR admin and gets your payroll changes ready, for OnPay or for Deel-managed payroll.',
-    costLine: 'Keep OnPay and load the change file MambaHR prepares, or use Deel-managed payroll. MambaHR is one price per employee, per plan, from $14.',
   },
 
   'quickbooks-payroll': {
@@ -1010,12 +978,11 @@ export const competitors: Record<string, CompetitorData> = {
       { feature: F.law, mamba: true, them: 'Payroll tax only' },
       { feature: F.payroll, mamba: 'Change file, or Deel-managed', them: true, note: PAYROLL_NOTE },
       { feature: 'Accounting and bookkeeping', mamba: 'Not included', them: true, note: 'QuickBooks strength: payroll and your books in one place.' },
-      { feature: F.hiring, mamba: true, them: 'Not included', note: HIRING_NOTE },
+      { feature: F.hiring, mamba: true, them: 'Not included' },
       { feature: F.onboarding, mamba: true, them: 'Payroll setup only' },
       { feature: F.everyday, mamba: true, them: 'Not included' },
     ],
     bottomLine: 'QuickBooks Payroll keeps pay and your books together. MambaHR does the HR admin and gets your payroll changes ready, for QuickBooks or for Deel-managed payroll.',
-    costLine: 'Keep QuickBooks Payroll and load the change file MambaHR prepares, or use Deel-managed payroll. MambaHR is one price per employee, per plan, from $14.',
   },
 }
 
@@ -1060,7 +1027,7 @@ const listOf = (items: string[]) => {
 }
 
 /** The questions a buyer asks about this comparison, answered only from the
- *  entry above and the published plans. Rendered on the page and as FAQPage
+ *  entry above. Rendered on the page and as FAQPage
  *  JSON-LD from this one list, so the two can never disagree. */
 export function compareFaqs(c: CompetitorData): CompareFaq[] {
   const complement = COMPLEMENTS.has(c.slug)
@@ -1085,11 +1052,6 @@ export function compareFaqs(c: CompetitorData): CompareFaq[] {
       a: [`${c.name} covers these, and MambaHR does not: ${listOf(theirs.map((r) => lowerFirst(r.feature)))}.`, ...notes].join(' '),
     })
   }
-
-  faqs.push({
-    q: complement ? `What does MambaHR cost alongside ${c.name}?` : `What does MambaHR cost compared with ${c.name}?`,
-    a: `${c.costLine} Plans are billed annually, with no yearly minimum.`,
-  })
 
   faqs.push({
     q: complement ? `How do we start with MambaHR if we use ${c.name}?` : `How do we move from ${c.name} to MambaHR?`,

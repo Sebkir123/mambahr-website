@@ -15,7 +15,6 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
       { label: 'To do', href: '/today' },
       { label: 'Employee records', href: '/people' },
       { label: 'Documents & e-sign', href: '/documents' },
-      { label: 'Pricing', href: '/pricing' },
     ],
   },
   {

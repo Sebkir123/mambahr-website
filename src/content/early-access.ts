@@ -7,7 +7,7 @@
 
 export type Option = { value: string; label: string }
 
-// The pricing page's plan bands (src/app/pricing/tiers.ts).
+// Team size bands asked on the early access form.
 export const TEAM_SIZES: Option[] = [
   { value: 'under_75', label: 'Up to 75' },
   { value: '75_149', label: '75 to 150' },

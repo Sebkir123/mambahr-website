@@ -19,7 +19,7 @@ const WIDTHS = (process.env.WIDTHS || '1440,390').split(',').map(Number);
 const ROUTES = process.argv.slice(3).length ? process.argv.slice(3) : [
   '/', '/product', '/how-it-works', '/today', '/mamba', '/hiring', '/job-portal',
   '/onboarding', '/payroll', '/leave', '/compensation', '/compliance', '/rif',
-  '/people', '/documents', '/pricing', '/about', '/careers', '/security', '/demo',
+  '/people', '/documents', '/about', '/careers', '/security', '/demo',
   '/compare', '/compare/rippling', '/guides', '/guides/how-to-hire-your-first-employee',
   '/hr-by-state', '/best-hris-for-startups', '/hr-software-small-business',
   '/ai-hr-software', '/resources/rif-playbook', '/blog', '/terms',

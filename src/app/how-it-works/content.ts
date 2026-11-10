@@ -219,7 +219,6 @@ export const START: { title: string; body: string }[] = [
   { title: 'Set up your company', body: 'Your company name and the state where most of your people work. The rest can wait.' },
   { title: 'Bring in your people', body: 'Import from Gusto, BambooHR, Rippling, Workday, ADP or Namely, upload a spreadsheet, add people by hand, or skip it for now. Hiring data can come over from Greenhouse or Lever.' },
   { title: 'Connect Slack', body: 'So your team can send requests where they already work. You can also skip this and use the web request form.' },
-  { title: 'Pick a plan', body: 'One price per employee, billed annually, with no minimum.' },
   { title: 'Invite your team', body: 'Add the people who approve things: HR, managers, finance.' },
 ]
 
@@ -238,7 +237,7 @@ export const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'Does MambaHR run payroll?',
-    a: 'MambaHR prepares every payroll change. Each company chooses either a change file for its current payroll provider or US payroll run through Deel (Powered by Deel), an add-on on any plan at $10 per employee paid per month. A person approves every run.',
+    a: 'MambaHR prepares every payroll change. Each company chooses either a change file for its current payroll provider or US payroll run through Deel (Powered by Deel). A person approves every run.',
   },
   {
     q: 'What does MambaHR do when it is not sure?',

@@ -9,13 +9,6 @@ import { COMPANIES_ADVISED, PARTNER_SHARE, PARTNER_TYPES } from '@/content/early
 import { Sky, Stage } from '../early-access/_parts/pass-card'
 import s from '../early-access/_parts/ea.module.css'
 
-// The worked example on the stage: HR Ops Manager list price ($22 per employee
-// per month, src/content/pricing-tiers.ts) for an 80-person client.
-const EXAMPLE = { employees: 80, perEmployee: 22 }
-const yearly = EXAMPLE.employees * EXAMPLE.perEmployee * 12
-const earned = Math.round(yearly * (parseInt(PARTNER_SHARE, 10) / 100))
-const usd = (n: number) => `$${n.toLocaleString('en-US')}`
-
 const WHO = [
   {
     t: 'Accountants and bookkeepers',
@@ -52,11 +45,10 @@ export default function PartnersPage() {
             </div>
             <Stage>
               <div className={`${s.glass} ${s.glassStatic} ${s.math}`}>
-                <span className={s.mathT}>What {PARTNER_SHARE} looks like</span>
-                <div className={s.mathRow}><span>A client with</span><b>{EXAMPLE.employees} employees</b></div>
-                <div className={s.mathRow}><span>On HR Ops Manager</span><b>{usd(EXAMPLE.perEmployee)} / employee / month</b></div>
-                <div className={s.mathRow}><span>Their first year</span><b>{usd(yearly)}</b></div>
-                <div className={s.mathTotal}><span>You earn</span><b>{usd(earned)}</b></div>
+                <span className={s.mathT}>How you earn</span>
+                <div className={s.mathRow}><span>For each client</span><b>Their first year of revenue</b></div>
+                <div className={s.mathRow}><span>Paid</span><b>Quarterly, once the client has paid</b></div>
+                <div className={s.mathTotal}><span>Your share</span><b>{PARTNER_SHARE}</b></div>
               </div>
             </Stage>
           </div>

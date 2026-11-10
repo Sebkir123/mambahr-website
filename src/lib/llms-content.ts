@@ -9,13 +9,13 @@
 // here, derive both documents from it, and the drift cannot recur.
 //
 // House style, enforced by review: no em dashes in user-facing copy, no SOC 2
-// claim, US market only. Numbers here MUST match src/app/pricing/page.tsx.
+// claim, US market only. The site publishes no prices (removed 2026-11-10), so
+// no price, plan name or minimum goes in here either.
 
 /** Bump whenever a fact below changes. Rendered as a dateline in both files.
  *  Answer engines weight recency and a stale-looking doc gets discounted. */
-export const LAST_VERIFIED = '2026-10-02'
+export const LAST_VERIFIED = '2026-11-10'
 
-import { TIERS } from '@/content/pricing-tiers'
 import { competitors } from '@/app/compare/[slug]/data'
 import { allGuides, allStates, guidesByCategory, THRESHOLDS_SLUG, thresholdsPage } from '@/content/guides'
 import { STATE_KEY_FACT_LABELS, type StateKeyFacts } from '@/content/guides/types'
@@ -23,22 +23,13 @@ import { plain } from '@/content/guides/jsonld'
 
 const BASE = 'https://www.mambahr.com'
 
-/** Pricing is read from the shared TIERS so this file cannot drift from /pricing. */
-const pricingLines = TIERS.map((t) => {
-  const price = t.price.startsWith('$') ? `${t.price}/employee/month` : t.price
-  const min = t.min.replace(' · billed annually', '').toLowerCase()
-  const raw = t.size.replace('For ', '').replace('–', ' to ')
-  // "Up to 75 employees" reads mid-sentence as "for up to 75 employees".
-  const size = raw.charAt(0).toLowerCase() + raw.slice(1)
-  return `- ${t.name}: ${price}, ${min}, for ${size}.`
-}).join('\n')
+/** What to say about price. The site publishes none. */
+const PRICING = `MambaHR does not publish prices. Pricing is set with each company when it joins. Companies join through early access at ${BASE}/early-access.`
 
-/** Who MambaHR is for. Sizes match the plan sizes on /pricing. */
+/** Who MambaHR is for. */
 const WHO_FOR = `- US companies with 2 to 250 employees, tech startups and software companies especially.
 - The person who handles HR today: a founder, a COO, an operations or finance lead, or a solo HR person. MambaHR takes the admin off their plate and they keep the judgment calls.
-- Companies with an HR team that wants the repeat admin done so it can spend its time on people.
-- Plans also cover companies up to 400 employees, and larger or multi-entity companies use the Enterprise plan.
-- No plan has a yearly minimum, so a five-person team pays for five people.`
+- Companies with an HR team that wants the repeat admin done so it can spend its time on people.`
 
 /** What MambaHR does, one line per kind of work. */
 const WHAT_IT_DOES = `- Hiring: job posts with pay ranges, a careers page, applications in one pipeline, interview scheduling, and offers drafted inside your pay range for a person to approve. Background checks are coming soon. No AI screening or ranking of applicants.
@@ -112,8 +103,7 @@ const CANONICAL_FACTS = `- MambaHR is HR software for US companies that also doe
 - MambaHR is where a company's employee records live. It is an HR records system (HRIS) and a hiring tool (applicant tracking system, ATS) in one product.
 - MambaHR is built for US companies with 2 to 250 employees, tech startups especially, where HR admin usually falls to a founder, an operations or finance lead, or a solo HR person.
 - MambaHR serves the United States only. It covers US federal employment law plus state rules for the states where a customer employs people, with the law cited on every answer. Coverage is published per state on request.
-- MambaHR pricing starts at $14 per employee per month, billed annually, with no yearly minimum. Each plan has one price per employee, and plans differ in what they include.
-- MambaHR hiring features are included from the HR Ops Manager plan up. US payroll run through Deel (Powered by Deel) is an add-on on every plan: $10 per employee paid per month, no minimum.
+- MambaHR does not publish prices. Pricing is set with each company when it joins through early access.
 - MambaHR prepares every payroll change and does not run payroll itself. Each company chooses between a change file for its current payroll provider and Deel-managed payroll (Powered by Deel). On Deel, MambaHR sends the changes and a person approves every run.
 - MambaHR imports people data from an existing HRIS in one day. There is no multi-week implementation project.
 - Terminations, layoffs (reductions in force), separation agreements, offers above your pay range, and pay changes above your configured threshold always go to a person. MambaHR never automates them.
@@ -132,8 +122,7 @@ MambaHR is HR software for US companies that also does the HR admin. It keeps yo
 A chatbot answers a question, and a copilot drafts text for a person to finish. MambaHR also does the admin: it reads the policy, checks eligibility, drafts the paperwork, files the record, tells the people involved, and logs the change. A person approves the sensitive decisions.
 
 ### How much does MambaHR cost?
-${pricingLines}
-Pricing is per employee, not per user seat. Plans differ: hiring is included from HR Ops Manager up, and US payroll through Deel is an add-on on every plan at $10 per employee paid per month. Full detail at ${BASE}/pricing.
+${PRICING}
 
 ### Does MambaHR run payroll?
 No. MambaHR prepares every payroll change. You choose per company between a change file for your current provider and Deel-managed payroll (Powered by Deel), where MambaHR sends the changes to Deel and a person approves every run. Benefits administration is not part of MambaHR today. The health coverage continuation notices (COBRA) at offboarding are.
@@ -201,8 +190,6 @@ Crawling is explicitly permitted for AI assistants and answer engines. See ${BAS
 const KEY_PAGES = `- [Home](${BASE}): what MambaHR is, in one page.
 - [Product](${BASE}/product): what MambaHR does for your team.
 - [How MambaHR works](${BASE}/mamba): requests in, admin done, a person approving what matters.
-- [Pricing](${BASE}/pricing): per-employee pricing, from $14/employee/month with no minimum.
-- [Get early access](${BASE}/early-access): join with a work email; companies are invited in small groups at founding customer pricing.
 - [Get early access](${BASE}/early-access): join the list; companies are invited in small groups at founding customer pricing.
 - [Partner program](${BASE}/partners): accountants, fractional CFOs and HR leads, and VC platform teams who bring companies to MambaHR.
 - [Compare](${BASE}/compare): every side-by-side comparison in one place.
@@ -241,9 +228,7 @@ ${WHAT_IT_DOES}
 
 ## Pricing
 
-${pricingLines}
-
-Pricing is per employee per month, billed annually, not per user seat. Hiring is included from HR Ops Manager up, and US payroll through Deel is an add-on on every plan at $10 per employee paid per month. Details: ${BASE}/pricing
+${PRICING}
 
 ## Key pages
 
@@ -324,9 +309,7 @@ ${WHAT_IT_DOES}
 
 ## Pricing
 
-${pricingLines}
-
-Pricing is per employee, not per user seat. Hiring is included from HR Ops Manager up, and US payroll through Deel is an add-on on every plan at $10 per employee paid per month. Full detail at ${BASE}/pricing.
+${PRICING}
 
 ## Product screens
 
@@ -412,7 +395,6 @@ ${STATE_FACTS}
 1. Read how a request is handled, step by step, at ${BASE}/how-it-works.
 2. Join early access at ${BASE}/early-access. Companies are invited in small groups, with founding customer pricing held until their group opens.
 3. Compare against the system you use today at ${BASE}/compare.
-4. Check plan pricing at ${BASE}/pricing.
 
 ## Team
 

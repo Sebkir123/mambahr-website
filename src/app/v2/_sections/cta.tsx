@@ -12,7 +12,6 @@ export default function Cta() {
         <p className="sub">We’re opening MambaHR to companies in small groups. Join the list, and your founding pricing is held until your group opens.</p>
         <div className="ctas">
           <a className="main" href="/early-access" data-track="cta_click" data-track-label="access-band">Get early access</a>
-          <a className="alt" href="/pricing">See pricing</a>
         </div>
         <p className="trust">Your data imports in a day. Nothing sensitive happens without your OK.</p>
       </div>
@@ -49,12 +48,10 @@ export default function Cta() {
         }
         .sub { font-size: clamp(16px, 1.7vw, 19px); line-height: 1.6; max-width: 52ch; margin: 22px auto 0; color: #2b2a27; }
         .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
-        .main, .alt { display: inline-flex; align-items: center; height: 50px; padding: 0 26px; border-radius: 999px; font-weight: 500; font-size: 16px; text-decoration: none; transition: transform 0.2s var(--ease), background 0.15s ease; }
+        .main { display: inline-flex; align-items: center; height: 50px; padding: 0 26px; border-radius: 999px; font-weight: 500; font-size: 16px; text-decoration: none; transition: transform 0.2s var(--ease), background 0.15s ease; }
         .main { background: #1a1a19; color: #fff; box-shadow: 0 1px 2px rgba(20, 18, 14, 0.12), 0 10px 24px -8px rgba(20, 18, 14, 0.4); }
         .main:hover { transform: translateY(-1px); background: #2a2a28; }
-        .alt { background: rgba(255, 255, 255, 0.72); color: #1a1a19; border: 1px solid rgba(26, 26, 25, 0.16); }
-        .alt:hover { background: #fff; }
-        .main:focus-visible, .alt:focus-visible { outline: 2px solid #1a1a19; outline-offset: 3px; }
+        .main:focus-visible { outline: 2px solid #1a1a19; outline-offset: 3px; }
         .trust { margin: 26px 0 0; font-size: 14px; color: #2b2a27; }
       `}</style>
     </section>

@@ -97,12 +97,6 @@ const jsonLd = [
     applicationCategory: 'BusinessApplication',
     publisher: { '@id': 'https://www.mambahr.com/#organization' },
     description: 'HR software that does the admin for your team: hiring, onboarding, payroll changes, time off and compliance.',
-    offers: {
-      '@type': 'Offer',
-      price: '14',
-      priceCurrency: 'USD',
-      description: 'Per employee / month, billed annually. Founding customer pricing through early access.',
-    },
     operatingSystem: 'Web',
     // Freshness signal. Answer engines discount undated facts, and this is the
     // same constant the /llms.txt dateline renders, so the two cannot disagree.

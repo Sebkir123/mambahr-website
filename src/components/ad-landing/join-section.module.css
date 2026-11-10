@@ -42,7 +42,6 @@
   letter-spacing: -0.035em;
   color: var(--ink);
 }
-.price { margin: 16px 0 0; font-size: 17px; line-height: 1.5; color: var(--text); }
 .answers { margin: 28px 0 0; display: grid; gap: 18px; }
 .answer { margin: 0; }
 .q { font-weight: 600; font-size: 16px; color: var(--ink); }

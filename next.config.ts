@@ -42,6 +42,9 @@ const config: NextConfig = {
       // Early access replaced the demo as the way in (2026-10-18). Temporary, so
       // the demo page can come back without search engines having forgotten it.
       { source: '/demo', destination: '/early-access', permanent: false },
+      // Prices are no longer published (2026-11-10). Temporary, so a pricing
+      // page can come back without search engines having dropped the address.
+      { source: '/pricing', destination: '/early-access', permanent: false },
     ]
   },
   async headers() {

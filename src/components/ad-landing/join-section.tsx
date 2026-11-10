@@ -36,7 +36,6 @@ export function JoinSection({ form, title, answers }: {
         <div className={s.copy}>
           <p className={s.eyebrow}>Early access</p>
           <h2 className={s.title}>{title}</h2>
-          <p className={s.price}>Founding pricing is held for your company: from $14 per employee a month.</p>
           <dl className={s.answers}>
             {answers.map((x) => (
               <div key={x.q} className={s.answer}>

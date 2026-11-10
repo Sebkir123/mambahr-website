@@ -59,7 +59,6 @@ const STATIC_LABELS: Record<string, string> = {
   '/compliance': 'How MambaHR answers compliance questions',
   '/rif': 'How MambaHR plans layoffs',
   '/people': 'Employee records in MambaHR',
-  '/pricing': 'MambaHR pricing',
   '/early-access': 'Get early access',
 }
 
