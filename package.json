@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "indexnow": "node scripts/indexnow.mjs",
-    "test": "node --test tests/admin/*.test.mjs"
+    "test": "node --test tests/admin/*.test.mjs tests/email/*.test.mjs"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "1.5.0",
