@@ -123,7 +123,9 @@ export async function POST(req: NextRequest) {
     colleagues = count ?? 0
   }
 
-  await Promise.all([
+  // Both are awaited before the response: a promise left running is dropped
+  // when the serverless function returns. Each logs its own failure.
+  const [slack] = await Promise.allSettled([
     notifyLeadSlack({
       title: PAGE_NAMES[page ?? ''] ? `New early access signup · ${PAGE_NAMES[page ?? '']}` : 'New early access signup',
       fields: [
@@ -131,6 +133,7 @@ export async function POST(req: NextRequest) {
         { label: 'Company', value: company },
         { label: 'Employees', value: labelFor(TEAM_SIZES, teamSize) },
         { label: 'Email', value: email },
+        { label: 'Joined', value: joinedAt(created.created_at) },
         { label: 'Referred by', value: referrer ? `${referrer.company ?? referrer.email}` : null },
         { label: 'Already on the list', value: colleagues ? `${colleagues} more from ${domain}` : null },
         { label: 'Came from', value: cameFrom(attribution) },
@@ -140,6 +143,9 @@ export async function POST(req: NextRequest) {
     }),
     sendWaitlistWelcome(passEmail(created)),
   ])
+  if (slack.status === 'rejected' || slack.value === false) {
+    console.error('[waitlist] Slack alert for a new signup was not delivered; see the [slack] line above')
+  }
 
   return NextResponse.json({ status: 'joined', pass: created.pass_token })
 }
@@ -150,6 +156,13 @@ const PAGE_NAMES: Record<string, string> = {
   '/crews': 'Crews page',
   '/startups': 'Startups page',
   '/early-access': 'Early access page',
+}
+
+// When the row was created, for the Slack card: "Nov 5, 2026, 14:03 UTC".
+function joinedAt(iso: string): string {
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return iso
+  return `${d.toLocaleString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })} UTC`
 }
 
 // The ad or link that brought the signup, as columns the ad test can be counted

@@ -6,6 +6,7 @@
 import { Resend } from 'resend'
 import { getSecret } from '@/lib/secrets'
 import { companyFromEmail } from '@/content/early-access'
+import { isUnsubscribed, unsubscribeLinks } from '@/lib/unsubscribe'
 
 function escapeHtml(s: string): string {
   return s
@@ -33,7 +34,16 @@ const SANS = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-s
 const SERIF = "Georgia,'Times New Roman',serif"
 const INK = '#1A1611'
 
-function emailShell(headline: string, body: string): string {
+// Why the reader got a list email, and the link that stops them. Shown under the
+// card with the company name and location (the site has no street address).
+type ListFooter = { reason: string; unsubscribeUrl: string }
+
+function listFooter(f: ListFooter): string {
+  return `<p style="font-family:${SANS};font-size:12px;line-height:1.6;color:#9A8F82;margin:14px 0 0;">${escapeHtml(f.reason)}<br/><a href="${escapeHtml(f.unsubscribeUrl)}" style="color:#8A6535;text-decoration:underline;">Unsubscribe</a> and we will stop sending you these emails.</p>
+              <p style="font-family:${SANS};font-size:12px;line-height:1.6;color:#9A8F82;margin:14px 0 0;">MambaHR, Inc., San Francisco, California</p>`
+}
+
+function emailShell(headline: string, body: string, footer?: ListFooter): string {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,6 +77,7 @@ function emailShell(headline: string, body: string): string {
           <tr>
             <td style="padding:28px 4px 0;text-align:center;">
               <p style="font-family:${SANS};font-size:12px;line-height:1.6;color:#9A8F82;margin:0;">MambaHR does the HR admin. You make the calls.<br/><a href="https://www.mambahr.com" style="color:#8A6535;text-decoration:none;">mambahr.com</a></p>
+              ${footer ? listFooter(footer) : ''}
             </td>
           </tr>
         </table>
@@ -145,7 +156,10 @@ function giftBlock(referralUrl: string): string {
     body(`Give them a founding spot with your link. They skip the queue and get founding pricing. You get a free month for every company that becomes a customer.<br/><a href="${escapeHtml(referralUrl)}" style="color:#6A5DA6;font-weight:600;text-decoration:none;word-break:break-all;">${escapeHtml(referralUrl.replace('https://www.', ''))}</a>`)
 }
 
-export function renderWaitlistWelcome(p: PassEmail): { subject: string; html: string } {
+const WELCOME_REASON = 'You got this email because you joined the MambaHR early access list at mambahr.com.'
+const PASS_AGAIN_REASON = 'You got this email because someone asked to join the MambaHR early access list with this address, which is already on it.'
+
+export function renderWaitlistWelcome(p: PassEmail, unsubscribeUrl?: string): { subject: string; html: string } {
   const subject = 'Your founding spot at MambaHR'
   // "Dana" from "Dana Whitfield"; no greeting name when none was given.
   const first = (p.name ?? '').trim().split(/\s+/)[0]
@@ -158,11 +172,12 @@ export function renderWaitlistWelcome(p: PassEmail): { subject: string; html: st
     ctaButton(p.passUrl, 'Open your pass') +
     giftBlock(p.referralUrl) +
     finePrint('Questions? Reply to this email, it comes straight to us.<br/>Brian and Sebastian'),
+    unsubscribeUrl ? { reason: WELCOME_REASON, unsubscribeUrl } : undefined,
   )
   return { subject, html }
 }
 
-export function renderPassLinkAgain(p: PassEmail): { subject: string; html: string } {
+export function renderPassLinkAgain(p: PassEmail, unsubscribeUrl?: string): { subject: string; html: string } {
   const subject = 'Your MambaHR pass'
   const html = emailShell(
     subject,
@@ -171,6 +186,7 @@ export function renderPassLinkAgain(p: PassEmail): { subject: string; html: stri
     passFor(p) +
     ctaButton(p.passUrl, 'Open your pass') +
     finePrint('Didn&rsquo;t try to join? You can ignore this email.'),
+    unsubscribeUrl ? { reason: PASS_AGAIN_REASON, unsubscribeUrl } : undefined,
   )
   return { subject, html }
 }
@@ -189,19 +205,32 @@ export function renderPartnerAck(p: { name: string; share: string }): { subject:
   return { subject, html }
 }
 
-async function send(tag: string, to: string, m: { subject: string; html: string }) {
+async function send(tag: string, to: string, m: { subject: string; html: string }, headers?: Record<string, string>) {
   const client = await getClient()
   if (!client) { console.warn(`[email:${tag}] skipped: no RESEND_API_KEY`); return }
   try {
-    const { error } = await client.emails.send({ from: FROM_EMAIL, to, subject: m.subject, html: m.html })
+    const { error } = await client.emails.send({ from: FROM_EMAIL, to, subject: m.subject, html: m.html, headers })
     if (error) throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
   } catch (err) {
     console.error(`[email:${tag}] failed:`, err)
   }
 }
 
-export const sendWaitlistWelcome = (p: PassEmail) => send('waitlist-welcome', p.email, renderWaitlistWelcome(p))
-export const sendPassLinkAgain = (p: PassEmail) => send('waitlist-pass-again', p.email, renderPassLinkAgain(p))
+// Early access list mail: skipped for an address that unsubscribed, and always
+// carries the footer link plus the RFC 8058 one-click headers. If no signing
+// key is configured the email still goes, without the link, and that is logged.
+async function sendListEmail(
+  tag: string,
+  p: PassEmail,
+  render: (p: PassEmail, unsubscribeUrl?: string) => { subject: string; html: string },
+) {
+  if (await isUnsubscribed(p.email)) { console.info(`[email:${tag}] skipped: address unsubscribed`); return }
+  const links = await unsubscribeLinks(p.email)
+  await send(tag, p.email, render(p, links?.pageUrl), links?.headers)
+}
+
+export const sendWaitlistWelcome = (p: PassEmail) => sendListEmail('waitlist-welcome', p, renderWaitlistWelcome)
+export const sendPassLinkAgain = (p: PassEmail) => sendListEmail('waitlist-pass-again', p, renderPassLinkAgain)
 export const sendPartnerAck = (to: string, p: { name: string; share: string }) => send('partner-ack', to, renderPartnerAck(p))
 
 /* ════════════════════════════════════════════
