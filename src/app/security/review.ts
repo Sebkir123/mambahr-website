@@ -25,7 +25,7 @@ export const REVIEW = [
   },
   {
     q: 'Who are your subprocessors?',
-    a: 'AWS for hosting, OpenRouter for AI with zero data retention (OpenRouter sends each request to a model host under its own account: Amazon Bedrock or Google Vertex AI for Anthropic models, Microsoft Azure for OpenAI models), Temporal Cloud to keep multi-step tasks running, WorkOS for sign-in, Cloudflare for DNS and bot protection on public forms, Stripe for billing, and Deel only if you choose Deel-managed payroll. Background checks are coming soon, and signing is built into MambaHR. The full list is in our Data Processing Addendum, provided with the order form, and we tell you before it changes.',
+    a: 'AWS for hosting, OpenRouter for AI with zero data retention (OpenRouter sends each request to a model host under its own account: Amazon Bedrock or Google Vertex AI for Anthropic models, Microsoft Azure for OpenAI models), Temporal Cloud to keep multi-step tasks running, WorkOS for sign-in, Cloudflare for DNS and bot protection on public forms, Stripe for billing, Deel only if you choose Deel-managed payroll, and Google Maps Platform for address lookup, drive distances, the order of a day and the map shown in your browser (it receives the business name and address you type, place ids and map locations, never workers’ names, emails, phone numbers or pay). Background checks are coming soon, and signing is built into MambaHR. The full list is in our Data Processing Addendum, provided with the order form, and we tell you before it changes.',
   },
   {
     q: 'What happens if there is an incident?',
